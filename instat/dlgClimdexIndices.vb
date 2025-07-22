@@ -110,8 +110,7 @@ Public Class dlgClimdexIndices
         ucrPnlAnnualMonthly.AddParameterValuesCondition(rdoAnnual, "freq", Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddParameterValuesCondition(rdoMonthly, "freq", Chr(34) & "monthly" & Chr(34))
         ucrPnlAnnualMonthly.AddParameterValuesCondition(rdoStation, "freq", Chr(34) & "station" & Chr(34))
-
-        ' ucrPnlAnnualMonthly.SetRDefault(Chr(34) & "annual" & Chr(34))
+        ucrPnlAnnualMonthly.SetRDefault(Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkSave.SetText("Store Indices")
@@ -193,7 +192,7 @@ Public Class dlgClimdexIndices
 
         ' For the sub dialog
         clsAddClimexIndices.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_climdex_indices")
-        ' clsAddClimexIndices.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=2)
+        'clsAddClimexIndices.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddClimexIndices)
         bResetSubdialog = True
@@ -201,8 +200,8 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsClimdex, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
-        ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=2)
+        ' ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsClimdex, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
+        ' ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=2)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("station", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("year", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrReceiverMonth.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("month", iNewPosition:=5), iAdditionalPairNo:=1)
@@ -342,13 +341,23 @@ Public Class dlgClimdexIndices
         If rdoStation.Checked Then
             clsClimdex.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=0)
-            clsAddClimexIndices.AddParameter("climdex_output", "ci", iPosition:=1)
             clsClimdex.RemoveParameterByName("freq")
+            clsAddClimexIndices.AddParameter("climdex_output", "ci", iPosition:=1)
+            clsAddClimexIndices.RemoveParameterByName("year")
+            clsAddClimexIndices.AddParameter("freq", Chr(34) & "station" & Chr(34), iPosition:=1)
         Else
+
             clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignOperator)
             clsAddClimexIndices.AddParameter("climdex_output", clsRFunctionParameter:=clsClimdex, iPosition:=1)
-
+            clsAddClimexIndices.AddParameter("year", Chr(34) & "year" & Chr(34), iPosition:=4)
+            If rdoAnnual.Checked Then
+                clsClimdex.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=2)
+                clsAddClimexIndices.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
+            ElseIf rdoMonthly.Checked Then
+                clsClimdex.AddParameter("freq", Chr(34) & "monthly" & Chr(34), iPosition:=2)
+                clsAddClimexIndices.AddParameter("freq", Chr(34) & "monthly" & Chr(34), iPosition:=1)
+            End If
         End If
     End Sub
 
