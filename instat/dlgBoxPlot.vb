@@ -850,7 +850,6 @@ Public Class dlgBoxplot
         End If
     End Sub
 
-
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()

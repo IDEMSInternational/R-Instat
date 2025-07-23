@@ -58,6 +58,8 @@ Public Class dlgScatterPlot
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowO As String = "Facet Row + O"
+    Private ReadOnly strFacetColO As String = "Facet Col + O"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -291,7 +293,7 @@ Public Class dlgScatterPlot
         ucr1stFactorReceiver.SetParameterPosition(1)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowO, strFacetColO, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
 
@@ -662,7 +664,6 @@ Public Class dlgScatterPlot
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -670,10 +671,10 @@ Public Class dlgScatterPlot
             Case strFacetWrap
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
-            Case strFacetCol
+            Case strFacetCol, strFacetColO
                 ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
                 ucr1stFactorReceiver.SetRCode(clsFacetColOp)
-            Case strFacetRow
+            Case strFacetRow, strFacetRowO
                 ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
                 ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
         End Select
@@ -687,11 +688,12 @@ Public Class dlgScatterPlot
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColO As Boolean = False
+        Dim bRowO As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
-
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -701,28 +703,41 @@ Public Class dlgScatterPlot
                     bCol = True
                 Case strFacetRow
                     bRow = True
+                Case strFacetColO
+                    bColO = True
+                Case strFacetRowO
+                    bRowO = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColO OrElse bRowO Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
+
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
         End If
-        If bRow OrElse bCol Then
+
+        If bRow OrElse bCol OrElse bRowO OrElse bColO Then
             clsFacetFunction.SetRCommand("facet_grid")
         End If
-        If bRow Then
+
+        If bRowO OrElse bColO Then
+            clsFacetFunction.AddParameter("margin", "TRUE")
+        Else
+            clsFacetFunction.RemoveParameterByName("margin")
+        End If
+
+        If bRow OrElse bRowO Then
             clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf bCol AndAlso bWrap = False Then
+        ElseIf (bCol OrElse bColO) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("left")
         End If
-        If bCol Then
+
+        If bCol OrElse bColO Then
             clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf bRow AndAlso bWrap = False Then
+        ElseIf (bRow OrElse bRowO) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("right")
@@ -752,9 +767,9 @@ Public Class dlgScatterPlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol
+                    Case strFacetCol, strFacetColO
                         GetParameterValue(clsFacetColOp)
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowO
                         GetParameterValue(clsFacetRowOp)
                 End Select
             End If
