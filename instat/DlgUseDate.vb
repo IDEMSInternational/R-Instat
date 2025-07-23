@@ -60,6 +60,10 @@ Public Class dlgUseDate
         ucrReceiverUseDate.bAutoFill = True
         ucrReceiverUseDate.SetParameterIsString()
 
+        'Format controls
+        ComboBoxnewformat.Items.AddRange(New String() {"%d", "%j", "%m", "%b", "%B", "%y", "%Y"})
+        ComboBoxnewformat.DropDownStyle = ComboBoxStyle.DropDown
+
         'Year
         ucrChkShiftYearNum.SetParameter(New RParameter("year_val", 2))
         ucrChkShiftYearNum.SetText("")
@@ -158,10 +162,13 @@ Public Class dlgUseDate
         ucrChkShiftQuarterAbbr.SetText("")
         ucrChkShiftQuarterAbbr.SetRDefault("FALSE")
 
+
+        ucrPnluseformat.bAllowNonConditionValues = True
         ucrPnluseformat.AddRadioButton(rdoUseColumn)
         ucrPnluseformat.AddRadioButton(rdoFormatColumn)
+        ucrPnluseformat.bChangeParameterValue = False
 
-        ' Set rdoUseColumn as the default selected radio button
+
         rdoUseColumn.Checked = True
 
         'start month
@@ -192,26 +199,82 @@ Public Class dlgUseDate
         clsDefaultFunction = New RFunction
 
         ucrSelectorUseDate.Reset()
+        ComboBoxnewformat.Text = ""
+
+
+        rdoUseColumn.Checked = True
+        rdoFormatColumn.Checked = False
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
+        clsDefaultFunction.AddParameter("format_date", "FALSE", iPosition:=4)
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+
+
+        ucrPnluseformat.SetRCode(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            ucrPnluseformat.SetRCode(clsDefaultFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkWeekName.Checked OrElse ucrChkWeekdayNum.Checked OrElse ucrChkWeekNum.Checked OrElse ucrChkShiftPentadNum.Checked OrElse ucrChkShiftQuarterAbbr.Checked OrElse
+        If rdoFormatColumn.Checked Then
+
+            If Not ucrReceiverUseDate.IsEmpty() AndAlso Not String.IsNullOrEmpty(ComboBoxnewformat.Text) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+
+            If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkWeekName.Checked OrElse ucrChkWeekdayNum.Checked OrElse ucrChkWeekNum.Checked OrElse ucrChkShiftPentadNum.Checked OrElse ucrChkShiftQuarterAbbr.Checked OrElse
                                                       ucrChkShiftPentadAbbr.Checked OrElse ucrChkShiftDekadAbbr.Checked OrElse ucrChkWeekAbbr.Checked OrElse ucrChkShiftMonthNum.Checked OrElse ucrChkLeapYearNum.Checked OrElse
                                                       ucrChkWeekdayName.Checked OrElse ucrChkShiftMonthName.Checked OrElse ucrChkShiftDekadNum.Checked OrElse ucrChkDayInMonthNum.Checked OrElse ucrChkDayInYearNum.Checked OrElse
                                                       ucrChkWeekdayAbbr.Checked OrElse ucrChkShiftMonthAbbr.Checked OrElse ucrChkShiftYearNum.Checked OrElse ucrChkShiftYearName.Checked OrElse ucrChkShiftDayInYearNum366.Checked OrElse
                                                       ucrChkShiftQuarterNum.Checked OrElse ucrChkDaysInMonthNum.Checked AndAlso Not ucrInputComboBoxStartingMonth.IsEmpty)) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
+    End Sub
+
+    Private Sub GroupBoxSettings()
+        If rdoUseColumn.Checked Then
+            Panelusemode.Visible = True
+            Panelformatmode.Visible = False
+            grpUseColumnnewfrm.Visible = False
+            grpfrmdescrp.Visible = False
+            clsDefaultFunction.AddParameter("format_date", "FALSE", iPosition:=4)
+            clsDefaultFunction.RemoveParameterByName("format_string")
+            clsDefaultFunction.RemoveParameterByName("new_col_name")
+        ElseIf rdoFormatColumn.Checked Then
+            Panelusemode.Visible = False
+            Panelformatmode.Visible = True
+            grpUseColumnnewfrm.Visible = True
+            grpfrmdescrp.Visible = True
+            clsDefaultFunction.AddParameter("format_date", "TRUE", iPosition:=4)
+            If Not String.IsNullOrEmpty(ComboBoxnewformat.Text) Then
+                clsDefaultFunction.AddParameter("format_string", Chr(34) & ComboBoxnewformat.Text & Chr(34), iPosition:=5)
+            End If
+            clsDefaultFunction.AddParameter("new_col_name", Chr(34) & "format_date" & Chr(34), iPosition:=6)
+        End If
+
+
+        ucrPnluseformat.SetRCode(clsDefaultFunction, bReset:=False)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ComboBoxnewformat_TextChanged(sender As Object, e As EventArgs) Handles ComboBoxnewformat.TextChanged
+        If rdoFormatColumn.Checked AndAlso Not String.IsNullOrEmpty(ComboBoxnewformat.Text) Then
+            clsDefaultFunction.AddParameter("format_string", Chr(34) & ComboBoxnewformat.Text & Chr(34), iPosition:=5)
+        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -258,32 +321,18 @@ Public Class dlgUseDate
 
     Private Sub rdoUseColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoUseColumn.CheckedChanged
         If rdoUseColumn.Checked Then
-            ' Actions when Use Column is selected
         End If
         GroupBoxSettings()
     End Sub
 
     Private Sub rdoFormatColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFormatColumn.CheckedChanged
         If rdoFormatColumn.Checked Then
-            ' Actions when Format Column is selected
         End If
         GroupBoxSettings()
     End Sub
 
-    Private Sub GroupBoxSettings()
-        If rdoUseColumn.Checked Then
-            Panelusemode.Visible = True
-            Panelformatmode.Visible = False
-            grpUseColumnnewfrm.Visible = False
-            grpfrmdescrp.Visible = False ' Hide format description in use mode
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-        ElseIf rdoFormatColumn.Checked Then
-            Panelusemode.Visible = False
-            Panelformatmode.Visible = True
-            grpUseColumnnewfrm.Visible = True
-            grpfrmdescrp.Visible = True ' Show format description in format mode
-            ' ucrBase.clsRsyntax.SetBaseRFunction(anotherFunction)
-        End If
+    Private Sub Controls_ControlValueChanged() Handles rdoUseColumn.CheckedChanged, rdoFormatColumn.CheckedChanged, ComboBoxnewformat.TextChanged, ucrReceiverUseDate.ControlContentsChanged
+        GroupBoxSettings()
     End Sub
 
 End Class
