@@ -85,6 +85,8 @@ Public Class dlgBoxplot
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowO As String = "Facet Row + O"
+    Private ReadOnly strFacetColO As String = "Facet Col + O"
     Private ReadOnly strNone As String = "None"
 
     Private bUpdateComboOptions As Boolean = True
@@ -238,7 +240,7 @@ Public Class dlgBoxplot
         ucr1stFactorReceiver.SetParameterPosition(1)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowO, strFacetColO, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrChkWidth.SetText("Cut Width")
@@ -703,7 +705,7 @@ Public Class dlgBoxplot
             Me.ucrInputLegendPosition.Location = New Size(105, 383)
             Me.ucrInputStation.Location = New Size(335, 383)
             Me.ucr1stFactorReceiver.Location = New Size(222, 384)
-            Me.lblFacetBy.Location = New Size(222, 388)
+            Me.lblFacetBy.Location = New Size(222, 372)
             Me.ucrSaveBoxplot.Location = New Point(10, 410)
             Me.ucrBase.Location = New Point(10, 435)
             Me.ucrChkLabel.Location = New Point(10, 334)
@@ -768,7 +770,6 @@ Public Class dlgBoxplot
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -776,10 +777,10 @@ Public Class dlgBoxplot
             Case strFacetWrap
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
-            Case strFacetCol
+            Case strFacetCol, strFacetColO
                 ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
                 ucr1stFactorReceiver.SetRCode(clsFacetColOp)
-            Case strFacetRow
+            Case strFacetRow, strFacetRowO
                 ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
                 ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
         End Select
@@ -793,11 +794,12 @@ Public Class dlgBoxplot
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColO As Boolean = False
+        Dim bRowO As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
-
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -807,33 +809,47 @@ Public Class dlgBoxplot
                     bCol = True
                 Case strFacetRow
                     bRow = True
+                Case strFacetColO
+                    bColO = True
+                Case strFacetRowO
+                    bRowO = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColO OrElse bRowO Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
+
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
         End If
-        If bRow OrElse bCol Then
+
+        If bRow OrElse bCol OrElse bRowO OrElse bColO Then
             clsFacetFunction.SetRCommand("facet_grid")
         End If
-        If bRow Then
+
+        If bRowO OrElse bColO Then
+            clsFacetFunction.AddParameter("margin", "TRUE")
+        Else
+            clsFacetFunction.RemoveParameterByName("margin")
+        End If
+
+        If bRow OrElse bRowO Then
             clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf bCol AndAlso bWrap = False Then
+        ElseIf (bCol OrElse bColO) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("left")
         End If
-        If bCol Then
+
+        If bCol OrElse bColO Then
             clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf bRow AndAlso bWrap = False Then
+        ElseIf (bRow OrElse bRowO) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("right")
         End If
     End Sub
+
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
         AddRemoveFacets()
@@ -860,9 +876,9 @@ Public Class dlgBoxplot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol
+                    Case strFacetCol, strFacetColO
                         GetParameterValue(clsFacetColOp)
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowO
                         GetParameterValue(clsFacetRowOp)
                 End Select
             End If
@@ -879,6 +895,7 @@ Public Class dlgBoxplot
         SetPipeAssignTo()
     End Sub
 
+
     Private Sub SetPipeAssignTo()
         If ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
             clsPipeOperator.SetAssignTo(ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -890,6 +907,14 @@ Public Class dlgBoxplot
     Private Sub ucrSelectorBoxPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorBoxPlot.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged, ucrChkAddPoints.ControlValueChanged
+
     End Sub
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
