@@ -2,26 +2,25 @@
 
 Public Class ucrColumnHide
     Private clsOperator As New ROperator
-    Private bFirstload As Boolean = True
     Private clsColHideRFunction As RFunction
 
-    Private Sub ucrColumnHide_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstload Then
-            InitialiseControl()
-            bFirstload = False
-        End If
-    End Sub
-
-    Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
-        ucrReceiverMultipleCols.SetMeAsReceiver()
-    End Sub
-
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
         Me.clsOperator = clsOperator
 
         ' Set up the selector and receiver
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
+        End If
+        ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrReceiverMultipleCols.Clear()
 
         Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"cols_hide"}, clsOperator)
