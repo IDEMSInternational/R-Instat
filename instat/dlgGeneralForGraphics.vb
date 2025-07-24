@@ -47,8 +47,8 @@ Public Class dlgGeneralForGraphics
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
-    Private clsYScaleDiscreteFunction As New RFunction
-    Private clsXScaleDiscreteFunction As New RFunction
+    Private clsScaleColourFunction As New RFunction
+    Private clsScaleFillFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
@@ -169,6 +169,22 @@ Public Class dlgGeneralForGraphics
         ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrInputAddCode.SetItems({"scale_colour_manual(values=c(" & Chr(34) & "red" & Chr(34) & "," & Chr(34) & "blue" & Chr(34) & "," & Chr(34) & "green" & Chr(34) & "," & Chr(34) & "black" & Chr(34) & "," & Chr(34) & "brown" & Chr(34) & "))", "scale_fill_manual(values = c(" & Chr(34) & "coral" & Chr(34) & "," & Chr(34) & "bisque4" & Chr(34) & "," & Chr(34) & "gold" & Chr(34) & "," & Chr(34) & "cyan" & Chr(34) & "," & Chr(34) & "khaki" & Chr(34) & "," & Chr(34) & "orange" & Chr(34) & "," & Chr(34) & "orchid" & Chr(34) & "))", "geom_hline(yintercept=20)", "geom_vline(xintercept=5) + geom_hline(yintercept = 1)", "geom_vline(xintercept=c(1,3,5),colour=" & Chr(34) & "green" & Chr(34) & ")", "scale_x_binned()", "scale_x_binned(n.breaks=20)", "scale_y_continuous(trans=" & Chr(34) & "log10" & Chr(34) & ", label=scales::dollar)"})
 
+        ucrChkFill.SetText("Add Scale Fill Identity")
+        ucrChkFill.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkFill.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkFill.AddToLinkedControls(ucrInputAddLegendRibbon, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAddLegendRibbon.SetValidationTypeAsList()
+        ucrInputAddLegendRibbon.SetItems({"Normal (Between Lower and Upper Tercile),Range 40th-90th Percentile", "A,B"})
+        ucrInputAddLegendRibbon.SetLinkedDisplayControl(lblFillidentity)
+
+        ucrChkColour.SetText("Add Scale Colour Identity")
+        ucrChkColour.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkColour.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkColour.AddToLinkedControls(ucrInputAddLegendLine, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAddLegendLine.SetValidationTypeAsList()
+        ucrInputAddLegendLine.SetItems({"Median,Record Low/High", "A,B", "maximum,minimum,mean"})
+        ucrInputAddLegendLine.SetLinkedDisplayControl(lblColouridentity)
+
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
@@ -192,6 +208,8 @@ Public Class dlgGeneralForGraphics
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
         clsAddCodeOperator = New ROperator
+        clsScaleFillFunction = New RFunction
+        clsScaleColourViridisFunction = New RFunction
 
         ucrSave.Reset()
 
@@ -245,6 +263,14 @@ Public Class dlgGeneralForGraphics
 
         clsAddCodeOperator.SetOperation("", bBracketsTemp:=False)
 
+        clsScaleColourFunction.SetRCommand("scale_colour_identity")
+        clsScaleColourFunction.AddParameter("name", "NULL", iPosition:=0)
+        clsScaleColourFunction.AddParameter("guide", Chr(34) & "legend" & Chr(34), iPosition:=1)
+
+        clsScaleFillFunction.SetRCommand("scale_fill_identity")
+        clsScaleFillFunction.AddParameter("name", "NULL", iPosition:=0)
+        clsScaleFillFunction.AddParameter("guide", Chr(34) & "legend" & Chr(34), iPosition:=1)
+
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -289,6 +315,8 @@ Public Class dlgGeneralForGraphics
             ucrChkUseasNumeric.SetRCode(clsDummyFunction, bReset)
             ucrChkAddCode.SetRCode(clsAddCodeOperator, bReset)
             ucrInputAddCode.SetRCode(clsAddCodeOperator, bReset)
+            ucrChkColour.SetRCode(clsBaseOperator, bReset)
+            ucrChkFill.SetRCode(clsBaseOperator, bReset)
         End If
         ucrFillReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
@@ -748,7 +776,7 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
-    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
@@ -809,5 +837,49 @@ Public Class dlgGeneralForGraphics
         Else
             clsBaseOperator.RemoveParameterByName("newcode")
         End If
+    End Sub
+
+    Private Sub SetCalculationColour()
+        Dim newItem As String = ucrInputAddLegendLine.GetText().Trim()
+
+        If Not String.IsNullOrEmpty(newItem) AndAlso Not ucrInputAddLegendLine.cboInput.Items.Contains(newItem) Then
+            ucrInputAddLegendLine.AddItems({newItem})
+        End If
+    End Sub
+
+    Private Sub SetCalculationFill()
+        Dim newItem As String = ucrInputAddLegendRibbon.GetText().Trim()
+
+        If Not String.IsNullOrEmpty(newItem) AndAlso Not ucrInputAddLegendRibbon.cboInput.Items.Contains(newItem) Then
+            ucrInputAddLegendRibbon.AddItems({newItem})
+        End If
+    End Sub
+
+    Private Sub ucrChkColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColour.ControlValueChanged, ucrInputAddLegendLine.ControlValueChanged
+        If ucrChkColour.Checked Then
+            If Not ucrInputAddLegendLine.IsEmpty Then
+                clsScaleColourFunction.AddParameter("labels", ucrInputAddLegendLine.clsRList.ToScript(), iPosition:=2)
+            Else
+                clsScaleColourFunction.RemoveParameterByName("labels")
+            End If
+            clsBaseOperator.AddParameter("scale_colour_identity", clsRFunctionParameter:=clsScaleColourFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale_colour_identity")
+        End If
+        SetCalculationFill()
+    End Sub
+
+    Private Sub ucrChkFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFill.ControlValueChanged, ucrInputAddLegendRibbon.ControlValueChanged
+        If ucrChkFill.Checked Then
+            If Not ucrInputAddLegendRibbon.IsEmpty Then
+                clsScaleFillFunction.AddParameter("labels", ucrInputAddLegendRibbon.clsRList.ToScript(), iPosition:=2)
+            Else
+                clsScaleFillFunction.RemoveParameterByName("labels")
+            End If
+            clsBaseOperator.AddParameter("scale_fill_identity", clsRFunctionParameter:=clsScaleFillFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale_fill_identity")
+        End If
+        SetCalculationColour()
     End Sub
 End Class

@@ -625,7 +625,7 @@ Public Class dlgDescribeTwoVariable
                 cmdSummaries.Visible = False
             End If
             ucrChkOmitMissing.Visible = IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso (IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric())
         End If
     End Sub
 
@@ -654,7 +654,7 @@ Public Class dlgDescribeTwoVariable
                                                    strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                    strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                                      strObjectName:="last_summary")
-
+            cmdMissingOptions.Visible = False
         ElseIf rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)

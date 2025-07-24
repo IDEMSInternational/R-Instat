@@ -131,6 +131,31 @@ Public Class sdgPLModelOptions
         ucrNudSteffenson.Minimum = 0
         ucrNudSteffenson.SetRDefault(0.1)
 
+
+
+        ucrChkMinSize.SetText("Minimum Size for Partition Group")
+        ucrChkMinSize.AddRSyntaxContainsFunctionNamesCondition(True, {"minsize"}, True)
+        ucrChkMinSize.AddRSyntaxContainsFunctionNamesCondition(False, {"minsize"}, False)
+        ucrChkMinSize.AddToLinkedControls(ucrNudMinSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudMinSize.SetParameter(New RParameter("minsize"))
+        ucrNudMinSize.Increment = 1
+        ucrNudMinSize.Minimum = 2
+        ucrNudMinSize.Maximum = Integer.MaxValue
+        ucrNudMinSize.SetRDefault(5)
+
+        ucrChkPValue.SetText("P-value")
+        ucrChkPValue.AddRSyntaxContainsFunctionNamesCondition(True, {"alpha"}, True)
+        ucrChkPValue.AddRSyntaxContainsFunctionNamesCondition(False, {"alpha"}, False)
+        ucrChkPValue.AddToLinkedControls(ucrInputComboPValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputComboPValue.SetParameter(New RParameter("alpha"))
+        ucrInputComboPValue.SetItems({0.01, 0.05, 0.1, 0.5})
+        ucrInputComboPValue.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
+        ucrInputComboPValue.SetText(0.05)
+        ucrInputComboPValue.bAllowNonConditionValues = True
+        ucrInputComboPValue.SetValidationTypeAsNumeric()
+
         ucrChkEpsilon.SetText("Epsilon")
         ucrChkEpsilon.AddRSyntaxContainsFunctionNamesCondition(True, {"epsilon"}, True)
         ucrChkEpsilon.AddRSyntaxContainsFunctionNamesCondition(False, {"epsilon"}, False)
@@ -184,7 +209,10 @@ Public Class sdgPLModelOptions
             ucrInputNA.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
             ucrInputWeight.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
             ucrInputEpsilon.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
-
+            ucrChkMinSize.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudMinSize.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkPValue.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputComboPValue.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
             ucrNudSteffenson.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
 
         End If
@@ -192,10 +220,12 @@ Public Class sdgPLModelOptions
         AddRemoveMethod()
         AddRemoveSteff()
         AddRemoveNas()
+        SetVisibilityControls()
     End Sub
 
     Private Sub AddRemoveGamma()
         If ucrChkGamma.Checked Then
+            ucrChkMethod.Enabled = False
             If Not ucrNudShape.IsEmpty Then
                 clsListGammaFunction.AddParameter("shape", ucrNudShape.GetText(), iPosition:=0)
             Else
@@ -208,6 +238,7 @@ Public Class sdgPLModelOptions
             End If
             clsPlacketFunction.AddParameter("gamma", clsRFunctionParameter:=clsListGammaFunction)
         Else
+            ucrChkMethod.Enabled = True
             clsPlacketFunction.RemoveParameterByName("gamma")
         End If
     End Sub
@@ -238,6 +269,32 @@ Public Class sdgPLModelOptions
             clsPlacketFunction.AddParameter("normal", clsRFunctionParameter:=clsListNormalFunction)
         Else
             clsPlacketFunction.RemoveParameterByName("normal")
+        End If
+    End Sub
+
+    Public Sub SetVisibilityControls()
+        ucrNudMinSize.Visible = ucrChkMinSize.Checked
+        ucrInputComboPValue.Visible = ucrChkPValue.Checked
+    End Sub
+
+    Private Sub ucrChkMinSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinSize.ControlValueChanged
+        If ucrChkMinSize.Checked Then
+            clsPlacketFunction.AddParameter("minsize", ucrNudMinSize.GetText(), iPosition:=11)
+        Else
+            If clsPlacketFunction.ContainsParameter("minsize") Then
+                clsPlacketFunction.RemoveParameterByName("minsize")
+            End If
+        End If
+    End Sub
+
+
+    Private Sub ucrChkPValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPValue.ControlValueChanged
+        If ucrChkPValue.Checked Then
+            clsPlacketFunction.AddParameter("alpha", ucrInputComboPValue.GetText(), iPosition:=12)
+        Else
+            If clsPlacketFunction.ContainsParameter("alpha") Then
+                clsPlacketFunction.RemoveParameterByName("alpha")
+            End If
         End If
     End Sub
 
