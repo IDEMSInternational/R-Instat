@@ -1067,29 +1067,36 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlDegree.ControlValueChanged ', ucrPnlEvap.ControlValueChanged
+        ucrBase.clsRsyntax.ClearCodes()
+
         If rdoCumulative.Checked Then
             CumulativeFunctions()
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoCount.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoMoving.Checked Then
             RasterFunction()
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoSpell.Checked Then
             clsRTransform.AddParameter("function_exp", Chr(34) & "instatClimatic::spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoMultSpells.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRollConsecutiveSumFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRollConsecutiveSumFunction
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoWaterBalance.Checked Then
             clsWaterBalanceFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
             clsWaterBalanceFunction.AddParameter("calc", strWB, iPosition:=0)
@@ -1105,6 +1112,7 @@ Public Class dlgTransformClimatic
         ElseIf rdoDegree.Checked Then
             DegreeFunctions()
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         End If
         AddCalculate()
         AutoFill()
