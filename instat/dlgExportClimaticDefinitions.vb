@@ -101,6 +101,16 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverRainIndicator.SetParameterIsString()
         ucrReceiverRainIndicator.SetLinkedDisplayControl(lblRainIndicator)
 
+        ucrReceiverExtremeTminIndicator.SetParameter(New RParameter("extreme_tmin_column", 15))
+        ucrReceiverExtremeTminIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverExtremeTminIndicator.SetParameterIsString()
+        ucrReceiverExtremeTminIndicator.SetLinkedDisplayControl(lblExtremeTminIndicator)
+
+        ucrReceiverExtremeTmaxIndicator.SetParameter(New RParameter("extreme_tmax_column", 16))
+        ucrReceiverExtremeTmaxIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverExtremeTmaxIndicator.SetParameterIsString()
+        ucrReceiverExtremeTmaxIndicator.SetLinkedDisplayControl(lblExtremeTmaxIndicator)
+
         ucrReceiverExtremIndicator.SetParameter(New RParameter("extreme_rainfall_column", 10))
         ucrReceiverExtremIndicator.Selector = ucrSelectorExportDefinitions
         ucrReceiverExtremIndicator.SetParameterIsString()
@@ -361,6 +371,8 @@ Public Class dlgExportClimaticDefinitions
         End If
         AddRemoveSummary()
         EnableDisableDefineButton()
+        AddExtremeTminIndicatorParam()
+        AddExtremeTmaxIndicatorParam()
         AddExtremeRainParameter()
         TestOkEnabled()
     End Sub
@@ -446,6 +458,8 @@ Public Class dlgExportClimaticDefinitions
             ucrReceiverDataYearMonth.Visible = ucrChkMonthlyTemp.Checked
             ucrReceiverDataYear.Visible = ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked
             ucrReceiverRain.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverExtremeTminIndicator.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverExtremeTmaxIndicator.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverExtremIndicator.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverRainIndicator.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
@@ -454,6 +468,8 @@ Public Class dlgExportClimaticDefinitions
             ucrReceiverDataYear.Visible = False
             ucrReceiverRain.Visible = False
             ucrReceiverRainIndicator.Visible = False
+            ucrReceiverExtremeTminIndicator.Visible = False
+            ucrReceiverExtremeTmaxIndicator.Visible = False
             ucrReceiverExtremIndicator.Visible = False
             ucrReceiverCropData.Visible = False
         End If
@@ -527,6 +543,38 @@ Public Class dlgExportClimaticDefinitions
         Else
             clsUpdateMetadataInfoFunction.RemoveParameterByName("country")
         End If
+    End Sub
+
+    Private Sub AddExtremeTminIndicatorParam()
+        If ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverExtremeTminIndicator.IsEmpty() Then
+                clsExportRinstatToBucketFunction.AddParameter("extreme_tmin_column", ucrReceiverExtremeTminIndicator.GetVariableNames(), iPosition:=15)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmin_column")
+            End If
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmin_column")
+        End If
+    End Sub
+
+    Private Sub AddExtremeTmaxIndicatorParam()
+        If ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverExtremeTmaxIndicator.IsEmpty() Then
+                clsExportRinstatToBucketFunction.AddParameter("extreme_tmax_column", ucrReceiverExtremeTmaxIndicator.GetVariableNames(), iPosition:=16)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmax_column")
+            End If
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmax_column")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverExtremeTminIndicator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExtremeTminIndicator.ControlValueChanged
+        AddExtremeTminIndicatorParam()
+    End Sub
+
+    Private Sub ucrReceiverExtremeTmaxIndicator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExtremeTmaxIndicator.ControlValueChanged
+        AddExtremeTmaxIndicatorParam()
     End Sub
 
     Private Sub AddExtremeRainParameter()
