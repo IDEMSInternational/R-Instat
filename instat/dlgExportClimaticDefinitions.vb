@@ -462,7 +462,7 @@ Public Class dlgExportClimaticDefinitions
             ucrReceiverExtremeTmaxIndicator.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverExtremIndicator.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverRainIndicator.Visible = ucrChkAnnualRainfall.Checked
-            ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
+            ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked
         Else
             ucrReceiverDataYearMonth.Visible = False
             ucrReceiverDataYear.Visible = False
@@ -517,11 +517,11 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub DialogSize()
         If rdoUpdateMetadata.Checked Then
-            Me.Size = New Size(475, 455)
-            Me.ucrBase.Location = New Point(4, 360)
+            Me.Size = New Size(475, 465)
+            Me.ucrBase.Location = New Point(4, 370)
         Else
-            Me.Size = New Size(475, 570)
-            Me.ucrBase.Location = New Point(4, 475)
+            Me.Size = New Size(475, 610)
+            Me.ucrBase.Location = New Point(5, 520)
         End If
     End Sub
 
