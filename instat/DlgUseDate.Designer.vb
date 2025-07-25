@@ -62,11 +62,11 @@ Partial Class dlgUseDate
         Me.lblLeapYear = New System.Windows.Forms.Label()
         Me.lblAbbr = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblShifted = New System.Windows.Forms.Label()
+        Me.lblShiftStartingMonth = New System.Windows.Forms.Label()
         Me.Panelformatmode = New System.Windows.Forms.Panel()
         Me.grpfrmdescrp = New System.Windows.Forms.GroupBox()
         Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
-        Me.lblShifted = New System.Windows.Forms.Label()
-        Me.lblShiftStartingMonth = New System.Windows.Forms.Label()
         Me.rdoUseColumn = New System.Windows.Forms.RadioButton()
         Me.rdoFormatColumn = New System.Windows.Forms.RadioButton()
         Me.ComboBoxnewformat = New System.Windows.Forms.ComboBox()
@@ -100,6 +100,7 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panelformatmode.SuspendLayout()
@@ -374,6 +375,26 @@ Partial Class dlgUseDate
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         '
+        'lblShifted
+        '
+        Me.lblShifted.AutoSize = True
+        Me.lblShifted.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblShifted.Location = New System.Drawing.Point(219, 19)
+        Me.lblShifted.Name = "lblShifted"
+        Me.lblShifted.Size = New System.Drawing.Size(40, 13)
+        Me.lblShifted.TabIndex = 2
+        Me.lblShifted.Text = "Shifted"
+        '
+        'lblShiftStartingMonth
+        '
+        Me.lblShiftStartingMonth.AutoSize = True
+        Me.lblShiftStartingMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblShiftStartingMonth.Location = New System.Drawing.Point(8, 16)
+        Me.lblShiftStartingMonth.Name = "lblShiftStartingMonth"
+        Me.lblShiftStartingMonth.Size = New System.Drawing.Size(79, 13)
+        Me.lblShiftStartingMonth.TabIndex = 0
+        Me.lblShiftStartingMonth.Text = "Starting Month:"
+        '
         'Panelformatmode
         '
         Me.Panelformatmode.Controls.Add(Me.grpfrmdescrp)
@@ -401,26 +422,6 @@ Partial Class dlgUseDate
         Me.txtTextDateFormats.Size = New System.Drawing.Size(416, 224)
         Me.txtTextDateFormats.TabIndex = 1
         Me.txtTextDateFormats.Text = resources.GetString("txtTextDateFormats.Text")
-        '
-        'lblShifted
-        '
-        Me.lblShifted.AutoSize = True
-        Me.lblShifted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblShifted.Location = New System.Drawing.Point(219, 19)
-        Me.lblShifted.Name = "lblShifted"
-        Me.lblShifted.Size = New System.Drawing.Size(40, 13)
-        Me.lblShifted.TabIndex = 2
-        Me.lblShifted.Text = "Shifted"
-        '
-        'lblShiftStartingMonth
-        '
-        Me.lblShiftStartingMonth.AutoSize = True
-        Me.lblShiftStartingMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblShiftStartingMonth.Location = New System.Drawing.Point(8, 16)
-        Me.lblShiftStartingMonth.Name = "lblShiftStartingMonth"
-        Me.lblShiftStartingMonth.Size = New System.Drawing.Size(79, 13)
-        Me.lblShiftStartingMonth.TabIndex = 0
-        Me.lblShiftStartingMonth.Text = "Starting Month:"
         '
         'rdoUseColumn
         '
@@ -786,12 +787,23 @@ Partial Class dlgUseDate
         Me.ucrSelectorUseDate.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorUseDate.TabIndex = 1
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(425, 15)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(25, 25)
+        Me.cmdHelp.TabIndex = 36
+        Me.cmdHelp.Text = "?"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'dlgUseDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(483, 567)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.Panelformatmode)
         Me.Controls.Add(Me.Panelusemode)
         Me.Controls.Add(Me.grpUseColumnnewfrm)
@@ -882,4 +894,5 @@ Partial Class dlgUseDate
     Friend WithEvents Panelusemode As Panel
     Friend WithEvents Panelformatmode As Panel
     Friend WithEvents txtTextDateFormats As RichTextBox
+    Friend WithEvents cmdHelp As Button
 End Class

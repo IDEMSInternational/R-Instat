@@ -135,12 +135,19 @@ Year:
 %Y - 4-digit
 %y - 2-digit
 
-Click 'Help' to see the full list
+Click ' ? ' to see the full list
 
 Examples:
-%d/%m/%y (24/12/93)
-%m:%d:%Y (12:24:1993)
-%Y-%b-%d (1993-Dec-24)</value>
+
+%b %-d       (Jan 5)
+%b %d        (Jan 05)
+%B %-d       (January 5)
+%-d %b %Y    (5 Jan 2025)
+%-d %b %y    (5 Jan 25)
+%a %-d %b    (Mon 5 Jan)
+%A %-d %B %Y (Monday 5 January 2025)
+%d/%m/%Y     (05/01/2025)
+	</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
