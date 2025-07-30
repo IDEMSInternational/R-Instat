@@ -17,6 +17,7 @@
 Imports instat
 Imports instat.dlgVisualizeData
 Imports instat.Translations
+Imports unvell.ReoGrid.IO.OpenXML.Schema
 Public Class dlgBoxplot
     Public enumBoxplotMode As String = BoxplotMode.Prepare
     Public Enum BoxplotMode
@@ -91,6 +92,10 @@ Public Class dlgBoxplot
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
+
+    Private bWrap As Boolean = False
+    Private bCol As Boolean = False
+    Private bRow As Boolean = False
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -771,7 +776,8 @@ Public Class dlgBoxplot
             End If
         End If
         UpdateParameters()
-        AddRemoveFacets()
+        ' AddRemoveFacet()
+        UpdateFacetCases()
         AddRemoveGroupBy()
     End Sub
 
@@ -779,6 +785,7 @@ Public Class dlgBoxplot
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -803,12 +810,11 @@ Public Class dlgBoxplot
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
-        Dim bColAll As Boolean = False
-        Dim bRowAll As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
+
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -824,7 +830,8 @@ Public Class dlgBoxplot
                     bRowAll = True
             End Select
         End If
-        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
+
+        If bWrap OrElse bRow OrElse bCol Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
 
@@ -860,7 +867,8 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
-        AddRemoveFacets()
+        AddRemoveFacet()
+        UpdateFacetCases()
         AddRemoveGroupBy()
         EnableDisableWidth()
         AddRemoveAesParm()

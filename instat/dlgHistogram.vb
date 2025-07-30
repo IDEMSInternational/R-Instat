@@ -16,6 +16,7 @@
 
 Imports instat
 Imports instat.Translations
+Imports unvell.ReoGrid.IO.OpenXML.Schema
 Public Class dlgHistogram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -60,6 +61,10 @@ Public Class dlgHistogram
     Private ReadOnly strFacetCol As String = "Facet Column"
     Private ReadOnly strFacetRowAll As String = "Facet Row + O"
     Private ReadOnly strFacetColAll As String = "Facet Col + O"
+
+    Private bWrap As Boolean = False
+    Private bCol As Boolean = False
+    Private bRow As Boolean = False
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -674,7 +679,8 @@ Public Class dlgHistogram
             End If
         End If
         UpdateParameters()
-        AddRemoveFacets()
+        'AddRemoveFacet()
+        UpdateFacetsCases()
         AddRemoveGroupBy()
     End Sub
 
@@ -682,7 +688,12 @@ Public Class dlgHistogram
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+<<<<<<< HEAD
         clsBaseOperator.RemoveParameterByName("facets")
+=======
+
+        'clsBaseOperator.RemoveParameterByName("facets") {Removed this command so that removing of the facets is done in the subdialog}
+>>>>>>> 1fb9f5f39ee16b68f308fb4da6fec03abdfa5596
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
@@ -702,6 +713,7 @@ Public Class dlgHistogram
         bUpdatingParameters = False
     End Sub
 
+<<<<<<< HEAD
     Private Sub AddRemoveFacets()
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
@@ -714,6 +726,12 @@ Public Class dlgHistogram
         End If
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
+=======
+    Private Sub AddRemoveFacet()
+        If ucr1stFactorReceiver.IsEmpty Then
+            Exit Sub
+        Else
+>>>>>>> 1fb9f5f39ee16b68f308fb4da6fec03abdfa5596
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
                     bWrap = True
@@ -727,7 +745,17 @@ Public Class dlgHistogram
                     bRowAll = True
             End Select
         End If
+<<<<<<< HEAD
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
+=======
+    End Sub
+    Private Sub UpdateFacetsCases()
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+>>>>>>> 1fb9f5f39ee16b68f308fb4da6fec03abdfa5596
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
 
@@ -788,7 +816,8 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
-        AddRemoveFacets()
+        AddRemoveFacet()
+        UpdateFacetsCases()
         AddRemoveGroupBy()
     End Sub
 
