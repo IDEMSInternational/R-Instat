@@ -309,9 +309,9 @@ Partial Class dlgBoxplot
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(335, 414)
+        Me.ucrInputStation.Location = New System.Drawing.Point(323, 414)
         Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(86, 21)
+        Me.ucrInputStation.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputStation.TabIndex = 26
         '
         'ucr1stFactorReceiver
@@ -322,7 +322,7 @@ Partial Class dlgBoxplot
         Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(109, 26)
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(98, 26)
         Me.ucr1stFactorReceiver.strNcFilePath = ""
         Me.ucr1stFactorReceiver.TabIndex = 25
         Me.ucr1stFactorReceiver.ucrSelector = Nothing
