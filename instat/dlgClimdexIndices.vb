@@ -216,11 +216,11 @@ Public Class dlgClimdexIndices
         ucrReceiverTmax.SetRCode(clsClimdex, bReset)
         ucrReceiverTmin.SetRCode(clsClimdex, bReset)
 
-        ' SetClimdexData()
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty) AndAlso (rdoStation.Checked OrElse Not ucrReceiverStation.IsEmpty) AndAlso clsIndices.iParameterCount > 0 Then
+        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso clsIndices.iParameterCount > 0 OrElse
+           (rdoMonthly.Checked AndAlso Not ucrReceiverMonth.IsEmpty) OrElse (rdoStation.Checked AndAlso Not ucrReceiverStation.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -250,6 +250,7 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
             sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = False
             ucrReceiverYear.Visible = True
+            ucrReceiverYear.Enabled = True
             lblYear.Visible = True
         ElseIf rdoMonthly.Checked Then
             clsDummyFunction.AddParameter("freq", Chr(34) & "monthly" & Chr(34), iPosition:=0)
@@ -275,9 +276,11 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpPrecAnnual.Enabled = False
             sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = False
             ucrReceiverYear.Visible = True
+            ucrReceiverYear.Enabled = True
             lblYear.Visible = True
         ElseIf rdoStation.Checked Then
             clsDummyFunction.AddParameter("freq", Chr(34) & "station" & Chr(34), iPosition:=0)
+            ucrReceiverYear.Enabled = False
             ucrReceiverYear.Visible = False
             lblYear.Visible = False
             sdgClimdexIndices.grpTminAnnual.Enabled = True
@@ -322,7 +325,7 @@ Public Class dlgClimdexIndices
         End If
     End Sub
 
-    Private Sub ucrPnlAnnualMonthly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlValueChanged
+    Private Sub ucrPnlAnnualMonthly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlValueChanged, ucrReceiverYear.ControlValueChanged
         ParameterCount()
         SetClimdexData()
         AddRemoveIndices()
@@ -338,16 +341,20 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub SetClimdexData()
+
         If rdoStation.Checked Then
+            clsClimdex.RemoveParameterByName("year")
             clsClimdex.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            clsClimdex.AddParameter("year", ucrReceiverStation.GetVariableNames, iPosition:=4)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=0)
             clsClimdex.RemoveParameterByName("freq")
             clsAddClimexIndices.AddParameter("climdex_output", "ci", iPosition:=1)
             clsAddClimexIndices.RemoveParameterByName("year")
             clsAddClimexIndices.AddParameter("freq", Chr(34) & "station" & Chr(34), iPosition:=1)
         Else
-
+            clsClimdex.RemoveParameterByName("year")
             clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsClimdex.AddParameter("year", ucrReceiverYear.GetVariableNames, iPosition:=4)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignOperator)
             clsAddClimexIndices.AddParameter("climdex_output", clsRFunctionParameter:=clsClimdex, iPosition:=1)
             clsAddClimexIndices.AddParameter("year", Chr(34) & "year" & Chr(34), iPosition:=4)
@@ -365,5 +372,6 @@ Public Class dlgClimdexIndices
         clsDollarSign0Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsDollarSign1Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsDollarSign2Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+        SetClimdexData()
     End Sub
 End Class
