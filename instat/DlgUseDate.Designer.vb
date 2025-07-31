@@ -53,27 +53,27 @@ Partial Class dlgUseDate
         Me.lblShiftDekad = New System.Windows.Forms.Label()
         Me.lblShift = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkDaysInMonthNum = New instat.ucrCheck()
         Me.lblDaysInMonth = New System.Windows.Forms.Label()
         Me.lblDayInMonth = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
         Me.lblWeek = New System.Windows.Forms.Label()
+        Me.ucrChkWeekdayName = New instat.ucrCheck()
         Me.lblWeekDay = New System.Windows.Forms.Label()
+        Me.ucrChkWeekdayAbbr = New instat.ucrCheck()
         Me.lblName = New System.Windows.Forms.Label()
         Me.lblLeapYear = New System.Windows.Forms.Label()
+        Me.ucrChkWeekdayNum = New instat.ucrCheck()
+        Me.ucrChkLeapYearNum = New instat.ucrCheck()
         Me.lblAbbr = New System.Windows.Forms.Label()
+        Me.ucrChkWeekAbbr = New instat.ucrCheck()
+        Me.ucrChkWeekName = New instat.ucrCheck()
+        Me.ucrChkWeekNum = New instat.ucrCheck()
+        Me.ucrChkDayInMonthNum = New instat.ucrCheck()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblShifted = New System.Windows.Forms.Label()
-        Me.lblShiftStartingMonth = New System.Windows.Forms.Label()
-        Me.Panelformatmode = New System.Windows.Forms.Panel()
-        Me.grpfrmdescrp = New System.Windows.Forms.GroupBox()
-        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
-        Me.rdoUseColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoFormatColumn = New System.Windows.Forms.RadioButton()
-        Me.ComboBoxnewformat = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.grpUseColumnnewfrm = New System.Windows.Forms.GroupBox()
-        Me.Panelusemode = New System.Windows.Forms.Panel()
         Me.ucrInputComboBoxStartingMonth = New instat.ucrInputComboBox()
+        Me.lblShiftStartingMonth = New System.Windows.Forms.Label()
         Me.ucrChkShiftDekadAbbr = New instat.ucrCheck()
         Me.ucrChkShiftPentadAbbr = New instat.ucrCheck()
         Me.ucrChkShiftDekadNum = New instat.ucrCheck()
@@ -87,15 +87,15 @@ Partial Class dlgUseDate
         Me.ucrChkShiftMonthAbbr = New instat.ucrCheck()
         Me.ucrChkShiftYearNum = New instat.ucrCheck()
         Me.ucrChkShiftYearName = New instat.ucrCheck()
-        Me.ucrChkDaysInMonthNum = New instat.ucrCheck()
-        Me.ucrChkWeekdayName = New instat.ucrCheck()
-        Me.ucrChkWeekdayAbbr = New instat.ucrCheck()
-        Me.ucrChkWeekdayNum = New instat.ucrCheck()
-        Me.ucrChkLeapYearNum = New instat.ucrCheck()
-        Me.ucrChkWeekAbbr = New instat.ucrCheck()
-        Me.ucrChkWeekName = New instat.ucrCheck()
-        Me.ucrChkWeekNum = New instat.ucrCheck()
-        Me.ucrChkDayInMonthNum = New instat.ucrCheck()
+        Me.Panelformatmode = New System.Windows.Forms.Panel()
+        Me.grpfrmdescrp = New System.Windows.Forms.GroupBox()
+        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
+        Me.rdoUseColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoFormatColumn = New System.Windows.Forms.RadioButton()
+        Me.ComboBoxnewformat = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.grpUseColumnnewfrm = New System.Windows.Forms.GroupBox()
+        Me.Panelusemode = New System.Windows.Forms.Panel()
         Me.ucrPnluseformat = New instat.UcrPanel()
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
@@ -254,6 +254,15 @@ Partial Class dlgUseDate
         Me.GroupBox2.TabIndex = 28
         Me.GroupBox2.TabStop = False
         '
+        'ucrChkDaysInMonthNum
+        '
+        Me.ucrChkDaysInMonthNum.AutoSize = True
+        Me.ucrChkDaysInMonthNum.Checked = False
+        Me.ucrChkDaysInMonthNum.Location = New System.Drawing.Point(399, 35)
+        Me.ucrChkDaysInMonthNum.Name = "ucrChkDaysInMonthNum"
+        Me.ucrChkDaysInMonthNum.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkDaysInMonthNum.TabIndex = 10
+        '
         'lblDaysInMonth
         '
         Me.lblDaysInMonth.AutoSize = True
@@ -297,6 +306,17 @@ Partial Class dlgUseDate
         Me.lblWeek.TabIndex = 1
         Me.lblWeek.Text = "Week"
         '
+        'ucrChkWeekdayName
+        '
+        Me.ucrChkWeekdayName.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkWeekdayName.AutoSize = True
+        Me.ucrChkWeekdayName.Checked = False
+        Me.ucrChkWeekdayName.Location = New System.Drawing.Point(210, 85)
+        Me.ucrChkWeekdayName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkWeekdayName.Name = "ucrChkWeekdayName"
+        Me.ucrChkWeekdayName.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWeekdayName.TabIndex = 16
+        '
         'lblWeekDay
         '
         Me.lblWeekDay.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -307,6 +327,17 @@ Partial Class dlgUseDate
         Me.lblWeekDay.Size = New System.Drawing.Size(58, 13)
         Me.lblWeekDay.TabIndex = 2
         Me.lblWeekDay.Text = "Week Day"
+        '
+        'ucrChkWeekdayAbbr
+        '
+        Me.ucrChkWeekdayAbbr.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkWeekdayAbbr.AutoSize = True
+        Me.ucrChkWeekdayAbbr.Checked = False
+        Me.ucrChkWeekdayAbbr.Location = New System.Drawing.Point(210, 58)
+        Me.ucrChkWeekdayAbbr.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkWeekdayAbbr.Name = "ucrChkWeekdayAbbr"
+        Me.ucrChkWeekdayAbbr.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWeekdayAbbr.TabIndex = 13
         '
         'lblName
         '
@@ -330,6 +361,28 @@ Partial Class dlgUseDate
         Me.lblLeapYear.TabIndex = 3
         Me.lblLeapYear.Text = "Leap Year"
         '
+        'ucrChkWeekdayNum
+        '
+        Me.ucrChkWeekdayNum.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkWeekdayNum.AutoSize = True
+        Me.ucrChkWeekdayNum.Checked = False
+        Me.ucrChkWeekdayNum.Location = New System.Drawing.Point(210, 31)
+        Me.ucrChkWeekdayNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkWeekdayNum.Name = "ucrChkWeekdayNum"
+        Me.ucrChkWeekdayNum.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWeekdayNum.TabIndex = 8
+        '
+        'ucrChkLeapYearNum
+        '
+        Me.ucrChkLeapYearNum.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkLeapYearNum.AutoSize = True
+        Me.ucrChkLeapYearNum.Checked = False
+        Me.ucrChkLeapYearNum.Location = New System.Drawing.Point(298, 31)
+        Me.ucrChkLeapYearNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkLeapYearNum.Name = "ucrChkLeapYearNum"
+        Me.ucrChkLeapYearNum.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkLeapYearNum.TabIndex = 9
+        '
         'lblAbbr
         '
         Me.lblAbbr.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -340,6 +393,50 @@ Partial Class dlgUseDate
         Me.lblAbbr.Size = New System.Drawing.Size(35, 13)
         Me.lblAbbr.TabIndex = 11
         Me.lblAbbr.Text = "Abbr.:"
+        '
+        'ucrChkWeekAbbr
+        '
+        Me.ucrChkWeekAbbr.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkWeekAbbr.AutoSize = True
+        Me.ucrChkWeekAbbr.Checked = False
+        Me.ucrChkWeekAbbr.Location = New System.Drawing.Point(145, 58)
+        Me.ucrChkWeekAbbr.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkWeekAbbr.Name = "ucrChkWeekAbbr"
+        Me.ucrChkWeekAbbr.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWeekAbbr.TabIndex = 12
+        '
+        'ucrChkWeekName
+        '
+        Me.ucrChkWeekName.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkWeekName.AutoSize = True
+        Me.ucrChkWeekName.Checked = False
+        Me.ucrChkWeekName.Location = New System.Drawing.Point(145, 85)
+        Me.ucrChkWeekName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkWeekName.Name = "ucrChkWeekName"
+        Me.ucrChkWeekName.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWeekName.TabIndex = 15
+        '
+        'ucrChkWeekNum
+        '
+        Me.ucrChkWeekNum.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkWeekNum.AutoSize = True
+        Me.ucrChkWeekNum.Checked = False
+        Me.ucrChkWeekNum.Location = New System.Drawing.Point(145, 31)
+        Me.ucrChkWeekNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkWeekNum.Name = "ucrChkWeekNum"
+        Me.ucrChkWeekNum.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWeekNum.TabIndex = 7
+        '
+        'ucrChkDayInMonthNum
+        '
+        Me.ucrChkDayInMonthNum.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrChkDayInMonthNum.AutoSize = True
+        Me.ucrChkDayInMonthNum.Checked = False
+        Me.ucrChkDayInMonthNum.Location = New System.Drawing.Point(76, 31)
+        Me.ucrChkDayInMonthNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkDayInMonthNum.Name = "ucrChkDayInMonthNum"
+        Me.ucrChkDayInMonthNum.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkDayInMonthNum.TabIndex = 6
         '
         'GroupBox1
         '
@@ -385,113 +482,6 @@ Partial Class dlgUseDate
         Me.lblShifted.TabIndex = 2
         Me.lblShifted.Text = "Shifted"
         '
-        'lblShiftStartingMonth
-        '
-        Me.lblShiftStartingMonth.AutoSize = True
-        Me.lblShiftStartingMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblShiftStartingMonth.Location = New System.Drawing.Point(8, 16)
-        Me.lblShiftStartingMonth.Name = "lblShiftStartingMonth"
-        Me.lblShiftStartingMonth.Size = New System.Drawing.Size(79, 13)
-        Me.lblShiftStartingMonth.TabIndex = 0
-        Me.lblShiftStartingMonth.Text = "Starting Month:"
-        '
-        'Panelformatmode
-        '
-        Me.Panelformatmode.Controls.Add(Me.grpfrmdescrp)
-        Me.Panelformatmode.Location = New System.Drawing.Point(10, 222)
-        Me.Panelformatmode.Name = "Panelformatmode"
-        Me.Panelformatmode.Size = New System.Drawing.Size(468, 282)
-        Me.Panelformatmode.TabIndex = 28
-        '
-        'grpfrmdescrp
-        '
-        Me.grpfrmdescrp.Controls.Add(Me.txtTextDateFormats)
-        Me.grpfrmdescrp.Location = New System.Drawing.Point(10, 15)
-        Me.grpfrmdescrp.Name = "grpfrmdescrp"
-        Me.grpfrmdescrp.Size = New System.Drawing.Size(440, 225)
-        Me.grpfrmdescrp.TabIndex = 28
-        Me.grpfrmdescrp.TabStop = False
-        Me.grpfrmdescrp.Text = "Format Description"
-        Me.grpfrmdescrp.Visible = False
-        '
-        'txtTextDateFormats
-        '
-        Me.txtTextDateFormats.Location = New System.Drawing.Point(6, 16)
-        Me.txtTextDateFormats.Name = "txtTextDateFormats"
-        Me.txtTextDateFormats.ReadOnly = True
-        Me.txtTextDateFormats.Size = New System.Drawing.Size(416, 224)
-        Me.txtTextDateFormats.TabIndex = 1
-        Me.txtTextDateFormats.Text = resources.GetString("txtTextDateFormats.Text")
-        '
-        'rdoUseColumn
-        '
-        Me.rdoUseColumn.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoUseColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoUseColumn.FlatAppearance.BorderSize = 2
-        Me.rdoUseColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoUseColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoUseColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUseColumn.Location = New System.Drawing.Point(101, 12)
-        Me.rdoUseColumn.Name = "rdoUseColumn"
-        Me.rdoUseColumn.Size = New System.Drawing.Size(121, 28)
-        Me.rdoUseColumn.TabIndex = 31
-        Me.rdoUseColumn.Text = "Use "
-        Me.rdoUseColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoUseColumn.UseVisualStyleBackColor = True
-        '
-        'rdoFormatColumn
-        '
-        Me.rdoFormatColumn.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoFormatColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoFormatColumn.FlatAppearance.BorderSize = 2
-        Me.rdoFormatColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoFormatColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoFormatColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFormatColumn.Location = New System.Drawing.Point(219, 12)
-        Me.rdoFormatColumn.Name = "rdoFormatColumn"
-        Me.rdoFormatColumn.Size = New System.Drawing.Size(136, 28)
-        Me.rdoFormatColumn.TabIndex = 32
-        Me.rdoFormatColumn.Text = "Format"
-        Me.rdoFormatColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoFormatColumn.UseVisualStyleBackColor = True
-        '
-        'ComboBoxnewformat
-        '
-        Me.ComboBoxnewformat.FormattingEnabled = True
-        Me.ComboBoxnewformat.Location = New System.Drawing.Point(0, 13)
-        Me.ComboBoxnewformat.Name = "ComboBoxnewformat"
-        Me.ComboBoxnewformat.Size = New System.Drawing.Size(163, 21)
-        Me.ComboBoxnewformat.TabIndex = 33
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(6, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 13)
-        Me.Label1.TabIndex = 34
-        '
-        'grpUseColumnnewfrm
-        '
-        Me.grpUseColumnnewfrm.Controls.Add(Me.ComboBoxnewformat)
-        Me.grpUseColumnnewfrm.Controls.Add(Me.Label1)
-        Me.grpUseColumnnewfrm.Location = New System.Drawing.Point(254, 115)
-        Me.grpUseColumnnewfrm.Name = "grpUseColumnnewfrm"
-        Me.grpUseColumnnewfrm.Size = New System.Drawing.Size(164, 34)
-        Me.grpUseColumnnewfrm.TabIndex = 35
-        Me.grpUseColumnnewfrm.TabStop = False
-        Me.grpUseColumnnewfrm.Text = "New Format"
-        '
-        'Panelusemode
-        '
-        Me.Panelusemode.Controls.Add(Me.GroupBox1)
-        Me.Panelusemode.Controls.Add(Me.GroupBox2)
-        Me.Panelusemode.Location = New System.Drawing.Point(10, 222)
-        Me.Panelusemode.Name = "Panelusemode"
-        Me.Panelusemode.Size = New System.Drawing.Size(468, 282)
-        Me.Panelusemode.TabIndex = 28
-        '
         'ucrInputComboBoxStartingMonth
         '
         Me.ucrInputComboBoxStartingMonth.AddQuotesIfUnrecognised = True
@@ -503,6 +493,16 @@ Partial Class dlgUseDate
         Me.ucrInputComboBoxStartingMonth.Name = "ucrInputComboBoxStartingMonth"
         Me.ucrInputComboBoxStartingMonth.Size = New System.Drawing.Size(114, 21)
         Me.ucrInputComboBoxStartingMonth.TabIndex = 1
+        '
+        'lblShiftStartingMonth
+        '
+        Me.lblShiftStartingMonth.AutoSize = True
+        Me.lblShiftStartingMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblShiftStartingMonth.Location = New System.Drawing.Point(8, 16)
+        Me.lblShiftStartingMonth.Name = "lblShiftStartingMonth"
+        Me.lblShiftStartingMonth.Size = New System.Drawing.Size(79, 13)
+        Me.lblShiftStartingMonth.TabIndex = 0
+        Me.lblShiftStartingMonth.Text = "Starting Month:"
         '
         'ucrChkShiftDekadAbbr
         '
@@ -647,102 +647,102 @@ Partial Class dlgUseDate
         Me.ucrChkShiftYearName.Size = New System.Drawing.Size(87, 23)
         Me.ucrChkShiftYearName.TabIndex = 26
         '
-        'ucrChkDaysInMonthNum
+        'Panelformatmode
         '
-        Me.ucrChkDaysInMonthNum.AutoSize = True
-        Me.ucrChkDaysInMonthNum.Checked = False
-        Me.ucrChkDaysInMonthNum.Location = New System.Drawing.Point(399, 35)
-        Me.ucrChkDaysInMonthNum.Name = "ucrChkDaysInMonthNum"
-        Me.ucrChkDaysInMonthNum.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkDaysInMonthNum.TabIndex = 10
+        Me.Panelformatmode.Controls.Add(Me.grpfrmdescrp)
+        Me.Panelformatmode.Location = New System.Drawing.Point(10, 222)
+        Me.Panelformatmode.Name = "Panelformatmode"
+        Me.Panelformatmode.Size = New System.Drawing.Size(468, 282)
+        Me.Panelformatmode.TabIndex = 28
         '
-        'ucrChkWeekdayName
+        'grpfrmdescrp
         '
-        Me.ucrChkWeekdayName.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkWeekdayName.AutoSize = True
-        Me.ucrChkWeekdayName.Checked = False
-        Me.ucrChkWeekdayName.Location = New System.Drawing.Point(210, 85)
-        Me.ucrChkWeekdayName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkWeekdayName.Name = "ucrChkWeekdayName"
-        Me.ucrChkWeekdayName.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeekdayName.TabIndex = 16
+        Me.grpfrmdescrp.Controls.Add(Me.txtTextDateFormats)
+        Me.grpfrmdescrp.Location = New System.Drawing.Point(10, 15)
+        Me.grpfrmdescrp.Name = "grpfrmdescrp"
+        Me.grpfrmdescrp.Size = New System.Drawing.Size(440, 225)
+        Me.grpfrmdescrp.TabIndex = 28
+        Me.grpfrmdescrp.TabStop = False
+        Me.grpfrmdescrp.Text = "Format Description"
+        Me.grpfrmdescrp.Visible = False
         '
-        'ucrChkWeekdayAbbr
+        'txtTextDateFormats
         '
-        Me.ucrChkWeekdayAbbr.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkWeekdayAbbr.AutoSize = True
-        Me.ucrChkWeekdayAbbr.Checked = False
-        Me.ucrChkWeekdayAbbr.Location = New System.Drawing.Point(210, 58)
-        Me.ucrChkWeekdayAbbr.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkWeekdayAbbr.Name = "ucrChkWeekdayAbbr"
-        Me.ucrChkWeekdayAbbr.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeekdayAbbr.TabIndex = 13
+        Me.txtTextDateFormats.Location = New System.Drawing.Point(6, 16)
+        Me.txtTextDateFormats.Name = "txtTextDateFormats"
+        Me.txtTextDateFormats.ReadOnly = True
+        Me.txtTextDateFormats.Size = New System.Drawing.Size(416, 224)
+        Me.txtTextDateFormats.TabIndex = 1
+        Me.txtTextDateFormats.Text = resources.GetString("txtTextDateFormats.Text")
         '
-        'ucrChkWeekdayNum
+        'rdoUseColumn
         '
-        Me.ucrChkWeekdayNum.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkWeekdayNum.AutoSize = True
-        Me.ucrChkWeekdayNum.Checked = False
-        Me.ucrChkWeekdayNum.Location = New System.Drawing.Point(210, 31)
-        Me.ucrChkWeekdayNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkWeekdayNum.Name = "ucrChkWeekdayNum"
-        Me.ucrChkWeekdayNum.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeekdayNum.TabIndex = 8
+        Me.rdoUseColumn.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoUseColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoUseColumn.FlatAppearance.BorderSize = 2
+        Me.rdoUseColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoUseColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoUseColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoUseColumn.Location = New System.Drawing.Point(101, 12)
+        Me.rdoUseColumn.Name = "rdoUseColumn"
+        Me.rdoUseColumn.Size = New System.Drawing.Size(121, 28)
+        Me.rdoUseColumn.TabIndex = 31
+        Me.rdoUseColumn.Text = "Use "
+        Me.rdoUseColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoUseColumn.UseVisualStyleBackColor = True
         '
-        'ucrChkLeapYearNum
+        'rdoFormatColumn
         '
-        Me.ucrChkLeapYearNum.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkLeapYearNum.AutoSize = True
-        Me.ucrChkLeapYearNum.Checked = False
-        Me.ucrChkLeapYearNum.Location = New System.Drawing.Point(298, 31)
-        Me.ucrChkLeapYearNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkLeapYearNum.Name = "ucrChkLeapYearNum"
-        Me.ucrChkLeapYearNum.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkLeapYearNum.TabIndex = 9
+        Me.rdoFormatColumn.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoFormatColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFormatColumn.FlatAppearance.BorderSize = 2
+        Me.rdoFormatColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFormatColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoFormatColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoFormatColumn.Location = New System.Drawing.Point(219, 12)
+        Me.rdoFormatColumn.Name = "rdoFormatColumn"
+        Me.rdoFormatColumn.Size = New System.Drawing.Size(136, 28)
+        Me.rdoFormatColumn.TabIndex = 32
+        Me.rdoFormatColumn.Text = "Format"
+        Me.rdoFormatColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoFormatColumn.UseVisualStyleBackColor = True
         '
-        'ucrChkWeekAbbr
+        'ComboBoxnewformat
         '
-        Me.ucrChkWeekAbbr.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkWeekAbbr.AutoSize = True
-        Me.ucrChkWeekAbbr.Checked = False
-        Me.ucrChkWeekAbbr.Location = New System.Drawing.Point(145, 58)
-        Me.ucrChkWeekAbbr.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkWeekAbbr.Name = "ucrChkWeekAbbr"
-        Me.ucrChkWeekAbbr.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeekAbbr.TabIndex = 12
+        Me.ComboBoxnewformat.FormattingEnabled = True
+        Me.ComboBoxnewformat.Location = New System.Drawing.Point(0, 13)
+        Me.ComboBoxnewformat.Name = "ComboBoxnewformat"
+        Me.ComboBoxnewformat.Size = New System.Drawing.Size(163, 21)
+        Me.ComboBoxnewformat.TabIndex = 33
         '
-        'ucrChkWeekName
+        'Label1
         '
-        Me.ucrChkWeekName.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkWeekName.AutoSize = True
-        Me.ucrChkWeekName.Checked = False
-        Me.ucrChkWeekName.Location = New System.Drawing.Point(145, 85)
-        Me.ucrChkWeekName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkWeekName.Name = "ucrChkWeekName"
-        Me.ucrChkWeekName.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeekName.TabIndex = 15
+        Me.Label1.AutoSize = True
+        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label1.Location = New System.Drawing.Point(6, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(0, 13)
+        Me.Label1.TabIndex = 34
         '
-        'ucrChkWeekNum
+        'grpUseColumnnewfrm
         '
-        Me.ucrChkWeekNum.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkWeekNum.AutoSize = True
-        Me.ucrChkWeekNum.Checked = False
-        Me.ucrChkWeekNum.Location = New System.Drawing.Point(145, 31)
-        Me.ucrChkWeekNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkWeekNum.Name = "ucrChkWeekNum"
-        Me.ucrChkWeekNum.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeekNum.TabIndex = 7
+        Me.grpUseColumnnewfrm.Controls.Add(Me.ComboBoxnewformat)
+        Me.grpUseColumnnewfrm.Controls.Add(Me.Label1)
+        Me.grpUseColumnnewfrm.Location = New System.Drawing.Point(254, 115)
+        Me.grpUseColumnnewfrm.Name = "grpUseColumnnewfrm"
+        Me.grpUseColumnnewfrm.Size = New System.Drawing.Size(164, 34)
+        Me.grpUseColumnnewfrm.TabIndex = 35
+        Me.grpUseColumnnewfrm.TabStop = False
+        Me.grpUseColumnnewfrm.Text = "New Format"
         '
-        'ucrChkDayInMonthNum
+        'Panelusemode
         '
-        Me.ucrChkDayInMonthNum.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrChkDayInMonthNum.AutoSize = True
-        Me.ucrChkDayInMonthNum.Checked = False
-        Me.ucrChkDayInMonthNum.Location = New System.Drawing.Point(76, 31)
-        Me.ucrChkDayInMonthNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkDayInMonthNum.Name = "ucrChkDayInMonthNum"
-        Me.ucrChkDayInMonthNum.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkDayInMonthNum.TabIndex = 6
+        Me.Panelusemode.Controls.Add(Me.GroupBox1)
+        Me.Panelusemode.Controls.Add(Me.GroupBox2)
+        Me.Panelusemode.Location = New System.Drawing.Point(10, 222)
+        Me.Panelusemode.Name = "Panelusemode"
+        Me.Panelusemode.Size = New System.Drawing.Size(468, 282)
+        Me.Panelusemode.TabIndex = 28
         '
         'ucrPnluseformat
         '
@@ -790,11 +790,11 @@ Partial Class dlgUseDate
         'cmdHelp
         '
         Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(425, 15)
+        Me.cmdHelp.Location = New System.Drawing.Point(399, 191)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(25, 25)
+        Me.cmdHelp.Size = New System.Drawing.Size(61, 25)
         Me.cmdHelp.TabIndex = 36
-        Me.cmdHelp.Text = "?"
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'dlgUseDate
