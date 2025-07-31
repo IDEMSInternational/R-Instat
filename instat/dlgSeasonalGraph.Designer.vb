@@ -48,6 +48,8 @@ Partial Class dlgSeasonalGraph
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputAddLegendLine = New instat.ucrInputComboBox()
         Me.ucrInputAddLegendRibbon = New instat.ucrInputComboBox()
+        Me.grpLegend = New System.Windows.Forms.GroupBox()
+        Me.grpLegend.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoBar
@@ -113,7 +115,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(260, 417)
+        Me.lblFacetBy.Location = New System.Drawing.Point(275, 414)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
         Me.lblFacetBy.TabIndex = 8
@@ -124,7 +126,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.lblFill.AutoSize = True
         Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFill.Location = New System.Drawing.Point(14, 384)
+        Me.lblFill.Location = New System.Drawing.Point(10, 104)
         Me.lblFill.Name = "lblFill"
         Me.lblFill.Size = New System.Drawing.Size(41, 13)
         Me.lblFill.TabIndex = 186
@@ -134,7 +136,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.lblColour.AutoSize = True
         Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColour.Location = New System.Drawing.Point(14, 332)
+        Me.lblColour.Location = New System.Drawing.Point(10, 52)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(41, 13)
         Me.lblColour.TabIndex = 187
@@ -144,7 +146,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrChkAddpointRibbon.AutoSize = True
         Me.ucrChkAddpointRibbon.Checked = False
-        Me.ucrChkAddpointRibbon.Location = New System.Drawing.Point(319, 381)
+        Me.ucrChkAddpointRibbon.Location = New System.Drawing.Point(319, 378)
         Me.ucrChkAddpointRibbon.Name = "ucrChkAddpointRibbon"
         Me.ucrChkAddpointRibbon.Size = New System.Drawing.Size(148, 23)
         Me.ucrChkAddpointRibbon.TabIndex = 188
@@ -153,7 +155,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrChkColour.AutoSize = True
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(14, 301)
+        Me.ucrChkColour.Location = New System.Drawing.Point(7, 21)
         Me.ucrChkColour.Name = "ucrChkColour"
         Me.ucrChkColour.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkColour.TabIndex = 22
@@ -162,7 +164,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrChkFill.AutoSize = True
         Me.ucrChkFill.Checked = False
-        Me.ucrChkFill.Location = New System.Drawing.Point(14, 356)
+        Me.ucrChkFill.Location = New System.Drawing.Point(7, 76)
         Me.ucrChkFill.Name = "ucrChkFill"
         Me.ucrChkFill.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkFill.TabIndex = 21
@@ -170,7 +172,7 @@ Partial Class dlgSeasonalGraph
         'cmdOptions
         '
         Me.cmdOptions.AutoSize = True
-        Me.cmdOptions.Location = New System.Drawing.Point(13, 266)
+        Me.cmdOptions.Location = New System.Drawing.Point(13, 257)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdOptions.TabIndex = 14
@@ -184,7 +186,7 @@ Partial Class dlgSeasonalGraph
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(119, 431)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(115, 139)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(82, 21)
         Me.ucrInputLegendPosition.TabIndex = 18
@@ -195,7 +197,7 @@ Partial Class dlgSeasonalGraph
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(386, 431)
+        Me.ucrInputStation.Location = New System.Drawing.Point(386, 428)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
         Me.ucrInputStation.TabIndex = 10
@@ -204,11 +206,11 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrReceiverFacetBy.AutoSize = True
         Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(259, 432)
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(272, 429)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
         Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(120, 26)
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(114, 26)
         Me.ucrReceiverFacetBy.strNcFilePath = ""
         Me.ucrReceiverFacetBy.TabIndex = 9
         Me.ucrReceiverFacetBy.ucrSelector = Nothing
@@ -273,7 +275,7 @@ Partial Class dlgSeasonalGraph
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(13, 472)
+        Me.ucrSave.Location = New System.Drawing.Point(16, 472)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(451, 24)
@@ -283,7 +285,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(13, 432)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(7, 140)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(88, 23)
         Me.ucrChkLegend.TabIndex = 17
@@ -312,7 +314,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(22, 517)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 509)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 19
@@ -323,9 +325,9 @@ Partial Class dlgSeasonalGraph
         Me.ucrInputAddLegendLine.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddLegendLine.GetSetSelectedIndex = -1
         Me.ucrInputAddLegendLine.IsReadOnly = False
-        Me.ucrInputAddLegendLine.Location = New System.Drawing.Point(64, 326)
+        Me.ucrInputAddLegendLine.Location = New System.Drawing.Point(60, 46)
         Me.ucrInputAddLegendLine.Name = "ucrInputAddLegendLine"
-        Me.ucrInputAddLegendLine.Size = New System.Drawing.Size(205, 23)
+        Me.ucrInputAddLegendLine.Size = New System.Drawing.Size(190, 23)
         Me.ucrInputAddLegendLine.TabIndex = 219
         '
         'ucrInputAddLegendRibbon
@@ -334,25 +336,36 @@ Partial Class dlgSeasonalGraph
         Me.ucrInputAddLegendRibbon.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddLegendRibbon.GetSetSelectedIndex = -1
         Me.ucrInputAddLegendRibbon.IsReadOnly = False
-        Me.ucrInputAddLegendRibbon.Location = New System.Drawing.Point(64, 381)
+        Me.ucrInputAddLegendRibbon.Location = New System.Drawing.Point(60, 101)
         Me.ucrInputAddLegendRibbon.Name = "ucrInputAddLegendRibbon"
-        Me.ucrInputAddLegendRibbon.Size = New System.Drawing.Size(205, 23)
+        Me.ucrInputAddLegendRibbon.Size = New System.Drawing.Size(190, 23)
         Me.ucrInputAddLegendRibbon.TabIndex = 220
+        '
+        'grpLegend
+        '
+        Me.grpLegend.Controls.Add(Me.ucrInputAddLegendRibbon)
+        Me.grpLegend.Controls.Add(Me.ucrChkLegend)
+        Me.grpLegend.Controls.Add(Me.ucrInputAddLegendLine)
+        Me.grpLegend.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpLegend.Controls.Add(Me.ucrChkFill)
+        Me.grpLegend.Controls.Add(Me.lblColour)
+        Me.grpLegend.Controls.Add(Me.ucrChkColour)
+        Me.grpLegend.Controls.Add(Me.lblFill)
+        Me.grpLegend.Location = New System.Drawing.Point(9, 286)
+        Me.grpLegend.Name = "grpLegend"
+        Me.grpLegend.Size = New System.Drawing.Size(256, 178)
+        Me.grpLegend.TabIndex = 221
+        Me.grpLegend.TabStop = False
+        Me.grpLegend.Text = "Legend"
         '
         'dlgSeasonalGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 573)
-        Me.Controls.Add(Me.ucrInputAddLegendRibbon)
-        Me.Controls.Add(Me.ucrInputAddLegendLine)
+        Me.Controls.Add(Me.grpLegend)
         Me.Controls.Add(Me.ucrChkAddpointRibbon)
-        Me.Controls.Add(Me.lblColour)
-        Me.Controls.Add(Me.lblFill)
-        Me.Controls.Add(Me.ucrChkColour)
-        Me.Controls.Add(Me.ucrChkFill)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucrReceiverFacetBy)
         Me.Controls.Add(Me.lblFacetBy)
@@ -364,7 +377,6 @@ Partial Class dlgSeasonalGraph
         Me.Controls.Add(Me.lblLines)
         Me.Controls.Add(Me.ucrReceiverLines)
         Me.Controls.Add(Me.ucrSave)
-        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.rdoBar)
         Me.Controls.Add(Me.rdoLine)
         Me.Controls.Add(Me.ucrPnlOptions)
@@ -376,6 +388,8 @@ Partial Class dlgSeasonalGraph
         Me.Name = "dlgSeasonalGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Seasonal Graph"
+        Me.grpLegend.ResumeLayout(False)
+        Me.grpLegend.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -407,4 +421,5 @@ Partial Class dlgSeasonalGraph
     Friend WithEvents ucrChkAddpointRibbon As ucrCheck
     Friend WithEvents ucrInputAddLegendRibbon As ucrInputComboBox
     Friend WithEvents ucrInputAddLegendLine As ucrInputComboBox
+    Friend WithEvents grpLegend As GroupBox
 End Class
