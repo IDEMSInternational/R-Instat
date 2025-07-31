@@ -96,6 +96,26 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
+        ucrReceiverRainIndicator.SetParameter(New RParameter("rain_days_name", 9))
+        ucrReceiverRainIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverRainIndicator.SetParameterIsString()
+        ucrReceiverRainIndicator.SetLinkedDisplayControl(lblRainIndicator)
+
+        ucrReceiverExtremeTminIndicator.SetParameter(New RParameter("extreme_tmin_column", 15))
+        ucrReceiverExtremeTminIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverExtremeTminIndicator.SetParameterIsString()
+        ucrReceiverExtremeTminIndicator.SetLinkedDisplayControl(lblExtremeTminIndicator)
+
+        ucrReceiverExtremeTmaxIndicator.SetParameter(New RParameter("extreme_tmax_column", 16))
+        ucrReceiverExtremeTmaxIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverExtremeTmaxIndicator.SetParameterIsString()
+        ucrReceiverExtremeTmaxIndicator.SetLinkedDisplayControl(lblExtremeTmaxIndicator)
+
+        ucrReceiverExtremIndicator.SetParameter(New RParameter("extreme_rainfall_column", 10))
+        ucrReceiverExtremIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverExtremIndicator.SetParameterIsString()
+        ucrReceiverExtremIndicator.SetLinkedDisplayControl(lblExtremRain)
+
         ucrChkAnnualRainfall.SetText("Annual Rainfall")
         ucrChkAnnualRainfall.AddParameterValuesCondition(True, "rain", "True")
         ucrChkAnnualRainfall.AddParameterValuesCondition(False, "rain", "False")
@@ -244,6 +264,9 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverDataYearMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverRain.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        'ucrReceiverRainIndicator.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        'ucrReceiverExtremIndicator.SetRCode(clsExportRinstatToBucketFunction, bReset)
+
         ucrReceiverYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrSelectorExportDefinitions.SetRCode(clsExportRinstatToBucketFunction)
         ucrInputTokenPath.SetRCode(ClsGcsAuthFileFunction, bReset)
@@ -274,24 +297,29 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub TestOkEnabled()
         If rdoUploadSummaries.Checked Then
-            If Not ucrReceiverStation.IsEmpty AndAlso
-           Not ucrReceiverYear.IsEmpty AndAlso
-           Not ucrInputCountry.IsEmpty AndAlso
-           Not ucrInputDefinitionsID.IsEmpty AndAlso
-           Not ucrInputTokenPath.IsEmpty Then
+            ' Basic required fields
+            Dim bRequiredFieldsFilled As Boolean = Not ucrReceiverStation.IsEmpty AndAlso
+                                               Not ucrReceiverYear.IsEmpty AndAlso
+                                               Not ucrInputCountry.IsEmpty AndAlso
+                                               Not ucrInputDefinitionsID.IsEmpty AndAlso
+                                               Not ucrInputTokenPath.IsEmpty
 
-                If (ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso
-                   Not ucrReceiverCropData.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                ElseIf ucrChkAnnualRainfall.Checked AndAlso
-                       Not ucrReceiverRain.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                ElseIf (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso
-                       Not ucrReceiverDataYear.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                ElseIf ucrChkMonthlyTemp.Checked AndAlso
-                       Not ucrReceiverMonth.IsEmpty AndAlso
-                       Not ucrReceiverDataYearMonth.IsEmpty Then
+            If bRequiredFieldsFilled Then
+                ' Individual validity checks
+                Dim bCropChecked As Boolean = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
+                Dim bCropOK As Boolean = Not bCropChecked OrElse Not ucrReceiverCropData.IsEmpty
+
+                Dim bAnnualRainOK As Boolean = Not ucrChkAnnualRainfall.Checked OrElse
+                                           (Not ucrReceiverRain.IsEmpty AndAlso Not ucrReceiverDataYear.IsEmpty)
+
+                Dim bAnnualTempOK As Boolean = Not ucrChkAnnualTemp.Checked OrElse
+                                           Not ucrReceiverDataYear.IsEmpty
+
+                Dim bMonthlyTempOK As Boolean = Not ucrChkMonthlyTemp.Checked OrElse
+                                            (Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDataYearMonth.IsEmpty)
+
+                ' Final OK decision
+                If bCropOK AndAlso bAnnualRainOK AndAlso bAnnualTempOK AndAlso bMonthlyTempOK Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -299,14 +327,19 @@ Public Class dlgExportClimaticDefinitions
             Else
                 ucrBase.OKEnabled(False)
             End If
+
         Else
-            If Not ucrReceiverStationName.IsEmpty AndAlso Not ucrInputTokenPath.IsEmpty AndAlso Not ucrInputCountryMetadata.IsEmpty Then
+            ' Non-upload mode (metadata)
+            If Not ucrReceiverStationName.IsEmpty AndAlso
+           Not ucrInputTokenPath.IsEmpty AndAlso
+           Not ucrInputCountryMetadata.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         End If
     End Sub
+
 
     Private Sub AddRemoveSummary()
         If ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked OrElse ucrChkCropSuccessProp.Checked OrElse ucrChkExtremes.Checked OrElse ucrChkMonthlyTemp.Checked OrElse ucrChkSeasonStartProp.Checked Then
@@ -338,6 +371,9 @@ Public Class dlgExportClimaticDefinitions
         End If
         AddRemoveSummary()
         EnableDisableDefineButton()
+        AddExtremeTminIndicatorParam()
+        AddExtremeTmaxIndicatorParam()
+        AddExtremeRainParameter()
         TestOkEnabled()
     End Sub
 
@@ -412,15 +448,29 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub EnableDisableDefineButton()
+        ucrReceiverDataYearMonth.Visible = False
+        ucrReceiverDataYear.Visible = False
+        ucrReceiverRain.Visible = False
+        ucrReceiverRainIndicator.Visible = False
+        ucrReceiverExtremIndicator.Visible = False
+        ucrReceiverCropData.Visible = False
         If rdoUploadSummaries.Checked Then
             ucrReceiverDataYearMonth.Visible = ucrChkMonthlyTemp.Checked
             ucrReceiverDataYear.Visible = ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked
             ucrReceiverRain.Visible = ucrChkAnnualRainfall.Checked
-            ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
+            ucrReceiverExtremeTminIndicator.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverExtremeTmaxIndicator.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverExtremIndicator.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverRainIndicator.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked
         Else
             ucrReceiverDataYearMonth.Visible = False
             ucrReceiverDataYear.Visible = False
             ucrReceiverRain.Visible = False
+            ucrReceiverRainIndicator.Visible = False
+            ucrReceiverExtremeTminIndicator.Visible = False
+            ucrReceiverExtremeTmaxIndicator.Visible = False
+            ucrReceiverExtremIndicator.Visible = False
             ucrReceiverCropData.Visible = False
         End If
 
@@ -467,11 +517,11 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub DialogSize()
         If rdoUpdateMetadata.Checked Then
-            Me.Size = New Size(475, 455)
-            Me.ucrBase.Location = New Point(4, 360)
+            Me.Size = New Size(475, 465)
+            Me.ucrBase.Location = New Point(4, 370)
         Else
-            Me.Size = New Size(475, 539)
-            Me.ucrBase.Location = New Point(4, 434)
+            Me.Size = New Size(475, 610)
+            Me.ucrBase.Location = New Point(5, 520)
         End If
     End Sub
 
@@ -494,4 +544,63 @@ Public Class dlgExportClimaticDefinitions
             clsUpdateMetadataInfoFunction.RemoveParameterByName("country")
         End If
     End Sub
+
+    Private Sub AddExtremeTminIndicatorParam()
+        If ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverExtremeTminIndicator.IsEmpty() Then
+                clsExportRinstatToBucketFunction.AddParameter("extreme_tmin_column", ucrReceiverExtremeTminIndicator.GetVariableNames(), iPosition:=15)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmin_column")
+            End If
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmin_column")
+        End If
+    End Sub
+
+    Private Sub AddExtremeTmaxIndicatorParam()
+        If ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverExtremeTmaxIndicator.IsEmpty() Then
+                clsExportRinstatToBucketFunction.AddParameter("extreme_tmax_column", ucrReceiverExtremeTmaxIndicator.GetVariableNames(), iPosition:=16)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmax_column")
+            End If
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_tmax_column")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverExtremeTminIndicator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExtremeTminIndicator.ControlValueChanged
+        AddExtremeTminIndicatorParam()
+    End Sub
+
+    Private Sub ucrReceiverExtremeTmaxIndicator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExtremeTmaxIndicator.ControlValueChanged
+        AddExtremeTmaxIndicatorParam()
+    End Sub
+
+    Private Sub AddExtremeRainParameter()
+        If ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverExtremIndicator.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("extreme_rainfall_column", ucrReceiverExtremIndicator.GetVariableNames, iPosition:=10)
+
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_rainfall_column")
+            End If
+
+            If Not ucrReceiverRainIndicator.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("rain_days_name", ucrReceiverRainIndicator.GetVariableNames, iPosition:=9)
+
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("rain_days_name")
+            End If
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("rain_days_name")
+            clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_rainfall_column")
+
+        End If
+    End Sub
+
+    Private Sub ucrReceiverRainIndicator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainIndicator.ControlValueChanged, ucrReceiverExtremIndicator.ControlValueChanged
+        AddExtremeRainParameter()
+    End Sub
+
 End Class
