@@ -95,7 +95,7 @@ packs <-
     "treemapify",
     "stringdist",
     "imputeTS",
-    #"chillR", This is no longer used
+    "chillR", 
     "patchwork",
     "changepoint",
     "trend",
