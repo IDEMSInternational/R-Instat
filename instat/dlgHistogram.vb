@@ -65,6 +65,8 @@ Public Class dlgHistogram
     Private bWrap As Boolean = False
     Private bCol As Boolean = False
     Private bRow As Boolean = False
+    Private bColAll As Boolean = False
+    Private bRowAll As Boolean = False
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -688,9 +690,9 @@ Public Class dlgHistogram
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-      
+
         'clsBaseOperator.RemoveParameterByName("facets") {Removed this command so that removing of the facets is done in the subdialog}
-      
+
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
@@ -728,12 +730,12 @@ Public Class dlgHistogram
             End Select
         End If
     End Sub
-      
+
     Private Sub UpdateFacetsCases()
         If bUpdatingParameters Then
             Exit Sub
         End If
-          
+
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If

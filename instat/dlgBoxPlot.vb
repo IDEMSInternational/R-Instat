@@ -96,6 +96,8 @@ Public Class dlgBoxplot
     Private bWrap As Boolean = False
     Private bCol As Boolean = False
     Private bRow As Boolean = False
+    Private bColAll As Boolean = False
+    Private bRowAll As Boolean = False
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
