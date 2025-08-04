@@ -1,4 +1,6 @@
-﻿Public Class ucrColumnMissingTexts
+﻿Imports RDotNet
+
+Public Class ucrColumnMissingTexts
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
@@ -10,8 +12,10 @@
     End Sub
 
     Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
-        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverSingleCol.Selector = ucrSelectorCols
+        ucrReceiverSingleCol.strSelectorHeading = "Tables"
+        ucrReceiverSingleCol.SetItemType(RObjectTypeLabel.Table)
+        ucrReceiverSingleCol.SetMeAsReceiver()
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -38,17 +42,32 @@
         Next
     End Sub
 
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
-        btnAdd.Enabled = Not ucrReceiverMultipleCols.IsEmpty
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore)
+        btnAdd.Enabled = Not ucrReceiverSingleCol.IsEmpty
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Dim clsGetRObjectFunction As New RFunction
+        Dim clsAsDataFrameFunction As New RFunction
+        clsGetRObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetRObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorCols.strCurrentDataFrame & Chr(34))
+        clsGetRObjectFunction.AddParameter("object_name", ucrReceiverSingleCol.GetVariableNames)
+
+        clsAsDataFrameFunction.SetRCommand("as.data.frame")
+        clsAsDataFrameFunction.AddParameter("object", clsRFunctionParameter:=clsGetRObjectFunction, bIncludeArgumentName:=False)
+        Dim strScript As String = "colnames(" & clsAsDataFrameFunction.ToScript & ")"
+        Dim lstObjectss As GenericVector
+        lstObjectss = frmMain.clsRLink.RunInternalScriptGetValue(strScript).AsList
+
+        Dim strAllNames As String = "c(" & String.Join(", ", lstObjectss.Select(Function(x) """" & x.AsCharacter(0) & """")) & ")"
+
         Dim clsSubMissingRFunction As New RFunction
 
         clsSubMissingRFunction.SetPackageName("gt")
         clsSubMissingRFunction.SetRCommand("sub_missing")
-        clsSubMissingRFunction.AddParameter(strParameterName:="columns", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-        clsSubMissingRFunction.AddParameter(strParameterName:="missing_text", strParameterValue:=Chr(34) & ucrTxtMissingText.GetText & Chr(34), iPosition:=1)
+        clsSubMissingRFunction.AddParameter(strParameterName:="data", ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False), iPosition:=1)
+        clsSubMissingRFunction.AddParameter(strParameterName:="columns", strParameterValue:=strAllNames, iPosition:=1)
+        clsSubMissingRFunction.AddParameter(strParameterName:="missing_text", strParameterValue:=Chr(34) & ucrTxtMissingText.GetText & Chr(34), iPosition:=2)
 
         ' Create parameter with unique name
         Dim clsRParam As New RParameter(strParameterName:="sub_missing_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsSubMissingRFunction, bNewIncludeArgumentName:=False)
@@ -64,7 +83,6 @@
         ' Add it to grid
         dataGrid.Rows.Add(row)
 
-        ucrReceiverMultipleCols.Clear()
         ucrTxtMissingText.SetName("")
     End Sub
 
