@@ -393,15 +393,17 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If _grid.GetSelectedRows.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
-            MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
+            MsgBox("Cannot delete all visible columns." & Environment.NewLine &
+                   "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.",
+                   MsgBoxStyle.Information, "Cannot Delete All Columns")
+        ElseIf Not clsWarningMessage.ConfirmDelete() Then
+            Exit Sub
         Else
-            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
-            If deleteCol = DialogResult.Yes Then
-                StartWait()
-                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedDataframeColumnsFromSelectedRows)
-                EndWait()
-            End If
+            StartWait()
+            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedDataframeColumnsFromSelectedRows)
+            EndWait()
         End If
+
     End Sub
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
         dlgName.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)

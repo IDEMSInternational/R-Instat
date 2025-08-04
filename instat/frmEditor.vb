@@ -117,11 +117,9 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
-        If deleteCol = DialogResult.Yes Then
-            clsDeleteColumns.AddParameter("cols", SelectedColumns())
-            frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
-        End If
+        If Not clsWarningMessage.ConfirmDelete() Then Exit Sub
+        clsDeleteColumns.AddParameter("cols", SelectedColumns())
+        frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
     End Sub
 
     'Private Sub resetToDefaultWidthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultWidthToolStripMenuItem.Click

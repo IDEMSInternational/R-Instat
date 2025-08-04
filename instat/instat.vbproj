@@ -227,6 +227,7 @@
     <Compile Include="clsTransformationControl.vb" />
     <Compile Include="clsTransformationRModel.vb" />
     <Compile Include="clsColumnSelectionUtility.vb" />
+    <Compile Include="clsWarningMessage.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>

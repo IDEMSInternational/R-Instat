@@ -3202,4 +3202,10 @@ Public Class frmMain
         dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
         dlgCombine.ShowDialog()
     End Sub
+
+    Private Sub mnuDisableWarningMessage_Click(sender As Object, e As EventArgs) Handles mnuDisableWarningMessage.Click
+        mnuDisableWarningMessage.Checked = Not mnuDisableWarningMessage.Checked
+        ' Update the warning flag accordingly
+        clsWarningMessage.ShowWarning = Not mnuDisableWarningMessage.Checked
+    End Sub
 End Class
