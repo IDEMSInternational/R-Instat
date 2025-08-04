@@ -419,9 +419,13 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "calculation_name"
             Case "scalar"
                 strItemsParameterNameInRFunction = "scalar_name"
+            Case "gtcol"
+                strItemsParameterNameInRFunction = "gtcol_name"
+            Case "gtrow"
+                strItemsParameterNameInRFunction = "gtrow_name"
         End Select
         If IsCurrentReceiver() Then
-            Selector.LoadList()
+            Selector.LoadList() ' this is where the selector is autopopulating ' which is the r cmd that loadlist is looking at?
         End If
         bTypeSet = True
     End Sub
@@ -653,6 +657,18 @@ Public Class ucrReceiver
         If Selector IsNot Nothing Then
             SetMeAsReceiver()
             frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
+        End If
+    End Sub
+    Public Sub AddTableItemsFromTable(strDataName As String, strTableName As String)
+        If Selector IsNot Nothing Then
+            SetMeAsReceiver()
+            Dim colNames = frmMain.clsRLink.GetColumnNamesFromTable(strDataName, strTableName)
+            If TypeOf Me Is ucrReceiverMultiple Then
+                DirectCast(Me, ucrReceiverMultiple).AddMultiple(
+                colNames.Select(Function(name) New KeyValuePair(Of String, String)(name, name)).ToArray())
+            ElseIf TypeOf Me Is ucrReceiverSingle AndAlso colNames.Count > 0 Then
+                Me.Add(colNames(0), colNames(0))
+            End If
         End If
     End Sub
 
