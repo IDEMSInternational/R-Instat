@@ -101,6 +101,7 @@ Public Class ucrAdditionalLayers
         lstLayerComplete.Insert(newIndex, layerComplete)
         lstLayers.Items(newIndex).Selected = True
         lstLayers.Select()
+        SyncLayerOrderWithOperator()
     End Sub
 
 
@@ -119,6 +120,24 @@ Public Class ucrAdditionalLayers
     Private Sub cmdBottom_Click(sender As Object, e As EventArgs) Handles cmdBottom.Click
         ReorderListViewItems(Direction.Bottom)
     End Sub
+
+
+    Private Sub SyncLayerOrderWithOperator()
+        Dim newParams As New List(Of RParameter)
+        For Each item As ListViewItem In lstLayers.Items
+            Dim param As RParameter = clsBaseOperator.GetParameter(item.Tag.ToString())
+            If param IsNot Nothing Then
+                newParams.Add(param)
+            End If
+        Next
+        For Each param As RParameter In clsBaseOperator.clsParameters
+            If Not newParams.Contains(param) Then
+                newParams.Add(param)
+            End If
+        Next
+        clsBaseOperator.clsParameters = newParams
+    End Sub
+
 
     Private Sub AddLayerToList(clsGeomParameter As RParameter, strGeomName As String, bLayerComplete As Boolean)
         Dim lviLayer As ListViewItem
@@ -239,14 +258,25 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub SetEditDeleteEnabled()
-        If lstLayers.Items.Count > 0 AndAlso lstLayers.SelectedItems.Count = 1 Then
+        Dim idx As Integer = -1
+        If lstLayers.SelectedItems.Count = 1 Then
+            idx = lstLayers.SelectedIndices(0)
             cmdDelete.Enabled = True
             cmdEdit.Enabled = True
+            cmdUp.Enabled = (idx > 0)
+            cmdTop.Enabled = (idx > 0)
+            cmdDown.Enabled = (idx >= 0 AndAlso idx < lstLayers.Items.Count - 1)
+            cmdBottom.Enabled = (idx >= 0 AndAlso idx < lstLayers.Items.Count - 1)
         Else
             cmdDelete.Enabled = False
             cmdEdit.Enabled = False
+            cmdUp.Enabled = False
+            cmdTop.Enabled = False
+            cmdDown.Enabled = False
+            cmdBottom.Enabled = False
         End If
     End Sub
+
 
     Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstLayers.SelectedIndexChanged
         SetEditDeleteEnabled()
