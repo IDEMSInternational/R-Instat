@@ -16,7 +16,6 @@
 
 Imports instat
 Imports instat.Translations
-Imports unvell.ReoGrid.IO.OpenXML.Schema
 Public Class dlgHistogram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -61,10 +60,6 @@ Public Class dlgHistogram
     Private ReadOnly strFacetCol As String = "Facet Column"
     Private ReadOnly strFacetRowAll As String = "Facet Row + O"
     Private ReadOnly strFacetColAll As String = "Facet Col + O"
-
-    Private bWrap As Boolean = False
-    Private bCol As Boolean = False
-    Private bRow As Boolean = False
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -687,11 +682,7 @@ Public Class dlgHistogram
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
-
-
-        'clsBaseOperator.RemoveParameterByName("facets") {Removed this command so that removing of the facets is done in the subdialog}
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
@@ -721,7 +712,6 @@ Public Class dlgHistogram
         If bUpdatingParameters Then
             Exit Sub
         End If
-
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -737,8 +727,7 @@ Public Class dlgHistogram
                     bRowAll = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
 
@@ -766,7 +755,7 @@ Public Class dlgHistogram
 
         If bCol OrElse bColAll Then
             clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
+        ElseIf (bRow OrElse bColAll) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("right")
@@ -855,4 +844,6 @@ Public Class dlgHistogram
     Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrInputWidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+
 End Class

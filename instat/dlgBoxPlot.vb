@@ -784,7 +784,6 @@ Public Class dlgBoxplot
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -815,7 +814,6 @@ Public Class dlgBoxplot
         If bUpdatingParameters Then
             Exit Sub
         End If
-
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -831,8 +829,7 @@ Public Class dlgBoxplot
                     bRowAll = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
 
