@@ -845,4 +845,5 @@ Public Class dlgHistogram
         TestOkEnabled()
     End Sub
 
+
 End Class
