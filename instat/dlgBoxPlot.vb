@@ -776,8 +776,7 @@ Public Class dlgBoxplot
             End If
         End If
         UpdateParameters()
-        ' AddRemoveFacet()
-        UpdateFacetCases()
+        AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
 
@@ -810,6 +809,8 @@ Public Class dlgBoxplot
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
@@ -867,8 +868,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
-        AddRemoveFacet()
-        UpdateFacetCases()
+        AddRemoveFacets()
         AddRemoveGroupBy()
         EnableDisableWidth()
         AddRemoveAesParm()
