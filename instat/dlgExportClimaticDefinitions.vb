@@ -437,11 +437,7 @@ Public Class dlgExportClimaticDefinitions
     Private Sub ucrSelectorExportDefinitions_DataFrameChanged() Handles ucrSelectorExportDefinitions.DataFrameChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrReceiverDataYearMonth_Load(sender As Object, e As EventArgs) Handles ucrReceiverDataYearMonth.Load
-
-    End Sub
-
+    
     Private Sub ucrPnlExportGoogle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportGoogle.ControlValueChanged, ucrInputTokenPath.ControlValueChanged
         ucrBase.clsRsyntax.AddToBeforeCodes(ClsGcsAuthFileFunction, 0)
         If rdoUpdateMetadata.Checked Then
