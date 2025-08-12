@@ -20,7 +20,7 @@ Partial Class sdgDefineAnnualRainfall
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSeasonPlantingDay = New System.Windows.Forms.Label()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
@@ -122,16 +122,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverMonthlyTemp = New instat.ucrReceiverSingle()
         Me.ucrSelecetorMonthlyTemp = New instat.ucrSelectorByDataFrame()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
-        Me.lblExtremeMinTemp = New System.Windows.Forms.Label()
-        Me.ucrReceiverExtremeMinTemp = New instat.ucrReceiverSingle()
-        Me.lblExtremeMaxTemp = New System.Windows.Forms.Label()
-        Me.ucrReceiverExtremeMaxTemp = New instat.ucrReceiverSingle()
-        Me.lblLongestRainfallSpell = New System.Windows.Forms.Label()
-        Me.ucrReceiverLongestRainfallSpell = New instat.ucrReceiverSingle()
-        Me.lblLongestMinTempSpell = New System.Windows.Forms.Label()
-        Me.ucrReceiverLongestMinTempSpell = New instat.ucrReceiverSingle()
-        Me.lblLongestMaxTempSpell = New System.Windows.Forms.Label()
-        Me.ucrReceiverLongestMaxTempSpell = New instat.ucrReceiverSingle()
         Me.tbSummaries.SuspendLayout()
         Me.tbAnnualRainfall.SuspendLayout()
         Me.tbCropSuccessProp.SuspendLayout()
@@ -166,16 +156,6 @@ Partial Class sdgDefineAnnualRainfall
         '
         'tbAnnualRainfall
         '
-        Me.tbAnnualRainfall.Controls.Add(Me.lblLongestMaxTempSpell)
-        Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverLongestMaxTempSpell)
-        Me.tbAnnualRainfall.Controls.Add(Me.lblLongestMinTempSpell)
-        Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverLongestMinTempSpell)
-        Me.tbAnnualRainfall.Controls.Add(Me.lblLongestRainfallSpell)
-        Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverLongestRainfallSpell)
-        Me.tbAnnualRainfall.Controls.Add(Me.lblExtremeMaxTemp)
-        Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverExtremeMaxTemp)
-        Me.tbAnnualRainfall.Controls.Add(Me.lblExtremeMinTemp)
-        Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverExtremeMinTemp)
         Me.tbAnnualRainfall.Controls.Add(Me.lblExtremRain)
         Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverExtremRian)
         Me.tbAnnualRainfall.Controls.Add(Me.lblStartRainStatus)
@@ -246,7 +226,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblStartRainStatus
         '
         Me.lblStartRainStatus.AutoSize = True
-        Me.lblStartRainStatus.Location = New System.Drawing.Point(280, 502)
+        Me.lblStartRainStatus.Location = New System.Drawing.Point(396, 502)
         Me.lblStartRainStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStartRainStatus.Name = "lblStartRainStatus"
         Me.lblStartRainStatus.Size = New System.Drawing.Size(144, 20)
@@ -257,7 +237,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverStartRainStatus.AutoSize = True
         Me.ucrReceiverStartRainStatus.frmParent = Nothing
-        Me.ucrReceiverStartRainStatus.Location = New System.Drawing.Point(280, 528)
+        Me.ucrReceiverStartRainStatus.Location = New System.Drawing.Point(396, 528)
         Me.ucrReceiverStartRainStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStartRainStatus.Name = "ucrReceiverStartRainStatus"
         Me.ucrReceiverStartRainStatus.Selector = Nothing
@@ -269,7 +249,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblEndRainStatus
         '
         Me.lblEndRainStatus.AutoSize = True
-        Me.lblEndRainStatus.Location = New System.Drawing.Point(280, 565)
+        Me.lblEndRainStatus.Location = New System.Drawing.Point(396, 565)
         Me.lblEndRainStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEndRainStatus.Name = "lblEndRainStatus"
         Me.lblEndRainStatus.Size = New System.Drawing.Size(138, 20)
@@ -280,7 +260,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverEndRainStatus.AutoSize = True
         Me.ucrReceiverEndRainStatus.frmParent = Nothing
-        Me.ucrReceiverEndRainStatus.Location = New System.Drawing.Point(280, 589)
+        Me.ucrReceiverEndRainStatus.Location = New System.Drawing.Point(396, 589)
         Me.ucrReceiverEndRainStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndRainStatus.Name = "ucrReceiverEndRainStatus"
         Me.ucrReceiverEndRainStatus.Selector = Nothing
@@ -292,7 +272,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblEndSeasonStatus
         '
         Me.lblEndSeasonStatus.AutoSize = True
-        Me.lblEndSeasonStatus.Location = New System.Drawing.Point(280, 628)
+        Me.lblEndSeasonStatus.Location = New System.Drawing.Point(396, 628)
         Me.lblEndSeasonStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEndSeasonStatus.Name = "lblEndSeasonStatus"
         Me.lblEndSeasonStatus.Size = New System.Drawing.Size(152, 20)
@@ -303,7 +283,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverEndSeasonStatus.AutoSize = True
         Me.ucrReceiverEndSeasonStatus.frmParent = Nothing
-        Me.ucrReceiverEndSeasonStatus.Location = New System.Drawing.Point(276, 649)
+        Me.ucrReceiverEndSeasonStatus.Location = New System.Drawing.Point(392, 649)
         Me.ucrReceiverEndSeasonStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndSeasonStatus.Name = "ucrReceiverEndSeasonStatus"
         Me.ucrReceiverEndSeasonStatus.Selector = Nothing
@@ -315,7 +295,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblRainyDaysYear
         '
         Me.lblRainyDaysYear.AutoSize = True
-        Me.lblRainyDaysYear.Location = New System.Drawing.Point(280, 132)
+        Me.lblRainyDaysYear.Location = New System.Drawing.Point(396, 132)
         Me.lblRainyDaysYear.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblRainyDaysYear.Name = "lblRainyDaysYear"
         Me.lblRainyDaysYear.Size = New System.Drawing.Size(151, 20)
@@ -326,7 +306,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverRainDaysYear.AutoSize = True
         Me.ucrReceiverRainDaysYear.frmParent = Nothing
-        Me.ucrReceiverRainDaysYear.Location = New System.Drawing.Point(280, 155)
+        Me.ucrReceiverRainDaysYear.Location = New System.Drawing.Point(396, 155)
         Me.ucrReceiverRainDaysYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainDaysYear.Name = "ucrReceiverRainDaysYear"
         Me.ucrReceiverRainDaysYear.Selector = Nothing
@@ -338,7 +318,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblNoRainDaysSeason
         '
         Me.lblNoRainDaysSeason.AutoSize = True
-        Me.lblNoRainDaysSeason.Location = New System.Drawing.Point(280, 63)
+        Me.lblNoRainDaysSeason.Location = New System.Drawing.Point(396, 63)
         Me.lblNoRainDaysSeason.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNoRainDaysSeason.Name = "lblNoRainDaysSeason"
         Me.lblNoRainDaysSeason.Size = New System.Drawing.Size(172, 20)
@@ -348,7 +328,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblSeasonalLength
         '
         Me.lblSeasonalLength.AutoSize = True
-        Me.lblSeasonalLength.Location = New System.Drawing.Point(280, 191)
+        Me.lblSeasonalLength.Location = New System.Drawing.Point(396, 191)
         Me.lblSeasonalLength.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSeasonalLength.Name = "lblSeasonalLength"
         Me.lblSeasonalLength.Size = New System.Drawing.Size(134, 20)
@@ -378,7 +358,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblEndSeasonDate
         '
         Me.lblEndSeasonDate.AutoSize = True
-        Me.lblEndSeasonDate.Location = New System.Drawing.Point(280, 438)
+        Me.lblEndSeasonDate.Location = New System.Drawing.Point(396, 438)
         Me.lblEndSeasonDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEndSeasonDate.Name = "lblEndSeasonDate"
         Me.lblEndSeasonDate.Size = New System.Drawing.Size(146, 20)
@@ -388,7 +368,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblEndSeasonDOY
         '
         Me.lblEndSeasonDOY.AutoSize = True
-        Me.lblEndSeasonDOY.Location = New System.Drawing.Point(280, 385)
+        Me.lblEndSeasonDOY.Location = New System.Drawing.Point(396, 385)
         Me.lblEndSeasonDOY.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEndSeasonDOY.Name = "lblEndSeasonDOY"
         Me.lblEndSeasonDOY.Size = New System.Drawing.Size(146, 20)
@@ -398,7 +378,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblEndRainDate
         '
         Me.lblEndRainDate.AutoSize = True
-        Me.lblEndRainDate.Location = New System.Drawing.Point(280, 318)
+        Me.lblEndRainDate.Location = New System.Drawing.Point(396, 318)
         Me.lblEndRainDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEndRainDate.Name = "lblEndRainDate"
         Me.lblEndRainDate.Size = New System.Drawing.Size(124, 20)
@@ -408,7 +388,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblEndRainsDOY
         '
         Me.lblEndRainsDOY.AutoSize = True
-        Me.lblEndRainsDOY.Location = New System.Drawing.Point(280, 257)
+        Me.lblEndRainsDOY.Location = New System.Drawing.Point(396, 257)
         Me.lblEndRainsDOY.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEndRainsDOY.Name = "lblEndRainsDOY"
         Me.lblEndRainsDOY.Size = New System.Drawing.Size(124, 20)
@@ -511,7 +491,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverEndSeasonDate.AutoSize = True
         Me.ucrReceiverEndSeasonDate.frmParent = Nothing
-        Me.ucrReceiverEndSeasonDate.Location = New System.Drawing.Point(280, 465)
+        Me.ucrReceiverEndSeasonDate.Location = New System.Drawing.Point(396, 465)
         Me.ucrReceiverEndSeasonDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndSeasonDate.Name = "ucrReceiverEndSeasonDate"
         Me.ucrReceiverEndSeasonDate.Selector = Nothing
@@ -524,7 +504,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverEndSeasonDOY.AutoSize = True
         Me.ucrReceiverEndSeasonDOY.frmParent = Nothing
-        Me.ucrReceiverEndSeasonDOY.Location = New System.Drawing.Point(280, 405)
+        Me.ucrReceiverEndSeasonDOY.Location = New System.Drawing.Point(396, 405)
         Me.ucrReceiverEndSeasonDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndSeasonDOY.Name = "ucrReceiverEndSeasonDOY"
         Me.ucrReceiverEndSeasonDOY.Selector = Nothing
@@ -537,7 +517,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverEndRainsDOY.AutoSize = True
         Me.ucrReceiverEndRainsDOY.frmParent = Nothing
-        Me.ucrReceiverEndRainsDOY.Location = New System.Drawing.Point(280, 283)
+        Me.ucrReceiverEndRainsDOY.Location = New System.Drawing.Point(396, 283)
         Me.ucrReceiverEndRainsDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndRainsDOY.Name = "ucrReceiverEndRainsDOY"
         Me.ucrReceiverEndRainsDOY.Selector = Nothing
@@ -550,7 +530,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverEndRainsDate.AutoSize = True
         Me.ucrReceiverEndRainsDate.frmParent = Nothing
-        Me.ucrReceiverEndRainsDate.Location = New System.Drawing.Point(280, 346)
+        Me.ucrReceiverEndRainsDate.Location = New System.Drawing.Point(396, 346)
         Me.ucrReceiverEndRainsDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndRainsDate.Name = "ucrReceiverEndRainsDate"
         Me.ucrReceiverEndRainsDate.Selector = Nothing
@@ -563,7 +543,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverSeasonalLength.AutoSize = True
         Me.ucrReceiverSeasonalLength.frmParent = Nothing
-        Me.ucrReceiverSeasonalLength.Location = New System.Drawing.Point(280, 218)
+        Me.ucrReceiverSeasonalLength.Location = New System.Drawing.Point(396, 218)
         Me.ucrReceiverSeasonalLength.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSeasonalLength.Name = "ucrReceiverSeasonalLength"
         Me.ucrReceiverSeasonalLength.Selector = Nothing
@@ -576,7 +556,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverRainDaysSeason.AutoSize = True
         Me.ucrReceiverRainDaysSeason.frmParent = Nothing
-        Me.ucrReceiverRainDaysSeason.Location = New System.Drawing.Point(280, 89)
+        Me.ucrReceiverRainDaysSeason.Location = New System.Drawing.Point(396, 89)
         Me.ucrReceiverRainDaysSeason.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainDaysSeason.Name = "ucrReceiverRainDaysSeason"
         Me.ucrReceiverRainDaysSeason.Selector = Nothing
@@ -1393,121 +1373,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrBase.Size = New System.Drawing.Size(336, 46)
         Me.ucrBase.TabIndex = 35
         '
-        'lblExtremeMinTemp
-        '
-        Me.lblExtremeMinTemp.AutoSize = True
-        Me.lblExtremeMinTemp.Location = New System.Drawing.Point(503, 63)
-        Me.lblExtremeMinTemp.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblExtremeMinTemp.Name = "lblExtremeMinTemp"
-        Me.lblExtremeMinTemp.Size = New System.Drawing.Size(234, 20)
-        Me.lblExtremeMinTemp.TabIndex = 35
-        Me.lblExtremeMinTemp.Text = "Extreme Minimum Temperature:"
-        '
-        'ucrReceiverExtremeMinTemp
-        '
-        Me.ucrReceiverExtremeMinTemp.AutoSize = True
-        Me.ucrReceiverExtremeMinTemp.frmParent = Me
-        Me.ucrReceiverExtremeMinTemp.Location = New System.Drawing.Point(503, 89)
-        Me.ucrReceiverExtremeMinTemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverExtremeMinTemp.Name = "ucrReceiverExtremeMinTemp"
-        Me.ucrReceiverExtremeMinTemp.Selector = Nothing
-        Me.ucrReceiverExtremeMinTemp.Size = New System.Drawing.Size(180, 38)
-        Me.ucrReceiverExtremeMinTemp.strNcFilePath = ""
-        Me.ucrReceiverExtremeMinTemp.TabIndex = 36
-        Me.ucrReceiverExtremeMinTemp.ucrSelector = Nothing
-        '
-        'lblExtremeMaxTemp
-        '
-        Me.lblExtremeMaxTemp.AutoSize = True
-        Me.lblExtremeMaxTemp.Location = New System.Drawing.Point(503, 128)
-        Me.lblExtremeMaxTemp.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblExtremeMaxTemp.Name = "lblExtremeMaxTemp"
-        Me.lblExtremeMaxTemp.Size = New System.Drawing.Size(238, 20)
-        Me.lblExtremeMaxTemp.TabIndex = 37
-        Me.lblExtremeMaxTemp.Text = "Extreme Maximum Temperature:"
-        '
-        'ucrReceiverExtremeMaxTemp
-        '
-        Me.ucrReceiverExtremeMaxTemp.AutoSize = True
-        Me.ucrReceiverExtremeMaxTemp.frmParent = Me
-        Me.ucrReceiverExtremeMaxTemp.Location = New System.Drawing.Point(503, 154)
-        Me.ucrReceiverExtremeMaxTemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverExtremeMaxTemp.Name = "ucrReceiverExtremeMaxTemp"
-        Me.ucrReceiverExtremeMaxTemp.Selector = Nothing
-        Me.ucrReceiverExtremeMaxTemp.Size = New System.Drawing.Size(180, 38)
-        Me.ucrReceiverExtremeMaxTemp.strNcFilePath = ""
-        Me.ucrReceiverExtremeMaxTemp.TabIndex = 38
-        Me.ucrReceiverExtremeMaxTemp.ucrSelector = Nothing
-        '
-        'lblLongestRainfallSpell
-        '
-        Me.lblLongestRainfallSpell.AutoSize = True
-        Me.lblLongestRainfallSpell.Location = New System.Drawing.Point(503, 192)
-        Me.lblLongestRainfallSpell.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLongestRainfallSpell.Name = "lblLongestRainfallSpell"
-        Me.lblLongestRainfallSpell.Size = New System.Drawing.Size(167, 20)
-        Me.lblLongestRainfallSpell.TabIndex = 39
-        Me.lblLongestRainfallSpell.Text = "Longest Rainfall Spell:"
-        '
-        'ucrReceiverLongestRainfallSpell
-        '
-        Me.ucrReceiverLongestRainfallSpell.AutoSize = True
-        Me.ucrReceiverLongestRainfallSpell.frmParent = Me
-        Me.ucrReceiverLongestRainfallSpell.Location = New System.Drawing.Point(503, 218)
-        Me.ucrReceiverLongestRainfallSpell.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongestRainfallSpell.Name = "ucrReceiverLongestRainfallSpell"
-        Me.ucrReceiverLongestRainfallSpell.Selector = Nothing
-        Me.ucrReceiverLongestRainfallSpell.Size = New System.Drawing.Size(180, 38)
-        Me.ucrReceiverLongestRainfallSpell.strNcFilePath = ""
-        Me.ucrReceiverLongestRainfallSpell.TabIndex = 40
-        Me.ucrReceiverLongestRainfallSpell.ucrSelector = Nothing
-        '
-        'lblLongestMinTempSpell
-        '
-        Me.lblLongestMinTempSpell.AutoSize = True
-        Me.lblLongestMinTempSpell.Location = New System.Drawing.Point(503, 257)
-        Me.lblLongestMinTempSpell.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLongestMinTempSpell.Name = "lblLongestMinTempSpell"
-        Me.lblLongestMinTempSpell.Size = New System.Drawing.Size(272, 20)
-        Me.lblLongestMinTempSpell.TabIndex = 41
-        Me.lblLongestMinTempSpell.Text = "Longest Minimum Temperature Spell:"
-        '
-        'ucrReceiverLongestMinTempSpell
-        '
-        Me.ucrReceiverLongestMinTempSpell.AutoSize = True
-        Me.ucrReceiverLongestMinTempSpell.frmParent = Me
-        Me.ucrReceiverLongestMinTempSpell.Location = New System.Drawing.Point(503, 283)
-        Me.ucrReceiverLongestMinTempSpell.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongestMinTempSpell.Name = "ucrReceiverLongestMinTempSpell"
-        Me.ucrReceiverLongestMinTempSpell.Selector = Nothing
-        Me.ucrReceiverLongestMinTempSpell.Size = New System.Drawing.Size(180, 38)
-        Me.ucrReceiverLongestMinTempSpell.strNcFilePath = ""
-        Me.ucrReceiverLongestMinTempSpell.TabIndex = 42
-        Me.ucrReceiverLongestMinTempSpell.ucrSelector = Nothing
-        '
-        'lblLongestMaxTempSpell
-        '
-        Me.lblLongestMaxTempSpell.AutoSize = True
-        Me.lblLongestMaxTempSpell.Location = New System.Drawing.Point(503, 320)
-        Me.lblLongestMaxTempSpell.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLongestMaxTempSpell.Name = "lblLongestMaxTempSpell"
-        Me.lblLongestMaxTempSpell.Size = New System.Drawing.Size(276, 20)
-        Me.lblLongestMaxTempSpell.TabIndex = 43
-        Me.lblLongestMaxTempSpell.Text = "Longest Maximum Temperature Spell:"
-        '
-        'ucrReceiverLongestMaxTempSpell
-        '
-        Me.ucrReceiverLongestMaxTempSpell.AutoSize = True
-        Me.ucrReceiverLongestMaxTempSpell.frmParent = Me
-        Me.ucrReceiverLongestMaxTempSpell.Location = New System.Drawing.Point(503, 346)
-        Me.ucrReceiverLongestMaxTempSpell.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongestMaxTempSpell.Name = "ucrReceiverLongestMaxTempSpell"
-        Me.ucrReceiverLongestMaxTempSpell.Selector = Nothing
-        Me.ucrReceiverLongestMaxTempSpell.Size = New System.Drawing.Size(180, 38)
-        Me.ucrReceiverLongestMaxTempSpell.strNcFilePath = ""
-        Me.ucrReceiverLongestMaxTempSpell.TabIndex = 44
-        Me.ucrReceiverLongestMaxTempSpell.ucrSelector = Nothing
-        '
         'sdgDefineAnnualRainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -1639,14 +1504,4 @@ Partial Class sdgDefineAnnualRainfall
     Friend WithEvents ucrReceiverPropSuccessNoStart As ucrReceiverSingle
     Friend WithEvents lblExtremRain As Label
     Friend WithEvents ucrReceiverExtremRian As ucrReceiverSingle
-    Friend WithEvents lblLongestMaxTempSpell As Label
-    Friend WithEvents ucrReceiverLongestMaxTempSpell As ucrReceiverSingle
-    Friend WithEvents lblLongestMinTempSpell As Label
-    Friend WithEvents ucrReceiverLongestMinTempSpell As ucrReceiverSingle
-    Friend WithEvents lblLongestRainfallSpell As Label
-    Friend WithEvents ucrReceiverLongestRainfallSpell As ucrReceiverSingle
-    Friend WithEvents lblExtremeMaxTemp As Label
-    Friend WithEvents ucrReceiverExtremeMaxTemp As ucrReceiverSingle
-    Friend WithEvents lblExtremeMinTemp As Label
-    Friend WithEvents ucrReceiverExtremeMinTemp As ucrReceiverSingle
 End Class
