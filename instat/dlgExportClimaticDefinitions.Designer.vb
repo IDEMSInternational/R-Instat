@@ -34,7 +34,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.cmdDefine = New System.Windows.Forms.Button()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblCountry = New System.Windows.Forms.Label()
-        Me.ucrInputCountry = New instat.ucrInputTextBox()
         Me.ucrChkIncludeSummaryData = New instat.ucrCheck()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverExtremIndicator = New instat.ucrReceiverSingle()
@@ -65,7 +64,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblCountryMetada = New System.Windows.Forms.Label()
-        Me.ucrInputCountryMetadata = New instat.ucrInputTextBox()
+        Me.ucrInputComboCountry = New instat.ucrInputComboBox()
+        Me.ucrInputComboCountryMetadata = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -212,18 +212,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblCountry.TabIndex = 21
         Me.lblCountry.Text = "Country:"
         '
-        'ucrInputCountry
-        '
-        Me.ucrInputCountry.AddQuotesIfUnrecognised = True
-        Me.ucrInputCountry.AutoSize = True
-        Me.ucrInputCountry.IsMultiline = False
-        Me.ucrInputCountry.IsReadOnly = False
-        Me.ucrInputCountry.Location = New System.Drawing.Point(478, 205)
-        Me.ucrInputCountry.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputCountry.Name = "ucrInputCountry"
-        Me.ucrInputCountry.Size = New System.Drawing.Size(180, 32)
-        Me.ucrInputCountry.TabIndex = 22
-        '
         'ucrChkIncludeSummaryData
         '
         Me.ucrChkIncludeSummaryData.AutoSize = True
@@ -251,7 +239,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.grpSummaries.Controls.Add(Me.lblDataByYear)
         Me.grpSummaries.Controls.Add(Me.ucrReceiverDataYear)
         Me.grpSummaries.Controls.Add(Me.ucrReceiverDataYearMonth)
-        Me.grpSummaries.Location = New System.Drawing.Point(13, 396)
+        Me.grpSummaries.Location = New System.Drawing.Point(14, 396)
         Me.grpSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -567,24 +555,39 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblCountryMetada.TabIndex = 17
         Me.lblCountryMetada.Text = "Country:"
         '
-        'ucrInputCountryMetadata
+        'ucrInputComboCountry
         '
-        Me.ucrInputCountryMetadata.AddQuotesIfUnrecognised = True
-        Me.ucrInputCountryMetadata.AutoSize = True
-        Me.ucrInputCountryMetadata.IsMultiline = False
-        Me.ucrInputCountryMetadata.IsReadOnly = False
-        Me.ucrInputCountryMetadata.Location = New System.Drawing.Point(478, 463)
-        Me.ucrInputCountryMetadata.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputCountryMetadata.Name = "ucrInputCountryMetadata"
-        Me.ucrInputCountryMetadata.Size = New System.Drawing.Size(180, 32)
-        Me.ucrInputCountryMetadata.TabIndex = 18
+        Me.ucrInputComboCountry.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboCountry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboCountry.GetSetSelectedIndex = -1
+        Me.ucrInputComboCountry.IsReadOnly = False
+        Me.ucrInputComboCountry.Location = New System.Drawing.Point(478, 206)
+        Me.ucrInputComboCountry.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputComboCountry.Name = "ucrInputComboCountry"
+        Me.ucrInputComboCountry.Size = New System.Drawing.Size(180, 32)
+        Me.ucrInputComboCountry.TabIndex = 22
+        '
+        'ucrInputComboCountryMetadata
+        '
+        Me.ucrInputComboCountryMetadata.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboCountryMetadata.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboCountryMetadata.GetSetSelectedIndex = -1
+        Me.ucrInputComboCountryMetadata.IsReadOnly = False
+        Me.ucrInputComboCountryMetadata.Location = New System.Drawing.Point(478, 463)
+        Me.ucrInputComboCountryMetadata.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputComboCountryMetadata.Name = "ucrInputComboCountryMetadata"
+        Me.ucrInputComboCountryMetadata.Size = New System.Drawing.Size(180, 32)
+        Me.ucrInputComboCountryMetadata.TabIndex = 18
         '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(699, 819)
+        Me.ClientSize = New System.Drawing.Size(698, 819)
+        Me.Controls.Add(Me.grpSummaries)
+        Me.Controls.Add(Me.ucrInputComboCountryMetadata)
+        Me.Controls.Add(Me.ucrInputComboCountry)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputTokenPath)
@@ -597,9 +600,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.Controls.Add(Me.cmdDefine)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.lblCountry)
-        Me.Controls.Add(Me.ucrInputCountry)
         Me.Controls.Add(Me.ucrChkIncludeSummaryData)
-        Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.ucrSelectorExportDefinitions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblDistrict)
@@ -613,7 +614,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.Controls.Add(Me.ucrReceiverStationName)
         Me.Controls.Add(Me.lblStationName)
         Me.Controls.Add(Me.lblCountryMetada)
-        Me.Controls.Add(Me.ucrInputCountryMetadata)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
@@ -639,7 +639,6 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents cmdDefine As Button
     Friend WithEvents lblStation As Label
     Friend WithEvents lblCountry As Label
-    Friend WithEvents ucrInputCountry As ucrInputTextBox
     Friend WithEvents ucrChkIncludeSummaryData As ucrCheck
     Friend WithEvents grpSummaries As GroupBox
     Friend WithEvents ucrChkMonthlyTemp As ucrCheck
@@ -666,9 +665,10 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrReceiverStationName As ucrReceiverSingle
     Friend WithEvents lblStationName As Label
     Friend WithEvents lblCountryMetada As Label
-    Friend WithEvents ucrInputCountryMetadata As ucrInputTextBox
     Friend WithEvents ucrReceiverExtremIndicator As ucrReceiverSingle
     Friend WithEvents ucrReceiverRainIndicator As ucrReceiverSingle
     Friend WithEvents lblRainIndicator As Label
     Friend WithEvents lblExtremRain As Label
+    Friend WithEvents ucrInputComboCountryMetadata As ucrInputComboBox
+    Friend WithEvents ucrInputComboCountry As ucrInputComboBox
 End Class

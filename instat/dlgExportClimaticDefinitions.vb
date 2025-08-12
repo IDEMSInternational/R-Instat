@@ -113,8 +113,8 @@ Public Class dlgExportClimaticDefinitions
         ucrInputDefinitionsID.SetParameter(New RParameter("definitions_id", 19))
         ucrInputDefinitionsID.SetLinkedDisplayControl(lblDefinitionsID)
 
-        ucrInputCountry.SetParameter(New RParameter("country", 20))
-        ucrInputCountry.SetLinkedDisplayControl(lblCountry)
+        ucrInputComboCountry.SetParameter(New RParameter("country", 20))
+        ucrInputComboCountry.SetLinkedDisplayControl(lblCountry)
 
         ucrInputTokenPath.SetParameter(New RParameter("filename", 0))
         ucrInputTokenPath.SetLinkedDisplayControl(lblExport)
@@ -154,12 +154,12 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverDistrict.bAutoFill = True
         ucrReceiverDistrict.SetLinkedDisplayControl(lblDistrict)
 
-        ucrInputCountryMetadata.SetParameter(New RParameter("country", 6))
-        ucrInputCountryMetadata.SetLinkedDisplayControl(lblCountryMetada)
+        ucrInputComboCountryMetadata.SetParameter(New RParameter("country", 6))
+        ucrInputComboCountryMetadata.SetLinkedDisplayControl(lblCountryMetada)
 
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverStation}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverDistrict, ucrReceiverElavation, ucrReceiverLatitude, ucrInputCountryMetadata, ucrReceiverLongititude, ucrReceiverStationName}, {rdoUpdateMetadata}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlExportGoogle.AddToLinkedControls({ucrInputCountry, ucrChkIncludeSummaryData, ucrInputDefinitionsID}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverDistrict, ucrReceiverElavation, ucrReceiverLatitude, ucrInputComboCountryMetadata, ucrReceiverLongititude, ucrReceiverStationName}, {rdoUpdateMetadata}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExportGoogle.AddToLinkedControls({ucrInputComboCountry, ucrChkIncludeSummaryData, ucrInputDefinitionsID}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         DialogSize()
     End Sub
 
@@ -234,7 +234,7 @@ Public Class dlgExportClimaticDefinitions
         ucrInputTokenPath.SetRCode(ClsGcsAuthFileFunction, bReset)
 
         ucrInputDefinitionsID.SetRCode(clsExportRinstatToBucketFunction, bReset)
-        ucrInputCountry.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrInputComboCountry.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrChkIncludeSummaryData.SetRCode(clsExportRinstatToBucketFunction, bReset)
 
         ucrReceiverDistrict.SetRCode(clsUpdateMetadataInfoFunction, bReset)
@@ -242,7 +242,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverLatitude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
         ucrReceiverLongititude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
         ucrReceiverStationName.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrInputCountryMetadata.SetRCode(clsUpdateMetadataInfoFunction, bReset)
+        ucrInputComboCountryMetadata.SetRCode(clsUpdateMetadataInfoFunction, bReset)
 
         If bReset Then
             ucrChkAnnualRainfall.SetRCode(clsDummyFunction, bReset)
@@ -260,7 +260,7 @@ Public Class dlgExportClimaticDefinitions
         If rdoUploadSummaries.Checked Then
             ' Basic required fields
             Dim bRequiredFieldsFilled As Boolean = Not ucrReceiverStation.IsEmpty AndAlso
-                                               Not ucrInputCountry.IsEmpty AndAlso
+                                               Not ucrInputComboCountry.IsEmpty AndAlso
                                                Not ucrInputDefinitionsID.IsEmpty AndAlso
                                                Not ucrInputTokenPath.IsEmpty
 
@@ -292,7 +292,7 @@ Public Class dlgExportClimaticDefinitions
             ' Non-upload mode (metadata)
             If Not ucrReceiverStationName.IsEmpty AndAlso
            Not ucrInputTokenPath.IsEmpty AndAlso
-           Not ucrInputCountryMetadata.IsEmpty Then
+           Not ucrInputComboCountryMetadata.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -379,9 +379,9 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputCountry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountry.ControlValueChanged
-        If Not ucrInputCountry.IsEmpty Then
-            clsExportRinstatToBucketFunction.AddParameter("country", Chr(34) & ucrInputCountry.GetText & Chr(34), iPosition:=20)
+    Private Sub ucrInputCountry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboCountry.ControlValueChanged
+        If Not ucrInputComboCountry.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("country", Chr(34) & ucrInputComboCountry.GetText & Chr(34), iPosition:=20)
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("country")
         End If
@@ -476,14 +476,14 @@ Public Class dlgExportClimaticDefinitions
         clsUpdateMetadataInfoFunction.AddParameter("metadata_data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrInputCountryMetadata.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputDefinitionsID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged, ucrReceiverLongititude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputDefinitionsID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged, ucrReceiverLongititude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputComboCountryMetadata.ControlContentsChanged, ucrInputComboCountry.ControlContentsChanged,
             ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged, ucrReceiverElavation.ControlContentsChanged, ucrReceiverDistrict.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputCountryMetadata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountryMetadata.ControlValueChanged
-        If Not ucrInputCountryMetadata.IsEmpty Then
-            clsUpdateMetadataInfoFunction.AddParameter("country", Chr(34) & ucrInputCountryMetadata.GetText & Chr(34), iPosition:=6)
+    Private Sub ucrInputCountryMetadata_ControlValueChanged(ucrChangedControl As ucrCore)
+        If Not ucrInputComboCountryMetadata.IsEmpty Then
+            clsUpdateMetadataInfoFunction.AddParameter("country", Chr(34) & ucrInputComboCountryMetadata.GetText & Chr(34), iPosition:=6)
         Else
             clsUpdateMetadataInfoFunction.RemoveParameterByName("country")
         End If
