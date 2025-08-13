@@ -878,6 +878,14 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkUseasNumeric.ControlContentsChanged, ucrChkLegend.ControlContentsChanged
+
+    End Sub
+
     Private Sub ucrChkColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColour.ControlValueChanged, ucrInputAddLegendLine.ControlValueChanged
         If ucrChkColour.Checked Then
             If Not ucrInputAddLegendLine.IsEmpty Then
