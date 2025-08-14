@@ -1856,7 +1856,7 @@ Public Class frmMain
                                     MessageBoxButtons.YesNo, "Close Data") Then
             Exit Sub
         End If
-
+        SetToDefaultLayout()
         clsRLink.CloseDataBook()
         strSaveFilePath = ""
     End Sub
