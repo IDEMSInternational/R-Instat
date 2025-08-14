@@ -2975,7 +2975,7 @@ Public Class frmMain
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
-        mnuSwapDataMetadata.Checked = Not mnuSwapDataDataframeMetadata.Checked
+        mnuSwapDataMetadata.Enabled = Not mnuSwapDataDataframeMetadata.Checked
         ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
@@ -2983,7 +2983,7 @@ Public Class frmMain
 
     Private Sub mnuSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataDataframeMetadata.Click
         mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
-        mnuSwapDataDataframeMetadata.Checked = Not mnuSwapDataMetadata.Checked
+        mnuSwapDataDataframeMetadata.Enabled = Not mnuSwapDataMetadata.Checked
         UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
     End Sub
