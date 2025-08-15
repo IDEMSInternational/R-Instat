@@ -41,6 +41,8 @@ Public Class ucrReceiver
 
     Private strPrvNcFilePath As String = ""
 
+    Public strObjectName As String = ""
+
     'Should the receiver attempt to autofill items based on lstIncludedAutoFillProperties?
     Public bAutoFill As Boolean = False
     Public lstIncludedAutoFillProperties As Dictionary(Of String, String())

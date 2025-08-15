@@ -1,25 +1,30 @@
-﻿Public Class ucrCellsFootNotes
+﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
+Public Class ucrCellsFootNotes
     Private clsOperator As New ROperator
-    Private bFirstload As Boolean = True
 
-    Private Sub InitialiseControl()
-        ucrReceiverSingleCol.Selector = ucrSelectorCols
-        ucrReceiverSingleCol.SetMeAsReceiver()
-    End Sub
-
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        If bFirstload Then
-            InitialiseControl()
-            bFirstload = False
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        ' Set up the selector and receiver
+        ucrReceiverSingleCol.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleCol.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleCol.Selector = ucrSelectorByTableDF
         End If
+        ucrReceiverSingleCol.SetMeAsReceiver()
+        ucrReceiverSingleCol.Clear()
 
         Me.clsOperator = clsOperator
 
         ' Set up the controls
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
         SetupDataGrid(clsOperator)
-
     End Sub
 
 

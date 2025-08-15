@@ -1,30 +1,32 @@
 ﻿Imports unvell.ReoGrid.IO.OpenXML.Schema
 
 Public Class ucrColumnSpanners
-
     Private clsOperator As ROperator
-    Private bFirstload As Boolean = True
 
-    Private Sub InitialiseDialog()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
-        ucrReceiverMultipleCols.SetMeAsReceiver()
-    End Sub
-
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        ' Set up the selector and receiver
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
         End If
+        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverMultipleCols.Clear()
 
         Me.clsOperator = clsOperator
 
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
         dataGridColSpanners.Rows.Clear()
 
         ' Note, the sequence of these 2 functions matters
         SetupTabSpannersInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_spanner"}, clsOperator))
         SetupTabSpannersStylesInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_column_spanners", clsOperator))
-
     End Sub
 
     Private Sub SetupTabSpannersInDataGrid(lstRParams As List(Of RParameter))
