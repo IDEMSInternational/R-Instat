@@ -114,6 +114,7 @@ Public Class dlgExportClimaticDefinitions
         ucrInputDefinitionsID.SetLinkedDisplayControl(lblDefinitionsID)
 
         ucrInputComboCountry.SetParameter(New RParameter("country", 20))
+        ucrInputComboCountry.SetItems({"mw", "zm", "zm_workshops", "mw_workshops"})
         ucrInputComboCountry.SetLinkedDisplayControl(lblCountry)
 
         ucrInputTokenPath.SetParameter(New RParameter("filename", 0))
@@ -155,6 +156,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverDistrict.SetLinkedDisplayControl(lblDistrict)
 
         ucrInputComboCountryMetadata.SetParameter(New RParameter("country", 6))
+        ucrInputComboCountryMetadata.SetItems({"mw", "zm", "zm_workshops", "mw_workshops"})
         ucrInputComboCountryMetadata.SetLinkedDisplayControl(lblCountryMetada)
 
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverStation}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
