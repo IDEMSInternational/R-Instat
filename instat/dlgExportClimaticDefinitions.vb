@@ -42,6 +42,12 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctCountry As New Dictionary(Of String, String)
+        dctCountry.Add("mw", Chr(34) & "mw" & Chr(34))
+        dctCountry.Add("zm", Chr(34) & "zm" & Chr(34))
+        dctCountry.Add("zm_workshops", Chr(34) & "zm_workshops" & Chr(34))
+        dctCountry.Add("mw_workshops", Chr(34) & "mw_workshops" & Chr(34))
+
         ucrPnlExportGoogle.AddRadioButton(rdoUpdateMetadata)
         ucrPnlExportGoogle.AddRadioButton(rdoUploadSummaries)
         ucrPnlExportGoogle.AddParameterValuesCondition(rdoUpdateMetadata, "checked", "metadata")
@@ -114,7 +120,8 @@ Public Class dlgExportClimaticDefinitions
         ucrInputDefinitionsID.SetLinkedDisplayControl(lblDefinitionsID)
 
         ucrInputComboCountry.SetParameter(New RParameter("country", 20))
-        ucrInputComboCountry.SetItems({"mw", "zm", "zm_workshops", "mw_workshops"})
+        ucrInputComboCountry.SetItems(dctCountry)
+        ucrInputComboCountry.SetRDefault(Chr(34) & "mw" & Chr(34))
         ucrInputComboCountry.SetLinkedDisplayControl(lblCountry)
 
         ucrInputTokenPath.SetParameter(New RParameter("filename", 0))
@@ -156,7 +163,8 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverDistrict.SetLinkedDisplayControl(lblDistrict)
 
         ucrInputComboCountryMetadata.SetParameter(New RParameter("country", 6))
-        ucrInputComboCountryMetadata.SetItems({"mw", "zm", "zm_workshops", "mw_workshops"})
+        ucrInputComboCountryMetadata.SetItems(dctCountry)
+        ucrInputComboCountryMetadata.SetRDefault(Chr(34) & "mw" & Chr(34))
         ucrInputComboCountryMetadata.SetLinkedDisplayControl(lblCountryMetada)
 
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverStation}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
