@@ -54,14 +54,14 @@ Public Class dlgExportClimaticDefinitions
         AddToolTip(ucrChkMonthlyTemp, "Export monthly temperature summaries (means and extremes).")
         AddToolTip(ucrChkCropSuccessProp, "Export the crop success probability table (called crop_prop by default).")
         AddToolTip(ucrChkSeasonStartProp, "Export the season-start probability table.")
-        AddToolTip(ucrInputDefinitionsID, "Unique ID for this export; use MMYY (e.g., 0825).")
         AddToolTip(ucrChkIncludeSummaryData, "Include the selected summary tables in the export.")
+        AddToolTipsToLabelInput(lblDefinitionsID, ucrInputDefinitionsID, "Unique ID for this export; use MMYY (e.g., 0825).")
         AddToolTipsToLabelInput(lblDataByYear, ucrReceiverDataYear, "Data frame of station–year summaries (e.g., mean temp per year per station).")
         AddToolTipsToLabelInput(lblRainIndicator, ucrReceiverRainIndicator, "(Optional to export definitions on the rainy days above/below a threshold for rainy days) Daily 0/1 flag: 1 = rainy day, 0 = not.")
         AddToolTipsToLabelInput(lblExtremRain, ucrReceiverExtremIndicator, " (Optional to export definitions on the rainy days above/below a threshold for extremes) Daily 0/1 flag: 1 = extreme rain day, 0 = not.")
         AddToolTipsToLabelInput(lblDataByYearMonth, ucrReceiverDataYearMonth, "Data frame of station–month summaries (e.g., January mean temp per station).")
         AddToolTipsToLabelInput(lblCropData, ucrReceiverCropData, "Crop success probabilities data frame (usually crop_prop).")
-
+        
         ucrPnlExportGoogle.AddRadioButton(rdoUpdateMetadata)
         ucrPnlExportGoogle.AddRadioButton(rdoUploadSummaries)
         ucrPnlExportGoogle.AddParameterValuesCondition(rdoUpdateMetadata, "checked", "metadata")
