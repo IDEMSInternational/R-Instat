@@ -48,6 +48,20 @@ Public Class dlgExportClimaticDefinitions
         dctCountry.Add("zm_workshops", Chr(34) & "zm_workshops" & Chr(34))
         dctCountry.Add("mw_workshops", Chr(34) & "mw_workshops" & Chr(34))
 
+        ' Setting tooltips
+        AddToolTip(ucrChkAnnualRainfall, "Export annual rainfall metrics (e.g., start/end of rains, rainfall stats, seasonal stats, extreme-day counts).")
+        AddToolTip(ucrChkAnnualTemp, "Export annual temperature summaries (means and extremes).")
+        AddToolTip(ucrChkMonthlyTemp, "Export monthly temperature summaries (means and extremes).")
+        AddToolTip(ucrChkCropSuccessProp, "Export the crop success probability table (called crop_prop by default).")
+        AddToolTip(ucrChkSeasonStartProp, "Export the season-start probability table.")
+        AddToolTip(ucrInputDefinitionsID, "Unique ID for this export; use MMYY (e.g., 0825).")
+        AddToolTip(ucrChkIncludeSummaryData, "Include the selected summary tables in the export.")
+        AddToolTipsToLabelInput(lblDataByYear, ucrReceiverDataYear, "Data frame of station–year summaries (e.g., mean temp per year per station).")
+        AddToolTipsToLabelInput(lblRainIndicator, ucrReceiverRainIndicator, "(Optional to export definitions on the rainy days above/below a threshold for rainy days) Daily 0/1 flag: 1 = rainy day, 0 = not.")
+        AddToolTipsToLabelInput(lblExtremRain, ucrReceiverExtremIndicator, " (Optional to export definitions on the rainy days above/below a threshold for extremes) Daily 0/1 flag: 1 = extreme rain day, 0 = not.")
+        AddToolTipsToLabelInput(lblDataByYearMonth, ucrReceiverDataYearMonth, "Data frame of station–month summaries (e.g., January mean temp per station).")
+        AddToolTipsToLabelInput(lblCropData, ucrReceiverCropData, "Crop success probabilities data frame (usually crop_prop).")
+
         ucrPnlExportGoogle.AddRadioButton(rdoUpdateMetadata)
         ucrPnlExportGoogle.AddRadioButton(rdoUploadSummaries)
         ucrPnlExportGoogle.AddParameterValuesCondition(rdoUpdateMetadata, "checked", "metadata")
@@ -310,6 +324,20 @@ Public Class dlgExportClimaticDefinitions
         End If
     End Sub
 
+    ' Adds tooltips to both the label and the input control elements.
+    Private Sub AddToolTipsToLabelInput(lbl As Label, inputControl As ucrCore, message As String)
+        ttExportToGoogleBuckets.SetToolTip(lbl, message)
+        AddToolTip(inputControl, message)
+    End Sub
+
+    ' Add tooltips to custom controls (specifically checkboxes and textboxes (single receivers))
+    Private Sub AddToolTip(cntrl As ucrCore, value As String)
+        For Each element As Control In cntrl.Controls
+            If TypeOf element Is CheckBox OrElse TypeOf element Is TextBox Then
+                ttExportToGoogleBuckets.SetToolTip(element, value)
+            End If
+        Next
+    End Sub
 
     Private Sub AddRemoveSummary()
         If ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked OrElse ucrChkCropSuccessProp.Checked OrElse ucrChkMonthlyTemp.Checked OrElse ucrChkSeasonStartProp.Checked Then
