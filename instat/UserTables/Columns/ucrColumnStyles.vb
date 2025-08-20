@@ -1,32 +1,30 @@
-﻿Public Class ucrColumnStyles
+﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
+Public Class ucrColumnStyles
     Private clsOperator As New ROperator
-    Private bFirstload As Boolean = True
 
-    Private Sub ucrColumnStyles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstload Then
-            InitialiseControl()
-            bFirstload = False
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        ' Set up the selector and receiver
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
         End If
-    End Sub
-
-    Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetMeAsReceiver()
-    End Sub
-
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-
+        ucrReceiverMultipleCols.Clear()
 
         Me.clsOperator = clsOperator
-
-        ' Set up the selector
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
 
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()
         SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_column_labels", clsOperator))
-
     End Sub
 
     Private Sub SetupDataGrid(lstRParams As List(Of RParameter))

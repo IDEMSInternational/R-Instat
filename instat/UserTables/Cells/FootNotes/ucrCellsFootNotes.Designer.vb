@@ -27,13 +27,14 @@ Partial Class ucrCellsFootNotes
         Me.lblFooteNotes = New System.Windows.Forms.Label()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorByDF = New instat.ucrSelectorByDataFrameAddRemove()
         Me.dataGrid = New System.Windows.Forms.DataGridView()
         Me.colStyles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.ucrTxtFootNote = New instat.ucrInputTextBox()
         Me.lblFootNote = New System.Windows.Forms.Label()
+        Me.ucrSelectorByTableDF = New instat.ucrSelectorByOutputObject()
         CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,6 +55,7 @@ Partial Class ucrCellsFootNotes
         Me.ucrInputRows.IsMultiline = False
         Me.ucrInputRows.IsReadOnly = False
         Me.ucrInputRows.Location = New System.Drawing.Point(240, 62)
+        Me.ucrInputRows.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputRows.Name = "ucrInputRows"
         Me.ucrInputRows.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputRows.TabIndex = 337
@@ -89,17 +91,17 @@ Partial Class ucrCellsFootNotes
         Me.lblColumns.TabIndex = 334
         Me.lblColumns.Text = "Column:"
         '
-        'ucrSelectorCols
+        'ucrSelectorByDF
         '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(5, 0)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 332
+        Me.ucrSelectorByDF.AutoSize = True
+        Me.ucrSelectorByDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorByDF.bShowHiddenColumns = False
+        Me.ucrSelectorByDF.bUseCurrentFilter = True
+        Me.ucrSelectorByDF.Location = New System.Drawing.Point(5, 0)
+        Me.ucrSelectorByDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByDF.Name = "ucrSelectorByDF"
+        Me.ucrSelectorByDF.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorByDF.TabIndex = 332
         '
         'dataGrid
         '
@@ -151,6 +153,7 @@ Partial Class ucrCellsFootNotes
         Me.ucrTxtFootNote.IsMultiline = False
         Me.ucrTxtFootNote.IsReadOnly = False
         Me.ucrTxtFootNote.Location = New System.Drawing.Point(241, 107)
+        Me.ucrTxtFootNote.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrTxtFootNote.Name = "ucrTxtFootNote"
         Me.ucrTxtFootNote.Size = New System.Drawing.Size(299, 21)
         Me.ucrTxtFootNote.TabIndex = 340
@@ -165,6 +168,16 @@ Partial Class ucrCellsFootNotes
         Me.lblFootNote.TabIndex = 341
         Me.lblFootNote.Text = "Foot Note Text:"
         '
+        'ucrSelectorByTableDF
+        '
+        Me.ucrSelectorByTableDF.AutoSize = True
+        Me.ucrSelectorByTableDF.bShowHiddenColumns = False
+        Me.ucrSelectorByTableDF.Location = New System.Drawing.Point(2, 5)
+        Me.ucrSelectorByTableDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByTableDF.Name = "ucrSelectorByTableDF"
+        Me.ucrSelectorByTableDF.Size = New System.Drawing.Size(216, 194)
+        Me.ucrSelectorByTableDF.TabIndex = 376
+        '
         'ucrCellsFootNotes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -176,10 +189,11 @@ Partial Class ucrCellsFootNotes
         Me.Controls.Add(Me.lblFooteNotes)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.dataGrid)
         Me.Controls.Add(Me.ucrReceiverSingleCol)
         Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.ucrSelectorByDF)
+        Me.Controls.Add(Me.ucrSelectorByTableDF)
         Me.Name = "ucrCellsFootNotes"
         Me.Size = New System.Drawing.Size(602, 265)
         CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -192,11 +206,12 @@ Partial Class ucrCellsFootNotes
     Friend WithEvents lblFooteNotes As Label
     Friend WithEvents btnClear As Button
     Friend WithEvents lblColumns As Label
-    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorByDF As ucrSelectorByDataFrameAddRemove
     Friend WithEvents dataGrid As DataGridView
     Friend WithEvents colStyles As DataGridViewTextBoxColumn
     Friend WithEvents ucrReceiverSingleCol As ucrReceiverSingle
     Friend WithEvents btnAdd As Button
     Friend WithEvents ucrTxtFootNote As ucrInputTextBox
     Friend WithEvents lblFootNote As Label
+    Friend WithEvents ucrSelectorByTableDF As ucrSelectorByOutputObject
 End Class
