@@ -52,7 +52,7 @@ Public Class dlgExportClimaticDefinitions
         AddToolTip(ucrChkAnnualRainfall, "Export annual rainfall metrics (e.g., start/end of rains, rainfall stats, seasonal stats, extreme-day counts).")
         AddToolTip(ucrChkAnnualTemp, "Export annual temperature summaries (means and extremes).")
         AddToolTip(ucrChkMonthlyTemp, "Export monthly temperature summaries (means and extremes).")
-        AddToolTip(ucrChkCropSuccessProp, "Export the crop success probability table (called crop_prop by default).")
+        AddToolTip(ucrChkCropSuccessProp, "Export the crop success probability table.")
         AddToolTip(ucrChkSeasonStartProp, "Export the season-start probability table.")
         AddToolTip(ucrChkIncludeSummaryData, "Include the selected summary tables in the export.")
         AddToolTipsToLabelInput(lblDefinitionsID, ucrInputDefinitionsID, "Unique ID for this export; use MMYY (e.g., 0825).")
