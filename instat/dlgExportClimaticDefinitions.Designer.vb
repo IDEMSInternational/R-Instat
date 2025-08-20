@@ -22,7 +22,7 @@ Partial Class dlgExportClimaticDefinitions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-
+        Me.components = New System.ComponentModel.Container()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.ucrInputTokenPath = New instat.ucrInputTextBox()
@@ -67,6 +67,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblCountryMetada = New System.Windows.Forms.Label()
         Me.ucrInputComboCountry = New instat.ucrInputComboBox()
         Me.ucrInputComboCountryMetadata = New instat.ucrInputComboBox()
+        Me.ttExportToGoogleBuckets = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -332,7 +333,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkCropSuccessProp.Location = New System.Drawing.Point(12, 182)
         Me.ucrChkCropSuccessProp.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkCropSuccessProp.Name = "ucrChkCropSuccessProp"
-        Me.ucrChkCropSuccessProp.Size = New System.Drawing.Size(230, 52)
+        Me.ucrChkCropSuccessProp.Size = New System.Drawing.Size(230, 34)
         Me.ucrChkCropSuccessProp.TabIndex = 3
         '
         'ucrChkAnnualTemp
@@ -626,6 +627,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.grpSummaries.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
+
     End Sub
 
     Friend WithEvents lblExport As Label
@@ -672,4 +674,5 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents lblExtremRain As Label
     Friend WithEvents ucrInputComboCountryMetadata As ucrInputComboBox
     Friend WithEvents ucrInputComboCountry As ucrInputComboBox
+    Friend WithEvents ttExportToGoogleBuckets As ToolTip
 End Class
