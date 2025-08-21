@@ -127,7 +127,7 @@ Partial Class dlgGeneralForGraphics
         Me.grpAesthetics.Controls.Add(Me.ucrColourReceiver)
         Me.grpAesthetics.Controls.Add(Me.lblFill)
         Me.grpAesthetics.Controls.Add(Me.ucrFillReceiver)
-        Me.grpAesthetics.Location = New System.Drawing.Point(277, 31)
+        Me.grpAesthetics.Location = New System.Drawing.Point(309, 24)
         Me.grpAesthetics.Name = "grpAesthetics"
         Me.grpAesthetics.Size = New System.Drawing.Size(174, 257)
         Me.grpAesthetics.TabIndex = 23
@@ -268,150 +268,150 @@ Partial Class dlgGeneralForGraphics
         Me.ContextMenuPackagesList.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuPackagesList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListBaseToolStripMenuItem, Me.GeomtextpathToolStripMenuItem, Me.GGallyToolStripMenuItem, Me.GgaltToolStripMenuItem, Me.GgdendroToolStripMenuItem, Me.GgeffectsToolStripMenuItem, Me.GgfittextToolStripMenuItem, Me.GgforceToolStripMenuItem, Me.GgformulaToolStripMenuItem, Me.GgfortifyToolStripMenuItem, Me.GgmcmcToolStripMenuItem, Me.GgmosaicToolStripMenuItem, Me.GgplotifyToolStripMenuItem, Me.GgpmiscToolStripMenuItem, Me.GgppToolStripMenuItem, Me.GgpubrToolStripMenuItem, Me.GgrepelToolStripMenuItem, Me.GgridgesToolStripMenuItem, Me.GgsciToolStripMenuItem, Me.GgsignifToolStripMenuItem, Me.GgstanceToolStripMenuItem, Me.GgtextToolStripMenuItem, Me.GgthemesToolStripMenuItem, Me.GgwordbuildToolStripMenuItem})
         Me.ContextMenuPackagesList.Name = "ContextMenuStrip1"
-        Me.ContextMenuPackagesList.Size = New System.Drawing.Size(150, 532)
+        Me.ContextMenuPackagesList.Size = New System.Drawing.Size(149, 532)
         '
         'ListBaseToolStripMenuItem
         '
         Me.ListBaseToolStripMenuItem.Name = "ListBaseToolStripMenuItem"
-        Me.ListBaseToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ListBaseToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.ListBaseToolStripMenuItem.Text = "ggplot2"
         '
         'GeomtextpathToolStripMenuItem
         '
         Me.GeomtextpathToolStripMenuItem.Name = "GeomtextpathToolStripMenuItem"
-        Me.GeomtextpathToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GeomtextpathToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GeomtextpathToolStripMenuItem.Text = "geomtextpath"
         '
         'GGallyToolStripMenuItem
         '
         Me.GGallyToolStripMenuItem.Name = "GGallyToolStripMenuItem"
-        Me.GGallyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GGallyToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GGallyToolStripMenuItem.Text = "GGally"
         '
         'GgaltToolStripMenuItem
         '
         Me.GgaltToolStripMenuItem.Name = "GgaltToolStripMenuItem"
-        Me.GgaltToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgaltToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgaltToolStripMenuItem.Text = "ggalt"
         '
         'GgdendroToolStripMenuItem
         '
         Me.GgdendroToolStripMenuItem.Name = "GgdendroToolStripMenuItem"
-        Me.GgdendroToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgdendroToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgdendroToolStripMenuItem.Text = "ggdendro"
         '
         'GgeffectsToolStripMenuItem
         '
         Me.GgeffectsToolStripMenuItem.Name = "GgeffectsToolStripMenuItem"
-        Me.GgeffectsToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgeffectsToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgeffectsToolStripMenuItem.Text = "ggeffects"
         '
         'GgfittextToolStripMenuItem
         '
         Me.GgfittextToolStripMenuItem.Name = "GgfittextToolStripMenuItem"
-        Me.GgfittextToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgfittextToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgfittextToolStripMenuItem.Text = "ggfittext"
         '
         'GgforceToolStripMenuItem
         '
         Me.GgforceToolStripMenuItem.Name = "GgforceToolStripMenuItem"
-        Me.GgforceToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgforceToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgforceToolStripMenuItem.Text = "ggforce"
         '
         'GgformulaToolStripMenuItem
         '
         Me.GgformulaToolStripMenuItem.Name = "GgformulaToolStripMenuItem"
-        Me.GgformulaToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgformulaToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgformulaToolStripMenuItem.Text = "ggformula"
         '
         'GgfortifyToolStripMenuItem
         '
         Me.GgfortifyToolStripMenuItem.Name = "GgfortifyToolStripMenuItem"
-        Me.GgfortifyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgfortifyToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgfortifyToolStripMenuItem.Text = "ggfortify"
         '
         'GgmcmcToolStripMenuItem
         '
         Me.GgmcmcToolStripMenuItem.Name = "GgmcmcToolStripMenuItem"
-        Me.GgmcmcToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgmcmcToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgmcmcToolStripMenuItem.Text = "ggmcmc"
         '
         'GgmosaicToolStripMenuItem
         '
         Me.GgmosaicToolStripMenuItem.Name = "GgmosaicToolStripMenuItem"
-        Me.GgmosaicToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgmosaicToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgmosaicToolStripMenuItem.Text = "ggmosaic"
         '
         'GgplotifyToolStripMenuItem
         '
         Me.GgplotifyToolStripMenuItem.Name = "GgplotifyToolStripMenuItem"
-        Me.GgplotifyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgplotifyToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgplotifyToolStripMenuItem.Text = "ggplotify"
         '
         'GgpmiscToolStripMenuItem
         '
         Me.GgpmiscToolStripMenuItem.Name = "GgpmiscToolStripMenuItem"
-        Me.GgpmiscToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgpmiscToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgpmiscToolStripMenuItem.Text = "ggpmisc"
         '
         'GgppToolStripMenuItem
         '
         Me.GgppToolStripMenuItem.Name = "GgppToolStripMenuItem"
-        Me.GgppToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgppToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgppToolStripMenuItem.Text = "ggpp"
         '
         'GgpubrToolStripMenuItem
         '
         Me.GgpubrToolStripMenuItem.Name = "GgpubrToolStripMenuItem"
-        Me.GgpubrToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgpubrToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgpubrToolStripMenuItem.Text = "ggpubr"
         '
         'GgrepelToolStripMenuItem
         '
         Me.GgrepelToolStripMenuItem.Name = "GgrepelToolStripMenuItem"
-        Me.GgrepelToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgrepelToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgrepelToolStripMenuItem.Text = "ggrepel"
         '
         'GgridgesToolStripMenuItem
         '
         Me.GgridgesToolStripMenuItem.Name = "GgridgesToolStripMenuItem"
-        Me.GgridgesToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgridgesToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgridgesToolStripMenuItem.Text = "ggridges"
         '
         'GgsciToolStripMenuItem
         '
         Me.GgsciToolStripMenuItem.Name = "GgsciToolStripMenuItem"
-        Me.GgsciToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgsciToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgsciToolStripMenuItem.Text = "ggsci"
         '
         'GgsignifToolStripMenuItem
         '
         Me.GgsignifToolStripMenuItem.Name = "GgsignifToolStripMenuItem"
-        Me.GgsignifToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgsignifToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgsignifToolStripMenuItem.Text = "ggsignif"
         '
         'GgstanceToolStripMenuItem
         '
         Me.GgstanceToolStripMenuItem.Name = "GgstanceToolStripMenuItem"
-        Me.GgstanceToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgstanceToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgstanceToolStripMenuItem.Text = "ggstance"
         '
         'GgtextToolStripMenuItem
         '
         Me.GgtextToolStripMenuItem.Name = "GgtextToolStripMenuItem"
-        Me.GgtextToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgtextToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgtextToolStripMenuItem.Text = "ggtext"
         '
         'GgthemesToolStripMenuItem
         '
         Me.GgthemesToolStripMenuItem.Name = "GgthemesToolStripMenuItem"
-        Me.GgthemesToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgthemesToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgthemesToolStripMenuItem.Text = "ggthemes"
         '
         'GgwordbuildToolStripMenuItem
         '
         Me.GgwordbuildToolStripMenuItem.Name = "GgwordbuildToolStripMenuItem"
-        Me.GgwordbuildToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgwordbuildToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.GgwordbuildToolStripMenuItem.Text = " ggwordbuild"
         '
         'contextMenuStripOptions
@@ -486,7 +486,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputAddCode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddCode.GetSetSelectedIndex = -1
         Me.ucrInputAddCode.IsReadOnly = False
-        Me.ucrInputAddCode.Location = New System.Drawing.Point(159, 360)
+        Me.ucrInputAddCode.Location = New System.Drawing.Point(167, 367)
         Me.ucrInputAddCode.Name = "ucrInputAddCode"
         Me.ucrInputAddCode.Size = New System.Drawing.Size(316, 21)
         Me.ucrInputAddCode.TabIndex = 218
@@ -495,7 +495,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkAddCode.AutoSize = True
         Me.ucrChkAddCode.Checked = False
-        Me.ucrChkAddCode.Location = New System.Drawing.Point(159, 333)
+        Me.ucrChkAddCode.Location = New System.Drawing.Point(167, 337)
         Me.ucrChkAddCode.Name = "ucrChkAddCode"
         Me.ucrChkAddCode.Size = New System.Drawing.Size(175, 24)
         Me.ucrChkAddCode.TabIndex = 217
@@ -517,7 +517,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuPackagesList
-        Me.cmdRHelp.Location = New System.Drawing.Point(368, 510)
+        Me.cmdRHelp.Location = New System.Drawing.Point(368, 517)
         Me.cmdRHelp.Name = "cmdRHelp"
         Me.cmdRHelp.Size = New System.Drawing.Size(91, 25)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuPackagesList
@@ -540,7 +540,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkFlipCoordinates.AutoSize = True
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 304)
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(309, 303)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(174, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
@@ -557,7 +557,7 @@ Partial Class dlgGeneralForGraphics
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(6, 511)
+        Me.ucrSave.Location = New System.Drawing.Point(6, 518)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -580,14 +580,14 @@ Partial Class dlgGeneralForGraphics
         Me.ucrAdditionalLayers.AutoSize = True
         Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 174)
         Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
-        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(247, 181)
+        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(301, 181)
         Me.ucrAdditionalLayers.TabIndex = 8
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 540)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 547)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
@@ -665,7 +665,7 @@ Partial Class dlgGeneralForGraphics
         Me.grpLegend.Controls.Add(Me.ucrInputAddLegendLine)
         Me.grpLegend.Controls.Add(Me.lblColouridentity)
         Me.grpLegend.Controls.Add(Me.lblFillidentity)
-        Me.grpLegend.Location = New System.Drawing.Point(6, 387)
+        Me.grpLegend.Location = New System.Drawing.Point(6, 394)
         Me.grpLegend.Name = "grpLegend"
         Me.grpLegend.Size = New System.Drawing.Size(469, 121)
         Me.grpLegend.TabIndex = 227
@@ -711,7 +711,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(478, 597)
+        Me.ClientSize = New System.Drawing.Size(495, 604)
         Me.Controls.Add(Me.grpLegend)
         Me.Controls.Add(Me.ucrInputAddCode)
         Me.Controls.Add(Me.ucrChkAddCode)
