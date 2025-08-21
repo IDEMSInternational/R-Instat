@@ -21,6 +21,7 @@ Public Class ucrReceiverMultiple
     Public bSingleType As Boolean = False
     ' If bSingleType and bCategoricalNumeric then categorical and numeric are the only considered types
     Public bCategoricalNumeric As Boolean = False
+    Public Property bSeparateAsAddition As Boolean = False
     Public iMaxItems As Integer
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -319,20 +320,36 @@ Public Class ucrReceiverMultiple
     End Function
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Dim strTempBuilder As New Text.StringBuilder
+        Dim strTempBuilder As New Text.StringBuilder()
         Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
 
-        If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
-            strTempBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
-        ElseIf lstSelectedVariables.Items.Count > 1 OrElse bForceVariablesAsList Then
-            strTempBuilder.Append(If(strVariablesListPackageName <> "", strVariablesListPackageName & "::", ""))
-            strTempBuilder.Append(strVariablesListFunctionName).Append("(")
-            For Each lvi As ListViewItem In lstSelectedVariables.Items
-                strTempBuilder.Append(strQuoteHolder).Append(lvi.Text).Append(strQuoteHolder).Append(",")
-            Next
-            strTempBuilder.Length -= 1 'remove last comma
-            strTempBuilder.Append(")")
+        If lstSelectedVariables.Items.Count = 0 Then
+            Return "" ' Nothing selected
         End If
+
+        If bSeparateAsAddition Then
+            ' Build as addition: var1 + var2 + var3
+            For Each lvi As ListViewItem In lstSelectedVariables.Items
+                If strTempBuilder.Length > 0 Then
+                    strTempBuilder.Append(" + ")
+                End If
+                strTempBuilder.Append(lvi.Text)
+            Next
+        Else
+            ' Original behaviour: c("var1", "var2", "var3")
+            If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
+                strTempBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
+            Else
+                strTempBuilder.Append(If(strVariablesListPackageName <> "", strVariablesListPackageName & "::", ""))
+                strTempBuilder.Append(strVariablesListFunctionName).Append("(")
+                For Each lvi As ListViewItem In lstSelectedVariables.Items
+                    strTempBuilder.Append(strQuoteHolder).Append(lvi.Text).Append(strQuoteHolder).Append(",")
+                Next
+                strTempBuilder.Length -= 1 'remove last comma
+                strTempBuilder.Append(")")
+            End If
+        End If
+
         Return strTempBuilder.ToString()
     End Function
 
