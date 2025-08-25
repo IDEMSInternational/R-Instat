@@ -60,7 +60,6 @@ Partial Class ucrScript
         Me.mnuReformatCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOpenScriptasFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuInsertScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLoadScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
@@ -91,9 +90,9 @@ Partial Class ucrScript
         'mnuContextScript
         '
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuFindNext, Me.mnuFindPrev, Me.mnuReplace, Me.mnuReplaceAll, Me.ToolStripSeparator6, Me.mnuRunCurrentStatementSelection, Me.mnuRunAllText, Me.ToolStripSeparator5, Me.mnuReformatCode, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuInsertScript, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuFindNext, Me.mnuFindPrev, Me.mnuReplace, Me.mnuReplaceAll, Me.ToolStripSeparator6, Me.mnuRunCurrentStatementSelection, Me.mnuRunAllText, Me.ToolStripSeparator5, Me.mnuReformatCode, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(306, 480)
+        Me.mnuContextScript.Size = New System.Drawing.Size(306, 458)
         '
         'mnuUndo
         '
@@ -229,23 +228,17 @@ Partial Class ucrScript
         Me.mnuOpenScriptasFile.Size = New System.Drawing.Size(305, 22)
         Me.mnuOpenScriptasFile.Text = "Open Script as File"
         '
-        'mnuInsertScript
-        '
-        Me.mnuInsertScript.Name = "mnuInsertScript"
-        Me.mnuInsertScript.Size = New System.Drawing.Size(305, 22)
-        Me.mnuInsertScript.Text = "Insert Script"
-        '
         'mnuLoadScriptFromFile
         '
         Me.mnuLoadScriptFromFile.Name = "mnuLoadScriptFromFile"
         Me.mnuLoadScriptFromFile.Size = New System.Drawing.Size(305, 22)
-        Me.mnuLoadScriptFromFile.Text = "Load Script from File..."
+        Me.mnuLoadScriptFromFile.Text = "Load from File..."
         '
         'mnuSaveScript
         '
         Me.mnuSaveScript.Name = "mnuSaveScript"
         Me.mnuSaveScript.Size = New System.Drawing.Size(305, 22)
-        Me.mnuSaveScript.Text = "Save Script..."
+        Me.mnuSaveScript.Text = "Save to File..."
         '
         'ToolStripSeparator4
         '
@@ -469,7 +462,6 @@ Partial Class ucrScript
     Friend WithEvents cmdRemoveTab As Button
     Friend WithEvents cmdSave As Button
     Friend WithEvents cmdLoadScript As Button
-    Friend WithEvents mnuInsertScript As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuReformatCode As ToolStripMenuItem
     Friend WithEvents cmdInsert As ucrSplitButton
