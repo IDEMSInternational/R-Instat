@@ -219,9 +219,22 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso clsIndices.iParameterCount > 0 OrElse
-           (rdoMonthly.Checked AndAlso Not ucrReceiverMonth.IsEmpty) OrElse (rdoStation.Checked AndAlso Not ucrReceiverStation.IsEmpty) Then
-            ucrBase.OKEnabled(True)
+        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso clsIndices.iParameterCount > 0 Then
+            If rdoAnnual.Checked Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdoMonthly.Checked Then
+                If Not ucrReceiverMonth.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            ElseIf rdoStation.Checked Then
+                If Not ucrReceiverStation.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -249,6 +262,8 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
             sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = False
+            sdgClimdexIndices.ucrChkPrecExceed95Percent.Enabled = True
+            sdgClimdexIndices.ucrChkPrecExceed99Percent.Enabled = True
             ucrReceiverYear.Visible = True
             ucrReceiverYear.Enabled = True
             lblYear.Visible = True
@@ -288,6 +303,8 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
             sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = True
+            sdgClimdexIndices.ucrChkPrecExceed95Percent.Enabled = False
+            sdgClimdexIndices.ucrChkPrecExceed99Percent.Enabled = False
         End If
     End Sub
 
