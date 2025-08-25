@@ -110,7 +110,7 @@ Public Class dlgSeasonalGraph
         ucrChkRibbons.SetText("Ribbon(s):")
         ucrChkRibbons.AddParameterPresentCondition(True, "geom_ribbon")
         ucrChkRibbons.AddParameterPresentCondition(False, "geom_ribbon", False)
-        ucrChkRibbons.AddToLinkedControls(ucrReceiverRibbons, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRibbons.AddToLinkedControls({ucrChkFill, ucrChkAddpointRibbon, ucrReceiverRibbons}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverRibbons.SetParameter(New RParameter("y", 1))
         ucrReceiverRibbons.Selector = ucrSelectorForSeasonalGraph

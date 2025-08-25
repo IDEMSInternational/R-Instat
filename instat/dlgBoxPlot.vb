@@ -17,6 +17,7 @@
 Imports instat
 Imports instat.dlgVisualizeData
 Imports instat.Translations
+Imports unvell.ReoGrid.IO.OpenXML.Schema
 Public Class dlgBoxplot
     Public enumBoxplotMode As String = BoxplotMode.Prepare
     Public Enum BoxplotMode
@@ -91,6 +92,10 @@ Public Class dlgBoxplot
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
+
+    Private bWrap As Boolean = False
+    Private bCol As Boolean = False
+    Private bRow As Boolean = False
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"

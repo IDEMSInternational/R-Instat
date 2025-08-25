@@ -844,4 +844,6 @@ Public Class dlgHistogram
     Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrInputWidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+
 End Class
