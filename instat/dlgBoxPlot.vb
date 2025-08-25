@@ -776,7 +776,8 @@ Public Class dlgBoxplot
             End If
         End If
         UpdateParameters()
-        AddRemoveFacets()
+        ' AddRemoveFacet()
+        UpdateFacetCases()
         AddRemoveGroupBy()
     End Sub
 
@@ -784,7 +785,9 @@ Public Class dlgBoxplot
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-        clsBaseOperator.RemoveParameterByName("facets")
+
+        ' clsBaseOperator.RemoveParameterByName("facets") {Removed this command so that removing of the facets is done in the subdialog}
+    
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
@@ -803,19 +806,11 @@ Public Class dlgBoxplot
         End If
         bUpdatingParameters = False
     End Sub
-
-    Private Sub AddRemoveFacets()
-        Dim bWrap As Boolean = False
-        Dim bCol As Boolean = False
-        Dim bRow As Boolean = False
-        Dim bColAll As Boolean = False
-        Dim bRowAll As Boolean = False
-
-        If bUpdatingParameters Then
+  
+    Private Sub AddRemoveFacet()
+        If ucr1stFactorReceiver.IsEmpty Then
             Exit Sub
-        End If
-        clsBaseOperator.RemoveParameterByName("facets")
-        If Not ucr1stFactorReceiver.IsEmpty Then
+        Else
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
                     bWrap = True
@@ -829,6 +824,14 @@ Public Class dlgBoxplot
                     bRowAll = True
             End Select
         End If
+    End Sub
+
+    Private Sub UpdateFacetCases()
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+        
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
@@ -865,7 +868,8 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
-        AddRemoveFacets()
+        AddRemoveFacet()
+        UpdateFacetCases()
         AddRemoveGroupBy()
         EnableDisableWidth()
         AddRemoveAesParm()
