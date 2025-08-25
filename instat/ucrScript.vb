@@ -84,7 +84,6 @@ Public Class ucrScript
         mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
         mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
         mnuHelp.ToolTipText = "Display the Script Window help information."
-        mnuInsertScript.ToolTipText = "Insert script in the current tab."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentStatementSelection.ShortcutKeys = Keys.Enter Or Keys.Control
@@ -218,10 +217,10 @@ Public Class ucrScript
 
     ''' <summary>
     ''' Displays a file save dialog; allows the user to specify a folder and file name; and saves 
-    ''' the log/script to the specified file.
+    ''' the contents of the active tab to the specified file.
     ''' </summary>
-    ''' <param name="bIsLog"> True if the script to be saved is the log file.</param>
-    Public Sub SaveScript(bIsLog As Boolean, Optional bOpenAsFile As Boolean = False)
+    ''' <param name="bIsLog"> True if the tab to be saved is the log tab.</param>
+    Public Sub SaveScript(bIsLog As Boolean)
         If Not bIsLog AndAlso TabControl.SelectedIndex = iTabIndexLog Then
             If TabControl.TabCount = 2 Then
                 TabControl.SelectTab(1)
@@ -232,8 +231,22 @@ Public Class ucrScript
         End If
 
         Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
+
+            Select Case enumScriptType
+                Case ScriptType.json
+                    dlgSave.Title = "Save To Json File"
+                    dlgSave.Filter = "JSON File (*.json)|*.json"
+                Case ScriptType.quarto
+                    dlgSave.Title = "Save To Quarto File"
+                    dlgSave.Filter = "Quarto File (*.qmd)|*.qmd"
+                Case ScriptType.rScript
+                    dlgSave.Title = If(bIsLog, "Save Log To R Script File", "Save To R Script File")
+                    dlgSave.Filter = "R Script File (*.R)|*.R"
+                Case Else
+                    dlgSave.Title = "Save To Text File"
+                    dlgSave.Filter = "Text File (*.txt)|*.txt"
+            End Select
+
             dlgSave.FileName = Path.GetFileName(TabControl.SelectedTab.Text)
 
             ' Ensure that dialog opens in the correct folder.
@@ -246,7 +259,9 @@ Public Class ucrScript
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
                     strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
                     bIsTextChanged = False
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
+                    TabControl.SelectedTab.Text = If(enumScriptType = ScriptType.rScript,
+                                                     Path.GetFileNameWithoutExtension(dlgSave.FileName),
+                                                     Path.GetFileName(dlgSave.FileName))
                     frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
                     frmMain.bDataSaved = True
 
@@ -256,9 +271,9 @@ Public Class ucrScript
                         strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
                     End If
                 Catch
-                    MsgBox("Could not save the " & If(bIsLog, "Log", "Script") & " file." & Environment.NewLine &
+                    MsgBox("Could not save the " & If(bIsLog, "Log ", "") & "file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
-                   vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
+                   vbExclamation, "Save " & If(bIsLog, "Log ", "") & "File.")
                 End Try
             End If
         End Using
@@ -619,8 +634,13 @@ Public Class ucrScript
         End If
 
         Using dlgLoad As New OpenFileDialog
-            dlgLoad.Title = "Load Script From Text File"
-            dlgLoad.Filter = "Text & R Script Files (*.txt, *.R, *.json)|*.txt;*.R;*.json|R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
+            dlgLoad.Title = "Load Script From File"
+            dlgLoad.Filter = "R Script, Quarto and Text Files (*.R;*.qmd;*.txt)|*.R;*.qmd;*.txt|" &
+                             "R Script File (*.R)|*.R|" &
+                             "Quarto File (*.qmd)|*.qmd|" &
+                             "Text File (*.txt)|*.txt|" &
+                             "JSON File (*.json)|*.json|*.txt|" &
+                             "All Files (*.*)|*.*"
 
             ' Ensure that dialog opens in the correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
@@ -634,12 +654,33 @@ Public Class ucrScript
 
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgLoad.FileName)
                 strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
                 bIsTextChanged = False
                 clsRScript = Nothing
                 frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
                 frmMain.bDataSaved = True
+
+                ' Set enumScriptType based on file extension
+                Dim strFileExtension As String = Path.GetExtension(dlgLoad.FileName).ToLower()
+                Select Case strFileExtension
+                    Case ".json"
+                        enumScriptType = ScriptType.json
+                    Case ".qmd"
+                        enumScriptType = ScriptType.quarto
+                    Case ".r"
+                        enumScriptType = ScriptType.rScript
+                    Case Else
+                        enumScriptType = ScriptType.other
+                End Select
+                Dim bIsScript As Boolean = enumScriptType = ScriptType.rScript
+                TabControl.SelectedTab.Text = If(bIsScript,
+                                                 Path.GetFileNameWithoutExtension(dlgLoad.FileName),
+                                                 Path.GetFileName(dlgLoad.FileName))
+                cmdInsert.Enabled = bIsScript
+                cmdRunStatementSelection.Enabled = bIsScript
+                mnuOpenScriptasFile.Enabled = bIsScript
+                mnuReformatCode.Enabled = bIsScript
+                mnuRunCurrentStatementSelection.Enabled = bIsScript
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to read from the specified location.",
@@ -1032,7 +1073,7 @@ Public Class ucrScript
                               If(bIsLog, clsScriptLog.Text,
                                  frmMain.clsRLink.GetRSetupScript() & vbCrLf & clsScriptActive.Text))
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
-            TabControl.SelectedTab.Text = strScriptFilename
+            TabControl.SelectedTab.Text = Path.GetFileNameWithoutExtension(strScriptFilename)
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -1315,5 +1356,21 @@ Public Class ucrScript
         clsScriptActive.Focus()
         clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
+
+    'todo move to start of file
+    ''' <summary>
+    ''' Enumeration to specify the type of script in the active tab.
+    ''' </summary>
+    Private Enum ScriptType
+        json
+        other
+        quarto
+        rScript
+    End Enum
+
+    ''' <summary>
+    ''' The type of script for the current tab.
+    ''' </summary>
+    Private enumScriptType As ScriptType = ScriptType.rScript
 
 End Class
