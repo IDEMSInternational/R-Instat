@@ -636,10 +636,10 @@ Public Class ucrScript
         Using dlgLoad As New OpenFileDialog
             dlgLoad.Title = "Load Script From File"
             dlgLoad.Filter = "R Script, Quarto and Text Files (*.R;*.qmd;*.txt)|*.R;*.qmd;*.txt|" &
-                             "R Script File (*.R)|*.R|" &
-                             "Quarto File (*.qmd)|*.qmd|" &
-                             "Text File (*.txt)|*.txt|" &
-                             "JSON File (*.json)|*.json|*.txt|" &
+                             "R Script Files (*.R)|*.R|" &
+                             "Quarto Files (*.qmd)|*.qmd|" &
+                             "Text Files (*.txt)|*.txt|" &
+                             "JSON Files (*.json)|*.json|" &
                              "All Files (*.*)|*.*"
 
             ' Ensure that dialog opens in the correct folder.
@@ -665,12 +665,16 @@ Public Class ucrScript
                 Select Case strFileExtension
                     Case ".json"
                         enumScriptType = ScriptType.json
+                        clsScriptActive.Lexer = Lexer.Json
                     Case ".qmd"
                         enumScriptType = ScriptType.quarto
+                        clsScriptActive.Lexer = Lexer.Markdown
                     Case ".r"
                         enumScriptType = ScriptType.rScript
+                        clsScriptActive.Lexer = Lexer.R
                     Case Else
                         enumScriptType = ScriptType.other
+                        clsScriptActive.Lexer = Lexer.Null
                 End Select
                 Dim bIsScript As Boolean = enumScriptType = ScriptType.rScript
                 TabControl.SelectedTab.Text = If(bIsScript,

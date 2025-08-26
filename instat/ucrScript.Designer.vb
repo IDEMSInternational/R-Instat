@@ -196,7 +196,7 @@ Partial Class ucrScript
         '
         Me.mnuRunCurrentStatementSelection.Name = "mnuRunCurrentStatementSelection"
         Me.mnuRunCurrentStatementSelection.Size = New System.Drawing.Size(305, 22)
-        Me.mnuRunCurrentStatementSelection.Text = "Run Current Statement/Selection Ctrl+Enter"
+        Me.mnuRunCurrentStatementSelection.Text = "Run Current Statement/Selection"
         '
         'mnuRunAllText
         '
