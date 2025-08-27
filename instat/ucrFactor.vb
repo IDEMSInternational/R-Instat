@@ -211,7 +211,6 @@ Public Class ucrFactor
             'this will raise ControlContentsChanged event
             'and also update parameter and R code with the values
             OnControlValueChanged()
-            e.Cell.Style.BackColor = Color.Gold
         Else
         'Todo what will happen if the text is not valid
         End If
