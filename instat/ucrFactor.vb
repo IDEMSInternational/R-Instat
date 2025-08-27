@@ -211,9 +211,8 @@ Public Class ucrFactor
             'this will raise ControlContentsChanged event
             'and also update parameter and R code with the values
             OnControlValueChanged()
-            e.Cell.Style.BackColor = Color.Gold
         Else
-        'Todo what will happen if the text is not valid
+            'Todo what will happen if the text is not valid
         End If
 
     End Sub
@@ -937,5 +936,6 @@ Public Class ucrFactor
         lblSelected.Visible = iSelectCol > 0
         SetToggleButtonSettings()
     End Sub
+
 
 End Class
