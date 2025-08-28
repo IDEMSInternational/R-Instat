@@ -3075,6 +3075,7 @@ Public Class sdgPlots
             tbpPlotsOptions.SelectedIndex = 0
             bResetThemes = True
         End If
+
         SetFacetParameters()
         ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
         ucrChkFillDiscrete.Enabled = bNewEnableDiscrete

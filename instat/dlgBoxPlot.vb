@@ -93,16 +93,6 @@ Public Class dlgBoxplot
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
 
-    Private bWrap As Boolean = False
-    Private bCol As Boolean = False
-    Private bRow As Boolean = False
-    Private bColAll As Boolean = False
-    Private bRowAll As Boolean = False
-
-    Private _rxMain As ucrReceiverSingle
-    Private _rxSub As ucrReceiverSingle
-    Private _isSyncing As Boolean = False
-
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strStatSummaryParameterName As String = "stat_summary"
@@ -785,8 +775,7 @@ Public Class dlgBoxplot
             End If
         End If
         UpdateParameters()
-        AddRemoveFacet()
-        UpdateFacetCases()
+        AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
 
@@ -815,10 +804,18 @@ Public Class dlgBoxplot
         bUpdatingParameters = False
     End Sub
 
-    Private Sub AddRemoveFacet()
-        If ucr1stFactorReceiver.IsEmpty Then
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
+
+        If bUpdatingParameters Then
             Exit Sub
-        Else
+        End If
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
                     bWrap = True
@@ -832,14 +829,6 @@ Public Class dlgBoxplot
                     bRowAll = True
             End Select
         End If
-    End Sub
-
-    Private Sub UpdateFacetCases()
-
-        If bUpdatingParameters Then
-            Exit Sub
-        End If
-
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
@@ -876,13 +865,11 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
-        AddRemoveFacet()
-        UpdateFacetCases()
+        AddRemoveFacets()
         AddRemoveGroupBy()
         EnableDisableWidth()
         AddRemoveAesParm()
         HideShowWidth()
-        'AutoFacetStation()
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
@@ -1056,23 +1043,4 @@ Public Class dlgBoxplot
         End If
         EnableGeomText()
     End Sub
-
-
-    '    CopyReceiver(_rxMain, _rxSub)
-    '    _isSyncing = False
-    'End Sub
-
-    'Private Sub SubReceiver_Changed(sender As Object, e As EventArgs)
-    '    If _isSyncing Then Exit Sub
-    '    _isSyncing = True
-    '    CopyReceiver(_rxSub, _rxMain)
-    '    _isSyncing = False
-    'End Sub
-
-    'Private Sub Subdialog_FormClosed(sender As Object, e As FormClosedEventArgs)
-    '    RemoveHandler _rxMain.ControlValueChanged, AddressOf MainReceiver_Changed
-    '    RemoveHandler _rxSub.ControlValueChanged, AddressOf SubReceiver_Changed
-    '    RemoveHandler sdgPlots.FormClosed, AddressOf Subdialog_FormClosed
-    'End Sub
-
 End Class
