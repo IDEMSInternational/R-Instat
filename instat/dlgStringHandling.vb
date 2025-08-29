@@ -608,18 +608,17 @@ Public Class dlgStringHandling
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
 
-                If rdoReplaceFirst.Checked Then
+                If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
                     clsAcrossFunction.RemoveParameterByName(".fns")
                     clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
                     clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                     ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
-                ElseIf rdoReplaceAll.Checked Then
-                    clsAcrossFunction.RemoveParameterByName(".fns")
-                    clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
-                    clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
+                    If rdoReplaceFirst.Checked Then
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    ElseIf rdoReplaceAll.Checked Then
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    End If
+
                 ElseIf rdoReplaceCell.Checked Then
                     clsAcrossFunction.RemoveParameterByName("tilda")
                     clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
