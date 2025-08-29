@@ -1249,6 +1249,7 @@ Public Class dlgTransform
                     ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
                 End If
 
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDescToolsFormatFunction)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
 
             ElseIf rdoNumeric.Checked Then
