@@ -262,8 +262,8 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
             sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = False
-            sdgClimdexIndices.ucrChkPrecExceed95Percent.Enabled = True
-            sdgClimdexIndices.ucrChkPrecExceed99Percent.Enabled = True
+            sdgClimdexIndices.ucrChkPrecExceed95Percent.Enabled = False
+            sdgClimdexIndices.ucrChkPrecExceed99Percent.Enabled = False
             ucrReceiverYear.Visible = True
             ucrReceiverYear.Enabled = True
             lblYear.Visible = True
