@@ -15,7 +15,7 @@ Public Class dlgTricotModellingGeneral
             clsNodeRulesFunction, clsTopItemsFunction, clsAICFunction, clsUnListAICFunction, clsAICMainFunction, clsAnnovaFunction,
             clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsHeatFunction, clsPackageCheck,
             clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction, clsImportDataFunction, clsDefineAsTricotFunction, clsWrapTrees,
-            clsGetVarFromMetaData, clsGetColumnFromData, clsDataUnstackedFunction,
+            clsGetVarFromMetaData, clsGetColumnFromData, clsDataUnstackedFunction, clsPasteFunction, clsAsFormulaFunction,
             clsPladmm2Function, clsMappings2Function, clsNames2Function, clsDataFunction, clsGetDataframe2function As New RFunction
 
     Private clsObjectOperator, clsTildeOperator, clsTilde2Operator, clsBracketOperator, clsDevianceOperator, clsPairwiseProbOperator,
@@ -102,6 +102,8 @@ Public Class dlgTricotModellingGeneral
         clsGetVarFromMetaData = New RFunction
         clsDataUnstackedFunction = New RFunction
         clsGetDataframe2function = New RFunction
+        clsPasteFunction = New RFunction
+        clsAsFormulaFunction = New RFunction
         clsDataFunction = New RFunction
         clsPladmm2Function = New RFunction
         clsMappings2Function = New RFunction
@@ -198,10 +200,17 @@ Public Class dlgTricotModellingGeneral
         clsDataFunction.SetRCommand("as.data.table")
         clsDataFunction.AddParameter("x", ucrSelectorVarietyLevel.strCurrentDataFrame, iPosition:=0, bIncludeArgumentName:=False)
 
+        clsPasteFunction.SetRCommand("paste")
+        clsPasteFunction.AddParameter("x", "var_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteFunction.AddParameter("y", Chr(34) & "+ " & ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False) & " ~ " & "'X'" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsAsFormulaFunction.SetRCommand("as.formula")
+        clsAsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsPasteFunction, iPosition:=0, bIncludeArgumentName:=False)
+
         clsDataUnstackedFunction.SetPackageName("data.table")
         clsDataUnstackedFunction.SetRCommand("dcast")
         clsDataUnstackedFunction.AddParameter("data", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
-        clsDataUnstackedFunction.AddParameter("formula", ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
+        clsDataUnstackedFunction.AddParameter("formula", clsRFunctionParameter:=clsAsFormulaFunction, iPosition:=1)
         clsDataUnstackedFunction.SetAssignTo("data_unstacked")
 
         clsTilde3Operator.SetOperation("~")
@@ -518,7 +527,7 @@ Public Class dlgTricotModellingGeneral
     End Sub
 
     Private Sub ucrReceiverMultipleExplanatoryVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleExplanatoryVariables.ControlValueChanged
-        clsDataUnstackedFunction.AddParameter("formula", ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
+        clsPasteFunction.AddParameter("y", Chr(34) & "+ " & ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False) & " ~ " & "'X'" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsTilde2Operator.AddParameter("right", ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsPackageCheck.AddParameter("col", Chr(34) & ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False) & Chr(34))
         clsTilde3Operator.AddParameter("right", ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
@@ -552,12 +561,12 @@ Public Class dlgTricotModellingGeneral
     Private Sub CheckAddCodesToBefore()
         If bCheck7Passed Then
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrameFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetVariablesFromMetaDataFunction)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBracketOperator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsNamesOperator)
 
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnFromData, iPosition:=5)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsNames2Operator, iPosition:=9)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction, iPosition:=6)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsNames2Operator, iPosition:=7)
 
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetColumnFromData)
