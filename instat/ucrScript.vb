@@ -29,6 +29,40 @@ Public Class ucrScript
     Private clsRScript As RScript = Nothing
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
+    ''' <summary>
+    ''' Enumeration to specify the type of script in the active tab.
+    ''' </summary>
+    Private Enum ScriptType
+        json
+        other
+        quarto
+        rScript
+    End Enum
+
+    ''' <summary>
+    ''' Gets or sets the type of script for the current tab.
+    ''' The value is stored in the active Scintilla control's Tag property.
+    ''' We need to use the Tag property because we can have multiple tabs, each with
+    ''' its own Scintilla control, and each tab can contain a different type of script.
+    ''' We use this property to determine the type of script in the current tab,
+    ''' so that we can set the correct lexer when loading a script from file, and also
+    ''' so that we can enable/disable the buttons and context menu options correctly.
+    ''' </summary>
+    Private Property enumScriptType As ScriptType
+        Get
+            If clsScriptActive IsNot Nothing AndAlso clsScriptActive.Tag IsNot Nothing Then
+                Return DirectCast(clsScriptActive.Tag, ScriptType)
+            Else
+                Return ScriptType.rScript ' Default value
+            End If
+        End Get
+        Set(value As ScriptType)
+            If clsScriptActive IsNot Nothing Then
+                clsScriptActive.Tag = value
+            End If
+        End Set
+    End Property
+
     Private ReadOnly Property isFindValid As Boolean
         Get
             Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
@@ -62,10 +96,15 @@ Public Class ucrScript
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        toolTipScriptWindow.SetToolTip(cmdRunStatementSelection, "Run the current statement or selection. (Ctrl+Enter)")
-        toolTipScriptWindow.SetToolTip(cmdRunAll, "Run all the text in the tab. (Ctrl+Alt+R)")
-        toolTipScriptWindow.SetToolTip(cmdLoadScript, "Load a script from file into the current tab.")
-        toolTipScriptWindow.SetToolTip(cmdSave, "Save the script in the current tab to a file.")
+        Dim strRunStatementSelectionToolTip As String = "Run the current statement or selection. (Ctrl+Enter)"
+        Dim strRunAllToolTip As String = "Run all the text in the tab. (Ctrl+Alt+R)"
+        Dim strLoadToolTip As String = "Load from file into the current tab."
+        Dim strSaveToolTip As String = "Save the contents of the current tab to a file."
+
+        toolTipScriptWindow.SetToolTip(cmdRunStatementSelection, strRunStatementSelectionToolTip)
+        toolTipScriptWindow.SetToolTip(cmdRunAll, strRunAllToolTip)
+        toolTipScriptWindow.SetToolTip(cmdLoadScript, strLoadToolTip)
+        toolTipScriptWindow.SetToolTip(cmdSave, strSaveToolTip)
         toolTipScriptWindow.SetToolTip(cmdAddTab, "Add a new tab.")
         toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
         toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
@@ -78,11 +117,11 @@ Public Class ucrScript
         mnuPaste.ToolTipText = "Paste the contents of the clipboard into the current tab. (Ctrl+V)"
         mnuSelectAll.ToolTipText = "Select all the contents of the current tab. (Ctrl+A)"
         mnuClear.ToolTipText = "Clear the contents of the current tab. (Ctrl+L)"
-        mnuRunCurrentStatementSelection.ToolTipText = "Run the current statement or selection. (Ctrl+Enter)"
-        mnuRunAllText.ToolTipText = "Run all the text in the tab. (Ctrl+Alt+R)"
+        mnuRunCurrentStatementSelection.ToolTipText = strRunStatementSelectionToolTip
+        mnuRunAllText.ToolTipText = strRunAllToolTip
         mnuOpenScriptasFile.ToolTipText = "Save file to log folder and open file in external editor."
-        mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
-        mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
+        mnuLoadScriptFromFile.ToolTipText = strLoadToolTip
+        mnuSaveScript.ToolTipText = strSaveToolTip
         mnuHelp.ToolTipText = "Display the Script Window help information."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
@@ -289,6 +328,7 @@ Public Class ucrScript
 
     Private Sub AddTab(Optional bIsLogTab As Boolean = False)
         clsScriptActive = NewScriptEditor()
+        SetupScriptEditorR()
         SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
@@ -340,38 +380,16 @@ Public Class ucrScript
     Private Sub EnableDisableButtons()
 
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
 
-        cmdRunStatementSelection.Enabled = bScriptExists
-        cmdRunAll.Enabled = bScriptExists
+        cmdRunStatementSelection.Enabled = bScriptExists AndAlso bIsRScript
+        cmdRunAll.Enabled = bScriptExists AndAlso (bIsRScript OrElse enumScriptType = ScriptType.quarto)
         cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
-        cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
-
+        cmdInsert.Enabled = bIsRScript
         cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
-    End Sub
-
-    ''' <summary>
-    ''' Enables or disables all right click menu options
-    ''' </summary>
-    ''' <param name="bEnable">If true, enables all right click options, false disables them</param>
-    Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
-        mnuUndo.Enabled = bEnable
-        mnuRedo.Enabled = bEnable
-        mnuCut.Enabled = bEnable
-        mnuCopy.Enabled = bEnable
-        mnuPaste.Enabled = bEnable
-        mnuSelectAll.Enabled = bEnable
-        mnuClear.Enabled = bEnable
-        mnuFindNext.Enabled = bEnable
-        mnuFindPrev.Enabled = bEnable
-        mnuReplace.Enabled = bEnable
-        mnuReplaceAll.Enabled = bEnable
-        mnuRunCurrentStatementSelection.Enabled = bEnable
-        mnuRunAllText.Enabled = bEnable
-        mnuLoadScriptFromFile.Enabled = bEnable
-        mnuOpenScriptasFile.Enabled = bEnable
-        mnuSaveScript.Enabled = bEnable
+        cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
     End Sub
 
     ''' <summary>
@@ -381,7 +399,8 @@ Public Class ucrScript
     Private Sub EnableRunOptions(bEnable As Boolean)
         cmdRunStatementSelection.Enabled = bEnable
         cmdRunAll.Enabled = bEnable
-        EnableRightClickMenuOptions(bEnable)
+        mnuRunCurrentStatementSelection.Enabled = bEnable
+        mnuRunAllText.Enabled = bEnable
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -629,12 +648,12 @@ Public Class ucrScript
         If clsScriptActive.TextLength > 0 _
                 AndAlso MsgBox("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
-                               vbYesNo, "Load Script From File") = vbNo Then
+                               vbYesNo, "Load From File") = vbNo Then
             Exit Sub
         End If
 
         Using dlgLoad As New OpenFileDialog
-            dlgLoad.Title = "Load Script From File"
+            dlgLoad.Title = "Load From File"
             dlgLoad.Filter = "R Script, Quarto and Text Files (*.R;*.qmd;*.txt)|*.R;*.qmd;*.txt|" &
                              "R Script Files (*.R)|*.R|" &
                              "Quarto Files (*.qmd)|*.qmd|" &
@@ -672,19 +691,15 @@ Public Class ucrScript
                     Case ".r"
                         enumScriptType = ScriptType.rScript
                         clsScriptActive.Lexer = Lexer.R
+                        SetupScriptEditorR()
                     Case Else
                         enumScriptType = ScriptType.other
                         clsScriptActive.Lexer = Lexer.Null
                 End Select
-                Dim bIsScript As Boolean = enumScriptType = ScriptType.rScript
-                TabControl.SelectedTab.Text = If(bIsScript,
+                TabControl.SelectedTab.Text = If(enumScriptType = ScriptType.rScript,
                                                  Path.GetFileNameWithoutExtension(dlgLoad.FileName),
                                                  Path.GetFileName(dlgLoad.FileName))
-                cmdInsert.Enabled = bIsScript
-                cmdRunStatementSelection.Enabled = bIsScript
-                mnuOpenScriptasFile.Enabled = bIsScript
-                mnuReformatCode.Enabled = bIsScript
-                mnuRunCurrentStatementSelection.Enabled = bIsScript
+                EnableDisableButtons()
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to read from the specified location.",
@@ -709,63 +724,6 @@ Public Class ucrScript
         clsNewScript.StyleResetDefault()
         clsNewScript.Styles(Style.Default).Font = "Consolas"
         clsNewScript.Styles(Style.Default).Size = 10
-
-        'TODO  Configure from R-Instat options?
-        'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
-        'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
-
-        ' Instruct the lexer to calculate folding
-        clsNewScript.SetProperty("fold", "1")
-        clsNewScript.SetProperty("fold.compact", "1")
-
-        ' Configure a margin to display folding symbols
-        clsNewScript.Margins(2).Type = MarginType.Symbol
-        clsNewScript.Margins(2).Mask = Marker.MaskFolders
-        clsNewScript.Margins(2).Sensitive = True
-        clsNewScript.Margins(2).Width = 20
-
-        ' Set colors for all folding markers
-        For i As Integer = 25 To 31
-            clsNewScript.Markers(i).SetForeColor(SystemColors.ControlLightLight)
-            clsNewScript.Markers(i).SetBackColor(SystemColors.ControlDark)
-        Next
-
-        ' Configure folding markers with respective symbols
-        clsNewScript.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
-        clsNewScript.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
-        clsNewScript.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
-        clsNewScript.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
-        clsNewScript.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
-        clsNewScript.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
-        clsNewScript.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
-
-        ' Enable automatic folding
-        clsNewScript.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
-
-        clsNewScript.IndentationGuides = IndentView.LookBoth
-        clsNewScript.StyleClearAll()
-        clsNewScript.Styles(Style.R.Default).ForeColor = Color.Silver
-        clsNewScript.Styles(Style.R.Comment).ForeColor = Color.Green
-        clsNewScript.Styles(Style.R.KWord).ForeColor = Color.Blue
-        clsNewScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
-        clsNewScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
-        clsNewScript.Styles(Style.R.Number).ForeColor = Color.Purple
-        clsNewScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
-        clsNewScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
-        clsNewScript.Styles(Style.R.Operator).ForeColor = Color.Gray
-        clsNewScript.Styles(Style.R.Identifier).ForeColor = Color.Black
-        clsNewScript.Styles(Style.R.Infix).ForeColor = Color.Gray
-        clsNewScript.Styles(Style.R.InfixEol).ForeColor = Color.Gray
-        clsNewScript.Styles(Style.BraceLight).BackColor = Color.LightGray
-        clsNewScript.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
-        clsNewScript.Styles(Style.BraceBad).ForeColor = Color.Red
-
-        Dim tmp = clsNewScript.DescribeKeywordSets()
-        clsNewScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
-
-        'TODO if we want to set the key words for 'default package functions' (key word set 1) 
-        ' and/or 'other package functions', then a good list is available at:
-        '  https://raw.githubusercontent.com/moltenform/scite-files/master/files/files/api_files/r.properties  
 
         Return clsNewScript
     End Function
@@ -898,6 +856,65 @@ Public Class ucrScript
         clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
+    Private Sub SetupScriptEditorR()
+        'TODO  Configure from R-Instat options?
+        'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
+        'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
+
+        ' Instruct the lexer to calculate folding
+        clsScriptActive.SetProperty("fold", "1")
+        clsScriptActive.SetProperty("fold.compact", "1")
+
+        ' Configure a margin to display folding symbols
+        clsScriptActive.Margins(2).Type = MarginType.Symbol
+        clsScriptActive.Margins(2).Mask = Marker.MaskFolders
+        clsScriptActive.Margins(2).Sensitive = True
+        clsScriptActive.Margins(2).Width = 20
+
+        ' Set colors for all folding markers
+        For i As Integer = 25 To 31
+            clsScriptActive.Markers(i).SetForeColor(SystemColors.ControlLightLight)
+            clsScriptActive.Markers(i).SetBackColor(SystemColors.ControlDark)
+        Next
+
+        ' Configure folding markers with respective symbols
+        clsScriptActive.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
+        clsScriptActive.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
+        clsScriptActive.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
+        clsScriptActive.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
+        clsScriptActive.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
+        clsScriptActive.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
+        clsScriptActive.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
+
+        ' Enable automatic folding
+        clsScriptActive.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
+
+        clsScriptActive.IndentationGuides = IndentView.LookBoth
+        clsScriptActive.StyleClearAll()
+        clsScriptActive.Styles(Style.R.Default).ForeColor = Color.Silver
+        clsScriptActive.Styles(Style.R.Comment).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.R.KWord).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.R.Number).ForeColor = Color.Purple
+        clsScriptActive.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
+        clsScriptActive.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
+        clsScriptActive.Styles(Style.R.Operator).ForeColor = Color.Gray
+        clsScriptActive.Styles(Style.R.Identifier).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.R.Infix).ForeColor = Color.Gray
+        clsScriptActive.Styles(Style.R.InfixEol).ForeColor = Color.Gray
+        clsScriptActive.Styles(Style.BraceLight).BackColor = Color.LightGray
+        clsScriptActive.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
+        clsScriptActive.Styles(Style.BraceBad).ForeColor = Color.Red
+
+        Dim tmp = clsScriptActive.DescribeKeywordSets()
+        clsScriptActive.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
+
+        'TODO if we want to set the key words for 'default package functions' (key word set 1) 
+        ' and/or 'other package functions', then a good list is available at:
+        '  https://raw.githubusercontent.com/moltenform/scite-files/master/files/files/api_files/r.properties  
+    End Sub
+
     Private Sub clsScriptActive_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
         InsertMatchedChars(ChrW(e.Char))
         InsertIndent(e.Char)
@@ -945,44 +962,51 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
-        'enable and disable menu options based on the active script properties before the user views them
-
-        Dim bScriptSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+        Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+        Dim bScriptSelected As Boolean = clsScriptActive.SelectedText.Length > 0
 
-        'initially disable all the right click menu options
-        EnableRightClickMenuOptions(False)
-
-        'if active tab is not log tab then enable the options based on active tab state
-        'below are options that are not to be used in the log tab
-        If TabControl.SelectedIndex <> iTabIndexLog Then
-            mnuUndo.Enabled = clsScriptActive.CanUndo
-            mnuRedo.Enabled = clsScriptActive.CanRedo
-            mnuCut.Enabled = bScriptSelected
-            mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
-            mnuClear.Enabled = bScriptExists
-            mnuLoadScriptFromFile.Enabled = True
-        End If
-
-        'enable find/replace options
+        mnuUndo.Enabled = clsScriptActive.CanUndo AndAlso Not bIsLogTab
+        mnuRedo.Enabled = clsScriptActive.CanRedo AndAlso Not bIsLogTab
+        mnuCut.Enabled = bScriptSelected AndAlso Not bIsLogTab
+        mnuCopy.Enabled = bScriptSelected
+        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text) AndAlso Not bIsLogTab
+        mnuSelectAll.Enabled = bScriptExists
+        mnuClear.Enabled = cmdClear.Enabled
         mnuFindNext.Enabled = isFindValid
         mnuFindPrev.Enabled = isFindValid
         mnuReplace.Enabled = isReplaceValid
         mnuReplaceAll.Enabled = isReplaceValid
-
-        'enable remaining options based on tab state
-        mnuCopy.Enabled = bScriptSelected
-        mnuSelectAll.Enabled = bScriptExists
-        mnuRunCurrentStatementSelection.Enabled = bScriptExists
-        mnuRunAllText.Enabled = bScriptExists
-        mnuOpenScriptasFile.Enabled = bScriptExists
-        mnuSaveScript.Enabled = bScriptExists
+        mnuRunCurrentStatementSelection.Enabled = cmdRunStatementSelection.Enabled
+        mnuRunAllText.Enabled = cmdRunAll.Enabled
+        mnuReformatCode.Enabled = bScriptExists AndAlso bIsRScript AndAlso Not bIsLogTab
+        mnuOpenScriptasFile.Enabled = bScriptExists AndAlso bIsRScript
+        mnuLoadScriptFromFile.Enabled = cmdLoadScript.Enabled
+        mnuSaveScript.Enabled = cmdSave.Enabled
     End Sub
 
     Private Sub mnuContextScript_Closing(sender As Object, e As EventArgs) Handles mnuContextScript.Closing
         'On closing menu context, just enable all the menu options to restore their short cut keys
         'validations of the options actions is done by the functions that the events call.
-        EnableRightClickMenuOptions(True)
+        mnuUndo.Enabled = True
+        mnuRedo.Enabled = True
+        mnuCut.Enabled = True
+        mnuCopy.Enabled = True
+        mnuPaste.Enabled = True
+        mnuSelectAll.Enabled = True
+        mnuClear.Enabled = True
+        mnuFindNext.Enabled = True
+        mnuFindPrev.Enabled = True
+        mnuReplace.Enabled = True
+        mnuReplaceAll.Enabled = True
+        mnuRunCurrentStatementSelection.Enabled = True
+        mnuRunAllText.Enabled = True
+        mnuReformatCode.Enabled = True
+        mnuOpenScriptasFile.Enabled = True
+        mnuLoadScriptFromFile.Enabled = True
+        mnuSaveScript.Enabled = True
+        mnuHelp.Enabled = True
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
@@ -1360,21 +1384,5 @@ Public Class ucrScript
         clsScriptActive.Focus()
         clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
-
-    'todo move to start of file
-    ''' <summary>
-    ''' Enumeration to specify the type of script in the active tab.
-    ''' </summary>
-    Private Enum ScriptType
-        json
-        other
-        quarto
-        rScript
-    End Enum
-
-    ''' <summary>
-    ''' The type of script for the current tab.
-    ''' </summary>
-    Private enumScriptType As ScriptType = ScriptType.rScript
 
 End Class
