@@ -522,7 +522,7 @@ Public Class dlgTricotModellingGeneral
         TestOkEnabled()
     End Sub
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitsReceiver.ControlContentsChanged,
-        ucrSaveModellingGeneral.ControlContentsChanged
+        ucrSaveModellingGeneral.ControlContentsChanged, ucrReceiverMultipleExplanatoryVariables.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
