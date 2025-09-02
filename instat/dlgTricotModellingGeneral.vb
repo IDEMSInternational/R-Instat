@@ -160,7 +160,7 @@ Public Class dlgTricotModellingGeneral
         clsPackageCheck.SetPackageName("databook")
         clsPackageCheck.SetRCommand("check_variety_data_level")
         clsPackageCheck.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34))
-        clsPackageCheck.AddParameter("col", Chr(34) & ucrReceiverMultipleExplanatoryVariables.GetVariableNames() & Chr(34))
+        clsPackageCheck.AddParameter("col", ucrReceiverMultipleExplanatoryVariables.GetVariableNames())
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadataFunction.SetAssignTo("get_index_names")
@@ -529,7 +529,7 @@ Public Class dlgTricotModellingGeneral
     Private Sub ucrReceiverMultipleExplanatoryVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleExplanatoryVariables.ControlValueChanged
         clsPasteFunction.AddParameter("y", Chr(34) & "+ " & ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False) & " ~ " & "'X'" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsTilde2Operator.AddParameter("right", ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
-        clsPackageCheck.AddParameter("col", Chr(34) & ucrReceiverMultipleExplanatoryVariables.GetVariableNames() & Chr(34))
+        clsPackageCheck.AddParameter("col", ucrReceiverMultipleExplanatoryVariables.GetVariableNames())
         clsTilde3Operator.AddParameter("right", ucrReceiverMultipleExplanatoryVariables.GetVariableNamesAsAddition(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         Check()
         CheckAddCodesToBefore()
