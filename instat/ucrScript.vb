@@ -327,7 +327,15 @@ Public Class ucrScript
     End Sub
 
     Private Sub AddTab(Optional bIsLogTab As Boolean = False)
-        clsScriptActive = NewScriptEditor()
+        clsScriptActive = New Scintilla With {
+            .ContextMenuStrip = mnuContextScript,
+            .Dock = DockStyle.Fill,
+            .Location = New Point(3, 3),
+            .Name = "txtScriptAdded",
+            .Size = New Size(391, 409),
+            .TabIndex = 14, 'TODO
+            .TabWidth = 2
+        }
         SetupScriptEditorR()
         SetLineNumberMarginWidth(1, True)
 
@@ -687,10 +695,9 @@ Public Class ucrScript
                         clsScriptActive.Lexer = Lexer.Json
                     Case ".qmd"
                         enumScriptType = ScriptType.quarto
-                        clsScriptActive.Lexer = Lexer.Markdown
+                        SetupScriptEditorQuarto()
                     Case ".r"
                         enumScriptType = ScriptType.rScript
-                        clsScriptActive.Lexer = Lexer.R
                         SetupScriptEditorR()
                     Case Else
                         enumScriptType = ScriptType.other
@@ -708,25 +715,6 @@ Public Class ucrScript
         End Using
 
     End Sub
-
-    Private Function NewScriptEditor() As Scintilla
-        Dim clsNewScript As Scintilla = New Scintilla With {
-            .ContextMenuStrip = mnuContextScript,
-            .Dock = DockStyle.Fill,
-            .Lexer = Lexer.R,
-            .Location = New Point(3, 3),
-            .Name = "txtScriptAdded",
-            .Size = New Size(391, 409),
-            .TabIndex = 14, 'TODO
-            .TabWidth = 2
-        }
-
-        clsNewScript.StyleResetDefault()
-        clsNewScript.Styles(Style.Default).Font = "Consolas"
-        clsNewScript.Styles(Style.Default).Size = 10
-
-        Return clsNewScript
-    End Function
 
     Private Sub RunCurrentStatement()
 
@@ -856,7 +844,54 @@ Public Class ucrScript
         clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
+    Private Sub SetupScriptEditorQuarto()
+
+        clsScriptActive.Lexer = Lexer.Markdown
+
+        clsScriptActive.StyleResetDefault()
+        clsScriptActive.Styles(Style.Default).Font = "Consolas"
+        clsScriptActive.Styles(Style.Default).Size = 10
+
+        clsScriptActive.StyleClearAll()
+        clsScriptActive.Styles(Style.Markdown.Default).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.Markdown.BlockQuote).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.Markdown.Code).BackColor = Color.Gainsboro
+        clsScriptActive.Styles(Style.Markdown.Code).ForeColor = Color.DarkSlateGray
+        clsScriptActive.Styles(Style.Markdown.Code2).BackColor = Color.Gainsboro
+        clsScriptActive.Styles(Style.Markdown.Code2).ForeColor = Color.DarkSlateGray
+        clsScriptActive.Styles(Style.Markdown.CodeBk).BackColor = Color.Gainsboro
+        clsScriptActive.Styles(Style.Markdown.CodeBk).ForeColor = Color.DarkSlateGray
+        clsScriptActive.Styles(Style.Markdown.Em1).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Markdown.Em2).ForeColor = Color.Orange
+        clsScriptActive.Styles(Style.Markdown.Header1).ForeColor = Color.Yellow
+        clsScriptActive.Styles(Style.Markdown.Header2).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Markdown.Header3).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header4).ForeColor = Color.Indigo
+        clsScriptActive.Styles(Style.Markdown.Header5).ForeColor = Color.Violet
+        clsScriptActive.Styles(Style.Markdown.Header6).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.Markdown.HRule).ForeColor = Color.Purple
+        clsScriptActive.Styles(Style.Markdown.LineBegin).ForeColor = Color.Yellow
+        clsScriptActive.Styles(Style.Markdown.Link).ForeColor = Color.DodgerBlue
+        clsScriptActive.Styles(Style.Markdown.OListItem).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Markdown.PreChar).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Strikeout).ForeColor = Color.Indigo
+        clsScriptActive.Styles(Style.Markdown.Strong1).ForeColor = Color.Violet
+        clsScriptActive.Styles(Style.Markdown.Strong2).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Markdown.UListItem).ForeColor = Color.Green
+
+        clsScriptActive.Styles(Style.BraceLight).BackColor = Color.LightGray
+        clsScriptActive.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
+        clsScriptActive.Styles(Style.BraceBad).ForeColor = Color.Red
+    End Sub
+
     Private Sub SetupScriptEditorR()
+
+        clsScriptActive.Lexer = Lexer.R
+
+        clsScriptActive.StyleResetDefault()
+        clsScriptActive.Styles(Style.Default).Font = "Consolas"
+        clsScriptActive.Styles(Style.Default).Size = 10
+
         'TODO  Configure from R-Instat options?
         'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
@@ -907,7 +942,6 @@ Public Class ucrScript
         clsScriptActive.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
         clsScriptActive.Styles(Style.BraceBad).ForeColor = Color.Red
 
-        Dim tmp = clsScriptActive.DescribeKeywordSets()
         clsScriptActive.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
 
         'TODO if we want to set the key words for 'default package functions' (key word set 1) 
