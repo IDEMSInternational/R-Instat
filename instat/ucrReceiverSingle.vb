@@ -69,7 +69,7 @@ Public Class ucrReceiverSingle
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
-            If strCurrentItemType = "column" Then
+            If strCurrentItemType = "column" AndAlso String.IsNullOrEmpty(strObjectName) Then
                 If strDataFrame = "" Then
                     SetMeAsReceiver()
                     For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
