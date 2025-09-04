@@ -854,34 +854,39 @@ Public Class ucrScript
 
         clsScriptActive.StyleClearAll()
         clsScriptActive.Styles(Style.Markdown.Default).ForeColor = Color.Black
+
         clsScriptActive.Styles(Style.Markdown.BlockQuote).ForeColor = Color.Black
-        clsScriptActive.Styles(Style.Markdown.Code).BackColor = Color.Gainsboro
-        clsScriptActive.Styles(Style.Markdown.Code).ForeColor = Color.DarkSlateGray
-        clsScriptActive.Styles(Style.Markdown.Code2).BackColor = Color.Gainsboro
-        clsScriptActive.Styles(Style.Markdown.Code2).ForeColor = Color.DarkSlateGray
-        clsScriptActive.Styles(Style.Markdown.CodeBk).BackColor = Color.Gainsboro
-        clsScriptActive.Styles(Style.Markdown.CodeBk).ForeColor = Color.DarkSlateGray
-        clsScriptActive.Styles(Style.Markdown.Em1).ForeColor = Color.Red
-        clsScriptActive.Styles(Style.Markdown.Em2).ForeColor = Color.Orange
-        clsScriptActive.Styles(Style.Markdown.Header1).ForeColor = Color.Yellow
-        clsScriptActive.Styles(Style.Markdown.Header2).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Markdown.Code).BackColor = Color.WhiteSmoke
+        clsScriptActive.Styles(Style.Markdown.Code).ForeColor = Color.DimGray
+        clsScriptActive.Styles(Style.Markdown.Code2).BackColor = Color.WhiteSmoke
+        clsScriptActive.Styles(Style.Markdown.Code2).ForeColor = Color.DimGray
+        clsScriptActive.Styles(Style.Markdown.OListItem).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.Markdown.Em1).ForeColor = Color.DodgerBlue
+        clsScriptActive.Styles(Style.Markdown.Em2).ForeColor = Color.DarkBlue
+        clsScriptActive.Styles(Style.Markdown.Header1).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header2).ForeColor = Color.Blue
         clsScriptActive.Styles(Style.Markdown.Header3).ForeColor = Color.Blue
-        clsScriptActive.Styles(Style.Markdown.Header4).ForeColor = Color.Indigo
-        clsScriptActive.Styles(Style.Markdown.Header5).ForeColor = Color.Violet
-        clsScriptActive.Styles(Style.Markdown.Header6).ForeColor = Color.Black
-        clsScriptActive.Styles(Style.Markdown.HRule).ForeColor = Color.Purple
-        clsScriptActive.Styles(Style.Markdown.LineBegin).ForeColor = Color.Yellow
+        clsScriptActive.Styles(Style.Markdown.Header4).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header5).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header6).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.HRule).ForeColor = Color.Blue
         clsScriptActive.Styles(Style.Markdown.Link).ForeColor = Color.DodgerBlue
-        clsScriptActive.Styles(Style.Markdown.OListItem).ForeColor = Color.Green
-        clsScriptActive.Styles(Style.Markdown.PreChar).ForeColor = Color.Blue
-        clsScriptActive.Styles(Style.Markdown.Strikeout).ForeColor = Color.Indigo
-        clsScriptActive.Styles(Style.Markdown.Strong1).ForeColor = Color.Violet
-        clsScriptActive.Styles(Style.Markdown.Strong2).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Markdown.Strong1).ForeColor = Color.DodgerBlue
+        clsScriptActive.Styles(Style.Markdown.Strong2).ForeColor = Color.DarkBlue
         clsScriptActive.Styles(Style.Markdown.UListItem).ForeColor = Color.Green
 
         clsScriptActive.Styles(Style.BraceLight).BackColor = Color.LightGray
         clsScriptActive.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
         clsScriptActive.Styles(Style.BraceBad).ForeColor = Color.Red
+
+        ' Note @lloyddewit 04/09/25: I am not sure that the remaining markdown styles are used in
+        '     Quarto files . I decided to include them anyway and give then clear colours. So if a
+        '     Quarto file does ever use them, then it should be easy to find the applicable style
+        '     in the code and change to a more desirable colour.
+        clsScriptActive.Styles(Style.Markdown.CodeBk).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Markdown.LineBegin).ForeColor = Color.Orange
+        clsScriptActive.Styles(Style.Markdown.PreChar).ForeColor = Color.Yellow
+        clsScriptActive.Styles(Style.Markdown.Strikeout).ForeColor = Color.Violet
     End Sub
 
     Private Sub SetupScriptEditorR()
