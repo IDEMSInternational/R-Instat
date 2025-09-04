@@ -135,18 +135,8 @@ Year:
 %Y - 4-digit
 %y - 2-digit
 
-Click 'Help' to see the full list
+Click 'R Help' to see the full list
 
-Examples:
-
-%b %-d       (Jan 5)
-%b %d        (Jan 05)
-%B %-d       (January 5)
-%-d %b %Y    (5 Jan 2025)
-%-d %b %y    (5 Jan 25)
-%a %-d %b    (Mon 5 Jan)
-%A %-d %B %Y (Monday 5 January 2025)
-%d/%m/%Y     (05/01/2025)
 	</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

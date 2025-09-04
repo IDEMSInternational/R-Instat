@@ -88,6 +88,7 @@ Partial Class dlgUseDate
         Me.ucrChkShiftYearNum = New instat.ucrCheck()
         Me.ucrChkShiftYearName = New instat.ucrCheck()
         Me.Panelformatmode = New System.Windows.Forms.Panel()
+        Me.ucrFormatNew = New instat.ucrSave()
         Me.grpfrmdescrp = New System.Windows.Forms.GroupBox()
         Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.rdoUseColumn = New System.Windows.Forms.RadioButton()
@@ -649,11 +650,21 @@ Partial Class dlgUseDate
         '
         'Panelformatmode
         '
+        Me.Panelformatmode.Controls.Add(Me.ucrFormatNew)
         Me.Panelformatmode.Controls.Add(Me.grpfrmdescrp)
         Me.Panelformatmode.Location = New System.Drawing.Point(10, 222)
         Me.Panelformatmode.Name = "Panelformatmode"
         Me.Panelformatmode.Size = New System.Drawing.Size(468, 282)
         Me.Panelformatmode.TabIndex = 28
+        '
+        'ucrFormatNew
+        '
+        Me.ucrFormatNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFormatNew.Location = New System.Drawing.Point(16, 249)
+        Me.ucrFormatNew.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrFormatNew.Name = "ucrFormatNew"
+        Me.ucrFormatNew.Size = New System.Drawing.Size(271, 22)
+        Me.ucrFormatNew.TabIndex = 29
         '
         'grpfrmdescrp
         '
@@ -794,7 +805,7 @@ Partial Class dlgUseDate
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(61, 25)
         Me.cmdHelp.TabIndex = 36
-        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.Text = "R Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'dlgUseDate
@@ -895,4 +906,5 @@ Partial Class dlgUseDate
     Friend WithEvents Panelformatmode As Panel
     Friend WithEvents txtTextDateFormats As RichTextBox
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents ucrFormatNew As ucrSave
 End Class
