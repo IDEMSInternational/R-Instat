@@ -25,6 +25,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblSeasonPlantingDay = New System.Windows.Forms.Label()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbAnnualRainfall = New System.Windows.Forms.TabPage()
+        Me.ucrSelectorDefineAnnualRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblTminExtreme = New System.Windows.Forms.Label()
         Me.lblTmaxExtreme = New System.Windows.Forms.Label()
         Me.ucrReceiverTminExtreme = New instat.ucrReceiverSingle()
@@ -69,8 +70,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverRainDaysSeason = New instat.ucrReceiverSingle()
         Me.ucrReceiverSeasonalRain = New instat.ucrReceiverSingle()
         Me.ucrReceiverAnnualRain = New instat.ucrReceiverSingle()
-        Me.ucrSelectorDefineAnnualRain = New instat.ucrSelectorByDataFrame()
         Me.tbCropSuccessProp = New System.Windows.Forms.TabPage()
+        Me.ucrSelectorCropProp = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblPropSuccessWithoutStart = New System.Windows.Forms.Label()
         Me.ucrReceiverPropSuccessNoStart = New instat.ucrReceiverSingle()
         Me.lblPlantingLength = New System.Windows.Forms.Label()
@@ -83,8 +84,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverPlantingDay = New instat.ucrReceiverSingle()
         Me.ucrReceiverTotalRain = New instat.ucrReceiverSingle()
         Me.ucrReceiverStationCrop = New instat.ucrReceiverSingle()
-        Me.ucrSelectorCropProp = New instat.ucrSelectorByDataFrame()
         Me.tbSeasonStartProb = New System.Windows.Forms.TabPage()
+        Me.ucrSelectorSeasonStartProp = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblPlantingDayCond = New System.Windows.Forms.Label()
         Me.lblSeasonYear = New System.Windows.Forms.Label()
         Me.lblStationSeasonProb = New System.Windows.Forms.Label()
@@ -92,8 +93,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverSeasonPlantingDay = New instat.ucrReceiverSingle()
         Me.ucrReceiverSeasonYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverSeasonStationProb = New instat.ucrReceiverSingle()
-        Me.ucrSelectorSeasonStartProp = New instat.ucrSelectorByDataFrame()
         Me.tbAnnualTempSummaries = New System.Windows.Forms.TabPage()
+        Me.ucrSelectorAnnualTemp = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblMinMinAnnual = New System.Windows.Forms.Label()
         Me.lblMeanAnnualTemp = New System.Windows.Forms.Label()
         Me.lblMaxMinAnnual = New System.Windows.Forms.Label()
@@ -110,8 +111,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverMeanAnnual = New instat.ucrReceiverSingle()
         Me.ucrReceiverAnnualTempYr = New instat.ucrReceiverSingle()
         Me.ucrReceiverAnnualTempStation = New instat.ucrReceiverSingle()
-        Me.ucrSelectorAnnualTemp = New instat.ucrSelectorByDataFrame()
         Me.tbMonthlyTemp = New System.Windows.Forms.TabPage()
+        Me.ucrSelecetorMonthlyTemp = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblMinMInMonthly = New System.Windows.Forms.Label()
         Me.lblMeanMinMonthly = New System.Windows.Forms.Label()
@@ -130,7 +131,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverMeanminMontly = New instat.ucrReceiverSingle()
         Me.ucrReceiverYearMonthly = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonthlyTemp = New instat.ucrReceiverSingle()
-        Me.ucrSelecetorMonthlyTemp = New instat.ucrSelectorByDataFrame()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbSummaries.SuspendLayout()
         Me.tbAnnualRainfall.SuspendLayout()
@@ -166,6 +166,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         'tbAnnualRainfall
         '
+        Me.tbAnnualRainfall.Controls.Add(Me.ucrSelectorDefineAnnualRain)
         Me.tbAnnualRainfall.Controls.Add(Me.lblTminExtreme)
         Me.tbAnnualRainfall.Controls.Add(Me.lblTmaxExtreme)
         Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverTminExtreme)
@@ -210,7 +211,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverRainDaysSeason)
         Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverSeasonalRain)
         Me.tbAnnualRainfall.Controls.Add(Me.ucrReceiverAnnualRain)
-        Me.tbAnnualRainfall.Controls.Add(Me.ucrSelectorDefineAnnualRain)
         Me.tbAnnualRainfall.Location = New System.Drawing.Point(4, 29)
         Me.tbAnnualRainfall.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbAnnualRainfall.Name = "tbAnnualRainfall"
@@ -220,10 +220,22 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualRainfall.Text = "Annual Rainfall"
         Me.tbAnnualRainfall.UseVisualStyleBackColor = True
         '
+        'ucrSelectorDefineAnnualRain
+        '
+        Me.ucrSelectorDefineAnnualRain.AutoSize = True
+        Me.ucrSelectorDefineAnnualRain.bDropUnusedFilterLevels = False
+        Me.ucrSelectorDefineAnnualRain.bShowHiddenColumns = False
+        Me.ucrSelectorDefineAnnualRain.bUseCurrentFilter = True
+        Me.ucrSelectorDefineAnnualRain.Location = New System.Drawing.Point(16, 8)
+        Me.ucrSelectorDefineAnnualRain.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDefineAnnualRain.Name = "ucrSelectorDefineAnnualRain"
+        Me.ucrSelectorDefineAnnualRain.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelectorDefineAnnualRain.TabIndex = 45
+        '
         'lblTminExtreme
         '
         Me.lblTminExtreme.AutoSize = True
-        Me.lblTminExtreme.Location = New System.Drawing.Point(574, 307)
+        Me.lblTminExtreme.Location = New System.Drawing.Point(580, 307)
         Me.lblTminExtreme.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTminExtreme.Name = "lblTminExtreme"
         Me.lblTminExtreme.Size = New System.Drawing.Size(110, 20)
@@ -233,7 +245,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblTmaxExtreme
         '
         Me.lblTmaxExtreme.AutoSize = True
-        Me.lblTmaxExtreme.Location = New System.Drawing.Point(574, 245)
+        Me.lblTmaxExtreme.Location = New System.Drawing.Point(580, 245)
         Me.lblTmaxExtreme.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTmaxExtreme.Name = "lblTmaxExtreme"
         Me.lblTmaxExtreme.Size = New System.Drawing.Size(114, 20)
@@ -244,7 +256,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverTminExtreme.AutoSize = True
         Me.ucrReceiverTminExtreme.frmParent = Nothing
-        Me.ucrReceiverTminExtreme.Location = New System.Drawing.Point(578, 334)
+        Me.ucrReceiverTminExtreme.Location = New System.Drawing.Point(584, 334)
         Me.ucrReceiverTminExtreme.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTminExtreme.Name = "ucrReceiverTminExtreme"
         Me.ucrReceiverTminExtreme.Selector = Nothing
@@ -257,7 +269,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverTmaxExtreme.AutoSize = True
         Me.ucrReceiverTmaxExtreme.frmParent = Nothing
-        Me.ucrReceiverTmaxExtreme.Location = New System.Drawing.Point(578, 270)
+        Me.ucrReceiverTmaxExtreme.Location = New System.Drawing.Point(584, 270)
         Me.ucrReceiverTmaxExtreme.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmaxExtreme.Name = "ucrReceiverTmaxExtreme"
         Me.ucrReceiverTmaxExtreme.Selector = Nothing
@@ -269,7 +281,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblLonTmaxSpell
         '
         Me.lblLonTmaxSpell.AutoSize = True
-        Me.lblLonTmaxSpell.Location = New System.Drawing.Point(574, 55)
+        Me.lblLonTmaxSpell.Location = New System.Drawing.Point(580, 49)
         Me.lblLonTmaxSpell.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLonTmaxSpell.Name = "lblLonTmaxSpell"
         Me.lblLonTmaxSpell.Size = New System.Drawing.Size(152, 20)
@@ -280,7 +292,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverLongTmaxSpell.AutoSize = True
         Me.ucrReceiverLongTmaxSpell.frmParent = Nothing
-        Me.ucrReceiverLongTmaxSpell.Location = New System.Drawing.Point(578, 75)
+        Me.ucrReceiverLongTmaxSpell.Location = New System.Drawing.Point(584, 75)
         Me.ucrReceiverLongTmaxSpell.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongTmaxSpell.Name = "ucrReceiverLongTmaxSpell"
         Me.ucrReceiverLongTmaxSpell.Selector = Nothing
@@ -302,7 +314,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblLonTminSpell
         '
         Me.lblLonTminSpell.AutoSize = True
-        Me.lblLonTminSpell.Location = New System.Drawing.Point(574, 116)
+        Me.lblLonTminSpell.Location = New System.Drawing.Point(580, 116)
         Me.lblLonTminSpell.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLonTminSpell.Name = "lblLonTminSpell"
         Me.lblLonTminSpell.Size = New System.Drawing.Size(148, 20)
@@ -313,7 +325,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverLongTminSpell.AutoSize = True
         Me.ucrReceiverLongTminSpell.frmParent = Nothing
-        Me.ucrReceiverLongTminSpell.Location = New System.Drawing.Point(578, 142)
+        Me.ucrReceiverLongTminSpell.Location = New System.Drawing.Point(584, 142)
         Me.ucrReceiverLongTminSpell.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongTminSpell.Name = "ucrReceiverLongTminSpell"
         Me.ucrReceiverLongTminSpell.Selector = Nothing
@@ -338,7 +350,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblExtremRain
         '
         Me.lblExtremRain.AutoSize = True
-        Me.lblExtremRain.Location = New System.Drawing.Point(582, 179)
+        Me.lblExtremRain.Location = New System.Drawing.Point(580, 179)
         Me.lblExtremRain.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExtremRain.Name = "lblExtremRain"
         Me.lblExtremRain.Size = New System.Drawing.Size(129, 20)
@@ -349,7 +361,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverExtremRian.AutoSize = True
         Me.ucrReceiverExtremRian.frmParent = Nothing
-        Me.ucrReceiverExtremRian.Location = New System.Drawing.Point(578, 207)
+        Me.ucrReceiverExtremRian.Location = New System.Drawing.Point(584, 207)
         Me.ucrReceiverExtremRian.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExtremRian.Name = "ucrReceiverExtremRian"
         Me.ucrReceiverExtremRian.Selector = Nothing
@@ -463,7 +475,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblSeasonalLength
         '
         Me.lblSeasonalLength.AutoSize = True
-        Me.lblSeasonalLength.Location = New System.Drawing.Point(12, 679)
+        Me.lblSeasonalLength.Location = New System.Drawing.Point(20, 679)
         Me.lblSeasonalLength.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSeasonalLength.Name = "lblSeasonalLength"
         Me.lblSeasonalLength.Size = New System.Drawing.Size(134, 20)
@@ -473,7 +485,7 @@ Partial Class sdgDefineAnnualRainfall
         'lblSeasonalRain
         '
         Me.lblSeasonalRain.AutoSize = True
-        Me.lblSeasonalRain.Location = New System.Drawing.Point(12, 611)
+        Me.lblSeasonalRain.Location = New System.Drawing.Point(20, 611)
         Me.lblSeasonalRain.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSeasonalRain.Name = "lblSeasonalRain"
         Me.lblSeasonalRain.Size = New System.Drawing.Size(117, 20)
@@ -678,7 +690,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverSeasonalLength.AutoSize = True
         Me.ucrReceiverSeasonalLength.frmParent = Nothing
-        Me.ucrReceiverSeasonalLength.Location = New System.Drawing.Point(8, 706)
+        Me.ucrReceiverSeasonalLength.Location = New System.Drawing.Point(16, 706)
         Me.ucrReceiverSeasonalLength.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSeasonalLength.Name = "ucrReceiverSeasonalLength"
         Me.ucrReceiverSeasonalLength.Selector = Nothing
@@ -704,7 +716,7 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrReceiverSeasonalRain.AutoSize = True
         Me.ucrReceiverSeasonalRain.frmParent = Nothing
-        Me.ucrReceiverSeasonalRain.Location = New System.Drawing.Point(8, 635)
+        Me.ucrReceiverSeasonalRain.Location = New System.Drawing.Point(16, 635)
         Me.ucrReceiverSeasonalRain.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSeasonalRain.Name = "ucrReceiverSeasonalRain"
         Me.ucrReceiverSeasonalRain.Selector = Nothing
@@ -726,20 +738,9 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverAnnualRain.TabIndex = 10
         Me.ucrReceiverAnnualRain.ucrSelector = Nothing
         '
-        'ucrSelectorDefineAnnualRain
-        '
-        Me.ucrSelectorDefineAnnualRain.AutoSize = True
-        Me.ucrSelectorDefineAnnualRain.bDropUnusedFilterLevels = False
-        Me.ucrSelectorDefineAnnualRain.bShowHiddenColumns = False
-        Me.ucrSelectorDefineAnnualRain.bUseCurrentFilter = True
-        Me.ucrSelectorDefineAnnualRain.Location = New System.Drawing.Point(16, 8)
-        Me.ucrSelectorDefineAnnualRain.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorDefineAnnualRain.Name = "ucrSelectorDefineAnnualRain"
-        Me.ucrSelectorDefineAnnualRain.Size = New System.Drawing.Size(337, 280)
-        Me.ucrSelectorDefineAnnualRain.TabIndex = 0
-        '
         'tbCropSuccessProp
         '
+        Me.tbCropSuccessProp.Controls.Add(Me.ucrSelectorCropProp)
         Me.tbCropSuccessProp.Controls.Add(Me.lblPropSuccessWithoutStart)
         Me.tbCropSuccessProp.Controls.Add(Me.ucrReceiverPropSuccessNoStart)
         Me.tbCropSuccessProp.Controls.Add(Me.lblPlantingLength)
@@ -752,7 +753,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbCropSuccessProp.Controls.Add(Me.ucrReceiverPlantingDay)
         Me.tbCropSuccessProp.Controls.Add(Me.ucrReceiverTotalRain)
         Me.tbCropSuccessProp.Controls.Add(Me.ucrReceiverStationCrop)
-        Me.tbCropSuccessProp.Controls.Add(Me.ucrSelectorCropProp)
         Me.tbCropSuccessProp.Location = New System.Drawing.Point(4, 29)
         Me.tbCropSuccessProp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbCropSuccessProp.Name = "tbCropSuccessProp"
@@ -761,6 +761,18 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbCropSuccessProp.TabIndex = 1
         Me.tbCropSuccessProp.Text = "Crop Success Prop"
         Me.tbCropSuccessProp.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorCropProp
+        '
+        Me.ucrSelectorCropProp.AutoSize = True
+        Me.ucrSelectorCropProp.bDropUnusedFilterLevels = False
+        Me.ucrSelectorCropProp.bShowHiddenColumns = False
+        Me.ucrSelectorCropProp.bUseCurrentFilter = True
+        Me.ucrSelectorCropProp.Location = New System.Drawing.Point(14, 17)
+        Me.ucrSelectorCropProp.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorCropProp.Name = "ucrSelectorCropProp"
+        Me.ucrSelectorCropProp.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelectorCropProp.TabIndex = 13
         '
         'lblPropSuccessWithoutStart
         '
@@ -900,20 +912,9 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverStationCrop.TabIndex = 2
         Me.ucrReceiverStationCrop.ucrSelector = Nothing
         '
-        'ucrSelectorCropProp
-        '
-        Me.ucrSelectorCropProp.AutoSize = True
-        Me.ucrSelectorCropProp.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCropProp.bShowHiddenColumns = False
-        Me.ucrSelectorCropProp.bUseCurrentFilter = True
-        Me.ucrSelectorCropProp.Location = New System.Drawing.Point(16, 12)
-        Me.ucrSelectorCropProp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCropProp.Name = "ucrSelectorCropProp"
-        Me.ucrSelectorCropProp.Size = New System.Drawing.Size(339, 412)
-        Me.ucrSelectorCropProp.TabIndex = 0
-        '
         'tbSeasonStartProb
         '
+        Me.tbSeasonStartProb.Controls.Add(Me.ucrSelectorSeasonStartProp)
         Me.tbSeasonStartProb.Controls.Add(Me.lblPlantingDayCond)
         Me.tbSeasonStartProb.Controls.Add(Me.lblSeasonPlantingDay)
         Me.tbSeasonStartProb.Controls.Add(Me.lblSeasonYear)
@@ -922,7 +923,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbSeasonStartProb.Controls.Add(Me.ucrReceiverSeasonPlantingDay)
         Me.tbSeasonStartProb.Controls.Add(Me.ucrReceiverSeasonYear)
         Me.tbSeasonStartProb.Controls.Add(Me.ucrReceiverSeasonStationProb)
-        Me.tbSeasonStartProb.Controls.Add(Me.ucrSelectorSeasonStartProp)
         Me.tbSeasonStartProb.Location = New System.Drawing.Point(4, 29)
         Me.tbSeasonStartProb.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbSeasonStartProb.Name = "tbSeasonStartProb"
@@ -931,6 +931,18 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbSeasonStartProb.TabIndex = 2
         Me.tbSeasonStartProb.Text = "Season Start Prob"
         Me.tbSeasonStartProb.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorSeasonStartProp
+        '
+        Me.ucrSelectorSeasonStartProp.AutoSize = True
+        Me.ucrSelectorSeasonStartProp.bDropUnusedFilterLevels = False
+        Me.ucrSelectorSeasonStartProp.bShowHiddenColumns = False
+        Me.ucrSelectorSeasonStartProp.bUseCurrentFilter = True
+        Me.ucrSelectorSeasonStartProp.Location = New System.Drawing.Point(13, 20)
+        Me.ucrSelectorSeasonStartProp.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorSeasonStartProp.Name = "ucrSelectorSeasonStartProp"
+        Me.ucrSelectorSeasonStartProp.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelectorSeasonStartProp.TabIndex = 9
         '
         'lblPlantingDayCond
         '
@@ -1014,20 +1026,9 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverSeasonStationProb.TabIndex = 2
         Me.ucrReceiverSeasonStationProb.ucrSelector = Nothing
         '
-        'ucrSelectorSeasonStartProp
-        '
-        Me.ucrSelectorSeasonStartProp.AutoSize = True
-        Me.ucrSelectorSeasonStartProp.bDropUnusedFilterLevels = False
-        Me.ucrSelectorSeasonStartProp.bShowHiddenColumns = False
-        Me.ucrSelectorSeasonStartProp.bUseCurrentFilter = True
-        Me.ucrSelectorSeasonStartProp.Location = New System.Drawing.Point(20, 15)
-        Me.ucrSelectorSeasonStartProp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorSeasonStartProp.Name = "ucrSelectorSeasonStartProp"
-        Me.ucrSelectorSeasonStartProp.Size = New System.Drawing.Size(339, 412)
-        Me.ucrSelectorSeasonStartProp.TabIndex = 0
-        '
         'tbAnnualTempSummaries
         '
+        Me.tbAnnualTempSummaries.Controls.Add(Me.ucrSelectorAnnualTemp)
         Me.tbAnnualTempSummaries.Controls.Add(Me.lblMinMinAnnual)
         Me.tbAnnualTempSummaries.Controls.Add(Me.lblMeanAnnualTemp)
         Me.tbAnnualTempSummaries.Controls.Add(Me.lblMaxMinAnnual)
@@ -1044,7 +1045,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualTempSummaries.Controls.Add(Me.ucrReceiverMeanAnnual)
         Me.tbAnnualTempSummaries.Controls.Add(Me.ucrReceiverAnnualTempYr)
         Me.tbAnnualTempSummaries.Controls.Add(Me.ucrReceiverAnnualTempStation)
-        Me.tbAnnualTempSummaries.Controls.Add(Me.ucrSelectorAnnualTemp)
         Me.tbAnnualTempSummaries.Location = New System.Drawing.Point(4, 29)
         Me.tbAnnualTempSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbAnnualTempSummaries.Name = "tbAnnualTempSummaries"
@@ -1053,6 +1053,18 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualTempSummaries.TabIndex = 3
         Me.tbAnnualTempSummaries.Text = "Annual Temperature"
         Me.tbAnnualTempSummaries.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorAnnualTemp
+        '
+        Me.ucrSelectorAnnualTemp.AutoSize = True
+        Me.ucrSelectorAnnualTemp.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAnnualTemp.bShowHiddenColumns = False
+        Me.ucrSelectorAnnualTemp.bUseCurrentFilter = True
+        Me.ucrSelectorAnnualTemp.Location = New System.Drawing.Point(14, 23)
+        Me.ucrSelectorAnnualTemp.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorAnnualTemp.Name = "ucrSelectorAnnualTemp"
+        Me.ucrSelectorAnnualTemp.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelectorAnnualTemp.TabIndex = 17
         '
         'lblMinMinAnnual
         '
@@ -1238,20 +1250,9 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverAnnualTempStation.TabIndex = 2
         Me.ucrReceiverAnnualTempStation.ucrSelector = Nothing
         '
-        'ucrSelectorAnnualTemp
-        '
-        Me.ucrSelectorAnnualTemp.AutoSize = True
-        Me.ucrSelectorAnnualTemp.bDropUnusedFilterLevels = False
-        Me.ucrSelectorAnnualTemp.bShowHiddenColumns = False
-        Me.ucrSelectorAnnualTemp.bUseCurrentFilter = True
-        Me.ucrSelectorAnnualTemp.Location = New System.Drawing.Point(16, 9)
-        Me.ucrSelectorAnnualTemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorAnnualTemp.Name = "ucrSelectorAnnualTemp"
-        Me.ucrSelectorAnnualTemp.Size = New System.Drawing.Size(339, 412)
-        Me.ucrSelectorAnnualTemp.TabIndex = 0
-        '
         'tbMonthlyTemp
         '
+        Me.tbMonthlyTemp.Controls.Add(Me.ucrSelecetorMonthlyTemp)
         Me.tbMonthlyTemp.Controls.Add(Me.lblMonth)
         Me.tbMonthlyTemp.Controls.Add(Me.lblMinMInMonthly)
         Me.tbMonthlyTemp.Controls.Add(Me.lblMeanMinMonthly)
@@ -1270,7 +1271,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbMonthlyTemp.Controls.Add(Me.ucrReceiverMeanminMontly)
         Me.tbMonthlyTemp.Controls.Add(Me.ucrReceiverYearMonthly)
         Me.tbMonthlyTemp.Controls.Add(Me.ucrReceiverMonthlyTemp)
-        Me.tbMonthlyTemp.Controls.Add(Me.ucrSelecetorMonthlyTemp)
         Me.tbMonthlyTemp.Location = New System.Drawing.Point(4, 29)
         Me.tbMonthlyTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbMonthlyTemp.Name = "tbMonthlyTemp"
@@ -1279,6 +1279,18 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbMonthlyTemp.TabIndex = 4
         Me.tbMonthlyTemp.Text = "Monthly Temperature"
         Me.tbMonthlyTemp.UseVisualStyleBackColor = True
+        '
+        'ucrSelecetorMonthlyTemp
+        '
+        Me.ucrSelecetorMonthlyTemp.AutoSize = True
+        Me.ucrSelecetorMonthlyTemp.bDropUnusedFilterLevels = False
+        Me.ucrSelecetorMonthlyTemp.bShowHiddenColumns = False
+        Me.ucrSelecetorMonthlyTemp.bUseCurrentFilter = True
+        Me.ucrSelecetorMonthlyTemp.Location = New System.Drawing.Point(19, 24)
+        Me.ucrSelecetorMonthlyTemp.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelecetorMonthlyTemp.Name = "ucrSelecetorMonthlyTemp"
+        Me.ucrSelecetorMonthlyTemp.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelecetorMonthlyTemp.TabIndex = 19
         '
         'lblMonth
         '
@@ -1487,18 +1499,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverMonthlyTemp.TabIndex = 2
         Me.ucrReceiverMonthlyTemp.ucrSelector = Nothing
         '
-        'ucrSelecetorMonthlyTemp
-        '
-        Me.ucrSelecetorMonthlyTemp.AutoSize = True
-        Me.ucrSelecetorMonthlyTemp.bDropUnusedFilterLevels = False
-        Me.ucrSelecetorMonthlyTemp.bShowHiddenColumns = False
-        Me.ucrSelecetorMonthlyTemp.bUseCurrentFilter = True
-        Me.ucrSelecetorMonthlyTemp.Location = New System.Drawing.Point(15, 18)
-        Me.ucrSelecetorMonthlyTemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelecetorMonthlyTemp.Name = "ucrSelecetorMonthlyTemp"
-        Me.ucrSelecetorMonthlyTemp.Size = New System.Drawing.Size(339, 412)
-        Me.ucrSelecetorMonthlyTemp.TabIndex = 0
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
@@ -1542,9 +1542,7 @@ Partial Class sdgDefineAnnualRainfall
     Friend WithEvents ucrReceiverMaxMinMonthly As ucrReceiverSingle
     Friend WithEvents ucrReceiverYearMonthly As ucrReceiverSingle
     Friend WithEvents ucrReceiverMonthlyTemp As ucrReceiverSingle
-    Friend WithEvents ucrSelecetorMonthlyTemp As ucrSelectorByDataFrame
     Friend WithEvents lblSeasonPlantingDay As Label
-    Friend WithEvents ucrSelectorSeasonStartProp As ucrSelectorByDataFrame
     Friend WithEvents tbSummaries As TabControl
     Friend WithEvents tbAnnualRainfall As TabPage
     Friend WithEvents lblStartRainStatus As Label
@@ -1579,7 +1577,6 @@ Partial Class sdgDefineAnnualRainfall
     Friend WithEvents ucrReceiverRainDaysSeason As ucrReceiverSingle
     Friend WithEvents ucrReceiverSeasonalRain As ucrReceiverSingle
     Friend WithEvents ucrReceiverAnnualRain As ucrReceiverSingle
-    Friend WithEvents ucrSelectorDefineAnnualRain As ucrSelectorByDataFrame
     Friend WithEvents tbCropSuccessProp As TabPage
     Friend WithEvents lblPlantingLength As Label
     Friend WithEvents lblPlantingDay As Label
@@ -1591,7 +1588,6 @@ Partial Class sdgDefineAnnualRainfall
     Friend WithEvents ucrReceiverPlantingDay As ucrReceiverSingle
     Friend WithEvents ucrReceiverTotalRain As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationCrop As ucrReceiverSingle
-    Friend WithEvents ucrSelectorCropProp As ucrSelectorByDataFrame
     Friend WithEvents tbSeasonStartProb As TabPage
     Friend WithEvents lblPlantingDayCond As Label
     Friend WithEvents lblSeasonYear As Label
@@ -1617,7 +1613,6 @@ Partial Class sdgDefineAnnualRainfall
     Friend WithEvents ucrReceiverMeanAnnual As ucrReceiverSingle
     Friend WithEvents ucrReceiverAnnualTempYr As ucrReceiverSingle
     Friend WithEvents ucrReceiverAnnualTempStation As ucrReceiverSingle
-    Friend WithEvents ucrSelectorAnnualTemp As ucrSelectorByDataFrame
     Friend WithEvents tbMonthlyTemp As TabPage
     Friend WithEvents lblMonth As Label
     Friend WithEvents lblMinMInMonthly As Label
@@ -1649,4 +1644,9 @@ Partial Class sdgDefineAnnualRainfall
     Friend WithEvents lblTmaxExtreme As Label
     Friend WithEvents ucrReceiverTminExtreme As ucrReceiverSingle
     Friend WithEvents ucrReceiverTmaxExtreme As ucrReceiverSingle
+    Friend WithEvents ucrSelectorDefineAnnualRain As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorCropProp As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorSeasonStartProp As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorAnnualTemp As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelecetorMonthlyTemp As ucrSelectorByDataFrameAddRemove
 End Class

@@ -261,21 +261,21 @@ Partial Class dlgExportClimaticDefinitions
         'lblTminIndicator
         '
         Me.lblTminIndicator.AutoSize = True
-        Me.lblTminIndicator.Location = New System.Drawing.Point(292, 262)
+        Me.lblTminIndicator.Location = New System.Drawing.Point(292, 263)
         Me.lblTminIndicator.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTminIndicator.Name = "lblTminIndicator"
         Me.lblTminIndicator.Size = New System.Drawing.Size(176, 20)
-        Me.lblTminIndicator.TabIndex = 18
+        Me.lblTminIndicator.TabIndex = 17
         Me.lblTminIndicator.Text = "Extreme Tmin Indicator:"
         '
         'lblTmaxIndicator
         '
         Me.lblTmaxIndicator.AutoSize = True
-        Me.lblTmaxIndicator.Location = New System.Drawing.Point(291, 229)
+        Me.lblTmaxIndicator.Location = New System.Drawing.Point(289, 228)
         Me.lblTmaxIndicator.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTmaxIndicator.Name = "lblTmaxIndicator"
         Me.lblTmaxIndicator.Size = New System.Drawing.Size(180, 20)
-        Me.lblTmaxIndicator.TabIndex = 17
+        Me.lblTmaxIndicator.TabIndex = 15
         Me.lblTmaxIndicator.Text = "Extreme Tmax Indicator:"
         '
         'ucrReceiverTmaxIndicator
@@ -301,7 +301,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverTminIndicator.Selector = Nothing
         Me.ucrReceiverTminIndicator.Size = New System.Drawing.Size(180, 31)
         Me.ucrReceiverTminIndicator.strNcFilePath = ""
-        Me.ucrReceiverTminIndicator.TabIndex = 15
+        Me.ucrReceiverTminIndicator.TabIndex = 18
         Me.ucrReceiverTminIndicator.ucrSelector = Nothing
         '
         'ucrReceiverExtremIndicator
