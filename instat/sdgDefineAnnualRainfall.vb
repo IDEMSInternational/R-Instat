@@ -373,17 +373,30 @@ Public Class sdgDefineAnnualRainfall
             ucrReceiverMinMaxMonthly.Selector = ucrSelecetorMonthlyTemp
             ucrReceiverMinMaxMonthly.SetParameterIsString()
             ucrReceiverMinMaxMonthly.Tag = "min_tmax_col"
-            ucrReceiverMinMaxMonthly.bExcludeFromSelector = True
+        ucrReceiverMinMaxMonthly.bExcludeFromSelector = True
 
-            ucrReceiverMaxMaxMonthly.SetParameter(New RParameter("max_tmax_col", 9))
+        ucrReceiverLongTminSpell.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverLongTmaxSpell.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverLongRainSpell.Selector = ucrSelectorDefineAnnualRain
+
+        ucrReceiverMaxMaxMonthly.SetParameter(New RParameter("max_tmax_col", 9))
             ucrReceiverMaxMaxMonthly.Selector = ucrSelecetorMonthlyTemp
             ucrReceiverMaxMaxMonthly.SetParameterIsString()
             ucrReceiverMaxMaxMonthly.Tag = "max_tmax_col"
             ucrReceiverMaxMaxMonthly.bExcludeFromSelector = True
             bControlsInitialised = True
 
-        End Sub
-        Public Sub SetRCode(clsNewReforMattAnnualSummaries As RFunction, clsNewExportRinstatToBucketFunction As RFunction, clsNewReformatCropSuccessFunction As RFunction, clsNewReformatMonthlyTempSummaries As RFunction, clsNewReformatSeasonStartFunction As RFunction, clsNewReformatTempSummariesFunction As RFunction, Optional bReset As Boolean = False)
+        ucrReceiverTmaxExtreme.SetParameter(New RParameter("extreme_tmax_column", 17))
+        ucrReceiverTmaxExtreme.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverTmaxExtreme.SetParameterIsString()
+        ucrReceiverTmaxExtreme.bExcludeFromSelector = True
+
+        ucrReceiverTminExtreme.SetParameter(New RParameter("extreme_tmin_days_col", 18))
+        ucrReceiverTminExtreme.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverTminExtreme.SetParameterIsString()
+        ucrReceiverTminExtreme.bExcludeFromSelector = True
+    End Sub
+    Public Sub SetRCode(clsNewReforMattAnnualSummaries As RFunction, clsNewExportRinstatToBucketFunction As RFunction, clsNewReformatCropSuccessFunction As RFunction, clsNewReformatMonthlyTempSummaries As RFunction, clsNewReformatSeasonStartFunction As RFunction, clsNewReformatTempSummariesFunction As RFunction, Optional bReset As Boolean = False)
             If Not bControlsInitialised Then
                 InitialiseControls()
             End If
@@ -414,35 +427,38 @@ Public Class sdgDefineAnnualRainfall
             ucrReceiverMinMinMonthly.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("min_monthly_tmin_column", 9), iAdditionalPairNo:=1)
             ucrReceiverMeanminMontly.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("mean_monthly_tmin_column", 10), iAdditionalPairNo:=1)
 
-            ucrReceiverAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverExtremRian.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
 
-            ucrReceiverEndRainsDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverEndRainsDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverEndSeasonDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverEndSeasonDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverRainDaysSeason.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverRainDaysYear.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverSeasonalLength.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverSeasonalRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverStartRainDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverStartRainDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverStation.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverYear.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrSelectorDefineAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-            ucrReceiverStartRainStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
-            ucrReceiverEndRainStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
-            ucrReceiverEndSeasonStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverExtremRian.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverTmaxExtreme.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverTminExtreme.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
 
-            ucrReceiverStationCrop.SetRCode(clsReformatCropSuccessFunction, bReset)
-            ucrReceiverTotalRain.SetRCode(clsReformatCropSuccessFunction, bReset)
-            ucrReceiverPlantingDay.SetRCode(clsReformatCropSuccessFunction, bReset)
-            ucrReceiverPlantingLenghth.SetRCode(clsReformatCropSuccessFunction, bReset)
-            ucrReceiverPropSuccess.SetRCode(clsReformatCropSuccessFunction, bReset)
-            ucrReceiverPropSuccessNoStart.SetRCode(clsReformatCropSuccessFunction, bReset)
-            ucrSelectorCropProp.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverEndRainsDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverEndRainsDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverEndSeasonDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverEndSeasonDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverRainDaysSeason.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverRainDaysYear.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverSeasonalLength.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverSeasonalRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverStartRainDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverStartRainDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverStation.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverYear.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrSelectorDefineAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverStartRainStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverEndRainStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverEndSeasonStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
 
-            ucrReceiverSeasonStationProb.SetRCode(clsReformatSeasonStartFunction, bReset)
+        ucrReceiverStationCrop.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverTotalRain.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverPlantingDay.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverPlantingLenghth.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverPropSuccess.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverPropSuccessNoStart.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrSelectorCropProp.SetRCode(clsReformatCropSuccessFunction, bReset)
+
+        ucrReceiverSeasonStationProb.SetRCode(clsReformatSeasonStartFunction, bReset)
             ucrReceiverSeasonYear.SetRCode(clsReformatSeasonStartFunction, bReset)
             ucrReceiverSeasonPlantingDay.SetRCode(clsReformatSeasonStartFunction, bReset)
             ucrReceiverPlantingDayCondition.SetRCode(clsReformatSeasonStartFunction, bReset)
@@ -475,27 +491,28 @@ Public Class sdgDefineAnnualRainfall
             AutoFillReceiversForSeasonsStart()
         End Sub
 
-        Private Sub ucrReceiverAnnualRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRain.ControlValueChanged, ucrReceiverEndRainsDate.ControlValueChanged, ucrReceiverEndRainsDOY.ControlValueChanged, ucrReceiverEndSeasonDate.ControlValueChanged,
-            ucrReceiverEndSeasonDOY.ControlValueChanged, ucrReceiverRainDaysSeason.ControlValueChanged, ucrReceiverRainDaysYear.ControlValueChanged, ucrReceiverSeasonalLength.ControlValueChanged, ucrReceiverSeasonalRain.ControlValueChanged,
-            ucrReceiverStartRainDate.ControlValueChanged, ucrReceiverStartRainDOY.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverExtremRian.ControlValueChanged
+    Private Sub ucrReceiverAnnualRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRain.ControlValueChanged, ucrReceiverEndRainsDate.ControlValueChanged, ucrReceiverEndRainsDOY.ControlValueChanged, ucrReceiverEndSeasonDate.ControlValueChanged,
+        ucrReceiverEndSeasonDOY.ControlValueChanged, ucrReceiverRainDaysSeason.ControlValueChanged, ucrReceiverRainDaysYear.ControlValueChanged, ucrReceiverSeasonalLength.ControlValueChanged, ucrReceiverSeasonalRain.ControlValueChanged,
+        ucrReceiverStartRainDate.ControlValueChanged, ucrReceiverStartRainDOY.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverExtremRian.ControlValueChanged, ucrReceiverTminExtreme.ControlValueChanged,
+        ucrReceiverTmaxExtreme.ControlValueChanged
 
-            If dlgExportClimaticDefinitions.ucrChkAnnualRainfall.Checked Then
-                If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse Not ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverExtremRian.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
-             Not ucrReceiverEndSeasonDate.IsEmpty OrElse Not ucrReceiverEndSeasonDOY.IsEmpty OrElse Not ucrReceiverRainDaysSeason.IsEmpty OrElse Not ucrReceiverRainDaysYear.IsEmpty OrElse Not ucrReceiverStartRainDate.IsEmpty OrElse
-             Not ucrReceiverStartRainDOY.IsEmpty) Then
+        If dlgExportClimaticDefinitions.ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse Not ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverExtremRian.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
+         Not ucrReceiverEndSeasonDate.IsEmpty OrElse Not ucrReceiverEndSeasonDOY.IsEmpty OrElse Not ucrReceiverRainDaysSeason.IsEmpty OrElse Not ucrReceiverRainDaysYear.IsEmpty OrElse Not ucrReceiverStartRainDate.IsEmpty OrElse
+         Not ucrReceiverStartRainDOY.IsEmpty) Then
 
-                    clsExportRinstatToBucketFunction.AddParameter("annual_rainfall_data", clsRFunctionParameter:=clsReforMattAnnualSummariesFunction, iPosition:=1)
+                clsExportRinstatToBucketFunction.AddParameter("annual_rainfall_data", clsRFunctionParameter:=clsReforMattAnnualSummariesFunction, iPosition:=1)
 
-                Else
-                    clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
-                End If
             Else
                 clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
             End If
-            AddAnnualSummariesPar()
-        End Sub
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
+        End If
+        AddAnnualSummariesPar()
+    End Sub
 
-        Private Sub ucrReceiverStationCrop_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationCrop.ControlValueChanged, ucrReceiverTotalRain.ControlValueChanged, ucrReceiverPlantingDay.ControlValueChanged, ucrReceiverPlantingLenghth.ControlValueChanged,
+    Private Sub ucrReceiverStationCrop_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationCrop.ControlValueChanged, ucrReceiverTotalRain.ControlValueChanged, ucrReceiverPlantingDay.ControlValueChanged, ucrReceiverPlantingLenghth.ControlValueChanged,
             ucrReceiverPropSuccess.ControlValueChanged, ucrReceiverPropSuccessNoStart.ControlValueChanged
 
             If dlgExportClimaticDefinitions.ucrChkCropSuccessProp.Checked Then
@@ -844,11 +861,11 @@ Public Class sdgDefineAnnualRainfall
             AutoFillReceiversForMonthlyTemp()
         End Sub
 
-        Private Sub ucrSelectorAnnualTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAnnualTemp.ControlValueChanged
-            AutoFillReceiversForAnnualTemp()
-        End Sub
+    Private Sub ucrSelectorAnnualTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAnnualTemp.ControlValueChanged
+        AutoFillReceiversForAnnualTemp()
+    End Sub
 
-        Private Sub ucrSelectorCropProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCropProp.ControlValueChanged
+    Private Sub ucrSelectorCropProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCropProp.ControlValueChanged
             AutoFillReceiversCrop()
         End Sub
 
@@ -895,4 +912,34 @@ Public Class sdgDefineAnnualRainfall
             End If
         End Sub
 
-    End Class
+    Private Sub ucrReceiverLongRainSpell_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongRainSpell.ControlValueChanged
+        If Not ucrReceiverLongRainSpell.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("longest_rain_spell_col", ucrReceiverLongRainSpell.GetVariableNames)
+            clsReforMattAnnualSummariesFunction.AddParameter("longest_rain_spell_col", ucrReceiverLongRainSpell.GetVariableNames)
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("longest_rain_spell_col")
+            clsReforMattAnnualSummariesFunction.RemoveParameterByName("longest_rain_spell_col")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLongTmaxSpell_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongTmaxSpell.ControlValueChanged
+        If Not ucrReceiverLongTmaxSpell.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("longest_tmax_spell_col", ucrReceiverLongTmaxSpell.GetVariableNames)
+            clsReforMattAnnualSummariesFunction.AddParameter("longest_tmax_spell_col", ucrReceiverLongTmaxSpell.GetVariableNames)
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("longest_tmax_spell_col")
+            clsReforMattAnnualSummariesFunction.RemoveParameterByName("longest_tmax_spell_col")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLongTminSpell_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongTminSpell.ControlValueChanged
+        If Not ucrReceiverLongTminSpell.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("longest_tmin_spell_col", ucrReceiverLongTminSpell.GetVariableNames)
+            clsReforMattAnnualSummariesFunction.AddParameter("longest_tmin_spell_col", ucrReceiverLongTminSpell.GetVariableNames)
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("longest_tmin_spell_col")
+            clsReforMattAnnualSummariesFunction.RemoveParameterByName("longest_tmin_spell_col")
+        End If
+    End Sub
+
+End Class
