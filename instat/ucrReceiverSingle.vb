@@ -238,8 +238,8 @@ Public Class ucrReceiverSingle
         End If
     End Function
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Return If(bWithQuotes, Chr(34) & txtReceiverSingle.Text & Chr(34), txtReceiverSingle.Text)
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
+        Return If(bWithQuotes, strQuotes & txtReceiverSingle.Text & strQuotes, txtReceiverSingle.Text)
     End Function
 
     Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()

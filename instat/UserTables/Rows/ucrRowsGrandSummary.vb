@@ -88,7 +88,7 @@ Public Class ucrRowsGrandSummary
         clsSummaryRowsRFunction.SetRCommand("grand_summary_rows")
 
         clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="fns", strParamValue:=GetFnParameters(), iNewPosition:=1))
-        clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False), iNewPosition:=2))
+        clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=True, strQuotes:="`"), bOnlyIfMultipleElement:=False), iNewPosition:=2))
 
         If btnFormat.Tag IsNot Nothing Then
             Dim clsFormatRFunction As RFunction = btnFormat.Tag

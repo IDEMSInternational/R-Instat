@@ -79,7 +79,7 @@
         clsNanoPlotsRFunction.SetPackageName("gt")
         clsNanoPlotsRFunction.SetRCommand("cols_nanoplot")
 
-        clsNanoPlotsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False), iNewPosition:=0))
+        clsNanoPlotsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=True, "`"), bOnlyIfMultipleElement:=False), iNewPosition:=0))
         clsNanoPlotsRFunction.AddParameter(New RParameter(strParameterName:="plot_type", strParamValue:=Chr(34) & dctPlotTypes.Item(ucrCboPlotType.GetText) & Chr(34), iNewPosition:=1))
         clsNanoPlotsRFunction.AddParameter(New RParameter(strParameterName:="plot_height", strParamValue:=Chr(34) & ucrNudPlotHeight.Value & "em" & Chr(34), iNewPosition:=2))
         clsNanoPlotsRFunction.AddParameter(New RParameter(strParameterName:="missing_vals", strParamValue:=Chr(34) & dctMissingVals.Item(ucrCboMissingValues.GetText) & Chr(34), iNewPosition:=3))

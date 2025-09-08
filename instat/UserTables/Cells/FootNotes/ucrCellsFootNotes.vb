@@ -57,7 +57,7 @@ Public Class ucrCellsFootNotes
 
         clsLocationsRFunction.SetPackageName("gt")
         clsLocationsRFunction.SetRCommand("cells_body")
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False), iNewPosition:=0))
+        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=True, strQuotes:="`"), iNewPosition:=0))
         clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrInputRows.GetText, iNewPosition:=1))
 
         clsTabFootNoteRFunction.SetPackageName("gt")

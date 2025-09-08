@@ -58,7 +58,7 @@
         Dim clsColWidthRFunction As New RFunction
         clsColWidthRFunction.SetPackageName("gt")
         clsColWidthRFunction.SetRCommand("cols_width")
-        clsColWidthRFunction.AddParameter(strParameterName:="column_param", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False) & " ~ px(" & ucrNudWidth.Value & ")", iPosition:=0, bIncludeArgumentName:=False)
+        clsColWidthRFunction.AddParameter(strParameterName:="column_param", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`") & " ~ px(" & ucrNudWidth.Value & ")", iPosition:=0, bIncludeArgumentName:=False)
 
         ' Create parameter with unique name
         Dim clsRParam As New RParameter(strParameterName:="tab_col_width_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsColWidthRFunction, bNewIncludeArgumentName:=False)

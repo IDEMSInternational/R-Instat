@@ -140,7 +140,7 @@ Public Class ucrSelector
         'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
         Static _strCurrentSelectorFillCondition As String = ""
         'if selector contains columns check if fill conditions are just the same
-        If strCurrentType = "column" Then
+        If strCurrentType = "column" AndAlso String.IsNullOrEmpty(CurrentReceiver.strObjectName) Then
 
             'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
             'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
@@ -152,8 +152,7 @@ Public Class ucrSelector
                                                                strHeading:=CurrentReceiver.strSelectorHeading,
                                                                arrStrExcludedItems:=arrStrExclud,
                                                                strDatabaseQuery:=CurrentReceiver.strDatabaseQuery,
-                                                               strNcFilePath:=CurrentReceiver.strNcFilePath,
-                                                               strObjectName:=CurrentReceiver.strObjectName)
+                                                               strNcFilePath:=CurrentReceiver.strNcFilePath)
             If strNewSelectorFillCondition = _strCurrentSelectorFillCondition Then
                 Exit Sub
             End If
@@ -181,7 +180,7 @@ Public Class ucrSelector
     Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String,
             lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))),
             strHeading As String, arrStrExcludedItems As String(), strDatabaseQuery As String,
-            strNcFilePath As String, strObjectName As String)
+            strNcFilePath As String)
         Dim strSelectorFillCondition As String = ""
 
         If dataFrame IsNot Nothing Then
@@ -203,10 +202,6 @@ Public Class ucrSelector
 
         If Not String.IsNullOrEmpty(strNcFilePath) Then
             strSelectorFillCondition &= strNcFilePath
-        End If
-
-        If Not String.IsNullOrEmpty(strObjectName) Then
-            strSelectorFillCondition &= strObjectName
         End If
 
         If arrStrExcludedItems IsNot Nothing Then

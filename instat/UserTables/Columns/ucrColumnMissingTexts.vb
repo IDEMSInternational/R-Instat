@@ -47,7 +47,7 @@
 
         clsSubMissingRFunction.SetPackageName("gt")
         clsSubMissingRFunction.SetRCommand("sub_missing")
-        clsSubMissingRFunction.AddParameter(strParameterName:="columns", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+        clsSubMissingRFunction.AddParameter(strParameterName:="columns", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`"), iPosition:=0)
         clsSubMissingRFunction.AddParameter(strParameterName:="missing_text", strParameterValue:=Chr(34) & ucrTxtMissingText.GetText & Chr(34), iPosition:=1)
 
         ' Create parameter with unique name

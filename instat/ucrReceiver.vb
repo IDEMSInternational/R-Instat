@@ -156,7 +156,7 @@ Public Class ucrReceiver
         Return New RFunction
     End Function
 
-    Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         Return ""
     End Function
 

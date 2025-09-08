@@ -121,7 +121,7 @@
         If Not ucrTxtGroupId.IsEmpty Then
             clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="groups", strParamValue:=Chr(34) & ucrTxtGroupId.GetText & Chr(34), iNewPosition:=0))
         End If
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False), iNewPosition:=1))
+        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`"), iNewPosition:=1))
         clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="row", strParamValue:=dataGridSummaries.Rows.Count + 1, iNewPosition:=2))
 
         Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)

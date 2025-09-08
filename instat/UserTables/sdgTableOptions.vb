@@ -51,7 +51,7 @@ Public Class sdgTableOptions
     ''' </summary>
     ''' <param name="strDataFrameName">Name of the data frame contained in the data book</param>
     ''' <param name="clsNewOperator">R operator that has a 'gt' parameter that produces a 'gt' object.</param>
-    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator, strTableName As String)
+    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator, Optional strTableName As String = "")
         clsOperator = clsNewOperator
 
         ucrHeader.Setup(clsOperator)

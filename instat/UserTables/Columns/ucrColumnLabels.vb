@@ -43,7 +43,7 @@ Public Class ucrColumnLabels
         Dim strColumnName As String = ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False)
         Dim strColumnLabel As String = ucrInputColLabel.GetValue()
 
-        Dim clsRParam As New RParameter(strParameterName:=clsTablesUtils.GetStringValue(strColumnName, False), strParamValue:=clsTablesUtils.GetStringValue(strColumnLabel, True))
+        Dim clsRParam As New RParameter(strParameterName:=clsTablesUtils.GetStringValue(strColumnName, True, "`"), strParamValue:=clsTablesUtils.GetStringValue(strColumnLabel, True))
         Dim row As DataGridViewRow = Nothing
 
         ' Update column label if column exists

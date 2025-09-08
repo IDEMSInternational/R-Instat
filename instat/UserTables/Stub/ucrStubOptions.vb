@@ -17,25 +17,32 @@
         ucrInputStubHead.SetParameter(New RParameter("label", 0))
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, Optional strTableName As String = "")
         If bFirstload Then
             initialiseControl()
             bFirstload = False
         End If
 
-        ' Set up the selector and receiver
+        ' Set up the selector and receivers
         ucrReceiverSingleRowName.strObjectName = strTableName
+
         If String.IsNullOrEmpty(strTableName) Then
             ucrSelectorByDF.Visible = True
             ucrSelectorByTableDF.Visible = False
             ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
             ucrReceiverSingleRowName.Selector = ucrSelectorByDF
+            ucrReceiverSingleGroupByCol.Selector = ucrSelectorByDF
         Else
             ucrSelectorByDF.Visible = False
             ucrSelectorByTableDF.Visible = True
             ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
             ucrReceiverSingleRowName.Selector = ucrSelectorByTableDF
+            ucrReceiverSingleGroupByCol.Selector = ucrSelectorByTableDF
         End If
+
+        ' Important to reset the receivers so that they can reset their selector states
+        ucrReceiverSingleGroupByCol.SetMeAsReceiver()
+        ucrReceiverSingleGroupByCol.Clear()
         ucrReceiverSingleRowName.SetMeAsReceiver()
         ucrReceiverSingleRowName.Clear()
 

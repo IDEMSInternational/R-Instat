@@ -11,7 +11,7 @@ Public Class ucrStub
         rdoVariables.Checked = True
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, Optional strTableName As String = "")
         If bFirstload Then
             initialiseDialog()
             bFirstload = False

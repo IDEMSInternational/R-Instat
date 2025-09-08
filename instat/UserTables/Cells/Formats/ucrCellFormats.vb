@@ -101,7 +101,7 @@
 
     Private Sub AddFormatParameterToGrid(clsFormatRFunction As RFunction)
 
-        Dim strColumnsExpression As String = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False)
+        Dim strColumnsExpression As String = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`")
         Dim strRowsExpression As String = ucrRowExpression.GetText
 
         ' Add columns parameter

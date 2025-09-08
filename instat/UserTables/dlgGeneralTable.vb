@@ -30,7 +30,7 @@ Public Class dlgGeneralTable
             sdgBeforeTablesOption.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
             sdgBeforeTablesOption.ShowDialog(Me)
         Else
-            sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator, "")
+            sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
             sdgTableOptions.ShowDialog(Me)
         End If
 

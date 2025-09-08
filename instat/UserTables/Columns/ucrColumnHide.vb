@@ -46,7 +46,7 @@ Public Class ucrColumnHide
 
         ' Add new changes
         If Not ucrReceiverMultipleCols.IsEmpty Then
-            Dim strParamValue = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False)
+            Dim strParamValue = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`")
             clsColHideRFunction.AddParameter("columns", strParameterValue:=strParamValue, iPosition:=0, bIncludeArgumentName:=True)
             clsOperator.AddParameter(New RParameter(strParameterName:="cols_hide_param", strParamValue:=clsColHideRFunction, bNewIncludeArgumentName:=False))
         End If
