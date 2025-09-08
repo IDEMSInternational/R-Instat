@@ -493,6 +493,12 @@
     <Compile Include="sdgPTConstants.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSelectFromNames.Designer.vb">
+      <DependentUpon>sdgSelectFromNames.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSelectFromNames.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </Compile>
@@ -3648,6 +3654,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPTConstants.resx">
       <DependentUpon>sdgPTConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSelectFromNames.resx">
+      <DependentUpon>sdgSelectFromNames.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
