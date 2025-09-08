@@ -24,6 +24,7 @@ Public Class ucrCellsFootNotes
 
         ' Set up the controls
         ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrRowExpression.Setup(strDataFrameName)
         SetupDataGrid(clsOperator)
     End Sub
 
@@ -45,8 +46,8 @@ Public Class ucrCellsFootNotes
         Next
     End Sub
 
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRows.ControlContentsChanged, ucrReceiverSingleCol.ControlContentsChanged
-        btnAdd.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputRows.IsEmpty
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleCol.ControlContentsChanged, ucrRowExpression.ControlContentsChanged
+        btnAdd.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrRowExpression.IsEmpty
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -58,7 +59,7 @@ Public Class ucrCellsFootNotes
         clsLocationsRFunction.SetPackageName("gt")
         clsLocationsRFunction.SetRCommand("cells_body")
         clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=True, strQuotes:="`"), iNewPosition:=0))
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrInputRows.GetText, iNewPosition:=1))
+        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrRowExpression.GetText, iNewPosition:=1))
 
         clsTabFootNoteRFunction.SetPackageName("gt")
         clsTabFootNoteRFunction.SetRCommand("tab_footnote")

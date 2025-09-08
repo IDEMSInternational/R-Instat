@@ -23,7 +23,6 @@ Partial Class ucrCellsFootNotes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblRowExpression = New System.Windows.Forms.Label()
-        Me.ucrInputRows = New instat.ucrInputTextBox()
         Me.lblFooteNotes = New System.Windows.Forms.Label()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
@@ -35,6 +34,7 @@ Partial Class ucrCellsFootNotes
         Me.ucrTxtFootNote = New instat.ucrInputTextBox()
         Me.lblFootNote = New System.Windows.Forms.Label()
         Me.ucrSelectorByTableDF = New instat.ucrSelectorByOutputObject()
+        Me.ucrRowExpression = New instat.ucrRowExpression()
         CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -47,18 +47,6 @@ Partial Class ucrCellsFootNotes
         Me.lblRowExpression.Size = New System.Drawing.Size(86, 13)
         Me.lblRowExpression.TabIndex = 338
         Me.lblRowExpression.Text = "Row Expression:"
-        '
-        'ucrInputRows
-        '
-        Me.ucrInputRows.AddQuotesIfUnrecognised = True
-        Me.ucrInputRows.AutoSize = True
-        Me.ucrInputRows.IsMultiline = False
-        Me.ucrInputRows.IsReadOnly = False
-        Me.ucrInputRows.Location = New System.Drawing.Point(240, 62)
-        Me.ucrInputRows.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputRows.Name = "ucrInputRows"
-        Me.ucrInputRows.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRows.TabIndex = 337
         '
         'lblFooteNotes
         '
@@ -125,7 +113,7 @@ Partial Class ucrCellsFootNotes
         '
         Me.ucrReceiverSingleCol.AutoSize = True
         Me.ucrReceiverSingleCol.frmParent = Nothing
-        Me.ucrReceiverSingleCol.Location = New System.Drawing.Point(235, 13)
+        Me.ucrReceiverSingleCol.Location = New System.Drawing.Point(240, 13)
         Me.ucrReceiverSingleCol.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSingleCol.Name = "ucrReceiverSingleCol"
         Me.ucrReceiverSingleCol.Selector = Nothing
@@ -178,14 +166,22 @@ Partial Class ucrCellsFootNotes
         Me.ucrSelectorByTableDF.Size = New System.Drawing.Size(216, 194)
         Me.ucrSelectorByTableDF.TabIndex = 376
         '
+        'ucrRowExpression
+        '
+        Me.ucrRowExpression.Location = New System.Drawing.Point(241, 62)
+        Me.ucrRowExpression.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrRowExpression.Name = "ucrRowExpression"
+        Me.ucrRowExpression.Size = New System.Drawing.Size(141, 25)
+        Me.ucrRowExpression.TabIndex = 377
+        '
         'ucrCellsFootNotes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrRowExpression)
         Me.Controls.Add(Me.lblFootNote)
         Me.Controls.Add(Me.ucrTxtFootNote)
         Me.Controls.Add(Me.lblRowExpression)
-        Me.Controls.Add(Me.ucrInputRows)
         Me.Controls.Add(Me.lblFooteNotes)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.lblColumns)
@@ -202,7 +198,6 @@ Partial Class ucrCellsFootNotes
 
     End Sub
     Friend WithEvents lblRowExpression As Label
-    Friend WithEvents ucrInputRows As ucrInputTextBox
     Friend WithEvents lblFooteNotes As Label
     Friend WithEvents btnClear As Button
     Friend WithEvents lblColumns As Label
@@ -214,4 +209,5 @@ Partial Class ucrCellsFootNotes
     Friend WithEvents ucrTxtFootNote As ucrInputTextBox
     Friend WithEvents lblFootNote As Label
     Friend WithEvents ucrSelectorByTableDF As ucrSelectorByOutputObject
+    Friend WithEvents ucrRowExpression As ucrRowExpression
 End Class
