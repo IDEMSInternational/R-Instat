@@ -78,10 +78,11 @@ Public Class dlgTraitCorrelations
         ucrChkDisplayOptions.AddToLinkedControls({ucrChkLeadingZeros, ucrChkIncludePValues, ucrNudDecimalPlaces, ucrPnlOutput}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
 
-        ucrChkBootstrapCorrelations.SetText("Bootstrap correlations")
-        ucrChkBootstrapCorrelations.AddToLinkedControls({ucrNudBootstrapCorrelations}, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkBootstrapCorrelations.AddParameterValuesCondition(True, "correlations", "True")
-        ucrChkBootstrapCorrelations.AddParameterValuesCondition(False, "correlations", "False")
+        ucrSaveBootstrapGraph.SetDataFrameSelector(ucrSelecetorTraits.ucrAvailableDataFrames)
+        ucrSaveBootstrapGraph.SetIsComboBox()
+        ucrSaveBootstrapGraph.SetSaveTypeAsGraph()
+        ucrSaveBootstrapGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveBootstrapGraph.SetCheckBoxText("Store Graph")
 
         ucrNudBootstrapCorrelations.SetParameter(New RParameter("nboot", 1))
         ucrNudBootstrapCorrelations.Increment = 1
@@ -89,14 +90,13 @@ Public Class dlgTraitCorrelations
         ucrNudBootstrapCorrelations.SetRDefault(50)
         ucrNudBootstrapCorrelations.SetText(50)
 
+        ucrChkBootstrapCorrelations.SetText("Bootstrap correlations")
+        ucrChkBootstrapCorrelations.AddToLinkedControls({ucrNudBootstrapCorrelations, ucrSaveBootstrapGraph}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBootstrapCorrelations.AddParameterValuesCondition(True, "correlations", "True")
+        ucrChkBootstrapCorrelations.AddParameterValuesCondition(False, "correlations", "False")
+
         ucrSaveCorrelation.SetDataFrameSelector(ucrSelecetorTraits.ucrAvailableDataFrames)
         ucrSaveCorrelation.SetIsComboBox()
-
-        ucrSaveBootstrapGraph.SetDataFrameSelector(ucrSelecetorTraits.ucrAvailableDataFrames)
-        ucrSaveBootstrapGraph.SetIsComboBox()
-        ucrSaveBootstrapGraph.SetSaveTypeAsGraph()
-        ucrSaveBootstrapGraph.SetAssignToIfUncheckedValue("last_graph")
-        ucrSaveBootstrapGraph.SetCheckBoxText("Store Graph")
 
         HideShowOptions()
         ChangeOutputObject()
@@ -178,10 +178,6 @@ Public Class dlgTraitCorrelations
         clsTildeOperator.AddParameter("right", "", iPosition:=0, bIncludeArgumentName:=False)
         clsTildeOperator.AddParameter("right", "~ {k <- gosset::kendallTau_bootstrap(x = compare_variables[[.x]], y = compare_variables[[baseline]], nboot = " & ucrNudBootstrapCorrelations.GetText() & "); tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
 
-
-
-
-
         clsMapDfr2Function.SetPackageName("purrr")
         clsMapDfr2Function.SetRCommand("map_dfr")
         clsMapDfr2Function.AddParameter(".x", "multiple_vars", iPosition:=0)
@@ -193,13 +189,12 @@ Public Class dlgTraitCorrelations
         clsAesFunction.AddParameter("x", "kendallTau", iPosition:=1)
 
         clsGgplotFunction.SetRCommand("ggplot")
-        clsGgplotFunction.AddParameter("x", clsRFunctionParameter:=clsMapDfr2Function, iPosition:=0, bIncludeArgumentName:=False)
-        clsGgplotFunction.AddParameter("y", clsRFunctionParameter:=clsAesFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=clsMapDfr2Function, iPosition:=0)
+        clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
 
         clsGeomBoxplotFunction.SetRCommand("geom_boxplot")
 
         clsLabsFunction.SetRCommand("labs")
-        clsLabsFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=0)
         clsLabsFunction.AddParameter("x", Chr(34) & "Correlation with the 'Overall'" & Chr(34))
 
         clsAdditionOperator.SetOperation("+")
@@ -299,7 +294,6 @@ Public Class dlgTraitCorrelations
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAdditionOperator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetObjectRFunction2)
         End If
-        HideShowOptions()
     End Sub
 
     Private Sub ucrNudBootstrapCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudBootstrapCorrelations.ControlValueChanged
@@ -436,8 +430,10 @@ Public Class dlgTraitCorrelations
 
     Private Sub HideShowOptions()
         grpDisplayOptions.Visible = ucrChkDisplayOptions.Checked
-        ucrNudBootstrapCorrelations.Visible = ucrChkBootstrapCorrelations.Checked
-        ucrSaveBootstrapGraph.Visible = ucrChkBootstrapCorrelations.Checked
+    End Sub
+
+    Private Sub ucrSaveBootstrapGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveBootstrapGraph.ControlValueChanged
+        clsGetObjectRFunction2.AddParameter("object_name", Chr(34) & ucrSaveBootstrapGraph.GetText() & Chr(34), iPosition:=1)
     End Sub
 
     Private Sub ucrSaveCorrelation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveCorrelation.ControlValueChanged
@@ -446,12 +442,6 @@ Public Class dlgTraitCorrelations
         Else
             clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "last_table" & Chr(34), iPosition:=1)
         End If
-    End Sub
-
-    Private Sub ucrSaveBootstrapGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveBootstrapGraph.ControlValueChanged
-        clsAdditionOperator.SetAssignTo(ucrSaveBootstrapGraph.GetText)
-        clsGetObjectRFunction2.AddParameter("object_name", Chr(34) & ucrSaveBootstrapGraph.GetText() & Chr(34), iPosition:=1)
-
     End Sub
 
     Private Sub ucrSaveCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveCorrelation.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
