@@ -386,7 +386,7 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverMaxMaxMonthly.bExcludeFromSelector = True
         bControlsInitialised = True
 
-        ucrReceiverTmaxExtreme.SetParameter(New RParameter("extreme_tmax_column", 17))
+        ucrReceiverTmaxExtreme.SetParameter(New RParameter("extreme_tmax_days_col", 17))
         ucrReceiverTmaxExtreme.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverTmaxExtreme.SetParameterIsString()
         ucrReceiverTmaxExtreme.bExcludeFromSelector = True
