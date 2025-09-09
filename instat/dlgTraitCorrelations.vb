@@ -21,8 +21,8 @@ Public Class dlgTraitCorrelations
     Private bRcodeSet As Boolean = True
     Private clsGetVariablesMetadataFunction, clsGetObjectRFunction, clsDummyFunction, clsCombineVarsFunction, clsFashionFunction, clsGetObjectFunction, clsGetRankingItemsFunction, clsDataFrameFunction,
         clsNamesFunction, clsMapDfrFunction, clsKendallTauFunction, clsMutateFunction, clsSelectFunction, clsMapDfr2Function, clsAesFunction, clsGgplotFunction, clsGeomBoxplotFunction, clsLabsFunction,
-        clsGetObjectRFunction2 As New RFunction
-    Private clsBaseLineOperator, clsObjectOperator, clsPipeOperator, clsNamesOperator, clsMultivarsOpeator, clsTildeOperator, clsAdditionOperator As New ROperator
+        clsGetObjectRFunction2, clsKendallTauBootstrapFunction As New RFunction
+    Private clsBaseLineOperator, clsObjectOperator, clsPipeOperator, clsNamesOperator, clsMultivarsOpeator, clsTildeOperator, clsAdditionOperator, clsColonOperator, clsAssignToOperator As New ROperator
 
     Private Sub dlgTraitCorrelations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -82,7 +82,7 @@ Public Class dlgTraitCorrelations
         ucrChkDisplayOptions.AddToLinkedControls({ucrChkLeadingZeros, ucrChkIncludePValues, ucrNudDecimalPlaces, ucrPnlOutput}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
 
-        ucrNudBootstrapCorrelations.SetParameter(New RParameter("nboot", 1))
+        ucrNudBootstrapCorrelations.SetParameter(New RParameter("nboot", 3))
         ucrNudBootstrapCorrelations.Increment = 1
         ucrNudBootstrapCorrelations.SetRDefault(100)
         ucrNudBootstrapCorrelations.SetLinkedDisplayControl(lblBootstrapCorrelations)
@@ -123,6 +123,9 @@ Public Class dlgTraitCorrelations
         clsGeomBoxplotFunction = New RFunction
         clsLabsFunction = New RFunction
         clsGetObjectRFunction2 = New RFunction
+        clsKendallTauBootstrapFunction = New RFunction
+        clsColonOperator = New ROperator
+        clsAssignToOperator = New ROperator
         clsTildeOperator = New ROperator
         clsAdditionOperator = New ROperator
         clsBaseLineOperator = New ROperator
@@ -181,10 +184,27 @@ Public Class dlgTraitCorrelations
         clsTildeOperator.AddParameter("right", "", iPosition:=0, bIncludeArgumentName:=False)
         clsTildeOperator.AddParameter("right", "~ {k <- gosset::kendallTau_bootstrap(x = compare_variables[[.x]], y = compare_variables[[baseline]], nboot = " & ucrNudBootstrapCorrelations.GetText() & "); tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
 
+        clsColonOperator.SetOperation(";")
+        clsColonOperator.AddParameter("right", "tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
+        clsColonOperator.AddParameter("left", clsROperatorParameter:=clsAssignToOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsColonOperator.bBrackets = False
+
+        clsAssignToOperator.SetOperation("<-")
+        clsAssignToOperator.AddParameter("left", "~ {k", iPosition:=0, bIncludeArgumentName:=False)
+        clsAssignToOperator.AddParameter("right", clsRFunctionParameter:=clsKendallTauBootstrapFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsAssignToOperator.bAllBrackets = False
+
+        clsKendallTauBootstrapFunction.SetPackageName("gosset")
+        clsKendallTauBootstrapFunction.SetRCommand("kendallTau_bootstrap")
+        clsKendallTauBootstrapFunction.AddParameter("x", "compare_variables[[.x]]", iPosition:=0)
+        clsKendallTauBootstrapFunction.AddParameter("y", "compare_variables[[baseline]]", iPosition:=1)
+
+
+
         clsMapDfr2Function.SetPackageName("purrr")
         clsMapDfr2Function.SetRCommand("map_dfr")
         clsMapDfr2Function.AddParameter(".x", "multiple_vars", iPosition:=0)
-        clsMapDfr2Function.AddParameter(".f", clsROperatorParameter:=clsTildeOperator, iPosition:=1)
+        clsMapDfr2Function.AddParameter(".f", clsROperatorParameter:=clsColonOperator, iPosition:=1)
         clsMapDfr2Function.SetAssignTo("kendall_bootstrap")
 
         clsAesFunction.SetPackageName("ggplot2")
@@ -268,6 +288,7 @@ Public Class dlgTraitCorrelations
         'ucrSaveCorrelation.AddAdditionalCodeParameterPair(clsGetObjectRFunction2, New RParameter("object_name", iNewPosition:=1), iAdditionalPairNo:=3)
 
         ucrNudDecimalPlaces.SetRCode(clsFashionFunction, bReset)
+        ucrNudBootstrapCorrelations.SetRCode(clsKendallTauBootstrapFunction, bReset)
         ucrChkLeadingZeros.SetRCode(clsFashionFunction, bReset)
         ucrChkDisplayOptions.SetRCode(clsDummyFunction, bReset)
 
@@ -308,9 +329,9 @@ Public Class dlgTraitCorrelations
         End If
     End Sub
 
-    Private Sub ucrNudBootstrapCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudBootstrapCorrelations.ControlValueChanged
-        clsTildeOperator.AddParameter("right", "~ {k <- gosset::kendallTau_bootstrap(x = compare_variables[[.x]], y = compare_variables[[baseline]], nboot = " & ucrNudBootstrapCorrelations.GetText() & "); tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
-    End Sub
+    'Private Sub ucrNudBootstrapCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudBootstrapCorrelations.ControlValueChanged
+    '    clsTildeOperator.AddParameter("right", "~ {k <- gosset::kendallTau_bootstrap(x = compare_variables[[.x]], y = compare_variables[[baseline]], nboot = " & ucrNudBootstrapCorrelations.GetText() & "); tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
+    'End Sub
 
     Private Sub ucrSelecetorTraits_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelecetorTraits.ControlValueChanged
         Dim DataFrame As String = ucrSelecetorTraits.strCurrentDataFrame
