@@ -681,7 +681,6 @@ Public Class dlgHistogram
             End If
         End If
         UpdateParameters()
-        'AddRemoveFacet()
         UpdateFacetsCases()
         AddRemoveGroupBy()
     End Sub
@@ -690,8 +689,6 @@ Public Class dlgHistogram
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
-        'clsBaseOperator.RemoveParameterByName("facets") {Removed this command so that removing of the facets is done in the subdialog}
 
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
