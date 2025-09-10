@@ -112,7 +112,7 @@ Public Class dlgFromLibrary
 
         'add the before codes (the data() R base function) and the base function(import_data() R-Instat function)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDataOperator)
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsImportFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsImportFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -247,7 +247,7 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
-        clsDataOperator.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+        clsDataOperator.SetAssignTo(ucrNewDataFrameName.GetText())
         SetParameterValues()
     End Sub
 
