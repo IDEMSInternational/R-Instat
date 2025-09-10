@@ -112,13 +112,13 @@ Public Class dlgCalculator
         clsRemoveLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
         clsGetDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataframe.SetAssignTo("df")
+        clsGetDataframe.SetAssignTo("`_df`")
         clsGetDataframe.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
 
         clsAttachFunction.SetRCommand("attach")
         clsDetachFunction.SetRCommand("detach")
         clsAttachFunction.AddParameter("what", clsRFunctionParameter:=clsGetDataframe)
-        clsDetachFunction.AddParameter("name", "df")
+        clsDetachFunction.AddParameter("name", "`_df`")
         clsDetachFunction.AddParameter("unload", "TRUE")
 
         clsAttachScalarsFunction.SetRCommand("attach")
