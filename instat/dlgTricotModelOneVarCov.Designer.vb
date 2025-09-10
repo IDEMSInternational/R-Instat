@@ -42,10 +42,10 @@ Partial Class dlgTricotModelOneVarCov
         Me.ucrSelectorTraitsRanking.bDropUnusedFilterLevels = False
         Me.ucrSelectorTraitsRanking.bShowHiddenColumns = False
         Me.ucrSelectorTraitsRanking.bUseCurrentFilter = True
-        Me.ucrSelectorTraitsRanking.Location = New System.Drawing.Point(6, 4)
+        Me.ucrSelectorTraitsRanking.Location = New System.Drawing.Point(17, 16)
         Me.ucrSelectorTraitsRanking.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTraitsRanking.Name = "ucrSelectorTraitsRanking"
-        Me.ucrSelectorTraitsRanking.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorTraitsRanking.Size = New System.Drawing.Size(320, 282)
         Me.ucrSelectorTraitsRanking.TabIndex = 0
         '
         'ucrSelectorVarietyLevel
@@ -54,21 +54,21 @@ Partial Class dlgTricotModelOneVarCov
         Me.ucrSelectorVarietyLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorVarietyLevel.bShowHiddenColumns = False
         Me.ucrSelectorVarietyLevel.bUseCurrentFilter = True
-        Me.ucrSelectorVarietyLevel.Location = New System.Drawing.Point(6, 187)
+        Me.ucrSelectorVarietyLevel.Location = New System.Drawing.Point(17, 298)
         Me.ucrSelectorVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVarietyLevel.Name = "ucrSelectorVarietyLevel"
-        Me.ucrSelectorVarietyLevel.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorVarietyLevel.Size = New System.Drawing.Size(320, 282)
         Me.ucrSelectorVarietyLevel.TabIndex = 1
         '
         'ucrTraitsReceiver
         '
         Me.ucrTraitsReceiver.AutoSize = True
         Me.ucrTraitsReceiver.frmParent = Me
-        Me.ucrTraitsReceiver.Location = New System.Drawing.Point(252, 50)
+        Me.ucrTraitsReceiver.Location = New System.Drawing.Point(396, 94)
         Me.ucrTraitsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrTraitsReceiver.Name = "ucrTraitsReceiver"
         Me.ucrTraitsReceiver.Selector = Nothing
-        Me.ucrTraitsReceiver.Size = New System.Drawing.Size(179, 129)
+        Me.ucrTraitsReceiver.Size = New System.Drawing.Size(213, 189)
         Me.ucrTraitsReceiver.strNcFilePath = ""
         Me.ucrTraitsReceiver.TabIndex = 2
         Me.ucrTraitsReceiver.ucrSelector = Nothing
@@ -77,11 +77,11 @@ Partial Class dlgTricotModelOneVarCov
         '
         Me.ucrVarietyLevelReceiver.AutoSize = True
         Me.ucrVarietyLevelReceiver.frmParent = Me
-        Me.ucrVarietyLevelReceiver.Location = New System.Drawing.Point(252, 244)
+        Me.ucrVarietyLevelReceiver.Location = New System.Drawing.Point(395, 385)
         Me.ucrVarietyLevelReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrVarietyLevelReceiver.Name = "ucrVarietyLevelReceiver"
         Me.ucrVarietyLevelReceiver.Selector = Nothing
-        Me.ucrVarietyLevelReceiver.Size = New System.Drawing.Size(179, 20)
+        Me.ucrVarietyLevelReceiver.Size = New System.Drawing.Size(214, 31)
         Me.ucrVarietyLevelReceiver.strNcFilePath = ""
         Me.ucrVarietyLevelReceiver.TabIndex = 3
         Me.ucrVarietyLevelReceiver.ucrSelector = Nothing
@@ -89,58 +89,54 @@ Partial Class dlgTricotModelOneVarCov
         'lblTraitsToModel
         '
         Me.lblTraitsToModel.AutoSize = True
-        Me.lblTraitsToModel.Location = New System.Drawing.Point(249, 28)
-        Me.lblTraitsToModel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTraitsToModel.Location = New System.Drawing.Point(392, 71)
         Me.lblTraitsToModel.Name = "lblTraitsToModel"
-        Me.lblTraitsToModel.Size = New System.Drawing.Size(80, 13)
+        Me.lblTraitsToModel.Size = New System.Drawing.Size(117, 20)
         Me.lblTraitsToModel.TabIndex = 4
         Me.lblTraitsToModel.Text = "Traits to Model:"
         '
         'lblExplanatory
         '
         Me.lblExplanatory.AutoSize = True
-        Me.lblExplanatory.Location = New System.Drawing.Point(249, 220)
-        Me.lblExplanatory.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblExplanatory.Location = New System.Drawing.Point(392, 363)
         Me.lblExplanatory.Name = "lblExplanatory"
-        Me.lblExplanatory.Size = New System.Drawing.Size(106, 13)
+        Me.lblExplanatory.Size = New System.Drawing.Size(158, 20)
         Me.lblExplanatory.TabIndex = 5
         Me.lblExplanatory.Text = "Explanatory Variable:"
         '
         'ucrTricOneVarSave
         '
         Me.ucrTricOneVarSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrTricOneVarSave.Location = New System.Drawing.Point(6, 406)
-        Me.ucrTricOneVarSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTricOneVarSave.Location = New System.Drawing.Point(17, 635)
+        Me.ucrTricOneVarSave.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTricOneVarSave.Name = "ucrTricOneVarSave"
-        Me.ucrTricOneVarSave.Size = New System.Drawing.Size(403, 32)
+        Me.ucrTricOneVarSave.Size = New System.Drawing.Size(604, 49)
         Me.ucrTricOneVarSave.TabIndex = 6
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 441)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Location = New System.Drawing.Point(17, 688)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 9
         '
         'btnModelOptions
         '
-        Me.btnModelOptions.Location = New System.Drawing.Point(317, 312)
-        Me.btnModelOptions.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnModelOptions.Location = New System.Drawing.Point(456, 490)
         Me.btnModelOptions.Name = "btnModelOptions"
-        Me.btnModelOptions.Size = New System.Drawing.Size(115, 21)
+        Me.btnModelOptions.Size = New System.Drawing.Size(172, 32)
         Me.btnModelOptions.TabIndex = 10
         Me.btnModelOptions.Text = "Model Options"
         Me.btnModelOptions.UseVisualStyleBackColor = True
         '
         'btnDisplayOptions
         '
-        Me.btnDisplayOptions.Location = New System.Drawing.Point(317, 337)
-        Me.btnDisplayOptions.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnDisplayOptions.Location = New System.Drawing.Point(456, 528)
         Me.btnDisplayOptions.Name = "btnDisplayOptions"
-        Me.btnDisplayOptions.Size = New System.Drawing.Size(115, 21)
+        Me.btnDisplayOptions.Size = New System.Drawing.Size(172, 32)
         Me.btnDisplayOptions.TabIndex = 11
         Me.btnDisplayOptions.Text = "Display Options"
         Me.btnDisplayOptions.UseVisualStyleBackColor = True
@@ -151,25 +147,28 @@ Partial Class dlgTricotModelOneVarCov
         Me.ucrInputCheckVariety.AutoSize = True
         Me.ucrInputCheckVariety.IsMultiline = False
         Me.ucrInputCheckVariety.IsReadOnly = False
-        Me.ucrInputCheckVariety.Location = New System.Drawing.Point(91, 378)
+        Me.ucrInputCheckVariety.Location = New System.Drawing.Point(144, 592)
+        Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckVariety.Name = "ucrInputCheckVariety"
-        Me.ucrInputCheckVariety.Size = New System.Drawing.Size(340, 21)
+        Me.ucrInputCheckVariety.Size = New System.Drawing.Size(484, 32)
         Me.ucrInputCheckVariety.TabIndex = 13
         '
         'lblCheckVariety
         '
         Me.lblCheckVariety.AutoSize = True
-        Me.lblCheckVariety.Location = New System.Drawing.Point(11, 382)
+        Me.lblCheckVariety.Location = New System.Drawing.Point(24, 595)
+        Me.lblCheckVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCheckVariety.Name = "lblCheckVariety"
-        Me.lblCheckVariety.Size = New System.Drawing.Size(73, 13)
+        Me.lblCheckVariety.Size = New System.Drawing.Size(111, 20)
         Me.lblCheckVariety.TabIndex = 14
-        Me.lblCheckVariety.Text = "Check Variety"
+        Me.lblCheckVariety.Text = "Check Variety:"
         '
         'dlgTricotModelOneVarCov
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 501)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(674, 774)
         Me.Controls.Add(Me.lblCheckVariety)
         Me.Controls.Add(Me.ucrInputCheckVariety)
         Me.Controls.Add(Me.btnDisplayOptions)
@@ -182,7 +181,9 @@ Partial Class dlgTricotModelOneVarCov
         Me.Controls.Add(Me.ucrTraitsReceiver)
         Me.Controls.Add(Me.ucrSelectorVarietyLevel)
         Me.Controls.Add(Me.ucrSelectorTraitsRanking)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgTricotModelOneVarCov"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

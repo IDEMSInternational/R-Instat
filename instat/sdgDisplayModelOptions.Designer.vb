@@ -22,6 +22,7 @@ Partial Class sdgDisplayModelOptions
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.lblConfLevel = New System.Windows.Forms.Label()
         Me.tpGraphics = New System.Windows.Forms.TabPage()
@@ -34,11 +35,12 @@ Partial Class sdgDisplayModelOptions
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrSavePlots = New instat.ucrSave()
         Me.tpDisplay = New System.Windows.Forms.TabPage()
+        Me.grpTrees = New System.Windows.Forms.GroupBox()
+        Me.ucrChkRegret = New instat.ucrCheck()
         Me.ucrNudNumber = New instat.ucrNud()
-        Me.ucrChkTopItem = New instat.ucrCheck()
         Me.ucrChkNodeLabel = New instat.ucrCheck()
         Me.ucrChkNodeRules = New instat.ucrCheck()
-        Me.ucrChkRegret = New instat.ucrCheck()
+        Me.ucrChkTopItem = New instat.ucrCheck()
         Me.ucrChkQuasiVa = New instat.ucrCheck()
         Me.ucrChkItemPara = New instat.ucrCheck()
         Me.ucrChkVaCoMa = New instat.ucrCheck()
@@ -53,13 +55,14 @@ Partial Class sdgDisplayModelOptions
         Me.ucrChkConfLimits = New instat.ucrCheck()
         Me.ucrChkANOVA = New instat.ucrCheck()
         Me.ucrChkModel = New instat.ucrCheck()
+        Me.ucrChkSave = New instat.ucrCheck()
         Me.tbpDisplayOptions = New System.Windows.Forms.TabControl()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.grpTrees = New System.Windows.Forms.GroupBox()
+        Me.ttModelDisplay = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpGraphics.SuspendLayout()
         Me.tpDisplay.SuspendLayout()
-        Me.tbpDisplayOptions.SuspendLayout()
         Me.grpTrees.SuspendLayout()
+        Me.tbpDisplayOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNumber
@@ -76,7 +79,7 @@ Partial Class sdgDisplayModelOptions
         'lblConfLevel
         '
         Me.lblConfLevel.AutoSize = True
-        Me.lblConfLevel.Location = New System.Drawing.Point(106, 169)
+        Me.lblConfLevel.Location = New System.Drawing.Point(106, 189)
         Me.lblConfLevel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblConfLevel.Name = "lblConfLevel"
         Me.lblConfLevel.Size = New System.Drawing.Size(135, 20)
@@ -205,6 +208,7 @@ Partial Class sdgDisplayModelOptions
         Me.tpDisplay.Controls.Add(Me.ucrChkANOVA)
         Me.tpDisplay.Controls.Add(Me.ucrChkModel)
         Me.tpDisplay.Controls.Add(Me.lblConfLevel)
+        Me.tpDisplay.Controls.Add(Me.ucrChkSave)
         Me.tpDisplay.Location = New System.Drawing.Point(4, 29)
         Me.tpDisplay.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tpDisplay.Name = "tpDisplay"
@@ -214,6 +218,31 @@ Partial Class sdgDisplayModelOptions
         Me.tpDisplay.Tag = "Display"
         Me.tpDisplay.Text = "Display"
         Me.tpDisplay.UseVisualStyleBackColor = True
+        '
+        'grpTrees
+        '
+        Me.grpTrees.Controls.Add(Me.ucrChkRegret)
+        Me.grpTrees.Controls.Add(Me.ucrNudNumber)
+        Me.grpTrees.Controls.Add(Me.ucrChkNodeLabel)
+        Me.grpTrees.Controls.Add(Me.lblNumber)
+        Me.grpTrees.Controls.Add(Me.ucrChkNodeRules)
+        Me.grpTrees.Controls.Add(Me.ucrChkTopItem)
+        Me.grpTrees.Location = New System.Drawing.Point(20, 215)
+        Me.grpTrees.Name = "grpTrees"
+        Me.grpTrees.Size = New System.Drawing.Size(360, 247)
+        Me.grpTrees.TabIndex = 12
+        Me.grpTrees.TabStop = False
+        Me.grpTrees.Text = "Tree Options"
+        '
+        'ucrChkRegret
+        '
+        Me.ucrChkRegret.AutoSize = True
+        Me.ucrChkRegret.Checked = False
+        Me.ucrChkRegret.Location = New System.Drawing.Point(12, 40)
+        Me.ucrChkRegret.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkRegret.Name = "ucrChkRegret"
+        Me.ucrChkRegret.Size = New System.Drawing.Size(348, 34)
+        Me.ucrChkRegret.TabIndex = 25
         '
         'ucrNudNumber
         '
@@ -228,16 +257,6 @@ Partial Class sdgDisplayModelOptions
         Me.ucrNudNumber.Size = New System.Drawing.Size(75, 31)
         Me.ucrNudNumber.TabIndex = 30
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkTopItem
-        '
-        Me.ucrChkTopItem.AutoSize = True
-        Me.ucrChkTopItem.Checked = False
-        Me.ucrChkTopItem.Location = New System.Drawing.Point(12, 167)
-        Me.ucrChkTopItem.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkTopItem.Name = "ucrChkTopItem"
-        Me.ucrChkTopItem.Size = New System.Drawing.Size(348, 34)
-        Me.ucrChkTopItem.TabIndex = 28
         '
         'ucrChkNodeLabel
         '
@@ -259,15 +278,15 @@ Partial Class sdgDisplayModelOptions
         Me.ucrChkNodeRules.Size = New System.Drawing.Size(348, 34)
         Me.ucrChkNodeRules.TabIndex = 26
         '
-        'ucrChkRegret
+        'ucrChkTopItem
         '
-        Me.ucrChkRegret.AutoSize = True
-        Me.ucrChkRegret.Checked = False
-        Me.ucrChkRegret.Location = New System.Drawing.Point(12, 40)
-        Me.ucrChkRegret.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkRegret.Name = "ucrChkRegret"
-        Me.ucrChkRegret.Size = New System.Drawing.Size(348, 34)
-        Me.ucrChkRegret.TabIndex = 25
+        Me.ucrChkTopItem.AutoSize = True
+        Me.ucrChkTopItem.Checked = False
+        Me.ucrChkTopItem.Location = New System.Drawing.Point(12, 167)
+        Me.ucrChkTopItem.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkTopItem.Name = "ucrChkTopItem"
+        Me.ucrChkTopItem.Size = New System.Drawing.Size(348, 34)
+        Me.ucrChkTopItem.TabIndex = 28
         '
         'ucrChkQuasiVa
         '
@@ -364,7 +383,7 @@ Partial Class sdgDisplayModelOptions
         Me.ucrNudConfLevel.AutoSize = True
         Me.ucrNudConfLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfLevel.Location = New System.Drawing.Point(253, 167)
+        Me.ucrNudConfLevel.Location = New System.Drawing.Point(253, 187)
         Me.ucrNudConfLevel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrNudConfLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudConfLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -387,7 +406,7 @@ Partial Class sdgDisplayModelOptions
         '
         Me.ucrChkConfLimits.AutoSize = True
         Me.ucrChkConfLimits.Checked = False
-        Me.ucrChkConfLimits.Location = New System.Drawing.Point(18, 135)
+        Me.ucrChkConfLimits.Location = New System.Drawing.Point(18, 155)
         Me.ucrChkConfLimits.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkConfLimits.Name = "ucrChkConfLimits"
         Me.ucrChkConfLimits.Size = New System.Drawing.Size(348, 34)
@@ -413,6 +432,16 @@ Partial Class sdgDisplayModelOptions
         Me.ucrChkModel.Size = New System.Drawing.Size(348, 34)
         Me.ucrChkModel.TabIndex = 7
         '
+        'ucrChkSave
+        '
+        Me.ucrChkSave.AutoSize = True
+        Me.ucrChkSave.Checked = False
+        Me.ucrChkSave.Location = New System.Drawing.Point(250, 128)
+        Me.ucrChkSave.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(348, 34)
+        Me.ucrChkSave.TabIndex = 25
+        '
         'tbpDisplayOptions
         '
         Me.tbpDisplayOptions.Controls.Add(Me.tpDisplay)
@@ -433,21 +462,6 @@ Partial Class sdgDisplayModelOptions
         Me.ucrSdgButtons.Size = New System.Drawing.Size(336, 46)
         Me.ucrSdgButtons.TabIndex = 11
         '
-        'grpTrees
-        '
-        Me.grpTrees.Controls.Add(Me.ucrChkRegret)
-        Me.grpTrees.Controls.Add(Me.ucrNudNumber)
-        Me.grpTrees.Controls.Add(Me.ucrChkNodeLabel)
-        Me.grpTrees.Controls.Add(Me.lblNumber)
-        Me.grpTrees.Controls.Add(Me.ucrChkNodeRules)
-        Me.grpTrees.Controls.Add(Me.ucrChkTopItem)
-        Me.grpTrees.Location = New System.Drawing.Point(20, 215)
-        Me.grpTrees.Name = "grpTrees"
-        Me.grpTrees.Size = New System.Drawing.Size(360, 247)
-        Me.grpTrees.TabIndex = 12
-        Me.grpTrees.TabStop = False
-        Me.grpTrees.Text = "Tree Options"
-        '
         'sdgDisplayModelOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -466,9 +480,9 @@ Partial Class sdgDisplayModelOptions
         Me.tpGraphics.PerformLayout()
         Me.tpDisplay.ResumeLayout(False)
         Me.tpDisplay.PerformLayout()
-        Me.tbpDisplayOptions.ResumeLayout(False)
         Me.grpTrees.ResumeLayout(False)
         Me.grpTrees.PerformLayout()
+        Me.tbpDisplayOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -508,4 +522,6 @@ Partial Class sdgDisplayModelOptions
     Friend WithEvents ucrPnlPlots As UcrPanel
     Friend WithEvents rdoTree As RadioButton
     Friend WithEvents grpTrees As GroupBox
+    Friend WithEvents ucrChkSave As ucrCheck
+    Friend WithEvents ttModelDisplay As ToolTip
 End Class

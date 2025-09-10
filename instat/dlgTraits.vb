@@ -20,7 +20,7 @@ Public Class dlgTraits
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction,
-                  clsPlotNetWorkFunction, clsCFunction As New RFunction
+                clsDummyFunction, clsConectivityFunction, clsAdjacentFunction, clsPlotNetWorkFunction, clsCFunction As New RFunction
     Private clsGetRankingOperator, clsColNamesOperator As New ROperator
     Private Sub dlgTraits_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -48,10 +48,22 @@ Public Class dlgTraits
         ucrReceiverTrait.SetParameter(New RParameter("column", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTrait.Selector = ucrTraitGraphSelector
         ucrReceiverTrait.SetParameterIsString()
-        ucrReceiverTrait.bAutoFill = True
         ucrReceiverTrait.strSelectorHeading = "Traits"
+        ucrReceiverTrait.SetIncludedDataTypes({"numeric"})
         ucrReceiverTrait.SetMeAsReceiver()
-        ucrReceiverTrait.SetTricotType({"traits"})
+        ucrReceiverTrait.SetTricotType("traits")
+        ucrReceiverTrait.bAutoFill = True
+
+        ucrChkConnectivity.SetText("Print connectivity output")
+        ucrChkConnectivity.AddParameterValuesCondition(True, "connectivity", "True")
+        ucrChkConnectivity.AddParameterValuesCondition(False, "connectivity", "False")
+
+        ucrChkAdjacent.SetText("Print adjacency matrix")
+        ucrChkAdjacent.AddParameterValuesCondition(True, "adjacency", "True")
+        ucrChkAdjacent.AddParameterValuesCondition(False, "adjacency", "False")
+
+        ttRankings.SetToolTip(ucrChkAdjacent.chkCheck, "For ""N"" varieties in the trait, this gives an N by N matrix. Here, element (i, j) is the number of times item i wins over item j. For example, in the ranking 1 > 3 > 2, item 1 wins over items 2, 3, and item 3 wins over item 2.")
+        ttRankings.SetToolTip(ucrChkConnectivity.chkCheck, "Checks the connectivity of the network underlying a set of rankings.")
 
         ucrSaveTraits.SetPrefix("trait_plot")
         ucrSaveTraits.SetIsComboBox()
@@ -67,11 +79,26 @@ Public Class dlgTraits
         clsRankingsItemsFunction = New RFunction
         clsPlotNetWorkFunction = New RFunction
         clsCFunction = New RFunction
+        clsConectivityFunction = New RFunction
+        clsAdjacentFunction = New RFunction
         clsGetRankingOperator = New ROperator
         clsColNamesOperator = New ROperator
 
         ucrTraitGraphSelector.Reset()
         ucrSaveTraits.Reset()
+
+        clsDummyFunction.AddParameter("connectivity", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("adjacency", "False", iPosition:=1)
+
+        clsConectivityFunction.SetPackageName("instatExtras")
+        clsConectivityFunction.SetRCommand("connectivity_check")
+        clsConectivityFunction.AddParameter("rank", "rankings_object[[1]]", bIncludeArgumentName:=False)
+        clsConectivityFunction.iCallType = 2
+        
+        clsAdjacentFunction.SetPackageName("PlackettLuce")
+        clsAdjacentFunction.SetRCommand("adjacency")
+        clsAdjacentFunction.AddParameter("rank", "rankings_object[[1]]", bIncludeArgumentName:=False)
+        clsAdjacentFunction.iCallType = 2
 
         clsCFunction.SetRCommand("c")
         clsCFunction.SetAssignTo("col_names")
@@ -85,6 +112,7 @@ Public Class dlgTraits
         clsGetVarMetadataFunction.ToScript(strScript:=strVarMetadataAssignedScript)
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrTraitGraphSelector.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsGetObjectRFunction.AddParameter("list", Chr(34) & "rankings_list" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
 
         clsGetRankingOperator.SetOperation("$")
@@ -124,6 +152,8 @@ Public Class dlgTraits
         ucrTraitGraphSelector.SetRCode(clsGetVarMetadataFunction, bReset)
         ucrReceiverTrait.SetRCode(clsCFunction, bReset)
         ucrSaveTraits.SetRCode(clsPlotNetWorkFunction, bReset)
+        ucrChkAdjacent.SetRCode(clsDummyFunction, bReset)
+        ucrChkConnectivity.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -138,6 +168,26 @@ Public Class dlgTraits
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitGraphSelector.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged, ucrSaveTraits.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkConnectivity_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConnectivity.ControlValueChanged
+        If ucrChkConnectivity.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsConectivityFunction, 3)
+            clsDummyFunction.AddParameter("connectivity", "True", iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsConectivityFunction)
+            clsDummyFunction.AddParameter("connectivity", "False", iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrChkAdjacent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAdjacent.ControlValueChanged
+        If ucrChkAdjacent.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAdjacentFunction, 4)
+            clsDummyFunction.AddParameter("adjacency", "True", iPosition:=1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAdjacentFunction)
+            clsDummyFunction.AddParameter("adjacency", "False", iPosition:=1)
+        End If
     End Sub
 
 End Class

@@ -21,6 +21,7 @@ Public Class dlgDuplicateRows
     Public Enum DuplicateMode
         Prepare
         Climatic
+        Tricot
     End Enum
 
     Private bReset As Boolean = True
@@ -282,6 +283,8 @@ Public Class dlgDuplicateRows
                 ucrBase.iHelpTopicID = 547
             Case DuplicateMode.Climatic
                 ucrBase.iHelpTopicID = 605
+            Case DuplicateMode.Tricot
+                ucrBase.iHelpTopicID = 698
         End Select
     End Sub
 

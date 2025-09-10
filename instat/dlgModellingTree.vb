@@ -37,11 +37,11 @@ Public Class dlgModellingTree
     Private clsDevianceFunction, clsDevianceMainFunction, clsSecondEstimatesFunction As New RFunction
     Private clsRegretFunction, clsNodeLabelsFunction, clsNodeRulesFunction, clsTopItemsFunction As New RFunction
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
-    Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator As New ROperator
+    Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator, clsPipeOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
-    Private clsWrapBarFunction, clsWrapPlotFunction As New RFunction
+    Private clsWrapBarFunction, clsWrapPlotFunction, clsPlacketFunction, clsWrapTrees As New RFunction
 
-    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction As New RFunction
+    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction, clsImportDataFunction, clsDefineAsTricotFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
 
     Public bResetSubDialog As Boolean = False
@@ -78,13 +78,15 @@ Public Class dlgModellingTree
         ucrReceiverModellingTree.SetParameterIsRFunction()
         ucrReceiverModellingTree.Selector = ucrSelectorByDataFrameAddRemoveForModellingTree
         ucrReceiverModellingTree.strSelectorHeading = "Traits"
-        ucrReceiverModellingTree.SetTricotType({"traits"})
+        ucrReceiverModellingTree.SetTricotType("traits")
+        ucrReceiverModellingTree.bAutoFill = True
 
         ucrReceiverExpressionModellingTree.SetParameter(New RParameter("y", 2))
         ucrReceiverExpressionModellingTree.SetParameterIsString()
         ucrReceiverExpressionModellingTree.bWithQuotes = False
         ucrReceiverExpressionModellingTree.AddtoCombobox("1")
         ucrReceiverExpressionModellingTree.strSelectorHeading = "Variables"
+        ucrReceiverExpressionModellingTree.SetIncludedDataTypes({"numeric", "factor"})
 
         ucrInputCheck.SetLinkedDisplayControl(lblCheckVareity)
 
@@ -141,9 +143,11 @@ Public Class dlgModellingTree
         clsVarianCovaMatrixFunction = New RFunction
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
+        clsWrapTrees = New RFunction
         clsAddObjectHeatFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
+        clsTreeFunction = New RFunction
         clsPlotFunction = New RFunction
         clsCoefOperator = New ROperator
         clsAICOperator = New ROperator
@@ -430,6 +434,15 @@ Public Class dlgModellingTree
         clsHeatFunction.bExcludeAssignedFunctionOutput = False
         clsHeatFunction.iCallType = 3
 
+        clsTreeFunction.SetPackageName("purrr")
+        clsTreeFunction.SetRCommand("map2")
+        clsTreeFunction.AddParameter(".x", "mod_list", iPosition:=0)
+        clsTreeFunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
+        clsTreeFunction.AddParameter(".f", "~plot_pltree(.x) + ggplot2::labs(caption = .y)")
+        clsTreeFunction.SetAssignTo("list_of_plots")
+        clsTreeFunction.bExcludeAssignedFunctionOutput = False
+        clsTreeFunction.iCallType = 3
+
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
         clsPlotFunction.AddParameter(".x", "mod_list", iPosition:=0)
@@ -464,18 +477,35 @@ Public Class dlgModellingTree
         clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
         clsWrapPlotFunction.iCallType = 3
 
+        clsWrapTrees.SetPackageName("patchwork")
+        clsWrapTrees.SetRCommand("wrap_plots")
+        clsWrapTrees.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapTrees.bExcludeAssignedFunctionOutput = False
+        clsWrapTrees.iCallType = 3
+        clsWrapTrees.SetAssignToOutputObject(
+            strObjectName:="last_graph",
+            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+            strRObjectFormatToAssignTo:=RObjectFormat.Image,
+            strRObjectToAssignTo:="last_graph"
+        )
+
+        ' PLACKET FUNCTION FOR THE MODEL OPTIONS SUB-DIALOG
+        '---------------------------------------------------------------------------------------------------------------------------------------------
+        'clsPlacketFunction.SetPackageName("PlackettLuce")
+        'clsPlacketFunction.SetRCommand("PlackettLuce")
+        'clsPlacketFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
 
         ucrBase.clsRsyntax.ClearCodes()
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetSecondDataFrameFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetSecondDataFrameFunction, iPosition:=2)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction, iPosition:=3)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsLibraryFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsLibraryFunction, iPosition:=4)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsMappingFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsMappingFunction, iPosition:=5)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=6)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsModelOperator)
 
@@ -580,11 +610,20 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-
+        sdgPLModelOptions.enumPLModelOptionsMode = sdgPLModelOptions.PLModelOptionsMode.Tree
+        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlackettLuceFunction)
+        sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = False
+        sdgPLModelOptions.ucrChkGamma.Enabled = False
+        sdgPLModelOptions.ucrChkGamma.Enabled = True
+        sdgPLModelOptions.ucrChkMinSize.Visible = True
+        sdgPLModelOptions.ucrChkPValue.Visible = True
+        sdgPLModelOptions.ShowDialog()
+        bResetSubDialog = False
     End Sub
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.tree
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
-            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewDevianceFunction:=clsDevianceMainFunction,
+            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
@@ -592,7 +631,7 @@ Public Class dlgModellingTree
             clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewStatsFunction:=clsStatsFunction,
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction, clsNewWrapTree:=clsWrapTrees
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
@@ -605,12 +644,15 @@ Public Class dlgModellingTree
         sdgDisplayModelOptions.ucrChkParProp.Enabled = True
         sdgDisplayModelOptions.ucrChkReability.Enabled = True
         sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
+        sdgDisplayModelOptions.ucrChkSave.Checked = False
+        sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.rdoPlot.Enabled = False
-        sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.rdoTree.Enabled = True
         sdgDisplayModelOptions.rdoNoPlot.Enabled = True
         sdgDisplayModelOptions.rdoMap.Enabled = True
         sdgDisplayModelOptions.rdoBar.Enabled = True
         sdgDisplayModelOptions.grpTrees.Enabled = True
+
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub

@@ -109,6 +109,28 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNasplin, "Spline interpolation of missing values. For example na.spline(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,2.5,4,7,12)")
         ttCalculator.SetToolTip(cmdNaest, "Missing values as the mean (usually) overall or with a factor. For example na.aggregate(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,3.75,4,7,3.75)")
         ttCalculator.SetToolTip(cmdRescale, "Transforms to (0, 1) scale, using (x - min)/(max - min)")
+        ttCalculator.SetToolTip(cmdRollApply, "Rolling summary for a function of your choice. The example given is for the 3 row count of values more than zero")
+        ttCalculator.SetToolTip(cmdDecimal3, "display with a fixed numer of decimals")
+        ttCalculator.SetToolTip(cmdInteger, "display with no decimals. Make digits negative to round large numbers")
+        ttCalculator.SetToolTip(cmdScientific4, "display in e notation for large and small numbers")
+        ttCalculator.SetToolTip(cmdScientific, "display all numbers in e notation.")
+        ttCalculator.SetToolTip(cmdEngineer, "display in engineering notation, so in blocks of 3.")
+        ttCalculator.SetToolTip(cmdPercent, "multiplies values by 100 and adds % sign.")
+        ttCalculator.SetToolTip(cmdPercent0, "multiplies values by 100, gives whole percentages and adds % sign.")
+        ttCalculator.SetToolTip(cmdFormatNA, "display missing values by blank, or a string of your choice, e.g. ""(missing)"".")
+        ttCalculator.SetToolTip(cmdFormatZero, "display zero values by a string of your choice, or by blank.")
+        ttCalculator.SetToolTip(cmdAlign, "try to align the values to a symbol present, e.g. ""."".")
+        ttCalculator.SetToolTip(cmdPValue, "Displays small values as <0.001.")
+        ttCalculator.SetToolTip(cmdStars, "Displays also ., or , or **, or *** for the level of significance. with fmt="" then the value is omitted from the display.")
+        ttCalculator.SetToolTip(cmdFormatComma, "Displays decimal point as comma.")
+        ttCalculator.SetToolTip(cmdTrace, "Trace rainfall is recorded as 0.03mm in R-Instat. Here we restore it to be ""tr"".")
+        ttCalculator.SetToolTip(cmdAlignR, "Aligns values to the right. Use ""\\c"" if you prefer them centred.")
+        ttCalculator.SetToolTip(cmdFractions, "Displays values as fractions. So (0.1, 0.2, 0.25) is displayed as (1/10, 1/5, 1/4) The other 4 keys are copied from the Functions keyboard.")
+        ttCalculator.SetToolTip(cmdFrac10, "Give fraction our of 10 for a decimal value. For example for 0.36 the value is 4/10")
+        ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
+        ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
+        ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example frac_den(0.36, 50) gives 18/50")
+
 
         'Logical and Symbols toooltips
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
@@ -442,6 +464,24 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdMinutes, "Extract minute from date-time variable. For example minute(""1984-05-12 14:23:45"") Is 23")
         ttCalculator.SetToolTip(cmdSec, "Extract second from date-time variable. For example second(""1984-05-12 14:23:45"") is 45")
         ttCalculator.SetToolTip(cmdQuarter, " 3-month period of the year from a date or date-time variable. For example quarter(""1984-05-12"") gives 2")
+        ttCalculator.SetToolTip(cmdJun4, "Month(abbr) and day of month, without leading zero")
+        ttCalculator.SetToolTip(cmdPlusD, "day of the month (1-31) without leading zero")
+        ttCalculator.SetToolTip(cmdPlusDD, "day of the month (01 - 31) with leading zero")
+        ttCalculator.SetToolTip(cmdPlusDDD, "day of the week abbreviated")
+        ttCalculator.SetToolTip(cmdPlusDDDD, "day of the week in full")
+        ttCalculator.SetToolTip(cmdPlusPercJ, "Day of the year from 1 Jan - the 365/366 day of the year")
+        ttCalculator.SetToolTip(cmd040625, "Day and month each with leading zero and 2 digit year.")
+        ttCalculator.SetToolTip(cmdPlusM, "month (1 - 12) without leading zero")
+        ttCalculator.SetToolTip(cmdPlusMM, "month (01 - 12) with leading zero")
+        ttCalculator.SetToolTip(cmdPlusMMM, "month abbreviated")
+        ttCalculator.SetToolTip(cmdPlusMMMM, "month in full")
+        ttCalculator.SetToolTip(cmdPlusPercD, "Date in default format - the same as yyyy-mm-dd. For example 18 Dec 2015 is given as 2015-12-18")
+        ttCalculator.SetToolTip(cmdMon4Jun, "Day of week(abbr), day of month and month(abbr)")
+        ttCalculator.SetToolTip(cmdPlusY, "year (0 - 99) without century, or leading zero")
+        ttCalculator.SetToolTip(cmdPlusYY, "year (00 - 99) without century, with leading zero")
+        ttCalculator.SetToolTip(cmdPlusYYYY, "year with century, for example 2025")
+        ttCalculator.SetToolTip(cmdPlusPercC, "date and time together, including the day of the week - the same as ddd mmm d %H:%M:%S yyyy")
+        ttCalculator.SetToolTip(cmdPlusPercR, "time of day - the same as %I:%M:%S %p")
 
         ' Factor keyboard tooltips
         ttCalculator.SetToolTip(cmdFactor, "Make a factor from a numeric or character variable")
@@ -494,10 +534,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPascal, "Gives Pascal triangles, e.g. for c(1,2,3,4) gives 1, (1,1), (1, 2, 1), (1, 3, 3, 1)")
         ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
         ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
-        ttCalculator.SetToolTip(cmdFrac10, "Give fraction our of 10 for a decimal value. For example for 0.36 the value is 4/10")
-        ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
-        ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
-        ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example frac_den(0.36, 50) gives 18/50")
+        ttCalculator.SetToolTip(cmdIdentical, "Returns the number of rows not identical")
         '---------------------------------------------------------------------------------------------------------------------
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -1875,6 +1912,80 @@ Public Class ucrCalculator
         End If
     End Sub
 
+
+    Private Sub cmdJun4_Click(sender As Object, e As EventArgs) Handles cmdJun4.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""mmm d"")", 15)
+    End Sub
+
+    Private Sub cmdPlusD_Click(sender As Object, e As EventArgs) Handles cmdPlusD.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("d", 0)
+    End Sub
+
+    Private Sub cmdPlusDD_Click(sender As Object, e As EventArgs) Handles cmdPlusDD.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dd", 0)
+    End Sub
+
+    Private Sub cmdPlusDDD_Click(sender As Object, e As EventArgs) Handles cmdPlusDDD.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ddd", 0)
+    End Sub
+
+    Private Sub cmdPlusDDDD_Click(sender As Object, e As EventArgs) Handles cmdPlusDDDD.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dddd", 0)
+    End Sub
+
+    Private Sub cmdPlusPercJ_Click(sender As Object, e As EventArgs) Handles cmdPlusPercJ.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%j", 0)
+    End Sub
+
+    Private Sub cmd040625_Click(sender As Object, e As EventArgs) Handles cmd040625.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""dd, mm, yy"")", 20)
+    End Sub
+
+    Private Sub cmdPlusM_Click(sender As Object, e As EventArgs) Handles cmdPlusM.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("m", 0)
+    End Sub
+
+    Private Sub cmdPlusMM_Click(sender As Object, e As EventArgs) Handles cmdPlusMM.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mm", 0)
+    End Sub
+
+    Private Sub cmdPlusMMM_Click(sender As Object, e As EventArgs) Handles cmdPlusMMM.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mmm", 0)
+    End Sub
+
+    Private Sub cmdPlusMMMM_Click(sender As Object, e As EventArgs) Handles cmdPlusMMMM.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mmmm", 0)
+    End Sub
+
+    Private Sub cmdPlusPercD_Click(sender As Object, e As EventArgs) Handles cmdPlusPercD.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%D", 0)
+    End Sub
+
+    Private Sub cmdMon4Jun_Click(sender As Object, e As EventArgs) Handles cmdMon4Jun.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""ddd, d, mmm"")", 21)
+    End Sub
+
+
+    Private Sub cmdPlusY_Click(sender As Object, e As EventArgs) Handles cmdPlusY.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("y", 0)
+    End Sub
+
+    Private Sub cmdPlusYY_Click(sender As Object, e As EventArgs) Handles cmdPlusYY.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("yy", 0)
+    End Sub
+
+    Private Sub cmdPlusYYYY_Click(sender As Object, e As EventArgs) Handles cmdPlusYYYY.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("yyyy", 0)
+    End Sub
+
+    Private Sub cmdPlusPercC_Click(sender As Object, e As EventArgs) Handles cmdPlusPercC.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%c", 0)
+    End Sub
+
+    Private Sub cmdPlusPercR_Click(sender As Object, e As EventArgs) Handles cmdPlusPercR.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%r", 0)
+    End Sub
+
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("( )", 2)
     End Sub
@@ -2065,6 +2176,117 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,narm=TRUE)", 12)
         End If
     End Sub
+
+    Private Sub cmdRollApply_Click(sender As Object, e As EventArgs) Handles cmdRollApply.Click
+        Dim clsRollApplyFunction As New RFunction
+
+        clsRollApplyFunction.SetPackageName("zoo")
+        clsRollApplyFunction.SetRCommand("rollapply")
+        clsRollApplyFunction.AddParameter("x", "", bIncludeArgumentName:=False, iPosition:=0)
+        clsRollApplyFunction.AddParameter("width", "3", iPosition:=1)
+        clsRollApplyFunction.AddParameter("FUN", "function(x) {sum(x>0)}", iPosition:=2)
+        clsRollApplyFunction.AddParameter("fill", "NA", iPosition:=3)
+        clsRollApplyFunction.AddParameter("align", Chr(34) & "center" & Chr(34), iPosition:=4)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRollApplyFunction.ToScript, 63)
+    End Sub
+
+    Private Sub cmdDecimal3_Click(sender As Object, e As EventArgs) Handles cmdDecimal3.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=3, sci=20)", 20)
+    End Sub
+
+    Private Sub cmdInteger_Click(sender As Object, e As EventArgs) Handles cmdInteger.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=0, sci=20)", 20)
+    End Sub
+
+    Private Sub cmdScientific4_Click(sender As Object, e As EventArgs) Handles cmdScientific4.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, sci=4)", 19)
+    End Sub
+
+    Private Sub cmdScientific_Click(sender As Object, e As EventArgs) Handles cmdScientific.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, fmt=""e"")", 21)
+    End Sub
+
+    Private Sub cmdEngineer_Click(sender As Object, e As EventArgs) Handles cmdEngineer.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, fmt=""eng"")", 23)
+    End Sub
+
+    Private Sub cmdPercent_Click(sender As Object, e As EventArgs) Handles cmdPercent.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, fmt=""%"")", 21)
+    End Sub
+
+    Private Sub cmdPercent0_Click(sender As Object, e As EventArgs) Handles cmdPercent0.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=0, fmt=""%"")", 21)
+    End Sub
+
+    Private Sub cmdFormatNA_Click(sender As Object, e As EventArgs) Handles cmdFormatNA.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, na.form="" "")", 25)
+    End Sub
+
+    Private Sub cmdFormatZeror(sender As Object, e As EventArgs) Handles cmdFormatZero.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, zero.form = ""__"")", 30)
+    End Sub
+
+    Private Sub cmdAlign_Click(sender As Object, e As EventArgs) Handles cmdAlign.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, sci=4, align=""e"")", 30)
+    End Sub
+
+    Private Sub cmdPValue_Click(sender As Object, e As EventArgs) Handles cmdPValue.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""p"", digits=3, eps=0.001)", 32)
+    End Sub
+
+    Private Sub cmdStars_Click(sender As Object, e As EventArgs) Handles cmdStars.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""p*"", digits=3, eps=0.001)", 33)
+    End Sub
+
+    Private Sub cmdFormatComma_Click(sender As Object, e As EventArgs) Handles cmdFormatComma.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("format( , decimal.mark= "","", big.mark=""."", small.mark="" "", sci=20)", 59)
+    End Sub
+
+    Private Sub cmdTrace_Click(sender As Object, e As EventArgs) Handles cmdTrace.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format(, fmt = instatClimatic::fmt_trace)", 34)
+    End Sub
+
+    Private Sub cmdAlignR_Click(sender As Object, e As EventArgs) Handles cmdAlignR.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=3, sci=20, align=""\\r"")", 32)
+    End Sub
+
+    Private Sub cmdFractions_Click(sender As Object, e As EventArgs) Handles cmdFractions.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""frac"")", 14)
+    End Sub
+
+    Private Sub cmdFrac10_Click(sender As Object, e As EventArgs) Handles cmdFrac10.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac20_Click(sender As Object, e As EventArgs) Handles cmdFrac20.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac100_Click(sender As Object, e As EventArgs) Handles cmdFrac100.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(x= ,den= )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(, )", 3)
+        End If
+    End Sub
+
 
     Private Sub cmdRowRank_Click(sender As Object, e As EventArgs) Handles cmdRowRank.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::row_number( )", 2)
@@ -4621,11 +4843,19 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPhi_Click(sender As Object, e As EventArgs) Handles cmdPhi.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::phi(n= )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::phi( )", 2)
-        End If
+
+        Dim clsPhiNRowsFunction As New RFunction
+        Dim clsPhiFunction As New RFunction
+
+        clsPhiNRowsFunction.SetRCommand("nrow")
+        clsPhiNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsPhiFunction.SetPackageName("primes")
+        clsPhiFunction.SetRCommand("phi")
+        clsPhiFunction.AddParameter("n", clsRFunctionParameter:=clsPhiNRowsFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPhiFunction.ToScript, 0)
+
     End Sub
 
     Private Sub PrimeFunctions(strRCommand As String)
@@ -4886,14 +5116,6 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub MASSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MASSToolStripMenuItem.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Transform" Then
-            strPackageName = "MASS"
-        End If
-        OpenHelpPage()
-    End Sub
-
 
     Private Sub ScalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScalesToolStripMenuItem.Click
         CalculationsOptions()
@@ -4907,6 +5129,15 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Transform" Then
             strPackageName = "zoo"
+        End If
+        OpenHelpPage()
+    End Sub
+
+
+    Private Sub DesctoolsFormatToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesctoolsFormatToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "DescTools"
         End If
         OpenHelpPage()
     End Sub
@@ -5192,6 +5423,14 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
+    Private Sub LabelledToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LabelledToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Factor" Then
+            strPackageName = "labelled"
+        End If
+        OpenHelpPage()
+    End Sub
+
     Private Sub cmdLogicalHelp_Click(sender As Object, e As EventArgs) Handles cmdLogicalHelp.Click, LogBaseToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Logical and Symbols" Then
@@ -5252,6 +5491,14 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Dates/Times" Then
             strPackageName = "hms"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DescToolsDateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescToolsDateToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "DescTools"
         End If
         OpenHelpPage()
     End Sub
@@ -6099,35 +6346,12 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFrac10_Click(sender As Object, e As EventArgs) Handles cmdFrac10.Click
+    Private Sub cmdIdentical_Click(sender As Object, e As EventArgs) Handles cmdIdentical.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(, )", 3)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(, )", 3)
         End If
     End Sub
 
-    Private Sub cmdFrac20_Click(sender As Object, e As EventArgs) Handles cmdFrac20.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20(x= )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20( )", 2)
-        End If
-    End Sub
-
-    Private Sub cmdFrac100_Click(sender As Object, e As EventArgs) Handles cmdFrac100.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100(x= )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100( )", 2)
-        End If
-    End Sub
-
-    Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(x= ,den= )", 8)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(, )", 3)
-        End If
-    End Sub
 End Class

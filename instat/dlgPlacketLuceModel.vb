@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO.Ports
 Imports instat.Translations
 
 Public Class dlgPlacketLuceModel
@@ -22,8 +23,8 @@ Public Class dlgPlacketLuceModel
     Private bResetSubdialog As Boolean = True
     Private clsGetDataFrameFunction, clsSndgetVarmataFunction, clsLevelFunction, clsFactorFunction, clsNamesFunction, clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction, clsVarFunction, clsMapFunction, clsPlacketFunction As RFunction
     Private clsPlotFunction, clsWrapPlotFunction, clsWrapBarFunction, clsHeatFunction, clsBarfunction, clsTreeFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsSummaryFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction As RFunction
-    Private clsStatsOperator, clsCoefOperator As ROperator
+    Private clsCoefFunction, clsStatsFunction, clsPivotWiderFunction, clsListFunction, clsList2Function, clsImportDataFunction, clsDefineAsTricotFunction, clsWrapTrees, clsImapDfrFunction, clsTibbleFunction As RFunction
+    Private clsStatsOperator, clsCoefOperator, clsPipeOperator, clsTildeOperator As ROperator
     Private clsAssignOperator, clsSpaceOpreator As ROperator
     Private clsGetRankingOperator, clsModelOperator, clsPlacketOperator, clsNamesOperator As ROperator
 
@@ -42,6 +43,8 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 704
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorTraitsPL.SetParameter(New RParameter("data_name", 0))
@@ -52,7 +55,8 @@ Public Class dlgPlacketLuceModel
         ucrReceiverMultipleTraits.Selector = ucrSelectorTraitsPL
         ucrReceiverMultipleTraits.strSelectorHeading = "Traits"
         ucrReceiverMultipleTraits.SetMeAsReceiver()
-        ucrReceiverMultipleTraits.SetTricotType({"traits"})
+        ucrReceiverMultipleTraits.SetTricotType("traits")
+        ucrReceiverMultipleTraits.bAutoFill = True
         ucrReceiverMultipleTraits.SetLinkedDisplayControl(lblTraits)
 
         ucrSaveResult.SetPrefix("model")
@@ -61,8 +65,6 @@ Public Class dlgPlacketLuceModel
         ucrSaveResult.SetCheckBoxText("Store Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorTraitsPL.ucrAvailableDataFrames)
-
-        cmdModelOptions.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -76,6 +78,13 @@ Public Class dlgPlacketLuceModel
         clsAnnovaFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsEstimatesFunction = New RFunction
+        clsImapDfrFunction = New RFunction
+        clsTibbleFunction = New RFunction
+        clsPivotWiderFunction = New RFunction
+        clsListFunction = New RFunction
+        clsList2Function = New RFunction
+        clsImportDataFunction = New RFunction
+        clsDefineAsTricotFunction = New RFunction
         clsConfidenLimFunction = New RFunction
         clsAICFunction = New RFunction
         clsDevianceFunction = New RFunction
@@ -97,7 +106,8 @@ Public Class dlgPlacketLuceModel
         clsFactorFunction = New RFunction
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
-
+        clsTildeOperator = New ROperator
+        clsPipeOperator = New ROperator
         clsSpaceOpreator = New ROperator
         clsAssignOperator = New ROperator
         clsGetRankingOperator = New ROperator
@@ -119,6 +129,7 @@ Public Class dlgPlacketLuceModel
         clsGetVarMetadataFunction.SetAssignTo("get_index_names")
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorTraitsPL.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
 
         clsGetRankingOperator.SetOperation("$")
@@ -180,6 +191,47 @@ Public Class dlgPlacketLuceModel
 
         clsCoefFunction.SetRCommand("coef")
         clsCoefFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
+
+        ' Adding the function for the save checkbox
+        clsTibbleFunction.SetPackageName("tibble")
+        clsTibbleFunction.SetRCommand("tibble")
+        clsTibbleFunction.AddParameter("variety", "names(.x)", iPosition:=0)
+        clsTibbleFunction.AddParameter("value", "as.numeric(.x)", iPosition:=1)
+        clsTibbleFunction.AddParameter("trait", ".y", iPosition:=2)
+
+        clsTildeOperator.SetOperation("~")
+        clsTildeOperator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
+        clsTildeOperator.AddParameter("right", "{" & clsTibbleFunction.ToScript & "}", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsImapDfrFunction.SetPackageName("purrr")
+        clsImapDfrFunction.SetRCommand("imap_dfr")
+        clsImapDfrFunction.AddParameter("first", clsROperatorParameter:=clsTildeOperator, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsPivotWiderFunction.SetPackageName("tidyr")
+        clsPivotWiderFunction.SetRCommand("pivot_wider")
+        clsPivotWiderFunction.AddParameter("names_from", "trait")
+        clsPivotWiderFunction.AddParameter("values_from", "value")
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("first", "coefficients_data", iPosition:=0, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("second", clsRFunctionParameter:=clsImapDfrFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsPivotWiderFunction, bIncludeArgumentName:=False)
+        clsPipeOperator.SetAssignTo("coefficients_data")
+
+        clsListFunction.SetRCommand("list")
+        clsListFunction.AddParameter("coefficients_data", "coefficients_data")
+
+        clsImportDataFunction.SetRCommand("data_book$import_data")
+        clsImportDataFunction.AddParameter("left", clsRFunctionParameter:=clsListFunction, bIncludeArgumentName:=False)
+
+        clsList2Function.SetRCommand("c")
+        clsList2Function.AddParameter("variety", Chr(34) & "variety" & Chr(34))
+
+        clsDefineAsTricotFunction.SetRCommand("data_book$define_as_tricot")
+        clsDefineAsTricotFunction.AddParameter("data_name", Chr(34) & "coefficients_data" & Chr(34))
+        clsDefineAsTricotFunction.AddParameter("key_col_names", Chr(34) & "variety" & Chr(34))
+        clsDefineAsTricotFunction.AddParameter("types", clsRFunctionParameter:=clsList2Function)
+        clsDefineAsTricotFunction.AddParameter("auto_selection", "TRUE")
 
         clsConfidenLimFunction.SetPackageName("purrr")
         clsConfidenLimFunction.SetRCommand("map")
@@ -250,11 +302,13 @@ Public Class dlgPlacketLuceModel
         clsAssignOperator.AddParameter("left", strData, iPosition:=0, bIncludeArgumentName:=False)
         clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
 
         clsSndgetVarmataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
-        clsSndgetVarmataFunction.AddParameter("property", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=1)
-        clsSndgetVarmataFunction.AddParameter("property_value", Chr(34) & "variety" & Chr(34), iPosition:=2)
+        clsSndgetVarmataFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
+        clsSndgetVarmataFunction.AddParameter("property", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=2)
+        clsSndgetVarmataFunction.AddParameter("property_value", Chr(34) & "variety" & Chr(34), iPosition:=3)
         clsSndgetVarmataFunction.SetAssignTo("var_name")
 
         clsSpaceOpreator.SetOperation("")
@@ -267,7 +321,7 @@ Public Class dlgPlacketLuceModel
         clsLevelFunction.AddParameter("x", clsRFunctionParameter:=clsFactorFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsFactorFunction.SetRCommand("factor")
-        clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]")
+        clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]", bIncludeArgumentName:=False)
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
@@ -327,7 +381,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverMultipleTraits.IsEmpty AndAlso ucrSaveResult.IsComplete)
+        ucrBase.OKEnabled(Not ucrReceiverMultipleTraits.IsEmpty AndAlso ucrSaveResult.IsComplete AndAlso Not ucrSelectorTraitsPL.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -341,9 +395,30 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubdialog)
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.nocovariates
+        sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapTree:=clsWrapTrees, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction,
+                                        clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction,
+                                        clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
+                                        clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction,
+                                        clsNewNodeLabFuction:=clsNodeLabFuction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubdialog)
+
         sdgDisplayModelOptions.grpTrees.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.ucrChkANOVA.Enabled = True
+        sdgDisplayModelOptions.ucrChkReability.Enabled = True
+        sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = True
+        sdgDisplayModelOptions.ucrChkSave.Visible = True
+        sdgDisplayModelOptions.rdoPlot.Enabled = True
+        sdgDisplayModelOptions.rdoBar.Enabled = True
+        sdgDisplayModelOptions.rdoMap.Enabled = True
+        sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
+        sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
+        sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
+        sdgDisplayModelOptions.ucrChkAIC.Enabled = True
+        sdgDisplayModelOptions.ucrChkDeviance.Enabled = True
+        sdgDisplayModelOptions.ucrChkSndEstimetes.Enabled = True
+        sdgDisplayModelOptions.ucrChkParProp.Enabled = True
+        sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
         sdgDisplayModelOptions.ShowDialog()
         bResetSubdialog = False
         AddRemoveFunctions()
@@ -365,5 +440,19 @@ Public Class dlgPlacketLuceModel
             ucrBase.clsRsyntax.AddToBeforeCodes(clsMapFunction, iPosition:=4)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=5)
         End If
+    End Sub
+
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgPLModelOptions.enumPLModelOptionsMode = sdgPLModelOptions.PLModelOptionsMode.Covariates
+        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
+        sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = True
+        sdgPLModelOptions.ucrChkGamma.Enabled = True
+        sdgPLModelOptions.ucrChkMinSize.Checked = False
+        sdgPLModelOptions.ucrChkMinSize.Visible = False
+        sdgPLModelOptions.ucrChkPValue.Checked = False
+        sdgPLModelOptions.ucrChkPValue.Visible = False
+        sdgPLModelOptions.ucrChkMethod.Enabled = True
+        sdgPLModelOptions.ShowDialog()
+        bResetSubdialog = False
     End Sub
 End Class

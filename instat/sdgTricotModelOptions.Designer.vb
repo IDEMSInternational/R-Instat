@@ -36,20 +36,22 @@ Partial Class sdgTricotModelOptions
         Me.ucrNudPenaltyPar.AutoSize = True
         Me.ucrNudPenaltyPar.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPenaltyPar.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPenaltyPar.Location = New System.Drawing.Point(168, 12)
+        Me.ucrNudPenaltyPar.Location = New System.Drawing.Point(252, 18)
+        Me.ucrNudPenaltyPar.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrNudPenaltyPar.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPenaltyPar.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPenaltyPar.Name = "ucrNudPenaltyPar"
-        Me.ucrNudPenaltyPar.Size = New System.Drawing.Size(72, 20)
+        Me.ucrNudPenaltyPar.Size = New System.Drawing.Size(108, 31)
         Me.ucrNudPenaltyPar.TabIndex = 4
         Me.ucrNudPenaltyPar.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSdgButton
         '
         Me.ucrSdgButton.AutoSize = True
-        Me.ucrSdgButton.Location = New System.Drawing.Point(12, 132)
+        Me.ucrSdgButton.Location = New System.Drawing.Point(18, 203)
+        Me.ucrSdgButton.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrSdgButton.Name = "ucrSdgButton"
-        Me.ucrSdgButton.Size = New System.Drawing.Size(224, 29)
+        Me.ucrSdgButton.Size = New System.Drawing.Size(336, 45)
         Me.ucrSdgButton.TabIndex = 0
         '
         'ucrInputConvTotal
@@ -58,36 +60,40 @@ Partial Class sdgTricotModelOptions
         Me.ucrInputConvTotal.AutoSize = True
         Me.ucrInputConvTotal.IsMultiline = False
         Me.ucrInputConvTotal.IsReadOnly = False
-        Me.ucrInputConvTotal.Location = New System.Drawing.Point(168, 95)
+        Me.ucrInputConvTotal.Location = New System.Drawing.Point(252, 146)
+        Me.ucrInputConvTotal.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputConvTotal.Name = "ucrInputConvTotal"
-        Me.ucrInputConvTotal.Size = New System.Drawing.Size(72, 21)
+        Me.ucrInputConvTotal.Size = New System.Drawing.Size(108, 32)
         Me.ucrInputConvTotal.TabIndex = 7
         '
         'ucrChkPenaltyPar
         '
         Me.ucrChkPenaltyPar.AutoSize = True
         Me.ucrChkPenaltyPar.Checked = False
-        Me.ucrChkPenaltyPar.Location = New System.Drawing.Point(12, 12)
+        Me.ucrChkPenaltyPar.Location = New System.Drawing.Point(18, 18)
+        Me.ucrChkPenaltyPar.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkPenaltyPar.Name = "ucrChkPenaltyPar"
-        Me.ucrChkPenaltyPar.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkPenaltyPar.Size = New System.Drawing.Size(219, 35)
         Me.ucrChkPenaltyPar.TabIndex = 8
         '
         'ucrChkNumberIt
         '
         Me.ucrChkNumberIt.AutoSize = True
         Me.ucrChkNumberIt.Checked = False
-        Me.ucrChkNumberIt.Location = New System.Drawing.Point(12, 54)
+        Me.ucrChkNumberIt.Location = New System.Drawing.Point(18, 83)
+        Me.ucrChkNumberIt.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkNumberIt.Name = "ucrChkNumberIt"
-        Me.ucrChkNumberIt.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkNumberIt.Size = New System.Drawing.Size(219, 35)
         Me.ucrChkNumberIt.TabIndex = 9
         '
         'ucrChkConvTotal
         '
         Me.ucrChkConvTotal.AutoSize = True
         Me.ucrChkConvTotal.Checked = False
-        Me.ucrChkConvTotal.Location = New System.Drawing.Point(12, 93)
+        Me.ucrChkConvTotal.Location = New System.Drawing.Point(18, 143)
+        Me.ucrChkConvTotal.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkConvTotal.Name = "ucrChkConvTotal"
-        Me.ucrChkConvTotal.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkConvTotal.Size = New System.Drawing.Size(219, 35)
         Me.ucrChkConvTotal.TabIndex = 10
         '
         'ucrInputNumberIt
@@ -96,16 +102,17 @@ Partial Class sdgTricotModelOptions
         Me.ucrInputNumberIt.AutoSize = True
         Me.ucrInputNumberIt.IsMultiline = False
         Me.ucrInputNumberIt.IsReadOnly = False
-        Me.ucrInputNumberIt.Location = New System.Drawing.Point(168, 54)
+        Me.ucrInputNumberIt.Location = New System.Drawing.Point(252, 83)
+        Me.ucrInputNumberIt.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputNumberIt.Name = "ucrInputNumberIt"
-        Me.ucrInputNumberIt.Size = New System.Drawing.Size(72, 21)
+        Me.ucrInputNumberIt.Size = New System.Drawing.Size(108, 32)
         Me.ucrInputNumberIt.TabIndex = 11
         '
         'sdgTricotModelOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(250, 175)
+        Me.ClientSize = New System.Drawing.Size(375, 269)
         Me.Controls.Add(Me.ucrInputNumberIt)
         Me.Controls.Add(Me.ucrChkConvTotal)
         Me.Controls.Add(Me.ucrChkNumberIt)
@@ -114,10 +121,11 @@ Partial Class sdgTricotModelOptions
         Me.Controls.Add(Me.ucrNudPenaltyPar)
         Me.Controls.Add(Me.ucrSdgButton)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "sdgTricotModelOptions"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "sdgTricotModelOptions"
+        Me.Text = "Model Options"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

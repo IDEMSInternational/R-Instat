@@ -14,7 +14,7 @@
     <AssemblyName>instat</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
@@ -134,8 +134,8 @@
     <Reference Include="CefSharp.WinForms, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
       <HintPath>..\packages\CefSharp.WinForms.104.4.240\lib\net452\CefSharp.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
+    <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="DynamicInterop, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicInterop.0.9.1\lib\netstandard2.0\DynamicInterop.dll</HintPath>
@@ -158,8 +158,8 @@
     <Reference Include="RDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RInsightF461.0.0.11\lib\net461\RInsightF461.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.12\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -353,6 +353,12 @@
     <Compile Include="dlgTraitCorrelations.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitCorrelationsXp.Designer.vb">
+      <DependentUpon>dlgTraitCorrelationsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelationsXp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTraits.Designer.vb">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </Compile>
@@ -415,12 +421,6 @@
     <Compile Include="sdgDefineAnnualRainfall.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgDefineTricotData.Designer.vb">
-      <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDefineTricotData.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgDisplayModelOptions.Designer.vb">
       <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </Compile>
@@ -451,6 +451,18 @@
     <Compile Include="sdgImportFromClimMob.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgInventoryOptions.Designer.vb">
+      <DependentUpon>sdgInventoryOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgInventoryOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgLinkedStationData.Designer.vb">
+      <DependentUpon>sdgLinkedStationData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLinkedStationData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgLocation.Designer.vb">
       <DependentUpon>sdgLocation.vb</DependentUpon>
     </Compile>
@@ -463,6 +475,12 @@
     <Compile Include="sdgPairPlotOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPLModelOptions.Designer.vb">
+      <DependentUpon>sdgPLModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPLModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPMConstants.Designer.vb">
       <DependentUpon>sdgPMConstants.vb</DependentUpon>
     </Compile>
@@ -473,6 +491,12 @@
       <DependentUpon>sdgPTConstants.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPTConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgSelectFromNames.Designer.vb">
+      <DependentUpon>sdgSelectFromNames.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSelectFromNames.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
@@ -533,6 +557,12 @@
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
+      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
@@ -601,6 +631,12 @@
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\sdgBeforeTablesOption.Designer.vb">
+      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgBeforeTablesOption.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -3537,6 +3573,9 @@
     <EmbeddedResource Include="dlgTraitCorrelations.resx">
       <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelationsXp.resx">
+      <DependentUpon>dlgTraitCorrelationsXp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </EmbeddedResource>
@@ -3579,9 +3618,6 @@
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDefineTricotData.resx">
-      <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgDisplayModelOptions.resx">
       <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3598,17 +3634,29 @@
       <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgInventoryOptions.resx">
+      <DependentUpon>sdgInventoryOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLinkedStationData.resx">
+      <DependentUpon>sdgLinkedStationData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPairPlotOptions.resx">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgPLModelOptions.resx">
+      <DependentUpon>sdgPLModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPMConstants.resx">
       <DependentUpon>sdgPMConstants.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPTConstants.resx">
       <DependentUpon>sdgPTConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSelectFromNames.resx">
+      <DependentUpon>sdgSelectFromNames.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
@@ -3639,6 +3687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
+      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
@@ -3672,6 +3723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
       <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgBeforeTablesOption.resx">
+      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -5829,8 +5883,6 @@
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateDynamic.txt" />
     <Content Include="translations\translateIgnore.txt" />
-    <None Include="DialogDefinitions\DlgTraits\dlgTraits.json" />
-    <None Include="DialogDefinitions\DlgTraits\dlgTraits.R" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -6170,6 +6222,12 @@
     <Content Include="static\Help\Statistics Glossary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\DialogDefinitions\DlgTraitCorrelations\dlgTraitCorrelations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraitCorrelations\dlgTraitCorrelations.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -336,6 +336,24 @@ Public Class ucrReceiverMultiple
         Return strTempBuilder.ToString()
     End Function
 
+    Public Function GetVariableNamesAsAddition(Optional bWithQuotes As Boolean = True) As String
+        Dim strBuilder As New Text.StringBuilder
+        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
+
+        If lstSelectedVariables.Items.Count = 0 Then
+            Return ""
+        ElseIf lstSelectedVariables.Items.Count = 1 Then
+            strBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
+        Else
+            For Each lvi As ListViewItem In lstSelectedVariables.Items
+                strBuilder.Append(strQuoteHolder).Append(lvi.Text).Append(strQuoteHolder).Append("+")
+            Next
+            strBuilder.Length -= 1 ' remove last "+"
+        End If
+
+        Return strBuilder.ToString()
+    End Function
+
     Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim arrItems(lstSelectedVariables.Items.Count - 1) As String
         Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
@@ -543,6 +561,19 @@ Public Class ucrReceiverMultiple
             strHeaders.Add(grpTemp.Name)
         Next
         Return strHeaders
+    End Function
+
+    ''' <summary>
+    '''  Returns information about the receiver's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the receiver's text.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the receiver's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Return GetVariableNames(bWithQuotes:=True)
     End Function
 
 End Class

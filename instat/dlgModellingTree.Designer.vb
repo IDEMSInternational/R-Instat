@@ -62,33 +62,33 @@ Partial Class dlgModellingTree
         'lblReceiverModellingTree
         '
         Me.lblReceiverModellingTree.AutoSize = True
-        Me.lblReceiverModellingTree.Location = New System.Drawing.Point(372, 30)
+        Me.lblReceiverModellingTree.Location = New System.Drawing.Point(376, 72)
         Me.lblReceiverModellingTree.Name = "lblReceiverModellingTree"
-        Me.lblReceiverModellingTree.Size = New System.Drawing.Size(113, 20)
-        Me.lblReceiverModellingTree.TabIndex = 51
-        Me.lblReceiverModellingTree.Text = "Traits to model"
+        Me.lblReceiverModellingTree.Size = New System.Drawing.Size(117, 20)
+        Me.lblReceiverModellingTree.TabIndex = 1
+        Me.lblReceiverModellingTree.Text = "Traits to Model:"
         '
         'ucrReceiverModellingTree
         '
         Me.ucrReceiverModellingTree.AutoSize = True
         Me.ucrReceiverModellingTree.frmParent = Me
-        Me.ucrReceiverModellingTree.Location = New System.Drawing.Point(376, 63)
+        Me.ucrReceiverModellingTree.Location = New System.Drawing.Point(376, 95)
         Me.ucrReceiverModellingTree.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverModellingTree.Name = "ucrReceiverModellingTree"
         Me.ucrReceiverModellingTree.Selector = Nothing
-        Me.ucrReceiverModellingTree.Size = New System.Drawing.Size(372, 132)
+        Me.ucrReceiverModellingTree.Size = New System.Drawing.Size(236, 152)
         Me.ucrReceiverModellingTree.strNcFilePath = ""
-        Me.ucrReceiverModellingTree.TabIndex = 50
+        Me.ucrReceiverModellingTree.TabIndex = 2
         Me.ucrReceiverModellingTree.ucrSelector = Nothing
         '
         'ucrModelName
         '
         Me.ucrModelName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrModelName.Location = New System.Drawing.Point(22, 750)
+        Me.ucrModelName.Location = New System.Drawing.Point(16, 706)
         Me.ucrModelName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrModelName.Name = "ucrModelName"
         Me.ucrModelName.Size = New System.Drawing.Size(453, 36)
-        Me.ucrModelName.TabIndex = 48
+        Me.ucrModelName.TabIndex = 12
         '
         'grpSecondCalc
         '
@@ -98,12 +98,12 @@ Partial Class dlgModellingTree
         Me.grpSecondCalc.Controls.Add(Me.cmdLog)
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
-        Me.grpSecondCalc.Location = New System.Drawing.Point(572, 326)
+        Me.grpSecondCalc.Location = New System.Drawing.Point(572, 434)
         Me.grpSecondCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.grpSecondCalc.Name = "grpSecondCalc"
         Me.grpSecondCalc.Padding = New System.Windows.Forms.Padding(4)
         Me.grpSecondCalc.Size = New System.Drawing.Size(189, 166)
-        Me.grpSecondCalc.TabIndex = 42
+        Me.grpSecondCalc.TabIndex = 7
         Me.grpSecondCalc.TabStop = False
         '
         'cmdCos
@@ -185,12 +185,12 @@ Partial Class dlgModellingTree
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
-        Me.grpFirstCalc.Location = New System.Drawing.Point(376, 326)
+        Me.grpFirstCalc.Location = New System.Drawing.Point(376, 434)
         Me.grpFirstCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.grpFirstCalc.Name = "grpFirstCalc"
         Me.grpFirstCalc.Padding = New System.Windows.Forms.Padding(4)
         Me.grpFirstCalc.Size = New System.Drawing.Size(196, 166)
-        Me.grpFirstCalc.TabIndex = 41
+        Me.grpFirstCalc.TabIndex = 6
         Me.grpFirstCalc.TabStop = False
         '
         'cmdMultiply
@@ -328,34 +328,34 @@ Partial Class dlgModellingTree
         '
         Me.ucrReceiverExpressionModellingTree.AutoSize = True
         Me.ucrReceiverExpressionModellingTree.frmParent = Me
-        Me.ucrReceiverExpressionModellingTree.Location = New System.Drawing.Point(376, 278)
+        Me.ucrReceiverExpressionModellingTree.Location = New System.Drawing.Point(376, 391)
         Me.ucrReceiverExpressionModellingTree.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrReceiverExpressionModellingTree.Name = "ucrReceiverExpressionModellingTree"
         Me.ucrReceiverExpressionModellingTree.Selector = Nothing
         Me.ucrReceiverExpressionModellingTree.Size = New System.Drawing.Size(384, 45)
         Me.ucrReceiverExpressionModellingTree.strNcFilePath = ""
-        Me.ucrReceiverExpressionModellingTree.TabIndex = 40
+        Me.ucrReceiverExpressionModellingTree.TabIndex = 5
         Me.ucrReceiverExpressionModellingTree.ucrSelector = Nothing
         '
         'lblExplanatoryModel
         '
         Me.lblExplanatoryModel.AutoSize = True
         Me.lblExplanatoryModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExplanatoryModel.Location = New System.Drawing.Point(376, 248)
+        Me.lblExplanatoryModel.Location = New System.Drawing.Point(377, 367)
         Me.lblExplanatoryModel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExplanatoryModel.Name = "lblExplanatoryModel"
         Me.lblExplanatoryModel.Size = New System.Drawing.Size(143, 20)
-        Me.lblExplanatoryModel.TabIndex = 39
+        Me.lblExplanatoryModel.TabIndex = 4
         Me.lblExplanatoryModel.Text = "Explanatory Model:"
         '
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(566, 741)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(566, 654)
         Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(186, 34)
-        Me.cmdDisplayOptions.TabIndex = 47
+        Me.cmdDisplayOptions.TabIndex = 14
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
@@ -365,31 +365,31 @@ Partial Class dlgModellingTree
         Me.ucrInputModelPreview.AutoSize = True
         Me.ucrInputModelPreview.IsMultiline = False
         Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(156, 698)
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(156, 656)
         Me.ucrInputModelPreview.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
         Me.ucrInputModelPreview.Size = New System.Drawing.Size(392, 32)
-        Me.ucrInputModelPreview.TabIndex = 45
+        Me.ucrInputModelPreview.TabIndex = 11
         '
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(18, 698)
+        Me.lblModelPreview.Location = New System.Drawing.Point(18, 660)
         Me.lblModelPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(114, 20)
-        Me.lblModelPreview.TabIndex = 44
+        Me.lblModelPreview.TabIndex = 10
         Me.lblModelPreview.Text = "Model Preview:"
         '
         'cmdModelOptions
         '
         Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(566, 698)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(566, 612)
         Me.cmdModelOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(186, 34)
-        Me.cmdModelOptions.TabIndex = 46
+        Me.cmdModelOptions.TabIndex = 13
         Me.cmdModelOptions.Text = "Model Options"
         Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
@@ -403,17 +403,17 @@ Partial Class dlgModellingTree
         Me.ucrSelectorByDataFrameAddRemoveForModellingTree.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveForModellingTree.Name = "ucrSelectorByDataFrameAddRemoveForModellingTree"
         Me.ucrSelectorByDataFrameAddRemoveForModellingTree.Size = New System.Drawing.Size(320, 274)
-        Me.ucrSelectorByDataFrameAddRemoveForModellingTree.TabIndex = 38
+        Me.ucrSelectorByDataFrameAddRemoveForModellingTree.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(22, 802)
+        Me.ucrBase.Location = New System.Drawing.Point(16, 759)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
-        Me.ucrBase.TabIndex = 49
+        Me.ucrBase.TabIndex = 15
         '
         'UcrSelectorByDataFrameForModellingTreeSecond
         '
@@ -425,7 +425,7 @@ Partial Class dlgModellingTree
         Me.UcrSelectorByDataFrameForModellingTreeSecond.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrSelectorByDataFrameForModellingTreeSecond.Name = "UcrSelectorByDataFrameForModellingTreeSecond"
         Me.UcrSelectorByDataFrameForModellingTreeSecond.Size = New System.Drawing.Size(320, 274)
-        Me.UcrSelectorByDataFrameForModellingTreeSecond.TabIndex = 52
+        Me.UcrSelectorByDataFrameForModellingTreeSecond.TabIndex = 3
         '
         'ucrInputCheck
         '
@@ -433,19 +433,19 @@ Partial Class dlgModellingTree
         Me.ucrInputCheck.AutoSize = True
         Me.ucrInputCheck.IsMultiline = False
         Me.ucrInputCheck.IsReadOnly = False
-        Me.ucrInputCheck.Location = New System.Drawing.Point(93, 633)
+        Me.ucrInputCheck.Location = New System.Drawing.Point(83, 616)
         Me.ucrInputCheck.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheck.Name = "ucrInputCheck"
-        Me.ucrInputCheck.Size = New System.Drawing.Size(392, 30)
-        Me.ucrInputCheck.TabIndex = 54
+        Me.ucrInputCheck.Size = New System.Drawing.Size(465, 30)
+        Me.ucrInputCheck.TabIndex = 9
         '
         'lblCheckVareity
         '
         Me.lblCheckVareity.AutoSize = True
-        Me.lblCheckVareity.Location = New System.Drawing.Point(16, 633)
+        Me.lblCheckVareity.Location = New System.Drawing.Point(18, 618)
         Me.lblCheckVareity.Name = "lblCheckVareity"
         Me.lblCheckVareity.Size = New System.Drawing.Size(58, 20)
-        Me.lblCheckVareity.TabIndex = 55
+        Me.lblCheckVareity.TabIndex = 8
         Me.lblCheckVareity.Text = "Check:"
         '
         'dlgModellingTree
@@ -453,7 +453,7 @@ Partial Class dlgModellingTree
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(778, 902)
+        Me.ClientSize = New System.Drawing.Size(778, 850)
         Me.Controls.Add(Me.lblCheckVareity)
         Me.Controls.Add(Me.ucrInputCheck)
         Me.Controls.Add(Me.UcrSelectorByDataFrameForModellingTreeSecond)

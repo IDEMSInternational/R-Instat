@@ -22,6 +22,7 @@ Public Class dlgOneVariableSummarise
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -273,6 +274,8 @@ Public Class dlgOneVariableSummarise
                 ucrBase.iHelpTopicID = 410
             Case OnevariableMode.Climatic
                 ucrBase.iHelpTopicID = 615
+            Case OnevariableMode.Tricot
+                ucrBase.iHelpTopicID = 735
         End Select
     End Sub
 
@@ -362,8 +365,8 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
-        sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator)
-        sdgTableOptions.ShowDialog(Me)
+        sdgBeforeTablesOption.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator)
+        sdgBeforeTablesOption.ShowDialog(Me)
         bResetFormatSubdialog = False
     End Sub
 
