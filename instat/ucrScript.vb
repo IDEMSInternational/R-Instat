@@ -336,6 +336,14 @@ Public Class ucrScript
             .TabIndex = 14, 'TODO
             .TabWidth = 2
         }
+        clsScriptActive.StyleResetDefault()
+        clsScriptActive.Styles(Style.Default).Font = "Consolas"
+        clsScriptActive.Styles(Style.Default).Size = 10
+
+        'TODO  Configure from R-Instat options?
+        'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
+        'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
+
         SetupScriptEditorR()
         SetLineNumberMarginWidth(1, True)
 
@@ -692,7 +700,7 @@ Public Class ucrScript
                 Select Case strFileExtension
                     Case ".json"
                         enumScriptType = ScriptType.json
-                        clsScriptActive.Lexer = Lexer.Json
+                        SetupScriptEditorJson()
                     Case ".qmd"
                         enumScriptType = ScriptType.quarto
                         SetupScriptEditorQuarto()
@@ -844,13 +852,21 @@ Public Class ucrScript
         clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
+    Private Sub SetupScriptEditorJson()
+        clsScriptActive.Lexer = Lexer.Json
+
+        clsScriptActive.Styles(Style.Json.BlockComment).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Json.LineComment).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Json.Number).ForeColor = Color.Olive
+        clsScriptActive.Styles(Style.Json.PropertyName).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Json.String).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Json.StringEol).BackColor = Color.Pink
+        clsScriptActive.Styles(Style.Json.Operator).ForeColor = Color.Purple
+    End Sub
+
     Private Sub SetupScriptEditorQuarto()
 
         clsScriptActive.Lexer = Lexer.Markdown
-
-        clsScriptActive.StyleResetDefault()
-        clsScriptActive.Styles(Style.Default).Font = "Consolas"
-        clsScriptActive.Styles(Style.Default).Size = 10
 
         clsScriptActive.StyleClearAll()
         clsScriptActive.Styles(Style.Markdown.Default).ForeColor = Color.Black
@@ -893,14 +909,6 @@ Public Class ucrScript
 
         clsScriptActive.Lexer = Lexer.R
 
-        clsScriptActive.StyleResetDefault()
-        clsScriptActive.Styles(Style.Default).Font = "Consolas"
-        clsScriptActive.Styles(Style.Default).Size = 10
-
-        'TODO  Configure from R-Instat options?
-        'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
-        'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
-
         ' Instruct the lexer to calculate folding
         clsScriptActive.SetProperty("fold", "1")
         clsScriptActive.SetProperty("fold.compact", "1")
@@ -931,7 +939,7 @@ Public Class ucrScript
 
         clsScriptActive.IndentationGuides = IndentView.LookBoth
         clsScriptActive.StyleClearAll()
-        clsScriptActive.Styles(Style.R.Default).ForeColor = Color.Silver
+        clsScriptActive.Styles(Style.R.Default).ForeColor = Color.Black
         clsScriptActive.Styles(Style.R.Comment).ForeColor = Color.Green
         clsScriptActive.Styles(Style.R.KWord).ForeColor = Color.Blue
         clsScriptActive.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
