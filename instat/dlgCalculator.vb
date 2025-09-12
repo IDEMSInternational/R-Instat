@@ -112,8 +112,8 @@ Public Class dlgCalculator
         clsRemoveLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
         clsGetDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataframe.AddParameter("use_current_filter", "FALSE")
         clsGetDataframe.SetAssignTo("`_df`")
-        clsGetDataframe.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
 
         clsAttachFunction.SetRCommand("attach")
         clsDetachFunction.SetRCommand("detach")
@@ -261,7 +261,7 @@ Public Class dlgCalculator
             Dim strDataFrame As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
             ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
             clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-            'clsDetachFunction.AddParameter("name", clsRFunctionParameter:=clsGetDataframe)
+            clsGetDataframe.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsAddScalarFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             SaveResults()
