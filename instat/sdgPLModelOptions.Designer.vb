@@ -49,6 +49,10 @@ Partial Class sdgPLModelOptions
         Me.ucrChkEpsilon = New instat.ucrCheck()
         Me.ucrChkSteffenson = New instat.ucrCheck()
         Me.ucrInputEpsilon = New instat.ucrInputTextBox()
+        Me.ucrChkMinSize = New instat.ucrCheck()
+        Me.ucrNudMinSize = New instat.ucrNud()
+        Me.ucrChkPValue = New instat.ucrCheck()
+        Me.ucrInputComboPValue = New instat.ucrInputComboBox()
         Me.grpPriors.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -57,7 +61,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkTreatsNAs.AutoSize = True
         Me.ucrChkTreatsNAs.Checked = False
         Me.ucrChkTreatsNAs.Location = New System.Drawing.Point(10, 232)
-        Me.ucrChkTreatsNAs.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkTreatsNAs.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkTreatsNAs.Name = "ucrChkTreatsNAs"
         Me.ucrChkTreatsNAs.Size = New System.Drawing.Size(93, 34)
         Me.ucrChkTreatsNAs.TabIndex = 5
@@ -127,7 +131,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkWeights.AutoSize = True
         Me.ucrChkWeights.Checked = False
         Me.ucrChkWeights.Location = New System.Drawing.Point(10, 196)
-        Me.ucrChkWeights.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkWeights.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(105, 34)
         Me.ucrChkWeights.TabIndex = 3
@@ -135,8 +139,8 @@ Partial Class sdgPLModelOptions
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(13, 401)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 476)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(335, 42)
         Me.ucrBase.TabIndex = 16
@@ -162,7 +166,7 @@ Partial Class sdgPLModelOptions
         Me.ucrInputNA.IsMultiline = False
         Me.ucrInputNA.IsReadOnly = False
         Me.ucrInputNA.Location = New System.Drawing.Point(120, 231)
-        Me.ucrInputNA.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputNA.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputNA.Name = "ucrInputNA"
         Me.ucrInputNA.Size = New System.Drawing.Size(139, 27)
         Me.ucrInputNA.TabIndex = 6
@@ -174,7 +178,7 @@ Partial Class sdgPLModelOptions
         Me.ucrInputWeight.IsMultiline = False
         Me.ucrInputWeight.IsReadOnly = False
         Me.ucrInputWeight.Location = New System.Drawing.Point(119, 197)
-        Me.ucrInputWeight.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputWeight.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputWeight.Name = "ucrInputWeight"
         Me.ucrInputWeight.Size = New System.Drawing.Size(140, 29)
         Me.ucrInputWeight.TabIndex = 4
@@ -186,7 +190,7 @@ Partial Class sdgPLModelOptions
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
         Me.ucrInputMethod.Location = New System.Drawing.Point(119, 163)
-        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(140, 26)
         Me.ucrInputMethod.TabIndex = 2
@@ -261,7 +265,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkMultivariateNormal.AutoSize = True
         Me.ucrChkMultivariateNormal.Checked = False
         Me.ucrChkMultivariateNormal.Location = New System.Drawing.Point(7, 19)
-        Me.ucrChkMultivariateNormal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkMultivariateNormal.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkMultivariateNormal.Name = "ucrChkMultivariateNormal"
         Me.ucrChkMultivariateNormal.Size = New System.Drawing.Size(93, 34)
         Me.ucrChkMultivariateNormal.TabIndex = 0
@@ -271,7 +275,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkGamma.AutoSize = True
         Me.ucrChkGamma.Checked = False
         Me.ucrChkGamma.Location = New System.Drawing.Point(7, 79)
-        Me.ucrChkGamma.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkGamma.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkGamma.Name = "ucrChkGamma"
         Me.ucrChkGamma.Size = New System.Drawing.Size(93, 34)
         Me.ucrChkGamma.TabIndex = 5
@@ -313,7 +317,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkMaxit.AutoSize = True
         Me.ucrChkMaxit.Checked = False
         Me.ucrChkMaxit.Location = New System.Drawing.Point(10, 268)
-        Me.ucrChkMaxit.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkMaxit.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkMaxit.Name = "ucrChkMaxit"
         Me.ucrChkMaxit.Size = New System.Drawing.Size(93, 34)
         Me.ucrChkMaxit.TabIndex = 7
@@ -323,7 +327,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkMethod.AutoSize = True
         Me.ucrChkMethod.Checked = False
         Me.ucrChkMethod.Location = New System.Drawing.Point(10, 162)
-        Me.ucrChkMethod.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkMethod.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkMethod.Name = "ucrChkMethod"
         Me.ucrChkMethod.Size = New System.Drawing.Size(93, 34)
         Me.ucrChkMethod.TabIndex = 1
@@ -333,7 +337,7 @@ Partial Class sdgPLModelOptions
         Me.ucrChkEpsilon.AutoSize = True
         Me.ucrChkEpsilon.Checked = False
         Me.ucrChkEpsilon.Location = New System.Drawing.Point(10, 331)
-        Me.ucrChkEpsilon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkEpsilon.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkEpsilon.Name = "ucrChkEpsilon"
         Me.ucrChkEpsilon.Size = New System.Drawing.Size(93, 34)
         Me.ucrChkEpsilon.TabIndex = 12
@@ -343,9 +347,9 @@ Partial Class sdgPLModelOptions
         Me.ucrChkSteffenson.AutoSize = True
         Me.ucrChkSteffenson.Checked = False
         Me.ucrChkSteffenson.Location = New System.Drawing.Point(10, 367)
-        Me.ucrChkSteffenson.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkSteffenson.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkSteffenson.Name = "ucrChkSteffenson"
-        Me.ucrChkSteffenson.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkSteffenson.Size = New System.Drawing.Size(93, 25)
         Me.ucrChkSteffenson.TabIndex = 14
         '
         'ucrInputEpsilon
@@ -355,16 +359,66 @@ Partial Class sdgPLModelOptions
         Me.ucrInputEpsilon.IsMultiline = False
         Me.ucrInputEpsilon.IsReadOnly = False
         Me.ucrInputEpsilon.Location = New System.Drawing.Point(120, 333)
-        Me.ucrInputEpsilon.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputEpsilon.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputEpsilon.Name = "ucrInputEpsilon"
         Me.ucrInputEpsilon.Size = New System.Drawing.Size(139, 28)
         Me.ucrInputEpsilon.TabIndex = 13
+        '
+        'ucrChkMinSize
+        '
+        Me.ucrChkMinSize.AutoSize = True
+        Me.ucrChkMinSize.Checked = False
+        Me.ucrChkMinSize.Location = New System.Drawing.Point(10, 404)
+        Me.ucrChkMinSize.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkMinSize.Name = "ucrChkMinSize"
+        Me.ucrChkMinSize.Size = New System.Drawing.Size(188, 23)
+        Me.ucrChkMinSize.TabIndex = 17
+        '
+        'ucrNudMinSize
+        '
+        Me.ucrNudMinSize.AutoSize = True
+        Me.ucrNudMinSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinSize.Location = New System.Drawing.Point(209, 404)
+        Me.ucrNudMinSize.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrNudMinSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinSize.Name = "ucrNudMinSize"
+        Me.ucrNudMinSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinSize.TabIndex = 18
+        Me.ucrNudMinSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkPValue
+        '
+        Me.ucrChkPValue.AutoSize = True
+        Me.ucrChkPValue.Checked = False
+        Me.ucrChkPValue.Location = New System.Drawing.Point(10, 437)
+        Me.ucrChkPValue.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkPValue.Name = "ucrChkPValue"
+        Me.ucrChkPValue.Size = New System.Drawing.Size(93, 25)
+        Me.ucrChkPValue.TabIndex = 19
+        '
+        'ucrInputComboPValue
+        '
+        Me.ucrInputComboPValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPValue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboPValue.GetSetSelectedIndex = -1
+        Me.ucrInputComboPValue.IsReadOnly = False
+        Me.ucrInputComboPValue.Location = New System.Drawing.Point(120, 437)
+        Me.ucrInputComboPValue.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputComboPValue.Name = "ucrInputComboPValue"
+        Me.ucrInputComboPValue.Size = New System.Drawing.Size(140, 26)
+        Me.ucrInputComboPValue.TabIndex = 20
         '
         'sdgPLModelOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(293, 448)
+        Me.ClientSize = New System.Drawing.Size(293, 505)
+        Me.Controls.Add(Me.ucrInputComboPValue)
+        Me.Controls.Add(Me.ucrChkPValue)
+        Me.Controls.Add(Me.ucrNudMinSize)
+        Me.Controls.Add(Me.ucrChkMinSize)
         Me.Controls.Add(Me.ucrInputEpsilon)
         Me.Controls.Add(Me.ucrChkSteffenson)
         Me.Controls.Add(Me.ucrChkEpsilon)
@@ -421,4 +475,8 @@ Partial Class sdgPLModelOptions
     Friend WithEvents ucrChkEpsilon As ucrCheck
     Friend WithEvents ucrChkSteffenson As ucrCheck
     Friend WithEvents ucrInputEpsilon As ucrInputTextBox
+    Friend WithEvents ucrChkMinSize As ucrCheck
+    Friend WithEvents ucrNudMinSize As ucrNud
+    Friend WithEvents ucrChkPValue As ucrCheck
+    Friend WithEvents ucrInputComboPValue As ucrInputComboBox
 End Class

@@ -54,6 +54,8 @@ Public Class dlgClimaticBoxPlot
     Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
     Private strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
     Private strXAxis As String = "X Axis"
     Private strColour As String = "Colour Axis"
     Private strNone As String = "None"
@@ -198,13 +200,13 @@ Public Class dlgClimaticBoxPlot
         clsTextElementFunc.AddParameter("hjust", "1", iPosition:=1)
         clsTextElementFunc.AddParameter("vjust", "0.5", iPosition:=2)
 
-        ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrInputYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputYear.SetDropDownStyleAsNonEditable()
 
-        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputWithinYear.SetDropDownStyleAsNonEditable()
 
         ucrSavePlot.SetPrefix("box_plot")
@@ -532,19 +534,42 @@ Public Class dlgClimaticBoxPlot
             strChangedText = ucrChangedControl.GetText()
             If strChangedText <> strNone Then
                 For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
-                    If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso Not ucrInputTemp.Equals(ucrChangedControl) AndAlso ucrInputTemp.GetText() = strChangedText Then
+                    If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetColAll AndAlso
+                       Not strChangedText = strFacetRow AndAlso Not strChangedText = strFacetRowAll AndAlso
+                       Not ucrInputTemp.Equals(ucrChangedControl) AndAlso ucrInputTemp.GetText() = strChangedText Then
+
                         bUpdateComboOptions = False
                         ucrInputTemp.SetName(strNone)
                         bUpdateComboOptions = True
                     End If
-                    If strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow OrElse strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetWrap OrElse strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetCol OrElse strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap Then
+
+                    If (strChangedText = strFacetWrap AndAlso
+                            (ucrInputTemp.GetText = strFacetRow OrElse ucrInputTemp.GetText = strFacetRowAll _
+                             OrElse ucrInputTemp.GetText = strFacetCol OrElse ucrInputTemp.GetText = strFacetColAll)) _
+                        OrElse (strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetWrap) _
+                        OrElse (strChangedText = strFacetRowAll AndAlso ucrInputTemp.GetText = strFacetWrap) _
+                        OrElse (strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap) _
+                        OrElse (strChangedText = strFacetColAll AndAlso ucrInputTemp.GetText = strFacetWrap) Then
+
+                        ucrInputTemp.SetName(strNone)
+                    End If
+
+                    If (strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetRowAll) _
+                        OrElse (strChangedText = strFacetRowAll AndAlso ucrInputTemp.GetText = strFacetRow) Then
+                        ucrInputTemp.SetName(strNone)
+                    End If
+
+                    If (strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetColAll) _
+                        OrElse (strChangedText = strFacetColAll AndAlso ucrInputTemp.GetText = strFacetCol) Then
                         ucrInputTemp.SetName(strNone)
                     End If
                 Next
             End If
+
             UpdateParameters()
             AddRemoveFacets()
         End If
+
     End Sub
 
     Private Sub UpdateParameters()
@@ -566,11 +591,13 @@ Public Class dlgClimaticBoxPlot
         For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
             strTemp = ucrInputTemp.GetText()
             dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
+
             If strTemp = strXAxis Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
                 clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
+
             ElseIf strTemp = strColour Then
                 If rdoJitter.Checked Then
                     dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
@@ -580,22 +607,28 @@ Public Class dlgClimaticBoxPlot
                     dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 End If
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+
             ElseIf strTemp = strFacetWrap Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOp)
-            ElseIf strTemp = strFacetCol Then
+
+            ElseIf strTemp = strFacetCol OrElse strTemp = strFacetColAll Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
-            ElseIf strTemp = strFacetRow Then
+
+            ElseIf strTemp = strFacetRow OrElse strTemp = strFacetRowAll Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("row" & ucrInputTemp.Name)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
             End If
         Next
+
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
+
         bUpdatingParameters = False
     End Sub
+
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
         AutoFill()
@@ -610,51 +643,64 @@ Public Class dlgClimaticBoxPlot
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
 
         If Not bUpdatingParameters Then
             clsBaseOperator.RemoveParameterByName("facets")
+
             For Each kvpTemp As KeyValuePair(Of ucrInputComboBox, ucrReceiverSingle) In dctComboReceiver
                 strText = kvpTemp.Key.GetText()
-                If strText = strFacetWrap OrElse strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
-                    If strText = strFacetWrap Then
-                        bWrap = True
-                    End If
-                    If strText = strFacetCol Then
-                        bCol = True
-                    End If
-                    If strText = strFacetRow Then
-                        bRow = True
-                    End If
+                If (strText = strFacetWrap OrElse strText = strFacetCol OrElse strText = strFacetRow _
+                OrElse strText = strFacetColAll OrElse strText = strFacetRowAll) AndAlso Not kvpTemp.Value.IsEmpty Then
+
+                    If strText = strFacetWrap Then bWrap = True
+                    If strText = strFacetCol Then bCol = True
+                    If strText = strFacetRow Then bRow = True
+                    If strText = strFacetColAll Then bColAll = True
+                    If strText = strFacetRowAll Then bRowAll = True
                 End If
             Next
-            If bWrap OrElse bRow OrElse bCol Then
+
+            If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
                 clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
             End If
+
             If bWrap Then
                 clsFacetFunction.SetRCommand("facet_wrap")
                 clsFacetOp.AddParameter("wrap", iPosition:=0)
             Else
                 clsFacetOp.RemoveParameterByName("wrap")
             End If
-            If bRow OrElse bCol Then
+
+            If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
                 clsFacetFunction.SetRCommand("facet_grid")
             End If
-            If bRow Then
+
+            If bRow OrElse bRowAll Then
                 clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-            ElseIf bCol AndAlso bWrap = False Then
+            ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
                 clsFacetOp.AddParameter("left", ".", iPosition:=0)
             Else
                 clsFacetOp.RemoveParameterByName("left")
             End If
-            If bCol Then
+
+            If bCol OrElse bColAll Then
                 clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-            ElseIf bRow AndAlso bWrap = False Then
+            ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
                 clsFacetOp.AddParameter("right", ".", iPosition:=1)
             Else
                 clsFacetOp.RemoveParameterByName("right")
             End If
+
+            If bRowAll OrElse bColAll Then
+                clsFacetFunction.AddParameter("margins", "TRUE")
+            Else
+                clsFacetFunction.RemoveParameterByName("margins")
+            End If
         End If
     End Sub
+
 
     Private Sub OmitFilter()
         If ucrChkOmitBelow.Checked Then
