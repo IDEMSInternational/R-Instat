@@ -792,6 +792,11 @@ Public Class ucrScript
         End Try
     End Sub
 
+    Private Sub RunQuartoScript(strScript As String, strComment As String)
+        Dim strQuartoRenderScript As String = "quarto::quarto_render(input = tempfile(fileext = '.qmd'), output_format = 'html', quiet = TRUE, input = I('" & strScript.Replace("\", "/").Replace("'", "\'") & "'))"
+        RunRScript(strQuartoRenderScript, strComment)
+    End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     '''     Executes the <paramref name="strScript"/> R script.
@@ -799,7 +804,7 @@ Public Class ucrScript
     ''' <param name="strScript"> The R script to execute.</param>
     ''' <param name="strComment">Converted into an R comment and prefixed to the script.</param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub RunScript(strScript As String, strComment As String)
+    Private Sub RunRScript(strScript As String, strComment As String)
 
         EnableRunOptions(False) 'temporarily disable the run buttons in case its a long operation
 
@@ -1185,14 +1190,21 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+        If enumScriptType = ScriptType.rScript Then
+            RunRScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+        ElseIf enumScriptType = ScriptType.quarto Then
+            RunQuartoScript(clsScriptActive.Text, "Quarto document rendered from Script Window (all text)")
+        Else
+            MsgBox("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
+            Exit Sub
+        End If
 
         SetFocusAndScrollCaret()
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
         If clsScriptActive.SelectedText.Length > 0 Then
-            RunScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
+            RunRScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
         Else
             RunCurrentStatement()
         End If
