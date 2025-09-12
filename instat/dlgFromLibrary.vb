@@ -23,9 +23,9 @@ Public Class dlgFromLibrary
     Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataOperator As New ROperator
+    Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
-    Private clsDummyFunction As New RFunction
+    Private clsRemoveFunction As New RFunction
 
     'a string array that holds the packages displayed in the combobox 
     'todo. this property can be removed once the PR that enhances the inputCombobox control is merged
@@ -82,8 +82,8 @@ Public Class dlgFromLibrary
 
         ucrPnlOptions.AddRadioButton(rdoDefaultDatasets)
         ucrPnlOptions.AddRadioButton(rdoInstatCollection)
-        ucrPnlOptions.AddParameterValuesCondition(rdoDefaultDatasets, "Check", "default")
-        ucrPnlOptions.AddParameterValuesCondition(rdoInstatCollection, "Check", "instat")
+        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoDefaultDatasets, {"data"})
+        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoInstatCollection, {"data"}, False)
         ucrPnlOptions.AddToLinkedControls(ucrInputPackages, {rdoDefaultDatasets}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOptions.AddToLinkedControls(ucrNewDataFrameName, {rdoDefaultDatasets}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
@@ -97,30 +97,29 @@ Public Class dlgFromLibrary
         'reset the functions and the custom controls
         ucrNewDataFrameName.SetName("") 'called here cause its not called in the control's reset method
         ucrNewDataFrameName.Reset()
-        clsDataOperator.Clear()
+        clsDataFunction.Clear()
         clsImportFunction.Clear()
 
-        'set the state of the panel using a dummy function
-        clsDummyFunction.AddParameter("Check", "default", iPosition:=0)
-
         'set up the data function
-        clsDataOperator.SetOperation("::")
-        clsDataOperator.AddParameter("package", Chr(34) & "datasets" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsDataFunction.SetPackageName("utils")
+        clsDataFunction.SetRCommand("data")
+        clsDataFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
+
+        clsRemoveFunction.SetRCommand("rm")
 
         'set up the import data function
         clsImportFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
         'add the before codes (the data() R base function) and the base function(import_data() R-Instat function)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsDataOperator)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsImportFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         If arrAvailablePackages IsNot Nothing Then
-            ucrInputPackages.SetRCode(clsDataOperator, bReset)
+            ucrInputPackages.SetRCode(clsDataFunction, bReset)
         End If
-        'ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+        ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -142,11 +141,13 @@ Public Class dlgFromLibrary
         If rdoDefaultDatasets.Checked Then
             lstCollection.Visible = True
             cmdLibraryCollection.Visible = False
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsDataOperator)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveFunction)
         Else
             lstCollection.Visible = False
             cmdLibraryCollection.Visible = True
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDataOperator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDataFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveFunction)
         End If
         TestOkEnabled()
         EnableHelp()
@@ -247,7 +248,6 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
-        clsDataOperator.SetAssignTo(ucrNewDataFrameName.GetText())
         SetParameterValues()
     End Sub
 
@@ -271,13 +271,15 @@ Public Class dlgFromLibrary
         strSelectedDataName = CheckString(strSelectedText)
 
         If strSelectedText.Contains("(") Then
-            clsDataOperator.AddParameter("X", strDataNameFromBracket, iPosition:=1, bIncludeArgumentName:=False)
+            clsDataFunction.AddParameter("X", strDataNameFromBracket)
+            clsRemoveFunction.AddParameter("X", strDataNameFromBracket, bIncludeArgumentName:=False)
         Else
-            clsDataOperator.AddParameter("X", strSelectedDataName, iPosition:=1, bIncludeArgumentName:=False)
+            clsDataFunction.AddParameter("X", strSelectedDataName)
+            clsRemoveFunction.AddParameter("X", strSelectedDataName, bIncludeArgumentName:=False)
         End If
 
         'calling RunInternalScriptGetOutput() twice because currently it can't execute multiple lines
-        frmMain.clsRLink.RunInternalScriptGetOutput(clsDataOperator.Clone.ToScript(), bSilent:=True)
+        frmMain.clsRLink.RunInternalScriptGetOutput(clsDataFunction.Clone.ToScript(), bSilent:=True)
         strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("class(" + strSelectedDataName + ")", bSilent:=True)
         If strVecOutput IsNot Nothing AndAlso strVecOutput.Length > 0 Then
             strRClass = Mid(strVecOutput(0), 5).Replace("""", "").ToLower
