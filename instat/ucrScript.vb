@@ -793,7 +793,22 @@ Public Class ucrScript
     End Sub
 
     Private Sub RunQuartoScript(strScript As String, strComment As String)
-        Dim strQuartoRenderScript As String = "quarto::quarto_render(input = tempfile(fileext = '.qmd'), output_format = 'html', quiet = TRUE, input = I('" & strScript.Replace("\", "/").Replace("'", "\'") & "'))"
+        Dim strQuartoRenderScriptPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R", "renderQuarto.R")
+        Dim strQuartoRenderScript As String = ""
+
+        'read the contents of the quarto render script
+        Try
+            strQuartoRenderScript = File.ReadAllText(strQuartoRenderScriptPath)
+        Catch ex As Exception
+            MsgBox("Could not read the quarto render script from:" & Environment.NewLine _
+                   & strQuartoRenderScriptPath & Environment.NewLine & Environment.NewLine _
+                   & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Render Script")
+            Exit Sub
+        End Try
+
+        'replace the placeholder with the actual quarto script
+        strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript.Replace("\", "\\").Replace("""", "\"""))
+
         RunRScript(strQuartoRenderScript, strComment)
     End Sub
 
@@ -1193,7 +1208,7 @@ Public Class ucrScript
         If enumScriptType = ScriptType.rScript Then
             RunRScript(clsScriptActive.Text, "Code run from Script Window (all text)")
         ElseIf enumScriptType = ScriptType.quarto Then
-            RunQuartoScript(clsScriptActive.Text, "Quarto document rendered from Script Window (all text)")
+            RunQuartoScript(clsScriptActive.Text, "Code to render the Quarto script in the Script Window (all text)")
         Else
             MsgBox("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
             Exit Sub
