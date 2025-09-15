@@ -88,8 +88,16 @@ Public Class dlgTransform
     Private clsIsNAColsFunction As New RFunction
     Private clsFormatFunction As New RFunction
     Private clsBaseFunction As New RFunction
-
-
+    Private clsGetDataFrameFunction As New RFunction
+    Private clsColumnsFunction As New RFunction
+    Private clsPasteFunction As New RFunction
+    Private clsMutateFunction As New RFunction
+    Private clsAcrossFunction As New RFunction
+    Private clsEverythingFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsTildaOperator As New ROperator
+    Private clsAssignOperator As New ROperator
+    Private bResetRCode As Boolean = True
 
     Private ReadOnly strDot As String = "."
     Private ReadOnly strE As String = "e"
@@ -105,17 +113,6 @@ Public Class dlgTransform
     Private ReadOnly strP As String = "P*"
     Private ReadOnly strPvalue As String = "p"
     Private ReadOnly strPercent As String = "%"
-
-    Private clsGetDataFrameFunction As New RFunction
-    Private clsColumnsFunction As New RFunction
-    Private clsPasteFunction As New RFunction
-    Private clsMutateFunction As New RFunction
-    Private clsAcrossFunction As New RFunction
-    Private clsEverythingFunction As New RFunction
-    Private clsPipeOperator As New ROperator
-    Private clsTildaOperator As New ROperator
-    Private clsAssignOperator As New ROperator
-    Private bResetRCode As Boolean = True
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -227,15 +224,10 @@ Public Class dlgTransform
         ucrPnlFormatOptions.AddParameterValuesCondition(rdoFraction, "check", "Fraction")
         ucrPnlFormatOptions.AddParameterValuesCondition(rdoAlign, "check", "Align")
 
-        ucrReceiverRank.SetParameter(New RParameter("x", 0))
-        ucrReceiverRank.SetParameterIsRFunction()
-
-
         ucrPnlNonNegative.AddRadioButton(rdoSquareRoot)
         ucrPnlNonNegative.AddRadioButton(rdoLogToBase10)
         ucrPnlNonNegative.AddRadioButton(rdoNaturalLog)
         ucrPnlNonNegative.AddRadioButton(rdoPower)
-
 
         UcrInputAlignOperations.SetItems({strDot, strE, strLeft, strCentre, strRight})
         UcrInputAlignOperations.SetDropDownStyleAsNonEditable()
@@ -271,8 +263,6 @@ Public Class dlgTransform
         ucrPnlFormatOptions.AddToLinkedControls({UcrInputZeroOperations, UcrInputZeroValues}, {rdoZero}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFormatOptions.AddToLinkedControls(UcrInputPvalue, {rdoPvalue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFormatOptions.AddToLinkedControls({UcrInputAlignOperations, UcrInputAlignValues}, {rdoAlign}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-
 
         ucrPnlNonNegative.AddToLinkedControls(ucrInputPower, {rdoPower}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlFormatOptions, {rdoFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -351,12 +341,8 @@ Public Class dlgTransform
         UcrNudFraction.SetParameter(New RParameter("digits", 0))
         UcrNudFraction.SetRDefault("2")
 
-
-
-
         UcrInputAlignOperations.SetParameter(New RParameter("align", 0))
         UcrInputAlignOperations.SetRDefault(Chr(34) & "." & Chr(34))
-
 
         ucrInputPower.SetParameter(New RParameter("y", 1))
         dctPowerValues.Add("1", "1")
@@ -520,6 +506,11 @@ Public Class dlgTransform
         clsDescToolsFormatFunction = New RFunction
         clsDescToolsFormatFunction.SetPackageName("DescTools")
         clsDescToolsFormatFunction.SetRCommand("Format")
+        clsDescToolsFormatFunction.AddParameter("digits", "1")
+        clsDescToolsFormatFunction.AddParameter("fmt", """p""")
+        clsDescToolsFormatFunction.AddParameter("na.form", """Missing""")
+        clsDescToolsFormatFunction.AddParameter("zero.form", """0""")
+        clsDescToolsFormatFunction.AddParameter("align", """l""")
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -774,9 +765,10 @@ Public Class dlgTransform
         ucrNudLagPosition.AddAdditionalCodeParameterPair(clsLagColsFunction, New RParameter("lag", 1), iAdditionalPairNo:=1)
         ucrNudSignifDigits.AddAdditionalCodeParameterPair(clsSignifColsFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
         ucrInputPower.AddAdditionalCodeParameterPair(clsPowerColsOperator, New RParameter("y", 1), iAdditionalPairNo:=1)
-
-        ucrReceiverRank.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("x", 0), iAdditionalPairNo:=0)
         ucrNudDecimalPlaces.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
+        ucrNudScientific.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
+        ucrNudPercent.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
+        UcrNudFraction.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("fmt", 2), iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=0)
 
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsAddConstantOperator, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=10)
@@ -802,6 +794,7 @@ Public Class dlgTransform
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsScaleMinColsFunction, New RParameter("x", 0), iAdditionalPairNo:=29)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsBooleanColsOperator, New RParameter("x", 0), iAdditionalPairNo:=30)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsIsNAColsFunction, New RParameter("x", 0), iAdditionalPairNo:=31)
+        ucrReceiverRank.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("x", 0), iAdditionalPairNo:=32)
 
         ucrChkOmitNA.AddAdditionalCodeParameterPair(clsStandardDevFunction, ucrChkOmitNA.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorForRank.AddAdditionalCodeParameterPair(clsGetColSelectionNamesFunction, ucrSelectorForRank.GetParameter, iAdditionalPairNo:=1)
@@ -833,6 +826,7 @@ Public Class dlgTransform
         ucrSaveNew.AddAdditionalRCode(clsPreviewOperator, iAdditionalPairNo:=13)
         ucrSaveNew.AddAdditionalRCode(clsBooleanOperator, iAdditionalPairNo:=14)
         ucrSaveNew.AddAdditionalRCode(clsIsNAFunction, iAdditionalPairNo:=15)
+        ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=16)
 
         ucrPnlTransformOptions.SetRCode(clsDummyTransformFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsDummyTransformFunction, bReset)
@@ -844,6 +838,10 @@ Public Class dlgTransform
         ucrNudRoundOfDigits.SetRCode(clsRoundFunction, bReset)
         ucrNudSignifDigits.SetRCode(clsSignifFunction, bReset)
         ucrNudLagLeadPosition.SetRCode(clsLeadFunction, bReset)
+        ucrNudDecimalPlaces.SetRCode(clsDescToolsFormatFunction, bReset)
+        ucrNudScientific.SetRCode(clsDescToolsFormatFunction, bReset)
+        ucrNudPercent.SetRCode(clsDescToolsFormatFunction, bReset)
+        UcrNudFraction.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrNudDiffLag.SetRCode(clsDiffFunction, bReset)
         ucrNudLagPosition.SetRCode(clsLagFunction, bReset)
         ucrInputPower.SetRCode(clsPowerOperator, bReset)
@@ -933,375 +931,8 @@ Public Class dlgTransform
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoFormat.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "format", iPosition:=0)
-
-
-                If rdoDecimalFormat.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-                    clsFormatFunc.AddParameter("digits", ucrNudDecimalPlaces.GetText)
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-                ElseIf rdoScientific.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-                    clsFormatFunc.AddParameter("digits", ucrNudDecimalPlaces.GetText)
-                    clsFormatFunc.AddParameter("fmt", Chr(34) & "%" & Chr(34))
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-                ElseIf rdoPercent.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-                    clsFormatFunc.AddParameter("digits", ucrNudDecimalPlaces.GetText)
-                    clsFormatFunc.AddParameter("fmt", Chr(34) & "%" & Chr(34))
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-                ElseIf rdoNA.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-
-                    Dim strNAValue As String = UcrInputNAOperations.GetText()
-                    If String.IsNullOrEmpty(strNAValue) Then
-                        strNAValue = UcrInputNAvalues.GetText()
-                    End If
-
-                    clsFormatFunc.AddParameter("na.form", Chr(34) & strNAValue & Chr(34))
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-
-                ElseIf rdoZero.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-
-                    Dim strZeroForm As String = UcrInputZeroOperations.GetText()
-
-                    If Not String.IsNullOrEmpty(UcrInputZeroValues.GetText()) Then
-                        strZeroForm = UcrInputZeroValues.GetText()
-                    End If
-
-                    clsFormatFunc.AddParameter("zero.form", Chr(34) & strZeroForm & Chr(34))
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-                ElseIf rdoPvalue.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-                    clsFormatFunc.AddParameter("digits", ucrNudDecimalPlaces.GetText)
-
-                    Dim strFmt As String = UcrInputPvalue.GetText()
-                    If String.IsNullOrEmpty(strFmt) Then
-                        strFmt = "p"
-                    End If
-                    clsFormatFunc.AddParameter("fmt", Chr(34) & strFmt & Chr(34))
-
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-                ElseIf rdoFraction.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim strNewVar As String = ucrSaveNew.GetText
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-
-                    Dim strDen As String = UcrNudFraction.GetText()
-                    Dim strFmt As String = "function(x) instatExtras::frac_den(x, den = " & strDen & ")"
-                    clsFormatFunc.AddParameter("fmt", strFmt)
-
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-
-                ElseIf rdoAlign.Checked Then
-                    Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                    Dim strColumn As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=True)
-                    Dim strTempVar As String = strColumn.Replace("""", "")
-                    Dim strNewVar As String = ucrSaveNew.GetText
-
-                    Dim clsGetColFunc As New RFunction
-                    clsGetColFunc.SetRCommand("data_book$get_columns_from_data")
-                    clsGetColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsGetColFunc.AddParameter("col_names", strColumn)
-                    clsGetColFunc.AddParameter("use_current_filter", "FALSE")
-                    clsGetColFunc.SetAssignTo(strTempVar)
-
-                    Dim clsFormatFunc As New RFunction
-                    clsFormatFunc.SetPackageName("DescTools")
-                    clsFormatFunc.SetRCommand("Format")
-                    clsFormatFunc.AddParameter("x", strTempVar, bIncludeArgumentName:=False)
-
-                    Dim strAlign As String = GetParamValue(UcrInputAlignOperations, UcrInputAlignValues)
-
-                    If String.IsNullOrEmpty(strAlign) Then
-                        strAlign = "l"
-                    End If
-
-                    Select Case strAlign
-                        Case "Left" : strAlign = "l"
-                        Case "Centre" : strAlign = "c"
-                        Case "Right" : strAlign = "r"
-                        Case "e" : strAlign = "e"
-                        Case "." : strAlign = "."
-                    End Select
-
-                    clsFormatFunc.AddParameter("align", Chr(34) & strAlign & Chr(34))
-                    clsFormatFunc.SetAssignTo(strNewVar)
-
-                    Dim clsAddColFunc As New RFunction
-                    clsAddColFunc.SetRCommand("data_book$add_columns_to_data")
-                    clsAddColFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                    clsAddColFunc.AddParameter("col_name", Chr(34) & strNewVar & Chr(34))
-                    clsAddColFunc.AddParameter("col_data", strNewVar)
-                    clsAddColFunc.AddParameter("before", "FALSE")
-                    clsAddColFunc.AddParameter("adjacent_column", strColumn)
-
-                    Dim clsRmFunc As New RFunction
-                    clsRmFunc.SetRCommand("rm")
-                    clsRmFunc.AddParameter("list", "c(" & Chr(34) & strNewVar & Chr(34) & ", " & Chr(34) & strTempVar & Chr(34) & ")", bIncludeArgumentName:=True)
-
-                    ucrBase.clsRsyntax.ClearCodes()
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsAddColFunc)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFormatFunc)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunc)
-                End If
-
                 ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDescToolsFormatFunction)
             ElseIf rdoNumeric.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
                 If rdoRoundOf.Checked Then
