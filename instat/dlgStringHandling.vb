@@ -809,5 +809,11 @@ Public Class dlgStringHandling
                 ucrSaveStringHandling.SetPrefix("remove")
             End If
         End If
+
+        If rdoReplace.Checked AndAlso rdoMultiple.Checked Then
+            ucrSaveStringHandling.btnColumnPosition.Visible = False
+        Else
+            ucrSaveStringHandling.btnColumnPosition.Visible = True
+        End If
     End Sub
 End Class
