@@ -22,7 +22,7 @@ Public Class dlgTraitCorrelations
     Private clsGetVariablesMetadataFunction, clsGetObjectRFunction, clsDummyFunction, clsCombineVarsFunction, clsFashionFunction, clsGetObjectFunction, clsGetRankingItemsFunction, clsDataFrameFunction,
         clsNamesFunction, clsMapDfrFunction, clsKendallTauFunction, clsMutateFunction, clsSelectFunction, clsMapDfr2Function, clsAesFunction, clsGgplotFunction, clsGeomBoxplotFunction, clsLabsFunction,
         clsGetObjectRFunction2, clsKendallTauBootstrapFunction As New RFunction
-    Private clsBaseLineOperator, clsObjectOperator, clsPipeOperator, clsNamesOperator, clsMultivarsOpeator, clsTildeOperator, clsAdditionOperator, clsColonOperator, clsAssignToOperator As New ROperator
+    Private clsBaseLineOperator, clsObjectOperator, clsPipeOperator, clsNamesOperator, clsMultivarsOpeator, clsPipeOperator2, clsAdditionOperator, clsColonOperator, clsAssignToOperator As New ROperator
 
     Private Sub dlgTraitCorrelations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -126,7 +126,7 @@ Public Class dlgTraitCorrelations
         clsKendallTauBootstrapFunction = New RFunction
         clsColonOperator = New ROperator
         clsAssignToOperator = New ROperator
-        clsTildeOperator = New ROperator
+        clsPipeOperator2 = New ROperator
         clsAdditionOperator = New ROperator
         clsBaseLineOperator = New ROperator
         clsMultivarsOpeator = New ROperator
@@ -138,11 +138,12 @@ Public Class dlgTraitCorrelations
         ucrSelecetorTraits.Reset()
         ucrSaveCorrelation.Reset()
         ucrSaveBootstrapGraph.Reset()
-        ucrChkBootstrapCorrelations.Checked = False
 
         clsDummyFunction.AddParameter("display", "False", iPosition:=0)
         clsDummyFunction.AddParameter("output", "as.table", iPosition:=1)
         clsDummyFunction.AddParameter("value", "False", iPosition:=2)
+        clsDummyFunction.AddParameter("correlations", "False", iPosition:=3)
+
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadataFunction.SetAssignTo("get_index_names")
@@ -180,10 +181,6 @@ Public Class dlgTraitCorrelations
         clsNamesOperator.AddParameter("left", clsRFunctionParameter:=clsNamesFunction, iPosition:=0)
         clsNamesOperator.AddParameter("right", "all_vars", iPosition:=1)
 
-        clsTildeOperator.SetOperation("~")
-        clsTildeOperator.AddParameter("right", "", iPosition:=0, bIncludeArgumentName:=False)
-        clsTildeOperator.AddParameter("right", "~ {k <- gosset::kendallTau_bootstrap(x = compare_variables[[.x]], y = compare_variables[[baseline]], nboot = " & ucrNudBootstrapCorrelations.GetText() & "); tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
-
         clsColonOperator.SetOperation(";")
         clsColonOperator.AddParameter("right", "tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
         clsColonOperator.AddParameter("left", clsROperatorParameter:=clsAssignToOperator, iPosition:=0, bIncludeArgumentName:=False)
@@ -198,8 +195,6 @@ Public Class dlgTraitCorrelations
         clsKendallTauBootstrapFunction.SetRCommand("kendallTau_bootstrap")
         clsKendallTauBootstrapFunction.AddParameter("x", "compare_variables[[.x]]", iPosition:=0)
         clsKendallTauBootstrapFunction.AddParameter("y", "compare_variables[[baseline]]", iPosition:=1)
-
-
 
         clsMapDfr2Function.SetPackageName("purrr")
         clsMapDfr2Function.SetRCommand("map_dfr")
@@ -254,11 +249,16 @@ Public Class dlgTraitCorrelations
         clsPipeOperator.AddParameter("first", clsRFunctionParameter:=clsMapDfrFunction, iPosition:=0)
         clsPipeOperator.AddParameter("second", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
         clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
-        clsPipeOperator.SetAssignTo("last_table")
+
+        clsPipeOperator2.SetOperation("%>%")
+        clsPipeOperator2.AddParameter("first", clsRFunctionParameter:=clsMapDfrFunction, iPosition:=0)
+        clsPipeOperator2.AddParameter("second", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+        clsPipeOperator2.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
+        clsPipeOperator2.SetAssignTo("kendall_rankings")
 
         clsFashionFunction.SetPackageName("corrr")
         clsFashionFunction.SetRCommand("fashion")
-        clsFashionFunction.AddParameter("var", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsFashionFunction.AddParameter("var", clsROperatorParameter:=clsPipeOperator2, iPosition:=0, bIncludeArgumentName:=False)
 
         clsDataFrameFunction.SetRCommand("data.frame")
         clsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsFashionFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -282,22 +282,20 @@ Public Class dlgTraitCorrelations
         ucrPnlOutput.AddAdditionalCodeParameterPair(clsDummyFunction, New RParameter("output", 2), iAdditionalPairNo:=1)
 
         ucrSelecetorTraits.AddAdditionalCodeParameterPair(clsGetVariablesMetadataFunction, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucrSelecetorTraits.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("data_name", iNewPosition:=0), iAdditionalPairNo:=2)
-        'ucrSaveCorrelation.AddAdditionalRCode(clsDataFrameFunction, iAdditionalPairNo:=1)
-        'ucrSaveCorrelation.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("object_name", iNewPosition:=1), iAdditionalPairNo:=2)
-        'ucrSaveCorrelation.AddAdditionalCodeParameterPair(clsGetObjectRFunction2, New RParameter("object_name", iNewPosition:=1), iAdditionalPairNo:=3)
+        ucrSaveCorrelation.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=1)
 
         ucrNudDecimalPlaces.SetRCode(clsFashionFunction, bReset)
         ucrNudBootstrapCorrelations.SetRCode(clsKendallTauBootstrapFunction, bReset)
         ucrChkLeadingZeros.SetRCode(clsFashionFunction, bReset)
         ucrChkDisplayOptions.SetRCode(clsDummyFunction, bReset)
+        ucrChkBootstrapCorrelations.SetRCode(clsDummyFunction, bReset)
 
         ucrReceiverTrait.SetRCode(clsBaseLineOperator, bReset)
         ucrReceiverTraitsToCompare.SetRCode(clsMultivarsOpeator, bReset)
         ucrSelecetorTraits.SetRCode(clsGetObjectFunction, bReset)
         ucrPnlOutput.SetRCode(clsDummyFunction, bReset)
         ucrChkIncludePValues.SetRCode(clsDummyFunction, bReset)
-        'ucrSaveCorrelation.SetRCode(clsPipeOperator, bReset)
+        ucrSaveCorrelation.SetRCode(clsDataFrameFunction, bReset)
         ucrSaveBootstrapGraph.SetRCode(clsAdditionOperator, bReset)
 
         bRcodeSet = True
@@ -321,17 +319,15 @@ Public Class dlgTraitCorrelations
 
     Private Sub ucrChkBootstrapCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBootstrapCorrelations.ControlValueChanged
         If ucrChkBootstrapCorrelations.Checked Then
+            clsDummyFunction.AddParameter("correlations", "True", iPosition:=3)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAdditionOperator, 3)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetObjectRFunction2, 4)
         Else
+            clsDummyFunction.AddParameter("correlations", "False", iPosition:=3)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAdditionOperator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetObjectRFunction2)
         End If
     End Sub
-
-    'Private Sub ucrNudBootstrapCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudBootstrapCorrelations.ControlValueChanged
-    '    clsTildeOperator.AddParameter("right", "~ {k <- gosset::kendallTau_bootstrap(x = compare_variables[[.x]], y = compare_variables[[baseline]], nboot = " & ucrNudBootstrapCorrelations.GetText() & "); tibble(trait = .x, kendallTau = k)}", iPosition:=1, bIncludeArgumentName:=False)
-    'End Sub
 
     Private Sub ucrSelecetorTraits_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelecetorTraits.ControlValueChanged
         Dim DataFrame As String = ucrSelecetorTraits.strCurrentDataFrame
@@ -371,11 +367,10 @@ Public Class dlgTraitCorrelations
     End Sub
 
     Private Sub ChangeOutputObject()
-        clsDataFrameFunction.RemoveAssignTo()
-        clsPipeOperator.RemoveAssignTo()
-
         If ucrChkDisplayOptions.Checked Then
-            clsDataFrameFunction.SetAssignTo("last_table")
+            clsDummyFunction.AddParameter("display", "True", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
+            clsDataFrameFunction.RemoveAssignTo()
             If rdoAsText.Checked Then
                 clsDummyFunction.AddParameter("output", "as.table", iPosition:=2)
                 ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
@@ -383,45 +378,47 @@ Public Class dlgTraitCorrelations
                 ucrSaveCorrelation.SetPrefix("summary_table")
                 ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
                 clsDataFrameFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                                       strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                                       strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                                                       strRDataFrameNameToAddObjectTo:=ucrSelecetorTraits.strCurrentDataFrame,
-                                                       strObjectName:="last_table")
+                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                            strRDataFrameNameToAddObjectTo:=ucrSelecetorTraits.strCurrentDataFrame,
+                                            strObjectName:="last_table")
+
+
             Else
                 clsDummyFunction.AddParameter("output", "as.dataframe", iPosition:=2)
+                clsDataFrameFunction.RemoveAssignTo()
                 ucrSaveCorrelation.SetSaveTypeAsDataFrame()
                 ucrSaveCorrelation.SetCheckBoxText("Store Data Frame")
                 ucrSaveCorrelation.SetPrefix("data_frame")
                 ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
             End If
         Else
+            clsDummyFunction.AddParameter("display", "False", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveCorrelation.SetCheckBoxText("Store Table")
             ucrSaveCorrelation.SetPrefix("summary_table")
             ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
-            clsPipeOperator.SetAssignTo("last_table")
             clsPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                                                   strRDataFrameNameToAddObjectTo:=ucrSelecetorTraits.strCurrentDataFrame,
-                                                   strObjectName:="last_table")
+                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                            strRDataFrameNameToAddObjectTo:=ucrSelecetorTraits.strCurrentDataFrame,
+                                            strObjectName:="last_table")
         End If
     End Sub
 
     Private Sub ChangeBaseFunction()
+
         If bRcodeSet Then
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
             If ucrChkDisplayOptions.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
                 If rdoAsDataFrame.Checked Then
                     ucrBase.clsRsyntax.iCallType = 0
+                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
                 Else
-                    ucrBase.clsRsyntax.iCallType = 2
                     ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
                 End If
             Else
-                ucrBase.clsRsyntax.iCallType = 2
-                ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
             End If
         End If
@@ -443,11 +440,11 @@ Public Class dlgTraitCorrelations
         End If
     End Sub
 
-    Private Sub ucrSaveCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveCorrelation.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
+    Private Sub ucrSaveCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSaveCorrelation_TextChanged(sender As Object, e As EventArgs) Handles ucrSaveCorrelation.TextChanged
+    Private Sub ucrSaveCorrelation_TextChanged(sender As Object, e As EventArgs)
         ChangeOutputObject()
     End Sub
 End Class

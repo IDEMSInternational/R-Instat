@@ -38,11 +38,11 @@ Partial Class dlgTraitCorrelations
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrChkIncludePValues = New instat.ucrCheck()
         Me.ucrChkDisplayOptions = New instat.ucrCheck()
-        Me.ucrSaveCorrelation = New instat.ucrSave()
         Me.ucrChkBootstrapCorrelations = New instat.ucrCheck()
         Me.lblBootstrapCorrelations = New System.Windows.Forms.Label()
         Me.ucrNudBootstrapCorrelations = New instat.ucrNud()
         Me.ucrSaveBootstrapGraph = New instat.ucrSave()
+        Me.ucrSaveCorrelation = New instat.ucrSave()
         Me.grpDisplayOptions.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -52,7 +52,7 @@ Partial Class dlgTraitCorrelations
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 462)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
@@ -118,7 +118,7 @@ Partial Class dlgTraitCorrelations
         Me.ucrChkLeadingZeros.AutoSize = True
         Me.ucrChkLeadingZeros.Checked = False
         Me.ucrChkLeadingZeros.Location = New System.Drawing.Point(7, 55)
-        Me.ucrChkLeadingZeros.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkLeadingZeros.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkLeadingZeros.Name = "ucrChkLeadingZeros"
         Me.ucrChkLeadingZeros.Size = New System.Drawing.Size(132, 34)
         Me.ucrChkLeadingZeros.TabIndex = 2
@@ -139,7 +139,7 @@ Partial Class dlgTraitCorrelations
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(103, 26)
-        Me.ucrNudDecimalPlaces.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudDecimalPlaces.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
@@ -200,7 +200,7 @@ Partial Class dlgTraitCorrelations
         '
         Me.ucrPnlOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlOutput.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlOutput.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlOutput.Name = "ucrPnlOutput"
         Me.ucrPnlOutput.Size = New System.Drawing.Size(150, 53)
         Me.ucrPnlOutput.TabIndex = 0
@@ -210,7 +210,7 @@ Partial Class dlgTraitCorrelations
         Me.ucrChkIncludePValues.AutoSize = True
         Me.ucrChkIncludePValues.Checked = False
         Me.ucrChkIncludePValues.Location = New System.Drawing.Point(7, 83)
-        Me.ucrChkIncludePValues.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkIncludePValues.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkIncludePValues.Name = "ucrChkIncludePValues"
         Me.ucrChkIncludePValues.Size = New System.Drawing.Size(149, 34)
         Me.ucrChkIncludePValues.TabIndex = 3
@@ -220,26 +220,17 @@ Partial Class dlgTraitCorrelations
         Me.ucrChkDisplayOptions.AutoSize = True
         Me.ucrChkDisplayOptions.Checked = False
         Me.ucrChkDisplayOptions.Location = New System.Drawing.Point(9, 213)
-        Me.ucrChkDisplayOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDisplayOptions.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDisplayOptions.Name = "ucrChkDisplayOptions"
         Me.ucrChkDisplayOptions.Size = New System.Drawing.Size(192, 23)
         Me.ucrChkDisplayOptions.TabIndex = 5
-        '
-        'ucrSaveCorrelation
-        '
-        Me.ucrSaveCorrelation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveCorrelation.Location = New System.Drawing.Point(9, 434)
-        Me.ucrSaveCorrelation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveCorrelation.Name = "ucrSaveCorrelation"
-        Me.ucrSaveCorrelation.Size = New System.Drawing.Size(266, 24)
-        Me.ucrSaveCorrelation.TabIndex = 7
         '
         'ucrChkBootstrapCorrelations
         '
         Me.ucrChkBootstrapCorrelations.AutoSize = True
         Me.ucrChkBootstrapCorrelations.Checked = False
         Me.ucrChkBootstrapCorrelations.Location = New System.Drawing.Point(9, 375)
-        Me.ucrChkBootstrapCorrelations.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkBootstrapCorrelations.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkBootstrapCorrelations.Name = "ucrChkBootstrapCorrelations"
         Me.ucrChkBootstrapCorrelations.Size = New System.Drawing.Size(200, 23)
         Me.ucrChkBootstrapCorrelations.TabIndex = 5
@@ -260,7 +251,7 @@ Partial Class dlgTraitCorrelations
         Me.ucrNudBootstrapCorrelations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBootstrapCorrelations.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudBootstrapCorrelations.Location = New System.Drawing.Point(330, 374)
-        Me.ucrNudBootstrapCorrelations.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudBootstrapCorrelations.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudBootstrapCorrelations.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBootstrapCorrelations.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBootstrapCorrelations.Name = "ucrNudBootstrapCorrelations"
@@ -277,16 +268,25 @@ Partial Class dlgTraitCorrelations
         Me.ucrSaveBootstrapGraph.Size = New System.Drawing.Size(266, 24)
         Me.ucrSaveBootstrapGraph.TabIndex = 10
         '
+        'ucrSaveCorrelation
+        '
+        Me.ucrSaveCorrelation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveCorrelation.Location = New System.Drawing.Point(9, 432)
+        Me.ucrSaveCorrelation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveCorrelation.Name = "ucrSaveCorrelation"
+        Me.ucrSaveCorrelation.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveCorrelation.TabIndex = 26
+        '
         'dlgTraitCorrelations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 516)
+        Me.Controls.Add(Me.ucrSaveCorrelation)
         Me.Controls.Add(Me.ucrSaveBootstrapGraph)
         Me.Controls.Add(Me.ucrNudBootstrapCorrelations)
         Me.Controls.Add(Me.lblBootstrapCorrelations)
         Me.Controls.Add(Me.ucrChkBootstrapCorrelations)
-        Me.Controls.Add(Me.ucrSaveCorrelation)
         Me.Controls.Add(Me.ucrChkDisplayOptions)
         Me.Controls.Add(Me.grpDisplayOptions)
         Me.Controls.Add(Me.lblTraitsCompare)
@@ -326,9 +326,9 @@ Partial Class dlgTraitCorrelations
     Friend WithEvents rdoAsText As RadioButton
     Friend WithEvents ucrPnlOutput As UcrPanel
     Friend WithEvents ucrChkDisplayOptions As ucrCheck
-    Friend WithEvents ucrSaveCorrelation As ucrSave
     Friend WithEvents ucrNudBootstrapCorrelations As ucrNud
     Friend WithEvents lblBootstrapCorrelations As Label
     Friend WithEvents ucrChkBootstrapCorrelations As ucrCheck
     Friend WithEvents ucrSaveBootstrapGraph As ucrSave
+    Friend WithEvents ucrSaveCorrelation As ucrSave
 End Class
