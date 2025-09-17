@@ -355,6 +355,7 @@ Public Class dlgTraitCorrelations
                 clsPipeOperator2.RemoveParameterByName("third")
             Else
                 clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+                clsPipeOperator2.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
             End If
         Else
             clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
