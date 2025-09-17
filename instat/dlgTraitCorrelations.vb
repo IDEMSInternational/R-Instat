@@ -306,11 +306,25 @@ Public Class dlgTraitCorrelations
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverTrait.IsEmpty AndAlso Not ucrReceiverTraitsToCompare.IsEmpty AndAlso ucrSaveCorrelation.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        Dim enableOk As Boolean = True
+
+        ' Check required receivers are filled
+        If ucrReceiverTrait.IsEmpty OrElse ucrReceiverTraitsToCompare.IsEmpty OrElse Not ucrSaveCorrelation.IsComplete Then
+            enableOk = False
         End If
+
+        ' Check display options validity
+        If enableOk AndAlso ucrChkDisplayOptions.Checked AndAlso ucrNudDecimalPlaces.IsEmpty Then
+            enableOk = False
+        End If
+
+        ' Check bootstrap correlations validity
+        If enableOk AndAlso ucrChkBootstrapCorrelations.Checked AndAlso
+       (Not ucrSaveBootstrapGraph.IsComplete OrElse ucrNudBootstrapCorrelations.IsEmpty) Then
+            enableOk = False
+        End If
+
+        ucrBase.OKEnabled(enableOk)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -447,7 +461,7 @@ Public Class dlgTraitCorrelations
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged, ucrSaveCorrelation.ControlContentsChanged, ucrSaveBootstrapGraph.ControlContentsChanged, ucrChkBootstrapCorrelations.ControlContentsChanged, ucrChkDisplayOptions.ControlContentsChanged, ucrNudBootstrapCorrelations.ControlContentsChanged, ucrNudDecimalPlaces.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
