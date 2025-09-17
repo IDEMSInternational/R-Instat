@@ -85,6 +85,7 @@ Public Class dlgTraitCorrelations
         ucrNudBootstrapCorrelations.SetParameter(New RParameter("nboot", 3))
         ucrNudBootstrapCorrelations.Increment = 1
         ucrNudBootstrapCorrelations.SetRDefault(100)
+        ucrNudBootstrapCorrelations.Maximum = Integer.MaxValue
         ucrNudBootstrapCorrelations.SetLinkedDisplayControl(lblBootstrapCorrelations)
 
         ucrChkBootstrapCorrelations.SetText("Bootstrap correlations")
@@ -338,6 +339,11 @@ Public Class dlgTraitCorrelations
     End Sub
 
     Private Sub ucrChkIncludePValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePValues.ControlValueChanged
+        If ucrChkIncludePValues.Checked Then
+            clsDummyFunction.AddParameter("value", "True", iPosition:=2)
+        Else
+            clsDummyFunction.AddParameter("value", "False", iPosition:=2)
+        End If
         AddPValues()
     End Sub
 
@@ -360,6 +366,12 @@ Public Class dlgTraitCorrelations
     End Sub
 
     Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged, ucrPnlOutput.ControlValueChanged
+        If ucrChkDisplayOptions.Checked Then
+            clsDummyFunction.AddParameter("display", "True", iPosition:=0)
+        Else
+            clsDummyFunction.AddParameter("display", "False", iPosition:=0)
+        End If
+
         ChangeOutputObject()
         ChangeBaseFunction()
         HideShowOptions()
@@ -368,7 +380,6 @@ Public Class dlgTraitCorrelations
 
     Private Sub ChangeOutputObject()
         If ucrChkDisplayOptions.Checked Then
-            clsDummyFunction.AddParameter("display", "True", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
             clsDataFrameFunction.RemoveAssignTo()
             If rdoAsText.Checked Then
@@ -393,7 +404,6 @@ Public Class dlgTraitCorrelations
                 ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
             End If
         Else
-            clsDummyFunction.AddParameter("display", "False", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveCorrelation.SetCheckBoxText("Store Table")
@@ -405,10 +415,10 @@ Public Class dlgTraitCorrelations
                                             strRDataFrameNameToAddObjectTo:=ucrSelecetorTraits.strCurrentDataFrame,
                                             strObjectName:="last_table")
         End If
+        ChangeBaseFunction()
     End Sub
 
     Private Sub ChangeBaseFunction()
-
         If bRcodeSet Then
             If ucrChkDisplayOptions.Checked Then
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
