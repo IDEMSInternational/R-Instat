@@ -245,6 +245,8 @@ Public Class dlgTraitCorrelations
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("select", "-c(`Pr(>|z|)`", iPosition:=0, bIncludeArgumentName:=False)
+        clsSelectFunction.AddParameter("z", "`Zvalue`)", iPosition:=1, bIncludeArgumentName:=False)
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("first", clsRFunctionParameter:=clsMapDfrFunction, iPosition:=0)
@@ -317,7 +319,6 @@ Public Class dlgTraitCorrelations
         TestOkEnabled()
     End Sub
 
-
     Private Sub ucrChkBootstrapCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBootstrapCorrelations.ControlValueChanged
         If ucrChkBootstrapCorrelations.Checked Then
             clsDummyFunction.AddParameter("correlations", "True", iPosition:=3)
@@ -351,16 +352,11 @@ Public Class dlgTraitCorrelations
         If ucrChkDisplayOptions.Checked Then
             If ucrChkIncludePValues.Checked Then
                 clsPipeOperator.RemoveParameterByName("third")
-                clsSelectFunction.RemoveParameterByName("select")
-                clsSelectFunction.RemoveParameterByName("z")
+                clsPipeOperator2.RemoveParameterByName("third")
             Else
-                clsSelectFunction.AddParameter("select", "-c(`Pr(>|z|)`", iPosition:=0, bIncludeArgumentName:=False)
-                clsSelectFunction.AddParameter("z", "`Zvalue`)", iPosition:=1, bIncludeArgumentName:=False)
                 clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
             End If
         Else
-            clsSelectFunction.AddParameter("select", "-c(`Pr(>|z|)`", iPosition:=0, bIncludeArgumentName:=False)
-            clsSelectFunction.AddParameter("z", "`Zvalue`)", iPosition:=1, bIncludeArgumentName:=False)
             clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
         End If
     End Sub
@@ -450,11 +446,7 @@ Public Class dlgTraitCorrelations
         End If
     End Sub
 
-    Private Sub ucrSaveCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSaveCorrelation_TextChanged(sender As Object, e As EventArgs)
-        ChangeOutputObject()
     End Sub
 End Class
