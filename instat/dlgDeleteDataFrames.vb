@@ -101,7 +101,7 @@ Public Class dlgDeleteDataFrames
     '    If Delete = DialogResult.Yes Then
     '        ' run base code
     ''        strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe"
-    ''        frmMain.clsRLink.RunScript(strScript)
+    ''        frmMain.clsRLink.RunRScript(strScript)
     '    Else
     '        'return to dialog
     '    End If
