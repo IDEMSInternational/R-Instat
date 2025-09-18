@@ -44,6 +44,10 @@ Public Class sdgDataOptions
             SetDefaults()
             bFirstLoad = False
         End If
+
+        ' Always set dataframe when opening
+        ResetDataFrame()
+
         autoTranslate(Me)
     End Sub
 
@@ -149,6 +153,13 @@ Public Class sdgDataOptions
         strCurrentDataFrame = strNewDataFrame
         ucrSelectorFilters.SetDataframe(strCurrentDataFrame, bEnabled)
         ucrSelectorForSelectColumns.SetDataframe(strCurrentDataFrame, bEnabled)
+    End Sub
+
+    Private Sub ResetDataFrame()
+        If Not String.IsNullOrEmpty(strCurrentDataFrame) Then
+            ucrSelectorFilters.SetDataframe(strCurrentDataFrame, False)
+            ucrSelectorForSelectColumns.SetDataframe(strCurrentDataFrame, False)
+        End If
     End Sub
 
     Private Sub cmdRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles cmdRemoveCurrentFilter.Click
