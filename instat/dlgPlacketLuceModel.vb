@@ -454,5 +454,6 @@ Public Class dlgPlacketLuceModel
         sdgPLModelOptions.ucrChkMethod.Enabled = True
         sdgPLModelOptions.ShowDialog()
         bResetSubdialog = False
+        clsPlacketFunction.RemoveParameterByName("alpha")
     End Sub
 End Class
