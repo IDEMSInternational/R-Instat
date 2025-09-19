@@ -455,5 +455,6 @@ Public Class dlgPlacketLuceModel
         sdgPLModelOptions.ShowDialog()
         bResetSubdialog = False
         clsPlacketFunction.RemoveParameterByName("alpha")
+        clsPlacketFunction.RemoveParameterByName("minsize")
     End Sub
 End Class
