@@ -3203,7 +3203,7 @@ Public Class frmMain
         dlgCombine.ShowDialog()
     End Sub
 
-    Private Sub ImportFromEPICSAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromEPICSAToolStripMenuItem.Click
+    Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
     End Sub
 End Class
