@@ -1016,6 +1016,7 @@ Public Class dlgStartofRains
                 clsCombinedList.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_amount")
+                clsTRCombineOperator.RemoveParameterByName("tr_perc")
                 clsCombinedList.AddParameter("evap_frac", strSumFractionEvap, bIncludeArgumentName:=False, iPosition:=1)
                 clsTRCombineOperator.AddParameter("evap", strParameterValue:=strSumFractionEvap, iPosition:=1, bIncludeArgumentName:=False)
                 If Not ucrReceiverEvap.IsEmpty Then
