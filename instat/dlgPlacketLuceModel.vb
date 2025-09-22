@@ -129,7 +129,6 @@ Public Class dlgPlacketLuceModel
         clsGetVarMetadataFunction.SetAssignTo("get_index_names")
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
-        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorTraitsPL.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
 
         clsGetRankingOperator.SetOperation("$")
@@ -303,10 +302,8 @@ Public Class dlgPlacketLuceModel
         clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
-        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
 
         clsSndgetVarmataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
-        clsSndgetVarmataFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
         clsSndgetVarmataFunction.AddParameter("property", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=2)
         clsSndgetVarmataFunction.AddParameter("property_value", Chr(34) & "variety" & Chr(34), iPosition:=3)
         clsSndgetVarmataFunction.SetAssignTo("var_name")
