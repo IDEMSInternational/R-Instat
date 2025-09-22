@@ -373,7 +373,7 @@ Public Class dlgPlacketLuceModel
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetDataFrameFunction, New RParameter("x", 0, False), iAdditionalPairNo:=2)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetDataFrameFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsSndgetVarmataFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
         ucrReceiverMultipleTraits.SetRCode(clsVarFunction, bReset)
         ucrSelectorTraitsPL.SetRCode(clsGetVarMetadataFunction, bReset)
