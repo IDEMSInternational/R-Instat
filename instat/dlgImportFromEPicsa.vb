@@ -93,7 +93,7 @@ Public Class dlgImportFromEPicsa
         clsListDefinitionsFunction.SetPackageName("epicsawrap")
         clsListDefinitionsFunction.SetRCommand("list_definition_versions")
         clsListDefinitionsFunction.AddParameter("country", ucrInputComboCountry.GetText(), iPosition:=0)
-        clsListDefinitionsFunction.AddParameter("definitions_id", ucrInputDefinitionsID.GetText(), iPosition:=0)
+        clsListDefinitionsFunction.AddParameter("definition_id", ucrInputDefinitionsID.GetText(), iPosition:=0)
 
         clsGetDefinitionsData.SetPackageName("epicsawrap")
         clsGetDefinitionsData.SetRCommand("get_definitions_data")
@@ -109,7 +109,7 @@ Public Class dlgImportFromEPicsa
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlImportFromEPicsa.SetRCode(clsDummyFunction)
         ucrInputTokenPath.SetRCode(clsGcsFileFunction, bReset)
-        ucrInputDefinitionsID.SetRCode(clsListDefinitionsFunction, bReset)
+        ucrInputDefinitionsID.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("definition_id", 2))
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("country", 0), 1)
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsStationMetadataFunction, New RParameter("country", 0), 2)
         ucrSaveDefinitions.AddAdditionalRCode(clsStationMetadataFunction)
