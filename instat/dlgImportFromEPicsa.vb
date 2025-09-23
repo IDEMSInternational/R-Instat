@@ -37,7 +37,6 @@ Public Class dlgImportFromEPicsa
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
-        'DialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -54,7 +53,6 @@ Public Class dlgImportFromEPicsa
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoStation, "checked", "station")
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoData, "checked", "data")
         ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry, ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        'ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         rdoData.Enabled = False
 
