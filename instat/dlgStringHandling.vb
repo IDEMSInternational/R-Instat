@@ -24,6 +24,7 @@ Public Class dlgStringHandling
             clsReplaceCellFunction, clsCurrentNewColumnFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplaceGrepFunction As New RFunction
     Private clsPipeOperator, clsTildaOperator, clsDataFrameOperator, clsPipe2Operator, clsUnpackOperator,
         clsSelectOperator, clsEqualToOperator As New ROperator
+
     Private clsDummyFunction, clsFindDummyFunction, clsReplaceDummyFunction, clsColumnSelectionFunction,
         clsList1Function, clsList2Function, clsGetDataFrameFunction, clsPasteFunction, clsEverythingFunction,
         clsAcrossFunction, clsPaste2Function, clsEndsWithFunction, clsUnpackFunction, clsMutate2Function,
@@ -156,6 +157,8 @@ Public Class dlgStringHandling
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "col", "single")
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "col", "multiple")
 
+        ucrChkOverWriteColumns.SetText("Overwrite Columns")
+
         ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrPnlReplaceOptions, ucrPnlColumnSelectOptions}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
@@ -173,6 +176,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkOverWriteColumns, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
@@ -276,7 +280,8 @@ Public Class dlgStringHandling
 
         clsPipe2Operator.SetOperation("%>%")
         clsPipe2Operator.AddParameter("left", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
-        clsPipe2Operator.AddParameter("right", clsRFunctionParameter:=clsMutate2Function, iPosition:=1)
+        clsPipe2Operator.AddParameter("right", clsROperatorParameter:=clsUnpackOperator, iPosition:=1)
+        clsPipe2Operator.SetAssignTo("col")
 
         clsPaste2Function.SetRCommand("paste0")
         clsPaste2Function.AddParameter("names", """_""", iPosition:=0, bIncludeArgumentName:=False)
@@ -291,8 +296,8 @@ Public Class dlgStringHandling
         clsUnpackFunction.AddParameter("names_sep", """.""", iPosition:=1)
 
         clsUnpackOperator.SetOperation("%>%")
-        clsUnpackOperator.AddParameter("left", clsROperatorParameter:=clsPipe2Operator, iPosition:=0)
-        clsUnpackOperator.AddParameter("right", clsRFunctionParameter:=clsUnpackFunction, iPosition:=1)
+        clsUnpackOperator.AddParameter("left", clsRFunctionParameter:=clsMutate2Function, iPosition:=0)
+        clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
 
         clsNamesFunction.SetRCommand("names")
 
@@ -304,12 +309,11 @@ Public Class dlgStringHandling
         clsSelectFunction.AddParameter("select", clsRFunctionParameter:=clsAnyFunction, bIncludeArgumentName:=False)
 
         clsSelectOperator.SetOperation("%>%")
-        clsSelectOperator.AddParameter("left", clsROperatorParameter:=clsUnpackOperator, iPosition:=0)
+        clsSelectOperator.AddParameter("left", clsRFunctionParameter:=clsUnpackFunction, iPosition:=0)
         clsSelectOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
-        clsSelectOperator.SetAssignTo("col")
 
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
+        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsPipe2Operator, iPosition:=1)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
 
         clsEqualToOperator.SetOperation("==")

@@ -86,6 +86,7 @@ Partial Class dlgStringHandling
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
+        Me.ucrChkOverWriteColumns = New instat.ucrCheck()
         Me.grpModifiers.SuspendLayout()
         Me.grpDetectOptions.SuspendLayout()
         Me.grpFindOptions.SuspendLayout()
@@ -251,7 +252,7 @@ Partial Class dlgStringHandling
         '
         'cmdAddkeyboard
         '
-        Me.cmdAddkeyboard.Location = New System.Drawing.Point(400, 560)
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(400, 597)
         Me.cmdAddkeyboard.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.Size = New System.Drawing.Size(150, 34)
@@ -439,7 +440,7 @@ Partial Class dlgStringHandling
         Me.ucrInputBoundary.AutoSize = True
         Me.ucrInputBoundary.IsMultiline = False
         Me.ucrInputBoundary.IsReadOnly = False
-        Me.ucrInputBoundary.Location = New System.Drawing.Point(258, 513)
+        Me.ucrInputBoundary.Location = New System.Drawing.Point(258, 552)
         Me.ucrInputBoundary.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputBoundary.Name = "ucrInputBoundary"
         Me.ucrInputBoundary.Size = New System.Drawing.Size(206, 32)
@@ -449,7 +450,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkBoundary.AutoSize = True
         Me.ucrChkBoundary.Checked = False
-        Me.ucrChkBoundary.Location = New System.Drawing.Point(15, 514)
+        Me.ucrChkBoundary.Location = New System.Drawing.Point(15, 553)
         Me.ucrChkBoundary.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkBoundary.Name = "ucrChkBoundary"
         Me.ucrChkBoundary.Size = New System.Drawing.Size(210, 34)
@@ -468,7 +469,7 @@ Partial Class dlgStringHandling
         'ucrSaveStringHandling
         '
         Me.ucrSaveStringHandling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(15, 603)
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(15, 640)
         Me.ucrSaveStringHandling.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
         Me.ucrSaveStringHandling.Size = New System.Drawing.Size(549, 33)
@@ -478,7 +479,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkIncludeRegularExpressions.AutoSize = True
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(15, 560)
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(15, 597)
         Me.ucrChkIncludeRegularExpressions.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(358, 34)
@@ -537,7 +538,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(15, 642)
+        Me.ucrBase.Location = New System.Drawing.Point(16, 684)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -679,12 +680,23 @@ Partial Class dlgStringHandling
         Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(291, 42)
         Me.ucrPnlColumnSelectOptions.TabIndex = 71
         '
+        'ucrChkOverWriteColumns
+        '
+        Me.ucrChkOverWriteColumns.AutoSize = True
+        Me.ucrChkOverWriteColumns.Checked = False
+        Me.ucrChkOverWriteColumns.Location = New System.Drawing.Point(15, 511)
+        Me.ucrChkOverWriteColumns.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkOverWriteColumns.Name = "ucrChkOverWriteColumns"
+        Me.ucrChkOverWriteColumns.Size = New System.Drawing.Size(344, 34)
+        Me.ucrChkOverWriteColumns.TabIndex = 74
+        '
         'dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(722, 724)
+        Me.ClientSize = New System.Drawing.Size(722, 769)
+        Me.Controls.Add(Me.ucrChkOverWriteColumns)
         Me.Controls.Add(Me.ucrChkReplaceBy)
         Me.Controls.Add(Me.grpVar)
         Me.Controls.Add(Me.lblReplaceBy)
@@ -784,4 +796,5 @@ Partial Class dlgStringHandling
     Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents ucrChkOverWriteColumns As ucrCheck
 End Class
