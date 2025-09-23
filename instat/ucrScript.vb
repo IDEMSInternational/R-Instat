@@ -807,7 +807,7 @@ Public Class ucrScript
         End Try
 
         'replace the placeholder with the actual quarto script
-        strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript.Replace("\", "\\").Replace("""", "\"""))
+        strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript)
 
         RunRScript(strQuartoRenderScript, strComment)
     End Sub
