@@ -110,7 +110,6 @@ Public Class dlgImportFromEPicsa
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlImportFromEPicsa.SetRCode(clsDummyFunction)
-        'ucrInputComboCountry.SetRCode(clsListDefinitionsFunction, bReset)
         ucrInputTokenPath.SetRCode(clsGcsFileFunction, bReset)
         ucrInputDefinitionsID.SetRCode(clsListDefinitionsFunction, bReset)
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("country", 0), 1)
