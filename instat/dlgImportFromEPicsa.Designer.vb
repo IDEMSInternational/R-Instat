@@ -26,15 +26,16 @@ Partial Class dlgImportFromEPicsa
         '
         'dlgImportFromEPicsa
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(800, 686)
+        Me.ClientSize = New System.Drawing.Size(533, 457)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromEPicsa"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import from e-Picsa"
+        Me.Text = "Import from e-PICSA"
         Me.ResumeLayout(False)
 
     End Sub
