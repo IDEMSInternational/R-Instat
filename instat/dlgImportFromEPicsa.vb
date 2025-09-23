@@ -14,8 +14,212 @@
 ' You should have received a copy of the GNU General Public License
 
 ' along with this program. If not, see <http://www.gnu.org/licenses/>.
-Public Class dlgImportFromEPicsa
-    Private Sub dlgImportFromEPicsa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+Imports instat.Translations
+Imports System.IO
+Imports RDotNet
+
+Public Class dlgImportFromEPicsa
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
+    Private clsDummyFunction, clsGcsFileFunction, clsListDefinitionsFunction, clsGetDefinitionsData, clsStationMetadataFunction As New RFunction
+    Private Sub dlgImportFromEPicsa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
+        autoTranslate(Me)
+        'DialogSize()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        Dim dctCountry As New Dictionary(Of String, String)
+        dctCountry.Add("mw", Chr(34) & "mw" & Chr(34))
+        dctCountry.Add("zm", Chr(34) & "zm" & Chr(34))
+        dctCountry.Add("zm_workshops", Chr(34) & "zm_workshops" & Chr(34))
+        dctCountry.Add("mw_workshops", Chr(34) & "mw_workshops" & Chr(34))
+
+        ucrPnlImportFromEPicsa.AddRadioButton(rdoDefinitions)
+        ucrPnlImportFromEPicsa.AddRadioButton(rdoStation)
+        ucrPnlImportFromEPicsa.AddRadioButton(rdoData)
+        ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoDefinitions, "checked", "definitions")
+        ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoStation, "checked", "station")
+        ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoData, "checked", "data")
+        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry, ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        'ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        rdoData.Enabled = False
+
+        ucrInputTokenPath.SetParameter(New RParameter("filename", 0))
+        ucrInputTokenPath.SetLinkedDisplayControl(lblToken)
+
+        ucrInputComboCountry.SetParameter(New RParameter("country", 1))
+        ucrInputComboCountry.SetItems(dctCountry)
+        ucrInputComboCountry.SetRDefault(Chr(34) & "mw" & Chr(34))
+        ucrInputComboCountry.SetLinkedDisplayControl(lblCountry)
+
+        ucrInputDefinitionsID.SetParameter(New RParameter("definitions_id", 2))
+        ucrInputDefinitionsID.SetLinkedDisplayControl(lblDefinitionsID)
+
+        ucrInputComboFindFiles.SetParameter(New RParameter("file", 3))
+        ucrInputComboFindFiles.SetDropDownStyleAsNonEditable()
+        ucrInputComboFindFiles.bAllowNonConditionValues = True
+
+        ucrSaveDefinitions.SetIsTextBox()
+        ucrSaveDefinitions.ucrInputTextSave.bAutoChangeOnLeave = True
+
+    End Sub
+
+    Private Sub SetDefaults()
+        clsDummyFunction = New RFunction
+        clsListDefinitionsFunction = New RFunction
+        clsGetDefinitionsData = New RFunction
+        clsGcsFileFunction = New RFunction
+        clsStationMetadataFunction = New RFunction
+
+        rdoData.Enabled = False
+
+        clsDummyFunction.AddParameter("checked", "definitions", iPosition:=0)
+
+        clsGcsFileFunction.SetPackageName("epicsawrap")
+        clsGcsFileFunction.SetRCommand("gcs_auth_file")
+
+        clsListDefinitionsFunction.SetPackageName("epicsawrap")
+        clsListDefinitionsFunction.SetRCommand("list_definition_versions")
+        clsListDefinitionsFunction.AddParameter("country", ucrInputComboCountry.GetText(), iPosition:=0)
+        clsListDefinitionsFunction.AddParameter("definitions_id", ucrInputDefinitionsID.GetText(), iPosition:=0)
+
+        clsGetDefinitionsData.SetPackageName("epicsawrap")
+        clsGetDefinitionsData.SetRCommand("get_definitions_data")
+
+        clsStationMetadataFunction.SetPackageName("epicsawrap")
+        clsStationMetadataFunction.SetRCommand("station_metadata")
+        clsStationMetadataFunction.AddParameter("include_definitions", "FALSE", iPosition:=2)
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGcsFileFunction, iPosition:=1)
+        changeBaseFunctions()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlImportFromEPicsa.SetRCode(clsDummyFunction)
+        'ucrInputComboCountry.SetRCode(clsListDefinitionsFunction, bReset)
+        ucrInputTokenPath.SetRCode(clsGcsFileFunction, bReset)
+        ucrInputDefinitionsID.SetRCode(clsListDefinitionsFunction, bReset)
+        ucrInputComboCountry.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("country", 0), 1)
+        ucrInputComboCountry.AddAdditionalCodeParameterPair(clsStationMetadataFunction, New RParameter("country", 0), 2)
+        ucrSaveDefinitions.AddAdditionalRCode(clsStationMetadataFunction)
+
+        ucrInputComboCountry.SetRCode(clsGetDefinitionsData, bReset)
+        ucrInputDefinitionsID.SetRCode(clsGetDefinitionsData, bReset)
+        ucrInputComboFindFiles.SetRCode(clsGetDefinitionsData, bReset)
+        ucrSaveDefinitions.SetRCode(clsGetDefinitionsData, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If rdoDefinitions.Checked Then
+            If Not ucrInputTokenPath.IsEmpty AndAlso Not ucrInputDefinitionsID.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoStation.Checked Then
+            If Not ucrInputTokenPath.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub AllControls_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrPnlImportFromEPicsa.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged,
+        ucrInputComboCountry.ControlContentsChanged, ucrInputDefinitionsID.ControlContentsChanged, ucrInputComboFindFiles.ControlContentsChanged
+        changeBaseFunctions()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdFindFiles_Click(sender As Object, e As EventArgs) Handles cmdFindFiles.Click
+        Dim strFormNames() As String
+        Dim expTemp As SymbolicExpression
+
+        Cursor = Cursors.WaitCursor
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListDefinitionsFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
+        Cursor = Cursors.Default
+        If expTemp IsNot Nothing Then
+            strFormNames = expTemp.AsCharacter().ToArray()
+            If strFormNames.Length > 0 Then
+                ucrInputComboFindFiles.SetItems(strFormNames)
+                ucrInputComboFindFiles.SetName(ucrInputComboFindFiles.cboInput.Items(0))
+            Else
+                ucrInputComboFindFiles.cboInput.Items.Clear()
+            End If
+        Else
+            ucrInputComboFindFiles.cboInput.Items.Clear()
+        End If
+    End Sub
+
+    Private Sub ucrPnlImportFromEPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlImportFromEPicsa.ControlValueChanged, ucrInputTokenPath.ControlValueChanged
+        If rdoStation.Checked Then
+            cmdFindFiles.Visible = False
+            ucrInputComboCountry.Visible = True
+            clsDummyFunction.AddParameter("checked", "station", iPosition:=0)
+            'ElseIf rdoData.Checked Then
+            '    cmdFindFiles.Visible = False
+            '    clsDummyFunction.AddParameter("checked", "data", iPosition:=0)
+        ElseIf rdoDefinitions.Checked Then
+            cmdFindFiles.Visible = True
+            clsDummyFunction.AddParameter("checked", "definitions", iPosition:=0)
+        End If
+        ChangeSaveType()
+        changeBaseFunctions()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        Using dlgOpen As New OpenFileDialog
+            dlgOpen.Filter = "JSON Files|*.json"
+            dlgOpen.Title = "Import JSON File"
+
+            dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputTokenPath.GetText(), "/", "\"))
+
+            If dlgOpen.ShowDialog() = DialogResult.OK AndAlso dlgOpen.FileName <> "" Then
+                ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
+            End If
+        End Using
+    End Sub
+
+    Private Sub ChangeSaveType()
+        If rdoDefinitions.Checked Then
+            ucrSaveDefinitions.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+            ucrSaveDefinitions.SetName("last_definition")
+            ucrSaveDefinitions.SetLabelText("Definition Name:")
+        ElseIf rdoStation.Checked Then
+            ucrSaveDefinitions.SetSaveTypeAsDataFrame()
+            ucrSaveDefinitions.SetName("last_dataframe")
+            ucrSaveDefinitions.SetLabelText("Dataframe Name:")
+        End If
+    End Sub
+
+    Private Sub changeBaseFunctions()
+        If rdoDefinitions.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetDefinitionsData)
+        ElseIf rdoStation.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStationMetadataFunction)
+        End If
     End Sub
 End Class
