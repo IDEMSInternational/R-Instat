@@ -86,6 +86,7 @@ Public Class dlgImportFromEPicsa
 
         rdoData.Enabled = False
         ucrInputComboCountry.SetText("mw")
+        ucrInputComboFindFiles.cboInput.Items.Clear()
 
         clsDummyFunction.AddParameter("checked", "definitions", iPosition:=0)
 
@@ -158,6 +159,8 @@ Public Class dlgImportFromEPicsa
         Dim expTemp As SymbolicExpression
 
         Cursor = Cursors.WaitCursor
+        ' Running the gcs_auth_file function internally first
+        frmMain.clsRLink.RunInternalScriptGetValue(clsGcsFileFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListDefinitionsFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         Cursor = Cursors.Default
         If expTemp IsNot Nothing Then
