@@ -116,12 +116,16 @@ Public Class ucrGeomListWithParameters
         ucrChkApplyOnAllLayers.Checked = bApplyAesGlobally
         ucrChkIgnoreGlobalAes.SetRCode(clsGeomFunction, bReset)
         If ucrChkApplyOnAllLayers.Checked AndAlso ucrChkIgnoreGlobalAes.Checked Then
-            MsgBox("Error: Cannot check both 'Apply On All Layers' and 'Ignore Global Aesthetics' as this will remove all aesthetics from this layer. Setting both values to checked.", vbOKOnly)
+            MsgBox("Error: Cannot check both 'Apply On All Layers' and 'Ignore Global Aesthetics' as this will remove all aesthetics from this layer. Setting both values to unchecked.", vbOKOnly)
             ucrChkApplyOnAllLayers.Checked = False
             ucrChkIgnoreGlobalAes.Checked = False
         End If
         bAllowShowGlobalAsLocal = True
-
+        If ucrChkIgnoreGlobalAes.Checked Then
+            ucrChkApplyOnAllLayers.Checked = False
+        Else
+            ucrChkApplyOnAllLayers.Show()
+        End If
         ' This might stay as data frame depends on global/local option and therefore can't be linked to a function
         InitialiseSelectedDataFrame()
 
@@ -234,6 +238,25 @@ Public Class ucrGeomListWithParameters
         End If
         SetParameters()
         SetInterAes()
+        ShowHideControls()
+    End Sub
+
+    Private Sub ShowHideControls()
+        Dim filledCount As Integer = 0
+
+        For Each receiver In lstAesParameterReceivers
+            If Not receiver.IsEmpty Then
+                filledCount += 1
+            End If
+        Next
+
+        If filledCount <= 1 OrElse (lstAesParameterReceivers.Count - filledCount) > 2 Then
+            ucrChkIgnoreGlobalAes.Hide()
+            ucrChkApplyOnAllLayers.Hide()
+        Else
+            ucrChkIgnoreGlobalAes.Show()
+            ucrChkApplyOnAllLayers.Show()
+        End If
     End Sub
 
     Public Function TestForOkEnabled() As Boolean
@@ -293,11 +316,13 @@ Public Class ucrGeomListWithParameters
         'Warning: the dataframe needs to be set first. Indeed, this will enable IgnoreGlobalAes in the "datafram_changed" sub. In the same sub, Ignore global aes will be unticked and thus setAes called. If not done in this order, Ignore global aes is unticked below before the check box has been enabled and thus the event IngnoreGlobalAes.check.changed is not raised, and set aes never called.
         If ucrChkApplyOnAllLayers.Checked Then
             ucrChkIgnoreGlobalAes.Checked = False
-            ucrChkIgnoreGlobalAes.Hide()
         Else
             ucrChkIgnoreGlobalAes.Show()
         End If
+        ucrChkIgnoreGlobalAes.Show()
+
         SetReceiverColour()
+        ShowHideControls()
     End Sub
 
     Private Sub AddRFunctionParameter(parentFunction As RFunction, paramName As String, paramValue As String)
