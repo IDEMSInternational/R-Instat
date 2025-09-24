@@ -166,10 +166,12 @@ Public Class dlgImportFromEPicsa
         Dim strFormNames() As String
         Dim cleanedFileNames() As String
         Dim expTemp As SymbolicExpression
+        Dim expTemp2 As SymbolicExpression
+
 
         Cursor = Cursors.WaitCursor
         ' Running the gcs_auth_file function internally first
-        frmMain.clsRLink.RunInternalScriptGetValue(clsGcsFileFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
+        expTemp2 = frmMain.clsRLink.RunInternalScriptGetValue(clsGcsFileFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListDefinitionsFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         Cursor = Cursors.Default
         If expTemp IsNot Nothing Then
