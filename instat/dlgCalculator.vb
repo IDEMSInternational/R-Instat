@@ -232,8 +232,39 @@ Public Class dlgCalculator
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
         End If
 
-        ' Update command string and clear input try message name
-        ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
+
+        Dim strExpr As String = ucrCalc.ucrReceiverForCalculation.GetVariableNames(False)
+        Dim strSaveName As String = ucrCalc.ucrSaveResultInto.GetText()
+        Dim bSavingToColumn As Boolean = ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete AndAlso Not ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked
+
+        If bSavingToColumn AndAlso Not String.IsNullOrEmpty(dataFrameName) AndAlso Not String.IsNullOrEmpty(strExpr) AndAlso Not String.IsNullOrEmpty(strSaveName) Then
+
+            Dim dataBook As String = frmMain.clsRLink.strInstatDataObject
+            Dim dfVar As String = "`_df`"
+            Dim dfFullVar As String = "`_df_full`"
+            Dim saveNameBackticked As String = "`" & strSaveName & "`"
+
+            Dim sb As New System.Text.StringBuilder()
+            sb.AppendLine(dfVar & " <- " & dataBook & "$get_data_frame(data_name=""" & dataFrameName & """, use_current_filter=TRUE)")
+            sb.AppendLine(dfFullVar & " <- " & dataBook & "$get_data_frame(data_name=""" & dataFrameName & """, use_current_filter=FALSE)")
+            sb.AppendLine("attach(what = " & dfVar & ")")
+            sb.AppendLine(saveNameBackticked & " <- " & strExpr)
+            sb.AppendLine("detach(name = " & dfVar & ", unload = TRUE)")
+            sb.AppendLine("filter_index <- rownames(" & dfFullVar & ") %in% rownames(" & dfVar & ")")
+            sb.AppendLine("calc_full <- get0(" & Chr(34) & strSaveName & Chr(34) & ", envir = as.environment(" & dfFullVar & "), ifnotfound = rep(NA, nrow(" & dfFullVar & ")))")
+            sb.AppendLine("calc_full[filter_index] <- " & saveNameBackticked)
+            sb.AppendLine("calc_full")
+
+            ucrBase.clsRsyntax.SetCommandString(sb.ToString())
+
+            ucrBase.clsRsyntax.SetAssignTo("calc_full", strTempDataframe:=dataFrameName, strTempColumn:=strSaveName,
+                                           bAssignToIsPrefix:=False,
+                                           bAssignToColumnWithoutNames:=False,
+                                           bInsertColumnBefore:=False,
+                                           bRequireCorrectLength:=True)
+        Else
+            ucrBase.clsRsyntax.SetCommandString(strExpr)
+        End If
 
         ' Test if OK button can be enabled
         TestOKEnabled()
