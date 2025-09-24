@@ -304,7 +304,7 @@ Public Class dlgPlacketLuceModel
 
         clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
         clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
-
+        
         clsSndgetVarmataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
         clsSndgetVarmataFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
         clsSndgetVarmataFunction.AddParameter("property", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=2)
@@ -373,7 +373,7 @@ Public Class dlgPlacketLuceModel
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetDataFrameFunction, New RParameter("x", 0, False), iAdditionalPairNo:=2)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetDataFrameFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsSndgetVarmataFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
         ucrReceiverMultipleTraits.SetRCode(clsVarFunction, bReset)
         ucrSelectorTraitsPL.SetRCode(clsGetVarMetadataFunction, bReset)
@@ -454,5 +454,7 @@ Public Class dlgPlacketLuceModel
         sdgPLModelOptions.ucrChkMethod.Enabled = True
         sdgPLModelOptions.ShowDialog()
         bResetSubdialog = False
+        clsPlacketFunction.RemoveParameterByName("alpha")
+        clsPlacketFunction.RemoveParameterByName("minsize")
     End Sub
 End Class
