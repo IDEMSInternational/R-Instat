@@ -52,7 +52,8 @@ Public Class dlgImportFromEPicsa
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoDefinitions, "checked", "definitions")
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoStation, "checked", "station")
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoData, "checked", "data")
-        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry, ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry}, {rdoDefinitions, rdoStation}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         rdoData.Enabled = False
 
@@ -61,7 +62,7 @@ Public Class dlgImportFromEPicsa
 
         ucrInputComboCountry.SetParameter(New RParameter("country", 1))
         ucrInputComboCountry.SetItems(dctCountry)
-        ucrInputComboCountry.SetRDefault(Chr(34) & "mw" & Chr(34))
+        ucrInputComboCountry.SetText("mw")
         ucrInputComboCountry.SetLinkedDisplayControl(lblCountry)
 
         ucrInputDefinitionsID.SetParameter(New RParameter("definitions_id", 2))
@@ -84,6 +85,7 @@ Public Class dlgImportFromEPicsa
         clsStationMetadataFunction = New RFunction
 
         rdoData.Enabled = False
+        ucrInputComboCountry.SetText("mw")
 
         clsDummyFunction.AddParameter("checked", "definitions", iPosition:=0)
 
@@ -112,9 +114,10 @@ Public Class dlgImportFromEPicsa
         ucrInputDefinitionsID.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("definition_id", 2))
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("country", 0), 1)
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsStationMetadataFunction, New RParameter("country", 0), 2)
+
         ucrSaveDefinitions.AddAdditionalRCode(clsStationMetadataFunction)
 
-        ucrInputComboCountry.SetRCode(clsGetDefinitionsData, bReset)
+        ucrInputComboCountry.AddAdditionalCodeParameterPair(clsGetDefinitionsData, New RParameter("country", 0), 3)
         ucrInputDefinitionsID.SetRCode(clsGetDefinitionsData, bReset)
         ucrInputComboFindFiles.SetRCode(clsGetDefinitionsData, bReset)
         ucrSaveDefinitions.SetRCode(clsGetDefinitionsData, bReset)
@@ -173,7 +176,6 @@ Public Class dlgImportFromEPicsa
     Private Sub ucrPnlImportFromEPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlImportFromEPicsa.ControlValueChanged, ucrInputTokenPath.ControlValueChanged
         If rdoStation.Checked Then
             cmdFindFiles.Visible = False
-            ucrInputComboCountry.Visible = True
             clsDummyFunction.AddParameter("checked", "station", iPosition:=0)
             'ElseIf rdoData.Checked Then
             '    cmdFindFiles.Visible = False
