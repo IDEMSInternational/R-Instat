@@ -154,8 +154,17 @@ Public Class dlgImportFromEPicsa
         TestOkEnabled()
     End Sub
 
+    Private Function CleanFileNames(strNamesArray As String())
+        Dim newStrNamesArray As New List(Of String)
+        For Each filePath As String In strNamesArray
+            newStrNamesArray.Add(Path.GetFileNameWithoutExtension(filePath))
+        Next
+        Return newStrNamesArray.ToArray()
+    End Function
+
     Private Sub cmdFindFiles_Click(sender As Object, e As EventArgs) Handles cmdFindFiles.Click
         Dim strFormNames() As String
+        Dim cleanedFileNames() As String
         Dim expTemp As SymbolicExpression
 
         Cursor = Cursors.WaitCursor
@@ -165,8 +174,9 @@ Public Class dlgImportFromEPicsa
         Cursor = Cursors.Default
         If expTemp IsNot Nothing Then
             strFormNames = expTemp.AsCharacter().ToArray()
-            If strFormNames.Length > 0 Then
-                ucrInputComboFindFiles.SetItems(strFormNames)
+            cleanedFileNames = CleanFileNames(strFormNames)
+            If cleanedFileNames.Length > 0 Then
+                ucrInputComboFindFiles.SetItems(cleanedFileNames)
                 ucrInputComboFindFiles.SetName(ucrInputComboFindFiles.cboInput.Items(0))
             Else
                 ucrInputComboFindFiles.cboInput.Items.Clear()
