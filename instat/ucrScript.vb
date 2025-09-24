@@ -326,7 +326,12 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub AddTab(Optional bIsLogTab As Boolean = False)
+    Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False)
+        If enumScriptTypeNew <> ScriptType.rScript AndAlso enumScriptTypeNew <> ScriptType.quarto Then
+            MsgBox("Developer error: The new tab cannot be " & enumScriptType.ToString() & ", it must be R script or Quarto.", MsgBoxStyle.Critical, "New Tab")
+            Exit Sub
+        End If
+
         clsScriptActive = New Scintilla With {
             .ContextMenuStrip = mnuContextScript,
             .Dock = DockStyle.Fill,
@@ -344,7 +349,28 @@ Public Class ucrScript
         'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
 
-        SetupScriptEditorR()
+        Select Case enumScriptTypeNew
+            Case ScriptType.quarto
+                enumScriptType = ScriptType.quarto
+                SetupScriptEditorQuarto()
+                clsScriptActive.Text =
+                        "---" & Environment.NewLine &
+                        "title: ""R-Instat""" & Environment.NewLine &
+                        "format:" & Environment.NewLine &
+                        "  docx: default" & Environment.NewLine &
+                        "  html: default" & Environment.NewLine &
+                        "  pdf:  default" & Environment.NewLine &
+                        "editor: visual" & Environment.NewLine &
+                        "---" & Environment.NewLine & Environment.NewLine
+                clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+            Case ScriptType.rScript
+                enumScriptType = ScriptType.rScript
+                SetupScriptEditorR()
+            Case Else
+                'this line of code should never be reached
+                Throw New NotImplementedException("The New tab must be R script Or Quarto.")
+        End Select
+
         SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
@@ -381,7 +407,9 @@ Public Class ucrScript
             clsScriptLog.ReadOnly = True
         Else
             Static iTabCounter As Integer = 1
-            tabPageAdded.Text = "Untitled" & iTabCounter
+            Dim strTabLabel As String = "Untitled" & iTabCounter _
+                                        & If(enumScriptTypeNew = ScriptType.quarto, ".qmd", "")
+            tabPageAdded.Text = strTabLabel
             iTabCounter += 1
         End If
 
@@ -998,8 +1026,12 @@ Public Class ucrScript
         HighlightPairedBracket()
     End Sub
 
-    Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
-        AddTab()
+    Private Sub cmdAddQuartoTab_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemNewQuartoScript.Click
+        AddTab(enumScriptTypeNew:=ScriptType.quarto)
+    End Sub
+
+    Private Sub cmdAddRTab_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemNewRScript.Click, cmdAddTab.Click
+        AddTab(enumScriptTypeNew:=ScriptType.rScript)
     End Sub
 
     Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
@@ -1199,9 +1231,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
+        Dim strMsg As String = If(enumScriptType = ScriptType.rScript,
+                                       "Are you sure you want to run all the R script in the window?",
+                                       "Are you sure you want to render all the Quarto script in the window?")
         If clsScriptActive.TextLength < 1 _
-                OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
-                              vbYesNo, "Run All") = vbNo Then
+                OrElse MsgBox(strMsg, vbYesNo, "Run All") = vbNo Then
             Exit Sub
         End If
 
