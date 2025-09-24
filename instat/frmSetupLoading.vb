@@ -14,9 +14,61 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Threading
+
 Public Class frmSetupLoading
     Private dctMessagesLinks As Dictionary(Of String, String)
     Private iSelectedMessage As Integer
+    Private Shared CancellationTokenSource As CancellationTokenSource
+
+    ''' <summary>
+    ''' Display a loading screen in seperate flag in order to keep the
+    ''' loading screens responsiveness
+    ''' </summary>
+    Public Shared Sub ShowLoadingScreen()
+        If CancellationTokenSource IsNot Nothing Then
+            HideLoadingScreen()
+        End If
+        CancellationTokenSource = New CancellationTokenSource
+        'Ignore the warning - we only want to keep this dialog responsive it doesn't mater
+        'that its not awaited 
+#Disable Warning BC42358 ' Because this call is not awaited, execution of the current method continues before the call is completed
+        ShowLoadingScreenAsync(CancellationTokenSource.Token)
+#Enable Warning BC42358 ' Because this call is not awaited, execution of the current method continues before the call is completed
+    End Sub
+
+    ''' <summary>
+    ''' Hide currently displayed loading screen
+    ''' </summary>
+    Public Shared Sub HideLoadingScreen()
+        If CancellationTokenSource IsNot Nothing Then
+            CancellationTokenSource.Cancel()
+            CancellationTokenSource.Dispose()
+            CancellationTokenSource = Nothing
+        End If
+    End Sub
+    Private Shared Async Function ShowLoadingScreenAsync(CancellationToken As CancellationToken) As Task
+        Await Task.Run(Sub() ShowLoadingScreenAndWait(CancellationToken), CancellationToken)
+    End Function
+    Private Shared Sub ShowLoadingScreenAndWait(CancellationToken As CancellationToken)
+        Dim iWaitSecondsBeforeShow As Integer = 2
+        Dim iWaitSecondsBeforeAbort As Integer = 30
+        Dim stopwatch As New Stopwatch
+        stopwatch.Start()
+        'Wait before showing loading screen
+        Thread.Sleep(iWaitSecondsBeforeShow * 1000)
+        If Not CancellationToken.IsCancellationRequested Then
+            frmSetupLoading.Show()
+        End If
+        'Timeout called incase HideLoadingScreen is never called
+        While (Not CancellationToken.IsCancellationRequested) And stopwatch.ElapsedMilliseconds < (iWaitSecondsBeforeAbort * 1000)
+            Threading.Thread.Sleep(5)
+            Application.DoEvents()
+        End While
+        frmSetupLoading.Close()
+    End Sub
+
+
 
     Private Sub frmSetupLoading_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dctMessagesLinks = New Dictionary(Of String, String)
