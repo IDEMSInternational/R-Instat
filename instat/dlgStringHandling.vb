@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Diagnostics.Eventing.Reader
 Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
@@ -43,6 +44,7 @@ Public Class dlgStringHandling
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        ReopenDialog()
         TestOkEnabled()
         AddSavePrefix()
 
@@ -550,7 +552,7 @@ Public Class dlgStringHandling
         End If
     End Sub
 
-    Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged,
+    Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrChkOverWriteColumns.ControlValueChanged,
         ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrSelectorStringHandling.ControlValueChanged,
         ucrInputReplaceNaBy.ControlValueChanged, ucrPnlReplaceOptions.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged, ucrReceiverStringHandling.ControlValueChanged
         AddSavePrefix()
@@ -611,23 +613,41 @@ Public Class dlgStringHandling
                 clsFindDummyFunction.AddParameter("string_handling", "replace", iPosition:=3)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
+                If Not ucrChkOverWriteColumns.Checked Then
+                    If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
+                        clsAcrossFunction.RemoveParameterByName(".fns")
+                        clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
+                        clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+                        ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
+                        If rdoReplaceFirst.Checked Then
+                            clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        ElseIf rdoReplaceAll.Checked Then
+                            clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        End If
 
-                If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
-                    clsAcrossFunction.RemoveParameterByName(".fns")
-                    clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
-                    clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
-                    If rdoReplaceFirst.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    ElseIf rdoReplaceAll.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    ElseIf rdoReplaceCell.Checked Then
+                        clsAcrossFunction.RemoveParameterByName("tilda")
+                        clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
+                        clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+                        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsColumnSelectionFunction)
                     End If
-
-                ElseIf rdoReplaceCell.Checked Then
+                Else
                     clsAcrossFunction.RemoveParameterByName("tilda")
-                    clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
-                    clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsColumnSelectionFunction)
+                    clsAcrossFunction.RemoveParameterByName(".names")
+                    clsUnpackOperator.RemoveParameterByName("right")
+                    If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
+                        ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
+                        clsAcrossFunction.RemoveParameterByName(".fns")
+
+                        If rdoReplaceFirst.Checked Then
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        ElseIf rdoReplaceAll.Checked Then
+                            clsAcrossFunction.RemoveParameterByName(".fns")
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        End If
+                    ElseIf rdoReplaceCell.Checked Then
+                        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsColumnSelectionFunction)
+                    End If
                 End If
             End If
         ElseIf rdoReplaceNa.Checked Then
@@ -819,5 +839,8 @@ Public Class dlgStringHandling
         Else
             ucrSaveStringHandling.btnColumnPosition.Visible = True
         End If
+    End Sub
+    Private Sub ReopenDialog()
+        ucrChkOverWriteColumns.Checked = False
     End Sub
 End Class
