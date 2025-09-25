@@ -97,7 +97,7 @@ Public Class ucrScript
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Dim strRunStatementSelectionToolTip As String = "Run the current statement or selection. (Ctrl+Enter)"
-        Dim strRunAllToolTip As String = "Run all the text in the tab. (Ctrl+Alt+R)"
+        Dim strRunAllToolTip As String = "If R script, run everything in the tab; if Quarto script, render everything in the tab. (Ctrl+Alt+R)"
         Dim strLoadToolTip As String = "Load from file into the current tab."
         Dim strSaveToolTip As String = "Save the contents of the current tab to a file."
 
@@ -162,13 +162,15 @@ Public Class ucrScript
             Exit Sub
         End If
 
+        Dim strTextToAppend As String = If(enumScriptType = ScriptType.quarto, "```{r}" & strText & "```" & Environment.NewLine, strText)
+
         If bAppendAtCurrentCursorPosition Then
-            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText & Environment.NewLine)
+            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strTextToAppend & Environment.NewLine)
             ' Todo. find a way of going to the last position of the inserted "group of text".
             ' Currently this just goes to the last position of the first line of inserted text
             clsScriptActive.GotoPosition(clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition)
         Else
-            clsScriptActive.AppendText(Environment.NewLine & strText)
+            clsScriptActive.AppendText(Environment.NewLine & strTextToAppend)
             clsScriptActive.GotoPosition(clsScriptActive.TextLength)
         End If
 
@@ -820,7 +822,7 @@ Public Class ucrScript
         End Try
     End Sub
 
-    Private Sub RunQuartoScript(strScript As String, strComment As String)
+    Private Function GetQuartoRenderScript(strScript As String) As String
         Dim strQuartoRenderScriptPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R", "renderQuarto.R")
         Dim strQuartoRenderScript As String = ""
 
@@ -831,14 +833,14 @@ Public Class ucrScript
             MsgBox("Could not read the quarto render script from:" & Environment.NewLine _
                    & strQuartoRenderScriptPath & Environment.NewLine & Environment.NewLine _
                    & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Render Script")
-            Exit Sub
+            Return ""
         End Try
 
         'replace the placeholder with the actual quarto script
         strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript)
 
-        RunRScript(strQuartoRenderScript, strComment)
-    End Sub
+        Return strQuartoRenderScript
+    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -1239,15 +1241,21 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        If enumScriptType = ScriptType.rScript Then
-            RunRScript(clsScriptActive.Text, "Code run from Script Window (all text)")
-        ElseIf enumScriptType = ScriptType.quarto Then
-            RunQuartoScript(clsScriptActive.Text, "Code to render the Quarto script in the Script Window (all text)")
-        Else
-            MsgBox("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
-            Exit Sub
-        End If
+        Dim strScriptToRun As String = ""
+        Dim strComment As String = ""
+        Select Case enumScriptType
+            Case ScriptType.rScript
+                strScriptToRun = clsScriptActive.Text
+                strComment = "Code run from Script Window (all text)"
+            Case ScriptType.quarto
+                strScriptToRun = GetQuartoRenderScript(clsScriptActive.Text)
+                strComment = "Code to render the Quarto script in the Script Window (all text)"
+            Case Else
+                MsgBox("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
+                Exit Sub
+        End Select
 
+        RunRScript(strScriptToRun, strComment)
         SetFocusAndScrollCaret()
     End Sub
 
