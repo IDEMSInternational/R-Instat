@@ -25,6 +25,7 @@ Public Class dlgImportFromEPicsa
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction, clsGcsFileFunction, clsListDefinitionsFunction, clsGetDefinitionsData, clsStationMetadataFunction As New RFunction
+
     Private Sub dlgImportFromEPicsa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -41,10 +42,6 @@ Public Class dlgImportFromEPicsa
 
     Private Sub InitialiseDialog()
         Dim dctCountry As New Dictionary(Of String, String)
-        dctCountry.Add("mw", Chr(34) & "mw" & Chr(34))
-        dctCountry.Add("zm", Chr(34) & "zm" & Chr(34))
-        dctCountry.Add("zm_workshops", Chr(34) & "zm_workshops" & Chr(34))
-        dctCountry.Add("mw_workshops", Chr(34) & "mw_workshops" & Chr(34))
 
         ucrPnlImportFromEPicsa.AddRadioButton(rdoDefinitions)
         ucrPnlImportFromEPicsa.AddRadioButton(rdoStation)
@@ -52,15 +49,22 @@ Public Class dlgImportFromEPicsa
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoDefinitions, "checked", "definitions")
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoStation, "checked", "station")
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoData, "checked", "data")
+
         ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry}, {rdoDefinitions, rdoStation}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
+        ' This tab is disabled for now. Will be implemented later
         rdoData.Enabled = False
+
 
         ucrInputTokenPath.SetParameter(New RParameter("filename", 0))
         ucrInputTokenPath.SetLinkedDisplayControl(lblToken)
 
         ucrInputComboCountry.SetParameter(New RParameter("country", 1))
+        dctCountry.Add("mw", Chr(34) & "mw" & Chr(34))
+        dctCountry.Add("zm", Chr(34) & "zm" & Chr(34))
+        dctCountry.Add("zm_workshops", Chr(34) & "zm_workshops" & Chr(34))
+        dctCountry.Add("mw_workshops", Chr(34) & "mw_workshops" & Chr(34))
         ucrInputComboCountry.SetItems(dctCountry)
         ucrInputComboCountry.SetText("mw")
         ucrInputComboCountry.SetLinkedDisplayControl(lblCountry)
@@ -110,15 +114,15 @@ Public Class dlgImportFromEPicsa
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlImportFromEPicsa.SetRCode(clsDummyFunction)
-        ucrInputTokenPath.SetRCode(clsGcsFileFunction, bReset)
         ucrInputDefinitionsID.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("definition_id", 2))
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsListDefinitionsFunction, New RParameter("country", 0), 1)
         ucrInputComboCountry.AddAdditionalCodeParameterPair(clsStationMetadataFunction, New RParameter("country", 0), 2)
+        ucrInputComboCountry.AddAdditionalCodeParameterPair(clsGetDefinitionsData, New RParameter("country", 0), 3)
 
         ucrSaveDefinitions.AddAdditionalRCode(clsStationMetadataFunction)
 
-        ucrInputComboCountry.AddAdditionalCodeParameterPair(clsGetDefinitionsData, New RParameter("country", 0), 3)
+        ucrPnlImportFromEPicsa.SetRCode(clsDummyFunction)
+        ucrInputTokenPath.SetRCode(clsGcsFileFunction, bReset)
         ucrInputDefinitionsID.SetRCode(clsGetDefinitionsData, bReset)
         ucrInputComboFindFiles.SetRCode(clsGetDefinitionsData, bReset)
         ucrSaveDefinitions.SetRCode(clsGetDefinitionsData, bReset)
@@ -192,9 +196,6 @@ Public Class dlgImportFromEPicsa
         If rdoStation.Checked Then
             cmdFindFiles.Visible = False
             clsDummyFunction.AddParameter("checked", "station", iPosition:=0)
-            'ElseIf rdoData.Checked Then
-            '    cmdFindFiles.Visible = False
-            '    clsDummyFunction.AddParameter("checked", "data", iPosition:=0)
         ElseIf rdoDefinitions.Checked Then
             cmdFindFiles.Visible = True
             clsDummyFunction.AddParameter("checked", "definitions", iPosition:=0)
@@ -236,4 +237,5 @@ Public Class dlgImportFromEPicsa
             ucrBase.clsRsyntax.SetBaseRFunction(clsStationMetadataFunction)
         End If
     End Sub
+
 End Class
