@@ -17,7 +17,6 @@
 Imports instat
 Imports instat.dlgVisualizeData
 Imports instat.Translations
-Imports unvell.ReoGrid.IO.OpenXML.Schema
 Public Class dlgBoxplot
     Public enumBoxplotMode As String = BoxplotMode.Prepare
     Public Enum BoxplotMode
