@@ -202,22 +202,27 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
-    ''' If script tab is already selected, then returns True.
-    ''' If log tab is selected and there is only one script tab, then selects script tab and 
-    ''' returns True.
-    ''' If log tab is selected and there is more than one script tab, then displays a message 
+    ''' If an R or Quarto script tab is already selected, then returns True.
+    ''' If the log tab is selected and there is only one script tab (and this is an R or Quarto 
+    ''' tab), then selects the script tab and returns True.
+    ''' If the log tab is selected and there is more than one script tab, then displays a message 
     ''' box and returns False.
     ''' </summary>
-    ''' <returns>True if a script tab is selected, or if there is only one script tab; else 
-    '''          returns False.</returns>
-    Public Function IsScriptTabSelected() As Boolean
+    ''' <returns>True if an R or Quarto script tab is selected, or if there is only one script tab 
+    '''          (and this is an R or Quarto tab); else returns False.</returns>
+    Public Function IsScriptTabROrQuarto() As Boolean
         If TabControl.SelectedIndex = iTabIndexLog Then
             If TabControl.TabCount = 2 Then
                 TabControl.SelectTab(1)
             Else
-                MsgBox("No script tab selected. Please first select the tab of the script you wish to write to.", vbExclamation, "Script Tab Not Selected")
+                MsgBox("No script tab selected. Please first select the tab of an R or Quarto script you wish to write to.", vbExclamation, "Script Tab Not Selected")
                 Return False
             End If
+        End If
+
+        If Not (enumScriptType = ScriptType.rScript OrElse enumScriptType = ScriptType.quarto) Then
+            MsgBox("Can only write to R or Quarto scripts. Please first select the tab of an R or Quarto script you wish to write to.", vbExclamation, "Script Tab Not Selected")
+            Return False
         End If
         Return True
     End Function

@@ -169,7 +169,7 @@ Public Class ucrButtons
     End Sub
 
     Private Sub Scripts(bRun As Boolean)
-        If Not frmMain.ucrScriptWindow.IsScriptTabSelected() Then
+        If Not bRun AndAlso Not frmMain.ucrScriptWindow.IsScriptTabROrQuarto() Then
             Exit Sub
         End If
 
