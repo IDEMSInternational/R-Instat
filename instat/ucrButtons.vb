@@ -195,9 +195,26 @@ Public Class ucrButtons
         Else
             strComments = ""
         End If
-        If Not bRun AndAlso strComments <> "" Then
-            strExpected &= frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine & vbLf
-            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+
+        Dim bIsQuarto As Boolean =
+                frmMain.ucrScriptWindow.enumScriptType = ucrScript.ScriptType.quarto
+
+        If Not bRun Then
+            If strComments <> "" Then
+                Dim strFormattedComment As String = If(bIsQuarto, strComments,
+                                                      frmMain.clsRLink.GetFormattedComment(strComments))
+                strExpected &= strFormattedComment & Environment.NewLine & vbLf
+                frmMain.AddToScriptWindow(strFormattedComment & Environment.NewLine,
+                      bMakeVisible:=bMakeVisibleScriptWindow,
+                      bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            End If
+
+            If bIsQuarto Then
+                Dim strOpenCodeBlock As String = "```{r warning=FALSE, message=FALSE}" & Environment.NewLine
+                frmMain.AddToScriptWindow(strOpenCodeBlock,
+                      bMakeVisible:=bMakeVisibleScriptWindow,
+                      bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            End If
         End If
 
         'Get this list before doing ToScript then no need for global variable name
@@ -277,6 +294,13 @@ Public Class ucrButtons
                 strExpected &= clsRemoveFunc.ToScript()
                 frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
+        End If
+
+        If Not bRun AndAlso bIsQuarto Then
+            Dim strCloseCodeBlock As String = "```" & Environment.NewLine
+            frmMain.AddToScriptWindow(strCloseCodeBlock,
+                  bMakeVisible:=bMakeVisibleScriptWindow,
+                  bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         CreateRScriptUsingXpBackEnd(strExpected)

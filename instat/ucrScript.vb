@@ -23,16 +23,10 @@ Imports RDotNet
 
 Public Class ucrScript
 
-    Private bIsTextChanged = False
-    Private iMaxLineNumberCharLength As Integer = 0
-    Private Const iTabIndexLog As Integer = 0
-    Private clsRScript As RScript = Nothing
-    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
-
     ''' <summary>
     ''' Enumeration to specify the type of script in the active tab.
     ''' </summary>
-    Private Enum ScriptType
+    Public Enum ScriptType
         json
         other
         quarto
@@ -48,7 +42,7 @@ Public Class ucrScript
     ''' so that we can set the correct lexer when loading a script from file, and also
     ''' so that we can enable/disable the buttons and context menu options correctly.
     ''' </summary>
-    Private Property enumScriptType As ScriptType
+    Public Property enumScriptType As ScriptType
         Get
             If clsScriptActive IsNot Nothing AndAlso clsScriptActive.Tag IsNot Nothing Then
                 Return DirectCast(clsScriptActive.Tag, ScriptType)
@@ -56,12 +50,18 @@ Public Class ucrScript
                 Return ScriptType.rScript ' Default value
             End If
         End Get
-        Set(value As ScriptType)
+        Private Set(value As ScriptType)
             If clsScriptActive IsNot Nothing Then
                 clsScriptActive.Tag = value
             End If
         End Set
     End Property
+
+    Private bIsTextChanged = False
+    Private iMaxLineNumberCharLength As Integer = 0
+    Private Const iTabIndexLog As Integer = 0
+    Private clsRScript As RScript = Nothing
+    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
     Private ReadOnly Property isFindValid As Boolean
         Get
@@ -162,15 +162,13 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        Dim strTextToAppend As String = If(enumScriptType = ScriptType.quarto, "```{r}" & strText & "```" & Environment.NewLine, strText)
-
         If bAppendAtCurrentCursorPosition Then
-            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strTextToAppend & Environment.NewLine)
+            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText & Environment.NewLine)
             ' Todo. find a way of going to the last position of the inserted "group of text".
             ' Currently this just goes to the last position of the first line of inserted text
             clsScriptActive.GotoPosition(clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition)
         Else
-            clsScriptActive.AppendText(Environment.NewLine & strTextToAppend)
+            clsScriptActive.AppendText(Environment.NewLine & strText)
             clsScriptActive.GotoPosition(clsScriptActive.TextLength)
         End If
 
@@ -355,6 +353,9 @@ Public Class ucrScript
             Case ScriptType.quarto
                 enumScriptType = ScriptType.quarto
                 SetupScriptEditorQuarto()
+
+                Dim strInstatObjectRPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R")
+                strInstatObjectRPath = strInstatObjectRPath.Replace("\", "/")
                 clsScriptActive.Text =
                         "---" & Environment.NewLine &
                         "title: ""R-Instat""" & Environment.NewLine &
@@ -363,7 +364,18 @@ Public Class ucrScript
                         "  html: default" & Environment.NewLine &
                         "  pdf:  default" & Environment.NewLine &
                         "editor: visual" & Environment.NewLine &
-                        "---" & Environment.NewLine & Environment.NewLine
+                        "---" & Environment.NewLine & Environment.NewLine &
+                        "Prepare R environment for R-Instat dialog scripts:" & Environment.NewLine & Environment.NewLine &
+                        "```{r warning=FALSE, message=FALSE}" & Environment.NewLine &
+                        "# Initialising R (e.g Loading R packages)" & Environment.NewLine &
+                        "library(databook)" & Environment.NewLine &
+                        "library(instatExtras)" & Environment.NewLine &
+                        "setwd(dir=""" & strInstatObjectRPath & """)" & Environment.NewLine & Environment.NewLine &
+                        "source(file=""Rsetup.R"")" & Environment.NewLine & Environment.NewLine &
+                        "data_book <- DataBook$new()" & Environment.NewLine & Environment.NewLine &
+                        "# Setting display options (e.g Number of significant digits)" & Environment.NewLine &
+                        "options(digits=4, show.signif.stars=FALSE, dplyr.summarise.inform=FALSE, R.commands.displayed.in.the.output.window=TRUE, Comments.from.dialogs.displayed.in.the.output.window=TRUE)" & Environment.NewLine &
+                        "```" & Environment.NewLine
                 clsScriptActive.GotoPosition(clsScriptActive.TextLength)
             Case ScriptType.rScript
                 enumScriptType = ScriptType.rScript
