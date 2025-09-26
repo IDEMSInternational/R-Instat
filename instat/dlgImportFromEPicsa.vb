@@ -23,7 +23,6 @@ Imports RDotNet
 Public Class dlgImportFromEPicsa
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bResetSubdialog As Boolean = False
     Private clsDummyFunction, clsGcsFileFunction, clsListDefinitionsFunction, clsGetDefinitionsData, clsStationMetadataFunction As New RFunction
 
     Private Sub dlgImportFromEPicsa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -109,6 +108,7 @@ Public Class dlgImportFromEPicsa
         clsStationMetadataFunction.SetRCommand("station_metadata")
         clsStationMetadataFunction.AddParameter("include_definitions", "FALSE", iPosition:=2)
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGcsFileFunction, iPosition:=1)
         changeBaseFunctions()
     End Sub
