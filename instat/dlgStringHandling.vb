@@ -31,7 +31,6 @@ Public Class dlgStringHandling
         clsAcrossFunction, clsPaste2Function, clsEndsWithFunction, clsUnpackFunction, clsMutate2Function,
        clsAddColumnsFunction, clsReplaceSelectFunction, clsReplaceAllSelectFunction, clsReplaceCellSelectFunction,
      clsNamesFunction, clsAnyFunction, clsSelectFunction As New RFunction
-    Private iCountPrefix As Integer = 0
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -381,6 +380,7 @@ Public Class dlgStringHandling
         clsReplaceSelectFunction.SetPackageName("~stringr")
         clsReplaceSelectFunction.SetRCommand("str_replace")
         clsReplaceSelectFunction.AddParameter("string", ".x", iPosition:=0)
+
         clsReplaceAllSelectFunction.SetPackageName("~stringr")
         clsReplaceAllSelectFunction.SetRCommand("str_replace_all")
         clsReplaceAllSelectFunction.AddParameter("string", ".x", iPosition:=0)
@@ -829,7 +829,9 @@ Public Class dlgStringHandling
             ucrSaveStringHandling.btnColumnPosition.Visible = True
         End If
     End Sub
+
     Private Sub ReopenDialog()
+        'This is hardcoded here so that the checkbox is always unchecked when the dialog is reopened
         ucrChkOverWriteColumns.Checked = False
     End Sub
 End Class
