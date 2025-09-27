@@ -202,6 +202,28 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
+    '''    If the log tab is selected, then displays a message box and returns False. If the 
+    '''    active tab contains text, then displays a message box and, if the user does not want 
+    '''    to overwrite, then returns False. Otherwise returns True.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function IsOkToLoadScript() As Boolean
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only load script to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Load to log tab")
+            Return False
+        End If
+
+        If clsScriptActive.TextLength > 0 _
+                AndAlso MsgBox("Loading a script from file will clear your current script" _
+                               & Environment.NewLine & "Do you still want to load?",
+                               vbYesNo, "Load From File") = vbNo Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    ''' <summary>
     ''' If an R or Quarto script tab is already selected, then returns True.
     ''' If the log tab is selected and there is only one script tab (and this is an R or Quarto 
     ''' tab), then selects the script tab and returns True.
@@ -227,6 +249,48 @@ Public Class ucrScript
         Return True
     End Function
 
+    ''' <summary>
+    '''    Attempts to read <paramref name="fileName"/> and, if successful, loads the contents 
+    '''    into the active tab. Sets the lexer, tab title, menu options and button enabled states 
+    '''    according to the file extension. Also updates the list of recent items. <para>
+    '''    If the file cannot be read, then displays a message box and leaves the active tab 
+    '''    unchanged.</para>
+    ''' </summary>
+    ''' <param name="fileName"> The full path of the file to read</param>
+    Public Sub LoadScriptFromFile(fileName As String)
+        Try
+            frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(fileName)
+            bIsTextChanged = False
+            clsRScript = Nothing
+            frmMain.clsRecentItems.addToMenu(Replace(fileName, "\", "/"))
+            frmMain.bDataSaved = True
+
+            ' Set enumScriptType based on file extension
+            Dim strFileExtension As String = Path.GetExtension(fileName).ToLower()
+            Select Case strFileExtension
+                Case ".json"
+                    enumScriptType = ScriptType.json
+                    SetupScriptEditorJson()
+                Case ".qmd"
+                    enumScriptType = ScriptType.quarto
+                    SetupScriptEditorQuarto()
+                Case ".r"
+                    enumScriptType = ScriptType.rScript
+                    SetupScriptEditorR()
+                Case Else
+                    enumScriptType = ScriptType.other
+                    clsScriptActive.Lexer = Lexer.Null
+            End Select
+            TabControl.SelectedTab.Text = If(enumScriptType = ScriptType.rScript,
+                                             Path.GetFileNameWithoutExtension(fileName),
+                                             Path.GetFileName(fileName))
+            EnableDisableButtons()
+        Catch
+            MsgBox("Could not load the script from file." & Environment.NewLine &
+                   "The file may be in use by another program or you may not have access to read from the specified location.",
+                   vbExclamation, "Load Script")
+        End Try
+    End Sub
 
     ''' <summary>
     '''     Appends <paramref name="strText"/> to the end of the text in the log tab.
@@ -703,15 +767,7 @@ Public Class ucrScript
     End Function
 
     Private Sub LoadScript()
-        If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBox("You can only load script to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Load to log tab")
-            Exit Sub
-        End If
-
-        If clsScriptActive.TextLength > 0 _
-                AndAlso MsgBox("Loading a script from file will clear your current script" _
-                               & Environment.NewLine & "Do you still want to load?",
-                               vbYesNo, "Load From File") = vbNo Then
+        If Not IsOkToLoadScript() Then
             Exit Sub
         End If
 
@@ -734,39 +790,8 @@ Public Class ucrScript
                 Exit Sub
             End If
 
-            Try
-                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
-                bIsTextChanged = False
-                clsRScript = Nothing
-                frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
-                frmMain.bDataSaved = True
-
-                ' Set enumScriptType based on file extension
-                Dim strFileExtension As String = Path.GetExtension(dlgLoad.FileName).ToLower()
-                Select Case strFileExtension
-                    Case ".json"
-                        enumScriptType = ScriptType.json
-                        SetupScriptEditorJson()
-                    Case ".qmd"
-                        enumScriptType = ScriptType.quarto
-                        SetupScriptEditorQuarto()
-                    Case ".r"
-                        enumScriptType = ScriptType.rScript
-                        SetupScriptEditorR()
-                    Case Else
-                        enumScriptType = ScriptType.other
-                        clsScriptActive.Lexer = Lexer.Null
-                End Select
-                TabControl.SelectedTab.Text = If(enumScriptType = ScriptType.rScript,
-                                                 Path.GetFileNameWithoutExtension(dlgLoad.FileName),
-                                                 Path.GetFileName(dlgLoad.FileName))
-                EnableDisableButtons()
-            Catch
-                MsgBox("Could not load the script from file." & Environment.NewLine &
-                       "The file may be in use by another program or you may not have access to read from the specified location.",
-                       vbExclamation, "Load Script")
-            End Try
+            strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
+            LoadScriptFromFile(dlgLoad.FileName)
         End Using
 
     End Sub
