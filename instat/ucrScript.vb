@@ -425,26 +425,7 @@ Public Class ucrScript
 
                 Dim strInstatObjectRPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R")
                 strInstatObjectRPath = strInstatObjectRPath.Replace("\", "/")
-                clsScriptActive.Text =
-                        "---" & Environment.NewLine &
-                        "title: ""R-Instat""" & Environment.NewLine &
-                        "format:" & Environment.NewLine &
-                        "  docx: default" & Environment.NewLine &
-                        "  html: default" & Environment.NewLine &
-                        "  pdf:  default" & Environment.NewLine &
-                        "editor: visual" & Environment.NewLine &
-                        "---" & Environment.NewLine & Environment.NewLine &
-                        "Prepare R environment for R-Instat dialog scripts:" & Environment.NewLine & Environment.NewLine &
-                        "```{r warning=FALSE, message=FALSE}" & Environment.NewLine &
-                        "# Initialising R (e.g Loading R packages)" & Environment.NewLine &
-                        "library(databook)" & Environment.NewLine &
-                        "library(instatExtras)" & Environment.NewLine &
-                        "setwd(dir=""" & strInstatObjectRPath & """)" & Environment.NewLine & Environment.NewLine &
-                        "source(file=""Rsetup.R"")" & Environment.NewLine & Environment.NewLine &
-                        "data_book <- DataBook$new()" & Environment.NewLine & Environment.NewLine &
-                        "# Setting display options (e.g Number of significant digits)" & Environment.NewLine &
-                        "options(digits=4, show.signif.stars=FALSE, dplyr.summarise.inform=FALSE, R.commands.displayed.in.the.output.window=TRUE, Comments.from.dialogs.displayed.in.the.output.window=TRUE)" & Environment.NewLine &
-                        "```" & Environment.NewLine
+                clsScriptActive.Text = GetQuartoTemplate()
                 clsScriptActive.GotoPosition(clsScriptActive.TextLength)
             Case ScriptType.rScript
                 enumScriptType = ScriptType.rScript
@@ -882,6 +863,27 @@ Public Class ucrScript
         strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript)
 
         Return strQuartoRenderScript
+    End Function
+
+    Private Function GetQuartoTemplate() As String
+        Dim strInstatObjectRPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R")
+        Dim strQuartoTemplatePath As String = Path.Combine(strInstatObjectRPath, "quartoTemplate.qmd")
+        Dim strQuartoTemplate As String = ""
+
+        'read the contents of the quarto template
+        Try
+            strQuartoTemplate = File.ReadAllText(strQuartoTemplatePath)
+        Catch ex As Exception
+            MsgBox("Could not read the quarto template from:" & Environment.NewLine _
+                   & strQuartoTemplatePath & Environment.NewLine & Environment.NewLine _
+                   & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Template")
+            Return ""
+        End Try
+
+        'replace the placeholder with the correct file path to InstatObject\R
+        strQuartoTemplate = strQuartoTemplate.Replace("<<R_PATH>>", strInstatObjectRPath.Replace("\", "/"))
+
+        Return strQuartoTemplate
     End Function
 
     '''--------------------------------------------------------------------------------------------

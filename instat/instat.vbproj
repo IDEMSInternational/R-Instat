@@ -6258,6 +6258,9 @@
     <Content Include="translations\rInstatTranslations.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\InstatObject\R\quartoTemplate.qmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\InstatObject\R\renderQuarto.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
