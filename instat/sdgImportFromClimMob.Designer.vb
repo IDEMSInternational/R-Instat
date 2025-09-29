@@ -30,21 +30,22 @@ Partial Class sdgImportFromClimMob
         '
         'cmdChooseFile
         '
-        Me.cmdChooseFile.Location = New System.Drawing.Point(259, 27)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(393, 22)
+        Me.cmdChooseFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.Size = New System.Drawing.Size(100, 23)
-        Me.cmdChooseFile.TabIndex = 7
+        Me.cmdChooseFile.Size = New System.Drawing.Size(150, 35)
+        Me.cmdChooseFile.TabIndex = 2
         Me.cmdChooseFile.Text = "Choose File..."
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(18, 92)
-        Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(15, 73)
+        Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
-        Me.ucrBaseSubdialog.TabIndex = 6
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
+        Me.ucrBaseSubdialog.TabIndex = 3
         '
         'ucrInputKeyPath
         '
@@ -52,31 +53,33 @@ Partial Class sdgImportFromClimMob
         Me.ucrInputKeyPath.AutoSize = True
         Me.ucrInputKeyPath.IsMultiline = False
         Me.ucrInputKeyPath.IsReadOnly = False
-        Me.ucrInputKeyPath.Location = New System.Drawing.Point(47, 30)
-        Me.ucrInputKeyPath.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputKeyPath.Location = New System.Drawing.Point(75, 26)
+        Me.ucrInputKeyPath.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputKeyPath.Name = "ucrInputKeyPath"
-        Me.ucrInputKeyPath.Size = New System.Drawing.Size(196, 27)
-        Me.ucrInputKeyPath.TabIndex = 5
+        Me.ucrInputKeyPath.Size = New System.Drawing.Size(294, 42)
+        Me.ucrInputKeyPath.TabIndex = 1
         '
         'lblKkey
         '
         Me.lblKkey.AutoSize = True
-        Me.lblKkey.Location = New System.Drawing.Point(8, 32)
+        Me.lblKkey.Location = New System.Drawing.Point(17, 29)
+        Me.lblKkey.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblKkey.Name = "lblKkey"
-        Me.lblKkey.Size = New System.Drawing.Size(28, 13)
-        Me.lblKkey.TabIndex = 4
+        Me.lblKkey.Size = New System.Drawing.Size(39, 20)
+        Me.lblKkey.TabIndex = 0
         Me.lblKkey.Text = "Key:"
         '
         'sdgImportFromClimMob
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(371, 146)
+        Me.ClientSize = New System.Drawing.Size(571, 132)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.ucrInputKeyPath)
         Me.Controls.Add(Me.lblKkey)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "sdgImportFromClimMob"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

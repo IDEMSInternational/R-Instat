@@ -41,6 +41,49 @@ Public Class sdgDisplayModelOptions
     End Enum
 
     Private Sub InitialiseDialog()
+
+        ' Adding tooltips
+        AddToolTip(ucrChkModel, "Provides an overview of the model including" + Environment.NewLine +
+                   "item rankings, coefficients, And model fit.")
+        AddToolTip(ucrChkANOVA, "Assesses the goodness Of fit For the Plackett Luce model fitted")
+        AddToolTip(ucrChkEstimates, "Displays the model coefficients (item worths)." + Environment.NewLine +
+                   "With an Option To log-transform them For easier interpretation.")
+        AddToolTip(ucrChkConfLimits, "Shows confidence intervals For the estimated item worths," + Environment.NewLine +
+                   "indicating the uncertainty around Each value.")
+        AddToolTip(ucrChkAIC, "Displays Akaike's Information Criterion to help compare model quality," + Environment.NewLine +
+                   "with lower values indicating better fit.")
+        AddToolTip(ucrChkDeviance, "Reports the deviance statistic, measuring how well the model" + Environment.NewLine +
+                   "fits the observed data (lower is better).")
+        AddToolTip(ucrChkSndEstimetes, "Lists the predicted probabilities or rankings from the fitted model.")
+        AddToolTip(ucrChkParProp, "Shows the probability of one item being preferred over" + Environment.NewLine +
+                   "another based on the model.")
+        AddToolTip(ucrChkReability, "Measures how consistently the model distinguishes between items," + Environment.NewLine +
+                   "often used to assess precision or predictability.")
+        AddToolTip(ucrChkItemPara, "Lists the estimated worth (preference scores)" + Environment.NewLine +
+                   "of each item in the model.")
+        AddToolTip(ucrChkVaCoMa, "Displays the estimated variances and" + Environment.NewLine +
+                   "covariances between item parameters.")
+        AddToolTip(ucrChkQuasiVa, "Provides quasi-variances and standard errors," + Environment.NewLine +
+                   "allowing valid comparisons between multiple items" + Environment.NewLine +
+                   "without needing a reference item.")
+        AddToolTip(ucrChkRegret, "Displays regret values at each node, reflecting the potential loss from" + Environment.NewLine +
+                   "not choosing the optimal item (based on worst-case scenarios).")
+        AddToolTip(ucrChkNodeLabel, "Shows labels for each terminal node," + Environment.NewLine +
+                   "often based on top items or group summaries.")
+        AddToolTip(ucrChkNodeRules, "Lists the conditions (e.g. variable splits)" + Environment.NewLine +
+                   "used to form each node in the tree.")
+        AddToolTip(ucrChkTopItem, "Highlights the most preferred items within each terminal node," + Environment.NewLine +
+                   "helping interpret local preferences across subgroups.")
+        ttModelDisplay.SetToolTip(rdoMap, "Produces plots to highlight worth coefficients of" + Environment.NewLine +
+                   "items in a party tree of a list of PlackettLuce models." + Environment.NewLine +
+                   "The y axis gives the traits in the order that they have" + Environment.NewLine +
+                   "been entered on the main dialog.")
+        ttModelDisplay.SetToolTip(rdoBar, "Plots the item worths as a bar chart for a single model," + Environment.NewLine +
+                   "making it easy to compare relative rankings.")
+        ttModelDisplay.SetToolTip(rdoTree, "Shows the structure of the Plackett-Luce tree," + Environment.NewLine +
+                   "including the variables used for splits and the decision rules at each node.")
+
+
         ucrChkModel.SetText("Summary")
         ucrChkModel.AddParameterValuesCondition(True, "summary", "True")
         ucrChkModel.AddParameterValuesCondition(False, "summary", "False")
@@ -85,7 +128,7 @@ Public Class sdgDisplayModelOptions
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(True, {"snd_estimates"}, True)
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(False, {"snd_estimates"}, False)
 
-        ucrChkParProp.SetText("Pairewise Probabilities")
+        ucrChkParProp.SetText("Pairwise Probabilities")
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(True, {"pair"}, True)
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(False, {"pair"}, False)
 
@@ -229,6 +272,14 @@ Public Class sdgDisplayModelOptions
             ucrPnlPlots.SetRCode(clsDummyFunction, bReset)
         End If
         AddRemoveSummary()
+    End Sub
+
+    Private Sub AddToolTip(cntrl As ucrCore, value As String)
+        For Each element As Control In cntrl.Controls
+            If TypeOf element Is CheckBox Then
+                ttModelDisplay.SetToolTip(element, value)
+            End If
+        Next
     End Sub
 
     Private Sub ucrChkAIC_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAIC.ControlValueChanged

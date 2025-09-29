@@ -110,8 +110,10 @@ Public Class sdgPlots
     Private dctDivergingPairsContinuous As New Dictionary(Of String, String)
     Private dctQualititivePairsContinuous As New Dictionary(Of String, String)
     Public strAxisType As String
+    Private bInitialised As Boolean = False
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitialiseControls()
         autoTranslate(Me)
     End Sub
 
@@ -213,7 +215,8 @@ Public Class sdgPlots
 
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
-        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
+        If Not bInitialised Then
+            ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
         ucrPnlHorizonatalVertical.bChangeParameterValue = False
         ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
         ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
@@ -333,15 +336,31 @@ Public Class sdgPlots
         urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
         urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
+
         strThemes = GgplotDefaults.strThemes
-        'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
-        For Each strTemp As String In strThemes
-            If strTemp.StartsWith("theme_") Then
-                dctThemes.Add(strTemp.Remove(0, 6), strTemp & "()")
+        Dim themePackages = GgplotDefaults.ThemePackageMap
+
+        If dctThemes Is Nothing Then dctThemes = New Dictionary(Of String, String)
+
+        For Each fullThemeName As String In strThemes
+            If String.IsNullOrEmpty(fullThemeName) Then Continue For
+
+            Dim displayName As String = If(fullThemeName.StartsWith("theme_"), fullThemeName.Substring(6), fullThemeName)
+
+            Dim qualifiedFunctionName As String
+            Dim packageName As String = Nothing
+
+            If themePackages.TryGetValue(fullThemeName, packageName) Then
+                qualifiedFunctionName = $"{packageName}::{fullThemeName}()"
             Else
-                dctThemes.Add(strTemp, strTemp & "()")
+                qualifiedFunctionName = $"{fullThemeName}()"
             End If
+
+            dctThemes(displayName) = qualifiedFunctionName
         Next
+
+        Debug.Print("Themes initialized.")
+
         ucrInputThemes.SetItems(dctThemes)
         ' ucrInputThemes.SetRDefault("theme_grey()")
         ucrInputThemes.SetDropDownStyleAsNonEditable()
@@ -401,7 +420,11 @@ Public Class sdgPlots
         ucrInputStartingAngle.SetValidationTypeAsNumeric()
         ucrInputStartingAngle.AddQuotesIfUnrecognised = False
         ucrInputStartingAngle.SetLinkedDisplayControl(New List(Of Control)({lblPi, lblStartingAngle}))
-
+        If dctTheta Is Nothing Then
+            dctTheta = New Dictionary(Of String, String)
+        Else
+            dctTheta.Clear()
+        End If
 
         dctTheta.Add("x", Chr(34) & "x" & Chr(34))
         dctTheta.Add("y", Chr(34) & "y" & Chr(34))
@@ -610,7 +633,12 @@ Public Class sdgPlots
         ucrInputPaletteContinuous.bAllowNonConditionValues = True
         ucrInputPaletteContinuous.SetLinkedDisplayControl(lblPaletteContinuous)
 
-        dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
+            If dctSequatailPairs Is Nothing Then
+                dctSequatailPairs = New Dictionary(Of String, String)
+            Else
+                dctSequatailPairs.Clear()
+            End If
+            dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
         dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
         dctSequatailPairs.Add("Greys", Chr(34) & "Greys" & Chr(34))
         dctSequatailPairs.Add("Oranges", Chr(34) & "Oranges" & Chr(34))
@@ -2034,7 +2062,8 @@ Public Class sdgPlots
         ucrPnlColourPalette.AddToLinkedControls(ucrInputColorFunctions, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrPnlColourPalette.AddToLinkedControls(ucrInputFillFunction, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrPnlColourPalette.AddToLinkedControls({ucrInputcontinuouscolor, ucrInputContinousfill}, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue-Green Sequential")
-
+            bInitialised = True
+        End If
         ucrInputColorFunctions.SetDropDownStyleAsNonEditable()
         ucrInputColorFunctions.SetItems({"scale_color_calc", "scale_color_canva", "scale_color_colorblind", "scale_color_economist", "scale_color_excel", "scale_color_excel_new", "scale_color_few", "scale_color_fivethirtyeight", "scale_color_gdocs", "scale_color_hc", "scale_color_pander", "scale_color_ptol", "scale_color_solarized", "scale_color_stata", "scale_color_wsj"})
         ucrInputColorFunctions.SetLinkedDisplayControl(lblGgthemesFunctions)
@@ -3046,6 +3075,7 @@ Public Class sdgPlots
             tbpPlotsOptions.SelectedIndex = 0
             bResetThemes = True
         End If
+
         SetFacetParameters()
         ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
         ucrChkFillDiscrete.Enabled = bNewEnableDiscrete
@@ -3131,7 +3161,10 @@ Public Class sdgPlots
                 ucr2ndFactorReceiver.SetParameterPosition(1)
                 clsFacetFunction.SetRCommand("facet_grid")
                 clsFacetFunction.RemoveParameterByName("dir")
+            Else
+                clsBaseOperator.RemoveParameterByName("facets")
             End If
+
             If clsFacetFunction.strRCommand = "facet_grid" Then
                 clsFacetFunction.AddParameter(ucrChkFreeSpace.GetParameter())
                 If ucrChkMargin.Checked Then

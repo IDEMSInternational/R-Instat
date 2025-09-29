@@ -40,6 +40,7 @@ Public Class dlgImportfromClimMob
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        TestOKEnabled()
         bReset = False
     End Sub
 
@@ -53,6 +54,7 @@ Public Class dlgImportfromClimMob
 
         ucrInputChooseForm.SetParameter(New RParameter("right", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
+        ucrInputChooseForm.SetDropDownStyleAsNonEditable()
 
         ucrSaveFile.SetPrefix("climmob_dataframe")
         ucrSaveFile.SetSaveTypeAsDataFrame()
@@ -133,7 +135,6 @@ Public Class dlgImportfromClimMob
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputChooseForm.AddAdditionalCodeParameterPair(clsClimmobFunction, New RParameter("project", 1), 1)
-
         ucrInputChooseForm.SetRCode(clsThirdOperator, bReset)
         ucrSaveFile.SetRCode(clsClimmobFunction, bReset)
     End Sub
@@ -141,6 +142,15 @@ Public Class dlgImportfromClimMob
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Public Sub TestOKEnabled()
+        If (ucrSaveFile.IsComplete AndAlso ucrInputChooseForm.GetText <> "") Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrInputServerName_NameChanged() Handles ucrInputServerName.ControlValueChanged
@@ -156,8 +166,13 @@ Public Class dlgImportfromClimMob
     Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.ControlValueChanged
         If ucrInputChooseForm.IsEmpty() Then
             clsThirdOperator.RemoveParameterByName("right")
+            ucrSaveFile.SetPrefix("climmob_dataframe")
         Else
             clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
+
+            ' Then: update the save-name if there's actually something selected:
+            ' Push the exact form name into the Data Frame name box:
+            ucrSaveFile.SetPrefix(ucrInputChooseForm.GetText())
         End If
     End Sub
 
@@ -206,5 +221,9 @@ Public Class dlgImportfromClimMob
         Else
             ucrInputChooseForm.cboInput.Items.Clear()
         End If
+    End Sub
+
+    Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged, ucrInputChooseForm.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
