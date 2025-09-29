@@ -169,6 +169,10 @@ Public Class dlgFindInVariableOrFilter
         rdoCell.Checked = True
         ucrReceiverVariable.Clear()
         ucrInputPattern.cboInput.ResetText()
+        lblMatching.Visible = False
+        lblFoundRow.Visible = False
+        lblFoundRowNo.Visible = False
+        cmdFindNext.Enabled = False
         frmMain.ucrDataViewer.RemoveAllBackgroundColors()
     End Sub
 
@@ -192,32 +196,33 @@ Public Class dlgFindInVariableOrFilter
                     Exit Sub
                 End If
 
-                Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
-                Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
-                ' Iterate over the list of row numbers to find the page where the row is displayed.
-                For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
-                    Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1)
-                    If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
-                        AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountRowClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
-                        iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
-                        Exit For
-                    End If
-                Next
+                'Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
+                'Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
+                '' Iterate over the list of row numbers to find the page where the row is displayed.
+                'For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
+                '    Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1)
+                '    If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
+                '        AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountRowClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
+                '        iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
+                '        Exit For
+                '    End If
+                'Next
 
-                If iCurrentOccurenceRowNumber = lstRowNumbers.Max Then
-                    If iCurrentOccurenceIndex > iCountRowClick Then
-                        iCountRowClick = iCurrentOccurenceIndex
-                    Else
-                        iCountRowClick = 1
-                    End If
-                    iCurrentOccurenceIndex = 1
-                End If
+                'If iCurrentOccurenceRowNumber = lstRowNumbers.Max Then
+                '    If iCurrentOccurenceIndex > iCountRowClick Then
+                '        iCountRowClick = iCurrentOccurenceIndex
+                '    Else
+                '        iCountRowClick = 1
+                '    End If
+                '    iCurrentOccurenceIndex = 1
+                'End If
 
                 Dim strColumn As String = ucrReceiverVariable.GetVariableNames
 
                 Dim iRow As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1)
                 Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
                 frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
+                ' We need these here so that when cmdFind is clicked, it highlights the rows/ cells found
                 Dim bApplyToRows As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
                 frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
                                                        iRow:=iRow, bApplyToRows:=bApplyToRows)
@@ -227,18 +232,18 @@ Public Class dlgFindInVariableOrFilter
                 lblFoundRow.Visible = True
                 'iCountRowClick += 1
                 'SetControlsVisible(False)
-                If iRow = -2147483648 Then
-                    lblFoundRow.Text = "No cell rows found"
-                Else
-                    lblFoundRow.Text = "Found " & lstRowNumbers.Count & " Row(s)"
-                End If
+                'If iRow = -2147483648 Then
+                '    lblFoundRow.Text = "No cell rows found"
+                'Else
+                '    lblFoundRow.Text = "Found " & lstRowNumbers.Count & " Row(s)"
+                'End If
                 'EnablingFindNext()
             Else
                 Dim lstColumnNames As New List(Of String)
                 lstColumnNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
-                If iColumnClick > lstColumnNames.Count Then
-                    iColumnClick = 1
-                End If
+                'If iColumnClick > lstColumnNames.Count Then
+                '    iColumnClick = 1
+                'End If
 
                 Dim strColumn As String = lstColumnNames(iColumnClick - 1)
                 Dim iColumn As Integer = GetColumnIndex(strColumn)
@@ -246,6 +251,7 @@ Public Class dlgFindInVariableOrFilter
                 frmMain.ucrDataViewer.GoToSpecificColumnPage(iColPage)
                 frmMain.ucrDataViewer.SelectColumnInGrid(strColumn)
 
+                lblNoOfVariablesFound.Visible = True
                 lblNoOfVariablesFound.Text = "Found " & lstColumnNames.Count & " Variable(s)"
                 cmdFindNext.Enabled = True
                 'Dim strName = "Name: " & strColumn
@@ -396,8 +402,8 @@ Public Class dlgFindInVariableOrFilter
                 Dim lstRowNumbers As New List(Of Integer)
                 lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsInteger.ToList
                 lblMatching.Visible = False
-                lblFoundRow.Visible = False
-                lblFoundRowNo.Visible = False
+                'lblFoundRow.Visible = False
+                'lblFoundRowNo.Visible = False
                 'If lstRowNumbers.Count <= 0 Then
                 '    lblMatching.ForeColor = Color.Red
                 '    Dim strMAtching As String = "There are no entries matching "
@@ -439,10 +445,10 @@ Public Class dlgFindInVariableOrFilter
                 Dim bApplyToRows As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
                 frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
                                                       iRow:=iRow, bApplyToRows:=bApplyToRows)
-                lblFoundRow.Visible = True
+                'lblFoundRow.Visible = True
                 lblFoundRowNo.Visible = True
                 lblFoundRowNo.Text = "Found Row: " & iRow
-                lblFoundRowNo.Visible = True
+                ' lblFoundRowNo.Visible = True
                 iCountRowClick += 1
                 SetControlsVisible(False)
                 If iRow = -2147483648 Then
