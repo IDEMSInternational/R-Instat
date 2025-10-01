@@ -1960,7 +1960,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Name = "mnuClimaticFileExportToGoogleBucketsToolStrip"
         Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Size = New System.Drawing.Size(282, 22)
-        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Text = "Export to  E-PICSA..."
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Text = "Export to E-PICSA..."
         '
         'ToolStripSeparator18
         '
