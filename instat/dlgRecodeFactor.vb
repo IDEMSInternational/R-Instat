@@ -305,6 +305,16 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
+    ' Ensure paste (Ctrl + V) triggers the same logic as manual editing
+    Private Sub ucrFactorGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrFactorGrid.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.V Then
+            ucrFactorGrid_ControlValueChanged(ucrFactorGrid)
+        End If
+    End Sub
+
+
+
+
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrPnlKeep.ControlValueChanged, ucrInputOther.ControlValueChanged, ucrNudLevels.ControlValueChanged, ucrNudCommonValues.ControlValueChanged, ucrNudFrequentValues.ControlValueChanged, ucrFactorLevels.ControlValueChanged
         If rdoRecode.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
