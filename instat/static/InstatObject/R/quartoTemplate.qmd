@@ -1,0 +1,24 @@
+﻿---
+title: "R-Instat"
+format:
+  docx: default
+  html: default
+  pdf:  default
+editor: visual
+---
+
+Prepare R environment for R-Instat dialog scripts:
+
+```{r warning=FALSE, message=FALSE}
+# Initialising R (e.g Loading R packages)
+library(databook)
+library(instatExtras)
+setwd(dir="<<R_PATH>>")
+
+source(file="Rsetup.R")
+
+data_book <- DataBook$new()
+
+# Setting display options (e.g Number of significant digits)
+options(digits=4, show.signif.stars=FALSE, dplyr.summarise.inform=FALSE, R.commands.displayed.in.the.output.window=TRUE, Comments.from.dialogs.displayed.in.the.output.window=TRUE)
+```

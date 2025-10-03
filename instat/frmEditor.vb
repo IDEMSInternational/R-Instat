@@ -302,7 +302,7 @@ Public Class frmEditor
         'If grdData.Worksheets.Count > 0 Then
         '    If Delete = DialogResult.Yes Then
         '        strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-        '        frmMain.clsRLink.RunScript(strScript)
+        '        frmMain.clsRLink.RunRScript(strScript)
         '    End If
         'End If
         dlgDeleteDataFrames.ShowDialog()
