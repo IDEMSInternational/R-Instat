@@ -234,7 +234,8 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 strExpected &= lstBeforeScripts(i) & vbLf
-                frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(lstBeforeScripts(i))
+                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
 
@@ -249,7 +250,8 @@ Public Class ucrButtons
             frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
             strExpected &= clsRsyntax.GetScript() & vbLf
-            frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(clsRsyntax.GetScript())
+            frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'Run additional after codes
@@ -266,7 +268,8 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
                 strExpected &= lstAfterScripts(i) & vbLf
-                frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(lstAfterScripts(i))
+                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
 
@@ -292,7 +295,8 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
             Else
                 strExpected &= clsRemoveFunc.ToScript()
-                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(clsRemoveFunc.ToScript())
+                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         End If
 

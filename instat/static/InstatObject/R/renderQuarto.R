@@ -1,5 +1,4 @@
-﻿
-# Ensure that the correct packages and executables are installed
+﻿# Ensure that the correct packages and executables are installed
 if (!requireNamespace("quarto", quietly = TRUE))
   stop("install.packages('quarto') needed.")
 if (system("quarto --version", ignore.stdout = TRUE, ignore.stderr = TRUE) != 0)

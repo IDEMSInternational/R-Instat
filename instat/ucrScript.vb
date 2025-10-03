@@ -202,6 +202,49 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
+    ''' Returns <paramref name="strScript"/> in a form that is suitable for including in a Quarto 
+    ''' file. Some dialog boxes call `get_object_data()` with `as_file=TRUE`. This prevents the 
+    ''' table or graph from being rendered. So this function sets `as_file=FALSE`.
+    ''' </summary>
+    ''' <param name="strScript"> R script generated from a dialog box</param>
+    ''' <returns><paramref name="strScript"/> in a form that is suitable for including in a Quarto 
+    '''          file.</returns>
+    Public Function GetScriptCleanedForQuarto(strScript As String) As String
+        Dim clsRScriptToClean As RScript
+        Dim dctRStatements As OrderedDictionary
+        Try
+            clsRScriptToClean = New RScript(strScript)
+            dctRStatements = clsRScriptToClean.statements
+        Catch ex As Exception
+            MsgBox("Could not parse R script for Quarto cleaning. " &
+                   "Parsing failed with message:" & Environment.NewLine & Environment.NewLine &
+                   ex.Message,
+                   MsgBoxStyle.Information, "Could Not parse R script")
+            Return strScript
+        End Try
+
+        If IsNothing(dctRStatements) OrElse dctRStatements.Count = 0 Then
+            Return strScript
+        End If
+
+        Dim strScriptCleaned As String = ""
+
+        'todo: We currently use string replace to change the parameter value. It would be safer
+        '      to use RScript to update the parameter directly. This would require changes to the
+        '      RScript class.
+        For Each kvpDictEntry As DictionaryEntry In dctRStatements
+            Dim clsRStatement As RStatement = kvpDictEntry.Value
+            Dim strStatement As String = clsRStatement.Text
+            If strStatement.Contains("get_object_data") Then
+                strStatement = strStatement.Replace("as_file=TRUE", "as_file=FALSE")
+            End If
+            strScriptCleaned &= strStatement
+        Next
+
+        Return strScriptCleaned
+    End Function
+
+    ''' <summary>
     '''    If the log tab is selected, then displays a message box and returns False. If the 
     '''    active tab contains text, then displays a message box and, if the user does not want 
     '''    to overwrite, then returns False. Otherwise returns True.
