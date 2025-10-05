@@ -365,7 +365,7 @@ Public Class dlgStringHandling
         clsStartsFunction.SetRCommand("str_starts")
         clsStartsFunction.AddParameter("negate", "FALSE", iPosition:=2)
 
-        clsStartsSelectFunction.SetPackageName("stringr")
+        clsStartsSelectFunction.SetPackageName("~stringr")
         clsStartsSelectFunction.SetRCommand("str_starts")
         clsStartsSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsStartsSelectFunction.AddParameter("negate", "FALSE", iPosition:=2)
@@ -374,7 +374,7 @@ Public Class dlgStringHandling
         clsEndsFunction.SetRCommand("str_ends")
         clsEndsFunction.AddParameter("negate", "FALSE", iPosition:=2)
 
-        clsEndsSelectFunction.SetPackageName("stringr")
+        clsEndsSelectFunction.SetPackageName("~stringr")
         clsEndsSelectFunction.SetRCommand("str_ends")
         clsEndsSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsEndsSelectFunction.AddParameter("negate", "FALSE", iPosition:=2)
@@ -382,21 +382,21 @@ Public Class dlgStringHandling
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
 
-        clsCountSelectFunction.SetPackageName("stringr")
+        clsCountSelectFunction.SetPackageName("~stringr")
         clsCountSelectFunction.SetRCommand("str_count")
         clsCountSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsExtractFunction.SetPackageName("stringr")
         clsExtractFunction.SetRCommand("str_extract")
 
-        clsExtractSelectFunction.SetPackageName("stringr")
+        clsExtractSelectFunction.SetPackageName("~stringr")
         clsExtractSelectFunction.SetRCommand("str_extract")
         clsExtractSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsExtractAllFunction.SetPackageName("stringr")
         clsExtractAllFunction.SetRCommand("str_extract_all")
 
-        clsExtractAllSelectFunction.SetPackageName("stringr")
+        clsExtractAllSelectFunction.SetPackageName("~stringr")
         clsExtractAllSelectFunction.SetRCommand("str_extract_all")
         clsExtractAllSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
@@ -406,21 +406,21 @@ Public Class dlgStringHandling
         clsDetectFunction.SetPackageName("stringr")
         clsDetectFunction.SetRCommand("str_detect")
 
-        clsDetectSelectFunction.SetPackageName("stringr")
+        clsDetectSelectFunction.SetPackageName("~stringr")
         clsDetectSelectFunction.SetRCommand("str_detect")
         clsDetectSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsLocateFunction.SetPackageName("stringr")
         clsLocateFunction.SetRCommand("str_locate")
 
-        clsLocateSelectFunction.SetPackageName("stringr")
+        clsLocateSelectFunction.SetPackageName("~stringr")
         clsLocateSelectFunction.SetRCommand("str_locate")
         clsLocateSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsLocateAllFunction.SetPackageName("stringr")
         clsLocateAllFunction.SetRCommand("str_locate_all")
 
-        clsLocateAllSelectFunction.SetPackageName("stringr")
+        clsLocateAllSelectFunction.SetPackageName("~stringr")
         clsLocateAllSelectFunction.SetRCommand("str_locate_all")
         clsLocateAllSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
@@ -433,21 +433,21 @@ Public Class dlgStringHandling
         clsReplaceNaFunction.SetPackageName("stringr")
         clsReplaceNaFunction.SetRCommand("str_replace_na")
 
-        clsReplaceNaSelectFunction.SetPackageName("stringr")
+        clsReplaceNaSelectFunction.SetPackageName("~stringr")
         clsReplaceNaSelectFunction.SetRCommand("str_replace_na")
         clsReplaceNaSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsRemoveFunction.SetPackageName("stringr")
         clsRemoveFunction.SetRCommand("str_remove")
 
-        clsRemoveSelectFunction.SetPackageName("stringr")
+        clsRemoveSelectFunction.SetPackageName("~stringr")
         clsRemoveSelectFunction.SetRCommand("str_remove")
         clsRemoveSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsRemoveAllFunction.SetPackageName("stringr")
         clsRemoveAllFunction.SetRCommand("str_remove_all")
 
-        clsRemoveAllSelectFunction.SetPackageName("stringr")
+        clsRemoveAllSelectFunction.SetPackageName("~stringr")
         clsRemoveAllSelectFunction.SetRCommand("str_remove_all")
         clsRemoveAllSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
@@ -477,7 +477,7 @@ Public Class dlgStringHandling
         clsNaIfFunction.SetPackageName("dplyr")
         clsNaIfFunction.SetRCommand("na_if")
 
-        clsNaIfSelectFunction.SetPackageName("dplyr")
+        clsNaIfSelectFunction.SetPackageName("~dplyr")
         clsNaIfSelectFunction.SetRCommand("na_if")
         clsNaIfSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
@@ -586,38 +586,59 @@ Public Class dlgStringHandling
         clsStringCollFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsNaIfFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsNaIfSelectFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
             clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsCountSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsRemoveFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsRemoveSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsDetectSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsStartsFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStartsSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsEndsFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsEndsSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsExtractSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsLocateSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsLocateAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsLocateAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsExtractAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsExtractAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsMatchAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsRemoveAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsRemoveAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
         Else
             clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsCountSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsRemoveFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsRemoveSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsDetectSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsStartsFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStartsSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsEndsFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsEndsSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsExtractSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsLocateSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
-            clsReplaceSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+            clsReplaceSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
-            clsReplaceAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+            clsReplaceAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsLocateAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsLocateAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsMatchAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsExtractAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsExtractAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsRemoveAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsRemoveAllSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
         End If
     End Sub
 
@@ -649,11 +670,11 @@ Public Class dlgStringHandling
                 End If
             Else
                 If rdoDetects.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsDetectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 ElseIf rdoStarts.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 ElseIf rdoEnds.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 End If
             End If
         ElseIf rdoFind.Checked Then
@@ -680,20 +701,20 @@ Public Class dlgStringHandling
             Else
                 If rdoCount.Checked Then
                     clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsCountFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsCountSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 ElseIf rdoExtract.Checked Then
                     clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
                     If ucrChkAll.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractAllFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                     Else
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                     End If
                 ElseIf rdoLocate.Checked Then
                     clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
                     If ucrChkAll.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateAllFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                     Else
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                     End If
                 End If
             End If
@@ -716,7 +737,7 @@ Public Class dlgStringHandling
                         clsAcrossFunction.RemoveParameterByName(".fns")
                         'clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
                         'clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                        clsAcrossFunction.RemoveParameterByName("left")
+                        ' clsAcrossFunction.RemoveParameterByName("left")
                         If rdoReplaceFirst.Checked Then
                             clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                         ElseIf rdoReplaceAll.Checked Then
@@ -725,31 +746,31 @@ Public Class dlgStringHandling
                     ElseIf rdoReplaceCell.Checked Then
                         clsAcrossFunction.RemoveParameterByName("tilda")
                         clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
-                        clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+                        ' clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
                     End If
                 Else
-                    clsAcrossFunction.RemoveParameterByName("tilda")
-                    clsAcrossFunction.RemoveParameterByName(".names")
-                    clsUnpackOperator.RemoveParameterByName("right")
+                    'clsAcrossFunction.RemoveParameterByName("tilda")
+                    '    clsAcrossFunction.RemoveParameterByName(".names")
+                    '    clsUnpackOperator.RemoveParameterByName("right")
                     If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
-                        clsAcrossFunction.RemoveParameterByName(".fns")
-                        If rdoReplaceFirst.Checked Then
-                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                        ElseIf rdoReplaceAll.Checked Then
-                            clsAcrossFunction.RemoveParameterByName(".fns")
-                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                        End If
-                    ElseIf rdoReplaceCell.Checked Then
-                        clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
+                    clsAcrossFunction.RemoveParameterByName(".fns")
+                    If rdoReplaceFirst.Checked Then
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    ElseIf rdoReplaceAll.Checked Then
+                        'clsAcrossFunction.RemoveParameterByName(".fns")
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
                     End If
+                ElseIf rdoReplaceCell.Checked Then
+                    clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
                 End If
             End If
+        End If
         ElseIf rdoReplaceNa.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "replace_na", iPosition:=3)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaFunction)
             Else
-                clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceNaFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceNaSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
             End If
 
         ElseIf rdoToNa.Checked Then
@@ -757,7 +778,7 @@ Public Class dlgStringHandling
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsNaIfFunction)
             Else
-                clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsNaIfFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsNaIfSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
             End If
         ElseIf rdoRemove.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "remove", iPosition:=3)
@@ -769,18 +790,25 @@ Public Class dlgStringHandling
                 End If
             Else
                 If ucrChkRemoveAll.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveAllFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 Else
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 End If
             End If
         End If
 
         If rdoMultiple.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
-            clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
-            clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
-            clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+            If Not ucrChkOverWriteColumns.Checked Then
+                clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
+                clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
+                clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+                clsAcrossFunction.RemoveParameterByName("left")
+            Else
+                clsAcrossFunction.RemoveParameterByName("tilda")
+                clsAcrossFunction.RemoveParameterByName(".names")
+                clsUnpackOperator.RemoveParameterByName("right")
+            End If
         End If
     End Sub
 
