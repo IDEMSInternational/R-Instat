@@ -658,6 +658,20 @@ Public Class dlgStringHandling
 
     Private Sub SetBaseFunction()
         ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAsDataFrameFunction)
+        If rdoMultiple.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
+            If Not ucrChkOverWriteColumns.Checked Then
+                clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
+                clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
+                clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+                clsAcrossFunction.RemoveParameterByName("left")
+                clsAcrossFunction.RemoveParameterByName(".fns")
+            Else
+                clsAcrossFunction.RemoveParameterByName("tilda")
+                clsAcrossFunction.RemoveParameterByName(".names")
+                clsUnpackOperator.RemoveParameterByName("right")
+            End If
+        End If
         If rdoDetect.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "detect", iPosition:=3)
             If rdoSingle.Checked Then
@@ -669,12 +683,22 @@ Public Class dlgStringHandling
                     ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
                 End If
             Else
-                If rdoDetects.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                ElseIf rdoStarts.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                ElseIf rdoEnds.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                If Not ucrChkOverWriteColumns.Checked Then
+                    If rdoDetects.Checked Then
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    ElseIf rdoStarts.Checked Then
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    ElseIf rdoEnds.Checked Then
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    End If
+                Else
+                    If rdoDetects.Checked Then
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    ElseIf rdoStarts.Checked Then
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    ElseIf rdoEnds.Checked Then
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    End If
                 End If
             End If
         ElseIf rdoFind.Checked Then
@@ -699,22 +723,43 @@ Public Class dlgStringHandling
                     End If
                 End If
             Else
-                If rdoCount.Checked Then
-                    clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsCountSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                ElseIf rdoExtract.Checked Then
-                    clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
-                    If ucrChkAll.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    Else
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                If Not ucrChkOverWriteColumns.Checked Then
+                    If rdoCount.Checked Then
+                        clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsCountSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    ElseIf rdoExtract.Checked Then
+                        clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
+                        If ucrChkAll.Checked Then
+                            clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        Else
+                            clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsExtractSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        End If
+                    ElseIf rdoLocate.Checked Then
+                        clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
+                        If ucrChkAll.Checked Then
+                            clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        Else
+                            clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                        End If
                     End If
-                ElseIf rdoLocate.Checked Then
-                    clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
-                    If ucrChkAll.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    Else
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsLocateSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                Else
+                    If rdoCount.Checked Then
+                        clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsCountSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    ElseIf rdoExtract.Checked Then
+                        clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
+                        If ucrChkAll.Checked Then
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsExtractAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        Else
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsExtractSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        End If
+                    ElseIf rdoLocate.Checked Then
+                        clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
+                        If ucrChkAll.Checked Then
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsLocateAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        Else
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsLocateSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        End If
                     End If
                 End If
             End If
@@ -730,14 +775,8 @@ Public Class dlgStringHandling
                     ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
                 End If
             Else
-                ' ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
                 If Not ucrChkOverWriteColumns.Checked Then
-                    ' clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
                     If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
-                        clsAcrossFunction.RemoveParameterByName(".fns")
-                        'clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
-                        'clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                        ' clsAcrossFunction.RemoveParameterByName("left")
                         If rdoReplaceFirst.Checked Then
                             clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                         ElseIf rdoReplaceAll.Checked Then
@@ -746,39 +785,41 @@ Public Class dlgStringHandling
                     ElseIf rdoReplaceCell.Checked Then
                         clsAcrossFunction.RemoveParameterByName("tilda")
                         clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
-                        ' clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
                     End If
                 Else
-                    'clsAcrossFunction.RemoveParameterByName("tilda")
-                    '    clsAcrossFunction.RemoveParameterByName(".names")
-                    '    clsUnpackOperator.RemoveParameterByName("right")
                     If rdoReplaceFirst.Checked OrElse rdoReplaceAll.Checked Then
-                    clsAcrossFunction.RemoveParameterByName(".fns")
-                    If rdoReplaceFirst.Checked Then
-                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                    ElseIf rdoReplaceAll.Checked Then
-                        'clsAcrossFunction.RemoveParameterByName(".fns")
-                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        clsAcrossFunction.RemoveParameterByName(".fns")
+                        If rdoReplaceFirst.Checked Then
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        ElseIf rdoReplaceAll.Checked Then
+                            clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                        End If
+                    ElseIf rdoReplaceCell.Checked Then
+                        clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
                     End If
-                ElseIf rdoReplaceCell.Checked Then
-                    clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
                 End If
             End If
-        End If
         ElseIf rdoReplaceNa.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "replace_na", iPosition:=3)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaFunction)
             Else
-                clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceNaSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                If Not ucrChkOverWriteColumns.Checked Then
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceNaSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                Else
+                    clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsReplaceNaSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                End If
             End If
-
         ElseIf rdoToNa.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "to_na", iPosition:=3)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsNaIfFunction)
             Else
-                clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsNaIfSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                If Not ucrChkOverWriteColumns.Checked Then
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsNaIfSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                Else
+                    clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsNaIfSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                End If
             End If
         ElseIf rdoRemove.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "remove", iPosition:=3)
@@ -789,27 +830,23 @@ Public Class dlgStringHandling
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFunction)
                 End If
             Else
-                If ucrChkRemoveAll.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                If Not ucrChkOverWriteColumns.Checked Then
+                    If ucrChkRemoveAll.Checked Then
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    Else
+                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    End If
                 Else
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsRemoveSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    If ucrChkRemoveAll.Checked Then
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsRemoveAllSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    Else
+                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsRemoveSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    End If
                 End If
             End If
         End If
 
-        If rdoMultiple.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
-            If Not ucrChkOverWriteColumns.Checked Then
-                clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
-                clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
-                clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
-                clsAcrossFunction.RemoveParameterByName("left")
-            Else
-                clsAcrossFunction.RemoveParameterByName("tilda")
-                clsAcrossFunction.RemoveParameterByName(".names")
-                clsUnpackOperator.RemoveParameterByName("right")
-            End If
-        End If
+
     End Sub
 
     Private Sub ChangePrefixName()
