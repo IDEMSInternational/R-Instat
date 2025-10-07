@@ -1451,8 +1451,10 @@ Public Class RLink
                 strTopItemText = lstView.TopItem.Text
             End If
             lstView.Clear()
+            lstView.Columns.Clear()
             lstView.Groups.Clear()
-            lstView.Columns.Add(strHeading)
+            lstView.View = View.Details ' For a single column with header
+            lstView.Columns.Add(strHeading) '<-- Line to add the column header
             If lstIncludedDataTypes.Count > 0 Then
                 clsIncludeList.SetRCommand("list")
                 For Each kvpInclude In lstIncludedDataTypes
@@ -1524,7 +1526,7 @@ Public Class RLink
                         End If
                     End If
                 Next
-                lstView.Columns(0).Width = -2
+                lstView.Columns(0).Width += 100
                 ' When there is a vertical scroll bar, Width = -2 makes it slightly wider than needed
                 ' causing the horizontal scroll bar to display even when not needed.
                 ' Reducing the Width by ~ 2 removes the horizontal scroll bar when it's not needed 
