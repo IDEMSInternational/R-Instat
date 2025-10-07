@@ -30,6 +30,10 @@ Public Class dlgTransformText
     Private bReset As Boolean = True
     Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsWordsFunction, clsSubstringFunction As New RFunction
     Private clsSquishTrimFunction, clsTruncateFunction, clsWrapFunction As New RFunction
+    Private clsDummyFunction, clsGetDataFrameFunction, clsPasteFunction, clsEverythingFunction, clsAcrossFunction, clsPaste2Function,
+    clsEndsWithFunction, clsUnpackFunction, clsMutate2Function, clsAddColumnsFunction, clsNamesFunction, clsAnyFunction, clsSelectFunction As New RFunction
+    Private clsTildaOperator, clsDataFrameOperator, clsPipe2Operator, clsUnpackOperator, clsSelectOperator As New ROperator
+
     Private bRCodeSet As Boolean = False
     Private iFullHeight As Integer
     Private igrpParameterFullHeight As Integer
@@ -216,6 +220,16 @@ Public Class dlgTransformText
         ucrNudTo.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
 
+        'select options
+        ucrPnlColumnSelectOptions.AddRadioButton(rdoSingle)
+        ucrPnlColumnSelectOptions.AddRadioButton(rdoMultiple)
+
+        ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "col", "single")
+        ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "col", "multiple")
+
+        ' ucrChkOverWriteColumns.SetText("Overwrite Columns")
+        ucrPnlColumnSelectOptions.SetLinkedDisplayControl(grpVar)
+
         'ucrNewColName
         ucrNewColName.SetIsComboBox()
         ucrNewColName.SetSaveTypeAsColumn()
@@ -233,6 +247,24 @@ Public Class dlgTransformText
         clsWrapFunction = New RFunction
         clsSubstringFunction = New RFunction
         clsSquishTrimFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
+        clsTildaOperator = New ROperator
+        clsDataFrameOperator = New ROperator
+        clsPasteFunction = New RFunction
+        clsEverythingFunction = New RFunction
+        clsAcrossFunction = New RFunction
+        clsPaste2Function = New RFunction
+        clsPipe2Operator = New ROperator
+        clsEndsWithFunction = New RFunction
+        clsUnpackFunction = New RFunction
+        clsUnpackOperator = New ROperator
+        clsMutate2Function = New RFunction
+        clsAddColumnsFunction = New RFunction
+        clsNamesFunction = New RFunction
+        clsAnyFunction = New RFunction
+        clsSelectFunction = New RFunction
+        clsSelectOperator = New ROperator
 
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
@@ -244,6 +276,7 @@ Public Class dlgTransformText
         ucrChkFirstOr.Checked = False
         ucrChkLastOr.Checked = False
 
+        'Single option functions
         clsConvertFunction.SetPackageName("stringr")
         clsConvertFunction.SetRCommand("str_to_lower")
         clsConvertFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
@@ -279,6 +312,69 @@ Public Class dlgTransformText
         clsSubstringFunction.AddParameter("end", 2, iPosition:=2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+
+        'Multiple Select Functions
+
+        clsDummyFunction.AddParameter("col", "single", iPosition:=0)
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+
+        clsTildaOperator.SetOperation(" ", bBracketsTemp:=False)
+
+        clsDataFrameOperator.SetOperation("%>%")
+        clsDataFrameOperator.AddParameter("right", "as.data.frame()", iPosition:=1)
+
+        clsPasteFunction.SetRCommand("paste0")
+        clsPasteFunction.AddParameter("col", """{.col}_""", iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteFunction.AddParameter("", clsROperatorParameter:=clsTildaOperator, bIncludeArgumentName:=False)
+
+        clsEverythingFunction.SetRCommand("everything")
+        clsEverythingFunction.AddParameter("dot", ".", bIncludeArgumentName:=False, iPosition:=0)
+
+        clsAcrossFunction.SetPackageName("dplyr")
+        clsAcrossFunction.SetRCommand("across")
+        clsAcrossFunction.AddParameter("every", clsRFunctionParameter:=clsEverythingFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsMutate2Function.SetPackageName("dplyr")
+        clsMutate2Function.SetRCommand("mutate")
+        clsMutate2Function.AddParameter(".names", clsRFunctionParameter:=clsAcrossFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsPipe2Operator.SetOperation("%>%")
+        clsPipe2Operator.AddParameter("left", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsPipe2Operator.AddParameter("right", clsROperatorParameter:=clsUnpackOperator, iPosition:=1)
+        clsPipe2Operator.SetAssignTo("col")
+
+        clsPaste2Function.SetRCommand("paste0")
+        clsPaste2Function.AddParameter("names", """_""", iPosition:=0, bIncludeArgumentName:=False)
+        clsPaste2Function.AddParameter("split", "new_name", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsEndsWithFunction.SetRCommand("ends_with")
+        clsEndsWithFunction.AddParameter("paste", clsRFunctionParameter:=clsPaste2Function, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsUnpackFunction.SetPackageName("tidyr")
+        clsUnpackFunction.SetRCommand("unpack")
+        clsUnpackFunction.AddParameter("cols", clsRFunctionParameter:=clsEndsWithFunction, iPosition:=0)
+        clsUnpackFunction.AddParameter("names_sep", """.""", iPosition:=1)
+
+        clsUnpackOperator.SetOperation("%>%")
+        clsUnpackOperator.AddParameter("left", clsRFunctionParameter:=clsMutate2Function, iPosition:=0)
+        clsUnpackOperator.AddParameter("right", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
+
+        clsNamesFunction.SetRCommand("names")
+
+        clsAnyFunction.SetRCommand("-any_of")
+        clsAnyFunction.AddParameter("any", clsRFunctionParameter:=clsNamesFunction, bIncludeArgumentName:=False)
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("select", clsRFunctionParameter:=clsAnyFunction, bIncludeArgumentName:=False)
+
+        clsSelectOperator.SetOperation("%>%")
+        clsSelectOperator.AddParameter("left", clsRFunctionParameter:=clsUnpackFunction, iPosition:=0)
+        clsSelectOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+
+        clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsPipe2Operator, iPosition:=1)
+        clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -377,36 +473,36 @@ Public Class dlgTransformText
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 3.04)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.39)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.36)
-            Me.Size = New Size(Me.Width, iFullHeight / 1.27)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.17)
         ElseIf rdoLength.Checked Then
             grpParameters.Visible = False
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.76)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.69)
-            Me.Size = New Size(Me.Width, iFullHeight / 1.5)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.4)
         ElseIf rdoSubstring.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 2.14)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.28)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.26)
-            Me.Size = New Size(Me.Width, iFullHeight / 1.2)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.1)
         ElseIf rdoPad.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 1.43)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.14)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.13)
-            Me.Size = New Size(Me.Width, iFullHeight / 1.1)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.0)
         ElseIf rdoTruncate.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 2.14)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.28)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.26)
-            Me.Size = New Size(Me.Width, iFullHeight / 1.2)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.1)
         ElseIf rdoWrap.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 3.04)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.39)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.36)
-            Me.Size = New Size(Me.Width, iFullHeight / 1.27)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.17)
         Else
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight)
