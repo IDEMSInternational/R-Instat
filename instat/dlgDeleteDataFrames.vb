@@ -49,8 +49,6 @@ Public Class dlgDeleteDataFrames
         ucrReceiverDataFrames.SetMeAsReceiver()
         ucrReceiverDataFrames.SetItemType("dataframe")
         ucrReceiverDataFrames.strSelectorHeading = "Data Frames"
-
-        lblDeleteNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
