@@ -522,7 +522,7 @@ Imports RDotNet
         strWorkingDirectory = strWD
         'This is done in R link setup. Need to rethink how this is done.
         'Commented out for now to not repeat.
-        'frmMain.clsRLink.RunScript(clsSetwdFunction.ToScript(), strComment:="Option: Setting working directory")
+        'frmMain.clsRLink.RunRScript(clsSetwdFunction.ToScript(), strComment:="Option: Setting working directory")
     End Sub
 
     Public Sub SetColorPalette(lstColours As List(Of Color))
