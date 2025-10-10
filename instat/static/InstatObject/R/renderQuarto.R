@@ -1,8 +1,10 @@
 ﻿# Ensure that the correct packages and executables are installed
 if (!requireNamespace("quarto", quietly = TRUE))
   stop("install.packages('quarto') needed.")
-if (system("quarto --version", ignore.stdout = TRUE, ignore.stderr = TRUE) != 0)
-  stop("Install Quarto CLI: https://quarto.org/ ")
+library(quarto)
+if (is.null(quarto_path()) || !file.exists(quarto_path())) {
+  stop("Cannot find the Quarto CLI. Please download and install from https://quarto.org/")
+}
 
 STEM <- "inline"          # basename for all temporary files
 
@@ -18,7 +20,7 @@ writeLines(src, qmd)
 
 # Render all formats listed in the Quarto script
 old <- setwd(tmpdir); on.exit(setwd(old))
-quarto::quarto_render(basename(qmd), quiet = TRUE)
+quarto_render(basename(qmd), quiet = TRUE)
 
 # Find all files generated (excluding the '.qmd' file itself)
 stem <- tools::file_path_sans_ext(basename(qmd))
