@@ -4,6 +4,7 @@ format:
   docx: default
   html: default
   pdf:  default
+  pptx: default
 editor: visual
 ---
 
