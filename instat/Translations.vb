@@ -116,28 +116,27 @@ Public Class Translations
     '''     Displays a message box with translated prompt and title, then returns the user's response.
     ''' </summary>
     '''
-    ''' <param name="Prompt">   The message to display in the dialog box. If not null or empty, 
-    '''                         it will be translated using GetTranslation(). </param>
+    ''' <param name="Prompt">   The message to display in the dialog box. It will be translated 
+    '''                         using GetTranslation(). </param>
     ''' <param name="Buttons">  Optional. Numeric expression that specifies the buttons and icons 
     '''                         to display, the default button, and the modality of the message box. 
     '''                         Defaults to MsgBoxStyle.OKOnly. </param>
     ''' <param name="Title">    Optional. String expression displayed in the title bar of the dialog box. 
-    '''                         If not null or empty, it will be translated using GetTranslation(). 
-    '''                         Defaults to Nothing. </param>
+    '''                         It will be translated using GetTranslation(). Defaults to Nothing. </param>
     '''
     ''' <returns>   A MsgBoxResult value indicating which button the user clicked. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Shared Function MsgBoxTranslate(Prompt As Object, Optional Buttons As MsgBoxStyle = MsgBoxStyle.OKOnly, Optional Title As Object = Nothing) As MsgBoxResult
-        Dim strTranslatedPrompt As Object = Prompt
-        Dim strTranslatedTitle As Object = Title
+        Dim strTranslatedPrompt As String = ""
+        Dim strTranslatedTitle As String = ""
 
-        ' Translate prompt if it's not null or empty
-        If Prompt IsNot Nothing AndAlso Not String.IsNullOrEmpty(Prompt.ToString()) Then
+        ' Translate prompt (GetTranslation handles null/empty checks)
+        If Prompt IsNot Nothing Then
             strTranslatedPrompt = GetTranslation(Prompt.ToString())
         End If
 
-        ' Translate title if it's not null or empty
-        If Title IsNot Nothing AndAlso Not String.IsNullOrEmpty(Title.ToString()) Then
+        ' Translate title (GetTranslation handles null/empty checks)
+        If Title IsNot Nothing Then
             strTranslatedTitle = GetTranslation(Title.ToString())
         End If
 
