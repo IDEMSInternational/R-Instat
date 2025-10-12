@@ -126,8 +126,10 @@ Public Class Translations
     '''
     ''' <returns>   A MsgBoxResult value indicating which button the user clicked. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Shared Function MsgBoxTranslate(Prompt As Object, Optional Buttons As MsgBoxStyle = MsgBoxStyle.OKOnly, Optional Title As Object = Nothing) As MsgBoxResult
-        Return MsgBox(GetTranslation(If(Prompt?.ToString(), "")), Buttons, GetTranslation(If(Title?.ToString(), "")))
+    Public Shared Function MsgBoxTranslate(Prompt As String, _
+                                           Optional Buttons As MsgBoxStyle = MsgBoxStyle.OKOnly, _
+                                           Optional Title As String = Nothing) As MsgBoxResult
+        Return MsgBox(GetTranslation(Prompt), Buttons, GetTranslation(Title))
     End Function
 
 
