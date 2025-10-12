@@ -478,13 +478,13 @@ Public Class sdgCalculationsSummmary
             clsSelectedSubCalcFunction = GetSubCalc(lstSubCalcs.SelectedItems(0).Text)
             If clsSelectedSubCalcFunction IsNot Nothing Then
                 If clsSelectedSubCalcFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedSubCalcFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
-                    MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
+                    MsgBoxTranslate("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
                 Else
                     sdgSubCalc.Setup(clsNewCalculationFunction:=clsSelectedSubCalcFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=True, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
                     sdgSubCalc.ShowDialog()
                 End If
             Else
-                MsgBox("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
+                MsgBoxTranslate("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
             End If
         End If
     End Sub
