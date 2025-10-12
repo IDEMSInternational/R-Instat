@@ -127,21 +127,7 @@ Public Class Translations
     ''' <returns>   A MsgBoxResult value indicating which button the user clicked. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Shared Function MsgBoxTranslate(Prompt As Object, Optional Buttons As MsgBoxStyle = MsgBoxStyle.OKOnly, Optional Title As Object = Nothing) As MsgBoxResult
-        Dim strTranslatedPrompt As String = ""
-        Dim strTranslatedTitle As String = ""
-
-        ' Translate prompt (GetTranslation handles null/empty checks)
-        If Prompt IsNot Nothing Then
-            strTranslatedPrompt = GetTranslation(Prompt.ToString())
-        End If
-
-        ' Translate title (GetTranslation handles null/empty checks)
-        If Title IsNot Nothing Then
-            strTranslatedTitle = GetTranslation(Title.ToString())
-        End If
-
-        ' Call MsgBox with translated parameters and return the result
-        Return MsgBox(strTranslatedPrompt, Buttons, strTranslatedTitle)
+        Return MsgBox(GetTranslation(If(Prompt?.ToString(), "")), Buttons, GetTranslation(If(Title?.ToString(), "")))
     End Function
 
 
