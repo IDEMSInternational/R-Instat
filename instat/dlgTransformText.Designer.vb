@@ -73,6 +73,7 @@ Partial Class dlgTransformText
         Me.grpVar = New System.Windows.Forms.GroupBox()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.ucrChkOverWriteColumns = New instat.ucrCheck()
         Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
         Me.ucrNudWidthWrap = New instat.ucrNud()
         Me.ucrNudWidthTrunc = New instat.ucrNud()
@@ -206,10 +207,10 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.lblToSubstring)
         Me.grpParameters.Controls.Add(Me.ucrPnlSide)
         Me.grpParameters.Controls.Add(Me.ucrPnlSideTrunc)
-        Me.grpParameters.Location = New System.Drawing.Point(15, 357)
-        Me.grpParameters.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpParameters.Location = New System.Drawing.Point(15, 352)
+        Me.grpParameters.Margin = New System.Windows.Forms.Padding(4)
         Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpParameters.Padding = New System.Windows.Forms.Padding(4)
         Me.grpParameters.Size = New System.Drawing.Size(638, 256)
         Me.grpParameters.TabIndex = 12
         Me.grpParameters.TabStop = False
@@ -264,7 +265,7 @@ Partial Class dlgTransformText
         Me.rdoSquish.AutoSize = True
         Me.rdoSquish.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoSquish.Location = New System.Drawing.Point(447, 36)
-        Me.rdoSquish.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoSquish.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoSquish.Name = "rdoSquish"
         Me.rdoSquish.Size = New System.Drawing.Size(83, 24)
         Me.rdoSquish.TabIndex = 9
@@ -288,7 +289,7 @@ Partial Class dlgTransformText
         Me.rdoBothPad.AutoSize = True
         Me.rdoBothPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoBothPad.Location = New System.Drawing.Point(308, 36)
-        Me.rdoBothPad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoBothPad.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoBothPad.Name = "rdoBothPad"
         Me.rdoBothPad.Size = New System.Drawing.Size(68, 24)
         Me.rdoBothPad.TabIndex = 8
@@ -301,7 +302,7 @@ Partial Class dlgTransformText
         Me.rdoRightPad.AutoSize = True
         Me.rdoRightPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRightPad.Location = New System.Drawing.Point(168, 36)
-        Me.rdoRightPad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoRightPad.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoRightPad.Name = "rdoRightPad"
         Me.rdoRightPad.Size = New System.Drawing.Size(72, 24)
         Me.rdoRightPad.TabIndex = 7
@@ -314,7 +315,7 @@ Partial Class dlgTransformText
         Me.rdoLeftPad.AutoSize = True
         Me.rdoLeftPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLeftPad.Location = New System.Drawing.Point(28, 36)
-        Me.rdoLeftPad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLeftPad.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLeftPad.Name = "rdoLeftPad"
         Me.rdoLeftPad.Size = New System.Drawing.Size(62, 24)
         Me.rdoLeftPad.TabIndex = 2
@@ -349,7 +350,7 @@ Partial Class dlgTransformText
         Me.rdoMiddle.AutoSize = True
         Me.rdoMiddle.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoMiddle.Location = New System.Drawing.Point(382, 82)
-        Me.rdoMiddle.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoMiddle.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoMiddle.Name = "rdoMiddle"
         Me.rdoMiddle.Size = New System.Drawing.Size(80, 24)
         Me.rdoMiddle.TabIndex = 18
@@ -362,7 +363,7 @@ Partial Class dlgTransformText
         Me.rdoRight.AutoSize = True
         Me.rdoRight.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRight.Location = New System.Drawing.Point(243, 82)
-        Me.rdoRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoRight.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoRight.Name = "rdoRight"
         Me.rdoRight.Size = New System.Drawing.Size(72, 24)
         Me.rdoRight.TabIndex = 17
@@ -375,7 +376,7 @@ Partial Class dlgTransformText
         Me.rdoLeft.AutoSize = True
         Me.rdoLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLeft.Location = New System.Drawing.Point(104, 82)
-        Me.rdoLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLeft.Name = "rdoLeft"
         Me.rdoLeft.Size = New System.Drawing.Size(62, 24)
         Me.rdoLeft.TabIndex = 16
@@ -388,7 +389,7 @@ Partial Class dlgTransformText
         Me.rdoBothSide.AutoSize = True
         Me.rdoBothSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoBothSide.Location = New System.Drawing.Point(384, 82)
-        Me.rdoBothSide.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoBothSide.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoBothSide.Name = "rdoBothSide"
         Me.rdoBothSide.Size = New System.Drawing.Size(68, 24)
         Me.rdoBothSide.TabIndex = 51
@@ -401,7 +402,7 @@ Partial Class dlgTransformText
         Me.rdoRightSide.AutoSize = True
         Me.rdoRightSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRightSide.Location = New System.Drawing.Point(244, 82)
-        Me.rdoRightSide.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoRightSide.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoRightSide.Name = "rdoRightSide"
         Me.rdoRightSide.Size = New System.Drawing.Size(72, 24)
         Me.rdoRightSide.TabIndex = 50
@@ -414,7 +415,7 @@ Partial Class dlgTransformText
         Me.rdoLeftSide.AutoSize = True
         Me.rdoLeftSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLeftSide.Location = New System.Drawing.Point(105, 82)
-        Me.rdoLeftSide.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLeftSide.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLeftSide.Name = "rdoLeftSide"
         Me.rdoLeftSide.Size = New System.Drawing.Size(62, 24)
         Me.rdoLeftSide.TabIndex = 49
@@ -431,7 +432,7 @@ Partial Class dlgTransformText
         Me.rdoCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCase.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoCase.Location = New System.Drawing.Point(128, 12)
-        Me.rdoCase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoCase.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoCase.Name = "rdoCase"
         Me.rdoCase.Size = New System.Drawing.Size(81, 51)
         Me.rdoCase.TabIndex = 1
@@ -449,7 +450,7 @@ Partial Class dlgTransformText
         Me.rdoLength.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLength.Location = New System.Drawing.Point(206, 12)
-        Me.rdoLength.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLength.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLength.Name = "rdoLength"
         Me.rdoLength.Size = New System.Drawing.Size(96, 51)
         Me.rdoLength.TabIndex = 2
@@ -467,7 +468,7 @@ Partial Class dlgTransformText
         Me.rdoPad.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoPad.Location = New System.Drawing.Point(296, 12)
-        Me.rdoPad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoPad.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPad.Name = "rdoPad"
         Me.rdoPad.Size = New System.Drawing.Size(82, 51)
         Me.rdoPad.TabIndex = 3
@@ -485,7 +486,7 @@ Partial Class dlgTransformText
         Me.rdoSubstring.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSubstring.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoSubstring.Location = New System.Drawing.Point(10, 12)
-        Me.rdoSubstring.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoSubstring.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoSubstring.Name = "rdoSubstring"
         Me.rdoSubstring.Size = New System.Drawing.Size(122, 51)
         Me.rdoSubstring.TabIndex = 8
@@ -503,7 +504,7 @@ Partial Class dlgTransformText
         Me.rdoWords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWords.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoWords.Location = New System.Drawing.Point(627, 12)
-        Me.rdoWords.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoWords.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoWords.Name = "rdoWords"
         Me.rdoWords.Size = New System.Drawing.Size(86, 51)
         Me.rdoWords.TabIndex = 7
@@ -521,7 +522,7 @@ Partial Class dlgTransformText
         Me.rdoTrim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTrim.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTrim.Location = New System.Drawing.Point(465, 12)
-        Me.rdoTrim.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoTrim.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoTrim.Name = "rdoTrim"
         Me.rdoTrim.Size = New System.Drawing.Size(82, 51)
         Me.rdoTrim.TabIndex = 5
@@ -539,7 +540,7 @@ Partial Class dlgTransformText
         Me.rdoWrap.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWrap.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoWrap.Location = New System.Drawing.Point(542, 12)
-        Me.rdoWrap.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoWrap.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoWrap.Name = "rdoWrap"
         Me.rdoWrap.Size = New System.Drawing.Size(88, 51)
         Me.rdoWrap.TabIndex = 6
@@ -557,7 +558,7 @@ Partial Class dlgTransformText
         Me.rdoTruncate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTruncate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTruncate.Location = New System.Drawing.Point(370, 12)
-        Me.rdoTruncate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoTruncate.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoTruncate.Name = "rdoTruncate"
         Me.rdoTruncate.Size = New System.Drawing.Size(99, 51)
         Me.rdoTruncate.TabIndex = 4
@@ -605,6 +606,16 @@ Partial Class dlgTransformText
         Me.rdoSingle.TabStop = True
         Me.rdoSingle.Text = "Single"
         Me.rdoSingle.UseVisualStyleBackColor = True
+        '
+        'ucrChkOverWriteColumns
+        '
+        Me.ucrChkOverWriteColumns.AutoSize = True
+        Me.ucrChkOverWriteColumns.Checked = False
+        Me.ucrChkOverWriteColumns.Location = New System.Drawing.Point(15, 615)
+        Me.ucrChkOverWriteColumns.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkOverWriteColumns.Name = "ucrChkOverWriteColumns"
+        Me.ucrChkOverWriteColumns.Size = New System.Drawing.Size(344, 34)
+        Me.ucrChkOverWriteColumns.TabIndex = 75
         '
         'ucrPnlColumnSelectOptions
         '
@@ -825,7 +836,7 @@ Partial Class dlgTransformText
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(15, 626)
+        Me.ucrNewColName.Location = New System.Drawing.Point(15, 663)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(496, 33)
@@ -860,7 +871,7 @@ Partial Class dlgTransformText
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(15, 670)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 706)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -879,7 +890,9 @@ Partial Class dlgTransformText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(736, 764)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(728, 791)
+        Me.Controls.Add(Me.ucrChkOverWriteColumns)
         Me.Controls.Add(Me.grpVar)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.rdoTruncate)
@@ -898,7 +911,7 @@ Partial Class dlgTransformText
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOperation)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTransformText"
@@ -971,4 +984,5 @@ Partial Class dlgTransformText
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
+    Friend WithEvents ucrChkOverWriteColumns As ucrCheck
 End Class
