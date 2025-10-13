@@ -504,13 +504,6 @@ Public Class dlgTransform
         clsAssignOperator = New ROperator
         clsIsNAColsFunction = New RFunction
         clsDescToolsFormatFunction = New RFunction
-        clsDescToolsFormatFunction.SetPackageName("DescTools")
-        clsDescToolsFormatFunction.SetRCommand("Format")
-        clsDescToolsFormatFunction.AddParameter("digits", "1")
-        clsDescToolsFormatFunction.AddParameter("fmt", """p""")
-        clsDescToolsFormatFunction.AddParameter("na.form", """Missing""")
-        clsDescToolsFormatFunction.AddParameter("zero.form", """0""")
-        clsDescToolsFormatFunction.AddParameter("align", """l""")
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -725,6 +718,10 @@ Public Class dlgTransform
         clsNumericDummyFunction.AddParameter("add", "False", iPosition:=3)
         clsNumericDummyFunction.AddParameter("subtract", "False", iPosition:=4)
 
+        clsDescToolsFormatFunction.SetPackageName("DescTools")
+        clsDescToolsFormatFunction.SetRCommand("Format")
+        clsDescToolsFormatFunction.AddParameter("check", "DecimalFormat", iPosition:=0)
+
         clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
 
         clsFormatFunction.AddParameter("fmt", "fmt_trace", bIncludeArgumentName:=True)
@@ -852,6 +849,7 @@ Public Class dlgTransform
         ucrInputMultiply.SetRCode(clsScaleMultiplyOperator, bReset)
         ucrChkAddConstant.SetRCode(clsConstantDummyFunction, bReset)
         ucrPnlNumericOptions.SetRCode(clsNumericDummyFunction, bReset)
+        ucrPnlFormatOptions.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
@@ -930,9 +928,9 @@ Public Class dlgTransform
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoFormat.Checked Then
-                clsDummyTransformFunction.AddParameter("check", "format", iPosition:=0)
-                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
+                clsPreviewTextFunction = clsDescToolsFormatFunction.Clone
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDescToolsFormatFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoNumeric.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
                 If rdoRoundOf.Checked Then
@@ -1029,6 +1027,7 @@ Public Class dlgTransform
 
 
         End If
+        AddFormatParameters()
         SetPreviewText()
         UpdateNonNegativeParameters()
         NewDefaultName()
@@ -1105,76 +1104,37 @@ Public Class dlgTransform
             End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
         ElseIf rdoFormat.Checked Then
-            clsDummyTransformFunction.AddParameter("check", "format", iPosition:=0)
-
             If rdoDecimalFormat.Checked Then
-                ucrReceiverRank.SetRCode(clsDescToolsFormatFunction, bReset:=True)
-                ucrNudDecimalPlaces.SetRCode(clsDescToolsFormatFunction, bReset:=True)
-                ucrSaveNew.SetRCode(clsDescToolsFormatFunction, bReset:=True)
-                clsPreviewTextFunction = clsDescToolsFormatFunction.Clone
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDescToolsFormatFunction)
-
             ElseIf rdoScientific.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "Scientific", iPosition:=0)
-                clsSignifColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSignifColsFunction, bIncludeArgumentName:=False)
-
             ElseIf rdoPercent.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "Percent", iPosition:=0)
-                clsLagColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLagColsFunction, bIncludeArgumentName:=False)
-
             ElseIf rdoNA.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "NA", iPosition:=0)
-                clsLeadColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLeadColsFunction, bIncludeArgumentName:=False)
-
             ElseIf rdoZero.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "Zero", iPosition:=0)
-                clsDiffColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsConcDiffColsFunction, bIncludeArgumentName:=False)
-
             ElseIf rdoPvalue.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "P-value", iPosition:=0)
-                clsMeanColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsStandardDevColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsSymbolOperator, bIncludeArgumentName:=False)
-
             ElseIf rdoFraction.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "Fraction", iPosition:=0)
-                clsMeanColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsStandardDevColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsSymbolOperator, bIncludeArgumentName:=False)
-
             ElseIf rdoAlign.Checked Then
-                clsNumericDummyFunction.AddParameter("check", "Align", iPosition:=0)
-                clsBooleanColsOperator.AddParameter("x", "~.x", bIncludeArgumentName:=False, iPosition:=0)
-                clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsBooleanColsOperator, bIncludeArgumentName:=False)
             End If
-
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-            ElseIf rdoNonNegative.Checked Then
-                clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
-                If rdoSquareRoot.Checked Then
-                    clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
-                    clsSquarerootColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                    clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSquarerootColsFunction, bIncludeArgumentName:=False)
-                ElseIf rdoPower.Checked Then
-                    clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
-                    clsPowerColsOperator.AddParameter("y", ucrInputPower.GetText, iPosition:=1)
-                    clsPowerColsOperator.AddParameter("x", "~.", bIncludeArgumentName:=False, iPosition:=0)
-                    clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsPowerColsOperator, bIncludeArgumentName:=False)
-                ElseIf rdoLogToBase10.Checked Then
-                    clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
-                    clsLogBase10ColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                    clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLogBase10ColsFunction, bIncludeArgumentName:=False)
-                ElseIf rdoNaturalLog.Checked Then
-                    clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
-                    clsNaturalLogColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                    clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsNaturalLogColsFunction, bIncludeArgumentName:=False)
-                End If
-            ElseIf rdoScale.Checked Then
-                clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
+        ElseIf rdoNonNegative.Checked Then
+            clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
+            If rdoSquareRoot.Checked Then
+                clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
+                clsSquarerootColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSquarerootColsFunction, bIncludeArgumentName:=False)
+            ElseIf rdoPower.Checked Then
+                clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
+                clsPowerColsOperator.AddParameter("y", ucrInputPower.GetText, iPosition:=1)
+                clsPowerColsOperator.AddParameter("x", "~.", bIncludeArgumentName:=False, iPosition:=0)
+                clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsPowerColsOperator, bIncludeArgumentName:=False)
+            ElseIf rdoLogToBase10.Checked Then
+                clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
+                clsLogBase10ColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLogBase10ColsFunction, bIncludeArgumentName:=False)
+            ElseIf rdoNaturalLog.Checked Then
+                clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
+                clsNaturalLogColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+                clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsNaturalLogColsFunction, bIncludeArgumentName:=False)
+            End If
+        ElseIf rdoScale.Checked Then
+            clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
             clsScaleSubtractColsOperator.AddParameter("left", ".x", iPosition:=0)
             clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsScaleAddColsOperator, bIncludeArgumentName:=False)
         End If
@@ -1229,40 +1189,34 @@ Public Class dlgTransform
         End If
     End Sub
 
-    Private Sub ChangeBaseRCode()
-
-
-        clsBaseFunction = New RFunction
-        clsBaseFunction.SetRCommand("format")
-
+    Private Sub AddFormatParameters()
         If rdoDecimalFormat.Checked Then
-            clsBaseFunction.AddParameter("digits", ucrNudDecimalPlaces.GetText)
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudDecimalPlaces.GetText)
 
         ElseIf rdoScientific.Checked Then
-            clsBaseFunction.AddParameter("sci", ucrNudScientific.GetText)
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudScientific.GetText)
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34))
 
         ElseIf rdoPercent.Checked Then
-            clsBaseFunction.AddParameter("digits", ucrNudPercent.GetText)
-            clsBaseFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudPercent.GetText)
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34))
 
         ElseIf rdoNA.Checked Then
-            clsBaseFunction.AddParameter("na.form", Chr(34) & UcrInputNAOperations.GetText & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("na.form", Chr(34) & UcrInputNAOperations.GetText & Chr(34))
 
         ElseIf rdoZero.Checked Then
-            clsBaseFunction.AddParameter("zero.form", Chr(34) & UcrInputZeroOperations.GetText & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("zero.form", Chr(34) & UcrInputZeroOperations.GetText & Chr(34))
 
         ElseIf rdoPvalue.Checked Then
-            clsBaseFunction.AddParameter("fmt", Chr(34) & UcrInputPvalue.GetText & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & UcrInputPvalue.GetText & Chr(34))
 
         ElseIf rdoFraction.Checked Then
-            clsBaseFunction.AddParameter("frac", UcrNudFraction.GetText)
+            clsDescToolsFormatFunction.AddParameter("frac", UcrNudFraction.GetText)
 
         ElseIf rdoAlign.Checked Then
-            clsBaseFunction.AddParameter("align", Chr(34) & UcrInputAlignOperations.GetText & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("align", Chr(34) & UcrInputAlignOperations.GetText & Chr(34))
+
         End If
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
-
     End Sub
 
     Private Sub UpdateControlStates()
