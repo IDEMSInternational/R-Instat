@@ -2595,6 +2595,9 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
+        If mnuViewSwapDataAndMetadata.Checked Then
+            ucrColumnMeta.RefreshGridData()
+        End If
     End Sub
 
     Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click
