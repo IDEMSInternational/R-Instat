@@ -19,6 +19,7 @@ qmd <- file.path(tmpdir, paste0(STEM, ".qmd"))
 writeLines(src, qmd)
 
 # Render all formats listed in the Quarto script
+# Please be patient, this may take some minutes
 old <- setwd(tmpdir); on.exit(setwd(old))
 quarto_render(basename(qmd), quiet = TRUE)
 

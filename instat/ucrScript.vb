@@ -529,7 +529,6 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
-
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
         Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
@@ -548,10 +547,13 @@ Public Class ucrScript
     ''' </summary>
     ''' <param name="bEnable">If true, enables buttons/options, else disables them</param>
     Private Sub EnableRunOptions(bEnable As Boolean)
-        cmdRunStatementSelection.Enabled = bEnable
-        cmdRunAll.Enabled = bEnable
-        mnuRunCurrentStatementSelection.Enabled = bEnable
-        mnuRunAllText.Enabled = bEnable
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+
+        cmdRunStatementSelection.Enabled = bEnable AndAlso bScriptExists AndAlso bIsRScript
+        cmdRunAll.Enabled = bEnable AndAlso bScriptExists AndAlso (bIsRScript OrElse enumScriptType = ScriptType.quarto)
+        mnuRunCurrentStatementSelection.Enabled = cmdRunStatementSelection.Enabled
+        mnuRunAllText.Enabled = cmdRunAll.Enabled
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -840,7 +842,7 @@ Public Class ucrScript
                 MsgBox("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
                    & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method.",
-                   MsgBoxStyle.Information, "Could not parse R script")
+                   MsgBoxStyle.Information, "Could Not Parse R script")
                 Exit Sub
             End Try
 
@@ -1347,6 +1349,13 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+
+        If Not bScriptExists OrElse Not bIsRScript Then
+            Exit Sub
+        End If
+
         If clsScriptActive.SelectedText.Length > 0 Then
             RunRScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
         Else
