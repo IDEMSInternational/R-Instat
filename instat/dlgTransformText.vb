@@ -94,7 +94,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddParameterValuesCondition(rdoLength, "transform", "length")
         ucrPnlOperation.AddParameterValuesCondition(rdoPad, "transform", "pad")
         ucrPnlOperation.AddParameterValuesCondition(rdoTrim, "transform", "trim")
-        ucrPnlOperation.AddParameterValuesCondition(rdoWords, "transform", "word")
+        ucrPnlOperation.AddParameterValuesCondition(rdoWords, "transform", "words")
         ucrPnlOperation.AddParameterValuesCondition(rdoSubstring, "transform", "sub_string")
         ucrPnlOperation.AddParameterValuesCondition(rdoTruncate, "transform", "trunc")
         ucrPnlOperation.AddParameterValuesCondition(rdoWrap, "transform", "wrap")
@@ -601,7 +601,7 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub WordsNudVisibility()
+    Private Sub ucrPnlOperation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
         If rdoWords.Checked Then
             ucrNudFirstWord.Visible = True
             ucrNudLastWord.Visible = True
@@ -610,6 +610,8 @@ Public Class dlgTransformText
             ucrNudLastWord.Visible = False
             ucrReceiverTransformText.SetMeAsReceiver()
         End If
+        ChangeBaseFunction()
+        DialogSize()
     End Sub
 
     Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
@@ -654,7 +656,7 @@ Public Class dlgTransformText
         End If
 
         If rdoLength.Checked Then
-            clsDummyFunction.AddParameter("transform", "legth", iPosition:=1)
+            clsDummyFunction.AddParameter("transform", "length", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
             Else
@@ -732,19 +734,29 @@ Public Class dlgTransformText
             End If
         ElseIf rdoCase.Checked Then
             clsDummyFunction.AddParameter("transform", "case", iPosition:=1)
-            Select Case ucrInputTo.GetText
-                Case "Lower"
-                    ucrBase.clsRsyntax.SetFunction("str_to_lower")
-                Case "Upper"
-                    ucrBase.clsRsyntax.SetFunction("str_to_upper")
-                Case "Title"
-                    ucrBase.clsRsyntax.SetFunction("str_to_title")
-                Case "Sentence"
-                    ucrBase.clsRsyntax.SetFunction("str_to_sentence")
-            End Select
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+                Select Case ucrInputTo.GetText
+                    Case "Lower"
+                        ucrBase.clsRsyntax.SetFunction("str_to_lower")
+                    Case "Upper"
+                        ucrBase.clsRsyntax.SetFunction("str_to_upper")
+                    Case "Title"
+                        ucrBase.clsRsyntax.SetFunction("str_to_title")
+                    Case "Sentence"
+                        ucrBase.clsRsyntax.SetFunction("str_to_sentence")
+                End Select
             Else
+                Select Case ucrInputTo.GetText
+                    Case "Lower"
+                        clsConvertSelectFunction.SetRCommand("str_to_lower")
+                    Case "Upper"
+                        clsConvertSelectFunction.SetRCommand("str_to_upper")
+                    Case "Title"
+                        clsConvertSelectFunction.SetRCommand("str_to_title")
+                    Case "Sentence"
+                        clsConvertSelectFunction.SetRCommand("str_to_sentence")
+                End Select
                 If Not ucrChkOverWriteColumns.Checked Then
                     clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsConvertSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 Else
@@ -794,12 +806,10 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTransformText.ControlValueChanged, ucrSelectorForTransformText.ControlValueChanged,
-            ucrPnlColumnSelectOptions.ControlValueChanged, ucrChkOverWriteColumns.ControlValueChanged, ucrPnlOperation.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
-        WordsNudVisibility()
+            ucrPnlColumnSelectOptions.ControlValueChanged, ucrChkOverWriteColumns.ControlValueChanged
         NewDefaultName()
         SelectOptions()
         ChangeBaseFunction()
-        DialogSize()
     End Sub
 
     Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged,
