@@ -1344,7 +1344,10 @@ Public Class ucrScript
                 Exit Sub
         End Select
 
+        frmSetupLoading.Show()
         RunRScript(strScriptToRun, strComment)
+        frmSetupLoading.Close()
+
         SetFocusAndScrollCaret()
     End Sub
 
