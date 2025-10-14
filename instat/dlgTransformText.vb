@@ -78,7 +78,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
-        ucrReceiverTransformText.strSelectorHeading = "Variables"
+        'ucrReceiverTransformText.strSelectorHeading = "Variables"
 
         'ucrRdoOptions
         ucrPnlOperation.AddRadioButton(rdoCase)
@@ -297,12 +297,14 @@ Public Class dlgTransformText
 
         clsConvertSelectFunction.SetPackageName("~stringr")
         clsConvertSelectFunction.SetRCommand("str_to_lower")
+        clsConvertSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsLengthFunction.SetPackageName("stringr")
         clsLengthFunction.SetRCommand("str_length")
 
         clsLengthSelectFunction.SetPackageName("~stringr")
         clsLengthSelectFunction.SetRCommand("str_length")
+        clsLengthSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsPadFunction.SetPackageName("stringr")
         clsPadFunction.SetRCommand("str_pad")
@@ -312,6 +314,7 @@ Public Class dlgTransformText
 
         clsPadSelectFunction.SetPackageName("~stringr")
         clsPadSelectFunction.SetRCommand("str_pad")
+        clsPadSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsPadSelectFunction.AddParameter("width", "20", iPosition:=1)
         clsPadSelectFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
         clsPadSelectFunction.AddParameter("pad", Chr(34) & " " & Chr(34), iPosition:=3)
@@ -323,6 +326,7 @@ Public Class dlgTransformText
 
         clsTruncateSelectFunction.SetPackageName("~stringr")
         clsTruncateSelectFunction.SetRCommand("str_trunc")
+        clsTruncateSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsTruncateSelectFunction.AddParameter("width", "20", iPosition:=1)
         clsTruncateSelectFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
 
@@ -332,6 +336,7 @@ Public Class dlgTransformText
 
         clsWrapSelectFunction.SetPackageName("~stringr")
         clsWrapSelectFunction.SetRCommand("str_wrap")
+        clsWrapSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsWrapSelectFunction.AddParameter("width", "40", iPosition:=1)
 
         clsSquishTrimFunction.SetPackageName("stringr")
@@ -340,6 +345,7 @@ Public Class dlgTransformText
 
         clsSquishTrimSelectFunction.SetPackageName("~stringr")
         clsSquishTrimSelectFunction.SetRCommand("str_trim")
+        clsSquishTrimSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsSquishTrimSelectFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=1)
 
         clsWordsFunction.SetPackageName("stringr")
@@ -347,6 +353,7 @@ Public Class dlgTransformText
 
         clsWordsSelectFunction.SetPackageName("~stringr")
         clsWordsSelectFunction.SetRCommand("word")
+        clsWordsSelectFunction.AddParameter("string", ".x", iPosition:=0)
 
         clsSubstringFunction.SetPackageName("stringr")
         clsSubstringFunction.SetRCommand("str_sub")
@@ -355,6 +362,7 @@ Public Class dlgTransformText
 
         clsSubstringSelectFunction.SetPackageName("~stringr")
         clsSubstringSelectFunction.SetRCommand("str_sub")
+        clsSubstringSelectFunction.AddParameter("string", ".x", iPosition:=0)
         clsSubstringSelectFunction.AddParameter("start", 1, iPosition:=1)
         clsSubstringSelectFunction.AddParameter("end", 2, iPosition:=2)
 
@@ -434,14 +442,6 @@ Public Class dlgTransformText
         ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsWrapFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=5)
         ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsWordsFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=6)
         ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsSubstringFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=7)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsLengthSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=8)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsPadSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=9)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsTruncateSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=10)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsSquishTrimSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=11)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsWrapSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=12)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsWordsSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=13)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsSubstringSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=14)
-        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsConvertSelectFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=15)
 
         ucrNewColName.AddAdditionalRCode(clsLengthFunction, iAdditionalPairNo:=1)
         ucrNewColName.AddAdditionalRCode(clsPadFunction, iAdditionalPairNo:=2)
@@ -463,9 +463,8 @@ Public Class dlgTransformText
         ucrPnlSide.AddAdditionalCodeParameterPair(clsPadSelectFunction, ucrPnlSide.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSideTrunc.AddAdditionalCodeParameterPair(clsTruncateSelectFunction, ucrPnlSideTrunc.GetParameter(), iAdditionalPairNo:=1)
 
-        ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
         ucrNewColName.SetRCode(clsConvertFunction, bReset)
-        ucrPnlOperation.SetRCode(clsDummyFunction bReset)
+        ucrPnlOperation.SetRCode(clsDummyFunction, bReset)
         ucrInputTo.SetRCode(clsConvertFunction, bReset)
         ucrInputPad.SetRCode(clsPadFunction, bReset)
         ucrNudWidth.SetRCode(clsPadFunction, bReset)
@@ -478,6 +477,10 @@ Public Class dlgTransformText
         ucrPnlSide.SetRCode(clsPadFunction, bReset)
         ucrPnlSideTrunc.SetRCode(clsTruncateFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsDummyFunction, bReset)
+
+        If bReset Then
+            ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
+        End If
 
         bRCodeSet = True
         DialogSize()
@@ -528,10 +531,9 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub NewDefaultName()
-        If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
-            ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
-        End If
         If rdoMultiple.Checked Then
+            ucrNewColName.SetPrefix("transform")
+            ucrNewColName.SetLabelText("Prefix for New Column:")
             ucrNewColName.btnColumnPosition.Visible = False
             If ucrChkOverWriteColumns.Checked Then
                 ucrNewColName.Enabled = False
@@ -540,6 +542,10 @@ Public Class dlgTransformText
             End If
         Else
             ucrNewColName.btnColumnPosition.Visible = True
+            ucrNewColName.SetLabelText("New Column:")
+            If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
+                ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
+            End If
         End If
     End Sub
 
@@ -595,7 +601,7 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub ucrPnlOperation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
+    Private Sub WordsNudVisibility()
         If rdoWords.Checked Then
             ucrNudFirstWord.Visible = True
             ucrNudLastWord.Visible = True
@@ -604,8 +610,6 @@ Public Class dlgTransformText
             ucrNudLastWord.Visible = False
             ucrReceiverTransformText.SetMeAsReceiver()
         End If
-        ChangeBaseFunction()
-        DialogSize()
     End Sub
 
     Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
@@ -650,6 +654,7 @@ Public Class dlgTransformText
         End If
 
         If rdoLength.Checked Then
+            clsDummyFunction.AddParameter("transform", "legth", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
             Else
@@ -660,6 +665,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoPad.Checked Then
+            clsDummyFunction.AddParameter("transform", "pad", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
             Else
@@ -670,6 +676,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoTruncate.Checked Then
+            clsDummyFunction.AddParameter("transform", "trunc", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTruncateFunction)
             Else
@@ -680,6 +687,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoTrim.Checked Then
+            clsDummyFunction.AddParameter("transform", "trim", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSquishTrimFunction)
             Else
@@ -690,6 +698,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoWrap.Checked Then
+            clsDummyFunction.AddParameter("transform", "wrap", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
             Else
@@ -700,6 +709,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoWords.Checked Then
+            clsDummyFunction.AddParameter("transform", "words", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
             Else
@@ -710,6 +720,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoSubstring.Checked Then
+            clsDummyFunction.AddParameter("transform", "sub_string", iPosition:=1)
             If rdoSingle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
             Else
@@ -720,15 +731,7 @@ Public Class dlgTransformText
                 End If
             End If
         ElseIf rdoCase.Checked Then
-            If rdoSingle.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-            Else
-                If Not ucrChkOverWriteColumns.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsConvertSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                Else
-                    clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsConvertSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                End If
-            End If
+            clsDummyFunction.AddParameter("transform", "case", iPosition:=1)
             Select Case ucrInputTo.GetText
                 Case "Lower"
                     ucrBase.clsRsyntax.SetFunction("str_to_lower")
@@ -739,6 +742,15 @@ Public Class dlgTransformText
                 Case "Sentence"
                     ucrBase.clsRsyntax.SetFunction("str_to_sentence")
             End Select
+            If rdoSingle.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+            Else
+                If Not ucrChkOverWriteColumns.Checked Then
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsConvertSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                Else
+                    clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsConvertSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+                End If
+            End If
         End If
     End Sub
 
@@ -782,10 +794,12 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTransformText.ControlValueChanged, ucrSelectorForTransformText.ControlValueChanged,
-            ucrPnlColumnSelectOptions.ControlValueChanged
+            ucrPnlColumnSelectOptions.ControlValueChanged, ucrChkOverWriteColumns.ControlValueChanged, ucrPnlOperation.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
+        WordsNudVisibility()
         NewDefaultName()
         SelectOptions()
         ChangeBaseFunction()
+        DialogSize()
     End Sub
 
     Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged,
@@ -856,5 +870,10 @@ Public Class dlgTransformText
             ucrReceiverTransformText.strSelectorHeading = "Variables"
             lblColumnToTransform.Text = "Column To Transform"
         End If
+    End Sub
+
+    Private Sub ucrNewColName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColName.ControlValueChanged
+        clsTildaOperator.AddParameter("new_name", Chr(34) & ucrNewColName.GetText & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsTildaOperator.SetAssignTo("new_name")
     End Sub
 End Class
