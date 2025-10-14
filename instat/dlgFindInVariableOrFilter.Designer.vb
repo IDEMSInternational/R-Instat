@@ -41,6 +41,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.cmdFindNext = New System.Windows.Forms.Button()
         Me.ttLabels = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblFoundRowNo = New System.Windows.Forms.Label()
+        Me.lblVariableFound = New System.Windows.Forms.Label()
         Me.ucrWholeValue = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
@@ -50,7 +51,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrInputPattern = New instat.ucrInputComboBox()
-        Me.lblVariableFound = New System.Windows.Forms.Label()
         Me.grpSelect.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,7 +66,7 @@ Partial Class dlgFindInVariableOrFilter
         'cmdAddkeyboard
         '
         Me.cmdAddkeyboard.Location = New System.Drawing.Point(388, 417)
-        Me.cmdAddkeyboard.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdAddkeyboard.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.Size = New System.Drawing.Size(150, 34)
         Me.cmdAddkeyboard.TabIndex = 68
@@ -126,7 +126,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoVariable.Location = New System.Drawing.Point(124, 14)
-        Me.rdoVariable.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoVariable.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoVariable.Name = "rdoVariable"
         Me.rdoVariable.Size = New System.Drawing.Size(128, 40)
         Me.rdoVariable.TabIndex = 54
@@ -143,7 +143,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoInFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoInFilter.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoInFilter.Location = New System.Drawing.Point(250, 14)
-        Me.rdoInFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoInFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoInFilter.Name = "rdoInFilter"
         Me.rdoInFilter.Size = New System.Drawing.Size(128, 40)
         Me.rdoInFilter.TabIndex = 55
@@ -154,7 +154,7 @@ Partial Class dlgFindInVariableOrFilter
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(414, 138)
+        Me.lblPattern.Location = New System.Drawing.Point(414, 133)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(65, 20)
         Me.lblPattern.TabIndex = 59
@@ -187,7 +187,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoSelect.Location = New System.Drawing.Point(376, 14)
-        Me.rdoSelect.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoSelect.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoSelect.Name = "rdoSelect"
         Me.rdoSelect.Size = New System.Drawing.Size(128, 40)
         Me.rdoSelect.TabIndex = 70
@@ -239,6 +239,15 @@ Partial Class dlgFindInVariableOrFilter
         Me.lblFoundRowNo.Size = New System.Drawing.Size(57, 20)
         Me.lblFoundRowNo.TabIndex = 77
         Me.lblFoundRowNo.Text = "Label1"
+        '
+        'lblVariableFound
+        '
+        Me.lblVariableFound.AutoSize = True
+        Me.lblVariableFound.Location = New System.Drawing.Point(412, 167)
+        Me.lblVariableFound.Name = "lblVariableFound"
+        Me.lblVariableFound.Size = New System.Drawing.Size(57, 20)
+        Me.lblVariableFound.TabIndex = 78
+        Me.lblVariableFound.Text = "Label1"
         '
         'ucrWholeValue
         '
@@ -334,15 +343,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(190, 32)
         Me.ucrInputPattern.TabIndex = 65
-        '
-        'lblVariableFound
-        '
-        Me.lblVariableFound.AutoSize = True
-        Me.lblVariableFound.Location = New System.Drawing.Point(412, 167)
-        Me.lblVariableFound.Name = "lblVariableFound"
-        Me.lblVariableFound.Size = New System.Drawing.Size(57, 20)
-        Me.lblVariableFound.TabIndex = 78
-        Me.lblVariableFound.Text = "Label1"
         '
         'dlgFindInVariableOrFilter
         '
