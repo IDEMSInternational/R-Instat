@@ -1,4 +1,6 @@
-﻿Public Class frmPackageIssues
+﻿Imports instat.Translations
+
+Public Class frmPackageIssues
     Private bFirstLoad As Boolean = True
     Private strMissingPackages() As String
     Private clsInstallPackages As New RFunction
@@ -14,7 +16,6 @@
     Private Sub InitialiseDialog()
         ucrInputPackageNames.txtInput.Multiline = True
         ucrInputPackageNames.IsReadOnly = True
-Imports instat.Translations
     End Sub
 
     Public Sub SetMissingPackages(strMissing() As String)
