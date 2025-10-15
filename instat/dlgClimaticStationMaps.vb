@@ -69,6 +69,7 @@ Public Class dlgClimaticStationMaps
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         Dim dctGRugColour As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
 
         ucrSelectorOutline.SetParameter(New RParameter("data", 0))
         ucrSelectorOutline.SetParameterIsrfunction()
@@ -118,6 +119,19 @@ Public Class dlgClimaticStationMaps
         ucrReceiverStation.Selector = ucrSelectorStation
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
+
+        ucrChkmapLegend.SetText("Legend:")
+        ucrChkmapLegend.AddToLinkedControls({ucrInputmapLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputmapLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputmapLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputmapLegendPosition.SetItems(dctLegendPosition)
+        ucrChkmapLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkmapLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrSaveMap.SetPrefix("map")
         ucrSaveMap.SetSaveTypeAsGraph()
@@ -308,6 +322,7 @@ Public Class dlgClimaticStationMaps
         ucrInputColour.SetRCode(clsLabelRepelFunction, bReset)
         ucrNudSize.SetRCode(clsLabelRepelFunction, bReset)
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
+        ucrChkmapLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverGeometry.SetRCode(clsSfAesFunction, bReset)
         If bReset Then
             ucrChkLabelledRectangle.SetRCode(clsGGplotOperator, bReset)
@@ -338,6 +353,18 @@ Public Class dlgClimaticStationMaps
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsGGplotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsGGplotOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkmapLegend.ControlValueChanged, ucrInputmapLegendPosition.ControlValueChanged
+        AddRemoveTheme()
     End Sub
 
     Private Sub ucrReceiverShape_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShape.ControlValueChanged
