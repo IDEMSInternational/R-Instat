@@ -914,7 +914,7 @@ Public Class dlgTransform
         ucrNudLagPosition.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputMultiply.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged,
         ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrChkAddConstant.ControlValueChanged,
         ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
-
+        UpdateControlStates()
         ucrBase.clsRsyntax.ClearCodes()
         If rdoSingle.Checked Then
             If rdoRank.Checked Then
