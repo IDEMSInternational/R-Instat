@@ -1107,7 +1107,7 @@ Public Class ucrCore
             lstAllRCodes.Add(clsNewRCode)
             lstAllRParameters.Add(clsNewRParameter)
         Else
-            MsgBox("Developer error: Cannot add additional RCode and RParameter pair because the additional pair number is out of bounds of the current pairs.")
+            MsgBoxTranslate("Developer error: Cannot add additional RCode and RParameter pair because the additional pair number is out of bounds of the current pairs.")
         End If
     End Sub
 

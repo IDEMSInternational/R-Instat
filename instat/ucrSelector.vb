@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrSelector
+Imports instat.Translations
     Public CurrentReceiver As ucrReceiver
     Public Event ResetAll()
     Public Event ResetReceivers()
@@ -469,7 +470,7 @@ Public Class ucrSelector
                     AddAllToolStripMenuItem.Enabled = True
                     SelectAllToolStripMenuItem.Enabled = True
                 Else
-                    MsgBox("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
+                    MsgBoxTranslate("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
                 End If
             Else
                 AddSelectedToolStripMenuItem.Enabled = False

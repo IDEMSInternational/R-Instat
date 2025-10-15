@@ -457,7 +457,7 @@ Public Class dlgImportDataset
                 ucrChkMultipleFiles.Checked = False
                 ucrSaveFile.Reset()
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
-                    MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
+                    MsgBoxTranslate("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
                     SetDialogStateFromFile("")
                 Else
                     dctSelectedExcelSheets.Clear()

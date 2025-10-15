@@ -510,13 +510,13 @@ Public Class sdgCalculationsSummmary
             clsSelectedManipulationFunction = GetManipulation(ucrManipulations.lstAvailableData.SelectedItems(0).Text)
             If clsSelectedManipulationFunction IsNot Nothing Then
                 If clsSelectedManipulationFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedManipulationFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
-                    MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
+                    MsgBoxTranslate("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
                 Else
                     sdgManipulation.Setup(clsNewCalculationFunction:=clsSelectedManipulationFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=False, bNewIsManipulation:=True, bReset:=False, bEnableName:=False)
                     sdgManipulation.ShowDialog()
                 End If
             Else
-                MsgBox("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
+                MsgBoxTranslate("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
             End If
         End If
     End Sub
