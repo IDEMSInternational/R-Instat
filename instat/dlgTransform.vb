@@ -107,6 +107,7 @@ Public Class dlgTransform
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -197,6 +198,7 @@ Public Class dlgTransform
         ucrPnlNonNegative.AddParameterValuesCondition(rdoNaturalLog, "check", "log")
         ucrPnlNonNegative.AddParameterValuesCondition(rdoPower, "check", "power")
 
+        ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkOverWriteColumns, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkPreview, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudSignifDigits, {rdoSignificantDigits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudRoundOfDigits, {rdoRoundOf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -355,6 +357,8 @@ Public Class dlgTransform
         ucrChkEditPreview.SetText("Edit")
 
         ttEditPreview.SetToolTip(ucrChkEditPreview.chkCheck, "Use(Slightly) at your peril.")
+
+        ucrChkOverWriteColumns.SetText("Overwrite Columns")
     End Sub
 
     Private Sub SetDefaults()
@@ -780,10 +784,18 @@ Public Class dlgTransform
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
         ElseIf rdoMultiple.Checked Then
-            ucrSaveNew.SetLabelText("Suffix Name:")
-            ucrSaveNew.btnColumnPosition.Visible = False
-            If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
-                clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
+            If ucrChkOverWriteColumns.Checked Then
+                ucrSaveNew.Enabled = False
+                clsPasteFunction.RemoveParameterByName("col_data")
+            Else
+                ucrSaveNew.Enabled = True
+                ucrSaveNew.SetLabelText("Suffix Name:")
+                ucrSaveNew.SetPrefix("select")
+                ucrSaveNew.btnColumnPosition.Visible = False
+                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+                If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
+                    clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
+                End If
             End If
         End If
     End Sub
@@ -1125,7 +1137,6 @@ Public Class dlgTransform
     Private Sub ucrSaveNew_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNew.ControlValueChanged
         If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
-            clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -1185,5 +1196,14 @@ Public Class dlgTransform
         Else
             clsScaleDivideColsOperator.RemoveParameterByName("z")
         End If
+    End Sub
+
+    Private Sub ReopenDialog()
+        'This is hardcoded here so that the checkbox is always unchecked when the dialog is reopened
+        ucrChkOverWriteColumns.Checked = False
+    End Sub
+
+    Private Sub ucrChkOverWriteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOverWriteColumns.ControlValueChanged
+        NewDefaultName()
     End Sub
 End Class
