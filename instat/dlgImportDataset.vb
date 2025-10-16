@@ -457,7 +457,7 @@ Public Class dlgImportDataset
                 ucrChkMultipleFiles.Checked = False
                 ucrSaveFile.Reset()
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
-                    MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
+                    MsgBoxTranslate("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
                     SetDialogStateFromFile("")
                 Else
                     dctSelectedExcelSheets.Clear()
@@ -868,6 +868,11 @@ Public Class dlgImportDataset
         Catch ex As Exception
         End Try
 
+        If clsTempImport.ContainsParameter("n_max") Then
+            clsTempImport.RemoveParameterByName("n_max")
+        End If
+        clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
+
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -1253,6 +1258,10 @@ Public Class dlgImportDataset
         Return {".json"}.Contains(strFileExtension)
     End Function
 
+    Private Function IsSavFileFormat() As Boolean
+        Return {".sav"}.Contains(strFileExtension)
+    End Function
+
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
         If strFileExtension = ".rds" _
@@ -1276,6 +1285,8 @@ Public Class dlgImportDataset
                     strRowMaxParamName = "nrows"
                 ElseIf IsExcelFileFormat() Then
                     strRowMaxParamName = "n_max"
+                ElseIf IsSavFileFormat() Then
+                    strRowMaxParamName = "n_max"
                 End If
 
                 'determine the correct maximum number of lines to preview 
@@ -1286,7 +1297,9 @@ Public Class dlgImportDataset
                     clsTempFunction.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
                 End If
 
-
+                If Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat() OrElse IsJSONFileFormat()) Then
+                    clsTempFunction.RemoveParameterByName(strRowMaxParamName)
+                End If
 
                 clsTempFunction.RemoveAssignTo()
                 clsTempFunction.bExcludeAssignedFunctionOutput = False

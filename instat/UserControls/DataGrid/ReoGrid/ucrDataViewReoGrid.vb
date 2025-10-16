@@ -17,6 +17,7 @@
 Imports System.Text.RegularExpressions
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 Public Class ucrDataViewReoGrid
     Implements IDataViewGrid
@@ -170,7 +171,7 @@ Public Class ucrDataViewReoGrid
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
         Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
-            MsgBox("Cannot wrap or unwrap this type of variable.")
+            MsgBoxTranslate("Cannot wrap or unwrap this type of variable.")
             Exit Sub
         End If
 
@@ -274,7 +275,7 @@ Public Class ucrDataViewReoGrid
         If e.Range.EndCol >= GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns.Count Then
             'this happens when Ctrl + V is pressed and the data to be pasted has more columns
             'than columns between start and end column
-            MsgBox("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
+            MsgBoxTranslate("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
             Exit Sub
         End If
         'TODO check see if pasted range is same as selected

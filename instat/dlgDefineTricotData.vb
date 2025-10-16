@@ -1,4 +1,4 @@
-' R- Instat
+﻿' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -453,10 +453,10 @@ Public Class dlgDefineTricotData
             bIsUnique = False
             If ucrReceiverLevelID.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID's found.")
-                MsgBox("You have multiple rows with the same ID.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same ID.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID were found.")
-                MsgBox("You have multiple rows with the same ID's.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same ID's.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
             ucrInputCheckInputIDLevel.SetName("No duplicate ID.")
@@ -607,10 +607,10 @@ Public Class dlgDefineTricotData
             bIsUniqueVariety = False
             If ucrReceiverVarietyLevelVariety.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate varieties found.")
-                MsgBox("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate varieties were found.")
-                MsgBox("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
             ucrInputCheckInputVarietyLevel.SetName("No duplicate varieties.")
@@ -639,10 +639,10 @@ Public Class dlgDefineTricotData
             bIsUniqueID = False
             If ucrReceiverIDVarietyLevelID.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID-Variety combination found.")
-                MsgBox("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID-Variety combination were found.")
-                MsgBox("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
             ucrInputCheckInputIDVarietyLevel.SetName("No duplicate ID-Variety combination.")
