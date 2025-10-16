@@ -401,7 +401,7 @@ Public Class dlgNewDataFrame
                     Case "Integer"
                         clsColExpRFunction.SetRCommand("as.integer")
                     Case Else
-                        MsgBox("Developer error: Only expected one predefined item to set the column type.")
+                        MsgBoxTranslate("Developer error: Only expected one predefined item to set the column type.")
                 End Select
             End If
 

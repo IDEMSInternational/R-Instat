@@ -18,6 +18,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 ''' <summary>
 ''' <para>This control only accepts string parameter types</para> 
@@ -195,10 +196,10 @@ Public Class ucrFactor
         'do levels entry validation
         If _grdSheet.ColumnHeaders(e.Cell.Column).Text = DefaultColumnNames.Level Then
             If Not IsNumeric(e.Text) Then
-                MsgBox("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
+                MsgBoxTranslate("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
                 bValid = False
             ElseIf e.Text.Contains(".") Then
-                MsgBox("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
+                MsgBoxTranslate("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
 
                 bValid = False
             End If

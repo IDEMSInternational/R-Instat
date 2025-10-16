@@ -19,6 +19,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
 Imports RInsightF461
+Imports instat.Translations
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -2185,7 +2186,7 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     Public Sub SetWaitDelayTime(iTimeInSeconds As Integer)
         If iTimeInSeconds <= 0 Then
-            MsgBox("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
+            MsgBoxTranslate("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
             iTimeInSeconds = 2
         End If
         iWaitDelay = iTimeInSeconds
