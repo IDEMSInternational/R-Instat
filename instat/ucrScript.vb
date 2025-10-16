@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -13,16 +13,49 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+                                                                                                                                          
 Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Windows.Controls
 Imports RInsightF461
 Imports ScintillaNET
 Imports RDotNet
-Imports instat.Translations
 
 Public Class ucrScript
+
+    ''' <summary>
+    ''' Enumeration to specify the type of script in the active tab.
+    ''' </summary>
+    Public Enum ScriptType
+        json
+        other
+        quarto
+        rScript
+    End Enum
+
+    ''' <summary>
+    ''' Gets or sets the type of script for the current tab.
+    ''' The value is stored in the active Scintilla control's Tag property.
+    ''' We need to use the Tag property because we can have multiple tabs, each with
+    ''' its own Scintilla control, and each tab can contain a different type of script.
+    ''' We use this property to determine the type of script in the current tab,
+    ''' so that we can set the correct lexer when loading a script from file, and also
+    ''' so that we can enable/disable the buttons and context menu options correctly.
+    ''' </summary>
+    Public Property enumScriptType As ScriptType
+        Get
+            If clsScriptActive IsNot Nothing AndAlso clsScriptActive.Tag IsNot Nothing Then
+                Return DirectCast(clsScriptActive.Tag, ScriptType)
+            Else
+                Return ScriptType.rScript ' Default value
+            End If
+        End Get
+        Private Set(value As ScriptType)
+            If clsScriptActive IsNot Nothing Then
+                clsScriptActive.Tag = value
+            End If
+        End Set
+    End Property
 
     Private bIsTextChanged = False
     Private iMaxLineNumberCharLength As Integer = 0
@@ -63,10 +96,15 @@ Public Class ucrScript
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        toolTipScriptWindow.SetToolTip(cmdRunStatementSelection, "Run the current statement or selection. (Ctrl+Enter)")
-        toolTipScriptWindow.SetToolTip(cmdRunAll, "Run all the text in the tab. (Ctrl+Alt+R)")
-        toolTipScriptWindow.SetToolTip(cmdLoadScript, "Load a script from file into the current tab.")
-        toolTipScriptWindow.SetToolTip(cmdSave, "Save the script in the current tab to a file.")
+        Dim strRunStatementSelectionToolTip As String = "Run the current statement or selection. (Ctrl+Enter)"
+        Dim strRunAllToolTip As String = "If R script, run everything in the tab; if Quarto script, render everything in the tab. (Ctrl+Alt+R)"
+        Dim strLoadToolTip As String = "Load from file into the current tab."
+        Dim strSaveToolTip As String = "Save the contents of the current tab to a file."
+
+        toolTipScriptWindow.SetToolTip(cmdRunStatementSelection, strRunStatementSelectionToolTip)
+        toolTipScriptWindow.SetToolTip(cmdRunAll, strRunAllToolTip)
+        toolTipScriptWindow.SetToolTip(cmdLoadScript, strLoadToolTip)
+        toolTipScriptWindow.SetToolTip(cmdSave, strSaveToolTip)
         toolTipScriptWindow.SetToolTip(cmdAddTab, "Add a new tab.")
         toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
         toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
@@ -79,13 +117,12 @@ Public Class ucrScript
         mnuPaste.ToolTipText = "Paste the contents of the clipboard into the current tab. (Ctrl+V)"
         mnuSelectAll.ToolTipText = "Select all the contents of the current tab. (Ctrl+A)"
         mnuClear.ToolTipText = "Clear the contents of the current tab. (Ctrl+L)"
-        mnuRunCurrentStatementSelection.ToolTipText = "Run the current statement or selection. (Ctrl+Enter)"
-        mnuRunAllText.ToolTipText = "Run all the text in the tab. (Ctrl+Alt+R)"
+        mnuRunCurrentStatementSelection.ToolTipText = strRunStatementSelectionToolTip
+        mnuRunAllText.ToolTipText = strRunAllToolTip
         mnuOpenScriptasFile.ToolTipText = "Save file to log folder and open file in external editor."
-        mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
-        mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
+        mnuLoadScriptFromFile.ToolTipText = strLoadToolTip
+        mnuSaveScript.ToolTipText = strSaveToolTip
         mnuHelp.ToolTipText = "Display the Script Window help information."
-        mnuInsertScript.ToolTipText = "Insert script in the current tab."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentStatementSelection.ShortcutKeys = Keys.Enter Or Keys.Control
@@ -144,7 +181,7 @@ Public Class ucrScript
     ''' </summary>
     Public Sub CutText()
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBoxTranslate("You can only cut from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Cut from log tab")
+            MsgBox("You can only cut from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Cut from log tab")
             Exit Sub
         End If
 
@@ -165,26 +202,138 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
-    ''' If script tab is already selected, then returns True.
-    ''' If log tab is selected and there is only one script tab, then selects script tab and 
-    ''' returns True.
-    ''' If log tab is selected and there is more than one script tab, then displays a message 
+    ''' Returns <paramref name="strScript"/> in a form that is suitable for including in a Quarto 
+    ''' file. Some dialog boxes call `get_object_data()` with `as_file=TRUE`. This prevents the 
+    ''' table or graph from being rendered. So this function sets `as_file=FALSE`.
+    ''' </summary>
+    ''' <param name="strScript"> R script generated from a dialog box</param>
+    ''' <returns><paramref name="strScript"/> in a form that is suitable for including in a Quarto 
+    '''          file.</returns>
+    Public Function GetScriptCleanedForQuarto(strScript As String) As String
+        Dim clsRScriptToClean As RScript
+        Dim dctRStatements As OrderedDictionary
+        Try
+            clsRScriptToClean = New RScript(strScript)
+            dctRStatements = clsRScriptToClean.statements
+        Catch ex As Exception
+            MsgBox("Could not parse R script for Quarto cleaning. " &
+                   "Parsing failed with message:" & Environment.NewLine & Environment.NewLine &
+                   ex.Message,
+                   MsgBoxStyle.Information, "Could Not parse R script")
+            Return strScript
+        End Try
+
+        If IsNothing(dctRStatements) OrElse dctRStatements.Count = 0 Then
+            Return strScript
+        End If
+
+        Dim strScriptCleaned As String = ""
+
+        'todo: We currently use string replace to change the parameter value. It would be safer
+        '      to use RScript to update the parameter directly. This would require changes to the
+        '      RScript class.
+        For Each kvpDictEntry As DictionaryEntry In dctRStatements
+            Dim clsRStatement As RStatement = kvpDictEntry.Value
+            Dim strStatement As String = clsRStatement.Text
+            If strStatement.Contains("get_object_data") Then
+                strStatement = strStatement.Replace("as_file=TRUE", "as_file=FALSE")
+            End If
+            strScriptCleaned &= strStatement
+        Next
+
+        Return strScriptCleaned
+    End Function
+
+    ''' <summary>
+    '''    If the log tab is selected, then displays a message box and returns False. If the 
+    '''    active tab contains text, then displays a message box and, if the user does not want 
+    '''    to overwrite, then returns False. Otherwise returns True.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function IsOkToLoadScript() As Boolean
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only load script to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Load to log tab")
+            Return False
+        End If
+
+        If clsScriptActive.TextLength > 0 _
+                AndAlso MsgBox("Loading a script from file will clear your current script" _
+                               & Environment.NewLine & "Do you still want to load?",
+                               vbYesNo, "Load From File") = vbNo Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' If an R or Quarto script tab is already selected, then returns True.
+    ''' If the log tab is selected and there is only one script tab (and this is an R or Quarto 
+    ''' tab), then selects the script tab and returns True.
+    ''' If the log tab is selected and there is more than one script tab, then displays a message 
     ''' box and returns False.
     ''' </summary>
-    ''' <returns>True if a script tab is selected, or if there is only one script tab; else 
-    '''          returns False.</returns>
-    Public Function IsScriptTabSelected() As Boolean
+    ''' <returns>True if an R or Quarto script tab is selected, or if there is only one script tab 
+    '''          (and this is an R or Quarto tab); else returns False.</returns>
+    Public Function IsScriptTabROrQuarto() As Boolean
         If TabControl.SelectedIndex = iTabIndexLog Then
             If TabControl.TabCount = 2 Then
                 TabControl.SelectTab(1)
             Else
-                MsgBoxTranslate("No script tab selected. Please first select the tab of the script you wish to write to.", vbExclamation, "Script Tab Not Selected")
+                MsgBox("No script tab selected. Please first select the tab of an R or Quarto script you wish to write to.", vbExclamation, "Script Tab Not Selected")
                 Return False
             End If
+        End If
+
+        If Not (enumScriptType = ScriptType.rScript OrElse enumScriptType = ScriptType.quarto) Then
+            MsgBox("Can only write to R or Quarto scripts. Please first select the tab of an R or Quarto script you wish to write to.", vbExclamation, "Script Tab Not Selected")
+            Return False
         End If
         Return True
     End Function
 
+    ''' <summary>
+    '''    Attempts to read <paramref name="fileName"/> and, if successful, loads the contents 
+    '''    into the active tab. Sets the lexer, tab title, menu options and button enabled states 
+    '''    according to the file extension. Also updates the list of recent items. <para>
+    '''    If the file cannot be read, then displays a message box and leaves the active tab 
+    '''    unchanged.</para>
+    ''' </summary>
+    ''' <param name="fileName"> The full path of the file to read</param>
+    Public Sub LoadScriptFromFile(fileName As String)
+        Try
+            frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(fileName)
+            bIsTextChanged = False
+            clsRScript = Nothing
+            frmMain.clsRecentItems.addToMenu(Replace(fileName, "\", "/"))
+            frmMain.bDataSaved = True
+
+            ' Set enumScriptType based on file extension
+            Dim strFileExtension As String = Path.GetExtension(fileName).ToLower()
+            Select Case strFileExtension
+                Case ".json"
+                    enumScriptType = ScriptType.json
+                    SetupScriptEditorJson()
+                Case ".qmd"
+                    enumScriptType = ScriptType.quarto
+                    SetupScriptEditorQuarto()
+                Case ".r"
+                    enumScriptType = ScriptType.rScript
+                    SetupScriptEditorR()
+                Case Else
+                    enumScriptType = ScriptType.other
+                    clsScriptActive.Lexer = Lexer.Null
+            End Select
+            TabControl.SelectedTab.Text = If(enumScriptType = ScriptType.rScript,
+                                             Path.GetFileNameWithoutExtension(fileName),
+                                             Path.GetFileName(fileName))
+            EnableDisableButtons()
+        Catch
+            MsgBox("Could not load the script from file." & Environment.NewLine &
+                   "The file may be in use by another program or you may not have access to read from the specified location.",
+                   vbExclamation, "Load Script")
+        End Try
+    End Sub
 
     ''' <summary>
     '''     Appends <paramref name="strText"/> to the end of the text in the log tab.
@@ -205,7 +354,7 @@ Public Class ucrScript
     ''' </summary>
     Public Sub PasteText()
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBoxTranslate("You can only paste to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Paste to log tab")
+            MsgBox("You can only paste to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Paste to log tab")
             Exit Sub
         End If
 
@@ -213,28 +362,42 @@ Public Class ucrScript
             clsScriptActive.Paste()
             EnableDisableButtons()
         Else
-            MsgBoxTranslate("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
+            MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
         End If
     End Sub
 
     ''' <summary>
     ''' Displays a file save dialog; allows the user to specify a folder and file name; and saves 
-    ''' the log/script to the specified file.
+    ''' the contents of the active tab to the specified file.
     ''' </summary>
-    ''' <param name="bIsLog"> True if the script to be saved is the log file.</param>
-    Public Sub SaveScript(bIsLog As Boolean, Optional bOpenAsFile As Boolean = False)
+    ''' <param name="bIsLog"> True if the tab to be saved is the log tab.</param>
+    Public Sub SaveScript(bIsLog As Boolean)
         If Not bIsLog AndAlso TabControl.SelectedIndex = iTabIndexLog Then
             If TabControl.TabCount = 2 Then
                 TabControl.SelectTab(1)
             Else
-                MsgBoxTranslate("No script tab selected. Please first select the tab of the script you wish to save.", vbExclamation, "Save Script")
+                MsgBox("No script tab selected. Please first select the tab of the script you wish to save.", vbExclamation, "Save Script")
                 Exit Sub
             End If
         End If
 
         Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
+
+            Select Case enumScriptType
+                Case ScriptType.json
+                    dlgSave.Title = "Save To Json File"
+                    dlgSave.Filter = "JSON File (*.json)|*.json"
+                Case ScriptType.quarto
+                    dlgSave.Title = "Save To Quarto File"
+                    dlgSave.Filter = "Quarto File (*.qmd)|*.qmd"
+                Case ScriptType.rScript
+                    dlgSave.Title = If(bIsLog, "Save Log To R Script File", "Save To R Script File")
+                    dlgSave.Filter = "R Script File (*.R)|*.R"
+                Case Else
+                    dlgSave.Title = "Save To Text File"
+                    dlgSave.Filter = "Text File (*.txt)|*.txt"
+            End Select
+
             dlgSave.FileName = Path.GetFileName(TabControl.SelectedTab.Text)
 
             ' Ensure that dialog opens in the correct folder.
@@ -247,7 +410,9 @@ Public Class ucrScript
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
                     strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
                     bIsTextChanged = False
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
+                    TabControl.SelectedTab.Text = If(enumScriptType = ScriptType.rScript,
+                                                     Path.GetFileNameWithoutExtension(dlgSave.FileName),
+                                                     Path.GetFileName(dlgSave.FileName))
                     frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
                     frmMain.bDataSaved = True
 
@@ -257,9 +422,9 @@ Public Class ucrScript
                         strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
                     End If
                 Catch
-                    MsgBox("Could not save the " & If(bIsLog, "Log", "Script") & " file." & Environment.NewLine &
+                    MsgBox("Could not save the " & If(bIsLog, "Log ", "") & "file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
-                   vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
+                   vbExclamation, "Save " & If(bIsLog, "Log ", "") & "File.")
                 End Try
             End If
         End Using
@@ -273,8 +438,46 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub AddTab(Optional bIsLogTab As Boolean = False)
-        clsScriptActive = NewScriptEditor()
+    Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False)
+        If enumScriptTypeNew <> ScriptType.rScript AndAlso enumScriptTypeNew <> ScriptType.quarto Then
+            MsgBox("Developer error: The new tab cannot be " & enumScriptType.ToString() & ", it must be R script or Quarto.", MsgBoxStyle.Critical, "New Tab")
+            Exit Sub
+        End If
+
+        clsScriptActive = New Scintilla With {
+            .ContextMenuStrip = mnuContextScript,
+            .Dock = DockStyle.Fill,
+            .Location = New Point(3, 3),
+            .Name = "txtScriptAdded",
+            .Size = New Size(391, 409),
+            .TabIndex = 14, 'TODO
+            .TabWidth = 2
+        }
+        clsScriptActive.StyleResetDefault()
+        clsScriptActive.Styles(Style.Default).Font = "Consolas"
+        clsScriptActive.Styles(Style.Default).Size = 10
+
+        'TODO  Configure from R-Instat options?
+        'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
+        'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
+
+        Select Case enumScriptTypeNew
+            Case ScriptType.quarto
+                enumScriptType = ScriptType.quarto
+                SetupScriptEditorQuarto()
+
+                Dim strInstatObjectRPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R")
+                strInstatObjectRPath = strInstatObjectRPath.Replace("\", "/")
+                clsScriptActive.Text = GetQuartoTemplate()
+                clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+            Case ScriptType.rScript
+                enumScriptType = ScriptType.rScript
+                SetupScriptEditorR()
+            Case Else
+                'this line of code should never be reached
+                Throw New NotImplementedException("The New tab must be R script Or Quarto.")
+        End Select
+
         SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
@@ -311,7 +514,9 @@ Public Class ucrScript
             clsScriptLog.ReadOnly = True
         Else
             Static iTabCounter As Integer = 1
-            tabPageAdded.Text = "Untitled" & iTabCounter
+            Dim strTabLabel As String = "Untitled" & iTabCounter _
+                                        & If(enumScriptTypeNew = ScriptType.quarto, ".qmd", "")
+            tabPageAdded.Text = strTabLabel
             iTabCounter += 1
         End If
 
@@ -324,40 +529,17 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
-
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
 
-        cmdRunStatementSelection.Enabled = bScriptExists
-        cmdRunAll.Enabled = bScriptExists
+        cmdRunStatementSelection.Enabled = bScriptExists AndAlso bIsRScript
+        cmdRunAll.Enabled = bScriptExists AndAlso (bIsRScript OrElse enumScriptType = ScriptType.quarto)
         cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
-        cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
-
+        cmdInsert.Enabled = bIsRScript
         cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
-    End Sub
-
-    ''' <summary>
-    ''' Enables or disables all right click menu options
-    ''' </summary>
-    ''' <param name="bEnable">If true, enables all right click options, false disables them</param>
-    Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
-        mnuUndo.Enabled = bEnable
-        mnuRedo.Enabled = bEnable
-        mnuCut.Enabled = bEnable
-        mnuCopy.Enabled = bEnable
-        mnuPaste.Enabled = bEnable
-        mnuSelectAll.Enabled = bEnable
-        mnuClear.Enabled = bEnable
-        mnuFindNext.Enabled = bEnable
-        mnuFindPrev.Enabled = bEnable
-        mnuReplace.Enabled = bEnable
-        mnuReplaceAll.Enabled = bEnable
-        mnuRunCurrentStatementSelection.Enabled = bEnable
-        mnuRunAllText.Enabled = bEnable
-        mnuLoadScriptFromFile.Enabled = bEnable
-        mnuOpenScriptasFile.Enabled = bEnable
-        mnuSaveScript.Enabled = bEnable
+        cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
     End Sub
 
     ''' <summary>
@@ -365,9 +547,13 @@ Public Class ucrScript
     ''' </summary>
     ''' <param name="bEnable">If true, enables buttons/options, else disables them</param>
     Private Sub EnableRunOptions(bEnable As Boolean)
-        cmdRunStatementSelection.Enabled = bEnable
-        cmdRunAll.Enabled = bEnable
-        EnableRightClickMenuOptions(bEnable)
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+
+        cmdRunStatementSelection.Enabled = bEnable AndAlso bScriptExists AndAlso bIsRScript
+        cmdRunAll.Enabled = bEnable AndAlso bScriptExists AndAlso (bIsRScript OrElse enumScriptType = ScriptType.quarto)
+        mnuRunCurrentStatementSelection.Enabled = cmdRunStatementSelection.Enabled
+        mnuRunAllText.Enabled = cmdRunAll.Enabled
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -607,21 +793,18 @@ Public Class ucrScript
     End Function
 
     Private Sub LoadScript()
-        If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBoxTranslate("You can only load script to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Load to log tab")
-            Exit Sub
-        End If
-
-        If clsScriptActive.TextLength > 0 _
-                AndAlso MsgBoxTranslate("Loading a script from file will clear your current script" _
-                               & Environment.NewLine & "Do you still want to load?",
-                               vbYesNo, "Load Script From File") = vbNo Then
+        If Not IsOkToLoadScript() Then
             Exit Sub
         End If
 
         Using dlgLoad As New OpenFileDialog
-            dlgLoad.Title = "Load Script From Text File"
-            dlgLoad.Filter = "Text & R Script Files (*.txt, *.R, *.json)|*.txt;*.R;*.json|R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
+            dlgLoad.Title = "Load From File"
+            dlgLoad.Filter = "R Script, Quarto and Text Files (*.R;*.qmd;*.txt)|*.R;*.qmd;*.txt|" &
+                             "R Script Files (*.R)|*.R|" &
+                             "Quarto Files (*.qmd)|*.qmd|" &
+                             "Text Files (*.txt)|*.txt|" &
+                             "JSON Files (*.json)|*.json|" &
+                             "All Files (*.*)|*.*"
 
             ' Ensure that dialog opens in the correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
@@ -633,98 +816,11 @@ Public Class ucrScript
                 Exit Sub
             End If
 
-            Try
-                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgLoad.FileName)
-                strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
-                bIsTextChanged = False
-                clsRScript = Nothing
-                frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
-                frmMain.bDataSaved = True
-            Catch
-                MsgBox("Could not load the script from file." & Environment.NewLine &
-                       "The file may be in use by another program or you may not have access to read from the specified location.",
-                       vbExclamation, "Load Script")
-            End Try
+            strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
+            LoadScriptFromFile(dlgLoad.FileName)
         End Using
 
     End Sub
-
-    Private Function NewScriptEditor() As Scintilla
-        Dim clsNewScript As Scintilla = New Scintilla With {
-            .ContextMenuStrip = mnuContextScript,
-            .Dock = DockStyle.Fill,
-            .Lexer = Lexer.R,
-            .Location = New Point(3, 3),
-            .Name = "txtScriptAdded",
-            .Size = New Size(391, 409),
-            .TabIndex = 14, 'TODO
-            .TabWidth = 2
-        }
-
-        clsNewScript.StyleResetDefault()
-        clsNewScript.Styles(Style.Default).Font = "Consolas"
-        clsNewScript.Styles(Style.Default).Size = 10
-
-        'TODO  Configure from R-Instat options?
-        'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
-        'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
-
-        ' Instruct the lexer to calculate folding
-        clsNewScript.SetProperty("fold", "1")
-        clsNewScript.SetProperty("fold.compact", "1")
-
-        ' Configure a margin to display folding symbols
-        clsNewScript.Margins(2).Type = MarginType.Symbol
-        clsNewScript.Margins(2).Mask = Marker.MaskFolders
-        clsNewScript.Margins(2).Sensitive = True
-        clsNewScript.Margins(2).Width = 20
-
-        ' Set colors for all folding markers
-        For i As Integer = 25 To 31
-            clsNewScript.Markers(i).SetForeColor(SystemColors.ControlLightLight)
-            clsNewScript.Markers(i).SetBackColor(SystemColors.ControlDark)
-        Next
-
-        ' Configure folding markers with respective symbols
-        clsNewScript.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
-        clsNewScript.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
-        clsNewScript.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
-        clsNewScript.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
-        clsNewScript.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
-        clsNewScript.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
-        clsNewScript.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
-
-        ' Enable automatic folding
-        clsNewScript.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
-
-        clsNewScript.IndentationGuides = IndentView.LookBoth
-        clsNewScript.StyleClearAll()
-        clsNewScript.Styles(Style.R.Default).ForeColor = Color.Silver
-        clsNewScript.Styles(Style.R.Comment).ForeColor = Color.Green
-        clsNewScript.Styles(Style.R.KWord).ForeColor = Color.Blue
-        clsNewScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
-        clsNewScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
-        clsNewScript.Styles(Style.R.Number).ForeColor = Color.Purple
-        clsNewScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
-        clsNewScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
-        clsNewScript.Styles(Style.R.Operator).ForeColor = Color.Gray
-        clsNewScript.Styles(Style.R.Identifier).ForeColor = Color.Black
-        clsNewScript.Styles(Style.R.Infix).ForeColor = Color.Gray
-        clsNewScript.Styles(Style.R.InfixEol).ForeColor = Color.Gray
-        clsNewScript.Styles(Style.BraceLight).BackColor = Color.LightGray
-        clsNewScript.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
-        clsNewScript.Styles(Style.BraceBad).ForeColor = Color.Red
-
-        Dim tmp = clsNewScript.DescribeKeywordSets()
-        clsNewScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
-
-        'TODO if we want to set the key words for 'default package functions' (key word set 1) 
-        ' and/or 'other package functions', then a good list is available at:
-        '  https://raw.githubusercontent.com/moltenform/scite-files/master/files/files/api_files/r.properties  
-
-        Return clsNewScript
-    End Function
 
     Private Sub RunCurrentStatement()
 
@@ -746,7 +842,7 @@ Public Class ucrScript
                 MsgBox("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
                    & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method.",
-                   MsgBoxStyle.Information, "Could not parse R script")
+                   MsgBoxStyle.Information, "Could Not Parse R script")
                 Exit Sub
             End Try
 
@@ -794,6 +890,47 @@ Public Class ucrScript
         End Try
     End Sub
 
+    Private Function GetQuartoRenderScript(strScript As String) As String
+        Dim strQuartoRenderScriptPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R", "renderQuarto.R")
+        Dim strQuartoRenderScript As String = ""
+
+        'read the contents of the quarto render script
+        Try
+            strQuartoRenderScript = File.ReadAllText(strQuartoRenderScriptPath)
+        Catch ex As Exception
+            MsgBox("Could not read the quarto render script from:" & Environment.NewLine _
+                   & strQuartoRenderScriptPath & Environment.NewLine & Environment.NewLine _
+                   & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Render Script")
+            Return ""
+        End Try
+
+        'replace the placeholder with the actual quarto script
+        strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript)
+
+        Return strQuartoRenderScript
+    End Function
+
+    Private Function GetQuartoTemplate() As String
+        Dim strInstatObjectRPath As String = Path.Combine(frmMain.strStaticPath, "InstatObject", "R")
+        Dim strQuartoTemplatePath As String = Path.Combine(strInstatObjectRPath, "quartoTemplate.qmd")
+        Dim strQuartoTemplate As String = ""
+
+        'read the contents of the quarto template
+        Try
+            strQuartoTemplate = File.ReadAllText(strQuartoTemplatePath)
+        Catch ex As Exception
+            MsgBox("Could not read the quarto template from:" & Environment.NewLine _
+                   & strQuartoTemplatePath & Environment.NewLine & Environment.NewLine _
+                   & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Template")
+            Return ""
+        End Try
+
+        'replace the placeholder with the correct file path to InstatObject\R
+        strQuartoTemplate = strQuartoTemplate.Replace("<<R_PATH>>", strInstatObjectRPath.Replace("\", "/"))
+
+        Return strQuartoTemplate
+    End Function
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     '''     Executes the <paramref name="strScript"/> R script.
@@ -801,7 +938,7 @@ Public Class ucrScript
     ''' <param name="strScript"> The R script to execute.</param>
     ''' <param name="strComment">Converted into an R comment and prefixed to the script.</param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub RunScript(strScript As String, strComment As String)
+    Private Sub RunRScript(strScript As String, strComment As String)
 
         EnableRunOptions(False) 'temporarily disable the run buttons in case its a long operation
 
@@ -854,6 +991,116 @@ Public Class ucrScript
         clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
+    Private Sub SetupScriptEditorJson()
+        clsScriptActive.Lexer = Lexer.Json
+
+        clsScriptActive.Styles(Style.Json.BlockComment).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Json.LineComment).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.Json.Number).ForeColor = Color.Olive
+        clsScriptActive.Styles(Style.Json.PropertyName).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Json.String).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Json.StringEol).BackColor = Color.Pink
+        clsScriptActive.Styles(Style.Json.Operator).ForeColor = Color.Purple
+    End Sub
+
+    Private Sub SetupScriptEditorQuarto()
+
+        clsScriptActive.Lexer = Lexer.Markdown
+
+        clsScriptActive.StyleClearAll()
+        clsScriptActive.Styles(Style.Markdown.Default).ForeColor = Color.Black
+
+        clsScriptActive.Styles(Style.Markdown.BlockQuote).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.Markdown.Code).BackColor = Color.WhiteSmoke
+        clsScriptActive.Styles(Style.Markdown.Code).ForeColor = Color.DimGray
+        clsScriptActive.Styles(Style.Markdown.Code2).BackColor = Color.WhiteSmoke
+        clsScriptActive.Styles(Style.Markdown.Code2).ForeColor = Color.DimGray
+        clsScriptActive.Styles(Style.Markdown.OListItem).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.Markdown.Em1).ForeColor = Color.DodgerBlue
+        clsScriptActive.Styles(Style.Markdown.Em2).ForeColor = Color.DarkBlue
+        clsScriptActive.Styles(Style.Markdown.Header1).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header2).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header3).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header4).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header5).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Header6).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.HRule).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.Markdown.Link).ForeColor = Color.DodgerBlue
+        clsScriptActive.Styles(Style.Markdown.Strong1).ForeColor = Color.DodgerBlue
+        clsScriptActive.Styles(Style.Markdown.Strong2).ForeColor = Color.DarkBlue
+        clsScriptActive.Styles(Style.Markdown.UListItem).ForeColor = Color.Green
+
+        clsScriptActive.Styles(Style.BraceLight).BackColor = Color.LightGray
+        clsScriptActive.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
+        clsScriptActive.Styles(Style.BraceBad).ForeColor = Color.Red
+
+        ' Note @lloyddewit 04/09/25: I am not sure that the remaining markdown styles are used in
+        '     Quarto files . I decided to include them anyway and give then clear colours. So if a
+        '     Quarto file does ever use them, then it should be easy to find the applicable style
+        '     in the code and change to a more desirable colour.
+        clsScriptActive.Styles(Style.Markdown.CodeBk).ForeColor = Color.Red
+        clsScriptActive.Styles(Style.Markdown.LineBegin).ForeColor = Color.Orange
+        clsScriptActive.Styles(Style.Markdown.PreChar).ForeColor = Color.Yellow
+        clsScriptActive.Styles(Style.Markdown.Strikeout).ForeColor = Color.Violet
+    End Sub
+
+    Private Sub SetupScriptEditorR()
+
+        clsScriptActive.Lexer = Lexer.R
+
+        ' Instruct the lexer to calculate folding
+        clsScriptActive.SetProperty("fold", "1")
+        clsScriptActive.SetProperty("fold.compact", "1")
+
+        ' Configure a margin to display folding symbols
+        clsScriptActive.Margins(2).Type = MarginType.Symbol
+        clsScriptActive.Margins(2).Mask = Marker.MaskFolders
+        clsScriptActive.Margins(2).Sensitive = True
+        clsScriptActive.Margins(2).Width = 20
+
+        ' Set colors for all folding markers
+        For i As Integer = 25 To 31
+            clsScriptActive.Markers(i).SetForeColor(SystemColors.ControlLightLight)
+            clsScriptActive.Markers(i).SetBackColor(SystemColors.ControlDark)
+        Next
+
+        ' Configure folding markers with respective symbols
+        clsScriptActive.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
+        clsScriptActive.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
+        clsScriptActive.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
+        clsScriptActive.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
+        clsScriptActive.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
+        clsScriptActive.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
+        clsScriptActive.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
+
+        ' Enable automatic folding
+        clsScriptActive.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
+
+        clsScriptActive.IndentationGuides = IndentView.LookBoth
+        clsScriptActive.StyleClearAll()
+        clsScriptActive.Styles(Style.R.Default).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.R.Comment).ForeColor = Color.Green
+        clsScriptActive.Styles(Style.R.KWord).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
+        clsScriptActive.Styles(Style.R.Number).ForeColor = Color.Purple
+        clsScriptActive.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
+        clsScriptActive.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
+        clsScriptActive.Styles(Style.R.Operator).ForeColor = Color.Gray
+        clsScriptActive.Styles(Style.R.Identifier).ForeColor = Color.Black
+        clsScriptActive.Styles(Style.R.Infix).ForeColor = Color.Gray
+        clsScriptActive.Styles(Style.R.InfixEol).ForeColor = Color.Gray
+        clsScriptActive.Styles(Style.BraceLight).BackColor = Color.LightGray
+        clsScriptActive.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
+        clsScriptActive.Styles(Style.BraceBad).ForeColor = Color.Red
+
+        clsScriptActive.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
+
+        'TODO if we want to set the key words for 'default package functions' (key word set 1) 
+        ' and/or 'other package functions', then a good list is available at:
+        '  https://raw.githubusercontent.com/moltenform/scite-files/master/files/files/api_files/r.properties  
+    End Sub
+
     Private Sub clsScriptActive_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
         InsertMatchedChars(ChrW(e.Char))
         InsertIndent(e.Char)
@@ -870,8 +1117,12 @@ Public Class ucrScript
         HighlightPairedBracket()
     End Sub
 
-    Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
-        AddTab()
+    Private Sub cmdAddQuartoTab_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemNewQuartoScript.Click
+        AddTab(enumScriptTypeNew:=ScriptType.quarto)
+    End Sub
+
+    Private Sub cmdAddRTab_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemNewRScript.Click, cmdAddTab.Click
+        AddTab(enumScriptTypeNew:=ScriptType.rScript)
     End Sub
 
     Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
@@ -885,7 +1136,7 @@ Public Class ucrScript
         End If
 
         If clsScriptActive.TextLength > 0 AndAlso bIsTextChanged _
-            AndAlso MsgBoxTranslate("Are you sure you want to delete the tab and lose the contents?",
+            AndAlso MsgBox("Are you sure you want to delete the tab and lose the contents?",
                                vbYesNo, "Remove Tab") = vbNo Then
             Exit Sub
         End If
@@ -901,44 +1152,51 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
-        'enable and disable menu options based on the active script properties before the user views them
-
-        Dim bScriptSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+        Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+        Dim bScriptSelected As Boolean = clsScriptActive.SelectedText.Length > 0
 
-        'initially disable all the right click menu options
-        EnableRightClickMenuOptions(False)
-
-        'if active tab is not log tab then enable the options based on active tab state
-        'below are options that are not to be used in the log tab
-        If TabControl.SelectedIndex <> iTabIndexLog Then
-            mnuUndo.Enabled = clsScriptActive.CanUndo
-            mnuRedo.Enabled = clsScriptActive.CanRedo
-            mnuCut.Enabled = bScriptSelected
-            mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
-            mnuClear.Enabled = bScriptExists
-            mnuLoadScriptFromFile.Enabled = True
-        End If
-
-        'enable find/replace options
+        mnuUndo.Enabled = clsScriptActive.CanUndo AndAlso Not bIsLogTab
+        mnuRedo.Enabled = clsScriptActive.CanRedo AndAlso Not bIsLogTab
+        mnuCut.Enabled = bScriptSelected AndAlso Not bIsLogTab
+        mnuCopy.Enabled = bScriptSelected
+        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text) AndAlso Not bIsLogTab
+        mnuSelectAll.Enabled = bScriptExists
+        mnuClear.Enabled = cmdClear.Enabled
         mnuFindNext.Enabled = isFindValid
         mnuFindPrev.Enabled = isFindValid
         mnuReplace.Enabled = isReplaceValid
         mnuReplaceAll.Enabled = isReplaceValid
-
-        'enable remaining options based on tab state
-        mnuCopy.Enabled = bScriptSelected
-        mnuSelectAll.Enabled = bScriptExists
-        mnuRunCurrentStatementSelection.Enabled = bScriptExists
-        mnuRunAllText.Enabled = bScriptExists
-        mnuOpenScriptasFile.Enabled = bScriptExists
-        mnuSaveScript.Enabled = bScriptExists
+        mnuRunCurrentStatementSelection.Enabled = cmdRunStatementSelection.Enabled
+        mnuRunAllText.Enabled = cmdRunAll.Enabled
+        mnuReformatCode.Enabled = bScriptExists AndAlso bIsRScript AndAlso Not bIsLogTab
+        mnuOpenScriptasFile.Enabled = bScriptExists AndAlso bIsRScript
+        mnuLoadScriptFromFile.Enabled = cmdLoadScript.Enabled
+        mnuSaveScript.Enabled = cmdSave.Enabled
     End Sub
 
     Private Sub mnuContextScript_Closing(sender As Object, e As EventArgs) Handles mnuContextScript.Closing
         'On closing menu context, just enable all the menu options to restore their short cut keys
         'validations of the options actions is done by the functions that the events call.
-        EnableRightClickMenuOptions(True)
+        mnuUndo.Enabled = True
+        mnuRedo.Enabled = True
+        mnuCut.Enabled = True
+        mnuCopy.Enabled = True
+        mnuPaste.Enabled = True
+        mnuSelectAll.Enabled = True
+        mnuClear.Enabled = True
+        mnuFindNext.Enabled = True
+        mnuFindPrev.Enabled = True
+        mnuReplace.Enabled = True
+        mnuReplaceAll.Enabled = True
+        mnuRunCurrentStatementSelection.Enabled = True
+        mnuRunAllText.Enabled = True
+        mnuReformatCode.Enabled = True
+        mnuOpenScriptasFile.Enabled = True
+        mnuLoadScriptFromFile.Enabled = True
+        mnuSaveScript.Enabled = True
+        mnuHelp.Enabled = True
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
@@ -956,12 +1214,12 @@ Public Class ucrScript
     Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClear.Click, cmdClear.Click
 
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBoxTranslate("You can only clear a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Clear log tab")
+            MsgBox("You can only clear a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Clear log tab")
             Exit Sub
         End If
 
         If clsScriptActive.TextLength < 1 _
-                OrElse MsgBoxTranslate("Are you sure you want to clear the contents of the script window?",
+                OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
                                vbYesNo, "Clear") = vbNo Then
             Exit Sub
         End If
@@ -997,7 +1255,7 @@ Public Class ucrScript
         Dim strSelectedTextOrigional As String = clsScriptActive.SelectedText
         clsScriptActive.ReplaceSelection(Clipboard.GetText())
         If Not FindAndHighlightNextOccurrence(strSelectedTextOrigional) Then
-            MsgBoxTranslate("No more occurrences found.", MsgBoxStyle.Information, "Replace")
+            MsgBox("No more occurrences found.", MsgBoxStyle.Information, "Replace")
         End If
     End Sub
 
@@ -1033,7 +1291,7 @@ Public Class ucrScript
                               If(bIsLog, clsScriptLog.Text,
                                  frmMain.clsRLink.GetRSetupScript() & vbCrLf & clsScriptActive.Text))
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
-            TabControl.SelectedTab.Text = strScriptFilename
+            TabControl.SelectedTab.Text = Path.GetFileNameWithoutExtension(strScriptFilename)
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -1043,7 +1301,7 @@ Public Class ucrScript
 
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBoxTranslate("You can only redo in a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Redo log tab")
+            MsgBox("You can only redo in a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Redo log tab")
             Exit Sub
         End If
 
@@ -1064,20 +1322,45 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
+        Dim strMsg As String = If(enumScriptType = ScriptType.rScript,
+                                       "Are you sure you want to run all the R script in the window?",
+                                       "Are you sure you want to render all the Quarto script in the window?")
         If clsScriptActive.TextLength < 1 _
-                OrElse MsgBoxTranslate("Are you sure you want to run the entire contents of the script window?",
-                              vbYesNo, "Run All") = vbNo Then
+                OrElse MsgBox(strMsg, vbYesNo, "Run All") = vbNo Then
             Exit Sub
         End If
 
-        RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+        Dim strScriptToRun As String = ""
+        Dim strComment As String = ""
+        Select Case enumScriptType
+            Case ScriptType.rScript
+                strScriptToRun = clsScriptActive.Text
+                strComment = "Code run from Script Window (all text)"
+            Case ScriptType.quarto
+                strScriptToRun = GetQuartoRenderScript(clsScriptActive.Text)
+                strComment = "Code to render the Quarto script in the Script Window (all text)"
+            Case Else
+                MsgBox("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
+                Exit Sub
+        End Select
+
+        frmSetupLoading.Show()
+        RunRScript(strScriptToRun, strComment)
+        frmSetupLoading.Close()
 
         SetFocusAndScrollCaret()
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
+        Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+
+        If Not bScriptExists OrElse Not bIsRScript Then
+            Exit Sub
+        End If
+
         If clsScriptActive.SelectedText.Length > 0 Then
-            RunScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
+            RunRScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
         Else
             RunCurrentStatement()
         End If
@@ -1099,7 +1382,7 @@ Public Class ucrScript
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBoxTranslate("You can only undo from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
+            MsgBox("You can only undo from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
             Exit Sub
         End If
 
@@ -1154,7 +1437,7 @@ Public Class ucrScript
         Next
 
         If IsNothing(clsScriptActive) Then
-            MsgBoxTranslate("Developer error: could not find editor window in tab.")
+            MsgBox("Developer error: could not find editor window in tab.")
         End If
     End Sub
 
@@ -1197,13 +1480,13 @@ Public Class ucrScript
     Private Sub ReplaceAll(strFindText As String, strReplacementText As String)
 
         If String.IsNullOrEmpty(strFindText) Then
-            MsgBoxTranslate("The text to find cannot be empty.", MsgBoxStyle.Exclamation, "Replace All")
+            MsgBox("The text to find cannot be empty.", MsgBoxStyle.Exclamation, "Replace All")
             Exit Sub
         End If
 
         Dim iCount As Integer = NumOfOccurences(strFindText)
         If iCount = 0 Then
-            MsgBoxTranslate("The text to find was not found in the document.", MsgBoxStyle.Information, "Replace All")
+            MsgBox("The text to find was not found in the document.", MsgBoxStyle.Information, "Replace All")
             Exit Sub
         End If
 
@@ -1317,4 +1600,4 @@ Public Class ucrScript
         clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
 
-End Class
+End Class                                                                                                                                                       
