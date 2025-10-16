@@ -3075,6 +3075,7 @@ Public Class sdgPlots
             tbpPlotsOptions.SelectedIndex = 0
             bResetThemes = True
         End If
+
         SetFacetParameters()
         ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
         ucrChkFillDiscrete.Enabled = bNewEnableDiscrete
@@ -3160,7 +3161,10 @@ Public Class sdgPlots
                 ucr2ndFactorReceiver.SetParameterPosition(1)
                 clsFacetFunction.SetRCommand("facet_grid")
                 clsFacetFunction.RemoveParameterByName("dir")
+            Else
+                clsBaseOperator.RemoveParameterByName("facets")
             End If
+
             If clsFacetFunction.strRCommand = "facet_grid" Then
                 clsFacetFunction.AddParameter(ucrChkFreeSpace.GetParameter())
                 If ucrChkMargin.Checked Then
@@ -3377,7 +3381,7 @@ Public Class sdgPlots
     Private Sub FacetsCheck()
         If Not ucr1stFactorReceiver.IsEmpty AndAlso Not ucr2ndFactorReceiver.IsEmpty Then
             If ucr1stFactorReceiver.txtReceiverSingle.Text = ucr2ndFactorReceiver.txtReceiverSingle.Text Then
-                MsgBox("You can not do facets with two same variables", vbOKOnly)
+                MsgBoxTranslate("You can not do facets with two same variables", vbOKOnly)
                 ucr2ndFactorReceiver.Clear()
                 ucr2ndFactorReceiver.SetMeAsReceiver()
             End If

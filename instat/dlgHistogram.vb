@@ -545,6 +545,7 @@ Public Class dlgHistogram
                          clsNewGlobalAesFunction:=clsRaesFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
 
@@ -844,6 +845,5 @@ Public Class dlgHistogram
     Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrInputWidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
 
 End Class

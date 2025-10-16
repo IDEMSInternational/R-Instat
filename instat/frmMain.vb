@@ -2595,6 +2595,9 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
+        If mnuViewSwapDataAndMetadata.Checked Then
+            ucrColumnMeta.RefreshGridData()
+        End If
     End Sub
 
     Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click
@@ -3201,5 +3204,9 @@ Public Class frmMain
     Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
         dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
         dlgCombine.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
+        dlgImportFromEPicsa.ShowDialog()
     End Sub
 End Class

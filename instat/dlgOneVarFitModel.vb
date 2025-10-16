@@ -660,7 +660,7 @@ Public Class dlgOneVarFitModel
             ucrSaveModel.SetCheckBoxText("Store Estimate")
             ucrSaveModel.SetPrefix("ci")
         Else
-            MsgBox("Developer error: the Radio Button has not been added to the Panel.")
+            MsgBoxTranslate("Developer error: the Radio Button has not been added to the Panel.")
         End If
     End Sub
 

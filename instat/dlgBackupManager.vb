@@ -64,7 +64,7 @@ Public Class dlgBackupManager
 
     Private Sub cmdOpen_Click(sender As Object, e As EventArgs) Handles cmdOpen.Click
         If (Not TestOk()) Then
-            MsgBox("Select the file to open")
+            MsgBoxTranslate("Select the file to open")
             Return
         End If
 
@@ -85,7 +85,7 @@ Public Class dlgBackupManager
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
         If (Not TestOk()) Then
-            MsgBox("Select the file to save")
+            MsgBoxTranslate("Select the file to save")
             Return
         End If
 
@@ -103,7 +103,7 @@ Public Class dlgBackupManager
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         If (Not TestOk()) Then
-            MsgBox("Select the file to delete")
+            MsgBoxTranslate("Select the file to delete")
             Return
         End If
 
