@@ -790,7 +790,9 @@ Public Class dlgTransform
             Else
                 ucrSaveNew.Enabled = True
                 ucrSaveNew.SetLabelText("Suffix Name:")
-                ucrSaveNew.SetPrefix("select")
+                If Not ucrSaveNew.bUserTyped Then
+                    ucrSaveNew.SetPrefix("select")
+                End If
                 ucrSaveNew.btnColumnPosition.Visible = False
                 clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
                 If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
@@ -1138,6 +1140,7 @@ Public Class dlgTransform
         If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
         End If
+        NewDefaultName()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged,
