@@ -5022,6 +5022,7 @@
   "Solar:": "Solar:",
   "Solid": "Solid",
   "Some packages still missing": "Some packages still missing",
+  "Some values are non-numeric:\n\n- Choose \"Inspect Values\" to investigate these values.\n- Choose \"Normal Convert\" to convert anyway. Non-numeric values will be lost. They will be set to NA.\n- Choose \"Labelled Convert\" to retain all values. All values will be labelled with integers and can be recovered by converting back to Factor or Character.": "Some values are non-numeric:\n\n- Choose \"Inspect Values\" to investigate these values.\n- Choose \"Normal Convert\" to convert anyway. Non-numeric values will be lost. They will be set to NA.\n- Choose \"Labelled Convert\" to retain all values. All values will be labelled with integers and can be recovered by converting back to Factor or Character.",
   "Sorry for the wait.": "Sorry for the wait.",
   "Sorry, cannot find sub calculation for editing": "Sorry, cannot find sub calculation for editing",
   "Sorry, editing 'by' and 'filter' calculations is not yet implemented": "Sorry, editing 'by' and 'filter' calculations is not yet implemented",
