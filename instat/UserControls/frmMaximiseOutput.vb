@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
 Imports System.Runtime.InteropServices
+Imports instat
+Imports instat.Translations
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>
@@ -26,6 +28,10 @@ Public Class frmMaximiseOutput
     Private _strFileFilter As String = ""
     'todo. to be used by the output page to remember paths selected by user when saving outputs
     Public _strFileDestinationDirectory As String = ""
+
+    Private Sub frmMaximiseOutput_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
 
     Public Overloads Sub Show(strFileName As String, Optional bReplace As Boolean = True)
         Me._strDisplayedFileName = strFileName
