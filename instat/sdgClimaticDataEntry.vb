@@ -422,7 +422,7 @@ Public Class sdgClimaticDataEntry
         'cells are read only at column level so check if any of the columns is read only by just checking the first cell
         For iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col To grdCurrentWorkSheet.SelectionRange.EndCol
             If grdCurrentWorkSheet.Cells.Item(grdCurrentWorkSheet.SelectionRange.Row, iColIndex).IsReadOnly Then
-                MsgBox("Deleting read only cells is currently disabled.", MsgBoxStyle.Information, "Cannot delete read only cells")
+                MsgBoxTranslate("Deleting read only cells is currently disabled.", MsgBoxStyle.Information, "Cannot delete read only cells")
                 Return False
             End If
         Next
@@ -474,17 +474,17 @@ Public Class sdgClimaticDataEntry
 
         'if only NAs allowed then check if cell is allowed to have new value (except summary cells)
         If grdCell IsNot Nothing AndAlso bEditNewDataOnly AndAlso grdCell.Tag <> "new" AndAlso grdCell.Tag <> "summary" Then
-            MsgBox("Previously existing data cannot be changed with the Add/Edit new data only option selected in the options subdialog.", MsgBoxStyle.Information, "Not new value.")
+            MsgBoxTranslate("Previously existing data cannot be changed with the Add/Edit new data only option selected in the options subdialog.", MsgBoxStyle.Information, "Not new value.")
             Return False
         End If
 
         If Not IsNumeric(newValue) AndAlso Not newValue = "NA" AndAlso Not newValue = "" Then
             If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
-                MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
+                MsgBoxTranslate("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
                 Return False
             End If
         ElseIf bNoDecimal AndAlso newValue.Contains(".") Then
-            MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
+            MsgBoxTranslate("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
             Return False
         End If
 
@@ -504,7 +504,7 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
-        If MsgBox("All data entry will be lost. Are you sure you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("All data entry will be lost. Are you sure you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
 
             Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,

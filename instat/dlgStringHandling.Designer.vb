@@ -82,17 +82,23 @@ Partial Class dlgStringHandling
         Me.rdoReplaceFirst = New System.Windows.Forms.RadioButton()
         Me.ucrPnlReplaceOptions = New instat.UcrPanel()
         Me.rdoToNa = New System.Windows.Forms.RadioButton()
+        Me.grpVar = New System.Windows.Forms.GroupBox()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
+        Me.ucrChkOverWriteColumns = New instat.ucrCheck()
         Me.grpModifiers.SuspendLayout()
         Me.grpDetectOptions.SuspendLayout()
         Me.grpFindOptions.SuspendLayout()
         Me.grpReplaceOptions.SuspendLayout()
+        Me.grpVar.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
         Me.lblColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumn.Location = New System.Drawing.Point(263, 55)
+        Me.lblColumn.Location = New System.Drawing.Point(263, 102)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
         Me.lblColumn.TabIndex = 8
@@ -102,7 +108,7 @@ Partial Class dlgStringHandling
         '
         Me.lblReplaceBy.AutoSize = True
         Me.lblReplaceBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReplaceBy.Location = New System.Drawing.Point(264, 143)
+        Me.lblReplaceBy.Location = New System.Drawing.Point(264, 173)
         Me.lblReplaceBy.Name = "lblReplaceBy"
         Me.lblReplaceBy.Size = New System.Drawing.Size(65, 13)
         Me.lblReplaceBy.TabIndex = 12
@@ -112,7 +118,7 @@ Partial Class dlgStringHandling
         '
         Me.lblPattern.AutoSize = True
         Me.lblPattern.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPattern.Location = New System.Drawing.Point(263, 97)
+        Me.lblPattern.Location = New System.Drawing.Point(263, 137)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 10
@@ -219,8 +225,9 @@ Partial Class dlgStringHandling
         Me.ucrChkComments.AutoSize = True
         Me.ucrChkComments.Checked = False
         Me.ucrChkComments.Location = New System.Drawing.Point(6, 47)
+        Me.ucrChkComments.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkComments.Name = "ucrChkComments"
-        Me.ucrChkComments.Size = New System.Drawing.Size(142, 23)
+        Me.ucrChkComments.Size = New System.Drawing.Size(142, 34)
         Me.ucrChkComments.TabIndex = 29
         '
         'ucrChkMultiline
@@ -228,13 +235,14 @@ Partial Class dlgStringHandling
         Me.ucrChkMultiline.AutoSize = True
         Me.ucrChkMultiline.Checked = False
         Me.ucrChkMultiline.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkMultiline.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkMultiline.Name = "ucrChkMultiline"
-        Me.ucrChkMultiline.Size = New System.Drawing.Size(142, 23)
+        Me.ucrChkMultiline.Size = New System.Drawing.Size(142, 34)
         Me.ucrChkMultiline.TabIndex = 28
         '
         'cmdAddkeyboard
         '
-        Me.cmdAddkeyboard.Location = New System.Drawing.Point(267, 373)
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(267, 398)
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.Size = New System.Drawing.Size(100, 23)
         Me.cmdAddkeyboard.TabIndex = 33
@@ -248,7 +256,7 @@ Partial Class dlgStringHandling
         Me.grpDetectOptions.Controls.Add(Me.rdoDetects)
         Me.grpDetectOptions.Controls.Add(Me.ucrChkNegate)
         Me.grpDetectOptions.Controls.Add(Me.ucrPnlDetectOptions)
-        Me.grpDetectOptions.Location = New System.Drawing.Point(261, 194)
+        Me.grpDetectOptions.Location = New System.Drawing.Point(261, 209)
         Me.grpDetectOptions.Name = "grpDetectOptions"
         Me.grpDetectOptions.Size = New System.Drawing.Size(165, 124)
         Me.grpDetectOptions.TabIndex = 38
@@ -293,14 +301,16 @@ Partial Class dlgStringHandling
         Me.ucrChkNegate.AutoSize = True
         Me.ucrChkNegate.Checked = False
         Me.ucrChkNegate.Location = New System.Drawing.Point(7, 95)
+        Me.ucrChkNegate.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkNegate.Name = "ucrChkNegate"
-        Me.ucrChkNegate.Size = New System.Drawing.Size(150, 23)
+        Me.ucrChkNegate.Size = New System.Drawing.Size(150, 34)
         Me.ucrChkNegate.TabIndex = 1
         '
         'ucrPnlDetectOptions
         '
         Me.ucrPnlDetectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlDetectOptions.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlDetectOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlDetectOptions.Name = "ucrPnlDetectOptions"
         Me.ucrPnlDetectOptions.Size = New System.Drawing.Size(156, 75)
         Me.ucrPnlDetectOptions.TabIndex = 0
@@ -312,7 +322,7 @@ Partial Class dlgStringHandling
         Me.grpFindOptions.Controls.Add(Me.rdoExtract)
         Me.grpFindOptions.Controls.Add(Me.rdoCount)
         Me.grpFindOptions.Controls.Add(Me.ucrPnlFindOptions)
-        Me.grpFindOptions.Location = New System.Drawing.Point(260, 195)
+        Me.grpFindOptions.Location = New System.Drawing.Point(260, 220)
         Me.grpFindOptions.Name = "grpFindOptions"
         Me.grpFindOptions.Size = New System.Drawing.Size(171, 122)
         Me.grpFindOptions.TabIndex = 41
@@ -324,8 +334,9 @@ Partial Class dlgStringHandling
         Me.ucrChkAll.AutoSize = True
         Me.ucrChkAll.Checked = False
         Me.ucrChkAll.Location = New System.Drawing.Point(7, 93)
+        Me.ucrChkAll.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkAll.Name = "ucrChkAll"
-        Me.ucrChkAll.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkAll.Size = New System.Drawing.Size(147, 34)
         Me.ucrChkAll.TabIndex = 4
         '
         'rdoLocate
@@ -365,6 +376,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrPnlFindOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlFindOptions.Location = New System.Drawing.Point(5, 16)
+        Me.ucrPnlFindOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlFindOptions.Name = "ucrPnlFindOptions"
         Me.ucrPnlFindOptions.Size = New System.Drawing.Size(159, 75)
         Me.ucrPnlFindOptions.TabIndex = 0
@@ -373,7 +385,8 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkRemoveAll.AutoSize = True
         Me.ucrChkRemoveAll.Checked = False
-        Me.ucrChkRemoveAll.Location = New System.Drawing.Point(261, 145)
+        Me.ucrChkRemoveAll.Location = New System.Drawing.Point(261, 173)
+        Me.ucrChkRemoveAll.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkRemoveAll.Name = "ucrChkRemoveAll"
         Me.ucrChkRemoveAll.Size = New System.Drawing.Size(157, 23)
         Me.ucrChkRemoveAll.TabIndex = 41
@@ -384,7 +397,8 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceNaBy.AutoSize = True
         Me.ucrInputReplaceNaBy.IsMultiline = False
         Me.ucrInputReplaceNaBy.IsReadOnly = False
-        Me.ucrInputReplaceNaBy.Location = New System.Drawing.Point(350, 103)
+        Me.ucrInputReplaceNaBy.Location = New System.Drawing.Point(369, 143)
+        Me.ucrInputReplaceNaBy.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputReplaceNaBy.Name = "ucrInputReplaceNaBy"
         Me.ucrInputReplaceNaBy.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputReplaceNaBy.TabIndex = 40
@@ -393,9 +407,10 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkReplaceBy.AutoSize = True
         Me.ucrChkReplaceBy.Checked = False
-        Me.ucrChkReplaceBy.Location = New System.Drawing.Point(261, 103)
+        Me.ucrChkReplaceBy.Location = New System.Drawing.Point(261, 141)
+        Me.ucrChkReplaceBy.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkReplaceBy.Name = "ucrChkReplaceBy"
-        Me.ucrChkReplaceBy.Size = New System.Drawing.Size(84, 23)
+        Me.ucrChkReplaceBy.Size = New System.Drawing.Size(106, 23)
         Me.ucrChkReplaceBy.TabIndex = 39
         '
         'ucrInputBoundary
@@ -404,7 +419,8 @@ Partial Class dlgStringHandling
         Me.ucrInputBoundary.AutoSize = True
         Me.ucrInputBoundary.IsMultiline = False
         Me.ucrInputBoundary.IsReadOnly = False
-        Me.ucrInputBoundary.Location = New System.Drawing.Point(172, 342)
+        Me.ucrInputBoundary.Location = New System.Drawing.Point(172, 368)
+        Me.ucrInputBoundary.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputBoundary.Name = "ucrInputBoundary"
         Me.ucrInputBoundary.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBoundary.TabIndex = 37
@@ -413,7 +429,8 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkBoundary.AutoSize = True
         Me.ucrChkBoundary.Checked = False
-        Me.ucrChkBoundary.Location = New System.Drawing.Point(10, 343)
+        Me.ucrChkBoundary.Location = New System.Drawing.Point(10, 369)
+        Me.ucrChkBoundary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkBoundary.Name = "ucrChkBoundary"
         Me.ucrChkBoundary.Size = New System.Drawing.Size(140, 23)
         Me.ucrChkBoundary.TabIndex = 36
@@ -423,6 +440,7 @@ Partial Class dlgStringHandling
         Me.ucrChkIgnoreCase.AutoSize = True
         Me.ucrChkIgnoreCase.Checked = False
         Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(10, 313)
+        Me.ucrChkIgnoreCase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
         Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(229, 23)
         Me.ucrChkIgnoreCase.TabIndex = 35
@@ -430,7 +448,7 @@ Partial Class dlgStringHandling
         'ucrSaveStringHandling
         '
         Me.ucrSaveStringHandling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 402)
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 427)
         Me.ucrSaveStringHandling.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
         Me.ucrSaveStringHandling.Size = New System.Drawing.Size(366, 22)
@@ -440,7 +458,8 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkIncludeRegularExpressions.AutoSize = True
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(10, 373)
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(10, 398)
+        Me.ucrChkIncludeRegularExpressions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 23)
         Me.ucrChkIncludeRegularExpressions.TabIndex = 14
@@ -449,7 +468,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrReceiverStringHandling.AutoSize = True
         Me.ucrReceiverStringHandling.frmParent = Me
-        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(261, 70)
+        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(261, 115)
         Me.ucrReceiverStringHandling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
         Me.ucrReceiverStringHandling.Selector = Nothing
@@ -464,7 +483,8 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.AutoSize = True
         Me.ucrInputReplaceBy.IsMultiline = False
         Me.ucrInputReplaceBy.IsReadOnly = False
-        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(261, 158)
+        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(261, 188)
+        Me.ucrInputReplaceBy.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
         Me.ucrInputReplaceBy.Size = New System.Drawing.Size(158, 20)
         Me.ucrInputReplaceBy.TabIndex = 13
@@ -475,7 +495,8 @@ Partial Class dlgStringHandling
         Me.ucrInputPattern.AutoSize = True
         Me.ucrInputPattern.IsMultiline = False
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(261, 114)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(261, 151)
+        Me.ucrInputPattern.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(158, 20)
         Me.ucrInputPattern.TabIndex = 12
@@ -496,7 +517,8 @@ Partial Class dlgStringHandling
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 428)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 456)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
@@ -505,6 +527,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrPnlStringHandling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlStringHandling.Location = New System.Drawing.Point(10, 1)
+        Me.ucrPnlStringHandling.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         Me.ucrPnlStringHandling.Size = New System.Drawing.Size(462, 46)
         Me.ucrPnlStringHandling.TabIndex = 0
@@ -515,7 +538,7 @@ Partial Class dlgStringHandling
         Me.grpReplaceOptions.Controls.Add(Me.rdoReplaceAll)
         Me.grpReplaceOptions.Controls.Add(Me.rdoReplaceFirst)
         Me.grpReplaceOptions.Controls.Add(Me.ucrPnlReplaceOptions)
-        Me.grpReplaceOptions.Location = New System.Drawing.Point(261, 201)
+        Me.grpReplaceOptions.Location = New System.Drawing.Point(261, 223)
         Me.grpReplaceOptions.Name = "grpReplaceOptions"
         Me.grpReplaceOptions.Size = New System.Drawing.Size(158, 100)
         Me.grpReplaceOptions.TabIndex = 42
@@ -559,6 +582,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrPnlReplaceOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlReplaceOptions.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlReplaceOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlReplaceOptions.Name = "ucrPnlReplaceOptions"
         Me.ucrPnlReplaceOptions.Size = New System.Drawing.Size(146, 75)
         Me.ucrPnlReplaceOptions.TabIndex = 0
@@ -580,16 +604,76 @@ Partial Class dlgStringHandling
         Me.rdoToNa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoToNa.UseVisualStyleBackColor = True
         '
+        'grpVar
+        '
+        Me.grpVar.Controls.Add(Me.rdoMultiple)
+        Me.grpVar.Controls.Add(Me.rdoSingle)
+        Me.grpVar.Controls.Add(Me.ucrPnlColumnSelectOptions)
+        Me.grpVar.Location = New System.Drawing.Point(260, 51)
+        Me.grpVar.Name = "grpVar"
+        Me.grpVar.Size = New System.Drawing.Size(209, 43)
+        Me.grpVar.TabIndex = 73
+        Me.grpVar.TabStop = False
+        Me.grpVar.Text = "Variables"
+        '
+        'rdoMultiple
+        '
+        Me.rdoMultiple.AutoSize = True
+        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultiple.Location = New System.Drawing.Point(97, 17)
+        Me.rdoMultiple.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.Size = New System.Drawing.Size(61, 17)
+        Me.rdoMultiple.TabIndex = 73
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Text = "Multiple"
+        Me.rdoMultiple.UseVisualStyleBackColor = True
+        '
+        'rdoSingle
+        '
+        Me.rdoSingle.AutoSize = True
+        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSingle.Location = New System.Drawing.Point(10, 18)
+        Me.rdoSingle.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.Size = New System.Drawing.Size(54, 17)
+        Me.rdoSingle.TabIndex = 72
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.Text = "Single"
+        Me.rdoSingle.UseVisualStyleBackColor = True
+        '
+        'ucrPnlColumnSelectOptions
+        '
+        Me.ucrPnlColumnSelectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(8, 11)
+        Me.ucrPnlColumnSelectOptions.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrPnlColumnSelectOptions.Name = "ucrPnlColumnSelectOptions"
+        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(194, 28)
+        Me.ucrPnlColumnSelectOptions.TabIndex = 71
+        '
+        'ucrChkOverWriteColumns
+        '
+        Me.ucrChkOverWriteColumns.AutoSize = True
+        Me.ucrChkOverWriteColumns.Checked = False
+        Me.ucrChkOverWriteColumns.Location = New System.Drawing.Point(10, 341)
+        Me.ucrChkOverWriteColumns.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkOverWriteColumns.Name = "ucrChkOverWriteColumns"
+        Me.ucrChkOverWriteColumns.Size = New System.Drawing.Size(229, 23)
+        Me.ucrChkOverWriteColumns.TabIndex = 74
+        '
         'dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(481, 483)
+        Me.ClientSize = New System.Drawing.Size(481, 513)
+        Me.Controls.Add(Me.ucrChkOverWriteColumns)
+        Me.Controls.Add(Me.ucrChkReplaceBy)
+        Me.Controls.Add(Me.grpVar)
+        Me.Controls.Add(Me.lblReplaceBy)
         Me.Controls.Add(Me.rdoToNa)
         Me.Controls.Add(Me.ucrChkRemoveAll)
         Me.Controls.Add(Me.ucrInputReplaceNaBy)
-        Me.Controls.Add(Me.ucrChkReplaceBy)
         Me.Controls.Add(Me.ucrInputBoundary)
         Me.Controls.Add(Me.ucrChkBoundary)
         Me.Controls.Add(Me.ucrChkIgnoreCase)
@@ -604,7 +688,6 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.ucrReceiverStringHandling)
         Me.Controls.Add(Me.lblPattern)
-        Me.Controls.Add(Me.lblReplaceBy)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrInputReplaceBy)
         Me.Controls.Add(Me.ucrInputPattern)
@@ -628,6 +711,8 @@ Partial Class dlgStringHandling
         Me.grpFindOptions.PerformLayout()
         Me.grpReplaceOptions.ResumeLayout(False)
         Me.grpReplaceOptions.PerformLayout()
+        Me.grpVar.ResumeLayout(False)
+        Me.grpVar.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -677,4 +762,9 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoReplaceFirst As RadioButton
     Friend WithEvents ucrPnlReplaceOptions As UcrPanel
     Friend WithEvents rdoToNa As RadioButton
+    Friend WithEvents grpVar As GroupBox
+    Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
+    Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents ucrChkOverWriteColumns As ucrCheck
 End Class
