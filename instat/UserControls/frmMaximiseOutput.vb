@@ -69,10 +69,7 @@ Public Class frmMaximiseOutput
                     Return
                 End If
             Case Else
-                MessageBox.Show(Me, "The file type to be viewed is currently not suported",
-                            "Developer Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
+                MessageBox.Show(Me, GetTranslation("The file type to be viewed is currently not supported"), GetTranslation("Developer Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
         End Select
 
@@ -85,7 +82,7 @@ Public Class frmMaximiseOutput
     Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
         'copies displayed file to the destination folder selected by user
         Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Output"
+            dlgSaveFile.Title = GetTranslation("Save Output")
             dlgSaveFile.Filter = _strFileFilter
             dlgSaveFile.InitialDirectory = If(String.IsNullOrEmpty(_strFileDestinationDirectory),
                     frmMain.clsInstatOptions.strWorkingDirectory, _strFileDestinationDirectory)
