@@ -343,6 +343,8 @@
   "Are you sure you want to delete these row(s)?": "Are you sure you want to delete these row(s)?",
   "Are you sure you want to exit R-Instat?": "Are you sure you want to exit R-Instat?",
   "Are you sure you want to reset to factory defaults?": "Are you sure you want to reset to factory defaults?",
+  "Are you sure you want to render all the Quarto script in the window?": "Are you sure you want to render all the Quarto script in the window?",
+  "Are you sure you want to run all the R script in the window?": "Are you sure you want to run all the R script in the window?",
   "Are you sure you want to run the entire contents of the script window?": "Are you sure you want to run the entire contents of the script window?",
   "Are you sure you want to the main dialog?": "Are you sure you want to the main dialog?",
   "Area": "Area",
