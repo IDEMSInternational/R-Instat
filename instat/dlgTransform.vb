@@ -786,15 +786,11 @@ Public Class dlgTransform
         ElseIf rdoMultiple.Checked Then
             If ucrChkOverWriteColumns.Checked Then
                 ucrSaveNew.Enabled = False
-                clsPasteFunction.RemoveParameterByName("col_data")
             Else
                 ucrSaveNew.Enabled = True
                 ucrSaveNew.SetLabelText("Suffix Name:")
-                If Not ucrSaveNew.bUserTyped Then
-                    ucrSaveNew.SetPrefix("select")
-                End If
+                ucrSaveNew.SetPrefix("select")
                 ucrSaveNew.btnColumnPosition.Visible = False
-                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
                 If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
                     clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
                 End If
@@ -1137,10 +1133,17 @@ Public Class dlgTransform
     End Sub
 
     Private Sub ucrSaveNew_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNew.ControlValueChanged
+        ucrSaveParChanged()
+    End Sub
+    Private Sub ucrSaveParChanged()
         If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
+            If Not ucrChkOverWriteColumns.Checked Then
+                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsPasteFunction.RemoveParameterByName("col_data")
+            End If
         End If
-        NewDefaultName()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged,
@@ -1207,6 +1210,7 @@ Public Class dlgTransform
     End Sub
 
     Private Sub ucrChkOverWriteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOverWriteColumns.ControlValueChanged
+        ucrSaveParChanged()
         NewDefaultName()
     End Sub
 End Class
