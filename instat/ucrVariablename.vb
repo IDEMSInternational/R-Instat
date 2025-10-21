@@ -98,10 +98,10 @@ Public Class ucrVariableName
                 MsgBox("This name cannot start with " & firstChar, vbOKOnly)
                 txtValidation.Focus()
             Case 3
-                MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+                MsgBoxTranslate("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
                 txtValidation.Focus()
             Case 4
-                MsgBox("This name cannot contain a space", vbOKOnly)
+                MsgBoxTranslate("This name cannot contain a space", vbOKOnly)
                 txtValidation.Focus()
             Case 5
                 MsgBox("This name cannot contain " & CurrChar, vbOKOnly)

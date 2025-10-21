@@ -111,6 +111,27 @@ Public Class Translations
         Return TranslateWinForm.clsTranslateWinForm.GetTranslation(strText, GetDbPath(), GetLanguageCode())
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''     Displays a message box with translated prompt and title, then returns the user's response.
+    ''' </summary>
+    '''
+    ''' <param name="Prompt">   The message to display in the dialog box. It will be translated 
+    '''                         using GetTranslation(). </param>
+    ''' <param name="Buttons">  Optional. Numeric expression that specifies the buttons and icons 
+    '''                         to display, the default button, and the modality of the message box. 
+    '''                         Defaults to MsgBoxStyle.OKOnly. </param>
+    ''' <param name="Title">    Optional. String expression displayed in the title bar of the dialog box. 
+    '''                         It will be translated using GetTranslation(). Defaults to Nothing. </param>
+    '''
+    ''' <returns>   A MsgBoxResult value indicating which button the user clicked. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Function MsgBoxTranslate(Prompt As String, _
+                                           Optional Buttons As MsgBoxStyle = MsgBoxStyle.OKOnly, _
+                                           Optional Title As String = Nothing) As MsgBoxResult
+        Return MsgBox(GetTranslation(Prompt), Buttons, GetTranslation(Title))
+    End Function
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   

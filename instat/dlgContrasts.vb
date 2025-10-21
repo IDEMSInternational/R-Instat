@@ -178,7 +178,7 @@ Public Class dlgContrasts
                 MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "You entered a non numeric value. Please enter a numeric value ", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             ElseIf e.NewData Is Nothing Then
-                MsgBox("All the cells in the grid must not be empty", MsgBoxStyle.Exclamation)
+                MsgBoxTranslate("All the cells in the grid must not be empty", MsgBoxStyle.Exclamation)
                 e.EndReason = EndEditReason.Cancel
             End If
         End If
