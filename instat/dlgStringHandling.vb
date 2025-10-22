@@ -1011,7 +1011,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub OverWriteColumnsEnabled()
-        If rdoDetect.Checked Then
+        If rdoDetect.Checked OrElse (rdoFind.Checked AndAlso rdoCount.Checked) Then
             ucrChkOverWriteColumns.Visible = False
         Else
             ucrChkOverWriteColumns.Visible = True
