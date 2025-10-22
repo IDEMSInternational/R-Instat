@@ -1668,7 +1668,7 @@ Public Class dlgEndOfRainsSeason
                 Try
                     Dim symResult As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyFunction.ToScript)
                     If symResult.AsLogical()(0) Then
-                        MsgBox("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
+                        MsgBoxTranslate("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
                     End If
                 Catch ex As Exception
                     ' Do nothing on error — no message

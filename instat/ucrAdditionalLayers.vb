@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class ucrAdditionalLayers
     'Operator containing all parts of the ggplot command
     Public clsBaseOperator As ROperator
@@ -291,7 +292,7 @@ Public Class ucrAdditionalLayers
                 'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
                 RaiseEvent NumberOfLayersChanged()
             Else
-                MsgBox("You cannot delete a layer that was created on the main dialog.", MsgBoxStyle.Information, "Cannot delete layer")
+                MsgBoxTranslate("You cannot delete a layer that was created on the main dialog.", MsgBoxStyle.Information, "Cannot delete layer")
             End If
         End If
     End Sub
@@ -322,7 +323,7 @@ Public Class ucrAdditionalLayers
             clsSelectedGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
             clsSelectedGeomParameter.SetArgument(clsSelectedGeomFunction)
         Else
-            MsgBox("Could not find layer. Delete the layer and recreate it.", MsgBoxStyle.Information, "Cannot find layer")
+            MsgBoxTranslate("Could not find layer. Delete the layer and recreate it.", MsgBoxStyle.Information, "Cannot find layer")
         End If
     End Sub
 

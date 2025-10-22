@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 Public Class ucrGeomListWithParameters
     Public lstAesParameterLabels As New List(Of Label)
@@ -116,7 +117,7 @@ Public Class ucrGeomListWithParameters
         ucrChkApplyOnAllLayers.Checked = bApplyAesGlobally
         ucrChkIgnoreGlobalAes.SetRCode(clsGeomFunction, bReset)
         If ucrChkApplyOnAllLayers.Checked AndAlso ucrChkIgnoreGlobalAes.Checked Then
-            MsgBox("Error: Cannot check both 'Apply On All Layers' and 'Ignore Global Aesthetics' as this will remove all aesthetics from this layer. Setting both values to checked.", vbOKOnly)
+            MsgBoxTranslate("Error: Cannot check both 'Apply On All Layers' and 'Ignore Global Aesthetics' as this will remove all aesthetics from this layer. Setting both values to checked.", vbOKOnly)
             ucrChkApplyOnAllLayers.Checked = False
             ucrChkIgnoreGlobalAes.Checked = False
         End If
@@ -196,7 +197,7 @@ Public Class ucrGeomListWithParameters
                 Next
             ElseIf (clsCurrGeom.clsAesParameters.Count > iMaxIndex) Then
                 'If the number of parameters in the current geom is greater than the number of receivers, then there is an error.
-                MsgBox("Developer Error, the number of aesthetics parameters of the current geom exceeds the number of aesthetic receivers in ucrGeomListWithAes, on the sdgLayerOptions. The exceding parameters will be ignored.", MsgBoxStyle.OkOnly)
+                MsgBoxTranslate("Developer Error, the number of aesthetics parameters of the current geom exceeds the number of aesthetic receivers in ucrGeomListWithAes, on the sdgLayerOptions. The exceding parameters will be ignored.", MsgBoxStyle.OkOnly)
             End If
 
             'In any case, we show all the receivers that have index lower than the iMaxIndex, and we populate the labels with the appropriate names.
@@ -224,7 +225,7 @@ Public Class ucrGeomListWithParameters
                 End If
             Next
         Else 'If the current geom has not been populated, then an error has been made in the code
-            MsgBox("Developer Error: the current geom (clsCurrGeom) has not been populated before setting the aes parameters for the ucrGeomListWithAes on the sdgLayerOptions.", MsgBoxStyle.OkOnly)
+            MsgBoxTranslate("Developer Error: the current geom (clsCurrGeom) has not been populated before setting the aes parameters for the ucrGeomListWithAes on the sdgLayerOptions.", MsgBoxStyle.OkOnly)
         End If
     End Sub
 

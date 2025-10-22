@@ -209,7 +209,7 @@ Public Class ucrDataView
         If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
             MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
-            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
+            Dim deleteCol = MsgBoxTranslate("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
                 GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedColumnNames())
@@ -888,7 +888,7 @@ Public Class ucrDataView
     Public Sub PasteValuesToDataFrame()
         Dim strClipBoardText As String = My.Computer.Clipboard.GetText
         If String.IsNullOrEmpty(strClipBoardText) Then
-            MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")
+            MsgBoxTranslate("No data available for pasting.", MsgBoxStyle.Information, "No Data")
             Exit Sub
         End If
         'warn user action cannot be undone
@@ -1090,7 +1090,7 @@ Public Class ucrDataView
     Public Sub Undo()
         If frmMain.clsInstatOptions.bSwitchOffUndo Then
             ' Show a message box indicating that undo is turned off
-            MsgBox("Undo is turned off, go to Tools > Options to turn it on.", vbInformation, "Undo Disabled")
+            MsgBoxTranslate("Undo is turned off, go to Tools > Options to turn it on.", vbInformation, "Undo Disabled")
             Exit Sub
         End If
 

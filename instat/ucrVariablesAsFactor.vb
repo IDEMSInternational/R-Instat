@@ -293,7 +293,7 @@ Public Class ucrVariablesAsFactor
                             End If
                         End If
                     Else
-                        MsgBox("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
+                        MsgBoxTranslate("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
                     End If
                 End If
             End If
@@ -327,7 +327,7 @@ Public Class ucrVariablesAsFactor
             If ucrNewSelector IsNot Nothing Then
                 ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
                 If ucrVariableSelector Is Nothing Then
-                    MsgBox("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
+                    MsgBoxTranslate("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
                 End If
             End If
 

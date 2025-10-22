@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R command. 
 '''             The R command may include parameters and an assignment part.
@@ -627,7 +628,7 @@ Public Class RCodeStructure
         Dim clsParam = New RParameter
 
         If strParameterName = "" Then
-            ' MsgBox("Developer Error: some parameter has been added without specifying a name. We want all
+            ' MsgBoxTranslate("Developer Error: some parameter has been added without specifying a name. We want all
             ' parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
             bIncludeArgumentName = False
             If iPosition = 0 Then
