@@ -162,7 +162,7 @@ Public Class dlgStringHandling
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "col", "single")
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "col", "multiple")
 
-        ucrChkOverWriteColumns.SetText("Overwrite Columns")
+        ucrChkOverWriteColumns.SetText("Overwrite Column(s)")
 
         ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrPnlReplaceOptions}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -181,7 +181,6 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkOverWriteColumns, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -537,6 +536,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsReplaceDummyFunction, bReset)
+        ucrChkBoundary.SetRCode(clsReplaceDummyFunction, bReset)
         ucrChkRemoveAll.SetRCode(clsDummyFunction, bReset)
         ucrChkAll.SetRCode(clsDummyFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsStringCollFunction, bReset)
@@ -636,14 +636,14 @@ Public Class dlgStringHandling
         ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrSelectorStringHandling.ControlValueChanged,
         ucrInputReplaceNaBy.ControlValueChanged, ucrPnlReplaceOptions.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged, ucrReceiverStringHandling.ControlValueChanged
         AddSavePrefix()
-        SetBaseFunction()
         SelectOptions()
+        SetBaseFunction()
         ChangePrefixName()
         AddRemoveParameters()
         CellParameters()
         RegularExpressionControl()
         IgnoreCaseControl()
-        OverWriteColumnsEnabled()
+        MultipleAndOverWriteEnabled()
     End Sub
 
     Private Sub SetBaseFunction()
@@ -827,8 +827,6 @@ Public Class dlgStringHandling
                 End If
             End If
         End If
-
-
     End Sub
 
     Private Sub ChangePrefixName()
@@ -931,12 +929,12 @@ Public Class dlgStringHandling
         clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
         If rdoMultiple.Checked Then
-            clsReplaceDummyFunction.AddParameter("col", "multiple", iPosition:=0)
+            clsReplaceDummyFunction.AddParameter("col", "multiple", iPosition:=1)
             ucrSelectorStringHandling.SetItemType("column_selection")
             ucrReceiverStringHandling.strSelectorHeading = "Column selections"
             lblColumn.Text = "Select:"
         ElseIf rdoSingle.Checked Then
-            clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=0)
+            clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=1)
             ucrSelectorStringHandling.SetItemType("column")
             ucrReceiverStringHandling.strSelectorHeading = "Factors"
             lblColumn.Text = "Column:"
@@ -989,19 +987,16 @@ Public Class dlgStringHandling
 
         If rdoMultiple.Checked Then
             ucrSaveStringHandling.btnColumnPosition.Visible = False
-            ucrSaveStringHandling.SetLabelText("Suffix Name:")
-            If ucrChkOverWriteColumns.Checked Then
-                ucrSaveStringHandling.Enabled = False
-            Else
-                ucrSaveStringHandling.Enabled = True
-            End If
+            ucrSaveStringHandling.SetLabelText("New Column Suffix:")
         Else
-            If rdoReplaceNa.Checked Then
-                ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
-            Else
-                ucrSaveStringHandling.SetLabelText("New Column Name:")
-            End If
+            ucrSaveStringHandling.SetLabelText("New Column Name:")
             ucrSaveStringHandling.btnColumnPosition.Visible = True
+        End If
+
+        If ucrChkOverWriteColumns.Checked Then
+            ucrSaveStringHandling.Enabled = False
+        Else
+            ucrSaveStringHandling.Enabled = True
         End If
     End Sub
 
@@ -1010,11 +1005,18 @@ Public Class dlgStringHandling
         ucrChkOverWriteColumns.Checked = False
     End Sub
 
-    Private Sub OverWriteColumnsEnabled()
+    Private Sub MultipleAndOverWriteEnabled()
         If rdoDetect.Checked OrElse (rdoFind.Checked AndAlso rdoCount.Checked) Then
             ucrChkOverWriteColumns.Visible = False
         Else
             ucrChkOverWriteColumns.Visible = True
+        End If
+
+        If rdoToNa.Checked OrElse (rdoFind.Checked AndAlso rdoLocate.Checked AndAlso ucrChkAll.Checked) Then
+            rdoMultiple.Enabled = False
+            rdoSingle.Checked = True 'Not sure if this is the best way to do this
+        Else
+            rdoMultiple.Enabled = True
         End If
     End Sub
 End Class
