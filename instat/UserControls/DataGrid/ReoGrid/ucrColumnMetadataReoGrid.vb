@@ -16,6 +16,7 @@
 
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 Public Class ucrColumnMetadataReoGrid
     Implements IColumnMetaDataGrid
@@ -115,7 +116,7 @@ Public Class ucrColumnMetadataReoGrid
     End Sub
 
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
-        MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
+        MsgBoxTranslate("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
         e.IsCancelled = True
     End Sub
 

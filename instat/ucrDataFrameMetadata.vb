@@ -115,7 +115,7 @@ Public Class ucrDataFrameMetadata
 
         StrDataframeName = _grid.GetCellValue(iRow, _strNameLabel)
         If StrDataframeName = "" Then
-            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
+            MsgBoxTranslate("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
             Exit Sub
         End If
         If Decimal.TryParse(newValue, iTemp) Then

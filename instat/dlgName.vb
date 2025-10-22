@@ -323,7 +323,7 @@ Public Class dlgName
                             OrElse Boolean.TryParse(strValue, parsedValue) _
                             OrElse strValue.ToLower.Equals("t") OrElse strValue.ToLower.Equals("f") _
                             OrElse IsNumeric(strValue) Then
-                        MsgBox("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
+                        MsgBoxTranslate("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
                         bCurrentCell = False
                         Exit For
                     End If
@@ -404,7 +404,7 @@ Public Class dlgName
 
     Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
         If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
-            MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
+            MsgBoxTranslate("The column name must not be an empty string.", MsgBoxStyle.Information)
             e.IsCancelled = True
         End If
     End Sub
