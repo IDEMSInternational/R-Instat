@@ -123,7 +123,6 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsComboBox()
-        ucrSaveStringHandling.SetLabelText("New Column:")
         ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
         ucrChkIgnoreCase.SetText("Ignore Case")
@@ -486,7 +485,6 @@ Public Class dlgStringHandling
 
         clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
-        NewColumnName()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -574,14 +572,6 @@ Public Class dlgStringHandling
         TestOkEnabled()
     End Sub
 
-    Private Sub NewColumnName()
-        If rdoReplaceNa.Checked Then
-            ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
-        Else
-            ucrSaveStringHandling.SetLabelText("New Column Name:")
-        End If
-    End Sub
-
     Private Sub AddRemoveParameters()
         clsStringCollFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
@@ -648,12 +638,12 @@ Public Class dlgStringHandling
         AddSavePrefix()
         SetBaseFunction()
         SelectOptions()
-        NewColumnName()
         ChangePrefixName()
         AddRemoveParameters()
         CellParameters()
         RegularExpressionControl()
         IgnoreCaseControl()
+        OverWriteColumnsEnabled()
     End Sub
 
     Private Sub SetBaseFunction()
@@ -683,23 +673,15 @@ Public Class dlgStringHandling
                     ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
                 End If
             Else
-                If Not ucrChkOverWriteColumns.Checked Then
-                    If rdoDetects.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    ElseIf rdoStarts.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    ElseIf rdoEnds.Checked Then
-                        clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    End If
-                Else
-                    If rdoDetects.Checked Then
-                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                    ElseIf rdoStarts.Checked Then
-                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                    ElseIf rdoEnds.Checked Then
-                        clsAcrossFunction.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
-                    End If
+                If rdoDetects.Checked Then
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsDetectSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                ElseIf rdoStarts.Checked Then
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsStartsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
+                ElseIf rdoEnds.Checked Then
+                    clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsEndsSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
                 End If
+
             End If
         ElseIf rdoFind.Checked Then
             clsFindDummyFunction.AddParameter("string_handling", "find", iPosition:=3)
@@ -948,7 +930,6 @@ Public Class dlgStringHandling
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverStringHandling.GetVariableNames, iPosition:=1)
         clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
-        'If rdoReplace.Checked Then
         If rdoMultiple.Checked Then
             clsReplaceDummyFunction.AddParameter("col", "multiple", iPosition:=0)
             ucrSelectorStringHandling.SetItemType("column_selection")
@@ -960,11 +941,6 @@ Public Class dlgStringHandling
             ucrReceiverStringHandling.strSelectorHeading = "Factors"
             lblColumn.Text = "Column:"
         End If
-        ' Else
-        'ucrSelectorStringHandling.SetItemType("column")
-        '    ucrReceiverStringHandling.strSelectorHeading = "Factors"
-        '    lblColumn.Text = "Column:"
-        'End If
     End Sub
 
     Private Sub ucrSaveStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStringHandling.ControlValueChanged
@@ -992,18 +968,14 @@ Public Class dlgStringHandling
                 End If
             End If
         ElseIf rdoReplace.Checked Then
-            'If rdoSingle.Checked Then
             If rdoReplaceFirst.Checked Then
-                    ucrSaveStringHandling.SetPrefix("replace")
-                ElseIf rdoReplaceAll.Checked Then
-                    ucrSaveStringHandling.SetPrefix("replace_all")
-                ElseIf rdoReplaceCell.Checked Then
-                    ucrSaveStringHandling.SetPrefix("replace_cell")
-                End If
-                ' ElseIf rdoMultiple.Checked Then
-                ' ucrSaveStringHandling.SetPrefix("select")
-                'End If
-            ElseIf rdoReplaceNa.Checked Then
+                ucrSaveStringHandling.SetPrefix("replace")
+            ElseIf rdoReplaceAll.Checked Then
+                ucrSaveStringHandling.SetPrefix("replace_all")
+            ElseIf rdoReplaceCell.Checked Then
+                ucrSaveStringHandling.SetPrefix("replace_cell")
+            End If
+        ElseIf rdoReplaceNa.Checked Then
             ucrSaveStringHandling.SetPrefix("replace_na")
         ElseIf rdoToNa.Checked Then
             ucrSaveStringHandling.SetPrefix("replace")
@@ -1017,12 +989,18 @@ Public Class dlgStringHandling
 
         If rdoMultiple.Checked Then
             ucrSaveStringHandling.btnColumnPosition.Visible = False
+            ucrSaveStringHandling.SetLabelText("Suffix Name:")
             If ucrChkOverWriteColumns.Checked Then
                 ucrSaveStringHandling.Enabled = False
             Else
                 ucrSaveStringHandling.Enabled = True
             End If
         Else
+            If rdoReplaceNa.Checked Then
+                ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
+            Else
+                ucrSaveStringHandling.SetLabelText("New Column Name:")
+            End If
             ucrSaveStringHandling.btnColumnPosition.Visible = True
         End If
     End Sub
@@ -1030,5 +1008,13 @@ Public Class dlgStringHandling
     Private Sub ReopenDialog()
         'This is hardcoded here so that the checkbox is always unchecked when the dialog is reopened
         ucrChkOverWriteColumns.Checked = False
+    End Sub
+
+    Private Sub OverWriteColumnsEnabled()
+        If rdoDetect.Checked Then
+            ucrChkOverWriteColumns.Visible = False
+        Else
+            ucrChkOverWriteColumns.Visible = True
+        End If
     End Sub
 End Class
