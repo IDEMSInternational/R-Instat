@@ -432,7 +432,7 @@ Public Class ucrSave
                 ucrInputTextSave.SetDefaultTypeAsLink()
                 btnColumnPosition.Visible = False
             Case Else
-                MsgBox("Developer error: unrecognised save type: " & strRObjectType)
+                MsgBoxTranslate("Developer error: unrecognised save type: " & strRObjectType)
         End Select
     End Sub
     ''' <summary>   Sets save type as column. </summary>

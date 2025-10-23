@@ -164,7 +164,7 @@ Public Class dlgCalculator
 
     Public Sub SetDefaultKeyboard(strNewDefaultKeyboard As String)
         If Not strKeyboards.Contains(strNewDefaultKeyboard) Then
-            MsgBox("Developer error: there is no Calculator keyboard called" & Chr(34) & strNewDefaultKeyboard & Chr(34) & vbNewLine & "Default keyboard will be selected.")
+            MsgBoxTranslate("Developer error: there is no Calculator keyboard called" & Chr(34) & strNewDefaultKeyboard & Chr(34) & vbNewLine & "Default keyboard will be selected.")
             strDefaultKeyboard = ""
         Else
             strDefaultKeyboard = strNewDefaultKeyboard
