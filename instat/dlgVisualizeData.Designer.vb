@@ -197,7 +197,7 @@ Partial Class dlgVisualizeData
         Me.ucrInputColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColourPalette.GetSetSelectedIndex = -1
         Me.ucrInputColourPalette.IsReadOnly = False
-        Me.ucrInputColourPalette.Location = New System.Drawing.Point(55, 266)
+        Me.ucrInputColourPalette.Location = New System.Drawing.Point(60, 266)
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         Me.ucrInputColourPalette.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputColourPalette.TabIndex = 25
@@ -208,7 +208,7 @@ Partial Class dlgVisualizeData
         Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColour.GetSetSelectedIndex = -1
         Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(55, 293)
+        Me.ucrInputColour.Location = New System.Drawing.Point(60, 293)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputColour.TabIndex = 22

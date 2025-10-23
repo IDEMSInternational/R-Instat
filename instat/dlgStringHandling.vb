@@ -42,6 +42,7 @@ Public Class dlgStringHandling
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        ChangeLabel()
         autoTranslate(Me)
         ReopenDialog()
         TestOkEnabled()
@@ -178,6 +179,7 @@ Public Class dlgStringHandling
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkOverWriteColumns, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ChangeLabel()
     End Sub
 
     Private Sub SetDefaults()
@@ -549,6 +551,7 @@ Public Class dlgStringHandling
         AddSavePrefix()
         SetBaseFunction()
         SelectOptions()
+        ChangeLabel()
         NewColumnName()
         ChangePrefixName()
         AddRemoveParameters()
@@ -756,17 +759,29 @@ Public Class dlgStringHandling
                 clsReplaceDummyFunction.AddParameter("col", "multiple", iPosition:=0)
                 ucrSelectorStringHandling.SetItemType("column_selection")
                 ucrReceiverStringHandling.strSelectorHeading = "Column selections"
-                lblColumn.Text = "Select:"
             ElseIf rdoSingle.Checked Then
                 clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=0)
                 ucrSelectorStringHandling.SetItemType("column")
                 ucrReceiverStringHandling.strSelectorHeading = "Factors"
-                lblColumn.Text = "Column:"
             End If
         Else
             ucrSelectorStringHandling.SetItemType("column")
             ucrReceiverStringHandling.strSelectorHeading = "Factors"
-            lblColumn.Text = "Column:"
+        End If
+    End Sub
+
+    Private Sub ChangeLabel()
+        If rdoReplace.Checked Then
+            If rdoMultiple.Checked Then
+                lblColumn.Visible = False
+                lblSelect.Visible = True
+            ElseIf rdoSingle.Checked Then
+                lblColumn.Visible = True
+                lblSelect.Visible = False
+            End If
+        Else
+            lblColumn.Visible = True
+            lblSelect.Visible = False
         End If
     End Sub
 
