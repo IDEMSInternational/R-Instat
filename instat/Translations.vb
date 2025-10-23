@@ -126,12 +126,34 @@ Public Class Translations
     '''
     ''' <returns>   A MsgBoxResult value indicating which button the user clicked. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Shared Function MsgBoxTranslate(Prompt As String, _
-                                           Optional Buttons As MsgBoxStyle = MsgBoxStyle.OKOnly, _
-                                           Optional Title As String = Nothing) As MsgBoxResult
-        Return MsgBox(GetTranslation(Prompt), Buttons, GetTranslation(Title))
-    End Function
+    Public Shared Function MsgBoxTranslate(Prompt As String,
+                                       Optional Buttons As MsgBoxStyle = MsgBoxStyle.OkOnly,
+                                       Optional Title As String = Nothing) As MsgBoxResult
+        Dim translatedPrompt As String = ""
+        Dim translatedTitle As String = ""
 
+        ' --- Traduction ligne par ligne pour gérer les multi-lignes ---
+        If Not String.IsNullOrEmpty(Prompt) Then
+            ' Découpage robuste pour gérer tous les types de retour à la ligne
+            Dim lines As String() = Prompt.Split(New String() {Environment.NewLine, vbCrLf, vbLf}, StringSplitOptions.None)
+
+            For i As Integer = 0 To lines.Length - 1
+                Dim line As String = lines(i).Trim()
+                If Not String.IsNullOrEmpty(line) Then
+                    lines(i) = GetTranslation(line)
+                End If
+            Next
+
+            translatedPrompt = String.Join(Environment.NewLine, lines)
+        End If
+
+        ' --- Traduction du titre ---
+        If Not String.IsNullOrEmpty(Title) Then
+            translatedTitle = GetTranslation(Title)
+        End If
+
+        Return MsgBox(translatedPrompt, Buttons, translatedTitle)
+    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   

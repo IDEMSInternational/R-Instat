@@ -592,7 +592,7 @@ Public Class dlgNewDataFrame
             dgrView.Columns("colLevels").ReadOnly = True
             FillGrid(iRow, dgrView, False)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBoxTranslate(ex.Message)
         End Try
     End Sub
 

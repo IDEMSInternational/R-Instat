@@ -225,7 +225,7 @@ Public Class dlgFindInVariableOrFilter
             End If
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBoxTranslate(ex.Message)
         End Try
     End Sub
 
@@ -424,7 +424,7 @@ Public Class dlgFindInVariableOrFilter
             End If
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBoxTranslate(ex.Message)
         End Try
     End Sub
 End Class

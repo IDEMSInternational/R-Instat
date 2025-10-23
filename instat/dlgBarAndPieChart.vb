@@ -784,7 +784,7 @@ Public Class dlgBarAndPieChart
                 End If
             Next
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBoxTranslate(ex.Message)
         End Try
         SetGeomTextOptions()
         TestOkEnabled()

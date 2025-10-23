@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
+Imports instat
+Imports instat.Translations
 
 Public Class ucrInputComboBox
 
@@ -248,7 +250,7 @@ Public Class ucrInputComboBox
         End If
         If bSetConditions Then
             If GetParameter() Is Nothing Then
-                MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+                MsgBoxTranslate("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
             End If
         End If
         For Each kvpTemp In dctItemParameterValuePairs

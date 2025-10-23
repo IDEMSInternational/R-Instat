@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports System.Runtime.InteropServices
 Imports RInsightF461
 
@@ -542,7 +544,7 @@ Public Class ucrOutputPage
                 richSelectedText.AppendText(richText.SelectedText)
                 CopySelectedTextToClipBoard(richSelectedText, richText.SelectedRtf)
             Catch ex As Exception
-                MsgBox(ex.Message)
+                MsgBoxTranslate(ex.Message)
             End Try
         End If
     End Sub

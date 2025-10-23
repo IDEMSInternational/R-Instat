@@ -244,7 +244,7 @@ Public Class DlgDefineClimaticData
                 End If
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBoxTranslate(ex.Message)
         End Try
         Return String.Empty
     End Function
