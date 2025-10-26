@@ -2958,10 +2958,6 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
     End Sub
 
-
-
-
-
     Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuToolsHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "8")
     End Sub
@@ -2985,12 +2981,26 @@ Public Class frmMain
         ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
+        If mnuSwapDataMetadata.Checked Then
+            mnuSwapDataDataframeMetadata.Enabled = False
+            mnuViewSwapDataAndDataframeMetadata.Enabled = False
+        Else
+            mnuSwapDataDataframeMetadata.Enabled = True
+            mnuViewSwapDataAndDataframeMetadata.Enabled = True
+        End If
     End Sub
 
     Private Sub mnuSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataDataframeMetadata.Click
         mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
         UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
+        If mnuSwapDataDataframeMetadata.Checked Then
+            mnuSwapDataMetadata.Enabled = False
+            mnuViewSwapDataAndMetadata.Enabled = False
+        Else
+            mnuSwapDataMetadata.Enabled = True
+            mnuViewSwapDataAndMetadata.Enabled = True
+        End If
     End Sub
 
     Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuHelpResourcesSite.Click
