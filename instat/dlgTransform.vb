@@ -32,6 +32,7 @@ Public Class dlgTransform
     Private clsStandardDevFunction As New RFunction
     Private clsSubtractOperator As New ROperator
     Private clsDivisionOperator As New ROperator
+    Private clsDescToolsFormatFunction As New RFunction
 
     Private clsDivisionColsOperator As New ROperator
     Private clsSquarerootFunction As New RFunction
@@ -85,7 +86,8 @@ Public Class dlgTransform
     Private clsAddColumnsFunction As New RFunction
     Private clsIsNAFunction As New RFunction
     Private clsIsNAColsFunction As New RFunction
-
+    Private clsFormatFunction As New RFunction
+    Private clsBaseFunction As New RFunction
     Private clsGetDataFrameFunction As New RFunction
     Private clsColumnsFunction As New RFunction
     Private clsPasteFunction As New RFunction
@@ -96,6 +98,21 @@ Public Class dlgTransform
     Private clsTildaOperator As New ROperator
     Private clsAssignOperator As New ROperator
     Private bResetRCode As Boolean = True
+
+    Private ReadOnly strDot As String = "."
+    Private ReadOnly strE As String = "e"
+    Private ReadOnly strLeft As String = "l"
+    Private ReadOnly strCentre As String = "c"
+    Private ReadOnly strRight As String = "r"
+    Private ReadOnly strNa As String = "NA"
+    Private ReadOnly strHyphen As String = "-"
+    Private ReadOnly strMissing As String = "Missing"
+    Private ReadOnly strZero As String = "0"
+    Private ReadOnly strDott As String = "dot"
+    Private ReadOnly strStar As String = "*"
+    Private ReadOnly strP As String = "P*"
+    Private ReadOnly strPvalue As String = "p"
+    Private ReadOnly strPercent As String = "%"
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -126,6 +143,7 @@ Public Class dlgTransform
         ucrPnlTransformOptions.AddRadioButton(rdoSort)
         ucrPnlTransformOptions.AddRadioButton(rdoNonNegative)
         ucrPnlTransformOptions.AddRadioButton(rdoScale)
+        ucrPnlTransformOptions.AddRadioButton(rdoFormat)
 
         ucrPnlColumnSelectOptions.AddRadioButton(rdoSingle)
         ucrPnlColumnSelectOptions.AddRadioButton(rdoMultiple)
@@ -135,6 +153,7 @@ Public Class dlgTransform
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoSort, "check", "sort")
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoNonNegative, "check", "non-negative")
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoScale, "check", "scale")
+        ucrPnlTransformOptions.AddParameterValuesCondition(rdoFormat, "check", "format")
 
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "col", "single")
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "col", "multiple")
@@ -187,10 +206,40 @@ Public Class dlgTransform
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoDifference, "check", "diff")
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoLogical, "check", "logical")
 
+        ucrPnlFormatOptions.AddRadioButton(rdoDecimalFormat)
+        ucrPnlFormatOptions.AddRadioButton(rdoScientific)
+        ucrPnlFormatOptions.AddRadioButton(rdoPercent)
+        ucrPnlFormatOptions.AddRadioButton(rdoNA)
+        ucrPnlFormatOptions.AddRadioButton(rdoZero)
+        ucrPnlFormatOptions.AddRadioButton(rdoPvalue)
+        ucrPnlFormatOptions.AddRadioButton(rdoFraction)
+        ucrPnlFormatOptions.AddRadioButton(rdoAlign)
+
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoDecimalFormat, "check", "DecimalFormat")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoScientific, "check", "Scientific")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoPercent, "check", "Percent")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoNA, "check", "NA")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoZero, "check", "Zero")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoPvalue, "check", "Pvalue")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoFraction, "check", "Fraction")
+        ucrPnlFormatOptions.AddParameterValuesCondition(rdoAlign, "check", "Align")
+
         ucrPnlNonNegative.AddRadioButton(rdoSquareRoot)
         ucrPnlNonNegative.AddRadioButton(rdoLogToBase10)
         ucrPnlNonNegative.AddRadioButton(rdoNaturalLog)
         ucrPnlNonNegative.AddRadioButton(rdoPower)
+
+        UcrInputAlignOperations.SetItems({strDot, strE, strLeft, strCentre, strRight})
+        UcrInputAlignOperations.SetDropDownStyleAsNonEditable()
+
+        UcrInputNAOperations.SetItems({strNa, strDot, strHyphen, strMissing})
+        UcrInputNAOperations.SetDropDownStyleAsNonEditable()
+
+        UcrInputZeroOperations.SetItems({strZero, strDott, strDot, strHyphen})
+        UcrInputZeroOperations.SetDropDownStyleAsNonEditable()
+
+        UcrInputPvalue.SetItems({strStar, strP, strPvalue})
+        UcrInputPvalue.SetDropDownStyleAsNonEditable()
 
         ucrPnlNonNegative.AddParameterValuesCondition(rdoSquareRoot, "check", "sqrt")
         ucrPnlNonNegative.AddParameterValuesCondition(rdoLogToBase10, "check", "log10")
@@ -203,9 +252,20 @@ Public Class dlgTransform
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagLeadPosition, {rdoLead}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudDiffLag, {rdoDifference}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagPosition, {rdoLag}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlNumericOptions.AddToLinkedControls(ucrChkOmitNA, {rdoStandardize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlNumericOptions.AddToLinkedControls({ucrInputLogicOperations}, {rdoLogical}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNumericOptions.AddToLinkedControls(ucrChkOmitNA, {rdoStandardize}, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlNumericOptions.AddToLinkedControls({ucrInputLogicOperations}, {rdoLogical}, bNewLinkedAddRemoveParameter:=True)
+
+        ucrPnlFormatOptions.AddToLinkedControls(ucrNudDecimalPlaces, {rdoDecimalFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls(ucrNudScientific, {rdoScientific}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls(ucrNudPercent, {rdoPercent}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls(UcrNudFraction, {rdoFraction}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls({UcrInputNAOperations, UcrInputNAvalues}, {rdoNA}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls({UcrInputZeroOperations, UcrInputZeroValues}, {rdoZero}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls(UcrInputPvalue, {rdoPvalue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFormatOptions.AddToLinkedControls({UcrInputAlignOperations, UcrInputAlignValues}, {rdoAlign}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlNonNegative.AddToLinkedControls(ucrInputPower, {rdoPower}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransformOptions.AddToLinkedControls(ucrPnlFormatOptions, {rdoFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlMissingValues, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlTies, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrChkDecreasing, {rdoSort}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -232,7 +292,7 @@ Public Class dlgTransform
         ucrPnlTies.SetLinkedDisplayControl(grpTies)
         ucrPnlNonNegative.SetLinkedDisplayControl(grpNonNegative)
         ucrInputPreview.SetLinkedDisplayControl(cmdUpdatePreview)
-
+        ucrPnlFormatOptions.SetLinkedDisplayControl(grpFormatOptions)
         ucrNudSignifDigits.SetParameter(New RParameter("digits", 1))
         ucrNudSignifDigits.SetMinMax(iNewMin:=0, iNewMax:=22)
         ucrNudSignifDigits.SetRDefault(6)
@@ -258,6 +318,31 @@ Public Class dlgTransform
 
         ucrInputLogicOperations.SetItems({"==", "<", "<=", ">", ">=", "!=", "%in%", "is.na", "!is.na"})
         ucrInputLogicOperations.SetDropDownStyleAsNonEditable()
+
+
+        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 0))
+        ucrNudDecimalPlaces.SetRDefault("3")
+
+        ucrNudScientific.SetParameter(New RParameter("sci", 0))
+        ucrNudScientific.SetRDefault("3")
+
+        ucrNudPercent.SetParameter(New RParameter("digits", 0))
+        ucrNudPercent.SetRDefault("2")
+
+        UcrInputNAOperations.SetParameter(New RParameter("na.form", 0))
+        UcrInputNAOperations.SetRDefault(Chr(34) & "missing" & Chr(34))
+
+        UcrInputZeroOperations.SetParameter(New RParameter("zero.form", 0))
+        UcrInputZeroOperations.SetRDefault(Chr(34) & "." & Chr(34))
+
+        UcrInputPvalue.SetParameter(New RParameter("fmt", 0))
+        UcrInputPvalue.SetRDefault(Chr(34) & "p" & Chr(34))
+
+        UcrNudFraction.SetParameter(New RParameter("digits", 0))
+        UcrNudFraction.SetRDefault("2")
+
+        UcrInputAlignOperations.SetParameter(New RParameter("align", 0))
+        UcrInputAlignOperations.SetRDefault(Chr(34) & "." & Chr(34))
 
         ucrInputPower.SetParameter(New RParameter("y", 1))
         dctPowerValues.Add("1", "1")
@@ -418,6 +503,7 @@ Public Class dlgTransform
         clsColumnsFunction = New RFunction
         clsAssignOperator = New ROperator
         clsIsNAColsFunction = New RFunction
+        clsDescToolsFormatFunction = New RFunction
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -632,7 +718,14 @@ Public Class dlgTransform
         clsNumericDummyFunction.AddParameter("add", "False", iPosition:=3)
         clsNumericDummyFunction.AddParameter("subtract", "False", iPosition:=4)
 
+        clsDescToolsFormatFunction.SetPackageName("DescTools")
+        clsDescToolsFormatFunction.SetRCommand("Format")
+        clsDescToolsFormatFunction.AddParameter("check", "DecimalFormat", iPosition:=0)
+
         clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
+
+        clsFormatFunction.AddParameter("fmt", "fmt_trace", bIncludeArgumentName:=True)
+
 
         clsColumnsFunction.SetRCommand("colnames")
         clsColumnsFunction.AddParameter("col_data", "col",, bIncludeArgumentName:=False)
@@ -669,6 +762,11 @@ Public Class dlgTransform
         ucrNudLagPosition.AddAdditionalCodeParameterPair(clsLagColsFunction, New RParameter("lag", 1), iAdditionalPairNo:=1)
         ucrNudSignifDigits.AddAdditionalCodeParameterPair(clsSignifColsFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
         ucrInputPower.AddAdditionalCodeParameterPair(clsPowerColsOperator, New RParameter("y", 1), iAdditionalPairNo:=1)
+        ucrNudDecimalPlaces.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
+        ucrNudScientific.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
+        ucrNudPercent.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
+        UcrNudFraction.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("fmt", 2), iAdditionalPairNo:=1)
+        ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=0)
 
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsAddConstantOperator, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=10)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsScaleSubtractOperator, New RParameter("x", 0), iAdditionalPairNo:=11)
@@ -693,6 +791,7 @@ Public Class dlgTransform
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsScaleMinColsFunction, New RParameter("x", 0), iAdditionalPairNo:=29)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsBooleanColsOperator, New RParameter("x", 0), iAdditionalPairNo:=30)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsIsNAColsFunction, New RParameter("x", 0), iAdditionalPairNo:=31)
+        ucrReceiverRank.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("x", 0), iAdditionalPairNo:=32)
 
         ucrChkOmitNA.AddAdditionalCodeParameterPair(clsStandardDevFunction, ucrChkOmitNA.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorForRank.AddAdditionalCodeParameterPair(clsGetColSelectionNamesFunction, ucrSelectorForRank.GetParameter, iAdditionalPairNo:=1)
@@ -724,6 +823,7 @@ Public Class dlgTransform
         ucrSaveNew.AddAdditionalRCode(clsPreviewOperator, iAdditionalPairNo:=13)
         ucrSaveNew.AddAdditionalRCode(clsBooleanOperator, iAdditionalPairNo:=14)
         ucrSaveNew.AddAdditionalRCode(clsIsNAFunction, iAdditionalPairNo:=15)
+        ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=16)
 
         ucrPnlTransformOptions.SetRCode(clsDummyTransformFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsDummyTransformFunction, bReset)
@@ -735,6 +835,10 @@ Public Class dlgTransform
         ucrNudRoundOfDigits.SetRCode(clsRoundFunction, bReset)
         ucrNudSignifDigits.SetRCode(clsSignifFunction, bReset)
         ucrNudLagLeadPosition.SetRCode(clsLeadFunction, bReset)
+        ucrNudDecimalPlaces.SetRCode(clsDescToolsFormatFunction, bReset)
+        ucrNudScientific.SetRCode(clsDescToolsFormatFunction, bReset)
+        ucrNudPercent.SetRCode(clsDescToolsFormatFunction, bReset)
+        UcrNudFraction.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrNudDiffLag.SetRCode(clsDiffFunction, bReset)
         ucrNudLagPosition.SetRCode(clsLagFunction, bReset)
         ucrInputPower.SetRCode(clsPowerOperator, bReset)
@@ -745,6 +849,7 @@ Public Class dlgTransform
         ucrInputMultiply.SetRCode(clsScaleMultiplyOperator, bReset)
         ucrChkAddConstant.SetRCode(clsConstantDummyFunction, bReset)
         ucrPnlNumericOptions.SetRCode(clsNumericDummyFunction, bReset)
+        ucrPnlFormatOptions.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
@@ -795,12 +900,21 @@ Public Class dlgTransform
         ucrChkEditPreview.Checked = False
     End Sub
 
-    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
+    Private Function GetParamValue(ucrDropdown As ucrInput, Optional ucrTextbox As ucrInput = Nothing) As String
+        Dim strValue As String = ucrDropdown.GetText()
+        If ucrTextbox IsNot Nothing AndAlso Not String.IsNullOrEmpty(ucrTextbox.GetText()) Then
+            strValue = ucrTextbox.GetText()
+        End If
+        Return strValue
+    End Function
+
+
+    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrPnlFormatOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
         ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrNudLagLeadPosition.ControlValueChanged,
         ucrNudLagPosition.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputMultiply.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged,
         ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrChkAddConstant.ControlValueChanged,
         ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
-
+        UpdateControlStates()
         ucrBase.clsRsyntax.ClearCodes()
         If rdoSingle.Checked Then
             If rdoRank.Checked Then
@@ -812,6 +926,10 @@ Public Class dlgTransform
                 clsPreviewTextFunction = clsSortFunction.Clone
                 clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
+            ElseIf rdoFormat.Checked Then
+                clsPreviewTextFunction = clsDescToolsFormatFunction.Clone
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDescToolsFormatFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoNumeric.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
@@ -909,6 +1027,7 @@ Public Class dlgTransform
 
 
         End If
+        AddFormatParameters()
         SetPreviewText()
         UpdateNonNegativeParameters()
         NewDefaultName()
@@ -984,6 +1103,16 @@ Public Class dlgTransform
                 End Select
             End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
+        ElseIf rdoFormat.Checked Then
+            If rdoDecimalFormat.Checked Then
+            ElseIf rdoScientific.Checked Then
+            ElseIf rdoPercent.Checked Then
+            ElseIf rdoNA.Checked Then
+            ElseIf rdoZero.Checked Then
+            ElseIf rdoPvalue.Checked Then
+            ElseIf rdoFraction.Checked Then
+            ElseIf rdoAlign.Checked Then
+            End If
         ElseIf rdoNonNegative.Checked Then
             clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
             If rdoSquareRoot.Checked Then
@@ -1057,6 +1186,83 @@ Public Class dlgTransform
             Else
                 clsConstantDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
             End If
+        End If
+    End Sub
+
+    Private Sub AddFormatParameters()
+        If rdoDecimalFormat.Checked Then
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudDecimalPlaces.GetText)
+
+        ElseIf rdoScientific.Checked Then
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudScientific.GetText)
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34))
+
+        ElseIf rdoPercent.Checked Then
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudPercent.GetText)
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34))
+
+        ElseIf rdoNA.Checked Then
+            clsDescToolsFormatFunction.AddParameter("na.form", Chr(34) & UcrInputNAOperations.GetText & Chr(34))
+
+        ElseIf rdoZero.Checked Then
+            clsDescToolsFormatFunction.AddParameter("zero.form", Chr(34) & UcrInputZeroOperations.GetText & Chr(34))
+
+        ElseIf rdoPvalue.Checked Then
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & UcrInputPvalue.GetText & Chr(34))
+
+        ElseIf rdoFraction.Checked Then
+            clsDescToolsFormatFunction.AddParameter("frac", UcrNudFraction.GetText)
+
+        ElseIf rdoAlign.Checked Then
+            clsDescToolsFormatFunction.AddParameter("align", Chr(34) & UcrInputAlignOperations.GetText & Chr(34))
+
+        End If
+    End Sub
+
+    Private Sub UpdateControlStates()
+
+        ucrNudDecimalPlaces.Enabled = False
+        ucrNudScientific.Enabled = False
+        ucrNudPercent.Enabled = False
+        UcrNudFraction.Enabled = False
+
+        UcrInputNAOperations.Enabled = False
+        UcrInputNAvalues.Enabled = False
+
+        UcrInputZeroOperations.Enabled = False
+        UcrInputZeroValues.Enabled = False
+
+        UcrInputPvalue.Enabled = False
+        UcrInputAlignOperations.Enabled = False
+        UcrInputAlignValues.Enabled = False
+
+
+        If rdoDecimalFormat.Checked Then
+            ucrNudDecimalPlaces.Enabled = True
+
+        ElseIf rdoScientific.Checked Then
+            ucrNudScientific.Enabled = True
+
+        ElseIf rdoPercent.Checked Then
+            ucrNudPercent.Enabled = True
+
+        ElseIf rdoFraction.Checked Then
+            UcrNudFraction.Enabled = True
+
+        ElseIf rdoNA.Checked Then
+            UcrInputNAOperations.Enabled = True
+            UcrInputNAvalues.Enabled = True
+
+        ElseIf rdoZero.Checked Then
+            UcrInputZeroOperations.Enabled = True
+            UcrInputZeroValues.Enabled = True
+
+        ElseIf rdoPvalue.Checked Then
+            UcrInputPvalue.Enabled = True
+
+        ElseIf rdoAlign.Checked Then
+            UcrInputAlignOperations.Enabled = True
+            UcrInputAlignValues.Enabled = True
         End If
     End Sub
 
@@ -1186,4 +1392,5 @@ Public Class dlgTransform
             clsScaleDivideColsOperator.RemoveParameterByName("z")
         End If
     End Sub
+
 End Class
