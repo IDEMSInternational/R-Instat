@@ -68,7 +68,7 @@ Public Class dlgBackupManager
             Return
         End If
 
-        If MsgBox("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
+        If MsgBoxTranslate("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
 
@@ -96,7 +96,7 @@ Public Class dlgBackupManager
                 'save the selected file
                 SaveFile(strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0)), dlgSave.FileName)
                 'display success message
-                MsgBox("Data file successfully saved to " & dlgSave.FileName)
+                MsgBoxTranslate("Data file successfully saved to " & dlgSave.FileName)
             End If
         End Using
     End Sub
@@ -107,7 +107,7 @@ Public Class dlgBackupManager
             Return
         End If
 
-        If MsgBox("Are you sure you want to delete this file?" & Environment.NewLine & "You cannot undo this action and all its data will be lost.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
+        If MsgBoxTranslate("Are you sure you want to delete this file?" & Environment.NewLine & "You cannot undo this action and all its data will be lost.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
 
@@ -197,7 +197,7 @@ Public Class dlgBackupManager
         Try
             File.Copy(strSourceFileName, strDestFilename, True)
         Catch ex As Exception
-            MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+            MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
         End Try
     End Sub
 

@@ -299,7 +299,7 @@ Public Class ucrInput
             Case 1
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox(Chr(34) & strText & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
+                        MsgBoxTranslate(Chr(34) & strText & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
                     Case "Numeric"
                         MsgBoxTranslate("Entry must be numeric.", vbOKOnly)
                     Case "List"
@@ -310,9 +310,9 @@ Public Class ucrInput
             Case 2
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox("This name cannot start with " & strText(0), vbOKOnly)
+                        MsgBoxTranslate("This name cannot start with " & strText(0), vbOKOnly)
                     Case "Numeric"
-                        MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
+                        MsgBoxTranslate("This number must be: " & GetNumericRange(), vbOKOnly)
                     Case "NumericList"
                         MsgBoxTranslate("Each item in the list must be numeric.", vbOKOnly, "Validation Error")
                 End Select
@@ -321,7 +321,7 @@ Public Class ucrInput
                     Case "RVariable"
                         MsgBoxTranslate("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
                     Case "NumericList"
-                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
+                        MsgBoxTranslate("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
                 End Select
             Case 4
                 Select Case strValidationType
