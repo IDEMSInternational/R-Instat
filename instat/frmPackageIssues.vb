@@ -42,7 +42,7 @@ Public Class frmPackageIssues
         frmMain.clsRLink.RunInternalScript(clsInstallPackages.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         strCurrentMissingPackages = frmMain.clsRLink.GetRPackagesNotInstalled()
         If strCurrentMissingPackages IsNot Nothing AndAlso strCurrentMissingPackages.Length > 0 Then
-            MsgBox("Some packages could still not be installed. Try the alternative suggestions or contact the R-Instat help team." & vbNewLine & "You can continue to use R-Instat, however some functionality may be unavailable." & vbNewLine & "Click OK to see the packages still missing.", MsgBoxStyle.Information, Title:="Some packages still missing")
+            MsgBoxTranslate("Some packages could still not be installed. Try the alternative suggestions or contact the R-Instat help team." & vbNewLine & "You can continue to use R-Instat, however some functionality may be unavailable." & vbNewLine & "Click OK to see the packages still missing.", MsgBoxStyle.Information, Title:="Some packages still missing")
             SetMissingPackages(strCurrentMissingPackages)
         Else
             MsgBoxTranslate("Congratulations! All missing packages were successfully installed. You can now continue using R-Instat.", MsgBoxStyle.Information, Title:="Missing packages successfully installed")

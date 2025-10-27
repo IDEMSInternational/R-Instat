@@ -328,7 +328,7 @@ Public Class sdgClimaticDataEntry
         Dim strNewValue As String
 
         If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
-            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
+            MsgBoxTranslate("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
             Exit Sub
         End If
 
@@ -337,7 +337,7 @@ Public Class sdgClimaticDataEntry
         End If
 
         If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders.Item(iColumnIndex).Text) Then
-            MsgBox("Pasting into uneditable cells is currently disabled." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste into uneditable cells")
+            MsgBoxTranslate("Pasting into uneditable cells is currently disabled." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste into uneditable cells")
             Exit Sub
         End If
 
@@ -390,7 +390,7 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub grdCurrentWorkSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforeCut
-        MsgBox("Cutting is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try copying and deleting from one column cells at a time.", MsgBoxStyle.Information, "Cannot cut from cells")
+        MsgBoxTranslate("Cutting is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try copying and deleting from one column cells at a time.", MsgBoxStyle.Information, "Cannot cut from cells")
         e.IsCancelled = True
     End Sub
 

@@ -90,7 +90,7 @@ Public Class UcrPanel
                 rdoTemp = DirectCast(objTemp, RadioButton)
                 rdoTemp.Checked = True
             Else
-                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
+                MsgBoxTranslate("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
             End If
         Else
             'If no value reset to a default value
