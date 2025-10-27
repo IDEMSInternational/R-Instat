@@ -43,6 +43,7 @@ Public Class frmCustomMessageBox
                                 Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
         Using frm As New frmCustomMessageBox()
             frm.SetupMessageBox(prompt, title, buttons, icon, defaultButton)
+            ' ShowDialog(Nothing) works correctly in VB.NET and shows the dialog without a parent
             frm.ShowDialog(owner)
             Return frm.Result
         End Using
