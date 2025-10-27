@@ -54,9 +54,6 @@ Public Class frmCustomMessageBox
 
         ' Set up buttons
         SetupButtons(buttons, defaultButton)
-
-        ' Apply translations
-        autoTranslate(Me)
     End Sub
 
     ''' <summary>
@@ -91,19 +88,19 @@ Public Class frmCustomMessageBox
 
         Select Case buttons
             Case MessageBoxButtons.OK
-                ConfigureButton(btnButton1, GetTranslation("OK"), DialogResult.OK, True)
-                SetDefaultButton(btnButton1, defaultButton, MessageBoxDefaultButton.Button1)
+                ConfigureButton(btnButton2, GetTranslation("OK"), DialogResult.OK, True)
+                SetDefaultButton(btnButton2, defaultButton, MessageBoxDefaultButton.Button1)
 
             Case MessageBoxButtons.OKCancel
-                ConfigureButton(btnButton1, GetTranslation("OK"), DialogResult.OK, True)
-                ConfigureButton(btnButton2, GetTranslation("Cancel"), DialogResult.Cancel, True)
-                SetDefaultButton(If(defaultButton = MessageBoxDefaultButton.Button2, btnButton2, btnButton1), defaultButton, MessageBoxDefaultButton.Button1)
-                Me.CancelButton = btnButton2
+                ConfigureButton(btnButton2, GetTranslation("OK"), DialogResult.OK, True)
+                ConfigureButton(btnButton3, GetTranslation("Cancel"), DialogResult.Cancel, True)
+                SetDefaultButton(If(defaultButton = MessageBoxDefaultButton.Button2, btnButton3, btnButton2), defaultButton, MessageBoxDefaultButton.Button1)
+                Me.CancelButton = btnButton3
 
             Case MessageBoxButtons.YesNo
-                ConfigureButton(btnButton1, GetTranslation("Yes"), DialogResult.Yes, True)
-                ConfigureButton(btnButton2, GetTranslation("No"), DialogResult.No, True)
-                SetDefaultButton(If(defaultButton = MessageBoxDefaultButton.Button2, btnButton2, btnButton1), defaultButton, MessageBoxDefaultButton.Button1)
+                ConfigureButton(btnButton2, GetTranslation("Yes"), DialogResult.Yes, True)
+                ConfigureButton(btnButton3, GetTranslation("No"), DialogResult.No, True)
+                SetDefaultButton(If(defaultButton = MessageBoxDefaultButton.Button2, btnButton3, btnButton2), defaultButton, MessageBoxDefaultButton.Button1)
 
             Case MessageBoxButtons.YesNoCancel
                 ConfigureButton(btnButton1, GetTranslation("Yes"), DialogResult.Yes, True)
@@ -119,10 +116,10 @@ Public Class frmCustomMessageBox
                 Me.CancelButton = btnButton3
 
             Case MessageBoxButtons.RetryCancel
-                ConfigureButton(btnButton1, GetTranslation("Retry"), DialogResult.Retry, True)
-                ConfigureButton(btnButton2, GetTranslation("Cancel"), DialogResult.Cancel, True)
-                SetDefaultButton(If(defaultButton = MessageBoxDefaultButton.Button2, btnButton2, btnButton1), defaultButton, MessageBoxDefaultButton.Button1)
-                Me.CancelButton = btnButton2
+                ConfigureButton(btnButton2, GetTranslation("Retry"), DialogResult.Retry, True)
+                ConfigureButton(btnButton3, GetTranslation("Cancel"), DialogResult.Cancel, True)
+                SetDefaultButton(If(defaultButton = MessageBoxDefaultButton.Button2, btnButton3, btnButton2), defaultButton, MessageBoxDefaultButton.Button1)
+                Me.CancelButton = btnButton3
 
             Case MessageBoxButtons.AbortRetryIgnore
                 ConfigureButton(btnButton1, GetTranslation("Abort"), DialogResult.Abort, True)
