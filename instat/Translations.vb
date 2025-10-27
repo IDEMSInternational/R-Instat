@@ -16,6 +16,7 @@
 Imports System.Data.SQLite
 Imports System.IO
 Imports System.Reflection
+Imports System.Windows.Forms
 
 Public Class Translations
 
@@ -28,6 +29,7 @@ Public Class Translations
     ''' <param name="clsControl">    The WinForm control to translate. </param>
     '''--------------------------------------------------------------------------------------------
     Public Shared Sub autoTranslate(clsControl As Control)
+        ' This helper intentionally only translates Forms (TranslateForm expects a Form)
         If IsNothing(TryCast(clsControl, Form)) Then
             Exit Sub
         End If
@@ -37,8 +39,74 @@ Public Class Translations
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
+    '''     Translates a ContextMenuStrip's items into the configured language.
+    '''     Call this for right-click context menus or split-button menus that are not part of the
+    '''     regular form control traversal.
+    ''' </summary>
+    ''' <param name="ctx"> The ContextMenuStrip to translate. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Sub autoTranslateContextMenu(ctx As ContextMenuStrip)
+        If ctx Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim strDbPath = GetDbPath()
+        Dim strLanguageCode = GetLanguageCode()
+        Dim parentName As String = If(String.IsNullOrEmpty(ctx.Name), "ContextMenu", ctx.Name)
+
+        ' First attempt: use TranslateWinForm library to translate items (keeps behavior consistent)
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(parentName, ctx.Items, strDbPath, strLanguageCode))
+
+        ' Fallback: directly translate each ToolStripItem.Text using GetTranslationWithFallback
+        Try
+            TranslateToolStripItemsWithFallback(ctx.Items)
+        Catch ex As Exception
+            HandleError("Error translating context menu items: " & ex.Message)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Translate a ToolStripItemCollection using textual fallback for each item's Text.
+    ''' Public so other controls can call it when needed (e.g. ucrSelector).
+    ''' </summary>
+    Public Shared Sub TranslateToolStripItemsWithFallback(items As ToolStripItemCollection)
+        If items Is Nothing Then Return
+        For Each tsi As ToolStripItem In items
+            If tsi Is Nothing Then Continue For
+            If Not String.IsNullOrEmpty(tsi.Text) Then
+                Dim newText As String = GetTranslationWithFallback(tsi.Text)
+                If Not String.IsNullOrEmpty(newText) Then
+                    tsi.Text = newText
+                End If
+            End If
+            Dim menuItem = TryCast(tsi, ToolStripMenuItem)
+            If menuItem IsNot Nothing AndAlso menuItem.DropDownItems IsNot Nothing AndAlso menuItem.DropDownItems.Count > 0 Then
+                TranslateToolStripItemsWithFallback(menuItem.DropDownItems)
+            End If
+        Next
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     Translates a ToolStripItemCollection directly (convenience wrapper).
+    ''' </summary>
+    ''' <param name="menuItems"> The ToolStripItemCollection to translate. </param>
+    ''' <param name="parentName"> Optional parent name used for database lookup. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Sub autoTranslateMenuItems(menuItems As ToolStripItemCollection, Optional parentName As String = "")
+        If menuItems Is Nothing Then Exit Sub
+        Dim strDbPath = GetDbPath()
+        Dim strLanguageCode = GetLanguageCode()
+        Dim parent = If(String.IsNullOrEmpty(parentName), "Menu", parentName)
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(parent, menuItems, strDbPath, strLanguageCode))
+        ' then apply textual fallback
+        TranslateToolStripItemsWithFallback(menuItems)
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
     '''     Attempts to translate all the text in the menu items in <paramref name="tsCollection"/> 
-    '''     to  the currently configured language.
+    '''     to the currently configured language.
     ''' </summary>
     '''
     ''' <param name="tsCollection">     The WinForm menu items to translate. </param>
@@ -70,27 +138,92 @@ Public Class Translations
 
         'The list of 10 most recent dialogs is dynamic and isn't translated as part of the main
         '    form. So translate manually.
-        For Each clsMenuItem As ToolStripItem In frmMain.mnuTbLast10Dialogs.DropDownItems
-            clsMenuItem.Text = GetTranslation(clsMenuItem.Text)
-        Next
+        If frmMain IsNot Nothing AndAlso frmMain.mnuTbLast10Dialogs IsNot Nothing Then
+            For Each clsMenuItem As ToolStripItem In frmMain.mnuTbLast10Dialogs.DropDownItems
+                clsMenuItem.Text = GetTranslation(clsMenuItem.Text)
+            Next
+        End If
 
         'The data grid status bar is dynamic and isn't translated as part of the main form.
         '    So translate manually.
-        frmMain.ucrDataViewer.SetDisplayLabels()
+        If frmMain IsNot Nothing AndAlso frmMain.ucrDataViewer IsNot Nothing Then
+            frmMain.ucrDataViewer.SetDisplayLabels()
+        End If
 
         'The right mouse button menus for the 6 output windows are not accessible via 
-        '    the control lists. Therefore, translate these menus explicitly
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.UcrOutputPages.tsButtons.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.columnContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.statusColumnMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.RowContextMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.ColumnContextMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.CellContextMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))
+        '    the control lists. Therefore, translate these menus explicitly where present.
+        Try
+            If frmMain IsNot Nothing Then
+                If frmMain.ucrOutput IsNot Nothing Then
+                    HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.UcrOutputPages.tsButtons.Items, strDbPath, strLanguageCode))
+                    TranslateToolStripItemsWithFallback(frmMain.ucrOutput.UcrOutputPages.tsButtons.Items)
+                End If
+                If frmMain.ucrColumnMeta IsNot Nothing Then
+                    If frmMain.ucrColumnMeta.cellContextMenuStrip IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrColumnMeta.cellContextMenuStrip.Items)
+                    End If
+                    If frmMain.ucrColumnMeta.columnContextMenuStrip IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.columnContextMenuStrip.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrColumnMeta.columnContextMenuStrip.Items)
+                    End If
+                    If frmMain.ucrColumnMeta.statusColumnMenu IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.statusColumnMenu.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrColumnMeta.statusColumnMenu.Items)
+                    End If
+                End If
+                If frmMain.ucrDataFrameMeta IsNot Nothing Then
+                    If frmMain.ucrDataFrameMeta.cellContextMenuStrip IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items)
+                    End If
+                    If frmMain.ucrDataFrameMeta.rowRightClickMenu IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrDataFrameMeta.rowRightClickMenu.Items)
+                    End If
+                End If
+                If frmMain.ucrScriptWindow IsNot Nothing AndAlso frmMain.ucrScriptWindow.mnuContextScript IsNot Nothing Then
+                    HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
+                    TranslateToolStripItemsWithFallback(frmMain.ucrScriptWindow.mnuContextScript.Items)
+                End If
+                If frmMain.ucrDataViewer IsNot Nothing Then
+                    If frmMain.ucrDataViewer.RowContextMenu IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.RowContextMenu.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrDataViewer.RowContextMenu.Items)
+                    End If
+                    If frmMain.ucrDataViewer.ColumnContextMenu IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.ColumnContextMenu.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrDataViewer.ColumnContextMenu.Items)
+                    End If
+                    If frmMain.ucrDataViewer.CellContextMenu IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.CellContextMenu.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrDataViewer.CellContextMenu.Items)
+                    End If
+                    If frmMain.ucrDataViewer.SheetTabContextMenu IsNot Nothing Then
+                        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))
+                        TranslateToolStripItemsWithFallback(frmMain.ucrDataViewer.SheetTabContextMenu.Items)
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            ' Continue: missing controls shouldn't break translation
+            HandleError("Error translating known menus: " & ex.Message)
+        End Try
+
+        ' --- Additional: translate any ContextMenuStrip attached to controls on the form (recursive) ---
+        Try
+            Dim allControls As New List(Of Control)
+            CollectAllControls(ctrParent, allControls)
+            For Each ctrl As Control In allControls
+                If ctrl IsNot Nothing AndAlso ctrl.ContextMenuStrip IsNot Nothing Then
+                    Dim parentName = If(String.IsNullOrEmpty(ctrl.Name), "ControlContextMenu", ctrl.Name)
+                    HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(parentName, ctrl.ContextMenuStrip.Items, strDbPath, strLanguageCode))
+                    TranslateToolStripItemsWithFallback(ctrl.ContextMenuStrip.Items)
+                End If
+            Next
+        Catch ex As Exception
+            HandleError("Error translating context menus: " & ex.Message)
+        End Try
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -109,6 +242,22 @@ Public Class Translations
         End If
 
         Return TranslateWinForm.clsTranslateWinForm.GetTranslation(strText, GetDbPath(), GetLanguageCode())
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''     A helper that attempts to translate a string by trying a cleaned version (remove '&') first,
+    '''     then the original trimmed text. Returns empty string when no translation found.
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Function GetTranslationWithFallback(strText As String) As String
+        If String.IsNullOrWhiteSpace(strText) Then Return ""
+        Dim cleaned As String = strText.Replace("&"c, "").Trim()
+        Dim translated As String = TranslateWinForm.clsTranslateWinForm.GetTranslation(cleaned, GetDbPath(), GetLanguageCode())
+        If String.IsNullOrEmpty(translated) Then
+            translated = TranslateWinForm.clsTranslateWinForm.GetTranslation(strText.Trim(), GetDbPath(), GetLanguageCode())
+        End If
+        Return If(String.IsNullOrEmpty(translated), "", translated)
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -153,6 +302,7 @@ Public Class Translations
 
         Return MsgBox(translatedPrompt, Buttons, translatedTitle)
     End Function
+
 
 
     '''--------------------------------------------------------------------------------------------
@@ -379,6 +529,21 @@ Public Class Translations
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "An error occured processing " & strFileName, MsgBoxStyle.Exclamation)
         End Try
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     Recursively collect all controls in a form or container control.
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Shared Sub CollectAllControls(parent As Control, ByRef lst As List(Of Control))
+        If parent Is Nothing Then Return
+        For Each c As Control In parent.Controls
+            lst.Add(c)
+            If c.HasChildren Then
+                CollectAllControls(c, lst)
+            End If
+        Next
     End Sub
 
 End Class

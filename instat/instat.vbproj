@@ -529,6 +529,9 @@
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrSelector.Translations.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </Compile>

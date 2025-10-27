@@ -72,6 +72,10 @@ Public Class ucrDataFrame
 
         'always load data frame names on load event because a data frame may have been deleted
         'and the control needs to refresh the data frame names.
+        Try
+            Translations.autoTranslateContextMenu(mnuRightClick)
+        Catch ex As Exception
+        End Try
         LoadDataFrameNamesAndFillComboBox()
     End Sub
 
@@ -275,6 +279,66 @@ Public Class ucrDataFrame
         If cboAvailableDataFrames.Text <> "" Then
             Clipboard.SetText(cboAvailableDataFrames.Text)
         End If
+    End Sub
+
+    Private Sub mnuRightClick_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles mnuRightClick.Opening
+        Try
+            ' Primary attempt: library-based translation of the menu
+            Translations.autoTranslateContextMenu(mnuRightClick)
+
+            ' Fallback: ensure each menu item text is translated by text lookup,
+            ' stripping mnemonic (&) and trimming whitespace to match DB entries.
+            For Each tsi As ToolStripItem In mnuRightClick.Items
+                If tsi Is Nothing Then Continue For
+                Dim originalText As String = tsi.Text
+                If String.IsNullOrWhiteSpace(originalText) Then Continue For
+
+                ' Try translation for cleaned text (no ampersand), then original
+                Dim cleaned As String = originalText.Replace("&", "").Trim()
+                Dim translated As String = Translations.GetTranslation(cleaned)
+
+                If String.IsNullOrEmpty(translated) Then
+                    translated = Translations.GetTranslation(originalText.Trim())
+                End If
+
+                If Not String.IsNullOrEmpty(translated) Then
+                    tsi.Text = translated
+                End If
+
+                ' If this item has a dropdown, translate its children too:
+                Dim mi As ToolStripMenuItem = TryCast(tsi, ToolStripMenuItem)
+                If mi IsNot Nothing AndAlso mi.HasDropDownItems Then
+                    TranslateToolStripItemsWithFallback(mi.DropDownItems)
+                End If
+            Next
+        Catch ex As Exception
+            ' Non-fatal: do not block the menu. Optionally log for debugging.
+            ' MsgBox("Context menu translation error: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Helper used by the Opening handler to recursively translate sub-items with same fallback logic
+    Private Sub TranslateToolStripItemsWithFallback(items As ToolStripItemCollection)
+        If items Is Nothing Then Return
+        For Each tsi As ToolStripItem In items
+            If tsi Is Nothing Then Continue For
+            Dim originalText As String = tsi.Text
+            If String.IsNullOrWhiteSpace(originalText) Then Continue For
+
+            Dim cleaned As String = originalText.Replace("&", "").Trim()
+            Dim translated As String = Translations.GetTranslation(cleaned)
+            If String.IsNullOrEmpty(translated) Then
+                translated = Translations.GetTranslation(originalText.Trim())
+            End If
+            If Not String.IsNullOrEmpty(translated) Then
+                tsi.Text = translated
+            End If
+
+            Dim mi As ToolStripMenuItem = TryCast(tsi, ToolStripMenuItem)
+            If mi IsNot Nothing AndAlso mi.HasDropDownItems Then
+                TranslateToolStripItemsWithFallback(mi.DropDownItems)
+            End If
+        Next
     End Sub
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
