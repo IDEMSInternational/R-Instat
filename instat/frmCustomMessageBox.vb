@@ -33,6 +33,26 @@ Public Class frmCustomMessageBox
     End Function
 
     ''' <summary>
+    ''' Shows a custom message box with translated buttons and a parent form
+    ''' </summary>
+    Public Shared Function Show(owner As IWin32Window,
+                                prompt As String,
+                                Optional title As String = Nothing,
+                                Optional buttons As MessageBoxButtons = MessageBoxButtons.OK,
+                                Optional icon As MessageBoxIcon = MessageBoxIcon.None,
+                                Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
+        Using frm As New frmCustomMessageBox()
+            frm.SetupMessageBox(prompt, title, buttons, icon, defaultButton)
+            If owner IsNot Nothing Then
+                frm.ShowDialog(owner)
+            Else
+                frm.ShowDialog()
+            End If
+            Return frm.Result
+        End Using
+    End Function
+
+    ''' <summary>
     ''' Configures the message box with the specified parameters
     ''' </summary>
     Private Sub SetupMessageBox(prompt As String,
