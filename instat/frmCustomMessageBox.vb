@@ -43,11 +43,7 @@ Public Class frmCustomMessageBox
                                 Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
         Using frm As New frmCustomMessageBox()
             frm.SetupMessageBox(prompt, title, buttons, icon, defaultButton)
-            If owner IsNot Nothing Then
-                frm.ShowDialog(owner)
-            Else
-                frm.ShowDialog()
-            End If
+            frm.ShowDialog(owner)
             Return frm.Result
         End Using
     End Function
