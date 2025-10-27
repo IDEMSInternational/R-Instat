@@ -106,8 +106,7 @@ Public Class ucrColumnMetadata
         If dataFrame.clsColumnMetaData.iRowCount > 1000 Then
             'if not asked or no response before then prompt for a response
             If bWideDataSetPromptResponse = DialogResult.None Then
-                bWideDataSetPromptResponse = MessageBox.Show(Me, "Are you sure you need wide data set(s) column metadata?  If so, be patient.  It, will be slow to load the first time", "Wide Data Set(s) Detected",
-                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                bWideDataSetPromptResponse = MsgBoxTranslate("Are you sure you need wide data set(s) column metadata?  If so, be patient.  It, will be slow to load the first time", MessageBoxButtons.YesNo, "Wide Data Set(s) Detected", MessageBoxIcon.Warning)
             End If
 
             'if response is no or no response given then don't fill the worksheet with data

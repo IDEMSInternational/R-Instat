@@ -39,11 +39,11 @@ Public Class sdgCreateFilter
     End Sub
 
     Private Sub sdgCreateFilter_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        Dim result As MsgBoxResult
+        Dim result As DialogResult
 
         If Not ucrCreateFilter.ucrFilterByReceiver.IsEmpty Then
-            result = MessageBox.Show(text:="Are you sure you want to return to the main dialog?" & Environment.NewLine & "The condition for " & ucrCreateFilter.ucrFilterByReceiver.GetVariableNames(False) & " has not been added." & Environment.NewLine & "Click the " & Chr(34) & "Add Condition" & Chr(34) & " button if you want to add it.", caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
-            If result = MsgBoxResult.No Then
+            result = MsgBoxTranslate(text:="Are you sure you want to return to the main dialog?" & Environment.NewLine & "The condition for " & ucrCreateFilter.ucrFilterByReceiver.GetVariableNames(False) & " has not been added." & Environment.NewLine & "Click the " & Chr(34) & "Add Condition" & Chr(34) & " button if you want to add it.", buttons:=MessageBoxButtons.YesNo, title:="Return to main dialog?", Icon:=MessageBoxIcon.Information)
+            If result = DialogResult.No Then
                 e.Cancel = True
             End If
         End If

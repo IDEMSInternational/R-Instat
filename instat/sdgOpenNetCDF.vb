@@ -479,8 +479,8 @@ Public Class sdgOpenNetCDF
             End If
         End If
         If bWarning Then
-            result = MessageBox.Show(text:="Information missing. See details below. OK will not be enabled on the main dialog untill resolved." & Environment.NewLine & "Are you sure you want to return to the main dialog?" & Environment.NewLine & strMessage, caption:="Missing information", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
-            If result = MsgBoxResult.No Then
+            result = MsgBoxTranslate(text:="Information missing. See details below. OK will not be enabled on the main dialog untill resolved." & Environment.NewLine & "Are you sure you want to return to the main dialog?" & Environment.NewLine & strMessage, buttons:=MessageBoxButtons.YesNo, title:="Missing information", Icon:=MessageBoxIcon.Information)
+            If result = DialogResult.No Then
                 e.Cancel = True
             End If
         End If
