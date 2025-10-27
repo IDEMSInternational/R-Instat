@@ -129,6 +129,37 @@ Public Class Translations
     Public Shared Function MsgBoxTranslate(Prompt As String,
                                        Optional Buttons As MsgBoxStyle = MsgBoxStyle.OkOnly,
                                        Optional Title As String = Nothing) As MsgBoxResult
+        ' Convert MsgBoxStyle to MessageBoxButtons and call the overload with translated buttons
+        Dim msgBoxButtons As MessageBoxButtons = ConvertMsgBoxStyleToMessageBoxButtons(Buttons)
+        Dim msgBoxIcon As MessageBoxIcon = ConvertMsgBoxStyleToMessageBoxIcon(Buttons)
+        
+        Dim result As DialogResult = MsgBoxTranslate(Prompt, msgBoxButtons, Title, msgBoxIcon)
+        
+        ' Convert DialogResult to MsgBoxResult
+        Return ConvertDialogResultToMsgBoxResult(result)
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''     Displays a message box with translated prompt, title and buttons, then returns the user's response.
+    '''     This overload uses a custom message box form to ensure button text is translated.
+    ''' </summary>
+    '''
+    ''' <param name="Prompt">   The message to display in the dialog box. It will be translated 
+    '''                         using GetTranslation(). </param>
+    ''' <param name="Buttons">  Optional. Specifies which buttons to display in the message box. 
+    '''                         Defaults to MessageBoxButtons.OK. </param>
+    ''' <param name="Title">    Optional. String expression displayed in the title bar of the dialog box. 
+    '''                         It will be translated using GetTranslation(). Defaults to Nothing. </param>
+    ''' <param name="Icon">     Optional. Specifies which icon to display in the message box.
+    '''                         Defaults to MessageBoxIcon.None. </param>
+    '''
+    ''' <returns>   A DialogResult value indicating which button the user clicked. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Function MsgBoxTranslate(Prompt As String,
+                                       Buttons As MessageBoxButtons,
+                                       Optional Title As String = Nothing,
+                                       Optional Icon As MessageBoxIcon = MessageBoxIcon.None) As DialogResult
         Dim translatedPrompt As String = ""
         Dim translatedTitle As String = ""
 
@@ -151,7 +182,84 @@ Public Class Translations
             translatedTitle = GetTranslation(Title)
         End If
 
-        Return MsgBox(translatedPrompt, Buttons, translatedTitle)
+        ' Use custom message box with translated buttons
+        Return frmCustomMessageBox.Show(translatedPrompt, translatedTitle, Buttons, Icon)
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''     Converts MsgBoxStyle to MessageBoxButtons.
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Shared Function ConvertMsgBoxStyleToMessageBoxButtons(style As MsgBoxStyle) As MessageBoxButtons
+        ' Extract button portion (lower 4 bits)
+        Dim buttonStyle As Integer = CInt(style) And &HF
+        
+        Select Case buttonStyle
+            Case 0 ' MsgBoxStyle.OkOnly
+                Return MessageBoxButtons.OK
+            Case 1 ' MsgBoxStyle.OkCancel
+                Return MessageBoxButtons.OKCancel
+            Case 2 ' MsgBoxStyle.AbortRetryIgnore
+                Return MessageBoxButtons.AbortRetryIgnore
+            Case 3 ' MsgBoxStyle.YesNoCancel
+                Return MessageBoxButtons.YesNoCancel
+            Case 4 ' MsgBoxStyle.YesNo
+                Return MessageBoxButtons.YesNo
+            Case 5 ' MsgBoxStyle.RetryCancel
+                Return MessageBoxButtons.RetryCancel
+            Case Else
+                Return MessageBoxButtons.OK
+        End Select
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''     Converts MsgBoxStyle to MessageBoxIcon.
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Shared Function ConvertMsgBoxStyleToMessageBoxIcon(style As MsgBoxStyle) As MessageBoxIcon
+        ' Extract icon portion (bits 4-7)
+        Dim iconStyle As Integer = (CInt(style) And &HF0)
+        
+        Select Case iconStyle
+            Case 16 ' MsgBoxStyle.Critical
+                Return MessageBoxIcon.Error
+            Case 32 ' MsgBoxStyle.Question
+                Return MessageBoxIcon.Question
+            Case 48 ' MsgBoxStyle.Exclamation
+                Return MessageBoxIcon.Warning
+            Case 64 ' MsgBoxStyle.Information
+                Return MessageBoxIcon.Information
+            Case Else
+                Return MessageBoxIcon.None
+        End Select
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''     Converts DialogResult to MsgBoxResult.
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Shared Function ConvertDialogResultToMsgBoxResult(result As DialogResult) As MsgBoxResult
+        Select Case result
+            Case DialogResult.OK
+                Return MsgBoxResult.Ok
+            Case DialogResult.Cancel
+                Return MsgBoxResult.Cancel
+            Case DialogResult.Abort
+                Return MsgBoxResult.Abort
+            Case DialogResult.Retry
+                Return MsgBoxResult.Retry
+            Case DialogResult.Ignore
+                Return MsgBoxResult.Ignore
+            Case DialogResult.Yes
+                Return MsgBoxResult.Yes
+            Case DialogResult.No
+                Return MsgBoxResult.No
+            Case Else
+                Return MsgBoxResult.Ok
+        End Select
     End Function
 
 

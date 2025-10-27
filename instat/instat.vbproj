@@ -906,6 +906,12 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmCustomMessageBox.Designer.vb">
+      <DependentUpon>frmCustomMessageBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCustomMessageBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="Model\Options\OutputFont.vb" />
     <Compile Include="Model\Output\clsOutputElement.vb" />
@@ -3611,6 +3617,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomMessageBox.resx">
+      <DependentUpon>frmCustomMessageBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
