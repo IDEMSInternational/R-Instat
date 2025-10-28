@@ -183,7 +183,7 @@ Public Class dlgInstallRPackage
                     ucrInputMessage.txtInput.BackColor = Color.LightGreen
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection? OK is enabled, but package may not install.")
-                    ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+                    ucrInputMessage.txtInput.BackColor = Color.Gold
                     bUniqueChecked = True
                 End If
             Case "3"
