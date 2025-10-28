@@ -182,9 +182,9 @@ Public Class dlgInstallRPackage
                     ucrInputMessage.SetText("Package exists and not currently installed.")
                     ucrInputMessage.txtInput.BackColor = Color.LightGreen
                 ElseIf rdoRPackage.Checked Then
-                    ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection?")
-                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
-                    bUniqueChecked = False
+                    ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection? OK is enabled, but package may not install.")
+                    ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+                    bUniqueChecked = True
                 End If
             Case "3"
                 If rdoCRAN.Checked Then
