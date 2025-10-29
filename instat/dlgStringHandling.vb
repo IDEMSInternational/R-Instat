@@ -57,6 +57,7 @@ Public Class dlgStringHandling
     Private Sub InitialiseDialog()
         Dim dctBoundaryPairs As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 406
+        rdoSingle.Checked = True
 
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
@@ -255,7 +256,7 @@ Public Class dlgStringHandling
         ucrInputPattern.SetName("")
 
         clsReplaceDummyFunction.AddParameter("checked", False, iPosition:=0)
-        clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=1)
+        'clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=1)
 
         clsList2Function.SetRCommand("list")
         clsList2Function.AddParameter("C0", clsRFunctionParameter:=clsList1Function, iPosition:=0)
@@ -340,6 +341,7 @@ Public Class dlgStringHandling
         clsFindDummyFunction.AddParameter("detect", "str_detect", iPosition:=1)
         clsFindDummyFunction.AddParameter("replace", "str_replace", iPosition:=2)
         clsFindDummyFunction.AddParameter("string_handling", "detect", iPosition:=3)
+        clsFindDummyFunction.AddParameter("col", "single", iPosition:=4)
 
         clsBoundaryFunction.SetPackageName("stringr")
         clsBoundaryFunction.SetRCommand("boundary")
@@ -488,6 +490,7 @@ Public Class dlgStringHandling
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlStringHandling.SetRCode(clsFindDummyFunction, bReset)
+        ucrPnlColumnSelectOptions.SetRCode(clsFindDummyFunction, bReset)
 
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsCountFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
@@ -535,7 +538,7 @@ Public Class dlgStringHandling
 
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
-        ucrPnlColumnSelectOptions.SetRCode(clsReplaceDummyFunction, bReset)
+        'ucrPnlColumnSelectOptions.SetRCode(clsFindDummyFunction, bReset)
         ucrChkBoundary.SetRCode(clsReplaceDummyFunction, bReset)
         ucrChkRemoveAll.SetRCode(clsDummyFunction, bReset)
         ucrChkAll.SetRCode(clsDummyFunction, bReset)
@@ -570,6 +573,7 @@ Public Class dlgStringHandling
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        rdoSingle.Checked = True 'This is done manually to have the rdoSingle.checked after reset
     End Sub
 
     Private Sub AddRemoveParameters()
@@ -928,16 +932,16 @@ Public Class dlgStringHandling
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverStringHandling.GetVariableNames, iPosition:=1)
         clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
-        If rdoMultiple.Checked Then
-            clsReplaceDummyFunction.AddParameter("col", "multiple", iPosition:=1)
+        If rdoSingle.Checked Then
+            clsFindDummyFunction.AddParameter("col", "single", iPosition:=4)
+            ucrSelectorStringHandling.SetItemType("column")
+            ucrReceiverStringHandling.strSelectorHeading = "Variables"
+            lblColumn.Text = "Column:"
+        Else
+            clsFindDummyFunction.AddParameter("col", "multiple", iPosition:=4)
             ucrSelectorStringHandling.SetItemType("column_selection")
             ucrReceiverStringHandling.strSelectorHeading = "Column selections"
             lblColumn.Text = "Select:"
-        ElseIf rdoSingle.Checked Then
-            clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=1)
-            ucrSelectorStringHandling.SetItemType("column")
-            ucrReceiverStringHandling.strSelectorHeading = "Factors"
-            lblColumn.Text = "Column:"
         End If
     End Sub
 
@@ -947,50 +951,55 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub AddSavePrefix()
-        If rdoDetect.Checked Then
-            ucrSaveStringHandling.SetPrefix("detect")
-        ElseIf rdoFind.Checked Then
-            If rdoCount.Checked Then
-                ucrSaveStringHandling.SetPrefix("count")
-            ElseIf rdoExtract.Checked Then
-                If ucrChkAll.Checked Then
-                    ucrSaveStringHandling.SetPrefix("extract_all")
-                Else
-                    ucrSaveStringHandling.SetPrefix("extract")
+        If rdoSingle.Checked AndAlso ucrChkOverWriteColumns.Checked Then
+            ucrSaveStringHandling.SetName(ucrReceiverStringHandling.GetVariableNames(bWithQuotes:=False))
+        Else
+            If rdoDetect.Checked Then
+                ucrSaveStringHandling.SetPrefix("detect")
+            ElseIf rdoFind.Checked Then
+                If rdoCount.Checked Then
+                    ucrSaveStringHandling.SetPrefix("count")
+                ElseIf rdoExtract.Checked Then
+                    If ucrChkAll.Checked Then
+                        ucrSaveStringHandling.SetPrefix("extract_all")
+                    Else
+                        ucrSaveStringHandling.SetPrefix("extract")
+                    End If
+                ElseIf rdoLocate.Checked Then
+                    If ucrChkAll.Checked Then
+                        ucrSaveStringHandling.SetPrefix("locate_all")
+                    Else
+                        ucrSaveStringHandling.SetPrefix("locate")
+                    End If
                 End If
-            ElseIf rdoLocate.Checked Then
-                If ucrChkAll.Checked Then
-                    ucrSaveStringHandling.SetPrefix("locate_all")
-                Else
-                    ucrSaveStringHandling.SetPrefix("locate")
+            ElseIf rdoReplace.Checked Then
+                If rdoReplaceFirst.Checked Then
+                    ucrSaveStringHandling.SetPrefix("replace")
+                ElseIf rdoReplaceAll.Checked Then
+                    ucrSaveStringHandling.SetPrefix("replace_all")
+                ElseIf rdoReplaceCell.Checked Then
+                    ucrSaveStringHandling.SetPrefix("replace_cell")
                 End If
-            End If
-        ElseIf rdoReplace.Checked Then
-            If rdoReplaceFirst.Checked Then
+            ElseIf rdoReplaceNa.Checked Then
+                ucrSaveStringHandling.SetPrefix("replace_na")
+            ElseIf rdoToNa.Checked Then
                 ucrSaveStringHandling.SetPrefix("replace")
-            ElseIf rdoReplaceAll.Checked Then
-                ucrSaveStringHandling.SetPrefix("replace_all")
-            ElseIf rdoReplaceCell.Checked Then
-                ucrSaveStringHandling.SetPrefix("replace_cell")
-            End If
-        ElseIf rdoReplaceNa.Checked Then
-            ucrSaveStringHandling.SetPrefix("replace_na")
-        ElseIf rdoToNa.Checked Then
-            ucrSaveStringHandling.SetPrefix("replace")
-        ElseIf rdoRemove.Checked Then
-            If ucrChkRemoveAll.Checked Then
-                ucrSaveStringHandling.SetPrefix("remove_all")
-            Else
-                ucrSaveStringHandling.SetPrefix("remove")
+            ElseIf rdoRemove.Checked Then
+                If ucrChkRemoveAll.Checked Then
+                    ucrSaveStringHandling.SetPrefix("remove_all")
+                Else
+                    ucrSaveStringHandling.SetPrefix("remove")
+                End If
             End If
         End If
 
-        If rdoMultiple.Checked Then
-            ucrSaveStringHandling.btnColumnPosition.Visible = False
-            ucrSaveStringHandling.SetLabelText("New Column Suffix:")
-        Else
+        If rdoSingle.Checked Then
             ucrSaveStringHandling.SetLabelText("New Column Name:")
             ucrSaveStringHandling.btnColumnPosition.Visible = True
+            ucrSaveStringHandling.Enabled = True
+        Else
+            ucrSaveStringHandling.btnColumnPosition.Visible = False
+            ucrSaveStringHandling.SetLabelText("New Column Suffix:")
         End If
 
         If ucrChkOverWriteColumns.Checked Then
@@ -1006,15 +1015,17 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub MultipleAndOverWriteEnabled()
-        If rdoDetect.Checked OrElse (rdoFind.Checked AndAlso rdoCount.Checked) Then
+        If rdoDetect.Checked OrElse (rdoFind.Checked AndAlso (rdoCount.Checked OrElse rdoLocate.Checked)) Then
             ucrChkOverWriteColumns.Visible = False
         Else
             ucrChkOverWriteColumns.Visible = True
         End If
 
+        'Not sure if this is the best way to do this. Feel free to rewrite this code.
+        'rdoMultiple should be disabled in rdoToNa and in rdoLocate when All is checked
         If rdoToNa.Checked OrElse (rdoFind.Checked AndAlso rdoLocate.Checked AndAlso ucrChkAll.Checked) Then
             rdoMultiple.Enabled = False
-            rdoSingle.Checked = True 'Not sure if this is the best way to do this
+            rdoSingle.Checked = True
         Else
             rdoMultiple.Enabled = True
         End If
