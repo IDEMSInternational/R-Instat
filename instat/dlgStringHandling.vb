@@ -47,7 +47,6 @@ Public Class dlgStringHandling
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ChangeLabel()
         autoTranslate(Me)
         ReopenDialog()
         TestOkEnabled()
