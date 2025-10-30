@@ -257,7 +257,7 @@ Partial Class dlgBoxplot
         Me.ucrChkLabel.AutoSize = True
         Me.ucrChkLabel.Checked = False
         Me.ucrChkLabel.Location = New System.Drawing.Point(10, 332)
-        Me.ucrChkLabel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkLabel.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkLabel.Name = "ucrChkLabel"
         Me.ucrChkLabel.Size = New System.Drawing.Size(121, 23)
         Me.ucrChkLabel.TabIndex = 34
@@ -268,7 +268,7 @@ Partial Class dlgBoxplot
         Me.ucrNudBoxPlot.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBoxPlot.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudBoxPlot.Location = New System.Drawing.Point(165, 332)
-        Me.ucrNudBoxPlot.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudBoxPlot.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudBoxPlot.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBoxPlot.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBoxPlot.Name = "ucrNudBoxPlot"
@@ -281,7 +281,7 @@ Partial Class dlgBoxplot
         Me.ucrChkBoxPlot.AutoSize = True
         Me.ucrChkBoxPlot.Checked = False
         Me.ucrChkBoxPlot.Location = New System.Drawing.Point(10, 334)
-        Me.ucrChkBoxPlot.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkBoxPlot.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkBoxPlot.Name = "ucrChkBoxPlot"
         Me.ucrChkBoxPlot.Size = New System.Drawing.Size(114, 23)
         Me.ucrChkBoxPlot.TabIndex = 31
@@ -303,7 +303,7 @@ Partial Class dlgBoxplot
         Me.ucrChkWidth.AutoSize = True
         Me.ucrChkWidth.Checked = False
         Me.ucrChkWidth.Location = New System.Drawing.Point(10, 310)
-        Me.ucrChkWidth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkWidth.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkWidth.Name = "ucrChkWidth"
         Me.ucrChkWidth.Size = New System.Drawing.Size(121, 23)
         Me.ucrChkWidth.TabIndex = 29
@@ -315,7 +315,7 @@ Partial Class dlgBoxplot
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
         Me.ucrInputStation.Location = New System.Drawing.Point(323, 414)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputStation.TabIndex = 26
@@ -340,7 +340,7 @@ Partial Class dlgBoxplot
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
         Me.ucrInputLegendPosition.Location = New System.Drawing.Point(105, 414)
-        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
         Me.ucrInputLegendPosition.TabIndex = 28
@@ -350,7 +350,7 @@ Partial Class dlgBoxplot
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
         Me.ucrChkLegend.Location = New System.Drawing.Point(10, 412)
-        Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 27
@@ -362,7 +362,7 @@ Partial Class dlgBoxplot
         Me.ucrInputSummaries.GetSetSelectedIndex = -1
         Me.ucrInputSummaries.IsReadOnly = False
         Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 283)
-        Me.ucrInputSummaries.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputSummaries.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSummaries.Name = "ucrInputSummaries"
         Me.ucrInputSummaries.Size = New System.Drawing.Size(81, 21)
         Me.ucrInputSummaries.TabIndex = 16
@@ -385,9 +385,9 @@ Partial Class dlgBoxplot
         Me.ucrChkTufte.AutoSize = True
         Me.ucrChkTufte.Checked = False
         Me.ucrChkTufte.Location = New System.Drawing.Point(275, 313)
-        Me.ucrChkTufte.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkTufte.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkTufte.Name = "ucrChkTufte"
-        Me.ucrChkTufte.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkTufte.Size = New System.Drawing.Size(173, 23)
         Me.ucrChkTufte.TabIndex = 11
         '
         'ucrChkGrouptoConnect
@@ -395,7 +395,7 @@ Partial Class dlgBoxplot
         Me.ucrChkGrouptoConnect.AutoSize = True
         Me.ucrChkGrouptoConnect.Checked = False
         Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 285)
-        Me.ucrChkGrouptoConnect.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkGrouptoConnect.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
         Me.ucrChkGrouptoConnect.Size = New System.Drawing.Size(144, 23)
         Me.ucrChkGrouptoConnect.TabIndex = 15
@@ -406,7 +406,7 @@ Partial Class dlgBoxplot
         Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudTransparency.Location = New System.Drawing.Point(301, 356)
-        Me.ucrNudTransparency.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudTransparency.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
@@ -420,7 +420,7 @@ Partial Class dlgBoxplot
         Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudJitter.Location = New System.Drawing.Point(164, 356)
-        Me.ucrNudJitter.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudJitter.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Name = "ucrNudJitter"
@@ -433,7 +433,7 @@ Partial Class dlgBoxplot
         Me.ucrChkAddPoints.AutoSize = True
         Me.ucrChkAddPoints.Checked = False
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(10, 358)
-        Me.ucrChkAddPoints.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkAddPoints.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
         Me.ucrChkAddPoints.Size = New System.Drawing.Size(115, 23)
         Me.ucrChkAddPoints.TabIndex = 17
@@ -452,7 +452,7 @@ Partial Class dlgBoxplot
         Me.ucrChkHorizontalBoxplot.AutoSize = True
         Me.ucrChkHorizontalBoxplot.Checked = False
         Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 263)
-        Me.ucrChkHorizontalBoxplot.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkHorizontalBoxplot.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(238, 23)
         Me.ucrChkHorizontalBoxplot.TabIndex = 14
@@ -462,7 +462,7 @@ Partial Class dlgBoxplot
         Me.ucrChkVarWidth.AutoSize = True
         Me.ucrChkVarWidth.Checked = False
         Me.ucrChkVarWidth.Location = New System.Drawing.Point(275, 290)
-        Me.ucrChkVarWidth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkVarWidth.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(146, 23)
         Me.ucrChkVarWidth.TabIndex = 13
@@ -472,7 +472,7 @@ Partial Class dlgBoxplot
         Me.ucrVariablesAsFactorForBoxplot.AutoSize = True
         Me.ucrVariablesAsFactorForBoxplot.frmParent = Me
         Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(275, 63)
-        Me.ucrVariablesAsFactorForBoxplot.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrVariablesAsFactorForBoxplot.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
         Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(135, 130)
@@ -512,7 +512,7 @@ Partial Class dlgBoxplot
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 466)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 23
@@ -521,7 +521,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrPnlPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlPlots.Location = New System.Drawing.Point(7, 12)
-        Me.ucrPnlPlots.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlPlots.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         Me.ucrPnlPlots.Size = New System.Drawing.Size(410, 35)
         Me.ucrPnlPlots.TabIndex = 0
@@ -531,8 +531,8 @@ Partial Class dlgBoxplot
         Me.ucrNudOutlierCoefficient.AutoSize = True
         Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(302, 333)
-        Me.ucrNudOutlierCoefficient.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(232, 333)
+        Me.ucrNudOutlierCoefficient.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Name = "ucrNudOutlierCoefficient"
