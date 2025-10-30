@@ -545,9 +545,9 @@ Partial Class dlgBoxplot
         Me.lblOutlierCoefficient.AutoSize = True
         Me.lblOutlierCoefficient.Location = New System.Drawing.Point(128, 336)
         Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
-        Me.lblOutlierCoefficient.Size = New System.Drawing.Size(102, 13)
+        Me.lblOutlierCoefficient.Size = New System.Drawing.Size(96, 13)
         Me.lblOutlierCoefficient.TabIndex = 35
-        Me.lblOutlierCoefficient.Text = "Outlier Coefficiennt :"
+        Me.lblOutlierCoefficient.Text = "Outlier Coefficient :"
         '
         'ucrSelectorBoxPlot
         '
