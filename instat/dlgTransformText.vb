@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports System.Diagnostics.Eventing.Reader
 Imports instat.Translations
 
 Public Class dlgTransformText
@@ -232,9 +233,8 @@ Public Class dlgTransformText
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "col", "single")
         ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "col", "multiple")
 
-        ucrChkOverWriteColumns.SetText("Overwrite Columns")
+        ucrChkOverWriteColumns.SetText("Overwrite Column(s)")
         ucrPnlColumnSelectOptions.SetLinkedDisplayControl(grpVar)
-        ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkOverWriteColumns, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNewColName
         ucrNewColName.SetIsComboBox()
@@ -282,7 +282,7 @@ Public Class dlgTransformText
 
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
-        NewDefaultName()
+        ' NewDefaultName()
 
         'initialise word controls
         ucrNudFirstWord.SetText(1)
@@ -479,6 +479,7 @@ Public Class dlgTransformText
 
         If bReset Then
             ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
+            NewDefaultName()
         End If
 
         bRCodeSet = True
@@ -530,21 +531,26 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub NewDefaultName()
-        If rdoMultiple.Checked Then
+        If rdoSingle.Checked Then
+            ucrNewColName.btnColumnPosition.Visible = True
+            ucrNewColName.SetLabelText("New Column:")
+            If Not ucrChkOverWriteColumns.Checked Then
+                If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
+                    ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
+                End If
+            Else
+                ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False))
+            End If
+        ElseIf rdoMultiple.Checked Then
             ucrNewColName.SetPrefix("transform")
             ucrNewColName.SetLabelText("Prefix for New Column:")
             ucrNewColName.btnColumnPosition.Visible = False
-            If ucrChkOverWriteColumns.Checked Then
-                ucrNewColName.Enabled = False
-            Else
-                ucrNewColName.Enabled = True
-            End If
+        End If
+
+        If ucrChkOverWriteColumns.Checked Then
+            ucrNewColName.Enabled = False
         Else
-            ucrNewColName.btnColumnPosition.Visible = True
-            ucrNewColName.SetLabelText("New Column:")
-            If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
-                ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
-            End If
+            ucrNewColName.Enabled = True
         End If
     End Sub
 
@@ -611,6 +617,7 @@ Public Class dlgTransformText
         End If
         ChangeBaseFunction()
         DialogSize()
+        OverwriteOption()
     End Sub
 
     Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
@@ -809,6 +816,7 @@ Public Class dlgTransformText
         NewDefaultName()
         SelectOptions()
         ChangeBaseFunction()
+        OverwriteOption()
     End Sub
 
     Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged,
@@ -868,21 +876,40 @@ Public Class dlgTransformText
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverTransformText.GetVariableNames, iPosition:=1)
         clsNamesFunction.AddParameter("data_name", ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
-        If rdoMultiple.Checked Then
-            clsDummyFunction.AddParameter("col", "multiple", iPosition:=0)
-            ucrSelectorForTransformText.SetItemType("column_selection")
-            ucrReceiverTransformText.strSelectorHeading = "Column selections"
-            lblColumnToTransform.Text = "Select To Transform"
-        ElseIf rdoSingle.Checked Then
+        If rdoSingle.Checked Then
             clsDummyFunction.AddParameter("col", "single", iPosition:=0)
             ucrSelectorForTransformText.SetItemType("column")
             ucrReceiverTransformText.strSelectorHeading = "Variables"
             lblColumnToTransform.Text = "Column To Transform"
+        Else
+            clsDummyFunction.AddParameter("col", "multiple", iPosition:=0)
+            ucrSelectorForTransformText.SetItemType("column_selection")
+            ucrReceiverTransformText.strSelectorHeading = "Column selections"
+            lblColumnToTransform.Text = "Select To Transform"
         End If
     End Sub
 
     Private Sub ucrNewColName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColName.ControlValueChanged
         clsTildaOperator.AddParameter("new_name", Chr(34) & ucrNewColName.GetText & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsTildaOperator.SetAssignTo("new_name")
+    End Sub
+
+    Private Sub OverwriteOption()
+        If rdoLength.Checked OrElse rdoTruncate.Checked Then
+            ucrChkOverWriteColumns.Visible = False
+        Else
+            ucrChkOverWriteColumns.Visible = True
+        End If
+    End Sub
+
+    Private Sub dlgRank_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Me.Visible Then
+            If rdoMultiple.Checked Then
+                lblColumnToTransform.Text = "Select To Transform"
+            Else
+                lblColumnToTransform.Text = "Column To Transform"
+                ' lblSelectColumns.Text = "Column:"
+            End If
+        End If
     End Sub
 End Class

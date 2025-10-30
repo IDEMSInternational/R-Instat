@@ -108,9 +108,8 @@ Partial Class dlgTransformText
         Me.lblColumnToTransform.Location = New System.Drawing.Point(397, 155)
         Me.lblColumnToTransform.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
-        Me.lblColumnToTransform.Size = New System.Drawing.Size(161, 20)
+        Me.lblColumnToTransform.Size = New System.Drawing.Size(0, 20)
         Me.lblColumnToTransform.TabIndex = 10
-        Me.lblColumnToTransform.Text = "Column to Transform:"
         '
         'lblToSubstring
         '
