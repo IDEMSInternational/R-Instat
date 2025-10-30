@@ -74,16 +74,13 @@ Public Class dlgTransformTricotData
 
         ucrReceiverTricotData.SetMeAsReceiver()
 
-        clsOutputDataLevelForCheck.SetPackageName("instatExtras")
-        clsOutputDataLevelForCheck.SetRCommand("summarise_data_levels")
+        clsOutputDataLevelForCheck.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summarise_data_levels")
 
-        clsOutputDataLevel.SetPackageName("instatExtras")
-        clsOutputDataLevel.SetRCommand("summarise_data_levels")
+        clsOutputDataLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summarise_data_levels")
         clsOutputDataLevel.SetAssignTo("output_data_levels")
 
-        clsCreateTricotData.SetPackageName("databook")
-        clsCreateTricotData.SetRCommand("create_tricot_datasets")
-        clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0, bIncludeArgumentName:=False)
+        clsCreateTricotData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_tricot_datasets")
+        clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0, bIncludeArgumentName:=True)
         clsCreateTricotData.SetAssignTo("output_data_levels")
 
         OverallSymbolOperator.SetOperation("[")
@@ -96,8 +93,8 @@ Public Class dlgTransformTricotData
         clsOutputLevelsOperator.AddParameter("right", "print", iPosition:=1)
         clsOutputLevelsOperator.bSpaceAroundOperation = False
 
-        clsDefineTricotDataFunction.SetRCommand("define_tricot_data")
-        clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=False)
+        clsDefineTricotDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_tricot_data")
+        clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=True)
         clsDefineTricotDataFunction.iCallType = 2
 
         clsPlotOperator.SetOperation("%>%")
