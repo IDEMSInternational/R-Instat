@@ -899,7 +899,7 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub OverwriteOption()
-        If rdoLength.Checked OrElse rdoTruncate.Checked Then
+        If rdoLength.Checked Then
             ucrChkOverWriteColumns.Visible = False
         Else
             ucrChkOverWriteColumns.Visible = True
