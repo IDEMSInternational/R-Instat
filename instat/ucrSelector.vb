@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Windows.Forms
 Imports instat.Translations
 
 Public Class ucrSelector
@@ -463,6 +464,20 @@ Public Class ucrSelector
 
     Private Sub SelectionMenuStrip_VisibleChanged(sender As Object, e As EventArgs) Handles SelectionMenuStrip.VisibleChanged
         If SelectionMenuStrip.Visible Then
+            ' Try to translate the menu before it is shown
+            Try
+                ' 1) library/database lookup by menu id / control name
+                Translations.autoTranslateContextMenu(SelectionMenuStrip)
+
+                ' 2) textual fallback (handles & mnemonics and nested items)
+                ' Make sure your Translations.vb contains GetTranslationWithFallback and TranslateToolStripItemsWithFallback
+                Translations.TranslateToolStripItemsWithFallback(SelectionMenuStrip.Items)
+            Catch ex As Exception
+                ' Non-fatal: do not block the UI if translation fails
+                ' Optionally log for debugging: Debug.WriteLine("Translate error: " & ex.Message)
+            End Try
+
+            ' --- existing visibility logic continues below ---
             If CurrentReceiver IsNot Nothing Then
                 AddSelectedToolStripMenuItem.Enabled = True
                 If TypeOf CurrentReceiver Is ucrReceiverSingle Then
