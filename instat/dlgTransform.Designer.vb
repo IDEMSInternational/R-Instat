@@ -46,10 +46,12 @@ Partial Class dlgTransform
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoAverage = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTies = New instat.UcrPanel()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.rdoRoundOf = New System.Windows.Forms.RadioButton()
         Me.rdoSignificantDigits = New System.Windows.Forms.RadioButton()
         Me.rdoStandardize = New System.Windows.Forms.RadioButton()
@@ -57,17 +59,30 @@ Partial Class dlgTransform
         Me.rdoLead = New System.Windows.Forms.RadioButton()
         Me.rdoLag = New System.Windows.Forms.RadioButton()
         Me.grpNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLogicalValues = New instat.ucrInputTextBox()
+        Me.ucrInputLogicOperations = New instat.ucrInputComboBox()
         Me.rdoLogical = New System.Windows.Forms.RadioButton()
+        Me.ucrChkOmitNA = New instat.ucrCheck()
+        Me.ucrNudLagPosition = New instat.ucrNud()
         Me.lblLagPosition = New System.Windows.Forms.Label()
         Me.lblRoundofDigits = New System.Windows.Forms.Label()
+        Me.ucrNudRoundOfDigits = New instat.ucrNud()
+        Me.ucrNudDiffLag = New instat.ucrNud()
+        Me.ucrNudLagLeadPosition = New instat.ucrNud()
+        Me.ucrNudSignifDigits = New instat.ucrNud()
         Me.lblDiffLag = New System.Windows.Forms.Label()
         Me.lblDigits = New System.Windows.Forms.Label()
         Me.lblLagLeadPosition = New System.Windows.Forms.Label()
+        Me.ucrPnlNumericOptions = New instat.UcrPanel()
         Me.grpNonNegative = New System.Windows.Forms.GroupBox()
+        Me.ucrInputPower = New instat.ucrInputComboBox()
         Me.rdoPower = New System.Windows.Forms.RadioButton()
+        Me.ucrInputConstant = New instat.ucrInputComboBox()
         Me.rdoSquareRoot = New System.Windows.Forms.RadioButton()
         Me.rdoNaturalLog = New System.Windows.Forms.RadioButton()
         Me.rdoLogToBase10 = New System.Windows.Forms.RadioButton()
+        Me.ucrChkAddConstant = New instat.ucrCheck()
+        Me.ucrPnlNonNegative = New instat.UcrPanel()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoNonNegative = New System.Windows.Forms.RadioButton()
         Me.rdoRank = New System.Windows.Forms.RadioButton()
@@ -79,20 +94,6 @@ Partial Class dlgTransform
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.ucrChkOverWriteColumns = New instat.ucrCheck()
         Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
-        Me.ucrInputLogicalValues = New instat.ucrInputTextBox()
-        Me.ucrInputLogicOperations = New instat.ucrInputComboBox()
-        Me.ucrChkOmitNA = New instat.ucrCheck()
-        Me.ucrNudLagPosition = New instat.ucrNud()
-        Me.ucrNudRoundOfDigits = New instat.ucrNud()
-        Me.ucrNudDiffLag = New instat.ucrNud()
-        Me.ucrNudLagLeadPosition = New instat.ucrNud()
-        Me.ucrNudSignifDigits = New instat.ucrNud()
-        Me.ucrPnlNumericOptions = New instat.UcrPanel()
-        Me.ucrInputPower = New instat.ucrInputComboBox()
-        Me.ucrInputConstant = New instat.ucrInputComboBox()
-        Me.ucrChkAddConstant = New instat.ucrCheck()
-        Me.ucrPnlNonNegative = New instat.UcrPanel()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrChkEditPreview = New instat.ucrCheck()
         Me.ucrChkPreview = New instat.ucrCheck()
         Me.ucrInputPreview = New instat.ucrInputTextBox()
@@ -104,7 +105,6 @@ Partial Class dlgTransform
         Me.ucrChkDivide = New instat.ucrCheck()
         Me.ucrChkMultiply = New instat.ucrCheck()
         Me.ucrChkSubtract = New instat.ucrCheck()
-        Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.ucrPnlTransformOptions = New instat.UcrPanel()
         Me.ucrSaveNew = New instat.ucrSave()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
@@ -139,9 +139,9 @@ Partial Class dlgTransform
         Me.grpTies.Controls.Add(Me.rdoAverage)
         Me.grpTies.Controls.Add(Me.ucrPnlTies)
         Me.grpTies.Location = New System.Drawing.Point(357, 192)
-        Me.grpTies.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpTies.Margin = New System.Windows.Forms.Padding(4)
         Me.grpTies.Name = "grpTies"
-        Me.grpTies.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpTies.Padding = New System.Windows.Forms.Padding(4)
         Me.grpTies.Size = New System.Drawing.Size(180, 202)
         Me.grpTies.TabIndex = 3
         Me.grpTies.TabStop = False
@@ -153,7 +153,7 @@ Partial Class dlgTransform
         Me.rdoRandom.AutoSize = True
         Me.rdoRandom.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRandom.Location = New System.Drawing.Point(20, 166)
-        Me.rdoRandom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoRandom.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoRandom.Name = "rdoRandom"
         Me.rdoRandom.Size = New System.Drawing.Size(95, 24)
         Me.rdoRandom.TabIndex = 5
@@ -167,7 +167,7 @@ Partial Class dlgTransform
         Me.rdoFirst.AutoSize = True
         Me.rdoFirst.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoFirst.Location = New System.Drawing.Point(20, 132)
-        Me.rdoFirst.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoFirst.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoFirst.Name = "rdoFirst"
         Me.rdoFirst.Size = New System.Drawing.Size(65, 24)
         Me.rdoFirst.TabIndex = 4
@@ -181,7 +181,7 @@ Partial Class dlgTransform
         Me.rdoMaximum.AutoSize = True
         Me.rdoMaximum.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoMaximum.Location = New System.Drawing.Point(20, 98)
-        Me.rdoMaximum.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoMaximum.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoMaximum.Name = "rdoMaximum"
         Me.rdoMaximum.Size = New System.Drawing.Size(101, 24)
         Me.rdoMaximum.TabIndex = 3
@@ -195,7 +195,7 @@ Partial Class dlgTransform
         Me.rdoMinimum.AutoSize = True
         Me.rdoMinimum.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoMinimum.Location = New System.Drawing.Point(20, 63)
-        Me.rdoMinimum.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoMinimum.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoMinimum.Name = "rdoMinimum"
         Me.rdoMinimum.Size = New System.Drawing.Size(97, 24)
         Me.rdoMinimum.TabIndex = 2
@@ -209,7 +209,7 @@ Partial Class dlgTransform
         Me.rdoAverage.AutoSize = True
         Me.rdoAverage.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoAverage.Location = New System.Drawing.Point(20, 28)
-        Me.rdoAverage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoAverage.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoAverage.Name = "rdoAverage"
         Me.rdoAverage.Size = New System.Drawing.Size(93, 24)
         Me.rdoAverage.TabIndex = 1
@@ -218,6 +218,15 @@ Partial Class dlgTransform
         Me.rdoAverage.Text = "Average"
         Me.rdoAverage.UseVisualStyleBackColor = True
         '
+        'ucrPnlTies
+        '
+        Me.ucrPnlTies.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTies.Location = New System.Drawing.Point(10, 21)
+        Me.ucrPnlTies.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        Me.ucrPnlTies.Size = New System.Drawing.Size(144, 171)
+        Me.ucrPnlTies.TabIndex = 0
+        '
         'grpMissingValues
         '
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
@@ -225,9 +234,9 @@ Partial Class dlgTransform
         Me.grpMissingValues.Controls.Add(Me.rdoKeptAsMissing)
         Me.grpMissingValues.Controls.Add(Me.ucrPnlMissingValues)
         Me.grpMissingValues.Location = New System.Drawing.Point(15, 376)
-        Me.grpMissingValues.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpMissingValues.Margin = New System.Windows.Forms.Padding(4)
         Me.grpMissingValues.Name = "grpMissingValues"
-        Me.grpMissingValues.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpMissingValues.Padding = New System.Windows.Forms.Padding(4)
         Me.grpMissingValues.Size = New System.Drawing.Size(315, 128)
         Me.grpMissingValues.TabIndex = 12
         Me.grpMissingValues.TabStop = False
@@ -238,7 +247,7 @@ Partial Class dlgTransform
         '
         Me.rdoLast.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLast.Location = New System.Drawing.Point(18, 96)
-        Me.rdoLast.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLast.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLast.Name = "rdoLast"
         Me.rdoLast.Size = New System.Drawing.Size(144, 26)
         Me.rdoLast.TabIndex = 3
@@ -251,7 +260,7 @@ Partial Class dlgTransform
         '
         Me.rdoFirstMissingValues.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoFirstMissingValues.Location = New System.Drawing.Point(18, 62)
-        Me.rdoFirstMissingValues.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoFirstMissingValues.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoFirstMissingValues.Name = "rdoFirstMissingValues"
         Me.rdoFirstMissingValues.Size = New System.Drawing.Size(165, 26)
         Me.rdoFirstMissingValues.TabIndex = 2
@@ -264,7 +273,7 @@ Partial Class dlgTransform
         '
         Me.rdoKeptAsMissing.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoKeptAsMissing.Location = New System.Drawing.Point(18, 27)
-        Me.rdoKeptAsMissing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoKeptAsMissing.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoKeptAsMissing.Name = "rdoKeptAsMissing"
         Me.rdoKeptAsMissing.Size = New System.Drawing.Size(189, 26)
         Me.rdoKeptAsMissing.TabIndex = 1
@@ -273,12 +282,21 @@ Partial Class dlgTransform
         Me.rdoKeptAsMissing.Text = "Keep as Missing"
         Me.rdoKeptAsMissing.UseVisualStyleBackColor = True
         '
+        'ucrPnlMissingValues
+        '
+        Me.ucrPnlMissingValues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlMissingValues.Location = New System.Drawing.Point(9, 27)
+        Me.ucrPnlMissingValues.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
+        Me.ucrPnlMissingValues.Size = New System.Drawing.Size(214, 96)
+        Me.ucrPnlMissingValues.TabIndex = 0
+        '
         'rdoRoundOf
         '
         Me.rdoRoundOf.AutoSize = True
         Me.rdoRoundOf.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRoundOf.Location = New System.Drawing.Point(16, 27)
-        Me.rdoRoundOf.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoRoundOf.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoRoundOf.Name = "rdoRoundOf"
         Me.rdoRoundOf.Size = New System.Drawing.Size(82, 24)
         Me.rdoRoundOf.TabIndex = 14
@@ -291,7 +309,7 @@ Partial Class dlgTransform
         Me.rdoSignificantDigits.AutoSize = True
         Me.rdoSignificantDigits.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoSignificantDigits.Location = New System.Drawing.Point(16, 66)
-        Me.rdoSignificantDigits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoSignificantDigits.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoSignificantDigits.Name = "rdoSignificantDigits"
         Me.rdoSignificantDigits.Size = New System.Drawing.Size(100, 24)
         Me.rdoSignificantDigits.TabIndex = 15
@@ -304,7 +322,7 @@ Partial Class dlgTransform
         Me.rdoStandardize.AutoSize = True
         Me.rdoStandardize.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoStandardize.Location = New System.Drawing.Point(16, 105)
-        Me.rdoStandardize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoStandardize.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoStandardize.Name = "rdoStandardize"
         Me.rdoStandardize.Size = New System.Drawing.Size(120, 24)
         Me.rdoStandardize.TabIndex = 17
@@ -317,7 +335,7 @@ Partial Class dlgTransform
         Me.rdoDifference.AutoSize = True
         Me.rdoDifference.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoDifference.Location = New System.Drawing.Point(16, 222)
-        Me.rdoDifference.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoDifference.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoDifference.Name = "rdoDifference"
         Me.rdoDifference.Size = New System.Drawing.Size(108, 24)
         Me.rdoDifference.TabIndex = 18
@@ -330,7 +348,7 @@ Partial Class dlgTransform
         Me.rdoLead.AutoSize = True
         Me.rdoLead.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLead.Location = New System.Drawing.Point(16, 183)
-        Me.rdoLead.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLead.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLead.Name = "rdoLead"
         Me.rdoLead.Size = New System.Drawing.Size(70, 24)
         Me.rdoLead.TabIndex = 19
@@ -343,7 +361,7 @@ Partial Class dlgTransform
         Me.rdoLag.AutoSize = True
         Me.rdoLag.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLag.Location = New System.Drawing.Point(16, 144)
-        Me.rdoLag.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoLag.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoLag.Name = "rdoLag"
         Me.rdoLag.Size = New System.Drawing.Size(61, 24)
         Me.rdoLag.TabIndex = 20
@@ -375,308 +393,13 @@ Partial Class dlgTransform
         Me.grpNumericOptions.Controls.Add(Me.lblLagLeadPosition)
         Me.grpNumericOptions.Controls.Add(Me.ucrPnlNumericOptions)
         Me.grpNumericOptions.Location = New System.Drawing.Point(350, 192)
-        Me.grpNumericOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpNumericOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.grpNumericOptions.Name = "grpNumericOptions"
-        Me.grpNumericOptions.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpNumericOptions.Padding = New System.Windows.Forms.Padding(4)
         Me.grpNumericOptions.Size = New System.Drawing.Size(300, 298)
         Me.grpNumericOptions.TabIndex = 11
         Me.grpNumericOptions.TabStop = False
         Me.grpNumericOptions.Text = "Options"
-        '
-        'rdoLogical
-        '
-        Me.rdoLogical.AutoSize = True
-        Me.rdoLogical.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLogical.Location = New System.Drawing.Point(16, 261)
-        Me.rdoLogical.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoLogical.Name = "rdoLogical"
-        Me.rdoLogical.Size = New System.Drawing.Size(84, 24)
-        Me.rdoLogical.TabIndex = 34
-        Me.rdoLogical.TabStop = True
-        Me.rdoLogical.Text = "Logical"
-        Me.rdoLogical.UseVisualStyleBackColor = True
-        '
-        'lblLagPosition
-        '
-        Me.lblLagPosition.AutoSize = True
-        Me.lblLagPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLagPosition.Location = New System.Drawing.Point(124, 147)
-        Me.lblLagPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLagPosition.Name = "lblLagPosition"
-        Me.lblLagPosition.Size = New System.Drawing.Size(77, 20)
-        Me.lblLagPosition.TabIndex = 24
-        Me.lblLagPosition.Text = "Positions:"
-        '
-        'lblRoundofDigits
-        '
-        Me.lblRoundofDigits.AutoSize = True
-        Me.lblRoundofDigits.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRoundofDigits.Location = New System.Drawing.Point(123, 30)
-        Me.lblRoundofDigits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblRoundofDigits.Name = "lblRoundofDigits"
-        Me.lblRoundofDigits.Size = New System.Drawing.Size(78, 20)
-        Me.lblRoundofDigits.TabIndex = 23
-        Me.lblRoundofDigits.Text = "Decimals:"
-        '
-        'lblDiffLag
-        '
-        Me.lblDiffLag.AutoSize = True
-        Me.lblDiffLag.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDiffLag.Location = New System.Drawing.Point(160, 225)
-        Me.lblDiffLag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblDiffLag.Name = "lblDiffLag"
-        Me.lblDiffLag.Size = New System.Drawing.Size(40, 20)
-        Me.lblDiffLag.TabIndex = 18
-        Me.lblDiffLag.Text = "Lag:"
-        '
-        'lblDigits
-        '
-        Me.lblDigits.AutoSize = True
-        Me.lblDigits.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDigits.Location = New System.Drawing.Point(148, 68)
-        Me.lblDigits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblDigits.Name = "lblDigits"
-        Me.lblDigits.Size = New System.Drawing.Size(53, 20)
-        Me.lblDigits.TabIndex = 15
-        Me.lblDigits.Text = "Digits:"
-        '
-        'lblLagLeadPosition
-        '
-        Me.lblLagLeadPosition.AutoSize = True
-        Me.lblLagLeadPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLagLeadPosition.Location = New System.Drawing.Point(124, 186)
-        Me.lblLagLeadPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLagLeadPosition.Name = "lblLagLeadPosition"
-        Me.lblLagLeadPosition.Size = New System.Drawing.Size(77, 20)
-        Me.lblLagLeadPosition.TabIndex = 17
-        Me.lblLagLeadPosition.Text = "Positions:"
-        '
-        'grpNonNegative
-        '
-        Me.grpNonNegative.Controls.Add(Me.ucrInputPower)
-        Me.grpNonNegative.Controls.Add(Me.rdoPower)
-        Me.grpNonNegative.Controls.Add(Me.ucrInputConstant)
-        Me.grpNonNegative.Controls.Add(Me.rdoSquareRoot)
-        Me.grpNonNegative.Controls.Add(Me.rdoNaturalLog)
-        Me.grpNonNegative.Controls.Add(Me.rdoLogToBase10)
-        Me.grpNonNegative.Controls.Add(Me.ucrChkAddConstant)
-        Me.grpNonNegative.Controls.Add(Me.ucrPnlNonNegative)
-        Me.grpNonNegative.Location = New System.Drawing.Point(350, 189)
-        Me.grpNonNegative.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpNonNegative.Name = "grpNonNegative"
-        Me.grpNonNegative.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpNonNegative.Size = New System.Drawing.Size(292, 224)
-        Me.grpNonNegative.TabIndex = 9
-        Me.grpNonNegative.TabStop = False
-        Me.grpNonNegative.Text = "Options"
-        '
-        'rdoPower
-        '
-        Me.rdoPower.AutoSize = True
-        Me.rdoPower.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPower.Location = New System.Drawing.Point(18, 132)
-        Me.rdoPower.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoPower.Name = "rdoPower"
-        Me.rdoPower.Size = New System.Drawing.Size(78, 24)
-        Me.rdoPower.TabIndex = 18
-        Me.rdoPower.TabStop = True
-        Me.rdoPower.Text = "Power"
-        Me.rdoPower.UseVisualStyleBackColor = True
-        '
-        'rdoSquareRoot
-        '
-        Me.rdoSquareRoot.AutoSize = True
-        Me.rdoSquareRoot.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSquareRoot.Location = New System.Drawing.Point(20, 32)
-        Me.rdoSquareRoot.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoSquareRoot.Name = "rdoSquareRoot"
-        Me.rdoSquareRoot.Size = New System.Drawing.Size(125, 24)
-        Me.rdoSquareRoot.TabIndex = 15
-        Me.rdoSquareRoot.TabStop = True
-        Me.rdoSquareRoot.Text = "Square Root"
-        Me.rdoSquareRoot.UseVisualStyleBackColor = True
-        '
-        'rdoNaturalLog
-        '
-        Me.rdoNaturalLog.AutoSize = True
-        Me.rdoNaturalLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoNaturalLog.Location = New System.Drawing.Point(18, 64)
-        Me.rdoNaturalLog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoNaturalLog.Name = "rdoNaturalLog"
-        Me.rdoNaturalLog.Size = New System.Drawing.Size(126, 24)
-        Me.rdoNaturalLog.TabIndex = 16
-        Me.rdoNaturalLog.TabStop = True
-        Me.rdoNaturalLog.Text = "Log (Natural)"
-        Me.rdoNaturalLog.UseVisualStyleBackColor = True
-        '
-        'rdoLogToBase10
-        '
-        Me.rdoLogToBase10.AutoSize = True
-        Me.rdoLogToBase10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLogToBase10.Location = New System.Drawing.Point(18, 98)
-        Me.rdoLogToBase10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoLogToBase10.Name = "rdoLogToBase10"
-        Me.rdoLogToBase10.Size = New System.Drawing.Size(134, 24)
-        Me.rdoLogToBase10.TabIndex = 17
-        Me.rdoLogToBase10.TabStop = True
-        Me.rdoLogToBase10.Text = "Log (Base 10)"
-        Me.rdoLogToBase10.UseVisualStyleBackColor = True
-        '
-        'rdoNumeric
-        '
-        Me.rdoNumeric.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoNumeric.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNumeric.FlatAppearance.BorderSize = 2
-        Me.rdoNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNumeric.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoNumeric.Location = New System.Drawing.Point(20, 20)
-        Me.rdoNumeric.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoNumeric.Name = "rdoNumeric"
-        Me.rdoNumeric.Size = New System.Drawing.Size(123, 42)
-        Me.rdoNumeric.TabIndex = 1
-        Me.rdoNumeric.TabStop = True
-        Me.rdoNumeric.Tag = "Frequency"
-        Me.rdoNumeric.Text = "Numeric"
-        Me.rdoNumeric.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoNumeric.UseVisualStyleBackColor = False
-        '
-        'rdoNonNegative
-        '
-        Me.rdoNonNegative.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoNonNegative.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoNonNegative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNonNegative.FlatAppearance.BorderSize = 2
-        Me.rdoNonNegative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNonNegative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoNonNegative.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoNonNegative.Location = New System.Drawing.Point(141, 20)
-        Me.rdoNonNegative.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoNonNegative.Name = "rdoNonNegative"
-        Me.rdoNonNegative.Size = New System.Drawing.Size(128, 42)
-        Me.rdoNonNegative.TabIndex = 2
-        Me.rdoNonNegative.TabStop = True
-        Me.rdoNonNegative.Tag = "Frequency"
-        Me.rdoNonNegative.Text = "Non-Negative"
-        Me.rdoNonNegative.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoNonNegative.UseVisualStyleBackColor = False
-        '
-        'rdoRank
-        '
-        Me.rdoRank.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoRank.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoRank.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRank.FlatAppearance.BorderSize = 2
-        Me.rdoRank.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRank.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRank.Location = New System.Drawing.Point(267, 20)
-        Me.rdoRank.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoRank.Name = "rdoRank"
-        Me.rdoRank.Size = New System.Drawing.Size(123, 42)
-        Me.rdoRank.TabIndex = 3
-        Me.rdoRank.TabStop = True
-        Me.rdoRank.Tag = "Frequency"
-        Me.rdoRank.Text = "Rank"
-        Me.rdoRank.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoRank.UseVisualStyleBackColor = False
-        '
-        'rdoSort
-        '
-        Me.rdoSort.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSort.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSort.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSort.FlatAppearance.BorderSize = 2
-        Me.rdoSort.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSort.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSort.Location = New System.Drawing.Point(388, 20)
-        Me.rdoSort.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoSort.Name = "rdoSort"
-        Me.rdoSort.Size = New System.Drawing.Size(123, 42)
-        Me.rdoSort.TabIndex = 4
-        Me.rdoSort.TabStop = True
-        Me.rdoSort.Tag = "Frequency"
-        Me.rdoSort.Text = "Sort"
-        Me.rdoSort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSort.UseVisualStyleBackColor = False
-        '
-        'rdoScale
-        '
-        Me.rdoScale.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoScale.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoScale.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoScale.FlatAppearance.BorderSize = 2
-        Me.rdoScale.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoScale.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoScale.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoScale.Location = New System.Drawing.Point(510, 20)
-        Me.rdoScale.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoScale.Name = "rdoScale"
-        Me.rdoScale.Size = New System.Drawing.Size(123, 42)
-        Me.rdoScale.TabIndex = 5
-        Me.rdoScale.TabStop = True
-        Me.rdoScale.Tag = "Frequency"
-        Me.rdoScale.Text = "Scale"
-        Me.rdoScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoScale.UseVisualStyleBackColor = False
-        '
-        'cmdUpdatePreview
-        '
-        Me.cmdUpdatePreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdUpdatePreview.Location = New System.Drawing.Point(424, 510)
-        Me.cmdUpdatePreview.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdUpdatePreview.Name = "cmdUpdatePreview"
-        Me.cmdUpdatePreview.Size = New System.Drawing.Size(112, 34)
-        Me.cmdUpdatePreview.TabIndex = 34
-        Me.cmdUpdatePreview.Text = "Update"
-        Me.cmdUpdatePreview.UseVisualStyleBackColor = True
-        '
-        'rdoSingle
-        '
-        Me.rdoSingle.AutoSize = True
-        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(382, 88)
-        Me.rdoSingle.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoSingle.Name = "rdoSingle"
-        Me.rdoSingle.Size = New System.Drawing.Size(78, 24)
-        Me.rdoSingle.TabIndex = 37
-        Me.rdoSingle.TabStop = True
-        Me.rdoSingle.Text = "Single"
-        Me.rdoSingle.UseVisualStyleBackColor = True
-        '
-        'rdoMultiple
-        '
-        Me.rdoMultiple.AutoSize = True
-        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(482, 90)
-        Me.rdoMultiple.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rdoMultiple.Name = "rdoMultiple"
-        Me.rdoMultiple.Size = New System.Drawing.Size(88, 24)
-        Me.rdoMultiple.TabIndex = 68
-        Me.rdoMultiple.TabStop = True
-        Me.rdoMultiple.Text = "Multiple"
-        Me.rdoMultiple.UseVisualStyleBackColor = True
-        '
-        'ucrChkOverWriteColumns
-        '
-        Me.ucrChkOverWriteColumns.AutoSize = True
-        Me.ucrChkOverWriteColumns.Checked = False
-        Me.ucrChkOverWriteColumns.Location = New System.Drawing.Point(18, 511)
-        Me.ucrChkOverWriteColumns.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkOverWriteColumns.Name = "ucrChkOverWriteColumns"
-        Me.ucrChkOverWriteColumns.Size = New System.Drawing.Size(274, 34)
-        Me.ucrChkOverWriteColumns.TabIndex = 69
-        '
-        'ucrPnlColumnSelectOptions
-        '
-        Me.ucrPnlColumnSelectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(356, 78)
-        Me.ucrPnlColumnSelectOptions.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlColumnSelectOptions.Name = "ucrPnlColumnSelectOptions"
-        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(278, 44)
-        Me.ucrPnlColumnSelectOptions.TabIndex = 37
         '
         'ucrInputLogicalValues
         '
@@ -702,6 +425,19 @@ Partial Class dlgTransform
         Me.ucrInputLogicOperations.Size = New System.Drawing.Size(88, 32)
         Me.ucrInputLogicOperations.TabIndex = 35
         '
+        'rdoLogical
+        '
+        Me.rdoLogical.AutoSize = True
+        Me.rdoLogical.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLogical.Location = New System.Drawing.Point(16, 261)
+        Me.rdoLogical.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoLogical.Name = "rdoLogical"
+        Me.rdoLogical.Size = New System.Drawing.Size(84, 24)
+        Me.rdoLogical.TabIndex = 34
+        Me.rdoLogical.TabStop = True
+        Me.rdoLogical.Text = "Logical"
+        Me.rdoLogical.UseVisualStyleBackColor = True
+        '
         'ucrChkOmitNA
         '
         Me.ucrChkOmitNA.AutoSize = True
@@ -725,6 +461,28 @@ Partial Class dlgTransform
         Me.ucrNudLagPosition.Size = New System.Drawing.Size(75, 30)
         Me.ucrNudLagPosition.TabIndex = 25
         Me.ucrNudLagPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblLagPosition
+        '
+        Me.lblLagPosition.AutoSize = True
+        Me.lblLagPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLagPosition.Location = New System.Drawing.Point(124, 147)
+        Me.lblLagPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLagPosition.Name = "lblLagPosition"
+        Me.lblLagPosition.Size = New System.Drawing.Size(77, 20)
+        Me.lblLagPosition.TabIndex = 24
+        Me.lblLagPosition.Text = "Positions:"
+        '
+        'lblRoundofDigits
+        '
+        Me.lblRoundofDigits.AutoSize = True
+        Me.lblRoundofDigits.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRoundofDigits.Location = New System.Drawing.Point(123, 30)
+        Me.lblRoundofDigits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblRoundofDigits.Name = "lblRoundofDigits"
+        Me.lblRoundofDigits.Size = New System.Drawing.Size(78, 20)
+        Me.lblRoundofDigits.TabIndex = 23
+        Me.lblRoundofDigits.Text = "Decimals:"
         '
         'ucrNudRoundOfDigits
         '
@@ -782,6 +540,39 @@ Partial Class dlgTransform
         Me.ucrNudSignifDigits.TabIndex = 14
         Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblDiffLag
+        '
+        Me.lblDiffLag.AutoSize = True
+        Me.lblDiffLag.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDiffLag.Location = New System.Drawing.Point(160, 225)
+        Me.lblDiffLag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDiffLag.Name = "lblDiffLag"
+        Me.lblDiffLag.Size = New System.Drawing.Size(40, 20)
+        Me.lblDiffLag.TabIndex = 18
+        Me.lblDiffLag.Text = "Lag:"
+        '
+        'lblDigits
+        '
+        Me.lblDigits.AutoSize = True
+        Me.lblDigits.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDigits.Location = New System.Drawing.Point(148, 68)
+        Me.lblDigits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDigits.Name = "lblDigits"
+        Me.lblDigits.Size = New System.Drawing.Size(53, 20)
+        Me.lblDigits.TabIndex = 15
+        Me.lblDigits.Text = "Digits:"
+        '
+        'lblLagLeadPosition
+        '
+        Me.lblLagLeadPosition.AutoSize = True
+        Me.lblLagLeadPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLagLeadPosition.Location = New System.Drawing.Point(124, 186)
+        Me.lblLagLeadPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLagLeadPosition.Name = "lblLagLeadPosition"
+        Me.lblLagLeadPosition.Size = New System.Drawing.Size(77, 20)
+        Me.lblLagLeadPosition.TabIndex = 17
+        Me.lblLagLeadPosition.Text = "Positions:"
+        '
         'ucrPnlNumericOptions
         '
         Me.ucrPnlNumericOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -790,6 +581,25 @@ Partial Class dlgTransform
         Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
         Me.ucrPnlNumericOptions.Size = New System.Drawing.Size(118, 268)
         Me.ucrPnlNumericOptions.TabIndex = 0
+        '
+        'grpNonNegative
+        '
+        Me.grpNonNegative.Controls.Add(Me.ucrInputPower)
+        Me.grpNonNegative.Controls.Add(Me.rdoPower)
+        Me.grpNonNegative.Controls.Add(Me.ucrInputConstant)
+        Me.grpNonNegative.Controls.Add(Me.rdoSquareRoot)
+        Me.grpNonNegative.Controls.Add(Me.rdoNaturalLog)
+        Me.grpNonNegative.Controls.Add(Me.rdoLogToBase10)
+        Me.grpNonNegative.Controls.Add(Me.ucrChkAddConstant)
+        Me.grpNonNegative.Controls.Add(Me.ucrPnlNonNegative)
+        Me.grpNonNegative.Location = New System.Drawing.Point(350, 189)
+        Me.grpNonNegative.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpNonNegative.Name = "grpNonNegative"
+        Me.grpNonNegative.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpNonNegative.Size = New System.Drawing.Size(292, 224)
+        Me.grpNonNegative.TabIndex = 9
+        Me.grpNonNegative.TabStop = False
+        Me.grpNonNegative.Text = "Options"
         '
         'ucrInputPower
         '
@@ -803,6 +613,19 @@ Partial Class dlgTransform
         Me.ucrInputPower.Size = New System.Drawing.Size(86, 32)
         Me.ucrInputPower.TabIndex = 29
         '
+        'rdoPower
+        '
+        Me.rdoPower.AutoSize = True
+        Me.rdoPower.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPower.Location = New System.Drawing.Point(18, 132)
+        Me.rdoPower.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoPower.Name = "rdoPower"
+        Me.rdoPower.Size = New System.Drawing.Size(78, 24)
+        Me.rdoPower.TabIndex = 18
+        Me.rdoPower.TabStop = True
+        Me.rdoPower.Text = "Power"
+        Me.rdoPower.UseVisualStyleBackColor = True
+        '
         'ucrInputConstant
         '
         Me.ucrInputConstant.AddQuotesIfUnrecognised = True
@@ -814,6 +637,45 @@ Partial Class dlgTransform
         Me.ucrInputConstant.Name = "ucrInputConstant"
         Me.ucrInputConstant.Size = New System.Drawing.Size(87, 32)
         Me.ucrInputConstant.TabIndex = 34
+        '
+        'rdoSquareRoot
+        '
+        Me.rdoSquareRoot.AutoSize = True
+        Me.rdoSquareRoot.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSquareRoot.Location = New System.Drawing.Point(20, 32)
+        Me.rdoSquareRoot.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSquareRoot.Name = "rdoSquareRoot"
+        Me.rdoSquareRoot.Size = New System.Drawing.Size(125, 24)
+        Me.rdoSquareRoot.TabIndex = 15
+        Me.rdoSquareRoot.TabStop = True
+        Me.rdoSquareRoot.Text = "Square Root"
+        Me.rdoSquareRoot.UseVisualStyleBackColor = True
+        '
+        'rdoNaturalLog
+        '
+        Me.rdoNaturalLog.AutoSize = True
+        Me.rdoNaturalLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNaturalLog.Location = New System.Drawing.Point(18, 64)
+        Me.rdoNaturalLog.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoNaturalLog.Name = "rdoNaturalLog"
+        Me.rdoNaturalLog.Size = New System.Drawing.Size(126, 24)
+        Me.rdoNaturalLog.TabIndex = 16
+        Me.rdoNaturalLog.TabStop = True
+        Me.rdoNaturalLog.Text = "Log (Natural)"
+        Me.rdoNaturalLog.UseVisualStyleBackColor = True
+        '
+        'rdoLogToBase10
+        '
+        Me.rdoLogToBase10.AutoSize = True
+        Me.rdoLogToBase10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLogToBase10.Location = New System.Drawing.Point(18, 98)
+        Me.rdoLogToBase10.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoLogToBase10.Name = "rdoLogToBase10"
+        Me.rdoLogToBase10.Size = New System.Drawing.Size(134, 24)
+        Me.rdoLogToBase10.TabIndex = 17
+        Me.rdoLogToBase10.TabStop = True
+        Me.rdoLogToBase10.Text = "Log (Base 10)"
+        Me.rdoLogToBase10.UseVisualStyleBackColor = True
         '
         'ucrChkAddConstant
         '
@@ -834,20 +696,167 @@ Partial Class dlgTransform
         Me.ucrPnlNonNegative.Size = New System.Drawing.Size(138, 150)
         Me.ucrPnlNonNegative.TabIndex = 19
         '
-        'ucrPnlTies
+        'rdoNumeric
         '
-        Me.ucrPnlTies.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTies.Location = New System.Drawing.Point(10, 21)
-        Me.ucrPnlTies.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlTies.Name = "ucrPnlTies"
-        Me.ucrPnlTies.Size = New System.Drawing.Size(144, 171)
-        Me.ucrPnlTies.TabIndex = 0
+        Me.rdoNumeric.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoNumeric.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatAppearance.BorderSize = 2
+        Me.rdoNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNumeric.Location = New System.Drawing.Point(20, 20)
+        Me.rdoNumeric.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoNumeric.Name = "rdoNumeric"
+        Me.rdoNumeric.Size = New System.Drawing.Size(123, 42)
+        Me.rdoNumeric.TabIndex = 1
+        Me.rdoNumeric.TabStop = True
+        Me.rdoNumeric.Tag = "Frequency"
+        Me.rdoNumeric.Text = "Numeric"
+        Me.rdoNumeric.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoNumeric.UseVisualStyleBackColor = False
+        '
+        'rdoNonNegative
+        '
+        Me.rdoNonNegative.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoNonNegative.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoNonNegative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNonNegative.FlatAppearance.BorderSize = 2
+        Me.rdoNonNegative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNonNegative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoNonNegative.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNonNegative.Location = New System.Drawing.Point(141, 20)
+        Me.rdoNonNegative.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoNonNegative.Name = "rdoNonNegative"
+        Me.rdoNonNegative.Size = New System.Drawing.Size(128, 42)
+        Me.rdoNonNegative.TabIndex = 2
+        Me.rdoNonNegative.TabStop = True
+        Me.rdoNonNegative.Tag = "Frequency"
+        Me.rdoNonNegative.Text = "Non-Negative"
+        Me.rdoNonNegative.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoNonNegative.UseVisualStyleBackColor = False
+        '
+        'rdoRank
+        '
+        Me.rdoRank.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRank.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRank.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRank.FlatAppearance.BorderSize = 2
+        Me.rdoRank.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRank.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRank.Location = New System.Drawing.Point(267, 20)
+        Me.rdoRank.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoRank.Name = "rdoRank"
+        Me.rdoRank.Size = New System.Drawing.Size(123, 42)
+        Me.rdoRank.TabIndex = 3
+        Me.rdoRank.TabStop = True
+        Me.rdoRank.Tag = "Frequency"
+        Me.rdoRank.Text = "Rank"
+        Me.rdoRank.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRank.UseVisualStyleBackColor = False
+        '
+        'rdoSort
+        '
+        Me.rdoSort.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSort.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSort.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSort.FlatAppearance.BorderSize = 2
+        Me.rdoSort.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSort.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSort.Location = New System.Drawing.Point(388, 20)
+        Me.rdoSort.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSort.Name = "rdoSort"
+        Me.rdoSort.Size = New System.Drawing.Size(123, 42)
+        Me.rdoSort.TabIndex = 4
+        Me.rdoSort.TabStop = True
+        Me.rdoSort.Tag = "Frequency"
+        Me.rdoSort.Text = "Sort"
+        Me.rdoSort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSort.UseVisualStyleBackColor = False
+        '
+        'rdoScale
+        '
+        Me.rdoScale.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoScale.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoScale.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoScale.FlatAppearance.BorderSize = 2
+        Me.rdoScale.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoScale.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoScale.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoScale.Location = New System.Drawing.Point(510, 20)
+        Me.rdoScale.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoScale.Name = "rdoScale"
+        Me.rdoScale.Size = New System.Drawing.Size(123, 42)
+        Me.rdoScale.TabIndex = 5
+        Me.rdoScale.TabStop = True
+        Me.rdoScale.Tag = "Frequency"
+        Me.rdoScale.Text = "Scale"
+        Me.rdoScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoScale.UseVisualStyleBackColor = False
+        '
+        'cmdUpdatePreview
+        '
+        Me.cmdUpdatePreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdUpdatePreview.Location = New System.Drawing.Point(424, 543)
+        Me.cmdUpdatePreview.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdUpdatePreview.Name = "cmdUpdatePreview"
+        Me.cmdUpdatePreview.Size = New System.Drawing.Size(112, 34)
+        Me.cmdUpdatePreview.TabIndex = 34
+        Me.cmdUpdatePreview.Text = "Update"
+        Me.cmdUpdatePreview.UseVisualStyleBackColor = True
+        '
+        'rdoSingle
+        '
+        Me.rdoSingle.AutoSize = True
+        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSingle.Location = New System.Drawing.Point(382, 88)
+        Me.rdoSingle.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.Size = New System.Drawing.Size(78, 24)
+        Me.rdoSingle.TabIndex = 37
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.Text = "Single"
+        Me.rdoSingle.UseVisualStyleBackColor = True
+        '
+        'rdoMultiple
+        '
+        Me.rdoMultiple.AutoSize = True
+        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultiple.Location = New System.Drawing.Point(482, 90)
+        Me.rdoMultiple.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.Size = New System.Drawing.Size(88, 24)
+        Me.rdoMultiple.TabIndex = 68
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Text = "Multiple"
+        Me.rdoMultiple.UseVisualStyleBackColor = True
+        '
+        'ucrChkOverWriteColumns
+        '
+        Me.ucrChkOverWriteColumns.AutoSize = True
+        Me.ucrChkOverWriteColumns.Checked = False
+        Me.ucrChkOverWriteColumns.Location = New System.Drawing.Point(15, 511)
+        Me.ucrChkOverWriteColumns.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkOverWriteColumns.Name = "ucrChkOverWriteColumns"
+        Me.ucrChkOverWriteColumns.Size = New System.Drawing.Size(274, 34)
+        Me.ucrChkOverWriteColumns.TabIndex = 69
+        '
+        'ucrPnlColumnSelectOptions
+        '
+        Me.ucrPnlColumnSelectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(356, 78)
+        Me.ucrPnlColumnSelectOptions.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlColumnSelectOptions.Name = "ucrPnlColumnSelectOptions"
+        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(278, 44)
+        Me.ucrPnlColumnSelectOptions.TabIndex = 37
         '
         'ucrChkEditPreview
         '
         Me.ucrChkEditPreview.AutoSize = True
         Me.ucrChkEditPreview.Checked = False
-        Me.ucrChkEditPreview.Location = New System.Drawing.Point(544, 514)
+        Me.ucrChkEditPreview.Location = New System.Drawing.Point(544, 547)
         Me.ucrChkEditPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkEditPreview.Name = "ucrChkEditPreview"
         Me.ucrChkEditPreview.Size = New System.Drawing.Size(99, 34)
@@ -857,7 +866,7 @@ Partial Class dlgTransform
         '
         Me.ucrChkPreview.AutoSize = True
         Me.ucrChkPreview.Checked = False
-        Me.ucrChkPreview.Location = New System.Drawing.Point(16, 514)
+        Me.ucrChkPreview.Location = New System.Drawing.Point(15, 547)
         Me.ucrChkPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkPreview.Name = "ucrChkPreview"
         Me.ucrChkPreview.Size = New System.Drawing.Size(104, 34)
@@ -869,7 +878,7 @@ Partial Class dlgTransform
         Me.ucrInputPreview.AutoSize = True
         Me.ucrInputPreview.IsMultiline = False
         Me.ucrInputPreview.IsReadOnly = True
-        Me.ucrInputPreview.Location = New System.Drawing.Point(123, 513)
+        Me.ucrInputPreview.Location = New System.Drawing.Point(123, 546)
         Me.ucrInputPreview.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputPreview.Name = "ucrInputPreview"
         Me.ucrInputPreview.Size = New System.Drawing.Size(298, 32)
@@ -963,15 +972,6 @@ Partial Class dlgTransform
         Me.ucrChkSubtract.Size = New System.Drawing.Size(118, 34)
         Me.ucrChkSubtract.TabIndex = 21
         '
-        'ucrPnlMissingValues
-        '
-        Me.ucrPnlMissingValues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMissingValues.Location = New System.Drawing.Point(9, 27)
-        Me.ucrPnlMissingValues.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
-        Me.ucrPnlMissingValues.Size = New System.Drawing.Size(214, 96)
-        Me.ucrPnlMissingValues.TabIndex = 0
-        '
         'ucrPnlTransformOptions
         '
         Me.ucrPnlTransformOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -984,7 +984,7 @@ Partial Class dlgTransform
         'ucrSaveNew
         '
         Me.ucrSaveNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveNew.Location = New System.Drawing.Point(15, 552)
+        Me.ucrSaveNew.Location = New System.Drawing.Point(15, 583)
         Me.ucrSaveNew.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveNew.Name = "ucrSaveNew"
         Me.ucrSaveNew.Size = New System.Drawing.Size(406, 33)
@@ -1007,7 +1007,7 @@ Partial Class dlgTransform
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(15, 588)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 619)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -1050,8 +1050,7 @@ Partial Class dlgTransform
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(660, 668)
-        Me.Controls.Add(Me.ucrChkOverWriteColumns)
+        Me.ClientSize = New System.Drawing.Size(660, 707)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrPnlColumnSelectOptions)
@@ -1084,8 +1083,9 @@ Partial Class dlgTransform
         Me.Controls.Add(Me.ucrSelectorForRank)
         Me.Controls.Add(Me.ucrChkMissingLast)
         Me.Controls.Add(Me.ucrChkDecreasing)
+        Me.Controls.Add(Me.ucrChkOverWriteColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTransform"

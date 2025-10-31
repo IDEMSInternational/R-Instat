@@ -198,7 +198,6 @@ Public Class dlgTransform
         ucrPnlNonNegative.AddParameterValuesCondition(rdoNaturalLog, "check", "log")
         ucrPnlNonNegative.AddParameterValuesCondition(rdoPower, "check", "power")
 
-        ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkOverWriteColumns, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnSelectOptions.AddToLinkedControls(ucrChkPreview, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudSignifDigits, {rdoSignificantDigits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudRoundOfDigits, {rdoRoundOf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -358,7 +357,7 @@ Public Class dlgTransform
 
         ttEditPreview.SetToolTip(ucrChkEditPreview.chkCheck, "Use(Slightly) at your peril.")
 
-        ucrChkOverWriteColumns.SetText("Overwrite Columns")
+        ucrChkOverWriteColumns.SetText("Overwrite Column(s)")
     End Sub
 
     Private Sub SetDefaults()
@@ -651,7 +650,6 @@ Public Class dlgTransform
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -780,21 +778,31 @@ Public Class dlgTransform
     Private Sub NewDefaultName()
         If rdoSingle.Checked Then
             ucrSaveNew.SetLabelText("New Column Name:")
-            If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
-                ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+            ucrSaveNew.btnColumnPosition.Visible = True
+            If ucrReceiverRank.IsEmpty() Then
+                ucrSaveNew.SetName("")
+                Exit Sub
+            End If
+            If Not ucrChkOverWriteColumns.Checked Then
+                If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
+                    ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+                End If
+            Else
+                ucrSaveNew.SetName(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
         ElseIf rdoMultiple.Checked Then
-            If ucrChkOverWriteColumns.Checked Then
-                ucrSaveNew.Enabled = False
-            Else
-                ucrSaveNew.Enabled = True
-                ucrSaveNew.SetLabelText("Suffix Name:")
-                ucrSaveNew.SetPrefix("select")
-                ucrSaveNew.btnColumnPosition.Visible = False
-                If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
-                    clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
-                End If
+            ucrSaveNew.SetLabelText("Suffix Name:")
+            ucrSaveNew.SetPrefix("select")
+            ucrSaveNew.btnColumnPosition.Visible = False
+            If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
+                clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
             End If
+        End If
+
+        If ucrChkOverWriteColumns.Checked Then
+            ucrSaveNew.Enabled = False
+        Else
+            ucrSaveNew.Enabled = True
         End If
     End Sub
 
@@ -916,7 +924,6 @@ Public Class dlgTransform
             ucrBase.clsRsyntax.AddToAfterCodes(clsPipeOperator, 0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAssignOperator, 1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnsFunction, 2)
-
 
         End If
         SetPreviewText()
@@ -1213,4 +1220,17 @@ Public Class dlgTransform
         ucrSaveParChanged()
         NewDefaultName()
     End Sub
+
+    Private Sub dlgTransformText_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Me.Visible Then
+            If rdoMultiple.Checked Then
+                lblSelectColumns.Text = "Select:"
+            Else
+                lblSelectColumns.Text = "Column:"
+            End If
+            ' Refresh new column name when dialog becomes visible again
+            NewDefaultName()
+        End If
+    End Sub
+
 End Class
