@@ -534,6 +534,10 @@ Public Class dlgTransformText
         If rdoSingle.Checked Then
             ucrNewColName.btnColumnPosition.Visible = True
             ucrNewColName.SetLabelText("New Column:")
+            If ucrReceiverTransformText.IsEmpty() Then
+                ucrNewColName.SetName("")
+                Exit Sub
+            End If
             If Not ucrChkOverWriteColumns.Checked Then
                 If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
                     ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
@@ -902,14 +906,15 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub dlgRank_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+    Private Sub dlgTransformText_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If Me.Visible Then
             If rdoMultiple.Checked Then
                 lblColumnToTransform.Text = "Select To Transform"
             Else
                 lblColumnToTransform.Text = "Column To Transform"
-                ' lblSelectColumns.Text = "Column:"
             End If
+            ' Refresh new column name when dialog becomes visible again
+            NewDefaultName()
         End If
     End Sub
 End Class
