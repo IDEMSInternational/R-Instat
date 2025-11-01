@@ -30,8 +30,8 @@ Public Class sdgSelectMonth
     Private Sub InitialiseControls()
         ' Create the helper label
         lblHelperText = New Label()
-        lblHelperText.Text = "Month variable is numeric and has no month labels." & Environment.NewLine &
-                             "Convert Month to a factor (e.g., via Climatic > Dates > Use Date)."
+        lblHelperText.Text = GetTranslation("Month variable is numeric and has no month labels.") & Environment.NewLine &
+                             GetTranslation("Convert Month to a factor (e.g., via Climatic > Dates > Use Date).")
         lblHelperText.Dock = DockStyle.Fill
         lblHelperText.TextAlign = ContentAlignment.MiddleCenter
         lblHelperText.ForeColor = Color.Red
