@@ -771,7 +771,6 @@ Public Class dlgPICSARainfall
         clsBaseOperator.RemoveParameterByName("facets")
         clsFacetFunction.RemoveParameterByName("facets")
         clsFacetFunction.RemoveParameterByName("rows")
-        clsFacetFunction.RemoveParameterByName("ggplot2::rows")
         clsFacetFunction.RemoveParameterByName("cols")
         If Not ucrReceiverFacetBy.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -791,10 +790,8 @@ Public Class dlgPICSARainfall
 
         If bWrap Then
             clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
-        ElseIf bRow Then
+        ElseIf bRow OrElse bRowAll Then
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction)
-        ElseIf bRowAll Then
-            clsFacetFunction.AddParameter("ggplot2::rows", clsRFunctionParameter:=clsVarsFunction)
         ElseIf bCol OrElse bColAll Then
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction)
         End If
@@ -1095,5 +1092,6 @@ Public Class dlgPICSARainfall
         openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class
+
 
 
