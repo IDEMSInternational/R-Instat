@@ -18,9 +18,9 @@ Imports instat.Translations
 
 Public Class dlgStartofRains
     Private bResetSubdialog As Boolean = True
-    Private clsCalcRainDay, clsCalcStartDOY, clsConvertssndLinkedVariableFunction, clsDeleteunusedrowFunction, clsRunStartStatus2Function, clsStartRainCombine2Function, clsListFunction, clsNastatus2Function, clsIfElseStatus2Function, clsStatRainStatus2Function, clsSetnameRainStatusFunction, clsSetnameRainFunction, clsCalculatedListformFunction, clsConvertLinkedvariablesvectorFunction, clsConvertLinkedVariablesFunction, clsStationTypeFunction, clsConvertStationtypeFunction, clsVectorFunction, clsGetlinkeddataFunction, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
+    Private clsCalcRainDay, clsCalcStartDOY, clsConvertssndLinkedVariableFunction, clsDeleteunusedrowFunction, clsRunStartStatus2Function, clsStartRainCombine2Function, clsInnerIfElseFunction, clsListFunction, clsNastatus2Function, clsIfElseStatus2Function, clsStatRainStatus2Function, clsSetnameRainStatusFunction, clsSetnameRainFunction, clsCalculatedListformFunction, clsConvertLinkedvariablesvectorFunction, clsConvertLinkedVariablesFunction, clsStationTypeFunction, clsConvertStationtypeFunction, clsVectorFunction, clsGetlinkeddataFunction, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
-    Private clsDayFromAndToOperator, clsEvapOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
+    Private clsDayFromAndToOperator, clsEvapOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsStartStatusEqualsTrueOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
 
     Private clsSpellsFunction, clsIfElseFirstDoyFilledFunction As New RFunction
@@ -859,14 +859,22 @@ Public Class dlgStartofRains
         clsStatRainStatus2Function.SetAssignTo(strStartStatus2)
         clsIfElseStatus2Function.SetRCommand("ifelse")
         clsIfElseStatus2Function.bToScriptAsRString = True
-        clsIfElseStatus2Function.AddParameter("test", clsRFunctionParameter:=clsNastatus2Function, iPosition:=0, bIncludeArgumentName:=False)
-        clsIfElseStatus2Function.AddParameter("yes", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
-        clsIfElseStatus2Function.AddParameter("no", strStartStatus, iPosition:=2, bIncludeArgumentName:=False)
 
         clsNastatus2Function.SetRCommand("!is.na")
         clsNastatus2Function.AddParameter("x", strStartDoy, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfElseStatus2Function.AddParameter("test", clsRFunctionParameter:=clsNastatus2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfElseStatus2Function.AddParameter("yes", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfElseStatus2Function.AddParameter("no", clsRFunctionParameter:=clsInnerIfElseFunction, iPosition:=2, bIncludeArgumentName:=False)
 
-        clsStartRainCombine2Function.SetPackageName("instatCalculations")
+        clsInnerIfElseFunction.SetRCommand("ifelse")
+        clsInnerIfElseFunction.AddParameter("test", clsROperatorParameter:=clsStartStatusEqualsTrueOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsInnerIfElseFunction.AddParameter("yes", "NA", iPosition:=1, bIncludeArgumentName:=False)
+        clsInnerIfElseFunction.AddParameter("no", strStartStatus, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsStartStatusEqualsTrueOperator.SetOperation("==")
+        clsStartStatusEqualsTrueOperator.AddParameter("0", strStartStatus, iPosition:=0)
+        clsStartStatusEqualsTrueOperator.AddParameter("1", "TRUE", iPosition:=1)
+
         clsStartRainCombine2Function.SetRCommand("instat_calculation$new")
         clsStartRainCombine2Function.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsStartRainCombine2Function.AddParameter("sub_calculations", clsRFunctionParameter:=clsListFunction, iPosition:=1)
