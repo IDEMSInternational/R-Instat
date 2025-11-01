@@ -20,6 +20,7 @@ Public Class sdgSelectMonth
     Private clsInOperator As New ROperator
     Private clsFilterMonthFunction As New RFunction
     Private clsListCalcFunction As New RFunction
+    Private lblHelperText As Label
 
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseControls()
@@ -27,9 +28,39 @@ Public Class sdgSelectMonth
     End Sub
 
     Private Sub InitialiseControls()
-        ucrMonthAsFactor.SetAsMultipleSelectorGrid(ucrReceiverMonth,
-                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
-                                                   bIncludeNALevel:=False)
+        ' Create the helper label
+        lblHelperText = New Label()
+        lblHelperText.Text = "Month variable is numeric and has no month labels." & Environment.NewLine &
+                             "Convert Month to a factor (e.g., via Climatic > Dates > Use Date)."
+        lblHelperText.Dock = DockStyle.Fill
+        lblHelperText.TextAlign = ContentAlignment.MiddleCenter
+        lblHelperText.ForeColor = Color.Red
+        lblHelperText.Visible = False
+        Me.Controls.Add(lblHelperText)
+        lblHelperText.BringToFront()
+
+        ' Check if the linked receiver exists
+        If ucrReceiverMonth IsNot Nothing Then
+            ' Get the variable type from R
+            Dim strColType As String = frmMain.clsRLink.GetColumnType(
+                ucrReceiverMonth.GetDataName(),
+                ucrReceiverMonth.GetVariableNames(bWithQuotes:=False)
+            )
+
+            ' If factor, show the grid; else show the helper label
+            If strColType.Contains("factor") Then
+                ucrMonthAsFactor.SetAsMultipleSelectorGrid(ucrReceiverMonth,
+                                                           hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                           bIncludeNALevel:=False)
+                ucrMonthAsFactor.Visible = True
+                lblHelperText.Visible = False
+            Else
+                ucrMonthAsFactor.Visible = False
+                lblHelperText.Visible = True
+            End If
+        End If
+
+        ' Disable Select All button by default
         ucrMonthAsFactor.btnSelectAll.Enabled = False
     End Sub
 
