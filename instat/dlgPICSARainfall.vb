@@ -638,7 +638,7 @@ Public Class dlgPICSARainfall
         clsAsNumeric.SetRCommand("as.numeric")
 
         clsVarsFunction.SetPackageName("ggplot2")
-        clsVarsFunction.SetRCommand("Vars")
+        clsVarsFunction.SetRCommand("vars")
 
         clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
         clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames, iPosition:=2)
@@ -1095,4 +1095,5 @@ Public Class dlgPICSARainfall
         openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class
+
 
