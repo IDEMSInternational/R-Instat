@@ -41,8 +41,6 @@ Public Class dlgPICSARainfall
     Private clsCLimitsYDate As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
-    'Private clsFacetRowOp As New ROperator
-    'Private clsFacetColOp As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
@@ -200,8 +198,6 @@ Public Class dlgPICSARainfall
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetColAll, strFacetRowAll, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-
-
         ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
@@ -237,14 +233,9 @@ Public Class dlgPICSARainfall
         clsVarsFunction = New RFunction
         clsCLimitsYContinuous = New RFunction
         clsCLimitsYDate = New RFunction
-
         clsFacetFunction = New RFunction
         clsFacetOperator = New ROperator
-        'clsFacetRowOp = New ROperator
-        'clsFacetColOp = New ROperator
-
         clsAsDateYLimit = New RFunction
-
         clsGeomHlineMean = New RFunction
         clsGeomHlineAesMean = New RFunction
         clsMeanFunction = New RFunction
@@ -321,7 +312,6 @@ Public Class dlgPICSARainfall
 
         'TODO Not yet implemented so do not add
         'clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYDate, iPosition:=8)
-
 
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
@@ -1105,3 +1095,4 @@ Public Class dlgPICSARainfall
         openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class
+
