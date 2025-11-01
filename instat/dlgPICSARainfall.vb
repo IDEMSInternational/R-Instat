@@ -41,8 +41,8 @@ Public Class dlgPICSARainfall
     Private clsCLimitsYDate As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
-    Private clsFacetRowOp As New ROperator
-    Private clsFacetColOp As New ROperator
+    'Private clsFacetRowOp As New ROperator
+    'Private clsFacetColOp As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
@@ -119,6 +119,7 @@ Public Class dlgPICSARainfall
     Private clsAesGeomTextLabelUpperTercileLine As New RFunction
     Private clsPasteUpperTercileY As New RFunction
     Private clsFormatUpperTercileY As New RFunction
+    Private clsVarsFunction As New RFunction
 
     Private clsAsDate As New RFunction
     Private clsAsNumeric As New RFunction
@@ -233,13 +234,14 @@ Public Class dlgPICSARainfall
         clsPipeOperator = New ROperator
         clsFactorLevels = New RFunction
 
+        clsVarsFunction = New RFunction
         clsCLimitsYContinuous = New RFunction
         clsCLimitsYDate = New RFunction
 
         clsFacetFunction = New RFunction
         clsFacetOperator = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
+        'clsFacetRowOp = New ROperator
+        'clsFacetColOp = New ROperator
 
         clsAsDateYLimit = New RFunction
 
@@ -373,14 +375,14 @@ Public Class dlgPICSARainfall
         clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
+        'clsFacetRowOp.SetOperation("+")
+        'clsFacetRowOp.bBrackets = False
+        'clsFacetColOp.SetOperation("+")
+        'clsFacetColOp.bBrackets = False
         clsFacetOperator.SetOperation("~")
         clsFacetOperator.bForceIncludeOperation = True
         clsFacetOperator.bBrackets = False
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+        'clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
 
 
         'Mean Line
@@ -645,6 +647,9 @@ Public Class dlgPICSARainfall
 
         clsAsNumeric.SetRCommand("as.numeric")
 
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("Vars")
+
         clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
         clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames, iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -738,8 +743,8 @@ Public Class dlgPICSARainfall
 
     Private Sub UpdateParameters()
         clsFacetOperator.RemoveParameterByName("var1")
-        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+        'clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        'clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucrReceiverFacetBy.SetRCode(Nothing)
@@ -749,10 +754,13 @@ Public Class dlgPICSARainfall
                 ucrReceiverFacetBy.SetRCode(clsFacetOperator)
             Case strFacetCol, strFacetColAll
                 ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
-                ucrReceiverFacetBy.SetRCode(clsFacetColOp)
+                'ucrReceiverFacetBy.SetRCode(clsFacetColOp)
+                clsVarsFunction.AddParameter("var", ucrReceiverFacetBy.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+
             Case strFacetRow, strFacetRowAll
                 ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
-                ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+                'ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+                clsVarsFunction.AddParameter("var", ucrReceiverFacetBy.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -771,6 +779,10 @@ Public Class dlgPICSARainfall
             Exit Sub
         End If
         clsBaseOperator.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("rows")
+        clsFacetFunction.RemoveParameterByName("ggplot2::rows")
+        clsFacetFunction.RemoveParameterByName("cols")
         If Not ucrReceiverFacetBy.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
@@ -786,9 +798,17 @@ Public Class dlgPICSARainfall
                     bRowAll = True
             End Select
         End If
-        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+
+        If bWrap Then
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+        ElseIf bRow Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction)
+        ElseIf bRowAll Then
+            clsFacetFunction.AddParameter("ggplot2::rows", clsRFunctionParameter:=clsVarsFunction)
+        ElseIf bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction)
         End If
+        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
@@ -803,22 +823,21 @@ Public Class dlgPICSARainfall
         Else
             clsFacetFunction.RemoveParameterByName("margin")
         End If
+        'If bRow OrElse bRowAll Then
+        '    'clsFacetOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        'ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
+        '    clsFacetOperator.AddParameter("left", ".", iPosition:=0)
+        'Else
+        '    clsFacetOperator.RemoveParameterByName("left")
+        'End If
 
-        If bRow OrElse bRowAll Then
-            clsFacetOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
-            clsFacetOperator.AddParameter("left", ".", iPosition:=0)
-        Else
-            clsFacetOperator.RemoveParameterByName("left")
-        End If
-
-        If bCol OrElse bColAll Then
-            clsFacetOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
-            clsFacetOperator.AddParameter("right", ".", iPosition:=1)
-        Else
-            clsFacetOperator.RemoveParameterByName("right")
-        End If
+        'If bCol OrElse bColAll Then
+        '    clsFacetOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        'ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
+        '    clsFacetOperator.AddParameter("right", ".", iPosition:=1)
+        'Else
+        '    clsFacetOperator.RemoveParameterByName("right")
+        'End If
     End Sub
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
@@ -967,10 +986,10 @@ Public Class dlgPICSARainfall
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetOperator)
-                    Case strFacetCol, strFacetColAll
-                        GetParameterValue(clsFacetColOp)
-                    Case strFacetRow, strFacetRowAll
-                        GetParameterValue(clsFacetRowOp)
+                        'Case strFacetCol, strFacetColAll
+                        '    GetParameterValue(clsVarsFunction)
+                        'Case strFacetRow, strFacetRowAll
+                        '    GetParameterValue(clsFacetRowOp)
                 End Select
             End If
             If clsRaesFunction.ContainsParameter("colour") Then
