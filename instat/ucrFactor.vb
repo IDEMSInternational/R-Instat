@@ -18,6 +18,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 ''' <summary>
 ''' <para>This control only accepts string parameter types</para> 
@@ -167,7 +168,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub _grdSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles _grdSheet.BeforeCut
-        MsgBox("Cutting is currently disabled. This feature will be included in future versions." &
+        MsgBoxTranslate("Cutting is currently disabled. This feature will be included in future versions." &
                Environment.NewLine & "Try copying and deleting from one column cells at a time.",
                MsgBoxStyle.Information, "Cannot cut from cells")
         e.IsCancelled = True
@@ -175,7 +176,7 @@ Public Class ucrFactor
 
     Private Sub _grdSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles _grdSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. " &
+            MsgBoxTranslate("Deleting cells is currently disabled. " &
                    "This feature will be included in future versions." &
                    Environment.NewLine & "To remove a cell's value, replace the value with NA.",
                    MsgBoxStyle.Information, "Cannot delete cells.")
@@ -195,10 +196,10 @@ Public Class ucrFactor
         'do levels entry validation
         If _grdSheet.ColumnHeaders(e.Cell.Column).Text = DefaultColumnNames.Level Then
             If Not IsNumeric(e.Text) Then
-                MsgBox("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
+                MsgBoxTranslate("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
                 bValid = False
             ElseIf e.Text.Contains(".") Then
-                MsgBox("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
+                MsgBoxTranslate("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
 
                 bValid = False
             End If
@@ -213,7 +214,7 @@ Public Class ucrFactor
             OnControlValueChanged()
             e.Cell.Style.BackColor = Color.Gold
         Else
-        'Todo what will happen if the text is not valid
+            'Todo what will happen if the text is not valid
         End If
 
     End Sub
@@ -835,14 +836,14 @@ Public Class ucrFactor
         'to enforce developers use this control correctly do the following checks
         If iValueColIndex < 0 Then
             If Not bSilent Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iValueColIndex & " in the grid.")
+                MsgBoxTranslate("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iValueColIndex & " in the grid.")
             End If
             Exit Sub
         End If
 
         If cellValues.Count <> _grdSheet.Rows Then
             If Not bSilent Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid.")
+                MsgBoxTranslate("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid.")
             End If
             Exit Sub
         End If
@@ -909,7 +910,7 @@ Public Class ucrFactor
                 SetSelectedRows(_grdSheet, iSelectorColIndex, iValueColIndex, arrCellValues, False)
             Case ControlStates.NormalGrid
                 If arrCellValues.Count <> _grdSheet.Rows Then
-                    MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid. check SetControl()")
+                    MsgBoxTranslate("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid. check SetControl()")
                     Exit Sub
                 End If
                 SetCellValues(_grdSheet, iValueColIndex, arrCellValues, False)

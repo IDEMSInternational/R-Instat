@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class Condition
     Private bIsParameterValues As Boolean = False
     Private bIsParameterPresent As Boolean = False
@@ -115,7 +116,7 @@ Public Class Condition
         bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
         If Not {"string", "RFunction", "ROperator"}.Contains(strType) Then
-            MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
+            MsgBoxTranslate("Developer error: strType must be either string, RFunction or ROperator.")
             strParameterType = ""
         Else
             strParameterType = strType
@@ -201,7 +202,7 @@ Public Class Condition
                     Case "ROperator"
                         Return (bIsPositive = clsTempParam.bIsOperator)
                     Case Else
-                        MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
+                        MsgBoxTranslate("Developer error: strType must be either string, RFunction or ROperator.")
                         Return False
                 End Select
             End If
