@@ -371,7 +371,7 @@ Public Class dlgEndOfRainsSeason
         ucrSaveObject.SetPrefix("end_rain_definition")
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
-        ucrSaveObject.SetLabelText("Survival Object Name:")
+        ucrSaveObject.SetLabelText("Definition Object Name:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
@@ -1198,7 +1198,7 @@ Public Class dlgEndOfRainsSeason
         clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
         clsGetOffsetTermFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_offset_term")
-        clsGetOffsetTermFunction.SetAssignTo("definitions_offset ")
+        clsGetOffsetTermFunction.SetAssignTo("definitions_offset")
 
         clsGetEndRainDefFunction.SetRCommand("get_end_rains_definition")
         clsGetEndRainDefFunction.AddParameter("summary_data", clsRFunctionParameter:=clsGetDataframeFunction, iPosition:=0, bIncludeArgumentName:=False)
