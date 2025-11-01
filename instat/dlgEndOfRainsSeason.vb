@@ -330,7 +330,6 @@ Public Class dlgEndOfRainsSeason
         ucrInputFilled.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrInputFilled.SetValidationTypeAsRVariable()
 
-
         ucrChkWB.AddParameterPresentCondition(True, "WB_evap", True)
         ucrChkWB.AddParameterPresentCondition(False, "WB_evap", False)
         ucrChkWB.SetText("Reducing")
@@ -1604,6 +1603,8 @@ Public Class dlgEndOfRainsSeason
             clsFirstOrLastFunction = clsFirstDoyFunction
             Evaporation()
         End If
+        AddSaveDefinitionOptions()
+
     End Sub
 
     Private Sub ucrChkEndofRainsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDoy.ControlValueChanged
@@ -1612,6 +1613,7 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndRainsCombinationSubCalcList.RemoveParameterByName("sub1")
         End If
+        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub ucrChkEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDate.ControlValueChanged
@@ -1620,6 +1622,7 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndRainsCombinationSubCalcList.RemoveParameterByName("sub2")
         End If
+        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub ucrChkEndofSeasonDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonDoy.ControlValueChanged
@@ -1644,28 +1647,48 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndRainsCombinationSubCalcList.RemoveParameterByName("sub3")
         End If
+        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub AddSaveDefinitionOptions()
+        ' Clear all existing parameters first
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains_date")
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains")
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains_status")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_seasons_date")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_seasons")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_seasons_status")
 
         If ucrChkDefinitions.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndRainDefFunction, iPosition:=13)
-            If ucrChkEndofSeasonDate.Checked Then
-                clsGetEndRainDefFunction.AddParameter("end_rains_date", ucrInputEndofSeasonDate.GetText, iPosition:=2)
-            ElseIf ucrChkEndofSeasonDoy.Checked Then
-                clsGetEndRainDefFunction.AddParameter("end_rains", ucrInputSeasonDoy.GetText, iPosition:=3)
 
-            ElseIf ucrChkEndofSeasonOccurence.Checked Then
-                clsGetEndRainDefFunction.AddParameter("end_rains_status", ucrInputEndofSeasonOccurence.GetText, iPosition:=4)
+            If rdoEndOfSeasons.Checked Then
+                If ucrChkEndofSeasonDate.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_seasons_date", Chr(34) & ucrInputEndofSeasonDate.GetText & Chr(34), iPosition:=2)
+                End If
+                If ucrChkEndofSeasonDoy.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_seasons", Chr(34) & ucrInputSeasonDoy.GetText & Chr(34), iPosition:=3)
+                End If
+                If ucrChkEndofSeasonOccurence.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_seasons_status", Chr(34) & ucrInputEndofSeasonOccurence.GetText & Chr(34), iPosition:=4)
+                End If
+
+            ElseIf rdoEndOfRains.Checked Then
+                If ucrChkEndofRainsDate.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_rains_date", Chr(34) & ucrInputEndofRainsDate.GetText & Chr(34), iPosition:=2)
+                End If
+                If ucrChkEndofRainsDoy.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_rains", Chr(34) & ucrInputEndRainDoy.GetText & Chr(34), iPosition:=3)
+                End If
+                If ucrChkEndofRainsOccurence.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_rains_status", Chr(34) & ucrInputEndofRainsOccurence.GetText & Chr(34), iPosition:=4)
+                End If
             End If
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndRainDefFunction)
         End If
-
     End Sub
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrChkEndofSeasonOccurence.ControlContentsChanged, ucrInputEndofSeasonOccurence.ControlContentsChanged, ucrChkEndofSeasonDate.ControlContentsChanged, ucrInputEndofSeasonDate.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -1743,6 +1766,10 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+        AddSaveDefinitionOptions()
+    End Sub
+
+    Private Sub ucrInputEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEndofRainsDate.ControlValueChanged, ucrInputEndofRainsOccurence.ControlValueChanged, ucrInputEndRainDoy.ControlValueChanged
         AddSaveDefinitionOptions()
     End Sub
 End Class
