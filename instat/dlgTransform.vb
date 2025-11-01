@@ -746,7 +746,6 @@ Public Class dlgTransform
         ucrInputDivide.SetRCode(clsScaleDivideOperator, bReset)
         ucrInputMultiply.SetRCode(clsScaleMultiplyOperator, bReset)
         ucrChkAddConstant.SetRCode(clsConstantDummyFunction, bReset)
-        ucrPnlNumericOptions.SetRCode(clsNumericDummyFunction, bReset)
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
@@ -757,6 +756,7 @@ Public Class dlgTransform
             ucrChkAdd.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkMultiply.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkSubtract.SetRCode(clsNumericDummyFunction, bReset)
+            ucrPnlNumericOptions.SetRCode(clsNumericDummyFunction, bReset)
             ucrSaveNew.SetRCode(clsRoundFunction, bReset)
         End If
         bResetRCode = True
@@ -779,10 +779,12 @@ Public Class dlgTransform
         If rdoSingle.Checked Then
             ucrSaveNew.SetLabelText("New Column Name:")
             ucrSaveNew.btnColumnPosition.Visible = True
+
             If ucrReceiverRank.IsEmpty() Then
                 ucrSaveNew.SetName("")
                 Exit Sub
             End If
+
             If Not ucrChkOverWriteColumns.Checked Then
                 If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
                     ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
@@ -790,6 +792,7 @@ Public Class dlgTransform
             Else
                 ucrSaveNew.SetName(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
+
         ElseIf rdoMultiple.Checked Then
             ucrSaveNew.SetLabelText("Suffix Name:")
             ucrSaveNew.SetPrefix("select")
@@ -835,30 +838,23 @@ Public Class dlgTransform
                 clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
                 If rdoRoundOf.Checked Then
                     clsPreviewTextFunction = clsRoundFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
                 ElseIf rdoSignificantDigits.Checked Then
                     clsPreviewTextFunction = clsSignifFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
                 ElseIf rdoLag.Checked Then
                     clsPreviewTextFunction = clsLagFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
                 ElseIf rdoLead.Checked Then
                     clsPreviewTextFunction = clsLeadFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
                 ElseIf rdoDifference.Checked Then
                     clsPreviewTextFunction = clsConcDiffFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsConcDiffFunction)
                 ElseIf rdoStandardize.Checked Then
                     clsPreviewTextFunction = clsDivisionOperator.Clone
-                    clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
                 ElseIf rdoLogical.Checked Then
-                    clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
                     clsPreviewTextFunction = clsBooleanOperator.Clone
                     ucrBase.clsRsyntax.SetBaseROperator(clsBooleanOperator)
                     Select Case ucrInputLogicOperations.GetText
