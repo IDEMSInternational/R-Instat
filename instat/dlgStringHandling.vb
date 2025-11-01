@@ -117,9 +117,8 @@ Public Class dlgStringHandling
 
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
-        ucrChkReplaceBy.SetText("Replace By:")
-        ucrChkReplaceBy.SetParameter(New RParameter("replacement", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputReplaceNaBy.SetParameter(New RParameter("replacement", 1))
+        ucrInputReplaceNaBy.SetLinkedDisplayControl(lblReplaceByFromNA)
 
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
@@ -165,14 +164,13 @@ Public Class dlgStringHandling
 
         ucrChkOverWriteColumns.SetText("Overwrite Column(s)")
 
-        ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrPnlReplaceOptions}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase}, {rdoDetect, rdoToNa, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrPnlFindOptions, {rdoFind}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrChkReplaceBy, {rdoReplaceNa}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceNaBy, {rdoReplaceNa}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkRemoveAll, {rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFindOptions.AddToLinkedControls(ucrChkAll, {rdoExtract, rdoLocate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFindOptions.SetLinkedDisplayControl(grpFindOptions)
@@ -256,7 +254,6 @@ Public Class dlgStringHandling
         ucrInputPattern.SetName("")
 
         clsReplaceDummyFunction.AddParameter("checked", False, iPosition:=0)
-        'clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=1)
 
         clsList2Function.SetRCommand("list")
         clsList2Function.AddParameter("C0", clsRFunctionParameter:=clsList1Function, iPosition:=0)
@@ -490,7 +487,6 @@ Public Class dlgStringHandling
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlStringHandling.SetRCode(clsFindDummyFunction, bReset)
-        ucrPnlColumnSelectOptions.SetRCode(clsFindDummyFunction, bReset)
 
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsCountFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
@@ -538,7 +534,6 @@ Public Class dlgStringHandling
 
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
-        'ucrPnlColumnSelectOptions.SetRCode(clsFindDummyFunction, bReset)
         ucrChkBoundary.SetRCode(clsReplaceDummyFunction, bReset)
         ucrChkRemoveAll.SetRCode(clsDummyFunction, bReset)
         ucrChkAll.SetRCode(clsDummyFunction, bReset)
@@ -548,7 +543,6 @@ Public Class dlgStringHandling
         ucrChkMultiline.SetRCode(clsRegexFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsDetectFunction, bReset)
         ucrChkNegate.SetRCode(clsDetectFunction, bReset)
-        ucrChkReplaceBy.SetRCode(clsReplaceNaFunction, bReset)
         ucrInputReplaceNaBy.SetRCode(clsReplaceNaFunction, bReset)
         ucrPnlFindOptions.SetRCode(clsFindDummyFunction, bReset)
         ucrPnlDetectOptions.SetRCode(clsFindDummyFunction, bReset)
@@ -556,6 +550,7 @@ Public Class dlgStringHandling
 
         If bReset Then
             ucrReceiverStringHandling.SetRCode(clsDetectFunction, bReset)
+            ucrPnlColumnSelectOptions.SetRCode(clsFindDummyFunction, bReset)
         End If
     End Sub
 
@@ -573,7 +568,6 @@ Public Class dlgStringHandling
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-        rdoSingle.Checked = True 'This is done manually to have the rdoSingle.checked after reset
     End Sub
 
     Private Sub AddRemoveParameters()
@@ -933,12 +927,10 @@ Public Class dlgStringHandling
         clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
         If rdoSingle.Checked Then
-            clsFindDummyFunction.AddParameter("col", "single", iPosition:=4)
             ucrSelectorStringHandling.SetItemType("column")
             ucrReceiverStringHandling.strSelectorHeading = "Variables"
             lblColumn.Text = "Column:"
         Else
-            clsFindDummyFunction.AddParameter("col", "multiple", iPosition:=4)
             ucrSelectorStringHandling.SetItemType("column_selection")
             ucrReceiverStringHandling.strSelectorHeading = "Column selections"
             lblColumn.Text = "Select:"
