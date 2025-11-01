@@ -38,6 +38,12 @@ Public Class sdgSelectMonth
         lblHelperText.Visible = False
         Me.Controls.Add(lblHelperText)
         lblHelperText.BringToFront()
+        Dim strVarName As String = ucrReceiverMonth.GetVariableNames(bWithQuotes:=False)
+        If String.IsNullOrWhiteSpace(strVarName) Then
+            ucrMonthAsFactor.Visible = True
+            lblHelperText.Visible = False
+            Return
+        End If
 
         ' Check if the linked receiver exists
         If ucrReceiverMonth IsNot Nothing Then
