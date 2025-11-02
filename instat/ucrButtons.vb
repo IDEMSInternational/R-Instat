@@ -126,7 +126,6 @@ Public Class ucrButtons
             OnScriptButtonsClick(sender, e, True, True)
         Else
             ' Normal To Script behavior (just send to script window)
-            OnScriptButtonsClick(sender, e, False, Not sender Is toolStripMenuItemToScriptKeep)
         End If
         frmMain.mnuViewLogScript.Checked = True
     End Sub
