@@ -184,7 +184,7 @@ Partial Class ucrButtons
         '
         Me.toolStripMenuItemToScriptOk.Name = "toolStripMenuItemToScriptOk"
         Me.toolStripMenuItemToScriptOk.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemToScriptOk.Text = "To Script && OK"
+        Me.toolStripMenuItemToScriptOk.Text = "To Script && Ok"
         '
         'ucrButtons
         '
