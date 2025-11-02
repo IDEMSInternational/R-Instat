@@ -296,9 +296,16 @@ Public Class dlgRecodeFactor
 
             'add the parameters
             For i = 0 To lstCurrentLabels.Count - 1
-                'todo. why not use the double quotes here??
-                'Backtick(') needed for names of the vector incase the levels are not valid R names
-                clsReplaceFunction.AddParameter(Chr(96) & lstCurrentLabels(i) & Chr(96), lstNewLabels(i), iPosition:=i + 1)
+                ' Clean and normalize labels before adding to the replace list
+                Dim oldLabel As String = lstCurrentLabels(i).Trim()
+                Dim newLabelRaw As String = lstNewLabels(i).Replace(Chr(34), "").Trim()
+
+                ' Optional: reorder compound labels alphabetically (if separated by ;)
+                Dim parts As String() = newLabelRaw.Split(";"c)
+                Dim reorderedLabel As String = String.Join("; ", parts.Select(Function(x) x.Trim()).OrderBy(Function(x) x))
+
+                ' Add mapping to replacement function with proper quotes and trimming
+                clsReplaceFunction.AddParameter(Chr(96) & oldLabel & Chr(96), Chr(34) & reorderedLabel & Chr(34), iPosition:=i + 1)
             Next
         End If
 
