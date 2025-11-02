@@ -1655,22 +1655,22 @@ Public Class dlgEndOfRainsSeason
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains_date")
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains")
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains_status")
-        clsGetEndRainDefFunction.RemoveParameterByName("end_seasons_date")
-        clsGetEndRainDefFunction.RemoveParameterByName("end_seasons")
-        clsGetEndRainDefFunction.RemoveParameterByName("end_seasons_status")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_season_date")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_season")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_season_status")
 
         If ucrChkDefinitions.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndRainDefFunction, iPosition:=13)
 
             If rdoEndOfSeasons.Checked Then
                 If ucrChkEndofSeasonDate.Checked Then
-                    clsGetEndRainDefFunction.AddParameter("end_seasons_date", Chr(34) & ucrInputEndofSeasonDate.GetText & Chr(34), iPosition:=2)
+                    clsGetEndRainDefFunction.AddParameter("end_season_date", Chr(34) & ucrInputEndofSeasonDate.GetText & Chr(34), iPosition:=2)
                 End If
                 If ucrChkEndofSeasonDoy.Checked Then
-                    clsGetEndRainDefFunction.AddParameter("end_seasons", Chr(34) & ucrInputSeasonDoy.GetText & Chr(34), iPosition:=3)
+                    clsGetEndRainDefFunction.AddParameter("end_season", Chr(34) & ucrInputSeasonDoy.GetText & Chr(34), iPosition:=3)
                 End If
                 If ucrChkEndofSeasonOccurence.Checked Then
-                    clsGetEndRainDefFunction.AddParameter("end_seasons_status", Chr(34) & ucrInputEndofSeasonOccurence.GetText & Chr(34), iPosition:=4)
+                    clsGetEndRainDefFunction.AddParameter("end_season_status", Chr(34) & ucrInputEndofSeasonOccurence.GetText & Chr(34), iPosition:=4)
                 End If
 
             ElseIf rdoEndOfRains.Checked Then
