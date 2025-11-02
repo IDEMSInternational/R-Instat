@@ -1069,6 +1069,3 @@ Public Class dlgPICSARainfall
         openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class
-
-
-
