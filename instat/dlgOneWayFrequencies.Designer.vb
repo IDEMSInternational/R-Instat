@@ -81,7 +81,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpTableGraphSort.Controls.Add(Me.ucrPnlTableGraphSort)
         Me.grpTableGraphSort.Location = New System.Drawing.Point(258, 185)
         Me.grpTableGraphSort.Name = "grpTableGraphSort"
-        Me.grpTableGraphSort.Size = New System.Drawing.Size(167, 88)
+        Me.grpTableGraphSort.Size = New System.Drawing.Size(177, 88)
         Me.grpTableGraphSort.TabIndex = 9
         Me.grpTableGraphSort.TabStop = False
         Me.grpTableGraphSort.Text = "Sort"
@@ -186,7 +186,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpTableGraphOutput.Controls.Add(Me.ucrPnlTableOutput)
         Me.grpTableGraphOutput.Location = New System.Drawing.Point(258, 275)
         Me.grpTableGraphOutput.Name = "grpTableGraphOutput"
-        Me.grpTableGraphOutput.Size = New System.Drawing.Size(165, 75)
+        Me.grpTableGraphOutput.Size = New System.Drawing.Size(177, 75)
         Me.grpTableGraphOutput.TabIndex = 10
         Me.grpTableGraphOutput.TabStop = False
         Me.grpTableGraphOutput.Text = "Output "
@@ -218,7 +218,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlTableOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlTableOutput.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlTableOutput.Name = "ucrPnlTableOutput"
-        Me.ucrPnlTableOutput.Size = New System.Drawing.Size(150, 53)
+        Me.ucrPnlTableOutput.Size = New System.Drawing.Size(174, 53)
         Me.ucrPnlTableOutput.TabIndex = 0
         '
         'rdoFrqStemLeaf
