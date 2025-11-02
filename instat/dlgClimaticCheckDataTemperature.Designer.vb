@@ -551,7 +551,7 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         Me.ucrNudSameLabel.AutoSize = True
         Me.ucrNudSameLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.ucrNudSameLabel.Location = New System.Drawing.Point(85, 328)
+        Me.ucrNudSameLabel.Location = New System.Drawing.Point(95, 328)
         Me.ucrNudSameLabel.Name = "ucrNudSameLabel"
         Me.ucrNudSameLabel.Size = New System.Drawing.Size(93, 13)
         Me.ucrNudSameLabel.TabIndex = 54
