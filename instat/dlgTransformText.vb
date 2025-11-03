@@ -131,7 +131,6 @@ Public Class dlgTransformText
         ucrPnlSideTrunc.AddRadioButton(rdoMiddle, Chr(34) & "center" & Chr(34))
         ucrPnlSideTrunc.SetLinkedDisplayControl(lblSideTrunc)
 
-
         'ucrInputPad
         ucrInputPad.SetParameter(New RParameter("pad", 3))
         dctInputPad.Add("Space ( )", Chr(34) & " " & Chr(34))
@@ -917,4 +916,52 @@ Public Class dlgTransformText
             NewDefaultName()
         End If
     End Sub
+
+    Private Sub SelectOptions()
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorForTransformText.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverTransformText.GetVariableNames, iPosition:=1)
+        clsNamesFunction.AddParameter("data_name", ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
+
+        If rdoSingle.Checked Then
+            clsDummyFunction.AddParameter("col", "single", iPosition:=0)
+            ucrSelectorForTransformText.SetItemType("column")
+            ucrReceiverTransformText.strSelectorHeading = "Variables"
+            lblColumnToTransform.Text = "Column To Transform"
+        Else
+            clsDummyFunction.AddParameter("col", "multiple", iPosition:=0)
+            ucrSelectorForTransformText.SetItemType("column_selection")
+            ucrReceiverTransformText.strSelectorHeading = "Column selections"
+            lblColumnToTransform.Text = "Select To Transform"
+        End If
+    End Sub
+
+    Private Sub ucrNewColName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColName.ControlValueChanged
+        clsTildaOperator.AddParameter("new_name", Chr(34) & ucrNewColName.GetText & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsTildaOperator.SetAssignTo("new_name")
+    End Sub
+
+    Private Sub OverwriteColumnOption()
+        If rdoLength.Checked Then
+            ucrChkOverWriteColumns.Visible = False
+        Else
+            ucrChkOverWriteColumns.Visible = True
+        End If
+    End Sub
+
+    Private Sub dlgTransformText_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+
+        If Me.Visible Then
+            If rdoMultiple.Checked Then
+                lblColumnToTransform.Text = "Select To Transform"
+            Else
+                lblColumnToTransform.Text = "Column To Transform"
+            End If
+
+            ' Refresh new column name when dialog becomes visible again
+            NewDefaultName()
+        End If
+    End Sub
+
 End Class
