@@ -86,6 +86,8 @@ Public Class dlgImportFromEPicsa
         clsGcsFileFunction = New RFunction
         clsStationMetadataFunction = New RFunction
 
+        ucrDataframeSelector.Reset()
+
         rdoData.Enabled = False
         ucrInputComboCountry.SetText("mw")
         ucrInputComboFindFiles.cboInput.Items.Clear()
