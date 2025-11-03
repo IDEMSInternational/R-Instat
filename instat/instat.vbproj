@@ -293,6 +293,12 @@
     <Compile Include="dlgImportClimMob.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportFromEPicsa.Designer.vb">
+      <DependentUpon>dlgImportFromEPicsa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromEPicsa.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -3507,6 +3513,9 @@
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromEPicsa.resx">
+      <DependentUpon>dlgImportFromEPicsa.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromPostgres.resx">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </EmbeddedResource>
@@ -6276,6 +6285,12 @@
     <Content Include="translations\rInstatTranslations.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\InstatObject\R\quartoTemplate.qmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\InstatObject\R\renderQuarto.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />

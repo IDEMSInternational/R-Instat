@@ -58,7 +58,7 @@ Public Class dlgImportDataset
         If strFileToOpenOn <> "" Then
             'if path is not a file or folder then it no longer exists
             If Not File.Exists(strFileToOpenOn) AndAlso Not Directory.Exists(strFileToOpenOn) Then
-                MsgBox("File or folder no longer exists: " & strFileToOpenOn)
+                MsgBoxTranslate("File or folder no longer exists: " & strFileToOpenOn)
                 strFileToOpenOn = "" 'reset
                 strFileExtension = "" 'reset
             End If
@@ -75,7 +75,7 @@ Public Class dlgImportDataset
                 SetDialogStateFromFile("")
             Else
                 If Not File.Exists(ucrInputFilePath.GetText()) AndAlso Not Directory.Exists(ucrInputFilePath.GetText()) Then
-                    MsgBox("File or folder no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File/Folder No Longer Exists")
+                    MsgBoxTranslate("File or folder no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File/Folder No Longer Exists")
                     SetDialogStateFromFile("")
                 Else
                     'get file or folder path from the control and use previous extension incase it was a folder
@@ -438,7 +438,36 @@ Public Class dlgImportDataset
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly;*.dat|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|DAT|*.dat|All files|*.*"
+            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.qmd;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly;*.dat|" &
+                             "Comma separated files|*.csv|" &
+                             "Text data file|*.txt|" &
+                             "Excel files|*.xls;*.xlsx|" &
+                             "R Data Structure files|*.RDS|" &
+                             "SPSS files|*.sav|" &
+                             "Tab separated files|*.tsv|" &
+                             "CSV with a YAML metadata header|*.csvy|" &
+                             "Feather R/Python interchange format|*.feather|" &
+                             "Pipe separates files|*.psv|" &
+                             "Saved R objects|*.RData|" &
+                             "Quarto Files (*.qmd)|*.qmd|" &
+                             "JSON|*.json|" &
+                             "YAML|*.yml|" &
+                             "Stata files|*.dta|" &
+                             "XBASE database files|*.dbf|" &
+                             "Weka Attribute-Relation File Format|*.arff|" &
+                             "R syntax object|*.R|" &
+                             "SAS Files|*.sas7bdat|" &
+                             "SAS XPORT|*.xpt|" &
+                             "Minitab Files|*.mtp|" &
+                             "Epiinfo Files|*.rec|" &
+                             "Systat Files|*.syd|" &
+                             "Data Interchange Format|*.dif|" &
+                             "OpenDocument Spreadsheet|*.ods|" &
+                             "Shallow XML documents|*.xml|" &
+                             "Single-table HTML documents|*.html|" &
+                             "DLY|*.dly|" &
+                             "DAT|*.dat|" &
+                             "All files|*.*"
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
@@ -449,7 +478,7 @@ Public Class dlgImportDataset
                     dlgOpen.InitialDirectory = strLibraryPath
                 End If
             Else
-                dlgOpen.Title = "Open Data from file"
+                dlgOpen.Title = "Open Data from File"
                 dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
             End If
             If DialogResult.OK = dlgOpen.ShowDialog() Then
@@ -457,7 +486,7 @@ Public Class dlgImportDataset
                 ucrChkMultipleFiles.Checked = False
                 ucrSaveFile.Reset()
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
-                    MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
+                    MsgBoxTranslate("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
                     SetDialogStateFromFile("")
                 Else
                     dctSelectedExcelSheets.Clear()
@@ -707,22 +736,13 @@ Public Class dlgImportDataset
                 ucrSaveFile.SetName(GetCleanFileName(strFileName), bSilent:=True)
             End If
 
-            If strFileExtension = ".r" Then
+            If strFileExtension = ".r" OrElse strFileExtension = ".qmd" Then
                 If Not frmMain.mnuViewLogScript.Checked Then
                     frmMain.mnuViewLogScript.Checked = True
                     frmMain.UpdateLayout()
                 End If
-                If frmMain.ucrScriptWindow.strActiveTabText.Length = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
-                              Environment.NewLine & "Do you still want to load?",
-                              "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    Try
-                        frmMain.ucrScriptWindow.strActiveTabText = File.ReadAllText(strFilePathSystem)
-                        frmMain.clsRecentItems.addToMenu(Replace(strFilePathSystem, "\", "/"))
-                    Catch
-                        MessageBox.Show("Could not load the script from file." &
-                              Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
-                              "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End Try
+                If frmMain.ucrScriptWindow.IsOkToLoadScript() Then
+                    frmMain.ucrScriptWindow.LoadScriptFromFile(strFilePathSystem)
                 End If
                 SetDialogStateFromFile("")
                 Me.Close()
@@ -867,6 +887,11 @@ Public Class dlgImportDataset
             End If
         Catch ex As Exception
         End Try
+
+        If clsTempImport.ContainsParameter("n_max") Then
+            clsTempImport.RemoveParameterByName("n_max")
+        End If
+        clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
 
     End Sub
 
@@ -1253,6 +1278,10 @@ Public Class dlgImportDataset
         Return {".json"}.Contains(strFileExtension)
     End Function
 
+    Private Function IsSavFileFormat() As Boolean
+        Return {".sav"}.Contains(strFileExtension)
+    End Function
+
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
         If strFileExtension = ".rds" _
@@ -1276,6 +1305,8 @@ Public Class dlgImportDataset
                     strRowMaxParamName = "nrows"
                 ElseIf IsExcelFileFormat() Then
                     strRowMaxParamName = "n_max"
+                ElseIf IsSavFileFormat() Then
+                    strRowMaxParamName = "n_max"
                 End If
 
                 'determine the correct maximum number of lines to preview 
@@ -1286,7 +1317,9 @@ Public Class dlgImportDataset
                     clsTempFunction.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
                 End If
 
-
+                If Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat() OrElse IsJSONFileFormat()) Then
+                    clsTempFunction.RemoveParameterByName(strRowMaxParamName)
+                End If
 
                 clsTempFunction.RemoveAssignTo()
                 clsTempFunction.bExcludeAssignedFunctionOutput = False

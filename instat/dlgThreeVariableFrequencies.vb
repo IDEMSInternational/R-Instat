@@ -308,7 +308,7 @@ Public Class dlgThreeVariableFrequencies
 
     '    If rdoBoth.Checked Then
     '        strGraph = clsGridArrangeFunction.ToScript(strTempScript)
-    '        frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
+    '        frmMain.clsRLink.RunRScript(strTempScript & strGraph, iCallType:=3)
     '    End If
     'End Sub
 

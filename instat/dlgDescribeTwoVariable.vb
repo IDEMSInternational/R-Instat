@@ -1724,7 +1724,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub DisplayWarning(strMessage As String)
-        MsgBox("Pick a categorical variable different from those selected in the" & strMessage & "to avoid Errors", vbOKOnly, "Matching Factor Variables")
+        MsgBoxTranslate("Pick a categorical variable different from those selected in the" & strMessage & "to avoid Errors", vbOKOnly, "Matching Factor Variables")
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
