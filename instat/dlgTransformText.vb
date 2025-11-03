@@ -78,7 +78,6 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
-        'ucrReceiverTransformText.strSelectorHeading = "Variables"
 
         'ucrRdoOptions
         ucrPnlOperation.AddRadioButton(rdoCase)
@@ -130,7 +129,6 @@ Public Class dlgTransformText
         ucrPnlSideTrunc.AddRadioButton(rdoRight, Chr(34) & "right" & Chr(34))
         ucrPnlSideTrunc.AddRadioButton(rdoMiddle, Chr(34) & "center" & Chr(34))
         ucrPnlSideTrunc.SetLinkedDisplayControl(lblSideTrunc)
-
 
         'ucrInputPad
         ucrInputPad.SetParameter(New RParameter("pad", 3))
@@ -282,7 +280,6 @@ Public Class dlgTransformText
 
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
-        ' NewDefaultName()
 
         'initialise word controls
         ucrNudFirstWord.SetText(1)
@@ -479,7 +476,6 @@ Public Class dlgTransformText
 
         If bReset Then
             ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
-            NewDefaultName()
         End If
 
         bRCodeSet = True
@@ -621,7 +617,7 @@ Public Class dlgTransformText
         End If
         ChangeBaseFunction()
         DialogSize()
-        OverwriteOption()
+        OverwriteColumnOption()
     End Sub
 
     Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
@@ -820,7 +816,7 @@ Public Class dlgTransformText
         NewDefaultName()
         SelectOptions()
         ChangeBaseFunction()
-        OverwriteOption()
+        OverwriteColumnOption()
     End Sub
 
     Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged,
@@ -898,7 +894,7 @@ Public Class dlgTransformText
         clsTildaOperator.SetAssignTo("new_name")
     End Sub
 
-    Private Sub OverwriteOption()
+    Private Sub OverwriteColumnOption()
         If rdoLength.Checked Then
             ucrChkOverWriteColumns.Visible = False
         Else
@@ -907,14 +903,17 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub dlgTransformText_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+
         If Me.Visible Then
             If rdoMultiple.Checked Then
                 lblColumnToTransform.Text = "Select To Transform"
             Else
                 lblColumnToTransform.Text = "Column To Transform"
             End If
+
             ' Refresh new column name when dialog becomes visible again
             NewDefaultName()
         End If
     End Sub
+
 End Class

@@ -107,6 +107,7 @@ Public Class dlgTransform
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -355,6 +356,8 @@ Public Class dlgTransform
         ucrChkEditPreview.SetText("Edit")
 
         ttEditPreview.SetToolTip(ucrChkEditPreview.chkCheck, "Use(Slightly) at your peril.")
+
+        ucrChkOverWriteColumns.SetText("Overwrite Column(s)")
     End Sub
 
     Private Sub SetDefaults()
@@ -647,7 +650,6 @@ Public Class dlgTransform
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -744,7 +746,6 @@ Public Class dlgTransform
         ucrInputDivide.SetRCode(clsScaleDivideOperator, bReset)
         ucrInputMultiply.SetRCode(clsScaleMultiplyOperator, bReset)
         ucrChkAddConstant.SetRCode(clsConstantDummyFunction, bReset)
-        ucrPnlNumericOptions.SetRCode(clsNumericDummyFunction, bReset)
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
@@ -755,6 +756,7 @@ Public Class dlgTransform
             ucrChkAdd.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkMultiply.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkSubtract.SetRCode(clsNumericDummyFunction, bReset)
+            ucrPnlNumericOptions.SetRCode(clsNumericDummyFunction, bReset)
             ucrSaveNew.SetRCode(clsRoundFunction, bReset)
         End If
         bResetRCode = True
@@ -776,15 +778,34 @@ Public Class dlgTransform
     Private Sub NewDefaultName()
         If rdoSingle.Checked Then
             ucrSaveNew.SetLabelText("New Column Name:")
-            If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
-                ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+            ucrSaveNew.btnColumnPosition.Visible = True
+
+            If ucrReceiverRank.IsEmpty() Then
+                ucrSaveNew.SetName("")
+                Exit Sub
             End If
+
+            If Not ucrChkOverWriteColumns.Checked Then
+                If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
+                    ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+                End If
+            Else
+                ucrSaveNew.SetName(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+            End If
+
         ElseIf rdoMultiple.Checked Then
             ucrSaveNew.SetLabelText("Suffix Name:")
+            ucrSaveNew.SetPrefix("select")
             ucrSaveNew.btnColumnPosition.Visible = False
             If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
                 clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
             End If
+        End If
+
+        If ucrChkOverWriteColumns.Checked Then
+            ucrSaveNew.Enabled = False
+        Else
+            ucrSaveNew.Enabled = True
         End If
     End Sub
 
@@ -817,30 +838,23 @@ Public Class dlgTransform
                 clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
                 If rdoRoundOf.Checked Then
                     clsPreviewTextFunction = clsRoundFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
                 ElseIf rdoSignificantDigits.Checked Then
                     clsPreviewTextFunction = clsSignifFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
                 ElseIf rdoLag.Checked Then
                     clsPreviewTextFunction = clsLagFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
                 ElseIf rdoLead.Checked Then
                     clsPreviewTextFunction = clsLeadFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
                 ElseIf rdoDifference.Checked Then
                     clsPreviewTextFunction = clsConcDiffFunction.Clone
-                    clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsConcDiffFunction)
                 ElseIf rdoStandardize.Checked Then
                     clsPreviewTextFunction = clsDivisionOperator.Clone
-                    clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
                 ElseIf rdoLogical.Checked Then
-                    clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
                     clsPreviewTextFunction = clsBooleanOperator.Clone
                     ucrBase.clsRsyntax.SetBaseROperator(clsBooleanOperator)
                     Select Case ucrInputLogicOperations.GetText
@@ -906,7 +920,6 @@ Public Class dlgTransform
             ucrBase.clsRsyntax.AddToAfterCodes(clsPipeOperator, 0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAssignOperator, 1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnsFunction, 2)
-
 
         End If
         SetPreviewText()
@@ -1123,9 +1136,16 @@ Public Class dlgTransform
     End Sub
 
     Private Sub ucrSaveNew_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNew.ControlValueChanged
+        ucrSaveParChanged()
+    End Sub
+    Private Sub ucrSaveParChanged()
         If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
-            clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            If Not ucrChkOverWriteColumns.Checked Then
+                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsPasteFunction.RemoveParameterByName("col_data")
+            End If
         End If
     End Sub
 
@@ -1186,4 +1206,27 @@ Public Class dlgTransform
             clsScaleDivideColsOperator.RemoveParameterByName("z")
         End If
     End Sub
+
+    Private Sub ReopenDialog()
+        'This is hardcoded here so that the checkbox is always unchecked when the dialog is reopened
+        ucrChkOverWriteColumns.Checked = False
+    End Sub
+
+    Private Sub ucrChkOverWriteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOverWriteColumns.ControlValueChanged
+        ucrSaveParChanged()
+        NewDefaultName()
+    End Sub
+
+    Private Sub dlgTransformText_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Me.Visible Then
+            If rdoMultiple.Checked Then
+                lblSelectColumns.Text = "Select:"
+            Else
+                lblSelectColumns.Text = "Column:"
+            End If
+            ' Refresh new column name when dialog becomes visible again
+            NewDefaultName()
+        End If
+    End Sub
+
 End Class
