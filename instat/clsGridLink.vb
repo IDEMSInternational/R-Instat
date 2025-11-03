@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Imports RDotNet
 Imports unvell.ReoGrid
 
@@ -277,7 +278,7 @@ Public Class clsGridLink
                     bIsFrozen = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsLogical(0)
                     If bIsFrozen Then
                         If k = dfTemp.ColumnCount - 1 Then
-                            MsgBox("Cannot freeze all columns.", Title:="Cannot freeze")
+                            MsgBoxTranslate("Cannot freeze all columns.", Title:="Cannot freeze")
                         Else
                             grdCurr.CurrentWorksheet.FreezeToCell(row:=0, col:=k + 1)
                         End If

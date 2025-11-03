@@ -550,7 +550,7 @@ Public Class sdgSummaries
                     End If
                 Next
                 If Not bTabFound Then
-                    MsgBox("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
+                    MsgBoxTranslate("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
                     tbSummaries.SelectedIndex = 0
                 End If
             Else
@@ -576,10 +576,10 @@ Public Class sdgSummaries
         'Temp solution to telling user why OK not enabled. Should be something on the main dialog to show this instead.
         'Maybe, number of summaries selected.
         If SummaryCount = 0 Then
-            MsgBox("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
+            MsgBoxTranslate("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
         End If
         If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
-            MsgBox("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
+            MsgBoxTranslate("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
             bOkEnabled = False
         Else
             bOkEnabled = True

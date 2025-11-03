@@ -229,7 +229,7 @@ Public Class dlgOpenNetCDF
                         clsBoundaryListFunction.ClearParameters()
                     End If
                 Else
-                    MsgBox("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
+                    MsgBoxTranslate("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
                     strShort = ""
                     strMedium = ""
                     strLong = ""

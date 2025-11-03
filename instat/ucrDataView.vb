@@ -207,9 +207,9 @@ Public Class ucrDataView
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
-            MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
+            MsgBoxTranslate("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
-            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
+            Dim deleteCol = MsgBoxTranslate("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
                 GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedColumnNames())
@@ -234,7 +234,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
+        Dim Delete = MsgBoxTranslate("Are you sure you want to delete these row(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
         If Delete = DialogResult.Yes Then
             StartWait()
             GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteRows(GetSelectedRows())
@@ -444,7 +444,7 @@ Public Class ucrDataView
             Select Case GetCurrentDataFrameFocus().clsPrepareFunctions.GetDataTypeLabel(strColumnName)
                 Case "factor"
                     If Not GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnFactorLevels(strColumnName).Contains(strNewValue) Then
-                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBoxTranslate("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
                         Exit Sub
                     Else
                         bWithQuotes = True
@@ -453,14 +453,14 @@ Public Class ucrDataView
                     If Double.TryParse(strNewValue, dblValue) Then
                         bWithQuotes = False
                     Else
-                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBoxTranslate("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                         Exit Sub
                     End If
                 Case "integer"
                     If Integer.TryParse(strNewValue, iValue) Then
                         bWithQuotes = False
                     Else
-                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBoxTranslate("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                         Exit Sub
                     End If
                 Case "list"
@@ -468,7 +468,7 @@ Public Class ucrDataView
                         bWithQuotes = False
                         bListOfVector = strNewValue.Contains(",")
                     Else
-                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: a list of numeric and numeric vector. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBoxTranslate("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: a list of numeric and numeric vector. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                         Exit Sub
                     End If
                 Case Else
@@ -888,11 +888,11 @@ Public Class ucrDataView
     Public Sub PasteValuesToDataFrame()
         Dim strClipBoardText As String = My.Computer.Clipboard.GetText
         If String.IsNullOrEmpty(strClipBoardText) Then
-            MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")
+            MsgBoxTranslate("No data available for pasting.", MsgBoxStyle.Information, "No Data")
             Exit Sub
         End If
         'warn user action cannot be undone
-        If DialogResult.No = MsgBox("Are you sure you want to paste to these column(s)?" & Environment.NewLine &
+        If DialogResult.No = MsgBoxTranslate("Are you sure you want to paste to these column(s)?" & Environment.NewLine &
                             "This action cannot be undone.", MessageBoxButtons.YesNo, "Paste Data") Then
             Exit Sub
         End If
@@ -981,7 +981,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub DeleteCell_Click()
-        Dim deleteCell = MsgBox("This will replace the selected cells with missing values (NA)." &
+        Dim deleteCell = MsgBoxTranslate("This will replace the selected cells with missing values (NA)." &
                                 Environment.NewLine & "Continue?",
                                 MessageBoxButtons.YesNo, "Delete Cells")
         If deleteCell = DialogResult.Yes Then
@@ -1090,7 +1090,7 @@ Public Class ucrDataView
     Public Sub Undo()
         If frmMain.clsInstatOptions.bSwitchOffUndo Then
             ' Show a message box indicating that undo is turned off
-            MsgBox("Undo is turned off, go to Tools > Options to turn it on.", vbInformation, "Undo Disabled")
+            MsgBoxTranslate("Undo is turned off, go to Tools > Options to turn it on.", vbInformation, "Undo Disabled")
             Exit Sub
         End If
 
@@ -1118,7 +1118,7 @@ Public Class ucrDataView
                 msg &= " Please go to Tools > Options to adjust the limits."
 
                 ' Display the message box
-                MsgBox(msg, vbExclamation, "Undo Limit Exceeded")
+                MsgBoxTranslate(msg, vbExclamation, "Undo Limit Exceeded")
 
                 Exit Sub
             End If
