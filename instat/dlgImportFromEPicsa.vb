@@ -77,7 +77,6 @@ Public Class dlgImportFromEPicsa
 
         ucrSaveDefinitions.SetIsTextBox()
         ucrSaveDefinitions.ucrInputTextSave.bAutoChangeOnLeave = True
-
     End Sub
 
     Private Sub SetDefaults()
@@ -223,6 +222,7 @@ Public Class dlgImportFromEPicsa
             ucrSaveDefinitions.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveDefinitions.SetName("last_definition")
             ucrSaveDefinitions.SetLabelText("Definition Name:")
+            ucrSaveDefinitions.SetDataFrameSelector(ucrDataframeSelector)
         ElseIf rdoStation.Checked Then
             ucrSaveDefinitions.SetSaveTypeAsDataFrame()
             ucrSaveDefinitions.SetName("last_dataframe")
