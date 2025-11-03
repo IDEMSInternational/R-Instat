@@ -175,6 +175,9 @@ Public Class sdgClimdexIndices
         ucrNudMonthlyMissingDays.SetParameter(New RParameter("monthly", 1))
         ucrNudMonthlyMissingDays.SetMinMax(0, 31)
 
+        ucrNudSeasonalMissingDays.SetParameter(New RParameter("seasonal", 2))
+        ucrNudSeasonalMissingDays.SetLinkedDisplayControl(lblSeasonal)
+
         ' Base Range
         ucrNudLowerBase.SetParameter(New RParameter("0", 0))
         ucrNudLowerBase.SetParameterIncludeArgumentName(False)
@@ -283,6 +286,7 @@ Public Class sdgClimdexIndices
         'max.missing.days
         ucrNudAnnualMissingDays.SetRCode(clsMaxMissingDays, bReset, bCloneIfNeeded:=True)
         ucrNudMonthlyMissingDays.SetRCode(clsMaxMissingDays, bReset, bCloneIfNeeded:=True)
+        ucrNudSeasonalMissingDays.SetRCode(clsMaxMissingDays, bReset, bCloneIfNeeded:=True)
 
         'base.range
         ucrNudLowerBase.SetRCode(clsRBaseRange, bReset, bCloneIfNeeded:=True)
