@@ -50,7 +50,7 @@ Public Class dlgImportFromEPicsa
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoData, "checked", "data")
 
         ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry}, {rdoDefinitions, rdoStation}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputDefinitionsID, ucrInputComboFindFiles, ucrDataframeSelector}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ' This tab is disabled for now. Will be implemented later
         rdoData.Enabled = False
