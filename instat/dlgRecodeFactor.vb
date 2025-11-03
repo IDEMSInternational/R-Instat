@@ -296,14 +296,31 @@ Public Class dlgRecodeFactor
 
             'add the parameters
             For i = 0 To lstCurrentLabels.Count - 1
-                'todo. why not use the double quotes here??
-                'Backtick(') needed for names of the vector incase the levels are not valid R names
-                clsReplaceFunction.AddParameter(Chr(96) & lstCurrentLabels(i) & Chr(96), lstNewLabels(i), iPosition:=i + 1)
+                ' Clean and normalize labels before adding to the replace list
+                Dim oldLabel As String = lstCurrentLabels(i).Trim()
+                Dim newLabelRaw As String = lstNewLabels(i).Replace(Chr(34), "").Trim()
+
+                ' Optional: reorder compound labels alphabetically (if separated by ;)
+                Dim parts As String() = newLabelRaw.Split(";"c)
+                Dim reorderedLabel As String = String.Join("; ", parts.Select(Function(x) x.Trim()).OrderBy(Function(x) x))
+
+                ' Add mapping to replacement function with proper quotes and trimming
+                clsReplaceFunction.AddParameter(Chr(96) & oldLabel & Chr(96), Chr(34) & reorderedLabel & Chr(34), iPosition:=i + 1)
             Next
         End If
 
         TestOKEnabled()
     End Sub
+
+    ' Ensure paste (Ctrl + V) triggers the same logic as manual editing
+    Private Sub ucrFactorGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrFactorGrid.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.V Then
+            ucrFactorGrid_ControlValueChanged(ucrFactorGrid)
+        End If
+    End Sub
+
+
+
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrPnlKeep.ControlValueChanged, ucrInputOther.ControlValueChanged, ucrNudLevels.ControlValueChanged, ucrNudCommonValues.ControlValueChanged, ucrNudFrequentValues.ControlValueChanged, ucrFactorLevels.ControlValueChanged
         If rdoRecode.Checked Then
