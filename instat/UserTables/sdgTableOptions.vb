@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Windows.Forms.TabControl
 Imports instat.Translations
 
 Public Class sdgTableOptions
     Private clsOperator As ROperator
     Private clsThemeRFunction As RFunction
+    Private tabsToUse As IEnumerable(Of EnumTableSubDialogTab)
     Private bFirstload As Boolean = True
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -51,29 +53,93 @@ Public Class sdgTableOptions
     ''' </summary>
     ''' <param name="strDataFrameName">Name of the data frame contained in the data book</param>
     ''' <param name="clsNewOperator">R operator that has a 'gt' parameter that produces a 'gt' object.</param>
-    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator, Optional strTableName As String = "")
-        clsOperator = clsNewOperator
+    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator, tabsToUse As IEnumerable(Of EnumTableSubDialogTab), Optional strTableName As String = "")
+        Me.clsOperator = clsNewOperator
+        Me.tabsToUse = tabsToUse
 
-        ucrHeader.Setup(clsOperator)
-        ucrStub.Setup(strDataFrameName, clsOperator, strTableName)
-        ucrRows.Setup(strDataFrameName, clsOperator, strTableName)
-        ucrColumns.Setup(strDataFrameName, clsOperator, strTableName)
-        ucrCells.Setup(strDataFrameName, clsOperator, strTableName)
-        ucrSourceNotes.Setup(clsOperator)
-        ucrOtherStyles.Setup(clsOperator)
-        SetupTheme(clsOperator)
+        tbTableOptions.TabPages.Clear()
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Header) Then
+            tbTableOptions.TabPages.Add(tbpHeader)
+            ucrHeader.Setup(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Stub) Then
+            tbTableOptions.TabPages.Add(tbpStub)
+            ucrStub.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Rows) Then
+            tbTableOptions.TabPages.Add(tbpRows)
+            ucrRows.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Columns) Then
+            tbTableOptions.TabPages.Add(tbpColumns)
+            ucrColumns.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Cells) Then
+            tbTableOptions.TabPages.Add(tbpCells)
+            ucrCells.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.SourceNotes) Then
+            tbTableOptions.TabPages.Add(tbpSourceNotes)
+            ucrSourceNotes.Setup(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Themes) Then
+            tbTableOptions.TabPages.Add(tbpThemes)
+            SetupTheme(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.OtherStyle) Then
+            tbTableOptions.TabPages.Add(tbpOtherStyles)
+            ucrOtherStyles.Setup(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Table) Then
+            ' TODO
+        End If
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
-        ucrHeader.SetValuesToOperator()
-        ucrStub.SetValuesToOperator()
-        ucrColumns.SetValuesToOperator()
-        ucrRows.SetValuesToOperator()
-        ucrCells.SetValuesToOperator()
-        ucrSourceNotes.SetValuesToOperator()
-        ucrOtherStyles.SetValuesToOperator()
+        If tabsToUse.Contains(EnumTableSubDialogTab.Header) Then
+            ucrHeader.SetValuesToOperator()
+        End If
 
-        SetThemeValuesOnReturn(clsOperator)
+        If tabsToUse.Contains(EnumTableSubDialogTab.Stub) Then
+            ucrStub.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Rows) Then
+            ucrRows.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Columns) Then
+            ucrColumns.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Cells) Then
+            ucrCells.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.SourceNotes) Then
+            ucrSourceNotes.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Themes) Then
+            SetThemeValuesOnReturn(clsOperator)
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.OtherStyle) Then
+            ucrOtherStyles.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Table) Then
+            ' TODO.
+        End If
     End Sub
 
     '-----------------------------------------

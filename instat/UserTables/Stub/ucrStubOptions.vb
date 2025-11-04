@@ -25,6 +25,7 @@
 
         ' Set up the selector and receivers
         ucrReceiverSingleRowName.strObjectName = strTableName
+        ucrReceiverSingleGroupByCol.strObjectName = strTableName
 
         If String.IsNullOrEmpty(strTableName) Then
             ucrSelectorByDF.Visible = True
@@ -49,7 +50,7 @@
         Me.clsOperator = clsOperator
 
         ' The GT paramter should always be there.
-        clsGtRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
+        clsGtRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt", "format_gt_table"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
 
         clsStubHeadRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_stubhead"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
         If clsStubHeadRFunction Is Nothing Then

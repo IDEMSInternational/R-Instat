@@ -70,15 +70,13 @@ Public Class sdgBeforeTablesOption
     ''' </summary>
     ''' <param name="strDataFrameName">Name of the data frame contained in the data book</param>
     ''' <param name="clsNewOperator">R operator that has a 'gt' parameter that produces a 'gt' object.</param>
-    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator)
+    Public Sub Setup1(strDataFrameName As String, clsNewOperator As ROperator)
         clsOperator = clsNewOperator
 
         ucrHeader.Setup(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
 
-        ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
-        ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
         ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
         ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
         sdgTableStyles.GetNewUserInputAsRFunction()

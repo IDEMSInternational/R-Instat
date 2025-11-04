@@ -1728,7 +1728,10 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgBeforeTablesOption.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator)
+        sdgTableOptions.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator,
+                              {EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                                  EnumTableSubDialogTab.Table})
         sdgBeforeTablesOption.ShowDialog(Me)
     End Sub
 

@@ -632,6 +632,7 @@
     <Compile Include="UserTables\Others\ucrOtherStyles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\enumTableSubDialogTab.vb" />
     <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
     </Compile>

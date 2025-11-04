@@ -324,7 +324,9 @@ Public Class dlgSummaryTables
             Exit Sub
         End If
 
-        sdgBeforeTablesOption.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
+        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator, {EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                                  EnumTableSubDialogTab.Table})
         sdgBeforeTablesOption.ShowDialog(Me)
 
     End Sub
