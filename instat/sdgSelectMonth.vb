@@ -20,7 +20,6 @@ Public Class sdgSelectMonth
     Private clsInOperator As New ROperator
     Private clsFilterMonthFunction As New RFunction
     Private clsListCalcFunction As New RFunction
-    Private lblHelperText As Label
 
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseControls()
@@ -28,20 +27,12 @@ Public Class sdgSelectMonth
     End Sub
 
     Private Sub InitialiseControls()
-        ' Create the helper label
-        lblHelperText = New Label()
-        lblHelperText.Text = GetTranslation("Month variable is numeric and has no month labels.") & Environment.NewLine &
-                             GetTranslation("Convert Month to a factor (e.g., via Climatic > Dates > Use Date).")
-        lblHelperText.Dock = DockStyle.Fill
-        lblHelperText.TextAlign = ContentAlignment.MiddleCenter
-        lblHelperText.ForeColor = Color.Red
-        lblHelperText.Visible = False
-        Me.Controls.Add(lblHelperText)
-        lblHelperText.BringToFront()
+
         Dim strVarName As String = ucrReceiverMonth.GetVariableNames(bWithQuotes:=False)
+
+        ' If no variable is selected, show the grid placeholder
         If String.IsNullOrWhiteSpace(strVarName) Then
             ucrMonthAsFactor.Visible = True
-            lblHelperText.Visible = False
             Return
         End If
 
@@ -49,20 +40,24 @@ Public Class sdgSelectMonth
         If ucrReceiverMonth IsNot Nothing Then
             ' Get the variable type from R
             Dim strColType As String = frmMain.clsRLink.GetColumnType(
-                ucrReceiverMonth.GetDataName(),
-                ucrReceiverMonth.GetVariableNames(bWithQuotes:=False)
-            )
+            ucrReceiverMonth.GetDataName(),
+            ucrReceiverMonth.GetVariableNames(bWithQuotes:=False)
+        )
 
-            ' If factor, show the grid; else show the helper label
+            ' If factor, show the grid; else show popup warning
             If strColType.Contains("factor") Then
                 ucrMonthAsFactor.SetAsMultipleSelectorGrid(ucrReceiverMonth,
-                                                           hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
-                                                           bIncludeNALevel:=False)
+                                                       hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                       bIncludeNALevel:=False)
                 ucrMonthAsFactor.Visible = True
-                lblHelperText.Visible = False
             Else
                 ucrMonthAsFactor.Visible = False
-                lblHelperText.Visible = True
+
+                ' Show popup message instead
+                MsgBox(GetTranslation("Month variable is numeric and has no month labels." & vbCrLf &
+                                  "Convert Month to a factor (e.g., via Climatic > Dates > Use Date)."),
+                   MsgBoxStyle.Exclamation,
+                   GetTranslation("Variable Type Warning"))
             End If
         End If
 
