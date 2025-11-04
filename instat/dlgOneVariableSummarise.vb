@@ -368,7 +368,7 @@ Public Class dlgOneVariableSummarise
         sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator, {EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
                                   EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
                                   EnumTableSubDialogTab.Table})
-        sdgBeforeTablesOption.ShowDialog(Me)
+        sdgTableOptions.ShowDialog(Me)
         bResetFormatSubdialog = False
     End Sub
 

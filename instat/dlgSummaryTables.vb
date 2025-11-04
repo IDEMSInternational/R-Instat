@@ -324,10 +324,11 @@ Public Class dlgSummaryTables
             Exit Sub
         End If
 
-        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator, {EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
-                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
-                                  EnumTableSubDialogTab.Table})
-        sdgBeforeTablesOption.ShowDialog(Me)
+        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator, {
+                              EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                              EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                              EnumTableSubDialogTab.Table})
+        sdgTableOptions.ShowDialog(Me)
 
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

@@ -357,10 +357,10 @@ Public Class dlgGeneralTable
             Me.ucrSaveTable.Location = New Point(Me.ucrSaveTable.Location.X, 540)
             Me.ucrBase.Location = New Point(Me.ucrBase.Location.X, 580)
         ElseIf rdoDataFrame.Checked Then
-            Me.Size = New Size(Me.Width, 580)
+            Me.Size = New Size(Me.Width, 610)
             Me.ucrHeader.Location = New Point(Me.ucrHeader.Location.X, 320)
-            Me.ucrSaveTable.Location = New Point(Me.ucrSaveTable.Location.X, 400)
-            Me.ucrBase.Location = New Point(Me.ucrBase.Location.X, 480)
+            Me.ucrSaveTable.Location = New Point(Me.ucrSaveTable.Location.X, 460)
+            Me.ucrBase.Location = New Point(Me.ucrBase.Location.X, 500)
         End If
     End Sub
 

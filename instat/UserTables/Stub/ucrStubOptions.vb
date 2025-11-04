@@ -23,6 +23,8 @@
             bFirstload = False
         End If
 
+        ' TODO. This component no longer uses the table name. SO refactor accordingly
+
         ' Set up the selector and receivers
         ucrReceiverSingleRowName.strObjectName = strTableName
         ucrReceiverSingleGroupByCol.strObjectName = strTableName

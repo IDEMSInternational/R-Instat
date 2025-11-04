@@ -645,12 +645,6 @@
     <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.Designer.vb">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
     </Compile>
@@ -3742,9 +3736,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
       <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\sdgBeforeTablesOption.resx">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>

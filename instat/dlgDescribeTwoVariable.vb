@@ -1732,7 +1732,7 @@ Public Class dlgDescribeTwoVariable
                               {EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
                                   EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
                                   EnumTableSubDialogTab.Table})
-        sdgBeforeTablesOption.ShowDialog(Me)
+        sdgTableOptions.ShowDialog(Me)
     End Sub
 
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
