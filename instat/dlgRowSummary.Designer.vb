@@ -454,7 +454,7 @@ Partial Class dlgRowSummary
         Me.ucrChkIgnoreMissingValues.Checked = False
         Me.ucrChkIgnoreMissingValues.Location = New System.Drawing.Point(276, 199)
         Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
-        Me.ucrChkIgnoreMissingValues.Size = New System.Drawing.Size(140, 23)
+        Me.ucrChkIgnoreMissingValues.Size = New System.Drawing.Size(182, 23)
         Me.ucrChkIgnoreMissingValues.TabIndex = 7
         '
         'ucrSelectorForRowSummaries
