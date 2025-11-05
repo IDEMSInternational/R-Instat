@@ -87,6 +87,8 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNudWB = New instat.ucrNud()
         Me.ucrChkWB = New instat.ucrCheck()
+        Me.ucrChkDefinitions = New instat.ucrCheck()
+        Me.ucrSaveObject = New instat.ucrSave()
         Me.grpEndofSeason.SuspendLayout()
         Me.grpEndofRains.SuspendLayout()
         Me.SuspendLayout()
@@ -624,7 +626,7 @@ Partial Class dlgEndOfRainsSeason
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(3, 493)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 545)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -654,12 +656,33 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrChkWB.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkWB.TabIndex = 46
         '
+        'ucrChkDefinitions
+        '
+        Me.ucrChkDefinitions.AutoSize = True
+        Me.ucrChkDefinitions.Checked = False
+        Me.ucrChkDefinitions.Location = New System.Drawing.Point(6, 488)
+        Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
+        Me.ucrChkDefinitions.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkDefinitions.TabIndex = 48
+        '
+        'ucrSaveObject
+        '
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveObject.Location = New System.Drawing.Point(6, 512)
+        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveObject.Name = "ucrSaveObject"
+        Me.ucrSaveObject.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveObject.TabIndex = 49
+        '
         'dlgEndOfRainsSeason
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(477, 549)
+        Me.ClientSize = New System.Drawing.Size(477, 603)
+        Me.Controls.Add(Me.ucrSaveObject)
+        Me.Controls.Add(Me.ucrChkDefinitions)
         Me.Controls.Add(Me.ucrReceiverEvaporation)
         Me.Controls.Add(Me.ucrInputEvaporation)
         Me.Controls.Add(Me.ucrNudWB)
@@ -760,4 +783,6 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents ucrChkWB As ucrCheck
     Friend WithEvents ucrInputFilled As ucrInputTextBox
     Friend WithEvents ucrChkFilled As ucrCheck
+    Friend WithEvents ucrChkDefinitions As ucrCheck
+    Friend WithEvents ucrSaveObject As ucrSave
 End Class
