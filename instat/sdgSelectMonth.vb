@@ -55,7 +55,8 @@ Public Class sdgSelectMonth
 
                 ' Show popup message instead
                 MsgBox(GetTranslation("Month variable is numeric and has no month labels." & vbCrLf &
-                                  "Convert Month to a factor (e.g., via Climatic > Dates > Use Date)."),
+                                  "Convert Month to a factor (e.g., via Climatic > Dates > Use Date)." & vbCrLf & vbCrLf &
+                                  "Tip: If you converted a column type before running this, click Reset first."),
                    MsgBoxStyle.Exclamation,
                    GetTranslation("Variable Type Warning"))
             End If
