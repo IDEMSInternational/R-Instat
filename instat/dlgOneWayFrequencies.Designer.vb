@@ -282,7 +282,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSaveFreq.Location = New System.Drawing.Point(10, 368)
         Me.ucrSaveFreq.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveFreq.Name = "ucrSaveFreq"
-        Me.ucrSaveFreq.Size = New System.Drawing.Size(304, 24)
+        Me.ucrSaveFreq.Size = New System.Drawing.Size(412, 24)
         Me.ucrSaveFreq.TabIndex = 22
         '
         'ucrNudTableGraphGroups
