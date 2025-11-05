@@ -28,7 +28,7 @@ Public Class ucrColumnHide
             clsColHideRFunction = lstRParams(0).clsArgumentCodeStructure
             Dim arrColumnNames As String() = clsTablesUtils.SplitRText(clsColHideRFunction.GetParameter("columns").strArgumentValue)
             For Each columnName As String In arrColumnNames
-                ucrReceiverMultipleCols.Add(columnName)
+                ucrReceiverMultipleCols.Add(columnName.Replace("`", ""))
             Next
         Else
             clsColHideRFunction = New RFunction
