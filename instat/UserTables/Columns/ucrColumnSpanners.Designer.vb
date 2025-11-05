@@ -51,7 +51,6 @@ Partial Class ucrColumnSpanners
         '
         'btnClearSpanners
         '
-        Me.btnClearSpanners.Enabled = False
         Me.btnClearSpanners.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnClearSpanners.Location = New System.Drawing.Point(476, 162)
         Me.btnClearSpanners.Name = "btnClearSpanners"
@@ -161,7 +160,7 @@ Partial Class ucrColumnSpanners
         Me.ucrInputColSpanner.IsMultiline = False
         Me.ucrInputColSpanner.IsReadOnly = False
         Me.ucrInputColSpanner.Location = New System.Drawing.Point(243, 111)
-        Me.ucrInputColSpanner.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputColSpanner.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputColSpanner.Name = "ucrInputColSpanner"
         Me.ucrInputColSpanner.Size = New System.Drawing.Size(117, 21)
         Me.ucrInputColSpanner.TabIndex = 307

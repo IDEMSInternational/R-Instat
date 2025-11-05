@@ -1,10 +1,5 @@
 ﻿Public Class ucrTableOptions
-
     Private clsOperator As New ROperator
-
-    Private Sub ucrTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
     Public Sub Setup(clsOperator As ROperator)
         Me.clsOperator = clsOperator
@@ -28,6 +23,10 @@
     End Sub
 
     Private Sub btnAddReplaceNaExpression_Click(sender As Object, e As EventArgs) Handles btnAddReplaceNaExpression.Click
+        If ucrTxtMissingText.IsEmpty Then
+            Exit Sub
+        End If
+
         Dim clsSubMissingRFunction As New RFunction
 
         clsSubMissingRFunction.SetPackageName("gt")
@@ -52,7 +51,35 @@
     End Sub
 
     Private Sub btnAddFormatExpression_Click(sender As Object, e As EventArgs) Handles btnAddFormatExpression.Click
+        Dim clsFormatRFunction As RFunction = Nothing
+        If cboSelectFormat.Text = "Text" Then
+            sdgCellFormatTextOptions.ShowDialog(Me.ParentForm)
+            clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
+        ElseIf cboSelectFormat.Text = "Number" Then
+            sdgCellFormatNumberOptions.ShowDialog(Me.ParentForm)
+            clsFormatRFunction = sdgCellFormatNumberOptions.GetNewUserInputAsRFunction()
+        ElseIf cboSelectFormat.Text = "Date" Then
+            sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
+            clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
+        End If
 
+        If clsFormatRFunction Is Nothing Then
+            Exit Sub
+        End If
+
+        ' Create parameter with unique name
+        Dim clsRParam As New RParameter(strParameterName:="all_fmt_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsFormatRFunction, bNewIncludeArgumentName:=False)
+
+        ' Create row and its cells
+        Dim row As New DataGridViewRow
+        row.CreateCells(dataGrid)
+        row.Cells(0).Value = clsFormatRFunction.Clone.ToScript
+
+        ' Tag the row with the parameter 
+        row.Tag = clsRParam
+
+        ' Add it to grid
+        dataGrid.Rows.Add(row)
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click

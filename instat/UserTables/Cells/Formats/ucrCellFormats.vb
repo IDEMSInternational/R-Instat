@@ -84,8 +84,6 @@
         ElseIf cboSelectFormat.Text = "Date" Then
             sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
             clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
-        ElseIf cboSelectFormat.Text = "Missing" Then
-            ' TODO
         End If
 
         If clsFormatRFunction Is Nothing Then
@@ -95,9 +93,7 @@
         AddFormatParameterToGrid(clsFormatRFunction)
         ucrReceiverMultipleCols.Clear()
         ucrRowExpression.Clear()
-
     End Sub
-
 
     Private Sub AddFormatParameterToGrid(clsFormatRFunction As RFunction)
 
