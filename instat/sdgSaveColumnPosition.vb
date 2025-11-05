@@ -48,18 +48,13 @@ Public Class sdgSaveColumnPosition
 
         ' find the ucrButtonsSubdialogue on the owner form (search recursively)
         ' Use Owner (set when ShowDialog(owner) is called); ParentForm may be Nothing for modal dialogs
-        If Me.Owner IsNot Nothing Then
-            clsParentSdgButtons = FindControlRecursive(Of ucrButtonsSubdialogue)(Me.Owner)
+        ' find the ucrButtonsSubdialogue on the owner form (search recursively)
+        ' Use Owner (set when ShowDialog(owner) is called); ParentForm may be Nothing for modal dialogs
+        Dim parent As Control = If(Me.Owner, Me.ParentForm)
+        If parent IsNot Nothing Then
+            clsParentSdgButtons = FindControlRecursive(Of ucrButtonsSubdialogue)(parent)
             If clsParentSdgButtons IsNot Nothing Then
                 AddHandler clsParentSdgButtons.LanguageChanged, AddressOf ParentButtons_LanguageChanged
-            End If
-        Else
-            ' optional: try FindForm fallback (shouldn't be needed if ShowDialog(owner) is used)
-            If Me.ParentForm IsNot Nothing Then
-                clsParentSdgButtons = FindControlRecursive(Of ucrButtonsSubdialogue)(Me.ParentForm)
-                If clsParentSdgButtons IsNot Nothing Then
-                    AddHandler clsParentSdgButtons.LanguageChanged, AddressOf ParentButtons_LanguageChanged
-                End If
             End If
         End If
     End Sub
@@ -188,9 +183,6 @@ Public Class sdgSaveColumnPosition
 
     ' Handler invoked during language preview/change raised by parent buttons
     Private Sub ParentButtons_LanguageChanged(ByVal newCulture As String)
-        ' Debug line to ensure handler fired and to show current configured language
-        System.Diagnostics.Debug.WriteLine("sdgSaveColumnPosition.ParentButtons_LanguageChanged newCulture=" & newCulture & " current=" & frmMain.clsInstatOptions.strLanguageCultureCode)
-
         Me.SuspendLayout()
         Try
             UpdateTranslations()
@@ -243,5 +235,4 @@ Public Class sdgSaveColumnPosition
         Next
         Return Nothing
     End Function
-
 End Class
