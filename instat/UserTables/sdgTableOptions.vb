@@ -100,7 +100,8 @@ Public Class sdgTableOptions
         End If
 
         If Me.tabsToUse.Contains(EnumTableSubDialogTab.Table) Then
-            ' TODO
+            tbTableOptions.TabPages.Add(tbpTable)
+            ucrTableOptions.Setup(clsOperator)
         End If
     End Sub
 
@@ -138,7 +139,7 @@ Public Class sdgTableOptions
         End If
 
         If tabsToUse.Contains(EnumTableSubDialogTab.Table) Then
-            ' TODO.
+            ucrTableOptions.SetValuesToOperator()
         End If
     End Sub
 

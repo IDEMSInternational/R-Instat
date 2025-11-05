@@ -137,8 +137,6 @@ Public Class dlgGeneralTable
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
 
-        ucrHeader.Setup(clsBaseOperator, bShowSubtitle:=False)
-
         ucrSaveTable.SetPrefix("presentation_table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorCols.ucrAvailableDataFrames)
@@ -261,6 +259,7 @@ Public Class dlgGeneralTable
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         MinMaxValRowVariable()
         MinMaxValVariable()
+        ucrHeader.Setup(clsBaseOperator, bShowSubtitle:=False)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)

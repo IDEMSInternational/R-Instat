@@ -571,12 +571,6 @@
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
     </Compile>
@@ -3405,6 +3399,12 @@
     <Compile Include="UserTables\Stub\ucrStubStyle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.Designer.vb">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgApsimx.resx">
@@ -3700,9 +3700,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
@@ -5882,6 +5879,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Stub\ucrStubStyle.resx">
       <DependentUpon>ucrStubStyle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Table\ucrTableOptions.resx">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

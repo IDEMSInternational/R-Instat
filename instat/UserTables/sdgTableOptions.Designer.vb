@@ -44,6 +44,7 @@ Partial Class sdgTableOptions
         Me.ucrHeader = New instat.ucrHeader()
         Me.tbTableOptions = New System.Windows.Forms.TabControl()
         Me.tbpTable = New System.Windows.Forms.TabPage()
+        Me.ucrTableOptions = New instat.ucrTableOptions()
         Me.tbpOtherStyles.SuspendLayout()
         Me.tbpThemes.SuspendLayout()
         Me.tbpSourceNotes.SuspendLayout()
@@ -53,6 +54,7 @@ Partial Class sdgTableOptions
         Me.tbpStub.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbTableOptions.SuspendLayout()
+        Me.tbpTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrSdgBaseButtons
@@ -267,6 +269,7 @@ Partial Class sdgTableOptions
         '
         'tbpTable
         '
+        Me.tbpTable.Controls.Add(Me.ucrTableOptions)
         Me.tbpTable.Location = New System.Drawing.Point(4, 22)
         Me.tbpTable.Name = "tbpTable"
         Me.tbpTable.Padding = New System.Windows.Forms.Padding(3)
@@ -274,6 +277,13 @@ Partial Class sdgTableOptions
         Me.tbpTable.TabIndex = 11
         Me.tbpTable.Text = "Table"
         Me.tbpTable.UseVisualStyleBackColor = True
+        '
+        'ucrTableOptions
+        '
+        Me.ucrTableOptions.Location = New System.Drawing.Point(6, 6)
+        Me.ucrTableOptions.Name = "ucrTableOptions"
+        Me.ucrTableOptions.Size = New System.Drawing.Size(531, 308)
+        Me.ucrTableOptions.TabIndex = 0
         '
         'sdgTableOptions
         '
@@ -296,6 +306,7 @@ Partial Class sdgTableOptions
         Me.tbpStub.ResumeLayout(False)
         Me.tbpHeader.ResumeLayout(False)
         Me.tbTableOptions.ResumeLayout(False)
+        Me.tbpTable.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -322,4 +333,5 @@ Partial Class sdgTableOptions
     Friend WithEvents ucrHeader As ucrHeader
     Friend WithEvents tbTableOptions As TabControl
     Friend WithEvents tbpTable As TabPage
+    Friend WithEvents ucrTableOptions As ucrTableOptions
 End Class

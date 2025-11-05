@@ -12,18 +12,26 @@ Public Class ucrHeader
         ' Set contents to the controls
         If clsHeaderRFunction.GetParameter("title") IsNot Nothing Then
             ucrInputTitle.SetName(clsTablesUtils.GetStringValue(clsHeaderRFunction.GetParameter("title").strArgumentValue, bwithQuotes:=False))
+        Else
+            ucrInputTitle.SetName("")
         End If
 
         If clsHeaderRFunction.GetParameter("subtitle") IsNot Nothing Then
             ucrInputSubtitle.SetName(clsTablesUtils.GetStringValue(clsHeaderRFunction.GetParameter("subtitle").strArgumentValue, bwithQuotes:=False))
+        Else
+            ucrInputSubtitle.SetName("")
         End If
 
         If clsTitleFooterRFunction.GetParameter("footnote") IsNot Nothing Then
             ucrInputTitleFooter.SetName(clsTablesUtils.GetStringValue(clsTitleFooterRFunction.GetParameter("footnote").strArgumentValue, bwithQuotes:=False))
+        Else
+            ucrInputTitleFooter.SetName("")
         End If
 
         If clsSubtitleFooterRFunction.GetParameter("footnote") IsNot Nothing Then
             ucrInputSubtitleFooter.SetName(clsTablesUtils.GetStringValue(clsSubtitleFooterRFunction.GetParameter("footnote").strArgumentValue, bwithQuotes:=False))
+        Else
+            ucrInputSubtitleFooter.SetName("")
         End If
 
         ' The general table dialog needs to hide the subtitle
