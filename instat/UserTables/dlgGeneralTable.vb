@@ -309,6 +309,7 @@ Public Class dlgGeneralTable
         clsBaseOperator.RemoveParameterByName("pivot_wider_col")
 
         If rdoSingle.Checked Then
+            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
             Updateparameter()
@@ -321,6 +322,7 @@ Public Class dlgGeneralTable
             End If
             clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=5)
         ElseIf rdoMultiple.Checked Then
+            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
             Updateparameter()
