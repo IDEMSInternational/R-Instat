@@ -328,6 +328,24 @@ Public Class ucrSelector
         SelectAll()
     End Sub
 
+    Private Sub mnuSortToolStrip_Click(sender As Object, e As EventArgs) Handles mnuSortToolStrip.Click
+        ' Get all existing items into a list (references preserved)
+        Dim items As List(Of ListViewItem) = lstAvailableVariable.Items.Cast(Of ListViewItem)().ToList()
+
+        ' Sort by the Text property (case-insensitive)
+        items.Sort(Function(a, b) String.Compare(a.Text, b.Text, StringComparison.OrdinalIgnoreCase))
+
+        ' Temporarily disable redrawing for smoother UI update
+        lstAvailableVariable.BeginUpdate()
+
+        ' Clear only the display order (not destroying item references)
+        lstAvailableVariable.Items.Clear()
+        lstAvailableVariable.Items.AddRange(items.ToArray())
+
+        ' Re-enable drawing
+        lstAvailableVariable.EndUpdate()
+    End Sub
+
     Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
         ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
@@ -468,9 +486,11 @@ Public Class ucrSelector
                 If TypeOf CurrentReceiver Is ucrReceiverSingle Then
                     AddAllToolStripMenuItem.Enabled = False
                     SelectAllToolStripMenuItem.Enabled = False
+                    mnuSortToolStrip.Enabled = False
                 ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
                     AddAllToolStripMenuItem.Enabled = True
                     SelectAllToolStripMenuItem.Enabled = True
+                    mnuSortToolStrip.Enabled = True
                 Else
                     MsgBoxTranslate("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
                 End If
@@ -478,6 +498,7 @@ Public Class ucrSelector
                 AddSelectedToolStripMenuItem.Enabled = False
                 AddAllToolStripMenuItem.Enabled = False
                 SelectAllToolStripMenuItem.Enabled = False
+                mnuSortToolStrip.Enabled = False
             End If
         End If
     End Sub
