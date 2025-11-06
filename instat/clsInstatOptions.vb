@@ -13,7 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat
+Imports instat.Translations
 Imports System.Threading
 Imports System.Globalization
 Imports unvell.ReoGrid
@@ -550,7 +551,7 @@ Imports RDotNet
 
     Public Sub SetDigits(iNewDigits As Integer)
         If iNewDigits > 22 OrElse iNewDigits < 0 Then
-            MsgBox("Cannot set digits to: " & iNewDigits & ". Digits must be an integer between 0 and 22.", MsgBoxStyle.Critical, "Error setting digits")
+            MsgBoxTranslate("Cannot set digits to: " & iNewDigits & ". Digits must be an integer between 0 and 22.", MsgBoxStyle.Critical, "Error setting digits")
         Else
             iDigits = iNewDigits
         End If

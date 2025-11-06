@@ -347,7 +347,7 @@ Partial Class dlgName
         '
         'rdoSelectedColumn
         '
-        Me.rdoSelectedColumn.Location = New System.Drawing.Point(364, 62)
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(389, 62)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(189, 24)
         Me.rdoSelectedColumn.TabIndex = 21
@@ -504,7 +504,8 @@ Partial Class dlgName
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 540)
+        Me.ClientSize = New System.Drawing.Size(561, 540)
+        Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
         Me.Controls.Add(Me.rdoLabels)
         Me.Controls.Add(Me.grdRenameColumns)
@@ -524,7 +525,6 @@ Partial Class dlgName
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverColumns)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)

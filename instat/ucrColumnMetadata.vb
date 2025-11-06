@@ -184,7 +184,7 @@ Public Class ucrColumnMetadata
         Dim clsDeleteLabelsFunction As New RFunction
 
         If strColumnName = strLabelsLabel Then
-            If MsgBox("This will delete the selected label(s) and replace them with (NA)." &
+            If MsgBoxTranslate("This will delete the selected label(s) and replace them with (NA)." &
                                 Environment.NewLine & "Continue?",
                                 MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
 
@@ -196,7 +196,7 @@ Public Class ucrColumnMetadata
                 frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript())
             End If
         Else
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine &
+            MsgBoxTranslate("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine &
                    "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
         End If
     End Sub
@@ -248,7 +248,7 @@ Public Class ucrColumnMetadata
         If strColumnName = strNameLabel Then
             If frmMain.clsRLink.IsValidText(newValue) Then
                 If frmMain.clsRLink.GetColumnNames(_grid.CurrentWorksheet.Name).Contains(newValue.ToString()) Then
-                    MsgBox(newValue.ToString() & " is an existing column name.", MsgBoxStyle.Information, "Invalid Column Name")
+                    MsgBoxTranslate(newValue.ToString() & " is an existing column name.", MsgBoxStyle.Information, "Invalid Column Name")
                     Exit Sub
                 Else
                     strScript = frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data(data_name =" & Chr(34) & _grid.CurrentWorksheet.Name & Chr(34) &
@@ -256,7 +256,7 @@ Public Class ucrColumnMetadata
                     strComment = "Renamed column"
                 End If
             Else
-                MsgBox(newValue & " is not a valid column name.", MsgBoxStyle.Information, "Invalid Column Name")
+                MsgBoxTranslate(newValue & " is not a valid column name.", MsgBoxStyle.Information, "Invalid Column Name")
                 Exit Sub
             End If
         Else
@@ -393,7 +393,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If _grid.GetSelectedRows.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
-            MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
+            MsgBoxTranslate("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
             Dim deleteCol = MsgBoxTranslate("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then

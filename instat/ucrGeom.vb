@@ -14,6 +14,9 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
+
 Public Class ucrGeom
     'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
     'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
@@ -60,13 +63,13 @@ Public Class ucrGeom
                     ucrInputGeoms.SetName(clsCurrGeom.strGeomName)
                     bResetGlobal = False
                 Else
-                    MsgBox("Developer error: Function set for " & Name & " is not a recognised geom.")
+                    MsgBoxTranslate("Developer error: Function set for " & Name & " is not a recognised geom.")
                 End If
             Else
-                MsgBox("Developer error: Code set for " & Name & " is not an RFunction.")
+                MsgBoxTranslate("Developer error: Code set for " & Name & " is not an RFunction.")
             End If
         Else
-            MsgBox("Developer error: Code set for " & Name & " is not an RFunction.")
+            MsgBoxTranslate("Developer error: Code set for " & Name & " is not an RFunction.")
         End If
     End Sub
 

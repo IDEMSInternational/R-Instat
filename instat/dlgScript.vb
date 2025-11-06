@@ -666,7 +666,7 @@ Public Class dlgScript
             strExample = strExample.Replace("##D", String.Empty)
             PreviewScript(strExample)
         Catch ex As Exception
-            MsgBox(strTopic & " has a help file but no examples.")
+            MsgBoxTranslate(strTopic & " has a help file but no examples.")
         End Try
         EnableHelp()
     End Sub

@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports System.IO
 
 ''' <summary>
@@ -69,7 +71,7 @@ Public Class ucrOutputPages
                     _selectedOutputPage.Save(dlgSaveFile.FileName)
                     _strSaveDirectory = Path.GetDirectoryName(dlgSaveFile.FileName)
                 Catch
-                    MsgBox("Could not save the output window." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    MsgBoxTranslate("Could not save the output window." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
             End If
         End Using

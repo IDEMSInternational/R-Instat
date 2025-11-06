@@ -217,7 +217,7 @@ Public Class ucrScript
             clsRScriptToClean = New RScript(strScript)
             dctRStatements = clsRScriptToClean.statements
         Catch ex As Exception
-            MsgBox("Could not parse R script for Quarto cleaning. " &
+            MsgBoxTranslate("Could not parse R script for Quarto cleaning. " &
                    "Parsing failed with message:" & Environment.NewLine & Environment.NewLine &
                    ex.Message,
                    MsgBoxStyle.Information, "Could Not parse R script")
@@ -258,7 +258,7 @@ Public Class ucrScript
         End If
 
         If clsScriptActive.TextLength > 0 _
-                AndAlso MsgBox("Loading a script from file will clear your current script" _
+                AndAlso MsgBoxTranslate("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
                                vbYesNo, "Load From File") = vbNo Then
             Return False
@@ -330,7 +330,7 @@ Public Class ucrScript
                                              Path.GetFileName(fileName))
             EnableDisableButtons()
         Catch
-            MsgBox("Could not load the script from file." & Environment.NewLine &
+            MsgBoxTranslate("Could not load the script from file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to read from the specified location.",
                    vbExclamation, "Load Script")
         End Try
@@ -423,7 +423,7 @@ Public Class ucrScript
                         strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
                     End If
                 Catch
-                    MsgBox("Could not save the " & If(bIsLog, "Log ", "") & "file." & Environment.NewLine &
+                    MsgBoxTranslate("Could not save the " & If(bIsLog, "Log ", "") & "file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
                    vbExclamation, "Save " & If(bIsLog, "Log ", "") & "File.")
                 End Try
@@ -441,7 +441,7 @@ Public Class ucrScript
 
     Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False)
         If enumScriptTypeNew <> ScriptType.rScript AndAlso enumScriptTypeNew <> ScriptType.quarto Then
-            MsgBox("Developer error: The new tab cannot be " & enumScriptType.ToString() & ", it must be R script or Quarto.", MsgBoxStyle.Critical, "New Tab")
+            MsgBoxTranslate("Developer error: The new tab cannot be " & enumScriptType.ToString() & ", it must be R script or Quarto.", MsgBoxStyle.Critical, "New Tab")
             Exit Sub
         End If
 
@@ -840,7 +840,7 @@ Public Class ucrScript
                 End If
                 dctRStatements = clsRScript.statements
             Catch ex As Exception
-                MsgBox("R script parsing failed with message:" & Environment.NewLine _
+                MsgBoxTranslate("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
                    & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method.",
                    MsgBoxStyle.Information, "Could Not Parse R script")
@@ -899,7 +899,7 @@ Public Class ucrScript
         Try
             strQuartoRenderScript = File.ReadAllText(strQuartoRenderScriptPath)
         Catch ex As Exception
-            MsgBox("Could not read the quarto render script from:" & Environment.NewLine _
+            MsgBoxTranslate("Could not read the quarto render script from:" & Environment.NewLine _
                    & strQuartoRenderScriptPath & Environment.NewLine & Environment.NewLine _
                    & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Render Script")
             Return ""
@@ -920,7 +920,7 @@ Public Class ucrScript
         Try
             strQuartoTemplate = File.ReadAllText(strQuartoTemplatePath)
         Catch ex As Exception
-            MsgBox("Could not read the quarto template from:" & Environment.NewLine _
+            MsgBoxTranslate("Could not read the quarto template from:" & Environment.NewLine _
                    & strQuartoTemplatePath & Environment.NewLine & Environment.NewLine _
                    & "Error message was:" & Environment.NewLine & ex.Message, MsgBoxStyle.Critical, "Could Not Read Quarto Template")
             Return ""
@@ -948,7 +948,7 @@ Public Class ucrScript
             dctRStatements = New RScript(frmMain.clsRLink.GetFormattedComment(strComment) _
                                             & Environment.NewLine & strScript).statements
         Catch ex As Exception
-            MsgBox("R script parsing failed with message:" & Environment.NewLine _
+            MsgBoxTranslate("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
                    & "R-Instat will now attempt to execute the script using a less strict method.",
                    MsgBoxStyle.Information, "Could Not Parse R Script")
@@ -1294,7 +1294,7 @@ Public Class ucrScript
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
             TabControl.SelectedTab.Text = Path.GetFileNameWithoutExtension(strScriptFilename)
         Catch
-            MsgBox("Could not save the script file." & Environment.NewLine &
+            MsgBoxTranslate("Could not save the script file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
                    vbExclamation, "Open Script as File")
         End Try
@@ -1341,7 +1341,7 @@ Public Class ucrScript
                 strScriptToRun = GetQuartoRenderScript(clsScriptActive.Text)
                 strComment = "Code to render the Quarto script in the Script Window (all text)"
             Case Else
-                MsgBox("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
+                MsgBoxTranslate("Developer error: cannot run script of type " & enumScriptType.ToString(), MsgBoxStyle.Critical, "Run All")
                 Exit Sub
         End Select
 

@@ -58,7 +58,7 @@ Public Class dlgImportDataset
         If strFileToOpenOn <> "" Then
             'if path is not a file or folder then it no longer exists
             If Not File.Exists(strFileToOpenOn) AndAlso Not Directory.Exists(strFileToOpenOn) Then
-                MsgBox("File or folder no longer exists: " & strFileToOpenOn)
+                MsgBoxTranslate("File or folder no longer exists: " & strFileToOpenOn)
                 strFileToOpenOn = "" 'reset
                 strFileExtension = "" 'reset
             End If
@@ -75,7 +75,7 @@ Public Class dlgImportDataset
                 SetDialogStateFromFile("")
             Else
                 If Not File.Exists(ucrInputFilePath.GetText()) AndAlso Not Directory.Exists(ucrInputFilePath.GetText()) Then
-                    MsgBox("File or folder no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File/Folder No Longer Exists")
+                    MsgBoxTranslate("File or folder no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File/Folder No Longer Exists")
                     SetDialogStateFromFile("")
                 Else
                     'get file or folder path from the control and use previous extension incase it was a folder

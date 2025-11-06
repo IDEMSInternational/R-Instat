@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 Public Class ucrDayOfYear
     ' Is the parameter value associated with the control a number
@@ -134,7 +135,7 @@ Public Class ucrDayOfYear
                     Return iDoy
                 End If
             Catch ex As Exception
-                MsgBox("Developer error: Invalid month and/or day value. For control: " & Name & ".")
+                MsgBoxTranslate("Developer error: Invalid month and/or day value. For control: " & Name & ".")
             End Try
         End If
         Return 1
@@ -166,7 +167,7 @@ Public Class ucrDayOfYear
                     'TODO case where parameter isn't a number e.g. "14 Jan"
                 End If
                 If bInvalid Then
-                    MsgBox("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to an R expression that can be interpreted as a day of the year")
+                    MsgBoxTranslate("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to an R expression that can be interpreted as a day of the year")
                 End If
             End If
         End If
@@ -178,7 +179,7 @@ Public Class ucrDayOfYear
         MyBase.SetRDefault(objNewDefault)
         If Integer.TryParse(objNewDefault, iDefault) Then
             If Not (iDefault < 1 OrElse iDefault > 366 OrElse (Not b366DayOfYear AndAlso iDefault > 365)) Then
-                MsgBox("Developer error: Cannot set the default value of control " & Me.Name & ". The default must be an integer day of the year.")
+                MsgBoxTranslate("Developer error: Cannot set the default value of control " & Me.Name & ". The default must be an integer day of the year.")
             End If
         End If
     End Sub

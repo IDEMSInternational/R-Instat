@@ -127,14 +127,14 @@ Public Class ucrDataFrameMetadata
         If strColumnName = _strNameLabel Then
             If frmMain.clsRLink.IsValidText(newValue) Then
                 If frmMain.clsRLink.GetDataFrameNames().Contains(newValue.ToString()) Then
-                    MsgBox(newValue.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
+                    MsgBoxTranslate(newValue.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
                     Exit Sub
                 Else
                     strScript = frmMain.clsRLink.strInstatDataObject & "$rename_dataframe(data_name =" & Chr(34) & strPreviousValue & Chr(34) & ", new_val = " & strNewValue & ")"
                     strComment = "Renamed data frame"
                 End If
             Else
-                MsgBox(newValue & " is not a valid data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
+                MsgBoxTranslate(newValue & " is not a valid data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
                 Exit Sub
             End If
         Else

@@ -578,7 +578,7 @@ Partial Class dlgStack
         Me.ucrPnlCarryColumns.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCarryColumns.Location = New System.Drawing.Point(259, 189)
         Me.ucrPnlCarryColumns.Name = "ucrPnlCarryColumns"
-        Me.ucrPnlCarryColumns.Size = New System.Drawing.Size(199, 48)
+        Me.ucrPnlCarryColumns.Size = New System.Drawing.Size(229, 48)
         Me.ucrPnlCarryColumns.TabIndex = 39
         '
         'ucrChkDropMissingValues

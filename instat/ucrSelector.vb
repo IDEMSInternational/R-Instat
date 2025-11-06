@@ -328,11 +328,41 @@ Public Class ucrSelector
         SelectAll()
     End Sub
 
+    Private Sub mnuSortToolStrip_Click(sender As Object, e As EventArgs) Handles mnuSortToolStrip.Click
+
+        ' Preserve selection
+        Dim selectedItems As List(Of ListViewItem) = lstAvailableVariable.SelectedItems.Cast(Of ListViewItem)().ToList()
+
+        ' Get all existing items into a list (references preserved)
+        Dim items As List(Of ListViewItem) = lstAvailableVariable.Items.Cast(Of ListViewItem)().ToList()
+
+        ' Sort by the Text property (case-insensitive)
+        items.Sort(Function(a, b) String.Compare(a.Text, b.Text, StringComparison.OrdinalIgnoreCase))
+
+        ' Temporarily disable redrawing for smoother UI update
+        lstAvailableVariable.BeginUpdate()
+
+        ' Clear only the display order (not destroying item references)
+        lstAvailableVariable.Items.Clear()
+        lstAvailableVariable.Items.AddRange(items.ToArray())
+
+        ' Restore selection
+        For Each item As ListViewItem In selectedItems
+            item.Selected = True
+        Next
+
+        ' Ensure the first selected item is visible
+        If lstAvailableVariable.SelectedItems.Count > 0 Then
+            lstAvailableVariable.SelectedItems(0).EnsureVisible()
+        End If
+
+        ' Re-enable drawing
+        lstAvailableVariable.EndUpdate()
+    End Sub
+
     Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
         ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
-
-
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
@@ -465,6 +495,7 @@ Public Class ucrSelector
         If SelectionMenuStrip.Visible Then
             If CurrentReceiver IsNot Nothing Then
                 AddSelectedToolStripMenuItem.Enabled = True
+                mnuSortToolStrip.Enabled = True
                 If TypeOf CurrentReceiver Is ucrReceiverSingle Then
                     AddAllToolStripMenuItem.Enabled = False
                     SelectAllToolStripMenuItem.Enabled = False
@@ -478,6 +509,7 @@ Public Class ucrSelector
                 AddSelectedToolStripMenuItem.Enabled = False
                 AddAllToolStripMenuItem.Enabled = False
                 SelectAllToolStripMenuItem.Enabled = False
+                mnuSortToolStrip.Enabled = False
             End If
         End If
     End Sub

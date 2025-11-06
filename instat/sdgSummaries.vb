@@ -550,7 +550,7 @@ Public Class sdgSummaries
                     End If
                 Next
                 If Not bTabFound Then
-                    MsgBox("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
+                    MsgBoxTranslate("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
                     tbSummaries.SelectedIndex = 0
                 End If
             Else
