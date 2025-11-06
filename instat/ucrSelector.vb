@@ -329,6 +329,10 @@ Public Class ucrSelector
     End Sub
 
     Private Sub mnuSortToolStrip_Click(sender As Object, e As EventArgs) Handles mnuSortToolStrip.Click
+
+        ' Preserve selection
+        Dim selectedItems As List(Of ListViewItem) = lstAvailableVariable.SelectedItems.Cast(Of ListViewItem)().ToList()
+
         ' Get all existing items into a list (references preserved)
         Dim items As List(Of ListViewItem) = lstAvailableVariable.Items.Cast(Of ListViewItem)().ToList()
 
@@ -342,6 +346,16 @@ Public Class ucrSelector
         lstAvailableVariable.Items.Clear()
         lstAvailableVariable.Items.AddRange(items.ToArray())
 
+        ' Restore selection
+        For Each item As ListViewItem In selectedItems
+            item.Selected = True
+        Next
+
+        ' Ensure the first selected item is visible
+        If lstAvailableVariable.SelectedItems.Count > 0 Then
+            lstAvailableVariable.SelectedItems(0).EnsureVisible()
+        End If
+
         ' Re-enable drawing
         lstAvailableVariable.EndUpdate()
     End Sub
@@ -349,8 +363,6 @@ Public Class ucrSelector
     Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
         ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
-
-
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
@@ -483,14 +495,13 @@ Public Class ucrSelector
         If SelectionMenuStrip.Visible Then
             If CurrentReceiver IsNot Nothing Then
                 AddSelectedToolStripMenuItem.Enabled = True
+                mnuSortToolStrip.Enabled = True
                 If TypeOf CurrentReceiver Is ucrReceiverSingle Then
                     AddAllToolStripMenuItem.Enabled = False
                     SelectAllToolStripMenuItem.Enabled = False
-                    mnuSortToolStrip.Enabled = False
                 ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
                     AddAllToolStripMenuItem.Enabled = True
                     SelectAllToolStripMenuItem.Enabled = True
-                    mnuSortToolStrip.Enabled = True
                 Else
                     MsgBoxTranslate("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
                 End If
