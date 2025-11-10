@@ -2960,6 +2960,9 @@
     <Compile Include="frmCommand.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmCustomMessageBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmEditor.Designer.vb">
       <DependentUpon>frmEditor.vb</DependentUpon>
     </Compile>
