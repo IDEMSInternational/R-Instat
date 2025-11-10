@@ -97,11 +97,11 @@ Public Class sdgExportToWWR
     End Sub
 
     Private Sub sdgExportToWWR_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
-        Dim result As MsgBoxResult
+        Dim result As DialogResult
 
         If Not bOkEnabled Then
-            result = MessageBox.Show(text:="Information missing. Station Name, Country, Latitude and Longitude are required. OK will not be enabled on the main dialog untill resolved." & Environment.NewLine & "Are you sure you want to return to the main dialog?", caption:="Missing information", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
-            If result = MsgBoxResult.No Then
+            result = Translations.MsgBoxTranslate("Information missing. Station Name, Country, Latitude and Longitude are required. OK will not be enabled on the main dialog untill resolved." & Environment.NewLine & "Are you sure you want to return to the main dialog?", MessageBoxButtons.YesNo, "Missing information", MessageBoxIcon.Information)
+            If result = DialogResult.No Then
                 e.Cancel = True
             End If
         End If

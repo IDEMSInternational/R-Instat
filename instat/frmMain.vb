@@ -1120,7 +1120,7 @@ Public Class frmMain
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
         Dim rstResponse As DialogResult
-        rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+        rstResponse = Translations.MsgBoxTranslate("Are you sure you want to clear the Output Window?", MessageBoxButtons.YesNo, "Clear Output Window")
         If rstResponse = DialogResult.Yes Then
             ucrOutput.UcrOutputPages.ClearOutputWindow()
         End If
@@ -1851,7 +1851,7 @@ Public Class frmMain
         End If
 
         If Not bDataSaved _
-                AndAlso DialogResult.No = MsgBox("Are you sure you want to close your data?" &
+                AndAlso DialogResult.No = Translations.MsgBoxTranslate("Are you sure you want to close your data?" &
                                     Environment.NewLine & "Any unsaved changes will be lost.",
                                     MessageBoxButtons.YesNo, "Close Data") Then
             Exit Sub
