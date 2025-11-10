@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
+Imports System.Windows.Forms
 
 Public Class ucrSelectorByDataFrameAddRemove
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, toolStripAddSelected.Click
@@ -92,5 +93,19 @@ Public Class ucrSelectorByDataFrameAddRemove
             toolStripAddSelected.Enabled = lstAvailableVariable.SelectedItems.Count > 0
             toolStripAddAll.Enabled = TypeOf CurrentReceiver Is ucrReceiverMultiple
         End If
+
+        ' Ensure context menu items are translated when the menu opens.
+        ' Use the dedicated helper that translates ContextMenuStrip instances.
+        Try
+            Translations.autoTranslateContextMenu(contextMenuStripAdd)
+            ' extra fallback: ensure specific items are translated if needed
+            toolStripAddSelected.Text = Translations.GetTranslation(toolStripAddSelected.Text)
+            toolStripAddAll.Text = Translations.GetTranslation(toolStripAddAll.Text)
+            toolStripHelp.Text = Translations.GetTranslation(toolStripHelp.Text)
+        Catch ex As Exception
+            ' Non-fatal: don't prevent context menu from opening if translation fails.
+            ' Optionally log the error for debugging:
+            ' MsgBox("Translation error in contextMenuStripAdd_Opening: " & ex.Message)
+        End Try
     End Sub
 End Class

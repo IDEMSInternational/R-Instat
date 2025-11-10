@@ -1,5 +1,4 @@
-﻿
-' R- Instat
+﻿' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -18,10 +17,8 @@
 Imports System.ComponentModel
 Imports System.Windows.Forms.VisualStyles
 Imports System.Runtime.InteropServices
+Imports System.Diagnostics
 
-''' <summary>
-''' Modifies .Net Button to support split button that can popup a contex menu simlar to a drop down
-''' </summary>
 Public Class ucrSplitButton
     Inherits Button
 
@@ -31,21 +28,16 @@ Public Class ucrSplitButton
     Private _dropDownRectangle As Rectangle
     Private _bSplitMenuVisible As Boolean
 
-    ''' <summary>
-    ''' used to determine if the button will be displayed and function in 'split' or 'normal' mode
-    ''' </summary>
     Private _bShowSplit As Boolean
-
-    ''' <summary>
-    ''' used as the split menu strip
-    ''' </summary>
     Private _contextSplitMenuStrip As ContextMenuStrip
     Private _textFormatFlags As TextFormatFlags = TextFormatFlags.Default
     Private _bSkipNextOpen As Boolean
     Private _bMouseEntered As Boolean
 
+    ' Toggle debugging diagnostics (set True to log measured widths)
+    Private Const ENABLE_SPLITMENU_DIAGNOSTICS As Boolean = False
+
     Public Sub New()
-        'by default support the autosize. This control aligns it's elements in runtime
         AutoSize = True
     End Sub
 
@@ -59,18 +51,12 @@ Public Class ucrSplitButton
         End Set
     End Property
 
-    ''' <summary>
-    ''' sets the context menu of the control
-    ''' the context menu will be used for the split menu items
-    ''' </summary>
-    ''' <returns>ContextMenuStrip used by the control as a Split Menu</returns>
     <DefaultValue(DirectCast(Nothing, ContextMenu))>
     Public Property SplitMenuStrip As ContextMenuStrip
         Get
             Return _contextSplitMenuStrip
         End Get
         Set(value As ContextMenuStrip)
-
             If _contextSplitMenuStrip IsNot Nothing Then
                 RemoveHandler _contextSplitMenuStrip.Closing, AddressOf SplitMenuStrip_Closing
                 RemoveHandler _contextSplitMenuStrip.Opening, AddressOf SplitMenuStrip_Opening
@@ -91,28 +77,26 @@ Public Class ucrSplitButton
     <DefaultValue(False)>
     Private WriteOnly Property ShowSplit As Boolean
         Set(value As Boolean)
-
             If value <> _bShowSplit Then
                 _bShowSplit = value
                 Invalidate()
-
-                If Parent IsNot Nothing Then
-                    Parent.PerformLayout()
-                End If
+                If Parent IsNot Nothing Then Parent.PerformLayout()
             End If
         End Set
     End Property
 
-    ''' <summary>
-    ''' used to determine display state of the button in response to different user events
-    ''' </summary>
-    ''' <returns></returns>
+    ' Public settings so Designer/other classes can access them without protection errors
+    <DefaultValue(False)>
+    Public Property ForceWideSplit As Boolean = False
+
+    <DefaultValue(28)>
+    Public Property ExtraMenuWidthPadding As Integer = 28
+
     Private Property State As PushButtonState
         Get
             Return _pushButtonState
         End Get
         Set(value As PushButtonState)
-
             If Not _pushButtonState.Equals(value) Then
                 _pushButtonState = value
                 Invalidate()
@@ -121,9 +105,7 @@ Public Class ucrSplitButton
     End Property
 
     Protected Overrides Function IsInputKey(keyData As Keys) As Boolean
-        If keyData.Equals(Keys.Down) AndAlso _bShowSplit Then
-            Return True
-        End If
+        If keyData.Equals(Keys.Down) AndAlso _bShowSplit Then Return True
         Return MyBase.IsInputKey(keyData)
     End Function
 
@@ -132,7 +114,6 @@ Public Class ucrSplitButton
             MyBase.OnGotFocus(e)
             Return
         End If
-
         If Not State.Equals(PushButtonState.Pressed) AndAlso Not State.Equals(PushButtonState.Disabled) Then
             State = PushButtonState.Default
         End If
@@ -146,21 +127,17 @@ Public Class ucrSplitButton
                 State = PushButtonState.Pressed
             End If
         End If
-
         MyBase.OnKeyDown(kevent)
     End Sub
 
     Protected Overrides Sub OnKeyUp(kevent As KeyEventArgs)
         If kevent.KeyCode.Equals(Keys.Space) Then
-            If MouseButtons = MouseButtons.None Then
-                State = PushButtonState.Normal
-            End If
+            If MouseButtons = MouseButtons.None Then State = PushButtonState.Normal
         ElseIf kevent.KeyCode.Equals(Keys.Apps) Then
             If MouseButtons = MouseButtons.None AndAlso Not _bSplitMenuVisible Then
                 ShowContextMenuStrip()
             End If
         End If
-
         MyBase.OnKeyUp(kevent)
     End Sub
 
@@ -174,7 +151,6 @@ Public Class ucrSplitButton
             MyBase.OnLostFocus(e)
             Return
         End If
-
         If Not State.Equals(PushButtonState.Pressed) AndAlso Not State.Equals(PushButtonState.Disabled) Then
             State = PushButtonState.Normal
         End If
@@ -185,9 +161,7 @@ Public Class ucrSplitButton
             MyBase.OnMouseEnter(e)
             Return
         End If
-
         _bMouseEntered = True
-
         If Not State.Equals(PushButtonState.Pressed) AndAlso Not State.Equals(PushButtonState.Disabled) Then
             State = PushButtonState.Hot
         End If
@@ -198,9 +172,7 @@ Public Class ucrSplitButton
             MyBase.OnMouseLeave(e)
             Return
         End If
-
         _bMouseEntered = False
-
         If Not State.Equals(PushButtonState.Pressed) AndAlso Not State.Equals(PushButtonState.Disabled) Then
             State = If(Focused, PushButtonState.Default, PushButtonState.Normal)
         End If
@@ -233,24 +205,17 @@ Public Class ucrSplitButton
             ShowContextMenuStrip()
         ElseIf _contextSplitMenuStrip Is Nothing OrElse Not _bSplitMenuVisible Then
             If ClientRectangle.Contains(mevent.Location) AndAlso Not _dropDownRectangle.Contains(mevent.Location) Then
-                ' Trigger the Click event
                 OnClick(EventArgs.Empty)
             End If
         End If
 
-        ' Set the button state to Normal regardless of other conditions
         State = PushButtonState.Normal
-
         MyBase.OnMouseUp(mevent)
     End Sub
-
 
     Protected Overrides Sub OnPaint(pevent As PaintEventArgs)
         MyBase.OnPaint(pevent)
         If Not _bShowSplit Then Exit Sub
-
-        '-----------------------------------------------
-        'below code draws the separator and drop down icon inside the control
 
         Dim g As Graphics = pevent.Graphics
         Dim bounds As Rectangle = ClientRectangle
@@ -273,24 +238,6 @@ Public Class ucrSplitButton
             g.DrawLine(SystemPens.ButtonShadow, bounds.Right - _iSplitSectionWidth, _iBorderSize, bounds.Right - _iSplitSectionWidth, bounds.Bottom - _iBorderSize)
             g.DrawLine(SystemPens.ButtonFace, bounds.Right - _iSplitSectionWidth - 1, _iBorderSize, bounds.Right - _iSplitSectionWidth - 1, bounds.Bottom - _iBorderSize)
         End If
-
-        'below commented code is meant to support Right To Left language locales,
-        'it can be activated if that support is desired.
-        'will draw the elements from  R, that is, 'down icon', 'split icon' then the text
-        'If RightToLeft = RightToLeft.Yes Then
-        '    _dropDownRectangle.X = bounds.Left + 1
-        '    focusRect.X = _dropDownRectangle.Right
-
-        '    If bDrawSplitLine Then
-        '        g.DrawLine(SystemPens.ButtonShadow, bounds.Left + _iSplitSectionWidth, _borderSize, bounds.Left + _iSplitSectionWidth, bounds.Bottom - _borderSize)
-        '        g.DrawLine(SystemPens.ButtonFace, bounds.Left + _iSplitSectionWidth + 1, _borderSize, bounds.Left + _iSplitSectionWidth + 1, bounds.Bottom - _borderSize)
-        '    End If
-        'Else
-        '    If bDrawSplitLine Then
-        '        g.DrawLine(SystemPens.ButtonShadow, bounds.Right - _iSplitSectionWidth, _borderSize, bounds.Right - _iSplitSectionWidth, bounds.Bottom - _borderSize)
-        '        g.DrawLine(SystemPens.ButtonFace, bounds.Right - _iSplitSectionWidth - 1, _borderSize, bounds.Right - _iSplitSectionWidth - 1, bounds.Bottom - _borderSize)
-        '    End If
-        'End If
 
         PaintArrow(g, _dropDownRectangle)
         PaintTextandImage(g, New Rectangle(0, 0, ClientRectangle.Width - _iSplitSectionWidth, ClientRectangle.Height))
@@ -318,7 +265,6 @@ Public Class ucrSplitButton
         CalculateAndSetButtonTextAndImageLayout(bounds, textRectangle, imageRectangle)
 
         If Image IsNot Nothing Then
-
             If Enabled Then
                 g.DrawImage(Image, imageRectangle.X, imageRectangle.Y, Image.Width, Image.Height)
             Else
@@ -333,7 +279,6 @@ Public Class ucrSplitButton
         End If
 
         If Not String.IsNullOrEmpty(Text) Then
-
             If Enabled Then
                 TextRenderer.DrawText(g, Text, Font, textRectangle, ForeColor, _textFormatFlags)
             Else
@@ -342,19 +287,14 @@ Public Class ucrSplitButton
         End If
     End Sub
 
-
     Public Overrides Function GetPreferredSize(proposedSize As Size) As Size
         Dim preferredSize As Size = MyBase.GetPreferredSize(proposedSize)
-
         If _bShowSplit Then
-            If AutoSize Then
-                Return CalculateButtonAutoSize()
-            End If
+            If AutoSize Then Return CalculateButtonAutoSize()
             If Not String.IsNullOrEmpty(Text) AndAlso TextRenderer.MeasureText(Text, Font).Width + _iSplitSectionWidth > preferredSize.Width Then
                 Return preferredSize + New Size(_iSplitSectionWidth + _iBorderSize * 2, 0)
             End If
         End If
-
         Return preferredSize
     End Function
 
@@ -382,9 +322,7 @@ Public Class ucrSplitButton
 
         rectSize.Height += Padding.Vertical + 6
         rectSize.Width += Padding.Horizontal + 6
-        If _bShowSplit Then
-            rectSize.Width += _iSplitSectionWidth
-        End If
+        If _bShowSplit Then rectSize.Width += _iSplitSectionWidth
         Return rectSize
     End Function
 
@@ -414,9 +352,9 @@ Public Class ucrSplitButton
         End Select
     End Sub
 
-    Private Function OverlayObjectRect(ByRef container As Rectangle, ByRef sizeOfObject As Size, alignment As System.Drawing.ContentAlignment) As Rectangle
+    ' Public helpers (changed from Private to Public so other compile units & designer code can access them)
+    Public Function OverlayObjectRect(ByRef container As Rectangle, ByRef sizeOfObject As Size, alignment As System.Drawing.ContentAlignment) As Rectangle
         Dim x, y As Integer
-
         Select Case alignment
             Case System.Drawing.ContentAlignment.TopLeft
                 x = 4
@@ -453,7 +391,7 @@ Public Class ucrSplitButton
         Return New Rectangle(x, y, sizeOfObject.Width, sizeOfObject.Height)
     End Function
 
-    Private Sub SetLayoutTextBeforeOrAfterImage(ByVal totalArea As Rectangle, ByVal textFirst As Boolean, ByVal textSize As Size, ByVal imageSize As Size, <Out> ByRef textRect As Rectangle, <Out> ByRef imageRect As Rectangle)
+    Public Sub SetLayoutTextBeforeOrAfterImage(ByVal totalArea As Rectangle, ByVal textFirst As Boolean, ByVal textSize As Size, ByVal imageSize As Size, <Out> ByRef textRect As Rectangle, <Out> ByRef imageRect As Rectangle)
         Dim iElementSpacing As Integer = 0
         Dim iTotalWidth As Integer = textSize.Width + iElementSpacing + imageSize.Width
         If Not textFirst Then iElementSpacing += 2
@@ -492,7 +430,7 @@ Public Class ucrSplitButton
         imageRect = finalImageRect
     End Sub
 
-    Private Sub SetLayoutTextAboveOrBelowImage(totalArea As Rectangle, bTextFirst As Boolean, textSize As Size, imageSize As Size, <Out> ByRef textRect As Rectangle, <Out> ByRef imageRect As Rectangle)
+    Public Sub SetLayoutTextAboveOrBelowImage(totalArea As Rectangle, bTextFirst As Boolean, textSize As Size, imageSize As Size, <Out> ByRef textRect As Rectangle, <Out> ByRef imageRect As Rectangle)
         Dim iElementSpacing As Integer = 0
         Dim iTotalHeight As Integer = textSize.Height + iElementSpacing + imageSize.Height
         If bTextFirst Then iElementSpacing += 2
@@ -533,7 +471,7 @@ Public Class ucrSplitButton
         imageRect = finalImageRect
     End Sub
 
-    Private Function GetHorizontalAlignment(enumAlign As System.Drawing.ContentAlignment) As HorizontalAlignment
+    Public Function GetHorizontalAlignment(enumAlign As System.Drawing.ContentAlignment) As HorizontalAlignment
         Select Case enumAlign
             Case System.Drawing.ContentAlignment.BottomLeft, System.Drawing.ContentAlignment.MiddleLeft, System.Drawing.ContentAlignment.TopLeft
                 Return HorizontalAlignment.Left
@@ -546,7 +484,7 @@ Public Class ucrSplitButton
         Return HorizontalAlignment.Left
     End Function
 
-    Private Function GetVerticalAlignment(enumAlign As System.Drawing.ContentAlignment) As VerticalAlignment
+    Public Function GetVerticalAlignment(enumAlign As System.Drawing.ContentAlignment) As VerticalAlignment
         Select Case enumAlign
             Case System.Drawing.ContentAlignment.TopLeft, System.Drawing.ContentAlignment.TopCenter, System.Drawing.ContentAlignment.TopRight
                 Return VerticalAlignment.Top
@@ -559,7 +497,7 @@ Public Class ucrSplitButton
         Return VerticalAlignment.Top
     End Function
 
-    Private Function GetAlignInRectangle(outer As Rectangle, inner As Size, enumAlign As System.Drawing.ContentAlignment) As Rectangle
+    Public Function GetAlignInRectangle(outer As Rectangle, inner As Size, enumAlign As System.Drawing.ContentAlignment) As Rectangle
         Dim x As Integer = 0
         Dim y As Integer = 0
 
@@ -582,74 +520,106 @@ Public Class ucrSplitButton
         Return New Rectangle(x, y, Math.Min(inner.Width, outer.Width), Math.Min(inner.Height, outer.Height))
     End Function
 
+    ' ========================================================
+    ' Core: ShowContextMenuStrip - robust approach (measure & force width, then show native)
+    ' ========================================================
     Private Sub ShowContextMenuStrip()
         If _bSkipNextOpen Then
             _bSkipNextOpen = False
             Return
         End If
 
+        If _contextSplitMenuStrip Is Nothing Then
+            Return
+        End If
+
         State = PushButtonState.Pressed
 
-        Dim tmpForm As New Form With {
-            .AutoScaleMode = AutoScaleMode.None,
-            .FormBorderStyle = FormBorderStyle.None,
-            .StartPosition = FormStartPosition.Manual,
-            .ShowInTaskbar = False
-        }
-        Dim panel As New Panel With {
-            .Dock = DockStyle.Fill,
-            .BorderStyle = BorderStyle.None
-        }
-        _contextSplitMenuStrip.TopLevel = False
-        _contextSplitMenuStrip.Dock = DockStyle.Top
-        _contextSplitMenuStrip.ShowImageMargin = False
+        ' Ensure layout is up-to-date so PreferredSize/GetPreferredSize are accurate
+        _contextSplitMenuStrip.PerformLayout()
 
-        AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
-                                                           tmpForm.Close()
-                                                       End Sub
-
-        AddHandler tmpForm.FormClosed, Sub(sender As Object, e As FormClosedEventArgs)
-                                           If panel.Controls.Contains(_contextSplitMenuStrip) Then
-                                               panel.Controls.Remove(_contextSplitMenuStrip)
-                                           End If
-                                       End Sub
-
-        AddHandler tmpForm.LostFocus, Sub(sender As Object, e As EventArgs)
-                                          _bSplitMenuVisible = False
-                                          tmpForm.Close()
-                                      End Sub
-
-        panel.Controls.Add(_contextSplitMenuStrip)
-        ' Set a maximum height for the form
-        Dim maxHeight As Integer = 250
-
-        ' Ensure that the panel fits the preferred size of the context menu without extra space
-        Dim preferredSize As Size = _contextSplitMenuStrip.PreferredSize
-        If preferredSize.Height > maxHeight Then
-            panel.AutoScroll = True
-            preferredSize.Height = maxHeight
-        Else
-            panel.AutoScroll = False
-        End If
-
-        If _contextSplitMenuStrip IsNot Nothing Then
-            _contextSplitMenuStrip.Show()
-        End If
-
-        ' Calculate whether to show the form above or below
+        Dim menuPreferred As Size = _contextSplitMenuStrip.PreferredSize
         Dim screenRect As Rectangle = Screen.FromControl(Me).WorkingArea
-        Dim showUp As Boolean = PointToScreen(New Point(0, Height + PreferredSize.Height)).Y > screenRect.Bottom
+        Dim maxHeight As Integer = 1000
+        Dim formHeight As Integer = Math.Min(menuPreferred.Height, maxHeight)
 
-        ' Set the form size and location accordingly
-        tmpForm.Size = New Size(PreferredSize.Width, PreferredSize.Height)
-        If showUp Then
-            tmpForm.Location = PointToScreen(New Point(0, Height - tmpForm.Height))
-        Else
-            tmpForm.Location = PointToScreen(New Point(0, Height))
+        Dim maxItemWidth As Integer = 0
+        Dim measureFont As Font = If(_contextSplitMenuStrip.Font, Me.Font)
+
+        Dim SubMeasure As Action(Of ToolStripItemCollection) =
+            Sub(items As ToolStripItemCollection)
+                If items Is Nothing Then Return
+                For Each tsi As ToolStripItem In items
+                    If tsi Is Nothing Then Continue For
+                    Try
+                        Dim pref As Size = tsi.GetPreferredSize(Size.Empty)
+                        If pref.Width > maxItemWidth Then maxItemWidth = pref.Width
+                    Catch
+                        Dim cleaned As String = If(String.IsNullOrEmpty(tsi.Text), "", tsi.Text.Replace("&"c, ""))
+                        Dim measured As Size = TextRenderer.MeasureText(cleaned, measureFont, New Size(4000, 0), TextFormatFlags.SingleLine)
+                        If measured.Width > maxItemWidth Then maxItemWidth = measured.Width
+                    End Try
+                    Dim mi = TryCast(tsi, ToolStripMenuItem)
+                    If mi IsNot Nothing AndAlso mi.HasDropDownItems Then
+                        SubMeasure(mi.DropDownItems)
+                    End If
+                Next
+            End Sub
+
+        SubMeasure(_contextSplitMenuStrip.Items)
+
+        Dim imageCol As Integer = If(_contextSplitMenuStrip.ShowImageMargin, 36, 0)
+        Dim arrowCol As Integer = 2
+        Dim padding As Integer = ExtraMenuWidthPadding
+        Dim computedWidth As Integer = maxItemWidth + imageCol + arrowCol + padding
+
+        computedWidth = Math.Max(computedWidth, menuPreferred.Width)
+        If ForceWideSplit Then computedWidth = Math.Max(computedWidth, Me.Width * 2)
+
+        Dim maxAllowedWidth As Integer = screenRect.Width - 20
+        If computedWidth > maxAllowedWidth Then computedWidth = maxAllowedWidth
+
+        If ENABLE_SPLITMENU_DIAGNOSTICS Then
+            Debug.WriteLine($"[ucrSplitButton] menuPreferred.Width={menuPreferred.Width}, maxItemWidth={maxItemWidth}, computedWidth={computedWidth}, screenWidth={screenRect.Width}")
         End If
 
-        tmpForm.Controls.Add(panel)
-        tmpForm.Show()
+        Dim prevAutoSize As Boolean = _contextSplitMenuStrip.AutoSize
+        Try
+            _contextSplitMenuStrip.AutoSize = False
+            _contextSplitMenuStrip.Width = Math.Max(30, computedWidth)
+        Catch ex As Exception
+        End Try
+
+        Dim belowScreenPoint As Point = PointToScreen(New Point(0, Height))
+        Dim showAbove As Boolean = (belowScreenPoint.Y + formHeight) > screenRect.Bottom
+
+        Try
+            RemoveHandler _contextSplitMenuStrip.ItemClicked, AddressOf ContextMenu_ItemClicked_CloseHosted
+        Catch ex As Exception
+        End Try
+        AddHandler _contextSplitMenuStrip.ItemClicked, AddressOf ContextMenu_ItemClicked_CloseHosted
+
+        If showAbove Then
+            _contextSplitMenuStrip.Show(Me, New Point(0, -formHeight))
+        Else
+            _contextSplitMenuStrip.Show(Me, New Point(0, Height))
+        End If
+
+        _bSplitMenuVisible = True
+
+        Me.BeginInvoke(Sub()
+                           Try
+                               _contextSplitMenuStrip.AutoSize = prevAutoSize
+                           Catch
+                           End Try
+                       End Sub)
+    End Sub
+
+    Private Sub ContextMenu_ItemClicked_CloseHosted(sender As Object, e As ToolStripItemClickedEventArgs)
+        Try
+            _contextSplitMenuStrip.Close()
+        Catch
+        End Try
     End Sub
 
     Private Sub SplitMenuStrip_Opening(sender As Object, e As CancelEventArgs)
@@ -659,14 +629,13 @@ Public Class ucrSplitButton
     Private Sub SplitMenuStrip_Closing(ByVal sender As Object, ByVal e As ToolStripDropDownClosingEventArgs)
         _bSplitMenuVisible = False
         SetButtonDrawState()
-
         If e.CloseReason = ToolStripDropDownCloseReason.AppClicked Then
             _bSkipNextOpen = _dropDownRectangle.Contains(PointToClient(Cursor.Position)) AndAlso MouseButtons = MouseButtons.Left
         End If
     End Sub
 
     Private Sub SetButtonDrawState()
-        If Bounds.Contains(Parent.PointToClient(Cursor.Position)) Then
+        If Parent IsNot Nothing AndAlso Bounds.Contains(Parent.PointToClient(Cursor.Position)) Then
             State = PushButtonState.Hot
         ElseIf Focused Then
             State = PushButtonState.Default
@@ -677,5 +646,3 @@ Public Class ucrSplitButton
         End If
     End Sub
 End Class
-
-
