@@ -49,8 +49,6 @@ Public Class dlgScatterPlot
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
-    ' Private clsFacetRowOp As New ROperator
-    ' Private clsFacetColOp As New ROperator
     Private clsVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
@@ -318,8 +316,6 @@ Public Class dlgScatterPlot
         clsDummyFunction = New RFunction
         clsFacetFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
-        ' clsFacetRowOp = New ROperator
-        ' clsFacetColOp = New ROperator
         clsVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
@@ -385,10 +381,6 @@ Public Class dlgScatterPlot
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
-        'clsFacetRowOp.SetOperation("+")
-        'clsFacetRowOp.bBrackets = False
-        'clsFacetColOp.SetOperation("+")
-        'clsFacetColOp.bBrackets = False
 
         clsFacetVariablesOperator.SetOperation("~")
         clsFacetVariablesOperator.bForceIncludeOperation = True
@@ -518,7 +510,6 @@ Public Class dlgScatterPlot
         ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
-
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
         EnableDisableOptions(clsRScatterGeomFunction)
     End Sub
@@ -677,8 +668,6 @@ Public Class dlgScatterPlot
 
     Private Sub UpdateParameters()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
-        'clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        ' clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -744,21 +733,13 @@ Public Class dlgScatterPlot
         End If
 
         If bRow OrElse bRowAll Then
-            'clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
-            'ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
-            '    'clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
-            '    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
         Else
             clsFacetFunction.RemoveParameterByName("rows")
         End If
 
         If bCol OrElse bColAll Then
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
-            ' clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-            'ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
-            '    ' clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
-            '    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
         Else
             clsFacetFunction.RemoveParameterByName("cols")
         End If
@@ -787,10 +768,6 @@ Public Class dlgScatterPlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                        'Case strFacetCol, strFacetColAll
-                        '    GetParameterValue(clsFacetColOp)
-                        'Case strFacetRow, strFacetRowAll
-                        '    GetParameterValue(clsFacetRowOp)
                 End Select
             End If
 
