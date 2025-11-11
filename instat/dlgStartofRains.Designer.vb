@@ -147,7 +147,7 @@ Partial Class dlgStartofRains
         Me.grpDisplay.Controls.Add(Me.ucrInputNewDateColumnName)
         Me.grpDisplay.Location = New System.Drawing.Point(13, 465)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(584, 49)
+        Me.grpDisplay.Size = New System.Drawing.Size(596, 49)
         Me.grpDisplay.TabIndex = 66
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display"
@@ -158,16 +158,17 @@ Partial Class dlgStartofRains
         Me.ucrInputNewStatusColumnName.AutoSize = True
         Me.ucrInputNewStatusColumnName.IsMultiline = False
         Me.ucrInputNewStatusColumnName.IsReadOnly = False
-        Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(461, 18)
+        Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(493, 18)
+        Me.ucrInputNewStatusColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNewStatusColumnName.Name = "ucrInputNewStatusColumnName"
-        Me.ucrInputNewStatusColumnName.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputNewStatusColumnName.Size = New System.Drawing.Size(99, 21)
         Me.ucrInputNewStatusColumnName.TabIndex = 51
         '
         'ucrChkAsDate
         '
         Me.ucrChkAsDate.AutoSize = True
         Me.ucrChkAsDate.Checked = False
-        Me.ucrChkAsDate.Location = New System.Drawing.Point(194, 18)
+        Me.ucrChkAsDate.Location = New System.Drawing.Point(233, 18)
         Me.ucrChkAsDate.Name = "ucrChkAsDate"
         Me.ucrChkAsDate.Size = New System.Drawing.Size(51, 23)
         Me.ucrChkAsDate.TabIndex = 48
@@ -176,7 +177,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrChkStatus.AutoSize = True
         Me.ucrChkStatus.Checked = False
-        Me.ucrChkStatus.Location = New System.Drawing.Point(372, 18)
+        Me.ucrChkStatus.Location = New System.Drawing.Point(404, 18)
         Me.ucrChkStatus.Name = "ucrChkStatus"
         Me.ucrChkStatus.Size = New System.Drawing.Size(84, 23)
         Me.ucrChkStatus.TabIndex = 50
@@ -187,7 +188,8 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDateColumnName.AutoSize = True
         Me.ucrInputNewDateColumnName.IsMultiline = False
         Me.ucrInputNewDateColumnName.IsReadOnly = False
-        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(248, 18)
+        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(283, 18)
+        Me.ucrInputNewDateColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
         Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(115, 21)
         Me.ucrInputNewDateColumnName.TabIndex = 49
@@ -210,9 +212,10 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDoyColumnName.AutoSize = True
         Me.ucrInputNewDoyColumnName.IsMultiline = False
         Me.ucrInputNewDoyColumnName.IsReadOnly = False
-        Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(75, 483)
+        Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(129, 483)
+        Me.ucrInputNewDoyColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNewDoyColumnName.Name = "ucrInputNewDoyColumnName"
-        Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(127, 21)
+        Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(110, 21)
         Me.ucrInputNewDoyColumnName.TabIndex = 68
         '
         'ucrChkAsDoy
@@ -221,7 +224,7 @@ Partial Class dlgStartofRains
         Me.ucrChkAsDoy.Checked = False
         Me.ucrChkAsDoy.Location = New System.Drawing.Point(20, 483)
         Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
-        Me.ucrChkAsDoy.Size = New System.Drawing.Size(69, 23)
+        Me.ucrChkAsDoy.Size = New System.Drawing.Size(108, 23)
         Me.ucrChkAsDoy.TabIndex = 67
         '
         'ucrReceiverStation
@@ -292,6 +295,7 @@ Partial Class dlgStartofRains
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(277, 11)
+        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
         Me.ucrInputFilterPreview.TabIndex = 15
