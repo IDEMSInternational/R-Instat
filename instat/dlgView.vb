@@ -275,7 +275,12 @@ Public Class dlgView
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
-        sdgTableOptions.Setup(ucrSelectorForView.strCurrentDataFrame, clsBaseOperator, "")
+        sdgTableOptions.Setup(ucrSelectorForView.strCurrentDataFrame, clsBaseOperator, {
+                                  EnumTableSubDialogTab.Header, EnumTableSubDialogTab.Stub,
+                                  EnumTableSubDialogTab.Columns, EnumTableSubDialogTab.Rows,
+                                  EnumTableSubDialogTab.Cells, EnumTableSubDialogTab.SourceNotes,
+                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                                  EnumTableSubDialogTab.Table})
         sdgTableOptions.ShowDialog(Me)
     End Sub
 
