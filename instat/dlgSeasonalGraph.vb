@@ -119,13 +119,13 @@ Public Class dlgSeasonalGraph
         ucrReceiverRibbons.bWithQuotes = False
         ucrReceiverRibbons.iMaxItems = 4
 
-        ucrReceiverFacetBy.SetParameter(New RParameter("var1"))
-        ucrReceiverFacetBy.Selector = ucrSelectorForSeasonalGraph
-        ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
-        ucrReceiverFacetBy.strSelectorHeading = "Factors"
-        ucrReceiverFacetBy.bWithQuotes = False
-        ucrReceiverFacetBy.SetParameterIsString()
-        ucrReceiverFacetBy.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucr1stFactorReceiver.Selector = ucrSelectorForSeasonalGraph
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
@@ -503,17 +503,17 @@ Public Class dlgSeasonalGraph
 
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        ucrReceiverFacetBy.SetRCode(Nothing)
+        ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
             Case strFacetWrap
-                ucrReceiverFacetBy.ChangeParameterName("var1")
-                ucrReceiverFacetBy.SetRCode(clsFacetOperator)
+                ucr1stFactorReceiver.ChangeParameterName("var1")
+                ucr1stFactorReceiver.SetRCode(clsFacetOperator)
             Case strFacetCol, strFacetColAll
-                ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
-                ucrReceiverFacetBy.SetRCode(clsFacetColOp)
+                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
             Case strFacetRow, strFacetRowAll
-                ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
-                ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=1)
@@ -534,7 +534,7 @@ Public Class dlgSeasonalGraph
 
         clsBaseOperator.RemoveParameterByName("facets")
 
-        If Not ucrReceiverFacetBy.IsEmpty Then
+        If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
                     bWrap = True
@@ -652,7 +652,7 @@ Public Class dlgSeasonalGraph
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
@@ -663,7 +663,7 @@ Public Class dlgSeasonalGraph
         If ucrSelectorForSeasonalGraph.CurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver = ucrSelectorForSeasonalGraph.CurrentReceiver
         End If
-        ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrSelectorForSeasonalGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorForSeasonalGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
@@ -718,6 +718,7 @@ Public Class dlgSeasonalGraph
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetOperator,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
 
