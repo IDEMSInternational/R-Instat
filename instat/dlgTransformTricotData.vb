@@ -171,7 +171,7 @@ Public Class dlgTransformTricotData
 
         clsIdVarietyOperator.SetOperation("%>%")
         clsIdVarietyOperator.AddParameter("left", "plot_data", iPosition:=0)
-        clsIdVarietyOperator.AddParameter("right", "pull(c(variety_col))", iPosition:=1)
+        clsIdVarietyOperator.AddParameter("right", "dplyr::pull(c(variety_col))", iPosition:=1)
         clsIdVarietyOperator.SetAssignTo("plot_data_variety_var")
 
         clsRankingFunction.SetPackageName("instatExtras")
