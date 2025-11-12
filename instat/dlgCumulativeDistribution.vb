@@ -181,8 +181,6 @@ Public Class dlgCumulativeDistribution
         clsStatECDFPointAesFunction = New RFunction
         clsFacetFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
-        'clsFacetRowOp = New ROperator
-        'clsFacetColOp = New ROperator
         clsVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
