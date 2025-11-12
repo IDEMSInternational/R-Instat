@@ -132,25 +132,25 @@ Partial Class dlgPICSARainfall
         Me.contextMenuStripOptions.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(199, 100)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(241, 133)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(198, 32)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(240, 32)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemLineOptions
         '
         Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(198, 32)
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(240, 32)
         Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
         'toolStripMenuItemPointOption
         '
         Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(198, 32)
-        Me.toolStripMenuItemPointOption.Text = "Point Options "
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(240, 32)
+        Me.toolStripMenuItemPointOption.Text = "Point Options"
         '
         'lblIncludeStatus
         '
@@ -173,7 +173,7 @@ Partial Class dlgPICSARainfall
         Me.lblYVar.Name = "lblYVar"
         Me.lblYVar.Size = New System.Drawing.Size(86, 20)
         Me.lblYVar.TabIndex = 3
-        Me.lblYVar.Tag = "X_Variable:"
+        Me.lblYVar.Tag = ""
         Me.lblYVar.Text = "Y Variable:"
         '
         'lblSecondYVar
