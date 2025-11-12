@@ -59,7 +59,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
@@ -283,18 +283,18 @@ Partial Class dlgPICSARainfall
         Me.ucrInputStation.Size = New System.Drawing.Size(123, 32)
         Me.ucrInputStation.TabIndex = 13
         '
-        'ucr1stFactorReceiver
+        'ucrReceiverFacetBy
         '
-        Me.ucr1stFactorReceiver.AutoSize = True
-        Me.ucr1stFactorReceiver.frmParent = Me
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(372, 357)
-        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
-        Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(188, 39)
-        Me.ucr1stFactorReceiver.strNcFilePath = ""
-        Me.ucr1stFactorReceiver.TabIndex = 12
-        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        Me.ucrReceiverFacetBy.AutoSize = True
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(372, 357)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(188, 39)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 12
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
@@ -380,7 +380,7 @@ Partial Class dlgPICSARainfall
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputStation)
-        Me.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.Controls.Add(Me.ucrReceiverFacetBy)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrChkPoints)
@@ -415,7 +415,7 @@ Partial Class dlgPICSARainfall
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
     Friend WithEvents cmdPICSAOptions As Button
-    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents cmdOptions As ucrSplitButton

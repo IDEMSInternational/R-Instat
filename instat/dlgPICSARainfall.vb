@@ -186,14 +186,13 @@ Public Class dlgPICSARainfall
         ucrReceiverColourBy.bWithQuotes = False
         ucrReceiverColourBy.SetParameterIsString()
 
-        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
-        ucr1stFactorReceiver.Selector = ucrSelectorPICSARainfall
-        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucr1stFactorReceiver.strSelectorHeading = "Factors"
-        ucr1stFactorReceiver.bWithQuotes = False
-        ucr1stFactorReceiver.SetParameterIsString()
-        ucr1stFactorReceiver.SetValuesToIgnore({"."})
-        ucr1stFactorReceiver.SetParameterPosition(1)
+        ucrReceiverFacetBy.SetParameter(New RParameter(""))
+        ucrReceiverFacetBy.Selector = ucrSelectorPICSARainfall
+        ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
+        ucrReceiverFacetBy.strSelectorHeading = "Factors"
+        ucrReceiverFacetBy.bWithQuotes = False
+        ucrReceiverFacetBy.SetParameterIsString()
+        ucrReceiverFacetBy.SetValuesToIgnore({"."})
 
         ucrReceiverIncludeStatus.SetParameter(New RParameter("left", 0))
         ucrReceiverIncludeStatus.Selector = ucrSelectorPICSARainfall
@@ -400,14 +399,9 @@ Public Class dlgPICSARainfall
         clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
-
         clsFacetOperator.SetOperation("~")
         clsFacetOperator.bForceIncludeOperation = True
         clsFacetOperator.bBrackets = False
-
-        clsVarsFunction.SetPackageName("ggplot2")
-        clsVarsFunction.SetRCommand("vars")
 
         clsFilterFunction.SetPackageName("dplyr")
         clsFilterFunction.SetRCommand("filter")
@@ -707,6 +701,9 @@ Public Class dlgPICSARainfall
 
         clsAsNumeric.SetRCommand("as.numeric")
 
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
+
         clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
         clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -796,17 +793,18 @@ Public Class dlgPICSARainfall
         clsFacetOperator.RemoveParameterByName("var1")
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        ucr1stFactorReceiver.SetRCode(Nothing)
+        ucrReceiverFacetBy.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
             Case strFacetWrap
-                ucr1stFactorReceiver.ChangeParameterName("var1")
-                ucr1stFactorReceiver.SetRCode(clsFacetOperator)
+                ucrReceiverFacetBy.ChangeParameterName("var1")
+                ucrReceiverFacetBy.SetRCode(clsFacetOperator)
             Case strFacetCol, strFacetColAll
-                ucr1stFactorReceiver.ChangeParameterName("cols" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+                ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
+                clsVarsFunction.AddParameter("var", ucrReceiverFacetBy.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+
             Case strFacetRow, strFacetRowAll
-                ucr1stFactorReceiver.ChangeParameterName("rows" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+                ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
+                clsVarsFunction.AddParameter("var", ucrReceiverFacetBy.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -825,7 +823,10 @@ Public Class dlgPICSARainfall
             Exit Sub
         End If
         clsBaseOperator.RemoveParameterByName("facets")
-        If Not ucr1stFactorReceiver.IsEmpty Then
+        clsFacetFunction.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("rows")
+        clsFacetFunction.RemoveParameterByName("cols")
+        If Not ucrReceiverFacetBy.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
                     bWrap = True
@@ -836,41 +837,38 @@ Public Class dlgPICSARainfall
                 Case strFacetColAll
                     bColAll = True
                 Case strFacetRowAll
+
                     bRowAll = True
             End Select
         End If
 
-        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        If bWrap Then
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+        ElseIf bRow OrElse bRowAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction)
+        ElseIf bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction)
         End If
 
-        If bWrap Then
-            clsFacetFunction.SetRCommand("facet_wrap")
-        ElseIf bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
-            clsFacetFunction.SetRCommand("facet_grid")
-            clsFacetFunction.RemoveParameterByName("facets")
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll OrElse bWrap Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         Else
             clsBaseOperator.RemoveParameterByName("facets")
         End If
 
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+        End If
+
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
+            clsFacetFunction.SetRCommand("facet_grid")
+        End If
+
         If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=1)
+            clsFacetFunction.AddParameter("margin", "TRUE")
         Else
             clsFacetFunction.RemoveParameterByName("margin")
         End If
-
-        If bRow OrElse bRowAll Then
-            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
-        Else
-            clsFacetFunction.RemoveParameterByName("rows")
-        End If
-
-        If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
-        Else
-            clsFacetFunction.RemoveParameterByName("cols")
-        End If
-
     End Sub
 
     'add more functions 
@@ -969,31 +967,25 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
-    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
 
     Private Sub AutoFacetStation()
-        'Dim ucrCurrentReceiver As ucrReceiver = Nothing
-        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorPICSARainfall.CurrentReceiver
+        Dim ucrCurrentReceiver As ucrReceiver = Nothing
 
-        'If ucrSelectorPICSARainfall.CurrentReceiver IsNot Nothing Then
-        '    ucrCurrentReceiver = ucrSelectorPICSARainfall.CurrentReceiver
-        'End If
-        'ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
-        'If ucrCurrentReceiver IsNot Nothing Then
-        '    ucrCurrentReceiver.SetMeAsReceiver()
-        'End If
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
-            ucrCurrentReceiver.SetMeAsReceiver()
-            AddRemoveGroupBy()
+        If ucrSelectorPICSARainfall.CurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver = ucrSelectorPICSARainfall.CurrentReceiver
         End If
-        'AddRemoveGroupBy()
+        ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+        AddRemoveGroupBy()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged, ucrReceiverForPICSA.ControlValueChanged
+    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged, ucrReceiverForPICSA.ControlValueChanged
         AddRemoveGroupBy()
         YAxisDataTypeCheck()
     End Sub
@@ -1101,7 +1093,6 @@ Public Class dlgPICSARainfall
                           clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
                           clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
         'AddRemoveGroupByAndHlines()
     End Sub
