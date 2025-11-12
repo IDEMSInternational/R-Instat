@@ -93,7 +93,7 @@ Public Class dlgTransformTricotData
         clsOutputLevelsOperator.AddParameter("right", "print", iPosition:=1)
         clsOutputLevelsOperator.bSpaceAroundOperation = False
 
-        clsDefineTricotDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_tricot_data")
+        clsDefineTricotDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_tricot")
         clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=True)
         clsDefineTricotDataFunction.iCallType = 2
 
