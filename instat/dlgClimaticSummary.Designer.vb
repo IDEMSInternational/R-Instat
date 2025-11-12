@@ -49,17 +49,19 @@ Partial Class dlgClimaticSummary
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.rdoStation = New System.Windows.Forms.RadioButton()
+        Me.rdoDaily = New System.Windows.Forms.RadioButton()
+        Me.ucrChkDefinitions = New instat.ucrCheck()
+        Me.ucrChkDayRange = New instat.ucrCheck()
+        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkAddDateColumn = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
-        Me.cmdDoyRange = New System.Windows.Forms.Button()
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.rdoStation = New System.Windows.Forms.RadioButton()
-        Me.rdoDaily = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
@@ -68,7 +70,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
-        Me.ucrChkDayRange = New instat.ucrCheck()
+        Me.ucrSaveObject = New instat.ucrSave()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -210,56 +212,6 @@ Partial Class dlgClimaticSummary
         Me.cmdMissingOptions.Text = "Options"
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.AutoSize = True
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 86)
-        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(178, 25)
-        Me.ucrChkOmitMissing.TabIndex = 5
-        '
-        'ucrChkAddDateColumn
-        '
-        Me.ucrChkAddDateColumn.AutoSize = True
-        Me.ucrChkAddDateColumn.Checked = False
-        Me.ucrChkAddDateColumn.Location = New System.Drawing.Point(6, 110)
-        Me.ucrChkAddDateColumn.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
-        Me.ucrChkAddDateColumn.Size = New System.Drawing.Size(219, 27)
-        Me.ucrChkAddDateColumn.TabIndex = 4
-        '
-        'ucrChkStoreResults
-        '
-        Me.ucrChkStoreResults.AutoSize = True
-        Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
-        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(255, 25)
-        Me.ucrChkStoreResults.TabIndex = 0
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.AutoSize = True
-        Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 40)
-        Me.ucrChkPrintOutput.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(254, 25)
-        Me.ucrChkPrintOutput.TabIndex = 1
-        '
-        'ucrChkDropUnusedLevels
-        '
-        Me.ucrChkDropUnusedLevels.AutoSize = True
-        Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 63)
-        Me.ucrChkDropUnusedLevels.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 25)
-        Me.ucrChkDropUnusedLevels.TabIndex = 2
-        '
         'cmdDoyRange
         '
         Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -315,6 +267,26 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDaily.UseVisualStyleBackColor = True
         '
+        'ucrChkDefinitions
+        '
+        Me.ucrChkDefinitions.AutoSize = True
+        Me.ucrChkDefinitions.Checked = False
+        Me.ucrChkDefinitions.Location = New System.Drawing.Point(13, 434)
+        Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
+        Me.ucrChkDefinitions.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkDefinitions.TabIndex = 49
+        '
+        'ucrChkDayRange
+        '
+        Me.ucrChkDayRange.AutoSize = True
+        Me.ucrChkDayRange.Checked = False
+        Me.ucrChkDayRange.Location = New System.Drawing.Point(334, 401)
+        Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDayRange.Name = "ucrChkDayRange"
+        Me.ucrChkDayRange.Size = New System.Drawing.Size(108, 27)
+        Me.ucrChkDayRange.TabIndex = 25
+        '
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.AutoSize = True
@@ -339,6 +311,56 @@ Partial Class dlgClimaticSummary
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(210, 22)
         Me.ucrInputFilterPreview.TabIndex = 22
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.AutoSize = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 86)
+        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(178, 25)
+        Me.ucrChkOmitMissing.TabIndex = 5
+        '
+        'ucrChkAddDateColumn
+        '
+        Me.ucrChkAddDateColumn.AutoSize = True
+        Me.ucrChkAddDateColumn.Checked = False
+        Me.ucrChkAddDateColumn.Location = New System.Drawing.Point(6, 110)
+        Me.ucrChkAddDateColumn.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
+        Me.ucrChkAddDateColumn.Size = New System.Drawing.Size(219, 27)
+        Me.ucrChkAddDateColumn.TabIndex = 4
+        '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.AutoSize = True
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(255, 25)
+        Me.ucrChkStoreResults.TabIndex = 0
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.AutoSize = True
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 40)
+        Me.ucrChkPrintOutput.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(254, 25)
+        Me.ucrChkPrintOutput.TabIndex = 1
+        '
+        'ucrChkDropUnusedLevels
+        '
+        Me.ucrChkDropUnusedLevels.AutoSize = True
+        Me.ucrChkDropUnusedLevels.Checked = False
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 63)
+        Me.ucrChkDropUnusedLevels.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 25)
+        Me.ucrChkDropUnusedLevels.TabIndex = 2
         '
         'ucrSelectorVariable
         '
@@ -421,7 +443,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(5, 427)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 491)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -436,22 +458,23 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(396, 35)
         Me.ucrPnlAnnualWithin.TabIndex = 0
         '
-        'ucrChkDayRange
+        'ucrSaveObject
         '
-        Me.ucrChkDayRange.AutoSize = True
-        Me.ucrChkDayRange.Checked = False
-        Me.ucrChkDayRange.Location = New System.Drawing.Point(334, 401)
-        Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkDayRange.Name = "ucrChkDayRange"
-        Me.ucrChkDayRange.Size = New System.Drawing.Size(108, 27)
-        Me.ucrChkDayRange.TabIndex = 25
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveObject.Location = New System.Drawing.Point(13, 456)
+        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveObject.Name = "ucrSaveObject"
+        Me.ucrSaveObject.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveObject.TabIndex = 50
         '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(452, 478)
+        Me.ClientSize = New System.Drawing.Size(449, 546)
+        Me.Controls.Add(Me.ucrSaveObject)
+        Me.Controls.Add(Me.ucrChkDefinitions)
         Me.Controls.Add(Me.ucrChkDayRange)
         Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoStation)
@@ -521,4 +544,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents rdoStation As RadioButton
     Friend WithEvents rdoDaily As RadioButton
     Friend WithEvents ucrChkDayRange As ucrCheck
+    Friend WithEvents ucrChkDefinitions As ucrCheck
+    Friend WithEvents ucrSaveObject As ucrSave
 End Class
