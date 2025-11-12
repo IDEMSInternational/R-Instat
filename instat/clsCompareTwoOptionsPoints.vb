@@ -40,8 +40,7 @@
     ' Facet functions
     Public clsRFacetFunction As New RFunction
     Public clsFacetOp As New ROperator
-    Public clsFacetRowOp As New ROperator
-    Public clsFacetColOp As New ROperator
+    Public clsVarsFunction As New RFunction
 
     ' Data unstacking and calculations
     Public clsDCast As New RFunction
@@ -61,8 +60,7 @@
 
         clsRFacetFunction = New RFunction
         clsFacetOp = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
+        clsVarsFunction = New RFunction
 
         clsDCast = New RFunction
         clsDCastFormula = New ROperator
@@ -121,16 +119,14 @@
 
         clsRFacetFunction.SetPackageName("ggplot2")
         clsRFacetFunction.SetRCommand("facet_grid")
-        clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp, iPosition:=0)
+        clsRFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
 
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
         clsFacetOp.bBrackets = False
 
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
     End Sub
