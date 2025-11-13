@@ -89,7 +89,7 @@ Public Class ucrSelector
 
     Private Sub SetSortRightClickMenuText()
         ' TODO. Add translations
-        mnuSortToolStrip.Text = If(enumCurrentListViewSortStatus = SelectorSortType.Appearance, "Sort Alphabetically", "Sort By Appearance")
+        mnuSortToolStrip.Text = If(enumCurrentListViewSortStatus = SelectorSortType.Appearance, "Sort Alphabetically", "Sort by Appearance")
     End Sub
 
     Protected Sub OnResetAll()
