@@ -27,6 +27,8 @@ Partial Class dlgClimaticStationMaps
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPoints = New System.Windows.Forms.GroupBox()
         Me.grpBoxLabelOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrNudSize = New instat.ucrNud()
         Me.ucrChkColour = New instat.ucrCheck()
         Me.ucrChkSize = New instat.ucrCheck()
         Me.ucrChkLabelAll = New instat.ucrCheck()
@@ -59,8 +61,8 @@ Partial Class dlgClimaticStationMaps
         Me.toolStripMenuItemLabelRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTextRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
-        Me.ucrNudSize = New instat.ucrNud()
-        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.grpPoints.SuspendLayout()
         Me.grpBoxLabelOptions.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
@@ -123,6 +125,30 @@ Partial Class dlgClimaticStationMaps
         Me.grpBoxLabelOptions.TabIndex = 13
         Me.grpBoxLabelOptions.TabStop = False
         Me.grpBoxLabelOptions.Text = "Label Options:"
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(86, 94)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(122, 21)
+        Me.ucrInputColour.TabIndex = 11
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.AutoSize = True
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(108, 41)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSize.TabIndex = 10
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkColour
         '
@@ -444,35 +470,35 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'ucrNudSize
+        'ucrInputLegendPosition
         '
-        Me.ucrNudSize.AutoSize = True
-        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(108, 41)
-        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSize.TabIndex = 10
-        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(241, 234)
+        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 30
         '
-        'ucrInputColour
+        'ucrChkLegend
         '
-        Me.ucrInputColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColour.GetSetSelectedIndex = -1
-        Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(86, 94)
-        Me.ucrInputColour.Name = "ucrInputColour"
-        Me.ucrInputColour.Size = New System.Drawing.Size(122, 21)
-        Me.ucrInputColour.TabIndex = 11
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(146, 232)
+        Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 29
         '
         'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(756, 406)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpMapOutline)
         Me.Controls.Add(Me.grpPoints)
@@ -533,4 +559,6 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents ucrChkColour As ucrCheck
     Friend WithEvents ucrInputColour As ucrInputComboBox
     Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class
