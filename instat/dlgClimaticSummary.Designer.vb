@@ -53,6 +53,7 @@ Partial Class dlgClimaticSummary
         Me.lblYear = New System.Windows.Forms.Label()
         Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.rdoDaily = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveObject = New instat.ucrSave()
         Me.ucrChkDefinitions = New instat.ucrCheck()
         Me.ucrChkDayRange = New instat.ucrCheck()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
@@ -70,7 +71,6 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
-        Me.ucrSaveObject = New instat.ucrSave()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -267,6 +267,15 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDaily.UseVisualStyleBackColor = True
         '
+        'ucrSaveObject
+        '
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveObject.Location = New System.Drawing.Point(13, 456)
+        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveObject.Name = "ucrSaveObject"
+        Me.ucrSaveObject.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveObject.TabIndex = 50
+        '
         'ucrChkDefinitions
         '
         Me.ucrChkDefinitions.AutoSize = True
@@ -457,15 +466,6 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
         Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(396, 35)
         Me.ucrPnlAnnualWithin.TabIndex = 0
-        '
-        'ucrSaveObject
-        '
-        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveObject.Location = New System.Drawing.Point(13, 456)
-        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveObject.Name = "ucrSaveObject"
-        Me.ucrSaveObject.Size = New System.Drawing.Size(266, 24)
-        Me.ucrSaveObject.TabIndex = 50
         '
         'dlgClimaticSummary
         '
