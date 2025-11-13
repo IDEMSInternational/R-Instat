@@ -121,13 +121,17 @@ Public Class ucrButtons
 
     '"To Script", "To Script and Close" and "To Script and Keep" Click event 
     Private Sub ToScript_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click, toolStripMenuItemToScriptClose.Click, toolStripMenuItemToScriptKeep.Click, toolStripMenuItemToScriptOk.Click
+        'Determine whether to show the Script window
+        bMakeVisibleScriptWindow = frmMain.mnuViewLogScript.Checked OrElse
+    (Not frmMain.mnuViewDataView.Checked OrElse Not frmMain.mnuViewSwapDataAndScript.Checked)
+        ' Handle script button actions
         OnScriptButtonsClick(sender, e, False, Not sender Is toolStripMenuItemToScriptKeep)
         If sender Is toolStripMenuItemToScriptOk Then
+            ' Confirm and send to script
             OnScriptButtonsClick(sender, e, True, True)
-        Else
-            ' Normal To Script behavior (just send to script window)
         End If
-        frmMain.mnuViewLogScript.Checked = True
+        ' Update menu state
+        frmMain.mnuViewLogScript.Checked = bMakeVisibleScriptWindow
     End Sub
 
     Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
