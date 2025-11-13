@@ -47,6 +47,11 @@
 
             Dim clsFormatRFunction As RFunction = clsRParam.clsArgumentCodeStructure
 
+            ' Only use functions that affect specific cells. 
+            If Not (clsFormatRFunction.ContainsParameter("columns") AndAlso clsFormatRFunction.ContainsParameter("rows")) Then
+                Continue For
+            End If
+
             ' Create a new row that represents the tab_row_group() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridFormats)

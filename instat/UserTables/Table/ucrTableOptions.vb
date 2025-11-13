@@ -6,17 +6,23 @@
 
         ' Clear and Set up the data grid with contents
         dataGrid.Rows.Clear()
-        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"sub_missing"}, clsOperator))
+        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"sub_missing", "fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator))
     End Sub
 
     Private Sub SetupDataGrid(lstRParams As List(Of RParameter))
         For Each clsRParam As RParameter In lstRParams
-            ' Create a new row that represents the tab_style() parameters
+
+            Dim clsRFunction As RFunction = clsRParam.clsArgumentCodeStructure
+
+            ' Only use functions that affect the whole table. 
+            If clsRFunction.ContainsParameter("columns") OrElse clsRFunction.ContainsParameter("rows") Then
+                Continue For
+            End If
+
             Dim row As New DataGridViewRow
             row.CreateCells(dataGrid)
-            row.Cells(0).Value = clsRParam.clsArgumentCodeStructure.Clone.ToScript
+            row.Cells(0).Value = clsRFunction.Clone.ToScript
 
-            ' Tag and add the tab_style() parameter function contents as a row
             row.Tag = clsRParam
             dataGrid.Rows.Add(row)
         Next
