@@ -117,6 +117,13 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.bAutoFill = True
         ucrReceiverElement2.bWithQuotes = False
 
+        ' Setting tooltips
+        ttOutliers.SetToolTip(ucrChkRangeElement1.chkCheck, "Flag values outside the acceptable range for Element 1")
+        ttOutliers.SetToolTip(ucrChkRangeElement2.chkCheck, "Flag values outside the acceptable range for Element 2")
+        ttOutliers.SetToolTip(ucrChkSame.chkCheck, "Flag values that occur for the specified number of consecutive days")
+        ttOutliers.SetToolTip(ucrChkJump.chkCheck, "Flag values where there are consecutive rows with a difference of a specified value")
+        ttOutliers.SetToolTip(ucrChkDifference.chkCheck, "Flag cases where Element 1 is less than or equal to Element 2")
+
         'Checkboxes for options
         ucrChkRangeElement1.SetParameter(New RParameter("range1", clsRangeOrOp, 1), bNewChangeParameterValue:=False)
         ucrChkRangeElement1.SetText("Acceptable Range Element1:")

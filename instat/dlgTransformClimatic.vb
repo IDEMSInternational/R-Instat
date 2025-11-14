@@ -304,6 +304,7 @@ Public Class dlgTransformClimatic
         ucrInputSpellLower.SetParameter(New RParameter("min", 1))
         dctInputLowerSpell.Add("0.85", "0.85")
         dctInputLowerSpell.Add("0", "0")
+        dctInputLowerSpell.Add("0.5", "0.5")
         dctInputLowerSpell.Add("2.45", "2.45")
         dctInputLowerSpell.Add("4.85", "4.85")
         dctInputLowerSpell.Add("9.85", "9.85")
@@ -1582,7 +1583,7 @@ Public Class dlgTransformClimatic
                 Try
                     Dim symResult As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyFunction.ToScript)
                     If symResult.AsLogical()(0) Then
-                        MsgBox("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
+                        MsgBoxTranslate("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
                     End If
                 Catch ex As Exception
                     ' Do nothing on error — no message

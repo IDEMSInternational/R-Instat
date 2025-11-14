@@ -3381,7 +3381,7 @@ Public Class sdgPlots
     Private Sub FacetsCheck()
         If Not ucr1stFactorReceiver.IsEmpty AndAlso Not ucr2ndFactorReceiver.IsEmpty Then
             If ucr1stFactorReceiver.txtReceiverSingle.Text = ucr2ndFactorReceiver.txtReceiverSingle.Text Then
-                MsgBox("You can not do facets with two same variables", vbOKOnly)
+                MsgBoxTranslate("You can not do facets with two same variables", vbOKOnly)
                 ucr2ndFactorReceiver.Clear()
                 ucr2ndFactorReceiver.SetMeAsReceiver()
             End If

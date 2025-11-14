@@ -120,8 +120,13 @@ Public Class ucrButtons
     End Sub
 
     '"To Script", "To Script and Close" and "To Script and Keep" Click event 
-    Private Sub ToScript_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click, toolStripMenuItemToScriptClose.Click, toolStripMenuItemToScriptKeep.Click
+    Private Sub ToScript_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click, toolStripMenuItemToScriptClose.Click, toolStripMenuItemToScriptKeep.Click, toolStripMenuItemToScriptOk.Click
         OnScriptButtonsClick(sender, e, False, Not sender Is toolStripMenuItemToScriptKeep)
+        If sender Is toolStripMenuItemToScriptOk Then
+            OnScriptButtonsClick(sender, e, True, True)
+        Else
+            ' Normal To Script behavior (just send to script window)
+        End If
         frmMain.mnuViewLogScript.Checked = True
     End Sub
 
@@ -169,7 +174,7 @@ Public Class ucrButtons
     End Sub
 
     Private Sub Scripts(bRun As Boolean)
-        If Not frmMain.ucrScriptWindow.IsScriptTabSelected() Then
+        If Not bRun AndAlso Not frmMain.ucrScriptWindow.IsScriptTabROrQuarto() Then
             Exit Sub
         End If
 
@@ -195,9 +200,26 @@ Public Class ucrButtons
         Else
             strComments = ""
         End If
-        If Not bRun AndAlso strComments <> "" Then
-            strExpected &= frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine & vbLf
-            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+
+        Dim bIsQuarto As Boolean =
+                frmMain.ucrScriptWindow.enumScriptType = ucrScript.ScriptType.quarto
+
+        If Not bRun Then
+            If strComments <> "" Then
+                Dim strFormattedComment As String = If(bIsQuarto, strComments,
+                                                      frmMain.clsRLink.GetFormattedComment(strComments))
+                strExpected &= strFormattedComment & Environment.NewLine & vbLf
+                frmMain.AddToScriptWindow(strFormattedComment & Environment.NewLine,
+                      bMakeVisible:=bMakeVisibleScriptWindow,
+                      bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            End If
+
+            If bIsQuarto Then
+                Dim strOpenCodeBlock As String = "```{r warning=FALSE, message=FALSE}" & Environment.NewLine
+                frmMain.AddToScriptWindow(strOpenCodeBlock,
+                      bMakeVisible:=bMakeVisibleScriptWindow,
+                      bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            End If
         End If
 
         'Get this list before doing ToScript then no need for global variable name
@@ -217,7 +239,8 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 strExpected &= lstBeforeScripts(i) & vbLf
-                frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(lstBeforeScripts(i))
+                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
 
@@ -232,7 +255,8 @@ Public Class ucrButtons
             frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
             strExpected &= clsRsyntax.GetScript() & vbLf
-            frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(clsRsyntax.GetScript())
+            frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'Run additional after codes
@@ -249,7 +273,8 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
                 strExpected &= lstAfterScripts(i) & vbLf
-                frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(lstAfterScripts(i))
+                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
 
@@ -275,8 +300,16 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
             Else
                 strExpected &= clsRemoveFunc.ToScript()
-                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(clsRemoveFunc.ToScript())
+                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
+        End If
+
+        If Not bRun AndAlso bIsQuarto Then
+            Dim strCloseCodeBlock As String = "```" & Environment.NewLine
+            frmMain.AddToScriptWindow(strCloseCodeBlock,
+                  bMakeVisible:=bMakeVisibleScriptWindow,
+                  bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         CreateRScriptUsingXpBackEnd(strExpected)

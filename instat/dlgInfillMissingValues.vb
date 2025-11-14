@@ -521,7 +521,7 @@ Public Class dlgInfillMissingValues
                             ucrChkAddLegend.Visible = True
                             clsVisualizeElementNa.AddParameter("type", Chr(34) & "interval" & Chr(34), iPosition:=8)
                         Case Else
-                            MsgBox("Developer error: Parameter must be among the cases. Modify setup such that " & ucrInputComboType.GetText & " is included among the cases.")
+                            MsgBoxTranslate("Developer error: Parameter must be among the cases. Modify setup such that " & ucrInputComboType.GetText & " is included among the cases.")
                     End Select
                 End If
             ElseIf rdoShow.Checked Then
