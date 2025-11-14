@@ -1674,18 +1674,6 @@ Public Class dlgEndOfRainsSeason
         AddTypes()
     End Sub
 
-    'Private Sub ucrInputSeasonDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSeasonDoy.ControlValueChanged
-    '    AddTypes()
-    'End Sub
-
-    'Private Sub ucrInputEndofSeasonDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEndofSeasonDate.ControlValueChanged
-    '    AddTypes()
-    'End Sub
-
-    'Private Sub ucrInputEndofSeasonOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEndofSeasonOccurence.ControlValueChanged
-    '    AddTypes()
-    'End Sub
-
     Private Sub AddSaveDefinitionOptions()
         ' Clear all existing parameters first
         clsGetEndRainDefFunction.RemoveParameterByName("end_rains_date")
