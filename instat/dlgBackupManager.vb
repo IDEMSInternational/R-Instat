@@ -68,7 +68,7 @@ Public Class dlgBackupManager
             Return
         End If
 
-        If MsgBoxTranslate("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
+        If MsgBoxTranslate("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = DialogResult.No Then
             Return
         End If
 
@@ -107,7 +107,7 @@ Public Class dlgBackupManager
             Return
         End If
 
-        If MsgBoxTranslate("Are you sure you want to delete this file?" & Environment.NewLine & "You cannot undo this action and all its data will be lost.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
+        If MsgBoxTranslate("Are you sure you want to delete this file?" & Environment.NewLine & "You cannot undo this action and all its data will be lost.", MessageBoxButtons.YesNo, "Back up Manager") = DialogResult.No Then
             Return
         End If
 

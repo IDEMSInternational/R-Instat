@@ -145,7 +145,7 @@ Public Class dlgAutoSaveRecovery
     End Sub
 
     Private Sub cmdRunLog_Click(sender As Object, e As EventArgs) Handles cmdRunLog.Click
-        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost." & Environment.NewLine & "Warning: running the log file can fail if files have been moved.", MessageBoxButtons.YesNo, "Are you sure you are finished?") = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost." & Environment.NewLine & "Warning: running the log file can fail if files have been moved.", MessageBoxButtons.YesNo, "Are you sure you are finished?") = DialogResult.Yes Then
             SaveFiles()
             If File.Exists(strAutoSavedLogFilePaths(0)) Then
                 Try
@@ -161,7 +161,7 @@ Public Class dlgAutoSaveRecovery
     End Sub
 
     Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
-        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = DialogResult.Yes Then
             SaveFiles()
             strLoadDateFilePath = strAutoSavedDataFilePaths(0)
             bUserClose = False
@@ -170,7 +170,7 @@ Public Class dlgAutoSaveRecovery
     End Sub
 
     Private Sub cmdNewSession_Click(sender As Object, e As EventArgs) Handles cmdNewSession.Click
-        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = DialogResult.Yes Then
             SaveFiles()
             bUserClose = False
             Close()
@@ -179,7 +179,7 @@ Public Class dlgAutoSaveRecovery
 
     Private Sub dlgAutoSaveRecovery_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If bUserClose Then
-            If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.No Then
+            If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = DialogResult.No Then
                 e.Cancel = True
             End If
         End If
