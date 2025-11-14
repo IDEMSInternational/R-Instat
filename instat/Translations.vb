@@ -16,6 +16,7 @@
 Imports System.Data.SQLite
 Imports System.IO
 Imports System.Reflection
+Imports System.Windows.Forms
 
 Public Class Translations
 
