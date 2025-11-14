@@ -247,7 +247,7 @@ Public Class dlgClimaticSummary
         clsLinkeddataFunction.SetAssignTo(strLinkeddata)
 
         clsGetCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculationsFunction.AddParameter("data_name", Chr(34) & strLinkeddata, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetCalculationsFunction.AddParameter("data_name", Chr(34) & strLinkeddata, iPosition:=0)
         clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -435,7 +435,6 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrSelectorVariable_DataFrameChanged() Handles ucrSelectorVariable.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
-        clsGetOffsetTermFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub UpdateDayFilterPreview()
@@ -503,17 +502,17 @@ Public Class dlgClimaticSummary
     Private Sub AddSaveDefinitionOptions()
         ' calculated_data <- data_book$get_calculations("<resulting data frame>")
         clsGetCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculationsFunction.AddParameter("data_name", Chr(34) & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetCalculationsFunction.AddParameter("data_name", Chr(34) & Chr(34), iPosition:=0)
         clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
         ' Variables_metadata <- data_book$get_variables_metadata("<data frame in selector>")
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-        clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34) & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34) & Chr(34), iPosition:=0)
         clsGetVariablesMetadataFunction.SetAssignTo("variables_metadata")
 
         ' Daily_data_calculation <- data_book$get_calculations("<data frame in selector>")
         clsGetDailyCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetDailyCalculationsFunction.AddParameter("data_name", Chr(34) & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDailyCalculationsFunction.AddParameter("data_name", Chr(34) & Chr(34), iPosition:=0)
         clsGetDailyCalculationsFunction.SetAssignTo("daily_data_calculation")
 
         ' Summary_variables = c("sum_extreme_max_temp", "sum_extreme_min_temp")
@@ -521,14 +520,6 @@ Public Class dlgClimaticSummary
         clsCFunctionSummaryVars.AddParameter("var1", Chr(34) & "sum_extreme_max_temp" & Chr(34), iPosition:=0)
         clsCFunctionSummaryVars.AddParameter("var2", Chr(34) & "sum_extreme_min_temp" & Chr(34), iPosition:=1)
         clsCFunctionSummaryVars.SetAssignTo("summary_variables")
-
-        ' Extremes_Temps <- get_climatic_summaries_definition(...)
-        clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
-        clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0, bIncludeArgumentName:=True)
-        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1, bIncludeArgumentName:=True)
-        clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsCFunctionSummaryVars, iPosition:=2, bIncludeArgumentName:=True)
-        clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyCalculationsFunction, iPosition:=3, bIncludeArgumentName:=True)
-        clsGetClimaticSummariesFunction.SetAssignTo("extremes_temps")
 
         ' Add to R syntax (so it appears in the final R command)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetClimaticSummariesFunction)
