@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Windows.Forms
+Imports System.Media
 
 ''' <summary>
 ''' Custom message box form that displays translated button text based on R-Instat's
@@ -38,36 +39,69 @@ Public Class frmCustomMessageBox
                                  buttons As MessageBoxButtons,
                                  icon As MessageBoxIcon) As DialogResult
         Using frm As New frmCustomMessageBox()
-            frm.Text = prompt
+            frm.Text = If(String.IsNullOrEmpty(title), "", title)
             frm.SetupDialog(prompt, title, buttons, icon)
+            
+            ' Play system sound based on icon
+            Select Case icon
+                Case MessageBoxIcon.Error, MessageBoxIcon.Hand, MessageBoxIcon.Stop
+                    SystemSounds.Hand.Play()
+                Case MessageBoxIcon.Warning, MessageBoxIcon.Exclamation
+                    SystemSounds.Exclamation.Play()
+                Case MessageBoxIcon.Question
+                    SystemSounds.Question.Play()
+                Case MessageBoxIcon.Information
+                    SystemSounds.Asterisk.Play()
+            End Select
+            
             frm.ShowDialog()
             Return frm._dialogResult
         End Using
     End Function
 
     Private Sub SetupDialog(prompt As String, title As String, buttons As MessageBoxButtons, icon As MessageBoxIcon)
-        ' Initialize form
+        ' Initialize form with Windows standard message box styling
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.StartPosition = FormStartPosition.CenterParent
+        Me.ShowInTaskbar = False
         Me.Text = If(String.IsNullOrEmpty(title), "", title)
-        Me.Size = New Size(400, 150)
+        Me.BackColor = SystemColors.Control
+        Me.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
+        
+        ' Calculate form size based on message length
+        Dim iconWidth As Integer = If(icon <> MessageBoxIcon.None, 50, 10)
+        Dim messageWidth As Integer = 300
+        Dim formWidth As Integer = iconWidth + messageWidth + 30
+        Dim formHeight As Integer = 150
+        
+        ' Adjust size for longer messages
+        Using g As Graphics = Me.CreateGraphics()
+            Dim textSize As SizeF = g.MeasureString(prompt, Me.Font, messageWidth)
+            If textSize.Height > 60 Then
+                formHeight = CInt(textSize.Height) + 100
+            End If
+        End Using
+        
+        Me.ClientSize = New Size(formWidth, formHeight)
 
         ' Create and configure label for message
         lblMessage = New Label()
         lblMessage.Text = prompt
         lblMessage.AutoSize = False
-        lblMessage.Size = New Size(350, 60)
-        lblMessage.Location = New Point(60, 20)
+        lblMessage.Size = New Size(messageWidth, formHeight - 60)
+        lblMessage.Location = New Point(iconWidth, 20)
+        lblMessage.TextAlign = ContentAlignment.MiddleLeft
+        lblMessage.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
         Me.Controls.Add(lblMessage)
 
         ' Create and configure icon (if specified)
         If icon <> MessageBoxIcon.None Then
             picIcon = New PictureBox()
             picIcon.Size = New Size(32, 32)
-            picIcon.Location = New Point(15, 20)
-            picIcon.SizeMode = PictureBoxSizeMode.StretchImage
+            picIcon.Location = New Point(10, 20)
+            picIcon.SizeMode = PictureBoxSizeMode.Normal
 
             ' Set icon based on type
             Select Case icon
@@ -91,8 +125,8 @@ Public Class frmCustomMessageBox
     Private Sub SetupButtons(buttons As MessageBoxButtons)
         Dim buttonWidth As Integer = 75
         Dim buttonHeight As Integer = 23
-        Dim buttonY As Integer = 90
-        Dim spacing As Integer = 10
+        Dim buttonY As Integer = Me.ClientSize.Height - 35
+        Dim spacing As Integer = 6
 
         Select Case buttons
             Case MessageBoxButtons.OK
@@ -206,6 +240,10 @@ Public Class frmCustomMessageBox
         Dim btn As New Button()
         btn.Text = text
         btn.Tag = result
+        btn.FlatStyle = FlatStyle.System
+        btn.UseVisualStyleBackColor = True
+        btn.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
+        btn.AutoSize = False
         AddHandler btn.Click, AddressOf Button_Click
         Return btn
     End Function
