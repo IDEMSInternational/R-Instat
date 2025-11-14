@@ -1527,6 +1527,12 @@ Public Class RLink
                     End If
                 Next
                 lstView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
+                ' When there is a vertical scroll bar, Width = -2 makes it slightly wider than needed
+                ' causing the horizontal scroll bar to display even when not needed.
+                ' Reducing the Width by ~ 2 removes the horizontal scroll bar when it's not needed 
+                ' and doesn't affect the visibility of the longest item
+                ' This has been tested on high resolution screens but needs further testing
+                ' and possibly a better solution.
                 lstView.Columns(0).Width -= 2
                 lstView.Refresh()
                 If strTopItemText <> "" Then
