@@ -18,6 +18,9 @@ Imports instat.Translations
 
 Public Class ucrButtonsSubdialogue
     Public Event ClickReturn(sender As Object, e As EventArgs)
+    ' New event so sub-dialogues can update when a language preview is triggered
+    Public Event LanguageChanged(ByVal newCulture As String)
+
     Public iHelpTopicID As Integer
     Private strCurrLang As String
 
@@ -55,7 +58,14 @@ Public Class ucrButtonsSubdialogue
 
         Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
         frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
-        autoTranslate(Me.ParentForm)
+
+        ' Use fully-qualified Shared method so the compiler finds it
+        Translations.autoTranslate(Me.ParentForm)
+
+        ' Notify listeners (sub-dialogues) to update programmatic texts for the preview language.
+        RaiseEvent LanguageChanged(strCurrLang)
+
+        ' restore configured language (we did a temporary preview)
         frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
 
         If cmdLanguage.FlatStyle = FlatStyle.Popup Then
