@@ -1,7 +1,19 @@
-﻿Imports System.Data.SqlClient
-Imports System.Windows.Documents
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Imports unvell.ReoGrid.IO.OpenXML.Schema
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
@@ -139,7 +151,7 @@ Public Class dlgGeneralTable
 
         ucrChkSelectTheme.SetText("Theme")
         ucrChkSelectTheme.Checked = True
-        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
 
         ucrSaveTable.SetPrefix("presentation_table")
@@ -605,8 +617,7 @@ Public Class dlgGeneralTable
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
-            ucrCboSelectThemes.SetText("") ' Clear first
-            ucrCboSelectThemes.SetText("Dark Theme") ' Set default theme
+            ucrCboSelectThemes.SetName("Dark Theme") ' Set default theme
         Else
             ucrCboSelectThemes.Visible = False
             clsBaseOperator.RemoveParameterByName("theme_format")
@@ -619,7 +630,7 @@ Public Class dlgGeneralTable
             Exit Sub
         End If
 
-        Dim strCommand As String = "gt_theme_dark"
+        Dim strCommand As String = ""
         Select Case ucrCboSelectThemes.GetText
             Case "Dark Theme"
                 strCommand = "gt_theme_dark"
@@ -638,6 +649,10 @@ Public Class dlgGeneralTable
             Case "PFF Theme"
                 strCommand = "gt_theme_pff"
         End Select
+
+        If strCommand = "" Then
+            Exit Sub ' Do nothing
+        End If
 
         Dim clsThemeRFunction As New RFunction
         clsThemeRFunction.SetPackageName("gtExtras")

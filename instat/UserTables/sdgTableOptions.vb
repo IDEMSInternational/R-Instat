@@ -168,7 +168,7 @@ Public Class sdgTableOptions
                     ucrChkSelectTheme.Checked = False
                 Else
                     ucrChkSelectTheme.Checked = True
-                    ucrCboSelectThemes.cboInput.Text = strSupportedTheme
+                    ucrCboSelectThemes.SetName(strSupportedTheme)
                     Me.clsThemeRFunction = newClsThemeRFunction
                 End If
             End If
