@@ -151,9 +151,6 @@ Partial Class ucrDataView
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
-        Me.CopyPasteContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.Copy = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Paste = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -165,7 +162,6 @@ Partial Class ucrDataView
         Me.panelSectionStart.SuspendLayout()
         Me.panelSectionRecent.SuspendLayout()
         Me.TblPanPageDisplay.SuspendLayout()
-        Me.CopyPasteContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'columnContextMenuStrip
@@ -647,7 +643,7 @@ Partial Class ucrDataView
         Me.tlpTableContainer.Controls.Add(Me.ucrLinuxGrid, 1, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
-        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
@@ -664,7 +660,7 @@ Partial Class ucrDataView
         Me.panelSectionsAll.Controls.Add(Me.panelSectionRecent)
         Me.panelSectionsAll.Dock = System.Windows.Forms.DockStyle.Fill
         Me.panelSectionsAll.Location = New System.Drawing.Point(4, 29)
-        Me.panelSectionsAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panelSectionsAll.Margin = New System.Windows.Forms.Padding(4)
         Me.panelSectionsAll.Name = "panelSectionsAll"
         Me.tlpTableContainer.SetRowSpan(Me.panelSectionsAll, 2)
         Me.panelSectionsAll.Size = New System.Drawing.Size(303, 568)
@@ -677,7 +673,7 @@ Partial Class ucrDataView
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartRestoreBackup)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartPasteScriptfromClipboard)
         Me.panelSectionAdvanced.Location = New System.Drawing.Point(34, 515)
-        Me.panelSectionAdvanced.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panelSectionAdvanced.Margin = New System.Windows.Forms.Padding(4)
         Me.panelSectionAdvanced.Name = "panelSectionAdvanced"
         Me.panelSectionAdvanced.Size = New System.Drawing.Size(468, 104)
         Me.panelSectionAdvanced.TabIndex = 12
@@ -743,7 +739,7 @@ Partial Class ucrDataView
         Me.panelSectionHelp.Controls.Add(Me.lblHelp)
         Me.panelSectionHelp.Controls.Add(Me.linkHelpRInstatResourcesSite)
         Me.panelSectionHelp.Location = New System.Drawing.Point(35, 396)
-        Me.panelSectionHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panelSectionHelp.Margin = New System.Windows.Forms.Padding(4)
         Me.panelSectionHelp.Name = "panelSectionHelp"
         Me.panelSectionHelp.Size = New System.Drawing.Size(468, 101)
         Me.panelSectionHelp.TabIndex = 12
@@ -810,7 +806,7 @@ Partial Class ucrDataView
         Me.panelSectionStart.Controls.Add(Me.linkStartOpenFile)
         Me.panelSectionStart.Controls.Add(Me.linkStartOpenLibrary)
         Me.panelSectionStart.Location = New System.Drawing.Point(35, 19)
-        Me.panelSectionStart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panelSectionStart.Margin = New System.Windows.Forms.Padding(4)
         Me.panelSectionStart.Name = "panelSectionStart"
         Me.panelSectionStart.Size = New System.Drawing.Size(468, 125)
         Me.panelSectionStart.TabIndex = 11
@@ -890,7 +886,7 @@ Partial Class ucrDataView
         Me.panelSectionRecent.Controls.Add(Me.lblRecent)
         Me.panelSectionRecent.Controls.Add(Me.panelRecentMenuItems)
         Me.panelSectionRecent.Location = New System.Drawing.Point(35, 155)
-        Me.panelSectionRecent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panelSectionRecent.Margin = New System.Windows.Forms.Padding(4)
         Me.panelSectionRecent.Name = "panelSectionRecent"
         Me.panelSectionRecent.Size = New System.Drawing.Size(223, 232)
         Me.panelSectionRecent.TabIndex = 13
@@ -913,7 +909,7 @@ Partial Class ucrDataView
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panelRecentMenuItems.AutoScroll = True
         Me.panelRecentMenuItems.Location = New System.Drawing.Point(6, 38)
-        Me.panelRecentMenuItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panelRecentMenuItems.Margin = New System.Windows.Forms.Padding(4)
         Me.panelRecentMenuItems.Name = "panelRecentMenuItems"
         Me.panelRecentMenuItems.Size = New System.Drawing.Size(198, 172)
         Me.panelRecentMenuItems.TabIndex = 6
@@ -1094,32 +1090,13 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(309, 549)
         Me.ucrLinuxGrid.TabIndex = 13
         '
-        'CopyPasteContextMenuStrip
-        '
-        Me.CopyPasteContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CopyPasteContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Copy, Me.Paste})
-        Me.CopyPasteContextMenuStrip.Name = "statusColumnMenu"
-        Me.CopyPasteContextMenuStrip.Size = New System.Drawing.Size(211, 80)
-        '
-        'Copy
-        '
-        Me.Copy.Name = "Copy"
-        Me.Copy.Size = New System.Drawing.Size(210, 24)
-        Me.Copy.Text = "Copy..."
-        '
-        'Paste
-        '
-        Me.Paste.Name = "Paste"
-        Me.Paste.Size = New System.Drawing.Size(210, 24)
-        Me.Paste.Text = "Paste..."
-        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ucrDataView"
         Me.Size = New System.Drawing.Size(935, 601)
         Me.Tag = "Data_View"
@@ -1140,7 +1117,6 @@ Partial Class ucrDataView
         Me.panelSectionRecent.PerformLayout()
         Me.TblPanPageDisplay.ResumeLayout(False)
         Me.TblPanPageDisplay.PerformLayout()
-        Me.CopyPasteContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1259,7 +1235,4 @@ Partial Class ucrDataView
     Friend WithEvents linkStartPasteData As LinkLabel
     Friend WithEvents mnuConvertToDate As ToolStripMenuItem
     Friend WithEvents mnuConvertToColumnDate As ToolStripMenuItem
-    Friend WithEvents CopyPasteContextMenuStrip As ContextMenuStrip
-    Friend WithEvents Copy As ToolStripMenuItem
-    Friend WithEvents Paste As ToolStripMenuItem
 End Class
