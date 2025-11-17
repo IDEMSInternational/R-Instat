@@ -138,6 +138,10 @@ Public Class ucrFactor
         Public Const SelectorColumn As String = "Select"
     End Structure
 
+    Private WithEvents mnuCopyPaste As ContextMenuStrip
+    Private WithEvents mnuCopy As ToolStripMenuItem
+    Private WithEvents mnuPaste As ToolStripMenuItem
+
     Private Property SelectionControlsVisible As Boolean
         Get
             Return Me.Controls.Contains(pnlSelectOptions)
@@ -155,6 +159,107 @@ Public Class ucrFactor
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         lblSelected.ForeColor = Color.Red
+
+        ' Initialize Copy/Paste context menu
+        InitializeCopyPasteContextMenu()
+    End Sub
+
+    Private Sub InitializeCopyPasteContextMenu()
+        mnuCopyPaste = New ContextMenuStrip()
+
+        mnuCopy = New ToolStripMenuItem("Copy")
+        mnuCopy.ShortcutKeys = Keys.Control Or Keys.C
+        mnuCopyPaste.Items.Add(mnuCopy)
+
+        mnuPaste = New ToolStripMenuItem("Paste")
+        mnuPaste.ShortcutKeys = Keys.Control Or Keys.V
+        mnuCopyPaste.Items.Add(mnuPaste)
+
+        ' Attach to the grid
+        grdFactorData.ContextMenuStrip = mnuCopyPaste
+    End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        CopySelectedCells()
+    End Sub
+
+    Private Sub CopySelectedCells()
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+
+        Try
+            _grdSheet.Copy()
+        Catch ex As Exception
+            MsgBoxTranslate("Error copying cells: " & ex.Message, MsgBoxStyle.Exclamation, "Copy Error")
+        End Try
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteIntoCells()
+    End Sub
+
+    Private Sub PasteIntoCells()
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+
+        ' Check if we're in a read-only state
+        If _enumControlState <> ControlStates.NormalGrid Then
+            MsgBoxTranslate("Cannot paste in selector mode.", MsgBoxStyle.Information, "Paste Disabled")
+            Exit Sub
+        End If
+
+        Try
+            Dim clipboardData As String = Clipboard.GetText()
+            If String.IsNullOrEmpty(clipboardData) Then
+                Exit Sub
+            End If
+
+            ' Get current selection
+            Dim currentCell = _grdSheet.SelectionRange
+            Dim startRow As Integer = currentCell.Row
+            Dim startCol As Integer = currentCell.Col
+
+            ' Split clipboard data by rows and columns
+            Dim rows() As String = clipboardData.Split(New String() {vbCrLf, vbLf}, StringSplitOptions.None)
+
+            For rowIndex As Integer = 0 To rows.Length - 1
+                If startRow + rowIndex >= _grdSheet.Rows Then Exit For
+
+                Dim cells() As String = rows(rowIndex).Split(vbTab)
+
+                For colIndex As Integer = 0 To cells.Length - 1
+                    If startCol + colIndex >= _grdSheet.Columns Then Exit For
+
+                    Dim targetRow = startRow + rowIndex
+                    Dim targetCol = startCol + colIndex
+
+                    ' Check if the cell is editable
+                    Dim cell = _grdSheet.GetCell(targetRow, targetCol)
+                    If cell IsNot Nothing AndAlso Not cell.IsReadOnly Then
+                        ' Validate based on column type
+                        Dim colName = _grdSheet.ColumnHeaders(targetCol).Text
+                        If colName = DefaultColumnNames.Level Then
+                            ' Validate numeric for levels
+                            If IsNumeric(cells(colIndex)) AndAlso Not cells(colIndex).Contains(".") Then
+                                _grdSheet(targetRow, targetCol) = cells(colIndex)
+                                cell.Style.BackColor = Color.Gold
+                            End If
+                        Else
+                            _grdSheet(targetRow, targetCol) = cells(colIndex)
+                            cell.Style.BackColor = Color.Gold
+                        End If
+                    End If
+                Next
+            Next
+
+            ' Trigger validation and parameter update
+            OnControlValueChanged()
+
+        Catch ex As Exception
+            MsgBoxTranslate("Error pasting cells: " & ex.Message, MsgBoxStyle.Exclamation, "Paste Error")
+        End Try
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
