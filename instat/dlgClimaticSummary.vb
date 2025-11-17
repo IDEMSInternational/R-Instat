@@ -177,9 +177,6 @@ Public Class dlgClimaticSummary
         clsDummyFunction = New RFunction
         clsIfElseFirstDoyFilledFunction = New RFunction
 
-        clsGetEndRainDefFunction = New RFunction
-        clsGetEndSeasonDefFunction = New RFunction
-
         clsFromAndToConditionOperator = New ROperator
         clsDayFilterCalc = New RFunction
         clsFromConditionOperator = New ROperator
