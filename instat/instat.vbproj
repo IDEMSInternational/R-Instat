@@ -535,6 +535,12 @@
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByOutputObject.Designer.vb">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByOutputObject.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </Compile>
@@ -569,12 +575,6 @@
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
@@ -632,6 +632,7 @@
     <Compile Include="UserTables\Others\ucrOtherStyles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\enumTableSubDialogTab.vb" />
     <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
     </Compile>
@@ -643,12 +644,6 @@
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.Designer.vb">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -3410,6 +3405,12 @@
     <Compile Include="UserTables\Stub\ucrStubStyle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.Designer.vb">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Climsoft\sdgClimsoftFilter.resx">
@@ -3688,6 +3689,9 @@
     <EmbeddedResource Include="sdgTricotModelOptions.resx">
       <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByOutputObject.resx">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3705,9 +3709,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
@@ -3741,9 +3742,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
       <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\sdgBeforeTablesOption.resx">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -5890,6 +5888,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Stub\ucrStubStyle.resx">
       <DependentUpon>ucrStubStyle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Table\ucrTableOptions.resx">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

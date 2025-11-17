@@ -1,8 +1,10 @@
-﻿Imports instat.Translations
+﻿Imports System.Windows.Documents
+Imports instat.Translations
+Imports unvell.ReoGrid.IO.OpenXML.Schema
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsDropLevelsMulFunction, clsDropLevelsSingFunction, clsCompleteSingFunction, clsArrangeSingFunction, clsCompleteFunction, clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderAscolumnFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsDropLevelsMulFunction, clsDropLevelsSingFunction, clsCompleteSingFunction, clsArrangeSingFunction, clsCompleteFunction, clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderAscolumnFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -19,23 +21,33 @@ Public Class dlgGeneralTable
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-        DialogueSize()
+        DialogSize()
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
-        If rdoSingle.Checked Then
-            sdgBeforeTablesOption.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
-            sdgBeforeTablesOption.ShowDialog(Me)
-        ElseIf rdoMultiple.Checked Then
-            sdgBeforeTablesOption.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
-            sdgBeforeTablesOption.ShowDialog(Me)
+        ' Set contents of the ucrHeader to the base operator just incase they have not been set 
+        ucrHeader.SetValuesToOperator(clsOperator:=clsBaseOperator)
+
+        If rdoSingle.Checked OrElse rdoMultiple.Checked Then
+            sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator, {
+                                  EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                                  EnumTableSubDialogTab.Table})
         Else
-            sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
-            sdgTableOptions.ShowDialog(Me)
+            sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator, {
+                                  EnumTableSubDialogTab.Header, EnumTableSubDialogTab.Stub,
+                                  EnumTableSubDialogTab.Columns, EnumTableSubDialogTab.Rows,
+                                  EnumTableSubDialogTab.Cells, EnumTableSubDialogTab.SourceNotes,
+                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                                  EnumTableSubDialogTab.Table})
+
         End If
 
-        ucrInputTitle.SetText(sdgTableOptions.ucrHeader.ucrInputTitle.GetText)
-        ucrInputTitleFooter.SetText(sdgTableOptions.ucrHeader.ucrInputTitleFooter.GetText)
+        sdgTableOptions.ShowDialog(Me)
+
+        ' Get any new header contents from operator 
+        ucrHeader.Setup(clsBaseOperator, bShowSubtitle:=False)
+
         ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
         ucrChkSelectTheme.Checked = sdgTableOptions.ucrChkSelectTheme.Checked
         sdgTableStyles.GetNewUserInputAsRFunction()
@@ -49,8 +61,6 @@ Public Class dlgGeneralTable
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-        ucrInputTitle.ResetText()
-        ucrInputTitleFooter.ResetText()
     End Sub
 
     Private Sub initialiseDialog()
@@ -110,8 +120,6 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleVariablesMul.Selector = ucrSelectorCols
         ucrReceiverMultipleVariablesMul.SetLinkedDisplayControl(lblVariblesMul)
 
-        ucrInputTitle.SetParameter(New RParameter("title", iNewPosition:=0))
-        ucrInputTitleFooter.SetParameter(New RParameter("footnote", iNewPosition:=0))
 
         ucrChkPreview.SetText("Preview")
         ucrChkPreview.AddParameterPresentCondition(True, "head", bNewIsPositive:=True)
@@ -123,6 +131,12 @@ Public Class dlgGeneralTable
         ucrNudPreview.Maximum = Decimal.MaxValue
         ucrNudPreview.SetRDefault(6)
 
+        ucrChkSelectTheme.SetText("Theme")
+        ucrChkSelectTheme.AddParameterValuesCondition(True, "theme", "True")
+        ucrChkSelectTheme.AddParameterValuesCondition(False, "theme", "False")
+        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+
         ucrSaveTable.SetPrefix("presentation_table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorCols.ucrAvailableDataFrames)
@@ -130,15 +144,9 @@ Public Class dlgGeneralTable
         ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
-        ucrChkSelectTheme.SetText("Theme")
-        ucrChkSelectTheme.AddParameterValuesCondition(True, "theme", "True")
-        ucrChkSelectTheme.AddParameterValuesCondition(False, "theme", "False")
-        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
-        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
-
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         SetDefaults()
-        DialogueSize()
+        DialogSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -146,10 +154,6 @@ Public Class dlgGeneralTable
 
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
-        clsHeaderRFunction = New RFunction
-        clsCellsTitleRFunction = New RFunction
-        clsTitleFooterRFunction = New RFunction
-        clsTitleStyleRFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         clsPivotWiderAscolumnFunction = New RFunction
@@ -203,17 +207,6 @@ Public Class dlgGeneralTable
         clsThemeRFunction.SetRCommand("gt_theme_dark")
         clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction, iPosition:=4)
 
-        clsHeaderRFunction.SetPackageName("gt")
-        clsHeaderRFunction.SetRCommand("tab_header")
-        clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
-        clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
-
-        clsTitleFooterRFunction.SetPackageName("gt")
-        clsTitleFooterRFunction.SetRCommand("tab_footnote")
-        clsTitleFooterRFunction.AddParameter("footnote", ucrInputTitleFooter.GetText, iPosition:=1)
-        clsTitleFooterRFunction.AddParameter("locations", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
-        clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
-
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=2)
@@ -257,11 +250,6 @@ Public Class dlgGeneralTable
 
         clsDropLevelsSingFunction.SetRCommand("droplevels")
 
-        Dim strGroupParamValue As String = "title"
-        clsCellsTitleRFunction.SetPackageName("gt")
-        clsCellsTitleRFunction.SetRCommand("cells_title")
-        clsCellsTitleRFunction.AddParameter(strParameterName:="groups", strParameterValue:=Chr(34) & strGroupParamValue & Chr(34), iPosition:=0)
-
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -271,12 +259,11 @@ Public Class dlgGeneralTable
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         MinMaxValRowVariable()
         MinMaxValVariable()
+        ucrHeader.Setup(clsBaseOperator, bShowSubtitle:=False)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
-        ucrInputTitle.SetRCode(clsHeaderRFunction, True, bCloneIfNeeded:=True)
-        ucrInputTitleFooter.SetRCode(clsTitleFooterRFunction, True, bCloneIfNeeded:=True)
         If bReset Then
             ucrChkSelectTheme.SetRCode(clsDummyFunction, bReset)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
@@ -309,7 +296,7 @@ Public Class dlgGeneralTable
         HidePosition()
         AddRemovespanner()
         AddRemoveSelect()
-        DialogueSize()
+        DialogSize()
         AddRemoveComplete_arrangeFunction()
         AddRemoveDroplevel()
     End Sub
@@ -322,6 +309,7 @@ Public Class dlgGeneralTable
         clsBaseOperator.RemoveParameterByName("pivot_wider_col")
 
         If rdoSingle.Checked Then
+            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
             Updateparameter()
@@ -334,9 +322,10 @@ Public Class dlgGeneralTable
             End If
             clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=5)
         ElseIf rdoMultiple.Checked Then
+            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("head")
-                clsBaseOperator.RemoveParameterByName("gt")
-                Updateparameter()
+            clsBaseOperator.RemoveParameterByName("gt")
+            Updateparameter()
             clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
@@ -346,8 +335,8 @@ Public Class dlgGeneralTable
                 clsBaseOperator.RemoveParameterByName("pivot_wider_col")
             End If
             clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=9)
-            Else
-                ucrChkPreview.Checked = True
+        Else
+            ucrChkPreview.Checked = True
             AddRemoveHead()
             ucrReceiverMultipleCols.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("pivot_wider")
@@ -357,22 +346,22 @@ Public Class dlgGeneralTable
         End If
     End Sub
 
-    Private Sub DialogueSize()
-        If rdoDataFrame.Checked Then
-            Me.Size = New Size(492, 614)
-            Me.grpBoxTitle.Location = New Size(7, 364)
-            Me.ucrSaveTable.Location = New Size(9, 480)
-            Me.ucrBase.Location = New Point(9, 515)
-        ElseIf rdoSingle.Checked Then
-            Me.Size = New Size(492, 574)
-            Me.grpBoxTitle.Location = New Size(7, 340)
-            Me.ucrSaveTable.Location = New Size(9, 448)
-            Me.ucrBase.Location = New Point(9, 478)
-        Else
-            Me.Size = New Size(492, 629)
-            Me.grpBoxTitle.Location = New Size(7, 401)
-            Me.ucrSaveTable.Location = New Size(9, 508)
-            Me.ucrBase.Location = New Point(9, 536)
+    Private Sub DialogSize()
+        If rdoSingle.Checked Then
+            Me.Size = New Size(Me.Width, 600)
+            Me.ucrHeader.Location = New Point(Me.ucrHeader.Location.X, 320)
+            Me.ucrSaveTable.Location = New Point(Me.ucrSaveTable.Location.X, 450)
+            Me.ucrBase.Location = New Point(Me.ucrBase.Location.X, 490)
+        ElseIf rdoMultiple.Checked Then
+            Me.Size = New Size(Me.Width, 680)
+            Me.ucrHeader.Location = New Point(Me.ucrHeader.Location.X, 400)
+            Me.ucrSaveTable.Location = New Point(Me.ucrSaveTable.Location.X, 540)
+            Me.ucrBase.Location = New Point(Me.ucrBase.Location.X, 580)
+        ElseIf rdoDataFrame.Checked Then
+            Me.Size = New Size(Me.Width, 610)
+            Me.ucrHeader.Location = New Point(Me.ucrHeader.Location.X, 320)
+            Me.ucrSaveTable.Location = New Point(Me.ucrSaveTable.Location.X, 460)
+            Me.ucrBase.Location = New Point(Me.ucrBase.Location.X, 500)
         End If
     End Sub
 
@@ -615,32 +604,6 @@ Public Class dlgGeneralTable
         AddRemoveHead()
     End Sub
 
-    Private Sub btnTitleFormat_Click(sender As Object, e As EventArgs) Handles btnTitleStyle.Click
-        Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm, clsTitleStyleRFunction)
-        If clsListStyleRFunction Is Nothing Then
-            Exit Sub
-        End If
-
-        clsTitleStyleRFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsCellsTitleRFunction)
-        If clsTitleStyleRFunction IsNot Nothing Then
-            clsBaseOperator.AddParameter(strParameterName:="tab_style_for_title_param", clsRFunctionParameter:=clsTitleStyleRFunction)
-        End If
-    End Sub
-
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlContentsChanged, ucrInputTitleFooter.ControlContentsChanged
-        ucrInputTitleFooter.Enabled = Not ucrInputTitle.IsEmpty()
-        If Not ucrInputTitle.IsEmpty Then
-            clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("theme_Header")
-        End If
-        If Not ucrInputTitleFooter.IsEmpty Then
-            clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("theme_footer")
-        End If
-    End Sub
-
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
         AddRemoveThemes()
     End Sub
@@ -714,5 +677,9 @@ Public Class dlgGeneralTable
 
     Private Sub ucrNudColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumn.ControlValueChanged
         AddingSummaryType()
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        ucrHeader.SetValuesToOperator(clsOperator:=clsBaseOperator)
     End Sub
 End Class

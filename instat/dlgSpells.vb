@@ -223,7 +223,7 @@ Public Class dlgSpells
         clsSpellLogicalCalc.AddParameter("save", "0", iPosition:=6)
         clsSpellLogicalCalc.SetAssignTo(strSpellLogical)
 
-        'clsSpellLogicalAndOperator.bToScriptAsRString = True
+        clsSpellLogicalAndOperator.bToScriptAsRString = True
         clsSpellLogicalAndOperator.SetOperation("&")
         clsSpellLogicalGreaterThanOperator.SetOperation(">=")
         clsSpellLogicalGreaterThanOperator.AddParameter("min", 0, iPosition:=1)
@@ -481,10 +481,8 @@ Public Class dlgSpells
 
         If rdoAnnuel.Checked OrElse rdoStation.Checked Then
             clsCurrCalc = clsMaxSpellSummary
-            clsSpellLogicalAndOperator.bToScriptAsRString = True
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         Else
-            clsSpellLogicalAndOperator.bToScriptAsRString = False
             clsCurrCalc = clsSpellFilterFunction
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsSpellFilterFunction, iPosition:=0)
         End If
