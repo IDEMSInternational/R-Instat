@@ -265,7 +265,6 @@ Public Class dlgClimaticSummary
         clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1, bIncludeArgumentName:=True)
         clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsCFunctionSummaryVars, iPosition:=2, bIncludeArgumentName:=True)
         clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyCalculationsFunction, iPosition:=3, bIncludeArgumentName:=True)
-        clsGetClimaticSummariesFunction.SetAssignTo("extremes_temps")
 
         clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsAddDateFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
@@ -518,24 +517,36 @@ Public Class dlgClimaticSummary
         clsCFunctionSummaryVars.AddParameter("var2", Chr(34) & "sum_extreme_min_temp" & Chr(34), iPosition:=1)
         clsCFunctionSummaryVars.SetAssignTo("summary_variables")
 
-        ' Add to R syntax (so it appears in the final R command)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGetClimaticSummariesFunction)
-
         If ucrChkDefinitions.Checked Then
+            ' Add to R syntax (so it appears in the final R command)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction)
 
             If rdoAnnual.Checked Then
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
                 ucrSaveObject.SetPrefix("Annual_Definitions")
             End If
 
-        ElseIf rdoWithinYear.Checked Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
-            ucrSaveObject.SetPrefix("Within_Year_Definitions")
-
-            If ucrChkDayRange.Checked Then
-                clsGetDailyCalculationsFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetClimaticSummariesFunction)
+            If rdoAnnual.Checked Then
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetCalculationsFunction)
             End If
+        End If
 
+        If rdoWithinYear.Checked Then
+            If ucrChkDefinitions.Checked Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
+                ucrSaveObject.SetPrefix("Within_Year_Definitions")
+
+                If ucrChkDayRange.Checked Then
+                    clsGetDailyCalculationsFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
+                End If
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetCalculationsFunction)
+                If ucrChkDayRange.Checked Then
+                    clsGetDailyCalculationsFunction.RemoveParameterByName("Day_Range")
+                End If
+            End If
         End If
     End Sub
 
