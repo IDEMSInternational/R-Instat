@@ -1,28 +1,35 @@
 ﻿Public Class ucrColumnWidth
-
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
-    Private Sub ucrColumnWidth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstload Then
-            InitialiseControl()
-            bFirstload = False
-        End If
-    End Sub
-
     Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
-        ucrReceiverMultipleCols.SetMeAsReceiver()
-
         ucrNudWidth.Minimum = 0
         ucrNudWidth.Maximum = Decimal.MaxValue
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        Me.clsOperator = clsOperator
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        If bFirstload Then
+            InitialiseControl()
+            bFirstload = False
+        End If
 
-        ' Set up the selector
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ' Set up the selector and receiver
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
+        End If
+        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverMultipleCols.Clear()
+
+        Me.clsOperator = clsOperator
 
         ' Clear and Set up the data grid with contents
         dataGrid.Rows.Clear()
@@ -51,7 +58,7 @@
         Dim clsColWidthRFunction As New RFunction
         clsColWidthRFunction.SetPackageName("gt")
         clsColWidthRFunction.SetRCommand("cols_width")
-        clsColWidthRFunction.AddParameter(strParameterName:="column_param", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False) & " ~ px(" & ucrNudWidth.Value & ")", iPosition:=0, bIncludeArgumentName:=False)
+        clsColWidthRFunction.AddParameter(strParameterName:="column_param", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`") & " ~ px(" & ucrNudWidth.Value & ")", iPosition:=0, bIncludeArgumentName:=False)
 
         ' Create parameter with unique name
         Dim clsRParam As New RParameter(strParameterName:="tab_col_width_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsColWidthRFunction, bNewIncludeArgumentName:=False)

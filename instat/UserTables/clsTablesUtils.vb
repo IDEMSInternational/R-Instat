@@ -90,11 +90,11 @@ Public Class clsTablesUtils
         Return lstRFunctionsParamsFound
     End Function
 
-    Public Shared Function GetStringValue(str As String, bwithQuotes As Boolean) As String
+    Public Shared Function GetStringValue(str As String, bwithQuotes As Boolean, Optional strQuoteCharacter As String = """") As String
         If String.IsNullOrEmpty(str) Then
             str = ""
         End If
-        Return If(bwithQuotes, """" & str & """", str.Replace("""", ""))
+        Return If(bwithQuotes, strQuoteCharacter & str & strQuoteCharacter, str.Replace(strQuoteCharacter, ""))
     End Function
 
     Public Shared Function SplitRText(input As String) As String()

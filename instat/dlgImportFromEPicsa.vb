@@ -50,7 +50,7 @@ Public Class dlgImportFromEPicsa
         ucrPnlImportFromEPicsa.AddParameterValuesCondition(rdoData, "checked", "data")
 
         ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputComboCountry}, {rdoDefinitions, rdoStation}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputDefinitionsID, ucrInputComboFindFiles}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlImportFromEPicsa.AddToLinkedControls({ucrInputDefinitionsID, ucrInputComboFindFiles, ucrDataframeSelector}, {rdoDefinitions}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ' This tab is disabled for now. Will be implemented later
         rdoData.Enabled = False
@@ -77,7 +77,6 @@ Public Class dlgImportFromEPicsa
 
         ucrSaveDefinitions.SetIsTextBox()
         ucrSaveDefinitions.ucrInputTextSave.bAutoChangeOnLeave = True
-
     End Sub
 
     Private Sub SetDefaults()
@@ -86,6 +85,8 @@ Public Class dlgImportFromEPicsa
         clsGetDefinitionsData = New RFunction
         clsGcsFileFunction = New RFunction
         clsStationMetadataFunction = New RFunction
+
+        ucrDataframeSelector.Reset()
 
         rdoData.Enabled = False
         ucrInputComboCountry.SetText("mw")
@@ -223,6 +224,7 @@ Public Class dlgImportFromEPicsa
             ucrSaveDefinitions.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveDefinitions.SetName("last_definition")
             ucrSaveDefinitions.SetLabelText("Definition Name:")
+            ucrSaveDefinitions.SetDataFrameSelector(ucrDataframeSelector)
         ElseIf rdoStation.Checked Then
             ucrSaveDefinitions.SetSaveTypeAsDataFrame()
             ucrSaveDefinitions.SetName("last_dataframe")

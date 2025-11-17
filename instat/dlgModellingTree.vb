@@ -663,8 +663,8 @@ Public Class dlgModellingTree
         Dim chrOutput As CharacterVector
 
         If Not ucrReceiverExpressionModellingTree.IsEmpty AndAlso Not ucrReceiverModellingTree.IsEmpty Then
-            clsPackageCheck.SetPackageName("databook")
-            clsPackageCheck.SetRCommand("check_ID_data_level")
+
+            clsPackageCheck.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$check_ID_data_level")
             clsPackageCheck.AddParameter("data", Chr(34) & UcrSelectorByDataFrameForModellingTreeSecond.strCurrentDataFrame & Chr(34))
 
             expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)

@@ -22,8 +22,16 @@ Public Class sdgAdditionalCondition
     Private clsConditionsAndOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator, clsSumRainDryPeriodIntervalPlusOperator As ROperator
 
     Private Sub sdgAdditionalCondition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-        InitialiseControls()
+        If Not bControlsInitialised Then
+            InitialiseControls()
+            bControlsInitialised = True
+        End If
+
+        UpdateTranslations()
+
+        ' Subscribe to language-changed event from the shared buttons control
+        AddHandler ucrSdgButtons.LanguageChanged, AddressOf ucrSdgButtons_LanguageChanged
+
     End Sub
 
     Public Sub InitialiseControls()
@@ -106,5 +114,39 @@ Public Class sdgAdditionalCondition
             ucrNudDPRainPeriod.Maximum = ucrNudDPOverallInterval.Value
             ucrNudDPOverallInterval.Minimum = ucrNudDPRainPeriod.Value
         End If
+    End Sub
+
+    Private Sub UpdateTranslations()
+        ' Translate designer/localizable texts
+        Translations.autoTranslate(Me)
+
+        ' Update texts you previously set programmatically
+        ucrChkNumberOfRainyDays.SetText(Translations.GetTranslation("Number of Rainy Days"))
+        ucrChkDryPeriod.SetText(Translations.GetTranslation("Dry Period"))
+        ucrChkDrySpell.SetText(Translations.GetTranslation("Dry Spell"))
+        lblRDMinimum.Text = Translations.GetTranslation("Minimum")
+        lblDSMaximumDays.Text = Translations.GetTranslation("Maximum Dry Days:")
+        lblDPMaxRain.Text = Translations.GetTranslation("Maximum Rain:")
+        lblDPOverallInterval.Text = Translations.GetTranslation("Overall Interval Length:")
+        lblRDWidth.Text = Translations.GetTranslation("Out of Days:")
+        lblDSLengthofTime.Text = Translations.GetTranslation("Overall Interval Length:")
+        lblDPLength.Text = Translations.GetTranslation("Maximum Dry Days:")
+    End Sub
+
+    ' Remove the handler when dialog closes to avoid leaks
+    Private Sub sdgAdditionalCondition_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        RemoveHandler ucrSdgButtons.LanguageChanged, AddressOf ucrSdgButtons_LanguageChanged
+    End Sub
+
+    ' Handler to refresh texts only
+    Private Sub ucrSdgButtons_LanguageChanged(ByVal newCulture As String)
+        Me.SuspendLayout()
+        Try
+            UpdateTranslations()
+        Finally
+            Me.ResumeLayout()
+            Me.PerformLayout()
+            Me.Refresh()
+        End Try
     End Sub
 End Class

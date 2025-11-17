@@ -225,9 +225,9 @@ Partial Class dlgSpells
         Me.rdoAnnuel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnuel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnuel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnuel.Location = New System.Drawing.Point(60, 8)
+        Me.rdoAnnuel.Location = New System.Drawing.Point(23, 8)
         Me.rdoAnnuel.Name = "rdoAnnuel"
-        Me.rdoAnnuel.Size = New System.Drawing.Size(130, 28)
+        Me.rdoAnnuel.Size = New System.Drawing.Size(167, 28)
         Me.rdoAnnuel.TabIndex = 1
         Me.rdoAnnuel.Tag = "Annual_Longest_Spell"
         Me.rdoAnnuel.Text = "Annual Longest Spell"
@@ -255,10 +255,10 @@ Partial Class dlgSpells
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(58, 3)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(15, 3)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(360, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(403, 36)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrInputNewColumnName

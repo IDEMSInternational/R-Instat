@@ -37,6 +37,7 @@ Partial Class dlgImportFromEPicsa
         Me.ucrInputComboFindFiles = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveDefinitions = New instat.ucrSave()
+        Me.ucrDataframeSelector = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'ucrPnlImportFromEPicsa
@@ -134,7 +135,7 @@ Partial Class dlgImportFromEPicsa
         Me.ucrInputComboCountry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboCountry.GetSetSelectedIndex = -1
         Me.ucrInputComboCountry.IsReadOnly = False
-        Me.ucrInputComboCountry.Location = New System.Drawing.Point(76, 149)
+        Me.ucrInputComboCountry.Location = New System.Drawing.Point(79, 166)
         Me.ucrInputComboCountry.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputComboCountry.Name = "ucrInputComboCountry"
         Me.ucrInputComboCountry.Size = New System.Drawing.Size(120, 21)
@@ -144,7 +145,7 @@ Partial Class dlgImportFromEPicsa
         '
         Me.lblCountry.AutoSize = True
         Me.lblCountry.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCountry.Location = New System.Drawing.Point(11, 149)
+        Me.lblCountry.Location = New System.Drawing.Point(14, 166)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
         Me.lblCountry.TabIndex = 24
@@ -156,7 +157,7 @@ Partial Class dlgImportFromEPicsa
         Me.ucrInputDefinitionsID.AutoSize = True
         Me.ucrInputDefinitionsID.IsMultiline = False
         Me.ucrInputDefinitionsID.IsReadOnly = False
-        Me.ucrInputDefinitionsID.Location = New System.Drawing.Point(99, 185)
+        Me.ucrInputDefinitionsID.Location = New System.Drawing.Point(102, 202)
         Me.ucrInputDefinitionsID.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputDefinitionsID.Name = "ucrInputDefinitionsID"
         Me.ucrInputDefinitionsID.Size = New System.Drawing.Size(120, 21)
@@ -166,7 +167,7 @@ Partial Class dlgImportFromEPicsa
         '
         Me.lblDefinitionsID.AutoSize = True
         Me.lblDefinitionsID.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDefinitionsID.Location = New System.Drawing.Point(11, 185)
+        Me.lblDefinitionsID.Location = New System.Drawing.Point(14, 202)
         Me.lblDefinitionsID.Name = "lblDefinitionsID"
         Me.lblDefinitionsID.Size = New System.Drawing.Size(73, 13)
         Me.lblDefinitionsID.TabIndex = 26
@@ -175,7 +176,7 @@ Partial Class dlgImportFromEPicsa
         'cmdFindFiles
         '
         Me.cmdFindFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFindFiles.Location = New System.Drawing.Point(14, 221)
+        Me.cmdFindFiles.Location = New System.Drawing.Point(17, 238)
         Me.cmdFindFiles.Name = "cmdFindFiles"
         Me.cmdFindFiles.Size = New System.Drawing.Size(80, 23)
         Me.cmdFindFiles.TabIndex = 27
@@ -188,7 +189,7 @@ Partial Class dlgImportFromEPicsa
         Me.ucrInputComboFindFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboFindFiles.GetSetSelectedIndex = -1
         Me.ucrInputComboFindFiles.IsReadOnly = False
-        Me.ucrInputComboFindFiles.Location = New System.Drawing.Point(121, 222)
+        Me.ucrInputComboFindFiles.Location = New System.Drawing.Point(124, 239)
         Me.ucrInputComboFindFiles.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputComboFindFiles.Name = "ucrInputComboFindFiles"
         Me.ucrInputComboFindFiles.Size = New System.Drawing.Size(120, 21)
@@ -198,7 +199,7 @@ Partial Class dlgImportFromEPicsa
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 308)
+        Me.ucrBase.Location = New System.Drawing.Point(17, 325)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -207,17 +208,29 @@ Partial Class dlgImportFromEPicsa
         'ucrSaveDefinitions
         '
         Me.ucrSaveDefinitions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDefinitions.Location = New System.Drawing.Point(14, 267)
+        Me.ucrSaveDefinitions.Location = New System.Drawing.Point(17, 284)
         Me.ucrSaveDefinitions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDefinitions.Name = "ucrSaveDefinitions"
         Me.ucrSaveDefinitions.Size = New System.Drawing.Size(375, 22)
         Me.ucrSaveDefinitions.TabIndex = 32
         '
+        'ucrDataframeSelector
+        '
+        Me.ucrDataframeSelector.AutoSize = True
+        Me.ucrDataframeSelector.bDropUnusedFilterLevels = False
+        Me.ucrDataframeSelector.bUseCurrentFilter = True
+        Me.ucrDataframeSelector.Location = New System.Drawing.Point(17, 110)
+        Me.ucrDataframeSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataframeSelector.Name = "ucrDataframeSelector"
+        Me.ucrDataframeSelector.Size = New System.Drawing.Size(151, 43)
+        Me.ucrDataframeSelector.TabIndex = 33
+        '
         'dlgImportFromEPicsa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(464, 369)
+        Me.ClientSize = New System.Drawing.Size(464, 388)
+        Me.Controls.Add(Me.ucrDataframeSelector)
         Me.Controls.Add(Me.ucrSaveDefinitions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrInputComboFindFiles)
@@ -260,4 +273,5 @@ Partial Class dlgImportFromEPicsa
     Friend WithEvents ucrInputComboFindFiles As ucrInputComboBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSaveDefinitions As ucrSave
+    Friend WithEvents ucrDataframeSelector As ucrDataFrame
 End Class

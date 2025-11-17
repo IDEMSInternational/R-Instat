@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class ucrSelector
-    Public CurrentReceiver As ucrReceiver
+    Private _currentReceiver As ucrReceiver
     Public Event ResetAll()
     Public Event ResetReceivers()
     Public Event DataFrameChanged()
@@ -54,6 +54,12 @@ Public Class ucrSelector
         Alphabetically
     End Enum
     Private enumCurrentListViewSortStatus As SelectorSortType = SelectorSortType.Appearance
+
+    Public ReadOnly Property CurrentReceiver As ucrReceiver
+        Get
+            Return _currentReceiver
+        End Get
+    End Property
 
     Public Sub New()
         ' This call is required by the designer.
@@ -150,7 +156,7 @@ Public Class ucrSelector
         'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
         Static _strCurrentSelectorFillCondition As String = ""
         'if selector contains columns check if fill conditions are just the same
-        If strCurrentType = "column" Then
+        If strCurrentType = "column" AndAlso String.IsNullOrEmpty(CurrentReceiver.strObjectName) Then
 
             'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
             'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
@@ -177,7 +183,8 @@ Public Class ucrSelector
         'todo, for columns, the list view should be field with variables from the .Net metadata object
         frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1),
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
-                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath,
+                                      strObjectName:=CurrentReceiver.strObjectName)
         If Not CurrentReceiver.bExcludeFromSelector Then
             'TODO. Investigate why this has to be called here instead of just being called in ucrReceiver control.SetControlValue()
             'See PR #8605 for related comments added in ucrReceiver.
@@ -250,7 +257,7 @@ Public Class ucrSelector
             CurrentReceiver.RemoveColor()
         End If
         If conReceiver IsNot Nothing Then
-            CurrentReceiver = conReceiver
+            _currentReceiver = conReceiver
             If CurrentReceiver.bAsReceiver Then CurrentReceiver.SetColor()
             SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame AndAlso CurrentReceiver.bOnlyLinkedToPrimaryDataFrames)
             If Not CurrentReceiver.IsEmpty Then
@@ -273,7 +280,7 @@ Public Class ucrSelector
                 lstAvailableVariable.MultiSelect = True
             End If
         Else
-            CurrentReceiver = Nothing
+            _currentReceiver = Nothing
         End If
     End Sub
 
