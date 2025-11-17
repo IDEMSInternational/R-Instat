@@ -1197,6 +1197,11 @@ Public Class dlgBarAndPieChart
             Exit Sub
         End If
 
+        ' Clear previous parameters
+        clsFacetFunction.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("rows")
+        clsFacetFunction.RemoveParameterByName("cols")
+        clsFacetFunction.RemoveParameterByName("margin")
         clsBaseOperator.RemoveParameterByName("facets")
 
         If Not ucr1stFactorReceiver.IsEmpty Then
@@ -1212,33 +1217,28 @@ Public Class dlgBarAndPieChart
                 Case strFacetRowAll
                     bRowAll = True
             End Select
-        End If
-        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
-        End If
-        If bWrap Then
-            clsFacetFunction.SetRCommand("facet_wrap")
-        End If
-        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
-            clsFacetFunction.SetRCommand("facet_grid")
-            clsFacetFunction.RemoveParameterByName("facets")
-        End If
-        If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=1)
-        Else
-            clsFacetFunction.RemoveParameterByName("margin")
-        End If
 
-        If bRow OrElse bRowAll Then
-            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
-        Else
-            clsFacetFunction.RemoveParameterByName("rows")
-        End If
+            If bWrap Then
+                clsFacetFunction.SetRCommand("facet_wrap")
+                clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+                clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            ElseIf bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
+                clsFacetFunction.SetRCommand("facet_grid")
 
-        If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
-        Else
-            clsFacetFunction.RemoveParameterByName("cols")
+                If bRowAll OrElse bColAll Then
+                    clsFacetFunction.AddParameter("margin", "TRUE")
+                End If
+
+                If bRow OrElse bRowAll Then
+                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+                End If
+
+                If bCol OrElse bColAll Then
+                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=1)
+                End If
+
+                clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            End If
         End If
     End Sub
 
