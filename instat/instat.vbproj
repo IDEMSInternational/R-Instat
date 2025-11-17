@@ -403,6 +403,9 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="frmCustomMessageBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAdditionalCondition.Designer.vb">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </Compile>
