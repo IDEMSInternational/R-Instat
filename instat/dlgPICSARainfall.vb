@@ -409,7 +409,7 @@ Public Class dlgPICSARainfall
         clsFilterFunction.AddParameter("var", clsROperatorParameter:=clsEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsEqualToOperator.SetOperation("==")
-        clsEqualToOperator.AddParameter("right", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
+        clsEqualToOperator.AddParameter("right", "FALSE", iPosition:=1, bIncludeArgumentName:=False)
 
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
