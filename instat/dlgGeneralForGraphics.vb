@@ -775,7 +775,7 @@ Public Class dlgGeneralForGraphics
         clsFacetFunction.RemoveParameterByName("facets")
         clsFacetFunction.RemoveParameterByName("rows")
         clsFacetFunction.RemoveParameterByName("cols")
-        clsFacetFunction.RemoveParameterByName("margin")
+        clsFacetFunction.RemoveParameterByName("margins")
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
@@ -784,7 +784,7 @@ Public Class dlgGeneralForGraphics
             clsFacetFunction.SetRCommand("facet_grid")
 
             If bRowAll OrElse bColAll Then
-                clsFacetFunction.AddParameter("margin", "TRUE")
+                clsFacetFunction.AddParameter("margins", "TRUE")
             End If
             If bRow OrElse bRowAll Then
                 clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)

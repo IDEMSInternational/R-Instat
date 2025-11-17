@@ -1201,7 +1201,7 @@ Public Class dlgBarAndPieChart
         clsFacetFunction.RemoveParameterByName("facets")
         clsFacetFunction.RemoveParameterByName("rows")
         clsFacetFunction.RemoveParameterByName("cols")
-        clsFacetFunction.RemoveParameterByName("margin")
+        clsFacetFunction.RemoveParameterByName("margins")
         clsBaseOperator.RemoveParameterByName("facets")
 
         If Not ucr1stFactorReceiver.IsEmpty Then
@@ -1226,7 +1226,7 @@ Public Class dlgBarAndPieChart
                 clsFacetFunction.SetRCommand("facet_grid")
 
                 If bRowAll OrElse bColAll Then
-                    clsFacetFunction.AddParameter("margin", "TRUE")
+                    clsFacetFunction.AddParameter("margins", "TRUE")
                 End If
 
                 If bRow OrElse bRowAll Then
