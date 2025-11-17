@@ -337,6 +337,7 @@ Public Class dlgSpells
         clsDefineAsClimatic.AddParameter("key_col_names", clsRFunctionParameter:=clsVectorConcatFunction, iPosition:=1)
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
+        clsDefineAsClimatic.iCallType = 2
 
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")

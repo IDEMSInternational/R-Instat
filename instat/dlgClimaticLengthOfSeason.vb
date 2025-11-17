@@ -332,6 +332,7 @@ Public Class dlgClimaticLengthOfSeason
         clsDefineAsClimatic.AddParameter("data_name", strCurrDataName, iPosition:=0)
         clsDefineAsClimatic.AddParameter("key_col_names", "NULL", iPosition:=1)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
+        clsDefineAsClimatic.iCallType = 2
 
         'Base Function
         ucrBase.clsRsyntax.ClearCodes()

@@ -817,6 +817,7 @@ Public Class dlgStartofRains
         clsDefineAsClimatic.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsDefineAsClimatic.AddParameter("data_name", clsRFunctionParameter:=clsGetlinkeddataFunction, iPosition:=0)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
+        clsDefineAsClimatic.iCallType = 2
 
         clsVectorConcat2Function.SetRCommand("c")
 
@@ -1230,11 +1231,11 @@ Public Class dlgStartofRains
     Private Sub AddRemoveStartStatus()
         If ucrChkStatus.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetlinkeddataFunction, iPosition:=0)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsCalculatedListformFunction, iPosition:=2)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsStatRainStatus2Function, iPosition:=3)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsStartRainCombine2Function, iPosition:=4)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRunStartStatus2Function, iPosition:=5)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsCalculatedListformFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsStatRainStatus2Function, iPosition:=2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsStartRainCombine2Function, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRunStartStatus2Function, iPosition:=4)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=5)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetlinkeddataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDefineAsClimatic)

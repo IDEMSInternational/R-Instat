@@ -1197,6 +1197,7 @@ Public Class dlgEndOfRainsSeason
         clsDefineAsClimatic.AddParameter("data_name", clsRFunctionParameter:=clsLinkeddataFunction, iPosition:=0)
         clsDefineAsClimatic.AddParameter("key_col_names", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
+        clsDefineAsClimatic.iCallType = 2
 
         clsGetDataframeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetDataframeFunction.AddParameter("summary_data", strLinkeddata, iPosition:=0, bIncludeArgumentName:=False)
@@ -1282,10 +1283,10 @@ Public Class dlgEndOfRainsSeason
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertlinkedvariableFunction, iPosition:=4)
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsLinkeddataFunction, iPosition:=4)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=5)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=12)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnlinkeddataFunction, iPosition:=13)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsLinkeddataFunction, iPosition:=5)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=10)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=13)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnlinkeddataFunction, iPosition:=14)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 
         clsFirstOrLastFunction = clsLastDoyFunction
@@ -1437,7 +1438,7 @@ Public Class dlgEndOfRainsSeason
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
             clsDeleteunusedrowFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=2)
             clsDeleteunusedrowFunction.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=14)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=15)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDeleteunusedrowFunction)
             clsDeleteunusedrowFunction.RemoveParameterByName("station")
@@ -1604,6 +1605,7 @@ Public Class dlgEndOfRainsSeason
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonStatusSummaryCalc, iPosition:=1)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonCombinationCalcStatusFunction, iPosition:=2)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsRunCalculationStatusFunction, iPosition:=3)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsLinkeddataFunction, iPosition:=5)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsVectorCalFormListFunction, iPosition:=6)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonStatus2Function, iPosition:=7)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonCombiStatus2Function, iPosition:=8)
@@ -1612,6 +1614,7 @@ Public Class dlgEndOfRainsSeason
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConditionsFilterCondCheckFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonStatusSummaryCalc)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunCalculationStatusFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkeddataFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonCombinationCalcStatusFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVectorCalFormListFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonStatus2Function)
@@ -1689,7 +1692,7 @@ Public Class dlgEndOfRainsSeason
         If ucrChkDefinitions.Checked Then
 
             If rdoEndOfSeasons.Checked Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndSeasonDefFunction, iPosition:=15)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndSeasonDefFunction, iPosition:=16)
                 ucrSaveObject.SetPrefix("end_season_definition")
 
                 If ucrChkEndofSeasonDate.Checked Then
@@ -1703,7 +1706,7 @@ Public Class dlgEndOfRainsSeason
                 End If
 
             ElseIf rdoEndOfRains.Checked Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndRainDefFunction, iPosition:=15)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndRainDefFunction, iPosition:=16)
                 ucrSaveObject.SetPrefix("end_rain_definition")
 
                 If ucrChkEndofRainsDate.Checked Then
@@ -1750,8 +1753,8 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub EnableFilledvariable()
         If ucrChkFilled.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonFirstDoySummaryCalcFilledFunction, iPosition:=10)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsrunfilledFunction, iPosition:=11)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonFirstDoySummaryCalcFilledFunction, iPosition:=11)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsrunfilledFunction, iPosition:=12)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsrunfilledFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonFirstDoySummaryCalcFilledFunction)
