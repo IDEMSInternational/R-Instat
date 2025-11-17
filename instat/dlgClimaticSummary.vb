@@ -252,7 +252,7 @@ Public Class dlgClimaticSummary
         clsGetVariablesMetadataFunction.SetAssignTo("variables_metadata")
 
         clsGetDailyCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetDailyCalculationsFunction.AddParameter("data_name", Chr(34) & strLinkeddata, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDailyCalculationsFunction.AddParameter("data_name", ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
         clsGetDailyCalculationsFunction.SetAssignTo("daily_data_calculation")
 
         clsCFunctionSummaryVars.SetRCommand("c")
@@ -261,10 +261,10 @@ Public Class dlgClimaticSummary
         clsCFunctionSummaryVars.SetAssignTo("summary_variables")
 
         clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
-        clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0)
-        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1)
-        clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsCFunctionSummaryVars, iPosition:=2)
-        clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyCalculationsFunction, iPosition:=3)
+        clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0, bIncludeArgumentName:=True)
+        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1, bIncludeArgumentName:=True)
+        clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsCFunctionSummaryVars, iPosition:=2, bIncludeArgumentName:=True)
+        clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyCalculationsFunction, iPosition:=3, bIncludeArgumentName:=True)
 
         clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsAddDateFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
@@ -600,18 +600,5 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub UpdateDateDoy()
-        If rdoStation.Checked AndAlso sdgDoyRange.ucrChkUseDate.Checked Then
-            If Not ucrReceiverDate.IsEmpty Then
-                clsDayFilterCalcFromList.AddParameter(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDate.GetVariableNames(), iPosition:=0)
-            Else
-                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            End If
-        Else
-            If Not ucrReceiverDOY.IsEmpty Then
-                clsDayFilterCalcFromList.AddParameter(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
-            Else
-                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            End If
-        End If
     End Sub
 End Class
