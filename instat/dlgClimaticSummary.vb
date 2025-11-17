@@ -248,7 +248,7 @@ Public Class dlgClimaticSummary
         clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-        clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34) & strLinkeddata, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34), iPosition:=0)
         clsGetVariablesMetadataFunction.SetAssignTo("variables_metadata")
 
         clsGetDailyCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
