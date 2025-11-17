@@ -768,14 +768,6 @@ Public Class dlgScatterPlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
-                        Dim i As Integer = clsGroupByFunction.iParameterCount
-                        For Each clsTempParam As RParameter In clsVarsFunction.clsParameters
-                            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
-                                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
-                                i = i + 1
-                            End If
-                        Next
                 End Select
             End If
 
