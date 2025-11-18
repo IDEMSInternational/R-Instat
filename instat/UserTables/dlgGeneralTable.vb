@@ -1,10 +1,23 @@
-﻿Imports System.Windows.Documents
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Imports unvell.ReoGrid.IO.OpenXML.Schema
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsDropLevelsMulFunction, clsDropLevelsSingFunction, clsCompleteSingFunction, clsArrangeSingFunction, clsCompleteFunction, clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderAscolumnFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsDropLevelsMulFunction, clsDropLevelsSingFunction, clsCompleteSingFunction, clsArrangeSingFunction, clsCompleteFunction, clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderAscolumnFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsGtRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -48,9 +61,14 @@ Public Class dlgGeneralTable
         ' Get any new header contents from operator 
         ucrHeader.Setup(clsBaseOperator, bShowSubtitle:=False)
 
-        ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
+        ' TODO. Temporary fix until the themes custom control is implemented
+        ' If false, no further themes processing will happen
+        ' If true, new themes RFunction will be added but same R command will be used
         ucrChkSelectTheme.Checked = sdgTableOptions.ucrChkSelectTheme.Checked
-        sdgTableStyles.GetNewUserInputAsRFunction()
+        If ucrChkSelectTheme.Checked Then
+            ' Only set the text when it is a theme selection. Ignore setting this when it's a manual theme selections
+            ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
+        End If
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged
@@ -132,9 +150,8 @@ Public Class dlgGeneralTable
         ucrNudPreview.SetRDefault(6)
 
         ucrChkSelectTheme.SetText("Theme")
-        ucrChkSelectTheme.AddParameterValuesCondition(True, "theme", "True")
-        ucrChkSelectTheme.AddParameterValuesCondition(False, "theme", "False")
-        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrChkSelectTheme.Checked = True
+        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
 
         ucrSaveTable.SetPrefix("presentation_table")
@@ -176,7 +193,7 @@ Public Class dlgGeneralTable
         ucrSaveTable.Reset()
         ucrReceiverMultipleRowFactors.SetMeAsReceiver()
         ucrChkPreview.Checked = True
-        ucrCboSelectThemes.SetText("Dark Theme")
+        ucrChkSelectTheme.Checked = False
 
         clsBaseOperator.SetOperation("%>%")
         clsBaseOperator.bBrackets = False
@@ -202,10 +219,6 @@ Public Class dlgGeneralTable
         clsGtRFunction.SetPackageName("gt")
         clsGtRFunction.SetRCommand("gt")
         clsBaseOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
-
-        clsThemeRFunction.SetPackageName("gtExtras")
-        clsThemeRFunction.SetRCommand("gt_theme_dark")
-        clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction, iPosition:=4)
 
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
@@ -265,7 +278,6 @@ Public Class dlgGeneralTable
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
         If bReset Then
-            ucrChkSelectTheme.SetRCode(clsDummyFunction, bReset)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkPreview.SetRCode(clsBaseOperator, bReset)
             ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
@@ -275,7 +287,6 @@ Public Class dlgGeneralTable
         End If
         ucrReceiverMultipleCols.SetRCode(clsGetdataFunction, bReset)
         Updateparameter()
-        AddRemoveThemes()
         AddingSummaryType()
     End Sub
 
@@ -291,7 +302,6 @@ Public Class dlgGeneralTable
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverSingleVariable.ControlValueChanged, ucrReceiverMultipleVariablesMul.ControlValueChanged, ucrReceiverMultipleCols.ControlValueChanged
         AddRemovePivotwider()
-        AddRemoveThemes()
         AddingSummaryType()
         HidePosition()
         AddRemovespanner()
@@ -605,25 +615,21 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
-        AddRemoveThemes()
-    End Sub
-
-    Private Sub AddRemoveThemes()
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
-            clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+            ucrCboSelectThemes.SetName("Dark Theme") ' Set default theme
         Else
-            clsBaseOperator.RemoveParameterByName("theme_format")
             ucrCboSelectThemes.Visible = False
-            clsThemeRFunction.ClearParameters()
+            clsBaseOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
 
+    ' TODO. This is a replication of what is in the tables sub-dialog. Move this to a custom control
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
-        AddRemoveThemes()
-        If clsThemeRFunction Is Nothing Then
+        If Not ucrChkSelectTheme.Checked OrElse ucrCboSelectThemes.IsEmpty() Then
             Exit Sub
         End If
+
         Dim strCommand As String = ""
         Select Case ucrCboSelectThemes.GetText
             Case "Dark Theme"
@@ -644,7 +650,14 @@ Public Class dlgGeneralTable
                 strCommand = "gt_theme_pff"
         End Select
 
+        If strCommand = "" Then
+            Exit Sub ' Do nothing
+        End If
+
+        Dim clsThemeRFunction As New RFunction
+        clsThemeRFunction.SetPackageName("gtExtras")
         clsThemeRFunction.SetRCommand(strCommand)
+        clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
     End Sub
 
     Private Sub ucrSelectorCols_DataFrameChanged() Handles ucrSelectorCols.DataFrameChanged
