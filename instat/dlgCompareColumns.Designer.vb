@@ -195,7 +195,7 @@ Partial Class dlgCompareColumns
         Me.ucrSaveLogical.Location = New System.Drawing.Point(11, 426)
         Me.ucrSaveLogical.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveLogical.Name = "ucrSaveLogical"
-        Me.ucrSaveLogical.Size = New System.Drawing.Size(355, 22)
+        Me.ucrSaveLogical.Size = New System.Drawing.Size(408, 22)
         Me.ucrSaveLogical.TabIndex = 8
         '
         'ucrChkSort
@@ -213,7 +213,7 @@ Partial Class dlgCompareColumns
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(11, 456)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
         'ucrReceiverSecond
