@@ -2218,7 +2218,8 @@ Public Class RLink
         Dim strReconstructedComment As String = ""
         Dim arrCommentParts As String()
         If strComment.Length > 0 Then
-            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            ' Split by newline but keep empty lines to preserve line breaks
+            arrCommentParts = strComment.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
             For Each strPart As String In arrCommentParts
                 If strReconstructedComment = "" Then
                     strReconstructedComment = "# " & strPart
