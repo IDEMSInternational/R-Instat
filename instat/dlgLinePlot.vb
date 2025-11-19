@@ -66,6 +66,7 @@ Public Class dlgLinePlot
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
     Private clsVarsFunction As New RFunction
+    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
 
@@ -504,6 +505,8 @@ Public Class dlgLinePlot
         clsDummyFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
         clsVarsFunction = New RFunction
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
 
@@ -564,8 +567,11 @@ Public Class dlgLinePlot
         clsFacetVariablesOperator.bForceIncludeOperation = True
         clsFacetVariablesOperator.bBrackets = False
 
-        clsVarsFunction.SetPackageName("ggplot2")
-        clsVarsFunction.SetRCommand("vars")
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -986,11 +992,11 @@ Public Class dlgLinePlot
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
             Case strFacetCol, strFacetColAll
-                ucr1stFactorReceiver.ChangeParameterName("cols" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+                ucr1stFactorReceiver.ChangeParameterName("cols")
+                ucr1stFactorReceiver.SetRCode(clsColVarsFunction)
             Case strFacetRow, strFacetRowAll
-                ucr1stFactorReceiver.ChangeParameterName("rows" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+                ucr1stFactorReceiver.ChangeParameterName("rows")
+                ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -1043,13 +1049,13 @@ Public Class dlgLinePlot
         End If
 
         If bRow OrElse bRowAll Then
-            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
         Else
             clsFacetFunction.RemoveParameterByName("rows")
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
         Else
             clsFacetFunction.RemoveParameterByName("cols")
         End If
