@@ -54,8 +54,8 @@ Public Class dlgPICSARainfall
     Private clsEqualToOperator As New ROperator
     Private clsGeomSegmentFunction As New RFunction
     Private clsSegmentAesFunction As New RFunction
-    Private clsGeomPoint2Function As RFunction
-    Private clsPoint2AesFunction As RFunction
+    Private clsGeomPoint2Function As New RFunction
+    Private clsPoint2AesFunction As New RFunction
 
     Private clsDatePeriodOperator As New ROperator
 
