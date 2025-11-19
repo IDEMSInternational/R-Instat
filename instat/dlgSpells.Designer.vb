@@ -212,9 +212,9 @@ Partial Class dlgSpells
         Me.lblNewColumnName.AutoSize = True
         Me.lblNewColumnName.Location = New System.Drawing.Point(6, 363)
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.Size = New System.Drawing.Size(121, 13)
         Me.lblNewColumnName.TabIndex = 21
-        Me.lblNewColumnName.Text = "New Column Name:"
+        Me.lblNewColumnName.Text = "New Data Frame Name:"
         '
         'rdoAnnuel
         '
@@ -230,7 +230,7 @@ Partial Class dlgSpells
         Me.rdoAnnuel.Size = New System.Drawing.Size(167, 28)
         Me.rdoAnnuel.TabIndex = 1
         Me.rdoAnnuel.Tag = "Annual_Longest_Spell"
-        Me.rdoAnnuel.Text = "Annual Longest Spell"
+        Me.rdoAnnuel.Text = "Longest Spell"
         Me.rdoAnnuel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAnnuel.UseVisualStyleBackColor = False
         '

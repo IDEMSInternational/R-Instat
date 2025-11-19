@@ -23,9 +23,13 @@ Public Class dlgInventoryPlot
     Private clsClimaticDetails As New RFunction
     Private clsAddKeyFunction As New RFunction
     Private clsNewCAddKeyFunction As New RFunction
-    Private clsCumulativeInventoryFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsDataFrameFunction As New RFunction
+    Private clsGetDataNamesFunction As New RFunction
+    Private clsGetDataNames2Function As New RFunction
+    Private clsSetDiffFunction As New RFunction
+    Private clsAddColumnsFunction As New RFunction
+    Private clsBracketOperator As New ROperator
     Private bResetSubdialog As Boolean = False
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -84,6 +88,11 @@ Public Class dlgInventoryPlot
         ucrChkOmitStart.SetText("Omit Start")
         ucrChkOmitStart.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitStart.SetRDefault("TRUE")
+
+        ucrChkHierarchal.SetParameter(New RParameter("duplicates", 10))
+        ucrChkHierarchal.SetText("Hierarchal Duplicate Levels")
+        ucrChkHierarchal.SetValuesCheckedAndUnchecked(Chr(34) & "hierarchical" & Chr(34), Chr(34) & "keep" & Chr(34))
+        ucrChkHierarchal.SetRDefault(Chr(34) & "keep" & Chr(34))
 
         ucrChkOmitEnd.SetParameter(New RParameter("end", 5))
         ucrChkOmitEnd.SetText("Omit End")
@@ -192,8 +201,12 @@ Public Class dlgInventoryPlot
         clsDummyFunction = New RFunction
         clsAddKeyFunction = New RFunction
         clsNewCAddKeyFunction = New RFunction
-        clsCumulativeInventoryFunction = New RFunction
         clsDataFrameFunction = New RFunction
+        clsGetDataNamesFunction = New RFunction
+        clsGetDataNames2Function = New RFunction
+        clsSetDiffFunction = New RFunction
+        clsAddColumnsFunction = New RFunction
+        clsBracketOperator = New ROperator
 
         bResetSubdialog = True
 
@@ -219,7 +232,7 @@ Public Class dlgInventoryPlot
 
         clsNewCAddKeyFunction.SetRCommand("c")
         clsNewCAddKeyFunction.AddParameter("from", Chr(34) & "From" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-        clsNewCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
+        clsNewCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=2)
         clsNewCAddKeyFunction.AddParameter("elements", Chr(34) & "Element" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
         clsNewCAddKeyFunction.AddParameter("levels", Chr(34) & "Level" & Chr(34), bIncludeArgumentName:=False, iPosition:=4)
         clsNewCAddKeyFunction.SetAssignTo("key_cols")
@@ -227,13 +240,30 @@ Public Class dlgInventoryPlot
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsAddKeyFunction.AddParameter("col_names", "key_cols", iPosition:=1)
 
-        clsCumulativeInventoryFunction.SetPackageName("instatClimatic")
-        clsCumulativeInventoryFunction.SetRCommand("cumulative_inventory")
-        clsCumulativeInventoryFunction.AddParameter("from", Chr(34) & "From" & Chr(34), iPosition:=1)
-        clsCumulativeInventoryFunction.AddParameter("to", Chr(34) & "To" & Chr(34), iPosition:=2)
+        clsGetDataNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsGetDataNamesFunction.SetAssignTo("existing_dfs")
+
+        clsGetDataNames2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+
+        clsSetDiffFunction.SetRCommand("setdiff")
+        clsSetDiffFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataNames2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsSetDiffFunction.AddParameter("y", "existing_dfs", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsBracketOperator.SetOperation("[")
+        clsBracketOperator.AddParameter("x", clsRFunctionParameter:=clsSetDiffFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsBracketOperator.AddParameter("y", "1]", iPosition:=1, bIncludeArgumentName:=False)
+        clsBracketOperator.bSpaceAroundOperation = False
+        clsBracketOperator.SetAssignTo(ucrSaveDetails.GetText())
+
+        clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsAddColumnsFunction.AddParameter("data_name", clsROperatorParameter:=clsBracketOperator, iPosition:=0)
+        clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=1)
+        clsAddColumnsFunction.AddParameter("col_data", "NA_real_", iPosition:=2)
+        clsAddColumnsFunction.AddParameter("col_name", Chr(34) & "comment" & Chr(34), iPosition:=3)
+        clsAddColumnsFunction.AddParameter("use_col_name_as_prefix", "TRUE", iPosition:=4)
 
         clsDataFrameFunction.SetRCommand("data.frame")
-        clsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsCumulativeInventoryFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsClimaticDetails, bIncludeArgumentName:=False, iPosition:=0)
         clsDataFrameFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
         ucrBase.clsRsyntax.ClearCodes()
@@ -268,6 +298,7 @@ Public Class dlgInventoryPlot
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
         ucrChkMonth.SetRCode(clsClimaticDetails, bReset)
         ucrChkDay.SetRCode(clsClimaticDetails, bReset)
+        ucrChkHierarchal.SetRCode(clsClimaticDetails, bReset)
         ucrSaveDetails.SetRCode(clsDataFrameFunction, bReset)
         ucrChkOmitStart.SetRCode(clsClimaticMissing, bReset)
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
@@ -368,9 +399,10 @@ Public Class dlgInventoryPlot
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
         If ucrChkDetails.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsDataFrameFunction, iPosition:=2)
-            clsCumulativeInventoryFunction.AddParameter("data", clsRFunctionParameter:=clsClimaticDetails, iPosition:=0)
             clsClimaticDetails.iCallType = 2
         Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataNamesFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDataFrameFunction)
         End If
 
@@ -395,6 +427,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        clsNewCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=2)
         AddOrRemoveKeyFunctions()
     End Sub
 
@@ -406,9 +439,14 @@ Public Class dlgInventoryPlot
             clsAddKeyFunction.RemoveParameterByName("data_name")
         End If
         If ucrSaveDetails.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataNamesFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnsFunction, iPosition:=6)
+            clsBracketOperator.SetAssignTo(ucrSaveDetails.GetText())
             clsDataFrameFunction.SetAssignTo(ucrSaveDetails.GetText())
             clsDataFrameFunction.iCallType = 0
         Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataNamesFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsFunction)
             clsDataFrameFunction.RemoveAssignTo()
             clsDataFrameFunction.iCallType = 2
         End If
