@@ -51,6 +51,7 @@ Public Class sdgPlots
     Private clsFillPaletteFunction As New RFunction
     Private clsColourPaletteFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Public clsRowVarsFunction, clsColVarsFunction As New RFunction
     Private clsScaleColorColorblindFunction, clsScaleFillColorblindFunction As New RFunction
     Private clsScaleColorDistillerFunction, clsScaleFillDistillerFunction As New RFunction
     Private clsScalecolorcalcFunction, clsScalefillcalcFunction As New RFunction
@@ -172,7 +173,7 @@ Public Class sdgPlots
         ucrChkIncludeTitles.AddParameterPresentCondition(False, "titles", False)
 
         ucrChkMargin.SetText("Margins")
-        ucrChkMargin.SetParameter(New RParameter("margins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargin.SetParameter(New RParameter("margin", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargin.SetRDefault("FALSE")
 
@@ -2315,8 +2316,8 @@ Public Class sdgPlots
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing,
-                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing, Optional clsNewColVarsFunction As RFunction = Nothing,
+                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing, Optional clsNewRowVarsFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bChangeAesParameter As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
         Dim clsTempParam As RParameter
         bRCodeSet = False
@@ -2350,6 +2351,9 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
+        clsColVarsFunction = clsNewColVarsFunction
+        clsRowVarsFunction = clsNewRowVarsFunction
+
 
         clsGuideLegendFunction = New RFunction
         clsGuideFunction = New RFunction
@@ -2405,6 +2409,7 @@ Public Class sdgPlots
         Else
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
+
 
         clsScaleFillColorblindFunction = New RFunction
         clsScaleFillColorblindFunction.SetPackageName("ggthemes")
@@ -2582,8 +2587,8 @@ Public Class sdgPlots
 
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
 
-        ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
-        ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
+        ucr2ndFactorReceiver.SetRCode(clsColVarsFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
@@ -3137,32 +3142,42 @@ Public Class sdgPlots
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
                 'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
                 'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
-                ucr1stFactorReceiver.SetParameterPosition(1)
-                ucr2ndFactorReceiver.SetParameterPosition(0)
-                clsFacetVariablesOperator.RemoveParameter(ucr2ndFactorReceiver.GetParameter())
+
+                'ucr1stFactorReceiver.SetParameterPosition(1)
+                'ucr2ndFactorReceiver.SetParameterPosition(0)
+                'clsFacetFunction.RemoveParameterByName("rows")
+                'clsFacetFunction.RemoveParameterByName("cols")
+                'clsFacetVariablesOperator.RemoveParameter(ucr2ndFactorReceiver.GetParameter())
                 If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
+                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                    clsFacetFunction.RemoveParameterByName("cols")
                 ElseIf (rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked)) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
+                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
                     clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                    clsFacetFunction.RemoveParameterByName("cols")
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
                     If rdoVertical.Checked Then
-                        ucr1stFactorReceiver.SetParameterPosition(0)
-                        ucr2ndFactorReceiver.SetParameterPosition(1)
-                        ucr2ndFactorReceiver.SetParameterValue(".")
-                        clsFacetVariablesOperator.AddParameter(ucr2ndFactorReceiver.GetParameter())
+                        clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=0)
+                        'ucr1stFactorReceiver.SetParameterPosition(0)
+                        'ucr2ndFactorReceiver.SetParameterPosition(1)
+                        'ucr2ndFactorReceiver.SetParameterValue(".")
+                        'clsFacetVariablesOperator.AddParameter(ucr2ndFactorReceiver.GetParameter())
                     End If
                     clsFacetFunction.RemoveParameterByName("dir")
                 End If
             ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
-                ucr1stFactorReceiver.SetParameterPosition(0)
-                ucr2ndFactorReceiver.SetParameterPosition(1)
                 clsFacetFunction.SetRCommand("facet_grid")
+                clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
                 clsFacetFunction.RemoveParameterByName("dir")
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
+                clsFacetFunction.RemoveParameterByName("rows")
+                clsFacetFunction.RemoveParameterByName("cols")
             End If
 
             If clsFacetFunction.strRCommand = "facet_grid" Then
@@ -3175,7 +3190,7 @@ Public Class sdgPlots
                 clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
             Else
                 clsFacetFunction.RemoveParameterByName("space")
-                clsFacetFunction.RemoveParameterByName("margins")
+                clsFacetFunction.RemoveParameterByName("margin")
                 If rdoHorizontal.Checked Then
                     ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
                     ucrNudNumberofRows.ChangeParameterName("nrow")
