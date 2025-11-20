@@ -1012,12 +1012,15 @@ Public Class dlgLinePlot
             Case strFacetWrap
                 ucr1stFactorReceiver.ChangeParameterName("rows")
                 ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
+                clsColVarsFunction.ClearParameters()
             Case strFacetCol, strFacetColAll
                 ucr1stFactorReceiver.ChangeParameterName("cols")
                 ucr1stFactorReceiver.SetRCode(clsColVarsFunction)
+                clsRowVarsFunction.ClearParameters()
             Case strFacetRow, strFacetRowAll
                 ucr1stFactorReceiver.ChangeParameterName("rows")
                 ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
+                clsColVarsFunction.ClearParameters()
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))

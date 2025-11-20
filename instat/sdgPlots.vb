@@ -3297,7 +3297,7 @@ Public Class sdgPlots
     Private Sub SecondFactorReceiverEnabled()
         If bRCodeSet Then
             If ucr1stFactorReceiver.IsEmpty() Then
-                ucr2ndFactorReceiver.Clear()
+                'ucr2ndFactorReceiver.Clear()
                 ucr2ndFactorReceiver.Enabled = False
                 If ucrFacetSelector.CurrentReceiver IsNot Nothing AndAlso ucrFacetSelector.CurrentReceiver.Equals(ucr2ndFactorReceiver) Then
                     ucr1stFactorReceiver.SetMeAsReceiver()
