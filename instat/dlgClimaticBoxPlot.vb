@@ -399,7 +399,7 @@ Public Class dlgClimaticBoxPlot
 
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
-        clsMutateFunction.AddParameter("x", clsROperatorParameter:=clsInOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsMutateFunction.AddParameter("is_out", clsROperatorParameter:=clsInOperator, iPosition:=0)
 
         clsFilterElement2Function.SetPackageName("dplyr")
         clsFilterElement2Function.SetRCommand("filter")
@@ -466,13 +466,6 @@ Public Class dlgClimaticBoxPlot
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeUpdated = False
         ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStatFunction, New RParameter("coef", 1), iAdditionalPairNo:=1)
-        'ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsGroupbyFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsAsFactor2Function, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        'ucrReceiverElement.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucrReceiverElement.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("is_out", 0), iAdditionalPairNo:=2)
-        'ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("coef", 1), iAdditionalPairNo:=2)
-
-        'ucrReceiverWithinYear.SetRCode(clsGroupbyFunction)
 
         ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
@@ -843,7 +836,7 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         If Not ucrReceiverElement.IsEmpty Then
             clsBoxplotStat2Function.AddParameter("x", ucrReceiverElement.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
-            clsInOperator.AddParameter("x", "is_out = " & ucrReceiverElement.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
+            clsInOperator.AddParameter("x", ucrReceiverElement.GetVariableNames(bWithQuotes:=False), iPosition:=0)
         Else
             clsBoxplotStat2Function.RemoveParameterByName("x")
             clsInOperator.RemoveParameterByName("x")
