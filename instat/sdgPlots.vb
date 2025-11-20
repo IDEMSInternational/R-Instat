@@ -143,7 +143,7 @@ Public Class sdgPlots
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
-        ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
+        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.bWithQuotes = False
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
@@ -153,7 +153,7 @@ Public Class sdgPlots
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.strSelectorHeading = "Factors"
-        ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
+        ucr2ndFactorReceiver.SetParameter(New RParameter("cols", bNewIncludeArgumentName:=False))
         ucr2ndFactorReceiver.SetParameterIsString()
         ucr2ndFactorReceiver.bWithQuotes = False
         ucr2ndFactorReceiver.SetLinkedDisplayControl(lblFactor2)

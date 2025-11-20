@@ -410,14 +410,14 @@ Public Class dlgLinePlot
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
-        ucr1stFactorReceiver.SetParameter(New RParameter("cols"))
+        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
         ucr1stFactorReceiver.Selector = ucrLinePlotSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.bWithQuotes = False
-        'ucr1stFactorReceiver.SetParameterIsString()
-        'ucr1stFactorReceiver.SetValuesToIgnore({"."})
-        'ucr1stFactorReceiver.SetParameterPosition(1)
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(0)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
@@ -650,7 +650,7 @@ Public Class dlgLinePlot
         ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsGgSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverSlopeY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
         'ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsRowVarsFunction, New RParameter("rows", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, New RParameter("cols", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        'ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, New RParameter("cols", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
@@ -1007,11 +1007,10 @@ Public Class dlgLinePlot
 
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        ucr1stFactorReceiver.SetRCode(Nothing)
+        'ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
             Case strFacetWrap
                 ucr1stFactorReceiver.ChangeParameterName("rows")
-                'ucr1stFactorReceiver.SetParameterPosition(1)
                 ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
             Case strFacetCol, strFacetColAll
                 ucr1stFactorReceiver.ChangeParameterName("cols")
@@ -1023,7 +1022,6 @@ Public Class dlgLinePlot
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
-
         If bNotSubdialogue Then
             clsFacetFunction.ClearParameters()
         End If
