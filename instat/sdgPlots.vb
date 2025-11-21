@@ -3138,34 +3138,29 @@ Public Class sdgPlots
         'The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
         If bRCodeSet Then
             FacetsNumberOfRowsOrColumns()
+            clsFacetFunction.RemoveParameterByName("cols")
+            clsFacetFunction.RemoveParameterByName("facets")
             If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
                 'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
                 'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
 
-                'ucr1stFactorReceiver.SetParameterPosition(1)
-                'ucr2ndFactorReceiver.SetParameterPosition(0)
-                'clsFacetFunction.RemoveParameterByName("rows")
-                'clsFacetFunction.RemoveParameterByName("cols")
-                'clsFacetVariablesOperator.RemoveParameter(ucr2ndFactorReceiver.GetParameter())
                 If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
-                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
                     clsFacetFunction.RemoveParameterByName("cols")
                 ElseIf (rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked)) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
-                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
+                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     If rdoVertical.Checked Then
-                        clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=0)
-                        'ucr1stFactorReceiver.SetParameterPosition(0)
-                        'ucr2ndFactorReceiver.SetParameterPosition(1)
-                        'ucr2ndFactorReceiver.SetParameterValue(".")
-                        'clsFacetVariablesOperator.AddParameter(ucr2ndFactorReceiver.GetParameter())
+                        clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                        clsFacetFunction.RemoveParameterByName("rows")
                     End If
                     clsFacetFunction.RemoveParameterByName("dir")
                 End If
