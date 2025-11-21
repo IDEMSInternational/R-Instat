@@ -908,7 +908,7 @@ Public Class dlgLinePlot
             ucrInputStation.SetName(strFacetWrap)
         End If
         bNotSubdialogue = True
-
+        bRowsAndCols = False
         bResetSubdialog = False
     End Sub
 
@@ -999,7 +999,6 @@ Public Class dlgLinePlot
                 ucrInputStation.SetName(strNone)
             End If
         End If
-        bRowsAndCols = True
         UpdateParameters()
         AddRemoveFacets()
         AddRemoveGroupBy()
@@ -1077,9 +1076,12 @@ Public Class dlgLinePlot
 
         If bCol OrElse bColAll Then
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=1)
+        ElseIf bRowsAndCols Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
         Else
             clsFacetFunction.RemoveParameterByName("cols")
         End If
+
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
