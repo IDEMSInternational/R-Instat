@@ -66,6 +66,7 @@ Public Class dlgLinePlot
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
     Private clsVarsFunction As New RFunction
+    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
 
@@ -78,6 +79,9 @@ Public Class dlgLinePlot
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
+    Private bRowsAndCols As Boolean = False
+
+    Private bNotSubdialogue As Boolean = False
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geom_line"
@@ -408,14 +412,14 @@ Public Class dlgLinePlot
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
-        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
         ucr1stFactorReceiver.Selector = ucrLinePlotSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.bWithQuotes = False
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.SetValuesToIgnore({"."})
-        ucr1stFactorReceiver.SetParameterPosition(1)
+        ucr1stFactorReceiver.SetParameterPosition(0)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
@@ -504,6 +508,8 @@ Public Class dlgLinePlot
         clsDummyFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
         clsVarsFunction = New RFunction
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
 
@@ -558,14 +564,17 @@ Public Class dlgLinePlot
         clsSlopeThemeFunction.SetRCommand("slopegraph_theme")
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+        clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
 
         clsFacetVariablesOperator.SetOperation("~")
         clsFacetVariablesOperator.bForceIncludeOperation = True
         clsFacetVariablesOperator.bBrackets = False
 
-        clsVarsFunction.SetPackageName("ggplot2")
-        clsVarsFunction.SetRCommand("vars")
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -665,6 +674,8 @@ Public Class dlgLinePlot
         ucrChkSlopeLabelOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeTextOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
+
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset)
 
         If bReset Then
             ucrInputMethod.SetRCode(clsGeomSmoothFunction, bReset)
@@ -874,13 +885,30 @@ Public Class dlgLinePlot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                                clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
+                    clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction,
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
-        clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
+        bNotSubdialogue = False
+        bRowsAndCols = clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols")
+        If clsFacetFunction.strRCommand = "facet_grid" Then
+            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("margin") Then
+                ucrInputStation.SetName(strFacetRowAll)
+            ElseIf clsFacetFunction.ContainsParameter("rows") Then
+                ucrInputStation.SetName(strFacetRow)
+            End If
+
+            If clsFacetFunction.ContainsParameter("cols") AndAlso clsFacetFunction.ContainsParameter("margin") Then
+                ucrInputStation.SetName(strFacetColAll)
+            ElseIf clsFacetFunction.ContainsParameter("cols") Then
+                ucrInputStation.SetName(strFacetCol)
+            End If
+        Else
+            ucrInputStation.SetName(strFacetWrap)
+        End If
+        bNotSubdialogue = True
+        bRowsAndCols = False
         bResetSubdialog = False
     End Sub
 
@@ -977,24 +1005,18 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub UpdateParameters()
-        clsFacetVariablesOperator.RemoveParameterByName("var1")
+
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        ucr1stFactorReceiver.SetRCode(Nothing)
-        Select Case ucrInputStation.GetText()
-            Case strFacetWrap
-                ucr1stFactorReceiver.ChangeParameterName("var1")
-                ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
-            Case strFacetCol, strFacetColAll
-                ucr1stFactorReceiver.ChangeParameterName("cols" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
-            Case strFacetRow, strFacetRowAll
-                ucr1stFactorReceiver.ChangeParameterName("rows" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
-        End Select
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
+
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
+        If bNotSubdialogue Then
+            clsFacetFunction.ClearParameters()
+        End If
+
         bUpdatingParameters = False
     End Sub
 
@@ -1009,6 +1031,7 @@ Public Class dlgLinePlot
             Exit Sub
         End If
         clsBaseOperator.RemoveParameterByName("facets")
+
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
@@ -1029,6 +1052,9 @@ Public Class dlgLinePlot
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+        Else
+            clsFacetFunction.RemoveParameterByName("facets")
         End If
 
         If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
@@ -1043,16 +1069,19 @@ Public Class dlgLinePlot
         End If
 
         If bRow OrElse bRowAll Then
-            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
         Else
             clsFacetFunction.RemoveParameterByName("rows")
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=1)
+        ElseIf bRowsAndCols Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
         Else
             clsFacetFunction.RemoveParameterByName("cols")
         End If
+
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
