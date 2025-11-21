@@ -486,7 +486,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(146, 232)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(134, 236)
         Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
