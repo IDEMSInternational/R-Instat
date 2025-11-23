@@ -239,8 +239,7 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 strExpected &= lstBeforeScripts(i) & vbLf
-                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(lstBeforeScripts(i))
-                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                AddToScriptWindow(lstBeforeScripts(i), bIsQuarto)
             End If
         Next
 
@@ -255,8 +254,7 @@ Public Class ucrButtons
             frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
             strExpected &= clsRsyntax.GetScript() & vbLf
-            Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(clsRsyntax.GetScript())
-            frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            AddToScriptWindow(clsRsyntax.GetScript(), bIsQuarto)
         End If
 
         'Run additional after codes
@@ -273,8 +271,7 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
                 strExpected &= lstAfterScripts(i) & vbLf
-                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(lstAfterScripts(i))
-                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                AddToScriptWindow(lstAfterScripts(i), bIsQuarto)
             End If
         Next
 
@@ -300,8 +297,7 @@ Public Class ucrButtons
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
             Else
                 strExpected &= clsRemoveFunc.ToScript()
-                Dim strScript As String = frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(clsRemoveFunc.ToScript())
-                frmMain.AddToScriptWindow(strScript, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                AddToScriptWindow(clsRemoveFunc.ToScript(), bIsQuarto)
             End If
         End If
 
@@ -349,6 +345,11 @@ Public Class ucrButtons
             strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
         End If
         bLoadInProgress = False
+    End Sub
+
+    Private Sub AddToScriptWindow(strScript As String, bIsQuarto As Boolean)
+        Dim strCleaned As String = If(bIsQuarto, frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(strScript), strScript)
+        frmMain.AddToScriptWindow(strCleaned, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
     End Sub
 
     Private Sub SetDefaults()
