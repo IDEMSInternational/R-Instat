@@ -406,6 +406,12 @@
     <Compile Include="frmCustomMessageBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmOkYesNo.Designer.vb">
+      <DependentUpon>frmOkYesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOkYesNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAdditionalCondition.Designer.vb">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </Compile>
@@ -3618,6 +3624,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomMessageBox.resx">
+      <DependentUpon>frmCustomMessageBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOkYesNo.resx">
+      <DependentUpon>frmOkYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAdditionalCondition.resx">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>

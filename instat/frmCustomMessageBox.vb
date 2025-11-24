@@ -22,13 +22,32 @@ Imports System.Media
 ''' </summary>
 Public Class frmCustomMessageBox
     Inherits Form
-
     Private lblMessage As Label
-    Private btnButton1 As Button
-    Private btnButton2 As Button
-    Private btnButton3 As Button
     Private picIcon As PictureBox
     Private _dialogResult As DialogResult = DialogResult.None
+    ' ==== Layout Constants ====
+    Private Const ICON_PRESENT_WIDTH As Integer = 50
+    Private Const ICON_ABSENT_WIDTH As Integer = 10
+
+    Private Const MESSAGE_WIDTH As Integer = 300
+    Private Const FORM_HORIZONTAL_PADDING As Integer = 30
+    Private Const DEFAULT_FORM_HEIGHT As Integer = 150
+    Private Const EXTRA_HEIGHT_FOR_TEXT As Integer = 100
+    Private Const MAX_TEXT_HEIGHT_BEFORE_GROW As Integer = 60
+
+    Private Const ICON_SIZE As Integer = 32
+    Private Const ICON_MARGIN_LEFT As Integer = 10
+    Private Const ICON_MARGIN_TOP As Integer = 20
+
+    Private Const MESSAGE_MARGIN_TOP As Integer = 20
+
+    'Private Const BUTTON_WIDTH As Integer = 75
+    'Private Const BUTTON_HEIGHT As Integer = 23
+    'Private Const BUTTON_BOTTOM_MARGIN As Integer = 35
+    'Private Const BUTTON_SPACING As Integer = 6
+    Friend WithEvents cmdYes As ucrSplitButton
+    Friend WithEvents cmdOk As Button
+    Friend WithEvents cmdNo As Button
 
     ''' <summary>
     ''' Displays a custom message box with translated buttons.
@@ -59,7 +78,6 @@ Public Class frmCustomMessageBox
     End Function
 
     Private Sub SetupDialog(prompt As String, title As String, buttons As MessageBoxButtons, icon As MessageBoxIcon)
-        ' Initialize form with Windows standard message box styling
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -69,40 +87,34 @@ Public Class frmCustomMessageBox
         Me.BackColor = SystemColors.Control
         Me.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
 
-        ' Calculate form size based on message length
-        Dim iconWidth As Integer = If(icon <> MessageBoxIcon.None, 50, 10)
-        Dim messageWidth As Integer = 300
-        Dim formWidth As Integer = iconWidth + messageWidth + 30
-        Dim formHeight As Integer = 150
+        Dim iconWidth As Integer = If(icon <> MessageBoxIcon.None, ICON_PRESENT_WIDTH, ICON_ABSENT_WIDTH)
+        Dim formWidth As Integer = iconWidth + MESSAGE_WIDTH + FORM_HORIZONTAL_PADDING
+        Dim formHeight As Integer = DEFAULT_FORM_HEIGHT
 
-        ' Adjust size for longer messages
         Using g As Graphics = Me.CreateGraphics()
-            Dim textSize As SizeF = g.MeasureString(prompt, Me.Font, messageWidth)
-            If textSize.Height > 60 Then
-                formHeight = CInt(textSize.Height) + 100
+            Dim textSize As SizeF = g.MeasureString(prompt, Me.Font, MESSAGE_WIDTH)
+            If textSize.Height > MAX_TEXT_HEIGHT_BEFORE_GROW Then
+                formHeight = CInt(textSize.Height) + EXTRA_HEIGHT_FOR_TEXT
             End If
         End Using
 
         Me.ClientSize = New Size(formWidth, formHeight)
 
-        ' Create and configure label for message
         lblMessage = New Label()
         lblMessage.Text = prompt
         lblMessage.AutoSize = False
-        lblMessage.Size = New Size(messageWidth, formHeight - 60)
-        lblMessage.Location = New Point(iconWidth, 20)
+        lblMessage.Size = New Size(MESSAGE_WIDTH, formHeight - 60)
+        lblMessage.Location = New Point(iconWidth, MESSAGE_MARGIN_TOP)
         lblMessage.TextAlign = ContentAlignment.MiddleLeft
         lblMessage.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
         Me.Controls.Add(lblMessage)
 
-        ' Create and configure icon (if specified)
         If icon <> MessageBoxIcon.None Then
             picIcon = New PictureBox()
-            picIcon.Size = New Size(32, 32)
-            picIcon.Location = New Point(10, 20)
+            picIcon.Size = New Size(ICON_SIZE, ICON_SIZE)
+            picIcon.Location = New Point(ICON_MARGIN_LEFT, ICON_MARGIN_TOP)
             picIcon.SizeMode = PictureBoxSizeMode.Normal
 
-            ' Set icon based on type
             Select Case icon
                 Case MessageBoxIcon.Information
                     picIcon.Image = SystemIcons.Information.ToBitmap()
@@ -117,139 +129,70 @@ Public Class frmCustomMessageBox
             Me.Controls.Add(picIcon)
         End If
 
-        ' Setup buttons based on MessageBoxButtons type
         SetupButtons(buttons)
     End Sub
 
+
     Private Sub SetupButtons(buttons As MessageBoxButtons)
-        Dim buttonWidth As Integer = 75
-        Dim buttonHeight As Integer = 23
-        Dim buttonY As Integer = Me.ClientSize.Height - 35
-        Dim spacing As Integer = 6
 
         Select Case buttons
+
             Case MessageBoxButtons.OK
-                ' Single OK button - centered
-                btnButton1 = CreateButton(Translations.GetTranslation("OK"), DialogResult.OK)
-                btnButton1.Location = New Point((Me.ClientSize.Width - buttonWidth) \ 2, buttonY)
-                btnButton1.Size = New Size(buttonWidth, buttonHeight)
-                Me.Controls.Add(btnButton1)
-                Me.AcceptButton = btnButton1
-
-            Case MessageBoxButtons.OKCancel
-                ' OK and Cancel buttons - right aligned
-                btnButton1 = CreateButton(Translations.GetTranslation("OK"), DialogResult.OK)
-                btnButton2 = CreateButton(Translations.GetTranslation("Cancel"), DialogResult.Cancel)
-
-                Dim totalWidth As Integer = buttonWidth * 2 + spacing
-                Dim startX As Integer = Me.ClientSize.Width - totalWidth - 15
-
-                btnButton1.Location = New Point(startX, buttonY)
-                btnButton1.Size = New Size(buttonWidth, buttonHeight)
-                btnButton2.Location = New Point(startX + buttonWidth + spacing, buttonY)
-                btnButton2.Size = New Size(buttonWidth, buttonHeight)
-
-                Me.Controls.Add(btnButton1)
-                Me.Controls.Add(btnButton2)
-                Me.AcceptButton = btnButton1
-                Me.CancelButton = btnButton2
+                cmdYes.Visible = False
+                cmdNo.Visible = False
+                cmdOk.Visible = True
+              '  cmdOk = CreateButton(Translations.GetTranslation("OK"), DialogResult.OK)
 
             Case MessageBoxButtons.YesNo
-                ' Yes and No buttons - right aligned
-                btnButton1 = CreateButton(Translations.GetTranslation("Yes"), DialogResult.Yes)
-                btnButton2 = CreateButton(Translations.GetTranslation("No"), DialogResult.No)
+                cmdYes.Visible = True
+                cmdNo.Visible = True
+                cmdOk.Visible = False
+                ' cmdYes = CreateButton(Translations.GetTranslation("Yes"), DialogResult.Yes)
+                '   cmdNo = CreateButton(Translations.GetTranslation("No"), DialogResult.No)
 
-                Dim totalWidth As Integer = buttonWidth * 2 + spacing
-                Dim startX As Integer = Me.ClientSize.Width - totalWidth - 15
-
-                btnButton1.Location = New Point(startX, buttonY)
-                btnButton1.Size = New Size(buttonWidth, buttonHeight)
-                btnButton2.Location = New Point(startX + buttonWidth + spacing, buttonY)
-                btnButton2.Size = New Size(buttonWidth, buttonHeight)
-
-                Me.Controls.Add(btnButton1)
-                Me.Controls.Add(btnButton2)
-                Me.AcceptButton = btnButton1
-                Me.CancelButton = btnButton2
-
-            Case MessageBoxButtons.YesNoCancel
-                ' Yes, No, and Cancel buttons - right aligned
-                btnButton1 = CreateButton(Translations.GetTranslation("Yes"), DialogResult.Yes)
-                btnButton2 = CreateButton(Translations.GetTranslation("No"), DialogResult.No)
-                btnButton3 = CreateButton(Translations.GetTranslation("Cancel"), DialogResult.Cancel)
-
-                Dim totalWidth As Integer = buttonWidth * 3 + spacing * 2
-                Dim startX As Integer = Me.ClientSize.Width - totalWidth - 15
-
-                btnButton1.Location = New Point(startX, buttonY)
-                btnButton1.Size = New Size(buttonWidth, buttonHeight)
-                btnButton2.Location = New Point(startX + buttonWidth + spacing, buttonY)
-                btnButton2.Size = New Size(buttonWidth, buttonHeight)
-                btnButton3.Location = New Point(startX + buttonWidth * 2 + spacing * 2, buttonY)
-                btnButton3.Size = New Size(buttonWidth, buttonHeight)
-
-                Me.Controls.Add(btnButton1)
-                Me.Controls.Add(btnButton2)
-                Me.Controls.Add(btnButton3)
-                Me.AcceptButton = btnButton1
-                Me.CancelButton = btnButton3
-
-            Case MessageBoxButtons.RetryCancel
-                ' Retry and Cancel buttons - right aligned
-                btnButton1 = CreateButton(Translations.GetTranslation("Retry"), DialogResult.Retry)
-                btnButton2 = CreateButton(Translations.GetTranslation("Cancel"), DialogResult.Cancel)
-
-                Dim totalWidth As Integer = buttonWidth * 2 + spacing
-                Dim startX As Integer = Me.ClientSize.Width - totalWidth - 15
-
-                btnButton1.Location = New Point(startX, buttonY)
-                btnButton1.Size = New Size(buttonWidth, buttonHeight)
-                btnButton2.Location = New Point(startX + buttonWidth + spacing, buttonY)
-                btnButton2.Size = New Size(buttonWidth, buttonHeight)
-
-                Me.Controls.Add(btnButton1)
-                Me.Controls.Add(btnButton2)
-                Me.AcceptButton = btnButton1
-                Me.CancelButton = btnButton2
-
-            Case MessageBoxButtons.AbortRetryIgnore
-                ' Abort, Retry, and Ignore buttons - right aligned
-                btnButton1 = CreateButton(Translations.GetTranslation("Abort"), DialogResult.Abort)
-                btnButton2 = CreateButton(Translations.GetTranslation("Retry"), DialogResult.Retry)
-                btnButton3 = CreateButton(Translations.GetTranslation("Ignore"), DialogResult.Ignore)
-
-                Dim totalWidth As Integer = buttonWidth * 3 + spacing * 2
-                Dim startX As Integer = Me.ClientSize.Width - totalWidth - 15
-
-                btnButton1.Location = New Point(startX, buttonY)
-                btnButton1.Size = New Size(buttonWidth, buttonHeight)
-                btnButton2.Location = New Point(startX + buttonWidth + spacing, buttonY)
-                btnButton2.Size = New Size(buttonWidth, buttonHeight)
-                btnButton3.Location = New Point(startX + buttonWidth * 2 + spacing * 2, buttonY)
-                btnButton3.Size = New Size(buttonWidth, buttonHeight)
-
-                Me.Controls.Add(btnButton1)
-                Me.Controls.Add(btnButton2)
-                Me.Controls.Add(btnButton3)
-                Me.AcceptButton = btnButton2
         End Select
     End Sub
 
-    Private Function CreateButton(text As String, result As DialogResult) As Button
-        Dim btn As New Button()
-        btn.Text = text
-        btn.Tag = result
-        btn.FlatStyle = FlatStyle.System
-        btn.UseVisualStyleBackColor = True
-        btn.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
-        btn.AutoSize = False
-        AddHandler btn.Click, AddressOf Button_Click
-        Return btn
-    End Function
+    Private Sub cmdOK_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        _dialogResult = DialogResult.OK
+        Me.Close()
+    End Sub
+
+    Private Sub cmdYes_Click(sender As Object, e As EventArgs) Handles cmdYes.Click
+        _dialogResult = DialogResult.Yes
+        Me.Close()
+    End Sub
+
+    Private Sub cmdNo_Click(sender As Object, e As EventArgs) Handles cmdNo.Click
+        _dialogResult = DialogResult.No
+        Me.Close()
+    End Sub
+
+
+
 
     Private Sub Button_Click(sender As Object, e As EventArgs)
         Dim btn As Button = DirectCast(sender, Button)
         _dialogResult = DirectCast(btn.Tag, DialogResult)
         Me.Close()
+    End Sub
+
+    Private Sub InitializeComponent()
+
+        'frmCustomMessageBox
+        '
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.cmdOk)
+        Me.Controls.Add(Me.cmdYes)
+        Me.Controls.Add(Me.cmdNo)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "frmCustomMessageBox"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
     End Sub
 End Class
