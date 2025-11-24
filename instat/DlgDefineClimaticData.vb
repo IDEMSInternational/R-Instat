@@ -176,10 +176,7 @@ Public Class DlgDefineClimaticData
 
     Private Sub SetRCodesforReceivers(bReset As Boolean)
         Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
-        Next
-        For Each ucrTempReceiver In lstReceiverYear
+        For Each ucrTempReceiver In lstReceivers.Concat(lstReceiverYear)
             ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
         Next
         For Each ucrTempReceiver In lstNewReceivers
