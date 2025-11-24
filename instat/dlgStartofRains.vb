@@ -200,15 +200,15 @@ Public Class dlgStartofRains
         'save
         ucrInputNewDoyColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDoyColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewDoyColumnName.SetName("start_rain")
+        ucrInputNewDoyColumnName.SetName("start")
 
         ucrInputNewDateColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDateColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewDateColumnName.SetName("start_rain_date")
+        ucrInputNewDateColumnName.SetName("start_d")
 
         ucrInputNewStatusColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewStatusColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewStatusColumnName.SetName("start_rain_status")
+        ucrInputNewStatusColumnName.SetName("start_s")
 
         ucrChkAsDoy.AddToLinkedControls(ucrInputNewDoyColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAsDate.AddToLinkedControls(ucrInputNewDateColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -238,9 +238,9 @@ Public Class dlgStartofRains
         Dim strAboveThreshold As String = "above_threshold"
         Dim strRollSumNumberDryPeriod As String = "n_dry_period"
         Dim strRollSumRain As String = "roll_sum_rain"
-        Dim strStartDate As String = "start_rain_date"
-        Dim strStartStatus As String = "start_rain_status"
-        Dim strStartDoy As String = "start_rain"
+        Dim strStartDate As String = "start_d"
+        Dim strStartStatus As String = "start_s"
+        Dim strStartDoy As String = "start"
         Dim strRollSumRainDryPeriod As String = "roll_sum_rain_dry_period"
         Dim strYearType As String = "year_type"
         Dim strStationType As String = "station_type"
@@ -868,7 +868,7 @@ Public Class dlgStartofRains
         clsStatRainStatus2Function.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsStatRainStatus2Function.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseStatus2Function, iPosition:=1)
         clsStatRainStatus2Function.AddParameter("calculated_from", strcalculatedfromlist, iPosition:=2)
-        clsStatRainStatus2Function.AddParameter("result_name", Chr(34) & "start_rain_status" & Chr(34), iPosition:=3)
+        clsStatRainStatus2Function.AddParameter("result_name", Chr(34) & "start_s" & Chr(34), iPosition:=3)
         clsStatRainStatus2Function.AddParameter("save", "2", iPosition:=4)
         clsStatRainStatus2Function.SetAssignTo(strStartStatus2)
         clsIfElseStatus2Function.SetRCommand("ifelse")
@@ -1423,9 +1423,9 @@ Public Class dlgStartofRains
         End If
         clsVectorConcat2Function.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
 
-        AddRemoveParam(ucrChkAsDoy, ucrInputNewDoyColumnName, "start_rain", 2)
-        AddRemoveParam(ucrChkAsDate, ucrInputNewDateColumnName, "start_rain_date", 3)
-        AddRemoveParam(ucrChkStatus, ucrInputNewStatusColumnName, "start_rain_status", 4)
+        AddRemoveParam(ucrChkAsDoy, ucrInputNewDoyColumnName, "start", 2)
+        AddRemoveParam(ucrChkAsDate, ucrInputNewDateColumnName, "start_d", 3)
+        AddRemoveParam(ucrChkStatus, ucrInputNewStatusColumnName, "start_s", 4)
 
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
     End Sub
