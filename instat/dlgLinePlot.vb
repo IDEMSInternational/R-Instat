@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.CodeDom
 Imports instat.Translations
 
 Public Class dlgLinePlot
@@ -76,10 +77,11 @@ Public Class dlgLinePlot
     Private ReadOnly strFacetCol As String = "Facet Column"
     Private ReadOnly strFacetRowAll As String = "Facet Row + O"
     Private ReadOnly strFacetColAll As String = "Facet Col + O"
+    Private ReadOnly strFacetRowAndCol As String = "Facet Row + Col"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
-    Private bRowsAndCols As Boolean = False
+    ' Private bRowsAndCols As Boolean = False
 
     Private bNotSubdialogue As Boolean = False
 
@@ -422,7 +424,8 @@ Public Class dlgLinePlot
         ucr1stFactorReceiver.SetParameterPosition(0)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strNone})
+        ' ttFacetStation.SetToolTip(ucrInputStation, "Facet Row + Col can only be used if the two receivers in the Plot Options are filled ")
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -891,24 +894,28 @@ Public Class dlgLinePlot
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bNotSubdialogue = False
-        bRowsAndCols = clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols")
+        'bRowsAndCols = clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols")
         If clsFacetFunction.strRCommand = "facet_grid" Then
-            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("margin") Then
+            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("margin") AndAlso Not clsFacetFunction.ContainsParameter("cols") Then
                 ucrInputStation.SetName(strFacetRowAll)
             ElseIf clsFacetFunction.ContainsParameter("rows") Then
                 ucrInputStation.SetName(strFacetRow)
             End If
 
-            If clsFacetFunction.ContainsParameter("cols") AndAlso clsFacetFunction.ContainsParameter("margin") Then
+            If clsFacetFunction.ContainsParameter("cols") AndAlso clsFacetFunction.ContainsParameter("margin") AndAlso Not clsFacetFunction.ContainsParameter("rows") Then
                 ucrInputStation.SetName(strFacetColAll)
             ElseIf clsFacetFunction.ContainsParameter("cols") Then
                 ucrInputStation.SetName(strFacetCol)
             End If
+
+            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
+                ucrInputStation.SetName(strFacetRowAndCol)
+            End If
         Else
-            ucrInputStation.SetName(strFacetWrap)
+                ucrInputStation.SetName(strFacetWrap)
         End If
         bNotSubdialogue = True
-        bRowsAndCols = False
+        'bRowsAndCols = False
         bResetSubdialog = False
     End Sub
 
@@ -980,7 +987,7 @@ Public Class dlgLinePlot
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
             If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
-            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll OrElse strChangedText = strFacetRowAndCol) _
             AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
             AndAlso ucrInputStation.GetText() = strChangedText Then
 
@@ -990,11 +997,12 @@ Public Class dlgLinePlot
             End If
             If (strChangedText = strFacetWrap AndAlso
             (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
-            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll)) _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll OrElse ucrInputStation.GetText = strFacetRowAndCol)) _
         OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
             AndAlso ucrInputStation.GetText = strFacetWrap) _
         OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
-            AndAlso ucrInputStation.GetText = strFacetWrap) Then
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+             OrElse (strChangedText = strFacetRowAndCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
 
                 ucrInputStation.SetName(strNone)
             End If
@@ -1026,6 +1034,7 @@ Public Class dlgLinePlot
         Dim bRow As Boolean = False
         Dim bColAll As Boolean = False
         Dim bRowAll As Boolean = False
+        Dim bRowsAndCols As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
@@ -1044,6 +1053,8 @@ Public Class dlgLinePlot
                     bColAll = True
                 Case strFacetRowAll
                     bRowAll = True
+                Case strFacetRowAndCol
+                    bRowsAndCols = True
             End Select
         End If
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
@@ -1057,7 +1068,7 @@ Public Class dlgLinePlot
             clsFacetFunction.RemoveParameterByName("facets")
         End If
 
-        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll OrElse bRowsAndCols Then
             clsFacetFunction.SetRCommand("facet_grid")
             clsFacetFunction.RemoveParameterByName("facets")
         End If
@@ -1070,16 +1081,13 @@ Public Class dlgLinePlot
 
         If bRow OrElse bRowAll Then
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-        Else
-            clsFacetFunction.RemoveParameterByName("rows")
-        End If
-
-        If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=1)
-        ElseIf bRowsAndCols Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
-        Else
             clsFacetFunction.RemoveParameterByName("cols")
+        ElseIf bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=1)
+            clsFacetFunction.RemoveParameterByName("rows")
+        ElseIf bRowsAndCols Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
         End If
 
     End Sub
@@ -1106,14 +1114,6 @@ Public Class dlgLinePlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
-                        Dim i As Integer = clsGroupByFunction.iParameterCount
-                        For Each clsTempParam As RParameter In clsVarsFunction.clsParameters
-                            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
-                                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
-                                i = i + 1
-                            End If
-                        Next
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -1316,6 +1316,14 @@ Public Class dlgLinePlot
 
     Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged, ucrChkWithSE.ControlValueChanged
         AddRemoveBestFit()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYMax.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
     End Sub
 
     Private Sub ucrChkAddLineLineRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLineLineRange.ControlValueChanged

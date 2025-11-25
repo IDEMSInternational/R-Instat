@@ -2392,24 +2392,31 @@ Public Class sdgPlots
 
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
-        If clsFacetFunction.ContainsParameter("facets") Then
-            clsTempParam = clsFacetFunction.GetParameter("facets")
-            If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing AndAlso clsNewFacetVariablesOperator IsNot Nothing Then
-                clsFacetVariablesOperator = clsNewFacetVariablesOperator
-            Else
-                clsFacetVariablesOperator = New ROperator("~")
-            End If
-        Else
-            clsFacetVariablesOperator = New ROperator("~")
-        End If
-        clsFacetVariablesOperator.bForceIncludeOperation = True
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
+
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        'If clsFacetFunction.ContainsParameter("facets") Then
+        '    clsTempParam = clsFacetFunction.GetParameter("facets")
+        '    If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing AndAlso clsNewFacetVariablesOperator IsNot Nothing Then
+        '        clsFacetVariablesOperator = clsNewFacetVariablesOperator
+        '    Else
+        '        clsFacetVariablesOperator = New ROperator("~")
+        '    End If
+        'Else
+        '    clsFacetVariablesOperator = New ROperator("~")
+        'End If
+        'clsFacetVariablesOperator.bForceIncludeOperation = True
+
+        ' clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
-
 
         clsScaleFillColorblindFunction = New RFunction
         clsScaleFillColorblindFunction.SetPackageName("ggthemes")
@@ -2588,7 +2595,10 @@ Public Class sdgPlots
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
 
         ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
-        ucr2ndFactorReceiver.SetRCode(clsColVarsFunction, bReset, bCloneIfNeeded:=True)
+        ucr2ndFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
+
+        'ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, ucr1stFactorReceiver.GetParameter(), iAdditionalPairNo:=1)
+        ' ucr2ndFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, ucr2ndFactorReceiver.GetParameter(), iAdditionalPairNo:=1)
 
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
@@ -3140,35 +3150,55 @@ Public Class sdgPlots
             FacetsNumberOfRowsOrColumns()
             clsFacetFunction.RemoveParameterByName("cols")
             clsFacetFunction.RemoveParameterByName("facets")
-            If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
+            If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
                 'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
                 'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
 
-                If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
+                If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
                     clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    clsFacetFunction.RemoveParameterByName("cols")
-                ElseIf (rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked)) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
-                    clsFacetFunction.SetRCommand("facet_wrap")
-                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    clsFacetFunction.RemoveParameterByName("cols")
+                    If rdoHorizontal.Checked Then
+                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                    Else
+                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                    End If
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
-                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    If rdoVertical.Checked Then
+                    If rdoHorizontal.Checked Then
+                        clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                        clsFacetFunction.RemoveParameterByName("cols")
+                    Else
                         clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                         clsFacetFunction.RemoveParameterByName("rows")
                     End If
                     clsFacetFunction.RemoveParameterByName("dir")
                 End If
             ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
-                clsFacetFunction.SetRCommand("facet_grid")
-                clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
-                clsFacetFunction.RemoveParameterByName("dir")
+                If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
+                    clsFacetFunction.SetRCommand("facet_wrap")
+                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                    clsRowVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                    If rdoHorizontal.Checked Then
+                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                    Else
+                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                    End If
+                    clsFacetFunction.RemoveParameterByName("rows")
+                    clsFacetFunction.RemoveParameterByName("cols")
+                Else 'If ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse Not ucrChkNoOfRowsOrColumns.Visible Then
+                    clsFacetFunction.SetRCommand("facet_grid")
+                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
+                    clsRowVarsFunction.ClearParameters()
+                    clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
+                    ' clsColVarsFunction.ClearParameters()
+                    clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
+                    clsFacetFunction.RemoveParameterByName("dir")
+                    'clsRowVarsFunction.RemoveParameterByName("rows")
+                    'clsRowVarsFunction.RemoveParameterByName("cols")
+                End If
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
                 clsFacetFunction.RemoveParameterByName("rows")
