@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmOkYesNo
     Inherits System.Windows.Forms.Form
 
     'Form replaces the Dispose method to clean up the list of components.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,12 @@ Partial Class frmOkYesNo
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdYes = New instat.ucrSplitButton()
         Me.cmdNo = New System.Windows.Forms.Button()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdOk
@@ -58,11 +59,21 @@ Partial Class frmOkYesNo
         Me.cmdNo.Text = "No"
         Me.cmdNo.UseVisualStyleBackColor = True
         '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.Location = New System.Drawing.Point(20, 20)
+        Me.lblMessage.MaximumSize = New System.Drawing.Size(250, 0)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(0, 13)
+        Me.lblMessage.TabIndex = 3
+        '
         'frmOkYesNo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdYes)
         Me.Controls.Add(Me.cmdNo)
@@ -79,4 +90,5 @@ Partial Class frmOkYesNo
     Friend WithEvents cmdOk As Button
     Friend WithEvents cmdYes As ucrSplitButton
     Friend WithEvents cmdNo As Button
+    Friend WithEvents lblMessage As Label
 End Class

@@ -154,7 +154,7 @@ Public Class Translations
         ' Route through custom message box to translate buttons
         Dim msgBoxButtons As MessageBoxButtons = ConvertMsgBoxStyleToButtons(Buttons)
         Dim msgBoxIcon As MessageBoxIcon = ConvertMsgBoxStyleToIcon(Buttons)
-        Dim customResult As DialogResult = frmCustomMessageBox.Show(translatedPrompt, translatedTitle, msgBoxButtons, msgBoxIcon)
+        Dim customResult As DialogResult = frmOkYesNo.ShowDialog(translatedPrompt, translatedTitle, msgBoxButtons, msgBoxIcon)
         Return ConvertDialogResultToMsgBoxResult(customResult)
     End Function
 
@@ -199,7 +199,7 @@ Public Class Translations
             translatedTitle = GetTranslation(Title)
         End If
 
-        Return frmCustomMessageBox.Show(translatedPrompt, translatedTitle, Buttons, Icon)
+        Return frmOkYesNo.ShowDialog(translatedPrompt, translatedTitle, Buttons, Icon)
     End Function
 
     '''--------------------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ Imports System.Media
 Imports instat.Translations
 
 Public Class frmOkYesNo
-    Private lblMessage As Label
+    ' Private lblMessage As Label
     Private picIcon As PictureBox
     Private _dialogResult As DialogResult = DialogResult.None
 
@@ -27,56 +27,140 @@ Public Class frmOkYesNo
         autoTranslate(Me)
     End Sub
 
-    Public Sub SetupDialog(prompt As String, title As String, buttons As MessageBoxButtons)
-        Me.FormBorderStyle = FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.StartPosition = FormStartPosition.CenterParent
-        Me.ShowInTaskbar = False
-        Me.Text = If(String.IsNullOrEmpty(title), "", title)
-        Me.BackColor = SystemColors.Control
-        Me.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
+    'Public Shared Function Show(prompt As String,
+    '                            title As String,
+    '                            buttons As MessageBoxButtons,
+    '                            icon As MessageBoxIcon) As DialogResult
 
-        Dim formWidth As Integer = 420
-        Dim formHeight As Integer = 150
+    '    Using frm As New frmOkYesNo()
 
-        Using g As Graphics = Me.CreateGraphics()
-            Dim textSize As SizeF = g.MeasureString(prompt, Me.Font, 360)
-            If textSize.Height > 60 Then
-                formHeight = CInt(textSize.Height) + 100
-            End If
-        End Using
+    '        frm.SetupDialog(prompt, title, buttons, icon)
 
-        Me.ClientSize = New Size(formWidth, formHeight)
+    '        ' Son système
+    '        Select Case icon
+    '            Case MessageBoxIcon.Error, MessageBoxIcon.Hand, MessageBoxIcon.Stop
+    '                SystemSounds.Hand.Play()
+    '            Case MessageBoxIcon.Warning, MessageBoxIcon.Exclamation
+    '                SystemSounds.Exclamation.Play()
+    '            Case MessageBoxIcon.Question
+    '                SystemSounds.Question.Play()
+    '            Case MessageBoxIcon.Information
+    '                SystemSounds.Asterisk.Play()
+    '        End Select
 
-        lblMessage = New Label()
+    '        frm.ShowDialog()
+    '        Return frm._dialogResult
+    '    End Using
+    'End Function
+
+    'form setup
+    Public Function ShowDialog(prompt As String,
+                               Optional title As String = "",
+                               Optional buttons As MessageBoxButtons = MessageBoxButtons.OK,
+                               Optional icon As MessageBoxIcon = MessageBoxIcon.None) As DialogResult
+
+        '=====Titre=====
+        Me.Text = title
+
+        '===== Message =====
         lblMessage.Text = prompt
-        lblMessage.AutoSize = False
-        lblMessage.Size = New Size(360, formHeight - 70)
-        lblMessage.Location = New Point(30, 15)
-        lblMessage.TextAlign = ContentAlignment.MiddleLeft
-        lblMessage.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
 
-        Me.Controls.Add(lblMessage)
+        '===== Ajuster automatiquement la taille =====
+        ResizeDialog(prompt)
 
-        ' Configuration des boutons
+        '===== Gérer les boutons =====
         SetupButtons(buttons)
+
+        '===== Jouer l’icône sonore =====
+        PlayIconSound(icon)
+
+        '===== Afficher =====
+        MyBase.ShowDialog()
+        Return _dialogResult
+    End Function
+
+    '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    ' Ajustement automatique de la fenêtre au texte
+    '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    Private Sub ResizeDialog(prompt As String)
+        Dim messageWidth As Integer = 360
+
+        Dim textSize As Size = TextRenderer.MeasureText(
+            prompt,
+            lblMessage.Font,
+            New Size(messageWidth, Integer.MaxValue),
+            TextFormatFlags.WordBreak
+        )
+
+        Dim neededHeight As Integer = textSize.Height + 150
+        If neededHeight < 180 Then neededHeight = 180
+
+        Me.ClientSize = New Size(420, neededHeight)
+        lblMessage.Size = New Size(messageWidth, neededHeight - 90)
     End Sub
 
+    '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    ' Boutons visibles selon MessageBoxButtons
+    '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     Private Sub SetupButtons(buttons As MessageBoxButtons)
+
+        cmdOk.Visible = False
+        cmdYes.Visible = False
+        cmdNo.Visible = False
+
         Select Case buttons
+
             Case MessageBoxButtons.OK
-                cmdYes.Visible = False
-                cmdNo.Visible = False
                 cmdOk.Visible = True
+                cmdOk.Left = (Me.ClientSize.Width - cmdOk.Width) \ 2
+
             Case MessageBoxButtons.YesNo
                 cmdYes.Visible = True
                 cmdNo.Visible = True
-                cmdOk.Visible = False
+
+                Dim totalWidth As Integer = cmdYes.Width + cmdNo.Width + 10
+                Dim startX As Integer = (Me.ClientSize.Width - totalWidth) \ 2
+
+                cmdYes.Left = startX
+                cmdNo.Left = startX + cmdYes.Width + 10
+
+            Case MessageBoxButtons.OKCancel
+                cmdOk.Visible = True
+                cmdNo.Visible = True
+                cmdNo.Text = Translations.GetTranslation("Cancel")
+
+                Dim totalWidth As Integer = cmdOk.Width + cmdNo.Width + 10
+                Dim startX As Integer = (Me.ClientSize.Width - totalWidth) \ 2
+
+                cmdOk.Left = startX
+                cmdNo.Left = startX + cmdOk.Width + 10
+
+        End Select
+
+        ' Position verticale des boutons
+        Dim y As Integer = Me.ClientSize.Height - 40
+        cmdOk.Top = y
+        cmdYes.Top = y
+        cmdNo.Top = y
+    End Sub
+
+    '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    ' Jouer le son Windows correspondant à l’icône
+    '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    Private Sub PlayIconSound(icon As MessageBoxIcon)
+        Select Case icon
+            Case MessageBoxIcon.Error
+                SystemSounds.Hand.Play()
+            Case MessageBoxIcon.Warning
+                SystemSounds.Exclamation.Play()
+            Case MessageBoxIcon.Question
+                SystemSounds.Question.Play()
+            Case MessageBoxIcon.Information
+                SystemSounds.Asterisk.Play()
         End Select
     End Sub
 
-    Private Sub cmdOK_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         _dialogResult = DialogResult.OK
         Me.Close()
     End Sub
