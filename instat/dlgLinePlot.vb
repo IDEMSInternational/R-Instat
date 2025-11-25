@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.CodeDom
 Imports instat.Translations
 
 Public Class dlgLinePlot
@@ -82,7 +81,6 @@ Public Class dlgLinePlot
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
-    ' Private bRowsAndCols As Boolean = False
 
     Private bNotSubdialogue As Boolean = False
 
@@ -425,7 +423,7 @@ Public Class dlgLinePlot
         ucr1stFactorReceiver.SetParameterPosition(0)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -894,14 +892,12 @@ Public Class dlgLinePlot
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bNotSubdialogue = False
-        'bRowsAndCols = clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols")
         If clsFacetFunction.strRCommand = "facet_grid" Then
             If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
                 If clsFacetFunction.ContainsParameter("margin") Then
-                    ucrInputStation.AddItems({strFacetRowAndColAll})
-                    ucrInputStation.SetText(strFacetRowAndColAll)
+                    ucrInputStation.SetName(strFacetRowAndColAll)
                 Else
-                    ucrInputStation.SetText(strFacetRowAndCol)
+                    ucrInputStation.SetName(strFacetRowAndCol)
                 End If
             ElseIf clsFacetFunction.ContainsParameter("rows") Then
                 If clsFacetFunction.ContainsParameter("margin") Then
@@ -920,7 +916,6 @@ Public Class dlgLinePlot
             ucrInputStation.SetName(strFacetWrap)
         End If
         bNotSubdialogue = True
-        'bRowsAndCols = False
         bResetSubdialog = False
     End Sub
 

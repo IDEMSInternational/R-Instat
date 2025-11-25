@@ -2398,20 +2398,6 @@ Public Class sdgPlots
         clsRowVarsFunction.SetPackageName("ggplot2")
         clsRowVarsFunction.SetRCommand("vars")
 
-        'If clsFacetFunction.ContainsParameter("facets") Then
-        '    clsTempParam = clsFacetFunction.GetParameter("facets")
-        '    If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing AndAlso clsNewFacetVariablesOperator IsNot Nothing Then
-        '        clsFacetVariablesOperator = clsNewFacetVariablesOperator
-        '    Else
-        '        clsFacetVariablesOperator = New ROperator("~")
-        '    End If
-        'Else
-        '    clsFacetVariablesOperator = New ROperator("~")
-        'End If
-        'clsFacetVariablesOperator.bForceIncludeOperation = True
-
-        ' clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
@@ -2597,7 +2583,6 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
         ucr2ndFactorReceiver.SetRCode(clsColVarsFunction, bReset, bCloneIfNeeded:=True)
 
-        ' ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, New RParameter("cols", 0), iAdditionalPairNo:=1)
         ucr2ndFactorReceiver.AddAdditionalCodeParameterPair(clsRowVarsFunction, New RParameter("cols", 1), iAdditionalPairNo:=1)
 
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
