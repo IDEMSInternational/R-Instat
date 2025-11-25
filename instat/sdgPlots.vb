@@ -2597,7 +2597,7 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
         ucr2ndFactorReceiver.SetRCode(clsColVarsFunction, bReset, bCloneIfNeeded:=True)
 
-        ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, New RParameter("cols", 0), iAdditionalPairNo:=1)
+        ' ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, New RParameter("cols", 0), iAdditionalPairNo:=1)
         ucr2ndFactorReceiver.AddAdditionalCodeParameterPair(clsRowVarsFunction, New RParameter("cols", 1), iAdditionalPairNo:=1)
 
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)

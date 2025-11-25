@@ -425,7 +425,7 @@ Public Class dlgLinePlot
         ucr1stFactorReceiver.SetParameterPosition(0)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -898,9 +898,10 @@ Public Class dlgLinePlot
         If clsFacetFunction.strRCommand = "facet_grid" Then
             If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
                 If clsFacetFunction.ContainsParameter("margin") Then
-                    ucrInputStation.SetName(strFacetRowAndColAll)
+                    ucrInputStation.AddItems({strFacetRowAndColAll})
+                    ucrInputStation.SetText(strFacetRowAndColAll)
                 Else
-                    ucrInputStation.SetName(strFacetRowAndCol)
+                    ucrInputStation.SetText(strFacetRowAndCol)
                 End If
             ElseIf clsFacetFunction.ContainsParameter("rows") Then
                 If clsFacetFunction.ContainsParameter("margin") Then
@@ -1011,6 +1012,7 @@ Public Class dlgLinePlot
                 ucrInputStation.SetName(strNone)
             End If
         End If
+
         UpdateParameters()
         AddRemoveFacets()
         AddRemoveGroupBy()
