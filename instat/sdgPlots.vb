@@ -2595,10 +2595,10 @@ Public Class sdgPlots
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
 
         ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
-        ucr2ndFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
+        ucr2ndFactorReceiver.SetRCode(clsColVarsFunction, bReset, bCloneIfNeeded:=True)
 
-        'ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, ucr1stFactorReceiver.GetParameter(), iAdditionalPairNo:=1)
-        ' ucr2ndFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, ucr2ndFactorReceiver.GetParameter(), iAdditionalPairNo:=1)
+        ucr1stFactorReceiver.AddAdditionalCodeParameterPair(clsColVarsFunction, New RParameter("cols", 0), iAdditionalPairNo:=1)
+        ucr2ndFactorReceiver.AddAdditionalCodeParameterPair(clsRowVarsFunction, New RParameter("cols", 1), iAdditionalPairNo:=1)
 
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
@@ -3148,12 +3148,15 @@ Public Class sdgPlots
         'The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
         If bRCodeSet Then
             FacetsNumberOfRowsOrColumns()
-            clsFacetFunction.RemoveParameterByName("cols")
             clsFacetFunction.RemoveParameterByName("facets")
+            clsFacetFunction.RemoveParameterByName("cols")
+            clsFacetFunction.RemoveParameterByName("rows")
             If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
-                'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
-                'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
+                'If two receivers are filled, wrap is used as facet_wrap(vars(factor1, factor2)), while grid is used as facet_grid(rows= vars(factor1), cols= vars(factor2)).
+                'In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
+                'In the grid case, the place of the argument, rows or cols, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting.
+                'In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
 
                 If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
@@ -3187,17 +3190,15 @@ Public Class sdgPlots
                     End If
                     clsFacetFunction.RemoveParameterByName("rows")
                     clsFacetFunction.RemoveParameterByName("cols")
-                Else 'If ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse Not ucrChkNoOfRowsOrColumns.Visible Then
+                Else
                     clsFacetFunction.SetRCommand("facet_grid")
-                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
                     clsRowVarsFunction.ClearParameters()
                     clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
-                    ' clsColVarsFunction.ClearParameters()
+                    clsColVarsFunction.ClearParameters()
                     clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
+                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
                     clsFacetFunction.RemoveParameterByName("dir")
-                    'clsRowVarsFunction.RemoveParameterByName("rows")
-                    'clsRowVarsFunction.RemoveParameterByName("cols")
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
@@ -3270,11 +3271,6 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged
-        FacetsNumberOfRowsOrColumns()
-        AddRemoveFacets()
-    End Sub
-
     Private Sub SetScaleParameter()
         'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
         'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
@@ -3317,12 +3313,18 @@ Public Class sdgPlots
         SecondFactorReceiverEnabled()
         SetFacetParameters()
         FacetsCheck()
+        AddRemoveFacets()
+        FacetsNumberOfRowsOrColumns()
     End Sub
 
+    Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged
+        FacetsNumberOfRowsOrColumns()
+        AddRemoveFacets()
+    End Sub
     Private Sub SecondFactorReceiverEnabled()
         If bRCodeSet Then
             If ucr1stFactorReceiver.IsEmpty() Then
-                'ucr2ndFactorReceiver.Clear()
+                ucr2ndFactorReceiver.Clear()
                 ucr2ndFactorReceiver.Enabled = False
                 If ucrFacetSelector.CurrentReceiver IsNot Nothing AndAlso ucrFacetSelector.CurrentReceiver.Equals(ucr2ndFactorReceiver) Then
                     ucr1stFactorReceiver.SetMeAsReceiver()
