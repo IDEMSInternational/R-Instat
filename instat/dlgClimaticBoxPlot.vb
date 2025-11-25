@@ -466,6 +466,12 @@ Public Class dlgClimaticBoxPlot
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeUpdated = False
         ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStatFunction, New RParameter("coef", 1), iAdditionalPairNo:=1)
+        ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("coef", 1), iAdditionalPairNo:=2)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsGroupbyFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsAsFactor2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
@@ -477,7 +483,6 @@ Public Class dlgClimaticBoxPlot
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
         ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
 
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
         ucrNudOmitBelow.SetRCode(clsFilterElementOperator, bReset)
@@ -824,37 +829,11 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub ucrReceiverWithinYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWithinYear.ControlValueChanged
         If Not ucrReceiverWithinYear.IsEmpty Then
-            clsGroupbyFunction.AddParameter("x", ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
-            clsAsFactor2Function.AddParameter("x", ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
             clsMutate2Function.AddParameter(ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=clsAsFactor2Function, iPosition:=0)
-        Else
-            clsGroupbyFunction.RemoveParameterByName("x")
-            clsAsFactor2Function.RemoveParameterByName("x")
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
-        If Not ucrReceiverElement.IsEmpty Then
-            clsBoxplotStat2Function.AddParameter("x", ucrReceiverElement.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
-            clsInOperator.AddParameter("x", ucrReceiverElement.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-        Else
-            clsBoxplotStat2Function.RemoveParameterByName("x")
-            clsInOperator.RemoveParameterByName("x")
-        End If
-
-    End Sub
-
-    Private Sub AddCoefficients()
-        If clsBoxplotStat2Function IsNot Nothing Then
-            If Not ucrNudOutlierCoefficient.IsEmpty Then
-                clsBoxplotStat2Function.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
-            Else
-                clsBoxplotStat2Function.RemoveParameterByName("coef")
-            End If
-        End If
-    End Sub
     Private Sub ucrNudOutlierCoefficient_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudOutlierCoefficient.ControlValueChanged, ucrChkLabel.ControlValueChanged
-        AddCoefficients()
         If clsBoxplotStatFunction IsNot Nothing Then
             If ucrChkLabel.Checked Then
                 If Not ucrNudOutlierCoefficient.IsEmpty Then
