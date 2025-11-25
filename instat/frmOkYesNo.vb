@@ -103,27 +103,24 @@ Public Class frmOkYesNo
     ' Boutons visibles selon MessageBoxButtons
     '=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     Private Sub SetupButtons(buttons As MessageBoxButtons)
-
         cmdOk.Visible = False
         cmdYes.Visible = False
         cmdNo.Visible = False
 
         Select Case buttons
-
             Case MessageBoxButtons.OK
+                cmdOk.Text = Translations.GetTranslation("Ok")
                 cmdOk.Visible = True
                 cmdOk.Left = (Me.ClientSize.Width - cmdOk.Width) \ 2
-
             Case MessageBoxButtons.YesNo
                 cmdYes.Visible = True
                 cmdNo.Visible = True
-
+                cmdNo.Text = Translations.GetTranslation("No")
+                cmdYes.Text = Translations.GetTranslation("Yes")
                 Dim totalWidth As Integer = cmdYes.Width + cmdNo.Width + 10
                 Dim startX As Integer = (Me.ClientSize.Width - totalWidth) \ 2
-
                 cmdYes.Left = startX
                 cmdNo.Left = startX + cmdYes.Width + 10
-
             Case MessageBoxButtons.OKCancel
                 cmdOk.Visible = True
                 cmdNo.Visible = True
@@ -134,9 +131,7 @@ Public Class frmOkYesNo
 
                 cmdOk.Left = startX
                 cmdNo.Left = startX + cmdOk.Width + 10
-
         End Select
-
         ' Position verticale des boutons
         Dim y As Integer = Me.ClientSize.Height - 40
         cmdOk.Top = y
