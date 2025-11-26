@@ -51,8 +51,6 @@ Partial Class dlgSpells
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.rdoAnnuel = New System.Windows.Forms.RadioButton()
         Me.rdoSpells = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
@@ -64,6 +62,8 @@ Partial Class dlgSpells
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.rdoStation = New System.Windows.Forms.RadioButton()
+        Me.rdoAnnual = New System.Windows.Forms.RadioButton()
+        Me.lblDataFrameName = New System.Windows.Forms.Label()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -206,33 +206,6 @@ Partial Class dlgSpells
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 4
         Me.lblStation.Text = "Station:"
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 363)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(121, 13)
-        Me.lblNewColumnName.TabIndex = 21
-        Me.lblNewColumnName.Text = "New Data Frame Name:"
-        '
-        'rdoAnnuel
-        '
-        Me.rdoAnnuel.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoAnnuel.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoAnnuel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoAnnuel.FlatAppearance.BorderSize = 2
-        Me.rdoAnnuel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoAnnuel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnuel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnuel.Location = New System.Drawing.Point(23, 8)
-        Me.rdoAnnuel.Name = "rdoAnnuel"
-        Me.rdoAnnuel.Size = New System.Drawing.Size(167, 28)
-        Me.rdoAnnuel.TabIndex = 1
-        Me.rdoAnnuel.Tag = "Annual_Longest_Spell"
-        Me.rdoAnnuel.Text = "Longest Spell"
-        Me.rdoAnnuel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoAnnuel.UseVisualStyleBackColor = False
         '
         'rdoSpells
         '
@@ -378,17 +351,44 @@ Partial Class dlgSpells
         Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoStation.UseVisualStyleBackColor = False
         '
+        'rdoAnnual
+        '
+        Me.rdoAnnual.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoAnnual.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoAnnual.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnual.FlatAppearance.BorderSize = 2
+        Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoAnnual.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoAnnual.Location = New System.Drawing.Point(37, 8)
+        Me.rdoAnnual.Name = "rdoAnnual"
+        Me.rdoAnnual.Size = New System.Drawing.Size(153, 28)
+        Me.rdoAnnual.TabIndex = 26
+        Me.rdoAnnual.Tag = "Longest_Spells"
+        Me.rdoAnnual.Text = "Longest Spells"
+        Me.rdoAnnual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoAnnual.UseVisualStyleBackColor = False
+        '
+        'lblDataFrameName
+        '
+        Me.lblDataFrameName.AutoSize = True
+        Me.lblDataFrameName.Location = New System.Drawing.Point(7, 360)
+        Me.lblDataFrameName.Name = "lblDataFrameName"
+        Me.lblDataFrameName.Size = New System.Drawing.Size(96, 13)
+        Me.lblDataFrameName.TabIndex = 27
+        Me.lblDataFrameName.Text = "Data Frame Name:"
+        '
         'dlgSpells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(461, 441)
+        Me.Controls.Add(Me.lblDataFrameName)
+        Me.Controls.Add(Me.rdoAnnual)
         Me.Controls.Add(Me.rdoStation)
-        Me.Controls.Add(Me.rdoAnnuel)
         Me.Controls.Add(Me.rdoSpells)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
@@ -434,13 +434,13 @@ Partial Class dlgSpells
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
     Friend WithEvents cmdDoyRange As Button
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
-    Friend WithEvents rdoAnnuel As RadioButton
     Friend WithEvents rdoSpells As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrChkDayRange As ucrCheck
     Friend WithEvents rdoStation As RadioButton
+    Friend WithEvents rdoAnnual As RadioButton
+    Friend WithEvents lblDataFrameName As Label
 End Class
