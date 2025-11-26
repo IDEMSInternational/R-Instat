@@ -154,7 +154,7 @@ Public Class Translations
         ' Route through custom message box to translate buttons
         Dim msgBoxButtons As MessageBoxButtons = ConvertMsgBoxStyleToButtons(Buttons)
         Dim msgBoxIcon As MessageBoxIcon = ConvertMsgBoxStyleToIcon(Buttons)
-        Dim customResult As DialogResult = frmOkYesNo.ShowDialog(translatedPrompt, translatedTitle, msgBoxButtons, msgBoxIcon)
+        Dim customResult As DialogResult = frmOkYesNoButton.ShowDialog(translatedPrompt, translatedTitle, msgBoxButtons, msgBoxIcon)
         Return ConvertDialogResultToMsgBoxResult(customResult)
     End Function
 
@@ -199,7 +199,7 @@ Public Class Translations
             translatedTitle = GetTranslation(Title)
         End If
 
-        Return frmOkYesNo.ShowDialog(translatedPrompt, translatedTitle, Buttons, Icon)
+        Return frmOkYesNoButton.ShowDialog(translatedPrompt, translatedTitle, Buttons, Icon)
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -214,16 +214,8 @@ Public Class Translations
         Select Case buttonPart
             Case MsgBoxStyle.OkOnly
                 Return MessageBoxButtons.OK
-            Case MsgBoxStyle.OkCancel
-                Return MessageBoxButtons.OKCancel
-            Case MsgBoxStyle.AbortRetryIgnore
-                Return MessageBoxButtons.AbortRetryIgnore
-            Case MsgBoxStyle.YesNoCancel
-                Return MessageBoxButtons.YesNoCancel
             Case MsgBoxStyle.YesNo
                 Return MessageBoxButtons.YesNo
-            Case MsgBoxStyle.RetryCancel
-                Return MessageBoxButtons.RetryCancel
             Case Else
                 Return MessageBoxButtons.OK
         End Select
@@ -261,14 +253,6 @@ Public Class Translations
         Select Case result
             Case DialogResult.OK
                 Return MsgBoxResult.Ok
-            Case DialogResult.Cancel
-                Return MsgBoxResult.Cancel
-            Case DialogResult.Abort
-                Return MsgBoxResult.Abort
-            Case DialogResult.Retry
-                Return MsgBoxResult.Retry
-            Case DialogResult.Ignore
-                Return MsgBoxResult.Ignore
             Case DialogResult.Yes
                 Return MsgBoxResult.Yes
             Case DialogResult.No
@@ -277,8 +261,6 @@ Public Class Translations
                 Return MsgBoxResult.Ok
         End Select
     End Function
-
-
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   

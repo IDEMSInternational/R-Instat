@@ -403,13 +403,10 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
-    <Compile Include="frmCustomMessageBox.vb">
-      <SubType>Form</SubType>
+    <Compile Include="frmOkYesNoButton.Designer.vb">
+      <DependentUpon>frmOkYesNoButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmOkYesNo.Designer.vb">
-      <DependentUpon>frmOkYesNo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmOkYesNo.vb">
+    <Compile Include="frmOkYesNoButton.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgAdditionalCondition.Designer.vb">
@@ -3625,11 +3622,8 @@
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCustomMessageBox.resx">
-      <DependentUpon>frmCustomMessageBox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOkYesNo.resx">
-      <DependentUpon>frmOkYesNo.vb</DependentUpon>
+    <EmbeddedResource Include="frmOkYesNoButton.resx">
+      <DependentUpon>frmOkYesNoButton.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAdditionalCondition.resx">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
