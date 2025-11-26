@@ -207,6 +207,7 @@ Public Class dlgInventoryPlot
         clsGetDataNames2Function = New RFunction
         clsSetDiffFunction = New RFunction
         clsAddColumnsFunction = New RFunction
+        clsConvertColumnToTypeFunction = New RFunction
         clsBracketOperator = New ROperator
 
         bResetSubdialog = True
