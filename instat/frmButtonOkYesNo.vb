@@ -88,16 +88,6 @@ Public Class frmButtonOkYesNo
                 Dim istartX As Integer = (Me.ClientSize.Width - itotalWidth) \ 2
                 cmdYes.Left = istartX
                 cmdNo.Left = istartX + cmdYes.Width + 10
-            Case MessageBoxButtons.OKCancel
-                cmdOk.Visible = True
-                cmdNo.Visible = True
-                cmdNo.Text = GetTranslation("Cancel")
-
-                Dim itotalWidth As Integer = cmdOk.Width + cmdNo.Width + 10
-                Dim istartX As Integer = (Me.ClientSize.Width - itotalWidth) \ 2
-
-                cmdOk.Left = istartX
-                cmdNo.Left = istartX + cmdOk.Width + 10
         End Select
         Dim iposition As Integer = Me.ClientSize.Height - 40
         cmdOk.Top = iposition
