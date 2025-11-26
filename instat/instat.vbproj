@@ -403,6 +403,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="frmButtonOkYesNo.Designer.vb">
+      <DependentUpon>frmButtonOkYesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmButtonOkYesNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgAdditionalCondition.Designer.vb">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </Compile>
@@ -3609,6 +3615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWordwrap.resx">
       <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmButtonOkYesNo.resx">
+      <DependentUpon>frmButtonOkYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
