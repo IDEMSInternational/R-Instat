@@ -115,92 +115,69 @@ Public Class Translations
     ''' <summary>   
     '''     Displays a message box with translated prompt and title, then returns the user's response.
     ''' </summary>
-    '''
-    ''' <param name="Prompt">   The message to display in the dialog box. It will be translated 
-    '''                         using GetTranslation(). </param>
-    ''' <param name="Buttons">  Optional. Numeric expression that specifies the buttons and icons 
-    '''                         to display, the default button, and the modality of the message box. 
-    '''                         Defaults to MsgBoxStyle.OKOnly. </param>
-    ''' <param name="Title">    Optional. String expression displayed in the title bar of the dialog box. 
-    '''                         It will be translated using GetTranslation(). Defaults to Nothing. </param>
-    '''
-    ''' <returns>   A MsgBoxResult value indicating which button the user clicked. </returns>
     '''--------------------------------------------------------------------------------------------
+    Private Shared Sub TranslatePromptAndTitle(Prompt As String,
+                                           Title As String,
+                                           ByRef TranslatedPrompt As String,
+                                           ByRef TranslatedTitle As String)
+
+        ' --- Prompt ---
+        If String.IsNullOrEmpty(Prompt) Then
+            TranslatedPrompt = ""
+        Else
+            Dim lines As String() = Prompt.Split(
+            New String() {Environment.NewLine, vbCrLf, vbLf},
+            StringSplitOptions.None)
+
+            For i As Integer = 0 To lines.Length - 1
+                Dim trimmed = lines(i).Trim()
+
+                If trimmed <> "" Then
+                    Dim translated = GetTranslation(trimmed)
+                    lines(i) = lines(i).Replace(trimmed, translated)
+                End If
+            Next
+            TranslatedPrompt = String.Join(Environment.NewLine, lines)
+        End If
+        ' --- Title ---
+        If String.IsNullOrEmpty(Title) Then
+            TranslatedTitle = ""
+        Else
+            TranslatedTitle = GetTranslation(Title)
+        End If
+    End Sub
+
     Public Shared Function MsgBoxTranslate(Prompt As String,
                                        Optional Buttons As MsgBoxStyle = MsgBoxStyle.OkOnly,
                                        Optional Title As String = Nothing) As MsgBoxResult
-        Dim translatedPrompt As String = ""
-        Dim translatedTitle As String = ""
 
-        ' --- Translate line by line to handle multi-line messages ---
-        If Not String.IsNullOrEmpty(Prompt) Then
-            ' Robust split to handle all types of newlines
-            Dim lines As String() = Prompt.Split(New String() {Environment.NewLine, vbCrLf, vbLf}, StringSplitOptions.None)
+        Dim translatedPrompt As String
+        Dim translatedTitle As String
 
-            For i As Integer = 0 To lines.Length - 1
-                Dim originalLine As String = lines(i)
-                Dim trimmedLine As String = originalLine.Trim()
-                If Not String.IsNullOrEmpty(trimmedLine) Then
-                    lines(i) = originalLine.Replace(trimmedLine, GetTranslation(trimmedLine))
-                End If
-            Next
+        TranslatePromptAndTitle(Prompt, Title, translatedPrompt, translatedTitle)
 
-            translatedPrompt = String.Join(Environment.NewLine, lines)
-        End If
-        If Not String.IsNullOrEmpty(Title) Then
-            translatedTitle = GetTranslation(Title)
-        End If
+        Dim msgButtons As MessageBoxButtons = ConvertMsgBoxStyleToButtons(Buttons)
+        Dim msgIcon As MessageBoxIcon = ConvertMsgBoxStyleToIcon(Buttons)
 
-        ' Route through custom message box to translate buttons
-        Dim msgBoxButtons As MessageBoxButtons = ConvertMsgBoxStyleToButtons(Buttons)
-        Dim msgBoxIcon As MessageBoxIcon = ConvertMsgBoxStyleToIcon(Buttons)
-        Dim customResult As DialogResult = frmButtonOkYesNo.ShowDialog(translatedPrompt, translatedTitle, msgBoxButtons, msgBoxIcon)
-        Return ConvertDialogResultToMsgBoxResult(customResult)
+        Dim result As DialogResult =
+        frmButtonOkYesNo.ShowDialog(translatedPrompt, translatedTitle, msgButtons, msgIcon)
+
+        Return ConvertDialogResultToMsgBoxResult(result)
     End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   
-    '''     Displays a message box with translated prompt, title, and buttons, then returns the user's response.
-    '''     This overload accepts MessageBoxButtons and MessageBoxIcon parameters.
-    ''' </summary>
-    '''
-    ''' <param name="Prompt">   The message to display in the dialog box. It will be translated 
-    '''                         using GetTranslation(). </param>
-    ''' <param name="Buttons">  The buttons to display in the message box. </param>
-    ''' <param name="Title">    Optional. String expression displayed in the title bar of the dialog box. 
-    '''                         It will be translated using GetTranslation(). Defaults to Nothing. </param>
-    ''' <param name="Icon">     Optional. The icon to display in the message box. Defaults to None. </param>
-    '''
-    ''' <returns>   A DialogResult value indicating which button the user clicked. </returns>
-    '''--------------------------------------------------------------------------------------------
     Public Shared Function MsgBoxTranslate(Prompt As String,
                                        Buttons As MessageBoxButtons,
                                        Optional Title As String = Nothing,
                                        Optional Icon As MessageBoxIcon = MessageBoxIcon.None) As DialogResult
-        Dim translatedPrompt As String = ""
-        Dim translatedTitle As String = ""
 
-        ' --- Translate line by line to handle multi-line messages ---
-        If Not String.IsNullOrEmpty(Prompt) Then
-            ' Robust split to handle all types of newlines
-            Dim lines As String() = Prompt.Split(New String() {Environment.NewLine, vbCrLf, vbLf}, StringSplitOptions.None)
+        Dim translatedPrompt As String
+        Dim translatedTitle As String
 
-            For i As Integer = 0 To lines.Length - 1
-                Dim originalLine As String = lines(i)
-                Dim trimmedLine As String = originalLine.Trim()
-                If Not String.IsNullOrEmpty(trimmedLine) Then
-                    lines(i) = originalLine.Replace(trimmedLine, GetTranslation(trimmedLine))
-                End If
-            Next
-
-            translatedPrompt = String.Join(Environment.NewLine, lines)
-        End If
-        If Not String.IsNullOrEmpty(Title) Then
-            translatedTitle = GetTranslation(Title)
-        End If
-
+        TranslatePromptAndTitle(Prompt, Title, translatedPrompt, translatedTitle)
         Return frmButtonOkYesNo.ShowDialog(translatedPrompt, translatedTitle, Buttons, Icon)
     End Function
+
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   

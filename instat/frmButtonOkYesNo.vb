@@ -109,17 +109,14 @@ Public Class frmButtonOkYesNo
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
-        _dialogResult = DialogResult.OK
-        Me.Close()
+        cmdOk.DialogResult = DialogResult.OK
     End Sub
 
     Private Sub cmdYes_Click(sender As Object, e As EventArgs) Handles cmdYes.Click
-        _dialogResult = DialogResult.Yes
-        Me.Close()
+        cmdYes.DialogResult = DialogResult.Yes
     End Sub
 
     Private Sub cmdNo_Click(sender As Object, e As EventArgs) Handles cmdNo.Click
-        _dialogResult = DialogResult.No
-        Me.Close()
+        cmdNo.DialogResult = DialogResult.No
     End Sub
 End Class
