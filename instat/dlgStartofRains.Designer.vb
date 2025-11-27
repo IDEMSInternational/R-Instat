@@ -188,7 +188,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDateColumnName.AutoSize = True
         Me.ucrInputNewDateColumnName.IsMultiline = False
         Me.ucrInputNewDateColumnName.IsReadOnly = False
-        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(263, 18)
+        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(267, 18)
         Me.ucrInputNewDateColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
         Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(85, 21)
