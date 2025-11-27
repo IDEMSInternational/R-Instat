@@ -187,7 +187,6 @@ Public Class dlgClimaticSummary
         clsGetCalculationsFunction = New RFunction
         clsGetDailyDataCalculationFunction = New RFunction
         clsGetVariablesMetadataFunction = New RFunction
-        clsGetDailyDataCalculationFunction = New RFunction
         clsGetClimaticSummariesFunction = New RFunction
         clsLinkColsFunction = New RFunction
 
