@@ -27,7 +27,7 @@ Public Class dlgClimaticSummary
         clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert,
         clsDayFilterCalcFromList, clsAddDateFunction,
         clsDummyFunction, clsGetCalculationsFunction, clsGetDataFrameFunction,
-        clsGetVaribalesMetadataFunction, clsGetSummaryVariablesFunction,
+        clsGetVariablesMetadataFunction, clsGetSummaryVariablesFunction,
         clsGetDailyDataCalculationFunction, clsGetClimaticSummariesFunction, clsLinkColsFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
@@ -186,7 +186,7 @@ Public Class dlgClimaticSummary
         clsGetDataFrameFunction = New RFunction
         clsGetCalculationsFunction = New RFunction
         clsGetDailyDataCalculationFunction = New RFunction
-        clsGetVaribalesMetadataFunction = New RFunction
+        clsGetVariablesMetadataFunction = New RFunction
         clsGetDailyDataCalculationFunction = New RFunction
         clsGetClimaticSummariesFunction = New RFunction
         clsLinkColsFunction = New RFunction
@@ -250,8 +250,8 @@ Public Class dlgClimaticSummary
         clsGetDataFrameFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
         clsGetDataFrameFunction.SetAssignTo("calculations_data")
         'Varibales MetaData
-        clsGetVaribalesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_variables_metadata")
-        clsGetVaribalesMetadataFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
+        clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_variables_metadata")
+        clsGetVariablesMetadataFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
         clsGetSummaryVariablesFunction.SetRCommand("variables_metadata")
         'Summary Variables
         clsGetSummaryVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_summary_variables")
@@ -265,7 +265,7 @@ Public Class dlgClimaticSummary
         'get_climatic_summaries_definition
         clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
         clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0)
-        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVaribalesMetadataFunction, iPosition:=1)
+        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1)
         clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsGetSummaryVariablesFunction, iPosition:=2)
         clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyDataCalculationFunction, iPosition:=3)
 
@@ -509,7 +509,7 @@ Public Class dlgClimaticSummary
         clsGetDataFrameFunction.AddParameter("summary_data", Chr(34) & ucrSaveObject.GetText() & Chr(34), iPosition:=0)
         clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
-        clsGetVaribalesMetadataFunction.AddParameter("summary_data", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetVariablesMetadataFunction.AddParameter("summary_data", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
         clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
