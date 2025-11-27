@@ -505,7 +505,7 @@ Partial Class dlgClimaticSummary
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticSummary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = " "
+        Me.Text = "Climatic Summary"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
