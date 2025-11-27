@@ -251,7 +251,6 @@ Public Class dlgClimaticSummary
         'Varibales MetaData
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_variables_metadata")
         clsGetVariablesMetadataFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
-        clsGetSummaryVariablesFunction.SetRCommand("variables_metadata")
         'Summary Variables
         clsGetSummaryVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_summary_variables")
         clsGetSummaryVariablesFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
