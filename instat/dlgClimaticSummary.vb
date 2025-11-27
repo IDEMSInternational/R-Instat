@@ -513,35 +513,33 @@ Public Class dlgClimaticSummary
 
         clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
+        Dim isAnnualOrWithinYear As Boolean = rdoAnnual.Checked OrElse rdoWithinYear.Checked
+
         If ucrChkDefinitions.Checked Then
             ' Add to R syntax (so it appears in the final R command)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction)
 
             If rdoAnnual.Checked Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
                 ucrSaveObject.SetText("Annual_Definitions")
-            End If
-
-        Else
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetClimaticSummariesFunction) ' <-- Need to understand why not to remove clsGetClimaticFunction
-            If rdoAnnual.Checked Then
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetCalculationsFunction) ' <-- Also this
-            End If
-        End If
-
-        If rdoWithinYear.Checked Then
-            If ucrChkDefinitions.Checked Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
+            ElseIf rdoWithinYear.Checked Then
                 ucrSaveObject.SetText("Within_Year_Definitions")
+            End If
 
-                If ucrChkDayRange.Checked Then
-                    clsGetDailyCalculationsFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
-                End If
+            If isAnnualOrWithinYear Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
+            End If
+
+            If rdoWithinYear.Checked AndAlso ucrChkDayRange.Checked Then
+                clsGetDailyDataCalculationFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
             Else
+                clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetClimaticSummariesFunction)
+            clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
+
+            If isAnnualOrWithinYear Then
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetCalculationsFunction)
-                If ucrChkDayRange.Checked Then
-                    clsGetDailyCalculationsFunction.RemoveParameterByName("Day_Range")
-                End If
             End If
         End If
     End Sub
