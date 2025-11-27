@@ -173,7 +173,7 @@ Public Class sdgPlots
         ucrChkIncludeTitles.AddParameterPresentCondition(False, "titles", False)
 
         ucrChkMargin.SetText("Margins")
-        ucrChkMargin.SetParameter(New RParameter("margin", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargin.SetParameter(New RParameter("margins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargin.SetRDefault("FALSE")
 
@@ -3201,7 +3201,7 @@ Public Class sdgPlots
                 clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
             Else
                 clsFacetFunction.RemoveParameterByName("space")
-                clsFacetFunction.RemoveParameterByName("margin")
+                clsFacetFunction.RemoveParameterByName("margins")
                 If rdoHorizontal.Checked Then
                     ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
                     ucrNudNumberofRows.ChangeParameterName("nrow")

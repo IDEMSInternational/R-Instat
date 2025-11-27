@@ -894,19 +894,19 @@ Public Class dlgLinePlot
         bNotSubdialogue = False
         If clsFacetFunction.strRCommand = "facet_grid" Then
             If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
-                If clsFacetFunction.ContainsParameter("margin") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
                     ucrInputStation.SetName(strFacetRowAndColAll)
                 Else
                     ucrInputStation.SetName(strFacetRowAndCol)
                 End If
             ElseIf clsFacetFunction.ContainsParameter("rows") Then
-                If clsFacetFunction.ContainsParameter("margin") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
                     ucrInputStation.SetName(strFacetRowAll)
                 Else
                     ucrInputStation.SetName(strFacetRow)
                 End If
             ElseIf clsFacetFunction.ContainsParameter("cols") Then
-                If clsFacetFunction.ContainsParameter("margin") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
                     ucrInputStation.SetName(strFacetColAll)
                 Else
                     ucrInputStation.SetName(strFacetCol)
@@ -1078,9 +1078,9 @@ Public Class dlgLinePlot
         End If
 
         If bRowAll OrElse bColAll OrElse bRowsAndColsAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE")
+            clsFacetFunction.AddParameter("margins", "TRUE")
         Else
-            clsFacetFunction.RemoveParameterByName("margin")
+            clsFacetFunction.RemoveParameterByName("margins")
         End If
 
         If bRowsAndCols OrElse bRowsAndColsAll Then
