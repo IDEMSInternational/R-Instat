@@ -30,7 +30,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblmm = New System.Windows.Forms.Label()
         Me.lblDays = New System.Windows.Forms.Label()
-        Me.lblRainDays = New System.Windows.Forms.Label()
         Me.lblSkewnessWeight = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
         Me.ucrChkLogicalColumns = New instat.ucrCheck()
@@ -41,6 +40,9 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblMissingThreshold = New System.Windows.Forms.Label()
         Me.lblThresholdmm = New System.Windows.Forms.Label()
         Me.lblGreater = New System.Windows.Forms.Label()
+        Me.lblGreaterConsecutive = New System.Windows.Forms.Label()
+        Me.ucrInputConsecutiveValue = New instat.ucrInputTextBox()
+        Me.UcrCheckAddCommentVariable = New instat.ucrCheck()
         Me.ucrInputSameValue = New instat.ucrInputTextBox()
         Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
@@ -63,6 +65,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblRainDays = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -145,21 +148,11 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblDays.TabIndex = 18
         Me.lblDays.Text = "days"
         '
-        'lblRainDays
-        '
-        Me.lblRainDays.AutoSize = True
-        Me.lblRainDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRainDays.Location = New System.Drawing.Point(159, 274)
-        Me.lblRainDays.Name = "lblRainDays"
-        Me.lblRainDays.Size = New System.Drawing.Size(49, 13)
-        Me.lblRainDays.TabIndex = 23
-        Me.lblRainDays.Text = "rain days"
-        '
         'lblSkewnessWeight
         '
         Me.lblSkewnessWeight.AutoSize = True
         Me.lblSkewnessWeight.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSkewnessWeight.Location = New System.Drawing.Point(204, 332)
+        Me.lblSkewnessWeight.Location = New System.Drawing.Point(262, 332)
         Me.lblSkewnessWeight.Name = "lblSkewnessWeight"
         Me.lblSkewnessWeight.Size = New System.Drawing.Size(96, 13)
         Me.lblSkewnessWeight.TabIndex = 31
@@ -169,9 +162,9 @@ Partial Class dlgClimaticCheckDataRain
         '
         Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkLogicalColumns)
         Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkCalculatedColumns)
-        Me.grpLogicalCalculatedColumns.Location = New System.Drawing.Point(6, 385)
+        Me.grpLogicalCalculatedColumns.Location = New System.Drawing.Point(12, 385)
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
-        Me.grpLogicalCalculatedColumns.Size = New System.Drawing.Size(399, 55)
+        Me.grpLogicalCalculatedColumns.Size = New System.Drawing.Size(395, 42)
         Me.grpLogicalCalculatedColumns.TabIndex = 37
         Me.grpLogicalCalculatedColumns.TabStop = False
         Me.grpLogicalCalculatedColumns.Text = "Include in Original Data"
@@ -255,6 +248,38 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblGreater.TabIndex = 19
         Me.lblGreater.Text = ">"
         '
+        'lblGreaterConsecutive
+        '
+        Me.lblGreaterConsecutive.AutoSize = True
+        Me.lblGreaterConsecutive.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblGreaterConsecutive.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGreaterConsecutive.Location = New System.Drawing.Point(186, 271)
+        Me.lblGreaterConsecutive.Name = "lblGreaterConsecutive"
+        Me.lblGreaterConsecutive.Size = New System.Drawing.Size(18, 20)
+        Me.lblGreaterConsecutive.TabIndex = 40
+        Me.lblGreaterConsecutive.Text = ">"
+        '
+        'ucrInputConsecutiveValue
+        '
+        Me.ucrInputConsecutiveValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputConsecutiveValue.AutoSize = True
+        Me.ucrInputConsecutiveValue.IsMultiline = False
+        Me.ucrInputConsecutiveValue.IsReadOnly = False
+        Me.ucrInputConsecutiveValue.Location = New System.Drawing.Point(207, 271)
+        Me.ucrInputConsecutiveValue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputConsecutiveValue.Name = "ucrInputConsecutiveValue"
+        Me.ucrInputConsecutiveValue.Size = New System.Drawing.Size(40, 20)
+        Me.ucrInputConsecutiveValue.TabIndex = 41
+        '
+        'UcrCheckAddCommentVariable
+        '
+        Me.UcrCheckAddCommentVariable.AutoSize = True
+        Me.UcrCheckAddCommentVariable.Checked = False
+        Me.UcrCheckAddCommentVariable.Location = New System.Drawing.Point(6, 433)
+        Me.UcrCheckAddCommentVariable.Name = "UcrCheckAddCommentVariable"
+        Me.UcrCheckAddCommentVariable.Size = New System.Drawing.Size(232, 23)
+        Me.UcrCheckAddCommentVariable.TabIndex = 39
+        '
         'ucrInputSameValue
         '
         Me.ucrInputSameValue.AddQuotesIfUnrecognised = True
@@ -262,6 +287,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrInputSameValue.IsMultiline = False
         Me.ucrInputSameValue.IsReadOnly = False
         Me.ucrInputSameValue.Location = New System.Drawing.Point(207, 243)
+        Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputSameValue.Name = "ucrInputSameValue"
         Me.ucrInputSameValue.Size = New System.Drawing.Size(40, 20)
         Me.ucrInputSameValue.TabIndex = 20
@@ -273,6 +299,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrInputThreshold.IsMultiline = False
         Me.ucrInputThreshold.IsReadOnly = False
         Me.ucrInputThreshold.Location = New System.Drawing.Point(274, 300)
+        Me.ucrInputThreshold.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputThreshold.Name = "ucrInputThreshold"
         Me.ucrInputThreshold.Size = New System.Drawing.Size(46, 21)
         Me.ucrInputThreshold.TabIndex = 26
@@ -284,6 +311,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrInputThresholdValue.IsMultiline = False
         Me.ucrInputThresholdValue.IsReadOnly = False
         Me.ucrInputThresholdValue.Location = New System.Drawing.Point(116, 359)
+        Me.ucrInputThresholdValue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
         Me.ucrInputThresholdValue.Size = New System.Drawing.Size(54, 21)
         Me.ucrInputThresholdValue.TabIndex = 34
@@ -307,7 +335,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkOmitZero.Checked = False
         Me.ucrChkOmitZero.Location = New System.Drawing.Point(108, 332)
         Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
-        Me.ucrChkOmitZero.Size = New System.Drawing.Size(96, 23)
+        Me.ucrChkOmitZero.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkOmitZero.TabIndex = 30
         '
         'ucrNudSkewnessWeight
@@ -501,10 +529,19 @@ Partial Class dlgClimaticCheckDataRain
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 449)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 452)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 38
+        '
+        'lblRainDays
+        '
+        Me.lblRainDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRainDays.Location = New System.Drawing.Point(159, 276)
+        Me.lblRainDays.Name = "lblRainDays"
+        Me.lblRainDays.Size = New System.Drawing.Size(29, 13)
+        Me.lblRainDays.TabIndex = 42
+        Me.lblRainDays.Text = "days"
         '
         'dlgClimaticCheckDataRain
         '
@@ -512,6 +549,10 @@ Partial Class dlgClimaticCheckDataRain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 504)
+        Me.Controls.Add(Me.lblGreaterConsecutive)
+        Me.Controls.Add(Me.lblRainDays)
+        Me.Controls.Add(Me.ucrInputConsecutiveValue)
+        Me.Controls.Add(Me.UcrCheckAddCommentVariable)
         Me.Controls.Add(Me.ucrInputSameValue)
         Me.Controls.Add(Me.lblGreater)
         Me.Controls.Add(Me.lblThresholdmm)
@@ -525,7 +566,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.Controls.Add(Me.ucrChkOmitZero)
         Me.Controls.Add(Me.lblSkewnessWeight)
         Me.Controls.Add(Me.ucrNudSkewnessWeight)
-        Me.Controls.Add(Me.lblRainDays)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.lblmm)
         Me.Controls.Add(Me.ucrNudWetDays)
@@ -588,7 +628,6 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents ucrNudSame As ucrNud
     Friend WithEvents lblmm As Label
     Friend WithEvents lblDays As Label
-    Friend WithEvents lblRainDays As Label
     Friend WithEvents lblSkewnessWeight As Label
     Friend WithEvents ucrNudSkewnessWeight As ucrNud
     Friend WithEvents ucrChkCalculatedColumns As ucrCheck
@@ -605,4 +644,8 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblThresholdmm As Label
     Friend WithEvents lblGreater As Label
     Friend WithEvents ucrInputSameValue As ucrInputTextBox
+    Friend WithEvents UcrCheckAddCommentVariable As ucrCheck
+    Friend WithEvents ucrInputConsecutiveValue As ucrInputTextBox
+    Friend WithEvents lblGreaterConsecutive As Label
+    Friend WithEvents lblRainDays As Label
 End Class
