@@ -63,6 +63,8 @@ Public Class dlgClimaticBoxPlot
     Private strColour As String = "Colour Axis"
     Private strNone As String = "None"
 
+    Private strWithinYearVariable As String = ""
+
     Private bUpdateComboOptions As Boolean = True
     Private bContainsFacet As Boolean = False
     Private bUpdatingParameters As Boolean = False
@@ -471,8 +473,9 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsGroupbyFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsAsFactor2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        'ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsAsFactor2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
+        ucrReceiverWithinYear.SetRCode(clsAsFactor2Function)
         ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorClimaticBoxPlot.SetRCode(clsFilteredDataOperator, bReset)
@@ -576,15 +579,6 @@ Public Class dlgClimaticBoxPlot
             ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
         End If
         bResetBoxLayerSubdialog = False
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                'ucrReceiverXVariable.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "y" Then
-                'ucrReceiverData.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                'ucrReceiverMoreData.Add(clsParam.strArgumentValue)
-            End If
-        Next
         'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
     End Sub
 
@@ -829,7 +823,13 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub ucrReceiverWithinYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWithinYear.ControlValueChanged
         If Not ucrReceiverWithinYear.IsEmpty Then
+            If clsMutate2Function.ContainsParameter(strWithinYearVariable) Then
+                clsMutate2Function.RemoveParameterByName(strWithinYearVariable)
+            End If
             clsMutate2Function.AddParameter(ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=clsAsFactor2Function, iPosition:=0)
+            strWithinYearVariable = ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False)
+        Else
+            clsMutate2Function.RemoveParameterByName(ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False))
         End If
     End Sub
 
