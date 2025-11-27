@@ -28,7 +28,7 @@ Public Class dlgClimaticSummary
         clsDayFilterCalcFromList, clsAddDateFunction,
         clsDummyFunction, clsGetCalculationsFunction, clsGetDataFrameFunction,
         clsGetVaribalesMetadataFunction, clsGetSummaryVariablesFunction,
-        clsGetDailyDataCalculationFunction, clsGetClimaticSummariesFunction, AddSaveDefinitionOptions() As New RFunction
+        clsGetDailyDataCalculationFunction, clsGetClimaticSummariesFunction, clsLinkColsFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -147,20 +147,20 @@ Public Class dlgClimaticSummary
         ucrChkAddDateColumn.AddParameterPresentCondition(True, "data_name", True)
         ucrChkAddDateColumn.AddParameterPresentCondition(False, "data_name", False)
 
-        ucrChkDefinition.SetText("Definitions")
-        ucrChkDefinition.AddParameterValuesCondition(True, "def", "True")
-        ucrChkDefinition.AddParameterValuesCondition(False, "def", "False")
+        ucrChkDefinitions.SetText("Definitions")
+        ucrChkDefinitions.AddParameterValuesCondition(True, "def", "True")
+        ucrChkDefinitions.AddParameterValuesCondition(False, "def", "False")
 
         'linking controls
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverYear}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoAnnualWithinYear, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrChkAddDateColumn}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkDefinition}, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkDefinitions}, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
         ucrInputFilterPreview.IsReadOnly = True
 
-        ucrChkDefinition.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDefinitions.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
@@ -189,8 +189,10 @@ Public Class dlgClimaticSummary
         clsGetVaribalesMetadataFunction = New RFunction
         clsGetDailyDataCalculationFunction = New RFunction
         clsGetClimaticSummariesFunction = New RFunction
+        clsLinkColsFunction = New RFunction
 
         Dim strLinkeddata As String = "linked_data_name"
+        Dim summary_data As String = "summary_data"
 
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetPackageName("databook")
@@ -238,7 +240,10 @@ Public Class dlgClimaticSummary
         clsDefaultFactors.SetRCommand("c")
         clsConcFunction.SetRCommand("c")
 
-        ' 
+        'extremes_temps <- get_climatic_summaries_definition(calculations_data = calculations_data,
+        '                                          variables_metadata = variables_metadata,
+        '                                          summary_variables = summary_variables,
+        '                                          daily_data_calculation = daily_data_calculation)
 
         'Get DataFrame
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_data_frame")
@@ -260,9 +265,9 @@ Public Class dlgClimaticSummary
         'get_climatic_summaries_definition
         clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
         clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0)
-        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1)
-        clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsCFunctionSummaryVars, iPosition:=2)
-        clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyCalculationsFunction, iPosition:=3)
+        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVaribalesMetadataFunction, iPosition:=1)
+        clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsGetSummaryVariablesFunction, iPosition:=2)
+        clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyDataCalculationFunction, iPosition:=3)
 
         clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsAddDateFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
@@ -288,7 +293,7 @@ Public Class dlgClimaticSummary
         ucrSaveObject.SetRCode(clsGetClimaticSummariesFunction, bReset)
         If bReset Then
             ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
-            ucrChkDefinition.SetRCode(clsDummyFunction, bReset)
+            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
         End If
         AddDateDoy()
         UpdateDateDoy()
@@ -508,13 +513,13 @@ Public Class dlgClimaticSummary
 
         clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
-        If ucrChkDefinition.Checked Then
+        If ucrChkDefinitions.Checked Then
             ' Add to R syntax (so it appears in the final R command)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction)
 
             If rdoAnnual.Checked Then
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
-                'ucrSaveObject.SetPrefix("Annual_Definitions") <-- --> TODO Left out to understand why its not read in.
+                ucrSaveObject.SetText("Annual_Definitions")
             End If
 
         Else
@@ -525,9 +530,9 @@ Public Class dlgClimaticSummary
         End If
 
         If rdoWithinYear.Checked Then
-            If ucrChkDefinition.Checked Then
+            If ucrChkDefinitions.Checked Then
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
-                ucrSaveObject.SetPrefix("Within_Year_Definitions")
+                ucrSaveObject.SetText("Within_Year_Definitions")
 
                 If ucrChkDayRange.Checked Then
                     clsGetDailyCalculationsFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
@@ -576,7 +581,7 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub ucrChkDefinition()_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinition.ControlValueChanged, ucrPnlAnnualWithin.ControlValueChanged
+    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
         AddSaveDefinitionOptions()
     End Sub
 

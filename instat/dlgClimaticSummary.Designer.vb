@@ -69,8 +69,8 @@ Partial Class dlgClimaticSummary
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.ucrChkDayRange = New instat.ucrCheck()
-        Me.ucrChkDefinition = New instat.ucrCheck()
-        Me.ucrSaveObject = New instat.ucrCheck()
+        Me.ucrChkDefinitions = New instat.ucrCheck()
+        Me.ucrSaveObject = New instat.ucrSave()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -448,20 +448,19 @@ Partial Class dlgClimaticSummary
         Me.ucrChkDayRange.Size = New System.Drawing.Size(108, 27)
         Me.ucrChkDayRange.TabIndex = 25
         '
-        'ucrChkDefinition
+        'ucrChkDefinitions
         '
-        Me.ucrChkDefinition.AutoSize = True
-        Me.ucrChkDefinition.Checked = False
-        Me.ucrChkDefinition.Location = New System.Drawing.Point(12, 435)
-        Me.ucrChkDefinition.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkDefinition.Name = "ucrChkDefinition"
-        Me.ucrChkDefinition.Size = New System.Drawing.Size(178, 25)
-        Me.ucrChkDefinition.TabIndex = 21
+        Me.ucrChkDefinitions.AutoSize = True
+        Me.ucrChkDefinitions.Checked = False
+        Me.ucrChkDefinitions.Location = New System.Drawing.Point(12, 435)
+        Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
+        Me.ucrChkDefinitions.Size = New System.Drawing.Size(178, 25)
+        Me.ucrChkDefinitions.TabIndex = 21
         '
         'ucrSaveObject
         '
         Me.ucrSaveObject.AutoSize = True
-        Me.ucrSaveObject.Checked = False
         Me.ucrSaveObject.Location = New System.Drawing.Point(12, 459)
         Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrSaveObject.Name = "ucrSaveObject"
@@ -474,7 +473,7 @@ Partial Class dlgClimaticSummary
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(450, 553)
-        Me.Controls.Add(Me.ucrChkDefinition)
+        Me.Controls.Add(Me.ucrChkDefinitions)
         Me.Controls.Add(Me.ucrChkDayRange)
         Me.Controls.Add(Me.ucrSaveObject)
         Me.Controls.Add(Me.rdoDaily)
@@ -545,6 +544,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents rdoStation As RadioButton
     Friend WithEvents rdoDaily As RadioButton
     Friend WithEvents ucrChkDayRange As ucrCheck
-    Friend WithEvents ucrChkDefinition As ucrCheck
-    Friend WithEvents ucrSaveObject As ucrCheck
+    Friend WithEvents ucrChkDefinitions As ucrCheck
+    Friend WithEvents ucrSaveObject As ucrSave
 End Class
