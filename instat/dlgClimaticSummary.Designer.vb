@@ -461,10 +461,11 @@ Partial Class dlgClimaticSummary
         'ucrSaveObject
         '
         Me.ucrSaveObject.AutoSize = True
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveObject.Location = New System.Drawing.Point(12, 459)
         Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrSaveObject.Name = "ucrSaveObject"
-        Me.ucrSaveObject.Size = New System.Drawing.Size(219, 27)
+        Me.ucrSaveObject.Size = New System.Drawing.Size(400, 31)
         Me.ucrSaveObject.TabIndex = 20
         '
         'dlgClimaticSummary

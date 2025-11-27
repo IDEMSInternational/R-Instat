@@ -26,7 +26,7 @@ Public Class dlgClimaticSummary
     Private clsDefaultFunction, clsIfElseFirstDoyFilledFunction, clsConcFunction, clsSummariesList,
         clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert,
         clsDayFilterCalcFromList, clsAddDateFunction,
-        clsDummyFunction, clsGetCalculationsFunction, clsGetDataFrameFunction,
+        clsDummyFunction, clsGetDataFrameFunction,
         clsGetVariablesMetadataFunction, clsGetSummaryVariablesFunction,
         clsGetDailyDataCalculationFunction, clsGetClimaticSummariesFunction, clsLinkColsFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
@@ -184,7 +184,7 @@ Public Class dlgClimaticSummary
         clsToConditionOperator = New ROperator
 
         clsGetDataFrameFunction = New RFunction
-        clsGetCalculationsFunction = New RFunction
+        clsGetSummaryVariablesFunction = New RFunction
         clsGetDailyDataCalculationFunction = New RFunction
         clsGetVariablesMetadataFunction = New RFunction
         clsGetClimaticSummariesFunction = New RFunction
@@ -262,7 +262,7 @@ Public Class dlgClimaticSummary
 
         'get_climatic_summaries_definition
         clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
-        clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0)
+        clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
         clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1)
         clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsGetSummaryVariablesFunction, iPosition:=2)
         clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyDataCalculationFunction, iPosition:=3)
@@ -393,6 +393,10 @@ Public Class dlgClimaticSummary
         AddSaveDefinitionOptions()
     End Sub
 
+    Private Sub Receivers_controlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+
+    End Sub
+
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
         sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
@@ -505,7 +509,6 @@ Public Class dlgClimaticSummary
     Private Sub AddSaveDefinitionOptions()
         ' calculated_data <- data_book$get_calculations("<resulting data frame>")
         clsGetDataFrameFunction.AddParameter("summary_data", Chr(34) & ucrSaveObject.GetText() & Chr(34), iPosition:=0)
-        clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
         clsGetVariablesMetadataFunction.AddParameter("summary_data", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
@@ -524,7 +527,7 @@ Public Class dlgClimaticSummary
             End If
 
             If isAnnualOrWithinYear Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetCalculationsFunction, iPosition:=13)
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=13)
             End If
 
             If rdoWithinYear.Checked AndAlso ucrChkDayRange.Checked Then
@@ -537,7 +540,7 @@ Public Class dlgClimaticSummary
             clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
 
             If isAnnualOrWithinYear Then
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetCalculationsFunction)
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrameFunction)
             End If
         End If
     End Sub
