@@ -62,6 +62,7 @@ Public Class dlgLinePlot
     Private clsGeomErrorbarFunction As New RFunction
     Private clsGeomPointrangeFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsGgplotlyFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
@@ -208,6 +209,9 @@ Public Class dlgLinePlot
         ucrChkAddSE.SetText("Add SE")
         ucrChkAddSE.SetParameter(New RParameter("se", 1))
         ucrChkAddSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkAddSlider.SetText("Add Slider")
+        ' ucrChkAddSlider.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrSave.SetPrefix("line_plot")
         ucrSave.SetIsComboBox()
@@ -513,6 +517,7 @@ Public Class dlgLinePlot
         clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+        clsGgplotlyFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -643,7 +648,11 @@ Public Class dlgLinePlot
         clsGeomPointrangeFunction.SetPackageName("ggplot2")
         clsGeomPointrangeFunction.SetRCommand("geom_pointrange")
 
+        clsGgplotlyFunction.SetPackageName("plotly")
+        clsGgplotlyFunction.SetRCommand("ggplotly")
+
         clsBaseOperator.RemoveParameterByName("geom_point")
+        'clsBaseOperator.SetAssignTo("last_graph")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         SetGroupParam()
@@ -652,6 +661,8 @@ Public Class dlgLinePlot
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsGgSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverSlopeY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
+
+        ucrSave.AddAdditionalRCode(clsGgplotlyFunction, iAdditionalPairNo:=1)
 
         ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
@@ -691,6 +702,7 @@ Public Class dlgLinePlot
             ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         End If
         SetGroupParam()
+        'SettingBaseFunction()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -885,7 +897,7 @@ Public Class dlgLinePlot
 
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+        sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                     clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction,
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
@@ -1326,4 +1338,23 @@ Public Class dlgLinePlot
         AddRemoveLineOnLineRange()
     End Sub
 
+    Private Sub ucrChkAddSlider_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddSlider.ControlValueChanged, ucrSave.ControlValueChanged
+        SettingBaseFunction()
+    End Sub
+
+    Private Sub SettingBaseFunction()
+        If ucrChkAddSlider.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsBaseOperator)
+            clsGgplotlyFunction.AddParameter("p", "last_graph", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotlyFunction)
+            ucrBase.clsRsyntax.iCallType = 2
+            ' ucrSave.SetRCode(clsGgplotlyFunction, bReset)
+
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBaseOperator)
+            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+            ucrBase.clsRsyntax.iCallType = 3
+            ' ucrSave.SetRCode(clsBaseOperator, bReset)
+        End If
+    End Sub
 End Class
