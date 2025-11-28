@@ -293,6 +293,12 @@
     <Compile Include="dlgImportClimMob.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportFromEPicsa.Designer.vb">
+      <DependentUpon>dlgImportFromEPicsa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromEPicsa.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -493,6 +499,12 @@
     <Compile Include="sdgPTConstants.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSelectFromNames.Designer.vb">
+      <DependentUpon>sdgSelectFromNames.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSelectFromNames.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </Compile>
@@ -516,6 +528,12 @@
     </Compile>
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrSelectorByOutputObject.Designer.vb">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByOutputObject.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
@@ -551,12 +569,6 @@
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
@@ -614,6 +626,7 @@
     <Compile Include="UserTables\Others\ucrOtherStyles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\enumTableSubDialogTab.vb" />
     <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
     </Compile>
@@ -625,12 +638,6 @@
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.Designer.vb">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -3392,6 +3399,12 @@
     <Compile Include="UserTables\Stub\ucrStubStyle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.Designer.vb">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgApsimx.resx">
@@ -3494,6 +3507,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromEPicsa.resx">
+      <DependentUpon>dlgImportFromEPicsa.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromPostgres.resx">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
@@ -3649,6 +3665,9 @@
     <EmbeddedResource Include="sdgPTConstants.resx">
       <DependentUpon>sdgPTConstants.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgSelectFromNames.resx">
+      <DependentUpon>sdgSelectFromNames.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3660,6 +3679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTricotModelOptions.resx">
       <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByOutputObject.resx">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
@@ -3678,9 +3700,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
@@ -3714,9 +3733,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
       <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\sdgBeforeTablesOption.resx">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -5864,6 +5880,9 @@
     <EmbeddedResource Include="UserTables\Stub\ucrStubStyle.resx">
       <DependentUpon>ucrStubStyle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Table\ucrTableOptions.resx">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENCE">
@@ -6258,6 +6277,12 @@
     <Content Include="translations\rInstatTranslations.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\InstatObject\R\quartoTemplate.qmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\InstatObject\R\renderQuarto.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />

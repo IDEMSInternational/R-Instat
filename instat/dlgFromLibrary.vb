@@ -25,6 +25,7 @@ Public Class dlgFromLibrary
     Private bReset As Boolean = True
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
+    Private clsRemoveFunction As New RFunction
 
     'a string array that holds the packages displayed in the combobox 
     'todo. this property can be removed once the PR that enhances the inputCombobox control is merged
@@ -104,6 +105,8 @@ Public Class dlgFromLibrary
         clsDataFunction.SetRCommand("data")
         clsDataFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
 
+        clsRemoveFunction.SetRCommand("rm")
+
         'set up the import data function
         clsImportFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
@@ -139,10 +142,12 @@ Public Class dlgFromLibrary
             lstCollection.Visible = True
             cmdLibraryCollection.Visible = False
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveFunction)
         Else
             lstCollection.Visible = False
             cmdLibraryCollection.Visible = True
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDataFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveFunction)
         End If
         TestOkEnabled()
         EnableHelp()
@@ -267,8 +272,10 @@ Public Class dlgFromLibrary
 
         If strSelectedText.Contains("(") Then
             clsDataFunction.AddParameter("X", strDataNameFromBracket)
+            clsRemoveFunction.AddParameter("X", strDataNameFromBracket, bIncludeArgumentName:=False)
         Else
             clsDataFunction.AddParameter("X", strSelectedDataName)
+            clsRemoveFunction.AddParameter("X", strSelectedDataName, bIncludeArgumentName:=False)
         End If
 
         'calling RunInternalScriptGetOutput() twice because currently it can't execute multiple lines

@@ -26,8 +26,7 @@ Public Class dlgSeasonalGraph
     Private clsDummyFunction As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
-    Private clsFacetRowOp As New ROperator
-    Private clsFacetColOp As New ROperator
+    Private clsVarsFunction As New RFunction
     Private clsGroupByFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsThemeFunction As New RFunction
@@ -52,6 +51,8 @@ Public Class dlgSeasonalGraph
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
     Private ReadOnly strNone As String = "None"
     Private bUpdateComboOptions As Boolean = True
 
@@ -108,7 +109,7 @@ Public Class dlgSeasonalGraph
         ucrChkRibbons.SetText("Ribbon(s):")
         ucrChkRibbons.AddParameterPresentCondition(True, "geom_ribbon")
         ucrChkRibbons.AddParameterPresentCondition(False, "geom_ribbon", False)
-        ucrChkRibbons.AddToLinkedControls(ucrReceiverRibbons, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRibbons.AddToLinkedControls({ucrChkFill, ucrChkAddpointRibbon, ucrReceiverRibbons}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverRibbons.SetParameter(New RParameter("y", 1))
         ucrReceiverRibbons.Selector = ucrSelectorForSeasonalGraph
@@ -125,7 +126,7 @@ Public Class dlgSeasonalGraph
         ucrReceiverFacetBy.SetParameterIsString()
         ucrReceiverFacetBy.SetValuesToIgnore({"."})
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrChkLegend.SetText("Legend:")
@@ -183,8 +184,7 @@ Public Class dlgSeasonalGraph
         clsScalefillidentityFunction = New RFunction
         clsGetObjectDataFunction = New RFunction
         clsFacetOperator = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
+        clsVarsFunction = New RFunction
         clsPipeOperator = New ROperator
 
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
@@ -215,14 +215,14 @@ Public Class dlgSeasonalGraph
         clsScalefillidentityFunction.AddParameter("guide", Chr(34) & "legend" & Chr(34), iPosition:=1)
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+
         clsFacetOperator.SetOperation("~")
         clsFacetOperator.bForceIncludeOperation = True
         clsFacetOperator.bBrackets = False
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -496,9 +496,6 @@ Public Class dlgSeasonalGraph
 
     Private Sub UpdateParameters()
         clsFacetOperator.RemoveParameterByName("var1")
-        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucrReceiverFacetBy.SetRCode(Nothing)
@@ -506,12 +503,12 @@ Public Class dlgSeasonalGraph
             Case strFacetWrap
                 ucrReceiverFacetBy.ChangeParameterName("var1")
                 ucrReceiverFacetBy.SetRCode(clsFacetOperator)
-            Case strFacetCol
+            Case strFacetCol, strFacetColAll
                 ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
-                ucrReceiverFacetBy.SetRCode(clsFacetColOp)
-            Case strFacetRow
+                ucrReceiverFacetBy.SetRCode(clsVarsFunction)
+            Case strFacetRow, strFacetRowAll
                 ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
-                ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+                ucrReceiverFacetBy.SetRCode(clsVarsFunction)
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=1)
@@ -523,12 +520,15 @@ Public Class dlgSeasonalGraph
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
 
         clsBaseOperator.RemoveParameterByName("facets")
+
         If Not ucrReceiverFacetBy.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
@@ -537,31 +537,36 @@ Public Class dlgSeasonalGraph
                     bCol = True
                 Case strFacetRow
                     bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
         End If
-        If bRow OrElse bCol Then
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
             clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.RemoveParameterByName("facets")
         End If
-        If bRow Then
-            clsFacetOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf bCol AndAlso bWrap = False Then
-            clsFacetOperator.AddParameter("left", ".", iPosition:=0)
+        If bRowAll OrElse bColAll Then
+            clsFacetFunction.AddParameter("margins", "TRUE")
         Else
-            clsFacetOperator.RemoveParameterByName("left")
+            clsFacetFunction.RemoveParameterByName("margins")
         End If
-        If bCol Then
-            clsFacetOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf bRow AndAlso bWrap = False Then
-            clsFacetOperator.AddParameter("right", ".", iPosition:=1)
+        If bRow OrElse bRowAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
         Else
-            clsFacetOperator.RemoveParameterByName("right")
+            clsFacetFunction.RemoveParameterByName("rows")
+        End If
+        If bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+        Else
+            clsFacetFunction.RemoveParameterByName("cols")
         End If
     End Sub
 
@@ -572,10 +577,14 @@ Public Class dlgSeasonalGraph
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetOperator)
-                    Case strFacetCol
-                        GetParameterValue(clsFacetColOp)
-                    Case strFacetRow
-                        GetParameterValue(clsFacetRowOp)
+                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
+                        Dim i As Integer = clsGroupByFunction.iParameterCount
+                        For Each clsTempParam As RParameter In clsVarsFunction.clsParameters
+                            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                                i = i + 1
+                            End If
+                        Next
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -593,17 +602,26 @@ Public Class dlgSeasonalGraph
         If Not bUpdateComboOptions Then
             Exit Sub
         End If
+
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
-            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
-                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
                 bUpdateComboOptions = False
                 ucrInputStation.SetName(strNone)
                 bUpdateComboOptions = True
             End If
-            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
-                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
-                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
                 ucrInputStation.SetName(strNone)
             End If
         End If
@@ -696,6 +714,7 @@ Public Class dlgSeasonalGraph
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetOperator,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        ucrReceiverFacetBy.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
 

@@ -189,6 +189,8 @@ packs <-
     "curl",
     "ClimMobTools",
     "gtsummary",
+    # quarto: R Interface to 'Quarto' Markdown Publishing System
+    "quarto",
     "PlackettLuce"
  )
 

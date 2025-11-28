@@ -43,8 +43,7 @@ Public Class dlgCumulativeDistribution
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
-    Private clsFacetRowOp As New ROperator
-    Private clsFacetColOp As New ROperator
+    Private clsVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
 
@@ -52,6 +51,8 @@ Public Class dlgCumulativeDistribution
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -159,7 +160,7 @@ Public Class dlgCumulativeDistribution
         ucr1stFactorReceiver.SetParameterPosition(1)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrSaveCumDist.SetSaveTypeAsGraph()
@@ -180,8 +181,7 @@ Public Class dlgCumulativeDistribution
         clsStatECDFPointAesFunction = New RFunction
         clsFacetFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
+        clsVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
 
@@ -238,14 +238,14 @@ Public Class dlgCumulativeDistribution
         clsLabsFunction.AddParameter("y", "NULL")
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
         clsFacetVariablesOperator.SetOperation("~")
         clsFacetVariablesOperator.bForceIncludeOperation = True
         clsFacetVariablesOperator.bBrackets = False
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -321,6 +321,7 @@ Public Class dlgCumulativeDistribution
                           clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
                            clsNewAnnotateFunction:=clsAnnotateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
 
@@ -368,21 +369,31 @@ Public Class dlgCumulativeDistribution
             AddRemoveGroupBy()
         End If
     End Sub
+
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
         If Not bUpdateComboOptions Then
             Exit Sub
         End If
+
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
-            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
-                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
                 bUpdateComboOptions = False
                 ucrInputStation.SetName(strNone)
                 bUpdateComboOptions = True
             End If
-            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
-                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
-                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
                 ucrInputStation.SetName(strNone)
             End If
         End If
@@ -393,9 +404,6 @@ Public Class dlgCumulativeDistribution
 
     Private Sub UpdateParameters()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
-        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -403,12 +411,12 @@ Public Class dlgCumulativeDistribution
             Case strFacetWrap
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
-            Case strFacetCol
+            Case strFacetCol, strFacetColAll
                 ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
-            Case strFacetRow
+                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+            Case strFacetRow, strFacetRowAll
                 ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
+                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
         End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -420,11 +428,12 @@ Public Class dlgCumulativeDistribution
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
-
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -434,31 +443,41 @@ Public Class dlgCumulativeDistribution
                     bCol = True
                 Case strFacetRow
                     bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
+
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
         End If
-        If bRow OrElse bCol Then
+
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
             clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.RemoveParameterByName("facets")
         End If
-        If bRow Then
-            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf bCol AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+
+        If bRowAll OrElse bColAll Then
+            clsFacetFunction.AddParameter("margin", "TRUE")
         Else
-            clsFacetVariablesOperator.RemoveParameterByName("left")
+            clsFacetFunction.RemoveParameterByName("margin")
         End If
-        If bCol Then
-            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf bRow AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
+
+        If bRow OrElse bRowAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
         Else
-            clsFacetVariablesOperator.RemoveParameterByName("right")
+            clsFacetFunction.RemoveParameterByName("rows")
+        End If
+
+        If bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+        Else
+            clsFacetFunction.RemoveParameterByName("cols")
         End If
     End Sub
 
@@ -484,13 +503,16 @@ Public Class dlgCumulativeDistribution
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol
-                        GetParameterValue(clsFacetColOp)
-                    Case strFacetRow
-                        GetParameterValue(clsFacetRowOp)
+                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
+                        Dim i As Integer = clsGroupByFunction.iParameterCount
+                        For Each clsTempParam As RParameter In clsVarsFunction.clsParameters
+                            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                                i = i + 1
+                            End If
+                        Next
                 End Select
             End If
-
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             Else
@@ -499,7 +521,6 @@ Public Class dlgCumulativeDistribution
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
-
         SetPipeAssignTo()
     End Sub
 

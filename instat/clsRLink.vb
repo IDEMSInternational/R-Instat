@@ -19,6 +19,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
 Imports RInsightF461
+Imports instat.Translations
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -198,7 +199,7 @@ Public Class RLink
             'todo. should we check the R version if R has been successfully bundled with R-Instat?
             bREngineInitialised = CheckIfRVersionIsSupported()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
+            MsgBoxTranslate(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
                    "R-Instat requires version " & strRVersionRequired & " of R." & Environment.NewLine &
                    "Note that R-Instat does not work with R below 4.4.1. We recommend using R " & strRBundledVersion &
                    ".  Try rerunning the installation to install R " & strRBundledVersion & " or download R " &
@@ -225,13 +226,13 @@ Public Class RLink
             End If
 
             If String.IsNullOrEmpty(strMajor) OrElse String.IsNullOrEmpty(strMinor) Then
-                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
+                MsgBoxTranslate("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
                                        "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
                                        strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
                                        " and restart R-Instat.",
                                        MsgBoxStyle.Critical, "R Version error.")
             ElseIf strMajor <> strRVersionMajorRequired OrElse strMinor.Substring(0, 1) < strRVersionMinorRequired Then
-                MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & Environment.NewLine &
+                MsgBoxTranslate("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & Environment.NewLine &
                        "R-Instat requires at least version " & strRVersionRequired & " or greater." & Environment.NewLine &
                        "Try reruning the installation to install an updated version of R or download R from " &
                        "https://cran.r-project.org/bin/windows/base/" & strRVersionRequired & "and restart R-Instat.",
@@ -240,7 +241,7 @@ Public Class RLink
                 bSupported = True
             End If
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
+            MsgBoxTranslate(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
         End Try
 
         Return bSupported
@@ -388,7 +389,7 @@ Public Class RLink
             Try
                 clsEngine.Dispose()
             Catch ex As Exception
-                MsgBox("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
+                MsgBoxTranslate("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
             End Try
         End If
     End Sub
@@ -679,7 +680,7 @@ Public Class RLink
                 End Using
             End If
         Catch ex As Exception
-            'MsgBox("Could not add script to auto save log file at:" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
+            'MsgBoxTranslate("Could not add script to auto save log file at:" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
             bAutoSaveLogExists = False
         Finally
             bFirstLogCode = False
@@ -767,7 +768,7 @@ Public Class RLink
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
-            MsgBox(e.Message & Environment.NewLine &
+            MsgBoxTranslate(e.Message & Environment.NewLine &
                    "The error occurred in attempting to run the following R command:" &
                    Environment.NewLine & clsRStatement.Text, MsgBoxStyle.Critical,
                    "Error running R command")
@@ -871,7 +872,7 @@ Public Class RLink
                 LogScript(strRStatement, strRStatementComment)
 
             Catch e As Exception
-                MsgBox(e.Message & Environment.NewLine &
+                MsgBoxTranslate(e.Message & Environment.NewLine &
                        "The error occurred in attempting to run the following R command(s):" &
                        Environment.NewLine &
                        strRStatement, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -952,7 +953,7 @@ Public Class RLink
 
         'TODO SJL 20/04/20 - is the commented out check below needed?
         'If strScript.Length > 2000 Then
-        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        '    MsgBoxTranslate("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
 
         Try
             Dim strOutput As String = ""
@@ -1017,7 +1018,7 @@ Public Class RLink
 
 
         Catch e As Exception
-            MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+            MsgBoxTranslate(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
         End Try
 
         AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
@@ -1125,7 +1126,7 @@ Public Class RLink
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
             If Not bSilent Then
-                MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                MsgBoxTranslate(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End If
             chrTemp = Nothing
         End Try
@@ -1242,7 +1243,7 @@ Public Class RLink
                     End Using
                     bDebugLogExists = True
                 Catch ex As Exception
-                    MsgBox("Could not create debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                    MsgBoxTranslate("Could not create debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
                     bDebugLogExists = False
                 Finally
                     bFirstRCode = False
@@ -1259,7 +1260,7 @@ Public Class RLink
                     ts.Stop()
                 End If
             Catch ex As Exception
-                MsgBox("Could not add text to debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                MsgBoxTranslate("Could not add text to debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
             End Try
             Try
                 ' if script should run in a separate thread
@@ -1271,7 +1272,7 @@ Public Class RLink
                                                           Catch ex As Exception
                                                               If Not bSilent Then
                                                                   bErrorMessageOpen = True
-                                                                  MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                                                                  MsgBoxTranslate(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                                                                   bErrorMessageOpen = False
                                                               End If
                                                               strTempError = ex.Message
@@ -1321,7 +1322,7 @@ Public Class RLink
                 End If
             Catch ex As Exception
                 If Not bSilent Then
-                    MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                    MsgBoxTranslate(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End If
                 strTempError = ex.Message
                 bReturn = False
@@ -1351,7 +1352,7 @@ Public Class RLink
                 expTemp = clsEngine.GetSymbol(strSymbol)
             Catch ex As Exception
                 If Not bSilent Then
-                    MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to retrieve:" & strSymbol, MsgBoxStyle.Critical, "Error retrieving R variable")
+                    MsgBoxTranslate(ex.Message & Environment.NewLine & "The error occurred in attempting to retrieve:" & strSymbol, MsgBoxStyle.Critical, "Error retrieving R variable")
                 End If
             End Try
         End If
@@ -1384,7 +1385,7 @@ Public Class RLink
     '''                                     Only used if <paramref name="strType"/> is 
     '''                                     'nc_dim_variables'.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "", Optional strObjectName As String = "")
         Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -1410,6 +1411,11 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
                     'TODO. why not apply or not the column selection at the R level.
                     clsGetItems.AddParameter("use_current_column_selection", If(bUseColumnSelection, "TRUE", "FALSE"))
+
+                    If strObjectName <> "" Then
+                        'TODO. After refactoring data book code, add the `strObjectName` parameter here
+                    End If
+
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
@@ -1473,6 +1479,15 @@ Public Class RLink
             If strExcludedItems IsNot Nothing AndAlso strExcludedItems.Count > 0 Then
                 clsGetItems.AddParameter("excluded_items", GetListAsRString(strExcludedItems.ToList()))
             End If
+
+            'TODO. Temporarily overwrite the the `clsGetItems` until implementation of table column names is done at the data book level
+            If Not String.IsNullOrEmpty(strObjectName) Then
+                Dim clsNewGetTableValues As New RFunction
+                clsNewGetTableValues.SetRCommand("list")
+                clsNewGetTableValues.AddParameter("x", strDataFrameName & " = colnames(" & "data_book$get_object_data(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", object_name = " & Chr(34) & strObjectName & Chr(34) & ", as_file = FALSE)[['_data']]" & ")", bIncludeArgumentName:=False)
+                clsGetItems = clsNewGetTableValues
+            End If
+
             expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
             If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
                 vecColumns = expItems.AsList
@@ -1491,7 +1506,7 @@ Public Class RLink
                                 lstView.Items(j).Group = lstView.Groups(i)
                             End If
                         Next
-                        If strType = "column" Then
+                        If strType = "column" AndAlso String.IsNullOrEmpty(strObjectName) Then
                             strColumnsRList = GetListAsRString(chrCurrColumns.ToList)
                             clsGetColumnTypes.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
                             clsGetColumnTypes.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
@@ -1532,6 +1547,7 @@ Public Class RLink
                 ' This has been tested on high resolution screens but needs further testing
                 ' and possibly a better solution.
                 lstView.Columns(0).Width = lstView.Columns(0).Width - 2
+
                 If strTopItemText <> "" Then
                     lviTemp = lstView.FindItemWithText(strTopItemText)
                     If lviTemp IsNot Nothing Then
@@ -2185,7 +2201,7 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     Public Sub SetWaitDelayTime(iTimeInSeconds As Integer)
         If iTimeInSeconds <= 0 Then
-            MsgBox("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
+            MsgBoxTranslate("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
             iTimeInSeconds = 2
         End If
         iWaitDelay = iTimeInSeconds

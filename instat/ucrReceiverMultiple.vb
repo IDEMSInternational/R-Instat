@@ -318,9 +318,9 @@ Public Class ucrReceiverMultiple
         Return lstColumnFunctions
     End Function
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         Dim strTempBuilder As New Text.StringBuilder
-        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
+        Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
 
         If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
             strTempBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
@@ -334,6 +334,24 @@ Public Class ucrReceiverMultiple
             strTempBuilder.Append(")")
         End If
         Return strTempBuilder.ToString()
+    End Function
+
+    Public Function GetVariableNamesAsAddition(Optional bWithQuotes As Boolean = True) As String
+        Dim strBuilder As New Text.StringBuilder
+        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
+
+        If lstSelectedVariables.Items.Count = 0 Then
+            Return ""
+        ElseIf lstSelectedVariables.Items.Count = 1 Then
+            strBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
+        Else
+            For Each lvi As ListViewItem In lstSelectedVariables.Items
+                strBuilder.Append(strQuoteHolder).Append(lvi.Text).Append(strQuoteHolder).Append("+")
+            Next
+            strBuilder.Length -= 1 ' remove last "+"
+        End If
+
+        Return strBuilder.ToString()
     End Function
 
     Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()

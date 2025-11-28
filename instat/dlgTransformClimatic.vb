@@ -304,6 +304,7 @@ Public Class dlgTransformClimatic
         ucrInputSpellLower.SetParameter(New RParameter("min", 1))
         dctInputLowerSpell.Add("0.85", "0.85")
         dctInputLowerSpell.Add("0", "0")
+        dctInputLowerSpell.Add("0.5", "0.5")
         dctInputLowerSpell.Add("2.45", "2.45")
         dctInputLowerSpell.Add("4.85", "4.85")
         dctInputLowerSpell.Add("9.85", "9.85")
@@ -1067,29 +1068,36 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlDegree.ControlValueChanged ', ucrPnlEvap.ControlValueChanged
+        ucrBase.clsRsyntax.ClearCodes()
+
         If rdoCumulative.Checked Then
             CumulativeFunctions()
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoCount.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoMoving.Checked Then
             RasterFunction()
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoSpell.Checked Then
             clsRTransform.AddParameter("function_exp", Chr(34) & "instatClimatic::spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoMultSpells.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRollConsecutiveSumFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRollConsecutiveSumFunction
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         ElseIf rdoWaterBalance.Checked Then
             clsWaterBalanceFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
             clsWaterBalanceFunction.AddParameter("calc", strWB, iPosition:=0)
@@ -1105,6 +1113,7 @@ Public Class dlgTransformClimatic
         ElseIf rdoDegree.Checked Then
             DegreeFunctions()
             clsTransformCheck = clsRTransform
+            ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
         End If
         AddCalculate()
         AutoFill()
@@ -1241,10 +1250,9 @@ Public Class dlgTransformClimatic
         RainfallChange()
     End Sub
 
-    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
         InputConditionOptions()
     End Sub
-
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
         RainDays()
         ReduceWaterBalance()
@@ -1263,17 +1271,17 @@ Public Class dlgTransformClimatic
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrInputSum_ControlValueChanged(ucrchangedControl As ucrCore)
+    Private Sub ucrInputSum_ControlValueChanged(ucrchangedControl As ucrCore) Handles ucrInputSum.ControlValueChanged
         MovingColNames()
     End Sub
 
-    Private Sub ucrChkGroupByYear_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkGroupByYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGroupByYear.ControlValueChanged
         GroupByYear()
         CheckGroupByYearEnabled()
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged, ucrPnlEvap.ControlContentsChanged
         ReduceWaterBalance()
     End Sub
 
@@ -1287,7 +1295,7 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrChkCircular_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkCircular_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCircular.ControlValueChanged
         RasterFunction()
     End Sub
 
@@ -1321,7 +1329,7 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrInputCumulative_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputCumulative_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCumulative.ControlValueChanged
         CumulativeColNames()
         CumulativeFunctions()
     End Sub
@@ -1462,15 +1470,15 @@ Public Class dlgTransformClimatic
         clsEndSeasonRainMaxCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged
         ReduceWaterBalance()
     End Sub
 
-    Private Sub rdoEvapValue_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub rdoEvapValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEvapValue.CheckedChanged, rdoEvapVariable.CheckedChanged
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrInputEvaporation_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlValueChanged, ucrReceiverEvap.ControlValueChanged
         ReduceWaterBalance()
         If Me.Visible Then
             CheckForMissingValues()
@@ -1481,7 +1489,7 @@ Public Class dlgTransformClimatic
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrNudWB_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrNudWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWB.ControlValueChanged
         ReduceWaterBalance()
     End Sub
 
@@ -1491,11 +1499,11 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlValueChanged
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrNudWBCapacity_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrNudWBCapacity_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBCapacity.ControlValueChanged
         ReduceWaterBalance()
     End Sub
 
@@ -1575,7 +1583,7 @@ Public Class dlgTransformClimatic
                 Try
                     Dim symResult As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyFunction.ToScript)
                     If symResult.AsLogical()(0) Then
-                        MsgBox("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
+                        MsgBoxTranslate("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
                     End If
                 Catch ex As Exception
                     ' Do nothing on error — no message
