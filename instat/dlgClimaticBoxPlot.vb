@@ -822,17 +822,19 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub ucrReceiverWithinYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWithinYear.ControlValueChanged
-        If Not ucrReceiverWithinYear.IsEmpty Then
-            If clsMutate2Function.ContainsParameter(strWithinYearVariable) Then
-                clsMutate2Function.RemoveParameterByName(strWithinYearVariable)
-            End If
-            Dim strNewWithinYearName As String = ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False)
-            clsMutate2Function.AddParameter(strNewWithinYearName, clsRFunctionParameter:=clsAsFactor2Function, iPosition:=0)
-            strWithinYearVariable = strNewWithinYearName
-        Else
-            If strWithinYearVariable <> "" Then
-                clsMutate2Function.RemoveParameterByName(strWithinYearVariable)
-                strWithinYearVariable = ""
+        If clsMutate2Function IsNot Nothing Then
+            If Not ucrReceiverWithinYear.IsEmpty Then
+                If clsMutate2Function.ContainsParameter(strWithinYearVariable) Then
+                    clsMutate2Function.RemoveParameterByName(strWithinYearVariable)
+                End If
+                Dim strNewWithinYearName As String = ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False)
+                clsMutate2Function.AddParameter(strNewWithinYearName, clsRFunctionParameter:=clsAsFactor2Function, iPosition:=0)
+                strWithinYearVariable = strNewWithinYearName
+            Else
+                If strWithinYearVariable <> "" Then
+                    clsMutate2Function.RemoveParameterByName(strWithinYearVariable)
+                    strWithinYearVariable = ""
+                End If
             End If
         End If
     End Sub
