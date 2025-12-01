@@ -724,7 +724,8 @@ Public Class dlgLinePlot
             (rdoDumbbell.Checked AndAlso (ucrReceiverX.IsEmpty() OrElse ucrReceiverSlopeY.IsEmpty() OrElse
             ucrReceiverXEnd.IsEmpty())) OrElse (rdoSlope.Checked AndAlso (ucrReceiverSlopeX.IsEmpty() OrElse
             ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverSlopeColour.IsEmpty())) OrElse (rdoLinerange.Checked AndAlso
-            (ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) Then
+            (ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) OrElse
+            (ucrChkAddSlider.Checked AndAlso ucrReceiverFrame.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -847,7 +848,7 @@ Public Class dlgLinePlot
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
         ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged,
         ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged,
-        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged ', ucrReceiverYVar.ControlContentsChanged
+        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverFrame.ControlContentsChanged, ucrChkAddSlider.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1366,7 +1367,7 @@ Public Class dlgLinePlot
             ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotlyFunction)
             ucrSave.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Html)
         Else
-            ucrReceiverFrame.Visible = False
+                ucrReceiverFrame.Visible = False
             clsRaesFunction.RemoveParameterByName("frame")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBaseOperator)
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
