@@ -203,7 +203,7 @@ Public Class dlgPICSARainfall
 
         ucrReceiverIncludeStatus.SetLinkedDisplayControl(lblIncludeStatus)
 
-        ucrChkIncludeStatus.SetText("Include Status")
+        ucrChkIncludeStatus.SetText("Include Status Variable")
         ucrChkIncludeStatus.AddParameterPresentCondition(True, "geom_rug")
         ucrChkIncludeStatus.AddParameterPresentCondition(False, "geom_rug", False)
         ucrChkIncludeStatus.AddToLinkedControls(ucrReceiverIncludeStatus, {True}, bNewLinkedHideIfParameterMissing:=True)

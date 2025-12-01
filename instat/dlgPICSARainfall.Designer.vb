@@ -132,24 +132,24 @@ Partial Class dlgPICSARainfall
         Me.contextMenuStripOptions.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(241, 133)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(194, 100)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(240, 32)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(193, 32)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemLineOptions
         '
         Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(240, 32)
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(193, 32)
         Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
         'toolStripMenuItemPointOption
         '
         Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(240, 32)
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(193, 32)
         Me.toolStripMenuItemPointOption.Text = "Point Options"
         '
         'lblIncludeStatus
@@ -159,10 +159,10 @@ Partial Class dlgPICSARainfall
         Me.lblIncludeStatus.Location = New System.Drawing.Point(372, 478)
         Me.lblIncludeStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIncludeStatus.Name = "lblIncludeStatus"
-        Me.lblIncludeStatus.Size = New System.Drawing.Size(189, 20)
+        Me.lblIncludeStatus.Size = New System.Drawing.Size(122, 20)
         Me.lblIncludeStatus.TabIndex = 14
         Me.lblIncludeStatus.Tag = ""
-        Me.lblIncludeStatus.Text = "Include Status (Optional):"
+        Me.lblIncludeStatus.Text = "Status Variable:"
         '
         'lblYVar
         '
