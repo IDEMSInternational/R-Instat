@@ -714,7 +714,6 @@ Public Class dlgLinePlot
             ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         End If
         SetGroupParam()
-        'SettingBaseFunction()
     End Sub
 
     Private Sub TestOkEnabled()
