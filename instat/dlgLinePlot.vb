@@ -1368,6 +1368,7 @@ Public Class dlgLinePlot
         Else
                 ucrReceiverFrame.Visible = False
             clsRaesFunction.RemoveParameterByName("frame")
+            clsGgplotlyFunction.RemoveParameterByName("p")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBaseOperator)
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
             ucrSave.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
