@@ -1134,6 +1134,7 @@ Public Class dlgPICSARainfall
             clsEqualToOperator.AddParameter("left", ucrReceiverIncludeStatus.GetVariableNames, iPosition:=0, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=6)
         Else
+            clsEqualToOperator.RemoveParameterByName("left")
             clsBaseOperator.RemoveParameterByName("geom_rug")
         End If
     End Sub
