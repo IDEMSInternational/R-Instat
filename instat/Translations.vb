@@ -121,7 +121,7 @@ Public Class Translations
                                            ByRef TranslatedPrompt As String,
                                            ByRef TranslatedTitle As String)
 
-        ' --- Prompt ---
+        ' ---Translate Prompt: The main text of the message in the dialogue box---
         If String.IsNullOrEmpty(Prompt) Then
             TranslatedPrompt = ""
         Else
@@ -139,7 +139,7 @@ Public Class Translations
             Next
             TranslatedPrompt = String.Join(Environment.NewLine, lines)
         End If
-        ' --- Title ---
+        ' --- Translate Title: The title of the pop up message dialogue box ---
         If String.IsNullOrEmpty(Title) Then
             TranslatedTitle = ""
         Else
@@ -157,10 +157,8 @@ Public Class Translations
         TranslatePromptAndTitle(Prompt, Title, translatedPrompt, translatedTitle)
 
         Dim msgButtons As MessageBoxButtons = ConvertMsgBoxStyleToButtons(Buttons)
-        Dim msgIcon As MessageBoxIcon = ConvertMsgBoxStyleToIcon(Buttons)
-
         Dim result As DialogResult =
-        frmButtonOkYesNo.ShowDialog(translatedPrompt, translatedTitle, msgButtons, msgIcon)
+        frmButtonOkYesNo.ShowDialog(translatedPrompt, translatedTitle, msgButtons)
 
         Return ConvertDialogResultToMsgBoxResult(result)
     End Function
@@ -177,16 +175,15 @@ Public Class Translations
         Return frmButtonOkYesNo.ShowDialog(translatedPrompt, translatedTitle, Buttons, Icon)
     End Function
 
-
-
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
     '''     Converts MsgBoxStyle to MessageBoxButtons.
     ''' </summary>
     '''--------------------------------------------------------------------------------------------
     Private Shared Function ConvertMsgBoxStyleToButtons(style As MsgBoxStyle) As MessageBoxButtons
-        ' Extract button part (lower 4 bits)
-        Dim buttonPart As Integer = style And &HF
+        ' Extract only the buttons included in MsgBoxStyle and converts them to MessageBoxButtons. In our case we just have Ok or Yes and No buttons.
+        ' 'We can have others combinaison like OkCancel, YesCancel, YesExit, OkExit...etc but R-Instat for now has Ok or Yes and No.
+        Dim buttonPart As Integer = style
 
         Select Case buttonPart
             Case MsgBoxStyle.OkOnly
@@ -195,29 +192,6 @@ Public Class Translations
                 Return MessageBoxButtons.YesNo
             Case Else
                 Return MessageBoxButtons.OK
-        End Select
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   
-    '''     Converts MsgBoxStyle to MessageBoxIcon.
-    ''' </summary>
-    '''--------------------------------------------------------------------------------------------
-    Private Shared Function ConvertMsgBoxStyleToIcon(style As MsgBoxStyle) As MessageBoxIcon
-        ' Extract icon part (bits 4-7)
-        Dim iconPart As Integer = style And &HF0
-
-        Select Case iconPart
-            Case MsgBoxStyle.Critical
-                Return MessageBoxIcon.Error
-            Case MsgBoxStyle.Question
-                Return MessageBoxIcon.Question
-            Case MsgBoxStyle.Exclamation
-                Return MessageBoxIcon.Warning
-            Case MsgBoxStyle.Information
-                Return MessageBoxIcon.Information
-            Case Else
-                Return MessageBoxIcon.None
         End Select
     End Function
 

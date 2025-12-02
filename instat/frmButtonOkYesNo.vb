@@ -14,8 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Windows.Forms
-Imports System.Media
 Imports instat.Translations
 
 Public Class frmButtonOkYesNo
@@ -31,7 +29,6 @@ Public Class frmButtonOkYesNo
         lblMessage.Text = prompt
         ResizeDialog(prompt, icon)
         SetupButtons(buttons)
-        PlayIconSound(icon)
         MyBase.ShowDialog()
         Return _dialogResult
     End Function
@@ -93,19 +90,6 @@ Public Class frmButtonOkYesNo
         cmdOk.Top = iposition
         cmdYes.Top = iposition
         cmdNo.Top = iposition
-    End Sub
-
-    Private Sub PlayIconSound(icon As MessageBoxIcon)
-        Select Case icon
-            Case MessageBoxIcon.Error
-                SystemSounds.Hand.Play()
-            Case MessageBoxIcon.Warning
-                SystemSounds.Exclamation.Play()
-            Case MessageBoxIcon.Question
-                SystemSounds.Question.Play()
-            Case MessageBoxIcon.Information
-                SystemSounds.Asterisk.Play()
-        End Select
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
