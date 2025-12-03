@@ -62,7 +62,6 @@ Public Class dlgLinePlot
     Private clsGeomErrorbarFunction As New RFunction
     Private clsGeomPointrangeFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsGgplotlyFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
@@ -186,11 +185,6 @@ Public Class dlgLinePlot
         ucrReceiverYMin.SetParameterIsString()
         ucrReceiverYMin.SetIncludedDataTypes({"numeric"})
 
-        ucrReceiverFrame.SetParameter(New RParameter("frame", 4))
-        ucrReceiverFrame.Selector = ucrLinePlotSelector
-        ucrReceiverFrame.bWithQuotes = False
-        ucrReceiverFrame.SetParameterIsString()
-
         clsGeomPointFunc.SetPackageName("ggplot2")
         clsGeomPointFunc.SetRCommand("geom_point")
         clsGeomPointParam.SetArgumentName("geom_point")
@@ -214,13 +208,6 @@ Public Class dlgLinePlot
         ucrChkAddSE.SetText("Add SE")
         ucrChkAddSE.SetParameter(New RParameter("se", 1))
         ucrChkAddSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-
-        ucrChkAddSlider.SetText("Add Slider")
-        ucrChkAddSlider.AddParameterValuesCondition(True, "checked", "True")
-        ucrChkAddSlider.AddParameterValuesCondition(False, "checked", "False")
-
-        ucrChkAddSlider.AddToLinkedControls({ucrReceiverFrame}, {True}, bNewLinkedAddRemoveParameter:=True)
-        ucrReceiverFrame.SetLinkedDisplayControl(lblFrame)
 
         ucrSave.SetPrefix("line_plot")
         ucrSave.SetIsComboBox()
@@ -526,7 +513,6 @@ Public Class dlgLinePlot
         clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
-        clsGgplotlyFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -658,25 +644,18 @@ Public Class dlgLinePlot
         clsGeomPointrangeFunction.SetPackageName("ggplot2")
         clsGeomPointrangeFunction.SetRCommand("geom_pointrange")
 
-        clsGgplotlyFunction.SetPackageName("plotly")
-        clsGgplotlyFunction.SetRCommand("ggplotly")
-
         clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         SetGroupParam()
-        SettingBaseFunction()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsGgSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverSlopeY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
 
-        ucrSave.AddAdditionalRCode(clsGgplotlyFunction, iAdditionalPairNo:=1)
-
         ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverFrame.SetRCode(clsRaesFunction, bReset)
         ucrReceiverSlopeY.SetRCode(clsGgSlopeFunction, bReset)
         ucrReceiverSlopeX.SetRCode(clsGgSlopeFunction, bReset)
         ucrReceiverSlopeColour.SetRCode(clsGgSlopeFunction, bReset)
@@ -705,7 +684,6 @@ Public Class dlgLinePlot
             ucrChkRibbon.SetRCode(clsBaseOperator, bReset)
             ucrChkPathOrStep.SetRCode(clsBaseOperator, bReset)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
-            ucrChkAddSlider.SetRCode(clsDummyFunction, bReset)
             ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
             ucrChkAddLineLineRange.SetRCode(clsBaseOperator, bReset)
             ucrChkAddLine.SetRCode(clsBaseOperator, bReset)
@@ -723,8 +701,7 @@ Public Class dlgLinePlot
             (rdoDumbbell.Checked AndAlso (ucrReceiverX.IsEmpty() OrElse ucrReceiverSlopeY.IsEmpty() OrElse
             ucrReceiverXEnd.IsEmpty())) OrElse (rdoSlope.Checked AndAlso (ucrReceiverSlopeX.IsEmpty() OrElse
             ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverSlopeColour.IsEmpty())) OrElse (rdoLinerange.Checked AndAlso
-            (ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) OrElse
-            (ucrChkAddSlider.Checked AndAlso ucrReceiverFrame.IsEmpty) Then
+            (ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -847,7 +824,7 @@ Public Class dlgLinePlot
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
         ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged,
         ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged,
-        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverFrame.ControlContentsChanged, ucrChkAddSlider.ControlContentsChanged
+        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1348,30 +1325,5 @@ Public Class dlgLinePlot
 
     Private Sub ucrChkAddLineLineRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLineLineRange.ControlValueChanged
         AddRemoveLineOnLineRange()
-    End Sub
-
-    Private Sub ucrChkAddSlider_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddSlider.ControlValueChanged
-        SettingBaseFunction()
-    End Sub
-
-    Private Sub SettingBaseFunction()
-        If ucrChkAddSlider.Checked Then
-            ucrReceiverFrame.Visible = True
-            ucrReceiverFrame.SetMeAsReceiver()
-            'frame adds a slider to the interactive plot
-            clsRaesFunction.AddParameter("frame", ucrReceiverFrame.GetVariableNames(False), iPosition:=4)
-
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsBaseOperator)
-            clsGgplotlyFunction.AddParameter("p", "last_graph", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotlyFunction)
-            ucrSave.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Html)
-        Else
-                ucrReceiverFrame.Visible = False
-            clsRaesFunction.RemoveParameterByName("frame")
-            clsGgplotlyFunction.RemoveParameterByName("p")
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBaseOperator)
-            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-            ucrSave.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
-        End If
     End Sub
 End Class

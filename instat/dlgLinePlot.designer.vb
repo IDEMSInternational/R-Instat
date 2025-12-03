@@ -147,9 +147,6 @@ Partial Class dlgLinePlot
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
         Me.ucrChkAddLineLineRange = New instat.ucrCheck()
-        Me.ucrChkAddSlider = New instat.ucrCheck()
-        Me.ucrReceiverFrame = New instat.ucrReceiverSingle()
-        Me.lblFrame = New System.Windows.Forms.Label()
         Me.grpSmoothOptions.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -978,7 +975,7 @@ Partial Class dlgLinePlot
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(9, 504)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 479)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(401, 24)
@@ -1013,7 +1010,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 529)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 504)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 68
@@ -1306,47 +1303,11 @@ Partial Class dlgLinePlot
         Me.ucrChkAddLineLineRange.Size = New System.Drawing.Size(77, 24)
         Me.ucrChkAddLineLineRange.TabIndex = 84
         '
-        'ucrChkAddSlider
-        '
-        Me.ucrChkAddSlider.AutoSize = True
-        Me.ucrChkAddSlider.Checked = False
-        Me.ucrChkAddSlider.Location = New System.Drawing.Point(9, 479)
-        Me.ucrChkAddSlider.Name = "ucrChkAddSlider"
-        Me.ucrChkAddSlider.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkAddSlider.TabIndex = 85
-        '
-        'ucrReceiverFrame
-        '
-        Me.ucrReceiverFrame.AutoSize = True
-        Me.ucrReceiverFrame.frmParent = Me
-        Me.ucrReceiverFrame.Location = New System.Drawing.Point(205, 479)
-        Me.ucrReceiverFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFrame.Name = "ucrReceiverFrame"
-        Me.ucrReceiverFrame.Selector = Nothing
-        Me.ucrReceiverFrame.Size = New System.Drawing.Size(110, 20)
-        Me.ucrReceiverFrame.strNcFilePath = ""
-        Me.ucrReceiverFrame.TabIndex = 86
-        Me.ucrReceiverFrame.ucrSelector = Nothing
-        '
-        'lblFrame
-        '
-        Me.lblFrame.AutoSize = True
-        Me.lblFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFrame.Location = New System.Drawing.Point(160, 484)
-        Me.lblFrame.Name = "lblFrame"
-        Me.lblFrame.Size = New System.Drawing.Size(39, 13)
-        Me.lblFrame.TabIndex = 87
-        Me.lblFrame.Tag = ""
-        Me.lblFrame.Text = "Frame:"
-        '
         'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(423, 588)
-        Me.Controls.Add(Me.lblFrame)
-        Me.Controls.Add(Me.ucrReceiverFrame)
-        Me.Controls.Add(Me.ucrChkAddSlider)
+        Me.ClientSize = New System.Drawing.Size(423, 561)
         Me.Controls.Add(Me.ucrChkAddLineLineRange)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
@@ -1554,7 +1515,4 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkAddLineLineRange As ucrCheck
-    Friend WithEvents ucrChkAddSlider As ucrCheck
-    Friend WithEvents ucrReceiverFrame As ucrReceiverSingle
-    Friend WithEvents lblFrame As Label
 End Class
