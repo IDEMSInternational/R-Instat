@@ -26,7 +26,9 @@ Public Class dlgClimaticSummary
     Private clsDefaultFunction, clsIfElseFirstDoyFilledFunction, clsConcFunction, clsSummariesList,
         clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert,
         clsDayFilterCalcFromList, clsAddDateFunction,
-        clsDummyFunction As New RFunction
+        clsDummyFunction, clsGetDataFrameFunction,
+        clsGetVariablesMetadataFunction, clsGetSummaryVariablesFunction,
+        clsGetDailyDataCalculationFunction, clsGetClimaticSummariesFunction, clsLinkColsFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -145,13 +147,26 @@ Public Class dlgClimaticSummary
         ucrChkAddDateColumn.AddParameterPresentCondition(True, "data_name", True)
         ucrChkAddDateColumn.AddParameterPresentCondition(False, "data_name", False)
 
+        ucrChkDefinitions.SetText("Definitions")
+        ucrChkDefinitions.AddParameterValuesCondition(True, "def", "True")
+        ucrChkDefinitions.AddParameterValuesCondition(False, "def", "False")
+
         'linking controls
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverYear}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoAnnualWithinYear, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrChkAddDateColumn}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkDefinitions}, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
         ucrInputFilterPreview.IsReadOnly = True
+
+        ucrChkDefinitions.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveObject.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
+        ucrSaveObject.SetLabelText("Definition Object Name:")
+        ucrSaveObject.SetIsComboBox()
+        ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -168,6 +183,16 @@ Public Class dlgClimaticSummary
         clsFromConditionOperator = New ROperator
         clsToConditionOperator = New ROperator
 
+        clsGetDataFrameFunction = New RFunction
+        clsGetSummaryVariablesFunction = New RFunction
+        clsGetDailyDataCalculationFunction = New RFunction
+        clsGetVariablesMetadataFunction = New RFunction
+        clsGetClimaticSummariesFunction = New RFunction
+        clsLinkColsFunction = New RFunction
+
+        Dim strLinkeddata As String = "linked_data_name"
+        Dim summary_data As String = "summary_data"
+
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
@@ -181,6 +206,8 @@ Public Class dlgClimaticSummary
 
         clsDummyFunction.AddParameter("checked", "annual", iPosition:=0)
         clsDummyFunction.AddParameter("day", "False", iPosition:=1)
+
+        clsDummyFunction.AddParameter("def", "false", iPosition:=2)
 
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsFromAndToConditionOperator.bToScriptAsRString = True
@@ -212,6 +239,34 @@ Public Class dlgClimaticSummary
         clsDefaultFactors.SetRCommand("c")
         clsConcFunction.SetRCommand("c")
 
+        'extremes_temps <- get_climatic_summaries_definition(calculations_data = calculations_data,
+        '                                          variables_metadata = variables_metadata,
+        '                                          summary_variables = summary_variables,
+        '                                          daily_data_calculation = daily_data_calculation)
+
+        'Get DataFrame
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_data_frame")
+        clsGetDataFrameFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
+        clsGetDataFrameFunction.SetAssignTo("calculations_data")
+        'Varibales MetaData
+        clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_variables_metadata")
+        clsGetVariablesMetadataFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
+        'Summary Variables
+        clsGetSummaryVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_summary_variables")
+        clsGetSummaryVariablesFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
+        clsGetSummaryVariablesFunction.SetAssignTo("summary_variables")
+        'daily_data_calculation
+        clsGetDailyDataCalculationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_daily_data_calculation")
+        clsGetDailyDataCalculationFunction.AddParameter(summary_data, strLinkeddata, iPosition:=0)
+        clsGetDailyDataCalculationFunction.SetAssignTo("daily_data_calculation")
+
+        'get_climatic_summaries_definition
+        clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
+        clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1)
+        clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsGetSummaryVariablesFunction, iPosition:=2)
+        clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyDataCalculationFunction, iPosition:=3)
+
         clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsAddDateFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
         clsAddDateFunction.AddParameter("summaries", Chr(34) & "summary_min" & Chr(34), iPosition:=4)
@@ -228,12 +283,15 @@ Public Class dlgClimaticSummary
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElements.SetRCode(clsDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
+        ucrSaveObject.AddAdditionalRCode(clsGetClimaticSummariesFunction, iAdditionalPairNo:=1)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
         ucrPnlAnnualWithin.SetRCode(clsDummyFunction, bReset)
+        ucrSaveObject.SetRCode(clsGetClimaticSummariesFunction, bReset)
         If bReset Then
             ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
         End If
         AddDateDoy()
         UpdateDateDoy()
@@ -332,6 +390,11 @@ Public Class dlgClimaticSummary
             clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
         End If
         cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
+        AddSaveDefinitionOptions()
+    End Sub
+
+    Private Sub Receivers_controlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+
     End Sub
 
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
@@ -359,6 +422,7 @@ Public Class dlgClimaticSummary
         End If
         AddDateDoy()
         UpdateDateDoy()
+        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
@@ -385,12 +449,15 @@ Public Class dlgClimaticSummary
         End If
         AddDateDoy()
         UpdateDateDoy()
+        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub SetFactors()
         If bRCodeSet Then
+            clsLinkColsFunction.ClearParameters()
             If Not ucrReceiverStation.IsEmpty Then
                 clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
+                clsLinkColsFunction.AddParameter("station", ucrReceiverStation.GetVariableNames)
             Else
                 clsDefaultFactors.RemoveParameterByName("station")
             End If
@@ -399,14 +466,18 @@ Public Class dlgClimaticSummary
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("date")
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+                clsLinkColsFunction.AddParameter("year", ucrReceiverYear.GetVariableNames, bIncludeArgumentName:=False)
             ElseIf rdoAnnualWithinYear.Checked Then
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
                 clsDefaultFactors.RemoveParameterByName("date")
+                clsLinkColsFunction.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False)
+                clsLinkColsFunction.AddParameter("year", ucrReceiverYear.GetVariableNames, bIncludeArgumentName:=False)
             ElseIf rdoWithinYear.Checked Then
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
                 clsDefaultFactors.RemoveParameterByName("date")
+                clsLinkColsFunction.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False)
             ElseIf rdoStation.Checked Then
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("year")
@@ -415,6 +486,7 @@ Public Class dlgClimaticSummary
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter("date", ucrReceiverDOY.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+                clsLinkColsFunction.AddParameter("date", ucrReceiverDOY.GetVariableNames, bIncludeArgumentName:=False)
             End If
         End If
     End Sub
@@ -431,6 +503,46 @@ Public Class dlgClimaticSummary
         SetFactors()
         AddDateDoy()
         UpdateDateDoy()
+        AddSaveDefinitionOptions()
+    End Sub
+
+    Private Sub AddSaveDefinitionOptions()
+        ' calculated_data <- data_book$get_calculations("<resulting data frame>")
+        clsGetDataFrameFunction.AddParameter("summary_data", Chr(34) & ucrSaveObject.GetText() & Chr(34), iPosition:=0)
+
+        clsGetVariablesMetadataFunction.AddParameter("summary_data", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        Dim isAnnualOrWithinYear As Boolean = rdoAnnual.Checked OrElse rdoWithinYear.Checked
+
+        If ucrChkDefinitions.Checked Then
+            ' Add to R syntax (so it appears in the final R command)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction)
+
+            If rdoAnnual.Checked Then
+                ucrSaveObject.SetText("Annual_Definitions")
+            ElseIf rdoWithinYear.Checked Then
+                ucrSaveObject.SetText("Within_Year_Definitions")
+            End If
+
+            If isAnnualOrWithinYear Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=13)
+            End If
+
+            If rdoWithinYear.Checked AndAlso ucrChkDayRange.Checked Then
+                clsGetDailyDataCalculationFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
+            Else
+                clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetClimaticSummariesFunction)
+            clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
+
+            If isAnnualOrWithinYear Then
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrameFunction)
+            End If
+        End If
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
@@ -451,6 +563,7 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrChkDayRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDayRange.ControlValueChanged
         AddDayRange()
+        AddSaveDefinitionOptions()
     End Sub
 
     Public Sub AddDateDoy()
@@ -465,6 +578,10 @@ Public Class dlgClimaticSummary
             clsToConditionOperator.RemoveParameterByName("date")
             clsFromConditionOperator.RemoveParameterByName("date")
         End If
+    End Sub
+
+    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub ResetUseDateIfNotStation()
