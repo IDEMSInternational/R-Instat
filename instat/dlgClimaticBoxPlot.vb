@@ -144,6 +144,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverLabelOutliers.SetParameter(New RParameter("label", 1))
         ucrReceiverLabelOutliers.SetParameterIsString()
         ucrReceiverLabelOutliers.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverLabelOutliers.bWithQuotes = False
 
 
         ' others
@@ -437,6 +438,7 @@ Public Class dlgClimaticBoxPlot
         clsGeomTextFunction.AddParameter("x", clsRFunctionParameter:=clsRaes2Function, iPosition:=1, bIncludeArgumentName:=False)
         clsGeomTextFunction.AddParameter("hjust", "-0.2", iPosition:=2)
         clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionNudgeFunction, iPosition:=3)
+        clsGeomTextFunction.AddParameter("size", "3", iPosition:=4)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
