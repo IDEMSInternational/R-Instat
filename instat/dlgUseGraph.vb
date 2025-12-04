@@ -79,8 +79,8 @@ Public Class dlgUseGraph
         ucrReceiverFrame.strSelectorHeading = "Variables"
 
         ucrChkAddSlider.SetText("Add Slider (Interactive)")
-        ucrChkAddSlider.AddParameterValuesCondition(True, "checked", "True")
-        ucrChkAddSlider.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkAddSlider.AddParameterValuesCondition(True, "check", "True")
+        ucrChkAddSlider.AddParameterValuesCondition(False, "check", "False")
 
         ucrChkAddSlider.AddToLinkedControls({ucrReceiverFrame}, {True}, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFrame.SetLinkedDisplayControl(lblSliderFrame)
@@ -101,9 +101,8 @@ Public Class dlgUseGraph
         ucrChkLegendPosition.SetLinkedDisplayControl(grpLegend)
 
         ucrSaveGraph.SetPrefix("use_graph")
-        'ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
-        ' strRObjectFormat:=RObjectFormat.Image)
         ucrSaveGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
         ucrSaveGraph.SetCheckBoxText("Store New Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
@@ -122,21 +121,26 @@ Public Class dlgUseGraph
         ucrGraphsSelector.Reset()
         ucrSaveGraph.Reset()
 
-        clsDummyFunction.AddParameter("checked", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("check", "False", iPosition:=0)
 
         clsSubSetLeftOperator.SetOperation("$")
         clsSubSetLeftOperator.AddParameter("right", "mapping $ frame", iPosition:=1, bIncludeArgumentName:=False)
 
         clsSubsetRightOperator.SetOperation("$")
-        'clsSubsetRightOperator.AddParameter("frame", ucrReceiverFrame.GetVariableNames, iPosition:=1, bIncludeArgumentName:=False)
 
         clsAssignToOperator.SetOperation("<-")
         clsAssignToOperator.AddParameter("left", clsROperatorParameter:=clsSubSetLeftOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsAssignToOperator.AddParameter("right", clsROperatorParameter:=clsSubsetRightOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsAssignToOperator.bBrackets = False
 
         clsGgplotlyFunction.SetPackageName("plotly")
         clsGgplotlyFunction.SetRCommand("ggplotly")
-        clsGgplotlyFunction.SetAssignTo("last_plot")
+        clsGgplotlyFunction.bExcludeAssignedFunctionOutput = False
+        clsGgplotlyFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_plot",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                           strRDataFrameNameToAddObjectTo:=ucrGraphsSelector.strCurrentDataFrame,
+                                           strObjectName:="last_plot")
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsUseGraphFunction, iPosition:=0)
@@ -160,29 +164,27 @@ Public Class dlgUseGraph
 
         clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
-        'clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
-        '                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
-        '                                   strRObjectFormatToAssignTo:=RObjectFormat.Image,
-        '                                   strRDataFrameNameToAddObjectTo:=ucrGraphsSelector.strCurrentDataFrame,
-        '                                   strObjectName:="last_graph")
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrGraphsSelector.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         AddRemoveSlider()
         TestOkEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrGraphsSelector.AddAdditionalCodeParameterPair(clsSubsetRightOperator, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ' ucrGraphReceiver.AddAdditionalCodeParameterPair(clsGgplotlyFunction, New RParameter("p", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-
-        ucrSaveGraph.AddAdditionalRCode(clsGgplotlyFunction, bReset)
-
         ucrReceiverFrame.SetRCode(clsSubsetRightOperator, bReset)
-        ucrChkAddSlider.SetRCode(clsDummyFunction, bReset)
         ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrGraphsSelector.SetRCode(clsUseGraphFunction, bReset)
         ucrGraphReceiver.SetRCode(clsUseGraphFunction, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
+
+        If bReset Then
+            ucrChkAddSlider.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -197,6 +199,7 @@ Public Class dlgUseGraph
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        ucrChkAddSlider.Checked = False
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
@@ -234,28 +237,30 @@ Public Class dlgUseGraph
         If ucrChkAddSlider.Checked Then
             ucrReceiverFrame.Visible = True
             ucrReceiverFrame.SetMeAsReceiver()
-            'ucrGraphsSelector.SetParameterIsrfunction()
-
+            clsDummyFunction.AddParameter("check", "True", iPosition:=0)
             clsSubSetLeftOperator.AddParameter("last_graph", ucrGraphReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-            clsSubsetRightOperator.AddParameter("data", ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
+            clsSubsetRightOperator.AddParameter("data", clsRFunctionParameter:=ucrGraphsSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
             clsGgplotlyFunction.AddParameter("p", ucrGraphReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
 
             ucrBase.clsRsyntax.AddToBeforeCodes(clsBaseOperator, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignToOperator, iPosition:=1)
             ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotlyFunction)
-            ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Html)
-            ' ucrSaveGraph.SetCheckBoxText("Store New Plot")
-            ' ucrSaveGraph.SetAssignToIfUncheckedValue("last_plot")
+
+            ucrSaveGraph.SetCheckBoxText("Store New Plot")
+            ucrSaveGraph.SetPrefix("last_plot")
         Else
             ucrReceiverFrame.Visible = False
-            'ucrGraphsSelector.SetParameterIsString()
-
+            clsDummyFunction.AddParameter("check", "False", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+            clsSubSetLeftOperator.RemoveParameterByName("last_graph")
+            clsSubsetRightOperator.RemoveParameterByName("data")
+            clsGgplotlyFunction.RemoveParameterByName("p")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBaseOperator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignToOperator)
-            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-            ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
-            ' ucrSaveGraph.SetCheckBoxText("Store New Graph")
-            'ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+            ucrSaveGraph.SetCheckBoxText("Store New Graph")
+            ucrSaveGraph.SetPrefix("use_graph")
+
         End If
     End Sub
 End Class
