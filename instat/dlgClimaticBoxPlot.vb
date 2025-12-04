@@ -146,6 +146,8 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverLabelOutliers.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverLabelOutliers.bWithQuotes = False
 
+        ' Label With receiver. Complete configuration yet to be done
+        ucrReceiverLabelWith.Selector = ucrSelectorClimaticBoxPlot
 
         ' others
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
@@ -182,10 +184,14 @@ Public Class dlgClimaticBoxPlot
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("FALSE")
 
-        ucrChkLabel.SetText("Label Outliers")
+        ucrChkLabel.SetText("Label Outliers:")
         ucrChkLabel.AddParameterPresentCondition(True, "stat_sumary", True)
         ucrChkLabel.AddParameterPresentCondition(False, "stat_sumary", False)
         ucrChkLabel.AddToLinkedControls(ucrReceiverLabelOutliers, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ' Label With Checkbox. Complete configuration yet to be done
+        ucrChkLabelWith.SetText("Label With:")
+        ucrChkLabelWith.AddToLinkedControls(ucrReceiverLabelWith, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
@@ -197,11 +203,11 @@ Public Class dlgClimaticBoxPlot
         ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
         ucrNudOutlierCoefficient.DecimalPlaces = 1
         ucrNudOutlierCoefficient.Increment = 0.1
-        ucrNudOutlierCoefficient.SetRDefault(1.5)
+        ucrNudOutlierCoefficient.SetRDefault(3)
 
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
 
-        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient, ucrChkLabel}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient, ucrChkLabel, ucrChkLabelWith}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
