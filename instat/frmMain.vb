@@ -544,7 +544,7 @@ Public Class frmMain
             Try
                 File.Delete(strAutoSavedLogFilePaths(1)) '1 to avoid deleting app_marker file
             Catch ex As Exception
-                MsgBoxTranslate("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                MsgBoxTranslate("Could not delete backup log file" & Environment.NewLine, Title:="Error deleting file")
             End Try
         End If
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
@@ -557,7 +557,7 @@ Public Class frmMain
                     End If
                 Next
             Catch ex As Exception
-                MsgBoxTranslate("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                MsgBoxTranslate("Could not delete backup internal log file." & Environment.NewLine & ex.Message, Title:="Error deleting file")
             End Try
         End If
 
@@ -565,7 +565,7 @@ Public Class frmMain
             Try
                 File.Delete(strAutoSavedDataFilePaths(0))
             Catch ex As Exception
-                MsgBoxTranslate("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                MsgBoxTranslate("Could not delete back data file." & Environment.NewLine & ex.Message, Title:="Error deleting file")
             End Try
         End If
         '---------------------------------------
