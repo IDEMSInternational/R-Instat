@@ -145,9 +145,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverLabelOutliers.SetParameterIsString()
         ucrReceiverLabelOutliers.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverLabelOutliers.bWithQuotes = False
-
-        ' Label With receiver. Complete configuration yet to be done
-        ucrReceiverLabelWith.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverLabelOutliers.SetLinkedDisplayControl(lblVariable)
 
         ' others
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
@@ -189,10 +187,6 @@ Public Class dlgClimaticBoxPlot
         ucrChkLabel.AddParameterPresentCondition(False, "stat_sumary", False)
         ucrChkLabel.AddToLinkedControls(ucrReceiverLabelOutliers, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' Label With Checkbox. Complete configuration yet to be done
-        ucrChkLabelWith.SetText("Label With:")
-        ucrChkLabelWith.AddToLinkedControls(ucrReceiverLabelWith, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
@@ -207,7 +201,7 @@ Public Class dlgClimaticBoxPlot
 
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
 
-        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient, ucrChkLabel, ucrChkLabelWith}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient, ucrChkLabel}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")

@@ -52,8 +52,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkLabel = New instat.ucrCheck()
         Me.ucrReceiverLabelOutliers = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLabelWith = New instat.ucrReceiverSingle()
-        Me.ucrChkLabelWith = New instat.ucrCheck()
+        Me.lblVariable = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdBoxPlotOptions
@@ -333,7 +332,7 @@ Partial Class dlgClimaticBoxPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 440)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 394)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 26
@@ -390,7 +389,7 @@ Partial Class dlgClimaticBoxPlot
         '
         Me.ucrReceiverLabelOutliers.AutoSize = True
         Me.ucrReceiverLabelOutliers.frmParent = Me
-        Me.ucrReceiverLabelOutliers.Location = New System.Drawing.Point(245, 363)
+        Me.ucrReceiverLabelOutliers.Location = New System.Drawing.Point(300, 362)
         Me.ucrReceiverLabelOutliers.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLabelOutliers.Name = "ucrReceiverLabelOutliers"
         Me.ucrReceiverLabelOutliers.Selector = Nothing
@@ -399,36 +398,22 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrReceiverLabelOutliers.TabIndex = 36
         Me.ucrReceiverLabelOutliers.ucrSelector = Nothing
         '
-        'ucrReceiverLabelWith
+        'lblVariable
         '
-        Me.ucrReceiverLabelWith.AutoSize = True
-        Me.ucrReceiverLabelWith.frmParent = Me
-        Me.ucrReceiverLabelWith.Location = New System.Drawing.Point(244, 413)
-        Me.ucrReceiverLabelWith.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLabelWith.Name = "ucrReceiverLabelWith"
-        Me.ucrReceiverLabelWith.Selector = Nothing
-        Me.ucrReceiverLabelWith.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverLabelWith.strNcFilePath = ""
-        Me.ucrReceiverLabelWith.TabIndex = 38
-        Me.ucrReceiverLabelWith.ucrSelector = Nothing
-        '
-        'ucrChkLabelWith
-        '
-        Me.ucrChkLabelWith.AutoSize = True
-        Me.ucrChkLabelWith.Checked = False
-        Me.ucrChkLabelWith.Location = New System.Drawing.Point(245, 389)
-        Me.ucrChkLabelWith.Name = "ucrChkLabelWith"
-        Me.ucrChkLabelWith.Size = New System.Drawing.Size(91, 23)
-        Me.ucrChkLabelWith.TabIndex = 37
+        Me.lblVariable.AutoSize = True
+        Me.lblVariable.Location = New System.Drawing.Point(243, 362)
+        Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Size = New System.Drawing.Size(48, 13)
+        Me.lblVariable.TabIndex = 37
+        Me.lblVariable.Text = "Variable:"
         '
         'dlgClimaticBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(461, 494)
-        Me.Controls.Add(Me.ucrReceiverLabelWith)
-        Me.Controls.Add(Me.ucrChkLabelWith)
+        Me.ClientSize = New System.Drawing.Size(461, 447)
+        Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverLabelOutliers)
         Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.ucrNudOutlierCoefficient)
@@ -499,6 +484,5 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents lblOutlierCoefficient As Label
     Friend WithEvents ucrChkLabel As ucrCheck
     Friend WithEvents ucrReceiverLabelOutliers As ucrReceiverSingle
-    Friend WithEvents ucrReceiverLabelWith As ucrReceiverSingle
-    Friend WithEvents ucrChkLabelWith As ucrCheck
+    Friend WithEvents lblVariable As Label
 End Class
