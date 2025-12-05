@@ -185,13 +185,18 @@ Public Class ucrSelector
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
                                       strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath,
                                       strObjectName:=CurrentReceiver.strObjectName)
+
+        ' Sort sekector alphabetically if the sort order is set to alphabetical
+        If enumCurrentListViewSortStatus = SelectorSortType.Alphabetically Then
+            SortListViewAlphabetically()
+        End If
+
         If Not CurrentReceiver.bExcludeFromSelector Then
             'TODO. Investigate why this has to be called here instead of just being called in ucrReceiver control.SetControlValue()
             'See PR #8605 for related comments added in ucrReceiver.
             CurrentReceiver.RemoveAnyVariablesNotInSelector() 'this needed for the multiple receiver(s) where the autofill is not applied
         End If
         EnableDataOptions(strCurrentType)
-
     End Sub
 
     Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String,
@@ -242,12 +247,45 @@ Public Class ucrSelector
         Return strSelectorFillCondition
     End Function
 
+    Private Sub SortListViewAlphabetically()
+        ' Preserve selection
+        Dim selectedItems As List(Of ListViewItem) = lstAvailableVariable.SelectedItems.Cast(Of ListViewItem)().ToList()
+
+        ' Get all existing items into a list (references preserved)
+        Dim items As List(Of ListViewItem) = lstAvailableVariable.Items.Cast(Of ListViewItem)().ToList()
+
+        ' Sort by the Text property (case-insensitive)
+        items.Sort(Function(a, b) String.Compare(a.Text, b.Text, StringComparison.OrdinalIgnoreCase))
+
+        ' Temporarily disable redrawing for smoother UI update
+        lstAvailableVariable.BeginUpdate()
+
+        ' Clear only the display order (not destroying item references)
+        lstAvailableVariable.Items.Clear()
+        lstAvailableVariable.Items.AddRange(items.ToArray())
+
+        ' Restore selection
+        For Each item As ListViewItem In selectedItems
+            item.Selected = True
+        Next
+
+        ' Ensure the first selected item is visible
+        If lstAvailableVariable.SelectedItems.Count > 0 Then
+            lstAvailableVariable.SelectedItems(0).EnsureVisible()
+        End If
+
+        ' Re-enable drawing
+        lstAvailableVariable.EndUpdate()
+    End Sub
+
+
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         ' Reset the sort status to default appearance
         enumCurrentListViewSortStatus = SelectorSortType.Appearance
-        LoadList()
         SetSortRightClickMenuText()
+
+        LoadList()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
@@ -357,59 +395,14 @@ Public Class ucrSelector
         SelectAll()
     End Sub
 
-
-
     Private Sub mnuSortToolStrip_Click(sender As Object, e As EventArgs) Handles mnuSortToolStrip.Click
-
-        If enumCurrentListViewSortStatus = SelectorSortType.Appearance Then
-
-            ' Change the current sort status of the listview and reload the listview with contents from R so that the caching can reflect the current sort status
-            enumCurrentListViewSortStatus = SelectorSortType.Alphabetically
-            LoadList()
-
-            ' Then sort the listview items
-
-            ' Preserve selection
-            Dim selectedItems As List(Of ListViewItem) = lstAvailableVariable.SelectedItems.Cast(Of ListViewItem)().ToList()
-
-            ' Get all existing items into a list (references preserved)
-            Dim items As List(Of ListViewItem) = lstAvailableVariable.Items.Cast(Of ListViewItem)().ToList()
-
-            ' Sort by the Text property (case-insensitive)
-            items.Sort(Function(a, b) String.Compare(a.Text, b.Text, StringComparison.OrdinalIgnoreCase))
-
-            ' Temporarily disable redrawing for smoother UI update
-            lstAvailableVariable.BeginUpdate()
-
-            ' Clear only the display order (not destroying item references)
-            lstAvailableVariable.Items.Clear()
-            lstAvailableVariable.Items.AddRange(items.ToArray())
-
-            ' Restore selection
-            For Each item As ListViewItem In selectedItems
-                item.Selected = True
-            Next
-
-            ' Ensure the first selected item is visible
-            If lstAvailableVariable.SelectedItems.Count > 0 Then
-                lstAvailableVariable.SelectedItems(0).EnsureVisible()
-            End If
-
-            ' Re-enable drawing
-            lstAvailableVariable.EndUpdate()
-
-            ' Then set the current sort status of the listview
-            enumCurrentListViewSortStatus = SelectorSortType.Alphabetically
-        Else
-
-            ' First change the current sort status of the listview to change the cache coniditions then reload the items from R
-            enumCurrentListViewSortStatus = SelectorSortType.Appearance
-            LoadList()
-        End If
+        enumCurrentListViewSortStatus = If(enumCurrentListViewSortStatus = SelectorSortType.Appearance, SelectorSortType.Alphabetically, SelectorSortType.Appearance)
 
         ' Change the label of the sort right click menu depedningon the sort status
         SetSortRightClickMenuText()
 
+        ' Reload the contents of the list view to apply the sort order
+        LoadList()
     End Sub
 
     Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
