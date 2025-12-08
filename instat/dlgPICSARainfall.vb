@@ -49,6 +49,13 @@ Public Class dlgPICSARainfall
     Private clsPointsFunc As New RFunction
     Private clsYLabsFunction, clsXLabsFunction, clsLabsFunction As RFunction
     Private clsFactorLevels As New RFunction
+    Private clsGeomRugFunction As New RFunction
+    Private clsFilterFunction As New RFunction
+    Private clsEqualToOperator As New ROperator
+    Private clsGeomSegmentFunction As New RFunction
+    Private clsSegmentAesFunction As New RFunction
+    Private clsGeomPoint2Function As New RFunction
+    Private clsPoint2AesFunction As New RFunction
 
     Private clsDatePeriodOperator As New ROperator
 
@@ -149,13 +156,19 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.SetParameter(New RParameter("data", 0))
         ucrSelectorPICSARainfall.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x", 0))
-        ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrReceiverColourBy)
-        ucrVariablesAsFactorForPicsa.Selector = ucrSelectorPICSARainfall
-        ucrVariablesAsFactorForPicsa.SetIncludedDataTypes({"numeric"}, True)
-        ucrVariablesAsFactorForPicsa.SetSelectorHeading("Numerics")
-        ucrVariablesAsFactorForPicsa.SetParameterIsString()
-        ucrVariablesAsFactorForPicsa.bWithQuotes = False
+        ucrReceiverForPICSA.SetParameter(New RParameter("y", 0))
+        ucrReceiverForPICSA.Selector = ucrSelectorPICSARainfall
+        ucrReceiverForPICSA.SetIncludedDataTypes({"numeric"}, True)
+        ucrReceiverForPICSA.SetSelectorHeading("Numerics")
+        ucrReceiverForPICSA.SetParameterIsString()
+        ucrReceiverForPICSA.bWithQuotes = False
+
+        ucrReceiverSecondYVar.SetParameter(New RParameter("yend"))
+        ucrReceiverSecondYVar.Selector = ucrSelectorPICSARainfall
+        ucrReceiverSecondYVar.SetIncludedDataTypes({"numeric"}, True)
+        ucrReceiverSecondYVar.SetSelectorHeading("Numerics")
+        ucrReceiverSecondYVar.bWithQuotes = False
+        ucrReceiverSecondYVar.SetParameterIsString()
 
         ucrReceiverX.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverX.SetParameterIsString()
@@ -180,6 +193,20 @@ Public Class dlgPICSARainfall
         ucrReceiverFacetBy.bWithQuotes = False
         ucrReceiverFacetBy.SetParameterIsString()
         ucrReceiverFacetBy.SetValuesToIgnore({"."})
+
+        ucrReceiverIncludeStatus.SetParameter(New RParameter("left", 0))
+        ucrReceiverIncludeStatus.Selector = ucrSelectorPICSARainfall
+        ucrReceiverIncludeStatus.strSelectorHeading = "Factors"
+        ucrReceiverIncludeStatus.bWithQuotes = False
+        ucrReceiverIncludeStatus.SetParameterIsString()
+        ucrReceiverIncludeStatus.SetIncludedDataTypes({"factor", "logical"})
+
+        ucrReceiverIncludeStatus.SetLinkedDisplayControl(lblIncludeStatus)
+
+        ucrChkIncludeStatus.SetText("Include Status Variable")
+        ucrChkIncludeStatus.AddParameterPresentCondition(True, "geom_rug")
+        ucrChkIncludeStatus.AddParameterPresentCondition(False, "geom_rug", False)
+        ucrChkIncludeStatus.AddToLinkedControls(ucrReceiverIncludeStatus, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "geom_point")
@@ -273,6 +300,13 @@ Public Class dlgPICSARainfall
         clsGeomTextLabelUpperTercileLine = New RFunction
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
+        clsGeomRugFunction = New RFunction
+        clsFilterFunction = New RFunction
+        clsEqualToOperator = New ROperator
+        clsGeomSegmentFunction = New RFunction
+        clsSegmentAesFunction = New RFunction
+        clsGeomPoint2Function = New RFunction
+        clsPoint2AesFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -320,7 +354,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.Reset()
         ucrSelectorPICSARainfall.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
-        ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
+        ucrReceiverForPICSA.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
@@ -335,18 +369,18 @@ Public Class dlgPICSARainfall
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsGeomLine, iPosition:=2)
+        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsGeomLine, iPosition:=3)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
-
         clsAsFactorFunction = New RFunction
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
+
         clsAsFactorFunction.SetRCommand("as.factor")
 
         clsGeomLine.SetPackageName("ggplot2")
@@ -361,7 +395,7 @@ Public Class dlgPICSARainfall
 
         clsPointsFunc.SetPackageName("ggplot2")
         clsPointsFunc.SetRCommand("geom_point")
-        clsPointsFunc.AddParameter("size", "3")
+        clsPointsFunc.AddParameter("size", "2")
         clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsFacetFunction.SetPackageName("ggplot2")
@@ -369,6 +403,41 @@ Public Class dlgPICSARainfall
         clsFacetOperator.bForceIncludeOperation = True
         clsFacetOperator.bBrackets = False
 
+        clsFilterFunction.SetPackageName("dplyr")
+        clsFilterFunction.SetRCommand("filter")
+        clsFilterFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+        clsFilterFunction.AddParameter("var", clsROperatorParameter:=clsEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsEqualToOperator.SetOperation("==")
+        clsEqualToOperator.AddParameter("right", "FALSE", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsGeomRugFunction.SetPackageName("ggplot2")
+        clsGeomRugFunction.SetRCommand("geom_rug")
+        clsGeomRugFunction.AddParameter("data", clsRFunctionParameter:=clsFilterFunction, iPosition:=0)
+        clsGeomRugFunction.AddParameter("sides", Chr(34) & "t" & Chr(34), iPosition:=1)
+        clsGeomRugFunction.AddParameter("alpha", "0.8", iPosition:=2)
+        clsGeomRugFunction.AddParameter("linewidth", "1", iPosition:=3)
+        clsGeomRugFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34), iPosition:=4)
+
+        clsGeomSegmentFunction.SetPackageName("ggplot2")
+        clsGeomSegmentFunction.SetRCommand("geom_segment")
+        clsGeomSegmentFunction.AddParameter("x", clsRFunctionParameter:=clsSegmentAesFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsGeomSegmentFunction.AddParameter("linewidth", "0.8", iPosition:=1)
+        clsGeomSegmentFunction.AddParameter("lty", "2", iPosition:=2)
+
+        clsSegmentAesFunction.SetRCommand("aes")
+        clsSegmentAesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+
+        clsGeomPoint2Function.SetPackageName("ggplot2")
+        clsGeomPoint2Function.SetRCommand("geom_point")
+        clsGeomPoint2Function.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsGeomPoint2Function.AddParameter("mapping", clsRFunctionParameter:=clsPoint2AesFunction, iPosition:=1)
+        clsGeomPoint2Function.AddParameter("size", "2", iPosition:=2)
+        clsGeomPoint2Function.AddParameter("colour", Chr(34) & "darkgreen" & Chr(34), iPosition:=3)
+        clsGeomPoint2Function.AddParameter("shape", "17", iPosition:=4)
+
+        clsPoint2AesFunction.SetRCommand("aes")
+        clsPoint2AesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
 
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
@@ -635,42 +704,47 @@ Public Class dlgPICSARainfall
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
 
-        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
-        clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames, iPosition:=2)
+        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
+        clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
-        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=3)
+        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=4)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
-        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
-        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
-        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
 
+        ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsPoint2AesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
-        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
-        ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
+        ucrReceiverX.SetRCode(clsAsNumeric, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
+        ucrChkIncludeStatus.SetRCode(clsBaseOperator, bReset)
+        ucrReceiverIncludeStatus.SetRCode(clsEqualToOperator, bReset)
+        ucrReceiverSecondYVar.SetRCode(clsSegmentAesFunction, bReset)
+
         If bReset Then
             AutoFacetStation()
         End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
+        If (ucrReceiverForPICSA.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse Not ucrSave.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -682,17 +756,6 @@ Public Class dlgPICSARainfall
         SetRCodeForControls(True)
         UpdateParameters()
         TestOkEnabled()
-    End Sub
-
-    Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        If ucrVariablesAsFactorForPicsa.bSingleVariable Then
-            'Added this because this sub is called on sed defaults and  it over writes the enabled property 
-            cmdPICSAOptions.Enabled = True
-            cmdOptions.Enabled = True
-        Else
-            'cmdPICSAOptions.Enabled = False
-            cmdOptions.Enabled = False
-        End If
     End Sub
 
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
@@ -808,10 +871,6 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
-    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
-        TempOptionsDisabledInMultipleVariablesCase()
-    End Sub
-
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
         sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, clsNewStatRegEquation:=clsStatRegEquationFunction, clsNewStatsCorFunction:=clsStatsCorFunction,
@@ -831,7 +890,7 @@ Public Class dlgPICSARainfall
         bResetSubdialog = False
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -901,7 +960,7 @@ Public Class dlgPICSARainfall
 
 
     Private Sub YAxisDataTypeCheck()
-        If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
+        If Not ucrReceiverForPICSA.IsEmpty Then
             clsGeomLine.AddParameter("group", 0)
         Else
             clsGeomLine.RemoveParameterByName("group")
@@ -926,7 +985,7 @@ Public Class dlgPICSARainfall
         AddRemoveGroupBy()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
+    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged, ucrReceiverForPICSA.ControlValueChanged
         AddRemoveGroupBy()
         YAxisDataTypeCheck()
     End Sub
@@ -1014,12 +1073,12 @@ Public Class dlgPICSARainfall
                 '  independently from the multiple variables method? Here if the receiver is 
                 '  actually in single mode, the variable "value" will still be given back, which 
                 '  throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value") Then
                 'Still might be in the case of bSingleVariable with mapping y="".
                 If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForPicsa.Clear()
+                    ucrReceiverForPICSA.Clear()
                 Else
-                    ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
+                    ucrReceiverForPICSA.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrReceiverColourBy.Add(clsParam.strArgumentValue)
@@ -1051,7 +1110,7 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
         If ucrChkLineofBestFit.Checked Then
-            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=4)
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=5)
         Else
             clsBaseOperator.RemoveParameterByName("geom_smooth")
         End If
@@ -1059,7 +1118,7 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrChkPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPoints.ControlValueChanged
         If ucrChkPoints.Checked Then
-            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=3)
+            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=4)
         Else
             clsBaseOperator.RemoveParameterByName("geom_point")
         End If
@@ -1068,4 +1127,27 @@ Public Class dlgPICSARainfall
     Private Sub toolStripMenuItemPointOption_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOption.Click
         openSdgLayerOptions(clsPointsFunc)
     End Sub
+
+    Private Sub ucrChkIncludeStatus_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeStatus.ControlValueChanged
+        If ucrChkIncludeStatus.Checked Then
+            ucrReceiverIncludeStatus.SetMeAsReceiver()
+            clsEqualToOperator.AddParameter("left", ucrReceiverIncludeStatus.GetVariableNames, iPosition:=0, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=6)
+        Else
+            clsEqualToOperator.RemoveParameterByName("left")
+            clsBaseOperator.RemoveParameterByName("geom_rug")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverSecondYVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondYVar.ControlValueChanged
+        If Not ucrReceiverSecondYVar.IsEmpty Then
+            clsPoint2AesFunction.AddParameter("y", ucrReceiverSecondYVar.GetVariableNames(bWithQuotes:=False), , iPosition:=1)
+            clsBaseOperator.AddParameter("geom_segment", clsRFunctionParameter:=clsGeomSegmentFunction, iPosition:=1, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("geom_point2", clsRFunctionParameter:=clsGeomPoint2Function, iPosition:=2, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_segment")
+            clsBaseOperator.RemoveParameterByName("geom_point2")
+        End If
+    End Sub
+
 End Class
