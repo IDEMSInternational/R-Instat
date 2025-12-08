@@ -68,11 +68,11 @@ Public Class DlgDefineClimaticData
         Dim kvpMinRH As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("hum_min", {"hum_min", "minhum", "hmin", "hn", "rhmin"}.ToList())
         Dim kvpMaxRH As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("hum_max", {"hum_max", "maxhum", "hmax", "hx", "rhmax"}.ToList())
 
-        lstRecognisedTypes.AddRange({kvpRain, kvpDistrict, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpStation, kvpAltitude, kvpLatitude, kvpLongitude,
-                                    kvpWindDirection, kvpWindSpeed, kvpYear, kvpMonth, kvpDay, kvpDOY, kvpDate, kvpMinRH, kvpMaxRH})
+        lstRecognisedTypes.AddRange({kvpRain, kvpYear, kvpDistrict, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpStation, kvpAltitude, kvpLatitude, kvpLongitude,
+                                    kvpWindDirection, kvpWindSpeed, kvpMonth, kvpDay, kvpDOY, kvpDate, kvpMinRH, kvpMaxRH})
         lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation,
                               ucrReceiverRain, ucrReceiverStation, ucrReceiverAltitude, ucrReceiverLatitude, ucrReceiverLongitude, ucrReceiverSunshine, ucrReceiverDiscrit,
-                              ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY, ucrReceiverDate, ucrReceiverMinRH, ucrReceiverMaxRH})
+                              ucrReceiverWindDirection, ucrReceiverYear, ucrReceiverWindSpeed, ucrReceiverDOY, ucrReceiverDate, ucrReceiverMinRH, ucrReceiverMaxRH})
 
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
@@ -174,7 +174,6 @@ Public Class DlgDefineClimaticData
         For Each ucrTempReceiver In lstReceivers
             ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
         Next
-
         For Each ucrTempReceiver In lstNewReceivers
             ucrTempReceiver.SetRCode(clsLinkedTypesFunction, bReset)
         Next
@@ -203,6 +202,10 @@ Public Class DlgDefineClimaticData
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorDefineClimaticData.lstAvailableVariable.Items
+                    If ucrTempReceiver.Tag = "year" AndAlso IsOrderedFactorByClass(lviTempVariable.Text, strData) Then
+                        Continue For
+                    End If
+
                     Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text, strData)
                     For Each strValue As String In lstRecognisedValues
                         If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
@@ -218,11 +221,31 @@ Public Class DlgDefineClimaticData
                 Next
             End If
         Next
-
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Function IsOrderedFactorByClass(strColumn As String, strDataName As String) As Boolean
+        Dim clsGetClass As New RFunction
+        clsGetClass.SetRCommand("class")
+            clsGetClass.AddParameter("x",
+            frmMain.clsRLink.strInstatDataObject &
+            "$get_columns_from_data(data_name = '" & strDataName &
+            "', col_names = '" & strColumn & "')[[1]]")
+
+            Dim result As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetClass.ToScript())
+
+            If result IsNot Nothing AndAlso result.Type = Internals.SymbolicExpressionType.CharacterVector Then
+            Dim arrClimaticTypes() As String = result.AsCharacter().ToArray()
+            For Each strClimaticType As String In arrClimaticTypes
+                If Not String.IsNullOrEmpty(strClimaticType) AndAlso strClimaticType.ToLower().Contains("ordered") Then
+                    Return True
+                End If
+            Next
+        End If
+        Return False
+    End Function
 
     Private Function GetClimaticTypeFromRCommand(strName As String, strDataName As String) As String
         Try

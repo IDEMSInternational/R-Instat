@@ -154,7 +154,7 @@ Partial Class dlgPermuteColumn
         Me.ucrChkWithReplacement.Checked = False
         Me.ucrChkWithReplacement.Location = New System.Drawing.Point(242, 151)
         Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
-        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(116, 23)
+        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(176, 23)
         Me.ucrChkWithReplacement.TabIndex = 9
         '
         'dlgPermuteColumn
