@@ -42,7 +42,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblGreater = New System.Windows.Forms.Label()
         Me.lblGreaterConsecutive = New System.Windows.Forms.Label()
         Me.ucrInputConsecutiveValue = New instat.ucrInputTextBox()
-        Me.UcrCheckAddCommentVariable = New instat.ucrCheck()
+        Me.UcrChkAddCommentVariable = New instat.ucrCheck()
         Me.ucrInputSameValue = New instat.ucrInputTextBox()
         Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
@@ -253,7 +253,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblGreaterConsecutive.AutoSize = True
         Me.lblGreaterConsecutive.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblGreaterConsecutive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGreaterConsecutive.Location = New System.Drawing.Point(186, 271)
+        Me.lblGreaterConsecutive.Location = New System.Drawing.Point(186, 274)
         Me.lblGreaterConsecutive.Name = "lblGreaterConsecutive"
         Me.lblGreaterConsecutive.Size = New System.Drawing.Size(18, 20)
         Me.lblGreaterConsecutive.TabIndex = 40
@@ -271,14 +271,14 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrInputConsecutiveValue.Size = New System.Drawing.Size(40, 20)
         Me.ucrInputConsecutiveValue.TabIndex = 41
         '
-        'UcrCheckAddCommentVariable
+        'UcrChkAddCommentVariable
         '
-        Me.UcrCheckAddCommentVariable.AutoSize = True
-        Me.UcrCheckAddCommentVariable.Checked = False
-        Me.UcrCheckAddCommentVariable.Location = New System.Drawing.Point(6, 433)
-        Me.UcrCheckAddCommentVariable.Name = "UcrCheckAddCommentVariable"
-        Me.UcrCheckAddCommentVariable.Size = New System.Drawing.Size(232, 23)
-        Me.UcrCheckAddCommentVariable.TabIndex = 39
+        Me.UcrChkAddCommentVariable.AutoSize = True
+        Me.UcrChkAddCommentVariable.Checked = False
+        Me.UcrChkAddCommentVariable.Location = New System.Drawing.Point(6, 433)
+        Me.UcrChkAddCommentVariable.Name = "UcrChkAddCommentVariable"
+        Me.UcrChkAddCommentVariable.Size = New System.Drawing.Size(232, 23)
+        Me.UcrChkAddCommentVariable.TabIndex = 39
         '
         'ucrInputSameValue
         '
@@ -537,9 +537,9 @@ Partial Class dlgClimaticCheckDataRain
         'lblRainDays
         '
         Me.lblRainDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRainDays.Location = New System.Drawing.Point(159, 276)
+        Me.lblRainDays.Location = New System.Drawing.Point(159, 277)
         Me.lblRainDays.Name = "lblRainDays"
-        Me.lblRainDays.Size = New System.Drawing.Size(29, 13)
+        Me.lblRainDays.Size = New System.Drawing.Size(30, 14)
         Me.lblRainDays.TabIndex = 42
         Me.lblRainDays.Text = "days"
         '
@@ -552,7 +552,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.Controls.Add(Me.lblGreaterConsecutive)
         Me.Controls.Add(Me.lblRainDays)
         Me.Controls.Add(Me.ucrInputConsecutiveValue)
-        Me.Controls.Add(Me.UcrCheckAddCommentVariable)
+        Me.Controls.Add(Me.UcrChkAddCommentVariable)
         Me.Controls.Add(Me.ucrInputSameValue)
         Me.Controls.Add(Me.lblGreater)
         Me.Controls.Add(Me.lblThresholdmm)
@@ -644,7 +644,7 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblThresholdmm As Label
     Friend WithEvents lblGreater As Label
     Friend WithEvents ucrInputSameValue As ucrInputTextBox
-    Friend WithEvents UcrCheckAddCommentVariable As ucrCheck
+    Friend WithEvents UcrChkAddCommentVariable As ucrCheck
     Friend WithEvents ucrInputConsecutiveValue As ucrInputTextBox
     Friend WithEvents lblGreaterConsecutive As Label
     Friend WithEvents lblRainDays As Label

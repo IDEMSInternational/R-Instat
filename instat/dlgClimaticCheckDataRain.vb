@@ -107,6 +107,7 @@ Public Class dlgClimaticCheckDataRain
     Private clsOutliersOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private clsWhyVariable As New RFunction
+    Private clsIdCalculationFunc As New RFunction
 
     Private Sub dlgRain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -201,10 +202,10 @@ Public Class dlgClimaticCheckDataRain
         ucrInputThresholdValue.AddQuotesIfUnrecognised = False
         ucrInputThresholdValue.SetValidationTypeAsNumeric()
 
-        UcrCheckAddCommentVariable.SetText("Add Comment Variable")
-        UcrCheckAddCommentVariable.SetParameter(New RParameter("why", 0))
-        UcrCheckAddCommentVariable.SetValuesCheckedAndUnchecked("", "")
-        UcrCheckAddCommentVariable.SetRDefault("FALSE")
+        UcrChkAddCommentVariable.SetText("Add Why Variable")
+        UcrChkAddCommentVariable.SetParameter(New RParameter("why", 0))
+        UcrChkAddCommentVariable.SetValuesCheckedAndUnchecked("", "")
+        UcrChkAddCommentVariable.SetRDefault("FALSE")
 
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
@@ -217,6 +218,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkOutlier.AddToLinkedControls(ucrNudCoeff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
         ucrChkOutlier.AddToLinkedControls(ucrNudSkewnessWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
         ucrChkOmitZero.AddToLinkedControls(ucrInputThresholdValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkDryMonth.AddToLinkedControls(UcrChkAddCommentVariable, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputThreshold.SetLinkedDisplayControl(lstControls)
         ucrInputThresholdValue.SetLinkedDisplayControl(lblThreshold)
@@ -226,6 +228,10 @@ Public Class dlgClimaticCheckDataRain
         ucrNudSkewnessWeight.SetLinkedDisplayControl(lblSkewnessWeight)
         ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
         ucrInputSameValue.SetLinkedDisplayControl(lblGreater)
+
+        ucrInputConsecutiveValue.SetParameter(New RParameter("right", 1))
+        ucrInputConsecutiveValue.AddQuotesIfUnrecognised = False
+        ucrInputConsecutiveValue.SetValidationTypeAsNumeric()
         ucrInputConsecutiveValue.SetLinkedDisplayControl(lblGreaterConsecutive)
 
         ucrChkCalculatedColumns.SetText("Calculated columns")
@@ -405,7 +411,7 @@ Public Class dlgClimaticCheckDataRain
 
         clsFirstGreaterOperator.SetOperation(">")
         clsFirstGreaterOperator.AddParameter("left", clsRFunctionParameter:=clsIfelseFunction, iPosition:=0)
-        clsFirstGreaterOperator.AddParameter("right", "0", iPosition:=1)
+        clsFirstGreaterOperator.AddParameter("right", "0.85", iPosition:=1)
 
         clsSecondGreaterOperator.SetOperation(">")
         clsSecondGreaterOperator.AddParameter("left", strParameterValue:=strCumulativeCalc, iPosition:=0)
@@ -618,10 +624,18 @@ Public Class dlgClimaticCheckDataRain
         ' Add Why Variable
         clsWhyVariable = New RFunction
         clsWhyVariable.SetRCommand("instatCalculations::instat_calculation$new")
-        clsWhyVariable.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsWhyVariable.AddParameter("function_exp", Chr(34) & "NA_character_" & Chr(34), iPosition:=1)
-        clsWhyVariable.AddParameter("result_name", Chr(34) & "why" & Chr(34), iPosition:=3)
+        clsWhyVariable.AddParameter("type", """calculation""", iPosition:=0)
+        clsWhyVariable.AddParameter("function_exp", Chr(34) & "'No rainfall recorded in month'" & Chr(34), iPosition:=1)
+        clsWhyVariable.AddParameter("result_name", Chr(34) & "why" & Chr(34), iPosition:=4)
         clsWhyVariable.SetAssignTo("why_variable")
+
+        ' Event ID Column Calculation
+        clsIdCalculationFunc = New RFunction
+        clsIdCalculationFunc.SetRCommand("instatCalculations::instat_calculation$new")
+        clsIdCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsIdCalculationFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManuplationDayListFunction, iPosition:=3)
+        clsIdCalculationFunc.AddParameter("result_name", Chr(34) & "event_id" & Chr(34), iPosition:=3)
+        clsIdCalculationFunc.SetAssignTo("id_calculation")
     End Sub
 
     Private Sub setRcodeForControls(bReset)
@@ -667,6 +681,7 @@ Public Class dlgClimaticCheckDataRain
         ucrNudCoeff.SetRCode(clsUpperOutlierLimitFunc, bReset)
         ucrInputThreshold.SetRCode(clsLessOperator, bReset)
         ucrInputSameValue.SetRCode(clsSecondGreaterSameOperator, bReset)
+        ucrInputConsecutiveValue.SetRCode(clsFirstGreaterOperator, bReset)
 
         ucrChkOutlier.SetRCode(clsOrOperator, bReset)
         ucrNudSkewnessWeight.SetRCode(clsUpperOutlierLimitFunc, bReset)
@@ -680,7 +695,7 @@ Public Class dlgClimaticCheckDataRain
         If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso Not ucrNudLarge.IsEmpty) OrElse
                (ucrChkSame.Checked AndAlso (Not ucrNudSame.IsEmpty AndAlso Not ucrInputSameValue.IsEmpty)) OrElse
                (ucrChkWetDays.Checked AndAlso (Not ucrNudWetDays.IsEmpty AndAlso Not ucrInputConsecutiveValue.IsEmpty)) OrElse
-               (ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse (ucrChkOutlier.Checked AndAlso (Not ucrNudSkewnessWeight.IsEmpty OrElse ucrNudCoeff.IsEmpty))) OrElse
+               (ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse (ucrChkOutlier.Checked AndAlso (Not ucrNudSkewnessWeight.IsEmpty AndAlso Not ucrNudCoeff.IsEmpty))) OrElse
                (ucrChkDryMonth.Checked AndAlso Not ucrInputThreshold.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
@@ -731,6 +746,7 @@ Public Class dlgClimaticCheckDataRain
         clsDryMonthTestCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverMonth.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
         GroupByOptions()
         GroupByMonth()
+        SetupEventIdCalculation()
     End Sub
 
     Private Sub ucrSelectorRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRain.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverYear.ControlValueChanged
@@ -750,6 +766,16 @@ Public Class dlgClimaticCheckDataRain
         GroupByMonth()
         AddRemoveDayFilter()
         AddDoy()
+    End Sub
+
+    Private Sub SetupEventIdCalculation()
+        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty Then
+            clsIdCalculationFunc.AddParameter("function_exp", Chr(34) & "paste0(" & ucrReceiverYear.GetVariableNames(False) & ", '_', substr(" & ucrReceiverStation.GetVariableNames(False) & ", 1, 3))" & Chr(34), iPosition:=1)
+            clsIdCalculationFunc.AddParameter("calculated_from", "list(" & Chr(34) & "qcRain" & Chr(34) & "=" & Chr(34) & ucrReceiverStation.GetVariableNames(False) & Chr(34) & "," & Chr(34) & "qcRain" & Chr(34) & "=" & Chr(34) & ucrReceiverYear.GetVariableNames(False) & Chr(34) & ")", iPosition:=2)
+        Else
+            clsIdCalculationFunc.RemoveParameterByName("function_exp")
+            clsIdCalculationFunc.RemoveParameterByName("calculated_from")
+        End If
     End Sub
 
     Private Sub ucrSelectorRain_DataFrameChanged() Handles ucrSelectorRain.DataFrameChanged
@@ -776,19 +802,109 @@ Public Class dlgClimaticCheckDataRain
 
     Private Sub ucrChkDryMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDryMonth.ControlValueChanged
         AddRemoveDayFilter()
+        If Not ucrChkDryMonth.Checked Then
+            clsListSubCalc.RemoveParameterByName("why")
+        End If
     End Sub
 
+    'Private Sub AddRemoveDayFilter()
+    '    clsRunCalcFunc.RemoveParameterByName("calc")
+    '    If ucrChkDryMonth.Checked Then
+    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
+    '        clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
+    '        clsRainFilterFunc.RemoveParameterByName("save")
+    '    Else
+    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
+    '        clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
+    '        clsDayFilterFunc.RemoveParameterByName("save")
+    '    End If
+    '    AddDoy()
+    'End Sub
+
+    'Private Sub AddRemoveDayFilter()
+    '    clsRunCalcFunc.RemoveParameterByName("calc")
+    '    If ucrChkDryMonth.Checked Then
+    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
+    '        clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
+    '        ' Add id_calculation when Dry Month is checked
+    '        clsListDayFunction.AddParameter("id_calc", clsRFunctionParameter:=clsIdCalculationFunc, iPosition:=1, bIncludeArgumentName:=False)
+    '        clsRainFilterFunc.RemoveParameterByName("save")
+    '    Else
+    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
+    '        clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
+    '        ' Remove id_calculation when Dry Month is unchecked
+    '        clsListDayFunction.RemoveParameterByName("id_calc")
+    '        clsDayFilterFunc.RemoveParameterByName("save")
+    '    End If
+    '    AddDoy()
+    'End Sub
+
+    'Private Sub AddRemoveDayFilter()
+    '    clsRunCalcFunc.RemoveParameterByName("calc")
+
+    '    If ucrChkDryMonth.Checked Then
+    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
+    '        clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
+    '        clsListDayFunction.AddParameter("id_calc", clsRFunctionParameter:=clsIdCalculationFunc, iPosition:=1, bIncludeArgumentName:=False)
+    '        clsRainFilterFunc.RemoveParameterByName("save")
+
+    '        ' Clear assignments to prevent duplication
+    '        clsFilterMonthFunction.SetAssignTo("")
+    '        clsGroupByMonthYearFunction.SetAssignTo("")
+    '        clsDryMonthCalculationFunc.SetAssignTo("")
+    '        clsWhyVariable.SetAssignTo("")
+    '        clsGroupByFunc.SetAssignTo("")
+    '        clsRainFilterFunc.SetAssignTo("")
+    '        clsDayFilterCalcFunction.SetAssignTo("")
+    '        clsIdCalculationFunc.SetAssignTo("")  ' ADD THIS LINE
+
+    '    Else
+    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
+    '        clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
+    '        clsListDayFunction.RemoveParameterByName("id_calc")
+    '        clsDayFilterFunc.RemoveParameterByName("save")
+
+    '        ' Restore assignments
+    '        clsFilterMonthFunction.SetAssignTo("filter_months")
+    '        clsGroupByMonthYearFunction.SetAssignTo("grouping_month_year")
+    '        clsDryMonthCalculationFunc.SetAssignTo("dry_month_calculation")
+    '        clsWhyVariable.SetAssignTo("why_variable")
+    '        clsGroupByFunc.SetAssignTo("grouping")
+    '        clsRainFilterFunc.SetAssignTo("rainfall_filter")
+    '        clsDayFilterCalcFunction.SetAssignTo("day_calculation")
+    '        clsIdCalculationFunc.SetAssignTo("id_calculation")  ' ADD THIS LINE
+    '    End If
+
+    '    AddDoy()
+    'End Sub
+
     Private Sub AddRemoveDayFilter()
+        Dim bClear As Boolean = ucrChkDryMonth.Checked
+
         clsRunCalcFunc.RemoveParameterByName("calc")
-        If ucrChkDryMonth.Checked Then
+
+        If bClear Then
             clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
             clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
+            clsListDayFunction.AddParameter("id_calc", clsRFunctionParameter:=clsIdCalculationFunc, iPosition:=1, bIncludeArgumentName:=False)
             clsRainFilterFunc.RemoveParameterByName("save")
         Else
             clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
             clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
+            clsListDayFunction.RemoveParameterByName("id_calc")
             clsDayFilterFunc.RemoveParameterByName("save")
         End If
+
+        ' Toggle all assignments using ternary operator
+        clsFilterMonthFunction.SetAssignTo(If(bClear, "", "filter_months"))
+        clsGroupByMonthYearFunction.SetAssignTo(If(bClear, "", "grouping_month_year"))
+        clsDryMonthCalculationFunc.SetAssignTo(If(bClear, "", "dry_month_calculation"))
+        clsWhyVariable.SetAssignTo(If(bClear, "", "why_variable"))
+        clsGroupByFunc.SetAssignTo(If(bClear, "", "grouping"))
+        clsRainFilterFunc.SetAssignTo(If(bClear, "", "rainfall_filter"))
+        clsDayFilterCalcFunction.SetAssignTo(If(bClear, "", "day_calculation"))
+        clsIdCalculationFunc.SetAssignTo(If(bClear, "", "id_calculation"))
+
         AddDoy()
     End Sub
 
@@ -800,10 +916,16 @@ Public Class dlgClimaticCheckDataRain
             clsDayEqualOperator.RemoveParameterByName("doy")
         End If
     End Sub
-    Private Sub UcrCheckAddCommentVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrCheckAddCommentVariable.ControlValueChanged
-        If UcrCheckAddCommentVariable.Checked AndAlso ucrChkDryMonth.Checked Then
-            clsWhyVariable.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-            clsListSubCalc.AddParameter("why", clsRFunctionParameter:=clsWhyVariable, bIncludeArgumentName:=False)
+
+    Private Sub UcrChkAddCommentVariable_ControlValueChanged(ucrChangedControl As ucrCore) _
+    Handles UcrChkAddCommentVariable.ControlValueChanged,
+            ucrChkDryMonth.ControlValueChanged,
+            ucrReceiverElement.ControlValueChanged,
+            ucrSelectorRain.ControlContentsChanged
+
+        If UcrChkAddCommentVariable.Checked AndAlso ucrChkDryMonth.Checked Then
+            clsWhyVariable.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & Chr(34) & ucrReceiverElement.GetVariableNames(False) & Chr(34) & ")", iPosition:=2)
+            clsListSubCalc.AddParameter("why", clsRFunctionParameter:=clsWhyVariable, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsListSubCalc.RemoveParameterByName("why")
         End If
