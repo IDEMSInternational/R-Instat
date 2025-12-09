@@ -30,7 +30,8 @@ Public Class dlgClimaticLengthOfSeason
     Private bDataChanged As Boolean = False
     Private clsLengthOfSeasonFunction, clsMaxFunction, clsLengthmoreFunction, clsListFunction, clsAscharactermoreFunction, clsConvertColumnTypeFunction,
         clsElseIfMoreFunction, clsApplyInstatCalcFunction, clsAsCharacterFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsCaseWhenFunction,
-        clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction, clsDefineAsClimatic, clsVectorConcatFunction As New RFunction
+        clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction, clsDefineAsClimatic, clsVectorConcatFunction, clsGetCalculationsFunction,
+        clsGetSeasonLengthFunction, clsDummyFunction As New RFunction
     Private clsMinusOpertor, clsAssignMoreOperator, clsMinusmoreOPerator, clsAndOperator, clsOROperator, clsCaseWhenOperator, clsCaseWhen1Operator, clsCaseWhen2Operator, clsCaseWhen3Operator, clsAssignOperator, clsAssign1Operator, clsAssign2Operator, clsAssign3Operator, clsAssign4Operator, clsAnd1Operator, clsAnd2Operator As New ROperator
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
@@ -124,6 +125,11 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthmore.AddParameterPresentCondition(False, "sub3", False)
         ucrChkLengthmore.AddToLinkedControls(ucrInputTextLengthmore, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkDefinitions.SetText("Definition")
+        ucrChkDefinitions.AddParameterValuesCondition(True, "definitions", "True")
+        ucrChkDefinitions.AddParameterValuesCondition(False, "definitions", "False")
+        ucrChkDefinitions.AddToLinkedControls(ucrSaveDefinitionsObject, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrInputTextLengthmore.SetParameter(New RParameter("result_name", 2))
         ucrInputTextLengthmore.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
         ucrInputTextLengthmore.SetName("length_more")
@@ -134,6 +140,13 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverEndFilled.Selector = ucrSelectorLengthofSeason
         ucrReceiverEndFilled.Tag = "end_season_filled"
         ucrReceiverEndFilled.SetLinkedDisplayControl(lblEndFilled)
+
+        ucrSaveDefinitionsObject.SetPrefix("season_length_definition")
+        ucrSaveDefinitionsObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveDefinitionsObject.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
+        ucrSaveDefinitionsObject.SetLabelText("Definition Object Name:")
+        ucrSaveDefinitionsObject.SetIsComboBox()
+        ucrSaveDefinitionsObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
         EnableLengthmore()
         EnableReceiver()
@@ -153,7 +166,12 @@ Public Class dlgClimaticLengthOfSeason
         clsVectorConcatFunction = New RFunction
         clsListFunction = New RFunction
         clsMaxFunction = New RFunction
+        clsGetCalculationsFunction = New RFunction
+        clsGetSeasonLengthFunction = New RFunction
+        clsDummyFunction = New RFunction
         clsMinusmoreOPerator = New ROperator
+
+        clsDummyFunction.AddParameter("definitions", "False", iPosition:=0)
 
         clsLengthOfSeasonFunction.Clear()
         clsCombinationCalcFunction.Clear()
@@ -334,6 +352,13 @@ Public Class dlgClimaticLengthOfSeason
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
         clsDefineAsClimatic.iCallType = 2
 
+        clsGetCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
+        clsGetCalculationsFunction.AddParameter("x", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetCalculationsFunction.SetAssignTo("calculations_data")
+
+        clsGetSeasonLengthFunction.SetRCommand("get_seasonal_length_definition")
+        clsGetSeasonLengthFunction.AddParameter("x", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=0, bIncludeArgumentName:=False)
+
         'Base Function
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=1)
@@ -352,8 +377,10 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsAnd2Operator, New RParameter("end_status", 1), iAdditionalPairNo:=4)
         ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsAssign3Operator, New RParameter("start_status", 0), iAdditionalPairNo:=5)
         ucrInputTextType.AddAdditionalCodeParameterPair(clsConvertColumnTypeFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
-        ucrReceiverStartofRains.AddAdditionalCodeParameterPair(clsMinusmoreOPerator, New RParameter("rigth", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverStartofRains.AddAdditionalCodeParameterPair(clsMinusmoreOPerator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrInputLengthofSeason.AddAdditionalCodeParameterPair(clsGetSeasonLengthFunction, New RParameter("seasonal_length", 1), iAdditionalPairNo:=1)
 
+        ucrSaveDefinitionsObject.SetRCode(clsGetSeasonLengthFunction, bReset)
         ucrReceiverStartofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverEndofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverStartofRainsLogical.SetRCode(clsAndOperator, bReset)
@@ -364,6 +391,7 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
         If bReset Then
             ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
+            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputTextLengthmore.SetRCode(clsLengthmoreFunction, bReset)
         ucrReceiverEndFilled.SetRCode(clsMaxFunction, bReset)
@@ -401,6 +429,14 @@ Public Class dlgClimaticLengthOfSeason
     Private Sub ucrReceiverStartofRains_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStartofRains.ControlValueChanged, ucrReceiverEndofRains.ControlValueChanged
         EnableReceiver()
         clsLengthOfSeasonFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStartofRains.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverEndofRains.GetVariableNames & ")", iPosition:=3)
+    End Sub
+
+    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+        If ucrChkDefinitions.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetSeasonLengthFunction, iPosition:=2)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetSeasonLengthFunction)
+        End If
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLengthofSeason.ControlValueChanged
