@@ -1,0 +1,27 @@
+### R-Instat developer checklist
+
+1. **Basic functionality – "Does it work?"**
+- [ ] Runs without errors on a dataset  
+- [ ] Outputs created correctly (data frames, graphs, summaries, models, etc.)  
+- [ ] Results appear in the right places (e.g., output window)  
+
+2. **TestOK / OK button behaviour**
+- [ ] OK disabled when dialog is incomplete/invalid  
+- [ ] OK enabled only when required inputs are set correctly  
+- [ ] TestOK updates when different controls change  
+
+3. **UI behaviour**
+- [ ] Reset returns dialog to defaults and TestOK updates  
+- [ ] Cancel/Close makes no changes to data or outputs  
+- [ ] Controls show/hide/enable/disable/clear correctly when options change  
+
+4. **Edge cases & error handling**
+- [ ] Invalid inputs (e.g. negative, too-large, empty, impossible combos) handled cleanly  
+- [ ] Running dialog twice with different parameters behaves consistently  
+- [ ] Tested on different size data sets  
+
+5. **Resolved AI Comments**
+- [ ] All AI/bot review comments have been read  
+- [ ] Each comment has been addressed (code changed) or intentionally ignored with a short explanation  
+- [ ] No unresolved AI comments that you still plan to act on  
+- [ ] Anything unclear has been asked about in the PR discussion  
