@@ -44,7 +44,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 470
+        ucrBase.iHelpTopicID = 460
 
         'Selector
         ucrSelectorUseDate.SetParameter(New RParameter("data_name", 0))
@@ -251,3 +251,4 @@ Public Class dlgUseDate
     End Sub
 
 End Class
+
