@@ -367,6 +367,9 @@ Public Class dlgInventoryPlot
             ucrReceiverDate.SetParameterIsRFunction()
             ucrInventoryPlotSelector.SetParameterIsrfunction()
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsInventoryPlot)
+            AddOrRemoveKeyFunctions()
+            AddOrRemoveSaveDetailFunctions()
+            AddOrRemoveDataFrameFunction()
         ElseIf rdoGraph.Checked Then
             ucrReceiverStation.SetParameterIsString()
             ucrReceiverDate.SetParameterIsString()
@@ -416,6 +419,10 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
+        AddOrRemoveDataFrameFunction()
+    End Sub
+
+    Private Sub AddOrRemoveDataFrameFunction()
         If ucrChkDetails.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsDataFrameFunction, iPosition:=2)
             clsClimaticDetails.iCallType = 2
@@ -425,8 +432,8 @@ Public Class dlgInventoryPlot
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConvertColumnToTypeFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDataFrameFunction)
         End If
-
     End Sub
+
 
     Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose, Me.Closing
         If rdoMissing.Checked AndAlso Not (ucrChkSummary.Checked OrElse ucrChkDetails.Checked) Then
@@ -458,20 +465,27 @@ Public Class dlgInventoryPlot
         Else
             clsAddKeyFunction.RemoveParameterByName("data_name")
         End If
+        AddOrRemoveSaveDetailFunctions()
         If ucrSaveDetails.ucrChkSave.Checked Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataNamesFunction, iPosition:=0)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnsFunction, iPosition:=6)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnToTypeFunction, iPosition:=7)
             clsBracketOperator.SetAssignTo(ucrSaveDetails.GetText())
             clsConvertColumnToTypeFunction.AddParameter("data_name", Chr(34) & ucrSaveDetails.GetText() & Chr(34), iPosition:=0)
             clsDataFrameFunction.SetAssignTo(ucrSaveDetails.GetText())
             clsDataFrameFunction.iCallType = 0
         Else
+            clsDataFrameFunction.RemoveAssignTo()
+            clsDataFrameFunction.iCallType = 2
+        End If
+    End Sub
+
+    Private Sub AddOrRemoveSaveDetailFunctions()
+        If ucrSaveDetails.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataNamesFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnsFunction, iPosition:=6)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnToTypeFunction, iPosition:=7)
+        Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataNamesFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConvertColumnToTypeFunction)
-            clsDataFrameFunction.RemoveAssignTo()
-            clsDataFrameFunction.iCallType = 2
         End If
     End Sub
 
