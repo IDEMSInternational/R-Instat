@@ -67,7 +67,7 @@ Public Class dlgUseDate
 
         ucrChkShiftYearName.SetParameter(New RParameter("year_name", 2))
         ucrChkShiftYearName.SetText("")
-        ucrChkShiftYearName.SetRDefault("FALSE")
+        ucrChkShiftYearName.SetRDefault("TRUE")
 
         ucrChkLeapYearNum.SetParameter(New RParameter("leap_year", 3))
         ucrChkLeapYearNum.SetText("")
@@ -249,4 +249,5 @@ Public Class dlgUseDate
     Private Sub ucrInputComboBoxStartingMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxStartingMonth.ControlValueChanged
         Shifted()
     End Sub
+
 End Class
