@@ -64,8 +64,7 @@ Public Class dlgLinePlot
     Private clsDummyFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
-    Private clsFacetVariablesOperator As New ROperator
-    Private clsVarsFunction As New RFunction
+    ' Private clsFacetVariablesOperator As New ROperator
     Private clsRowVarsFunction, clsColVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
@@ -507,8 +506,6 @@ Public Class dlgLinePlot
         clsGeomRibbonFunction = New RFunction
         clsFacetFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsFacetVariablesOperator = New ROperator
-        clsVarsFunction = New RFunction
         clsRowVarsFunction = New RFunction
         clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
@@ -529,7 +526,6 @@ Public Class dlgLinePlot
         ucrInputFormula.SetText("y ~ x")
 
         clsDummyFunction.AddParameter("check", "line", iPosition:=0)
-        clsDummyFunction.AddParameter("checked", "False", iPosition:=1)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -567,10 +563,6 @@ Public Class dlgLinePlot
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-
-        clsFacetVariablesOperator.SetOperation("~")
-        clsFacetVariablesOperator.bForceIncludeOperation = True
-        clsFacetVariablesOperator.bBrackets = False
 
         clsRowVarsFunction.SetPackageName("ggplot2")
         clsRowVarsFunction.SetRCommand("vars")
@@ -888,7 +880,7 @@ Public Class dlgLinePlot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
         sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                     clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction,
-                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
+                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
@@ -1118,7 +1110,7 @@ Public Class dlgLinePlot
             If clsBaseOperator.ContainsParameter("facets") Then
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
-                        GetParameterValue(clsFacetVariablesOperator)
+                        ' GetParameterValue(clsRowVarsFunction)
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
