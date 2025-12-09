@@ -50,7 +50,7 @@ Public Class dlgAddKey
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 742
+        ucrBase.iHelpTopicID = 780
         ucrBase.clsRsyntax.iCallType = 2
         ucrInputCheckInput.IsReadOnly = True
         EnableDisableCmdCheckUnique()
@@ -157,4 +157,5 @@ Public Class dlgAddKey
     Private Sub AllControls_ControlContentsChanged() Handles ucrSaveKey.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
