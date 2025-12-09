@@ -8,10 +8,10 @@
 2. **TestOK / OK button behaviour**
 - [ ] OK disabled when dialog is incomplete/invalid  
 - [ ] OK enabled only when required inputs are set correctly  
-- [ ] TestOk updates when different controls change  
+- [ ] TestOK updates when different controls change  
 
 3. **UI behaviour**
-- [ ] Reset returns dialog to defaults and TestOk updates  
+- [ ] Reset returns dialog to defaults and TestOK updates  
 - [ ] Cancel/Close makes no changes to data or outputs  
 - [ ] Controls show/hide/enable/disable/clear correctly when options change  
 
