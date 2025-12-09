@@ -417,6 +417,11 @@ Public Class dlgClimaticLengthOfSeason
                 bOkEnabled = False
             End If
         End If
+        If ucrChkDefinitions.Checked Then
+            If Not ucrSaveDefinitionsObject.IsComplete Then
+                bOkEnabled = False
+            End If
+        End If
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
@@ -431,12 +436,13 @@ Public Class dlgClimaticLengthOfSeason
         clsLengthOfSeasonFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStartofRains.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverEndofRains.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
-        If ucrChkDefinitions.Checked Then
+    Private Sub ucrDefinitionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged, ucrSaveDefinitionsObject.ControlValueChanged
+        If ucrChkDefinitions.Checked AndAlso ucrSaveDefinitionsObject.IsComplete Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetSeasonLengthFunction, iPosition:=2)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetSeasonLengthFunction)
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLengthofSeason.ControlValueChanged
@@ -474,7 +480,7 @@ Public Class dlgClimaticLengthOfSeason
         AddTypes()
     End Sub
 
-    Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged, ucrReceiverEndFilled.ControlContentsChanged, ucrChkLengthmore.ControlContentsChanged, ucrInputTextLengthmore.ControlContentsChanged
+    Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged, ucrReceiverEndFilled.ControlContentsChanged, ucrChkLengthmore.ControlContentsChanged, ucrInputTextLengthmore.ControlContentsChanged, ucrSaveDefinitionsObject.ControlContentsChanged, ucrChkDefinitions.ControlContentsChanged
         TestOKEnabled()
         EnableLengthmore()
         AddRemoveLengthmore()
