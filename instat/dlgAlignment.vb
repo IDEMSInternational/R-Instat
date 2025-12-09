@@ -37,7 +37,7 @@ Public Class dlgAlignment
         ucrMultiple.Selector = ucrSelectorAlignment
         ucrMultiple.SetMeAsReceiver()
 
-        ucrBase.OKEnabled(False)
+        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub SetDefaults()
@@ -64,4 +64,5 @@ Public Class dlgAlignment
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
+
 End Class
