@@ -207,13 +207,13 @@ Public Class dlgRestoreBackup
     End Function
 
     Private Sub ucrInputSavedPathData_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathData.Leave
-        If Not ucrInputSavedPathData.IsEmpty AndAlso Not String.IsNullOrEmpty(ucrInputSavedPathData.FilePath) Then
+        If Not ucrInputSavedPathData.IsEmpty Then
             frmMain.clsRecentItems.addToMenu(ucrInputSavedPathData.FilePath.Replace("\", "/"))
         End If
     End Sub
 
     Private Sub ucrInputSavedPathLog_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathLog.Leave
-        If Not ucrInputSavedPathLog.IsEmpty AndAlso Not String.IsNullOrEmpty(ucrInputSavedPathLog.FilePath) Then
+        If Not ucrInputSavedPathLog.IsEmpty Then
             frmMain.clsRecentItems.addToMenu(ucrInputSavedPathLog.FilePath.Replace("\", "/"))
         End If
     End Sub
