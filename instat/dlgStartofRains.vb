@@ -748,7 +748,7 @@ Public Class dlgStartofRains
         clsCalcStartDate.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStartDate, iPosition:=1)
         clsCalcStartDate.AddParameter("result_name", Chr(34) & strStartDate & Chr(34), iPosition:=2)
         clsCalcStartDate.AddParameter("save", 2, iPosition:=6)
-        clsCalcStartDate.SetAssignTo(strStartDate)
+        clsCalcStartDate.SetAssignTo("start_rain_date")
 
         clsIfelseStartDate.SetPackageName("dplyr")
         clsIfelseStartDate.SetRCommand("if_else")
@@ -851,16 +851,12 @@ Public Class dlgStartofRains
         clsConvertLinkedvariablesvectorFunction.SetRCommand("c")
 
         clsCalculatedListformFunction.SetRCommand("c")
-        clsCalculatedListformFunction.AddParameter("x", clsRFunctionParameter:=clsSetnameRainStatusFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsCalculatedListformFunction.AddParameter("y", clsRFunctionParameter:=clsSetnameRainFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsCalculatedListformFunction.SetAssignTo(strcalculatedfromlist)
 
         clsSetnameRainStatusFunction.SetRCommand("setNames")
-        clsSetnameRainStatusFunction.AddParameter("x", Chr(34) & strStartStatus & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsSetnameRainStatusFunction.AddParameter("y", "linked_data_name", iPosition:=1, bIncludeArgumentName:=False)
 
         clsSetnameRainFunction.SetRCommand("setNames")
-        clsSetnameRainFunction.AddParameter("x", Chr(34) & strStartDoy & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsSetnameRainFunction.AddParameter("y", "linked_data_name", iPosition:=1, bIncludeArgumentName:=False)
 
         clsStatRainStatus2Function.SetPackageName("instatCalculations")
@@ -875,7 +871,6 @@ Public Class dlgStartofRains
         clsIfElseStatus2Function.bToScriptAsRString = True
 
         clsNastatus2Function.SetRCommand("!is.na")
-        clsNastatus2Function.AddParameter("x", strStartDoy, iPosition:=0, bIncludeArgumentName:=False)
         clsIfElseStatus2Function.AddParameter("test", clsRFunctionParameter:=clsNastatus2Function, iPosition:=0, bIncludeArgumentName:=False)
         clsIfElseStatus2Function.AddParameter("yes", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
         clsIfElseStatus2Function.AddParameter("no", clsRFunctionParameter:=clsInnerIfElseFunction, iPosition:=2, bIncludeArgumentName:=False)
@@ -883,10 +878,8 @@ Public Class dlgStartofRains
         clsInnerIfElseFunction.SetRCommand("ifelse")
         clsInnerIfElseFunction.AddParameter("test", clsROperatorParameter:=clsStartStatusEqualsTrueOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsInnerIfElseFunction.AddParameter("yes", "NA", iPosition:=1, bIncludeArgumentName:=False)
-        clsInnerIfElseFunction.AddParameter("no", strStartStatus, iPosition:=2, bIncludeArgumentName:=False)
 
         clsStartStatusEqualsTrueOperator.SetOperation("==")
-        clsStartStatusEqualsTrueOperator.AddParameter("0", strStartStatus, iPosition:=0)
         clsStartStatusEqualsTrueOperator.AddParameter("1", "TRUE", iPosition:=1)
 
         clsStartRainCombine2Function.SetRCommand("instat_calculation$new")
@@ -1143,6 +1136,7 @@ Public Class dlgStartofRains
         GroupByStationOptions()
         GroupByYearOptions()
         CombinedFilter()
+        AddRemoveSetNamesParamater()
     End Sub
 
     Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorForStartofRains.ControlValueChanged
@@ -1204,6 +1198,7 @@ Public Class dlgStartofRains
 
     Private Sub ucrChkAsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAsDoy.ControlValueChanged
         AddTypes()
+        AddRemoveSetNamesParamater()
         If ucrChkAsDoy.Checked Then
             clsCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsCalcStartDOY, bIncludeArgumentName:=False, iPosition:=0)
             clsListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsCalcStartDOY, bIncludeArgumentName:=False, iPosition:=0)
@@ -1213,14 +1208,39 @@ Public Class dlgStartofRains
         End If
     End Sub
 
+    Private Sub AddRemoveSetNamesParamater()
+        If ucrChkAsDoy.Checked Then
+            clsNastatus2Function.AddParameter("x", ucrInputNewDoyColumnName.GetText, iPosition:=0, bIncludeArgumentName:=False)
+            clsSetnameRainFunction.AddParameter("x", Chr(34) & ucrInputNewDoyColumnName.GetText & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            clsCalculatedListformFunction.AddParameter("y", clsRFunctionParameter:=clsSetnameRainFunction, iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsSetnameRainFunction.RemoveParameterByName("x")
+            clsNastatus2Function.RemoveParameterByName("x")
+            clsCalculatedListformFunction.RemoveParameterByName("y")
+        End If
+        If ucrChkStatus.Checked Then
+            clsStartStatusEqualsTrueOperator.AddParameter("0", ucrInputNewStatusColumnName.GetText, iPosition:=0)
+            clsInnerIfElseFunction.AddParameter("no", ucrInputNewStatusColumnName.GetText, iPosition:=2, bIncludeArgumentName:=False)
+            clsSetnameRainStatusFunction.AddParameter("x", Chr(34) & ucrInputNewStatusColumnName.GetText & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            clsCalculatedListformFunction.AddParameter("x", clsRFunctionParameter:=clsSetnameRainStatusFunction, iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsSetnameRainStatusFunction.RemoveParameterByName("x")
+            clsInnerIfElseFunction.RemoveParameterByName("no")
+            clsStartStatusEqualsTrueOperator.RemoveParameterByName("0")
+            clsCalculatedListformFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
     Private Sub ucrInputNewDoyColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDoyColumnName.ControlValueChanged
         clsSORStartSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=ucrInputNewDoyColumnName.GetText, bIncludeArgumentName:=False, iPosition:=0)
         clsSORStatusSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=ucrInputNewDoyColumnName.GetText, bIncludeArgumentName:=False, iPosition:=0)
         AddTypes()
+        AddRemoveSetNamesParamater()
     End Sub
 
     Private Sub ucrInputNewStatusColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewStatusColumnName.ControlValueChanged
         AddTypes()
+        AddRemoveSetNamesParamater()
     End Sub
 
     Private Sub ucrInputNewDateColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDateColumnName.ControlValueChanged
@@ -1249,6 +1269,7 @@ Public Class dlgStartofRains
     Private Sub ucrChkStatus_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStatus.ControlValueChanged
         AddRemoveStartStatus()
         AddTypes()
+        AddRemoveSetNamesParamater()
         If ucrChkStatus.Checked Then
             clsCombinationSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsCalcStatus, bIncludeArgumentName:=False, iPosition:=2)
             clsListSubCalc.AddParameter("sub3", clsRFunctionParameter:=clsCalcStatus, bIncludeArgumentName:=False, iPosition:=2)
@@ -1423,9 +1444,9 @@ Public Class dlgStartofRains
         End If
         clsVectorConcat2Function.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
 
-        AddRemoveParam(ucrChkAsDoy, ucrInputNewDoyColumnName, "start", 2)
-        AddRemoveParam(ucrChkAsDate, ucrInputNewDateColumnName, "start_d", 3)
-        AddRemoveParam(ucrChkStatus, ucrInputNewStatusColumnName, "start_s", 4)
+        AddRemoveParam(ucrChkAsDoy, ucrInputNewDoyColumnName, "start_rain", 2)
+        AddRemoveParam(ucrChkAsDate, ucrInputNewDateColumnName, "start_rain_date", 3)
+        AddRemoveParam(ucrChkStatus, ucrInputNewStatusColumnName, "start_rain_status", 4)
 
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
     End Sub
