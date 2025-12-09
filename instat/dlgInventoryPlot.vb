@@ -26,7 +26,7 @@ Public Class dlgInventoryPlot
     Private clsDummyFunction As New RFunction
     Private clsDataFrameFunction As New RFunction
     Private clsGetDataNamesFunction As New RFunction
-    Private clsGetDataNames2Function As New RFunction
+    Private clsUpdatedDataNamesFunction As New RFunction
     Private clsSetDiffFunction As New RFunction
     Private clsAddColumnsFunction As New RFunction
     Private clsConvertColumnToTypeFunction As New RFunction
@@ -204,7 +204,7 @@ Public Class dlgInventoryPlot
         clsNewCAddKeyFunction = New RFunction
         clsDataFrameFunction = New RFunction
         clsGetDataNamesFunction = New RFunction
-        clsGetDataNames2Function = New RFunction
+        clsUpdatedDataNamesFunction = New RFunction
         clsSetDiffFunction = New RFunction
         clsAddColumnsFunction = New RFunction
         clsConvertColumnToTypeFunction = New RFunction
@@ -245,10 +245,10 @@ Public Class dlgInventoryPlot
         clsGetDataNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
         clsGetDataNamesFunction.SetAssignTo("existing_dfs")
 
-        clsGetDataNames2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsUpdatedDataNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
 
         clsSetDiffFunction.SetRCommand("setdiff")
-        clsSetDiffFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataNames2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsSetDiffFunction.AddParameter("x", clsRFunctionParameter:=clsUpdatedDataNamesFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsSetDiffFunction.AddParameter("y", "existing_dfs", iPosition:=1, bIncludeArgumentName:=False)
 
         clsBracketOperator.SetOperation("[")
