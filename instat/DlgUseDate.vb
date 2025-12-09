@@ -44,7 +44,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 462
+        ucrBase.iHelpTopicID = 480
 
         'Selector
         ucrSelectorUseDate.SetParameter(New RParameter("data_name", 0))
@@ -249,4 +249,5 @@ Public Class dlgUseDate
     Private Sub ucrInputComboBoxStartingMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxStartingMonth.ControlValueChanged
         Shifted()
     End Sub
+
 End Class
