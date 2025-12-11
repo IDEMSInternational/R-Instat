@@ -238,6 +238,7 @@ Public Class dlgClimaticSummary
 
         clsDefaultFactors.SetRCommand("c")
         clsConcFunction.SetRCommand("c")
+        clsLinkColsFunction.SetRCommand("c")
 
         'extremes_temps <- get_climatic_summaries_definition(calculations_data = calculations_data,
         '                                          variables_metadata = variables_metadata,
@@ -245,10 +246,11 @@ Public Class dlgClimaticSummary
         '                                          daily_data_calculation = daily_data_calculation)
 
         'Get DataFrame
-        clsGetLinkedDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetLinkedDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
+        clsGetLinkedDataFrameFunction.AddParameter("link_cols", clsRFunctionParameter:=clsLinkColsFunction, iPosition:=1)
         clsGetLinkedDataFrameFunction.SetAssignTo(strLinkeddata)
 
-        clsGetDataFrameFunction.SetRCommand("data_book$get_daily_data_calculations")
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_daily_data_calculations")
         clsGetDataFrameFunction.AddParameter(strParameterValue:=strLinkeddata, iPosition:=0)
         clsGetDataFrameFunction.SetAssignTo("calculations_data")
         'Varibales MetaData
@@ -461,7 +463,7 @@ Public Class dlgClimaticSummary
             clsLinkColsFunction.ClearParameters()
             If Not ucrReceiverStation.IsEmpty Then
                 clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
-                clsLinkColsFunction.AddParameter("station", ucrReceiverStation.GetVariableNames)
+                clsLinkColsFunction.AddParameter("station", ucrReceiverStation.GetVariableNames, bIncludeArgumentName:=False)
             Else
                 clsDefaultFactors.RemoveParameterByName("station")
             End If
