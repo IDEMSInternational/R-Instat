@@ -70,7 +70,6 @@ Public Class frmButtonOkYesNo
         cmdOk.Visible = False
         cmdYes.Visible = False
         cmdNo.Visible = False
-
         Select Case buttons
             Case MessageBoxButtons.OK
                 cmdOk.Text = GetTranslation("Ok")
