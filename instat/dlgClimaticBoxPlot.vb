@@ -47,7 +47,7 @@ Public Class dlgClimaticBoxPlot
     Private clsYScaleDateFunction As New RFunction
 
     'Functions for Label CheckBox
-    Private clsRoundFunction, clsLabelAfterFunction, clsLabelSummaryFunction, clsAesLabelFunction, clsBoxplotStatFunction, clsIfFunction,
+    Private clsRoundFunction, clsLabelAfterFunction, clsAesLabelFunction, clsBoxplotStatFunction, clsIfFunction,
         clsLengthFunction, clsGroupbyFunction, clsBoxplotStat2Function, clsMutateFunction, clsFilterElement2Function, clsUngroupFunction,
         clsAsFactor2Function, clsMutate2Function, clsGeomTextFunction, clsRaes2Function, clsPositionNudgeFunction As RFunction
     'Label Outlier Operators
@@ -243,7 +243,6 @@ Public Class dlgClimaticBoxPlot
         clsFilterElementOperator = New ROperator
         clsFilterElementFunction = New RFunction
         clsAsFactorFunction = New RFunction
-        clsLabelSummaryFunction = New RFunction
         clsAesLabelFunction = New RFunction
 
         clsRoundFunction = New RFunction
@@ -329,13 +328,6 @@ Public Class dlgClimaticBoxPlot
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
-
-        clsLabelSummaryFunction.SetPackageName("ggplot2")
-        clsLabelSummaryFunction.SetRCommand("stat_summary")
-        clsLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
-        clsLabelSummaryFunction.AddParameter("fun", clsROperatorParameter:=clsOpenBraquetOperator, iPosition:=2)
-        clsLabelSummaryFunction.AddParameter("hjust", "-0.2", iPosition:=3)
 
         clsOpenBraquetOperator.SetOperation("{")
         clsOpenBraquetOperator.AddParameter("left", "\ (y)", iPosition:=0, bIncludeArgumentName:=False)
@@ -476,7 +468,6 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsGroupbyFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsAsFactor2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrReceiverWithinYear.SetRCode(clsAsFactor2Function)
         ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
@@ -492,9 +483,6 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
         ucrNudOmitBelow.SetRCode(clsFilterElementOperator, bReset)
-        If bReset Then
-            ucrChkLabel.SetRCode(clsLabelSummaryFunction)
-        End If
         bRCodeUpdated = True
     End Sub
 
@@ -793,23 +781,14 @@ Public Class dlgClimaticBoxPlot
     Private Sub AddOutlierFunctions()
         If ucrChkLabel.Checked AndAlso Not ucrReceiverLabelOutliers.IsEmpty Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=0)
-            If clsBaseOperator.ContainsParameter("label") Then
-                clsBaseOperator.RemoveParameterByName("label")
-                clsBaseOperator.AddParameter("x", clsRFunctionParameter:=clsGeomTextFunction, bIncludeArgumentName:=False)
-            End If
+            clsBaseOperator.AddParameter("x", clsRFunctionParameter:=clsGeomTextFunction, bIncludeArgumentName:=False)
         Else
             clsBaseOperator.RemoveParameterByName("x")
-            clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipeOperator)
         End If
     End Sub
 
     Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
-        If ucrChkLabel.Checked Then
-            clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
-        Else
-            clsBaseOperator.RemoveParameterByName("label")
-        End If
         AddOutlierFunctions()
     End Sub
 
