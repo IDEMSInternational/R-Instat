@@ -32,7 +32,7 @@ Public Class dlgClimaticLengthOfSeason
         clsElseIfMoreFunction, clsApplyInstatCalcFunction, clsAsCharacterFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsCaseWhenFunction,
         clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction, clsDefineAsClimatic, clsVectorConcatFunction, clsGetCalculationsFunction,
         clsGetSeasonLengthFunction, clsDummyFunction As New RFunction
-    Private clsMinusOpertor, clsAssignMoreOperator, clsMinusmoreOPerator, clsAndOperator, clsOROperator, clsCaseWhenOperator, clsCaseWhen1Operator, clsCaseWhen2Operator, clsCaseWhen3Operator, clsAssignOperator, clsAssign1Operator, clsAssign2Operator, clsAssign3Operator, clsAssign4Operator, clsAnd1Operator, clsAnd2Operator As New ROperator
+    Private clsMinusOpertor, clsAssignMoreOperator, clsMinusmoreOperator, clsAndOperator, clsOROperator, clsCaseWhenOperator, clsCaseWhen1Operator, clsCaseWhen2Operator, clsCaseWhen3Operator, clsAssignOperator, clsAssign1Operator, clsAssign2Operator, clsAssign3Operator, clsAssign4Operator, clsAnd1Operator, clsAnd2Operator As New ROperator
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -169,7 +169,7 @@ Public Class dlgClimaticLengthOfSeason
         clsGetCalculationsFunction = New RFunction
         clsGetSeasonLengthFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsMinusmoreOPerator = New ROperator
+        clsMinusmoreOperator = New ROperator
 
         clsDummyFunction.AddParameter("definitions", "False", iPosition:=0)
 
@@ -328,7 +328,7 @@ Public Class dlgClimaticLengthOfSeason
         clsElseIfMoreFunction.SetRCommand("ifelse")
         clsElseIfMoreFunction.bToScriptAsRString = True
         clsElseIfMoreFunction.AddParameter("test", clsROperatorParameter:=clsAssignMoreOperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsElseIfMoreFunction.AddParameter("yes", clsROperatorParameter:=clsMinusmoreOPerator, iPosition:=1, bIncludeArgumentName:=False)
+        clsElseIfMoreFunction.AddParameter("yes", clsROperatorParameter:=clsMinusmoreOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsAssignMoreOperator.SetOperation("==")
         clsAssignMoreOperator.AddParameter("left", clsRFunctionParameter:=clsAscharactermoreFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -336,8 +336,8 @@ Public Class dlgClimaticLengthOfSeason
 
         clsAscharactermoreFunction.SetRCommand("as.character")
 
-        clsMinusmoreOPerator.SetOperation("-")
-        clsMinusmoreOPerator.AddParameter("left", "max_filled", iPosition:=0, bIncludeArgumentName:=False)
+        clsMinusmoreOperator.SetOperation("-")
+        clsMinusmoreOperator.AddParameter("left", "max_filled", iPosition:=0, bIncludeArgumentName:=False)
 
         clsMaxFunction.SetRCommand("max")
         clsMaxFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
@@ -377,7 +377,7 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsAnd2Operator, New RParameter("end_status", 1), iAdditionalPairNo:=4)
         ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsAssign3Operator, New RParameter("start_status", 0), iAdditionalPairNo:=5)
         ucrInputTextType.AddAdditionalCodeParameterPair(clsConvertColumnTypeFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
-        ucrReceiverStartofRains.AddAdditionalCodeParameterPair(clsMinusmoreOPerator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverStartofRains.AddAdditionalCodeParameterPair(clsMinusmoreOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrInputLengthofSeason.AddAdditionalCodeParameterPair(clsGetSeasonLengthFunction, New RParameter("seasonal_length", 1), iAdditionalPairNo:=1)
 
         ucrSaveDefinitionsObject.SetRCode(clsGetSeasonLengthFunction, bReset)
