@@ -45,6 +45,7 @@ Public Class dlgClimaticBoxPlot
     Private clsAsFactorFunction As New RFunction
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
+    Private clsLabelSummaryFunction As New RFunction
 
     'Functions for Label CheckBox
     Private clsRoundFunction, clsLabelAfterFunction, clsAesLabelFunction, clsBoxplotStatFunction, clsIfFunction,
@@ -243,6 +244,7 @@ Public Class dlgClimaticBoxPlot
         clsFilterElementOperator = New ROperator
         clsFilterElementFunction = New RFunction
         clsAsFactorFunction = New RFunction
+        clsLabelSummaryFunction = New RFunction
         clsAesLabelFunction = New RFunction
 
         clsRoundFunction = New RFunction
@@ -328,6 +330,13 @@ Public Class dlgClimaticBoxPlot
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
+
+        clsLabelSummaryFunction.SetPackageName("ggplot2")
+        clsLabelSummaryFunction.SetRCommand("stat_summary")
+        clsLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
+        clsLabelSummaryFunction.AddParameter("fun", clsROperatorParameter:=clsOpenBraquetOperator, iPosition:=2)
+        clsLabelSummaryFunction.AddParameter("hjust", "-0.2", iPosition:=3)
 
         clsOpenBraquetOperator.SetOperation("{")
         clsOpenBraquetOperator.AddParameter("left", "\ (y)", iPosition:=0, bIncludeArgumentName:=False)
@@ -483,6 +492,9 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
         ucrNudOmitBelow.SetRCode(clsFilterElementOperator, bReset)
+        If bReset Then
+            ucrChkLabel.SetRCode(clsLabelSummaryFunction)
+        End If
         bRCodeUpdated = True
     End Sub
 
@@ -779,12 +791,22 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub AddOutlierFunctions()
-        If ucrChkLabel.Checked AndAlso Not ucrReceiverLabelOutliers.IsEmpty Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=0)
-            clsBaseOperator.AddParameter("x", clsRFunctionParameter:=clsGeomTextFunction, bIncludeArgumentName:=False)
+        If ucrChkLabel.Checked Then
+            If Not ucrReceiverLabelOutliers.IsEmpty Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=0)
+                If clsBaseOperator.ContainsParameter("label") Then
+                    clsBaseOperator.RemoveParameterByName("label")
+                    clsBaseOperator.AddParameter("x", clsRFunctionParameter:=clsGeomTextFunction, bIncludeArgumentName:=False)
+                End If
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipeOperator)
+                clsBaseOperator.RemoveParameterByName("x")
+                clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
+            End If
         Else
-            clsBaseOperator.RemoveParameterByName("x")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipeOperator)
+            clsBaseOperator.RemoveParameterByName("x")
+            clsBaseOperator.RemoveParameterByName("label")
         End If
     End Sub
 
