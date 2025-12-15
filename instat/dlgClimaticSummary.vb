@@ -148,7 +148,7 @@ Public Class dlgClimaticSummary
         ucrChkAddDateColumn.AddParameterPresentCondition(True, "data_name", True)
         ucrChkAddDateColumn.AddParameterPresentCondition(False, "data_name", False)
 
-        ucrChkDefinitions.SetText("Definitions")
+        ucrChkDefinitions.SetText("Store Definitions")
         ucrChkDefinitions.AddParameterValuesCondition(True, "def", "True")
         ucrChkDefinitions.AddParameterValuesCondition(False, "def", "False")
 
@@ -165,7 +165,7 @@ Public Class dlgClimaticSummary
 
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveObject.SetLabelText("Definition Object Name:")
+        ucrSaveObject.SetLabelText("Name:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
@@ -250,7 +250,7 @@ Public Class dlgClimaticSummary
         clsGetLinkedDataFrameFunction.AddParameter("link_cols", clsRFunctionParameter:=clsLinkColsFunction, iPosition:=1)
         clsGetLinkedDataFrameFunction.SetAssignTo(strLinkeddata)
 
-        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_daily_data_calculations")
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_calculations")
         clsGetDataFrameFunction.AddParameter(strParameterValue:=strLinkeddata, iPosition:=0)
         clsGetDataFrameFunction.SetAssignTo("calculations_data")
         'Varibales MetaData
@@ -262,7 +262,7 @@ Public Class dlgClimaticSummary
         clsGetSummaryVariablesFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
         clsGetSummaryVariablesFunction.SetAssignTo("summary_variables")
         'daily_data_calculation
-        clsGetDailyDataCalculationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_daily_data_calculation")
+        clsGetDailyDataCalculationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_calculations")
         clsGetDailyDataCalculationFunction.AddParameter("summary_data", strLinkeddata, iPosition:=0)
         clsGetDailyDataCalculationFunction.SetAssignTo("daily_data_calculation")
 
@@ -524,24 +524,19 @@ Public Class dlgClimaticSummary
 
         If ucrChkDefinitions.Checked Then
             ' Configure parameters with current UI values
-            clsGetLinkedDataFrameFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+            clsGetLinkedDataFrameFunction.AddParameter("from_data_frame", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetDataFrameFunction.AddParameter(strParameterValue:="linked_data_name", iPosition:=0)
             clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetSummaryVariablesFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
 
             ' Add to R syntax (so it appears in the final R command)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetLinkedDataFrameFunction, iPosition:=0)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=1)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesMetadataFunction, iPosition:=2)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDailyDataCalculationFunction, iPosition:=3)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetSummaryVariablesFunction, iPosition:=4)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction)
 
             If rdoAnnual.Checked Then
-                ucrSaveObject.SetText("Annual_Definitions")
+                ucrSaveObject.SetPrefix("Annual_Definitions")
             ElseIf rdoWithinYear.Checked Then
-                ucrSaveObject.SetText("Within_Year_Definitions")
+                ucrSaveObject.SetPrefix("Within_Year_Definitions")
             End If
 
             If rdoWithinYear.Checked AndAlso ucrChkDayRange.Checked Then
