@@ -250,7 +250,7 @@ Public Class dlgClimaticSummary
         clsGetLinkedDataFrameFunction.AddParameter("link_cols", clsRFunctionParameter:=clsLinkColsFunction, iPosition:=1)
         clsGetLinkedDataFrameFunction.SetAssignTo(strLinkeddata)
 
-        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_calculations")
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
         clsGetDataFrameFunction.AddParameter(strParameterValue:=strLinkeddata, iPosition:=0)
         clsGetDataFrameFunction.SetAssignTo("calculations_data")
         'Varibales MetaData
@@ -262,7 +262,7 @@ Public Class dlgClimaticSummary
         clsGetSummaryVariablesFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
         clsGetSummaryVariablesFunction.SetAssignTo("summary_variables")
         'daily_data_calculation
-        clsGetDailyDataCalculationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_calculations")
+        clsGetDailyDataCalculationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
         clsGetDailyDataCalculationFunction.AddParameter("summary_data", strLinkeddata, iPosition:=0)
         clsGetDailyDataCalculationFunction.SetAssignTo("daily_data_calculation")
 
