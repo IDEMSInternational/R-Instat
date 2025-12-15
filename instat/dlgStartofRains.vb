@@ -1024,6 +1024,11 @@ Public Class dlgStartofRains
                 (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
             bOkEnabled = False
         End If
+        If ucrChkDefinitions.Checked Then
+            If Not ucrSaveDefinitionsObject.IsComplete Then
+                bOkEnabled = False
+            End If
+        End If
 
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
@@ -1324,7 +1329,7 @@ Public Class dlgStartofRains
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkAsDoy.ControlContentsChanged, ucrChkAsDate.ControlContentsChanged, ucrInputNewDateColumnName.ControlContentsChanged, ucrChkStatus.ControlContentsChanged, ucrInputNewStatusColumnName.ControlContentsChanged, ucrNudEvapo.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkAsDoy.ControlContentsChanged, ucrChkAsDate.ControlContentsChanged, ucrInputNewDateColumnName.ControlContentsChanged, ucrChkStatus.ControlContentsChanged, ucrInputNewStatusColumnName.ControlContentsChanged, ucrNudEvapo.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrSaveDefinitionsObject.ControlContentsChanged, ucrChkDefinitions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
