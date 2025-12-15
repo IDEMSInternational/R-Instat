@@ -125,7 +125,7 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthmore.AddParameterPresentCondition(False, "sub3", False)
         ucrChkLengthmore.AddToLinkedControls(ucrInputTextLengthmore, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkDefinitions.SetText("Definition")
+        ucrChkDefinitions.SetText("Store Definitions:")
         ucrChkDefinitions.AddParameterValuesCondition(True, "definitions", "True")
         ucrChkDefinitions.AddParameterValuesCondition(False, "definitions", "False")
         ucrChkDefinitions.AddToLinkedControls(ucrSaveDefinitionsObject, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -144,7 +144,7 @@ Public Class dlgClimaticLengthOfSeason
         ucrSaveDefinitionsObject.SetPrefix("season_length_definition")
         ucrSaveDefinitionsObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveDefinitionsObject.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
-        ucrSaveDefinitionsObject.SetLabelText("Definition Object Name:")
+        ucrSaveDefinitionsObject.SetLabelText("Name:")
         ucrSaveDefinitionsObject.SetIsComboBox()
         ucrSaveDefinitionsObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
