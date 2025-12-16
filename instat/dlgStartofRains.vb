@@ -280,6 +280,8 @@ Public Class dlgStartofRains
         clsDefineAsClimatic = New RFunction
         clsVectorConcat2Function = New RFunction
         clsGetCalulationsFunction = New RFunction
+        clsGetOffsetTermFunction = New RFunction
+        clsGetStartRainsDefinitionsFunction = New RFunction
 
         clsDayFromAndTo.Clear()
         clsDayFromAndToOperator.Clear()
