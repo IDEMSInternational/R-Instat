@@ -1306,13 +1306,21 @@ Public Class dlgStartofRains
             ucrBase.clsRsyntax.AddToAfterCodes(clsStatRainStatus2Function, iPosition:=2)
             ucrBase.clsRsyntax.AddToAfterCodes(clsStartRainCombine2Function, iPosition:=3)
             ucrBase.clsRsyntax.AddToAfterCodes(clsRunStartStatus2Function, iPosition:=4)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=5)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetlinkeddataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDefineAsClimatic)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCalculatedListformFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsStatRainStatus2Function)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsStartRainCombine2Function)
+        End If
+        AddRemoveDefineAsClimaticFunction()
+    End Sub
+
+
+    Private Sub AddRemoveDefineAsClimaticFunction()
+        If ucrChkAsDate.Checked OrElse ucrChkStatus.Checked OrElse ucrChkAsDoy.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=5)
+        Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunStartStatus2Function)
         End If
     End Sub
