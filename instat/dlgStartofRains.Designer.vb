@@ -49,9 +49,9 @@ Partial Class dlgStartofRains
         Me.ucrChkAsDate = New instat.ucrCheck()
         Me.ucrChkStatus = New instat.ucrCheck()
         Me.ucrInputNewDateColumnName = New instat.ucrInputTextBox()
+        Me.ucrChkAsDoy = New instat.ucrCheck()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputNewDoyColumnName = New instat.ucrInputTextBox()
-        Me.ucrChkAsDoy = New instat.ucrCheck()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -153,11 +153,12 @@ Partial Class dlgStartofRains
         Me.grpDisplay.Controls.Add(Me.ucrChkAsDate)
         Me.grpDisplay.Controls.Add(Me.ucrChkStatus)
         Me.grpDisplay.Controls.Add(Me.ucrInputNewDateColumnName)
+        Me.grpDisplay.Controls.Add(Me.ucrChkAsDoy)
         Me.grpDisplay.Location = New System.Drawing.Point(20, 684)
         Me.grpDisplay.Margin = New System.Windows.Forms.Padding(4)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpDisplay.Size = New System.Drawing.Size(802, 74)
+        Me.grpDisplay.Size = New System.Drawing.Size(802, 65)
         Me.grpDisplay.TabIndex = 66
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display"
@@ -168,7 +169,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewStatusColumnName.AutoSize = True
         Me.ucrInputNewStatusColumnName.IsMultiline = False
         Me.ucrInputNewStatusColumnName.IsReadOnly = False
-        Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(668, 27)
+        Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(664, 23)
         Me.ucrInputNewStatusColumnName.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputNewStatusColumnName.Name = "ucrInputNewStatusColumnName"
         Me.ucrInputNewStatusColumnName.Size = New System.Drawing.Size(130, 32)
@@ -178,20 +179,20 @@ Partial Class dlgStartofRains
         '
         Me.ucrChkAsDate.AutoSize = True
         Me.ucrChkAsDate.Checked = False
-        Me.ucrChkAsDate.Location = New System.Drawing.Point(320, 27)
+        Me.ucrChkAsDate.Location = New System.Drawing.Point(276, 23)
         Me.ucrChkAsDate.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAsDate.Name = "ucrChkAsDate"
-        Me.ucrChkAsDate.Size = New System.Drawing.Size(76, 51)
+        Me.ucrChkAsDate.Size = New System.Drawing.Size(76, 34)
         Me.ucrChkAsDate.TabIndex = 48
         '
         'ucrChkStatus
         '
         Me.ucrChkStatus.AutoSize = True
         Me.ucrChkStatus.Checked = False
-        Me.ucrChkStatus.Location = New System.Drawing.Point(534, 27)
+        Me.ucrChkStatus.Location = New System.Drawing.Point(534, 23)
         Me.ucrChkStatus.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkStatus.Name = "ucrChkStatus"
-        Me.ucrChkStatus.Size = New System.Drawing.Size(126, 51)
+        Me.ucrChkStatus.Size = New System.Drawing.Size(126, 36)
         Me.ucrChkStatus.TabIndex = 50
         '
         'ucrInputNewDateColumnName
@@ -200,11 +201,21 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDateColumnName.AutoSize = True
         Me.ucrInputNewDateColumnName.IsMultiline = False
         Me.ucrInputNewDateColumnName.IsReadOnly = False
-        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(400, 27)
+        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(357, 23)
         Me.ucrInputNewDateColumnName.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
         Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(128, 32)
         Me.ucrInputNewDateColumnName.TabIndex = 49
+        '
+        'ucrChkAsDoy
+        '
+        Me.ucrChkAsDoy.AutoSize = True
+        Me.ucrChkAsDoy.Checked = False
+        Me.ucrChkAsDoy.Location = New System.Drawing.Point(8, 23)
+        Me.ucrChkAsDoy.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
+        Me.ucrChkAsDoy.Size = New System.Drawing.Size(76, 34)
+        Me.ucrChkAsDoy.TabIndex = 67
         '
         'ucrSelectorForStartofRains
         '
@@ -224,21 +235,11 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDoyColumnName.AutoSize = True
         Me.ucrInputNewDoyColumnName.IsMultiline = False
         Me.ucrInputNewDoyColumnName.IsReadOnly = False
-        Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(194, 724)
+        Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(112, 707)
         Me.ucrInputNewDoyColumnName.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputNewDoyColumnName.Name = "ucrInputNewDoyColumnName"
         Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(132, 32)
         Me.ucrInputNewDoyColumnName.TabIndex = 68
-        '
-        'ucrChkAsDoy
-        '
-        Me.ucrChkAsDoy.AutoSize = True
-        Me.ucrChkAsDoy.Checked = False
-        Me.ucrChkAsDoy.Location = New System.Drawing.Point(30, 724)
-        Me.ucrChkAsDoy.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
-        Me.ucrChkAsDoy.Size = New System.Drawing.Size(162, 34)
-        Me.ucrChkAsDoy.TabIndex = 67
         '
         'ucrReceiverStation
         '
@@ -296,7 +297,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(21, 820)
+        Me.ucrBase.Location = New System.Drawing.Point(21, 807)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -372,7 +373,7 @@ Partial Class dlgStartofRains
         Me.ucrChkAdditional.Location = New System.Drawing.Point(6, 226)
         Me.ucrChkAdditional.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAdditional.Name = "ucrChkAdditional"
-        Me.ucrChkAdditional.Size = New System.Drawing.Size(214, 51)
+        Me.ucrChkAdditional.Size = New System.Drawing.Size(214, 44)
         Me.ucrChkAdditional.TabIndex = 45
         '
         'ucrReceiverEvap
@@ -570,7 +571,7 @@ Partial Class dlgStartofRains
         'ucrSaveDefinitionsObject
         '
         Me.ucrSaveDefinitionsObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDefinitionsObject.Location = New System.Drawing.Point(218, 773)
+        Me.ucrSaveDefinitionsObject.Location = New System.Drawing.Point(218, 760)
         Me.ucrSaveDefinitionsObject.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveDefinitionsObject.Name = "ucrSaveDefinitionsObject"
         Me.ucrSaveDefinitionsObject.Size = New System.Drawing.Size(257, 36)
@@ -580,7 +581,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrChkDefinitions.AutoSize = True
         Me.ucrChkDefinitions.Checked = False
-        Me.ucrChkDefinitions.Location = New System.Drawing.Point(21, 773)
+        Me.ucrChkDefinitions.Location = New System.Drawing.Point(21, 760)
         Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
         Me.ucrChkDefinitions.Size = New System.Drawing.Size(182, 34)
@@ -591,7 +592,7 @@ Partial Class dlgStartofRains
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(832, 903)
+        Me.ClientSize = New System.Drawing.Size(832, 893)
         Me.Controls.Add(Me.ucrSaveDefinitionsObject)
         Me.Controls.Add(Me.ucrChkDefinitions)
         Me.Controls.Add(Me.lblRainfall)
@@ -601,7 +602,6 @@ Partial Class dlgStartofRains
         Me.Controls.Add(Me.lblDOY)
         Me.Controls.Add(Me.ucrSelectorForStartofRains)
         Me.Controls.Add(Me.ucrInputNewDoyColumnName)
-        Me.Controls.Add(Me.ucrChkAsDoy)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverYear)
