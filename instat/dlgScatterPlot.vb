@@ -509,7 +509,7 @@ Public Class dlgScatterPlot
                           clsNewYScaleDateFunction:=clsYScaleDateFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorForScatter,
                           strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
+        ucr1stFactorReceiver.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
         bResetSubdialog = False
     End Sub
 

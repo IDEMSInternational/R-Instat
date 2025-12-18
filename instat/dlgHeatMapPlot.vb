@@ -655,7 +655,7 @@ Public Class dlgHeatMapPlot
              strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
              clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bChangeAesParameter:=True, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
+        ucr1stFactorReceiver.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
         bResetSubdialog = False
     End Sub
 

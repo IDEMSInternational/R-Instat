@@ -714,7 +714,7 @@ Public Class dlgSeasonalGraph
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetOperator,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        ucrReceiverFacetBy.Add(sdgPlots.ucr1stFactorReceiver.GetText)
+        ucrReceiverFacetBy.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
         bResetSubdialog = False
     End Sub
 

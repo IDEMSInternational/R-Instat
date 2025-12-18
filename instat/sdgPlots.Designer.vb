@@ -53,10 +53,6 @@ Partial Class sdgPlots
         Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
-        Me.lblFactor2 = New System.Windows.Forms.Label()
-        Me.lblFactor1 = New System.Windows.Forms.Label()
-        Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
         Me.tbpLayers = New System.Windows.Forms.TabPage()
         Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
@@ -653,6 +649,8 @@ Partial Class sdgPlots
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrReceiverFacetFactors = New instat.ucrReceiverMultiple()
+        Me.lblFactorFacets = New System.Windows.Forms.Label()
         Me.tbpPlotsOptions.SuspendLayout
         Me.tbpFacet.SuspendLayout
         Me.tbpLayers.SuspendLayout
@@ -722,6 +720,8 @@ Partial Class sdgPlots
         '
         'tbpFacet
         '
+        Me.tbpFacet.Controls.Add(Me.lblFactorFacets)
+        Me.tbpFacet.Controls.Add(Me.ucrReceiverFacetFactors)
         Me.tbpFacet.Controls.Add(Me.ucrChkDrop)
         Me.tbpFacet.Controls.Add(Me.ucrNudNumberofRows)
         Me.tbpFacet.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
@@ -734,10 +734,6 @@ Partial Class sdgPlots
         Me.tbpFacet.Controls.Add(Me.ucrFacetSelector)
         Me.tbpFacet.Controls.Add(Me.rdoHorizontal)
         Me.tbpFacet.Controls.Add(Me.rdoVertical)
-        Me.tbpFacet.Controls.Add(Me.lblFactor2)
-        Me.tbpFacet.Controls.Add(Me.lblFactor1)
-        Me.tbpFacet.Controls.Add(Me.ucr2ndFactorReceiver)
-        Me.tbpFacet.Controls.Add(Me.ucr1stFactorReceiver)
         Me.tbpFacet.Controls.Add(Me.ucrPnlHorizonatalVertical)
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
@@ -871,53 +867,6 @@ Partial Class sdgPlots
         Me.rdoVertical.Text = "Column"
         Me.rdoVertical.UseVisualStyleBackColor = True
         '
-        'lblFactor2
-        '
-        Me.lblFactor2.AutoSize = True
-        Me.lblFactor2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactor2.Location = New System.Drawing.Point(274, 99)
-        Me.lblFactor2.Name = "lblFactor2"
-        Me.lblFactor2.Size = New System.Drawing.Size(109, 13)
-        Me.lblFactor2.TabIndex = 4
-        Me.lblFactor2.Text = "2nd Factor (Optional):"
-        '
-        'lblFactor1
-        '
-        Me.lblFactor1.AutoSize = True
-        Me.lblFactor1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactor1.Location = New System.Drawing.Point(272, 44)
-        Me.lblFactor1.Name = "lblFactor1"
-        Me.lblFactor1.Size = New System.Drawing.Size(57, 13)
-        Me.lblFactor1.TabIndex = 2
-        Me.lblFactor1.Tag = ""
-        Me.lblFactor1.Text = "1st Factor:"
-        '
-        'ucr2ndFactorReceiver
-        '
-        Me.ucr2ndFactorReceiver.AutoSize = True
-        Me.ucr2ndFactorReceiver.frmParent = Nothing
-        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(273, 114)
-        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
-        Me.ucr2ndFactorReceiver.Selector = Nothing
-        Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucr2ndFactorReceiver.strNcFilePath = ""
-        Me.ucr2ndFactorReceiver.TabIndex = 5
-        Me.ucr2ndFactorReceiver.ucrSelector = Nothing
-        '
-        'ucr1stFactorReceiver
-        '
-        Me.ucr1stFactorReceiver.AutoSize = True
-        Me.ucr1stFactorReceiver.frmParent = Nothing
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(273, 59)
-        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
-        Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucr1stFactorReceiver.strNcFilePath = ""
-        Me.ucr1stFactorReceiver.TabIndex = 3
-        Me.ucr1stFactorReceiver.ucrSelector = Nothing
-        '
         'ucrPnlHorizonatalVertical
         '
         Me.ucrPnlHorizonatalVertical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -943,7 +892,7 @@ Partial Class sdgPlots
         Me.ucrPlotsAdditionalLayers.AutoSize = True
         Me.ucrPlotsAdditionalLayers.Location = New System.Drawing.Point(7, 6)
         Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
-        Me.ucrPlotsAdditionalLayers.Size = New System.Drawing.Size(243, 191)
+        Me.ucrPlotsAdditionalLayers.Size = New System.Drawing.Size(301, 191)
         Me.ucrPlotsAdditionalLayers.TabIndex = 0
         '
         'tbpTitles
@@ -7706,6 +7655,28 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'ucrReceiverFacetFactors
+        '
+        Me.ucrReceiverFacetFactors.AutoSize = True
+        Me.ucrReceiverFacetFactors.frmParent = Me
+        Me.ucrReceiverFacetFactors.Location = New System.Drawing.Point(273, 45)
+        Me.ucrReceiverFacetFactors.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetFactors.Name = "ucrReceiverFacetFactors"
+        Me.ucrReceiverFacetFactors.Selector = Nothing
+        Me.ucrReceiverFacetFactors.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFacetFactors.strNcFilePath = ""
+        Me.ucrReceiverFacetFactors.TabIndex = 31
+        Me.ucrReceiverFacetFactors.ucrSelector = Nothing
+        '
+        'lblFactorFacets
+        '
+        Me.lblFactorFacets.AutoSize = True
+        Me.lblFactorFacets.Location = New System.Drawing.Point(270, 31)
+        Me.lblFactorFacets.Name = "lblFactorFacets"
+        Me.lblFactorFacets.Size = New System.Drawing.Size(81, 13)
+        Me.lblFactorFacets.TabIndex = 32
+        Me.lblFactorFacets.Text = "Facet Factor(s):"
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -7829,10 +7800,6 @@ Partial Class sdgPlots
     Friend WithEvents tbpLayers As TabPage
     Friend WithEvents rdoHorizontal As RadioButton
     Friend WithEvents rdoVertical As RadioButton
-    Friend WithEvents lblFactor2 As Label
-    Friend WithEvents lblFactor1 As Label
-    Friend WithEvents ucr2ndFactorReceiver As ucrReceiverSingle
-    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents tbpXAxis As TabPage
     Friend WithEvents tbpYAxis As TabPage
     Friend WithEvents ucrInputThemes As ucrInputComboBox
@@ -8437,6 +8404,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputAesth As ucrInputTextBox
     Friend WithEvents ucrInputValueColor As ucrInputTextBox
     Friend WithEvents ucrInputAthsColor As ucrInputTextBox
+    Friend WithEvents ucrReceiverFacetFactors As ucrReceiverMultiple
+    Friend WithEvents lblFactorFacets As Label
 End Class
 
 

@@ -603,7 +603,7 @@ Public Class dlgMosaicPlot
                          clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableColour:=False, bNewEnableDiscrete:=False, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
+        ucr1stFactorReceiver.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
         bResetSubdialog = False
         SetRCodeForControls(False)
         AddRemoveXAxisTextParameters()
