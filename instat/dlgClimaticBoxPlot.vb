@@ -198,11 +198,10 @@ Public Class dlgClimaticBoxPlot
         ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
         ucrNudOutlierCoefficient.DecimalPlaces = 1
         ucrNudOutlierCoefficient.Increment = 0.1
-        ucrNudOutlierCoefficient.SetRDefault(3)
-
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
 
-        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient, ucrChkLabel}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3.0)
+        ucrPnlPlots.AddToLinkedControls({ucrChkLabel}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
