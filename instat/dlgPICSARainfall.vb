@@ -26,6 +26,7 @@ Public Class dlgPICSARainfall
         Rainfall
         Temperature
         General
+        Trend
     End Enum
 
     Private clsRggplotFunction As New RFunction
@@ -896,7 +897,7 @@ Public Class dlgPICSARainfall
 
     Private Sub RemoveFunction()
         Select Case enumPICSAMode
-            Case PICSAMode.General
+            Case PICSAMode.General OrElse PICSAMode.Trend
                 clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             Case PICSAMode.Rainfall
                 clsBaseOperator.RemoveParameterByName("geom_smooth")
@@ -946,6 +947,11 @@ Public Class dlgPICSARainfall
                 ucrChkWithSE.Visible = True
                 Me.Text = "PICSA General Graphs"
                 ucrBase.iHelpTopicID = 521
+            Case PICSAMode.Trend
+                ucrChkLineofBestFit.Visible = True
+                ucrChkWithSE.Visible = True
+                Me.Text = "Climatic Trend Graph"
+                ucrSave.SetPrefix("climatic_trend_graph")
             Case PICSAMode.Rainfall
                 ucrChkLineofBestFit.Visible = False
                 ucrChkWithSE.Visible = False
