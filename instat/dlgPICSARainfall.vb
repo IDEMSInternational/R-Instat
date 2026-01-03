@@ -157,7 +157,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.SetParameter(New RParameter("data", 0))
         ucrSelectorPICSARainfall.SetParameterIsrfunction()
 
-        ucrReceiverForPICSA.SetParameter(New RParameter("y", 0))
+        ucrReceiverForPICSA.SetParameter(New RParameter("y", 1))
         ucrReceiverForPICSA.Selector = ucrSelectorPICSARainfall
         ucrReceiverForPICSA.SetIncludedDataTypes({"numeric"}, True)
         ucrReceiverForPICSA.SetSelectorHeading("Numerics")
@@ -328,6 +328,7 @@ Public Class dlgPICSARainfall
 
         clsDummyFunction.AddParameter("upper_limit", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("lower_limit", "FALSE", iPosition:=1)
+        clsDummyFunction.AddParameter("rdo_checked", "numeric", iPosition:=2)
 
         clsYScalecontinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYContinuous, iPosition:=3)
         clsCLimitsYContinuous.SetRCommand("c")
@@ -406,7 +407,7 @@ Public Class dlgPICSARainfall
 
         clsFilterFunction.SetPackageName("dplyr")
         clsFilterFunction.SetRCommand("filter")
-        clsFilterFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+        clsFilterFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsFilterFunction.AddParameter("var", clsROperatorParameter:=clsEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsEqualToOperator.SetOperation("==")
@@ -431,7 +432,7 @@ Public Class dlgPICSARainfall
 
         clsGeomPoint2Function.SetPackageName("ggplot2")
         clsGeomPoint2Function.SetRCommand("geom_point")
-        clsGeomPoint2Function.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsGeomPoint2Function.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsGeomPoint2Function.AddParameter("mapping", clsRFunctionParameter:=clsPoint2AesFunction, iPosition:=1)
         clsGeomPoint2Function.AddParameter("size", "2", iPosition:=2)
         clsGeomPoint2Function.AddParameter("colour", Chr(34) & "darkgreen" & Chr(34), iPosition:=3)
@@ -705,8 +706,8 @@ Public Class dlgPICSARainfall
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
 
-        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
-        clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=2)
+        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+        clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
@@ -991,8 +992,7 @@ Public Class dlgPICSARainfall
         AddRemoveGroupBy()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged, ucrReceiverForPICSA.ControlValueChanged
-        AddRemoveGroupBy()
+    Private Sub ucrReceiverForPICSA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForPICSA.ControlValueChanged
         YAxisDataTypeCheck()
     End Sub
 

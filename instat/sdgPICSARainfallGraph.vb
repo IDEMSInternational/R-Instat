@@ -218,9 +218,8 @@ Public Class sdgPICSARainfallGraph
         ' Y-Axis
         ucrPnlYAxisType.AddRadioButton(rdoYNumeric)
         ucrPnlYAxisType.AddRadioButton(rdoYDate)
-        ucrPnlYAxisType.AddParameterValueFunctionNamesCondition(rdoYNumeric, "y", "as.Date", False)
-        ucrPnlYAxisType.AddParameterValueFunctionNamesCondition(rdoYDate, "y", "as.Date", True)
-
+        ucrPnlYAxisType.AddParameterValuesCondition(rdoYNumeric, "rdo_checked", "numeric")
+        ucrPnlYAxisType.AddParameterValuesCondition(rdoYDate, "rdo_checked", "date")
         ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyYAxisTickMarks, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlYAxisType.AddToLinkedControls(ucrInputDateDisplayFormat, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
         ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyDateBreaks, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
@@ -847,7 +846,7 @@ Public Class sdgPICSARainfallGraph
             clsCLimitsYDate.AddParameter("upperlimit", "NA", bIncludeArgumentName:=False, iPosition:=1)
         End If
 
-        ucrPnlYAxisType.SetRCode(clsRaesFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlYAxisType.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         'This is needed to set the R code correctly for ucrChkYSpecifyLowerLimit/ucrChkYSpecifyUpperLimit
         'since used by both continuous and date scales
@@ -1072,6 +1071,10 @@ Public Class sdgPICSARainfallGraph
         Else
             clsPipeOperator.RemoveParameterByName("mutate")
         End If
+
+        If ucrChkAddMean.Checked Then ucrChkAddMeanLabel.Checked = True
+        If ucrChkAddMedian.Checked Then ucrChkAddMedianLabel.Checked = True
+        If ucrChkAddTerciles.Checked Then ucrChkAddTercilesLabel.Checked = True
     End Sub
 
 
@@ -1300,6 +1303,7 @@ Public Class sdgPICSARainfallGraph
     Private Sub AddRemoveYAxisScales()
         If bRCodeSet Then
             If rdoYNumeric.Checked Then
+                clsDummyFunction.AddParameter("rdo_checked", "numeric", iPosition:=2)
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
                 If clsYScaleContinuousFunction.iParameterCount > 0 Then
                     clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScaleContinuousFunction)
@@ -1308,6 +1312,7 @@ Public Class sdgPICSARainfallGraph
                 End If
                 clsBaseOperator.RemoveParameterByName("scale_y_date")
             ElseIf rdoYDate.Checked Then
+                clsDummyFunction.AddParameter("rdo_checked", "date", iPosition:=2)
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsDate, iPosition:=1)
                 If clsYScaleDateFunction.iParameterCount > 0 Then
                     clsBaseOperator.AddParameter("scale_y_date", clsRFunctionParameter:=clsYScaleDateFunction)
@@ -1315,10 +1320,6 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.RemoveParameterByName("scale_y_date")
                 End If
                 clsBaseOperator.RemoveParameterByName("scale_y_continuous")
-            Else
-                clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
-                clsBaseOperator.RemoveParameterByName("scale_y_continuous")
-                clsBaseOperator.RemoveParameterByName("scale_y_date")
             End If
         End If
     End Sub
