@@ -191,6 +191,8 @@ packs <-
     "gtsummary",
     # quarto: R Interface to 'Quarto' Markdown Publishing System
     "quarto",
+    # Efficient Rolling / Windowed Operations
+    "RcppRoll",
     "PlackettLuce"
  )
 
