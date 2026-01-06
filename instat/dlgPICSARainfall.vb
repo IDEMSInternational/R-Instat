@@ -128,7 +128,8 @@ Public Class dlgPICSARainfall
     Private clsVarsFunction As New RFunction
 
     Private clsAsDate As New RFunction
-    Private clsAsNumeric As New RFunction
+    Private clsAsNumericX As New RFunction
+    Private clsAsNumericY As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
 
@@ -315,7 +316,8 @@ Public Class dlgPICSARainfall
         clsDatePeriodOperator = New ROperator
 
         clsAsDate = New RFunction
-        clsAsNumeric = New RFunction
+        clsAsNumericX = New RFunction
+        clsAsNumericY = New RFunction
 
         clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYLabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -428,7 +430,7 @@ Public Class dlgPICSARainfall
         clsGeomSegmentFunction.AddParameter("lty", "2", iPosition:=2)
 
         clsSegmentAesFunction.SetRCommand("aes")
-        clsSegmentAesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+        clsSegmentAesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
 
         clsGeomPoint2Function.SetPackageName("ggplot2")
         clsGeomPoint2Function.SetRCommand("geom_point")
@@ -439,7 +441,7 @@ Public Class dlgPICSARainfall
         clsGeomPoint2Function.AddParameter("shape", "17", iPosition:=4)
 
         clsPoint2AesFunction.SetRCommand("aes")
-        clsPoint2AesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+        clsPoint2AesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
 
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
@@ -701,12 +703,13 @@ Public Class dlgPICSARainfall
         clsDatePeriodOperator.bSpaceAroundOperation = False
         clsDatePeriodOperator.bToScriptAsRString = True
 
-        clsAsNumeric.SetRCommand("as.numeric")
+        clsAsNumericX.SetRCommand("as.numeric")
+        clsAsNumericY.SetRCommand("as.numeric")
 
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
 
-        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
         clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
@@ -725,6 +728,7 @@ Public Class dlgPICSARainfall
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
         ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsPoint2AesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
 
@@ -733,7 +737,7 @@ Public Class dlgPICSARainfall
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
-        ucrReceiverX.SetRCode(clsAsNumeric, bReset)
+        ucrReceiverX.SetRCode(clsAsNumericX, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         ucrChkIncludeStatus.SetRCode(clsBaseOperator, bReset)
@@ -879,8 +883,8 @@ Public Class dlgPICSARainfall
                                        dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction,
                                        clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile,
-                                       clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction,
-                                       clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                       clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewAsNumericY:=clsAsNumericY,
+                                       clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumericX:=clsAsNumericX, clsNewYScaleDateFunction:=clsYScaleDateFunction,
                                        clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY,
                                        clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine,
                                        clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY,

@@ -94,7 +94,8 @@ Public Class sdgPICSARainfallGraph
     Private clsRaesFunction As New RFunction
     Private clsAsDate As New RFunction
     Private clsAsDateYLimit As New RFunction
-    Private clsAsNumeric As New RFunction
+    Private clsAsNumericX As New RFunction
+    Private clsAsNumericY As New RFunction
 
     Private clsGeomRug As New RFunction
 
@@ -654,7 +655,7 @@ Public Class sdgPICSARainfallGraph
                         Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing,
                         Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing,
                         Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing,
-                        Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing,
+                        Optional clsNewAsNumericX As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing,
                         Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing,
                         Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing,
                         Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing,
@@ -666,7 +667,8 @@ Public Class sdgPICSARainfallGraph
                         Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing,
                         Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing,
                         Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing,
-                        Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewDummyFunction As RFunction = Nothing, Optional bReset As Boolean = False)
+                        Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewDummyFunction As RFunction = Nothing,
+                        Optional clsNewAsNumericY As RFunction = Nothing, Optional bReset As Boolean = False)
         Dim clsCLimitsY As RFunction
 
         bRCodeSet = False
@@ -786,8 +788,9 @@ Public Class sdgPICSARainfallGraph
         clsRaesFunction = clsNewRaesFunction
 
         clsAsDate = clsNewAsDate
-        clsAsNumeric = clsNewAsNumeric
+        clsAsNumericX = clsNewAsNumericX
 
+        clsAsNumericY = clsNewAsNumericY
         clsAsDateYLimit = clsNewAsDateYLimit
 
         clsDatePeriodOperator = clsNewDatePeriodOperator
@@ -1304,7 +1307,7 @@ Public Class sdgPICSARainfallGraph
         If bRCodeSet Then
             If rdoYNumeric.Checked Then
                 clsDummyFunction.AddParameter("rdo_checked", "numeric", iPosition:=2)
-                clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
+                clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumericY, iPosition:=1)
                 If clsYScaleContinuousFunction.iParameterCount > 0 Then
                     clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScaleContinuousFunction)
                 Else
