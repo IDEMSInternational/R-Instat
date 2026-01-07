@@ -43,8 +43,9 @@ jobs:
           # Run the check and capture output
           npm run check-translations:ci > translation-report.txt 2>&1 || true
           
-          # Check if there are violations (exit code stored in check)
-          if grep -q "Missing translations:" translation-report.txt; then
+          # Check if there are violations by looking for ::warning annotations
+          # These only appear when there are actual missing translations
+          if grep -q "::warning" translation-report.txt; then
             echo "has_violations=true" >> $GITHUB_OUTPUT
             echo "violation_count=$(grep -c '::warning' translation-report.txt || echo 0)" >> $GITHUB_OUTPUT
           else
