@@ -22,7 +22,7 @@ Public Class dlgSummaryTables
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
-    Private clsSummaryDefaultFunction, clsArrangeFunction, clsFrequencyDefaultFunction As New RFunction
+    Private clsSummaryDefaultFunction, clsSelectFunction, clsArrangeFunction, clsFrequencyDefaultFunction As New RFunction
     Private bRCodeSet As Boolean = True
     Private clsPivotWiderFunction As New RFunction
     Private ClsTabSpannerDelimFunction As New RFunction
@@ -181,6 +181,7 @@ Public Class dlgSummaryTables
         clsDummyFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         ClsTabSpannerDelimFunction = New RFunction
+        clsSelectFunction = New RFunction
         clsArrangeFunction = New RFunction
 
         clsJoiningPipeOperator = New ROperator
@@ -228,6 +229,9 @@ Public Class dlgSummaryTables
         ClsTabSpannerDelimFunction.SetPackageName("gt")
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
         ClsTabSpannerDelimFunction.AddParameter("delim", Chr(34) & "_" & Chr(34))
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
 
         clsArrangeFunction.SetPackageName("dplyr")
         clsArrangeFunction.SetRCommand("arrange")
@@ -540,7 +544,6 @@ Public Class dlgSummaryTables
             ' Pass the remaining variables to the arrange parameter in clsArrangeFunction
             clsArrangeFunction.AddParameter("arrange", arrangeString, iPosition:=0, bIncludeArgumentName:=False)
 
-
         Else
             ' Step 1: Define the number of items to add based on UcrNudColumnSumFactors
             Dim numSumm As Integer = UcrNudColumnSumFactors.Value
@@ -583,12 +586,18 @@ Public Class dlgSummaryTables
                 End If
             End If
 
-            ' Step 6.5: If "summary" is in the row region, it must not be a column factor
-            Dim rowCount As Integer = Math.Max(varNames.Count - numSumm, 0) ' number of row-factor positions
+            ' Step 6.5: If "summary" is in the row region, it must not be a column factor. We want to reorder it within the row region
+            Dim rowCount As Integer = Math.Max(varNames.Count - numSumm, 0)  ' number of row-factor positions
             Dim idxSummary As Integer = varNames.IndexOf("summary")          ' 0-based index, -1 if not present
 
-            If idxSummary <> -1 AndAlso idxSummary < rowCount Then
-                varNames.RemoveAt(idxSummary)
+            If idxSummary <> -1 AndAlso rowCount > 0 AndAlso idxSummary < rowCount Then
+                ' Desired 0-based position for summary within the row region, based on the nud
+                Dim desiredRowPos As Integer = Math.Max(0, Math.Min(positionSum - 1, rowCount - 1))
+
+                If idxSummary <> desiredRowPos Then
+                    varNames.RemoveAt(idxSummary)
+                    varNames.Insert(desiredRowPos, "summary")
+                End If
             End If
 
             ' Step 7: Trim the list to include only the highest-positioned items, up to numSumm
@@ -602,17 +611,15 @@ Public Class dlgSummaryTables
             ' Step 8: Identify remaining variables that were not added to names_from
             Dim remainingVars As List(Of String) = varNames.Except(namesFromList).ToList()
 
-            ' Check if all variables are added to names_from
             If remainingVars.Count = 0 Then
-                ' If all variables are added to names_from, remove the arrange parameter
-                clsSummaryOperator.RemoveParameterByName("arrange")
+                ' If all variables are added to names_from, remove the select parameter
+                clsSummaryOperator.RemoveParameterByName("select")
             Else
-                ' Convert remaining variables to a comma-separated string for arrange parameter
-                Dim arrangeVars As String = String.Join(",", remainingVars)
-                clsArrangeFunction.AddParameter("arrange", arrangeVars, iPosition:=0)
-                clsSummaryOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=2)
+                ' Convert remaining variables to a comma-separated string for arrange 
+                Dim selectVars As String = String.Join(",", remainingVars) & ",tidyselect::everything()"
+                clsSelectFunction.AddParameter("select", selectVars, iPosition:=0, bIncludeArgumentName:=False)
+                clsSummaryOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
             End If
-
         End If
     End Sub
 
