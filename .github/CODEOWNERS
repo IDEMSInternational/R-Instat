@@ -6,11 +6,11 @@
 # a review from the translation oversight team.
 
 # English translation source files (used by Crowdin)
-instat/translations/en/*.json @ksiinga
+instat/translations/en/*.json @kisinga
 
 # Translation pattern files (ignore/dynamic patterns)
-instat/translations/translateIgnore.txt @ksiinga
-instat/translations/translateDynamic.txt @ksiinga
+instat/translations/translateIgnore.txt @kisinga
+instat/translations/translateDynamic.txt @kisinga
 
 # Translation-related scripts
-scripts/ @ksiinga
+scripts/ @kisinga
