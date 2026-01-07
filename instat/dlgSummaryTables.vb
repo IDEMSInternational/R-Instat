@@ -558,11 +558,12 @@ Public Class dlgSummaryTables
             ' Step 4: Adjust positions if ucrNudPositionVar equals ucrNudPositionSum
             If positionVar = positionSum Then
                 ' If both are at their maximum values, position "variable" one step lower than positionVar
-                If positionVar = ucrNudPositionVar.Maximum Then
-                    positionVar = Math.Max(1, positionVar - 1)
+                ' but prefer keeping summary at the user-chosen position (so summary can be 1)
+                If positionVar < ucrNudPositionVar.Maximum Then
+                    positionVar = positionVar + 1
                 Else
-                    ' If not at maximum, position "summary" one step higher than positionSum
-                    positionSum = Math.Min(ucrNudPositionSum.Maximum, positionSum + 1)
+                    ' If variable can't move up (already max), then move summary down
+                    positionSum = Math.Max(1, positionSum - 1)
                 End If
             End If
 
@@ -608,8 +609,8 @@ Public Class dlgSummaryTables
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
 
-            ' Step 8: Identify remaining variables that were not added to names_from
-            Dim remainingVars As List(Of String) = varNames.Except(namesFromList).ToList()
+            ' Step 8: Identify remaining variables (row factors) — preserve order
+            Dim remainingVars As List(Of String) = varNames.GetRange(0, rowCount)
 
             If remainingVars.Count = 0 Then
                 ' If all variables are added to names_from, remove the select parameter
