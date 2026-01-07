@@ -583,6 +583,14 @@ Public Class dlgSummaryTables
                 End If
             End If
 
+            ' Step 6.5: If "summary" is in the row region, it must not be a column factor
+            Dim rowCount As Integer = Math.Max(varNames.Count - numSumm, 0) ' number of row-factor positions
+            Dim idxSummary As Integer = varNames.IndexOf("summary")          ' 0-based index, -1 if not present
+
+            If idxSummary <> -1 AndAlso idxSummary < rowCount Then
+                varNames.RemoveAt(idxSummary)
+            End If
+
             ' Step 7: Trim the list to include only the highest-positioned items, up to numSumm
             Dim startIndex As Integer = Math.Max(varNames.Count - numSumm, 0)
             Dim namesFromList As List(Of String) = varNames.GetRange(startIndex, varNames.Count - startIndex)
