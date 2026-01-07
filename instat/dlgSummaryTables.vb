@@ -199,6 +199,7 @@ Public Class dlgSummaryTables
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
         clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
 
+        clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
         clsPivotWiderFunction.AddParameter("names_sort", "TRUE", iPosition:=2)
@@ -228,6 +229,7 @@ Public Class dlgSummaryTables
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
         ClsTabSpannerDelimFunction.AddParameter("delim", Chr(34) & "_" & Chr(34))
 
+        clsArrangeFunction.SetPackageName("dplyr")
         clsArrangeFunction.SetRCommand("arrange")
 
         clsSummaryOperator.SetOperation("%>%")
@@ -582,10 +584,8 @@ Public Class dlgSummaryTables
             End If
 
             ' Step 7: Trim the list to include only the highest-positioned items, up to numSumm
-            Dim namesFromList As New List(Of String)
-            For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numSumm, 0) Step -1
-                namesFromList.Add(varNames(i))
-            Next
+            Dim startIndex As Integer = Math.Max(varNames.Count - numSumm, 0)
+            Dim namesFromList As List(Of String) = varNames.GetRange(startIndex, varNames.Count - startIndex)
 
             ' Convert namesFromList to a comma-separated string for names_from parameter
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
