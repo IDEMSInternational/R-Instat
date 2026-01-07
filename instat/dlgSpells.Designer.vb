@@ -70,7 +70,7 @@ Partial Class dlgSpells
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(247, 224)
+        Me.lblElement.Location = New System.Drawing.Point(278, 224)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 12
@@ -79,7 +79,7 @@ Partial Class dlgSpells
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(247, 98)
+        Me.lblDate.Location = New System.Drawing.Point(278, 98)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 6
@@ -88,7 +88,7 @@ Partial Class dlgSpells
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(247, 140)
+        Me.lblYear.Location = New System.Drawing.Point(278, 140)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 8
@@ -97,7 +97,7 @@ Partial Class dlgSpells
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(247, 181)
+        Me.lblDOY.Location = New System.Drawing.Point(278, 181)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 10
@@ -124,7 +124,7 @@ Partial Class dlgSpells
         Me.grpRainParameters.Controls.Add(Me.lblAnd)
         Me.grpRainParameters.Location = New System.Drawing.Point(10, 263)
         Me.grpRainParameters.Name = "grpRainParameters"
-        Me.grpRainParameters.Size = New System.Drawing.Size(417, 86)
+        Me.grpRainParameters.Size = New System.Drawing.Size(449, 86)
         Me.grpRainParameters.TabIndex = 14
         Me.grpRainParameters.TabStop = False
         Me.grpRainParameters.Text = "Options"
@@ -136,7 +136,7 @@ Partial Class dlgSpells
         Me.ucrChkDayRange.Location = New System.Drawing.Point(335, 29)
         Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkDayRange.Name = "ucrChkDayRange"
-        Me.ucrChkDayRange.Size = New System.Drawing.Size(80, 23)
+        Me.ucrChkDayRange.Size = New System.Drawing.Size(108, 23)
         Me.ucrChkDayRange.TabIndex = 21
         '
         'ucrInputFilterPreview
@@ -145,10 +145,10 @@ Partial Class dlgSpells
         Me.ucrInputFilterPreview.AutoSize = True
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(90, 25)
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(127, 25)
         Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(205, 22)
         Me.ucrInputFilterPreview.TabIndex = 16
         '
         'cmdDoyRange
@@ -156,7 +156,7 @@ Partial Class dlgSpells
         Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdDoyRange.Location = New System.Drawing.Point(8, 23)
         Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Size = New System.Drawing.Size(83, 26)
+        Me.cmdDoyRange.Size = New System.Drawing.Size(118, 26)
         Me.cmdDoyRange.TabIndex = 15
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
@@ -201,7 +201,7 @@ Partial Class dlgSpells
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(247, 56)
+        Me.lblStation.Location = New System.Drawing.Point(278, 56)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 4
@@ -225,9 +225,9 @@ Partial Class dlgSpells
         Me.rdoAnnuel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnuel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnuel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnuel.Location = New System.Drawing.Point(60, 8)
+        Me.rdoAnnuel.Location = New System.Drawing.Point(23, 8)
         Me.rdoAnnuel.Name = "rdoAnnuel"
-        Me.rdoAnnuel.Size = New System.Drawing.Size(130, 28)
+        Me.rdoAnnuel.Size = New System.Drawing.Size(167, 28)
         Me.rdoAnnuel.TabIndex = 1
         Me.rdoAnnuel.Tag = "Annual_Longest_Spell"
         Me.rdoAnnuel.Text = "Annual Longest Spell"
@@ -255,10 +255,10 @@ Partial Class dlgSpells
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(58, 3)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(15, 3)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(360, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(403, 36)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrInputNewColumnName
@@ -277,7 +277,7 @@ Partial Class dlgSpells
         '
         Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(247, 72)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(278, 72)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -290,7 +290,7 @@ Partial Class dlgSpells
         '
         Me.ucrReceiverDOY.AutoSize = True
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(247, 198)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(278, 198)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
@@ -303,7 +303,7 @@ Partial Class dlgSpells
         '
         Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(247, 156)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(278, 156)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -316,7 +316,7 @@ Partial Class dlgSpells
         '
         Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(247, 114)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(278, 114)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -329,7 +329,7 @@ Partial Class dlgSpells
         '
         Me.ucrReceiverElement.AutoSize = True
         Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(247, 240)
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(278, 240)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
@@ -383,7 +383,7 @@ Partial Class dlgSpells
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(447, 441)
+        Me.ClientSize = New System.Drawing.Size(461, 441)
         Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.rdoAnnuel)
         Me.Controls.Add(Me.rdoSpells)

@@ -66,6 +66,10 @@ Partial Class ucrAdditionalLayers
         Me.toolStripMenuItemGeomTextRepel = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomtile = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdEdit = New System.Windows.Forms.Button()
+        Me.cmdTop = New System.Windows.Forms.Button()
+        Me.cmdUp = New System.Windows.Forms.Button()
+        Me.cmdDown = New System.Windows.Forms.Button()
+        Me.cmdBottom = New System.Windows.Forms.Button()
         Me.grpGeoms.SuspendLayout()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
@@ -95,7 +99,7 @@ Partial Class ucrAdditionalLayers
         Me.grpGeoms.Controls.Add(Me.cmdDelete)
         Me.grpGeoms.Controls.Add(Me.cmdAdd)
         Me.grpGeoms.Controls.Add(Me.cmdEdit)
-        Me.grpGeoms.Location = New System.Drawing.Point(134, 53)
+        Me.grpGeoms.Location = New System.Drawing.Point(192, 56)
         Me.grpGeoms.Name = "grpGeoms"
         Me.grpGeoms.Size = New System.Drawing.Size(106, 100)
         Me.grpGeoms.TabIndex = 9
@@ -117,7 +121,7 @@ Partial Class ucrAdditionalLayers
         Me.cmdAdd.ContextMenuStrip = Me.contextMenuStripAdd
         Me.cmdAdd.Location = New System.Drawing.Point(16, 15)
         Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAdd.Size = New System.Drawing.Size(75, 26)
         Me.cmdAdd.SplitMenuStrip = Me.contextMenuStripAdd
         Me.cmdAdd.TabIndex = 11
         Me.cmdAdd.Tag = "Add"
@@ -129,7 +133,7 @@ Partial Class ucrAdditionalLayers
         Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemGeomBar, Me.toolStripMenuItemGeomBoxPlot, Me.toolStripMenuItemGeomcategoricalmodel, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomcontour, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomDensity, Me.toolStripMenuItemGeomDensityRidges, Me.toolStripMenuItemGeomhistogram, Me.toolStripMenuItemGeomJitter, Me.toolStripMenuItemGeomLabel, Me.toolStripMenuItemGeomLabelRepel, Me.toolStripMenuItemGeomLine, Me.toolStripMenuItemGeomparallelslopes, Me.toolStripMenuItemGeomPoint, Me.toolStripMenuItemGeomRug, Me.toolStripMenuItemGeomsmooth, Me.toolStripMenuItemGeomText, Me.toolStripMenuItemGeomTextRepel, Me.toolStripMenuItemGeomtile})
         Me.contextMenuStripAdd.Name = "contextMenuStripOk"
-        Me.contextMenuStripAdd.Size = New System.Drawing.Size(208, 466)
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(208, 444)
         '
         'toolStripMenuItemGeomBar
         '
@@ -260,16 +264,60 @@ Partial Class ucrAdditionalLayers
         Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
+        'cmdTop
+        '
+        Me.cmdTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdTop.Image = Global.instat.My.Resources.Resources.arrows_top
+        Me.cmdTop.Location = New System.Drawing.Point(142, 56)
+        Me.cmdTop.Name = "cmdTop"
+        Me.cmdTop.Size = New System.Drawing.Size(32, 22)
+        Me.cmdTop.TabIndex = 10
+        Me.cmdTop.UseVisualStyleBackColor = True
+        '
+        'cmdUp
+        '
+        Me.cmdUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdUp.Image = Global.instat.My.Resources.Resources.arrows_up
+        Me.cmdUp.Location = New System.Drawing.Point(142, 78)
+        Me.cmdUp.Name = "cmdUp"
+        Me.cmdUp.Size = New System.Drawing.Size(32, 22)
+        Me.cmdUp.TabIndex = 11
+        Me.cmdUp.UseVisualStyleBackColor = True
+        '
+        'cmdDown
+        '
+        Me.cmdDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdDown.Image = Global.instat.My.Resources.Resources.arrows_down
+        Me.cmdDown.Location = New System.Drawing.Point(142, 107)
+        Me.cmdDown.Name = "cmdDown"
+        Me.cmdDown.Size = New System.Drawing.Size(32, 22)
+        Me.cmdDown.TabIndex = 12
+        Me.cmdDown.UseVisualStyleBackColor = True
+        '
+        'cmdBottom
+        '
+        Me.cmdBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.cmdBottom.Image = Global.instat.My.Resources.Resources.arrows_bottom
+        Me.cmdBottom.Location = New System.Drawing.Point(142, 136)
+        Me.cmdBottom.Name = "cmdBottom"
+        Me.cmdBottom.Size = New System.Drawing.Size(32, 22)
+        Me.cmdBottom.TabIndex = 13
+        Me.cmdBottom.UseVisualStyleBackColor = True
+        '
         'ucrAdditionalLayers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.cmdBottom)
+        Me.Controls.Add(Me.cmdDown)
+        Me.Controls.Add(Me.cmdUp)
+        Me.Controls.Add(Me.cmdTop)
         Me.Controls.Add(Me.grpGeoms)
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
         Me.Name = "ucrAdditionalLayers"
-        Me.Size = New System.Drawing.Size(249, 180)
+        Me.Size = New System.Drawing.Size(316, 180)
         Me.grpGeoms.ResumeLayout(False)
         Me.grpGeoms.PerformLayout()
         Me.contextMenuStripAdd.ResumeLayout(False)
@@ -304,4 +352,8 @@ Partial Class ucrAdditionalLayers
     Friend WithEvents toolStripMenuItemGeomparallelslopes As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomsmooth As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomtile As ToolStripMenuItem
+    Friend WithEvents cmdTop As Button
+    Friend WithEvents cmdUp As Button
+    Friend WithEvents cmdDown As Button
+    Friend WithEvents cmdBottom As Button
 End Class

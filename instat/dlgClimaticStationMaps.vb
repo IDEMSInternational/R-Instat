@@ -69,6 +69,7 @@ Public Class dlgClimaticStationMaps
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         Dim dctGRugColour As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
 
         ucrSelectorOutline.SetParameter(New RParameter("data", 0))
         ucrSelectorOutline.SetParameterIsrfunction()
@@ -76,7 +77,9 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
+        ucrReceiverGeometry.SetParameter(New RParameter("geometry", 0))
         ucrReceiverGeometry.Selector = ucrSelectorOutline
+        ucrReceiverGeometry.SetParameterIsRFunction()
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
@@ -163,6 +166,19 @@ Public Class dlgClimaticStationMaps
         ucrInputColour.SetItems(dctGRugColour)
         ucrInputColour.bAllowNonConditionValues = True
         ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrChkAddPoints.SetText("Add Points")
         ucrChkAddPoints.AddParameterPresentCondition(True, "geom_point")
@@ -306,6 +322,9 @@ Public Class dlgClimaticStationMaps
         ucrInputColour.SetRCode(clsLabelRepelFunction, bReset)
         ucrNudSize.SetRCode(clsLabelRepelFunction, bReset)
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
+        ucrReceiverGeometry.SetRCode(clsSfAesFunction, bReset)
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrChkLabelledRectangle.SetRCode(clsGGplotOperator, bReset)
             ucrChkLabelAll.SetRCode(clsLabelRepelFunction, bReset)
@@ -422,6 +441,18 @@ Public Class dlgClimaticStationMaps
         bResetSFLayerSubdialog = False
     End Sub
 
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsGGplotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsGGplotOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
     Private Sub AddExtraGeoms()
         clsGGplotOperator.RemoveParameterByName("geom_label")
         clsGGplotOperator.RemoveParameterByName("geom_point")
@@ -481,6 +512,16 @@ Public Class dlgClimaticStationMaps
             If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
                 ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             End If
+            clsSfAesFunction.AddParameter("geometry", clsRFunctionParameter:=clsGetGeometry)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverGeometry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGeometry.ControlValueChanged
+        clsSfAesFunction.RemoveParameterByName("geometry")
+        If ucrReceiverGeometry.IsEmpty Then
+            AutoFillGeometry()
+        Else
+            clsSfAesFunction.AddParameter("geometry", clsRFunctionParameter:=ucrReceiverGeometry.GetVariables)
         End If
     End Sub
 

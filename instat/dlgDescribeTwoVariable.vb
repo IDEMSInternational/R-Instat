@@ -625,7 +625,7 @@ Public Class dlgDescribeTwoVariable
                 cmdSummaries.Visible = False
             End If
             ucrChkOmitMissing.Visible = IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso (IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric())
         End If
     End Sub
 
@@ -654,7 +654,7 @@ Public Class dlgDescribeTwoVariable
                                                    strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                    strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                                      strObjectName:="last_summary")
-
+            cmdMissingOptions.Visible = False
         ElseIf rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
@@ -1410,10 +1410,30 @@ Public Class dlgDescribeTwoVariable
         ChangeBaseRCode()
     End Sub
 
+    'This sub is used to update the base R code when the control value changes in the ucrSelectorDescribeTwoVar.
+    'This now updated from the previous ucrSelectorDescribeTwoVar_ControlValueChanged sub.
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
-        clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        ' Always update the data parameter for these functions
+        clsRAnovaTable2Function.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsRAnovaSwapTable2Funtion.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        ' --- Clear all variable receivers to avoid referencing old variables ---
+        ucrReceiverFirstVars.ResetText()
+        ucrReceiverSecondTwoVariableFactor.ResetText()
+        ucrReceiverSkimrGroupByFactor.ResetText()
+        ucrReceiverSecondSkimrGroupByFactor.ResetText()
+        ucrReceiverThreeVariableThirdVariable.ResetText()
+        ucrReceiverPercentages.ResetText()
+        ucrReceiverColumns.ResetText()
+        ucrReceiverThreeVariableSecondFactor.ResetText()
+        ucrSaveTable.Reset()
     End Sub
+
+    ' This sub is commented out because it is not used in the current implementation.
+    'Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
+    '    clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    '    clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    'End Sub
 
     Private Sub UpdateSummaryTableFunction()
         If rdoSkim.Checked Then
@@ -1704,12 +1724,15 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub DisplayWarning(strMessage As String)
-        MsgBox("Pick a categorical variable different from those selected in the" & strMessage & "to avoid Errors", vbOKOnly, "Matching Factor Variables")
+        MsgBoxTranslate("Pick a categorical variable different from those selected in the" & strMessage & "to avoid Errors", vbOKOnly, "Matching Factor Variables")
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgBeforeTablesOption.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator)
-        sdgBeforeTablesOption.ShowDialog(Me)
+        sdgTableOptions.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator, {
+                              EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                              EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                              EnumTableSubDialogTab.Table})
+        sdgTableOptions.ShowDialog(Me)
     End Sub
 
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click

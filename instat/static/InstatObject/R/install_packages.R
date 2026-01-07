@@ -1,22 +1,33 @@
-require("miniCRAN")
-r_version <- "4.4.1"
-# Specify list of packages to download
-pkgs <-
+Sys.setenv(TZ='GMT')
+Sys.setlocale("LC_TIME", "C")
+
+#Install packages from CRAN archive
+install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
+
+#Install packages from win.binary
+install.packages("stringi", dependencies = FALSE,  repos='https://cloud.r-project.org', type = "win.binary")
+install.packages("stringr", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+install.packages("RMySQL", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+install.packages("terra", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+install.packages("XML", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+
+#Install packages from CRAN 
+packs <-
   c(
     "reshape2",
     "lubridate",
     "plyr",
     "dplyr",
     "rtf",
-    "openxlsx",
+    #"openxlsx", This is no longer used
     "ggplot2",
     "extRemes",
     "GGally",
     "agridat",
-    "DAAG",
+    #"DAAG", This is no longer used
     "FactoMineR",
-    "plotrix",
-    "candisc",
+    #"plotrix", This is no longer used
+    #"candisc", This is no longer used
     "R6",
     "openair",
     "circular",
@@ -26,49 +37,47 @@ pkgs <-
     "devtools",
     "factoextra",
     "circlize",
-    "CircStats",
+    #"CircStats", This is no longer used
     "gridExtra",
     "ggfortify",
     "rio",
     "readxl",
     "lme4",
     "ggthemes",
-    "lazyeval",
+    #"lazyeval", This is no longer used
     "stringr",
-    "httr",
+    "httr", 
     "jsonlite",
     "fitdistrplus",
     "visreg",
-    "climdex.pcic",
     "mosaic",
     "ncdf4",
-    "ncdf4.helpers",
     "RMySQL",
-    "DBI",
+    "DBI", 
     "EnvStats",
     "sjPlot",
     "sjmisc",
     "plotly",
     "svglite",
-    "htmlTable",
-    "rje",
+    #"htmlTable", This is no longer used
+    #"rje", This is no longer used
     "tidyr",
-    "faraway",
+    #"faraway", This is no longer used
     "rrefine",
     "dae",
     "gapminder",
     "questionr",
     "nycflights13",
-    "Lahman",
+    #"Lahman", This i no longer used
     "RcppRoll",
     "cmsaf",
     "sjlabelled",
     "maptools",
-    "RColorBrewer",
-    "colorRamps",
+    #"RColorBrewer", This is no longer used
+    #"colorRamps", This is no longer used
     "mapdata",
-    "rworldmap",
-    "rworldxtra",
+    #"rworldmap", This is no longer used
+    #"rworldxtra", This is no longer used
     "e1071",
     "robustbase",
     "wakefield",
@@ -86,7 +95,7 @@ pkgs <-
     "treemapify",
     "stringdist",
     "imputeTS",
-    "chillR",
+    "chillR", 
     "patchwork",
     "changepoint",
     "trend",
@@ -104,7 +113,7 @@ pkgs <-
     # For comparison measures used in Climatic > Compare > Summary
     "hydroGOF",
     "lemon",
-    "HistData",
+    #"HistData", This is no longer used
     "caret",
     "rpivotTable",
     # For datasets
@@ -128,14 +137,6 @@ pkgs <-
     "fastDummies",
     # For most frequent values in Prepare > Column:Numeric > Row Summaries
     "statip",
-    # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
-    # install.packages('remotes')
-    # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
-    # also install CDT from GitHub devtools::install_github("rijaf-iri/CDT")
-    # also install instatClimatic from GitHub devtools::install_github("IDEMSInternational/instatClimatic", upgrade = "always")
-    # also install instatExtras from GitHub devtools::install_github("IDEMSInternational/instatExtras", upgrade = "always")
-    # also install databook from GitHub devtools::install_github("IDEMSInternational/databook", upgrade = "always")
-    # also install instatCalculations from GitHub devtools::install_github("IDEMSInternational/instatCalculations", upgrade = "always")
     "corrr",
     "dslabs",
     "coin",
@@ -179,35 +180,39 @@ pkgs <-
     "waffle",
     # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
     "fivethirtyeight",
-    "CGPfunctions",
+    "CGPfunctions", 
     "ggside",
     "Weighted.Desc.Stat",
     "weights",
     "nanonext",
     "collapse",
-    "modeldata",
     "curl",
     "ClimMobTools",
     "gtsummary",
+    # quarto: R Interface to 'Quarto' Markdown Publishing System
+    "quarto",
     "PlackettLuce"
  )
-pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
-pth <- "C:/Users/chris/Documents/RPackages"
-makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")
 
-#add extra packages to location
-#then update
-#updateRepoIndex(pth, type = "win.binary")
+install.packages(packs, dependencies = TRUE, repos='https://cloud.r-project.org', type="win.binary")
 
-#install.packages("trimcluster", repos = paste0("file:///", pth), type = "win.binary")
-#install.packages("maps", repos = paste0("file:///", pth), type = "win.binary")
+install.packages("https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/climdex.pcic/climdex.pcic_1.1-11.tar.gz", repos=NULL, type="source")
 
-pthbin <- paste0(pth, "/bin/windows/contrib/", r_version)
-#list.files(pth, recursive=TRUE, full.names=FALSE)
-View(pkgAvail(repos=pth, type="win.binary", Rversion = r_version)[, c(1:3, 5)])
-versions <- pkgAvail(repos=pth, type="win.binary", Rversion = r_version)[,2]
+# Only use internal library
+if (length(.libPaths()) >= 2){
+  current_paths <- .libPaths()
+  .libPaths(current_paths[c(1, 3)[c(1, 3) <= length(current_paths)]])
+}
 
-#get list of packages in repo
-#enquote(pkgList)
-enquote(as.vector(pkgAvail(repos=pth, type="win.binary", Rversion = r_version)[, c(1)]))
-enquote(as.vector(pkgAvail(repos=pth, type="win.binary", Rversion = r_version)[,2]))
+#install development packages not on CRAN
+devtools::install_github("michael-franke/aida-package", upgrade = "never")
+devtools::install_github("rijaf-iri/CDT", upgrade = "never")
+devtools::install_github("IDEMSInternational/rapidpror", upgrade = "never")
+devtools::install_github("IDEMSInternational/epicsawrap", upgrade = "never")
+devtools::install_github("IDEMSInternational/instatCalculations", dependencies = FALSE, force = TRUE, upgrade = "never")
+devtools::install_github("IDEMSInternational/instatExtras", dependencies = TRUE, upgrade = "never", force = TRUE)
+devtools::install_github("IDEMSInternational/databook", dependencies = FALSE, force = TRUE, upgrade = "never")
+devtools::install_github("IDEMSInternational/instatClimatic", dependencies = FALSE, force = TRUE, upgrade = "never")
