@@ -6,7 +6,7 @@
  * Returns structured data that can be reused for other VB.NET static analysis.
  */
 
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 
 /** Represents an extracted string from VB.NET code */
 export interface ExtractedString {
@@ -271,17 +271,18 @@ function extractSetLabelTextCalls(line: string, lineNumber: number): ExtractedSt
 }
 
 /**
- * Parses a VB.NET file and extracts all translatable strings.
+ * Parses VB.NET content and extracts all translatable strings.
+ * This is the core parsing logic, separated from file I/O.
  * 
- * @param filePath - Path to the VB.NET file
- * @returns Parse result with extracted strings and any errors
+ * @param content - VB.NET source code content
+ * @param filePath - Path to the file (for metadata)
+ * @returns Parse result with extracted strings
  */
-export function parseVBNetFile(filePath: string): ParseResult {
+export function parseVBNetContent(content: string, filePath: string): ParseResult {
   const strings: ExtractedString[] = [];
   const errors: string[] = [];
 
   try {
-    const content = fs.readFileSync(filePath, 'utf-8');
     const lines = content.split(/\r?\n/);
     
     // Join continued lines
@@ -302,20 +303,41 @@ export function parseVBNetFile(filePath: string): ParseResult {
       strings.push(...extractSetLabelTextCalls(line, lineNumber));
     }
   } catch (error) {
-    errors.push(`Error reading file ${filePath}: ${error}`);
+    errors.push(`Error parsing content: ${error}`);
   }
 
   return { filePath, strings, errors };
 }
 
 /**
- * Parses multiple VB.NET files.
+ * Parses a VB.NET file and extracts all translatable strings.
+ * Uses async file I/O for better performance with large codebases.
+ * 
+ * @param filePath - Path to the VB.NET file
+ * @returns Parse result with extracted strings and any errors
+ */
+export async function parseVBNetFile(filePath: string): Promise<ParseResult> {
+  try {
+    const content = await fs.readFile(filePath, 'utf-8');
+    return parseVBNetContent(content, filePath);
+  } catch (error) {
+    return {
+      filePath,
+      strings: [],
+      errors: [`Error reading file ${filePath}: ${error}`]
+    };
+  }
+}
+
+/**
+ * Parses multiple VB.NET files concurrently.
+ * Uses Promise.all for efficient parallel processing.
  * 
  * @param filePaths - Array of file paths to parse
  * @returns Array of parse results
  */
-export function parseVBNetFiles(filePaths: string[]): ParseResult[] {
-  return filePaths.map(parseVBNetFile);
+export async function parseVBNetFiles(filePaths: string[]): Promise<ParseResult[]> {
+  return Promise.all(filePaths.map(parseVBNetFile));
 }
 
 /**

@@ -5,7 +5,7 @@
  * Loads and checks against the English translation JSON files.
  */
 
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 
 /** Represents loaded translation data */
@@ -29,17 +29,31 @@ export interface CombinedTranslations {
   menus: TranslationData;
   notMenus: TranslationData;
   allKeys: Set<string>;
+  /** Pre-computed map of normalized keys to original keys for O(1) lookup */
+  normalizedKeyMap: Map<string, string>;
 }
 
 /**
- * Loads a JSON translation file.
+ * Checks if a file exists using async fs.
+ */
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Loads a JSON translation file asynchronously.
  * 
  * @param filePath - Path to the JSON file
  * @returns Loaded translation data
  */
-export function loadTranslationFile(filePath: string): TranslationData {
+export async function loadTranslationFile(filePath: string): Promise<TranslationData> {
   try {
-    if (!fs.existsSync(filePath)) {
+    if (!(await fileExists(filePath))) {
       return {
         filePath,
         translations: {},
@@ -47,7 +61,7 @@ export function loadTranslationFile(filePath: string): TranslationData {
       };
     }
 
-    const content = fs.readFileSync(filePath, 'utf-8');
+    const content = await fs.readFile(filePath, 'utf-8');
     const translations = JSON.parse(content) as Record<string, string>;
 
     return {
@@ -66,28 +80,46 @@ export function loadTranslationFile(filePath: string): TranslationData {
 
 /**
  * Loads the English translation JSON files from the translations folder.
+ * Uses parallel loading for better performance.
+ * Pre-computes a normalized key map for O(1) lookups during string checking.
  * 
  * @param baseDir - Base directory of the R-Instat project
  * @returns Combined translation data
  */
-export function loadEnglishTranslations(baseDir: string): CombinedTranslations {
+export async function loadEnglishTranslations(baseDir: string): Promise<CombinedTranslations> {
   const translationsDir = path.join(baseDir, 'instat', 'translations', 'en');
   
-  const menus = loadTranslationFile(path.join(translationsDir, 'r_instat_menus.json'));
-  const notMenus = loadTranslationFile(path.join(translationsDir, 'r_instat_not_menus.json'));
+  // Load both files in parallel
+  const [menus, notMenus] = await Promise.all([
+    loadTranslationFile(path.join(translationsDir, 'r_instat_menus.json')),
+    loadTranslationFile(path.join(translationsDir, 'r_instat_not_menus.json'))
+  ]);
 
-  // Combine all keys
+  // Combine all keys and pre-compute normalized key map
   const allKeys = new Set<string>();
+  const normalizedKeyMap = new Map<string, string>();
   
+  // Process menus keys
   for (const key of Object.keys(menus.translations)) {
     allKeys.add(key);
+    const normalized = normalizeString(key);
+    // Only store first occurrence if there are collisions
+    if (!normalizedKeyMap.has(normalized)) {
+      normalizedKeyMap.set(normalized, key);
+    }
   }
   
+  // Process notMenus keys
   for (const key of Object.keys(notMenus.translations)) {
     allKeys.add(key);
+    const normalized = normalizeString(key);
+    // Only store first occurrence if there are collisions
+    if (!normalizedKeyMap.has(normalized)) {
+      normalizedKeyMap.set(normalized, key);
+    }
   }
 
-  return { menus, notMenus, allKeys };
+  return { menus, notMenus, allKeys, normalizedKeyMap };
 }
 
 /**
@@ -104,7 +136,7 @@ export function normalizeString(str: string): string {
 
 /**
  * Checks if a string exists in the translation files.
- * Uses exact match first, then tries normalized match.
+ * Uses exact match first (O(1) via Set), then tries normalized match (O(1) via Map).
  * 
  * @param searchString - String to search for
  * @param translations - Combined translation data
@@ -114,33 +146,29 @@ export function checkStringInTranslations(
   searchString: string,
   translations: CombinedTranslations
 ): TranslationCheckResult {
-  const normalized = normalizeString(searchString);
-
-  // Check exact match first
-  const foundInMenusExact = searchString in translations.menus.translations;
-  const foundInNotMenusExact = searchString in translations.notMenus.translations;
-
-  if (foundInMenusExact || foundInNotMenusExact) {
+  // Check exact match first using Set (O(1))
+  if (translations.allKeys.has(searchString)) {
     return {
       string: searchString,
-      foundInMenus: foundInMenusExact,
-      foundInNotMenus: foundInNotMenusExact,
+      foundInMenus: searchString in translations.menus.translations,
+      foundInNotMenus: searchString in translations.notMenus.translations,
       found: true,
       matchedKey: searchString
     };
   }
 
-  // Try normalized match
-  for (const key of translations.allKeys) {
-    if (normalizeString(key) === normalized) {
-      return {
-        string: searchString,
-        foundInMenus: key in translations.menus.translations,
-        foundInNotMenus: key in translations.notMenus.translations,
-        found: true,
-        matchedKey: key
-      };
-    }
+  // Try normalized match using pre-computed map (O(1))
+  const normalized = normalizeString(searchString);
+  const matchedKey = translations.normalizedKeyMap.get(normalized);
+
+  if (matchedKey) {
+    return {
+      string: searchString,
+      foundInMenus: matchedKey in translations.menus.translations,
+      foundInNotMenus: matchedKey in translations.notMenus.translations,
+      found: true,
+      matchedKey: matchedKey
+    };
   }
 
   // Not found

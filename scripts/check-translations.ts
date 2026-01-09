@@ -17,15 +17,16 @@
  *   --help        Show help
  */
 
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 
 // Import library modules
+import { getProjectRoot } from './lib/project-root.js';
 import { loadTranslateIgnore, shouldIgnore, PatternFile } from './lib/pattern-matcher.js';
-import { inferFullControlName, isFormFile, isDesignerFile, isDynamicControl } from './lib/control-name-inference.js';
+import { inferFullControlName, isDynamicControl } from './lib/control-name-inference.js';
 import { parseVBNetFile, filterStrings, ExtractedString } from './lib/vbnet-parser.js';
 import { loadEnglishTranslations, checkStringInTranslations, CombinedTranslations } from './lib/translation-checker.js';
-import { createViolation, createSummary, generateReport, writeReportToFile, generateConsoleSummary, Violation, ReportOptions, OrphanAnalysis } from './lib/reporter.js';
+import { createViolation, createSummary, generateReport, writeReportToFile, generateConsoleSummary, Violation, ReportOptions } from './lib/reporter.js';
 import { getChangedVBNetFiles, isCI, resolveFilePath } from './lib/git-utils.js';
 
 /** CLI options */
@@ -105,9 +106,21 @@ Examples:
 }
 
 /**
+ * Checks if a file exists using async fs.
+ */
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Gets VB.NET files to check.
  */
-function getFilesToCheck(baseDir: string, options: CliOptions): string[] {
+async function getFilesToCheck(baseDir: string, options: CliOptions): Promise<string[]> {
   // If specific files provided, use those
   if (options.files.length > 0) {
     return options.files.map(f => resolveFilePath(f, baseDir));
@@ -134,27 +147,51 @@ function getFilesToCheck(baseDir: string, options: CliOptions): string[] {
 }
 
 /**
- * Recursively finds all VB.NET files in a directory.
+ * Recursively finds all VB.NET files in a directory using async I/O.
+ * Uses breadth-first traversal for better performance on large trees.
  */
-function findVBNetFiles(dir: string): string[] {
+async function findVBNetFiles(dir: string): Promise<string[]> {
   const files: string[] = [];
+  const dirsToProcess: string[] = [dir];
 
-  if (!fs.existsSync(dir)) {
-    return files;
-  }
+  // Skip these directories for performance
+  const skipDirs = new Set(['node_modules', 'bin', 'obj', '.git']);
 
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  while (dirsToProcess.length > 0) {
+    // Process directories in batches for better parallelism
+    const batch = dirsToProcess.splice(0, 10);
+    
+    const batchResults = await Promise.all(
+      batch.map(async (currentDir) => {
+        const localFiles: string[] = [];
+        const localDirs: string[] = [];
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
+        try {
+          const entries = await fs.readdir(currentDir, { withFileTypes: true });
 
-    if (entry.isDirectory()) {
-      // Skip node_modules and other non-relevant directories
-      if (entry.name !== 'node_modules' && entry.name !== 'bin' && entry.name !== 'obj') {
-        files.push(...findVBNetFiles(fullPath));
-      }
-    } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.vb')) {
-      files.push(fullPath);
+          for (const entry of entries) {
+            const fullPath = path.join(currentDir, entry.name);
+
+            if (entry.isDirectory()) {
+              if (!skipDirs.has(entry.name)) {
+                localDirs.push(fullPath);
+              }
+            } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.vb')) {
+              localFiles.push(fullPath);
+            }
+          }
+        } catch {
+          // Directory doesn't exist or can't be read - skip silently
+        }
+
+        return { files: localFiles, dirs: localDirs };
+      })
+    );
+
+    // Collect results
+    for (const result of batchResults) {
+      files.push(...result.files);
+      dirsToProcess.push(...result.dirs);
     }
   }
 
@@ -176,16 +213,18 @@ interface CheckResult {
 /**
  * Main check function.
  */
-function runCheck(baseDir: string, options: CliOptions): CheckResult {
+async function runCheck(baseDir: string, options: CliOptions): Promise<CheckResult> {
   const violations: Violation[] = [];
   const extractedStrings = new Set<string>();
   let totalFilesChecked = 0;
   let totalStringsExtracted = 0;
   let totalStringsIgnored = 0;
 
-  // Load patterns and translations
-  const ignorePatterns = loadTranslateIgnore(baseDir);
-  const translations = loadEnglishTranslations(baseDir);
+  // Load patterns and translations in parallel
+  const [ignorePatterns, translations] = await Promise.all([
+    loadTranslateIgnore(baseDir),
+    loadEnglishTranslations(baseDir)
+  ]);
 
   if (options.verbose) {
     console.log(`Loaded ${ignorePatterns.patterns.length} ignore patterns`);
@@ -193,7 +232,7 @@ function runCheck(baseDir: string, options: CliOptions): CheckResult {
   }
 
   // Get files to check
-  const files = getFilesToCheck(baseDir, options);
+  const files = await getFilesToCheck(baseDir, options);
 
   if (files.length === 0) {
     if (options.verbose) {
@@ -207,82 +246,95 @@ function runCheck(baseDir: string, options: CliOptions): CheckResult {
     };
   }
 
-  // Process each file
-  for (const filePath of files) {
-    if (!fs.existsSync(filePath)) {
-      if (options.verbose) {
-        console.log(`Skipping non-existent file: ${filePath}`);
+  // Process files in parallel batches for efficiency
+  const BATCH_SIZE = 20;
+  
+  for (let i = 0; i < files.length; i += BATCH_SIZE) {
+    const batch = files.slice(i, i + BATCH_SIZE);
+    
+    const parseResults = await Promise.all(
+      batch.map(async (filePath) => {
+        if (!(await fileExists(filePath))) {
+          if (options.verbose) {
+            console.log(`Skipping non-existent file: ${filePath}`);
+          }
+          return null;
+        }
+        return parseVBNetFile(filePath);
+      })
+    );
+
+    // Process parse results
+    for (const parseResult of parseResults) {
+      if (!parseResult) continue;
+
+      totalFilesChecked++;
+
+      if (parseResult.errors.length > 0 && options.verbose) {
+        for (const error of parseResult.errors) {
+          console.warn(`Warning: ${error}`);
+        }
       }
-      continue;
-    }
 
-    // Parse the file
-    const parseResult = parseVBNetFile(filePath);
-    totalFilesChecked++;
+      // Filter strings
+      const filteredStrings = filterStrings(parseResult.strings, {
+        minLength: 2,
+        excludeEmpty: true,
+        excludeWhitespaceOnly: true,
+        excludeNumericOnly: true,
+        excludePunctuationOnly: true
+      });
 
-    if (parseResult.errors.length > 0 && options.verbose) {
-      for (const error of parseResult.errors) {
-        console.warn(`Warning: ${error}`);
-      }
-    }
+      totalStringsExtracted += filteredStrings.length;
 
-    // Filter strings
-    const filteredStrings = filterStrings(parseResult.strings, {
-      minLength: 2,
-      excludeEmpty: true,
-      excludeWhitespaceOnly: true,
-      excludeNumericOnly: true,
-      excludePunctuationOnly: true
-    });
+      // Check each string
+      for (const extracted of filteredStrings) {
+        // Infer control name
+        const controlInfo = inferFullControlName(parseResult.filePath, extracted.rawLine);
 
-    totalStringsExtracted += filteredStrings.length;
+        // Check if control should be ignored based on patterns
+        const fullPattern = controlInfo.fullPattern;
+        let patternMatch = null;
 
-    // Check each string
-    for (const extracted of filteredStrings) {
-      // Track all extracted strings (before any filtering)
-      extractedStrings.add(extracted.value);
+        if (fullPattern) {
+          patternMatch = shouldIgnore(fullPattern, ignorePatterns);
+          
+          if (patternMatch.shouldIgnore) {
+            totalStringsIgnored++;
+            if (options.verbose) {
+              console.log(`Ignored: "${extracted.value}" (pattern: ${patternMatch.matchedPattern?.pattern})`);
+            }
+            continue;
+          }
+        }
 
-      // Infer control name
-      const controlInfo = inferFullControlName(filePath, extracted.rawLine);
-
-      // Check if control should be ignored based on patterns
-      const fullPattern = controlInfo.fullPattern;
-      let patternMatch = null;
-
-      if (fullPattern) {
-        patternMatch = shouldIgnore(fullPattern, ignorePatterns);
-        
-        if (patternMatch.shouldIgnore) {
+        // Check if control is a dynamic control type (ucrInput, ucrCheck)
+        if (extracted.controlName && isDynamicControl(extracted.controlName)) {
           totalStringsIgnored++;
           if (options.verbose) {
-            console.log(`Ignored: "${extracted.value}" (pattern: ${patternMatch.matchedPattern?.pattern})`);
+            console.log(`Ignored (dynamic control): "${extracted.value}" (${extracted.controlName})`);
           }
           continue;
         }
-      }
 
-      // Check if control is a dynamic control type (ucrInput, ucrCheck)
-      if (extracted.controlName && isDynamicControl(extracted.controlName)) {
-        totalStringsIgnored++;
-        if (options.verbose) {
-          console.log(`Ignored (dynamic control): "${extracted.value}" (${extracted.controlName})`);
+        // Track extracted strings AFTER all ignore checks pass
+        // This ensures orphan analysis only considers strings that weren't ignored
+        extractedStrings.add(extracted.value);
+
+        // Check if string exists in translations
+        const translationCheck = checkStringInTranslations(extracted.value, translations);
+
+        if (!translationCheck.found) {
+          // Missing translation - create violation
+          const violation = createViolation(
+            extracted,
+            parseResult.filePath,
+            controlInfo,
+            patternMatch,
+            translationCheck
+          );
+          violations.push(violation);
         }
-        continue;
-      }
-
-      // Check if string exists in translations
-      const translationCheck = checkStringInTranslations(extracted.value, translations);
-
-      if (!translationCheck.found) {
-        // Missing translation - create violation
-        const violation = createViolation(
-          extracted,
-          filePath,
-          controlInfo,
-          patternMatch,
-          translationCheck
-        );
-        violations.push(violation);
       }
     }
   }
@@ -343,15 +395,13 @@ async function main(): Promise<void> {
     process.exit(0);
   }
 
-  // Determine base directory (project root)
-  // If running from scripts/, go up one level. Otherwise use cwd.
-  let baseDir = process.cwd();
-  if (baseDir.endsWith('scripts')) {
-    baseDir = path.dirname(baseDir);
-  }
-  // Also check if we're in the dist folder
-  if (baseDir.endsWith('dist')) {
-    baseDir = path.dirname(path.dirname(baseDir));
+  // Robustly find the project root by searching for markers
+  let baseDir: string;
+  try {
+    baseDir = await getProjectRoot();
+  } catch (error) {
+    console.error((error as Error).message);
+    process.exit(1);
   }
 
   if (options.verbose) {
@@ -360,7 +410,7 @@ async function main(): Promise<void> {
   }
 
   // Run the check
-  const { violations, stats, extractedStrings, translations } = runCheck(baseDir, options);
+  const { violations, stats, extractedStrings, translations } = await runCheck(baseDir, options);
 
   // Find orphan translations (in JSON but not extracted from code)
   const orphanAnalysis = findOrphanTranslations(extractedStrings, translations);

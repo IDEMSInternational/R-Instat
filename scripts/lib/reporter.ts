@@ -5,6 +5,7 @@
  * Supports multiple output formats: JSON, console, and GitHub annotations.
  */
 
+import * as fs from 'fs';
 import { ExtractedString } from './vbnet-parser.js';
 import { TranslationCheckResult } from './translation-checker.js';
 import { InferredControlName } from './control-name-inference.js';
@@ -273,7 +274,6 @@ export function printReport(summary: CheckSummary, options: ReportOptions): void
  * @param outputPath - Path to write the report
  */
 export function writeReportToFile(summary: CheckSummary, outputPath: string): void {
-  const fs = require('fs');
   const content = JSON.stringify(summary, null, 2);
   fs.writeFileSync(outputPath, content, 'utf-8');
 }

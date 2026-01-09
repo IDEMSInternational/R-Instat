@@ -122,7 +122,7 @@ jobs:
                 owner,
                 repo,
                 pull_number: prNumber,
-                reviewers: ['ksiinga']
+                reviewers: ['kisinga']
               });
               
               console.log('Review requested successfully');

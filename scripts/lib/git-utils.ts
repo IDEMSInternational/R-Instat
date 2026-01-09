@@ -17,6 +17,7 @@ export interface ChangedFilesResult {
 
 /**
  * Executes a git command and returns the output.
+ * Logs errors to stderr for debugging in CI environments.
  * 
  * @param command - Git command to execute (without 'git' prefix)
  * @param cwd - Working directory
@@ -31,6 +32,17 @@ function execGit(command: string, cwd: string): string | null {
     });
     return output.trim();
   } catch (error) {
+    // Log error details to stderr for debugging
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const stderr = (error as { stderr?: Buffer | string })?.stderr;
+    const stderrText = stderr instanceof Buffer ? stderr.toString() : stderr;
+    
+    console.error(`[git-utils] Command failed: git ${command}`);
+    console.error(`[git-utils] Error: ${errorMessage}`);
+    if (stderrText) {
+      console.error(`[git-utils] stderr: ${stderrText}`);
+    }
+    
     return null;
   }
 }
@@ -95,8 +107,8 @@ export function getChangedFiles(cwd: string, baseBranch?: string): ChangedFilesR
       };
     }
 
-    // Get changed files from merge base
-    const output = execGit(`diff --name-only ${mergeBase}`, cwd);
+    // Get changed files from merge base to HEAD
+    const output = execGit(`diff --name-only ${mergeBase} HEAD`, cwd);
     
     if (output === null) {
       return {

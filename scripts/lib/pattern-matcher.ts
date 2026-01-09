@@ -13,7 +13,7 @@
  * - Blank lines are ignored
  */
 
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 
 /** Represents a pattern with its negation status */
@@ -31,21 +31,33 @@ export interface PatternFile {
 }
 
 /**
+ * Checks if a file exists using async fs.
+ */
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Loads patterns from a translateIgnore.txt or translateDynamic.txt file.
  * Parses comments, blank lines, and negation patterns.
  * 
  * @param filePath - Path to the pattern file
  * @returns Parsed patterns and negations
  */
-export function loadPatterns(filePath: string): PatternFile {
+export async function loadPatterns(filePath: string): Promise<PatternFile> {
   const patterns: Pattern[] = [];
   const negations: Pattern[] = [];
 
-  if (!fs.existsSync(filePath)) {
+  if (!(await fileExists(filePath))) {
     return { patterns, negations, filePath };
   }
 
-  const content = fs.readFileSync(filePath, 'utf-8');
+  const content = await fs.readFile(filePath, 'utf-8');
   const lines = content.split(/\r?\n/);
 
   for (const line of lines) {
@@ -63,7 +75,12 @@ export function loadPatterns(filePath: string): PatternFile {
 
     // Check for negation
     if (trimmed.startsWith('!')) {
-      const pattern = trimmed.substring(1); // Remove leading '!'
+      // Remove leading '!' and trim any whitespace after it (handles "! pattern" with space)
+      const pattern = trimmed.substring(1).trim();
+      // Skip if pattern is empty after trimming
+      if (pattern === '') {
+        continue;
+      }
       negations.push({
         pattern,
         isNegation: true,
@@ -196,7 +213,7 @@ export function shouldIgnore(
  * @param baseDir - Base directory of the R-Instat project
  * @returns Loaded pattern file
  */
-export function loadTranslateIgnore(baseDir: string): PatternFile {
+export async function loadTranslateIgnore(baseDir: string): Promise<PatternFile> {
   const filePath = path.join(baseDir, 'instat', 'translations', 'translateIgnore.txt');
   return loadPatterns(filePath);
 }
@@ -207,7 +224,7 @@ export function loadTranslateIgnore(baseDir: string): PatternFile {
  * @param baseDir - Base directory of the R-Instat project
  * @returns Loaded pattern file
  */
-export function loadTranslateDynamic(baseDir: string): PatternFile {
+export async function loadTranslateDynamic(baseDir: string): Promise<PatternFile> {
   const filePath = path.join(baseDir, 'instat', 'translations', 'translateDynamic.txt');
   return loadPatterns(filePath);
 }
