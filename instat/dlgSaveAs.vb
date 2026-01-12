@@ -33,9 +33,7 @@ Public Class dlgSaveAs
         autoTranslate(Me)
 
         ' Auto-trigger browse on load
-        Me.BeginInvoke(New MethodInvoker(Sub()
-                                             ucrFilePath.TriggerBrowse()
-                                         End Sub))
+        Me.BeginInvoke(New MethodInvoker(AddressOf ucrFilePath.TriggerBrowse))
 
     End Sub
 
