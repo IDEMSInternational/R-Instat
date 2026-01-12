@@ -234,6 +234,11 @@ Public Class ucrFilePath
         FilePath = ""
     End Sub
 
+    'Triggers the browse button click programmatically
+    Public Sub TriggerBrowse()
+        btnBrowse.PerformClick()
+    End Sub
+
     Private Sub ucrFilePath_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             AddButtonInFilePathControlTextbox()
