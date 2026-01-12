@@ -629,11 +629,10 @@ Public Class dlgClimaticCheckDataRain
         clsWhyVariable.AddParameter("result_name", Chr(34) & "why" & Chr(34), iPosition:=4)
         clsWhyVariable.SetAssignTo("why_variable")
 
-        ' Event ID Column Calculation
+        'Event ID Column Calculation
         clsIdCalculationFunc = New RFunction
         clsIdCalculationFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsIdCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsIdCalculationFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManuplationDayListFunction, iPosition:=3)
         clsIdCalculationFunc.AddParameter("result_name", Chr(34) & "event_id" & Chr(34), iPosition:=3)
         clsIdCalculationFunc.SetAssignTo("id_calculation")
     End Sub
@@ -772,9 +771,11 @@ Public Class dlgClimaticCheckDataRain
         If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty Then
             clsIdCalculationFunc.AddParameter("function_exp", Chr(34) & "paste0(" & ucrReceiverYear.GetVariableNames(False) & ", '_', substr(" & ucrReceiverStation.GetVariableNames(False) & ", 1, 3))" & Chr(34), iPosition:=1)
             clsIdCalculationFunc.AddParameter("calculated_from", "list(" & Chr(34) & "qcRain" & Chr(34) & "=" & Chr(34) & ucrReceiverStation.GetVariableNames(False) & Chr(34) & "," & Chr(34) & "qcRain" & Chr(34) & "=" & Chr(34) & ucrReceiverYear.GetVariableNames(False) & Chr(34) & ")", iPosition:=2)
+            clsIdCalculationFunc.RemoveParameterByName("manipulations")
         Else
             clsIdCalculationFunc.RemoveParameterByName("function_exp")
             clsIdCalculationFunc.RemoveParameterByName("calculated_from")
+            clsIdCalculationFunc.RemoveParameterByName("manipulations")
         End If
     End Sub
 
@@ -807,103 +808,23 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
-    'Private Sub AddRemoveDayFilter()
-    '    clsRunCalcFunc.RemoveParameterByName("calc")
-    '    If ucrChkDryMonth.Checked Then
-    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
-    '        clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
-    '        clsRainFilterFunc.RemoveParameterByName("save")
-    '    Else
-    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
-    '        clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
-    '        clsDayFilterFunc.RemoveParameterByName("save")
-    '    End If
-    '    AddDoy()
-    'End Sub
-
-    'Private Sub AddRemoveDayFilter()
-    '    clsRunCalcFunc.RemoveParameterByName("calc")
-    '    If ucrChkDryMonth.Checked Then
-    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
-    '        clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
-    '        ' Add id_calculation when Dry Month is checked
-    '        clsListDayFunction.AddParameter("id_calc", clsRFunctionParameter:=clsIdCalculationFunc, iPosition:=1, bIncludeArgumentName:=False)
-    '        clsRainFilterFunc.RemoveParameterByName("save")
-    '    Else
-    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
-    '        clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
-    '        ' Remove id_calculation when Dry Month is unchecked
-    '        clsListDayFunction.RemoveParameterByName("id_calc")
-    '        clsDayFilterFunc.RemoveParameterByName("save")
-    '    End If
-    '    AddDoy()
-    'End Sub
-
-    'Private Sub AddRemoveDayFilter()
-    '    clsRunCalcFunc.RemoveParameterByName("calc")
-
-    '    If ucrChkDryMonth.Checked Then
-    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
-    '        clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
-    '        clsListDayFunction.AddParameter("id_calc", clsRFunctionParameter:=clsIdCalculationFunc, iPosition:=1, bIncludeArgumentName:=False)
-    '        clsRainFilterFunc.RemoveParameterByName("save")
-
-    '        ' Clear assignments to prevent duplication
-    '        clsFilterMonthFunction.SetAssignTo("")
-    '        clsGroupByMonthYearFunction.SetAssignTo("")
-    '        clsDryMonthCalculationFunc.SetAssignTo("")
-    '        clsWhyVariable.SetAssignTo("")
-    '        clsGroupByFunc.SetAssignTo("")
-    '        clsRainFilterFunc.SetAssignTo("")
-    '        clsDayFilterCalcFunction.SetAssignTo("")
-    '        clsIdCalculationFunc.SetAssignTo("")  ' ADD THIS LINE
-
-    '    Else
-    '        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
-    '        clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
-    '        clsListDayFunction.RemoveParameterByName("id_calc")
-    '        clsDayFilterFunc.RemoveParameterByName("save")
-
-    '        ' Restore assignments
-    '        clsFilterMonthFunction.SetAssignTo("filter_months")
-    '        clsGroupByMonthYearFunction.SetAssignTo("grouping_month_year")
-    '        clsDryMonthCalculationFunc.SetAssignTo("dry_month_calculation")
-    '        clsWhyVariable.SetAssignTo("why_variable")
-    '        clsGroupByFunc.SetAssignTo("grouping")
-    '        clsRainFilterFunc.SetAssignTo("rainfall_filter")
-    '        clsDayFilterCalcFunction.SetAssignTo("day_calculation")
-    '        clsIdCalculationFunc.SetAssignTo("id_calculation")  ' ADD THIS LINE
-    '    End If
-
-    '    AddDoy()
-    'End Sub
-
     Private Sub AddRemoveDayFilter()
-        Dim bClear As Boolean = ucrChkDryMonth.Checked
-
         clsRunCalcFunc.RemoveParameterByName("calc")
 
-        If bClear Then
+        If ucrChkDryMonth.Checked Then
             clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDayFilterFunc, iPosition:=0)
             clsDayFilterFunc.AddParameter("save", 2, iPosition:=5)
             clsListDayFunction.AddParameter("id_calc", clsRFunctionParameter:=clsIdCalculationFunc, iPosition:=1, bIncludeArgumentName:=False)
             clsRainFilterFunc.RemoveParameterByName("save")
+            clsDayFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManuplationDayListFunction, iPosition:=4)
+            clsDayFilterCalcFunction.RemoveParameterByName("manipulations")
         Else
             clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
             clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
             clsListDayFunction.RemoveParameterByName("id_calc")
             clsDayFilterFunc.RemoveParameterByName("save")
+            clsDayFilterFunc.RemoveParameterByName("manipulations")
         End If
-
-        ' Toggle all assignments using ternary operator
-        clsFilterMonthFunction.SetAssignTo(If(bClear, "", "filter_months"))
-        clsGroupByMonthYearFunction.SetAssignTo(If(bClear, "", "grouping_month_year"))
-        clsDryMonthCalculationFunc.SetAssignTo(If(bClear, "", "dry_month_calculation"))
-        clsWhyVariable.SetAssignTo(If(bClear, "", "why_variable"))
-        clsGroupByFunc.SetAssignTo(If(bClear, "", "grouping"))
-        clsRainFilterFunc.SetAssignTo(If(bClear, "", "rainfall_filter"))
-        clsDayFilterCalcFunction.SetAssignTo(If(bClear, "", "day_calculation"))
-        clsIdCalculationFunc.SetAssignTo(If(bClear, "", "id_calculation"))
 
         AddDoy()
     End Sub
