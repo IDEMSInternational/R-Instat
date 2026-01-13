@@ -158,7 +158,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.SetParameter(New RParameter("data", 0))
         ucrSelectorPICSARainfall.SetParameterIsrfunction()
 
-        ucrReceiverForPICSA.SetParameter(New RParameter("y", 1))
+        ucrReceiverForPICSA.SetParameter(New RParameter("y"))
         ucrReceiverForPICSA.Selector = ucrSelectorPICSARainfall
         ucrReceiverForPICSA.SetIncludedDataTypes({"numeric"}, True)
         ucrReceiverForPICSA.SetSelectorHeading("Numerics")
@@ -728,12 +728,11 @@ Public Class dlgPICSARainfall
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
-        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
         ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsPoint2AesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
-        ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
@@ -746,6 +745,7 @@ Public Class dlgPICSARainfall
 
         If bReset Then
             AutoFacetStation()
+            ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
         End If
     End Sub
 
