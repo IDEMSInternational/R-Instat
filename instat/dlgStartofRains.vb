@@ -161,7 +161,7 @@ Public Class dlgStartofRains
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "tr_perc_sub")
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoEvapo, "tr_perc_sub")
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRPercentile, {rdoTRPercentile}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.8)
-        ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRAmount, {rdoTRAmount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="20")
+        ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRAmount, {rdoTRAmount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudEvapo, {rdoEvapo}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrReceiverEvap, {rdoEvapo}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTRCalculateBy.SetLinkedDisplayControl(lblTRVal)
@@ -169,7 +169,7 @@ Public Class dlgStartofRains
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "tr_amount")
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoEvapo, "evap")
 
-        ucrNudTRAmount.SetParameter(New RParameter("tr_amount", 1, False), False)
+        ucrNudTRAmount.SetParameter(New RParameter("tr_amount", 20, False), False)
         ucrNudTRAmount.SetMinMax(1, Integer.MaxValue)
 
         ucrChkTotalRainfall.SetParameter(New RParameter("tr_sub", clsCalcRainRollingSum, 1, False), False)
@@ -368,6 +368,7 @@ Public Class dlgStartofRains
 
         bResetSubdialog = True
         ucrSelectorForStartofRains.Reset()
+        SetRCodeForControls(True)
         ucrNudTROverDays.SetText("3")
         ucrNudTRAmount.SetText("20")
 
