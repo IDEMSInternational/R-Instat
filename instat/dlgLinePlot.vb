@@ -886,8 +886,6 @@ Public Class dlgLinePlot
 
         sdgPlots.ShowDialog()
         bNotSubdialogue = False
-
-        'lstFacetVars = ucrReceiverFacetFactors.GetVariableNamesAsList()
         ucrReceiverFacetFactors.Add(sdgPlots.ucrReceiverFacetFactors.GetVariableNames(False))
 
         If clsFacetFunction.strRCommand = "facet_grid" Then
