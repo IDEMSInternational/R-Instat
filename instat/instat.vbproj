@@ -222,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Climsoft\sdgClimsoftFilter.Designer.vb">
+      <DependentUpon>sdgClimsoftFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Climsoft\sdgClimsoftFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="clsTransformationControl.vb" />
@@ -415,10 +421,10 @@
     <Compile Include="sdgAdvOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgClimsoft.Designer.vb">
+    <Compile Include="Climsoft\sdgClimsoft.Designer.vb">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgClimsoft.vb">
+    <Compile Include="Climsoft\sdgClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
@@ -529,6 +535,12 @@
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByOutputObject.Designer.vb">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByOutputObject.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </Compile>
@@ -563,12 +575,6 @@
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
@@ -626,6 +632,7 @@
     <Compile Include="UserTables\Others\ucrOtherStyles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\enumTableSubDialogTab.vb" />
     <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
     </Compile>
@@ -637,12 +644,6 @@
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.Designer.vb">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\sdgBeforeTablesOption.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -757,10 +758,10 @@
     <Compile Include="dlgClimaticNCMPVariogram.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimsoftWizard.Designer.vb">
+    <Compile Include="Climsoft\dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimsoftWizard.vb">
+    <Compile Include="Climsoft\dlgClimsoftWizard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCluster.Designer.vb">
@@ -1171,10 +1172,10 @@
     <Compile Include="dlgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimSoft.Designer.vb">
+    <Compile Include="Climsoft\dlgClimSoft.Designer.vb">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimSoft.vb">
+    <Compile Include="Climsoft\dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCompare.Designer.vb">
@@ -3404,8 +3405,17 @@
     <Compile Include="UserTables\Stub\ucrStubStyle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.Designer.vb">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Table\ucrTableOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Climsoft\sdgClimsoftFilter.resx">
+      <DependentUpon>sdgClimsoftFilter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgApsimx.resx">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </EmbeddedResource>
@@ -3449,7 +3459,7 @@
     <EmbeddedResource Include="dlgClimograph.resx">
       <DependentUpon>dlgClimograph.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimsoftWizard.resx">
+    <EmbeddedResource Include="Climsoft\dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCluster.resx">
@@ -3621,7 +3631,7 @@
     <EmbeddedResource Include="sdgAdvOptions.resx">
       <DependentUpon>sdgAdvOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimsoft.resx">
+    <EmbeddedResource Include="Climsoft\sdgClimsoft.resx">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
@@ -3679,6 +3689,9 @@
     <EmbeddedResource Include="sdgTricotModelOptions.resx">
       <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByOutputObject.resx">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3696,9 +3709,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
-      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
@@ -3732,9 +3742,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
       <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\sdgBeforeTablesOption.resx">
-      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -3960,10 +3967,10 @@
     <EmbeddedResource Include="dlgClimdexIndices.sw-KE.resx">
       <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimSoft.resx">
+    <EmbeddedResource Include="Climsoft\dlgClimSoft.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimSoft.sw-KE.resx">
+    <EmbeddedResource Include="Climsoft\dlgClimSoft.sw-KE.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.resx">
@@ -5881,6 +5888,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Stub\ucrStubStyle.resx">
       <DependentUpon>ucrStubStyle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Table\ucrTableOptions.resx">
+      <DependentUpon>ucrTableOptions.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

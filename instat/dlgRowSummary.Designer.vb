@@ -107,7 +107,7 @@ Partial Class dlgRowSummary
         Me.grpStatistic.Controls.Add(Me.ucrPnlStatistics)
         Me.grpStatistic.Location = New System.Drawing.Point(10, 238)
         Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(435, 88)
+        Me.grpStatistic.Size = New System.Drawing.Size(448, 88)
         Me.grpStatistic.TabIndex = 8
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
@@ -116,7 +116,7 @@ Partial Class dlgRowSummary
         'lblTrim
         '
         Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(353, 66)
+        Me.lblTrim.Location = New System.Drawing.Point(368, 66)
         Me.lblTrim.Name = "lblTrim"
         Me.lblTrim.Size = New System.Drawing.Size(30, 13)
         Me.lblTrim.TabIndex = 15
@@ -126,7 +126,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMore.AutoSize = True
         Me.rdoMore.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMore.Location = New System.Drawing.Point(198, 63)
+        Me.rdoMore.Location = New System.Drawing.Point(213, 63)
         Me.rdoMore.Name = "rdoMore"
         Me.rdoMore.Size = New System.Drawing.Size(49, 17)
         Me.rdoMore.TabIndex = 9
@@ -191,7 +191,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoStandardDeviation.AutoSize = True
         Me.rdoStandardDeviation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(198, 19)
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(213, 19)
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
         Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
         Me.rdoStandardDeviation.TabIndex = 5
@@ -217,7 +217,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMedian.AutoSize = True
         Me.rdoMedian.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMedian.Location = New System.Drawing.Point(198, 42)
+        Me.rdoMedian.Location = New System.Drawing.Point(213, 42)
         Me.rdoMedian.Name = "rdoMedian"
         Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
         Me.rdoMedian.TabIndex = 2
@@ -254,7 +254,7 @@ Partial Class dlgRowSummary
         Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputUserDefined.GetSetSelectedIndex = -1
         Me.ucrInputUserDefined.IsReadOnly = False
-        Me.ucrInputUserDefined.Location = New System.Drawing.Point(247, 61)
+        Me.ucrInputUserDefined.Location = New System.Drawing.Point(262, 61)
         Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
         Me.ucrInputUserDefined.Size = New System.Drawing.Size(104, 25)
         Me.ucrInputUserDefined.TabIndex = 10
@@ -264,7 +264,7 @@ Partial Class dlgRowSummary
         Me.ucrNudProp.AutoSize = True
         Me.ucrNudProp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudProp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudProp.Location = New System.Drawing.Point(385, 62)
+        Me.ucrNudProp.Location = New System.Drawing.Point(400, 62)
         Me.ucrNudProp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudProp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudProp.Name = "ucrNudProp"
@@ -454,7 +454,7 @@ Partial Class dlgRowSummary
         Me.ucrChkIgnoreMissingValues.Checked = False
         Me.ucrChkIgnoreMissingValues.Location = New System.Drawing.Point(276, 199)
         Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
-        Me.ucrChkIgnoreMissingValues.Size = New System.Drawing.Size(140, 23)
+        Me.ucrChkIgnoreMissingValues.Size = New System.Drawing.Size(182, 23)
         Me.ucrChkIgnoreMissingValues.TabIndex = 7
         '
         'ucrSelectorForRowSummaries
@@ -488,7 +488,7 @@ Partial Class dlgRowSummary
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(12, 361)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 10
         '
         'ucrPnlRowSummaries
@@ -513,7 +513,7 @@ Partial Class dlgRowSummary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(453, 426)
+        Me.ClientSize = New System.Drawing.Size(460, 426)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrChkIgnoreMissingValues)

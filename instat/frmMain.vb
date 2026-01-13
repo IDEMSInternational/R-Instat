@@ -642,6 +642,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataDataframeMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrColumnMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
@@ -658,6 +659,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrDataFrameMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel2.Controls.Add(ucrDataFrameMeta)
@@ -2595,9 +2597,6 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
-        If mnuViewSwapDataAndMetadata.Checked Then
-            ucrColumnMeta.RefreshGridData()
-        End If
     End Sub
 
     Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click

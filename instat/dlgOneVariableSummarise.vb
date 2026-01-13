@@ -365,8 +365,10 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
-        sdgBeforeTablesOption.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator)
-        sdgBeforeTablesOption.ShowDialog(Me)
+        sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator, {EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                                  EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                                  EnumTableSubDialogTab.Table})
+        sdgTableOptions.ShowDialog(Me)
         bResetFormatSubdialog = False
     End Sub
 

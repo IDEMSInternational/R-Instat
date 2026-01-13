@@ -1385,7 +1385,7 @@ Public Class RLink
     '''                                     Only used if <paramref name="strType"/> is 
     '''                                     'nc_dim_variables'.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "", Optional strObjectName As String = "")
         Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -1411,6 +1411,11 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
                     'TODO. why not apply or not the column selection at the R level.
                     clsGetItems.AddParameter("use_current_column_selection", If(bUseColumnSelection, "TRUE", "FALSE"))
+
+                    If strObjectName <> "" Then
+                        'TODO. After refactoring data book code, add the `strObjectName` parameter here
+                    End If
+
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
@@ -1452,8 +1457,10 @@ Public Class RLink
                 strTopItemText = lstView.TopItem.Text
             End If
             lstView.Clear()
+            lstView.Columns.Clear()
             lstView.Groups.Clear()
-            lstView.Columns.Add(strHeading)
+            lstView.View = View.Details ' For a single column with header
+            lstView.Columns.Add(strHeading) '<-- Line to add the column header
             If lstIncludedDataTypes.Count > 0 Then
                 clsIncludeList.SetRCommand("list")
                 For Each kvpInclude In lstIncludedDataTypes
@@ -1474,6 +1481,15 @@ Public Class RLink
             If strExcludedItems IsNot Nothing AndAlso strExcludedItems.Count > 0 Then
                 clsGetItems.AddParameter("excluded_items", GetListAsRString(strExcludedItems.ToList()))
             End If
+
+            'TODO. Temporarily overwrite the the `clsGetItems` until implementation of table column names is done at the data book level
+            If Not String.IsNullOrEmpty(strObjectName) Then
+                Dim clsNewGetTableValues As New RFunction
+                clsNewGetTableValues.SetRCommand("list")
+                clsNewGetTableValues.AddParameter("x", strDataFrameName & " = colnames(" & "data_book$get_object_data(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", object_name = " & Chr(34) & strObjectName & Chr(34) & ", as_file = FALSE)[['_data']]" & ")", bIncludeArgumentName:=False)
+                clsGetItems = clsNewGetTableValues
+            End If
+
             expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
             If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
                 vecColumns = expItems.AsList
@@ -1492,7 +1508,7 @@ Public Class RLink
                                 lstView.Items(j).Group = lstView.Groups(i)
                             End If
                         Next
-                        If strType = "column" Then
+                        If strType = "column" AndAlso String.IsNullOrEmpty(strObjectName) Then
                             strColumnsRList = GetListAsRString(chrCurrColumns.ToList)
                             clsGetColumnTypes.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
                             clsGetColumnTypes.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
@@ -1525,14 +1541,20 @@ Public Class RLink
                         End If
                     End If
                 Next
-                lstView.Columns(0).Width = -2
+                lstView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
                 ' When there is a vertical scroll bar, Width = -2 makes it slightly wider than needed
                 ' causing the horizontal scroll bar to display even when not needed.
                 ' Reducing the Width by ~ 2 removes the horizontal scroll bar when it's not needed 
                 ' and doesn't affect the visibility of the longest item
                 ' This has been tested on high resolution screens but needs further testing
                 ' and possibly a better solution.
+
+                lstView.Columns(0).Width -= 2
+                lstView.Refresh()
+
                 lstView.Columns(0).Width = lstView.Columns(0).Width - 2
+
+
                 If strTopItemText <> "" Then
                     lviTemp = lstView.FindItemWithText(strTopItemText)
                     If lviTemp IsNot Nothing Then
