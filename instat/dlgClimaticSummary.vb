@@ -267,7 +267,7 @@ Public Class dlgClimaticSummary
         clsGetDailyDataCalculationFunction.SetAssignTo("daily_data_calculation")
 
         'get_climatic_summaries_definition
-        clsGetClimaticSummariesFunction.SetRCommand("data_book$get_climatic_summaries_definition")
+        clsGetClimaticSummariesFunction.SetRCommand("get_climatic_summaries_definition")
         clsGetClimaticSummariesFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
         clsGetClimaticSummariesFunction.AddParameter("variables_metadata", clsRFunctionParameter:=clsGetVariablesMetadataFunction, iPosition:=1)
         clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsGetSummaryVariablesFunction, iPosition:=2)
@@ -525,13 +525,14 @@ Public Class dlgClimaticSummary
         If ucrChkDefinitions.Checked Then
             ' Configure parameters with current UI values
             clsGetLinkedDataFrameFunction.AddParameter("from_data_frame", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
-            clsGetDataFrameFunction.AddParameter(strParameterValue:="linked_data_name", iPosition:=0)
+            clsGetDataFrameFunction.AddParameter(strParameterValue:="strLinkeddata", iPosition:=0)
             clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetSummaryVariablesFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
 
             ' Add to R syntax (so it appears in the final R command)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetLinkedDataFrameFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction, iPosition:=2)
 
             If rdoAnnual.Checked Then
                 ucrSaveObject.SetPrefix("Annual_Definitions")
