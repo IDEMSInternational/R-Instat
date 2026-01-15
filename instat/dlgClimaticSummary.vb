@@ -514,18 +514,31 @@ Public Class dlgClimaticSummary
 
     Private Sub AddSaveDefinitionOptions()
         Dim strDataFrame As String = ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-        Dim isAnnualOrWithinYear As Boolean = rdoAnnual.Checked OrElse rdoWithinYear.Checked
+        Dim strLinkeddata As String = "linked_data_name"
 
         ' Clear previous parameters to avoid duplication
+        clsGetLinkedDataFrameFunction.ClearParameters()
         clsGetDataFrameFunction.ClearParameters()
         clsGetVariablesMetadataFunction.ClearParameters()
         clsGetDailyDataCalculationFunction.ClearParameters()
         clsGetSummaryVariablesFunction.RemoveParameterByName("data_name")
 
+        ' Clear previous after-codes to avoid duplication
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetDataFrameFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetVariablesMetadataFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetSummaryVariablesFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetDailyDataCalculationFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetClimaticSummariesFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetLinkedDataFrameFunction)
+        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetLinkedDataFrameFunction) ' Also clear from before-codes for safety
+
         If ucrChkDefinitions.Checked Then
-            ' Configure parameters with current UI values
+            ' 1. Configure parameters for each function
             clsGetLinkedDataFrameFunction.AddParameter("from_data_frame", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
-            clsGetDataFrameFunction.AddParameter(strParameterValue:="strLinkeddata", iPosition:=0)
+
+            ' FIX: Pass the variable name as an unquoted value, not a string literal.
+            clsGetDataFrameFunction.AddParameter(strParameterValue:=strLinkeddata, iPosition:=0)
+
             clsGetVariablesMetadataFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetDailyDataCalculationFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetSummaryVariablesFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
@@ -534,12 +547,14 @@ Public Class dlgClimaticSummary
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetLinkedDataFrameFunction, iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction, iPosition:=2)
 
+            ' Configure save object prefix
             If rdoAnnual.Checked Then
                 ucrSaveObject.SetPrefix("Annual_Definitions")
             ElseIf rdoWithinYear.Checked Then
                 ucrSaveObject.SetPrefix("Within_Year_Definitions")
             End If
 
+            ' Configure day range parameter if needed
             If rdoWithinYear.Checked AndAlso ucrChkDayRange.Checked Then
                 clsGetDailyDataCalculationFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
             Else
@@ -547,12 +562,7 @@ Public Class dlgClimaticSummary
             End If
         Else
             ' Remove all definition-related code if checkbox is unchecked
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetClimaticSummariesFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetLinkedDataFrameFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrameFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetVariablesMetadataFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDailyDataCalculationFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetSummaryVariablesFunction)
+            ' Note: The functions are already removed at the top of the sub
             clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
         End If
     End Sub
@@ -616,7 +626,7 @@ Public Class dlgClimaticSummary
             If Not ucrReceiverDOY.IsEmpty Then
                 clsDayFilterCalcFromList.AddParameter(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
             Else
-                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.Text)
             End If
         End If
     End Sub
