@@ -4722,6 +4722,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseDate.resx">
       <DependentUpon>dlgUseDate.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseGraph.resx">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
