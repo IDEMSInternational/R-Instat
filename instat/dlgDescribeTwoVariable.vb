@@ -600,9 +600,11 @@ Public Class dlgDescribeTwoVariable
     (rdoThreeVariable.Checked AndAlso (IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor()))
 
         ucrInputMarginName.Visible =
-    ucrChkDisplayMargins.Visible AndAlso
-    ucrChkDisplayMargins.Checked
-
+    ucrChkDisplayMargins.Checked AndAlso
+    ((rdoTwoVariable.Checked AndAlso (IsFactorByFactor() OrElse IsFactorByNumeric())) OrElse
+     (rdoThreeVariable.Checked AndAlso (IsFactorByFactorByNumeric() OrElse
+                                        IsFactorByNumericByFactor() OrElse
+                                        IsFactorByFactorByFactor())))
 
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = rdoTwoVariable.Checked AndAlso ucrChkDisplayAsPercentage.Checked AndAlso rdoORow.Checked AndAlso IsFactorByFactor()
@@ -637,6 +639,8 @@ Public Class dlgDescribeTwoVariable
         If Not ucrChkSwapXYVar.Visible Then
             ucrChkSwapXYVar.Checked = False
         End If
+
+        lblMarginName.Visible = ucrInputMarginName.Visible
 
     End Sub
 
