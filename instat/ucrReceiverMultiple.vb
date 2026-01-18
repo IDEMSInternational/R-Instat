@@ -156,6 +156,11 @@ Public Class ucrReceiverMultiple
     ''' that is not in the list of variables of the selector
     ''' </summary>
     Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        ' SAFETY: Selector may not yet be initialised during autofill
+        If Selector Is Nothing OrElse Selector.lstAvailableVariable Is Nothing Then
+            Exit Sub
+        End If
+
         Dim lstItemsToRemove As New List(Of ListViewItem)
         For Each lvi As ListViewItem In lstSelectedVariables.Items
             If Selector.lstAvailableVariable.FindItemWithText(lvi.Text) Is Nothing Then
@@ -176,6 +181,7 @@ Public Class ucrReceiverMultiple
         OnSelectionChanged()
         MyBase.RemoveSelected()
     End Sub
+
 
     Private Sub SetGroupHeaderVariablesCount()
 
