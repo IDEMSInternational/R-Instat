@@ -182,7 +182,6 @@ Public Class ucrReceiverMultiple
         MyBase.RemoveSelected()
     End Sub
 
-
     Private Sub SetGroupHeaderVariablesCount()
 
         If lstSelectedVariables.Groups.Count = 0 Then
