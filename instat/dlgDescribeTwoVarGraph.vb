@@ -25,11 +25,11 @@ Public Class dlgDescribeTwoVarGraph
     End Enum
 
     Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator As New ROperator
-    Private clsRGGplotFunction, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
+    Private clsRGGplotFunction, clsGGSideFunction, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
             clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
             clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
-            clsScaleColourViridisFunction, clsPairThemesFunction As New RFunction
+            clsScaleColourViridisFunction, clsAesLabelFunction, clsPairThemesFunction As New RFunction
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
@@ -99,7 +99,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrPnlByPairs.AddParameterValuesCondition(rdoBy, "checked", "by")
         ucrPnlByPairs.AddParameterValuesCondition(rdoPairs, "checked", "pair")
 
-        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates, ucrChkDisplayMargins}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
@@ -272,6 +272,16 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputDiagonalNA.SetItems({"naDiag", "blankDiag"}, bAddConditions:=True)
         ucrInputDiagonalNA.SetLinkedDisplayControl(lblDiagonalNA)
 
+        ucrChkDisplayMargins.SetText("Display Margins")
+        ucrChkDisplayMargins.AddToLinkedControls({ucrNudAlpha}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudAlpha.SetParameter(New RParameter("alpha", 2))
+        ucrNudAlpha.Minimum = 0
+        ucrNudAlpha.Maximum = 1
+        ucrNudAlpha.DecimalPlaces = 2
+        ucrNudAlpha.Increment = 0.01
+        ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
+
         ucrSaveGraph.SetPrefix("two_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
@@ -283,6 +293,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub SetDefaults()
         clsGGpairsFunction = New RFunction
         clsRGGplotFunction = New RFunction
+        clsGGSideFunction = New RFunction
         clsPairThemesFunction = New RFunction
         clsMosaicGgplotFunction = New RFunction
         clsDummyFunction = New RFunction
@@ -316,7 +327,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomMosaic = New RFunction
         clsGgmosaicProduct = New RFunction
         clsStatSummaryHline = New RFunction
-
+        clsAesLabelFunction = New RFunction
         clsAesNumericByNumeric = New RFunction
         clsAesCategoricalByCategoricalBarChart = New RFunction
         clsAesCategoricalByCategoricalMosaicPlot = New RFunction
@@ -393,6 +404,14 @@ Public Class dlgDescribeTwoVarGraph
 
         clsMosaicGgplotFunction.SetPackageName("ggplot2")
         clsMosaicGgplotFunction.SetRCommand("ggplot")
+
+        clsGGSideFunction.SetPackageName("ggside")
+        clsGGSideFunction.SetRCommand("geom_xsidedensity")
+        clsGGSideFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsGGSideFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
+
+        clsAesLabelFunction.SetRCommand("aes")
+        clsAesLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRFacet.SetPackageName("ggplot2")
         clsRFacet.SetRCommand("facet_wrap")
@@ -543,6 +562,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
+        ucrChkDisplayMargins.SetRCode(clsGGSideFunction, bReset)
+        ucrNudAlpha.SetRCode(clsGGSideFunction, bReset)
 
         bRCodeSet = True
         Results()
@@ -829,7 +850,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged,
         ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged,
-        ucrPnlByPairs.ControlContentsChanged, ucrReceiverColour.ControlContentsChanged
+        ucrPnlByPairs.ControlContentsChanged, ucrReceiverColour.ControlContentsChanged, ucrChkDisplayMargins.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1095,4 +1116,21 @@ Public Class dlgDescribeTwoVarGraph
             End If
         End If
     End Sub
+
+    Private Sub ucrChkDisplayMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayMargins.ControlValueChanged, ucrNudAlpha.ControlValueChanged
+        If ucrChkDisplayMargins.Checked Then
+            clsBaseOperator.AddParameter("ggside", clsRFunctionParameter:=clsGGSideFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsAesLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, iPosition:=0)
+            clsGGSideFunction.AddParameter("alpha", ucrNudAlpha.GetText, iPosition:=1)
+            clsGGSideFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
+            clsGGSideFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+        Else
+            clsGGSideFunction.RemoveParameterByName("alpha")
+            clsGGSideFunction.RemoveParameterByName("colour")
+            clsGGSideFunction.RemoveParameterByName("aes")
+            clsAesLabelFunction.RemoveParameterByName("fill")
+            clsBaseOperator.RemoveParameterByName("ggside")
+        End If
+    End Sub
+
 End Class
