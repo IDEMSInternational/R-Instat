@@ -555,9 +555,10 @@ Public Class dlgClimaticSummary
 
             clsGetDataFrameFunction.AddParameter(strParameterValue:=strLinkeddata, iPosition:=0)
 
-            clsGetVariablesMetadataFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
-            clsGetDailyDataCalculationFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
-            clsGetSummaryVariablesFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
+            ' The following functions should use the main data frame from the selector, not the linked_data_name
+            clsGetVariablesMetadataFunction.AddParameter(strParameterValue:=Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+            clsGetDailyDataCalculationFunction.AddParameter(strParameterValue:=Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+            clsGetSummaryVariablesFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
 
             ' Add to R syntax (so it appears in the final R command)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetLinkedDataFrameFunction, iPosition:=1)
@@ -572,7 +573,7 @@ Public Class dlgClimaticSummary
             End If
 
             ' Configure day range parameter if needed
-            If rdoWithinYear.Checked AndAlso ucrChkDayRange.Checked Then
+            If ucrChkDayRange.Checked Then
                 clsGetDailyDataCalculationFunction.AddParameter("Day_Range", Chr(34) & ucrInputFilterPreview.GetText & Chr(34), iPosition:=2)
             Else
                 clsGetDailyDataCalculationFunction.RemoveParameterByName("Day_Range")
