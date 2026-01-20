@@ -251,6 +251,7 @@ Public Class dlgClimaticCheckDataRain
         Dim strLengths As String = "lengths"
         Dim strUpperOutlierLimit As String = "outlier_upper_limit"
         Dim strLowerOutlierLimit As String = "outlier_lower_limit"
+        UcrChkAddCommentVariable.Checked = False
         clsRleFunc = New RFunction
         clsRepFunc = New RFunction
         clsAsNumericFunc = New RFunction
