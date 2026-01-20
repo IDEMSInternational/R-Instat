@@ -1142,7 +1142,7 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
-    Private Sub ucrChkDisplayMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrNudAlpha.ControlValueChanged
+    Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrNudAlpha.ControlValueChanged
         If ucrChkXSidePlot.Checked Then
             clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsGGXSideFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsAesXLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, iPosition:=0)
