@@ -125,11 +125,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthmore.AddParameterPresentCondition(False, "sub3", False)
         ucrChkLengthmore.AddToLinkedControls(ucrInputTextLengthmore, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkDefinitions.SetText("Store Definitions:")
-        ucrChkDefinitions.AddParameterValuesCondition(True, "definitions", "True")
-        ucrChkDefinitions.AddParameterValuesCondition(False, "definitions", "False")
-        ucrChkDefinitions.AddToLinkedControls(ucrSaveDefinitionsObject, {True}, bNewLinkedHideIfParameterMissing:=True)
-
         ucrInputTextLengthmore.SetParameter(New RParameter("result_name", 2))
         ucrInputTextLengthmore.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
         ucrInputTextLengthmore.SetName("length_more")
@@ -141,12 +136,12 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverEndFilled.Tag = "end_season_filled"
         ucrReceiverEndFilled.SetLinkedDisplayControl(lblEndFilled)
 
-        ucrSaveDefinitionsObject.SetPrefix("season_length_definition")
-        ucrSaveDefinitionsObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
-        ucrSaveDefinitionsObject.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
-        ucrSaveDefinitionsObject.SetLabelText("Name:")
-        ucrSaveDefinitionsObject.SetIsComboBox()
-        ucrSaveDefinitionsObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveDefinition.SetPrefix("season_length_definition")
+        ucrSaveDefinition.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveDefinition.SetIsComboBox()
+        ucrSaveDefinition.SetCheckBoxText("Store Definitions")
+        ucrSaveDefinition.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveDefinition.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
 
         EnableLengthmore()
         EnableReceiver()
@@ -380,7 +375,7 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverStartofRains.AddAdditionalCodeParameterPair(clsMinusmoreOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrInputLengthofSeason.AddAdditionalCodeParameterPair(clsGetSeasonLengthFunction, New RParameter("seasonal_length", 1), iAdditionalPairNo:=1)
 
-        ucrSaveDefinitionsObject.SetRCode(clsGetSeasonLengthFunction, bReset)
+        ucrSaveDefinition.SetRCode(clsGetSeasonLengthFunction)
         ucrReceiverStartofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverEndofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverStartofRainsLogical.SetRCode(clsAndOperator, bReset)
@@ -391,7 +386,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
         If bReset Then
             ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
-            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputTextLengthmore.SetRCode(clsLengthmoreFunction, bReset)
         ucrReceiverEndFilled.SetRCode(clsMaxFunction, bReset)
@@ -417,8 +411,8 @@ Public Class dlgClimaticLengthOfSeason
                 bOkEnabled = False
             End If
         End If
-        If ucrChkDefinitions.Checked Then
-            If Not ucrSaveDefinitionsObject.IsComplete Then
+        If ucrSaveDefinition.ucrChkSave.Checked Then
+            If Not ucrSaveDefinition.IsComplete Then
                 bOkEnabled = False
             End If
         End If
@@ -436,8 +430,8 @@ Public Class dlgClimaticLengthOfSeason
         clsLengthOfSeasonFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStartofRains.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverEndofRains.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrDefinitionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged, ucrSaveDefinitionsObject.ControlValueChanged
-        If ucrChkDefinitions.Checked AndAlso ucrSaveDefinitionsObject.IsComplete Then
+    Private Sub ucrDefinitionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveDefinition.ControlValueChanged
+        If ucrSaveDefinition.ucrChkSave.Checked AndAlso ucrSaveDefinition.IsComplete Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetSeasonLengthFunction, iPosition:=2)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetSeasonLengthFunction)
@@ -480,7 +474,7 @@ Public Class dlgClimaticLengthOfSeason
         AddTypes()
     End Sub
 
-    Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged, ucrReceiverEndFilled.ControlContentsChanged, ucrChkLengthmore.ControlContentsChanged, ucrInputTextLengthmore.ControlContentsChanged, ucrSaveDefinitionsObject.ControlContentsChanged, ucrChkDefinitions.ControlContentsChanged
+    Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged, ucrReceiverEndFilled.ControlContentsChanged, ucrChkLengthmore.ControlContentsChanged, ucrInputTextLengthmore.ControlContentsChanged, ucrSaveDefinition.ControlContentsChanged
         TestOKEnabled()
         EnableLengthmore()
         AddRemoveLengthmore()
