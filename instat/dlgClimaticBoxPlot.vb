@@ -200,7 +200,7 @@ Public Class dlgClimaticBoxPlot
         ucrNudOutlierCoefficient.Increment = 0.1
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
 
-        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3.0)
+        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3.0)
         ucrPnlPlots.AddToLinkedControls({ucrChkLabel}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         clsThemeFunc.SetPackageName("ggplot2")
@@ -485,8 +485,8 @@ Public Class dlgClimaticBoxPlot
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
-        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
         ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
