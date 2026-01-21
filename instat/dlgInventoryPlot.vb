@@ -494,4 +494,5 @@ Public Class dlgInventoryPlot
         sdgInventoryOptions.ShowDialog()
         bResetSubdialog = False
     End Sub
+
 End Class
