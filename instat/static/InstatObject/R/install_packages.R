@@ -19,15 +19,15 @@ packs <-
     "plyr",
     "dplyr",
     "rtf",
-    "openxlsx",
+    #"openxlsx", This is no longer used
     "ggplot2",
     "extRemes",
     "GGally",
     "agridat",
-    "DAAG",
+    #"DAAG", This is no longer used
     "FactoMineR",
-    "plotrix",
-    "candisc",
+    #"plotrix", This is no longer used
+    #"candisc", This is no longer used
     "R6",
     "openair",
     "circular",
@@ -37,47 +37,47 @@ packs <-
     "devtools",
     "factoextra",
     "circlize",
-    "CircStats",
+    #"CircStats", This is no longer used
     "gridExtra",
     "ggfortify",
     "rio",
     "readxl",
     "lme4",
     "ggthemes",
-    "lazyeval",
+    #"lazyeval", This is no longer used
     "stringr",
-    "httr",
+    "httr", 
     "jsonlite",
     "fitdistrplus",
     "visreg",
     "mosaic",
     "ncdf4",
     "RMySQL",
-    "DBI",
+    "DBI", 
     "EnvStats",
     "sjPlot",
     "sjmisc",
     "plotly",
     "svglite",
-    "htmlTable",
-    "rje",
+    #"htmlTable", This is no longer used
+    #"rje", This is no longer used
     "tidyr",
-    "faraway",
+    #"faraway", This is no longer used
     "rrefine",
     "dae",
     "gapminder",
     "questionr",
     "nycflights13",
-    "Lahman",
+    #"Lahman", This i no longer used
     "RcppRoll",
     "cmsaf",
     "sjlabelled",
     "maptools",
-    "RColorBrewer",
-    "colorRamps",
+    #"RColorBrewer", This is no longer used
+    #"colorRamps", This is no longer used
     "mapdata",
-    "rworldmap",
-    "rworldxtra",
+    #"rworldmap", This is no longer used
+    #"rworldxtra", This is no longer used
     "e1071",
     "robustbase",
     "wakefield",
@@ -95,7 +95,7 @@ packs <-
     "treemapify",
     "stringdist",
     "imputeTS",
-    "chillR",
+    "chillR", 
     "patchwork",
     "changepoint",
     "trend",
@@ -113,7 +113,7 @@ packs <-
     # For comparison measures used in Climatic > Compare > Summary
     "hydroGOF",
     "lemon",
-    "HistData",
+    #"HistData", This is no longer used
     "caret",
     "rpivotTable",
     # For datasets
@@ -180,7 +180,7 @@ packs <-
     "waffle",
     # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
     "fivethirtyeight",
-    "CGPfunctions",
+    "CGPfunctions", 
     "ggside",
     "Weighted.Desc.Stat",
     "weights",
