@@ -60,9 +60,9 @@ Public Class dlgClimaticLengthOfSeason
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 564
         Dim kvpEnd As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season", {"end_season", "end_rains"}.ToList())
-        Dim kvpStart As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain", {"start_rain"}.ToList())
+        Dim kvpStart As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain", {"start_rain", "start"}.ToList())
         Dim kvpEndStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season_status", {"end_season_status", "end_rains_status"}.ToList())
-        Dim kvpStartStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain_status", {"start_rain_status"}.ToList())
+        Dim kvpStartStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain_status", {"start_rain_status", "start_s"}.ToList())
         Dim kvpFilled As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season_filled", {"end_season_filled"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpEnd, kvpStart, kvpFilled, kvpEndStatus, kvpStartStatus})
