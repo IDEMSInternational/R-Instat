@@ -60,7 +60,7 @@ Public Class dlgClimaticCheckDataRain
     Private clsCumulativeList As New RFunction
     Private clsIfelseFunction As New RFunction
     Private clsIsNaFunction As New RFunction
-    Private strCumulativeCalc As String = "Wet_days"
+    Private strCumulativeCalc As String = "wet_days"
     Private strCumulativeTestCalc As String = "wet_days"
     Private strDryMonthCalc As String = "dry_month"
     Private strDryMonthTestCalc As String = "dry_month_calc"
@@ -852,5 +852,6 @@ Public Class dlgClimaticCheckDataRain
             clsListSubCalc.RemoveParameterByName("why")
         End If
     End Sub
+
 
 End Class
