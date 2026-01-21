@@ -805,7 +805,7 @@ Public Class dlgClimaticCheckDataRain
     Private Sub ucrChkDryMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDryMonth.ControlValueChanged
         AddRemoveDayFilter()
         If Not ucrChkDryMonth.Checked Then
-            clsListSubCalc.RemoveParameterByName("why")
+            clsListDayFunction.RemoveParameterByName("why")
         End If
     End Sub
 
@@ -847,9 +847,9 @@ Public Class dlgClimaticCheckDataRain
 
         If UcrChkAddCommentVariable.Checked AndAlso ucrChkDryMonth.Checked Then
             clsWhyVariable.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & Chr(34) & ucrReceiverElement.GetVariableNames(False) & Chr(34) & ")", iPosition:=2)
-            clsListSubCalc.AddParameter("why", clsRFunctionParameter:=clsWhyVariable, bIncludeArgumentName:=False, iPosition:=2)
+            clsListDayFunction.AddParameter("why", clsRFunctionParameter:=clsWhyVariable, bIncludeArgumentName:=False, iPosition:=0)
         Else
-            clsListSubCalc.RemoveParameterByName("why")
+            clsListDayFunction.RemoveParameterByName("why")
         End If
     End Sub
 
