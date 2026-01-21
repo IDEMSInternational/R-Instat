@@ -273,9 +273,13 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputDiagonalNA.SetLinkedDisplayControl(lblDiagonalNA)
 
         ucrChkXSidePlot.SetText("X Side Plot")
+        ucrChkXSidePlot.AddParameterPresentCondition(True, "X Side Plot")
+        ucrChkXSidePlot.AddParameterPresentCondition(False, "X Side Plot", False)
         ucrChkXSidePlot.AddToLinkedControls({ucrNudAlpha}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSidePlot.SetText("Y Side Plot")
+        ucrChkYSidePlot.AddParameterPresentCondition(True, "Y Side Plot")
+        ucrChkYSidePlot.AddParameterPresentCondition(False, "Y Side Plot", False)
         ucrChkYSidePlot.AddToLinkedControls({ucrNudYAlpha}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudAlpha.SetParameter(New RParameter("alpha", 2))
@@ -584,11 +588,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
-        ucrChkXSidePlot.SetRCode(clsGGXSideFunction, bReset)
-        ucrNudAlpha.SetRCode(clsGGXSideFunction, bReset)
-        ucrChkYSidePlot.SetRCode(clsGGYSideFunction, bReset)
-        ucrNudYAlpha.SetRCode(clsGGYSideFunction, bReset)
-
+        If bReset Then
+            ucrChkXSidePlot.SetRCode(clsGGXSideFunction, bReset)
+            ucrNudAlpha.SetRCode(clsGGXSideFunction, bReset)
+            ucrChkYSidePlot.SetRCode(clsGGYSideFunction, bReset)
+            ucrNudYAlpha.SetRCode(clsGGYSideFunction, bReset)
+        End If
         bRCodeSet = True
         Results()
         SetFreeYAxis()
