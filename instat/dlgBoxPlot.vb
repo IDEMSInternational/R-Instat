@@ -697,11 +697,6 @@ Public Class dlgBoxplot
             End If
         End If
 
-        '' This makes sure that if the Boxplot radio button unchecked, then the Label Outliers checkbox is also unchecked and also associted codes removed
-        'If rdoJitter.Checked OrElse rdoViolin.Checked Then
-        '    ucrChkLabel.Checked = False
-        '    ucrReceiverLabelOutliers.Clear()
-        'End If
         AddOutlierFunctions()
     End Sub
 
@@ -1037,14 +1032,6 @@ Public Class dlgBoxplot
         AutoFacetStation()
         SetPipeAssignTo()
     End Sub
-
-    'Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    'End Sub
-
-    'Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged, ucrChkAddPoints.ControlValueChanged
-
-    'End Sub
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
