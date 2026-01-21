@@ -342,13 +342,11 @@ Public Class dlgClimaticLengthOfSeason
         clsVectorConcatFunction.SetRCommand("c")
 
         clsDefineAsClimatic.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
-        clsDefineAsClimatic.AddParameter("data_name", strCurrDataName, iPosition:=0)
         clsDefineAsClimatic.AddParameter("key_col_names", "NULL", iPosition:=1)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
         clsDefineAsClimatic.iCallType = 2
 
         clsGetCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculationsFunction.AddParameter("x", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
         clsGetCalculationsFunction.SetAssignTo("calculations_data")
 
         clsGetSeasonLengthFunction.SetRCommand("get_seasonal_length_definition")
@@ -439,10 +437,12 @@ Public Class dlgClimaticLengthOfSeason
         TestOKEnabled()
     End Sub
 
+
+
     Private Sub ucrSelectorLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLengthofSeason.ControlValueChanged
         bDataChanged = True
         bUserClearedReceiver = False
-        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.strCurrentDataFrame & Chr(34)
+        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
         AutoFillReceivers(lstEndReceivers)
         AutoFillReceivers(lstStartReceivers)
         AutoFillReceivers(lstEndStatusReceivers)
@@ -482,7 +482,10 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_DataFrameChanged() Handles ucrSelectorLengthofSeason.DataFrameChanged
-        clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
+        clsGetCalculationsFunction.AddParameter("x", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
+        clsDefineAsClimatic.AddParameter("data_name", strCurrDataName, iPosition:=0)
+        clsConvertColumnTypeFunction.AddParameter("data_name", strCurrDataName, iPosition:=0)
     End Sub
 
     Private Sub AddRemoveLengthmore()
