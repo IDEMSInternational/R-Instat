@@ -120,7 +120,6 @@ Public Class dlgClimaticSummary
         ucrReceiverElements.SetParameter(New RParameter("columns_to_summarise", 0))
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Variables"
-        ucrReceiverElements.SetClimaticType("rain")
         ucrReceiverElements.Selector = ucrSelectorVariable
         ucrReceiverElements.SetIncludedDataTypes({"numeric"})
 
@@ -672,12 +671,6 @@ Public Class dlgClimaticSummary
             If Not ucrReceiverDOY.IsEmpty Then
                 clsKeyColsVector.AddParameter("date", ucrReceiverDOY.GetVariableNames(True))
             End If
-        End If
-
-        ' Add types for the data columns being summarised
-        If Not ucrReceiverElements.IsEmpty Then
-            ' Correctly formats as: rain = "rainfall_column_name"
-            clsKeyColsVector.AddParameter("rain", ucrReceiverElements.GetVariableNames(True))
         End If
     End Sub
 End Class
