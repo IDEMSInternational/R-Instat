@@ -874,16 +874,67 @@ Public Class dlgTransform
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoNumeric.Checked AndAlso rdoLogical.Checked Then
-            If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
-                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete AndAlso Not ucrInputLogicalValues.IsEmpty)
-            Else
-                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete)
-            End If
+        Dim bOKEnabled As Boolean = Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete
 
-        Else
-            ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty())
+        ' Check if any numeric input that is visible/enabled is empty
+        If bOKEnabled Then
+            If rdoNumeric.Checked AndAlso rdoLogical.Checked Then
+                If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
+                    bOKEnabled = Not ucrInputLogicalValues.IsEmpty
+                End If
+            Else
+                ' Check all numeric controls 
+                If ucrNudRoundOfDigits.Visible AndAlso ucrNudRoundOfDigits.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudRoundOfDigits.IsEmpty
+                End If
+                If ucrNudSignifDigits.Visible AndAlso ucrNudSignifDigits.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudSignifDigits.IsEmpty
+                End If
+                If ucrNudLagPosition.Visible AndAlso ucrNudLagPosition.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudLagPosition.IsEmpty
+                End If
+                If ucrNudLagLeadPosition.Visible AndAlso ucrNudLagLeadPosition.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudLagLeadPosition.IsEmpty
+                End If
+                If ucrNudDiffLag.Visible AndAlso ucrNudDiffLag.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudDiffLag.IsEmpty
+                End If
+                If ucrNudDecimalPlaces.Visible AndAlso ucrNudDecimalPlaces.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudDecimalPlaces.IsEmpty
+                End If
+                If ucrNudScientific.Visible AndAlso ucrNudScientific.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudScientific.IsEmpty
+                End If
+                If ucrNudPercent.Visible AndAlso ucrNudPercent.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrNudPercent.IsEmpty
+                End If
+                If UcrNudFraction.Visible AndAlso UcrNudFraction.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not UcrNudFraction.IsEmpty
+                End If
+                ' Check input controls for Non-Negative options
+                If ucrInputPower.Visible AndAlso ucrInputPower.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrInputPower.IsEmpty
+                End If
+                If ucrInputConstant.Visible AndAlso ucrInputConstant.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrInputConstant.IsEmpty
+                End If
+                ' Check input controls for Scale options
+                If ucrInputSubtract.Visible AndAlso ucrInputSubtract.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrInputSubtract.IsEmpty
+                End If
+                If ucrInputMultiply.Visible AndAlso ucrInputMultiply.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrInputMultiply.IsEmpty
+                End If
+                If ucrInputDivide.Visible AndAlso ucrInputDivide.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrInputDivide.IsEmpty
+                End If
+                If ucrInputAdd.Visible AndAlso ucrInputAdd.Enabled Then
+                    bOKEnabled = bOKEnabled AndAlso Not ucrInputAdd.IsEmpty
+                End If
+            End If
         End If
+
+        ucrBase.OKEnabled(bOKEnabled)
     End Sub
 
     Private Sub NewDefaultName()
@@ -1344,9 +1395,12 @@ Public Class dlgTransform
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged,
-        ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlColumnSelectOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
-        ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged,
-        ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged, ucrInputLogicalValues.ControlContentsChanged, ucrInputLogicOperations.ControlContentsChanged
+    ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlColumnSelectOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
+    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged,
+    ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged, ucrInputLogicalValues.ControlContentsChanged, ucrInputLogicOperations.ControlContentsChanged,
+    ucrNudRoundOfDigits.ControlContentsChanged, ucrNudSignifDigits.ControlContentsChanged, ucrNudLagPosition.ControlContentsChanged, ucrNudLagLeadPosition.ControlContentsChanged, ucrNudDiffLag.ControlContentsChanged,
+    ucrNudDecimalPlaces.ControlContentsChanged, ucrNudScientific.ControlContentsChanged, ucrNudPercent.ControlContentsChanged, UcrNudFraction.ControlContentsChanged, ucrPnlFormatOptions.ControlContentsChanged,
+    ucrInputConstant.ControlContentsChanged, ucrInputSubtract.ControlContentsChanged, ucrInputMultiply.ControlContentsChanged, ucrInputDivide.ControlContentsChanged, ucrInputAdd.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
