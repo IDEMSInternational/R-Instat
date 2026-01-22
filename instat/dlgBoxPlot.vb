@@ -511,12 +511,6 @@ Public Class dlgBoxplot
         clsLabelAfterFunction.SetRCommand("after_stat")
         clsLabelAfterFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
 
-
-
-
-
-
-
         clsSecondGroupByFunction.SetPackageName("dplyr")
         clsSecondGroupByFunction.SetRCommand("group_by")
 
@@ -563,7 +557,6 @@ Public Class dlgBoxplot
         clsPositionNudgeFunction.SetRCommand("position_nudge")
         clsPositionNudgeFunction.AddParameter("x", "0.05", iPosition:=0)
 
-
         clsGeomTextFunction.SetPackageName("ggplot2")
         clsGeomTextFunction.SetRCommand("geom_text")
         clsGeomTextFunction.AddParameter("data", "outliers", iPosition:=0)
@@ -571,7 +564,6 @@ Public Class dlgBoxplot
         clsGeomTextFunction.AddParameter("hjust", "-0.2", iPosition:=2)
         clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionNudgeFunction, iPosition:=3)
         clsGeomTextFunction.AddParameter("size", "3", iPosition:=4)
-
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -609,6 +601,8 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
         ucrSelectorBoxPlot.SetRCode(clsOutlierPipeOperator, bReset)
+
+        ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
 
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVarWidth.SetRCode(clsBoxplotFunction, bReset)
