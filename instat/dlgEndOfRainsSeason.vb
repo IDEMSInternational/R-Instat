@@ -306,10 +306,6 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofSeasonDate.AddParameterValuesCondition(True, "sub2", "True")
         ucrChkEndofSeasonDate.AddParameterValuesCondition(False, "sub2", "False")
 
-        ucrChkDefinitions.SetText("Definitions")
-        ucrChkDefinitions.AddParameterValuesCondition(True, "def", "True")
-        ucrChkDefinitions.AddParameterValuesCondition(False, "def", "False")
-
         ucrInputEndofSeasonDate.SetParameter(New RParameter("result_name", 3))
         ucrInputEndofSeasonDate.SetValidationTypeAsRVariable()
         ucrInputEndofSeasonDate.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
@@ -1340,7 +1336,6 @@ Public Class dlgEndOfRainsSeason
             ucrChkEndofRainsOccurence.SetRCode(clsDummyFunction, bReset)
             ucrChkEndofSeasonDoy.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
             ucrChkEndofSeasonDate.SetRCode(clsDummyFunction, bReset)
-            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
             ucrChkEndofSeasonOccurence.SetRCode(clsDummyFunction, bReset)
         End If
 
