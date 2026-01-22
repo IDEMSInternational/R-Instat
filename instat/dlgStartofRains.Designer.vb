@@ -78,8 +78,7 @@ Partial Class dlgStartofRains
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
-        Me.ucrSaveDefinitionsObject = New instat.ucrSave()
-        Me.ucrChkDefinitions = New instat.ucrCheck()
+        Me.ucrSaveDefinition = New instat.ucrSave()
         Me.grpDisplay.SuspendLayout()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
         Me.grpRainParameters.SuspendLayout()
@@ -568,24 +567,14 @@ Partial Class dlgStartofRains
         Me.cmdDoyRange.Text = "Day Range"
         Me.cmdDoyRange.UseVisualStyleBackColor = True
         '
-        'ucrSaveDefinitionsObject
+        'ucrSaveDefinition
         '
-        Me.ucrSaveDefinitionsObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDefinitionsObject.Location = New System.Drawing.Point(218, 760)
-        Me.ucrSaveDefinitionsObject.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrSaveDefinitionsObject.Name = "ucrSaveDefinitionsObject"
-        Me.ucrSaveDefinitionsObject.Size = New System.Drawing.Size(257, 36)
-        Me.ucrSaveDefinitionsObject.TabIndex = 71
-        '
-        'ucrChkDefinitions
-        '
-        Me.ucrChkDefinitions.AutoSize = True
-        Me.ucrChkDefinitions.Checked = False
-        Me.ucrChkDefinitions.Location = New System.Drawing.Point(21, 760)
-        Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
-        Me.ucrChkDefinitions.Size = New System.Drawing.Size(182, 34)
-        Me.ucrChkDefinitions.TabIndex = 70
+        Me.ucrSaveDefinition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDefinition.Location = New System.Drawing.Point(20, 758)
+        Me.ucrSaveDefinition.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSaveDefinition.Name = "ucrSaveDefinition"
+        Me.ucrSaveDefinition.Size = New System.Drawing.Size(480, 36)
+        Me.ucrSaveDefinition.TabIndex = 53
         '
         'dlgStartofRains
         '
@@ -593,8 +582,7 @@ Partial Class dlgStartofRains
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(832, 893)
-        Me.Controls.Add(Me.ucrSaveDefinitionsObject)
-        Me.Controls.Add(Me.ucrChkDefinitions)
+        Me.Controls.Add(Me.ucrSaveDefinition)
         Me.Controls.Add(Me.lblRainfall)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.lblYear)
@@ -670,6 +658,5 @@ Partial Class dlgStartofRains
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents cmdDoyRange As Button
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents ucrSaveDefinitionsObject As ucrSave
-    Friend WithEvents ucrChkDefinitions As ucrCheck
+    Friend WithEvents ucrSaveDefinition As ucrSave
 End Class

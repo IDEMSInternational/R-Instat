@@ -227,17 +227,12 @@ Public Class dlgStartofRains
         ucrChkStatus.AddParameterValuesCondition(False, "sub3", "False")
         ucrChkStatus.SetText("Occurrence")
 
-        ucrChkDefinitions.SetText("Store Definitions")
-        ucrChkDefinitions.AddParameterValuesCondition(True, "definitions", "True")
-        ucrChkDefinitions.AddParameterValuesCondition(False, "definitions", "False")
-        ucrChkDefinitions.AddToLinkedControls(ucrSaveDefinitionsObject, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrSaveDefinitionsObject.SetPrefix("start_rains_definition")
-        ucrSaveDefinitionsObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
-        ucrSaveDefinitionsObject.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrSaveDefinitionsObject.SetLabelText("Name:")
-        ucrSaveDefinitionsObject.SetIsComboBox()
-        ucrSaveDefinitionsObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveDefinition.SetPrefix("start_rains_definition")
+        ucrSaveDefinition.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveDefinition.SetIsComboBox()
+        ucrSaveDefinition.SetCheckBoxText("Store Definitions")
+        ucrSaveDefinition.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveDefinition.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
 
         SetReceiver()
         AdditionalCondition()
@@ -972,13 +967,12 @@ Public Class dlgStartofRains
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrSelectorForStartofRains.SetRCode(clsGetOffsetTermFunction, bReset)
-        ucrSaveDefinitionsObject.SetRCode(clsGetStartRainsDefinitionsFunction, bReset)
+        ucrSaveDefinition.SetRCode(clsGetStartRainsDefinitionsFunction, bReset)
         If bReset Then
             ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
             ucrChkStatus.SetRCode(clsDummyFunction, bReset)
             ucrChkAsDate.SetRCode(clsDummyFunction, bReset)
             ucrChkAdditional.SetRCode(clsDummyFunction, bReset)
-            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
             ucrNudTROverDays.SetRCode(clsRainRollingSumFunction, bReset)
             ucrNudTRAmount.SetRCode(clsTRCombineOperator, bReset)
         End If
@@ -1026,10 +1020,8 @@ Public Class dlgStartofRains
                 (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
             bOkEnabled = False
         End If
-        If ucrChkDefinitions.Checked Then
-            If Not ucrSaveDefinitionsObject.IsComplete Then
-                bOkEnabled = False
-            End If
+        If ucrSaveDefinition.ucrChkSave.Checked AndAlso Not ucrSaveDefinition.IsComplete Then
+            bOkEnabled = False
         End If
 
         ucrBase.OKEnabled(bOkEnabled)
@@ -1324,7 +1316,7 @@ Public Class dlgStartofRains
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkAsDoy.ControlContentsChanged, ucrChkAsDate.ControlContentsChanged, ucrInputNewDateColumnName.ControlContentsChanged, ucrChkStatus.ControlContentsChanged, ucrInputNewStatusColumnName.ControlContentsChanged, ucrNudEvapo.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrSaveDefinitionsObject.ControlContentsChanged, ucrChkDefinitions.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkAsDoy.ControlContentsChanged, ucrChkAsDate.ControlContentsChanged, ucrInputNewDateColumnName.ControlContentsChanged, ucrChkStatus.ControlContentsChanged, ucrInputNewStatusColumnName.ControlContentsChanged, ucrNudEvapo.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrSaveDefinition.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -1469,15 +1461,15 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub AddSaveDefinitionCodes()
-        If ucrChkDefinitions.Checked Then
+        If ucrSaveDefinition.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetStartRainsDefinitionsFunction, iPosition:=10)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetStartRainsDefinitionsFunction)
         End If
+        TestOKEnabled()
     End Sub
 
-
-    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+    Private Sub ucrSaveDefinition_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrSaveDefinition.ControlValueChanged
         AddSaveDefinitionCodes()
     End Sub
 
