@@ -346,7 +346,6 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofSeasonDate.AddToLinkedControls(ucrInputEndofSeasonDate, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonDoy.AddToLinkedControls(ucrInputSeasonDoy, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFilled.AddToLinkedControls(ucrInputFilled, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDefinitions.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkWB.AddToLinkedControls(ucrNudWB, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrPnlEvaporation.AddToLinkedControls(ucrInputEvaporation, {rdoValueEvaporation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlEvaporation.AddToLinkedControls(ucrReceiverEvaporation, {rdoVariableEvaporation}, bNewLinkedHideIfParameterMissing:=True)
@@ -367,10 +366,12 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofSeasonDoy.SetLinkedDisplayControl(grpEndofSeason)
         ucrNudTotalOverDays.SetLinkedDisplayControl(lblTotalOverDays)
 
+        ucrSaveObject.SetPrefix("end_rain_definition")
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrSaveObject.SetLabelText("Definition Object Name:")
         ucrSaveObject.SetIsComboBox()
+        ucrSaveObject.SetCheckBoxText("Store Definitions")
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
 #End Region
@@ -1689,7 +1690,7 @@ Public Class dlgEndOfRainsSeason
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndRainDefFunction)
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndSeasonDefFunction)
 
-        If ucrChkDefinitions.Checked Then
+        If ucrSaveObject.ucrChkSave.Checked Then
 
             If rdoEndOfSeasons.Checked Then
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndSeasonDefFunction, iPosition:=16)
@@ -1800,7 +1801,7 @@ Public Class dlgEndOfRainsSeason
         End If
     End Sub
 
-    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+    Private Sub ucrSaveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlValueChanged
         AddSaveDefinitionOptions()
     End Sub
 
