@@ -442,7 +442,7 @@ Public Class dlgClimaticLengthOfSeason
     Private Sub ucrSelectorLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLengthofSeason.ControlValueChanged
         bDataChanged = True
         bUserClearedReceiver = False
-        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
+        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.strCurrentDataFrame & Chr(34)
         AutoFillReceivers(lstEndReceivers)
         AutoFillReceivers(lstStartReceivers)
         AutoFillReceivers(lstEndStatusReceivers)
@@ -482,7 +482,7 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_DataFrameChanged() Handles ucrSelectorLengthofSeason.DataFrameChanged
-        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
+        strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.strCurrentDataFrame & Chr(34)
         clsGetCalculationsFunction.AddParameter("x", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
         clsDefineAsClimatic.AddParameter("data_name", strCurrDataName, iPosition:=0)
         clsConvertColumnTypeFunction.AddParameter("data_name", strCurrDataName, iPosition:=0)
