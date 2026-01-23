@@ -142,11 +142,11 @@ Partial Class dlgLinePlot
         Me.ucrPnlStepOrPath = New instat.UcrPanel()
         Me.ucrPnlLinerangeOptions = New instat.UcrPanel()
         Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
         Me.ucrChkAddLineLineRange = New instat.ucrCheck()
-        Me.ucrReceiverFacetFactors = New instat.ucrReceiverMultiple()
         Me.grpSmoothOptions.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -289,7 +289,6 @@ Partial Class dlgLinePlot
         Me.ucrInputFormula.GetSetSelectedIndex = -1
         Me.ucrInputFormula.IsReadOnly = False
         Me.ucrInputFormula.Location = New System.Drawing.Point(73, 46)
-        Me.ucrInputFormula.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputFormula.Name = "ucrInputFormula"
         Me.ucrInputFormula.Size = New System.Drawing.Size(110, 23)
         Me.ucrInputFormula.TabIndex = 7
@@ -299,9 +298,8 @@ Partial Class dlgLinePlot
         Me.ucrChkSpan.AutoSize = True
         Me.ucrChkSpan.Checked = False
         Me.ucrChkSpan.Location = New System.Drawing.Point(185, 20)
-        Me.ucrChkSpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSpan.Name = "ucrChkSpan"
-        Me.ucrChkSpan.Size = New System.Drawing.Size(54, 34)
+        Me.ucrChkSpan.Size = New System.Drawing.Size(54, 23)
         Me.ucrChkSpan.TabIndex = 4
         '
         'ucrChkFormula
@@ -309,9 +307,8 @@ Partial Class dlgLinePlot
         Me.ucrChkFormula.AutoSize = True
         Me.ucrChkFormula.Checked = False
         Me.ucrChkFormula.Location = New System.Drawing.Point(5, 49)
-        Me.ucrChkFormula.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkFormula.Name = "ucrChkFormula"
-        Me.ucrChkFormula.Size = New System.Drawing.Size(66, 34)
+        Me.ucrChkFormula.Size = New System.Drawing.Size(66, 23)
         Me.ucrChkFormula.TabIndex = 1
         '
         'ucrChkAddSE
@@ -319,9 +316,8 @@ Partial Class dlgLinePlot
         Me.ucrChkAddSE.AutoSize = True
         Me.ucrChkAddSE.Checked = False
         Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
-        Me.ucrChkAddSE.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 34)
+        Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
         Me.ucrChkAddSE.TabIndex = 8
         '
         'ucrNudSpan
@@ -330,7 +326,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSpan.Location = New System.Drawing.Point(239, 20)
-        Me.ucrNudSpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSpan.Name = "ucrNudSpan"
@@ -345,7 +340,6 @@ Partial Class dlgLinePlot
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
         Me.ucrInputMethod.Location = New System.Drawing.Point(52, 20)
-        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
         Me.ucrInputMethod.TabIndex = 2
@@ -357,7 +351,6 @@ Partial Class dlgLinePlot
         Me.ucrFamilyInput.GetSetSelectedIndex = -1
         Me.ucrFamilyInput.IsReadOnly = False
         Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
-        Me.ucrFamilyInput.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrFamilyInput.Name = "ucrFamilyInput"
         Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
         Me.ucrFamilyInput.TabIndex = 5
@@ -615,7 +608,6 @@ Partial Class dlgLinePlot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.AreaOptionsToolStripMenuItem, Me.CrossbarOptionsToolStripMenuItem, Me.DumbbellOptionsToolStripMenuItem, Me.ErrorbarOptionsToolStripMenuItem, Me.LineOptionsToolStripMenuItem, Me.LinerangeOptionsToolStripMenuItem, Me.PathOptionsToolStripMenuItem, Me.PointOptionToolStripMenuItem, Me.PointrangeOptionsToolStripMenuItem, Me.RibbonOptionsToolStripMenuItem, Me.SmoothOptionsToolStripMenuItem, Me.StepOptionsToolStripMenuItem})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
         Me.contextMenuStripOptions.Size = New System.Drawing.Size(178, 290)
@@ -799,7 +791,6 @@ Partial Class dlgLinePlot
         Me.ucrChkRibbon.AutoSize = True
         Me.ucrChkRibbon.Checked = False
         Me.ucrChkRibbon.Location = New System.Drawing.Point(9, 364)
-        Me.ucrChkRibbon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkRibbon.Name = "ucrChkRibbon"
         Me.ucrChkRibbon.Size = New System.Drawing.Size(149, 23)
         Me.ucrChkRibbon.TabIndex = 25
@@ -850,7 +841,6 @@ Partial Class dlgLinePlot
         Me.ucrInputSlopeLineColour.GetSetSelectedIndex = -1
         Me.ucrInputSlopeLineColour.IsReadOnly = False
         Me.ucrInputSlopeLineColour.Location = New System.Drawing.Point(134, 377)
-        Me.ucrInputSlopeLineColour.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputSlopeLineColour.Name = "ucrInputSlopeLineColour"
         Me.ucrInputSlopeLineColour.Size = New System.Drawing.Size(69, 21)
         Me.ucrInputSlopeLineColour.TabIndex = 61
@@ -862,7 +852,6 @@ Partial Class dlgLinePlot
         Me.ucrInputSlopeTextColour.GetSetSelectedIndex = -1
         Me.ucrInputSlopeTextColour.IsReadOnly = False
         Me.ucrInputSlopeTextColour.Location = New System.Drawing.Point(134, 348)
-        Me.ucrInputSlopeTextColour.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputSlopeTextColour.Name = "ucrInputSlopeTextColour"
         Me.ucrInputSlopeTextColour.Size = New System.Drawing.Size(69, 21)
         Me.ucrInputSlopeTextColour.TabIndex = 51
@@ -873,7 +862,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSlopeTextSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeTextSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSlopeTextSize.Location = New System.Drawing.Point(247, 350)
-        Me.ucrNudSlopeTextSize.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudSlopeTextSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSlopeTextSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeTextSize.Name = "ucrNudSlopeTextSize"
@@ -888,7 +876,6 @@ Partial Class dlgLinePlot
         Me.ucrInputDumbbellLine.GetSetSelectedIndex = -1
         Me.ucrInputDumbbellLine.IsReadOnly = False
         Me.ucrInputDumbbellLine.Location = New System.Drawing.Point(341, 318)
-        Me.ucrInputDumbbellLine.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputDumbbellLine.Name = "ucrInputDumbbellLine"
         Me.ucrInputDumbbellLine.Size = New System.Drawing.Size(69, 21)
         Me.ucrInputDumbbellLine.TabIndex = 44
@@ -899,7 +886,6 @@ Partial Class dlgLinePlot
         Me.ucrNudDumbbellXEnd.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDumbbellXEnd.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDumbbellXEnd.Location = New System.Drawing.Point(229, 351)
-        Me.ucrNudDumbbellXEnd.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudDumbbellXEnd.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDumbbellXEnd.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDumbbellXEnd.Name = "ucrNudDumbbellXEnd"
@@ -913,7 +899,6 @@ Partial Class dlgLinePlot
         Me.ucrNudDumbbellX.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDumbbellX.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDumbbellX.Location = New System.Drawing.Point(112, 351)
-        Me.ucrNudDumbbellX.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudDumbbellX.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDumbbellX.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDumbbellX.Name = "ucrNudDumbbellX"
@@ -926,7 +911,6 @@ Partial Class dlgLinePlot
         Me.ucrChkDumbbellSize.AutoSize = True
         Me.ucrChkDumbbellSize.Checked = False
         Me.ucrChkDumbbellSize.Location = New System.Drawing.Point(9, 353)
-        Me.ucrChkDumbbellSize.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDumbbellSize.Name = "ucrChkDumbbellSize"
         Me.ucrChkDumbbellSize.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkDumbbellSize.TabIndex = 47
@@ -949,7 +933,6 @@ Partial Class dlgLinePlot
         Me.ucrChkAddLine.AutoSize = True
         Me.ucrChkAddLine.Checked = False
         Me.ucrChkAddLine.Location = New System.Drawing.Point(133, 337)
-        Me.ucrChkAddLine.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkAddLine.Name = "ucrChkAddLine"
         Me.ucrChkAddLine.Size = New System.Drawing.Size(77, 24)
         Me.ucrChkAddLine.TabIndex = 46
@@ -958,7 +941,6 @@ Partial Class dlgLinePlot
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(9, 7)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(409, 44)
         Me.ucrPnlOptions.TabIndex = 0
@@ -968,7 +950,6 @@ Partial Class dlgLinePlot
         Me.ucrChkPathOrStep.AutoSize = True
         Me.ucrChkPathOrStep.Checked = False
         Me.ucrChkPathOrStep.Location = New System.Drawing.Point(9, 389)
-        Me.ucrChkPathOrStep.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkPathOrStep.Name = "ucrChkPathOrStep"
         Me.ucrChkPathOrStep.Size = New System.Drawing.Size(148, 23)
         Me.ucrChkPathOrStep.TabIndex = 30
@@ -978,7 +959,6 @@ Partial Class dlgLinePlot
         Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
         Me.ucrChkWithSE.Location = New System.Drawing.Point(248, 362)
-        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         Me.ucrChkWithSE.Size = New System.Drawing.Size(72, 23)
         Me.ucrChkWithSE.TabIndex = 63
@@ -988,7 +968,6 @@ Partial Class dlgLinePlot
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 363)
-        Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(253, 24)
         Me.ucrChkLineofBestFit.TabIndex = 34
@@ -996,10 +975,10 @@ Partial Class dlgLinePlot
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(9, 509)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 479)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(401, 25)
+        Me.ucrSave.Size = New System.Drawing.Size(401, 24)
         Me.ucrSave.TabIndex = 69
         '
         'ucrVariablesAsFactorForLinePlot
@@ -1007,7 +986,6 @@ Partial Class dlgLinePlot
         Me.ucrVariablesAsFactorForLinePlot.AutoSize = True
         Me.ucrVariablesAsFactorForLinePlot.frmParent = Me
         Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(284, 90)
-        Me.ucrVariablesAsFactorForLinePlot.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
         Me.ucrVariablesAsFactorForLinePlot.Selector = Nothing
         Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
@@ -1032,8 +1010,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 535)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 504)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 68
@@ -1056,7 +1033,6 @@ Partial Class dlgLinePlot
         Me.ucrChkSlopeLineOptions.AutoSize = True
         Me.ucrChkSlopeLineOptions.Checked = False
         Me.ucrChkSlopeLineOptions.Location = New System.Drawing.Point(10, 382)
-        Me.ucrChkSlopeLineOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSlopeLineOptions.Name = "ucrChkSlopeLineOptions"
         Me.ucrChkSlopeLineOptions.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkSlopeLineOptions.TabIndex = 28
@@ -1067,7 +1043,6 @@ Partial Class dlgLinePlot
         Me.UcrNudSlopeYTextSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UcrNudSlopeYTextSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.UcrNudSlopeYTextSize.Location = New System.Drawing.Point(364, 350)
-        Me.UcrNudSlopeYTextSize.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.UcrNudSlopeYTextSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.UcrNudSlopeYTextSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UcrNudSlopeYTextSize.Name = "UcrNudSlopeYTextSize"
@@ -1080,7 +1055,6 @@ Partial Class dlgLinePlot
         Me.ucrChkDumbbellColour.AutoSize = True
         Me.ucrChkDumbbellColour.Checked = False
         Me.ucrChkDumbbellColour.Location = New System.Drawing.Point(9, 322)
-        Me.ucrChkDumbbellColour.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDumbbellColour.Name = "ucrChkDumbbellColour"
         Me.ucrChkDumbbellColour.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkDumbbellColour.TabIndex = 22
@@ -1090,7 +1064,6 @@ Partial Class dlgLinePlot
         Me.ucrChkAddPoints.AutoSize = True
         Me.ucrChkAddPoints.Checked = False
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(9, 337)
-        Me.ucrChkAddPoints.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
         Me.ucrChkAddPoints.Size = New System.Drawing.Size(141, 24)
         Me.ucrChkAddPoints.TabIndex = 23
@@ -1100,7 +1073,6 @@ Partial Class dlgLinePlot
         Me.ucrChkSlopeLabelOptions.AutoSize = True
         Me.ucrChkSlopeLabelOptions.Checked = False
         Me.ucrChkSlopeLabelOptions.Location = New System.Drawing.Point(10, 322)
-        Me.ucrChkSlopeLabelOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSlopeLabelOptions.Name = "ucrChkSlopeLabelOptions"
         Me.ucrChkSlopeLabelOptions.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkSlopeLabelOptions.TabIndex = 59
@@ -1110,7 +1082,6 @@ Partial Class dlgLinePlot
         Me.ucrChkSlopeTextOptions.AutoSize = True
         Me.ucrChkSlopeTextOptions.Checked = False
         Me.ucrChkSlopeTextOptions.Location = New System.Drawing.Point(10, 352)
-        Me.ucrChkSlopeTextOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSlopeTextOptions.Name = "ucrChkSlopeTextOptions"
         Me.ucrChkSlopeTextOptions.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkSlopeTextOptions.TabIndex = 58
@@ -1121,7 +1092,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSlopeLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSlopeLabelSize.Location = New System.Drawing.Point(246, 319)
-        Me.ucrNudSlopeLabelSize.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudSlopeLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSlopeLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeLabelSize.Name = "ucrNudSlopeLabelSize"
@@ -1135,7 +1105,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSlopeLabelPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeLabelPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSlopeLabelPadding.Location = New System.Drawing.Point(347, 319)
-        Me.ucrNudSlopeLabelPadding.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudSlopeLabelPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSlopeLabelPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeLabelPadding.Name = "ucrNudSlopeLabelPadding"
@@ -1149,7 +1118,6 @@ Partial Class dlgLinePlot
         Me.ucrNudDumbbellLine.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDumbbellLine.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDumbbellLine.Location = New System.Drawing.Point(341, 350)
-        Me.ucrNudDumbbellLine.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudDumbbellLine.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDumbbellLine.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDumbbellLine.Name = "ucrNudDumbbellLine"
@@ -1164,7 +1132,6 @@ Partial Class dlgLinePlot
         Me.ucrInputDumbbellX.GetSetSelectedIndex = -1
         Me.ucrInputDumbbellX.IsReadOnly = False
         Me.ucrInputDumbbellX.Location = New System.Drawing.Point(112, 320)
-        Me.ucrInputDumbbellX.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputDumbbellX.Name = "ucrInputDumbbellX"
         Me.ucrInputDumbbellX.Size = New System.Drawing.Size(71, 21)
         Me.ucrInputDumbbellX.TabIndex = 36
@@ -1175,7 +1142,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSlopeLineThickness.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeLineThickness.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSlopeLineThickness.Location = New System.Drawing.Point(264, 378)
-        Me.ucrNudSlopeLineThickness.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudSlopeLineThickness.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSlopeLineThickness.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSlopeLineThickness.Name = "ucrNudSlopeLineThickness"
@@ -1190,7 +1156,6 @@ Partial Class dlgLinePlot
         Me.ucrInputSlopeLabelColour.GetSetSelectedIndex = -1
         Me.ucrInputSlopeLabelColour.IsReadOnly = False
         Me.ucrInputSlopeLabelColour.Location = New System.Drawing.Point(134, 319)
-        Me.ucrInputSlopeLabelColour.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputSlopeLabelColour.Name = "ucrInputSlopeLabelColour"
         Me.ucrInputSlopeLabelColour.Size = New System.Drawing.Size(69, 21)
         Me.ucrInputSlopeLabelColour.TabIndex = 37
@@ -1202,7 +1167,6 @@ Partial Class dlgLinePlot
         Me.ucrInputDumbbellXEnd.GetSetSelectedIndex = -1
         Me.ucrInputDumbbellXEnd.IsReadOnly = False
         Me.ucrInputDumbbellXEnd.Location = New System.Drawing.Point(229, 318)
-        Me.ucrInputDumbbellXEnd.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputDumbbellXEnd.Name = "ucrInputDumbbellXEnd"
         Me.ucrInputDumbbellXEnd.Size = New System.Drawing.Size(68, 21)
         Me.ucrInputDumbbellXEnd.TabIndex = 40
@@ -1263,7 +1227,6 @@ Partial Class dlgLinePlot
         '
         Me.ucrPnlStepOrPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlStepOrPath.Location = New System.Drawing.Point(42, 412)
-        Me.ucrPnlStepOrPath.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlStepOrPath.Name = "ucrPnlStepOrPath"
         Me.ucrPnlStepOrPath.Size = New System.Drawing.Size(222, 29)
         Me.ucrPnlStepOrPath.TabIndex = 66
@@ -1272,7 +1235,6 @@ Partial Class dlgLinePlot
         '
         Me.ucrPnlLinerangeOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlLinerangeOptions.Location = New System.Drawing.Point(10, 390)
-        Me.ucrPnlLinerangeOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlLinerangeOptions.Name = "ucrPnlLinerangeOptions"
         Me.ucrPnlLinerangeOptions.Size = New System.Drawing.Size(385, 33)
         Me.ucrPnlLinerangeOptions.TabIndex = 2
@@ -1284,10 +1246,22 @@ Partial Class dlgLinePlot
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
         Me.ucrInputStation.Location = New System.Drawing.Point(318, 452)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(101, 21)
         Me.ucrInputStation.TabIndex = 81
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(205, 453)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(110, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 80
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
         '
         'lblFacetBy
         '
@@ -1307,7 +1281,6 @@ Partial Class dlgLinePlot
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
         Me.ucrInputLegendPosition.Location = New System.Drawing.Point(87, 452)
-        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
         Me.ucrInputLegendPosition.TabIndex = 83
@@ -1317,7 +1290,6 @@ Partial Class dlgLinePlot
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
         Me.ucrChkLegend.Location = New System.Drawing.Point(9, 453)
-        Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 82
@@ -1327,32 +1299,18 @@ Partial Class dlgLinePlot
         Me.ucrChkAddLineLineRange.AutoSize = True
         Me.ucrChkAddLineLineRange.Checked = False
         Me.ucrChkAddLineLineRange.Location = New System.Drawing.Point(133, 337)
-        Me.ucrChkAddLineLineRange.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkAddLineLineRange.Name = "ucrChkAddLineLineRange"
         Me.ucrChkAddLineLineRange.Size = New System.Drawing.Size(77, 24)
         Me.ucrChkAddLineLineRange.TabIndex = 84
-        '
-        'ucrReceiverFacetFactors
-        '
-        Me.ucrReceiverFacetFactors.AutoSize = True
-        Me.ucrReceiverFacetFactors.frmParent = Me
-        Me.ucrReceiverFacetFactors.Location = New System.Drawing.Point(205, 451)
-        Me.ucrReceiverFacetFactors.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacetFactors.Name = "ucrReceiverFacetFactors"
-        Me.ucrReceiverFacetFactors.Selector = Nothing
-        Me.ucrReceiverFacetFactors.Size = New System.Drawing.Size(107, 51)
-        Me.ucrReceiverFacetFactors.strNcFilePath = ""
-        Me.ucrReceiverFacetFactors.TabIndex = 85
-        Me.ucrReceiverFacetFactors.ucrSelector = Nothing
         '
         'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(423, 595)
-        Me.Controls.Add(Me.ucrReceiverFacetFactors)
+        Me.ClientSize = New System.Drawing.Size(423, 561)
         Me.Controls.Add(Me.ucrChkAddLineLineRange)
         Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkLegend)
@@ -1552,9 +1510,9 @@ Partial Class dlgLinePlot
     Friend WithEvents PointrangeOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RibbonOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkAddLineLineRange As ucrCheck
-    Friend WithEvents ucrReceiverFacetFactors As ucrReceiverMultiple
 End Class
