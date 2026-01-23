@@ -104,9 +104,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblLabelPosition = New System.Windows.Forms.Label()
         Me.ucrInputLabelColour = New instat.ucrInputComboBox()
         Me.cmdPairOptions = New System.Windows.Forms.Button()
-        Me.ucrNudAlpha = New instat.ucrNud()
-        Me.lblAlpha = New System.Windows.Forms.Label()
-        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -425,7 +422,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkDiagonal)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkLower)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkUpper)
-        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(10, 333)
+        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(4, 252)
         Me.grpTypeOfDispaly.Name = "grpTypeOfDispaly"
         Me.grpTypeOfDispaly.Size = New System.Drawing.Size(422, 151)
         Me.grpTypeOfDispaly.TabIndex = 22
@@ -850,50 +847,12 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdPairOptions.Text = "Pair Plot Options"
         Me.cmdPairOptions.UseVisualStyleBackColor = True
         '
-        'ucrNudAlpha
-        '
-        Me.ucrNudAlpha.AutoSize = True
-        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(155, 375)
-        Me.ucrNudAlpha.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Name = "ucrNudAlpha"
-        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlpha.TabIndex = 69
-        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblAlpha
-        '
-        Me.lblAlpha.AutoSize = True
-        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlpha.Location = New System.Drawing.Point(111, 379)
-        Me.lblAlpha.Name = "lblAlpha"
-        Me.lblAlpha.Size = New System.Drawing.Size(37, 13)
-        Me.lblAlpha.TabIndex = 68
-        Me.lblAlpha.Tag = "By_Factor:"
-        Me.lblAlpha.Text = "Alpha:"
-        '
-        'ucrChkDisplayMargins
-        '
-        Me.ucrChkDisplayMargins.AutoSize = True
-        Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(11, 372)
-        Me.ucrChkDisplayMargins.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(115, 23)
-        Me.ucrChkDisplayMargins.TabIndex = 67
-        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 516)
-        Me.Controls.Add(Me.ucrNudAlpha)
-        Me.Controls.Add(Me.lblAlpha)
-        Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.ucrInputLabelSize)
         Me.Controls.Add(Me.lblLabelColour)
         Me.Controls.Add(Me.lblLabelSize)
@@ -1001,7 +960,4 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents lblLabelPosition As Label
     Friend WithEvents ucrInputLabelColour As ucrInputComboBox
     Friend WithEvents cmdPairOptions As Button
-    Friend WithEvents ucrNudAlpha As ucrNud
-    Friend WithEvents lblAlpha As Label
-    Friend WithEvents ucrChkDisplayMargins As ucrCheck
 End Class
