@@ -381,6 +381,7 @@ Public Class dlgStartofRains
 
         bResetSubdialog = True
         ucrSelectorForStartofRains.Reset()
+        ucrSaveDefinition.Reset()
         ucrNudTROverDays.SetText("3")
         ucrNudTRAmount.SetText("20")
 
