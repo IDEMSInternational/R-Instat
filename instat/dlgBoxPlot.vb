@@ -670,7 +670,7 @@ Public Class dlgBoxplot
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bChangeAesParameter:=True, bReset:=bResetSubdialog)
 
         sdgPlots.ShowDialog()
-        ucr1stFactorReceiver.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
+        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
 

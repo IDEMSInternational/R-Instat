@@ -397,7 +397,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.tbpPlotsOptions.SelectedIndex = 2
         sdgPlots.ShowDialog()
         sdgPlots.EnableLayersTab()
-        ucr1stFactorReceiver.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
+        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
     End Sub
 
