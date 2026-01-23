@@ -77,8 +77,6 @@ Public Class dlgLinePlot
     Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
     Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
 
-    Private lstFacetVars As List(Of String)
-
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
 
@@ -669,7 +667,6 @@ Public Class dlgLinePlot
         ucrChkSlopeLabelOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeTextOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
-        ucrReceiverFacetFactors.SetRCode(clsFacetFunction, bReset)
 
         If bReset Then
             ucrInputMethod.SetRCode(clsGeomSmoothFunction, bReset)
@@ -883,12 +880,9 @@ Public Class dlgLinePlot
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
-
         sdgPlots.ShowDialog()
         bNotSubdialogue = False
-
-        'lstFacetVars = ucrReceiverFacetFactors.GetVariableNamesAsList()
-        ucrReceiverFacetFactors.Add(sdgPlots.ucrReceiverFacetFactors.GetVariableNames(False))
+        ucrReceiverFacetFactors.Add(sdgPlots.ucrReceiverFacetFactors.GetText)
 
         If clsFacetFunction.strRCommand = "facet_grid" Then
             If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
@@ -1062,6 +1056,7 @@ Public Class dlgLinePlot
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
 
+
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
             clsFacetFunction.RemoveParameterByName("rows")
@@ -1077,6 +1072,7 @@ Public Class dlgLinePlot
             clsFacetFunction.RemoveParameterByName("margins")
         End If
 
+        Dim lstFacetVars As List(Of String)
         'Get variables from the multiple receiver
         lstFacetVars = ucrReceiverFacetFactors.GetVariableNamesAsList()
         If lstFacetVars.Count = 0 Then Exit Sub
@@ -1123,7 +1119,7 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrReceiverFacetFactors.ControlValueChanged
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrReceiverFacetFactors.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
