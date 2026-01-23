@@ -428,7 +428,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkDiagonal)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkLower)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkUpper)
-        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(10, 331)
+        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(10, 258)
         Me.grpTypeOfDispaly.Name = "grpTypeOfDispaly"
         Me.grpTypeOfDispaly.Size = New System.Drawing.Size(422, 151)
         Me.grpTypeOfDispaly.TabIndex = 22
