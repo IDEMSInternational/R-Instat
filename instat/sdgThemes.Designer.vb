@@ -205,7 +205,7 @@ Partial Class sdgThemes
         Me.ucrStripsSpaceWrap.AutoSize = True
         Me.ucrStripsSpaceWrap.Location = New System.Drawing.Point(265, 21)
         Me.ucrStripsSpaceWrap.Name = "ucrStripsSpaceWrap"
-        Me.ucrStripsSpaceWrap.Size = New System.Drawing.Size(261, 125)
+        Me.ucrStripsSpaceWrap.Size = New System.Drawing.Size(261, 130)
         Me.ucrStripsSpaceWrap.TabIndex = 1
         '
         'ucrStripsSpaceGrid
@@ -213,7 +213,7 @@ Partial Class sdgThemes
         Me.ucrStripsSpaceGrid.AutoSize = True
         Me.ucrStripsSpaceGrid.Location = New System.Drawing.Point(6, 21)
         Me.ucrStripsSpaceGrid.Name = "ucrStripsSpaceGrid"
-        Me.ucrStripsSpaceGrid.Size = New System.Drawing.Size(260, 122)
+        Me.ucrStripsSpaceGrid.Size = New System.Drawing.Size(260, 130)
         Me.ucrStripsSpaceGrid.TabIndex = 0
         '
         'grpFacetBackground
@@ -251,7 +251,7 @@ Partial Class sdgThemes
         Me.ucrStripTextYAxis.AutoSize = True
         Me.ucrStripTextYAxis.Location = New System.Drawing.Point(536, 21)
         Me.ucrStripTextYAxis.Name = "ucrStripTextYAxis"
-        Me.ucrStripTextYAxis.Size = New System.Drawing.Size(255, 226)
+        Me.ucrStripTextYAxis.Size = New System.Drawing.Size(255, 234)
         Me.ucrStripTextYAxis.TabIndex = 2
         '
         'ucrStripTextXAxis
@@ -259,7 +259,7 @@ Partial Class sdgThemes
         Me.ucrStripTextXAxis.AutoSize = True
         Me.ucrStripTextXAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrStripTextXAxis.Name = "ucrStripTextXAxis"
-        Me.ucrStripTextXAxis.Size = New System.Drawing.Size(255, 226)
+        Me.ucrStripTextXAxis.Size = New System.Drawing.Size(255, 234)
         Me.ucrStripTextXAxis.TabIndex = 1
         '
         'ucrStripText
@@ -267,7 +267,7 @@ Partial Class sdgThemes
         Me.ucrStripText.AutoSize = True
         Me.ucrStripText.Location = New System.Drawing.Point(14, 21)
         Me.ucrStripText.Name = "ucrStripText"
-        Me.ucrStripText.Size = New System.Drawing.Size(255, 226)
+        Me.ucrStripText.Size = New System.Drawing.Size(255, 234)
         Me.ucrStripText.TabIndex = 0
         '
         'tbThemePanelAndBackground
@@ -299,7 +299,7 @@ Partial Class sdgThemes
         Me.ucrPanelSpacingYAxis.AutoSize = True
         Me.ucrPanelSpacingYAxis.Location = New System.Drawing.Point(530, 21)
         Me.ucrPanelSpacingYAxis.Name = "ucrPanelSpacingYAxis"
-        Me.ucrPanelSpacingYAxis.Size = New System.Drawing.Size(261, 122)
+        Me.ucrPanelSpacingYAxis.Size = New System.Drawing.Size(261, 130)
         Me.ucrPanelSpacingYAxis.TabIndex = 2
         '
         'ucrPanelSpacingXAxis
@@ -307,7 +307,7 @@ Partial Class sdgThemes
         Me.ucrPanelSpacingXAxis.AutoSize = True
         Me.ucrPanelSpacingXAxis.Location = New System.Drawing.Point(268, 21)
         Me.ucrPanelSpacingXAxis.Name = "ucrPanelSpacingXAxis"
-        Me.ucrPanelSpacingXAxis.Size = New System.Drawing.Size(262, 122)
+        Me.ucrPanelSpacingXAxis.Size = New System.Drawing.Size(262, 130)
         Me.ucrPanelSpacingXAxis.TabIndex = 1
         '
         'ucrPanelSpacing
@@ -315,7 +315,7 @@ Partial Class sdgThemes
         Me.ucrPanelSpacing.AutoSize = True
         Me.ucrPanelSpacing.Location = New System.Drawing.Point(7, 21)
         Me.ucrPanelSpacing.Name = "ucrPanelSpacing"
-        Me.ucrPanelSpacing.Size = New System.Drawing.Size(260, 122)
+        Me.ucrPanelSpacing.Size = New System.Drawing.Size(260, 130)
         Me.ucrPanelSpacing.TabIndex = 0
         '
         'grpBorderAndBackground
@@ -410,25 +410,25 @@ Partial Class sdgThemes
         'ucrLegendKeyWidth
         '
         Me.ucrLegendKeyWidth.AutoSize = True
-        Me.ucrLegendKeyWidth.Location = New System.Drawing.Point(531, 21)
+        Me.ucrLegendKeyWidth.Location = New System.Drawing.Point(525, 21)
         Me.ucrLegendKeyWidth.Name = "ucrLegendKeyWidth"
-        Me.ucrLegendKeyWidth.Size = New System.Drawing.Size(261, 122)
+        Me.ucrLegendKeyWidth.Size = New System.Drawing.Size(261, 130)
         Me.ucrLegendKeyWidth.TabIndex = 2
         '
         'ucrLegendKeyHeight
         '
         Me.ucrLegendKeyHeight.AutoSize = True
-        Me.ucrLegendKeyHeight.Location = New System.Drawing.Point(269, 21)
+        Me.ucrLegendKeyHeight.Location = New System.Drawing.Point(263, 21)
         Me.ucrLegendKeyHeight.Name = "ucrLegendKeyHeight"
-        Me.ucrLegendKeyHeight.Size = New System.Drawing.Size(263, 122)
+        Me.ucrLegendKeyHeight.Size = New System.Drawing.Size(263, 130)
         Me.ucrLegendKeyHeight.TabIndex = 1
         '
         'ucrLegendKeySize
         '
         Me.ucrLegendKeySize.AutoSize = True
-        Me.ucrLegendKeySize.Location = New System.Drawing.Point(9, 21)
+        Me.ucrLegendKeySize.Location = New System.Drawing.Point(4, 21)
         Me.ucrLegendKeySize.Name = "ucrLegendKeySize"
-        Me.ucrLegendKeySize.Size = New System.Drawing.Size(260, 122)
+        Me.ucrLegendKeySize.Size = New System.Drawing.Size(260, 130)
         Me.ucrLegendKeySize.TabIndex = 0
         '
         'grpLegendTitleAndText
@@ -437,7 +437,7 @@ Partial Class sdgThemes
         Me.grpLegendTitleAndText.Controls.Add(Me.ucrLegendTitle)
         Me.grpLegendTitleAndText.Location = New System.Drawing.Point(6, 6)
         Me.grpLegendTitleAndText.Name = "grpLegendTitleAndText"
-        Me.grpLegendTitleAndText.Size = New System.Drawing.Size(535, 255)
+        Me.grpLegendTitleAndText.Size = New System.Drawing.Size(518, 255)
         Me.grpLegendTitleAndText.TabIndex = 0
         Me.grpLegendTitleAndText.TabStop = False
         Me.grpLegendTitleAndText.Text = "Legend Title and Text"
@@ -445,17 +445,17 @@ Partial Class sdgThemes
         'ucrLegendText
         '
         Me.ucrLegendText.AutoSize = True
-        Me.ucrLegendText.Location = New System.Drawing.Point(275, 21)
+        Me.ucrLegendText.Location = New System.Drawing.Point(261, 21)
         Me.ucrLegendText.Name = "ucrLegendText"
-        Me.ucrLegendText.Size = New System.Drawing.Size(255, 226)
+        Me.ucrLegendText.Size = New System.Drawing.Size(255, 234)
         Me.ucrLegendText.TabIndex = 1
         '
         'ucrLegendTitle
         '
         Me.ucrLegendTitle.AutoSize = True
-        Me.ucrLegendTitle.Location = New System.Drawing.Point(14, 21)
+        Me.ucrLegendTitle.Location = New System.Drawing.Point(9, 21)
         Me.ucrLegendTitle.Name = "ucrLegendTitle"
-        Me.ucrLegendTitle.Size = New System.Drawing.Size(255, 226)
+        Me.ucrLegendTitle.Size = New System.Drawing.Size(255, 234)
         Me.ucrLegendTitle.TabIndex = 0
         '
         'grpLegendAdjustments
@@ -470,9 +470,9 @@ Partial Class sdgThemes
         Me.grpLegendAdjustments.Controls.Add(Me.urChkLegendPosition)
         Me.grpLegendAdjustments.Controls.Add(Me.ucrChkLegendDirection)
         Me.grpLegendAdjustments.Controls.Add(Me.urChkLegendBoxJust)
-        Me.grpLegendAdjustments.Location = New System.Drawing.Point(550, 6)
+        Me.grpLegendAdjustments.Location = New System.Drawing.Point(532, 6)
         Me.grpLegendAdjustments.Name = "grpLegendAdjustments"
-        Me.grpLegendAdjustments.Size = New System.Drawing.Size(260, 164)
+        Me.grpLegendAdjustments.Size = New System.Drawing.Size(281, 164)
         Me.grpLegendAdjustments.TabIndex = 1
         Me.grpLegendAdjustments.TabStop = False
         Me.grpLegendAdjustments.Text = "Legend Adjustments"
@@ -483,10 +483,10 @@ Partial Class sdgThemes
         Me.ucrInputLegendJustification.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendJustification.GetSetSelectedIndex = -1
         Me.ucrInputLegendJustification.IsReadOnly = False
-        Me.ucrInputLegendJustification.Location = New System.Drawing.Point(152, 126)
+        Me.ucrInputLegendJustification.Location = New System.Drawing.Point(193, 126)
         Me.ucrInputLegendJustification.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendJustification.Name = "ucrInputLegendJustification"
-        Me.ucrInputLegendJustification.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendJustification.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputLegendJustification.TabIndex = 9
         '
         'ucrInputLegendBox
@@ -495,10 +495,10 @@ Partial Class sdgThemes
         Me.ucrInputLegendBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendBox.GetSetSelectedIndex = -1
         Me.ucrInputLegendBox.IsReadOnly = False
-        Me.ucrInputLegendBox.Location = New System.Drawing.Point(152, 98)
+        Me.ucrInputLegendBox.Location = New System.Drawing.Point(193, 98)
         Me.ucrInputLegendBox.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendBox.Name = "ucrInputLegendBox"
-        Me.ucrInputLegendBox.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendBox.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputLegendBox.TabIndex = 7
         '
         'ucrInputLegendPosition
@@ -507,10 +507,10 @@ Partial Class sdgThemes
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(152, 19)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(193, 19)
         Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
-        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputLegendPosition.TabIndex = 1
         '
         'ucrInputLegendDirection
@@ -519,10 +519,10 @@ Partial Class sdgThemes
         Me.ucrInputLegendDirection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendDirection.GetSetSelectedIndex = -1
         Me.ucrInputLegendDirection.IsReadOnly = False
-        Me.ucrInputLegendDirection.Location = New System.Drawing.Point(152, 45)
+        Me.ucrInputLegendDirection.Location = New System.Drawing.Point(193, 45)
         Me.ucrInputLegendDirection.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendDirection.Name = "ucrInputLegendDirection"
-        Me.ucrInputLegendDirection.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendDirection.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputLegendDirection.TabIndex = 3
         '
         'ucrInputLegendBoxJust
@@ -531,7 +531,7 @@ Partial Class sdgThemes
         Me.ucrInputLegendBoxJust.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendBoxJust.GetSetSelectedIndex = -1
         Me.ucrInputLegendBoxJust.IsReadOnly = False
-        Me.ucrInputLegendBoxJust.Location = New System.Drawing.Point(177, 71)
+        Me.ucrInputLegendBoxJust.Location = New System.Drawing.Point(193, 71)
         Me.ucrInputLegendBoxJust.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendBoxJust.Name = "ucrInputLegendBoxJust"
         Me.ucrInputLegendBoxJust.Size = New System.Drawing.Size(80, 21)
@@ -543,7 +543,7 @@ Partial Class sdgThemes
         Me.ucrChkLegendJustification.Checked = False
         Me.ucrChkLegendJustification.Location = New System.Drawing.Point(6, 128)
         Me.ucrChkLegendJustification.Name = "ucrChkLegendJustification"
-        Me.ucrChkLegendJustification.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkLegendJustification.Size = New System.Drawing.Size(178, 23)
         Me.ucrChkLegendJustification.TabIndex = 8
         '
         'ucrChkLegendBox
@@ -552,7 +552,7 @@ Partial Class sdgThemes
         Me.ucrChkLegendBox.Checked = False
         Me.ucrChkLegendBox.Location = New System.Drawing.Point(6, 100)
         Me.ucrChkLegendBox.Name = "ucrChkLegendBox"
-        Me.ucrChkLegendBox.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkLegendBox.Size = New System.Drawing.Size(178, 23)
         Me.ucrChkLegendBox.TabIndex = 6
         '
         'urChkLegendPosition
@@ -561,7 +561,7 @@ Partial Class sdgThemes
         Me.urChkLegendPosition.Checked = False
         Me.urChkLegendPosition.Location = New System.Drawing.Point(6, 21)
         Me.urChkLegendPosition.Name = "urChkLegendPosition"
-        Me.urChkLegendPosition.Size = New System.Drawing.Size(147, 23)
+        Me.urChkLegendPosition.Size = New System.Drawing.Size(160, 23)
         Me.urChkLegendPosition.TabIndex = 0
         '
         'ucrChkLegendDirection
@@ -570,7 +570,7 @@ Partial Class sdgThemes
         Me.ucrChkLegendDirection.Checked = False
         Me.ucrChkLegendDirection.Location = New System.Drawing.Point(6, 47)
         Me.ucrChkLegendDirection.Name = "ucrChkLegendDirection"
-        Me.ucrChkLegendDirection.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkLegendDirection.Size = New System.Drawing.Size(160, 23)
         Me.ucrChkLegendDirection.TabIndex = 2
         '
         'urChkLegendBoxJust
@@ -579,7 +579,7 @@ Partial Class sdgThemes
         Me.urChkLegendBoxJust.Checked = False
         Me.urChkLegendBoxJust.Location = New System.Drawing.Point(6, 73)
         Me.urChkLegendBoxJust.Name = "urChkLegendBoxJust"
-        Me.urChkLegendBoxJust.Size = New System.Drawing.Size(165, 23)
+        Me.urChkLegendBoxJust.Size = New System.Drawing.Size(178, 23)
         Me.urChkLegendBoxJust.TabIndex = 4
         '
         'grpLegendBackGroundAndKey
@@ -597,7 +597,7 @@ Partial Class sdgThemes
         'ucrLegendBoxBackground
         '
         Me.ucrLegendBoxBackground.AutoSize = True
-        Me.ucrLegendBoxBackground.Location = New System.Drawing.Point(275, 21)
+        Me.ucrLegendBoxBackground.Location = New System.Drawing.Point(265, 21)
         Me.ucrLegendBoxBackground.Name = "ucrLegendBoxBackground"
         Me.ucrLegendBoxBackground.Size = New System.Drawing.Size(253, 130)
         Me.ucrLegendBoxBackground.TabIndex = 1
@@ -605,7 +605,7 @@ Partial Class sdgThemes
         'ucrLegendBackground
         '
         Me.ucrLegendBackground.AutoSize = True
-        Me.ucrLegendBackground.Location = New System.Drawing.Point(14, 21)
+        Me.ucrLegendBackground.Location = New System.Drawing.Point(9, 21)
         Me.ucrLegendBackground.Name = "ucrLegendBackground"
         Me.ucrLegendBackground.Size = New System.Drawing.Size(253, 130)
         Me.ucrLegendBackground.TabIndex = 0
@@ -613,7 +613,7 @@ Partial Class sdgThemes
         'ucrLegendKey
         '
         Me.ucrLegendKey.AutoSize = True
-        Me.ucrLegendKey.Location = New System.Drawing.Point(536, 21)
+        Me.ucrLegendKey.Location = New System.Drawing.Point(526, 21)
         Me.ucrLegendKey.Name = "ucrLegendKey"
         Me.ucrLegendKey.Size = New System.Drawing.Size(253, 130)
         Me.ucrLegendKey.TabIndex = 2
@@ -647,7 +647,7 @@ Partial Class sdgThemes
         Me.ucrThemeTitleYRightAxis.AutoSize = True
         Me.ucrThemeTitleYRightAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeTitleYRightAxis.Name = "ucrThemeTitleYRightAxis"
-        Me.ucrThemeTitleYRightAxis.Size = New System.Drawing.Size(262, 227)
+        Me.ucrThemeTitleYRightAxis.Size = New System.Drawing.Size(262, 234)
         Me.ucrThemeTitleYRightAxis.TabIndex = 1
         '
         'ucrThemeTitleYAxis
@@ -655,7 +655,7 @@ Partial Class sdgThemes
         Me.ucrThemeTitleYAxis.AutoSize = True
         Me.ucrThemeTitleYAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeTitleYAxis.Name = "ucrThemeTitleYAxis"
-        Me.ucrThemeTitleYAxis.Size = New System.Drawing.Size(259, 227)
+        Me.ucrThemeTitleYAxis.Size = New System.Drawing.Size(259, 234)
         Me.ucrThemeTitleYAxis.TabIndex = 0
         '
         'grpTickMarkLabelsYAxis
@@ -674,7 +674,7 @@ Partial Class sdgThemes
         Me.ucrThemeYRightAxis.AutoSize = True
         Me.ucrThemeYRightAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeYRightAxis.Name = "ucrThemeYRightAxis"
-        Me.ucrThemeYRightAxis.Size = New System.Drawing.Size(262, 226)
+        Me.ucrThemeYRightAxis.Size = New System.Drawing.Size(262, 234)
         Me.ucrThemeYRightAxis.TabIndex = 1
         '
         'ucrThemeLeftYAxis
@@ -682,7 +682,7 @@ Partial Class sdgThemes
         Me.ucrThemeLeftYAxis.AutoSize = True
         Me.ucrThemeLeftYAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeLeftYAxis.Name = "ucrThemeLeftYAxis"
-        Me.ucrThemeLeftYAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrThemeLeftYAxis.Size = New System.Drawing.Size(259, 234)
         Me.ucrThemeLeftYAxis.TabIndex = 0
         '
         'grpTickMarkers
@@ -741,7 +741,7 @@ Partial Class sdgThemes
         Me.ucrThemeTopXAxis.AutoSize = True
         Me.ucrThemeTopXAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeTopXAxis.Name = "ucrThemeTopXAxis"
-        Me.ucrThemeTopXAxis.Size = New System.Drawing.Size(258, 226)
+        Me.ucrThemeTopXAxis.Size = New System.Drawing.Size(258, 234)
         Me.ucrThemeTopXAxis.TabIndex = 1
         '
         'ucrThemeBottomXAxis
@@ -749,7 +749,7 @@ Partial Class sdgThemes
         Me.ucrThemeBottomXAxis.AutoSize = True
         Me.ucrThemeBottomXAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeBottomXAxis.Name = "ucrThemeBottomXAxis"
-        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 234)
         Me.ucrThemeBottomXAxis.TabIndex = 0
         '
         'grpTickMarks
@@ -795,7 +795,7 @@ Partial Class sdgThemes
         Me.ucrThemeTitleXTopAxis.AutoSize = True
         Me.ucrThemeTitleXTopAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeTitleXTopAxis.Name = "ucrThemeTitleXTopAxis"
-        Me.ucrThemeTitleXTopAxis.Size = New System.Drawing.Size(252, 230)
+        Me.ucrThemeTitleXTopAxis.Size = New System.Drawing.Size(252, 234)
         Me.ucrThemeTitleXTopAxis.TabIndex = 1
         '
         'ucrThemeTitleXAxis
@@ -803,7 +803,7 @@ Partial Class sdgThemes
         Me.ucrThemeTitleXAxis.AutoSize = True
         Me.ucrThemeTitleXAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeTitleXAxis.Name = "ucrThemeTitleXAxis"
-        Me.ucrThemeTitleXAxis.Size = New System.Drawing.Size(260, 231)
+        Me.ucrThemeTitleXAxis.Size = New System.Drawing.Size(260, 234)
         Me.ucrThemeTitleXAxis.TabIndex = 0
         '
         'tbXYAxes
@@ -835,7 +835,7 @@ Partial Class sdgThemes
         Me.ucrTickLength.AutoSize = True
         Me.ucrTickLength.Location = New System.Drawing.Point(6, 23)
         Me.ucrTickLength.Name = "ucrTickLength"
-        Me.ucrTickLength.Size = New System.Drawing.Size(260, 122)
+        Me.ucrTickLength.Size = New System.Drawing.Size(260, 130)
         Me.ucrTickLength.TabIndex = 0
         '
         'ucrThemeAxesLines
@@ -851,7 +851,7 @@ Partial Class sdgThemes
         Me.ucrThemeAxesTickLabels.AutoSize = True
         Me.ucrThemeAxesTickLabels.Location = New System.Drawing.Point(281, 27)
         Me.ucrThemeAxesTickLabels.Name = "ucrThemeAxesTickLabels"
-        Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
+        Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 234)
         Me.ucrThemeAxesTickLabels.TabIndex = 1
         '
         'ucrTickMarksAxes
@@ -867,7 +867,7 @@ Partial Class sdgThemes
         Me.ucrThemeAxesTitle.AutoSize = True
         Me.ucrThemeAxesTitle.Location = New System.Drawing.Point(20, 27)
         Me.ucrThemeAxesTitle.Name = "ucrThemeAxesTitle"
-        Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 228)
+        Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 234)
         Me.ucrThemeAxesTitle.TabIndex = 0
         '
         'tbPLot
@@ -898,7 +898,7 @@ Partial Class sdgThemes
         Me.ucrPlotMargin.AutoSize = True
         Me.ucrPlotMargin.Location = New System.Drawing.Point(5, 23)
         Me.ucrPlotMargin.Name = "ucrPlotMargin"
-        Me.ucrPlotMargin.Size = New System.Drawing.Size(260, 123)
+        Me.ucrPlotMargin.Size = New System.Drawing.Size(260, 130)
         Me.ucrPlotMargin.TabIndex = 0
         '
         'grpPlotBackground
@@ -936,7 +936,7 @@ Partial Class sdgThemes
         Me.ucrPlotCaption.AutoSize = True
         Me.ucrPlotCaption.Location = New System.Drawing.Point(536, 21)
         Me.ucrPlotCaption.Name = "ucrPlotCaption"
-        Me.ucrPlotCaption.Size = New System.Drawing.Size(255, 226)
+        Me.ucrPlotCaption.Size = New System.Drawing.Size(255, 234)
         Me.ucrPlotCaption.TabIndex = 2
         '
         'ucrPlotSubTitle
@@ -944,7 +944,7 @@ Partial Class sdgThemes
         Me.ucrPlotSubTitle.AutoSize = True
         Me.ucrPlotSubTitle.Location = New System.Drawing.Point(275, 21)
         Me.ucrPlotSubTitle.Name = "ucrPlotSubTitle"
-        Me.ucrPlotSubTitle.Size = New System.Drawing.Size(255, 226)
+        Me.ucrPlotSubTitle.Size = New System.Drawing.Size(255, 234)
         Me.ucrPlotSubTitle.TabIndex = 1
         '
         'ucrPlotTitle
@@ -952,7 +952,7 @@ Partial Class sdgThemes
         Me.ucrPlotTitle.AutoSize = True
         Me.ucrPlotTitle.Location = New System.Drawing.Point(14, 21)
         Me.ucrPlotTitle.Name = "ucrPlotTitle"
-        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 226)
+        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 234)
         Me.ucrPlotTitle.TabIndex = 0
         '
         'tbLegend
@@ -998,7 +998,7 @@ Partial Class sdgThemes
         Me.ucrLegendBoxSpacing.AutoSize = True
         Me.ucrLegendBoxSpacing.Location = New System.Drawing.Point(4, 21)
         Me.ucrLegendBoxSpacing.Name = "ucrLegendBoxSpacing"
-        Me.ucrLegendBoxSpacing.Size = New System.Drawing.Size(262, 127)
+        Me.ucrLegendBoxSpacing.Size = New System.Drawing.Size(262, 130)
         Me.ucrLegendBoxSpacing.TabIndex = 0
         '
         'grpLegendSpacing
@@ -1018,7 +1018,7 @@ Partial Class sdgThemes
         Me.ucrLegendSpacingYAxis.AutoSize = True
         Me.ucrLegendSpacingYAxis.Location = New System.Drawing.Point(532, 21)
         Me.ucrLegendSpacingYAxis.Name = "ucrLegendSpacingYAxis"
-        Me.ucrLegendSpacingYAxis.Size = New System.Drawing.Size(260, 122)
+        Me.ucrLegendSpacingYAxis.Size = New System.Drawing.Size(260, 130)
         Me.ucrLegendSpacingYAxis.TabIndex = 2
         '
         'ucrLegendSpacingXAxis
@@ -1026,7 +1026,7 @@ Partial Class sdgThemes
         Me.ucrLegendSpacingXAxis.AutoSize = True
         Me.ucrLegendSpacingXAxis.Location = New System.Drawing.Point(268, 21)
         Me.ucrLegendSpacingXAxis.Name = "ucrLegendSpacingXAxis"
-        Me.ucrLegendSpacingXAxis.Size = New System.Drawing.Size(261, 122)
+        Me.ucrLegendSpacingXAxis.Size = New System.Drawing.Size(261, 130)
         Me.ucrLegendSpacingXAxis.TabIndex = 1
         '
         'ucrLegendSpacing
@@ -1034,7 +1034,7 @@ Partial Class sdgThemes
         Me.ucrLegendSpacing.AutoSize = True
         Me.ucrLegendSpacing.Location = New System.Drawing.Point(6, 21)
         Me.ucrLegendSpacing.Name = "ucrLegendSpacing"
-        Me.ucrLegendSpacing.Size = New System.Drawing.Size(260, 122)
+        Me.ucrLegendSpacing.Size = New System.Drawing.Size(260, 130)
         Me.ucrLegendSpacing.TabIndex = 0
         '
         'tbThemePanelMoreOptions
@@ -1066,7 +1066,7 @@ Partial Class sdgThemes
         Me.ucrPanelGridMinorYAxis.AutoSize = True
         Me.ucrPanelGridMinorYAxis.Location = New System.Drawing.Point(275, 251)
         Me.ucrPanelGridMinorYAxis.Name = "ucrPanelGridMinorYAxis"
-        Me.ucrPanelGridMinorYAxis.Size = New System.Drawing.Size(258, 226)
+        Me.ucrPanelGridMinorYAxis.Size = New System.Drawing.Size(258, 234)
         Me.ucrPanelGridMinorYAxis.TabIndex = 3
         '
         'ucrPanelGridMinorXAxis
@@ -1074,7 +1074,7 @@ Partial Class sdgThemes
         Me.ucrPanelGridMinorXAxis.AutoSize = True
         Me.ucrPanelGridMinorXAxis.Location = New System.Drawing.Point(14, 251)
         Me.ucrPanelGridMinorXAxis.Name = "ucrPanelGridMinorXAxis"
-        Me.ucrPanelGridMinorXAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrPanelGridMinorXAxis.Size = New System.Drawing.Size(259, 234)
         Me.ucrPanelGridMinorXAxis.TabIndex = 2
         '
         'ucrPanelGridMajorYAxis
@@ -1082,7 +1082,7 @@ Partial Class sdgThemes
         Me.ucrPanelGridMajorYAxis.AutoSize = True
         Me.ucrPanelGridMajorYAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrPanelGridMajorYAxis.Name = "ucrPanelGridMajorYAxis"
-        Me.ucrPanelGridMajorYAxis.Size = New System.Drawing.Size(258, 226)
+        Me.ucrPanelGridMajorYAxis.Size = New System.Drawing.Size(258, 234)
         Me.ucrPanelGridMajorYAxis.TabIndex = 1
         '
         'ucrPanelGridMajorXAxis
@@ -1090,7 +1090,7 @@ Partial Class sdgThemes
         Me.ucrPanelGridMajorXAxis.AutoSize = True
         Me.ucrPanelGridMajorXAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrPanelGridMajorXAxis.Name = "ucrPanelGridMajorXAxis"
-        Me.ucrPanelGridMajorXAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrPanelGridMajorXAxis.Size = New System.Drawing.Size(259, 234)
         Me.ucrPanelGridMajorXAxis.TabIndex = 0
         '
         'sdgThemes
