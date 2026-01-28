@@ -82,8 +82,6 @@ Public Class dlgBarAndPieChart
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
-    Private clsFacetRowOp As New ROperator
-    Private clsFacetColOp As New ROperator
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
 
@@ -106,6 +104,8 @@ Public Class dlgBarAndPieChart
     Private strStatSummaryParameterName As String = "stat_summary"
     Private strAdditionalPointsParameterName As String = "add_jitter"
     Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
+
+    Private clsVarsFunction As New RFunction
 
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -443,10 +443,10 @@ Public Class dlgBarAndPieChart
         clsGeomLollipopAesFunction = New RFunction
         clsFacetFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+
+        clsVarsFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -610,14 +610,13 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction.SetRCommand("scale_size_area")
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
         clsFacetVariablesOperator.SetOperation("~")
         clsFacetVariablesOperator.bForceIncludeOperation = True
         clsFacetVariablesOperator.bBrackets = False
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -697,7 +696,7 @@ Public Class dlgBarAndPieChart
             ucrChkBinWidth.SetRCode(clsRgeomBarFunction, bReset)
         End If
         HideShowWidth()
-        AddRemoveCountlabel()
+        AddRemoveCountLabel()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -1167,8 +1166,6 @@ Public Class dlgBarAndPieChart
 
     Private Sub UpdateParameters()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
-        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -1177,11 +1174,11 @@ Public Class dlgBarAndPieChart
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
             Case strFacetCol, strFacetColAll
-                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
+                ucr1stFactorReceiver.ChangeParameterName("cols" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
             Case strFacetRow, strFacetRowAll
-                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
+                ucr1stFactorReceiver.ChangeParameterName("rows" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
         End Select
         If Not clsRFacetFunction.ContainsParameter("x") Then
             clsRFacetFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -1200,6 +1197,11 @@ Public Class dlgBarAndPieChart
             Exit Sub
         End If
 
+        ' Clear previous parameters
+        clsFacetFunction.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("rows")
+        clsFacetFunction.RemoveParameterByName("cols")
+        clsFacetFunction.RemoveParameterByName("margins")
         clsBaseOperator.RemoveParameterByName("facets")
 
         If Not ucr1stFactorReceiver.IsEmpty Then
@@ -1215,34 +1217,28 @@ Public Class dlgBarAndPieChart
                 Case strFacetRowAll
                     bRowAll = True
             End Select
-        End If
-        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
-        End If
-        If bWrap Then
-            clsFacetFunction.SetRCommand("facet_wrap")
-        End If
-        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
-            clsFacetFunction.SetRCommand("facet_grid")
-        End If
-        If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margins", "TRUE")
-        Else
-            clsFacetFunction.RemoveParameterByName("margins")
-        End If
-        If bRow OrElse bRowAll Then
-            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
-        Else
-            clsFacetVariablesOperator.RemoveParameterByName("left")
-        End If
-        If bCol OrElse bColAll Then
-            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
-        Else
-            clsFacetVariablesOperator.RemoveParameterByName("right")
+
+            If bWrap Then
+                clsFacetFunction.SetRCommand("facet_wrap")
+                clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+                clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            ElseIf bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
+                clsFacetFunction.SetRCommand("facet_grid")
+
+                If bRowAll OrElse bColAll Then
+                    clsFacetFunction.AddParameter("margins", "TRUE")
+                End If
+
+                If bRow OrElse bRowAll Then
+                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+                End If
+
+                If bCol OrElse bColAll Then
+                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=1)
+                End If
+
+                clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            End If
         End If
     End Sub
 
@@ -1268,10 +1264,7 @@ Public Class dlgBarAndPieChart
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll
-                        GetParameterValue(clsFacetColOp)
-                    Case strFacetRow, strFacetRowAll
-                        GetParameterValue(clsFacetRowOp)
+
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -1308,7 +1301,7 @@ Public Class dlgBarAndPieChart
         ChangeParameterName()
         AddStatsParm()
         HideShowWidth()
-        AddRemoveCountlabel()
+        AddRemoveCountLabel()
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
         ElseIf rdoWordCloud.Checked Then
@@ -1389,7 +1382,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
-        AddRemoveCountlabel()
+        AddRemoveCountLabel()
         If ucrChkAddLabelsText.Checked Then
             clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
         Else
