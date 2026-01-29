@@ -54,6 +54,12 @@ Public Class dlgUseTable
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
+        ucrChkSelectTheme.SetText("Theme")
+        ucrChkSelectTheme.Checked = True
+        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+        ucrHeader.Setup(clsGtTableROperator, bShowSubtitle:=False)
+
         ucrChkExport.SetText("Export Table")
         ucrChkExport.Checked = True ' Forces the controls to be hidden
         'cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
@@ -69,6 +75,7 @@ Public Class dlgUseTable
         ucrTablesSelector.Reset()
         ucrTablesReceiver.SetMeAsReceiver()
         ucrSaveTable.Reset()
+        ucrChkSelectTheme.Checked = False
         ucrChkExport.Checked = False
         cboFileType.SelectedIndex = 0
         ucrFilePath.ResetPathControl()
@@ -78,6 +85,7 @@ Public Class dlgUseTable
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
         clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGetGtTableFunction, iPosition:=0, bIncludeArgumentName:=False)
+        ucrHeader.Setup(clsGtTableROperator, bShowSubtitle:=False)
 
         ' Set base operator
         clsBaseOperator.SetOperation("%>%")
@@ -125,6 +133,9 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub btnTableOptions_Click(sender As Object, e As EventArgs) Handles btnTableOptions.Click
+        ' Set contents of the ucrHeader to the operator just incase they have not been set 
+        ucrHeader.SetValuesToOperator(clsOperator:=clsGtTableROperator)
+
         sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame,
                               clsGtTableROperator, {
                               EnumTableSubDialogTab.Header,
@@ -134,6 +145,15 @@ Public Class dlgUseTable
                               EnumTableSubDialogTab.Table},
                               strTableName:=ucrTablesReceiver.GetVariableNames(bWithQuotes:=False))
         sdgTableOptions.ShowDialog(Me)
+
+        ' Get any new header contents from operator 
+        ucrHeader.Setup(clsGtTableROperator, bShowSubtitle:=False)
+
+        ' TODO. Temporary fix until the themes custom control is implemented
+        ucrChkSelectTheme.Checked = sdgTableOptions.ucrChkSelectTheme.Checked
+        If ucrChkSelectTheme.Checked Then
+            ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
+        End If
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
@@ -186,4 +206,54 @@ Public Class dlgUseTable
         Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
         Return arrStr(0) & "|" & arrStr(1)
     End Function
+
+    Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        If ucrChkSelectTheme.Checked Then
+            ucrCboSelectThemes.Visible = True
+            ucrCboSelectThemes.SetName("Dark Theme") ' Set default theme
+        Else
+            ucrCboSelectThemes.Visible = False
+            clsGtTableROperator.RemoveParameterByName("theme_format")
+        End If
+    End Sub
+
+    ' TODO. This is a replication of what is in the tables sub-dialog.
+    Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
+        If Not ucrChkSelectTheme.Checked OrElse ucrCboSelectThemes.IsEmpty() Then
+            Exit Sub
+        End If
+
+        Dim strCommand As String = ""
+        Select Case ucrCboSelectThemes.GetText
+            Case "Dark Theme"
+                strCommand = "gt_theme_dark"
+            Case "538 Theme"
+                strCommand = "gt_theme_538"
+            Case "Dot Matrix Theme"
+                strCommand = "gt_theme_dot_matrix"
+            Case "Espn Theme"
+                strCommand = "gt_theme_espn"
+            Case "Excel Theme"
+                strCommand = "gt_theme_excel"
+            Case "Guardian Theme"
+                strCommand = "gt_theme_guardian"
+            Case "NY Times Theme"
+                strCommand = "gt_theme_nytimes"
+            Case "PFF Theme"
+                strCommand = "gt_theme_pff"
+        End Select
+
+        If strCommand = "" Then
+            Exit Sub ' Do nothing
+        End If
+
+        Dim clsThemeRFunction As New RFunction
+        clsThemeRFunction.SetPackageName("gtExtras")
+        clsThemeRFunction.SetRCommand(strCommand)
+        clsGtTableROperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        ucrHeader.SetValuesToOperator(clsOperator:=clsGtTableROperator)
+    End Sub
 End Class
