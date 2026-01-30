@@ -3218,4 +3218,8 @@ Public Class frmMain
     Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
     End Sub
+
+    Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
+        dlgCheckSummary.ShowDialog()
+    End Sub
 End Class
