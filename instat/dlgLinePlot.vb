@@ -884,7 +884,6 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
         sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                     clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction,
@@ -1069,6 +1068,8 @@ Public Class dlgLinePlot
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
             clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.RemoveParameterByName("cols")
         Else
             clsFacetFunction.RemoveParameterByName("facets")
         End If

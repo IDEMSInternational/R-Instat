@@ -2319,7 +2319,7 @@ Public Class sdgPlots
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing, Optional clsNewColVarsFunction As RFunction = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing, Optional clsNewRowVarsFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bChangeAesParameter As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
-        Dim clsTempParam As RParameter
+
         bRCodeSet = False
 
         If Not bControlsInitialised Then
@@ -3151,6 +3151,8 @@ Public Class sdgPlots
                     Else
                         clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
                     End If
+                    clsFacetFunction.RemoveParameterByName("rows")
+                    clsFacetFunction.RemoveParameterByName("cols")
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
                     If rdoHorizontal.Checked Then
@@ -3161,6 +3163,7 @@ Public Class sdgPlots
                         clsFacetFunction.RemoveParameterByName("rows")
                     End If
                     clsFacetFunction.RemoveParameterByName("dir")
+                    clsFacetFunction.RemoveParameterByName("facets")
                 End If
             ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
                 If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
