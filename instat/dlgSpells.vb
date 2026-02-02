@@ -27,6 +27,7 @@ Public Class dlgSpells
     Private clsCurrCalc, clsLinkedDataFunction, clsVectorConcatFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
+    Private clsSpellsCalculationFunction, clsGetLinkedDataName, clsGetCalculations, clsGetLongestSpellDef, clsLinkedColsVector As New RFunction
 
     Private strCurrDataName As String = ""
     Private strSpellDay As String = "spell_day"
@@ -125,6 +126,10 @@ Public Class dlgSpells
         ucrChkDayRange.AddParameterValuesCondition(True, "day", "True")
         ucrChkDayRange.AddParameterValuesCondition(False, "day", "False")
 
+        ucrChkDefinitions.SetText("Store Definitions")
+        ucrChkDefinitions.AddParameterValuesCondition(True, "def", "TRUE")
+        ucrChkDefinitions.AddParameterValuesCondition(False, "def", "FALSE")
+
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetValidationTypeAsRVariable()
@@ -132,7 +137,15 @@ Public Class dlgSpells
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {strLessThan, strGreaterThan, strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+        ucrPnlOptions.AddToLinkedControls({ucrChkDefinitions}, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputFilterPreview.IsReadOnly = True
+
+        ucrChkDefinitions.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveObject.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
+        ucrSaveObject.SetLabelText("Save Definitions Object:")
+        ucrSaveObject.SetIsComboBox()
+        ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -150,6 +163,8 @@ Public Class dlgSpells
         clsDefineAsClimatic = New RFunction
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
+
+        clsSpellsCalculationFunction = New RFunction
 
         clsApplyInstatFunction.Clear()
         clsMaxSpellManipulation.Clear()
@@ -343,6 +358,22 @@ Public Class dlgSpells
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
+
+        ' Save definitions
+        clsLinkedColsVector.SetRCommand("c")
+        clsGetLinkedDataName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
+        clsGetLinkedDataName.AddParameter("link_cols", clsRFunctionParameter:=clsLinkedColsVector, iPosition:=1)
+        clsGetLinkedDataName.SetAssignTo("linked_data_name")
+        clsGetLinkedDataName.iCallType = 2
+
+        clsGetCalculations.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
+        clsGetCalculations.AddParameter("x", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsGetCalculations.SetAssignTo("calculations_data")
+        clsGetCalculations.iCallType = 2
+
+        clsGetLongestSpellDef.SetRCommand("get_longest_spell_definition")
+        clsGetLongestSpellDef.AddParameter("calculations", "calculations_data", iPosition:=0)
+
         AddDayRange()
         AddDateDoy()
         UpdateDateDoy()
@@ -359,6 +390,7 @@ Public Class dlgSpells
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsSpellFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsVectorConcat2Function, New RParameter("dry_spell"), iAdditionalPairNo:=2)
+        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDef, New RParameter("spell_name", 1), iAdditionalPairNo:=3)
 
         ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
@@ -489,6 +521,7 @@ Public Class dlgSpells
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForSpells.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        clsGetLinkedDataName.AddParameter("data", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
         RainDays()
         GroupByOptions()
     End Sub
@@ -509,9 +542,11 @@ Public Class dlgSpells
         If Not ucrReceiverStation.IsEmpty Then
             clsVectorConcatFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
             clsVectorConcat2Function.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=0)
+            clsLinkedColsVector.AddParameter("station", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
         Else
             clsVectorConcatFunction.RemoveParameterByName("y")
             clsVectorConcat2Function.RemoveParameterByName("station")
+            clsLinkedColsVector.RemoveParameterByPosition(1)
         End If
     End Sub
 
@@ -578,6 +613,11 @@ Public Class dlgSpells
         AddDateDoy()
         UpdateDateDoy()
         UpdateDayFilterPreview()
+        If Not ucrReceiverDate.IsEmpty Then
+            clsLinkedColsVector.AddParameter("date", ucrReceiverDate.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsLinkedColsVector.RemoveParameterByPosition(0)
+        End If
     End Sub
 
     Private bIsUpdatingPreview As Boolean = False
