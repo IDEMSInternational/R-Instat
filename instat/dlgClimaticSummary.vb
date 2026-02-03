@@ -191,12 +191,13 @@ Public Class dlgClimaticSummary
         clsGetVariablesMetadataFunction = New RFunction
         clsGetClimaticSummariesFunction = New RFunction
         clsLinkColsFunction = New RFunction
-
+        clsDefineAsClimatic = New RFunction
+        clsKeyColsVector = New RFunction
+        clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromList = New RFunction
         Dim strLinkeddata As String = "linked_data_name"
 
-        clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
-        clsDayFilterCalcFromList = New RFunction
         clsDayFilterCalcFromList.SetRCommand("list")
         clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
 
@@ -274,8 +275,6 @@ Public Class dlgClimaticSummary
         clsGetClimaticSummariesFunction.AddParameter("summary_variables", clsRFunctionParameter:=clsGetSummaryVariablesFunction, iPosition:=2)
         clsGetClimaticSummariesFunction.AddParameter("daily_data_calculation", clsRFunctionParameter:=clsGetDailyDataCalculationFunction, iPosition:=3)
 
-        clsDefineAsClimatic = New RFunction
-        clsKeyColsVector = New RFunction
         clsKeyColsVector.SetRCommand("c")
 
         clsDefineAsClimatic.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
@@ -283,6 +282,7 @@ Public Class dlgClimaticSummary
         clsDefineAsClimatic.AddParameter("key_col_names", clsRFunctionParameter:=clsLinkColsFunction, iPosition:=1)
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsKeyColsVector, iPosition:=2)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
+        clsDefineAsClimatic.iCallType = 2
 
         clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsAddDateFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
