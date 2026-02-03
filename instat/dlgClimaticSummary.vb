@@ -547,7 +547,13 @@ Public Class dlgClimaticSummary
         ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetLinkedDataFrameFunction) ' Also clear from before-codes for safety
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDefineAsClimatic)
 
-        If ucrChkDefinitions.Checked Then
+        ' Reset the call type to prevent output unless explicitly requested
+        clsDefineAsClimatic.iCallType = 0
+
+        If (rdoAnnual.Checked OrElse rdoWithinYear.Checked) AndAlso ucrChkDefinitions.Checked Then
+            ' Set call type to 2 to trigger the definition summary output
+            clsDefineAsClimatic.iCallType = 2
+
             ' 1. Configure parameters for each function
             clsGetLinkedDataFrameFunction.AddParameter("from_data_frame", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsGetLinkedDataFrameFunction.AddParameter("link_cols", clsRFunctionParameter:=clsLinkColsFunction, iPosition:=1)
