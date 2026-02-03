@@ -54,7 +54,6 @@ Public Class dlgCheckSummary
     End Sub
 
     Private Sub InitialiseDialog()
-        ' TODO: set to correct help topic once available
         ucrBase.iHelpTopicID = -1
 
         ucrPnlOptions.AddRadioButton(rdoRecent)
@@ -62,7 +61,6 @@ Public Class dlgCheckSummary
         ucrPnlOptions.AddRadioButton(rdoTable)
         ucrPnlOptions.AddRadioButton(rdoTrend)
 
-        ' Year receiver (numeric, climatic year autofill)
         ucrReceiverYear.SetParameter(New RParameter("x", 0))
         ucrReceiverYear.Selector = ucrSelectorForRecode
         ucrReceiverYear.SetParameterIsString()
@@ -79,7 +77,6 @@ Public Class dlgCheckSummary
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetIsComboBox()
         ucrSaveNewColumn.SetLabelText("New Column Name:")
-        ' Don't link to receiver; fixed prefix requested
 
         UpdateVisiblePanels()
     End Sub
@@ -119,9 +116,6 @@ Public Class dlgCheckSummary
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ' The year receiver is used in multiple places (max(), conditions).
-        ' Don't link it to clsFactorFunction because it would overwrite the x parameter.
         ucrReceiverYear.SetRCode(clsDummyFunction, bReset)
         ucrSaveNewColumn.SetRCode(clsFactorFunction, bReset)
     End Sub
@@ -140,7 +134,6 @@ Public Class dlgCheckSummary
     End Sub
 
     Private Sub UpdateVisiblePanels()
-        ' Only pnlRecent exists currently; hide it when not in "Recent" mode.
         pnlRecent.Visible = rdoRecent.Checked
     End Sub
 
@@ -162,7 +155,6 @@ Public Class dlgCheckSummary
 
     Private Sub InitialiseRecentGrid()
         grdRecent.Worksheets.Clear()
-        ' Use the control's factory method; Worksheet constructor isn't accessible in this build.
         grdRecentWorkSheet = grdRecent.CreateWorksheet("Recent")
         grdRecent.AddWorksheet(grdRecentWorkSheet)
         grdRecent.CurrentWorksheet = grdRecentWorkSheet
@@ -202,10 +194,8 @@ Public Class dlgCheckSummary
             grdRecentWorkSheet(1, 2) = 30
             grdRecentWorkSheet(2, 2) = ""
 
-            ' Ensure all cells exist
             grdRecentWorkSheet.SetRangeDataFormat(0, 0, 3, 3, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
 
-            ' Read-only settings
             For iRow As Integer = 0 To 2
                 grdRecentWorkSheet.GetCell(iRow, 0).IsReadOnly = True
             Next
@@ -287,7 +277,7 @@ Public Class dlgCheckSummary
 
         clsMaxFunction.ClearParameters()
         clsMaxFunction.SetRCommand("max")
-        clsMaxFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+        clsMaxFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverYear.GetVariables(), iPosition:=0, bIncludeArgumentName:=False)
         clsMaxFunction.AddParameter("na.rm", "TRUE")
 
         clsMinus1.SetOperation("-")
@@ -299,11 +289,11 @@ Public Class dlgCheckSummary
         clsMinus2.AddParameter("n", strYears2, iPosition:=1, bIncludeArgumentName:=False)
 
         clsCond1.SetOperation(">=")
-        clsCond1.AddParameter("x", ucrReceiverYear.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+        clsCond1.AddParameter("x", clsRFunctionParameter:=ucrReceiverYear.GetVariables(), iPosition:=0, bIncludeArgumentName:=False)
         clsCond1.AddParameter("y", clsROperatorParameter:=clsMinus1, iPosition:=1, bIncludeArgumentName:=False)
 
         clsCond2.SetOperation(">=")
-        clsCond2.AddParameter("x", ucrReceiverYear.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+        clsCond2.AddParameter("x", clsRFunctionParameter:=ucrReceiverYear.GetVariables(), iPosition:=0, bIncludeArgumentName:=False)
         clsCond2.AddParameter("y", clsROperatorParameter:=clsMinus2, iPosition:=1, bIncludeArgumentName:=False)
 
         clsInnerIfElseFunction.ClearParameters()
