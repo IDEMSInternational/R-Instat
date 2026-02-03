@@ -194,6 +194,8 @@ Public Class dlgSpells
         clsGetCalculations.Clear()
         clsGetLongestSpellDef.Clear()
         clsLinkedColsVector.Clear()
+        ucrSaveObject.SetRCode(Nothing, False)
+        UpdateDefinitionsOutput()
 
         ucrSelectorForSpells.Reset()
         ucrReceiverElement.SetMeAsReceiver()
@@ -354,7 +356,6 @@ Public Class dlgSpells
         clsDefineAsClimatic.AddParameter("key_col_names", clsRFunctionParameter:=clsVectorConcatFunction, iPosition:=1)
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
-        clsDefineAsClimatic.iCallType = 2
 
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -471,10 +472,10 @@ Public Class dlgSpells
             Case strExcludingBetween
                 clsSpellLogicalAndOperator.SetOperation("|")
                 clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsSpellLogicalGreaterThanOperator, iPosition:=1)
-                clsSpellLogicalGreaterThanOperator.SetOperation(">")
+                clsSpellLogicalGreaterThanOperator.SetOperation(">") ' Changed to strict greater than
                 clsSpellLogicalGreaterThanOperator.AddParameter("min", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsSpellLogicalLessThanOperator, iPosition:=0)
-                clsSpellLogicalLessThanOperator.SetOperation("<")
+                clsSpellLogicalLessThanOperator.SetOperation("<") ' Changed to strict less than
                 clsSpellLogicalLessThanOperator.AddParameter("max", ucrInputSpellLower.GetText, iPosition:=1)
                 clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
         End Select
@@ -522,7 +523,11 @@ Public Class dlgSpells
     'End Sub
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForSpells.ControlContentsChanged
-        strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        Dim selectedDataframe As String = ""
+        If ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem IsNot Nothing Then
+            selectedDataframe = ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString()
+        End If
+        strCurrDataName = Chr(34) & selectedDataframe.Replace("""", "\""") & Chr(34)
         clsGetLinkedDataName.AddParameter("data", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
         RainDays()
         GroupByOptions()
@@ -564,8 +569,31 @@ Public Class dlgSpells
             clsCurrCalc = clsSpellFilterFunction
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsSpellFilterFunction, iPosition:=0)
         End If
+        UpdateSaveDefinitions()
+        UpdateDefinitionsOutput()
         AddDateDoy()
         UpdateDateDoy()
+    End Sub
+
+    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+        UpdateSaveDefinitions()
+        UpdateDefinitionsOutput()
+    End Sub
+
+    Private Sub UpdateSaveDefinitions()
+        If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
+            ucrSaveObject.SetRCode(clsGetLongestSpellDef, False)
+        Else
+            ucrSaveObject.SetRCode(Nothing, False)
+        End If
+    End Sub
+
+    Private Sub UpdateDefinitionsOutput()
+        If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
+            clsDefineAsClimatic.iCallType = 2
+        Else
+            clsDefineAsClimatic.iCallType = 0
+        End If
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
