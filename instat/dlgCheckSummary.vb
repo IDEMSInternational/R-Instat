@@ -27,6 +27,7 @@ Public Class dlgCheckSummary
     Private clsRecentIfElseFunction As New RFunction
     Private clsInnerIfElseFunction As New RFunction
     Private clsMaxFunction As New RFunction
+    Private clsMaxYearAssign As New RFunction
     Private clsFactorFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
@@ -85,6 +86,7 @@ Public Class dlgCheckSummary
         clsRecentIfElseFunction = New RFunction
         clsInnerIfElseFunction = New RFunction
         clsMaxFunction = New RFunction
+        clsMaxYearAssign = New RFunction
         clsFactorFunction = New RFunction
         clsDummyFunction = New RFunction
 
@@ -101,6 +103,10 @@ Public Class dlgCheckSummary
 
         clsMaxFunction.SetRCommand("max")
         clsMaxFunction.AddParameter("na.rm", "TRUE")
+
+        clsMaxYearAssign.SetAssignToObject("max_year")
+        clsMaxYearAssign.SetRCommand("max")
+        clsMaxYearAssign.AddParameter("na.rm", "TRUE")
 
         clsInnerIfElseFunction.SetRCommand("ifelse")
         clsRecentIfElseFunction.SetRCommand("ifelse")
@@ -130,11 +136,19 @@ Public Class dlgCheckSummary
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         UpdateVisiblePanels()
         ucrReceiverYear.SetMeAsReceiver()
+        If rdoRecent.Checked Then
+            UpdateRecentRCode()
+        End If
         TestOKEnabled()
     End Sub
 
     Private Sub UpdateVisiblePanels()
         pnlRecent.Visible = rdoRecent.Checked
+
+        If Not rdoRecent.Checked Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMaxYearAssign)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDummyFunction)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -258,11 +272,25 @@ Public Class dlgCheckSummary
         Return True
     End Function
 
+    Private Function QuoteRString(strText As String) As String
+        If strText Is Nothing Then
+            strText = ""
+        End If
+
+
+        Dim strEscaped As String = strText.Replace("\\", "\\\\").Replace(Chr(34), "\\" & Chr(34))
+        Return Chr(34) & strEscaped & Chr(34)
+    End Function
+
     Private Sub UpdateRecentRCode()
-        ' Build: factor(ifelse(x >= m - n1, l1, ifelse(x >= m - n2, l2, l3)), levels=c(l3,l2,l1), ordered=TRUE)
+
         If grdRecentWorkSheet Is Nothing OrElse ucrReceiverYear.IsEmpty OrElse Not IsRecentGridValid() Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMaxYearAssign)
             Exit Sub
         End If
+
+        Dim clsYearColumn As RFunction = ucrReceiverYear.GetVariables()
+        clsYearColumn.RemoveAssignTo()
 
         Dim strLabel1 As String = GetRecentGridValue(0, 1)
         Dim strLabel2 As String = GetRecentGridValue(1, 1)
@@ -275,44 +303,46 @@ Public Class dlgCheckSummary
         Dim clsMinus1 As New ROperator
         Dim clsMinus2 As New ROperator
 
-        clsMaxFunction.ClearParameters()
-        clsMaxFunction.SetRCommand("max")
-        clsMaxFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverYear.GetVariables(), iPosition:=0, bIncludeArgumentName:=False)
-        clsMaxFunction.AddParameter("na.rm", "TRUE")
+        clsMaxYearAssign.ClearParameters()
+        clsMaxYearAssign.SetAssignToObject("max_year")
+        clsMaxYearAssign.SetRCommand("max")
+        clsMaxYearAssign.AddParameter("x", clsRFunctionParameter:=clsYearColumn, iPosition:=0, bIncludeArgumentName:=False)
+        clsMaxYearAssign.AddParameter("na.rm", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsMaxYearAssign, iPosition:=0)
 
         clsMinus1.SetOperation("-")
-        clsMinus1.AddParameter("m", clsRFunctionParameter:=clsMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsMinus1.AddParameter("m", "max_year", iPosition:=0, bIncludeArgumentName:=False)
         clsMinus1.AddParameter("n", strYears1, iPosition:=1, bIncludeArgumentName:=False)
 
         clsMinus2.SetOperation("-")
-        clsMinus2.AddParameter("m", clsRFunctionParameter:=clsMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsMinus2.AddParameter("m", "max_year", iPosition:=0, bIncludeArgumentName:=False)
         clsMinus2.AddParameter("n", strYears2, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsCond1.SetOperation(">=")
-        clsCond1.AddParameter("x", clsRFunctionParameter:=ucrReceiverYear.GetVariables(), iPosition:=0, bIncludeArgumentName:=False)
+        clsCond1.SetOperation(">")
+        clsCond1.AddParameter("x", clsRFunctionParameter:=clsYearColumn, iPosition:=0, bIncludeArgumentName:=False)
         clsCond1.AddParameter("y", clsROperatorParameter:=clsMinus1, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsCond2.SetOperation(">=")
-        clsCond2.AddParameter("x", clsRFunctionParameter:=ucrReceiverYear.GetVariables(), iPosition:=0, bIncludeArgumentName:=False)
+        clsCond2.SetOperation(">")
+        clsCond2.AddParameter("x", clsRFunctionParameter:=clsYearColumn, iPosition:=0, bIncludeArgumentName:=False)
         clsCond2.AddParameter("y", clsROperatorParameter:=clsMinus2, iPosition:=1, bIncludeArgumentName:=False)
 
         clsInnerIfElseFunction.ClearParameters()
         clsInnerIfElseFunction.SetRCommand("ifelse")
         clsInnerIfElseFunction.AddParameter("test", clsROperatorParameter:=clsCond2, iPosition:=0)
-        clsInnerIfElseFunction.AddParameter("yes", Chr(34) & strLabel2 & Chr(34), iPosition:=1)
-        clsInnerIfElseFunction.AddParameter("no", Chr(34) & strLabel3 & Chr(34), iPosition:=2)
+        clsInnerIfElseFunction.AddParameter("yes", QuoteRString(strLabel2), iPosition:=1)
+        clsInnerIfElseFunction.AddParameter("no", QuoteRString(strLabel3), iPosition:=2)
 
         clsRecentIfElseFunction.ClearParameters()
         clsRecentIfElseFunction.SetRCommand("ifelse")
         clsRecentIfElseFunction.AddParameter("test", clsROperatorParameter:=clsCond1, iPosition:=0)
-        clsRecentIfElseFunction.AddParameter("yes", Chr(34) & strLabel1 & Chr(34), iPosition:=1)
+        clsRecentIfElseFunction.AddParameter("yes", QuoteRString(strLabel1), iPosition:=1)
         clsRecentIfElseFunction.AddParameter("no", clsRFunctionParameter:=clsInnerIfElseFunction, iPosition:=2)
 
         Dim clsLevels As New RFunction
         clsLevels.SetRCommand("c")
-        clsLevels.AddParameter("l3", Chr(34) & strLabel3 & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsLevels.AddParameter("l2", Chr(34) & strLabel2 & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-        clsLevels.AddParameter("l1", Chr(34) & strLabel1 & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsLevels.AddParameter("l3", QuoteRString(strLabel3), iPosition:=0, bIncludeArgumentName:=False)
+        clsLevels.AddParameter("l2", QuoteRString(strLabel2), iPosition:=1, bIncludeArgumentName:=False)
+        clsLevels.AddParameter("l1", QuoteRString(strLabel1), iPosition:=2, bIncludeArgumentName:=False)
 
         clsFactorFunction.ClearParameters()
         clsFactorFunction.SetRCommand("factor")
