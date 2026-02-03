@@ -27,7 +27,7 @@ Public Class dlgSpells
     Private clsCurrCalc, clsLinkedDataFunction, clsVectorConcatFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
-    Private clsSpellsCalculationFunction, clsGetLinkedDataName, clsGetCalculations, clsGetLongestSpellDef, clsLinkedColsVector As New RFunction
+    Private clsGetLinkedDataName, clsGetCalculations, clsGetLongestSpellDef, clsLinkedColsVector As New RFunction
 
     Private strCurrDataName As String = ""
     Private strSpellDay As String = "spell_day"
@@ -120,7 +120,7 @@ Public Class dlgSpells
         'ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
         'ucrChkConditional.SetParameter(New RParameter("initial_value"))
         'ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
-        'ucrChkConditional.SetRDefault("NA_real_
+        'ucrChkConditional.SetRDefault("NA_real_")
 
         ucrChkDayRange.SetText("Day Range")
         ucrChkDayRange.AddParameterValuesCondition(True, "day", "True")
@@ -164,8 +164,6 @@ Public Class dlgSpells
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
 
-        clsSpellsCalculationFunction = New RFunction
-
         clsApplyInstatFunction.Clear()
         clsMaxSpellManipulation.Clear()
         clsDayFilter.Clear()
@@ -192,6 +190,10 @@ Public Class dlgSpells
         clsAdditionalConditionReplaceOperator.Clear()
         clsGreaterThanOperator.Clear()
         clsLessThanOperator.Clear()
+        clsGetLinkedDataName.Clear()
+        clsGetCalculations.Clear()
+        clsGetLongestSpellDef.Clear()
+        clsLinkedColsVector.Clear()
 
         ucrSelectorForSpells.Reset()
         ucrReceiverElement.SetMeAsReceiver()
