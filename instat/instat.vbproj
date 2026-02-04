@@ -263,11 +263,6 @@
     <Compile Include="dlgDescribeOneVariableLikertGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDescribeOneVariableLikertGraph1.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dlgDescribeOneVariableLikertGraph.resx</DependentUpon>
-    </Compile>
     <Compile Include="dlgDistances.Designer.vb">
       <DependentUpon>dlgDistances.vb</DependentUpon>
     </Compile>
@@ -420,11 +415,6 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
-    <Compile Include="Resource1.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource1.resx</DependentUpon>
-    </Compile>
     <Compile Include="sdgAdditionalCondition.Designer.vb">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </Compile>
@@ -3651,11 +3641,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resource1.resx">
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAdditionalCondition.resx">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>

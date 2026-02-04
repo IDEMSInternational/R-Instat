@@ -1,19 +1,4 @@
 ﻿'<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-'Partial Class dlgDescribeOneVariableLikertGraph
-'    Inherits System.Windows.Forms.Form
-
-'    'Form overrides dispose to clean up the component list.
-'    <System.Diagnostics.DebuggerNonUserCode()> _
-'    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-'        Try
-'            If disposing AndAlso components IsNot Nothing Then
-'                components.Dispose()
-'            End If
-'        Finally
-'            MyBase.Dispose(disposing)
-'        End Try
-'    End Sub
-
 '    'Required by the Windows Form Designer
 '    Private components As System.ComponentModel.IContainer
 
@@ -142,7 +127,7 @@ Partial Class dlgDescribeOneVariableLikertGraph
         'ucrNudWrap
         '
         resources.ApplyResources(Me.ucrNudWrap, "ucrNudWrap")
-        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWrap.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
@@ -158,7 +143,7 @@ Partial Class dlgDescribeOneVariableLikertGraph
         'ucrNudCentre
         '
         resources.ApplyResources(Me.ucrNudCentre, "ucrNudCentre")
-        Me.ucrNudCentre.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCentre.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudCentre.Increment = New Decimal(New Integer() {5, 0, 0, 65536})
         Me.ucrNudCentre.Maximum = New Decimal(New Integer() {35, 0, 0, 65536})
         Me.ucrNudCentre.Minimum = New Decimal(New Integer() {15, 0, 0, 65536})

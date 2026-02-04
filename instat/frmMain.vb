@@ -44,7 +44,6 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
-    'Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
     Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
     Public ReadOnly Property DataBook As clsDataBook
         Get
@@ -3218,10 +3217,6 @@ Public Class frmMain
         End If
         dlgDescribeOneVariableLikertGraph.ShowDialog()
     End Sub
-
-    'Private Sub mnuDescribeOneVariableLikertGraphs_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableLikertGraphs.Click
-    '    dlgDescribeOneVariableLikertGraph.ShowDialog()
-    'End Sub
 
     Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
         dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot

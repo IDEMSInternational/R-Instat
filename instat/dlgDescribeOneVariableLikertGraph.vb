@@ -1,8 +1,4 @@
-﻿'Public Class dlgDescribeOneVariableLikertGraph
-
-'End
-
-' R-Instat
+﻿' R-Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -80,18 +76,23 @@ Public Class dlgDescribeOneVariableLikertGraph
 
         ucrChkCentre.SetText("Specify Centre")
         ucrNudCentre.SetParameter(New RParameter("center", 3))
-        ucrNudCentre.SetMinMax(1.5, 3.5)
+        ucrNudCentre.Minimum = 1.5
+        ucrNudCentre.Maximum = 3.5
         ucrNudCentre.Increment = 0.5
         ucrNudCentre.DecimalPlaces = 1
         ucrNudCentre.SetRDefault(2.5)
         ucrChkCentre.AddToLinkedControls(ucrNudCentre, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudCentre.nudUpDown.ReadOnly = False
 
         ucrChkWrap.SetText("Label Width")
         ucrNudWrap.SetParameter(New RParameter("wrap", 4))
-        ucrNudWrap.SetMinMax(10, 100)
+        ucrNudWrap.Minimum = 10
+        ucrNudWrap.Maximum = 100
         ucrNudWrap.Increment = 1
+        ucrNudWrap.DecimalPlaces = 0
         ucrNudWrap.SetRDefault(50)
         ucrChkWrap.AddToLinkedControls(ucrNudWrap, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudWrap.nudUpDown.ReadOnly = False
 
         ' Set up save control for graph
         ucrSaveGraph.SetPrefix("likert_graph")
@@ -255,6 +256,8 @@ Public Class dlgDescribeOneVariableLikertGraph
             clsSummaryFunction.AddParameter("object", "likert_data", bIncludeArgumentName:=False)
         Else
             clsSummaryFunction.RemoveParameterByName("object")
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
+            clsLikertFunction.RemoveParameterByName("items")
         End If
     End Sub
 
@@ -262,8 +265,13 @@ Public Class dlgDescribeOneVariableLikertGraph
         ' Switch the base R function based on selected tab
         If tbcLikert.SelectedTab Is tbpGraph Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
+            ' Clean up state from summary tab
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
+            clsLikertFunction.SetAssignTo("")
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+            ' Clean up state from graph tab
+            clsPlotFunction.RemoveParameterByName("x")
         End If
         TestOKEnabled()
     End Sub
