@@ -823,11 +823,8 @@ Public Class dlgGeneralForGraphics
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
-                        GetParameterValue(clsVarsFunction)
                 End Select
             End If
-
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             Else

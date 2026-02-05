@@ -1273,8 +1273,6 @@ Public Class dlgBarAndPieChart
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
-                        GetParameterValue(clsVarsFunction)
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -1285,6 +1283,7 @@ Public Class dlgBarAndPieChart
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
+
         SetPipeAssignTo()
     End Sub
 

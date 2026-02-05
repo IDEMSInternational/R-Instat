@@ -432,8 +432,6 @@ Public Class dlgParallelCoordinatePlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll, strFacetRow, strFacetRowAll
-                        GetParameterValue(clsVarsFunction)
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -444,6 +442,7 @@ Public Class dlgParallelCoordinatePlot
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
+
         SetPipeAssignTo()
     End Sub
 
