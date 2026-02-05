@@ -1029,6 +1029,7 @@ Public Class dlgLinePlot
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
         End If
 
         If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
@@ -1292,5 +1293,6 @@ Public Class dlgLinePlot
     Private Sub ucrChkAddLineLineRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLineLineRange.ControlValueChanged
         AddRemoveLineOnLineRange()
     End Sub
+
 
 End Class
