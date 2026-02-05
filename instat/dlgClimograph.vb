@@ -991,10 +991,10 @@ Public Class dlgClimograph
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                                clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
-                                dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorClimograph, clsNewThemeFunction:=clsThemeFunction, clsNewGlobalAesFunction:=clsBarAesFunction,
-                                clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
-                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+                            clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
+                            dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorClimograph, clsNewThemeFunction:=clsThemeFunction, clsNewGlobalAesFunction:=clsBarAesFunction,
+                            clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
+                            clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         AutoFacetStation()
         AddRemoveFacetClimograph()
@@ -1012,9 +1012,9 @@ Public Class dlgClimograph
 
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
-                                   clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
-                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
-                                   bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+                               clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                               bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
+                               bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
@@ -1049,9 +1049,9 @@ Public Class dlgClimograph
 
     Private Sub openSdgLayerOptionstmax(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
-                                   clsNewGlobalAesFunc:=clsLocalRaesFunction, clsNewLocalAes:=clsNewAesFunction,
-                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
-                                   bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
+                               clsNewGlobalAesFunc:=clsLocalRaesFunction, clsNewLocalAes:=clsNewAesFunction,
+                               bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
+                               bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
@@ -1072,9 +1072,9 @@ Public Class dlgClimograph
 
     Private Sub openSdgLayerOptionstmin(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
-                                   clsNewGlobalAesFunc:=clsLocalRaesFunction, clsNewLocalAes:=clsNewAesFunction,
-                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
-                                   bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
+                               clsNewGlobalAesFunc:=clsLocalRaesFunction, clsNewLocalAes:=clsNewAesFunction,
+                               bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
+                               bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
         For Each clsParam In clsNewAesFunction.clsParameters
@@ -1096,21 +1096,21 @@ Public Class dlgClimograph
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone1 Then
             If Not (strChangedText = strFacetCol1 OrElse strChangedText = strFacetColStationAll _
-            OrElse strChangedText = strFacetRow1 OrElse strChangedText = strFacetRowStationAll) _
-            AndAlso Not ucrInputFacet.Equals(ucrChangedControl) _
-            AndAlso ucrInputFacet.GetText() = strChangedText Then
+        OrElse strChangedText = strFacetRow1 OrElse strChangedText = strFacetRowStationAll) _
+        AndAlso Not ucrInputFacet.Equals(ucrChangedControl) _
+        AndAlso ucrInputFacet.GetText() = strChangedText Then
 
                 bUpdateComboOptions1 = False
                 ucrInputFacet.SetName(strNone1)
                 bUpdateComboOptions1 = True
             End If
             If (strChangedText = strFacetWrap1 AndAlso
-            (ucrInputFacet.GetText = strFacetRow1 OrElse ucrInputFacet.GetText = strFacetRowStationAll _
-            OrElse ucrInputFacet.GetText = strFacetCol1 OrElse ucrInputFacet.GetText = strFacetColStationAll)) _
-        OrElse ((strChangedText = strFacetRow1 OrElse strChangedText = strFacetRowStationAll) _
-            AndAlso ucrInputFacet.GetText = strFacetWrap1) _
-        OrElse ((strChangedText = strFacetCol1 OrElse strChangedText = strFacetColStationAll) _
-            AndAlso ucrInputFacet.GetText = strFacetWrap1) Then
+        (ucrInputFacet.GetText = strFacetRow1 OrElse ucrInputFacet.GetText = strFacetRowStationAll _
+        OrElse ucrInputFacet.GetText = strFacetCol1 OrElse ucrInputFacet.GetText = strFacetColStationAll)) _
+    OrElse ((strChangedText = strFacetRow1 OrElse strChangedText = strFacetRowStationAll) _
+        AndAlso ucrInputFacet.GetText = strFacetWrap1) _
+    OrElse ((strChangedText = strFacetCol1 OrElse strChangedText = strFacetColStationAll) _
+        AndAlso ucrInputFacet.GetText = strFacetWrap1) Then
 
                 ucrInputFacet.SetName(strNone1)
             End If
@@ -1152,21 +1152,21 @@ Public Class dlgClimograph
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone2 Then
             If Not (strChangedText = strFacetCol2 OrElse strChangedText = strFacetColBarAll _
-            OrElse strChangedText = strFacetRow2 OrElse strChangedText = strFacetRowBarAll) _
-            AndAlso Not ucrInputFacetBar.Equals(ucrChangedControl) _
-            AndAlso ucrInputFacetBar.GetText() = strChangedText Then
+        OrElse strChangedText = strFacetRow2 OrElse strChangedText = strFacetRowBarAll) _
+        AndAlso Not ucrInputFacetBar.Equals(ucrChangedControl) _
+        AndAlso ucrInputFacetBar.GetText() = strChangedText Then
 
                 bUpdateComboOptions2 = False
                 ucrInputFacet.SetName(strNone2)
                 bUpdateComboOptions2 = True
             End If
             If (strChangedText = strFacetWrap2 AndAlso
-            (ucrInputFacetBar.GetText = strFacetRow2 OrElse ucrInputFacetBar.GetText = strFacetRowBarAll _
-            OrElse ucrInputFacetBar.GetText = strFacetCol2 OrElse ucrInputFacetBar.GetText = strFacetColBarAll)) _
-        OrElse ((strChangedText = strFacetRow2 OrElse strChangedText = strFacetRowBarAll) _
-            AndAlso ucrInputFacetBar.GetText = strFacetWrap2) _
-        OrElse ((strChangedText = strFacetCol2 OrElse strChangedText = strFacetColBarAll) _
-            AndAlso ucrInputFacetBar.GetText = strFacetWrap2) Then
+        (ucrInputFacetBar.GetText = strFacetRow2 OrElse ucrInputFacetBar.GetText = strFacetRowBarAll _
+        OrElse ucrInputFacetBar.GetText = strFacetCol2 OrElse ucrInputFacetBar.GetText = strFacetColBarAll)) _
+    OrElse ((strChangedText = strFacetRow2 OrElse strChangedText = strFacetRowBarAll) _
+        AndAlso ucrInputFacetBar.GetText = strFacetWrap2) _
+    OrElse ((strChangedText = strFacetCol2 OrElse strChangedText = strFacetColBarAll) _
+        AndAlso ucrInputFacetBar.GetText = strFacetWrap2) Then
 
                 ucrInputFacetBar.SetName(strNone2)
             End If
@@ -1441,21 +1441,21 @@ Public Class dlgClimograph
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
             If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
-            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
-            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
-            AndAlso ucrInputStation.GetText() = strChangedText Then
+        OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+        AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+        AndAlso ucrInputStation.GetText() = strChangedText Then
 
                 bUpdateComboOptions = False
                 ucrInputStation.SetName(strNone)
                 bUpdateComboOptions = True
             End If
             If (strChangedText = strFacetWrap AndAlso
-            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
-            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll)) _
-        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
-            AndAlso ucrInputStation.GetText = strFacetWrap) _
-        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
-            AndAlso ucrInputStation.GetText = strFacetWrap) Then
+        (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+        OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll)) _
+    OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+        AndAlso ucrInputStation.GetText = strFacetWrap) _
+    OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+        AndAlso ucrInputStation.GetText = strFacetWrap) Then
 
                 ucrInputStation.SetName(strNone)
             End If
