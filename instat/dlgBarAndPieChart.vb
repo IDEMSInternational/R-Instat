@@ -1224,6 +1224,7 @@ Public Class dlgBarAndPieChart
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
         End If
 
         If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
