@@ -403,7 +403,7 @@ Public Class dlgParallelCoordinatePlot
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=1)
         Else
             clsFacetFunction.RemoveParameterByName("cols")
         End If

@@ -1264,7 +1264,7 @@ Public Class dlgClimograph
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction1.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction1, iPosition:=0)
+            clsFacetFunction1.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction1, iPosition:=1)
         Else
             clsFacetFunction1.RemoveParameterByName("cols")
         End If
@@ -1322,7 +1322,7 @@ Public Class dlgClimograph
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction2.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction2, iPosition:=0)
+            clsFacetFunction2.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction2, iPosition:=1)
         Else
             clsFacetFunction2.RemoveParameterByName("cols")
         End If
@@ -1535,7 +1535,7 @@ Public Class dlgClimograph
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=1)
         Else
             clsFacetFunction.RemoveParameterByName("cols")
         End If
