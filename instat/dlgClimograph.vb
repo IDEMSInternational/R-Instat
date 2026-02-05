@@ -1252,7 +1252,7 @@ Public Class dlgClimograph
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction1.AddParameter("margin", "TRUE", iPosition:=1)
+            clsFacetFunction1.AddParameter("margin", "TRUE", iPosition:=2)
         Else
             clsFacetFunction1.RemoveParameterByName("margin")
         End If
@@ -1310,7 +1310,7 @@ Public Class dlgClimograph
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction2.AddParameter("margin", "TRUE", iPosition:=1)
+            clsFacetFunction2.AddParameter("margin", "TRUE", iPosition:=2)
         Else
             clsFacetFunction2.RemoveParameterByName("margin")
         End If
@@ -1523,7 +1523,7 @@ Public Class dlgClimograph
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=1)
+            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=2)
         Else
             clsFacetFunction.RemoveParameterByName("margin")
         End If

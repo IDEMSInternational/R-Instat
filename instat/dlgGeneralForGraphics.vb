@@ -783,7 +783,7 @@ Public Class dlgGeneralForGraphics
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=1)
+            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=2)
         Else
             clsFacetFunction.RemoveParameterByName("margin")
         End If
