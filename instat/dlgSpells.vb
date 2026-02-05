@@ -144,6 +144,7 @@ Public Class dlgSpells
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrSaveObject.SetLabelText("Save Definitions Object:")
+        ucrSaveObject.SetPrefix("Longest_Spells_Definition")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
@@ -366,16 +367,12 @@ Public Class dlgSpells
         clsLinkedColsVector.SetRCommand("c")
         clsGetLinkedDataName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
         clsGetLinkedDataName.AddParameter("link_cols", clsRFunctionParameter:=clsLinkedColsVector, iPosition:=1)
-        clsGetLinkedDataName.SetAssignTo("linked_data_name")
-        clsGetLinkedDataName.iCallType = 2
 
         clsGetCalculations.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculations.AddParameter("x", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
-        clsGetCalculations.SetAssignTo("calculations_data")
-        clsGetCalculations.iCallType = 2
+        clsGetCalculations.AddParameter("x", clsRFunctionParameter:=clsGetLinkedDataName, iPosition:=0, bIncludeArgumentName:=False)
 
         clsGetLongestSpellDef.SetRCommand("get_longest_spell_definition")
-        clsGetLongestSpellDef.AddParameter("calculations", "calculations_data", iPosition:=0)
+        clsGetLongestSpellDef.AddParameter("calculations", clsRFunctionParameter:=clsGetCalculations, iPosition:=0)
 
         AddDayRange()
         AddDateDoy()
