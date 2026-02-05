@@ -1232,9 +1232,9 @@ Public Class dlgBarAndPieChart
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margins", "TRUE", iPosition:=1)
+            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=1)
         Else
-            clsFacetFunction.RemoveParameterByName("margins")
+            clsFacetFunction.RemoveParameterByName("margin")
         End If
 
         If bRow OrElse bRowAll Then
