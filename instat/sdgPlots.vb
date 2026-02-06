@@ -51,7 +51,6 @@ Public Class sdgPlots
     Private clsFillPaletteFunction As New RFunction
     Private clsColourPaletteFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Public clsRowVarsFunction, clsColVarsFunction As New RFunction
     Private clsScaleColorColorblindFunction, clsScaleFillColorblindFunction As New RFunction
     Private clsScaleColorDistillerFunction, clsScaleFillDistillerFunction As New RFunction
     Private clsScalecolorcalcFunction, clsScalefillcalcFunction As New RFunction
@@ -143,7 +142,7 @@ Public Class sdgPlots
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
-        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.bWithQuotes = False
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
@@ -153,7 +152,7 @@ Public Class sdgPlots
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.strSelectorHeading = "Factors"
-        ucr2ndFactorReceiver.SetParameter(New RParameter("cols", bNewIncludeArgumentName:=False))
+        ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
         ucr2ndFactorReceiver.SetParameterIsString()
         ucr2ndFactorReceiver.bWithQuotes = False
         ucr2ndFactorReceiver.SetLinkedDisplayControl(lblFactor2)
@@ -218,421 +217,421 @@ Public Class sdgPlots
         'Conditions in place for reading function
         If Not bInitialised Then
             ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
-            ucrPnlHorizonatalVertical.bChangeParameterValue = False
-            ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
-            ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
-            ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoVertical, "dir", Chr(34) & "v" & Chr(34))
-            ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoHorizontal, "dir", Chr(34) & "h" & Chr(34))
-            ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.bChangeParameterValue = False
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoVertical, "dir", Chr(34) & "v" & Chr(34))
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoHorizontal, "dir", Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
 
-            ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrChkLabeler, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeFacets.AddToLinkedControls(ucrChkDrop, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkLabeler, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkDrop, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-            ucrChkColour.AddToLinkedControls(ucrInputAxisType, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkColour.AddToLinkedControls(ucrPnlScale, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkColour.AddToLinkedControls(ucrPnlColourPalette, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColour.AddToLinkedControls(ucrInputAxisType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColour.AddToLinkedControls(ucrPnlScale, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColour.AddToLinkedControls(ucrPnlColourPalette, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-            'layers tab 
+        'layers tab 
 
-            'titles tab
+        'titles tab
 
-            ucrInputGraphTitle.SetParameter(New RParameter("title"))
-            ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
-            ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+        ucrInputGraphTitle.SetParameter(New RParameter("title"))
+        ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
+        ucrInputGraphCaption.SetParameter(New RParameter("caption"))
 
-            ucrInputTag.SetParameter(New RParameter("tag"))
-            ucrInputLegendTitle.SetParameter(New RParameter("colour"))
+        ucrInputTag.SetParameter(New RParameter("tag"))
+        ucrInputLegendTitle.SetParameter(New RParameter("colour"))
 
-            ucrInputGraphTitle.SetLinkedDisplayControl(lblTitle)
-            ucrInputGraphSubTitle.SetLinkedDisplayControl(lblSubTitle)
-            ucrInputGraphCaption.SetLinkedDisplayControl(lblCaption)
+        ucrInputGraphTitle.SetLinkedDisplayControl(lblTitle)
+        ucrInputGraphSubTitle.SetLinkedDisplayControl(lblSubTitle)
+        ucrInputGraphCaption.SetLinkedDisplayControl(lblCaption)
 
-            ucrNudTitleSize.SetParameter(New RParameter("size"))
-            ucrNudTitleSize.SetMinMax(0, Integer.MaxValue)
-            ucrNudTitleSize.SetRDefault(20)
-            ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
+        ucrNudTitleSize.SetParameter(New RParameter("size"))
+        ucrNudTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudTitleSize.SetRDefault(20)
+        ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
 
-            ucrNudSubTitleSize.SetParameter(New RParameter("size"))
-            ucrNudSubTitleSize.SetMinMax(0, Integer.MaxValue)
-            ucrNudSubTitleSize.SetRDefault(15)
-            ucrNudSubTitleSize.SetLinkedDisplayControl(lblSubTitleSize)
+        ucrNudSubTitleSize.SetParameter(New RParameter("size"))
+        ucrNudSubTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudSubTitleSize.SetRDefault(15)
+        ucrNudSubTitleSize.SetLinkedDisplayControl(lblSubTitleSize)
 
-            ucrNudCaptionSize.SetParameter(New RParameter("size"))
-            ucrNudCaptionSize.SetMinMax(0, Integer.MaxValue)
-            ucrNudCaptionSize.SetRDefault(8)
-            ucrNudCaptionSize.SetLinkedDisplayControl(lblCaptionSize)
+        ucrNudCaptionSize.SetParameter(New RParameter("size"))
+        ucrNudCaptionSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudCaptionSize.SetRDefault(8)
+        ucrNudCaptionSize.SetLinkedDisplayControl(lblCaptionSize)
 
-            ucrNudTagSize.SetParameter(New RParameter("size"))
-            ucrNudTagSize.SetMinMax(0, Integer.MaxValue)
-            ucrNudTagSize.SetRDefault(20)
+        ucrNudTagSize.SetParameter(New RParameter("size"))
+        ucrNudTagSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudTagSize.SetRDefault(20)
 
-            ucrNudLegendSize.SetParameter(New RParameter("size"))
-            ucrNudLegendSize.SetMinMax(0, Integer.MaxValue)
-            ucrNudLegendSize.SetRDefault(18)
+        ucrNudLegendSize.SetParameter(New RParameter("size"))
+        ucrNudLegendSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudLegendSize.SetRDefault(18)
 
-            ucrChkTag.SetText("Tag")
-            ucrChkTag.AddToLinkedControls(ucrNudTagSize, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkTag.AddToLinkedControls(ucrInputTag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="A")
-            ucrChkTag.AddParameterPresentCondition(True, "tag", True)
-            ucrChkTag.AddParameterPresentCondition(False, "tag", False)
+        ucrChkTag.SetText("Tag")
+        ucrChkTag.AddToLinkedControls(ucrNudTagSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTag.AddToLinkedControls(ucrInputTag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="A")
+        ucrChkTag.AddParameterPresentCondition(True, "tag", True)
+        ucrChkTag.AddParameterPresentCondition(False, "tag", False)
 
-            ucrChkNewLegend.SetText("New Legend ")
-            ucrChkNewLegend.AddToLinkedControls(ucrInputLegendTitle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
-            ucrChkNewLegend.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkNewLegend.AddParameterPresentCondition(True, {"colour", "fill"}, True)
-            ucrChkNewLegend.AddParameterPresentCondition(False, {"colour", "fill"}, False)
+        ucrChkNewLegend.SetText("New Legend ")
+        ucrChkNewLegend.AddToLinkedControls(ucrInputLegendTitle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
+        ucrChkNewLegend.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkNewLegend.AddParameterPresentCondition(True, {"colour", "fill"}, True)
+        ucrChkNewLegend.AddParameterPresentCondition(False, {"colour", "fill"}, False)
 
-            ucrInputTag.SetLinkedDisplayControl(lblTag)
-            ucrInputLegendTitle.SetLinkedDisplayControl(lblLegendTitle)
-            ucrNudTagSize.SetLinkedDisplayControl(lblTagSize)
-            ucrNudLegendSize.SetLinkedDisplayControl(lblLegendSize)
+        ucrInputTag.SetLinkedDisplayControl(lblTag)
+        ucrInputLegendTitle.SetLinkedDisplayControl(lblLegendTitle)
+        ucrNudTagSize.SetLinkedDisplayControl(lblTagSize)
+        ucrNudLegendSize.SetLinkedDisplayControl(lblLegendSize)
 
-            ucrChkIncludeTitles.AddToLinkedControls(ucrChkTag, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrChkNewLegend, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphTitle, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphSubTitle, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphCaption, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrNudTitleSize, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrNudSubTitleSize, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkIncludeTitles.AddToLinkedControls(ucrNudCaptionSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrChkTag, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrChkNewLegend, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphTitle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphSubTitle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphCaption, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrNudTitleSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrNudSubTitleSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrNudCaptionSize, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-            'TODO what about the subtitle argument of labs?
-            'TODO what about the caption argument of labs?
+        'TODO what about the subtitle argument of labs?
+        'TODO what about the caption argument of labs?
 
-            'legend titles are more complex than this, suggest we disable until later
-            'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
-            'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
-            'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", False)
-            'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", True)
-            'ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'legend titles are more complex than this, suggest we disable until later
+        'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
+        'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
+        'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", False)
+        'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", True)
+        'ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-            'ucrChkDisplayLegendTitle.SetText("Display")
-            'ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkDisplayLegendTitle.SetText("Display")
+        'ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-            'ucrChkOverwriteLegendTitle.SetText("Overwrite Title")
-            'ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkOverwriteLegendTitle.SetText("Overwrite Title")
+        'ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-            'ucrInputLegend.SetParameter(New RParameter("fill"))
+        'ucrInputLegend.SetParameter(New RParameter("fill"))
 
-            'X Axis tab
-            ucrXAxis.InitialiseControl()
+        'X Axis tab
+        ucrXAxis.InitialiseControl()
 
-            'Y Axis tab
-            ucrYAxis.InitialiseControl()
+        'Y Axis tab
+        ucrYAxis.InitialiseControl()
 
-            'themes tab
-            urChkSelectTheme.SetText("Select Theme")
-            ' This position MUST be smaller than the position of the theme() parameter
-            ' Otherwise this will overwrite any specific theme options selected
-            ' Currently theme() is set to position 100
-            ucrInputThemes.SetParameter(New RParameter("theme_name", iNewPosition:=14))
-            urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-            urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
-            urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
+        'themes tab
+        urChkSelectTheme.SetText("Select Theme")
+        ' This position MUST be smaller than the position of the theme() parameter
+        ' Otherwise this will overwrite any specific theme options selected
+        ' Currently theme() is set to position 100
+        ucrInputThemes.SetParameter(New RParameter("theme_name", iNewPosition:=14))
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
+        urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
 
-            strThemes = GgplotDefaults.strThemes
-            Dim themePackages = GgplotDefaults.ThemePackageMap
+        strThemes = GgplotDefaults.strThemes
+        Dim themePackages = GgplotDefaults.ThemePackageMap
 
-            If dctThemes Is Nothing Then dctThemes = New Dictionary(Of String, String)
+        If dctThemes Is Nothing Then dctThemes = New Dictionary(Of String, String)
 
-            For Each fullThemeName As String In strThemes
-                If String.IsNullOrEmpty(fullThemeName) Then Continue For
+        For Each fullThemeName As String In strThemes
+            If String.IsNullOrEmpty(fullThemeName) Then Continue For
 
-                Dim displayName As String = If(fullThemeName.StartsWith("theme_"), fullThemeName.Substring(6), fullThemeName)
+            Dim displayName As String = If(fullThemeName.StartsWith("theme_"), fullThemeName.Substring(6), fullThemeName)
 
-                Dim qualifiedFunctionName As String
-                Dim packageName As String = Nothing
+            Dim qualifiedFunctionName As String
+            Dim packageName As String = Nothing
 
-                If themePackages.TryGetValue(fullThemeName, packageName) Then
-                    qualifiedFunctionName = $"{packageName}::{fullThemeName}()"
-                Else
-                    qualifiedFunctionName = $"{fullThemeName}()"
-                End If
-
-                dctThemes(displayName) = qualifiedFunctionName
-            Next
-
-            Debug.Print("Themes initialized.")
-
-            ucrInputThemes.SetItems(dctThemes)
-            ' ucrInputThemes.SetRDefault("theme_grey()")
-            ucrInputThemes.SetDropDownStyleAsNonEditable()
-
-            'coordiantes tab
-            ucrChkHorizontalPlot.SetText("Horizontal Plot (coord-flip)")
-            clsCoordFlipFunc.SetPackageName("ggplot2")
-            clsCoordFlipFunc.SetRCommand("coord_flip")
-            clsCoordFlipParam.SetArgumentName("coord_flip")
-            clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-            ucrChkHorizontalPlot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-            ucrChkHorizontalPlot.AddParameterPresentCondition(True, "coord_flip", True)
-
-            ucrChkSameScale.SetText("Same Scale (coord-equal)")
-            clsCoordEqualFunc.SetPackageName("ggplot2")
-            clsCoordEqualFunc.SetRCommand("coord_equal")
-            clsCoordEqualParam.SetArgumentName("coord_equal")
-            clsCoordEqualParam.SetArgument(clsCoordEqualFunc)
-            ucrChkSameScale.SetParameter(clsCoordEqualParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-            ucrChkSameScale.AddParameterPresentCondition(True, "coord_equal", True)
-            InitialiseTabs()
-
-            'temporary disabled until implemented
-            ' tbpLayers.Enabled = False
-            grpLegendTitle.Enabled = False
-            tbpCoordinates.Enabled = True
-            'cmdAllOptions.Enabled = False
-            'grpCommonOptions.Visible = False
-            bControlsInitialised = True
-
-            'Theme Tab Checkboxes under grpCommonOptions
-            ucrChkLegendPosition.SetText("Legend Position")
-            ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
-            ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
-            ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
-            dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
-            dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
-            dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
-            dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
-            dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
-            ucrInputLegendPosition.SetItems(dctLegendPosition)
-            ucrChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
-            ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
-
-            'Polar Coordinates
-            ucrChkUsePolarCoordinates.SetText("Polar Coordinates")
-            ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar")
-            ucrChkUsePolarCoordinates.AddParameterPresentCondition(False, "coord_polar", False)
-            ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrInputStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrChkUsePolarCoordinates.AddToLinkedControls({ucrInputPolarCoordinates}, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-            ucrChkDirectionAnticlockwise.SetText("Anticlockwise Direction")
-            ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction"), bNewChangeParameterValue:=True, strNewValueIfChecked:="-1", strNewValueIfUnchecked:="1")
-            ucrChkDirectionAnticlockwise.SetRDefault("1")
-
-            ucrInputStartingAngle.SetParameter(New RParameter("0", iNewPosition:=0))
-            ucrInputStartingAngle.SetValidationTypeAsNumeric()
-            ucrInputStartingAngle.AddQuotesIfUnrecognised = False
-            ucrInputStartingAngle.SetLinkedDisplayControl(New List(Of Control)({lblPi, lblStartingAngle}))
-            If dctTheta Is Nothing Then
-                dctTheta = New Dictionary(Of String, String)
+            If themePackages.TryGetValue(fullThemeName, packageName) Then
+                qualifiedFunctionName = $"{packageName}::{fullThemeName}()"
             Else
-                dctTheta.Clear()
+                qualifiedFunctionName = $"{fullThemeName}()"
             End If
 
-            dctTheta.Add("x", Chr(34) & "x" & Chr(34))
-            dctTheta.Add("y", Chr(34) & "y" & Chr(34))
-            ucrInputPolarCoordinates.SetParameter(New RParameter("theta", iNewPosition:=1))
-            ucrInputPolarCoordinates.SetLinkedDisplayControl(lblPolarCoordinate)
-            ucrInputPolarCoordinates.SetItems(dctTheta)
-            ucrInputPolarCoordinates.SetDropDownStyleAsNonEditable()
-            ucrInputPolarCoordinates.SetRDefault(Chr(34) & "x" & Chr(34))
+            dctThemes(displayName) = qualifiedFunctionName
+        Next
+
+        Debug.Print("Themes initialized.")
+
+        ucrInputThemes.SetItems(dctThemes)
+        ' ucrInputThemes.SetRDefault("theme_grey()")
+        ucrInputThemes.SetDropDownStyleAsNonEditable()
+
+        'coordiantes tab
+        ucrChkHorizontalPlot.SetText("Horizontal Plot (coord-flip)")
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrChkHorizontalPlot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHorizontalPlot.AddParameterPresentCondition(True, "coord_flip", True)
+
+        ucrChkSameScale.SetText("Same Scale (coord-equal)")
+        clsCoordEqualFunc.SetPackageName("ggplot2")
+        clsCoordEqualFunc.SetRCommand("coord_equal")
+        clsCoordEqualParam.SetArgumentName("coord_equal")
+        clsCoordEqualParam.SetArgument(clsCoordEqualFunc)
+        ucrChkSameScale.SetParameter(clsCoordEqualParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSameScale.AddParameterPresentCondition(True, "coord_equal", True)
+        InitialiseTabs()
+
+        'temporary disabled until implemented
+        ' tbpLayers.Enabled = False
+        grpLegendTitle.Enabled = False
+        tbpCoordinates.Enabled = True
+        'cmdAllOptions.Enabled = False
+        'grpCommonOptions.Visible = False
+        bControlsInitialised = True
+
+        'Theme Tab Checkboxes under grpCommonOptions
+        ucrChkLegendPosition.SetText("Legend Position")
+        ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
+
+        'Polar Coordinates
+        ucrChkUsePolarCoordinates.SetText("Polar Coordinates")
+        ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar")
+        ucrChkUsePolarCoordinates.AddParameterPresentCondition(False, "coord_polar", False)
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrInputStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrInputPolarCoordinates}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkDirectionAnticlockwise.SetText("Anticlockwise Direction")
+        ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction"), bNewChangeParameterValue:=True, strNewValueIfChecked:="-1", strNewValueIfUnchecked:="1")
+        ucrChkDirectionAnticlockwise.SetRDefault("1")
+
+        ucrInputStartingAngle.SetParameter(New RParameter("0", iNewPosition:=0))
+        ucrInputStartingAngle.SetValidationTypeAsNumeric()
+        ucrInputStartingAngle.AddQuotesIfUnrecognised = False
+        ucrInputStartingAngle.SetLinkedDisplayControl(New List(Of Control)({lblPi, lblStartingAngle}))
+        If dctTheta Is Nothing Then
+            dctTheta = New Dictionary(Of String, String)
+        Else
+            dctTheta.Clear()
+        End If
+
+        dctTheta.Add("x", Chr(34) & "x" & Chr(34))
+        dctTheta.Add("y", Chr(34) & "y" & Chr(34))
+        ucrInputPolarCoordinates.SetParameter(New RParameter("theta", iNewPosition:=1))
+        ucrInputPolarCoordinates.SetLinkedDisplayControl(lblPolarCoordinate)
+        ucrInputPolarCoordinates.SetItems(dctTheta)
+        ucrInputPolarCoordinates.SetDropDownStyleAsNonEditable()
+        ucrInputPolarCoordinates.SetRDefault(Chr(34) & "x" & Chr(34))
 
 
-            ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
-            ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
-            ucrNudXAngle.SetParameter(New RParameter("angle"))
-            ucrChkXaxisAngle.AddParameterPresentCondition(True, "angle")
-            ucrChkXaxisAngle.AddParameterPresentCondition(False, "angle", False)
+        ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
+        ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
+        ucrNudXAngle.SetParameter(New RParameter("angle"))
+        ucrChkXaxisAngle.AddParameterPresentCondition(True, "angle")
+        ucrChkXaxisAngle.AddParameterPresentCondition(False, "angle", False)
 
-            ucrChkXaxisSize.SetText("X axis Label Size")
-            ucrChkXaxisSize.AddToLinkedControls(ucrNudXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
-            ucrNudXSize.SetParameter(New RParameter("size"))
-            ucrNudXSize.DecimalPlaces = 1
-            ucrNudXSize.Increment = 0.1
-            ucrChkXaxisSize.AddParameterPresentCondition(True, "size")
-            ucrChkXaxisSize.AddParameterPresentCondition(False, "size", False)
+        ucrChkXaxisSize.SetText("X axis Label Size")
+        ucrChkXaxisSize.AddToLinkedControls(ucrNudXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
+        ucrNudXSize.SetParameter(New RParameter("size"))
+        ucrNudXSize.DecimalPlaces = 1
+        ucrNudXSize.Increment = 0.1
+        ucrChkXaxisSize.AddParameterPresentCondition(True, "size")
+        ucrChkXaxisSize.AddParameterPresentCondition(False, "size", False)
 
-            ucrChkYaxisSize.SetText("Y axis Label Size")
-            ucrChkYaxisSize.AddToLinkedControls(ucrNudYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
-            ucrNudYSize.SetParameter(New RParameter("size"))
-            ucrNudYSize.DecimalPlaces = 1
-            ucrNudYSize.Increment = 0.1
-            ucrChkYaxisSize.AddParameterPresentCondition(True, "size")
-            ucrChkYaxisSize.AddParameterPresentCondition(False, "size", False)
+        ucrChkYaxisSize.SetText("Y axis Label Size")
+        ucrChkYaxisSize.AddToLinkedControls(ucrNudYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
+        ucrNudYSize.SetParameter(New RParameter("size"))
+        ucrNudYSize.DecimalPlaces = 1
+        ucrNudYSize.Increment = 0.1
+        ucrChkYaxisSize.AddParameterPresentCondition(True, "size")
+        ucrChkYaxisSize.AddParameterPresentCondition(False, "size", False)
 
-            ucrChkXaxisTickMarkLabelSize.SetText("X axis Tick Mark Label Size")
-            ucrChkXaxisTickMarkLabelSize.AddToLinkedControls(ucrNudXaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
-            ucrNudXaxisMarkSize.SetParameter(New RParameter("size"))
-            ucrNudXaxisMarkSize.DecimalPlaces = 1
-            ucrNudXaxisMarkSize.Increment = 0.1
-            ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
-            ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
+        ucrChkXaxisTickMarkLabelSize.SetText("X axis Tick Mark Label Size")
+        ucrChkXaxisTickMarkLabelSize.AddToLinkedControls(ucrNudXaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
+        ucrNudXaxisMarkSize.SetParameter(New RParameter("size"))
+        ucrNudXaxisMarkSize.DecimalPlaces = 1
+        ucrNudXaxisMarkSize.Increment = 0.1
+        ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
+        ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
 
-            ucrChkYaxisTickMarkLabelSize.SetText("Y axis Tick Mark Label Size")
-            ucrChkYaxisTickMarkLabelSize.AddToLinkedControls(ucrNudYaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
-            ucrNudYaxisMarkSize.SetParameter(New RParameter("size"))
-            ucrNudYaxisMarkSize.DecimalPlaces = 1
-            ucrNudYaxisMarkSize.Increment = 0.1
-            ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
-            ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
+        ucrChkYaxisTickMarkLabelSize.SetText("Y axis Tick Mark Label Size")
+        ucrChkYaxisTickMarkLabelSize.AddToLinkedControls(ucrNudYaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
+        ucrNudYaxisMarkSize.SetParameter(New RParameter("size"))
+        ucrNudYaxisMarkSize.DecimalPlaces = 1
+        ucrNudYaxisMarkSize.Increment = 0.1
+        ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
+        ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
 
-            ucrChkDrop.SetParameter(New RParameter("drop", 8))
-            ucrChkDrop.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-            ucrChkDrop.SetText("Drop empty factor levels")
-            ucrChkDrop.SetRDefault("TRUE")
+        ucrChkDrop.SetParameter(New RParameter("drop", 8))
+        ucrChkDrop.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDrop.SetText("Drop empty factor levels")
+        ucrChkDrop.SetRDefault("TRUE")
 
-            'Annotation
-            ucrChkAnnotation.SetText("Annotation")
-            ucrChkAnnotation.AddParameterPresentCondition(True, "annotate", True)
-            ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", False)
+        'Annotation
+        ucrChkAnnotation.SetText("Annotation")
+        ucrChkAnnotation.AddParameterPresentCondition(True, "annotate", True)
+        ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", False)
 
-            ucrInputX.SetParameter(New RParameter("x", 0))
-            ucrInputX.SetRDefault("NULL")
-            ucrInputX.AddQuotesIfUnrecognised = False
+        ucrInputX.SetParameter(New RParameter("x", 0))
+        ucrInputX.SetRDefault("NULL")
+        ucrInputX.AddQuotesIfUnrecognised = False
 
-            ucrInputY.SetParameter(New RParameter("y", 1))
-            ucrInputY.SetRDefault("NULL")
-            ucrInputY.AddQuotesIfUnrecognised = False
+        ucrInputY.SetParameter(New RParameter("y", 1))
+        ucrInputY.SetRDefault("NULL")
+        ucrInputY.AddQuotesIfUnrecognised = False
 
-            ucrInputYmin.SetParameter(New RParameter("ymin", 2))
-            ucrInputYmin.SetRDefault("NULL")
-            ucrInputYmin.AddQuotesIfUnrecognised = False
+        ucrInputYmin.SetParameter(New RParameter("ymin", 2))
+        ucrInputYmin.SetRDefault("NULL")
+        ucrInputYmin.AddQuotesIfUnrecognised = False
 
-            ucrInputXmin.SetParameter(New RParameter("xmin", 3))
-            ucrInputXmin.SetRDefault("NULL")
-            ucrInputXmin.AddQuotesIfUnrecognised = False
+        ucrInputXmin.SetParameter(New RParameter("xmin", 3))
+        ucrInputXmin.SetRDefault("NULL")
+        ucrInputXmin.AddQuotesIfUnrecognised = False
 
-            ucrInputXend.SetParameter(New RParameter("xend", 4))
-            ucrInputXend.SetRDefault("NULL")
-            ucrInputXend.AddQuotesIfUnrecognised = False
+        ucrInputXend.SetParameter(New RParameter("xend", 4))
+        ucrInputXend.SetRDefault("NULL")
+        ucrInputXend.AddQuotesIfUnrecognised = False
 
-            ucrInputYend.SetParameter(New RParameter("yend", 5))
-            ucrInputYend.SetRDefault("NULL")
-            ucrInputYend.AddQuotesIfUnrecognised = False
+        ucrInputYend.SetParameter(New RParameter("yend", 5))
+        ucrInputYend.SetRDefault("NULL")
+        ucrInputYend.AddQuotesIfUnrecognised = False
 
-            ucrInputXmax.SetParameter(New RParameter("xmax", 6))
-            ucrInputXmax.SetRDefault("NULL")
-            ucrInputXmax.AddQuotesIfUnrecognised = False
+        ucrInputXmax.SetParameter(New RParameter("xmax", 6))
+        ucrInputXmax.SetRDefault("NULL")
+        ucrInputXmax.AddQuotesIfUnrecognised = False
 
-            ucrInputYmax.SetParameter(New RParameter("ymax", 7))
-            ucrInputYmax.SetRDefault("NULL")
-            ucrInputYmax.AddQuotesIfUnrecognised = False
+        ucrInputYmax.SetParameter(New RParameter("ymax", 7))
+        ucrInputYmax.SetRDefault("NULL")
+        ucrInputYmax.AddQuotesIfUnrecognised = False
 
-            ucrNudLinetype.SetParameter(New RParameter("linetype", 8))
-            ucrNudLinetype.SetMinMax(iNewMin:=1)
-            ucrNudLinetype.SetRDefault(1)
-            ucrNudLinetype.SetLinkedDisplayControl(lblLinetype)
+        ucrNudLinetype.SetParameter(New RParameter("linetype", 8))
+        ucrNudLinetype.SetMinMax(iNewMin:=1)
+        ucrNudLinetype.SetRDefault(1)
+        ucrNudLinetype.SetLinkedDisplayControl(lblLinetype)
 
-            ucrNudCurvature.SetParameter(New RParameter("curvature", 9))
-            ucrNudCurvature.DecimalPlaces = 1
-            ucrNudCurvature.SetRDefault(0.5)
-            ucrNudCurvature.SetLinkedDisplayControl(lblCurvature)
+        ucrNudCurvature.SetParameter(New RParameter("curvature", 9))
+        ucrNudCurvature.DecimalPlaces = 1
+        ucrNudCurvature.SetRDefault(0.5)
+        ucrNudCurvature.SetLinkedDisplayControl(lblCurvature)
 
-            ucrNudCrossbarFatten.SetParameter(New RParameter("fatten", 10))
-            ucrNudCrossbarFatten.SetMinMax(iNewMin:=0)
-            ucrNudCrossbarFatten.SetRDefault(2.5)
-            ucrNudCrossbarFatten.SetLinkedDisplayControl(lblCrossbarFatten)
+        ucrNudCrossbarFatten.SetParameter(New RParameter("fatten", 10))
+        ucrNudCrossbarFatten.SetMinMax(iNewMin:=0)
+        ucrNudCrossbarFatten.SetRDefault(2.5)
+        ucrNudCrossbarFatten.SetLinkedDisplayControl(lblCrossbarFatten)
 
-            ucrNudPointrangeFatten.SetParameter(New RParameter("fatten", 11))
-            ucrNudPointrangeFatten.SetMinMax(iNewMin:=0)
-            ucrNudPointrangeFatten.SetRDefault(4)
-            ucrNudPointrangeFatten.SetLinkedDisplayControl(lblPointrangeFatten)
+        ucrNudPointrangeFatten.SetParameter(New RParameter("fatten", 11))
+        ucrNudPointrangeFatten.SetMinMax(iNewMin:=0)
+        ucrNudPointrangeFatten.SetRDefault(4)
+        ucrNudPointrangeFatten.SetLinkedDisplayControl(lblPointrangeFatten)
 
-            ucrInputLineend.SetParameter(New RParameter("lineend", 12))
-            ucrInputLineend.SetItems({"butt", "square", "round"}, bAddConditions:=True)
-            ucrInputLineend.SetRDefault(Chr(34) & "butt" & Chr(34))
-            ucrInputLineend.SetLinkedDisplayControl(lblLineend)
+        ucrInputLineend.SetParameter(New RParameter("lineend", 12))
+        ucrInputLineend.SetItems({"butt", "square", "round"}, bAddConditions:=True)
+        ucrInputLineend.SetRDefault(Chr(34) & "butt" & Chr(34))
+        ucrInputLineend.SetLinkedDisplayControl(lblLineend)
 
-            ucrNudAngle.SetParameter(New RParameter("angle", 13))
-            ucrNudAngle.SetMinMax(0, 180)
-            ucrNudAngle.Increment = 1
-            ucrNudAngle.SetRDefault(90)
-            ucrNudAngle.SetLinkedDisplayControl(lblAngle)
+        ucrNudAngle.SetParameter(New RParameter("angle", 13))
+        ucrNudAngle.SetMinMax(0, 180)
+        ucrNudAngle.Increment = 1
+        ucrNudAngle.SetRDefault(90)
+        ucrNudAngle.SetLinkedDisplayControl(lblAngle)
 
-            ucrNudShape.SetParameter(New RParameter("shape", 14))
-            ucrNudShape.SetMinMax(1, 255)
-            ucrNudShape.Increment = 1
-            ucrNudShape.SetRDefault(1)
-            ucrNudShape.SetLinkedDisplayControl(lblShape)
+        ucrNudShape.SetParameter(New RParameter("shape", 14))
+        ucrNudShape.SetMinMax(1, 255)
+        ucrNudShape.Increment = 1
+        ucrNudShape.SetRDefault(1)
+        ucrNudShape.SetLinkedDisplayControl(lblShape)
 
-            'Annotation Control positions
-            iSizeYPosition = ucrNudSize.Location.Y
-            iAlphaYPosition = ucrNudAlpha.Location.Y
-            iFillYPositon = ucrInputFill.Location.Y
-            iLabelYposition = ucrInputLabel.Location.Y
+        'Annotation Control positions
+        iSizeYPosition = ucrNudSize.Location.Y
+        iAlphaYPosition = ucrNudAlpha.Location.Y
+        iFillYPositon = ucrInputFill.Location.Y
+        iLabelYposition = ucrInputLabel.Location.Y
 
-            ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=15))
-            dctAnnotationGeom.Add("text", Chr(34) & "text" & Chr(34))
-            dctAnnotationGeom.Add("rect", Chr(34) & "rect" & Chr(34))
-            dctAnnotationGeom.Add("segment", Chr(34) & "segment" & Chr(34))
-            dctAnnotationGeom.Add("pointrange", Chr(34) & "pointrange" & Chr(34))
-            dctAnnotationGeom.Add("label", Chr(34) & "label" & Chr(34))
-            dctAnnotationGeom.Add("curve", Chr(34) & "curve" & Chr(34))
-            dctAnnotationGeom.Add("linerange", Chr(34) & "linerange" & Chr(34))
-            dctAnnotationGeom.Add("errorbar", Chr(34) & "errorbar" & Chr(34))
-            dctAnnotationGeom.Add("crossbar", Chr(34) & "crossbar" & Chr(34))
-            ucrInputAnnotationGeoms.SetItems(dctAnnotationGeom)
-            ucrInputAnnotationGeoms.SetLinkedDisplayControl(New List(Of Control)({lblAnnotationGeoms, grpAnnotation}))
+        ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=15))
+        dctAnnotationGeom.Add("text", Chr(34) & "text" & Chr(34))
+        dctAnnotationGeom.Add("rect", Chr(34) & "rect" & Chr(34))
+        dctAnnotationGeom.Add("segment", Chr(34) & "segment" & Chr(34))
+        dctAnnotationGeom.Add("pointrange", Chr(34) & "pointrange" & Chr(34))
+        dctAnnotationGeom.Add("label", Chr(34) & "label" & Chr(34))
+        dctAnnotationGeom.Add("curve", Chr(34) & "curve" & Chr(34))
+        dctAnnotationGeom.Add("linerange", Chr(34) & "linerange" & Chr(34))
+        dctAnnotationGeom.Add("errorbar", Chr(34) & "errorbar" & Chr(34))
+        dctAnnotationGeom.Add("crossbar", Chr(34) & "crossbar" & Chr(34))
+        ucrInputAnnotationGeoms.SetItems(dctAnnotationGeom)
+        ucrInputAnnotationGeoms.SetLinkedDisplayControl(New List(Of Control)({lblAnnotationGeoms, grpAnnotation}))
 
 
-            ucrInputFill.SetParameter(New RParameter("fill", 16))
-            ucrInputFill.SetRDefault(Chr(34) & "black" & Chr(34))
-            ucrInputFill.SetLinkedDisplayControl(lblFill)
+        ucrInputFill.SetParameter(New RParameter("fill", 16))
+        ucrInputFill.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputFill.SetLinkedDisplayControl(lblFill)
 
-            ucrInputColour.SetParameter(New RParameter("colour", 17))
-            ucrInputColour.SetLinkedDisplayControl(lblColour)
-            ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColour.SetParameter(New RParameter("colour", 17))
+        ucrInputColour.SetLinkedDisplayControl(lblColour)
+        ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
 
-            ucrNudAlpha.SetParameter(New RParameter("alpha", iNewPosition:=18))
-            ucrNudAlpha.SetMinMax(0, 1)
-            ucrNudAlpha.Increment = 0.01
-            ucrNudAlpha.DecimalPlaces = 2
-            ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
-            ucrNudAlpha.SetRDefault(1.0)
+        ucrNudAlpha.SetParameter(New RParameter("alpha", iNewPosition:=18))
+        ucrNudAlpha.SetMinMax(0, 1)
+        ucrNudAlpha.Increment = 0.01
+        ucrNudAlpha.DecimalPlaces = 2
+        ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
+        ucrNudAlpha.SetRDefault(1.0)
 
-            ucrNudSize.SetParameter(New RParameter("size", 19))
-            ucrNudSize.SetMinMax(iNewMin:=0)
-            ucrNudSize.Increment = 0.1
-            ucrNudSize.DecimalPlaces = 1
-            ucrNudSize.SetLinkedDisplayControl(lblSize)
-            ucrNudSize.SetRDefault(0.5)
+        ucrNudSize.SetParameter(New RParameter("size", 19))
+        ucrNudSize.SetMinMax(iNewMin:=0)
+        ucrNudSize.Increment = 0.1
+        ucrNudSize.DecimalPlaces = 1
+        ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrNudSize.SetRDefault(0.5)
 
-            ucrInputLabel.SetLinkedDisplayControl(lblLabel)
-            ucrInputLabel.SetValidationTypeAsList()
+        ucrInputLabel.SetLinkedDisplayControl(lblLabel)
+        ucrInputLabel.SetValidationTypeAsList()
 
-            ucrChkParse.SetText("Parse")
-            ucrChkParse.SetParameter(New RParameter("parse", 20))
-            ucrChkParse.SetRDefault("FALSE")
-            ucrChkParse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkParse.SetText("Parse")
+        ucrChkParse.SetParameter(New RParameter("parse", 20))
+        ucrChkParse.SetRDefault("FALSE")
+        ucrChkParse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-            ucrChkAnnotation.AddToLinkedControls(ucrInputAnnotationGeoms, {True}, bNewLinkedHideIfParameterMissing:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXmin, ucrInputXmax, ucrInputYmin, ucrInputYmax}, {"rect", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "label", "segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXend, ucrInputYend}, {"segment", "curve"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputFill, {"rect", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudLinetype, {"segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudCurvature, ucrNudAngle}, {"curve"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLineend, {"segment"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCrossbarFatten, {"crossbar"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudShape, ucrNudPointrangeFatten}, {"pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-            ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrChkAnnotation.AddToLinkedControls(ucrInputAnnotationGeoms, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXmin, ucrInputXmax, ucrInputYmin, ucrInputYmax}, {"rect", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "label", "segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXend, ucrInputYend}, {"segment", "curve"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputFill, {"rect", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudLinetype, {"segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudCurvature, ucrNudAngle}, {"curve"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLineend, {"segment"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCrossbarFatten, {"crossbar"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudShape, ucrNudPointrangeFatten}, {"pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
-            'Colour
-            ucrPnlColourPalette.AddRadioButton(rdoSequential)
-            ucrPnlColourPalette.AddRadioButton(rdoDiverging)
-            ucrPnlColourPalette.AddRadioButton(rdoQualitative)
-            ucrPnlColourPalette.AddRadioButton(rdoViridis)
-            ucrPnlColourPalette.AddRadioButton(rdoGgthemes)
-            ucrPnlColourPalette.AddRadioButton(rdoGradient)
+        'Colour
+        ucrPnlColourPalette.AddRadioButton(rdoSequential)
+        ucrPnlColourPalette.AddRadioButton(rdoDiverging)
+        ucrPnlColourPalette.AddRadioButton(rdoQualitative)
+        ucrPnlColourPalette.AddRadioButton(rdoViridis)
+        ucrPnlColourPalette.AddRadioButton(rdoGgthemes)
+        ucrPnlColourPalette.AddRadioButton(rdoGradient)
 
-            ucrPnlScale.AddRadioButton(rdoColour)
-            ucrPnlScale.AddRadioButton(rdoFill)
+        ucrPnlScale.AddRadioButton(rdoColour)
+        ucrPnlScale.AddRadioButton(rdoFill)
 
-            ucrInputPalettes.SetParameter(New RParameter("palette", 7))
-            ucrInputPalettes.bAllowNonConditionValues = True
-            ucrInputPalettes.SetLinkedDisplayControl(lblPalette)
+        ucrInputPalettes.SetParameter(New RParameter("palette", 7))
+        ucrInputPalettes.bAllowNonConditionValues = True
+        ucrInputPalettes.SetLinkedDisplayControl(lblPalette)
 
-            ucrInputPaletteContinuous.SetParameter(New RParameter("palette", 8))
-            ucrInputPaletteContinuous.bAllowNonConditionValues = True
-            ucrInputPaletteContinuous.SetLinkedDisplayControl(lblPaletteContinuous)
+        ucrInputPaletteContinuous.SetParameter(New RParameter("palette", 8))
+        ucrInputPaletteContinuous.bAllowNonConditionValues = True
+        ucrInputPaletteContinuous.SetLinkedDisplayControl(lblPaletteContinuous)
 
             If dctSequatailPairs Is Nothing Then
                 dctSequatailPairs = New Dictionary(Of String, String)
@@ -640,1429 +639,1429 @@ Public Class sdgPlots
                 dctSequatailPairs.Clear()
             End If
             dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
-            dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
-            dctSequatailPairs.Add("Greys", Chr(34) & "Greys" & Chr(34))
-            dctSequatailPairs.Add("Oranges", Chr(34) & "Oranges" & Chr(34))
-            dctSequatailPairs.Add("Purples", Chr(34) & "Purples" & Chr(34))
-            dctSequatailPairs.Add("Reds", Chr(34) & "Reds" & Chr(34))
-            dctSequatailPairs.Add("BuGn", Chr(34) & "BuGn" & Chr(34))
-            dctSequatailPairs.Add("BuPu", Chr(34) & "BuPu" & Chr(34))
-            dctSequatailPairs.Add("GnBu", Chr(34) & "GnBu" & Chr(34))
-            dctSequatailPairs.Add("OrRd", Chr(34) & "OrRd" & Chr(34))
-            dctSequatailPairs.Add("PuBu", Chr(34) & "PuBu" & Chr(34))
-            dctSequatailPairs.Add("PuBuGn", Chr(34) & "PuBuGn" & Chr(34))
-            dctSequatailPairs.Add("PuRd", Chr(34) & "PuRd" & Chr(34))
-            dctSequatailPairs.Add("RdPu", Chr(34) & "RdPu" & Chr(34))
-            dctSequatailPairs.Add("YlGn", Chr(34) & "YlGn" & Chr(34))
-            dctSequatailPairs.Add("YlGnBu", Chr(34) & "YlGnBu" & Chr(34))
-            dctSequatailPairs.Add("YlOrBr", Chr(34) & "YlOrBr" & Chr(34))
-            dctSequatailPairs.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
-            ucrInputPalettes.SetItems(dctSequatailPairs)
-            ucrInputPalettes.SetDropDownStyleAsNonEditable()
-
-            dctSequatailPairsContinuous.Add("Blues", Chr(34) & "Blues" & Chr(34))
-            dctSequatailPairsContinuous.Add("Greens", Chr(34) & "Greens" & Chr(34))
-            dctSequatailPairsContinuous.Add("Greys", Chr(34) & "Greys" & Chr(34))
-            dctSequatailPairsContinuous.Add("Oranges", Chr(34) & "Oranges" & Chr(34))
-            dctSequatailPairsContinuous.Add("Purples", Chr(34) & "Purples" & Chr(34))
-            dctSequatailPairsContinuous.Add("Reds", Chr(34) & "Reds" & Chr(34))
-            dctSequatailPairsContinuous.Add("BuGn", Chr(34) & "BuGn" & Chr(34))
-            dctSequatailPairsContinuous.Add("BuPu", Chr(34) & "BuPu" & Chr(34))
-            dctSequatailPairsContinuous.Add("GnBu", Chr(34) & "GnBu" & Chr(34))
-            dctSequatailPairsContinuous.Add("OrRd", Chr(34) & "OrRd" & Chr(34))
-            dctSequatailPairsContinuous.Add("PuBu", Chr(34) & "PuBu" & Chr(34))
-            dctSequatailPairsContinuous.Add("PuBuGn", Chr(34) & "PuBuGn" & Chr(34))
-            dctSequatailPairsContinuous.Add("PuRd", Chr(34) & "PuRd" & Chr(34))
-            dctSequatailPairsContinuous.Add("RdPu", Chr(34) & "RdPu" & Chr(34))
-            dctSequatailPairsContinuous.Add("YlGn", Chr(34) & "YlGn" & Chr(34))
-            dctSequatailPairsContinuous.Add("YlGnBu", Chr(34) & "YlGnBu" & Chr(34))
-            dctSequatailPairsContinuous.Add("YlOrBr", Chr(34) & "YlOrBr" & Chr(34))
-            dctSequatailPairsContinuous.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
-            ucrInputPaletteContinuous.SetItems(dctSequatailPairsContinuous)
-            ucrInputPaletteContinuous.SetDropDownStyleAsNonEditable()
-
-            dctDivergingPairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
-            dctDivergingPairs.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
-            dctDivergingPairs.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
-            dctDivergingPairs.Add("PRGn", Chr(34) & "PRGn" & Chr(34))
-            dctDivergingPairs.Add("PuOr", Chr(34) & "PuOr" & Chr(34))
-            dctDivergingPairs.Add("RdBu", Chr(34) & "RdBu" & Chr(34))
-            dctDivergingPairs.Add("RdGy", Chr(34) & "RdGy" & Chr(34))
-            dctDivergingPairs.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
-            dctDivergingPairs.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
-
-            dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
-            dctQualititivePairs.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
-            dctQualititivePairs.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
-            dctQualititivePairs.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
-            dctQualititivePairs.Add("Set1", Chr(34) & "Set1" & Chr(34))
-            dctQualititivePairs.Add("Set2", Chr(34) & "Set2" & Chr(34))
-            dctQualititivePairs.Add("Set3", Chr(34) & "Set3" & Chr(34))
-
-            dctDivergingPairsContinuous.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
-            dctDivergingPairsContinuous.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
-            dctDivergingPairsContinuous.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
-            dctDivergingPairsContinuous.Add("PRGn", Chr(34) & "PRGn" & Chr(34))
-            dctDivergingPairsContinuous.Add("PuOr", Chr(34) & "PuOr" & Chr(34))
-            dctDivergingPairsContinuous.Add("RdBu", Chr(34) & "RdBu" & Chr(34))
-            dctDivergingPairsContinuous.Add("RdGy", Chr(34) & "RdGy" & Chr(34))
-            dctDivergingPairsContinuous.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
-            dctDivergingPairsContinuous.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
-
-            dctQualititivePairsContinuous.Add("Accent", Chr(34) & "Accent" & Chr(34))
-            dctQualititivePairsContinuous.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
-            dctQualititivePairsContinuous.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
-            dctQualititivePairsContinuous.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
-            dctQualititivePairsContinuous.Add("Set1", Chr(34) & "Set1" & Chr(34))
-            dctQualititivePairsContinuous.Add("Set2", Chr(34) & "Set2" & Chr(34))
-            dctQualititivePairsContinuous.Add("Set3", Chr(34) & "Set3" & Chr(34))
-
-            ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevels.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevels.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevels.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevels.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevels.AddToLinkedControls(ucrInputDropUnusedLevels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevels.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPosition.SetText("Position")
-            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPosition.SetDropDownStyleAsNonEditable()
-            ucrInputPosition.SetParameter(New RParameter("position"))
-            ucrInputPosition.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPosition.AddParameterPresentCondition(True, "position")
-            ucrChkPosition.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpand.SetText("Expand")
-            ucrChkExpand.AddParameterPresentCondition(True, "expand")
-            ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpand.AddToLinkedControls(ucrInputTextExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpand.SetValidationTypeAsNumericList()
-
-            ucrChkBreaks.SetText("Breaks")
-            ucrChkBreaks.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaks.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaks.AddToLinkedControls(ucrInputTextBreaks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaks.SetValidationTypeAsList()
-
-            ucrChkLimit.SetText("Limits")
-            ucrChkLimit.AddParameterPresentCondition(True, "limit")
-            ucrChkLimit.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimit.AddToLinkedControls(ucrInputTextLimit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimit.SetValidationTypeAsList()
-
-            ucrInputTextNaValue.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValue.SetValidationTypeAsNumeric()
-            ucrInputTextNaValue.bAddRemoveParameter = False
-            ucrInputTextNaValue.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValue.SetText("Replace Missing Values")
-            ucrChkNaValue.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValue.AddToLinkedControls(ucrInputTextNaValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColor.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColor.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColor.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColor.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColor.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColor.AddToLinkedControls(ucrInputDropUnusedLevelsColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColor.SetItems({"TRUE", "FALSE"})
-
-            ucrInputAxisType.SetItems({"continuous", "discrete"})
-            ucrInputAxisType.SetDropDownStyleAsNonEditable()
-            ucrInputAxisType.AddToLinkedControls(ucrInputPaletteContinuous, {"continuous"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-            ucrInputAxisType.AddToLinkedControls(ucrInputPalettes, {"discrete"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-            ucrChkPositionColor.SetText("Position")
-            ucrChkPositionColor.AddToLinkedControls(ucrInputPositionColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColor.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColor.SetParameter(New RParameter("position"))
-            ucrInputPositionColor.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColor.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColor.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColor.SetText("Expand")
-            ucrChkExpandColor.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColor.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColor.AddToLinkedControls(ucrInputTextExpandColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColor.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColor.SetText("Breaks")
-            ucrChkBreaksColor.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColor.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColor.AddToLinkedControls(ucrInputTextBreaksColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColor.SetValidationTypeAsList()
-
-            ucrChkLimitColor.SetText("Limits")
-            ucrChkLimitColor.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColor.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColor.AddToLinkedControls(ucrInputTextLimitColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColor.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColor.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColor.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColor.bAddRemoveParameter = False
-            ucrInputTextNaValueColor.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColor.SetText("Replace Missing Values")
-            ucrChkNaValueColor.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColor.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColor.AddToLinkedControls(ucrInputTextNaValueColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsCal.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsCal.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsCal.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsCal.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsCal.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsCal.AddToLinkedControls(ucrInputDropUnusedLevelsCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsCal.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionCal.SetText("Position")
-            ucrChkPositionCal.AddToLinkedControls(ucrInputPositionCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionCal.SetDropDownStyleAsNonEditable()
-            ucrInputPositionCal.SetParameter(New RParameter("position"))
-            ucrInputPositionCal.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionCal.AddParameterPresentCondition(True, "position")
-            ucrChkPositionCal.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandCal.SetText("Expand")
-            ucrChkExpandCal.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandCal.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandCal.AddToLinkedControls(ucrInputTextExpandCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandCal.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksCal.SetText("Breaks")
-            ucrChkBreaksCal.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksCal.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksCal.AddToLinkedControls(ucrInputTextBreaksCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksCal.SetValidationTypeAsList()
-
-            ucrChkLimitCal.SetText("Limits")
-            ucrChkLimitCal.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitCal.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitCal.AddToLinkedControls(ucrInputTextLimitCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitCal.SetValidationTypeAsList()
-
-            ucrInputTextNaValueCal.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueCal.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueCal.bAddRemoveParameter = False
-            ucrInputTextNaValueCal.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueCal.SetText("Replace Missing Values")
-            ucrChkNaValueCal.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueCal.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueCal.AddToLinkedControls(ucrInputTextNaValueCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorCal.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorCal.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorCal.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorCal.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorCal.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorCal.AddToLinkedControls(ucrInputDropUnusedLevelsColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorCal.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorCal.SetText("Position")
-            ucrChkPositionColorCal.AddToLinkedControls(ucrInputPositionColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorCal.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorCal.SetParameter(New RParameter("position"))
-            ucrInputPositionColorCal.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorCal.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorCal.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorCal.SetText("Expand")
-            ucrChkExpandColorCal.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorCal.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorCal.AddToLinkedControls(ucrInputTextExpandColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorCal.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorCal.SetText("Breaks")
-            ucrChkBreaksColorCal.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorCal.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorCal.AddToLinkedControls(ucrInputTextBreaksColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorCal.SetValidationTypeAsList()
-
-            ucrChkLimitColorCal.SetText("Limits")
-            ucrChkLimitColorCal.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorCal.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorCal.AddToLinkedControls(ucrInputTextLimitColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorCal.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorCal.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorCal.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorCal.bAddRemoveParameter = False
-            ucrInputTextNaValueColorCal.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorCal.SetText("Replace Missing Values")
-            ucrChkNaValueColorCal.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorCal.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorCal.AddToLinkedControls(ucrInputTextNaValueColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsEcon.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsEcon.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsEcon.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsEcon.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsEcon.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsEcon.AddToLinkedControls(ucrInputDropUnusedLevelsEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsEcon.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionEcon.SetText("Position")
-            ucrChkPositionEcon.AddToLinkedControls(ucrInputPositionEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionEcon.SetDropDownStyleAsNonEditable()
-            ucrInputPositionEcon.SetParameter(New RParameter("position"))
-            ucrInputPositionEcon.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionEcon.AddParameterPresentCondition(True, "position")
-            ucrChkPositionEcon.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandEcon.SetText("Expand")
-            ucrChkExpandEcon.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandEcon.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandEcon.AddToLinkedControls(ucrInputTextExpandEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandEcon.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksEcon.SetText("Breaks")
-            ucrChkBreaksEcon.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksEcon.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksEcon.AddToLinkedControls(ucrInputTextBreaksEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksEcon.SetValidationTypeAsList()
-
-            ucrChkLimitEcon.SetText("Limits")
-            ucrChkLimitEcon.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitEcon.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitEcon.AddToLinkedControls(ucrInputTextLimitEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitEcon.SetValidationTypeAsList()
-
-            ucrInputTextNaValueEcon.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueEcon.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueEcon.bAddRemoveParameter = False
-            ucrInputTextNaValueEcon.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueEcon.SetText("Replace Missing Values")
-            ucrChkNaValueEcon.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueEcon.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueEcon.AddToLinkedControls(ucrInputTextNaValueEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorEcon.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorEcon.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorEcon.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorEcon.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorEcon.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorEcon.AddToLinkedControls(ucrInputDropUnusedLevelsColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorEcon.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorEcon.SetText("Position")
-            ucrChkPositionColorEcon.AddToLinkedControls(ucrInputPositionColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorEcon.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorEcon.SetParameter(New RParameter("position"))
-            ucrInputPositionColorEcon.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorEcon.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorEcon.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorEcon.SetText("Expand")
-            ucrChkExpandColorEcon.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorEcon.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorEcon.AddToLinkedControls(ucrInputTextExpandColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorEcon.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorEcon.SetText("Breaks")
-            ucrChkBreaksColorEcon.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorEcon.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorEcon.AddToLinkedControls(ucrInputTextBreaksColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorEcon.SetValidationTypeAsList()
-
-            ucrChkLimitColorEcon.SetText("Limits")
-            ucrChkLimitColorEcon.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorEcon.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorEcon.AddToLinkedControls(ucrInputTextLimitColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorEcon.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorEcon.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorEcon.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorEcon.bAddRemoveParameter = False
-            ucrInputTextNaValueColorEcon.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorEcon.SetText("Replace Missing Values")
-            ucrChkNaValueColorEcon.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorEcon.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorEcon.AddToLinkedControls(ucrInputTextNaValueColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsEx.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsEx.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsEx.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsEx.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsEx.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsEx.AddToLinkedControls(ucrInputDropUnusedLevelsEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsEx.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionEx.SetText("Position")
-            ucrChkPositionEx.AddToLinkedControls(ucrInputPositionEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionEx.SetDropDownStyleAsNonEditable()
-            ucrInputPositionEx.SetParameter(New RParameter("position"))
-            ucrInputPositionEx.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionEx.AddParameterPresentCondition(True, "position")
-            ucrChkPositionEx.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandEx.SetText("Expand")
-            ucrChkExpandEx.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandEx.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandEx.AddToLinkedControls(ucrInputTextExpandEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandEx.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksEx.SetText("Breaks")
-            ucrChkBreaksEx.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksEx.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksEx.AddToLinkedControls(ucrInputTextBreaksEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksEx.SetValidationTypeAsList()
-
-            ucrChkLimitEx.SetText("Limits")
-            ucrChkLimitEx.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitEx.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitEx.AddToLinkedControls(ucrInputTextLimitEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitEx.SetValidationTypeAsList()
-
-            ucrInputTextNaValueEx.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueEx.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueEx.bAddRemoveParameter = False
-            ucrInputTextNaValueEx.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueEx.SetText("Replace Missing Values")
-            ucrChkNaValueEx.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueEx.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueEx.AddToLinkedControls(ucrInputTextNaValueEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorEx.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorEx.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorEx.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorEx.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorEx.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorEx.AddToLinkedControls(ucrInputDropUnusedLevelsColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorEx.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorEx.SetText("Position")
-            ucrChkPositionColorEx.AddToLinkedControls(ucrInputPositionColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorEx.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorEx.SetParameter(New RParameter("position"))
-            ucrInputPositionColorEx.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorEx.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorEx.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorEx.SetText("Expand")
-            ucrChkExpandColorEx.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorEx.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorEx.AddToLinkedControls(ucrInputTextExpandColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorEx.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorEx.SetText("Breaks")
-            ucrChkBreaksColorEx.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorEx.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorEx.AddToLinkedControls(ucrInputTextBreaksColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorEx.SetValidationTypeAsList()
-
-            ucrChkLimitColorEx.SetText("Limits")
-            ucrChkLimitColorEx.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorEx.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorEx.AddToLinkedControls(ucrInputTextLimitColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorEx.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorEx.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorEx.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorEx.bAddRemoveParameter = False
-            ucrInputTextNaValueColorEx.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorEx.SetText("Replace Missing Values")
-            ucrChkNaValueColorEx.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorEx.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorEx.AddToLinkedControls(ucrInputTextNaValueColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsExn.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsExn.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsExn.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsExn.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsExn.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsExn.AddToLinkedControls(ucrInputDropUnusedLevelsExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsExn.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionExn.SetText("Position")
-            ucrChkPositionExn.AddToLinkedControls(ucrInputPositionExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionExn.SetDropDownStyleAsNonEditable()
-            ucrInputPositionExn.SetParameter(New RParameter("position"))
-            ucrInputPositionExn.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionExn.AddParameterPresentCondition(True, "position")
-            ucrChkPositionExn.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandExn.SetText("Expand")
-            ucrChkExpandExn.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandExn.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandExn.AddToLinkedControls(ucrInputTextExpandExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandExn.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksExn.SetText("Breaks")
-            ucrChkBreaksExn.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksExn.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksExn.AddToLinkedControls(ucrInputTextBreaksExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksExn.SetValidationTypeAsList()
-
-            ucrChkLimitExn.SetText("Limits")
-            ucrChkLimitExn.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitExn.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitExn.AddToLinkedControls(ucrInputTextLimitExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitExn.SetValidationTypeAsList()
-
-            ucrInputTextNaValueExn.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueExn.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueExn.bAddRemoveParameter = False
-            ucrInputTextNaValueExn.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueExn.SetText("Replace Missing Values")
-            ucrChkNaValueExn.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueExn.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueExn.AddToLinkedControls(ucrInputTextNaValueExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorExn.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorExn.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorExn.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorExn.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorExn.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorExn.AddToLinkedControls(ucrInputDropUnusedLevelsColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorExn.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorExn.SetText("Position")
-            ucrChkPositionColorExn.AddToLinkedControls(ucrInputPositionColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorExn.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorExn.SetParameter(New RParameter("position"))
-            ucrInputPositionColorExn.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorExn.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorExn.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorExn.SetText("Expand")
-            ucrChkExpandColorExn.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorExn.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorExn.AddToLinkedControls(ucrInputTextExpandColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorExn.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorExn.SetText("Breaks")
-            ucrChkBreaksColorExn.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorExn.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorExn.AddToLinkedControls(ucrInputTextBreaksColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorExn.SetValidationTypeAsList()
-
-            ucrChkLimitColorExn.SetText("Limits")
-            ucrChkLimitColorExn.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorExn.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorExn.AddToLinkedControls(ucrInputTextLimitColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorExn.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorExn.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorExn.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorExn.bAddRemoveParameter = False
-            ucrInputTextNaValueColorExn.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorExn.SetText("Replace Missing Values")
-            ucrChkNaValueColorExn.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorExn.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorExn.AddToLinkedControls(ucrInputTextNaValueColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkThemecolor.SetText("Theme:")
-            ucrChkThemecolor.AddToLinkedControls(ucrInputThemeColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Atlas")
-            ucrInputThemeColor.SetDropDownStyleAsNonEditable()
-            ucrInputThemeColor.SetParameter(New RParameter("theme"))
-            ucrInputThemeColor.SetItems({"Atlas", "Badge", "Berlin", "Celestial", "Crop", "Depth", "Droplet", "Facet", "Feathered", "Gallery", "Headlines", "Integral", "Ion Boardroom", "Ion", "Madison", "Main Event", "Mesh", "Office Theme", "Organic", "Parallax", "Parcel",
+        dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
+        dctSequatailPairs.Add("Greys", Chr(34) & "Greys" & Chr(34))
+        dctSequatailPairs.Add("Oranges", Chr(34) & "Oranges" & Chr(34))
+        dctSequatailPairs.Add("Purples", Chr(34) & "Purples" & Chr(34))
+        dctSequatailPairs.Add("Reds", Chr(34) & "Reds" & Chr(34))
+        dctSequatailPairs.Add("BuGn", Chr(34) & "BuGn" & Chr(34))
+        dctSequatailPairs.Add("BuPu", Chr(34) & "BuPu" & Chr(34))
+        dctSequatailPairs.Add("GnBu", Chr(34) & "GnBu" & Chr(34))
+        dctSequatailPairs.Add("OrRd", Chr(34) & "OrRd" & Chr(34))
+        dctSequatailPairs.Add("PuBu", Chr(34) & "PuBu" & Chr(34))
+        dctSequatailPairs.Add("PuBuGn", Chr(34) & "PuBuGn" & Chr(34))
+        dctSequatailPairs.Add("PuRd", Chr(34) & "PuRd" & Chr(34))
+        dctSequatailPairs.Add("RdPu", Chr(34) & "RdPu" & Chr(34))
+        dctSequatailPairs.Add("YlGn", Chr(34) & "YlGn" & Chr(34))
+        dctSequatailPairs.Add("YlGnBu", Chr(34) & "YlGnBu" & Chr(34))
+        dctSequatailPairs.Add("YlOrBr", Chr(34) & "YlOrBr" & Chr(34))
+        dctSequatailPairs.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
+        ucrInputPalettes.SetItems(dctSequatailPairs)
+        ucrInputPalettes.SetDropDownStyleAsNonEditable()
+
+        dctSequatailPairsContinuous.Add("Blues", Chr(34) & "Blues" & Chr(34))
+        dctSequatailPairsContinuous.Add("Greens", Chr(34) & "Greens" & Chr(34))
+        dctSequatailPairsContinuous.Add("Greys", Chr(34) & "Greys" & Chr(34))
+        dctSequatailPairsContinuous.Add("Oranges", Chr(34) & "Oranges" & Chr(34))
+        dctSequatailPairsContinuous.Add("Purples", Chr(34) & "Purples" & Chr(34))
+        dctSequatailPairsContinuous.Add("Reds", Chr(34) & "Reds" & Chr(34))
+        dctSequatailPairsContinuous.Add("BuGn", Chr(34) & "BuGn" & Chr(34))
+        dctSequatailPairsContinuous.Add("BuPu", Chr(34) & "BuPu" & Chr(34))
+        dctSequatailPairsContinuous.Add("GnBu", Chr(34) & "GnBu" & Chr(34))
+        dctSequatailPairsContinuous.Add("OrRd", Chr(34) & "OrRd" & Chr(34))
+        dctSequatailPairsContinuous.Add("PuBu", Chr(34) & "PuBu" & Chr(34))
+        dctSequatailPairsContinuous.Add("PuBuGn", Chr(34) & "PuBuGn" & Chr(34))
+        dctSequatailPairsContinuous.Add("PuRd", Chr(34) & "PuRd" & Chr(34))
+        dctSequatailPairsContinuous.Add("RdPu", Chr(34) & "RdPu" & Chr(34))
+        dctSequatailPairsContinuous.Add("YlGn", Chr(34) & "YlGn" & Chr(34))
+        dctSequatailPairsContinuous.Add("YlGnBu", Chr(34) & "YlGnBu" & Chr(34))
+        dctSequatailPairsContinuous.Add("YlOrBr", Chr(34) & "YlOrBr" & Chr(34))
+        dctSequatailPairsContinuous.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
+        ucrInputPaletteContinuous.SetItems(dctSequatailPairsContinuous)
+        ucrInputPaletteContinuous.SetDropDownStyleAsNonEditable()
+
+        dctDivergingPairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
+        dctDivergingPairs.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
+        dctDivergingPairs.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
+        dctDivergingPairs.Add("PRGn", Chr(34) & "PRGn" & Chr(34))
+        dctDivergingPairs.Add("PuOr", Chr(34) & "PuOr" & Chr(34))
+        dctDivergingPairs.Add("RdBu", Chr(34) & "RdBu" & Chr(34))
+        dctDivergingPairs.Add("RdGy", Chr(34) & "RdGy" & Chr(34))
+        dctDivergingPairs.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
+        dctDivergingPairs.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
+
+        dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
+        dctQualititivePairs.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
+        dctQualititivePairs.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
+        dctQualititivePairs.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
+        dctQualititivePairs.Add("Set1", Chr(34) & "Set1" & Chr(34))
+        dctQualititivePairs.Add("Set2", Chr(34) & "Set2" & Chr(34))
+        dctQualititivePairs.Add("Set3", Chr(34) & "Set3" & Chr(34))
+
+        dctDivergingPairsContinuous.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
+        dctDivergingPairsContinuous.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
+        dctDivergingPairsContinuous.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
+        dctDivergingPairsContinuous.Add("PRGn", Chr(34) & "PRGn" & Chr(34))
+        dctDivergingPairsContinuous.Add("PuOr", Chr(34) & "PuOr" & Chr(34))
+        dctDivergingPairsContinuous.Add("RdBu", Chr(34) & "RdBu" & Chr(34))
+        dctDivergingPairsContinuous.Add("RdGy", Chr(34) & "RdGy" & Chr(34))
+        dctDivergingPairsContinuous.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
+        dctDivergingPairsContinuous.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
+
+        dctQualititivePairsContinuous.Add("Accent", Chr(34) & "Accent" & Chr(34))
+        dctQualititivePairsContinuous.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
+        dctQualititivePairsContinuous.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
+        dctQualititivePairsContinuous.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
+        dctQualititivePairsContinuous.Add("Set1", Chr(34) & "Set1" & Chr(34))
+        dctQualititivePairsContinuous.Add("Set2", Chr(34) & "Set2" & Chr(34))
+        dctQualititivePairsContinuous.Add("Set3", Chr(34) & "Set3" & Chr(34))
+
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevels.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevels.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevels.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevels.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevels.AddToLinkedControls(ucrInputDropUnusedLevels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevels.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPosition.SetText("Position")
+        ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPosition.SetDropDownStyleAsNonEditable()
+        ucrInputPosition.SetParameter(New RParameter("position"))
+        ucrInputPosition.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPosition.AddParameterPresentCondition(True, "position")
+        ucrChkPosition.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpand.SetText("Expand")
+        ucrChkExpand.AddParameterPresentCondition(True, "expand")
+        ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpand.AddToLinkedControls(ucrInputTextExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpand.SetValidationTypeAsNumericList()
+
+        ucrChkBreaks.SetText("Breaks")
+        ucrChkBreaks.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaks.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaks.AddToLinkedControls(ucrInputTextBreaks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaks.SetValidationTypeAsList()
+
+        ucrChkLimit.SetText("Limits")
+        ucrChkLimit.AddParameterPresentCondition(True, "limit")
+        ucrChkLimit.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimit.AddToLinkedControls(ucrInputTextLimit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimit.SetValidationTypeAsList()
+
+        ucrInputTextNaValue.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValue.SetValidationTypeAsNumeric()
+        ucrInputTextNaValue.bAddRemoveParameter = False
+        ucrInputTextNaValue.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValue.SetText("Replace Missing Values")
+        ucrChkNaValue.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValue.AddToLinkedControls(ucrInputTextNaValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColor.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColor.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColor.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColor.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColor.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColor.AddToLinkedControls(ucrInputDropUnusedLevelsColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColor.SetItems({"TRUE", "FALSE"})
+
+        ucrInputAxisType.SetItems({"continuous", "discrete"})
+        ucrInputAxisType.SetDropDownStyleAsNonEditable()
+        ucrInputAxisType.AddToLinkedControls(ucrInputPaletteContinuous, {"continuous"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAxisType.AddToLinkedControls(ucrInputPalettes, {"discrete"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkPositionColor.SetText("Position")
+        ucrChkPositionColor.AddToLinkedControls(ucrInputPositionColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColor.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColor.SetParameter(New RParameter("position"))
+        ucrInputPositionColor.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColor.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColor.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColor.SetText("Expand")
+        ucrChkExpandColor.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColor.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColor.AddToLinkedControls(ucrInputTextExpandColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColor.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColor.SetText("Breaks")
+        ucrChkBreaksColor.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColor.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColor.AddToLinkedControls(ucrInputTextBreaksColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColor.SetValidationTypeAsList()
+
+        ucrChkLimitColor.SetText("Limits")
+        ucrChkLimitColor.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColor.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColor.AddToLinkedControls(ucrInputTextLimitColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColor.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColor.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColor.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColor.bAddRemoveParameter = False
+        ucrInputTextNaValueColor.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColor.SetText("Replace Missing Values")
+        ucrChkNaValueColor.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColor.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColor.AddToLinkedControls(ucrInputTextNaValueColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsCal.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsCal.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsCal.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsCal.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsCal.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsCal.AddToLinkedControls(ucrInputDropUnusedLevelsCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsCal.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionCal.SetText("Position")
+        ucrChkPositionCal.AddToLinkedControls(ucrInputPositionCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionCal.SetDropDownStyleAsNonEditable()
+        ucrInputPositionCal.SetParameter(New RParameter("position"))
+        ucrInputPositionCal.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionCal.AddParameterPresentCondition(True, "position")
+        ucrChkPositionCal.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandCal.SetText("Expand")
+        ucrChkExpandCal.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandCal.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandCal.AddToLinkedControls(ucrInputTextExpandCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandCal.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksCal.SetText("Breaks")
+        ucrChkBreaksCal.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksCal.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksCal.AddToLinkedControls(ucrInputTextBreaksCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksCal.SetValidationTypeAsList()
+
+        ucrChkLimitCal.SetText("Limits")
+        ucrChkLimitCal.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitCal.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitCal.AddToLinkedControls(ucrInputTextLimitCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitCal.SetValidationTypeAsList()
+
+        ucrInputTextNaValueCal.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueCal.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueCal.bAddRemoveParameter = False
+        ucrInputTextNaValueCal.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueCal.SetText("Replace Missing Values")
+        ucrChkNaValueCal.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueCal.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueCal.AddToLinkedControls(ucrInputTextNaValueCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorCal.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorCal.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorCal.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorCal.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorCal.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorCal.AddToLinkedControls(ucrInputDropUnusedLevelsColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorCal.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorCal.SetText("Position")
+        ucrChkPositionColorCal.AddToLinkedControls(ucrInputPositionColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorCal.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorCal.SetParameter(New RParameter("position"))
+        ucrInputPositionColorCal.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorCal.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorCal.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorCal.SetText("Expand")
+        ucrChkExpandColorCal.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorCal.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorCal.AddToLinkedControls(ucrInputTextExpandColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorCal.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorCal.SetText("Breaks")
+        ucrChkBreaksColorCal.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorCal.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorCal.AddToLinkedControls(ucrInputTextBreaksColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorCal.SetValidationTypeAsList()
+
+        ucrChkLimitColorCal.SetText("Limits")
+        ucrChkLimitColorCal.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorCal.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorCal.AddToLinkedControls(ucrInputTextLimitColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorCal.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorCal.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorCal.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorCal.bAddRemoveParameter = False
+        ucrInputTextNaValueColorCal.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorCal.SetText("Replace Missing Values")
+        ucrChkNaValueColorCal.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorCal.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorCal.AddToLinkedControls(ucrInputTextNaValueColorCal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsEcon.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsEcon.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsEcon.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsEcon.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsEcon.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsEcon.AddToLinkedControls(ucrInputDropUnusedLevelsEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsEcon.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionEcon.SetText("Position")
+        ucrChkPositionEcon.AddToLinkedControls(ucrInputPositionEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionEcon.SetDropDownStyleAsNonEditable()
+        ucrInputPositionEcon.SetParameter(New RParameter("position"))
+        ucrInputPositionEcon.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionEcon.AddParameterPresentCondition(True, "position")
+        ucrChkPositionEcon.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandEcon.SetText("Expand")
+        ucrChkExpandEcon.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandEcon.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandEcon.AddToLinkedControls(ucrInputTextExpandEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandEcon.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksEcon.SetText("Breaks")
+        ucrChkBreaksEcon.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksEcon.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksEcon.AddToLinkedControls(ucrInputTextBreaksEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksEcon.SetValidationTypeAsList()
+
+        ucrChkLimitEcon.SetText("Limits")
+        ucrChkLimitEcon.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitEcon.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitEcon.AddToLinkedControls(ucrInputTextLimitEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitEcon.SetValidationTypeAsList()
+
+        ucrInputTextNaValueEcon.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueEcon.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueEcon.bAddRemoveParameter = False
+        ucrInputTextNaValueEcon.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueEcon.SetText("Replace Missing Values")
+        ucrChkNaValueEcon.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueEcon.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueEcon.AddToLinkedControls(ucrInputTextNaValueEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorEcon.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorEcon.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorEcon.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorEcon.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorEcon.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorEcon.AddToLinkedControls(ucrInputDropUnusedLevelsColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorEcon.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorEcon.SetText("Position")
+        ucrChkPositionColorEcon.AddToLinkedControls(ucrInputPositionColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorEcon.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorEcon.SetParameter(New RParameter("position"))
+        ucrInputPositionColorEcon.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorEcon.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorEcon.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorEcon.SetText("Expand")
+        ucrChkExpandColorEcon.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorEcon.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorEcon.AddToLinkedControls(ucrInputTextExpandColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorEcon.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorEcon.SetText("Breaks")
+        ucrChkBreaksColorEcon.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorEcon.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorEcon.AddToLinkedControls(ucrInputTextBreaksColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorEcon.SetValidationTypeAsList()
+
+        ucrChkLimitColorEcon.SetText("Limits")
+        ucrChkLimitColorEcon.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorEcon.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorEcon.AddToLinkedControls(ucrInputTextLimitColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorEcon.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorEcon.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorEcon.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorEcon.bAddRemoveParameter = False
+        ucrInputTextNaValueColorEcon.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorEcon.SetText("Replace Missing Values")
+        ucrChkNaValueColorEcon.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorEcon.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorEcon.AddToLinkedControls(ucrInputTextNaValueColorEcon, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsEx.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsEx.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsEx.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsEx.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsEx.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsEx.AddToLinkedControls(ucrInputDropUnusedLevelsEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsEx.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionEx.SetText("Position")
+        ucrChkPositionEx.AddToLinkedControls(ucrInputPositionEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionEx.SetDropDownStyleAsNonEditable()
+        ucrInputPositionEx.SetParameter(New RParameter("position"))
+        ucrInputPositionEx.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionEx.AddParameterPresentCondition(True, "position")
+        ucrChkPositionEx.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandEx.SetText("Expand")
+        ucrChkExpandEx.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandEx.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandEx.AddToLinkedControls(ucrInputTextExpandEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandEx.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksEx.SetText("Breaks")
+        ucrChkBreaksEx.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksEx.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksEx.AddToLinkedControls(ucrInputTextBreaksEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksEx.SetValidationTypeAsList()
+
+        ucrChkLimitEx.SetText("Limits")
+        ucrChkLimitEx.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitEx.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitEx.AddToLinkedControls(ucrInputTextLimitEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitEx.SetValidationTypeAsList()
+
+        ucrInputTextNaValueEx.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueEx.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueEx.bAddRemoveParameter = False
+        ucrInputTextNaValueEx.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueEx.SetText("Replace Missing Values")
+        ucrChkNaValueEx.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueEx.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueEx.AddToLinkedControls(ucrInputTextNaValueEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorEx.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorEx.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorEx.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorEx.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorEx.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorEx.AddToLinkedControls(ucrInputDropUnusedLevelsColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorEx.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorEx.SetText("Position")
+        ucrChkPositionColorEx.AddToLinkedControls(ucrInputPositionColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorEx.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorEx.SetParameter(New RParameter("position"))
+        ucrInputPositionColorEx.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorEx.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorEx.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorEx.SetText("Expand")
+        ucrChkExpandColorEx.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorEx.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorEx.AddToLinkedControls(ucrInputTextExpandColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorEx.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorEx.SetText("Breaks")
+        ucrChkBreaksColorEx.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorEx.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorEx.AddToLinkedControls(ucrInputTextBreaksColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorEx.SetValidationTypeAsList()
+
+        ucrChkLimitColorEx.SetText("Limits")
+        ucrChkLimitColorEx.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorEx.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorEx.AddToLinkedControls(ucrInputTextLimitColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorEx.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorEx.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorEx.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorEx.bAddRemoveParameter = False
+        ucrInputTextNaValueColorEx.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorEx.SetText("Replace Missing Values")
+        ucrChkNaValueColorEx.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorEx.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorEx.AddToLinkedControls(ucrInputTextNaValueColorEx, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsExn.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsExn.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsExn.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsExn.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsExn.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsExn.AddToLinkedControls(ucrInputDropUnusedLevelsExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsExn.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionExn.SetText("Position")
+        ucrChkPositionExn.AddToLinkedControls(ucrInputPositionExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionExn.SetDropDownStyleAsNonEditable()
+        ucrInputPositionExn.SetParameter(New RParameter("position"))
+        ucrInputPositionExn.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionExn.AddParameterPresentCondition(True, "position")
+        ucrChkPositionExn.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandExn.SetText("Expand")
+        ucrChkExpandExn.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandExn.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandExn.AddToLinkedControls(ucrInputTextExpandExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandExn.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksExn.SetText("Breaks")
+        ucrChkBreaksExn.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksExn.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksExn.AddToLinkedControls(ucrInputTextBreaksExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksExn.SetValidationTypeAsList()
+
+        ucrChkLimitExn.SetText("Limits")
+        ucrChkLimitExn.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitExn.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitExn.AddToLinkedControls(ucrInputTextLimitExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitExn.SetValidationTypeAsList()
+
+        ucrInputTextNaValueExn.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueExn.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueExn.bAddRemoveParameter = False
+        ucrInputTextNaValueExn.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueExn.SetText("Replace Missing Values")
+        ucrChkNaValueExn.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueExn.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueExn.AddToLinkedControls(ucrInputTextNaValueExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorExn.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorExn.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorExn.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorExn.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorExn.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorExn.AddToLinkedControls(ucrInputDropUnusedLevelsColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorExn.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorExn.SetText("Position")
+        ucrChkPositionColorExn.AddToLinkedControls(ucrInputPositionColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorExn.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorExn.SetParameter(New RParameter("position"))
+        ucrInputPositionColorExn.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorExn.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorExn.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorExn.SetText("Expand")
+        ucrChkExpandColorExn.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorExn.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorExn.AddToLinkedControls(ucrInputTextExpandColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorExn.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorExn.SetText("Breaks")
+        ucrChkBreaksColorExn.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorExn.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorExn.AddToLinkedControls(ucrInputTextBreaksColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorExn.SetValidationTypeAsList()
+
+        ucrChkLimitColorExn.SetText("Limits")
+        ucrChkLimitColorExn.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorExn.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorExn.AddToLinkedControls(ucrInputTextLimitColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorExn.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorExn.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorExn.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorExn.bAddRemoveParameter = False
+        ucrInputTextNaValueColorExn.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorExn.SetText("Replace Missing Values")
+        ucrChkNaValueColorExn.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorExn.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorExn.AddToLinkedControls(ucrInputTextNaValueColorExn, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkThemecolor.SetText("Theme:")
+        ucrChkThemecolor.AddToLinkedControls(ucrInputThemeColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Atlas")
+        ucrInputThemeColor.SetDropDownStyleAsNonEditable()
+        ucrInputThemeColor.SetParameter(New RParameter("theme"))
+        ucrInputThemeColor.SetItems({"Atlas", "Badge", "Berlin", "Celestial", "Crop", "Depth", "Droplet", "Facet", "Feathered", "Gallery", "Headlines", "Integral", "Ion Boardroom", "Ion", "Madison", "Main Event", "Mesh", "Office Theme", "Organic", "Parallax", "Parcel",
                                     "Retrospect", "Savon", "Slice", "Vapor Trail", "View", "Wisp", "Wood Type", "Aspect", "Blue Green", "Blue II", "Blue Warm", "Blue", "Grayscale", "Green Yellow", "Green", "Marquee", "Median", "Office 2007-2010", "Orange Red", "Orange", "Paper", "Red Orange", "Red Violet", "Red", "Slipstream", "Violet II", "Violet", "Yellow Orange", "Yellow"})
-            ucrChkThemecolor.AddParameterPresentCondition(True, "theme")
-            ucrChkThemecolor.AddParameterPresentCondition(False, "theme", False)
+        ucrChkThemecolor.AddParameterPresentCondition(True, "theme")
+        ucrChkThemecolor.AddParameterPresentCondition(False, "theme", False)
 
-            ucrChkThemeFill.SetText("Theme:")
-            ucrChkThemeFill.AddToLinkedControls(ucrInputThemeFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Atlas")
-            ucrInputThemeFill.SetDropDownStyleAsNonEditable()
-            ucrInputThemeFill.SetParameter(New RParameter("theme"))
-            ucrInputThemeFill.SetItems({"Atlas", "Badge", "Berlin", "Celestial", "Crop", "Depth", "Droplet", "Facet", "Feathered", "Gallery", "Headlines", "Integral", "Ion Boardroom", "Ion", "Madison", "Main Event", "Mesh", "Office Theme", "Organic", "Parallax", "Parcel",
+        ucrChkThemeFill.SetText("Theme:")
+        ucrChkThemeFill.AddToLinkedControls(ucrInputThemeFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Atlas")
+        ucrInputThemeFill.SetDropDownStyleAsNonEditable()
+        ucrInputThemeFill.SetParameter(New RParameter("theme"))
+        ucrInputThemeFill.SetItems({"Atlas", "Badge", "Berlin", "Celestial", "Crop", "Depth", "Droplet", "Facet", "Feathered", "Gallery", "Headlines", "Integral", "Ion Boardroom", "Ion", "Madison", "Main Event", "Mesh", "Office Theme", "Organic", "Parallax", "Parcel",
                                    "Retrospect", "Savon", "Slice", "Vapor Trail", "View", "Wisp", "Wood Type", "Aspect", "Blue Green", "Blue II", "Blue Warm", "Blue", "Grayscale", "Green Yellow", "Green", "Marquee", "Median", "Office 2007-2010", "Orange Red", "Orange", "Paper", "Red Orange", "Red Violet", "Red", "Slipstream", "Violet II", "Violet", "Yellow Orange", "Yellow"})
-            ucrChkThemeFill.AddParameterPresentCondition(True, "theme")
-            ucrChkThemeFill.AddParameterPresentCondition(False, "theme", False)
-
-            ucrChkDropUnusedLevelsfew.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsfew.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsfew.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsfew.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsfew.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsfew.AddToLinkedControls(ucrInputDropUnusedLevelsfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsfew.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionfew.SetText("Position")
-            ucrChkPositionfew.AddToLinkedControls(ucrInputPositionfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionfew.SetDropDownStyleAsNonEditable()
-            ucrInputPositionfew.SetParameter(New RParameter("position"))
-            ucrInputPositionfew.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionfew.AddParameterPresentCondition(True, "position")
-            ucrChkPositionfew.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandfew.SetText("Expand")
-            ucrChkExpandfew.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandfew.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandfew.AddToLinkedControls(ucrInputTextExpandfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandfew.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksfew.SetText("Breaks")
-            ucrChkBreaksfew.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksfew.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksfew.AddToLinkedControls(ucrInputTextBreaksfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksfew.SetValidationTypeAsList()
-
-            ucrChkLimitfew.SetText("Limits")
-            ucrChkLimitfew.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitfew.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitfew.AddToLinkedControls(ucrInputTextLimitfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitfew.SetValidationTypeAsList()
-
-            ucrInputTextNaValuefew.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuefew.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuefew.bAddRemoveParameter = False
-            ucrInputTextNaValuefew.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuefew.SetText("Replace Missing Values")
-            ucrChkNaValuefew.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuefew.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuefew.AddToLinkedControls(ucrInputTextNaValuefew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorfew.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorfew.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorfew.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorfew.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorfew.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorfew.AddToLinkedControls(ucrInputDropUnusedLevelsColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorfew.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorfew.SetText("Position")
-            ucrChkPositionColorfew.AddToLinkedControls(ucrInputPositionColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorfew.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorfew.SetParameter(New RParameter("position"))
-            ucrInputPositionColorfew.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorfew.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorfew.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorfew.SetText("Expand")
-            ucrChkExpandColorfew.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorfew.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorfew.AddToLinkedControls(ucrInputTextExpandColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorfew.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorfew.SetText("Breaks")
-            ucrChkBreaksColorfew.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorfew.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorfew.AddToLinkedControls(ucrInputTextBreaksColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorfew.SetValidationTypeAsList()
-
-            ucrChkLimitColorfew.SetText("Limits")
-            ucrChkLimitColorfew.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorfew.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorfew.AddToLinkedControls(ucrInputTextLimitColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorfew.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorfew.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorfew.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorfew.bAddRemoveParameter = False
-            ucrInputTextNaValueColorfew.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorfew.SetText("Replace Missing Values")
-            ucrChkNaValueColorfew.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorfew.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorfew.AddToLinkedControls(ucrInputTextNaValueColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsfiv.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsfiv.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsfiv.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsfiv.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsfiv.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsfiv.AddToLinkedControls(ucrInputDropUnusedLevelsfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsfiv.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionfiv.SetText("Position")
-            ucrChkPositionfiv.AddToLinkedControls(ucrInputPositionfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionfiv.SetDropDownStyleAsNonEditable()
-            ucrInputPositionfiv.SetParameter(New RParameter("position"))
-            ucrInputPositionfiv.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionfiv.AddParameterPresentCondition(True, "position")
-            ucrChkPositionfiv.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandfiv.SetText("Expand")
-            ucrChkExpandfiv.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandfiv.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandfiv.AddToLinkedControls(ucrInputTextExpandfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandfiv.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksfiv.SetText("Breaks")
-            ucrChkBreaksfiv.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksfiv.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksfiv.AddToLinkedControls(ucrInputTextBreaksfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksfiv.SetValidationTypeAsList()
-
-            ucrChkLimitfiv.SetText("Limits")
-            ucrChkLimitfiv.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitfiv.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitfiv.AddToLinkedControls(ucrInputTextLimitfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitfiv.SetValidationTypeAsList()
-
-            ucrInputTextNaValuefiv.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuefiv.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuefiv.bAddRemoveParameter = False
-            ucrInputTextNaValuefiv.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuefiv.SetText("Replace Missing Values")
-            ucrChkNaValuefiv.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuefiv.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuefiv.AddToLinkedControls(ucrInputTextNaValuefiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorfiv.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorfiv.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorfiv.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorfiv.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorfiv.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorfiv.AddToLinkedControls(ucrInputDropUnusedLevelsColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorfiv.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorfiv.SetText("Position")
-            ucrChkPositionColorfiv.AddToLinkedControls(ucrInputPositionColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorfiv.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorfiv.SetParameter(New RParameter("position"))
-            ucrInputPositionColorfiv.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorfiv.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorfiv.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorfiv.SetText("Expand")
-            ucrChkExpandColorfiv.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorfiv.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorfiv.AddToLinkedControls(ucrInputTextExpandColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorfiv.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorfiv.SetText("Breaks")
-            ucrChkBreaksColorfiv.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorfiv.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorfiv.AddToLinkedControls(ucrInputTextBreaksColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorfiv.SetValidationTypeAsList()
-
-            ucrChkLimitColorfiv.SetText("Limits")
-            ucrChkLimitColorfiv.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorfiv.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorfiv.AddToLinkedControls(ucrInputTextLimitColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorfiv.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorfiv.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorfiv.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorfiv.bAddRemoveParameter = False
-            ucrInputTextNaValueColorfiv.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorfiv.SetText("Replace Missing Values")
-            ucrChkNaValueColorfiv.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorfiv.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorfiv.AddToLinkedControls(ucrInputTextNaValueColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsg.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsg.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsg.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsg.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsg.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsg.AddToLinkedControls(ucrInputDropUnusedLevelsg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsg.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositiong.SetText("Position")
-            ucrChkPositiong.AddToLinkedControls(ucrInputPositiong, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositiong.SetDropDownStyleAsNonEditable()
-            ucrInputPositiong.SetParameter(New RParameter("position"))
-            ucrInputPositiong.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositiong.AddParameterPresentCondition(True, "position")
-            ucrChkPositiong.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandg.SetText("Expand")
-            ucrChkExpandg.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandg.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandg.AddToLinkedControls(ucrInputTextExpandg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandg.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksg.SetText("Breaks")
-            ucrChkBreaksg.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksg.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksg.AddToLinkedControls(ucrInputTextBreaksg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksg.SetValidationTypeAsList()
-
-            ucrChkLimitg.SetText("Limits")
-            ucrChkLimitg.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitg.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitg.AddToLinkedControls(ucrInputTextLimitg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitg.SetValidationTypeAsList()
-
-            ucrInputTextNaValueg.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueg.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueg.bAddRemoveParameter = False
-            ucrInputTextNaValueg.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueg.SetText("Replace Missing Values")
-            ucrChkNaValueg.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueg.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueg.AddToLinkedControls(ucrInputTextNaValueg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorg.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorg.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorg.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorg.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorg.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorg.AddToLinkedControls(ucrInputDropUnusedLevelsColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorg.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorg.SetText("Position")
-            ucrChkPositionColorg.AddToLinkedControls(ucrInputPositionColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorg.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorg.SetParameter(New RParameter("position"))
-            ucrInputPositionColorg.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorg.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorg.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorg.SetText("Expand")
-            ucrChkExpandColorg.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorg.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorg.AddToLinkedControls(ucrInputTextExpandColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorg.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorg.SetText("Breaks")
-            ucrChkBreaksColorg.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorg.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorg.AddToLinkedControls(ucrInputTextBreaksColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorg.SetValidationTypeAsList()
-
-            ucrChkLimitColorg.SetText("Limits")
-            ucrChkLimitColorg.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorg.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorg.AddToLinkedControls(ucrInputTextLimitColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorg.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorg.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorg.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorg.bAddRemoveParameter = False
-            ucrInputTextNaValueColorg.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorg.SetText("Replace Missing Values")
-            ucrChkNaValueColorg.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorg.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorg.AddToLinkedControls(ucrInputTextNaValueColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelshc.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelshc.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelshc.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelshc.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelshc.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelshc.AddToLinkedControls(ucrInputDropUnusedLevelshc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelshc.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionhc.SetText("Position")
-            ucrChkPositionhc.AddToLinkedControls(ucrInputPositionhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionhc.SetDropDownStyleAsNonEditable()
-            ucrInputPositionhc.SetParameter(New RParameter("position"))
-            ucrInputPositionhc.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionhc.AddParameterPresentCondition(True, "position")
-            ucrChkPositionhc.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandhc.SetText("Expand")
-            ucrChkExpandhc.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandhc.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandhc.AddToLinkedControls(ucrInputTextExpandhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandhc.SetValidationTypeAsNumericList()
-
-            ucrChkBreakshc.SetText("Breaks")
-            ucrChkBreakshc.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreakshc.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreakshc.AddToLinkedControls(ucrInputTextBreakshc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreakshc.SetValidationTypeAsList()
-
-            ucrChkLimithc.SetText("Limits")
-            ucrChkLimithc.AddParameterPresentCondition(True, "limit")
-            ucrChkLimithc.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimithc.AddToLinkedControls(ucrInputTextLimithc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimithc.SetValidationTypeAsList()
-
-            ucrInputTextNaValuehc.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuehc.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuehc.bAddRemoveParameter = False
-            ucrInputTextNaValuehc.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuehc.SetText("Replace Missing Values")
-            ucrChkNaValuehc.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuehc.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuehc.AddToLinkedControls(ucrInputTextNaValuehc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorhc.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorhc.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorhc.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorhc.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorhc.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorhc.AddToLinkedControls(ucrInputDropUnusedLevelsColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorhc.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorhc.SetText("Position")
-            ucrChkPositionColorhc.AddToLinkedControls(ucrInputPositionColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorhc.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorhc.SetParameter(New RParameter("position"))
-            ucrInputPositionColorhc.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorhc.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorhc.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorhc.SetText("Expand")
-            ucrChkExpandColorhc.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorhc.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorhc.AddToLinkedControls(ucrInputTextExpandColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorhc.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorhc.SetText("Breaks")
-            ucrChkBreaksColorhc.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorhc.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorhc.AddToLinkedControls(ucrInputTextBreaksColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorhc.SetValidationTypeAsList()
-
-            ucrChkLimitColorhc.SetText("Limits")
-            ucrChkLimitColorhc.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorhc.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorhc.AddToLinkedControls(ucrInputTextLimitColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorhc.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorhc.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorhc.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorhc.bAddRemoveParameter = False
-            ucrInputTextNaValueColorhc.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorhc.SetText("Replace Missing Values")
-            ucrChkNaValueColorhc.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorhc.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorhc.AddToLinkedControls(ucrInputTextNaValueColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkPalettehc.SetText("Palette")
-            ucrChkPalettehc.AddToLinkedControls(ucrInputPalettehc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
-            ucrInputPalettehc.SetDropDownStyleAsNonEditable()
-            ucrInputPalettehc.SetParameter(New RParameter("palette"))
-            ucrInputPalettehc.SetItems({"default", "darkunica"})
-            ucrChkPalettehc.AddParameterPresentCondition(True, "palette")
-            ucrChkPalettehc.AddParameterPresentCondition(False, "palette", False)
-
-            ucrChkPalettecolorhc.SetText("Palette")
-            ucrChkPalettecolorhc.AddToLinkedControls(ucrInputPalettecolorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
-            ucrInputPalettecolorhc.SetDropDownStyleAsNonEditable()
-            ucrInputPalettecolorhc.SetParameter(New RParameter("palette"))
-            ucrInputPalettecolorhc.SetItems({"default", "darkunica"})
-            ucrChkPalettecolorhc.AddParameterPresentCondition(True, "palette")
-            ucrChkPalettecolorhc.AddParameterPresentCondition(False, "palette", False)
-
-            ucrChkPalettecolor.SetText("Palette")
-            ucrChkPalettecolor.AddToLinkedControls(ucrInputPalettecolor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light")
-            ucrInputPalettecolor.SetDropDownStyleAsNonEditable()
-            ucrInputPalettecolor.SetParameter(New RParameter("palette"))
-            ucrInputPalettecolor.SetItems({"Light", "Medium", "Dark"})
-            ucrChkPalettecolor.AddParameterPresentCondition(True, "palette")
-            ucrChkPalettecolor.AddParameterPresentCondition(False, "palette", False)
-
-            ucrChkPalettefill.SetText("Palette")
-            ucrChkPalettefill.AddToLinkedControls(ucrInputPalettefill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light")
-            ucrInputPalettefill.SetDropDownStyleAsNonEditable()
-            ucrInputPalettefill.SetParameter(New RParameter("palette"))
-            ucrInputPalettefill.SetItems({"Light", "Medium", "Dark"})
-            ucrChkPalettefill.AddParameterPresentCondition(True, "palette")
-            ucrChkPalettefill.AddParameterPresentCondition(False, "palette", False)
-
-            ucrChkDropUnusedLevelspan.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelspan.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelspan.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelspan.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelspan.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelspan.AddToLinkedControls(ucrInputDropUnusedLevelspan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelspan.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionpan.SetText("Position")
-            ucrChkPositionpan.AddToLinkedControls(ucrInputPositionpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionpan.SetDropDownStyleAsNonEditable()
-            ucrInputPositionpan.SetParameter(New RParameter("position"))
-            ucrInputPositionpan.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionpan.AddParameterPresentCondition(True, "position")
-            ucrChkPositionpan.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandpan.SetText("Expand")
-            ucrChkExpandpan.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandpan.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandpan.AddToLinkedControls(ucrInputTextExpandpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandpan.SetValidationTypeAsNumericList()
-
-            ucrChkBreakspan.SetText("Breaks")
-            ucrChkBreakspan.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreakspan.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreakspan.AddToLinkedControls(ucrInputTextBreakspan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreakspan.SetValidationTypeAsList()
-
-            ucrChkLimitpan.SetText("Limits")
-            ucrChkLimitpan.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitpan.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitpan.AddToLinkedControls(ucrInputTextLimitpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitpan.SetValidationTypeAsList()
-
-            ucrInputTextNaValuepan.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuepan.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuepan.bAddRemoveParameter = False
-            ucrInputTextNaValuepan.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuepan.SetText("Replace Missing Values")
-            ucrChkNaValuepan.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuepan.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuepan.AddToLinkedControls(ucrInputTextNaValuepan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorpan.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorpan.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorpan.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorpan.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorpan.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorpan.AddToLinkedControls(ucrInputDropUnusedLevelsColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorpan.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorpan.SetText("Position")
-            ucrChkPositionColorpan.AddToLinkedControls(ucrInputPositionColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorpan.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorpan.SetParameter(New RParameter("position"))
-            ucrInputPositionColorpan.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorpan.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorpan.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorpan.SetText("Expand")
-            ucrChkExpandColorpan.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorpan.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorpan.AddToLinkedControls(ucrInputTextExpandColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorpan.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorpan.SetText("Breaks")
-            ucrChkBreaksColorpan.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorpan.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorpan.AddToLinkedControls(ucrInputTextBreaksColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorpan.SetValidationTypeAsList()
-
-            ucrChkLimitColorpan.SetText("Limits")
-            ucrChkLimitColorpan.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorpan.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorpan.AddToLinkedControls(ucrInputTextLimitColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorpan.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorpan.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorpan.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorpan.bAddRemoveParameter = False
-            ucrInputTextNaValueColorpan.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorpan.SetText("Replace Missing Values")
-            ucrChkNaValueColorpan.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorpan.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorpan.AddToLinkedControls(ucrInputTextNaValueColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelspt.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelspt.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelspt.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelspt.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelspt.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelspt.AddToLinkedControls(ucrInputDropUnusedLevelspt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelspt.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionpt.SetText("Position")
-            ucrChkPositionpt.AddToLinkedControls(ucrInputPositionpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionpt.SetDropDownStyleAsNonEditable()
-            ucrInputPositionpt.SetParameter(New RParameter("position"))
-            ucrInputPositionpt.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionpt.AddParameterPresentCondition(True, "position")
-            ucrChkPositionpt.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandpt.SetText("Expand")
-            ucrChkExpandpt.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandpt.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandpt.AddToLinkedControls(ucrInputTextExpandpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandpt.SetValidationTypeAsNumericList()
-
-            ucrChkBreakspt.SetText("Breaks")
-            ucrChkBreakspt.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreakspt.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreakspt.AddToLinkedControls(ucrInputTextBreakspt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreakspt.SetValidationTypeAsList()
-
-            ucrChkLimitpt.SetText("Limits")
-            ucrChkLimitpt.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitpt.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitpt.AddToLinkedControls(ucrInputTextLimitpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitpt.SetValidationTypeAsList()
-
-            ucrInputTextNaValuept.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuept.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuept.bAddRemoveParameter = False
-            ucrInputTextNaValuept.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuept.SetText("Replace Missing Values")
-            ucrChkNaValuept.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuept.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuept.AddToLinkedControls(ucrInputTextNaValuept, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorpt.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorpt.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorpt.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorpt.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorpt.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorpt.AddToLinkedControls(ucrInputDropUnusedLevelsColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorpt.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorpt.SetText("Position")
-            ucrChkPositionColorpt.AddToLinkedControls(ucrInputPositionColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorpt.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorpt.SetParameter(New RParameter("position"))
-            ucrInputPositionColorpt.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorpt.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorpt.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorpt.SetText("Expand")
-            ucrChkExpandColorpt.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorpt.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorpt.AddToLinkedControls(ucrInputTextExpandColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorpt.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorpt.SetText("Breaks")
-            ucrChkBreaksColorpt.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorpt.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorpt.AddToLinkedControls(ucrInputTextBreaksColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorpt.SetValidationTypeAsList()
-
-            ucrChkLimitColorpt.SetText("Limits")
-            ucrChkLimitColorpt.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorpt.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorpt.AddToLinkedControls(ucrInputTextLimitColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorpt.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorpt.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorpt.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorpt.bAddRemoveParameter = False
-            ucrInputTextNaValueColorpt.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorpt.SetText("Replace Missing Values")
-            ucrChkNaValueColorpt.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorpt.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorpt.AddToLinkedControls(ucrInputTextNaValueColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelssol.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelssol.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelssol.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelssol.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelssol.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelssol.AddToLinkedControls(ucrInputDropUnusedLevelssol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelssol.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionsol.SetText("Position")
-            ucrChkPositionsol.AddToLinkedControls(ucrInputPositionsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionsol.SetDropDownStyleAsNonEditable()
-            ucrInputPositionsol.SetParameter(New RParameter("position"))
-            ucrInputPositionsol.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionsol.AddParameterPresentCondition(True, "position")
-            ucrChkPositionsol.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandsol.SetText("Expand")
-            ucrChkExpandsol.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandsol.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandsol.AddToLinkedControls(ucrInputTextExpandsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandsol.SetValidationTypeAsNumericList()
-
-            ucrChkBreakssol.SetText("Breaks")
-            ucrChkBreakssol.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreakssol.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreakssol.AddToLinkedControls(ucrInputTextBreakssol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreakssol.SetValidationTypeAsList()
-
-            ucrChkLimitsol.SetText("Limits")
-            ucrChkLimitsol.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitsol.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitsol.AddToLinkedControls(ucrInputTextLimitsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitsol.SetValidationTypeAsList()
-
-            ucrInputTextNaValuesol.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuesol.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuesol.bAddRemoveParameter = False
-            ucrInputTextNaValuesol.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuesol.SetText("Replace Missing Values")
-            ucrChkNaValuesol.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuesol.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuesol.AddToLinkedControls(ucrInputTextNaValuesol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorsol.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorsol.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorsol.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorsol.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorsol.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorsol.AddToLinkedControls(ucrInputDropUnusedLevelsColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorsol.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorsol.SetText("Position")
-            ucrChkPositionColorsol.AddToLinkedControls(ucrInputPositionColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorsol.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorsol.SetParameter(New RParameter("position"))
-            ucrInputPositionColorsol.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorsol.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorsol.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorsol.SetText("Expand")
-            ucrChkExpandColorsol.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorsol.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorsol.AddToLinkedControls(ucrInputTextExpandColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorsol.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorsol.SetText("Breaks")
-            ucrChkBreaksColorsol.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorsol.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorsol.AddToLinkedControls(ucrInputTextBreaksColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorsol.SetValidationTypeAsList()
-
-            ucrChkLimitColorsol.SetText("Limits")
-            ucrChkLimitColorsol.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorsol.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorsol.AddToLinkedControls(ucrInputTextLimitColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorsol.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorsol.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorsol.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorsol.bAddRemoveParameter = False
-            ucrInputTextNaValueColorsol.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorsol.SetText("Replace Missing Values")
-            ucrChkNaValueColorsol.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorsol.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorsol.AddToLinkedControls(ucrInputTextNaValueColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsst.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsst.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsst.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsst.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsst.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsst.AddToLinkedControls(ucrInputDropUnusedLevelsst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsst.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionst.SetText("Position")
-            ucrChkPositionst.AddToLinkedControls(ucrInputPositionst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionst.SetDropDownStyleAsNonEditable()
-            ucrInputPositionst.SetParameter(New RParameter("position"))
-            ucrInputPositionst.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionst.AddParameterPresentCondition(True, "position")
-            ucrChkPositionst.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandst.SetText("Expand")
-            ucrChkExpandst.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandst.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandst.AddToLinkedControls(ucrInputTextExpandst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandst.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksst.SetText("Breaks")
-            ucrChkBreaksst.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksst.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksst.AddToLinkedControls(ucrInputTextBreaksst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksst.SetValidationTypeAsList()
-
-            ucrChkLimitst.SetText("Limits")
-            ucrChkLimitst.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitst.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitst.AddToLinkedControls(ucrInputTextLimitst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitst.SetValidationTypeAsList()
-
-            ucrInputTextNaValuest.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuest.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuest.bAddRemoveParameter = False
-            ucrInputTextNaValuest.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuest.SetText("Replace Missing Values")
-            ucrChkNaValuest.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuest.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuest.AddToLinkedControls(ucrInputTextNaValuest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorst.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorst.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorst.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorst.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorst.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorst.AddToLinkedControls(ucrInputDropUnusedLevelsColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorst.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorst.SetText("Position")
-            ucrChkPositionColorst.AddToLinkedControls(ucrInputPositionColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorst.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorst.SetParameter(New RParameter("position"))
-            ucrInputPositionColorst.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorst.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorst.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorst.SetText("Expand")
-            ucrChkExpandColorst.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorst.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorst.AddToLinkedControls(ucrInputTextExpandColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorst.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorst.SetText("Breaks")
-            ucrChkBreaksColorst.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorst.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorst.AddToLinkedControls(ucrInputTextBreaksColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorst.SetValidationTypeAsList()
-
-            ucrChkLimitColorst.SetText("Limits")
-            ucrChkLimitColorst.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorst.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorst.AddToLinkedControls(ucrInputTextLimitColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorst.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorst.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorst.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorst.bAddRemoveParameter = False
-            ucrInputTextNaValueColorst.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorst.SetText("Replace Missing Values")
-            ucrChkNaValueColorst.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorst.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorst.AddToLinkedControls(ucrInputTextNaValueColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkSchemecolor.SetText("Scheme:")
-            ucrChkSchemecolor.AddToLinkedControls(ucrInputSchemecolor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="s2color")
-            ucrInputSchemecolor.SetDropDownStyleAsNonEditable()
-            ucrInputSchemecolor.SetParameter(New RParameter("scheme"))
-            ucrInputSchemecolor.SetItems({"s2color", "s1rcolor", "s1color", "mono"})
-            ucrChkSchemecolor.AddParameterPresentCondition(True, "scheme")
-            ucrChkSchemecolor.AddParameterPresentCondition(False, "scheme", False)
-
-            ucrChkSchemefill.SetText("Scheme:")
-            ucrChkSchemefill.AddToLinkedControls(ucrInputSchemefill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="s2color")
-            ucrInputSchemefill.SetDropDownStyleAsNonEditable()
-            ucrInputSchemefill.SetParameter(New RParameter("scheme"))
-            ucrInputSchemefill.SetItems({"s2color", "s1rcolor", "s1color", "mono"})
-            ucrChkSchemefill.AddParameterPresentCondition(True, "scheme")
-            ucrChkSchemefill.AddParameterPresentCondition(False, "scheme", False)
-
-            ucrChkDropUnusedLevelsw.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsw.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsw.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsw.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsw.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsw.AddToLinkedControls(ucrInputDropUnusedLevelsw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsw.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionw.SetText("Position")
-            ucrChkPositionw.AddToLinkedControls(ucrInputPositionw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionw.SetDropDownStyleAsNonEditable()
-            ucrInputPositionw.SetParameter(New RParameter("position"))
-            ucrInputPositionw.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionw.AddParameterPresentCondition(True, "position")
-            ucrChkPositionw.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandw.SetText("Expand")
-            ucrChkExpandw.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandw.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandw.AddToLinkedControls(ucrInputTextExpandw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandw.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksw.SetText("Breaks")
-            ucrChkBreaksw.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksw.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksw.AddToLinkedControls(ucrInputTextBreaksw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksw.SetValidationTypeAsList()
-
-            ucrChkLimitw.SetText("Limits")
-            ucrChkLimitw.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitw.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitw.AddToLinkedControls(ucrInputTextLimitw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitw.SetValidationTypeAsList()
-
-            ucrInputTextNaValuew.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValuew.SetValidationTypeAsNumeric()
-            ucrInputTextNaValuew.bAddRemoveParameter = False
-            ucrInputTextNaValuew.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValuew.SetText("Replace Missing Values")
-            ucrChkNaValuew.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValuew.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValuew.AddToLinkedControls(ucrInputTextNaValuew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkDropUnusedLevelsColorw.SetText("Drop Unused Levels")
-            ucrInputDropUnusedLevelsColorw.SetParameter(New RParameter("drop"))
-            ucrInputDropUnusedLevelsColorw.SetDropDownStyleAsNonEditable()
-            ucrChkDropUnusedLevelsColorw.AddParameterPresentCondition(True, "drop")
-            ucrChkDropUnusedLevelsColorw.AddParameterPresentCondition(False, "drop", False)
-            ucrChkDropUnusedLevelsColorw.AddToLinkedControls(ucrInputDropUnusedLevelsColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
-            ucrInputDropUnusedLevelsColorw.SetItems({"TRUE", "FALSE"})
-
-            ucrChkPositionColorw.SetText("Position")
-            ucrChkPositionColorw.AddToLinkedControls(ucrInputPositionColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
-            ucrInputPositionColorw.SetDropDownStyleAsNonEditable()
-            ucrInputPositionColorw.SetParameter(New RParameter("position"))
-            ucrInputPositionColorw.SetItems({"left", "right", "bottom", "top"})
-            ucrChkPositionColorw.AddParameterPresentCondition(True, "position")
-            ucrChkPositionColorw.AddParameterPresentCondition(False, "position", False)
-
-            ucrChkExpandColorw.SetText("Expand")
-            ucrChkExpandColorw.AddParameterPresentCondition(True, "expand")
-            ucrChkExpandColorw.AddParameterPresentCondition(False, "expand", False)
-            ucrChkExpandColorw.AddToLinkedControls(ucrInputTextExpandColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-            ucrInputTextExpandColorw.SetValidationTypeAsNumericList()
-
-            ucrChkBreaksColorw.SetText("Breaks")
-            ucrChkBreaksColorw.AddParameterPresentCondition(True, "breaks")
-            ucrChkBreaksColorw.AddParameterPresentCondition(False, "breaks", False)
-            ucrChkBreaksColorw.AddToLinkedControls(ucrInputTextBreaksColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextBreaksColorw.SetValidationTypeAsList()
-
-            ucrChkLimitColorw.SetText("Limits")
-            ucrChkLimitColorw.AddParameterPresentCondition(True, "limit")
-            ucrChkLimitColorw.AddParameterPresentCondition(False, "limit", False)
-            ucrChkLimitColorw.AddToLinkedControls(ucrInputTextLimitColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrInputTextLimitColorw.SetValidationTypeAsList()
-
-            ucrInputTextNaValueColorw.SetParameter(New RParameter("na.value"))
-            ucrInputTextNaValueColorw.SetValidationTypeAsNumeric()
-            ucrInputTextNaValueColorw.bAddRemoveParameter = False
-            ucrInputTextNaValueColorw.AddQuotesIfUnrecognised = False
-
-            ucrChkNaValueColorw.SetText("Replace Missing Values")
-            ucrChkNaValueColorw.AddParameterPresentCondition(True, "na.value")
-            ucrChkNaValueColorw.AddParameterPresentCondition(False, "na.value", False)
-            ucrChkNaValueColorw.AddToLinkedControls(ucrInputTextNaValueColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
-            ucrChkPalettecolorw.SetText("Palette")
-            ucrChkPalettecolorw.AddToLinkedControls(ucrInputPalettecolorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="rgby")
-            ucrInputPalettecolorw.SetDropDownStyleAsNonEditable()
-            ucrInputPalettecolorw.SetParameter(New RParameter("palette"))
-            ucrInputPalettecolorw.SetItems({"rgby", "red_green", "black_green", "dem_rep", "colors6"})
-            ucrChkPalettecolorw.AddParameterPresentCondition(True, "palette")
-            ucrChkPalettecolorw.AddParameterPresentCondition(False, "palette", False)
-
-            ucrChkpalettefillw.SetText("Palette")
-            ucrChkpalettefillw.AddToLinkedControls(ucrInputPalettefillw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="rgby")
-            ucrInputPalettefillw.SetDropDownStyleAsNonEditable()
-            ucrInputPalettefillw.SetParameter(New RParameter("palette"))
-            ucrInputPalettefillw.SetItems({"rgby", "red_green", "black_green", "dem_rep", "colors6"})
-            ucrChkpalettefillw.AddParameterPresentCondition(True, "palette")
-            ucrChkpalettefillw.AddParameterPresentCondition(False, "palette", False)
-
-            ucrInputContinousfill.SetDropDownStyleAsNonEditable()
-            ucrInputContinousfill.SetParameter(New RParameter("palette"))
-            ucrInputContinousfill.SetItems({"Blue-Green Sequential", "Blue Light", "Orange Light", "Blue", "Orange", "Green", "Red", "Purple", "Brown", "Gray", "Gray Warm", "Blue-Teal", "Orange-Gold", "Green-Gold", "Red-Gold", "Classic Green", "Classic Gray", "Classic Blue", "Classic Red", "Classic Orange", "Classic Area Red",
+        ucrChkThemeFill.AddParameterPresentCondition(True, "theme")
+        ucrChkThemeFill.AddParameterPresentCondition(False, "theme", False)
+
+        ucrChkDropUnusedLevelsfew.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsfew.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsfew.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsfew.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsfew.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsfew.AddToLinkedControls(ucrInputDropUnusedLevelsfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsfew.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionfew.SetText("Position")
+        ucrChkPositionfew.AddToLinkedControls(ucrInputPositionfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionfew.SetDropDownStyleAsNonEditable()
+        ucrInputPositionfew.SetParameter(New RParameter("position"))
+        ucrInputPositionfew.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionfew.AddParameterPresentCondition(True, "position")
+        ucrChkPositionfew.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandfew.SetText("Expand")
+        ucrChkExpandfew.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandfew.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandfew.AddToLinkedControls(ucrInputTextExpandfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandfew.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksfew.SetText("Breaks")
+        ucrChkBreaksfew.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksfew.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksfew.AddToLinkedControls(ucrInputTextBreaksfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksfew.SetValidationTypeAsList()
+
+        ucrChkLimitfew.SetText("Limits")
+        ucrChkLimitfew.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitfew.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitfew.AddToLinkedControls(ucrInputTextLimitfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitfew.SetValidationTypeAsList()
+
+        ucrInputTextNaValuefew.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuefew.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuefew.bAddRemoveParameter = False
+        ucrInputTextNaValuefew.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuefew.SetText("Replace Missing Values")
+        ucrChkNaValuefew.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuefew.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuefew.AddToLinkedControls(ucrInputTextNaValuefew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorfew.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorfew.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorfew.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorfew.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorfew.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorfew.AddToLinkedControls(ucrInputDropUnusedLevelsColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorfew.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorfew.SetText("Position")
+        ucrChkPositionColorfew.AddToLinkedControls(ucrInputPositionColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorfew.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorfew.SetParameter(New RParameter("position"))
+        ucrInputPositionColorfew.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorfew.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorfew.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorfew.SetText("Expand")
+        ucrChkExpandColorfew.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorfew.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorfew.AddToLinkedControls(ucrInputTextExpandColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorfew.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorfew.SetText("Breaks")
+        ucrChkBreaksColorfew.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorfew.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorfew.AddToLinkedControls(ucrInputTextBreaksColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorfew.SetValidationTypeAsList()
+
+        ucrChkLimitColorfew.SetText("Limits")
+        ucrChkLimitColorfew.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorfew.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorfew.AddToLinkedControls(ucrInputTextLimitColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorfew.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorfew.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorfew.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorfew.bAddRemoveParameter = False
+        ucrInputTextNaValueColorfew.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorfew.SetText("Replace Missing Values")
+        ucrChkNaValueColorfew.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorfew.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorfew.AddToLinkedControls(ucrInputTextNaValueColorfew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsfiv.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsfiv.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsfiv.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsfiv.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsfiv.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsfiv.AddToLinkedControls(ucrInputDropUnusedLevelsfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsfiv.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionfiv.SetText("Position")
+        ucrChkPositionfiv.AddToLinkedControls(ucrInputPositionfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionfiv.SetDropDownStyleAsNonEditable()
+        ucrInputPositionfiv.SetParameter(New RParameter("position"))
+        ucrInputPositionfiv.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionfiv.AddParameterPresentCondition(True, "position")
+        ucrChkPositionfiv.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandfiv.SetText("Expand")
+        ucrChkExpandfiv.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandfiv.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandfiv.AddToLinkedControls(ucrInputTextExpandfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandfiv.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksfiv.SetText("Breaks")
+        ucrChkBreaksfiv.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksfiv.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksfiv.AddToLinkedControls(ucrInputTextBreaksfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksfiv.SetValidationTypeAsList()
+
+        ucrChkLimitfiv.SetText("Limits")
+        ucrChkLimitfiv.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitfiv.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitfiv.AddToLinkedControls(ucrInputTextLimitfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitfiv.SetValidationTypeAsList()
+
+        ucrInputTextNaValuefiv.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuefiv.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuefiv.bAddRemoveParameter = False
+        ucrInputTextNaValuefiv.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuefiv.SetText("Replace Missing Values")
+        ucrChkNaValuefiv.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuefiv.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuefiv.AddToLinkedControls(ucrInputTextNaValuefiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorfiv.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorfiv.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorfiv.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorfiv.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorfiv.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorfiv.AddToLinkedControls(ucrInputDropUnusedLevelsColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorfiv.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorfiv.SetText("Position")
+        ucrChkPositionColorfiv.AddToLinkedControls(ucrInputPositionColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorfiv.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorfiv.SetParameter(New RParameter("position"))
+        ucrInputPositionColorfiv.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorfiv.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorfiv.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorfiv.SetText("Expand")
+        ucrChkExpandColorfiv.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorfiv.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorfiv.AddToLinkedControls(ucrInputTextExpandColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorfiv.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorfiv.SetText("Breaks")
+        ucrChkBreaksColorfiv.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorfiv.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorfiv.AddToLinkedControls(ucrInputTextBreaksColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorfiv.SetValidationTypeAsList()
+
+        ucrChkLimitColorfiv.SetText("Limits")
+        ucrChkLimitColorfiv.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorfiv.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorfiv.AddToLinkedControls(ucrInputTextLimitColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorfiv.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorfiv.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorfiv.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorfiv.bAddRemoveParameter = False
+        ucrInputTextNaValueColorfiv.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorfiv.SetText("Replace Missing Values")
+        ucrChkNaValueColorfiv.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorfiv.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorfiv.AddToLinkedControls(ucrInputTextNaValueColorfiv, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsg.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsg.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsg.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsg.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsg.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsg.AddToLinkedControls(ucrInputDropUnusedLevelsg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsg.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositiong.SetText("Position")
+        ucrChkPositiong.AddToLinkedControls(ucrInputPositiong, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositiong.SetDropDownStyleAsNonEditable()
+        ucrInputPositiong.SetParameter(New RParameter("position"))
+        ucrInputPositiong.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositiong.AddParameterPresentCondition(True, "position")
+        ucrChkPositiong.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandg.SetText("Expand")
+        ucrChkExpandg.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandg.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandg.AddToLinkedControls(ucrInputTextExpandg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandg.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksg.SetText("Breaks")
+        ucrChkBreaksg.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksg.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksg.AddToLinkedControls(ucrInputTextBreaksg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksg.SetValidationTypeAsList()
+
+        ucrChkLimitg.SetText("Limits")
+        ucrChkLimitg.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitg.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitg.AddToLinkedControls(ucrInputTextLimitg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitg.SetValidationTypeAsList()
+
+        ucrInputTextNaValueg.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueg.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueg.bAddRemoveParameter = False
+        ucrInputTextNaValueg.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueg.SetText("Replace Missing Values")
+        ucrChkNaValueg.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueg.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueg.AddToLinkedControls(ucrInputTextNaValueg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorg.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorg.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorg.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorg.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorg.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorg.AddToLinkedControls(ucrInputDropUnusedLevelsColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorg.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorg.SetText("Position")
+        ucrChkPositionColorg.AddToLinkedControls(ucrInputPositionColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorg.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorg.SetParameter(New RParameter("position"))
+        ucrInputPositionColorg.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorg.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorg.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorg.SetText("Expand")
+        ucrChkExpandColorg.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorg.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorg.AddToLinkedControls(ucrInputTextExpandColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorg.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorg.SetText("Breaks")
+        ucrChkBreaksColorg.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorg.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorg.AddToLinkedControls(ucrInputTextBreaksColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorg.SetValidationTypeAsList()
+
+        ucrChkLimitColorg.SetText("Limits")
+        ucrChkLimitColorg.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorg.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorg.AddToLinkedControls(ucrInputTextLimitColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorg.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorg.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorg.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorg.bAddRemoveParameter = False
+        ucrInputTextNaValueColorg.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorg.SetText("Replace Missing Values")
+        ucrChkNaValueColorg.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorg.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorg.AddToLinkedControls(ucrInputTextNaValueColorg, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelshc.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelshc.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelshc.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelshc.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelshc.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelshc.AddToLinkedControls(ucrInputDropUnusedLevelshc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelshc.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionhc.SetText("Position")
+        ucrChkPositionhc.AddToLinkedControls(ucrInputPositionhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionhc.SetDropDownStyleAsNonEditable()
+        ucrInputPositionhc.SetParameter(New RParameter("position"))
+        ucrInputPositionhc.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionhc.AddParameterPresentCondition(True, "position")
+        ucrChkPositionhc.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandhc.SetText("Expand")
+        ucrChkExpandhc.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandhc.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandhc.AddToLinkedControls(ucrInputTextExpandhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandhc.SetValidationTypeAsNumericList()
+
+        ucrChkBreakshc.SetText("Breaks")
+        ucrChkBreakshc.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreakshc.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreakshc.AddToLinkedControls(ucrInputTextBreakshc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreakshc.SetValidationTypeAsList()
+
+        ucrChkLimithc.SetText("Limits")
+        ucrChkLimithc.AddParameterPresentCondition(True, "limit")
+        ucrChkLimithc.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimithc.AddToLinkedControls(ucrInputTextLimithc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimithc.SetValidationTypeAsList()
+
+        ucrInputTextNaValuehc.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuehc.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuehc.bAddRemoveParameter = False
+        ucrInputTextNaValuehc.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuehc.SetText("Replace Missing Values")
+        ucrChkNaValuehc.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuehc.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuehc.AddToLinkedControls(ucrInputTextNaValuehc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorhc.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorhc.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorhc.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorhc.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorhc.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorhc.AddToLinkedControls(ucrInputDropUnusedLevelsColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorhc.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorhc.SetText("Position")
+        ucrChkPositionColorhc.AddToLinkedControls(ucrInputPositionColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorhc.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorhc.SetParameter(New RParameter("position"))
+        ucrInputPositionColorhc.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorhc.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorhc.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorhc.SetText("Expand")
+        ucrChkExpandColorhc.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorhc.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorhc.AddToLinkedControls(ucrInputTextExpandColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorhc.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorhc.SetText("Breaks")
+        ucrChkBreaksColorhc.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorhc.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorhc.AddToLinkedControls(ucrInputTextBreaksColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorhc.SetValidationTypeAsList()
+
+        ucrChkLimitColorhc.SetText("Limits")
+        ucrChkLimitColorhc.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorhc.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorhc.AddToLinkedControls(ucrInputTextLimitColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorhc.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorhc.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorhc.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorhc.bAddRemoveParameter = False
+        ucrInputTextNaValueColorhc.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorhc.SetText("Replace Missing Values")
+        ucrChkNaValueColorhc.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorhc.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorhc.AddToLinkedControls(ucrInputTextNaValueColorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkPalettehc.SetText("Palette")
+        ucrChkPalettehc.AddToLinkedControls(ucrInputPalettehc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
+        ucrInputPalettehc.SetDropDownStyleAsNonEditable()
+        ucrInputPalettehc.SetParameter(New RParameter("palette"))
+        ucrInputPalettehc.SetItems({"default", "darkunica"})
+        ucrChkPalettehc.AddParameterPresentCondition(True, "palette")
+        ucrChkPalettehc.AddParameterPresentCondition(False, "palette", False)
+
+        ucrChkPalettecolorhc.SetText("Palette")
+        ucrChkPalettecolorhc.AddToLinkedControls(ucrInputPalettecolorhc, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
+        ucrInputPalettecolorhc.SetDropDownStyleAsNonEditable()
+        ucrInputPalettecolorhc.SetParameter(New RParameter("palette"))
+        ucrInputPalettecolorhc.SetItems({"default", "darkunica"})
+        ucrChkPalettecolorhc.AddParameterPresentCondition(True, "palette")
+        ucrChkPalettecolorhc.AddParameterPresentCondition(False, "palette", False)
+
+        ucrChkPalettecolor.SetText("Palette")
+        ucrChkPalettecolor.AddToLinkedControls(ucrInputPalettecolor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light")
+        ucrInputPalettecolor.SetDropDownStyleAsNonEditable()
+        ucrInputPalettecolor.SetParameter(New RParameter("palette"))
+        ucrInputPalettecolor.SetItems({"Light", "Medium", "Dark"})
+        ucrChkPalettecolor.AddParameterPresentCondition(True, "palette")
+        ucrChkPalettecolor.AddParameterPresentCondition(False, "palette", False)
+
+        ucrChkPalettefill.SetText("Palette")
+        ucrChkPalettefill.AddToLinkedControls(ucrInputPalettefill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light")
+        ucrInputPalettefill.SetDropDownStyleAsNonEditable()
+        ucrInputPalettefill.SetParameter(New RParameter("palette"))
+        ucrInputPalettefill.SetItems({"Light", "Medium", "Dark"})
+        ucrChkPalettefill.AddParameterPresentCondition(True, "palette")
+        ucrChkPalettefill.AddParameterPresentCondition(False, "palette", False)
+
+        ucrChkDropUnusedLevelspan.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelspan.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelspan.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelspan.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelspan.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelspan.AddToLinkedControls(ucrInputDropUnusedLevelspan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelspan.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionpan.SetText("Position")
+        ucrChkPositionpan.AddToLinkedControls(ucrInputPositionpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionpan.SetDropDownStyleAsNonEditable()
+        ucrInputPositionpan.SetParameter(New RParameter("position"))
+        ucrInputPositionpan.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionpan.AddParameterPresentCondition(True, "position")
+        ucrChkPositionpan.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandpan.SetText("Expand")
+        ucrChkExpandpan.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandpan.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandpan.AddToLinkedControls(ucrInputTextExpandpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandpan.SetValidationTypeAsNumericList()
+
+        ucrChkBreakspan.SetText("Breaks")
+        ucrChkBreakspan.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreakspan.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreakspan.AddToLinkedControls(ucrInputTextBreakspan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreakspan.SetValidationTypeAsList()
+
+        ucrChkLimitpan.SetText("Limits")
+        ucrChkLimitpan.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitpan.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitpan.AddToLinkedControls(ucrInputTextLimitpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitpan.SetValidationTypeAsList()
+
+        ucrInputTextNaValuepan.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuepan.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuepan.bAddRemoveParameter = False
+        ucrInputTextNaValuepan.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuepan.SetText("Replace Missing Values")
+        ucrChkNaValuepan.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuepan.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuepan.AddToLinkedControls(ucrInputTextNaValuepan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorpan.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorpan.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorpan.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorpan.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorpan.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorpan.AddToLinkedControls(ucrInputDropUnusedLevelsColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorpan.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorpan.SetText("Position")
+        ucrChkPositionColorpan.AddToLinkedControls(ucrInputPositionColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorpan.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorpan.SetParameter(New RParameter("position"))
+        ucrInputPositionColorpan.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorpan.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorpan.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorpan.SetText("Expand")
+        ucrChkExpandColorpan.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorpan.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorpan.AddToLinkedControls(ucrInputTextExpandColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorpan.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorpan.SetText("Breaks")
+        ucrChkBreaksColorpan.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorpan.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorpan.AddToLinkedControls(ucrInputTextBreaksColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorpan.SetValidationTypeAsList()
+
+        ucrChkLimitColorpan.SetText("Limits")
+        ucrChkLimitColorpan.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorpan.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorpan.AddToLinkedControls(ucrInputTextLimitColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorpan.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorpan.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorpan.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorpan.bAddRemoveParameter = False
+        ucrInputTextNaValueColorpan.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorpan.SetText("Replace Missing Values")
+        ucrChkNaValueColorpan.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorpan.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorpan.AddToLinkedControls(ucrInputTextNaValueColorpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelspt.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelspt.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelspt.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelspt.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelspt.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelspt.AddToLinkedControls(ucrInputDropUnusedLevelspt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelspt.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionpt.SetText("Position")
+        ucrChkPositionpt.AddToLinkedControls(ucrInputPositionpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionpt.SetDropDownStyleAsNonEditable()
+        ucrInputPositionpt.SetParameter(New RParameter("position"))
+        ucrInputPositionpt.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionpt.AddParameterPresentCondition(True, "position")
+        ucrChkPositionpt.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandpt.SetText("Expand")
+        ucrChkExpandpt.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandpt.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandpt.AddToLinkedControls(ucrInputTextExpandpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandpt.SetValidationTypeAsNumericList()
+
+        ucrChkBreakspt.SetText("Breaks")
+        ucrChkBreakspt.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreakspt.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreakspt.AddToLinkedControls(ucrInputTextBreakspt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreakspt.SetValidationTypeAsList()
+
+        ucrChkLimitpt.SetText("Limits")
+        ucrChkLimitpt.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitpt.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitpt.AddToLinkedControls(ucrInputTextLimitpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitpt.SetValidationTypeAsList()
+
+        ucrInputTextNaValuept.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuept.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuept.bAddRemoveParameter = False
+        ucrInputTextNaValuept.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuept.SetText("Replace Missing Values")
+        ucrChkNaValuept.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuept.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuept.AddToLinkedControls(ucrInputTextNaValuept, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorpt.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorpt.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorpt.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorpt.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorpt.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorpt.AddToLinkedControls(ucrInputDropUnusedLevelsColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorpt.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorpt.SetText("Position")
+        ucrChkPositionColorpt.AddToLinkedControls(ucrInputPositionColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorpt.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorpt.SetParameter(New RParameter("position"))
+        ucrInputPositionColorpt.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorpt.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorpt.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorpt.SetText("Expand")
+        ucrChkExpandColorpt.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorpt.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorpt.AddToLinkedControls(ucrInputTextExpandColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorpt.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorpt.SetText("Breaks")
+        ucrChkBreaksColorpt.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorpt.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorpt.AddToLinkedControls(ucrInputTextBreaksColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorpt.SetValidationTypeAsList()
+
+        ucrChkLimitColorpt.SetText("Limits")
+        ucrChkLimitColorpt.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorpt.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorpt.AddToLinkedControls(ucrInputTextLimitColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorpt.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorpt.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorpt.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorpt.bAddRemoveParameter = False
+        ucrInputTextNaValueColorpt.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorpt.SetText("Replace Missing Values")
+        ucrChkNaValueColorpt.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorpt.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorpt.AddToLinkedControls(ucrInputTextNaValueColorpt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelssol.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelssol.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelssol.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelssol.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelssol.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelssol.AddToLinkedControls(ucrInputDropUnusedLevelssol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelssol.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionsol.SetText("Position")
+        ucrChkPositionsol.AddToLinkedControls(ucrInputPositionsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionsol.SetDropDownStyleAsNonEditable()
+        ucrInputPositionsol.SetParameter(New RParameter("position"))
+        ucrInputPositionsol.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionsol.AddParameterPresentCondition(True, "position")
+        ucrChkPositionsol.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandsol.SetText("Expand")
+        ucrChkExpandsol.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandsol.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandsol.AddToLinkedControls(ucrInputTextExpandsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandsol.SetValidationTypeAsNumericList()
+
+        ucrChkBreakssol.SetText("Breaks")
+        ucrChkBreakssol.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreakssol.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreakssol.AddToLinkedControls(ucrInputTextBreakssol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreakssol.SetValidationTypeAsList()
+
+        ucrChkLimitsol.SetText("Limits")
+        ucrChkLimitsol.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitsol.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitsol.AddToLinkedControls(ucrInputTextLimitsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitsol.SetValidationTypeAsList()
+
+        ucrInputTextNaValuesol.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuesol.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuesol.bAddRemoveParameter = False
+        ucrInputTextNaValuesol.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuesol.SetText("Replace Missing Values")
+        ucrChkNaValuesol.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuesol.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuesol.AddToLinkedControls(ucrInputTextNaValuesol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorsol.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorsol.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorsol.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorsol.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorsol.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorsol.AddToLinkedControls(ucrInputDropUnusedLevelsColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorsol.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorsol.SetText("Position")
+        ucrChkPositionColorsol.AddToLinkedControls(ucrInputPositionColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorsol.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorsol.SetParameter(New RParameter("position"))
+        ucrInputPositionColorsol.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorsol.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorsol.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorsol.SetText("Expand")
+        ucrChkExpandColorsol.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorsol.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorsol.AddToLinkedControls(ucrInputTextExpandColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorsol.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorsol.SetText("Breaks")
+        ucrChkBreaksColorsol.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorsol.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorsol.AddToLinkedControls(ucrInputTextBreaksColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorsol.SetValidationTypeAsList()
+
+        ucrChkLimitColorsol.SetText("Limits")
+        ucrChkLimitColorsol.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorsol.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorsol.AddToLinkedControls(ucrInputTextLimitColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorsol.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorsol.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorsol.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorsol.bAddRemoveParameter = False
+        ucrInputTextNaValueColorsol.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorsol.SetText("Replace Missing Values")
+        ucrChkNaValueColorsol.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorsol.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorsol.AddToLinkedControls(ucrInputTextNaValueColorsol, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsst.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsst.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsst.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsst.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsst.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsst.AddToLinkedControls(ucrInputDropUnusedLevelsst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsst.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionst.SetText("Position")
+        ucrChkPositionst.AddToLinkedControls(ucrInputPositionst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionst.SetDropDownStyleAsNonEditable()
+        ucrInputPositionst.SetParameter(New RParameter("position"))
+        ucrInputPositionst.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionst.AddParameterPresentCondition(True, "position")
+        ucrChkPositionst.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandst.SetText("Expand")
+        ucrChkExpandst.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandst.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandst.AddToLinkedControls(ucrInputTextExpandst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandst.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksst.SetText("Breaks")
+        ucrChkBreaksst.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksst.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksst.AddToLinkedControls(ucrInputTextBreaksst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksst.SetValidationTypeAsList()
+
+        ucrChkLimitst.SetText("Limits")
+        ucrChkLimitst.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitst.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitst.AddToLinkedControls(ucrInputTextLimitst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitst.SetValidationTypeAsList()
+
+        ucrInputTextNaValuest.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuest.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuest.bAddRemoveParameter = False
+        ucrInputTextNaValuest.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuest.SetText("Replace Missing Values")
+        ucrChkNaValuest.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuest.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuest.AddToLinkedControls(ucrInputTextNaValuest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorst.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorst.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorst.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorst.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorst.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorst.AddToLinkedControls(ucrInputDropUnusedLevelsColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorst.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorst.SetText("Position")
+        ucrChkPositionColorst.AddToLinkedControls(ucrInputPositionColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorst.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorst.SetParameter(New RParameter("position"))
+        ucrInputPositionColorst.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorst.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorst.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorst.SetText("Expand")
+        ucrChkExpandColorst.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorst.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorst.AddToLinkedControls(ucrInputTextExpandColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorst.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorst.SetText("Breaks")
+        ucrChkBreaksColorst.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorst.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorst.AddToLinkedControls(ucrInputTextBreaksColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorst.SetValidationTypeAsList()
+
+        ucrChkLimitColorst.SetText("Limits")
+        ucrChkLimitColorst.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorst.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorst.AddToLinkedControls(ucrInputTextLimitColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorst.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorst.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorst.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorst.bAddRemoveParameter = False
+        ucrInputTextNaValueColorst.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorst.SetText("Replace Missing Values")
+        ucrChkNaValueColorst.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorst.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorst.AddToLinkedControls(ucrInputTextNaValueColorst, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkSchemecolor.SetText("Scheme:")
+        ucrChkSchemecolor.AddToLinkedControls(ucrInputSchemecolor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="s2color")
+        ucrInputSchemecolor.SetDropDownStyleAsNonEditable()
+        ucrInputSchemecolor.SetParameter(New RParameter("scheme"))
+        ucrInputSchemecolor.SetItems({"s2color", "s1rcolor", "s1color", "mono"})
+        ucrChkSchemecolor.AddParameterPresentCondition(True, "scheme")
+        ucrChkSchemecolor.AddParameterPresentCondition(False, "scheme", False)
+
+        ucrChkSchemefill.SetText("Scheme:")
+        ucrChkSchemefill.AddToLinkedControls(ucrInputSchemefill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="s2color")
+        ucrInputSchemefill.SetDropDownStyleAsNonEditable()
+        ucrInputSchemefill.SetParameter(New RParameter("scheme"))
+        ucrInputSchemefill.SetItems({"s2color", "s1rcolor", "s1color", "mono"})
+        ucrChkSchemefill.AddParameterPresentCondition(True, "scheme")
+        ucrChkSchemefill.AddParameterPresentCondition(False, "scheme", False)
+
+        ucrChkDropUnusedLevelsw.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsw.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsw.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsw.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsw.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsw.AddToLinkedControls(ucrInputDropUnusedLevelsw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsw.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionw.SetText("Position")
+        ucrChkPositionw.AddToLinkedControls(ucrInputPositionw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionw.SetDropDownStyleAsNonEditable()
+        ucrInputPositionw.SetParameter(New RParameter("position"))
+        ucrInputPositionw.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionw.AddParameterPresentCondition(True, "position")
+        ucrChkPositionw.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandw.SetText("Expand")
+        ucrChkExpandw.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandw.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandw.AddToLinkedControls(ucrInputTextExpandw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandw.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksw.SetText("Breaks")
+        ucrChkBreaksw.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksw.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksw.AddToLinkedControls(ucrInputTextBreaksw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksw.SetValidationTypeAsList()
+
+        ucrChkLimitw.SetText("Limits")
+        ucrChkLimitw.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitw.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitw.AddToLinkedControls(ucrInputTextLimitw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitw.SetValidationTypeAsList()
+
+        ucrInputTextNaValuew.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValuew.SetValidationTypeAsNumeric()
+        ucrInputTextNaValuew.bAddRemoveParameter = False
+        ucrInputTextNaValuew.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValuew.SetText("Replace Missing Values")
+        ucrChkNaValuew.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValuew.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValuew.AddToLinkedControls(ucrInputTextNaValuew, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkDropUnusedLevelsColorw.SetText("Drop Unused Levels")
+        ucrInputDropUnusedLevelsColorw.SetParameter(New RParameter("drop"))
+        ucrInputDropUnusedLevelsColorw.SetDropDownStyleAsNonEditable()
+        ucrChkDropUnusedLevelsColorw.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevelsColorw.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevelsColorw.AddToLinkedControls(ucrInputDropUnusedLevelsColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevelsColorw.SetItems({"TRUE", "FALSE"})
+
+        ucrChkPositionColorw.SetText("Position")
+        ucrChkPositionColorw.AddToLinkedControls(ucrInputPositionColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
+        ucrInputPositionColorw.SetDropDownStyleAsNonEditable()
+        ucrInputPositionColorw.SetParameter(New RParameter("position"))
+        ucrInputPositionColorw.SetItems({"left", "right", "bottom", "top"})
+        ucrChkPositionColorw.AddParameterPresentCondition(True, "position")
+        ucrChkPositionColorw.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpandColorw.SetText("Expand")
+        ucrChkExpandColorw.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandColorw.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandColorw.AddToLinkedControls(ucrInputTextExpandColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputTextExpandColorw.SetValidationTypeAsNumericList()
+
+        ucrChkBreaksColorw.SetText("Breaks")
+        ucrChkBreaksColorw.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreaksColorw.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreaksColorw.AddToLinkedControls(ucrInputTextBreaksColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextBreaksColorw.SetValidationTypeAsList()
+
+        ucrChkLimitColorw.SetText("Limits")
+        ucrChkLimitColorw.AddParameterPresentCondition(True, "limit")
+        ucrChkLimitColorw.AddParameterPresentCondition(False, "limit", False)
+        ucrChkLimitColorw.AddToLinkedControls(ucrInputTextLimitColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputTextLimitColorw.SetValidationTypeAsList()
+
+        ucrInputTextNaValueColorw.SetParameter(New RParameter("na.value"))
+        ucrInputTextNaValueColorw.SetValidationTypeAsNumeric()
+        ucrInputTextNaValueColorw.bAddRemoveParameter = False
+        ucrInputTextNaValueColorw.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueColorw.SetText("Replace Missing Values")
+        ucrChkNaValueColorw.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueColorw.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueColorw.AddToLinkedControls(ucrInputTextNaValueColorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+        ucrChkPalettecolorw.SetText("Palette")
+        ucrChkPalettecolorw.AddToLinkedControls(ucrInputPalettecolorw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="rgby")
+        ucrInputPalettecolorw.SetDropDownStyleAsNonEditable()
+        ucrInputPalettecolorw.SetParameter(New RParameter("palette"))
+        ucrInputPalettecolorw.SetItems({"rgby", "red_green", "black_green", "dem_rep", "colors6"})
+        ucrChkPalettecolorw.AddParameterPresentCondition(True, "palette")
+        ucrChkPalettecolorw.AddParameterPresentCondition(False, "palette", False)
+
+        ucrChkpalettefillw.SetText("Palette")
+        ucrChkpalettefillw.AddToLinkedControls(ucrInputPalettefillw, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="rgby")
+        ucrInputPalettefillw.SetDropDownStyleAsNonEditable()
+        ucrInputPalettefillw.SetParameter(New RParameter("palette"))
+        ucrInputPalettefillw.SetItems({"rgby", "red_green", "black_green", "dem_rep", "colors6"})
+        ucrChkpalettefillw.AddParameterPresentCondition(True, "palette")
+        ucrChkpalettefillw.AddParameterPresentCondition(False, "palette", False)
+
+        ucrInputContinousfill.SetDropDownStyleAsNonEditable()
+        ucrInputContinousfill.SetParameter(New RParameter("palette"))
+        ucrInputContinousfill.SetItems({"Blue-Green Sequential", "Blue Light", "Orange Light", "Blue", "Orange", "Green", "Red", "Purple", "Brown", "Gray", "Gray Warm", "Blue-Teal", "Orange-Gold", "Green-Gold", "Red-Gold", "Classic Green", "Classic Gray", "Classic Blue", "Classic Red", "Classic Orange", "Classic Area Red",
                                        "Classic Area Green", "Classic Area-Brown", "ordered-diverging", "Orange-Blue Diverging", "Red-Green Diverging", "Green-Blue Diverging", "Red-Blue Diverging", "Red-Black Diverging", "Gold-Purple Diverging", "Red-Green-Gold Diverging", "Sunset-Sunrise Diverging", "Orange-Blue-White Diverging",
                                        "Red-Green-White Diverging", "Green-Blue-White Diverging", "Red-Blue-White Diverging", "Red-Black-White Diverging", "Orange-Blue Light Diverging", "Temperature Diverging", "Classic Red-Green", "Classic Red-Blue", "Classic Red-Black", "Classic Area Red-Green", "Classic Orange-Blue", "Classic Green-Blue",
                                        "Classic Red-White-Green", "Classic Red-White-Black", "Classic Orange-White-Blue", "Classic Red-White-Black Light", "Classic Orange-White-Blue Light", "Classic Red-White-Green Light", "Classic Red-Green Light"})
-            ucrInputContinousfill.SetLinkedDisplayControl(lblPaletteContinuousfill)
+        ucrInputContinousfill.SetLinkedDisplayControl(lblPaletteContinuousfill)
 
-            ucrInputcontinuouscolor.SetDropDownStyleAsNonEditable()
-            ucrInputcontinuouscolor.SetParameter(New RParameter("palette"))
-            ucrInputcontinuouscolor.SetItems({"Blue-Green Sequential", "Blue Light", "Orange Light", "Blue", "Orange", "Green", "Red", "Purple", "Brown", "Gray", "Gray Warm", "Blue-Teal", "Orange-Gold", "Green-Gold", "Red-Gold", "Classic Green", "Classic Gray", "Classic Blue", "Classic Red", "Classic Orange", "Classic Area Red",
+        ucrInputcontinuouscolor.SetDropDownStyleAsNonEditable()
+        ucrInputcontinuouscolor.SetParameter(New RParameter("palette"))
+        ucrInputcontinuouscolor.SetItems({"Blue-Green Sequential", "Blue Light", "Orange Light", "Blue", "Orange", "Green", "Red", "Purple", "Brown", "Gray", "Gray Warm", "Blue-Teal", "Orange-Gold", "Green-Gold", "Red-Gold", "Classic Green", "Classic Gray", "Classic Blue", "Classic Red", "Classic Orange", "Classic Area Red",
                                          "Classic Area Green", "Classic Area-Brown", "ordered-diverging", "Orange-Blue Diverging", "Red-Green Diverging", "Green-Blue Diverging", "Red-Blue Diverging", "Red-Black Diverging", "Gold-Purple Diverging", "Red-Green-Gold Diverging", "Sunset-Sunrise Diverging", "Orange-Blue-White Diverging",
                                          "Red-Green-White Diverging", "Green-Blue-White Diverging", "Red-Blue-White Diverging", "Red-Black-White Diverging", "Orange-Blue Light Diverging", "Temperature Diverging", "Classic Red-Green", "Classic Red-Blue", "Classic Red-Black", "Classic Area Red-Green", "Classic Orange-Blue", "Classic Green-Blue",
                                          "Classic Red-White-Green", "Classic Red-White-Black", "Classic Orange-White-Blue", "Classic Red-White-Black Light", "Classic Orange-White-Blue Light", "Classic Red-White-Green Light", "Classic Red-Green Light"})
-            ucrInputcontinuouscolor.SetLinkedDisplayControl(lblPalcontinuouscolor)
+        ucrInputcontinuouscolor.SetLinkedDisplayControl(lblPalcontinuouscolor)
 
-            ucrPnlColourPalette.AddParameterValuesCondition(rdoSequential, "palette", "sequential")
-            ucrPnlColourPalette.AddParameterValuesCondition(rdoDiverging, "palette", "diverging")
-            ucrPnlColourPalette.AddParameterValuesCondition(rdoQualitative, "palette", "qualitative")
-            ucrPnlColourPalette.AddParameterValuesCondition(rdoViridis, "option", "viridis")
-            ucrPnlColourPalette.AddParameterValuesCondition(rdoGgthemes, "palette", "ggthemes")
-            ucrPnlColourPalette.AddParameterValuesCondition(rdoGradient, "palette", "gradient")
-            ucrPnlScale.AddParameterValuesCondition(rdoColour, "Check", "color")
-            ucrPnlScale.AddParameterValuesCondition(rdoFill, "Check", "fill")
-            ucrPnlColourPalette.AddToLinkedControls(ucrInputColorFunctions, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrPnlColourPalette.AddToLinkedControls(ucrInputFillFunction, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-            ucrPnlColourPalette.AddToLinkedControls({ucrInputcontinuouscolor, ucrInputContinousfill}, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue-Green Sequential")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoSequential, "palette", "sequential")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoDiverging, "palette", "diverging")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoQualitative, "palette", "qualitative")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoViridis, "option", "viridis")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoGgthemes, "palette", "ggthemes")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoGradient, "palette", "gradient")
+        ucrPnlScale.AddParameterValuesCondition(rdoColour, "Check", "color")
+        ucrPnlScale.AddParameterValuesCondition(rdoFill, "Check", "fill")
+        ucrPnlColourPalette.AddToLinkedControls(ucrInputColorFunctions, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrPnlColourPalette.AddToLinkedControls(ucrInputFillFunction, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrPnlColourPalette.AddToLinkedControls({ucrInputcontinuouscolor, ucrInputContinousfill}, {rdoGgthemes}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue-Green Sequential")
             bInitialised = True
         End If
         ucrInputColorFunctions.SetDropDownStyleAsNonEditable()
@@ -2316,10 +2315,10 @@ Public Class sdgPlots
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing, Optional clsNewColVarsFunction As RFunction = Nothing,
-                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing, Optional clsNewRowVarsFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing,
+                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bChangeAesParameter As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
-
+        Dim clsTempParam As RParameter
         bRCodeSet = False
 
         If Not bControlsInitialised Then
@@ -2351,9 +2350,6 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
-        clsColVarsFunction = clsNewColVarsFunction
-        clsRowVarsFunction = clsNewRowVarsFunction
-
 
         clsGuideLegendFunction = New RFunction
         clsGuideFunction = New RFunction
@@ -2392,12 +2388,18 @@ Public Class sdgPlots
 
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
-        clsColVarsFunction.SetPackageName("ggplot2")
-        clsColVarsFunction.SetRCommand("vars")
-
-        clsRowVarsFunction.SetPackageName("ggplot2")
-        clsRowVarsFunction.SetRCommand("vars")
-
+        If clsFacetFunction.ContainsParameter("facets") Then
+            clsTempParam = clsFacetFunction.GetParameter("facets")
+            If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing AndAlso clsNewFacetVariablesOperator IsNot Nothing Then
+                clsFacetVariablesOperator = clsNewFacetVariablesOperator
+            Else
+                clsFacetVariablesOperator = New ROperator("~")
+            End If
+        Else
+            clsFacetVariablesOperator = New ROperator("~")
+        End If
+        clsFacetVariablesOperator.bForceIncludeOperation = True
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
@@ -2580,10 +2582,8 @@ Public Class sdgPlots
 
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
 
-        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset, bCloneIfNeeded:=True)
-        ucr2ndFactorReceiver.SetRCode(clsColVarsFunction, bReset, bCloneIfNeeded:=True)
-
-        ucr2ndFactorReceiver.AddAdditionalCodeParameterPair(clsRowVarsFunction, New RParameter("cols", 1), iAdditionalPairNo:=1)
+        ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
+        ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
 
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
@@ -3133,65 +3133,36 @@ Public Class sdgPlots
         'The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
         If bRCodeSet Then
             FacetsNumberOfRowsOrColumns()
-            clsFacetFunction.RemoveParameterByName("facets")
-            clsFacetFunction.RemoveParameterByName("cols")
-            clsFacetFunction.RemoveParameterByName("rows")
-            If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
+            If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
-                'If two receivers are filled, wrap is used as facet_wrap(vars(factor1, factor2)), while grid is used as facet_grid(rows= vars(factor1), cols= vars(factor2)).
-                'In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
-                'In the grid case, the place of the argument, rows or cols, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting.
-                'In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
-
-                If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
+                'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
+                'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
+                ucr1stFactorReceiver.SetParameterPosition(1)
+                ucr2ndFactorReceiver.SetParameterPosition(0)
+                clsFacetVariablesOperator.RemoveParameter(ucr2ndFactorReceiver.GetParameter())
+                If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
-                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    Else
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    End If
-                    clsFacetFunction.RemoveParameterByName("rows")
-                    clsFacetFunction.RemoveParameterByName("cols")
+                    clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                ElseIf (rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked)) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
+                    clsFacetFunction.SetRCommand("facet_wrap")
+                    clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                        clsFacetFunction.RemoveParameterByName("cols")
-                    Else
-                        clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                        clsFacetFunction.RemoveParameterByName("rows")
+                    If rdoVertical.Checked Then
+                        ucr1stFactorReceiver.SetParameterPosition(0)
+                        ucr2ndFactorReceiver.SetParameterPosition(1)
+                        ucr2ndFactorReceiver.SetParameterValue(".")
+                        clsFacetVariablesOperator.AddParameter(ucr2ndFactorReceiver.GetParameter())
                     End If
                     clsFacetFunction.RemoveParameterByName("dir")
-                    clsFacetFunction.RemoveParameterByName("facets")
                 End If
             ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
-                If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
-                    clsFacetFunction.SetRCommand("facet_wrap")
-                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                    clsRowVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    Else
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    End If
-                    clsFacetFunction.RemoveParameterByName("rows")
-                    clsFacetFunction.RemoveParameterByName("cols")
-                Else
-                    clsFacetFunction.SetRCommand("facet_grid")
-                    clsRowVarsFunction.ClearParameters()
-                    clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
-                    clsColVarsFunction.ClearParameters()
-                    clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
-                    clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
-                    clsFacetFunction.RemoveParameterByName("dir")
-                End If
+                ucr1stFactorReceiver.SetParameterPosition(0)
+                ucr2ndFactorReceiver.SetParameterPosition(1)
+                clsFacetFunction.SetRCommand("facet_grid")
+                clsFacetFunction.RemoveParameterByName("dir")
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
-                clsFacetFunction.RemoveParameterByName("rows")
-                clsFacetFunction.RemoveParameterByName("cols")
             End If
 
             If clsFacetFunction.strRCommand = "facet_grid" Then
@@ -3259,6 +3230,11 @@ Public Class sdgPlots
         End If
     End Sub
 
+    Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged
+        FacetsNumberOfRowsOrColumns()
+        AddRemoveFacets()
+    End Sub
+
     Private Sub SetScaleParameter()
         'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
         'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
@@ -3301,14 +3277,8 @@ Public Class sdgPlots
         SecondFactorReceiverEnabled()
         SetFacetParameters()
         FacetsCheck()
-        AddRemoveFacets()
-        FacetsNumberOfRowsOrColumns()
     End Sub
 
-    Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged
-        FacetsNumberOfRowsOrColumns()
-        AddRemoveFacets()
-    End Sub
     Private Sub SecondFactorReceiverEnabled()
         If bRCodeSet Then
             If ucr1stFactorReceiver.IsEmpty() Then

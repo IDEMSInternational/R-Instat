@@ -975,7 +975,7 @@ Partial Class dlgLinePlot
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(9, 479)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 482)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(401, 24)
@@ -1010,7 +1010,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 504)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 507)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 68
@@ -1289,7 +1289,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(9, 453)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(11, 453)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 82
@@ -1307,7 +1307,7 @@ Partial Class dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(423, 561)
+        Me.ClientSize = New System.Drawing.Size(423, 563)
         Me.Controls.Add(Me.ucrChkAddLineLineRange)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
