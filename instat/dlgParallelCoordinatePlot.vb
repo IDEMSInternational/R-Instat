@@ -43,6 +43,7 @@ Public Class dlgParallelCoordinatePlot
     Private clsFacetVariablesOperator As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
+    Private clsVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
 
@@ -161,6 +162,7 @@ Public Class dlgParallelCoordinatePlot
         clsFacetVariablesOperator = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
+        clsVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
         clsNamesFunction = New RFunction
@@ -189,6 +191,8 @@ Public Class dlgParallelCoordinatePlot
         clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsGGParCoordFunc, iPosition:=0)
 
         clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
         clsFacetRowOp.SetOperation("+")
         clsFacetRowOp.bBrackets = False
         clsFacetColOp.SetOperation("+")
@@ -196,7 +200,9 @@ Public Class dlgParallelCoordinatePlot
         clsFacetVariablesOperator.SetOperation("~")
         clsFacetVariablesOperator.bForceIncludeOperation = True
         clsFacetVariablesOperator.bBrackets = False
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -329,8 +335,6 @@ Public Class dlgParallelCoordinatePlot
 
     Private Sub UpdateParameters()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
-        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -339,11 +343,11 @@ Public Class dlgParallelCoordinatePlot
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
             Case strFacetCol, strFacetColAll
-                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
+                ucr1stFactorReceiver.ChangeParameterName("cols" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
             Case strFacetRow, strFacetRowAll
-                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
+                ucr1stFactorReceiver.ChangeParameterName("rows" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
         End Select
         bUpdatingParameters = False
     End Sub
@@ -379,32 +383,30 @@ Public Class dlgParallelCoordinatePlot
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
         End If
 
         If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
             clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.RemoveParameterByName("facets")
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE")
+            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=2)
         Else
             clsFacetFunction.RemoveParameterByName("margin")
         End If
 
         If bRow OrElse bRowAll Then
-            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
         Else
-            clsFacetVariablesOperator.RemoveParameterByName("left")
+            clsFacetFunction.RemoveParameterByName("rows")
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=1)
         Else
-            clsFacetVariablesOperator.RemoveParameterByName("right")
+            clsFacetFunction.RemoveParameterByName("cols")
         End If
     End Sub
 
@@ -430,10 +432,6 @@ Public Class dlgParallelCoordinatePlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol, strFacetColAll
-                        GetParameterValue(clsFacetColOp)
-                    Case strFacetRow, strFacetRowAll
-                        GetParameterValue(clsFacetRowOp)
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -444,6 +442,7 @@ Public Class dlgParallelCoordinatePlot
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
+
         SetPipeAssignTo()
     End Sub
 
@@ -473,4 +472,5 @@ Public Class dlgParallelCoordinatePlot
             clsGGParCoordFunc.RemoveParameterByName("order")
         End If
     End Sub
+
 End Class
