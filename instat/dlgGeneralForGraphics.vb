@@ -54,7 +54,6 @@ Public Class dlgGeneralForGraphics
     Private clsFacetVariablesOperator As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
-    Private clsVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
     Private clsAddCodeOperator As New ROperator
@@ -208,7 +207,6 @@ Public Class dlgGeneralForGraphics
         clsFacetVariablesOperator = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
-        clsVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
         clsAddCodeOperator = New ROperator
@@ -241,8 +239,6 @@ Public Class dlgGeneralForGraphics
         clsGlobalAesFunction.SetRCommand("aes")
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
-
         clsFacetRowOp.SetOperation("+")
         clsFacetRowOp.bBrackets = False
         clsFacetColOp.SetOperation("+")
@@ -250,9 +246,7 @@ Public Class dlgGeneralForGraphics
         clsFacetVariablesOperator.SetOperation("~")
         clsFacetVariablesOperator.bForceIncludeOperation = True
         clsFacetVariablesOperator.bBrackets = False
-
-        clsVarsFunction.SetPackageName("ggplot2")
-        clsVarsFunction.SetRCommand("vars")
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -724,6 +718,8 @@ Public Class dlgGeneralForGraphics
 
     Private Sub UpdateParameters()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -732,11 +728,11 @@ Public Class dlgGeneralForGraphics
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
             Case strFacetCol, strFacetColAll
-                ucr1stFactorReceiver.ChangeParameterName("cols" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
             Case strFacetRow, strFacetRowAll
-                ucr1stFactorReceiver.ChangeParameterName("rows" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsVarsFunction)
+                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
         End Select
         If Not clsGlobalAesFunction.ContainsParameter("x") Then
             clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -775,30 +771,32 @@ Public Class dlgGeneralForGraphics
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
-            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
         End If
 
         If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
             clsFacetFunction.SetRCommand("facet_grid")
-            clsFacetFunction.RemoveParameterByName("facets")
         End If
 
         If bRowAll OrElse bColAll Then
-            clsFacetFunction.AddParameter("margin", "TRUE", iPosition:=2)
+            clsFacetFunction.AddParameter("margin", "TRUE")
         Else
             clsFacetFunction.RemoveParameterByName("margin")
         End If
 
         If bRow OrElse bRowAll Then
-            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsVarsFunction, iPosition:=0)
+            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
         Else
-            clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetVariablesOperator.RemoveParameterByName("left")
         End If
 
         If bCol OrElse bColAll Then
-            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsVarsFunction, iPosition:=1)
+            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        ElseIf (bRow OrElse bRowAll) AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
         Else
-            clsFacetFunction.RemoveParameterByName("cols")
+            clsFacetVariablesOperator.RemoveParameterByName("right")
         End If
     End Sub
 
@@ -823,8 +821,13 @@ Public Class dlgGeneralForGraphics
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
+                    Case strFacetCol
+                        GetParameterValue(clsFacetColOp)
+                    Case strFacetRow
+                        GetParameterValue(clsFacetRowOp)
                 End Select
             End If
+
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             Else
@@ -903,5 +906,4 @@ Public Class dlgGeneralForGraphics
         End If
         SetCalculationColour()
     End Sub
-
 End Class
