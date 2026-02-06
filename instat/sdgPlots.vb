@@ -2392,11 +2392,11 @@ Public Class sdgPlots
 
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
-        clsColVarsFunction.SetPackageName("ggplot2")
-        clsColVarsFunction.SetRCommand("vars")
+        'clsColVarsFunction.SetPackageName("dplyr")
+        'clsColVarsFunction.SetRCommand("vars")
 
-        clsRowVarsFunction.SetPackageName("ggplot2")
-        clsRowVarsFunction.SetRCommand("vars")
+        'clsRowVarsFunction.SetPackageName("dplyr")
+        'clsRowVarsFunction.SetRCommand("vars")
 
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
@@ -3145,7 +3145,8 @@ Public Class sdgPlots
 
                 If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
-                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    'clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                    clsFacetFunction.AddParameter("facets", "." & "~" & ucr1stFactorReceiver.GetVariableNames(False))
                     If rdoHorizontal.Checked Then
                         clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
                     Else
@@ -3180,9 +3181,15 @@ Public Class sdgPlots
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
+                    clsRowVarsFunction.SetPackageName("dplyr")
+                    clsRowVarsFunction.SetRCommand("vars")
                     clsRowVarsFunction.ClearParameters()
+                    clsRowVarsFunction.AddParameter(ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
+                    clsColVarsFunction.SetPackageName("dplyr")
+                    clsColVarsFunction.SetRCommand("vars")
                     clsColVarsFunction.ClearParameters()
+                    clsColVarsFunction.AddParameter(ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
