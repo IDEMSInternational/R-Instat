@@ -223,6 +223,7 @@ Public Class dlgDescribeTwoVariable
         clsPipeOperator = New ROperator
         clsTabFootnoteOperator = New ROperator
         clsgtFunction = New RFunction
+
         clsSummaryOperator = New ROperator
         clsMapOperator = New ROperator
         clsPivotWiderFunction = New RFunction
@@ -423,6 +424,7 @@ Public Class dlgDescribeTwoVariable
 
         clsgtFunction.SetPackageName("instatExtras")
         clsgtFunction.SetRCommand("generate_summary_tables")
+        clsgtFunction.AddParameter("rm_summary_title", "TRUE", iPosition:=0)
 
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
@@ -597,9 +599,12 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayMargins.Visible = (rdoTwoVariable.Checked AndAlso (IsFactorByFactor() OrElse IsFactorByNumeric())) OrElse
     (rdoThreeVariable.Checked AndAlso (IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor()))
 
-        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso
-    (IsFactorByFactor() OrElse IsFactorByFactorByNumeric() OrElse
-    IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor())
+        ucrInputMarginName.Visible =
+    ucrChkDisplayMargins.Checked AndAlso
+    ((rdoTwoVariable.Checked AndAlso (IsFactorByFactor() OrElse IsFactorByNumeric())) OrElse
+     (rdoThreeVariable.Checked AndAlso (IsFactorByFactorByNumeric() OrElse
+                                        IsFactorByNumericByFactor() OrElse
+                                        IsFactorByFactorByFactor())))
 
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = rdoTwoVariable.Checked AndAlso ucrChkDisplayAsPercentage.Checked AndAlso rdoORow.Checked AndAlso IsFactorByFactor()
@@ -609,6 +614,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
 
+
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             ucrChkOmitMissing.Visible = Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric()
@@ -617,6 +623,8 @@ Public Class dlgDescribeTwoVariable
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
         If rdoThreeVariable.Checked Then
+            ucrChkSwapXYVar.Visible = IsNumericByNumericByFactor()
+
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                 ucrReorderSummary.Visible = True
                 cmdSummaries.Visible = True
@@ -627,6 +635,13 @@ Public Class dlgDescribeTwoVariable
             ucrChkOmitMissing.Visible = IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric()
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso (IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric())
         End If
+
+        If Not ucrChkSwapXYVar.Visible Then
+            ucrChkSwapXYVar.Checked = False
+        End If
+
+        lblMarginName.Visible = ucrInputMarginName.Visible
+
     End Sub
 
     Private Sub ChangeBaseRCode()
