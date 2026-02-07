@@ -1118,10 +1118,10 @@ Public Class dlgLinePlot
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
                 '' Feb 07 2026
-                ''This should be figured out, when we have mutate in the clsPipeOperator for the other Cases
+                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
-                        GetParameterValue(clsFacetVariablesOperator)
+                        'GetParameterValue(clsFacetVariablesOperator)
                 End Select
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
