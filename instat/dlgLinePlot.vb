@@ -529,7 +529,7 @@ Public Class dlgLinePlot
         ucrInputFormula.SetText("y ~ x")
 
         clsDummyFunction.AddParameter("check", "line", iPosition:=0)
-        clsDummyFunction.AddParameter("checked", "False", iPosition:=1)
+        ' clsDummyFunction.AddParameter("checked", "False", iPosition:=1)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -1117,6 +1117,8 @@ Public Class dlgLinePlot
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
+                '' Feb 07 2026
+                ''This should be figured out, when we have mutate in the clsPipeOperator for the other Cases
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
