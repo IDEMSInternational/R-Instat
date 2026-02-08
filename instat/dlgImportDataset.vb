@@ -862,12 +862,18 @@ Public Class dlgImportDataset
         'If ucrChkDropEmptyCols is checked, add the script in the pipeOperator as the input to the data argument in the "convert_to_character_matrix" function
         'The pipeOperator feeds the imported data to the "remove_empty" function in the janitor package to remove all the empty rows and columns
         If ucrChkDropEmptyCols.Checked Then
+
             Dim clsPipeClone As ROperator = clsPipeOperator.Clone()
             clsPipeClone.RemoveAssignTo()
+
+            clsPipeClone.RemoveParameterByName("y")
+            clsPipeClone.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
+
             clsAsCharacterFunc.AddParameter("data", clsPipeClone.ToScript())
         Else
             clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
         End If
+
 
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
         Try
@@ -1087,10 +1093,11 @@ Public Class dlgImportDataset
 
     Private Sub InitializeSheetSelection()
         ' Ensure at least one sheet exists
-        If clbSheets.Items.Count > 0 Then
+        If clbSheets.Items.Count > 0 AndAlso clbSheets.CheckedItems.Count = 0 Then
             ' Temporarily remove event handling to prevent infinite recursion
             RemoveHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
             clbSheets.SetItemChecked(0, True) ' Check the first sheet
+            dctSelectedExcelSheets.Clear()
             dctSelectedExcelSheets(1) = clbSheets.Items.Item(0).ToString()
             AddHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
             lblImportingSheets.Hide()
@@ -1294,32 +1301,6 @@ Public Class dlgImportDataset
             ucrChkDropEmptyCols.Visible = True
             If ucrChkDropEmptyCols.Checked Then
                 Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
-                Dim iTemp As Integer
-                Dim strRowMaxParamName As String = ""
-
-                If IsTextFileFormat() Then
-                    strRowMaxParamName = If(rdoSeparatortext.Checked, "nrows", "n_max")
-                ElseIf IsCSVFileFormat() Then
-                    strRowMaxParamName = "nrows"
-                ElseIf IsJSONFileFormat() Then
-                    strRowMaxParamName = "nrows"
-                ElseIf IsExcelFileFormat() Then
-                    strRowMaxParamName = "n_max"
-                ElseIf IsSavFileFormat() Then
-                    strRowMaxParamName = "n_max"
-                End If
-
-                'determine the correct maximum number of lines to preview 
-                If clsTempFunction.ContainsParameter(strRowMaxParamName) _
-                    AndAlso Integer.TryParse(clsTempFunction.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
-                    clsTempFunction.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
-                Else
-                    clsTempFunction.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
-                End If
-
-                If Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat() OrElse IsJSONFileFormat()) Then
-                    clsTempFunction.RemoveParameterByName(strRowMaxParamName)
-                End If
 
                 clsTempFunction.RemoveAssignTo()
                 clsTempFunction.bExcludeAssignedFunctionOutput = False
