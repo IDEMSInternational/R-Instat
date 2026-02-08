@@ -874,7 +874,6 @@ Public Class dlgImportDataset
             clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
         End If
 
-
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
         Try
             dfTemp = expTemp?.AsDataFrame
