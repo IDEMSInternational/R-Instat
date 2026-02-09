@@ -866,7 +866,6 @@ Public Class dlgImportDataset
             Dim clsPipeClone As ROperator = clsPipeOperator.Clone()
             clsPipeClone.RemoveAssignTo()
 
-            clsPipeClone.RemoveParameterByName("y")
             clsPipeClone.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
 
             clsAsCharacterFunc.AddParameter("data", clsPipeClone.ToScript())
@@ -896,7 +895,6 @@ Public Class dlgImportDataset
         If clsTempImport.ContainsParameter("n_max") Then
             clsTempImport.RemoveParameterByName("n_max")
         End If
-        clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
 
     End Sub
 
