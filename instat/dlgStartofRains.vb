@@ -162,7 +162,7 @@ Public Class dlgStartofRains
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "tr_perc_sub")
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoEvapo, "tr_perc_sub")
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRPercentile, {rdoTRPercentile}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.8)
-        ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRAmount, {rdoTRAmount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="20")
+        ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRAmount, {rdoTRAmount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudEvapo, {rdoEvapo}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrReceiverEvap, {rdoEvapo}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTRCalculateBy.SetLinkedDisplayControl(lblTRVal)
@@ -170,7 +170,7 @@ Public Class dlgStartofRains
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "tr_amount")
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoEvapo, "evap")
 
-        ucrNudTRAmount.SetParameter(New RParameter("tr_amount", 1, False), False)
+        ucrNudTRAmount.SetParameter(New RParameter("tr_amount", 20, False), False)
         ucrNudTRAmount.SetMinMax(1, Integer.MaxValue)
 
         ucrChkTotalRainfall.SetParameter(New RParameter("tr_sub", clsCalcRainRollingSum, 1, False), False)
@@ -382,6 +382,7 @@ Public Class dlgStartofRains
         bResetSubdialog = True
         ucrSelectorForStartofRains.Reset()
         ucrSaveDefinition.Reset()
+        SetRCodeForControls(True)
         ucrNudTROverDays.SetText("3")
         ucrNudTRAmount.SetText("20")
 
@@ -944,7 +945,7 @@ Public Class dlgStartofRains
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertLinkedVariablesFunction, iPosition:=4)
         ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=6)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertssndLinkedVariableFunction, iPosition:=9)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertssndLinkedVariableFunction, iPosition:=8)
         SetReceiver()
         ChangeDSValue()
         AdditionalCondition()
@@ -1104,7 +1105,7 @@ Public Class dlgStartofRains
             clsConvertColumnType2Function.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsStationTypeFunction, iPosition:=2)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertStationtypeFunction, iPosition:=3)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=8)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=9)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDeleteunusedrowFunction)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsStationTypeFunction)
@@ -1526,4 +1527,5 @@ Public Class dlgStartofRains
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
     End Sub
 End Class
+
 
