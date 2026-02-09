@@ -841,7 +841,9 @@ Public Class dlgCheckSummary
         End If
 
         Dim strYearVar As String = ucrReceiverYear.GetVariableNames.Replace("]", "").Replace("""", "")
-        Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame
+        Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsDataFrameParam.RemoveParameterByName("use_current_filter")
+        clsDataFrameParam.AddParameter("use_current_filter", "FALSE")
 
         Dim strLabel1 As String = GetRecentGridValue(0, 1)
         Dim strLabel2 As String = GetRecentGridValue(1, 1)
