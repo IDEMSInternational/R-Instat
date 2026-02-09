@@ -119,6 +119,14 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverColour.SetLinkedDisplayControl(lblColour)
         ucrReceiverColour.bWithQuotes = False
 
+        ucrRecieverFill.SetParameter(New RParameter("Fill", iNewPosition:=0))
+        ucrRecieverFill.SetParameterIsString()
+        ucrRecieverFill.SetDataType("factor")
+        ucrRecieverFill.strSelectorHeading = "Factors"
+        ucrRecieverFill.Selector = ucrSelectorTwoVarGraph
+        ucrRecieverFill.SetLinkedDisplayControl(lblFill)
+        ucrRecieverFill.bWithQuotes = False
+
         ucrReceiverSecondVar.SetParameter(New RParameter("fill", 0))
         ucrReceiverSecondVar.Selector = ucrSelectorTwoVarGraph
         ucrReceiverSecondVar.SetParameterIsString()
@@ -275,12 +283,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrChkXSidePlot.SetText("X Side Plot")
         ucrChkXSidePlot.AddParameterPresentCondition(True, "X Side Plot")
         ucrChkXSidePlot.AddParameterPresentCondition(False, "X Side Plot", False)
-        ucrChkXSidePlot.AddToLinkedControls({ucrNudAlpha}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkXSidePlot.AddToLinkedControls({ucrNudAlpha, ucrRecieverFill}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSidePlot.SetText("Y Side Plot")
         ucrChkYSidePlot.AddParameterPresentCondition(True, "Y Side Plot")
         ucrChkYSidePlot.AddParameterPresentCondition(False, "Y Side Plot", False)
-        ucrChkYSidePlot.AddToLinkedControls({ucrNudYAlpha}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkYSidePlot.AddToLinkedControls({ucrNudYAlpha, ucrRecieverFill}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudAlpha.SetParameter(New RParameter("alpha", 2))
         ucrNudAlpha.Minimum = 0
@@ -880,7 +888,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged,
         ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged,
         ucrPnlByPairs.ControlContentsChanged, ucrReceiverColour.ControlContentsChanged, ucrChkXSidePlot.ControlContentsChanged,
-        ucrChkYSidePlot.ControlContentsChanged
+        ucrChkYSidePlot.ControlContentsChanged, ucrRecieverFill.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1150,7 +1158,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrNudAlpha.ControlValueChanged
         If ucrChkXSidePlot.Checked Then
             clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsGGXSideFunction, bIncludeArgumentName:=False, iPosition:=1)
-            clsAesXLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, iPosition:=0)
+            clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, iPosition:=0)
             clsGGXSideFunction.AddParameter("alpha", ucrNudAlpha.GetText, iPosition:=1)
             clsGGXSideFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
             clsGGXSideFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
@@ -1166,7 +1174,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrChkYSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSidePlot.ControlValueChanged, ucrNudYAlpha.ControlValueChanged
         If ucrChkYSidePlot.Checked Then
             clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsGGYSideFunction, bIncludeArgumentName:=False, iPosition:=2)
-            clsAesYLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, iPosition:=0)
+            clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, iPosition:=0)
             clsGGYSideFunction.AddParameter("alpha", ucrNudYAlpha.GetText, iPosition:=1)
             clsGGYSideFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
             clsGGYSideFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
