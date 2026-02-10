@@ -55,6 +55,12 @@ Public Class dlgCheckSummary
     Private clsAesTextFirstLast As New RFunction
     Private clsGeomPointFirstLast As New RFunction
 
+    Private clsGeomSegmentFunction As New RFunction
+    Private clsSegmentAesFunction As New RFunction
+    Private clsGeomPoint2Function As New RFunction
+    Private clsPoint2AesFunction As New RFunction
+
+
     ' Plot Options Objects
     Private clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
     Private clsXScalecontinuousFunction As New RFunction
@@ -244,6 +250,9 @@ Public Class dlgCheckSummary
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrChkPoints.SetText("Add Points")
+        ucrChkPoints.AddParameterPresentCondition(True, "geom_point")
+        ucrChkPoints.AddParameterPresentCondition(False, "geom_point", False)
+
         ucrChkFirstAndLast.SetText("Label First and Last")
         ucrChkWithSE.SetText("With Standard Error")
 
@@ -294,11 +303,19 @@ Public Class dlgCheckSummary
         clsMaxFunctionFirstLast = New RFunction
         clsAesTextFirstLast = New RFunction
 
+        clsGeomSegmentFunction = New RFunction
+        clsSegmentAesFunction = New RFunction
+        clsGeomPoint2Function = New RFunction
+        clsPoint2AesFunction = New RFunction
+
+        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+
         rdoRecent.Checked = True
+
         rdoMeanLine.Checked = False
         rdoFittedLine.Checked = False
         rdoBrokenStick.Checked = False
-        ucrChkPoints.Checked = False
+        ucrChkPoints.Checked = True
         ucrChkFirstAndLast.Checked = False
         ucrChkWithSE.Checked = False
 
@@ -614,6 +631,14 @@ Public Class dlgCheckSummary
 
         clsAesTextFirstLast.SetRCommand("aes")
 
+        clsGeomSegmentFunction.SetPackageName("ggplot2")
+        clsGeomSegmentFunction.SetRCommand("geom_segment")
+        clsGeomSegmentFunction.AddParameter("linewidth", "0.8")
+        clsGeomSegmentFunction.AddParameter("lty", "2")
+
+        clsSegmentAesFunction.SetRCommand("aes")
+
+
 
         UpdateRecentRCode()
         UpdateTrendRCode()
@@ -699,7 +724,7 @@ Public Class dlgCheckSummary
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged,
-        ucrReceiverYVar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverColourBy.ControlContentsChanged,
+        ucrReceiverYVar.ControlContentsChanged, ucrReceiverSecondYVar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverColourBy.ControlContentsChanged,
         ucrReceiverFacetBy.ControlContentsChanged, ucrChkPoints.ControlContentsChanged, ucrChkFirstAndLast.ControlContentsChanged,
         ucrChkWithSE.ControlContentsChanged, ucrSave.ControlContentsChanged
 
@@ -970,8 +995,71 @@ Public Class dlgCheckSummary
         End If
 
         Dim strXVar As String = ucrReceiverX.GetVariableNames.Replace("]", "").Replace("""", "").Replace("'", "")
-        clsRaesFunction.AddParameter("x", "as.numeric(" & strXVar & ")", iPosition:=1)
+        Dim strXExpression As String = "as.numeric(" & strXVar & ")"
+        If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
+            strXExpression = "as.numeric(as.character(" & strXVar & "))"
+        End If
+        clsRaesFunction.AddParameter("x", strXExpression, iPosition:=1)
         clsXLabsFunction.AddParameter("label", QuoteRString(strXVar))
+
+        If Not ucrReceiverSecondYVar.IsEmpty Then
+            Dim strYVar As String = ucrReceiverYVar.GetVariableNames.Replace("""", "")
+            Dim strSecondYVar As String = ucrReceiverSecondYVar.GetVariableNames.Replace("""", "")
+
+            clsSegmentAesFunction.ClearParameters()
+            clsSegmentAesFunction.SetRCommand("aes")
+
+            clsGeomPoint2Function.SetPackageName("ggplot2")
+            clsGeomPoint2Function.SetRCommand("geom_point")
+            clsGeomPoint2Function.AddParameter("mapping", clsRFunctionParameter:=clsPoint2AesFunction)
+            clsGeomPoint2Function.AddParameter("size", "2")
+            clsGeomPoint2Function.AddParameter("colour", """darkgreen""")
+            clsGeomPoint2Function.AddParameter("shape", "17")
+
+            clsPoint2AesFunction.SetRCommand("aes")
+
+
+            clsSegmentAesFunction.AddParameter("x", strXExpression, iPosition:=0)
+            clsSegmentAesFunction.AddParameter("xend", strXExpression, iPosition:=1)
+            clsSegmentAesFunction.AddParameter("y", strYVar, iPosition:=2)
+            clsSegmentAesFunction.AddParameter("yend", strSecondYVar, iPosition:=3)
+
+            clsGeomSegmentFunction.RemoveParameterByName("mapping")
+            clsGeomSegmentFunction.AddParameter("mapping", clsRFunctionParameter:=clsSegmentAesFunction)
+
+            If ucrReceiverColourBy.IsEmpty Then
+                If Not clsGeomSegmentFunction.ContainsParameter("colour") Then
+                    clsGeomSegmentFunction.AddParameter("colour", """darkgray""")
+                End If
+            Else
+                clsGeomSegmentFunction.RemoveParameterByName("colour")
+            End If
+
+            clsBaseOperator.AddParameter("geom_segment", clsRFunctionParameter:=clsGeomSegmentFunction, iPosition:=2)
+
+            clsPoint2AesFunction.ClearParameters()
+            clsPoint2AesFunction.SetRCommand("aes")
+
+            clsPoint2AesFunction.AddParameter("x", strXExpression, iPosition:=0)
+            clsPoint2AesFunction.AddParameter("y", strSecondYVar, iPosition:=1)
+
+            clsGeomPoint2Function.RemoveParameterByName("mapping")
+            clsGeomPoint2Function.AddParameter("mapping", clsRFunctionParameter:=clsPoint2AesFunction)
+
+            If ucrReceiverColourBy.IsEmpty Then
+                If Not clsGeomPoint2Function.ContainsParameter("colour") Then
+                    clsGeomPoint2Function.AddParameter("colour", """darkgreen""")
+                End If
+            Else
+                clsGeomPoint2Function.RemoveParameterByName("colour")
+            End If
+
+            clsBaseOperator.AddParameter("geom_point2", clsRFunctionParameter:=clsGeomPoint2Function, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_segment")
+            clsBaseOperator.RemoveParameterByName("geom_point2")
+        End If
+
 
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
