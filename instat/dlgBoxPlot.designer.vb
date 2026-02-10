@@ -543,7 +543,7 @@ Partial Class dlgBoxplot
         Me.ucrNudOutlierCoefficient.AutoSize = True
         Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(348, 500)
+        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(432, 501)
         Me.ucrNudOutlierCoefficient.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
