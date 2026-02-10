@@ -41,7 +41,7 @@ Public Class dlgDescribeOneVariableLikertGraph
     End Sub
     Private Function GetDataFrameFunction(strDataFrame As String, strColumns As String) As RFunction
         Dim clsGetDataFrame As New RFunction
-        clsGetDataFrame.SetRCommand("data_book$get_data_frame")
+        clsGetDataFrame.SetRCommand("data_book$get_columns_from_data")
         clsGetDataFrame.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
         clsGetDataFrame.AddParameter("col_names", "c(" & strColumns & ")")
         Return clsGetDataFrame
