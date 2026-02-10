@@ -332,6 +332,7 @@ Public Class dlgCheckSummary
 
         clsWithFunction.SetRCommand("with")
 
+
         ' Trend Function Config
         ' Initialize Plot Options Objects
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
