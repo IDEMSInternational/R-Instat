@@ -437,7 +437,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGGXSideFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
 
         clsAesXLabelFunction.SetRCommand("aes")
-        clsAesXLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
+        clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
 
         clsGGYSideFunction.SetPackageName("ggside")
         clsGGYSideFunction.SetRCommand("geom_ysidedensity")
@@ -445,7 +445,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGGYSideFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
 
         clsAesYLabelFunction.SetRCommand("aes")
-        clsAesYLabelFunction.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
+        clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRFacet.SetPackageName("ggplot2")
         clsRFacet.SetRCommand("facet_wrap")
@@ -1155,7 +1155,7 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
-    Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrNudAlpha.ControlValueChanged
+    Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrNudAlpha.ControlValueChanged, ucrRecieverFill.ControlValueChanged
         If ucrChkXSidePlot.Checked Then
             clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsGGXSideFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, iPosition:=0)
@@ -1171,7 +1171,7 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
-    Private Sub ucrChkYSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSidePlot.ControlValueChanged, ucrNudYAlpha.ControlValueChanged
+    Private Sub ucrChkYSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSidePlot.ControlValueChanged, ucrNudYAlpha.ControlValueChanged, ucrRecieverFill.ControlValueChanged
         If ucrChkYSidePlot.Checked Then
             clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsGGYSideFunction, bIncludeArgumentName:=False, iPosition:=2)
             clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, iPosition:=0)
