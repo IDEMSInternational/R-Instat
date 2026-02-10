@@ -524,7 +524,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudMaxSize.AutoSize = True
         Me.ucrNudMaxSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxSize.Location = New System.Drawing.Point(104, 317)
+        Me.ucrNudMaxSize.Location = New System.Drawing.Point(145, 317)
         Me.ucrNudMaxSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSize.Name = "ucrNudMaxSize"
@@ -569,7 +569,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrSaveBar.Location = New System.Drawing.Point(10, 512)
         Me.ucrSaveBar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(403, 24)
+        Me.ucrSaveBar.Size = New System.Drawing.Size(457, 24)
         Me.ucrSaveBar.TabIndex = 59
         '
         'ucrReceiverByFactor
@@ -850,7 +850,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkIncreaseSize.Checked = False
         Me.ucrChkIncreaseSize.Location = New System.Drawing.Point(10, 317)
         Me.ucrChkIncreaseSize.Name = "ucrChkIncreaseSize"
-        Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(129, 23)
         Me.ucrChkIncreaseSize.TabIndex = 63
         '
         'ucrInputStation
