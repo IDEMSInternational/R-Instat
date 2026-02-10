@@ -26,6 +26,7 @@ Public Class dlgPICSARainfall
         Rainfall
         Temperature
         General
+        Trend
     End Enum
 
     Private clsRggplotFunction As New RFunction
@@ -127,7 +128,8 @@ Public Class dlgPICSARainfall
     Private clsVarsFunction As New RFunction
 
     Private clsAsDate As New RFunction
-    Private clsAsNumeric As New RFunction
+    Private clsAsNumericX As New RFunction
+    Private clsAsNumericY As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
 
@@ -156,7 +158,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.SetParameter(New RParameter("data", 0))
         ucrSelectorPICSARainfall.SetParameterIsrfunction()
 
-        ucrReceiverForPICSA.SetParameter(New RParameter("y", 0))
+        ucrReceiverForPICSA.SetParameter(New RParameter("y"))
         ucrReceiverForPICSA.Selector = ucrSelectorPICSARainfall
         ucrReceiverForPICSA.SetIncludedDataTypes({"numeric"}, True)
         ucrReceiverForPICSA.SetSelectorHeading("Numerics")
@@ -314,7 +316,8 @@ Public Class dlgPICSARainfall
         clsDatePeriodOperator = New ROperator
 
         clsAsDate = New RFunction
-        clsAsNumeric = New RFunction
+        clsAsNumericX = New RFunction
+        clsAsNumericY = New RFunction
 
         clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYLabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -327,6 +330,7 @@ Public Class dlgPICSARainfall
 
         clsDummyFunction.AddParameter("upper_limit", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("lower_limit", "FALSE", iPosition:=1)
+        clsDummyFunction.AddParameter("rdo_checked", "numeric", iPosition:=2)
 
         clsYScalecontinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYContinuous, iPosition:=3)
         clsCLimitsYContinuous.SetRCommand("c")
@@ -405,7 +409,7 @@ Public Class dlgPICSARainfall
 
         clsFilterFunction.SetPackageName("dplyr")
         clsFilterFunction.SetRCommand("filter")
-        clsFilterFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+        clsFilterFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsFilterFunction.AddParameter("var", clsROperatorParameter:=clsEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsEqualToOperator.SetOperation("==")
@@ -426,18 +430,18 @@ Public Class dlgPICSARainfall
         clsGeomSegmentFunction.AddParameter("lty", "2", iPosition:=2)
 
         clsSegmentAesFunction.SetRCommand("aes")
-        clsSegmentAesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+        clsSegmentAesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
 
         clsGeomPoint2Function.SetPackageName("ggplot2")
         clsGeomPoint2Function.SetRCommand("geom_point")
-        clsGeomPoint2Function.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsGeomPoint2Function.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsGeomPoint2Function.AddParameter("mapping", clsRFunctionParameter:=clsPoint2AesFunction, iPosition:=1)
         clsGeomPoint2Function.AddParameter("size", "2", iPosition:=2)
         clsGeomPoint2Function.AddParameter("colour", Chr(34) & "darkgreen" & Chr(34), iPosition:=3)
         clsGeomPoint2Function.AddParameter("shape", "17", iPosition:=4)
 
         clsPoint2AesFunction.SetRCommand("aes")
-        clsPoint2AesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+        clsPoint2AesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
 
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
@@ -699,13 +703,14 @@ Public Class dlgPICSARainfall
         clsDatePeriodOperator.bSpaceAroundOperation = False
         clsDatePeriodOperator.bToScriptAsRString = True
 
-        clsAsNumeric.SetRCommand("as.numeric")
+        clsAsNumericX.SetRCommand("as.numeric")
+        clsAsNumericY.SetRCommand("as.numeric")
 
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
 
-        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
-        clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=2)
+        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
+        clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
@@ -723,15 +728,15 @@ Public Class dlgPICSARainfall
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
+        ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
         ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsPoint2AesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
-        ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
-        ucrReceiverX.SetRCode(clsAsNumeric, bReset)
+        ucrReceiverX.SetRCode(clsAsNumericX, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         ucrChkIncludeStatus.SetRCode(clsBaseOperator, bReset)
@@ -740,6 +745,7 @@ Public Class dlgPICSARainfall
 
         If bReset Then
             AutoFacetStation()
+            ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
         End If
     End Sub
 
@@ -877,8 +883,8 @@ Public Class dlgPICSARainfall
                                        dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction,
                                        clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile,
-                                       clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction,
-                                       clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                       clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewAsNumericY:=clsAsNumericY,
+                                       clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumericX:=clsAsNumericX, clsNewYScaleDateFunction:=clsYScaleDateFunction,
                                        clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY,
                                        clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine,
                                        clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY,
@@ -896,7 +902,7 @@ Public Class dlgPICSARainfall
 
     Private Sub RemoveFunction()
         Select Case enumPICSAMode
-            Case PICSAMode.General
+            Case PICSAMode.General OrElse PICSAMode.Trend
                 clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             Case PICSAMode.Rainfall
                 clsBaseOperator.RemoveParameterByName("geom_smooth")
@@ -946,6 +952,11 @@ Public Class dlgPICSARainfall
                 ucrChkWithSE.Visible = True
                 Me.Text = "PICSA General Graphs"
                 ucrBase.iHelpTopicID = 521
+            Case PICSAMode.Trend
+                ucrChkLineofBestFit.Visible = True
+                ucrChkWithSE.Visible = True
+                Me.Text = "Climatic Trend Graph"
+                ucrSave.SetPrefix("climatic_trend_graph")
             Case PICSAMode.Rainfall
                 ucrChkLineofBestFit.Visible = False
                 ucrChkWithSE.Visible = False
@@ -985,8 +996,7 @@ Public Class dlgPICSARainfall
         AddRemoveGroupBy()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged, ucrReceiverForPICSA.ControlValueChanged
-        AddRemoveGroupBy()
+    Private Sub ucrReceiverForPICSA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForPICSA.ControlValueChanged
         YAxisDataTypeCheck()
     End Sub
 
