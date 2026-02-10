@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -86,12 +86,11 @@ Public Class dlgCalculator
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrChkStoreScalar.Checked = False
         ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
-        ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(),
-                                           strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                   strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
                                            bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
                                            bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
                                            bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
@@ -216,6 +215,7 @@ Public Class dlgCalculator
     ''' </summary>
     Private Sub SaveResults()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsToData)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFilterIndexAssign)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCalcFullAssign)
@@ -225,7 +225,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 160)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
-            ucrBase.clsRsyntax.SetAssignTo("calc")
+            ucrBase.clsRsyntax.SetAssignTo("calc", strTempColumn:="", strTempDataframe:="")
 
             Dim strDF As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
             Dim strCol As String = ucrCalc.ucrSaveResultInto.GetText
@@ -252,18 +252,15 @@ Public Class dlgCalculator
                 clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
                 clsRepFunction.AddParameter("times", clsRFunctionParameter:=clsNrowFunction, iPosition:=1)
                 clsGet0Function.ClearParameters()
-                clsGet0Function.AddParameter("x", Chr(34) & "calc" & Chr(34), iPosition:=0)
+                clsGet0Function.AddParameter("x", Chr(34) & strCol & Chr(34), iPosition:=0)
                 clsGet0Function.AddParameter("envir", clsRFunctionParameter:=clsAsEnvironmentFunction, iPosition:=1)
                 clsGet0Function.AddParameter("ifnotfound", clsRFunctionParameter:=clsRepFunction, iPosition:=2)
                 clsCalcFullAssign.ClearParameters()
                 clsCalcFullAssign.AddParameter("left", "calc_full", bIncludeArgumentName:=False, iPosition:=0)
                 clsCalcFullAssign.AddParameter("right", clsRFunctionParameter:=clsGet0Function, bIncludeArgumentName:=False, iPosition:=1)
 
-                clsIndexOperator.ClearParameters()
-                clsIndexOperator.AddParameter("left", "calc_full", bIncludeArgumentName:=False, iPosition:=0)
-                clsIndexOperator.AddParameter("right", "filter_index]", bIncludeArgumentName:=False, iPosition:=1)
                 clsIndexAssign.ClearParameters()
-                clsIndexAssign.AddParameter("left", clsROperatorParameter:=clsIndexOperator, bIncludeArgumentName:=False, iPosition:=0)
+                clsIndexAssign.AddParameter("left", "calc_full[filter_index]", bIncludeArgumentName:=False, iPosition:=0)
                 clsIndexAssign.AddParameter("right", "calc", bIncludeArgumentName:=False, iPosition:=1)
 
                 clsAddColumnsToData.ClearParameters()
