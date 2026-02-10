@@ -569,7 +569,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrSaveBar.Location = New System.Drawing.Point(10, 512)
         Me.ucrSaveBar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(372, 24)
+        Me.ucrSaveBar.Size = New System.Drawing.Size(403, 24)
         Me.ucrSaveBar.TabIndex = 59
         '
         'ucrReceiverByFactor
