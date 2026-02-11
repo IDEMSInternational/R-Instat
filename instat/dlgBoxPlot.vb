@@ -636,7 +636,7 @@ Public Class dlgBoxplot
     Private Sub TestOkEnabled()
         Dim bEnableOk As Boolean = True
 
-        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse Not ucrSaveBoxplot.IsComplete Then
+        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse (ucrSaveBoxplot.ucrChkSave.Checked AndAlso Not ucrSaveBoxplot.IsComplete) Then
             bEnableOk = False
         ElseIf rdoBoxplotTufte.Checked AndAlso ucrNudOutlierCoefficient.IsEmpty Then
             bEnableOk = False
@@ -651,6 +651,10 @@ Public Class dlgBoxplot
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBoxplot.ControlValueChanged
         TestOkEnabled()
     End Sub
 
