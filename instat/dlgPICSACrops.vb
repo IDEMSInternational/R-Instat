@@ -226,14 +226,12 @@ Public Class dlgPICSACrops
         ucrSaveDefinitionCrops.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveDefinitionCrops.SetIsComboBox()
         ucrSaveDefinitionCrops.SetCheckBoxText("Store Crops Data Definitions")
-        ucrSaveDefinitionCrops.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveDefinitionCrops.SetDataFrameSelector(ucrSelectorForCrops.ucrAvailableDataFrames)
 
         ucrSaveDefinitionProportions.SetPrefix("crops_proportion_definition")
         ucrSaveDefinitionProportions.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveDefinitionProportions.SetIsComboBox()
         ucrSaveDefinitionProportions.SetCheckBoxText("Store Proportion Definitions")
-        ucrSaveDefinitionProportions.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveDefinitionProportions.SetDataFrameSelector(ucrSelectorForCrops.ucrAvailableDataFrames)
 
         'Linking of controls
