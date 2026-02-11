@@ -22,6 +22,12 @@ Public Class dlgPICSACrops
     Private clsCropsFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsSequenceFunction, clsSequencewaterFunction, clsSequencePlantingFunction As New RFunction
+    Private clsGetDataNamesFunction, clsSetDiffFunction, clsUpdatedDataNamesFunction, clsStartsWithFunction,
+            clsGetDataFrameFunction, clsGetCropDefinitionFunction, clsGetSeasonStartDefinitionFunction,
+            clsStartsWithPropsFunction, clsGetDataFramePropsFunction As New RFunction
+
+    Private clsFirstBracketOperator, clsEmptySpaceOperator, clsEmptySpacePropsOperator As New ROperator
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
@@ -210,13 +216,28 @@ Public Class dlgPICSACrops
         ucrChkDataCrops.SetText("Return Crops Data")
         ucrChkDataCrops.SetParameter(New RParameter("return_crops_table", 11), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkDataCrops.SetRDefault("TRUE")
+        ucrChkDataCrops.AddToLinkedControls(ucrSaveDefinitionCrops, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         ucrChkDataProp.SetText("Calculate Proportions")
         ucrChkDataProp.SetParameter(New RParameter("definition_props", 12), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkDataProp.SetRDefault("TRUE")
 
+        ucrSaveDefinitionCrops.SetPrefix("crops_data_definition")
+        ucrSaveDefinitionCrops.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveDefinitionCrops.SetIsComboBox()
+        ucrSaveDefinitionCrops.SetCheckBoxText("Store Crops Data Definitions")
+        ucrSaveDefinitionCrops.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveDefinitionCrops.SetDataFrameSelector(ucrSelectorForCrops.ucrAvailableDataFrames)
+
+        ucrSaveDefinitionProportions.SetPrefix("crops_proportion_definition")
+        ucrSaveDefinitionProportions.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveDefinitionProportions.SetIsComboBox()
+        ucrSaveDefinitionProportions.SetCheckBoxText("Store Proportion Definitions")
+        ucrSaveDefinitionProportions.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveDefinitionProportions.SetDataFrameSelector(ucrSelectorForCrops.ucrAvailableDataFrames)
+
         'Linking of controls
-        ucrChkDataProp.AddToLinkedControls(ucrChkDataCrops, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkDataProp.AddToLinkedControls({ucrChkDataCrops, ucrSaveDefinitionProportions}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         AutoFillReceivers(lstEndReceivers)
         AutoFillReceivers(lstStartReceivers)
     End Sub
@@ -227,10 +248,28 @@ Public Class dlgPICSACrops
         clsSequenceFunction = New RFunction
         clsSequencePlantingFunction = New RFunction
         clsSequencewaterFunction = New RFunction
+
+        clsGetDataNamesFunction = New RFunction
+        clsSetDiffFunction = New RFunction
+        clsUpdatedDataNamesFunction = New RFunction
+        clsStartsWithFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
+        clsGetCropDefinitionFunction = New RFunction
+        clsGetSeasonStartDefinitionFunction = New RFunction
+        clsStartsWithPropsFunction = New RFunction
+        clsGetDataFramePropsFunction = New RFunction
+
+
+        clsFirstBracketOperator = New ROperator
+        clsEmptySpaceOperator = New ROperator
+        clsEmptySpacePropsOperator = New ROperator
+
         'Currently this must come before reset to ensure autofilling is done correctly
         'Once autofilling is being triggered correctly this can go after Reset.
         ucrSelectorForCrops.Reset()
         ucrSelectorSummary.Reset()
+        ucrSaveDefinitionProportions.Reset()
+        ucrSaveDefinitionCrops.Reset()
         ucrReceiverRainfall.SetMeAsReceiver()
         ucrReceiverStart.SetMeAsReceiver()
 
@@ -245,11 +284,68 @@ Public Class dlgPICSACrops
 
         ' Temp disabled until list working correctly
 
+        clsGetDataNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsGetDataNamesFunction.SetAssignTo("existing_dfs")
+
+        clsUpdatedDataNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+
+        clsSetDiffFunction.SetRCommand("setdiff")
+        clsSetDiffFunction.AddParameter("x", clsRFunctionParameter:=clsUpdatedDataNamesFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsSetDiffFunction.AddParameter("y", "existing_dfs", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsFirstBracketOperator.SetOperation("[")
+        clsFirstBracketOperator.AddParameter("x", clsRFunctionParameter:=clsSetDiffFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsFirstBracketOperator.AddParameter("y", "1]", iPosition:=1, bIncludeArgumentName:=False)
+        clsFirstBracketOperator.SetAssignTo("new_df_name")
+        clsFirstBracketOperator.bSpaceAroundOperation = False
+
+        clsStartsWithFunction.SetRCommand("startsWith")
+        clsStartsWithFunction.AddParameter("x", "new_df_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsStartsWithFunction.AddParameter("y", Chr(34) & "crop_def" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsStartsWithPropsFunction.SetRCommand("startsWith")
+        clsStartsWithPropsFunction.AddParameter("x", "new_df_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsStartsWithPropsFunction.AddParameter("y", Chr(34) & "crop_prop" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsEmptySpaceOperator.SetOperation("")
+        clsEmptySpaceOperator.AddParameter("x", "new_df_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsEmptySpaceOperator.AddParameter("y", "[", iPosition:=1, bIncludeArgumentName:=False)
+        clsEmptySpaceOperator.AddParameter("z", clsRFunctionParameter:=clsStartsWithFunction, iPosition:=2, bIncludeArgumentName:=False)
+        clsEmptySpaceOperator.AddParameter("z1", "]", iPosition:=3, bIncludeArgumentName:=False)
+        clsEmptySpaceOperator.bSpaceAroundOperation = False
+        clsEmptySpaceOperator.SetAssignTo("new_crop_def")
+
+        clsEmptySpacePropsOperator.SetOperation("")
+        clsEmptySpacePropsOperator.AddParameter("x", "new_df_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsEmptySpacePropsOperator.AddParameter("y", "[", iPosition:=1, bIncludeArgumentName:=False)
+        clsEmptySpacePropsOperator.AddParameter("z", clsRFunctionParameter:=clsStartsWithPropsFunction, iPosition:=2, bIncludeArgumentName:=False)
+        clsEmptySpacePropsOperator.AddParameter("z1", "]", iPosition:=3, bIncludeArgumentName:=False)
+        clsEmptySpacePropsOperator.bSpaceAroundOperation = False
+        clsEmptySpacePropsOperator.SetAssignTo("new_crop_prop")
+
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameFunction.AddParameter("x", clsROperatorParameter:=clsEmptySpaceOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDataFrameFunction.SetAssignTo("crop_def")
+
+        clsGetDataFramePropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFramePropsFunction.AddParameter("x", clsROperatorParameter:=clsEmptySpacePropsOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDataFramePropsFunction.SetAssignTo("crop_prop")
+
+        clsGetCropDefinitionFunction.SetRCommand("get_crop_definition")
+        clsGetCropDefinitionFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsGetSeasonStartDefinitionFunction.SetRCommand("get_season_start_definition")
+        clsGetSeasonStartDefinitionFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFramePropsFunction, iPosition:=0, bIncludeArgumentName:=False)
+
         ucrInputPlantingDates.SetName("160")
         ucrInputCropLengths.SetName("120")
         ucrInputWaterAmounts.SetName("600")
         clsCropsFunction.AddParameter("return_crops_table", "TRUE", iPosition:=11)
         clsCropsFunction.AddParameter("definition_props", "TRUE", iPosition:=12)
+
+
+        AddDataNames()
+        AddDefinitionCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
         ucrBase.clsRsyntax.iCallType = 2
         TestOkEnabled()
@@ -274,6 +370,8 @@ Public Class dlgPICSACrops
         ' Disabled as list validation not working correctly with reading/writing controls
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkDataCrops.SetRCode(clsCropsFunction, bReset)
+        ucrSaveDefinitionCrops.SetRCode(clsGetCropDefinitionFunction, bReset)
+        ucrSaveDefinitionProportions.SetRCode(clsGetSeasonStartDefinitionFunction, bReset)
         If bReset Then
             ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
         End If
@@ -289,15 +387,26 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub TestOkEnabled()
+        Dim bOkEnabled = True
         If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputCropLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty AndAlso (ucrChkDataCrops.Checked OrElse ucrChkDataProp.Checked) Then
-            ucrBase.OKEnabled(True)
+            bOkEnabled = True
         Else
-            ucrBase.OKEnabled(False)
+            bOkEnabled = False
         End If
+
+        If ucrSaveDefinitionCrops.ucrChkSave.Checked AndAlso Not ucrSaveDefinitionCrops.IsComplete Then
+            bOkEnabled = False
+        End If
+
+        If ucrSaveDefinitionProportions.ucrChkSave.Checked AndAlso Not ucrSaveDefinitionProportions.IsComplete Then
+            bOkEnabled = False
+        End If
+
+        ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
     Private Sub ucrReceiverYear_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverStart.ControlContentsChanged, ucrReceiverEnd.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged,
-            ucrInputCropLengths.ControlContentsChanged, ucrInputPlantingDates.ControlContentsChanged, ucrInputWaterAmounts.ControlContentsChanged
+            ucrInputCropLengths.ControlContentsChanged, ucrInputPlantingDates.ControlContentsChanged, ucrInputWaterAmounts.ControlContentsChanged, ucrSaveDefinitionCrops.ControlContentsChanged, ucrSaveDefinitionProportions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -309,6 +418,36 @@ Public Class dlgPICSACrops
         End If
         AutoFillReceivers(lstEndReceivers)
         AutoFillReceivers(lstStartReceivers)
+    End Sub
+
+    Private Sub Save_Definitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataCrops.ControlValueChanged, ucrChkDataProp.ControlValueChanged,
+             ucrSaveDefinitionCrops.ControlValueChanged, ucrSaveDefinitionProportions.ControlValueChanged
+        AddDefinitionCodes()
+    End Sub
+
+    Private Sub AddDefinitionCodes()
+        If ucrChkDataCrops.Checked AndAlso ucrSaveDefinitionCrops.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetCropDefinitionFunction, iPosition:=2)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetCropDefinitionFunction)
+        End If
+
+        If ucrChkDataProp.Checked AndAlso ucrSaveDefinitionProportions.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetSeasonStartDefinitionFunction, iPosition:=3)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetSeasonStartDefinitionFunction)
+        End If
+        AddDataNames()
+    End Sub
+
+    Private Sub AddDataNames()
+        If ucrSaveDefinitionProportions.ucrChkSave.Checked OrElse ucrSaveDefinitionCrops.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataNamesFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsFirstBracketOperator, iPosition:=1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataNamesFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFirstBracketOperator)
+        End If
     End Sub
 
     Private Sub PlantingDaysParam()
