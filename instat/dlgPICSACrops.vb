@@ -387,12 +387,12 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub TestOkEnabled()
-        Dim bOkEnabled = True
-        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputCropLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty AndAlso (ucrChkDataCrops.Checked OrElse ucrChkDataProp.Checked) Then
-            bOkEnabled = True
-        Else
-            bOkEnabled = False
-        End If
+        Dim bOkEnabled = (Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputCropLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty AndAlso (ucrChkDataCrops.Checked OrElse ucrChkDataProp.Checked))
+        'If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputCropLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty AndAlso (ucrChkDataCrops.Checked OrElse ucrChkDataProp.Checked) Then
+        '    bOkEnabled = True
+        'Else
+        '    bOkEnabled = False
+        'End If
 
         If ucrSaveDefinitionCrops.ucrChkSave.Checked AndAlso Not ucrSaveDefinitionCrops.IsComplete Then
             bOkEnabled = False
