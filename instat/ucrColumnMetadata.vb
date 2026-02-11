@@ -80,8 +80,6 @@ Public Class ucrColumnMetadata
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
         AddHandler _grid.EditValue, AddressOf EditValue
         AddHandler _grid.DeleteLabels, AddressOf DeleteLables
-
-
     End Sub
 
     Public WriteOnly Property DataBook() As clsDataBook
@@ -243,6 +241,12 @@ Public Class ucrColumnMetadata
         End Set
     End Property
 
+    Private Sub AfterStateChange()
+        SetDisplayLabels()
+        UpdateNavigationButtons()
+    End Sub
+
+
     Public Sub RefreshGridData()
         'todo. a temporary useful fix because of wide data sets
         'only refresh the grid when the data book is initialised and the grid is visible
@@ -253,8 +257,7 @@ Public Class ucrColumnMetadata
             _grid.RemoveOldWorksheets()
             _grid.bVisible = _clsDataBook.DataFrames.Count > 0
 
-            SetDisplayLabels()
-            UpdateNavigationButtons()
+            AfterStateChange()
         End If
     End Sub
 
@@ -377,57 +380,49 @@ Public Class ucrColumnMetadata
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadFirstRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadPreviousRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadNextRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadLastRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblColFirst_Click(sender As Object, e As EventArgs) Handles lblColFirst.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadFirstColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblColBack_Click(sender As Object, e As EventArgs) Handles lblColBack.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadPreviousColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblColNext_Click(sender As Object, e As EventArgs) Handles lblColNext.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadNextColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblColLast_Click(sender As Object, e As EventArgs) Handles lblColLast.Click
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadLastColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
@@ -535,8 +530,7 @@ Public Class ucrColumnMetadata
     Public Sub GoToSpecificRowPage(iPage As Integer)
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPage)
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
@@ -559,8 +553,7 @@ Public Class ucrColumnMetadata
     Public Sub GoToSpecificColumnPage(iPage As Integer)
         GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPage)
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        SetDisplayLabels()
-        UpdateNavigationButtons()
+        AfterStateChange()
     End Sub
 
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
