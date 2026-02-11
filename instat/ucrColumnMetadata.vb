@@ -80,6 +80,8 @@ Public Class ucrColumnMetadata
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
         AddHandler _grid.EditValue, AddressOf EditValue
         AddHandler _grid.DeleteLabels, AddressOf DeleteLables
+
+
     End Sub
 
     Public WriteOnly Property DataBook() As clsDataBook
@@ -221,7 +223,7 @@ Public Class ucrColumnMetadata
         lblColDisplay.Text &= strColLabel
 
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso
-       GetCurrentDataFrameFocus.clsVisibleDataFramePage.UseColumnSelectionInDataView Then
+       GetCurrentDataFrameFocus().clsVisibleDataFramePage.UseColumnSelectionInDataView Then
             lblColDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount &
                               "/" & totalCols & ") | " &
                               GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
