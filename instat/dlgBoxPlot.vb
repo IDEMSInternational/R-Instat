@@ -805,6 +805,11 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub DialogueSize()
+        Me.ucrVariablesAsFactorForBoxplot.Size = New Size(145, 120)
+        Me.ucrVariablesAsFactorForBoxplot.ucrMultipleVariables.Size = New Size(140, 110)
+        Me.ucrVariablesAsFactorForBoxplot.ucrSingleVariable.Size = New Size(140, 30)
+        Me.ucrVariablesAsFactorForBoxplot.cmdVariables.Size = New Size(140, 30)
+
         If rdoBoxplotTufte.Checked Then
             Me.Size = New Size(441, 575)
             Me.ucrChkLegend.Location = New Size(10, 423)
@@ -1034,7 +1039,7 @@ Public Class dlgBoxplot
         SetPipeAssignTo()
     End Sub
 
-    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged
+    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged
         TestOkEnabled()
     End Sub
 

@@ -75,7 +75,6 @@ Partial Class dlgBoxplot
         Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
-        Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
@@ -85,6 +84,7 @@ Partial Class dlgBoxplot
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverLabelOutliers = New instat.ucrReceiverSingle()
+        Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -479,20 +479,6 @@ Partial Class dlgBoxplot
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(219, 34)
         Me.ucrChkVarWidth.TabIndex = 13
         '
-        'ucrVariablesAsFactorForBoxplot
-        '
-        Me.ucrVariablesAsFactorForBoxplot.AutoSize = True
-        Me.ucrVariablesAsFactorForBoxplot.frmParent = Me
-        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(412, 94)
-        Me.ucrVariablesAsFactorForBoxplot.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
-        Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
-        Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(217, 195)
-        Me.ucrVariablesAsFactorForBoxplot.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForBoxplot.TabIndex = 5
-        Me.ucrVariablesAsFactorForBoxplot.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
-        '
         'ucrSecondFactorReceiver
         '
         Me.ucrSecondFactorReceiver.AutoSize = True
@@ -597,12 +583,27 @@ Partial Class dlgBoxplot
         Me.ucrReceiverLabelOutliers.TabIndex = 38
         Me.ucrReceiverLabelOutliers.ucrSelector = Nothing
         '
+        'ucrVariablesAsFactorForBoxplot
+        '
+        Me.ucrVariablesAsFactorForBoxplot.AutoSize = True
+        Me.ucrVariablesAsFactorForBoxplot.frmParent = Me
+        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(412, 87)
+        Me.ucrVariablesAsFactorForBoxplot.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
+        Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
+        Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(188, 212)
+        Me.ucrVariablesAsFactorForBoxplot.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForBoxplot.TabIndex = 40
+        Me.ucrVariablesAsFactorForBoxplot.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(638, 835)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverLabelOutliers)
         Me.Controls.Add(Me.ucrNudOutlierCoefficient)
@@ -633,7 +634,6 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplotTufte)
-        Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
         Me.Controls.Add(Me.lblBySecondFactor)
@@ -662,7 +662,6 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrSelectorBoxPlot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblBySecondFactor As Label
-    Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
     Friend WithEvents rdoBoxplotTufte As RadioButton
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoViolin As RadioButton
@@ -702,4 +701,5 @@ Partial Class dlgBoxplot
     Friend WithEvents lblOutlierCoefficient As Label
     Friend WithEvents lblVariable As Label
     Friend WithEvents ucrReceiverLabelOutliers As ucrReceiverSingle
+    Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
 End Class
