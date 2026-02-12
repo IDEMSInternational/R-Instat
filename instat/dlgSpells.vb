@@ -150,6 +150,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetDefaults()
+        ucrChkDefinitions.Checked = False
         clsSpellsManipulationsFunc = New RFunction
         clsSpellManipulationsFunc = New RFunction
         clsSpellFunction = New RFunction
@@ -390,7 +391,7 @@ Public Class dlgSpells
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsSpellFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsVectorConcat2Function, New RParameter("dry_spell"), iAdditionalPairNo:=2)
-        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDef, New RParameter("spell_name", 1), iAdditionalPairNo:=3)
+        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDef, New RParameter("spell_column", 1), iAdditionalPairNo:=3)
 
         ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
@@ -525,7 +526,7 @@ Public Class dlgSpells
             selectedDataframe = ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString()
         End If
         strCurrDataName = Chr(34) & selectedDataframe.Replace("""", "\""") & Chr(34)
-        clsGetLinkedDataName.AddParameter("data", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetLinkedDataName.AddParameter(strParameterValue:=strCurrDataName, iPosition:=0)
         RainDays()
         GroupByOptions()
     End Sub
@@ -578,10 +579,17 @@ Public Class dlgSpells
     End Sub
 
     Private Sub UpdateSaveDefinitions()
+        ' First, always remove the function to prevent duplicates
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetLongestSpellDef)
+
         If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
-            ucrSaveObject.SetRCode(clsGetLongestSpellDef, False)
+            ' Set the assignment variable name from the save object
+            clsGetLongestSpellDef.SetAssignTo(ucrSaveObject.GetText())
+            ' Add the head of the function chain to the after-codes to be executed
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetLongestSpellDef, iPosition:=1)
         Else
-            ucrSaveObject.SetRCode(Nothing, False)
+            ' Clear the assignment when not active
+            clsGetLongestSpellDef.SetAssignTo(Nothing)
         End If
     End Sub
 
