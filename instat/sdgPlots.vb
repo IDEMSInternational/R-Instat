@@ -3195,15 +3195,19 @@ Public Class sdgPlots
             End If
 
             If clsFacetFunction.strRCommand = "facet_grid" Then
-                clsFacetFunction.AddParameter(ucrChkFreeSpace.GetParameter())
-                If ucrChkMargin.Checked Then
-                    clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
+                If ucrChkFreeSpace.Checked Then
+                    clsFacetFunction.AddParameter("space", Chr(34) & "free" & Chr(34))
                 Else
-                    clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
+                    clsFacetFunction.AddParameter("space", Chr(34) & "fixed" & Chr(34))
                 End If
-                clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
-            Else
-                clsFacetFunction.RemoveParameterByName("space")
+                If ucrChkMargin.Checked Then
+                        clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
+                    Else
+                        clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
+                    End If
+                    clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
+                Else
+                    clsFacetFunction.RemoveParameterByName("space")
                 clsFacetFunction.RemoveParameterByName("margins")
                 If rdoHorizontal.Checked Then
                     ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
