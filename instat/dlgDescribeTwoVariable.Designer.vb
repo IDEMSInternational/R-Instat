@@ -60,7 +60,6 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.rdoOCol = New System.Windows.Forms.RadioButton()
         Me.rdoOCell = New System.Windows.Forms.RadioButton()
@@ -99,7 +98,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoThreeVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoThreeVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoThreeVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoThreeVariable.Location = New System.Drawing.Point(288, 8)
+        Me.rdoThreeVariable.Location = New System.Drawing.Point(194, 8)
         Me.rdoThreeVariable.Name = "rdoThreeVariable"
         Me.rdoThreeVariable.Size = New System.Drawing.Size(100, 28)
         Me.rdoThreeVariable.TabIndex = 3
@@ -258,7 +257,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(95, 8)
+        Me.rdoSkim.Location = New System.Drawing.Point(290, 8)
         Me.rdoSkim.Name = "rdoSkim"
         Me.rdoSkim.Size = New System.Drawing.Size(100, 28)
         Me.rdoSkim.TabIndex = 1
@@ -294,7 +293,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoTwoVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTwoVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTwoVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoTwoVariable.Location = New System.Drawing.Point(191, 8)
+        Me.rdoTwoVariable.Location = New System.Drawing.Point(96, 8)
         Me.rdoTwoVariable.Name = "rdoTwoVariable"
         Me.rdoTwoVariable.Size = New System.Drawing.Size(100, 28)
         Me.rdoTwoVariable.TabIndex = 2
@@ -325,7 +324,6 @@ Partial Class dlgDescribeTwoVariable
         '
         'grpDisplay
         '
-        Me.grpDisplay.Controls.Add(Me.ucrReceiverColumns)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayAsPercentage)
         Me.grpDisplay.Location = New System.Drawing.Point(276, 191)
         Me.grpDisplay.Name = "grpDisplay"
@@ -333,19 +331,6 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplay.TabIndex = 15
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Percentages"
-        '
-        'ucrReceiverColumns
-        '
-        Me.ucrReceiverColumns.AutoSize = True
-        Me.ucrReceiverColumns.frmParent = Me
-        Me.ucrReceiverColumns.Location = New System.Drawing.Point(27, 92)
-        Me.ucrReceiverColumns.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
-        Me.ucrReceiverColumns.Selector = Nothing
-        Me.ucrReceiverColumns.Size = New System.Drawing.Size(120, 82)
-        Me.ucrReceiverColumns.strNcFilePath = ""
-        Me.ucrReceiverColumns.TabIndex = 46
-        Me.ucrReceiverColumns.ucrSelector = Nothing
         '
         'ucrChkDisplayAsPercentage
         '
@@ -363,10 +348,10 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoOCol.Location = New System.Drawing.Point(288, 238)
         Me.rdoOCol.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoOCol.Name = "rdoOCol"
-        Me.rdoOCol.Size = New System.Drawing.Size(54, 17)
+        Me.rdoOCol.Size = New System.Drawing.Size(56, 17)
         Me.rdoOCol.TabIndex = 40
         Me.rdoOCol.TabStop = True
-        Me.rdoOCol.Text = "Col(%)"
+        Me.rdoOCol.Text = "row(%)"
         Me.rdoOCol.UseVisualStyleBackColor = True
         '
         'rdoOCell
@@ -387,10 +372,10 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoORow.Location = New System.Drawing.Point(345, 238)
         Me.rdoORow.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoORow.Name = "rdoORow"
-        Me.rdoORow.Size = New System.Drawing.Size(61, 17)
+        Me.rdoORow.Size = New System.Drawing.Size(54, 17)
         Me.rdoORow.TabIndex = 42
         Me.rdoORow.TabStop = True
-        Me.rdoORow.Text = "Row(%)"
+        Me.rdoORow.Text = "Col(%)"
         Me.rdoORow.UseVisualStyleBackColor = True
         '
         'ucrReceiverThreeVariableThirdVariable
@@ -744,5 +729,4 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrpnlPercent As UcrPanel
     Friend WithEvents ucrChkTotal As ucrCheck
     Friend WithEvents ucrChkInteraction As ucrCheck
-    Friend WithEvents ucrReceiverColumns As ucrReceiverMultiple
 End Class

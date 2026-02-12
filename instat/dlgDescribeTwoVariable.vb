@@ -126,10 +126,10 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverPercentages.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverPercentages.SetDataType("factor")
 
-        ucrReceiverColumns.SetParameter(New RParameter("perc_total_factors", 3))
-        ucrReceiverColumns.SetParameterIsString()
-        ucrReceiverColumns.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverColumns.SetDataType("factor")
+        'ucrReceiverColumns.SetParameter(New RParameter("perc_total_factors", 3))
+        'ucrReceiverColumns.SetParameterIsString()
+        'ucrReceiverColumns.Selector = ucrSelectorDescribeTwoVar
+        'ucrReceiverColumns.SetDataType("factor")
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -189,7 +189,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableSecondFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrpnlPercent.AddToLinkedControls({ucrReceiverPercentages}, {rdoORow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrpnlPercent.AddToLinkedControls({ucrReceiverColumns}, {rdoOCol}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrpnlPercent.AddToLinkedControls({ucrReceiverColumns}, {rdoOCol}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableSecondFactor.SetParameterIsString()
@@ -291,7 +291,7 @@ Public Class dlgDescribeTwoVariable
         clsMap2SummaryFunction.AddParameter(".x", "combinations$factor", iPosition:=0)
         clsMap2SummaryFunction.AddParameter(".y", "combinations$summary", iPosition:=1)
 
-        clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
         clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
         clsDummyFunction.AddParameter("theme", "select", iPosition:=2)
         clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
@@ -463,6 +463,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCorrelationFunction, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsSkimrFunction, New RParameter("col_names", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsMapSummaryFunction, New RParameter(".x", 1), iAdditionalPairNo:=3)
+        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("perc_total_factors", 3), iAdditionalPairNo:=4)
         ucrChkMeans.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("means", iNewPosition:=5), iAdditionalPairNo:=1)
         ucrChkLevSig.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("sign_level", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("include_margins", iNewPosition:=5), iAdditionalPairNo:=1)
@@ -481,7 +482,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondSkimrGroupByFactor.SetRCode(clsGroupByFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrReceiverPercentages.SetRCode(clsCombineFrequencyParametersFunction, bReset)
-        ucrReceiverColumns.SetRCode(clsCombineFrequencyColParametersFunction, bReset)
+        ' ucrReceiverColumns.SetRCode(clsCombineFrequencyColParametersFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrpnlPercent.SetRCode(clsDummyFunction, bReset)
         ucrChkCorrelations.SetRCode(clsDummyFunction, bReset)
@@ -609,7 +610,6 @@ Public Class dlgDescribeTwoVariable
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = rdoTwoVariable.Checked AndAlso ucrChkDisplayAsPercentage.Checked AndAlso rdoORow.Checked AndAlso IsFactorByFactor()
         ucrpnlPercent.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor() AndAlso ucrChkDisplayAsPercentage.Checked
-        ucrReceiverColumns.Visible = ucrChkDisplayAsPercentage.Checked AndAlso IsFactorByFactor() AndAlso rdoOCol.Checked
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
@@ -714,7 +714,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
 
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
@@ -729,7 +729,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("frequency_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -772,7 +772,7 @@ Public Class dlgDescribeTwoVariable
                     ucrSaveTable.SetPrefix("summary_table")
                     ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                     ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                    ucrSaveTable.SetCheckBoxText("Save Table")
+                    ucrSaveTable.SetCheckBoxText("Store Table")
                     clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                          strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                          strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -874,7 +874,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = True
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsSummariesOperator, 0)
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsFactorOperator, 1)
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsCrossDfFunction, 2)
@@ -1375,7 +1375,7 @@ Public Class dlgDescribeTwoVariable
                 If rdoORow.Checked Then
                     ucrReceiverPercentages.SetMeAsReceiver()
                 ElseIf rdoOCol.Checked Then
-                    ucrReceiverColumns.SetMeAsReceiver()
+                    ' ucrReceiverColumns.SetMeAsReceiver()
                 Else
                     ucrReceiverFirstVars.SetMeAsReceiver()
                 End If
@@ -1439,7 +1439,6 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondSkimrGroupByFactor.ResetText()
         ucrReceiverThreeVariableThirdVariable.ResetText()
         ucrReceiverPercentages.ResetText()
-        ucrReceiverColumns.ResetText()
         ucrReceiverThreeVariableSecondFactor.ResetText()
         ucrSaveTable.Reset()
     End Sub
@@ -1813,21 +1812,21 @@ Public Class dlgDescribeTwoVariable
                     Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
 
                     ' Get the current list of variable names in ucrReceiverColumns
-                    Dim currentColumnVars As List(Of String) = ucrReceiverColumns.GetVariableNamesAsList()
+                    'Dim currentColumnVars As List(Of String) = ucrReceiverColumns.GetVariableNamesAsList()
 
-                    ' Remove variables from ucrReceiverColumns that are no longer in ucrReceiverFirstVars
-                    For Each varName As String In currentColumnVars
-                        If Not variableNames.Contains(varName) Then
-                            ucrReceiverColumns.Remove(New String() {varName}) ' Remove expects an array of strings
-                        End If
-                    Next
+                    '' Remove variables from ucrReceiverColumns that are no longer in ucrReceiverFirstVars
+                    'For Each varName As String In currentColumnVars
+                    '    If Not variableNames.Contains(varName) Then
+                    '        ucrReceiverColumns.Remove(New String() {varName}) ' Remove expects an array of strings
+                    '    End If
+                    'Next
 
                     ' Add the remaining variables to ucrReceiverColumns
-                    For Each varName As String In variableNames
-                        If Not currentColumnVars.Contains(varName) Then
-                            ucrReceiverColumns.Add(varName)
-                        End If
-                    Next
+                    'For Each varName As String In variableNames
+                    '    If Not currentColumnVars.Contains(varName) Then
+                    '        ucrReceiverColumns.Add(varName)
+                    '    End If
+                    'Next
 
                 End If
             ElseIf rdoORow.Checked Then
@@ -1837,7 +1836,7 @@ Public Class dlgDescribeTwoVariable
             End If
         Else
             ucrReceiverPercentages.Clear()
-            ucrReceiverColumns.Clear()
+            ' ucrReceiverColumns.Clear()
         End If
 
     End Sub
