@@ -65,7 +65,6 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoOCell = New System.Windows.Forms.RadioButton()
         Me.rdoORow = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverThreeVariableThirdVariable = New instat.ucrReceiverSingle()
-        Me.ucrReceiverPercentages = New instat.ucrReceiverSingle()
         Me.ucrpnlPercent = New instat.UcrPanel()
         Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
@@ -391,19 +390,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverThreeVariableThirdVariable.TabIndex = 14
         Me.ucrReceiverThreeVariableThirdVariable.ucrSelector = Nothing
         '
-        'ucrReceiverPercentages
-        '
-        Me.ucrReceiverPercentages.AutoSize = True
-        Me.ucrReceiverPercentages.frmParent = Me
-        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(287, 260)
-        Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
-        Me.ucrReceiverPercentages.Selector = Nothing
-        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPercentages.strNcFilePath = ""
-        Me.ucrReceiverPercentages.TabIndex = 39
-        Me.ucrReceiverPercentages.ucrSelector = Nothing
-        '
         'ucrpnlPercent
         '
         Me.ucrpnlPercent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -628,7 +614,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ClientSize = New System.Drawing.Size(482, 467)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.cmdSummaries)
-        Me.Controls.Add(Me.ucrReceiverPercentages)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.ucrChkInteraction)
         Me.Controls.Add(Me.ucrReceiverThreeVariableThirdVariable)
@@ -722,7 +707,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrChkSwapXYVar As ucrCheck
     Friend WithEvents ucrChkMeans As ucrCheck
     Friend WithEvents ucrChkLevSig As ucrCheck
-    Friend WithEvents ucrReceiverPercentages As ucrReceiverSingle
     Friend WithEvents rdoORow As RadioButton
     Friend WithEvents rdoOCell As RadioButton
     Friend WithEvents rdoOCol As RadioButton
