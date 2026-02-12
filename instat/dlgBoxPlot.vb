@@ -78,8 +78,13 @@ Public Class dlgBoxplot
 
     'Functions for Label CheckBox
     Private clsRoundFunction, clsLabelAfterFunction, clsLabelSummaryFunction, clsAesLabelFunction, clsBoxplotStatFunction, clsIfFunction, clsLengthFunction As RFunction
+    Private clsSecondGroupByFunction, clsBoxplotStat2Function, clsMutateFunction, clsFilterElement2Function, clsUngroupFunction, clsAsFactor2Function,
+            clsMutate2Function, clsRaes2Function, clsPositionNudgeFunction, clsGeomTextFunction
+
     'Label Outlier Operators
     Private clsOpenBraquetOperator, clsSpaceOperator, clsBraquetOperator, clsSemiCommatOperator, clsDollardOperator, clsEqualOperator, clsAssigneOperator As ROperator
+    Private clsDollarSignOperator, clsInOperator, clsOutlierPipeOperator
+
 
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
@@ -94,6 +99,8 @@ Public Class dlgBoxplot
     Private bWrap As Boolean = False
     Private bCol As Boolean = False
     Private bRow As Boolean = False
+
+    Private strSecondFactor As String = ""
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -168,6 +175,12 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
         ucrSecondFactorReceiver.SetLinkedDisplayControl(lblBySecondFactor)
+
+        ucrReceiverLabelOutliers.SetParameter(New RParameter("label", 1))
+        ucrReceiverLabelOutliers.SetParameterIsString()
+        ucrReceiverLabelOutliers.Selector = ucrSelectorBoxPlot
+        ucrReceiverLabelOutliers.bWithQuotes = False
+        ucrReceiverLabelOutliers.SetLinkedDisplayControl(lblVariable)
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
@@ -275,6 +288,7 @@ Public Class dlgBoxplot
         ucrChkLabel.SetText("Label Outliers")
         ucrChkLabel.AddParameterPresentCondition(True, strLabelOutierParameterName, True)
         ucrChkLabel.AddParameterPresentCondition(False, strLabelOutierParameterName, False)
+        ucrChkLabel.AddToLinkedControls(ucrReceiverLabelOutliers, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
         ucrNudOutlierCoefficient.DecimalPlaces = 1
@@ -320,6 +334,21 @@ Public Class dlgBoxplot
         clsLengthFunction = New RFunction
         clsIfFunction = New RFunction
         clsBoxplotStatFunction = New RFunction
+
+        clsSecondGroupByFunction = New RFunction
+        clsBoxplotStat2Function = New RFunction
+        clsMutateFunction = New RFunction
+        clsFilterElement2Function = New RFunction
+        clsUngroupFunction = New RFunction
+        clsAsFactor2Function = New RFunction
+        clsMutate2Function = New RFunction
+        clsRaes2Function = New RFunction
+        clsPositionNudgeFunction = New RFunction
+        clsGeomTextFunction = New RFunction
+
+        clsDollarSignOperator = New ROperator
+        clsInOperator = New ROperator
+        clsOutlierPipeOperator = New ROperator
 
         clsBraquetOperator = New ROperator
         clsSpaceOperator = New ROperator
@@ -482,6 +511,60 @@ Public Class dlgBoxplot
         clsLabelAfterFunction.SetRCommand("after_stat")
         clsLabelAfterFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
 
+        clsSecondGroupByFunction.SetPackageName("dplyr")
+        clsSecondGroupByFunction.SetRCommand("group_by")
+
+        clsBoxplotStat2Function.SetPackageName("grDevices")
+        clsBoxplotStat2Function.SetRCommand("boxplot.stats")
+
+        clsDollarSignOperator.SetOperation("$")
+        clsDollarSignOperator.AddParameter("x", clsRFunctionParameter:=clsBoxplotStat2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsDollarSignOperator.AddParameter("y", "out", iPosition:=1, bIncludeArgumentName:=False)
+        clsDollarSignOperator.bSpaceAroundOperation = False
+
+        clsInOperator.SetOperation("%in%")
+        clsInOperator.AddParameter("y", clsROperatorParameter:=clsDollarSignOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsMutateFunction.SetPackageName("dplyr")
+        clsMutateFunction.SetRCommand("mutate")
+        clsMutateFunction.AddParameter("is_out", clsROperatorParameter:=clsInOperator, iPosition:=0)
+
+        clsFilterElement2Function.SetPackageName("dplyr")
+        clsFilterElement2Function.SetRCommand("filter")
+        clsFilterElement2Function.AddParameter("x", "is_out", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsUngroupFunction.SetPackageName("dplyr")
+        clsUngroupFunction.SetRCommand("ungroup")
+
+        clsAsFactor2Function.SetPackageName("instatExtras")
+        clsAsFactor2Function.SetRCommand("make_factor")
+
+        clsMutate2Function.SetPackageName("dplyr")
+        clsMutate2Function.SetRCommand("mutate")
+
+        clsOutlierPipeOperator.SetOperation("%>%")
+        clsOutlierPipeOperator.SetAssignTo("outliers")
+        clsOutlierPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsSecondGroupByFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsOutlierPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2, bIncludeArgumentName:=False)
+        clsOutlierPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsFilterElement2Function, iPosition:=3, bIncludeArgumentName:=False)
+        clsOutlierPipeOperator.AddParameter("ungroup", clsRFunctionParameter:=clsUngroupFunction, iPosition:=4, bIncludeArgumentName:=False)
+        clsOutlierPipeOperator.AddParameter("mutate2", clsRFunctionParameter:=clsMutate2Function, iPosition:=5, bIncludeArgumentName:=False)
+
+        clsRaes2Function.SetPackageName("ggplot2")
+        clsRaes2Function.SetRCommand("aes")
+
+        clsPositionNudgeFunction.SetPackageName("ggplot2")
+        clsPositionNudgeFunction.SetRCommand("position_nudge")
+        clsPositionNudgeFunction.AddParameter("x", "0.05", iPosition:=0)
+
+        clsGeomTextFunction.SetPackageName("ggplot2")
+        clsGeomTextFunction.SetRCommand("geom_text")
+        clsGeomTextFunction.AddParameter("data", "outliers", iPosition:=0)
+        clsGeomTextFunction.AddParameter("x", clsRFunctionParameter:=clsRaes2Function, iPosition:=1, bIncludeArgumentName:=False)
+        clsGeomTextFunction.AddParameter("hjust", "-0.2", iPosition:=2)
+        clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionNudgeFunction, iPosition:=3)
+        clsGeomTextFunction.AddParameter("size", "3", iPosition:=4)
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -502,15 +585,24 @@ Public Class dlgBoxplot
 
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStatFunction, New RParameter("coef", 1), iAdditionalPairNo:=1)
+        ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("coef", 1), iAdditionalPairNo:=2)
+        ucrSecondFactorReceiver.AddAdditionalCodeParameterPair(clsSecondGroupByFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrSecondFactorReceiver.AddAdditionalCodeParameterPair(clsAsFactor2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrVariablesAsFactorForBoxplot.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrVariablesAsFactorForBoxplot.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
+        ucrSelectorBoxPlot.SetRCode(clsOutlierPipeOperator, bReset)
+
+        ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
 
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVarWidth.SetRCode(clsBoxplotFunction, bReset)
@@ -542,16 +634,27 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse Not ucrSaveBoxplot.IsComplete Then
-            ucrBase.OKEnabled(False)
+        Dim bEnableOk As Boolean = True
+
+        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse (ucrSaveBoxplot.ucrChkSave.Checked AndAlso Not ucrSaveBoxplot.IsComplete) Then
+            bEnableOk = False
+        ElseIf rdoBoxplotTufte.Checked AndAlso ucrNudOutlierCoefficient.IsEmpty Then
+            bEnableOk = False
         Else
-            ucrBase.OKEnabled(True)
+            bEnableOk = True
         End If
+
+        ucrBase.OKEnabled(bEnableOk)
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBoxplot.ControlValueChanged
         TestOkEnabled()
     End Sub
 
@@ -598,6 +701,8 @@ Public Class dlgBoxplot
                 clsBoxplotFunction.RemoveParameterByName("outlier.shape")
             End If
         End If
+
+        AddOutlierFunctions()
     End Sub
 
     Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
@@ -704,16 +809,28 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub DialogueSize()
+        Me.ucrVariablesAsFactorForBoxplot.Size = New Size(145, 120)
+        Me.ucrVariablesAsFactorForBoxplot.ucrMultipleVariables.Size = New Size(140, 110)
+        Me.ucrVariablesAsFactorForBoxplot.ucrSingleVariable.Size = New Size(140, 30)
+        Me.ucrVariablesAsFactorForBoxplot.cmdVariables.Size = New Size(140, 30)
+
         If rdoBoxplotTufte.Checked Then
-            Me.Size = New Size(441, 530)
-            Me.ucrChkLegend.Location = New Size(10, 383)
-            Me.ucrInputLegendPosition.Location = New Size(105, 383)
-            Me.ucrInputStation.Location = New Size(335, 383)
-            Me.ucr1stFactorReceiver.Location = New Size(222, 384)
-            Me.lblFacetBy.Location = New Size(222, 372)
-            Me.ucrSaveBoxplot.Location = New Point(10, 410)
-            Me.ucrBase.Location = New Point(10, 435)
+            Me.Size = New Size(441, 575)
+            Me.ucrChkLegend.Location = New Size(10, 423)
+            Me.ucrInputLegendPosition.Location = New Size(105, 423)
+            Me.ucrInputStation.Location = New Size(335, 423)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 424)
+            Me.lblFacetBy.Location = New Size(222, 412)
+            Me.ucrSaveBoxplot.Location = New Point(10, 450)
+            Me.ucrBase.Location = New Point(10, 475)
             Me.ucrChkLabel.Location = New Point(10, 334)
+            Me.ucrChkAddPoints.Location = New Point(10, 390)
+            Me.lblJitter.Location = New Point(135, 390)
+            Me.ucrNudJitter.Location = New Point(170, 390)
+            Me.lblTransparency.Location = New Point(255, 390)
+            Me.ucrNudTransparency.Location = New Point(335, 390)
+            Me.lblVariable.Location = New Point(10, 360)
+            Me.ucrReceiverLabelOutliers.Location = New Point(80, 360)
         ElseIf rdoViolin.Checked Then
             Me.Size = New Size(441, 536)
             Me.ucrChkLegend.Location = New Size(10, 388)
@@ -723,6 +840,11 @@ Public Class dlgBoxplot
             Me.lblFacetBy.Location = New Size(222, 376)
             Me.ucrSaveBoxplot.Location = New Point(10, 418)
             Me.ucrBase.Location = New Point(10, 442)
+            Me.ucrChkAddPoints.Location = New Point(10, 360)
+            Me.lblJitter.Location = New Point(120, 360)
+            Me.ucrNudJitter.Location = New Point(160, 360)
+            Me.lblTransparency.Location = New Point(255, 360)
+            Me.ucrNudTransparency.Location = New Point(335, 360)
         Else
             Me.Size = New Size(441, 500)
             Me.ucrChkLegend.Location = New Size(10, 358)
@@ -921,15 +1043,7 @@ Public Class dlgBoxplot
         SetPipeAssignTo()
     End Sub
 
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged, ucrChkAddPoints.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1017,8 +1131,29 @@ Public Class dlgBoxplot
         End If
     End Sub
 
+
+    Private Sub AddSecondMutateParams()
+        If clsMutate2Function IsNot Nothing Then
+            If Not ucrSecondFactorReceiver.IsEmpty Then
+                If clsMutate2Function.ContainsParameter(strSecondFactor) Then
+                    clsMutate2Function.RemoveParameterByName(strSecondFactor)
+                End If
+                Dim strNewWithinYearName As String = ucrSecondFactorReceiver.GetVariableNames(bWithQuotes:=False)
+                clsMutate2Function.AddParameter(strNewWithinYearName, clsRFunctionParameter:=clsAsFactor2Function, iPosition:=0)
+                strSecondFactor = strNewWithinYearName
+            Else
+                If strSecondFactor <> "" Then
+                    clsMutate2Function.RemoveParameterByName(strSecondFactor)
+                    strSecondFactor = ""
+                End If
+            End If
+        End If
+    End Sub
+
+
     Private Sub ucrSecondFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged
         AddRemoveAesParm()
+        AddSecondMutateParams()
     End Sub
 
     Private Sub ToolStripMenuItemTextOptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTextOptions.Click
@@ -1029,17 +1164,41 @@ Public Class dlgBoxplot
         ToolStripMenuItemTextOptions.Enabled = ucrChkLabel.Checked
     End Sub
 
+    Private Sub AddOutlierFunctions()
+        If ucrChkLabel.Checked AndAlso rdoBoxplotTufte.Checked Then
+            If Not ucrReceiverLabelOutliers.IsEmpty Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsOutlierPipeOperator, iPosition:=0)
+                If clsBaseOperator.ContainsParameter("label") Then
+                    clsBaseOperator.RemoveParameterByName("label")
+                End If
+                clsBaseOperator.AddParameter("x", clsRFunctionParameter:=clsGeomTextFunction, bIncludeArgumentName:=False)
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsOutlierPipeOperator)
+                clsBaseOperator.RemoveParameterByName("x")
+                clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsOutlierPipeOperator)
+            clsBaseOperator.RemoveParameterByName("x")
+            clsBaseOperator.RemoveParameterByName("label")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLabelOutliers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabelOutliers.ControlValueChanged
+        AddOutlierFunctions()
+    End Sub
+
     Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged, ucrNudOutlierCoefficient.ControlValueChanged
         If ucrChkLabel.Checked Then
             If Not ucrNudOutlierCoefficient.IsEmpty Then
                 clsBoxplotStatFunction.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
+                clsBoxplotStat2Function.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
             Else
                 clsBoxplotStatFunction.RemoveParameterByName("coef")
+                clsBoxplotStat2Function.RemoveParameterByName("coef")
             End If
-            clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
-        Else
-            clsBaseOperator.RemoveParameterByName("label")
         End If
+        AddOutlierFunctions()
         EnableGeomText()
     End Sub
 End Class
