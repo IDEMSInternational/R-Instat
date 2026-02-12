@@ -327,12 +327,12 @@ Public Class dlgBarAndPieChart
         ucrChkReorderValue.SetText("Reorder")
         ucrChkReorderValue.AddFunctionNamesCondition(True, "reorder", True)
         ucrChkReorderValue.AddFunctionNamesCondition(False, "reorder", False)
-        ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
 
         ucrChkReorderFrequency.SetText("Reorder")
         ucrChkReorderFrequency.SetParameter(New RParameter("Checked", iNewPosition:=0))
         ucrChkReorderFrequency.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkReorderFrequency.AddToLinkedControls(ucrInputReorderX, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkReorderFrequency.AddToLinkedControls(ucrInputReorderX, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
 
         ucrInputLayout.SetParameter(New RParameter("layout", 2))
         dctLayout.Add("Squarified", Chr(34) & "squarified" & Chr(34))
@@ -458,13 +458,11 @@ Public Class dlgBarAndPieChart
         bResetSubdialog = True
         bResetBarLayerSubdialog = True
 
-        ucrInputAddReorder.SetText(strNone)
+        ucrInputAddReorder.SetName(strNone)
         ucrInputAddReorder.bUpdateRCodeFromControl = True
 
-        ucrInputReorderX.SetText(strNone)
         ucrInputReorderX.bUpdateRCodeFromControl = True
 
-        ucrInputReorderValue.SetText(strNone)
         ucrInputReorderValue.bUpdateRCodeFromControl = True
 
         'Temp fix: Set panel conditions properly!
@@ -697,7 +695,7 @@ Public Class dlgBarAndPieChart
             ucrChkBinWidth.SetRCode(clsRgeomBarFunction, bReset)
         End If
         HideShowWidth()
-        AddRemoveCountlabel()
+        AddRemoveCountLabel()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -856,24 +854,14 @@ Public Class dlgBarAndPieChart
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextWordcloudAesFunction, iPosition:=1)
         End If
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
+    End Sub
+
+    Private Sub ShowHideControl()
         If rdoFrequency.Checked Then
-            If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-                If ucrReceiverByFactor.IsEmpty Then
-                    ucrInputAddReorder.Visible = False
-                    ucrInputAddReorder.SetText(strNone)
-                Else
-                    ucrInputAddReorder.Visible = True
-                End If
-            Else
-                ucrInputReorderX.SetText(strNone)
-            End If
+            ucrInputAddReorder.Visible = ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso Not ucrReceiverByFactor.IsEmpty()
         ElseIf rdoValue.Checked Then
-            If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-                ucrChkReorderValue.Visible = True
-                ucrInputAddReorder.Visible = Not ucrReceiverByFactor.IsEmpty()
-            Else
-                ucrChkReorderValue.Visible = False
-            End If
+            ucrChkReorderValue.Visible = ucrVariablesAsFactorForBarChart.bSingleVariable
+            ucrInputAddReorder.Visible = ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso Not ucrReceiverByFactor.IsEmpty()
         End If
     End Sub
 
@@ -1303,12 +1291,13 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
         ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
+        ShowHideControl()
         SetDialogOptions()
         EnableDisablesOptions()
         ChangeParameterName()
         AddStatsParm()
         HideShowWidth()
-        AddRemoveCountlabel()
+        AddRemoveCountLabel()
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
         ElseIf rdoWordCloud.Checked Then
@@ -1389,7 +1378,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
-        AddRemoveCountlabel()
+        AddRemoveCountLabel()
         If ucrChkAddLabelsText.Checked Then
             clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
         Else
