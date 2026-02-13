@@ -1399,7 +1399,7 @@ Public Class dlgDescribeTwoVariable
         End If
         FactorColumns()
         AddRemoveFrequencyParameters()
-        AddingColumnFactor()
+        ' AddingColumnFactor()
         ChangeBaseRCode()
     End Sub
 
@@ -1548,7 +1548,7 @@ Public Class dlgDescribeTwoVariable
         FactorColumns()
         AddRemoveFirstAnova2Param()
         AddRemoveSecondAnovaParam()
-        AddingColumnFactor()
+        ' AddingColumnFactor()
         AddRemoveThirdAnovaParam()
     End Sub
 
@@ -1625,7 +1625,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
-        AddingColumnFactor()
+        ' AddingColumnFactor()
         ThreeVarSummariesVar()
     End Sub
 
@@ -1781,44 +1781,24 @@ Public Class dlgDescribeTwoVariable
         AddRemoveThirdAnovaParam()
     End Sub
 
-    Private Sub AddingColumnFactor()
-        If IsFactorByFactor() Then
-            If rdoOCol.Checked Then
-                If Not ucrReceiverFirstVars.IsEmpty Then
-                    ' Get the list of variable names from ucrReceiverFirstVars
-                    Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
+    'Private Sub AddingColumnFactor()
+    '    If IsFactorByFactor() Then
+    '        If rdoOCol.Checked Then
+    '            If Not ucrReceiverFirstVars.IsEmpty Then
+    '                ' Get the list of variable names from ucrReceiverFirstVars
+    '                Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
 
-                    ' Get the current list of variable names in ucrReceiverColumns
-                    'Dim currentColumnVars As List(Of String) = ucrReceiverColumns.GetVariableNamesAsList()
+    '            End If
+    '        ElseIf rdoORow.Checked Then
 
-                    '' Remove variables from ucrReceiverColumns that are no longer in ucrReceiverFirstVars
-                    'For Each varName As String In currentColumnVars
-                    '    If Not variableNames.Contains(varName) Then
-                    '        ucrReceiverColumns.Remove(New String() {varName}) ' Remove expects an array of strings
-                    '    End If
-                    'Next
+    '        End If
+    '    Else
+    '    End If
 
-                    ' Add the remaining variables to ucrReceiverColumns
-                    'For Each varName As String In variableNames
-                    '    If Not currentColumnVars.Contains(varName) Then
-                    '        ucrReceiverColumns.Add(varName)
-                    '    End If
-                    'Next
-
-                End If
-            ElseIf rdoORow.Checked Then
-                'If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                '    ucrReceiverPercentages.Add(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
-                'End If
-            End If
-        Else
-            ' ucrReceiverPercentages.Clear()
-        End If
-
-    End Sub
+    'End Sub
 
     Private Sub ucrpnlPercent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrpnlPercent.ControlValueChanged
-        AddingColumnFactor()
+        '  AddingColumnFactor()
         If rdoOCol.Checked Then
             clsDummyFunction.AddParameter("percent", "col", iPosition:=6)
         ElseIf rdoORow.Checked Then
