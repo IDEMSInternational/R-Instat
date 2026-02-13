@@ -1399,7 +1399,6 @@ Public Class dlgDescribeTwoVariable
         End If
         FactorColumns()
         AddRemoveFrequencyParameters()
-        ' AddingColumnFactor()
         ChangeBaseRCode()
     End Sub
 
@@ -1548,7 +1547,6 @@ Public Class dlgDescribeTwoVariable
         FactorColumns()
         AddRemoveFirstAnova2Param()
         AddRemoveSecondAnovaParam()
-        ' AddingColumnFactor()
         AddRemoveThirdAnovaParam()
     End Sub
 
@@ -1625,7 +1623,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
-        ' AddingColumnFactor()
         ThreeVarSummariesVar()
     End Sub
 
@@ -1781,24 +1778,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveThirdAnovaParam()
     End Sub
 
-    'Private Sub AddingColumnFactor()
-    '    If IsFactorByFactor() Then
-    '        If rdoOCol.Checked Then
-    '            If Not ucrReceiverFirstVars.IsEmpty Then
-    '                ' Get the list of variable names from ucrReceiverFirstVars
-    '                Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
-
-    '            End If
-    '        ElseIf rdoORow.Checked Then
-
-    '        End If
-    '    Else
-    '    End If
-
-    'End Sub
-
     Private Sub ucrpnlPercent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrpnlPercent.ControlValueChanged
-        '  AddingColumnFactor()
         If rdoOCol.Checked Then
             clsDummyFunction.AddParameter("percent", "col", iPosition:=6)
         ElseIf rdoORow.Checked Then
