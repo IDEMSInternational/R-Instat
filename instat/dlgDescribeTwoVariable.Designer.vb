@@ -326,7 +326,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayAsPercentage)
         Me.grpDisplay.Location = New System.Drawing.Point(276, 191)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(194, 177)
+        Me.grpDisplay.Size = New System.Drawing.Size(197, 77)
         Me.grpDisplay.TabIndex = 15
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Percentages"
@@ -347,16 +347,16 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoOCol.Location = New System.Drawing.Point(288, 238)
         Me.rdoOCol.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoOCol.Name = "rdoOCol"
-        Me.rdoOCol.Size = New System.Drawing.Size(56, 17)
+        Me.rdoOCol.Size = New System.Drawing.Size(61, 17)
         Me.rdoOCol.TabIndex = 40
         Me.rdoOCol.TabStop = True
-        Me.rdoOCol.Text = "row(%)"
+        Me.rdoOCol.Text = "Row(%)"
         Me.rdoOCol.UseVisualStyleBackColor = True
         '
         'rdoOCell
         '
         Me.rdoOCell.AutoSize = True
-        Me.rdoOCell.Location = New System.Drawing.Point(408, 237)
+        Me.rdoOCell.Location = New System.Drawing.Point(410, 237)
         Me.rdoOCell.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoOCell.Name = "rdoOCell"
         Me.rdoOCell.Size = New System.Drawing.Size(56, 17)
@@ -368,7 +368,7 @@ Partial Class dlgDescribeTwoVariable
         'rdoORow
         '
         Me.rdoORow.AutoSize = True
-        Me.rdoORow.Location = New System.Drawing.Point(345, 238)
+        Me.rdoORow.Location = New System.Drawing.Point(351, 238)
         Me.rdoORow.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoORow.Name = "rdoORow"
         Me.rdoORow.Size = New System.Drawing.Size(54, 17)
@@ -396,7 +396,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrpnlPercent.Location = New System.Drawing.Point(283, 235)
         Me.ucrpnlPercent.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrpnlPercent.Name = "ucrpnlPercent"
-        Me.ucrpnlPercent.Size = New System.Drawing.Size(180, 25)
+        Me.ucrpnlPercent.Size = New System.Drawing.Size(187, 25)
         Me.ucrpnlPercent.TabIndex = 43
         '
         'ucrReceiverThreeVariableSecondFactor
@@ -615,7 +615,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrReorderSummary)
-        Me.Controls.Add(Me.ucrChkInteraction)
         Me.Controls.Add(Me.ucrReceiverThreeVariableThirdVariable)
         Me.Controls.Add(Me.rdoORow)
         Me.Controls.Add(Me.rdoOCell)
@@ -651,6 +650,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrChkSwapXYVar)
         Me.Controls.Add(Me.ucrChkMeans)
         Me.Controls.Add(Me.ucrChkOmitMissing)
+        Me.Controls.Add(Me.ucrChkInteraction)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
