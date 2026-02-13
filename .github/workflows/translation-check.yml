@@ -1,0 +1,149 @@
+name: Translation Check
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'instat/**/*.vb'
+      - 'instat/translations/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-translations:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for git diff
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: scripts/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm ci || npm install
+      
+      - name: Build TypeScript
+        working-directory: scripts
+        run: npm run build
+      
+      - name: Run translation check
+        id: translation-check
+        working-directory: scripts
+        run: |
+          # Run the check and capture output
+          npm run check-translations:ci > translation-report.txt 2>&1 || true
+          
+          # Check if there are violations by looking for ::warning annotations
+          # These only appear when there are actual missing translations
+          if grep -q "::warning" translation-report.txt; then
+            echo "has_violations=true" >> $GITHUB_OUTPUT
+            echo "violation_count=$(grep -c '::warning' translation-report.txt || echo 0)" >> $GITHUB_OUTPUT
+          else
+            echo "has_violations=false" >> $GITHUB_OUTPUT
+            echo "violation_count=0" >> $GITHUB_OUTPUT
+          fi
+          
+          # Output the report (GitHub will render annotations)
+          cat translation-report.txt
+      
+      - name: Add PR comment with results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Read the report
+            let report = '';
+            try {
+              report = fs.readFileSync('scripts/translation-report.txt', 'utf8');
+            } catch (e) {
+              report = 'Translation check completed (no detailed report available)';
+            }
+            
+            // Extract just the summary part (markdown table)
+            const summaryMatch = report.match(/## Translation Check Results[\s\S]*?(?=###|$)/);
+            const summary = summaryMatch ? summaryMatch[0] : report.substring(0, 2000);
+            
+            // Create or update comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const botComment = comments.find(c => 
+              c.user.type === 'Bot' && 
+              c.body.includes('Translation Check Results')
+            );
+            
+            const body = `## Translation Check Results\n\n${summary}\n\n---\n*This comment is automatically updated by the translation check workflow.*`;
+            
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              });
+            }
+      
+      - name: Request review from translation oversight
+        if: steps.translation-check.outputs.has_violations == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            
+            console.log(`Requesting review from translation oversight for PR #${prNumber}`);
+            
+            try {
+              // Request review from the translation oversight user
+              await github.rest.pulls.requestReviewers({
+                owner,
+                repo,
+                pull_number: prNumber,
+                reviewers: ['kisinga']
+              });
+              
+              console.log('Review requested successfully');
+            } catch (error) {
+              // Don't fail if user can't be assigned (e.g., not a collaborator)
+              console.log(`Note: Could not request review: ${error.message}`);
+            }
+      
+      - name: Add translation label
+        if: steps.translation-check.outputs.has_violations == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: ['needs-translation-review']
+              });
+            } catch (error) {
+              // Don't fail if label doesn't exist
+              console.log(`Note: Could not add label: ${error.message}`);
+            }

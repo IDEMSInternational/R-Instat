@@ -1,0 +1,24 @@
+{
+  "name": "r-instat-translation-check",
+  "version": "1.0.0",
+  "description": "Static analysis tool to detect missing translations in R-Instat VB.NET codebase",
+  "main": "dist/check-translations.js",
+  "scripts": {
+    "build": "tsc",
+    "check-translations": "node dist/check-translations.js",
+    "check-translations:ci": "node dist/check-translations.js --ci",
+    "check-translations:verbose": "node dist/check-translations.js --verbose",
+    "test": "node --test lib/*.test.ts"
+  },
+  "keywords": [
+    "translation",
+    "static-analysis",
+    "vbnet"
+  ],
+  "author": "IDEMS International",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
