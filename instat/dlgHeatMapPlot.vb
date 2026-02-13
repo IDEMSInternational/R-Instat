@@ -766,6 +766,7 @@ Public Class dlgHeatMapPlot
         AddRemoveGeomParameter()
         ChangePalette()
         Visibility()
+        AddDiscrete()
     End Sub
 
     Private Sub AutoFacetStation()
@@ -1001,9 +1002,21 @@ Public Class dlgHeatMapPlot
             End If
         End If
     End Sub
+    Private Sub AddDiscrete()
+        If rdoViridis.Checked Then
+            If Not ucrReceiverFill.IsEmpty Then
+                If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "Character" Then
+                    clsColourPaletteFunction.AddParameter("discrete", "TRUE")
+                Else
+                    clsColourPaletteFunction.RemoveParameterByName("discrete")
+                End If
+            End If
+        End If
+    End Sub
 
     Private Sub ucrPnlColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColour.ControlValueChanged, ucrInputPalette.ControlValueChanged, ucrInputColourPalette.ControlValueChanged, ucrInputValue.ControlValueChanged, ucrColourFrom.ControlValueChanged, ucrColourTo.ControlValueChanged
         ChangePalette()
         Visibility()
+        AddDiscrete()
     End Sub
 End Class
