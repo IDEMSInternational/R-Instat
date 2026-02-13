@@ -121,11 +121,6 @@ Public Class dlgDescribeTwoVariable
 
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
-        'ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 2))
-        'ucrReceiverPercentages.SetParameterIsString()
-        'ucrReceiverPercentages.Selector = ucrSelectorDescribeTwoVar
-        'ucrReceiverPercentages.SetDataType("factor")
-
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
         ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
@@ -1359,13 +1354,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrpnlPercent.ControlValueChanged
-        If rdoTwoVariable.Checked Then
-            ucrReceiverFirstVars.SetMeAsReceiver()
-        ElseIf rdoSkim.Checked Then
-            ucrReceiverFirstVars.SetMeAsReceiver()
-        Else
-            ucrReceiverFirstVars.SetMeAsReceiver()
-        End If
         If rdoORow.Checked OrElse rdoOCell.Checked Then
             If ucrChkDisplayMargins.Checked Then
                 ucrInputMarginName.Visible = True
