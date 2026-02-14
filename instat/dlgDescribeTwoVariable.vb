@@ -504,10 +504,9 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub RemoveAddPerTotal()
-        If rdoORow.Checked Then
+        clsCombineFrequencyParametersFunction.RemoveParameterByName("perc_total_factors")
+        If rdoORow.Checked AndAlso Not rdoOCell.Checked Then
             clsCombineFrequencyParametersFunction.AddParameter("perc_total_factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames, iPosition:=2)
-        Else
-            clsCombineFrequencyParametersFunction.RemoveParameterByName("perc_total_factors")
         End If
     End Sub
 
@@ -1362,6 +1361,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrpnlPercent.ControlValueChanged
+        RemoveAddPerTotal()
         If rdoORow.Checked OrElse rdoOCell.Checked Then
             If ucrChkDisplayMargins.Checked Then
                 ucrInputMarginName.Visible = True
