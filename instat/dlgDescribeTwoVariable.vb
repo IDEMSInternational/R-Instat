@@ -503,6 +503,14 @@ Public Class dlgDescribeTwoVariable
                 OrElse IsFactorByNumericByNumeric() OrElse IsNumericByFactorByNumeric() OrElse IsFactorByFactorByFactor() OrElse IsNumericByNumeric())) AndAlso ucrSaveTable.IsComplete)
     End Sub
 
+    Private Sub RemoveAddPerTotal()
+        If rdoORow.Checked Then
+            clsCombineFrequencyParametersFunction.AddParameter("perc_total_factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames, iPosition:=2)
+        Else
+            clsCombineFrequencyParametersFunction.RemoveParameterByName("perc_total_factors")
+        End If
+    End Sub
+
     Private Function IsFactorByFactor() As Boolean
         Return strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical"
     End Function
@@ -931,7 +939,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
 
         ucrReceiverFirstVars.SetMeAsReceiver()
-
+        RemoveAddPerTotal()
         If rdoSkim.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
         ElseIf rdoThreeVariable.Checked Then
@@ -1536,6 +1544,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFirstAnova2Param()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
+        RemoveAddPerTotal()
     End Sub
 
     Private Sub ChangeFirstTypeLabel()
@@ -1774,6 +1783,7 @@ Public Class dlgDescribeTwoVariable
         Else
             clsDummyFunction.AddParameter("percent", "cell", iPosition:=6)
         End If
+        RemoveAddPerTotal()
     End Sub
 
     Private Sub ucrChkTotal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTotal.ControlValueChanged
