@@ -98,7 +98,9 @@ Public Class sdgPICSARainfallGraph
     Private clsAsNumericY As New RFunction
 
     Private clsGeomRug As New RFunction
-
+    Private clsSegmentAesFunction As New RFunction
+    Private clsAsDateYendFunction As New RFunction
+    Private clsPoint2AesFunction As New RFunction
     Private bSlope As Boolean = False
     Private bLine As Boolean = False
 
@@ -668,7 +670,8 @@ Public Class sdgPICSARainfallGraph
                         Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing,
                         Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing,
                         Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewDummyFunction As RFunction = Nothing,
-                        Optional clsNewAsNumericY As RFunction = Nothing, Optional bReset As Boolean = False)
+                        Optional clsNewAsNumericY As RFunction = Nothing, Optional clsNewSegmentAes As RFunction = Nothing,
+                        Optional clsNewAsDateYend As RFunction = Nothing, Optional clsNewPoint2AesFunction As RFunction = Nothing, Optional bReset As Boolean = False)
         Dim clsCLimitsY As RFunction
 
         bRCodeSet = False
@@ -715,6 +718,9 @@ Public Class sdgPICSARainfallGraph
         clsRoundUpperTercileY = clsNewRoundUpperTercileY
         clsPasteUpperTercileY = clsNewPasteUpperTercileY
         clsFormatUpperTercileY = clsNewFormatUpperTercileY
+        clsSegmentAesFunction = clsNewSegmentAes
+        clsAsDateYendFunction = clsNewAsDateYend
+        clsPoint2AesFunction = clsNewPoint2AesFunction
 
         clsStatRegEquationFunction = clsNewStatRegEquation
         clsStatsCorFunction = clsNewStatsCorFunction
@@ -1317,6 +1323,9 @@ Public Class sdgPICSARainfallGraph
             ElseIf rdoYDate.Checked Then
                 clsDummyFunction.AddParameter("rdo_checked", "date", iPosition:=2)
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsDate, iPosition:=1)
+                clsSegmentAesFunction.AddParameter("y", clsRFunctionParameter:=clsAsDate, iPosition:=1)
+                clsSegmentAesFunction.AddParameter("yend", clsRFunctionParameter:=clsAsDateYendFunction, iPosition:=2)
+                clsPoint2AesFunction.AddParameter("y", clsRFunctionParameter:=clsAsDateYendFunction, iPosition:=1)
                 If clsYScaleDateFunction.iParameterCount > 0 Then
                     clsBaseOperator.AddParameter("scale_y_date", clsRFunctionParameter:=clsYScaleDateFunction)
                 Else

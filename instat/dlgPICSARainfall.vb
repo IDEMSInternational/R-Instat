@@ -128,6 +128,7 @@ Public Class dlgPICSARainfall
     Private clsVarsFunction As New RFunction
 
     Private clsAsDate As New RFunction
+    Private clsAsDateYendFunction As New RFunction
     Private clsAsNumericX As New RFunction
     Private clsAsNumericY As New RFunction
     Private clsCoordPolarFunction As New RFunction
@@ -309,6 +310,7 @@ Public Class dlgPICSARainfall
         clsSegmentAesFunction = New RFunction
         clsGeomPoint2Function = New RFunction
         clsPoint2AesFunction = New RFunction
+        clsAsDateYendFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -697,6 +699,9 @@ Public Class dlgPICSARainfall
         clsAsDate.SetRCommand("as.Date")
         clsAsDate.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
 
+        clsAsDateYendFunction.SetRCommand("as.Date")
+        clsAsDateYendFunction.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
         clsDatePeriodOperator.SetOperation(" ")
         clsDatePeriodOperator.AddParameter("left", "1", iPosition:=0)
         clsDatePeriodOperator.AddParameter("right", "months", iPosition:=1)
@@ -731,6 +736,7 @@ Public Class dlgPICSARainfall
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
         ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsPoint2AesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
+        ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsAsDateYendFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
@@ -746,6 +752,7 @@ Public Class dlgPICSARainfall
         If bReset Then
             AutoFacetStation()
             ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
+            ucrReceiverSecondYVar.SetRCode(clsSegmentAesFunction, bReset)
         End If
     End Sub
 
@@ -890,7 +897,8 @@ Public Class dlgPICSARainfall
                                        clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY,
                                        clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverX.strCurrDataType, clsNewMutateFunction:=clsMutateFunction, clsNewMeanFunction:=clsMeanFunction, clsNewMedianFunction:=clsMedianFunction,
                                        clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY,
-                                       clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY, bReset:=bResetSubdialog)
+                                       clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY,
+                                       clsNewPoint2AesFunction:=clsPoint2AesFunction, clsNewSegmentAes:=clsSegmentAesFunction, clsNewAsDateYend:=clsAsDateYendFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         AddRemoveGroupBy()
         bResetSubdialog = False
