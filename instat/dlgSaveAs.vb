@@ -31,8 +31,6 @@ Public Class dlgSaveAs
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        ucrFilePath.TriggerBrowse()
-
     End Sub
 
     Private Sub InitialiseDialog()

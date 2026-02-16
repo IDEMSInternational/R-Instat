@@ -234,11 +234,6 @@ Public Class ucrFilePath
         FilePath = ""
     End Sub
 
-    'Triggers the browse button click programmatically
-    'Public Sub TriggerBrowse()
-    '    btnBrowse.PerformClick()
-    'End Sub
-
     Private Sub ucrFilePath_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             AddButtonInFilePathControlTextbox()
@@ -253,11 +248,6 @@ Public Class ucrFilePath
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
-        TriggerBrowse()
-    End Sub
-
-    'Triggers the browse functionality
-    Public Sub TriggerBrowse()
         If FolderBrowse Then
             Using dlgFolderBrowse As New FolderBrowserDialog
                 If IsEmpty() Then
@@ -298,6 +288,7 @@ Public Class ucrFilePath
             End Using
         End If
     End Sub
+
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         btnBrowse.PerformClick()
