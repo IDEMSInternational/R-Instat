@@ -372,10 +372,10 @@ Public Class dlgHeatMapPlot
         bResetSubdialog = True
         bResetRugLayerSubdialog = True
 
-        ucrInputReorderValue.SetText(strNone)
+        ucrInputReorderValue.SetName(strNone)
         ucrInputReorderValue.bUpdateRCodeFromControl = True
 
-        ucrInputReorderVariableX.SetText(strNone)
+        ucrInputReorderVariableX.SetName(strNone)
         ucrInputReorderVariableX.bUpdateRCodeFromControl = True
 
         clsBaseOperator.SetOperation("+")
