@@ -80,6 +80,7 @@ Public Class ucrColumnMetadata
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
         AddHandler _grid.EditValue, AddressOf EditValue
         AddHandler _grid.DeleteLabels, AddressOf DeleteLables
+        AddHandler _grid.WorksheetChanged, AddressOf AfterStateChange
     End Sub
 
     Public WriteOnly Property DataBook() As clsDataBook
@@ -92,6 +93,10 @@ Public Class ucrColumnMetadata
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
         Return _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name)
     End Function
+
+    Private Sub OnWorksheetChanged()
+        AfterStateChange()
+    End Sub
 
     Private Sub UpdateNavigationButtons()
         lblColBack.Enabled = If(GetCurrentDataFrameFocus()?.clsVisibleDataFramePage?.CanLoadPreviousColumnPage(), False)

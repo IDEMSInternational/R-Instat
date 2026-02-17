@@ -23,6 +23,8 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
+    Public Event WorksheetChanged()
+
 
     ''' <summary>
     ''' Gets current worksheet adapter
@@ -274,5 +276,11 @@ Public MustInherit Class ucrReoGrid
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.SheetTabWidth = 450
+    End Sub
+
+    Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged
+
+        RaiseEvent WorksheetChanged()
+
     End Sub
 End Class
