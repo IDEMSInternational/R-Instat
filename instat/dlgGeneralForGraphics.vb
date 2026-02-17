@@ -71,6 +71,8 @@ Public Class dlgGeneralForGraphics
     Private bUpdatingParameters As Boolean = False
     Private strPackageName As String
 
+    Private clsVarsFunction As New RFunction
+
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -213,6 +215,11 @@ Public Class dlgGeneralForGraphics
         clsScaleFillFunction = New RFunction
         clsScaleColourViridisFunction = New RFunction
 
+
+
+        clsVarsFunction = New RFunction
+
+
         ucrSave.Reset()
 
         ucrInputStation.SetName(strFacetWrap)
@@ -246,6 +253,9 @@ Public Class dlgGeneralForGraphics
 
         clsColVarsFunction.SetPackageName("ggplot2")
         clsColVarsFunction.SetRCommand("vars")
+
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -807,6 +817,11 @@ Public Class dlgGeneralForGraphics
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
+
+        clsFacetFunction.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("rows")
+        clsFacetFunction.RemoveParameterByName("cols")
+        clsFacetFunction.RemoveParameterByName("margins")
 
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")

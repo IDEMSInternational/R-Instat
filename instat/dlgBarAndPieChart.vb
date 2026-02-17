@@ -109,6 +109,8 @@ Public Class dlgBarAndPieChart
     Private strAdditionalPointsParameterName As String = "add_jitter"
     Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
 
+    Private clsVarsFunction As New RFunction
+
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -449,6 +451,8 @@ Public Class dlgBarAndPieChart
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
 
+        clsVarsFunction = New RFunction
+
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
 
@@ -616,6 +620,9 @@ Public Class dlgBarAndPieChart
 
         clsColVarsFunction.SetPackageName("ggplot2")
         clsColVarsFunction.SetRCommand("vars")
+
+        clsVarsFunction.SetPackageName("ggplot2")
+        clsVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -1211,6 +1218,11 @@ Public Class dlgBarAndPieChart
             Exit Sub
         End If
 
+        ' Clear previous parameters
+        clsFacetFunction.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("rows")
+        clsFacetFunction.RemoveParameterByName("cols")
+        clsFacetFunction.RemoveParameterByName("margins")
         clsBaseOperator.RemoveParameterByName("facets")
 
         If Not ucr1stFactorReceiver.IsEmpty Then
