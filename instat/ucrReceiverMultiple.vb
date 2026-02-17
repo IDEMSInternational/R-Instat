@@ -156,6 +156,11 @@ Public Class ucrReceiverMultiple
     ''' that is not in the list of variables of the selector
     ''' </summary>
     Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        ' SAFETY: Selector may not yet be initialised during autofill
+        If Selector Is Nothing OrElse Selector.lstAvailableVariable Is Nothing Then
+            Exit Sub
+        End If
+
         Dim lstItemsToRemove As New List(Of ListViewItem)
         For Each lvi As ListViewItem In lstSelectedVariables.Items
             If Selector.lstAvailableVariable.FindItemWithText(lvi.Text) Is Nothing Then
@@ -318,9 +323,9 @@ Public Class ucrReceiverMultiple
         Return lstColumnFunctions
     End Function
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         Dim strTempBuilder As New Text.StringBuilder
-        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
+        Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
 
         If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
             strTempBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)

@@ -34,12 +34,29 @@ Public Class sdgSaveColumnPosition
     Public bUserSelected As Boolean = False
     Public bRcodeFlag As Boolean = False
 
+    ' Reference to the buttons control on the parent dialog (so we can add/remove handler)
+    Private clsParentSdgButtons As ucrButtonsSubdialogue = Nothing
+
     Private Sub sdgSaveColumnPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bControlsNotInitialised Then
             InitialiseControl()
             bControlsNotInitialised = False
         End If
-        autoTranslate(Me)
+
+        ' translate designer/localizable text initially
+        Translations.autoTranslate(Me)
+
+        ' find the ucrButtonsSubdialogue on the owner form (search recursively)
+        ' Use Owner (set when ShowDialog(owner) is called); ParentForm may be Nothing for modal dialogs
+        ' find the ucrButtonsSubdialogue on the owner form (search recursively)
+        ' Use Owner (set when ShowDialog(owner) is called); ParentForm may be Nothing for modal dialogs
+        Dim parent As Control = If(Me.Owner, Me.ParentForm)
+        If parent IsNot Nothing Then
+            clsParentSdgButtons = FindControlRecursive(Of ucrButtonsSubdialogue)(parent)
+            If clsParentSdgButtons IsNot Nothing Then
+                AddHandler clsParentSdgButtons.LanguageChanged, AddressOf ParentButtons_LanguageChanged
+            End If
+        End If
     End Sub
 
     Private Sub InitialiseControl()
@@ -69,9 +86,10 @@ Public Class sdgSaveColumnPosition
         ucrReceiverColumn.bUseFilteredData = False
         ucrReceiverColumn.SetLinkedDisplayControl(lblColumns)
 
-        'todo. change visibilty to true once this feature is implemented
+        'todo. change visibility to true once this feature is implemented
         ucrChkKeepExistingPos.Visible = False
-        ucrChkKeepExistingPos.Text = "Keep existing position"
+        ' use GetTranslation when setting programmatic texts at init, but we will also refresh them in UpdateTranslations
+        ucrChkKeepExistingPos.Text = GetTranslation("Keep existing position")
         ucrChkKeepExistingPos.SetParameter(New RParameter("keep_existing_position"))
         ucrChkKeepExistingPos.Checked = True
     End Sub
@@ -115,13 +133,14 @@ Public Class sdgSaveColumnPosition
             ucrSelectorColumns.Visible = False
             ucrReceiverColumn.Visible = False
             lblColumns.Visible = False
-            grpColumnPosition.Text = GetTranslation("New column will be at the: ")
+            ' Use exact key without trailing space
+            grpColumnPosition.Text = GetTranslation("New column will be at the:")
         ElseIf rdoEnd.Checked Then
             clsColPosFunction.RemoveParameterByName("adjacent_column")
             ucrSelectorColumns.Visible = False
             ucrReceiverColumn.Visible = False
             lblColumns.Visible = False
-            grpColumnPosition.Text = GetTranslation("New column will be at the: ")
+            grpColumnPosition.Text = GetTranslation("New column will be at the:")
         ElseIf rdoBefore.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
                 clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
@@ -131,7 +150,7 @@ Public Class sdgSaveColumnPosition
             ucrSelectorColumns.Visible = True
             ucrReceiverColumn.Visible = True
             lblColumns.Visible = True
-            grpColumnPosition.Text = GetTranslation("New column will be: ")
+            grpColumnPosition.Text = GetTranslation("New column will be:")
         ElseIf rdoAfter.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
                 clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
@@ -141,7 +160,44 @@ Public Class sdgSaveColumnPosition
             ucrSelectorColumns.Visible = True
             ucrReceiverColumn.Visible = True
             lblColumns.Visible = True
-            grpColumnPosition.Text = GetTranslation("New column will be: ")
+            grpColumnPosition.Text = GetTranslation("New column will be:")
+        End If
+    End Sub
+
+    ' Update only textual properties so translations are refreshed for preview/changes
+    Private Sub UpdateTranslations()
+        ' Translate designer/localizable texts for this form
+        Translations.autoTranslate(Me)
+
+        ' Update programmatic texts exactly matching the keys used in SetColumnControlsAndParameterState
+        If rdoStart.Checked OrElse rdoEnd.Checked Then
+            grpColumnPosition.Text = Translations.GetTranslation("New column will be at the:")
+        ElseIf rdoBefore.Checked OrElse rdoAfter.Checked Then
+            grpColumnPosition.Text = Translations.GetTranslation("New column will be:")
+        End If
+
+        ' Update other programmatic texts
+        ucrChkKeepExistingPos.Text = Translations.GetTranslation("Keep existing position")
+        lblColumns.Text = Translations.GetTranslation("Columns")
+    End Sub
+
+    ' Handler invoked during language preview/change raised by parent buttons
+    Private Sub ParentButtons_LanguageChanged(ByVal newCulture As String)
+        Me.SuspendLayout()
+        Try
+            UpdateTranslations()
+        Finally
+            Me.ResumeLayout()
+            Me.PerformLayout()
+            Me.Refresh()
+        End Try
+    End Sub
+
+    ' Remove the handler to avoid leaks when the dialog closes
+    Private Sub sdgSaveColumnPosition_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If clsParentSdgButtons IsNot Nothing Then
+            RemoveHandler clsParentSdgButtons.LanguageChanged, AddressOf ParentButtons_LanguageChanged
+            clsParentSdgButtons = Nothing
         End If
     End Sub
 
@@ -163,4 +219,20 @@ Public Class sdgSaveColumnPosition
         End Get
     End Property
 
+    ' Recursive helper to find a control of a given type in the form's control hierarchy.
+    Private Function FindControlRecursive(Of T As Control)(parent As Control) As T
+        If parent Is Nothing Then Return Nothing
+        ' check parent itself
+        If TypeOf parent Is T Then
+            Return DirectCast(parent, T)
+        End If
+        ' search children recursively
+        For Each ctl As Control In parent.Controls
+            Dim result As T = FindControlRecursive(Of T)(ctl)
+            If result IsNot Nothing Then
+                Return result
+            End If
+        Next
+        Return Nothing
+    End Function
 End Class
