@@ -222,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Climsoft\sdgClimsoftFilter.Designer.vb">
+      <DependentUpon>sdgClimsoftFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Climsoft\sdgClimsoftFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="clsTransformationControl.vb" />
@@ -249,6 +255,12 @@
       <DependentUpon>dlgDefineTricotData.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDefineTricotData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDescribeOneVariableLikertGraph.Designer.vb">
+      <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeOneVariableLikertGraph.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDistances.Designer.vb">
@@ -415,10 +427,10 @@
     <Compile Include="sdgAdvOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgClimsoft.Designer.vb">
+    <Compile Include="Climsoft\sdgClimsoft.Designer.vb">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgClimsoft.vb">
+    <Compile Include="Climsoft\sdgClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
@@ -752,10 +764,10 @@
     <Compile Include="dlgClimaticNCMPVariogram.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimsoftWizard.Designer.vb">
+    <Compile Include="Climsoft\dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimsoftWizard.vb">
+    <Compile Include="Climsoft\dlgClimsoftWizard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCluster.Designer.vb">
@@ -1166,10 +1178,10 @@
     <Compile Include="dlgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimSoft.Designer.vb">
+    <Compile Include="Climsoft\dlgClimSoft.Designer.vb">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimSoft.vb">
+    <Compile Include="Climsoft\dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCompare.Designer.vb">
@@ -3407,6 +3419,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Climsoft\sdgClimsoftFilter.resx">
+      <DependentUpon>sdgClimsoftFilter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgApsimx.resx">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </EmbeddedResource>
@@ -3450,7 +3465,7 @@
     <EmbeddedResource Include="dlgClimograph.resx">
       <DependentUpon>dlgClimograph.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimsoftWizard.resx">
+    <EmbeddedResource Include="Climsoft\dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCluster.resx">
@@ -3470,6 +3485,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineTricotData.resx">
       <DependentUpon>dlgDefineTricotData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeOneVariableLikertGraph.resx">
+      <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>dlgDescribeOneVariableLikertGraph1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeOneVariableLikertGraph.sw-KE.resx">
+      <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
@@ -3622,7 +3648,7 @@
     <EmbeddedResource Include="sdgAdvOptions.resx">
       <DependentUpon>sdgAdvOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimsoft.resx">
+    <EmbeddedResource Include="Climsoft\sdgClimsoft.resx">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
@@ -3958,10 +3984,10 @@
     <EmbeddedResource Include="dlgClimdexIndices.sw-KE.resx">
       <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimSoft.resx">
+    <EmbeddedResource Include="Climsoft\dlgClimSoft.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimSoft.sw-KE.resx">
+    <EmbeddedResource Include="Climsoft\dlgClimSoft.sw-KE.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.resx">
