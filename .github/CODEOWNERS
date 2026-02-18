@@ -1,0 +1,16 @@
+# CODEOWNERS file for R-Instat
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Translation oversight - required reviewer for translation-related changes
+# When the translation check CI detects missing translations, it will request
+# a review from the translation oversight team.
+
+# English translation source files (used by Crowdin)
+instat/translations/en/*.json @kisinga
+
+# Translation pattern files (ignore/dynamic patterns)
+instat/translations/translateIgnore.txt @kisinga
+instat/translations/translateDynamic.txt @kisinga
+
+# Translation-related scripts
+scripts/ @kisinga
