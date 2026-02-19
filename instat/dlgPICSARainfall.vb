@@ -756,7 +756,6 @@ Public Class dlgPICSARainfall
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         ucrChkIncludeStatus.SetRCode(clsBaseOperator, bReset)
         ucrReceiverIncludeStatus.SetRCode(clsEqualToOperator, bReset)
-        ucrReceiverSecondYVar.SetRCode(clsSegmentAesFunction, bReset)
         ucrReceiverFacetBy.SetRCode(clsRowVarsFunction, bReset)
 
         If bReset Then
