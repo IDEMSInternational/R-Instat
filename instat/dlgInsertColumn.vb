@@ -16,6 +16,13 @@
 
 Imports instat.Translations
 Public Class dlgInsertColumn
+    Public enumInsertColumnMode As String = InsertColumnMode.Prepare
+
+    Public Enum InsertColumnMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsInsertRowFunction, clsInsertColumnFunction As New RFunction
@@ -188,6 +195,15 @@ Public Class dlgInsertColumn
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumInsertColumnMode
+            Case InsertColumnMode.Prepare
+                ucrBase.iHelpTopicID = 164
+            Case InsertColumnMode.Climatic
+                ucrBase.iHelpTopicID = 844
+        End Select
     End Sub
 
     Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged
