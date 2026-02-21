@@ -3228,6 +3228,7 @@ Public Class frmMain
     End Sub
 
     Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
+        dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
         dlgInsertColumn.ShowDialog()
     End Sub
 End Class
