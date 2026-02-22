@@ -21,7 +21,7 @@ Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsScaleShapeFunction, clsLabelRepelFunction, clsTextRepelFunction As New RFunction
-    Private clsGGplotOperator, clsFacetOp As New ROperator
+    Private clsGGplotOperator As New ROperator
 
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
@@ -47,6 +47,20 @@ Public Class dlgClimaticStationMaps
     Private clsGetDataFrame As New RFunction
     Private clsRemoveFunc As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
+
+    Private ReadOnly strNone As String = "None"
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
+    Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
+    Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
+
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
+    Private bNotSubdialogue As Boolean = False
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -110,10 +124,18 @@ Public Class dlgClimaticStationMaps
         ucrReceiverColor.SetParameterIsString()
         ucrReceiverColor.bWithQuotes = False
 
-        ucrReceiverFacet.SetParameter(New RParameter("wrap", bNewIncludeArgumentName:=False))
+        ucrReceiverFacet.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
         ucrReceiverFacet.Selector = ucrSelectorStation
-        ucrReceiverFacet.SetParameterIsString()
+        ucrReceiverFacet.SetIncludedDataTypes({"factor"})
+        ucrReceiverFacet.strSelectorHeading = "Factors"
         ucrReceiverFacet.bWithQuotes = False
+        ucrReceiverFacet.SetParameterIsString()
+        ucrReceiverFacet.SetValuesToIgnore({"."})
+        ucrReceiverFacet.SetParameterPosition(0)
+        ucrReceiverFacet.SetLinkedDisplayControl(lblFacet)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrReceiverStation.SetParameter(New RParameter("label", 2))
         ucrReceiverStation.Selector = ucrSelectorStation
@@ -203,7 +225,8 @@ Public Class dlgClimaticStationMaps
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
         clsYlimFunction = New RFunction
-        clsFacetOp = New ROperator
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
 
         clsCoordPolarFunction = New RFunction
         clsCoordPolarStartOperator = New ROperator
@@ -248,9 +271,14 @@ Public Class dlgClimaticStationMaps
         clsScaleShapeFunction.SetRCommand("scale_shape_manual")
         clsScaleShapeFunction.AddParameter("values", strParameterValue:="c(3,4,7,8,11,13,15,16,17,18,21,22,42)", bIncludeArgumentName:=True, iPosition:=0)
 
-        clsFacetOp.SetOperation("~")
-        clsFacetOp.bForceIncludeOperation = True
-        clsFacetOp.bBrackets = False
+        clsRFacetFunction.RemoveParameterByName("facets")
+        clsRFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
 
         clsLabelRepelFunction.SetPackageName("ggrepel")
         clsLabelRepelFunction.SetRCommand("geom_label_repel")
@@ -288,9 +316,6 @@ Public Class dlgClimaticStationMaps
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
-        clsRFacetFunction.RemoveParameterByName("facets")
-        clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
-
         clsXlimFunction.SetRCommand("xlim")
         clsYlimFunction.SetRCommand("ylim")
 
@@ -317,7 +342,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverLatitude.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
-        ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
+        ucrReceiverFacet.SetRCode(clsRowVarsFunction, bReset)
         ucrReceiverStation.SetRCode(clsLabelRepelAesFunction, bReset)
         ucrInputColour.SetRCode(clsLabelRepelFunction, bReset)
         ucrNudSize.SetRCode(clsLabelRepelFunction, bReset)
@@ -382,9 +407,10 @@ Public Class dlgClimaticStationMaps
                   clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction,
                   dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
                   clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction,
-                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction,
                   clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        UpdatingFacetOptions()
         bResetSubdialog = False
     End Sub
 
@@ -393,10 +419,157 @@ Public Class dlgClimaticStationMaps
                   clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction,
                   dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
                   clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction,
-                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction,
                   clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        UpdatingFacetOptions()
         bResetSubdialog = False
+    End Sub
+
+    Private Sub UpdatingFacetOptions()
+        bNotSubdialogue = False
+        If clsRFacetFunction.strRCommand = "facet_grid" Then
+            If clsRFacetFunction.ContainsParameter("rows") AndAlso clsRFacetFunction.ContainsParameter("cols") Then
+                If clsRFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAndColAll)
+                Else
+                    ucrInputStation.SetName(strFacetRowAndCol)
+                End If
+            ElseIf clsRFacetFunction.ContainsParameter("rows") Then
+                If clsRFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAll)
+                Else
+                    ucrInputStation.SetName(strFacetRow)
+                End If
+            ElseIf clsRFacetFunction.ContainsParameter("cols") Then
+                If clsRFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetColAll)
+                Else
+                    ucrInputStation.SetName(strFacetCol)
+                End If
+            End If
+        Else
+            ucrInputStation.SetName(strFacetWrap)
+        End If
+        bNotSubdialogue = True
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll OrElse strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll _
+            OrElse ucrInputStation.GetText = strFacetRowAndCol OrElse ucrInputStation.GetText = strFacetRowAndColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+            OrElse ((strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+             AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+
+        UpdateParameters()
+        AddRemoveFacets()
+    End Sub
+
+    Private Sub UpdateParameters()
+
+        clsGGplotOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucrReceiverFacet.SetRCode(clsRowVarsFunction)
+
+        'If Not clsRaesFunction.ContainsParameter("x") Then
+        '    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        'End If
+        If bNotSubdialogue Then
+            clsRFacetFunction.ClearParameters()
+        End If
+
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
+        Dim bRowsAndCols As Boolean = False
+        Dim bRowsAndColsAll As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+        clsGGplotOperator.RemoveParameterByName("facets")
+
+        If Not ucrReceiverFacet.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
+                Case strFacetRowAndCol
+                    bRowsAndCols = True
+                Case strFacetRowAndColAll
+                    bRowsAndColsAll = True
+            End Select
+        End If
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
+            clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
+        End If
+
+        If bWrap Then
+            clsRFacetFunction.SetRCommand("facet_wrap")
+            clsRFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsRFacetFunction.RemoveParameterByName("rows")
+            clsRFacetFunction.RemoveParameterByName("cols")
+        Else
+            clsRFacetFunction.RemoveParameterByName("facets")
+        End If
+
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
+            clsRFacetFunction.SetRCommand("facet_grid")
+            clsRFacetFunction.RemoveParameterByName("facets")
+        End If
+
+        If bRowAll OrElse bColAll OrElse bRowsAndColsAll Then
+            clsRFacetFunction.AddParameter("margins", "TRUE")
+        Else
+            clsRFacetFunction.RemoveParameterByName("margins")
+        End If
+
+        If bRowsAndCols OrElse bRowsAndColsAll Then
+            clsRFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsRFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
+        ElseIf bRow OrElse bRowAll Then
+            clsRFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsRFacetFunction.RemoveParameterByName("cols")
+        ElseIf bCol OrElse bColAll Then
+            clsRFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsRFacetFunction.RemoveParameterByName("rows")
+        End If
     End Sub
 
     Private Sub ChangeSize()
@@ -407,7 +580,7 @@ Public Class dlgClimaticStationMaps
             Me.ucrBase.Location = New Point(10, 350)
         Else
             grpPoints.Visible = False
-            Me.Size = New Size(772, 384)
+            Me.Size = New Size(450, 384)
             Me.ucrSaveMap.Location = New Point(10, 261)
             Me.ucrBase.Location = New Point(10, 286)
         End If

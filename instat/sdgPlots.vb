@@ -3180,13 +3180,13 @@ Public Class sdgPlots
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
+                    clsFacetFunction.RemoveParameterByName("dir")
                     clsRowVarsFunction.ClearParameters()
                     clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsColVarsFunction.ClearParameters()
                     clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
-                    clsFacetFunction.RemoveParameterByName("dir")
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
