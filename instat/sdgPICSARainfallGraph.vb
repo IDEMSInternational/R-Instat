@@ -968,6 +968,7 @@ Public Class sdgPICSARainfallGraph
         ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateMedianY, New RParameter("origin", 1), iAdditionalPairNo:=2)
         ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateLowerTercileY, New RParameter("origin", 1), iAdditionalPairNo:=3)
         ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateUpperTercileY, New RParameter("origin", 1), iAdditionalPairNo:=4)
+        ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateYendFunction, New RParameter("origin", 1), iAdditionalPairNo:=5)
 
         ucrInputStartMonth.SetRCode(clsAsDate, bReset, bCloneIfNeeded:=True)
 
@@ -1314,6 +1315,9 @@ Public Class sdgPICSARainfallGraph
             If rdoYNumeric.Checked Then
                 clsDummyFunction.AddParameter("rdo_checked", "numeric", iPosition:=2)
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumericY, iPosition:=1)
+                clsSegmentAesFunction.AddParameter("y", dlgPICSARainfall.ucrReceiverForPICSA.GetVariableNames(bWithQuotes:=False), iPosition:=1)
+                clsSegmentAesFunction.AddParameter("yend", dlgPICSARainfall.ucrReceiverSecondYVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
+                clsPoint2AesFunction.AddParameter("y", dlgPICSARainfall.ucrReceiverSecondYVar.GetVariableNames(bWithQuotes:=False), iPosition:=1)
                 If clsYScaleContinuousFunction.iParameterCount > 0 Then
                     clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScaleContinuousFunction)
                 Else
