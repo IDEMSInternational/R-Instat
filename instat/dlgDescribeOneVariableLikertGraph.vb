@@ -20,11 +20,17 @@ Imports instat.Translations
 Public Class dlgDescribeOneVariableLikertGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bShowingGraph As Boolean = True
+    Private bHistogramChecked As Boolean = False
+    Private bCentreChecked As Boolean = False
     Private clsLikertFunction As New RFunction
     Private clsPlotFunction As New RFunction
     Private clsSummaryFunction As New RFunction
     Private clsGridLibrary As New RFunction
     Private clsDetachGrid As New RFunction
+    Private clsDevOff As New RFunction
+    Private clsGetDataFrame As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgDescribeOneVariableLikertGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -39,12 +45,21 @@ Public Class dlgDescribeOneVariableLikertGraph
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
-    Private Function GetDataFrameFunction(strDataFrame As String, strColumns As String) As RFunction
-        Dim clsGetDataFrame As New RFunction
-        clsGetDataFrame.SetRCommand("data_book$get_columns_from_data")
-        clsGetDataFrame.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-        clsGetDataFrame.AddParameter("col_names", "c(" & strColumns & ")")
-        Return clsGetDataFrame
+
+    Private Function GetDataFrameFunction(strDataFrame As String, strColumns As String, iCount As Integer) As RFunction
+        Dim clsGetColumns As New RFunction
+        clsGetColumns.SetRCommand("data_book$get_columns_from_data")
+        clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsGetColumns.AddParameter("col_names", strColumns)
+
+        If iCount = 1 Then
+            Dim clsDataFrame As New RFunction
+            clsDataFrame.SetRCommand("data.frame")
+            clsDataFrame.AddParameter(strColumns.Replace(Chr(34), "").Trim(), clsRFunctionParameter:=clsGetColumns, bIncludeArgumentName:=True)
+            Return clsDataFrame
+        End If
+
+        Return clsGetColumns
     End Function
 
     Private Sub InitialiseDialog()
@@ -52,7 +67,6 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        ' Set up receiver for multiple variables - factors only
         ucrReceiverMultipleLikert.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultipleLikert.SetParameterIsRFunction()
         ucrReceiverMultipleLikert.Selector = ucrSelectorLikert
@@ -60,7 +74,6 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrReceiverMultipleLikert.SetIncludedDataTypes({"factor", "ordered"})
         ucrReceiverMultipleLikert.strSelectorHeading = "Factors"
 
-        ' Set up radio buttons for graph type
         ucrPnlGraphType.AddRadioButton(rdoBar)
         ucrPnlGraphType.AddRadioButton(rdoHeat)
         ucrPnlGraphType.AddRadioButton(rdoDensity)
@@ -68,7 +81,6 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrPnlGraphType.AddParameterValuesCondition(rdoHeat, "type", Chr(34) & "heat" & Chr(34))
         ucrPnlGraphType.AddParameterValuesCondition(rdoDensity, "type", Chr(34) & "density" & Chr(34))
 
-        ' Set up checkboxes
         ucrChkIncludeHistogram.SetText("Label Histogram")
         ucrChkIncludeHistogram.SetParameter(New RParameter("include.histogram", 2))
         ucrChkIncludeHistogram.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -76,17 +88,20 @@ Public Class dlgDescribeOneVariableLikertGraph
 
         ucrChkCentre.SetText("Specify Centre")
         ucrNudCentre.SetParameter(New RParameter("center", 3))
-        ucrNudCentre.Minimum = 1.5
-        ucrNudCentre.Maximum = 3.5
-        ucrNudCentre.Increment = 0.5
+        ucrNudCentre.Minimum = 2
+        ucrNudCentre.Maximum = 4
+        ucrNudCentre.Increment = 0.1
         ucrNudCentre.DecimalPlaces = 1
         ucrNudCentre.SetRDefault(2.5)
         ucrChkCentre.AddToLinkedControls(ucrNudCentre, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudCentre.nudUpDown.ReadOnly = False
 
+        ucrNudCentre.Visible = False
+        ucrNudWrap.Visible = False
+
         ucrChkWrap.SetText("Label Width")
         ucrNudWrap.SetParameter(New RParameter("wrap", 4))
-        ucrNudWrap.Minimum = 10
+        ucrNudWrap.Minimum = 0
         ucrNudWrap.Maximum = 100
         ucrNudWrap.Increment = 1
         ucrNudWrap.DecimalPlaces = 0
@@ -94,14 +109,12 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrChkWrap.AddToLinkedControls(ucrNudWrap, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudWrap.nudUpDown.ReadOnly = False
 
-        ' Set up save control for graph
         ucrSaveGraph.SetPrefix("likert_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorLikert.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveGraph.SetCheckBoxText("Store Graph")
 
-        ' Set up receiver for summary
         ucrReceiverMultipleLikertSummary.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultipleLikertSummary.SetParameterIsRFunction()
         ucrReceiverMultipleLikertSummary.Selector = ucrSelectorLikertSummary
@@ -109,36 +122,33 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrReceiverMultipleLikertSummary.SetIncludedDataTypes({"factor", "ordered"})
         ucrReceiverMultipleLikertSummary.strSelectorHeading = "Factors"
 
-        ' Set up save control for summary
         ucrSaveSummary.SetPrefix("likert_summary")
         ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveSummary.SetDataFrameSelector(ucrSelectorLikertSummary.ucrAvailableDataFrames)
         ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
         ucrSaveSummary.SetCheckBoxText("Store Summary")
-        cmdLikertOptions.Enabled = False ' Disable Likert Options by default
+        cmdLikertOptions.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
         clsLikertFunction = New RFunction
         clsPlotFunction = New RFunction
         clsSummaryFunction = New RFunction
+        clsDummyFunction = New RFunction
 
-        ' Reset selectors
         ucrSelectorLikert.Reset()
         ucrSelectorLikertSummary.Reset()
         ucrReceiverMultipleLikert.SetMeAsReceiver()
         ucrReceiverMultipleLikertSummary.SetMeAsReceiver()
 
-        ' Set up likert function for both tabs
         clsLikertFunction.SetPackageName("likert")
         clsLikertFunction.SetRCommand("likert")
 
-        ' Set up plot function for graph tab
+        clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
+
         clsPlotFunction.SetRCommand("plot")
-        clsPlotFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=1)
         clsPlotFunction.AddParameter("include.histogram", "FALSE", iPosition:=2)
 
-        ' Set up summary function for summary tab
         clsSummaryFunction.SetRCommand("summary")
 
         clsGridLibrary.SetRCommand("library")
@@ -148,17 +158,18 @@ Public Class dlgDescribeOneVariableLikertGraph
         clsDetachGrid.AddParameter("name", Chr(34) & "package:grid" & Chr(34), bIncludeArgumentName:=False)
         clsDetachGrid.AddParameter("character.only", "TRUE")
         clsDetachGrid.AddParameter("unload", "TRUE")
+        clsDevOff.SetRCommand("dev.off")
 
         ucrChkIncludeHistogram.Checked = False
         ucrChkCentre.Checked = False
         ucrChkWrap.Checked = False
-
         ucrSaveGraph.ucrChkSave.Checked = False
         ucrSaveSummary.ucrChkSave.Checked = False
+        cmdLikertOptions.Enabled = False
+        bHistogramChecked = False
+        bCentreChecked = False
 
-        cmdLikertOptions.Enabled = False ' Disable Likert Options by default
-
-        If tbcLikert.SelectedTab Is tbpGraph Then
+        If bShowingGraph Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
@@ -166,35 +177,23 @@ Public Class dlgDescribeOneVariableLikertGraph
 
         ucrPnlGraphType.SetRDefault("bar")
     End Sub
-
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ' Graph Tab
-        ' Don't set RCode for selector - it adds unwanted data_name parameter
-        ' ucrSelectorLikert.SetRCode(clsLikertFunction, bReset)
-        ucrPnlGraphType.SetRCode(clsPlotFunction, bReset)
         ucrChkIncludeHistogram.SetRCode(clsPlotFunction, bReset)
         ucrNudCentre.SetRCode(clsPlotFunction, bReset)
         ucrNudWrap.SetRCode(clsPlotFunction, bReset)
         ucrSaveGraph.SetRCode(clsPlotFunction, bReset)
-
-        ' Summary Tab
-        ' Don't set RCode for selector
-        ' ucrSelectorLikertSummary.SetRCode(clsLikertFunction, bReset)
         ucrSaveSummary.SetRCode(clsSummaryFunction, bReset)
+        ucrPnlGraphType.SetRCode(clsDummyFunction, bReset)
     End Sub
-
     Public Sub TestOKEnabled()
-        If tbcLikert.SelectedTab Is tbpGraph Then
-            ' Graph tab validation
+        If bShowingGraph Then
             If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
-                ' Enable Likert Options group when factors are selected
                 grpLikertOptions.Enabled = Not ucrReceiverMultipleLikert.IsEmpty()
             End If
         Else
-            ' Summary tab validation
             If ucrReceiverMultipleLikertSummary.IsEmpty() OrElse Not ucrSaveSummary.IsComplete Then
                 ucrBase.OKEnabled(False)
             Else
@@ -202,7 +201,6 @@ Public Class dlgDescribeOneVariableLikertGraph
             End If
         End If
     End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         ucrSaveGraph.Reset()
         ucrSaveSummary.Reset()
@@ -215,79 +213,112 @@ Public Class dlgDescribeOneVariableLikertGraph
             ucrSaveGraph.ControlContentsChanged, ucrReceiverMultipleLikertSummary.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
+    Private Sub rdoGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGraph.CheckedChanged
+        If rdoGraph.Checked Then
+            bShowingGraph = True
+            pnlGraph.Visible = True
+            pnlSummary.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
+            clsLikertFunction.SetAssignTo("")
+            TestOKEnabled()
+        End If
+    End Sub
+    Private Sub rdoSummary_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSummary.CheckedChanged
+        If rdoSummary.Checked Then
+            bShowingGraph = False
+            pnlGraph.Visible = False
+            pnlSummary.Visible = True
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+            clsPlotFunction.RemoveParameterByName("x")
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachGrid)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDevOff)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGridLibrary)
+            TestOKEnabled()
+        End If
+    End Sub
+    Private Sub ucrChkIncludeHistogram_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeHistogram.ControlValueChanged
+        If rdoBar.Checked Then
+            bHistogramChecked = ucrChkIncludeHistogram.chkCheck.Checked
+        End If
+        ManageGridLibrary()
+    End Sub
+    Private Sub ucrChkCentre_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCentre.ControlValueChanged
+        If rdoBar.Checked Then
+            bCentreChecked = ucrChkCentre.chkCheck.Checked
+        End If
+    End Sub
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
-        ' Enable/disable histogram and centre options based on graph type
         If rdoBar.Checked Then
             ucrChkIncludeHistogram.Enabled = True
             ucrChkCentre.Enabled = True
-        Else
+            ucrChkIncludeHistogram.chkCheck.Checked = bHistogramChecked
+            ucrChkCentre.chkCheck.Checked = bCentreChecked
+            clsPlotFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=1)
+            ucrNudCentre.Visible = bCentreChecked
+        ElseIf rdoHeat.Checked Then
+            ucrChkIncludeHistogram.chkCheck.Checked = False
+            ucrChkCentre.chkCheck.Checked = False
             ucrChkIncludeHistogram.Enabled = False
             ucrChkCentre.Enabled = False
-            ucrChkIncludeHistogram.Checked = False
-            ucrChkCentre.Checked = False
+            ucrNudCentre.Visible = False
+            clsPlotFunction.AddParameter("type", Chr(34) & "heat" & Chr(34), iPosition:=1)
+        ElseIf rdoDensity.Checked Then
+            ucrChkIncludeHistogram.chkCheck.Checked = False
+            ucrChkCentre.chkCheck.Checked = False
+            ucrChkIncludeHistogram.Enabled = False
+            ucrChkCentre.Enabled = False
+            ucrNudCentre.Visible = False
+            clsPlotFunction.AddParameter("type", Chr(34) & "density" & Chr(34), iPosition:=1)
         End If
         ManageGridLibrary()
     End Sub
 
     Private Sub ucrReceiverMultipleLikert_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleLikert.ControlValueChanged
         If Not ucrReceiverMultipleLikert.IsEmpty Then
-            Dim clsGetDataFrame As RFunction = GetDataFrameFunction(ucrSelectorLikert.strCurrentDataFrame, ucrReceiverMultipleLikert.GetVariableNames())
-
-            clsLikertFunction.AddParameter("items", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
+            clsGetDataFrame = GetDataFrameFunction(ucrSelectorLikert.strCurrentDataFrame, ucrReceiverMultipleLikert.GetVariableNames(), ucrReceiverMultipleLikert.Count())
+            clsGetDataFrame.SetAssignTo("likert_data")
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrame, iPosition:=0)
+            clsLikertFunction.RemoveParameterByName("items")
+            clsLikertFunction.AddParameter("items", "likert_data", iPosition:=0, bIncludeArgumentName:=False)
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsLikertFunction, iPosition:=0, bIncludeArgumentName:=False)
         Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
             clsLikertFunction.RemoveParameterByName("items")
             clsPlotFunction.RemoveParameterByName("x")
         End If
-
         grpLikertOptions.Enabled = Not ucrReceiverMultipleLikert.IsEmpty()
     End Sub
-
     Private Sub ucrReceiverMultipleLikertSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleLikertSummary.ControlValueChanged
         If Not ucrReceiverMultipleLikertSummary.IsEmpty Then
-            Dim clsGetDataFrame As RFunction = GetDataFrameFunction(ucrSelectorLikertSummary.strCurrentDataFrame, ucrReceiverMultipleLikertSummary.GetVariableNames())
-
-            clsLikertFunction.AddParameter("items", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0, bIncludeArgumentName:=False)
-            clsLikertFunction.SetAssignTo("likert_data")
-
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsLikertFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", "likert_data", bIncludeArgumentName:=False)
-        Else
-            clsSummaryFunction.RemoveParameterByName("object")
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
             clsLikertFunction.RemoveParameterByName("items")
-        End If
-    End Sub
-
-    Private Sub tbcLikert_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcLikert.SelectedIndexChanged
-        ' Switch the base R function based on selected tab
-        If tbcLikert.SelectedTab Is tbpGraph Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
-            ' Clean up state from summary tab
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
-            clsLikertFunction.SetAssignTo("")
+            clsGetDataFrame = GetDataFrameFunction(ucrSelectorLikertSummary.strCurrentDataFrame, ucrReceiverMultipleLikertSummary.GetVariableNames(), ucrReceiverMultipleLikertSummary.Count())
+            clsGetDataFrame.SetAssignTo("likert_data")
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrame, iPosition:=0)
+            clsLikertFunction.AddParameter("items", "likert_data", iPosition:=0, bIncludeArgumentName:=False)
+            clsLikertFunction.SetAssignTo("likert_object")
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsLikertFunction, iPosition:=1)
+            clsSummaryFunction.AddParameter("object", "likert_object", bIncludeArgumentName:=False)
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-            ' Clean up state from graph tab
-            clsPlotFunction.RemoveParameterByName("x")
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
+            clsLikertFunction.RemoveParameterByName("items")
+            clsSummaryFunction.RemoveParameterByName("object")
         End If
-        TestOKEnabled()
     End Sub
-
-    Private Sub ucrChkIncludeHistogram_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeHistogram.ControlValueChanged
-        ManageGridLibrary()
-    End Sub
-
     Private Sub ManageGridLibrary()
         If rdoBar.Checked AndAlso ucrChkIncludeHistogram.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGridLibrary, iPosition:=0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachGrid, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDevOff, iPosition:=1)
         Else
-            ' Remove grid library codes if conditions not met
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGridLibrary)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachGrid)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDevOff)
         End If
     End Sub
 End Class
