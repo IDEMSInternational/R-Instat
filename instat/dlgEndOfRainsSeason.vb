@@ -19,6 +19,7 @@ Imports RDotNet
 
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
+    Private bIsUpdatingSaveObject As Boolean = False
     Private bDialogJustShown As Boolean = False
     Private bReset As Boolean = True
     Private strRainMin As String = "rain_min"
@@ -306,10 +307,6 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofSeasonDate.AddParameterValuesCondition(True, "sub2", "True")
         ucrChkEndofSeasonDate.AddParameterValuesCondition(False, "sub2", "False")
 
-        ucrChkDefinitions.SetText("Definitions")
-        ucrChkDefinitions.AddParameterValuesCondition(True, "def", "True")
-        ucrChkDefinitions.AddParameterValuesCondition(False, "def", "False")
-
         ucrInputEndofSeasonDate.SetParameter(New RParameter("result_name", 3))
         ucrInputEndofSeasonDate.SetValidationTypeAsRVariable()
         ucrInputEndofSeasonDate.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
@@ -346,7 +343,6 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofSeasonDate.AddToLinkedControls(ucrInputEndofSeasonDate, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonDoy.AddToLinkedControls(ucrInputSeasonDoy, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFilled.AddToLinkedControls(ucrInputFilled, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDefinitions.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkWB.AddToLinkedControls(ucrNudWB, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrPnlEvaporation.AddToLinkedControls(ucrInputEvaporation, {rdoValueEvaporation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlEvaporation.AddToLinkedControls(ucrReceiverEvaporation, {rdoVariableEvaporation}, bNewLinkedHideIfParameterMissing:=True)
@@ -369,7 +365,7 @@ Public Class dlgEndOfRainsSeason
 
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
-        ucrSaveObject.SetLabelText("Definition Object Name:")
+        ucrSaveObject.SetCheckBoxText("Store Definitions:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
@@ -1339,7 +1335,6 @@ Public Class dlgEndOfRainsSeason
             ucrChkEndofRainsOccurence.SetRCode(clsDummyFunction, bReset)
             ucrChkEndofSeasonDoy.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
             ucrChkEndofSeasonDate.SetRCode(clsDummyFunction, bReset)
-            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
             ucrChkEndofSeasonOccurence.SetRCode(clsDummyFunction, bReset)
         End If
 
@@ -1385,6 +1380,11 @@ Public Class dlgEndOfRainsSeason
         Else
             bOkEnabled = False
         End If
+
+        If ucrSaveObject.ucrChkSave.Checked AndAlso Not ucrSaveObject.IsComplete Then
+            bOkEnabled = False
+        End If
+
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
@@ -1689,7 +1689,7 @@ Public Class dlgEndOfRainsSeason
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndRainDefFunction)
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndSeasonDefFunction)
 
-        If ucrChkDefinitions.Checked Then
+        If ucrSaveObject.ucrChkSave.Checked Then
 
             If rdoEndOfSeasons.Checked Then
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndSeasonDefFunction, iPosition:=16)
@@ -1723,7 +1723,17 @@ Public Class dlgEndOfRainsSeason
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrChkEndofSeasonOccurence.ControlContentsChanged, ucrInputEndofSeasonOccurence.ControlContentsChanged, ucrChkEndofSeasonDate.ControlContentsChanged, ucrInputEndofSeasonDate.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
+    Private Sub ucrSaveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlValueChanged
+        If bIsUpdatingSaveObject Then
+            Exit Sub
+        End If
+
+        bIsUpdatingSaveObject = True
+        AddSaveDefinitionOptions()
+        bIsUpdatingSaveObject = False
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrChkEndofSeasonOccurence.ControlContentsChanged, ucrInputEndofSeasonOccurence.ControlContentsChanged, ucrChkEndofSeasonDate.ControlContentsChanged, ucrInputEndofSeasonDate.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrSaveObject.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -1798,10 +1808,6 @@ Public Class dlgEndOfRainsSeason
             CheckForMissingValues()
             bDialogJustShown = False ' So it doesn't repeat if Shown is triggered again
         End If
-    End Sub
-
-    Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
-        AddSaveDefinitionOptions()
     End Sub
 
     Private Sub ucrInputEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEndofRainsDate.ControlValueChanged, ucrInputEndofRainsOccurence.ControlValueChanged, ucrInputEndRainDoy.ControlValueChanged
