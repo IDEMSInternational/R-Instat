@@ -45,13 +45,13 @@ Public Class dlgDescribeOneVariableLikertGraph
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
-    Private Function GetDataFrameFunction(strDataFrame As String, strColumns As String) As RFunction
+
+    Private Function GetDataFrameFunction(strDataFrame As String, strColumns As String, iCount As Integer) As RFunction
         Dim clsGetColumns As New RFunction
         clsGetColumns.SetRCommand("data_book$get_columns_from_data")
         clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
         clsGetColumns.AddParameter("col_names", strColumns)
 
-        Dim iCount As Integer = strColumns.Split(",").Length
         If iCount = 1 Then
             Dim clsDataFrame As New RFunction
             clsDataFrame.SetRCommand("data.frame")
@@ -274,10 +274,11 @@ Public Class dlgDescribeOneVariableLikertGraph
         End If
         ManageGridLibrary()
     End Sub
+
     Private Sub ucrReceiverMultipleLikert_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleLikert.ControlValueChanged
         If Not ucrReceiverMultipleLikert.IsEmpty Then
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
-            clsGetDataFrame = GetDataFrameFunction(ucrSelectorLikert.strCurrentDataFrame, ucrReceiverMultipleLikert.GetVariableNames())
+            clsGetDataFrame = GetDataFrameFunction(ucrSelectorLikert.strCurrentDataFrame, ucrReceiverMultipleLikert.GetVariableNames(), ucrReceiverMultipleLikert.Count())
             clsGetDataFrame.SetAssignTo("likert_data")
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrame, iPosition:=0)
             clsLikertFunction.RemoveParameterByName("items")
@@ -295,7 +296,7 @@ Public Class dlgDescribeOneVariableLikertGraph
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertFunction)
             clsLikertFunction.RemoveParameterByName("items")
-            clsGetDataFrame = GetDataFrameFunction(ucrSelectorLikertSummary.strCurrentDataFrame, ucrReceiverMultipleLikertSummary.GetVariableNames())
+            clsGetDataFrame = GetDataFrameFunction(ucrSelectorLikertSummary.strCurrentDataFrame, ucrReceiverMultipleLikertSummary.GetVariableNames(), ucrReceiverMultipleLikertSummary.Count())
             clsGetDataFrame.SetAssignTo("likert_data")
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrame, iPosition:=0)
             clsLikertFunction.AddParameter("items", "likert_data", iPosition:=0, bIncludeArgumentName:=False)
