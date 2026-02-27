@@ -23,7 +23,7 @@ Public Class dlgPICSACrops
     Private clsDummyFunction As New RFunction
     Private clsSequenceFunction, clsSequencewaterFunction, clsSequencePlantingFunction As New RFunction
     Private clsGetDataNamesFunction, clsSetDiffFunction, clsUpdatedDataNamesFunction, clsStartsWithFunction,
-            clsGetDataFrameFunction, clsGetCropDefinitionFunction, clsGetSeasonStartDefinitionFunction,
+            clsGetDataFrameFunction, clsGetCropDefinitionFunction, clsGetCropDefinitionPropsFunction,
             clsStartsWithPropsFunction, clsGetDataFramePropsFunction As New RFunction
 
     Private clsFirstBracketOperator, clsEmptySpaceOperator, clsEmptySpacePropsOperator As New ROperator
@@ -253,7 +253,7 @@ Public Class dlgPICSACrops
         clsStartsWithFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
         clsGetCropDefinitionFunction = New RFunction
-        clsGetSeasonStartDefinitionFunction = New RFunction
+        clsGetCropDefinitionPropsFunction = New RFunction
         clsStartsWithPropsFunction = New RFunction
         clsGetDataFramePropsFunction = New RFunction
 
@@ -290,12 +290,13 @@ Public Class dlgPICSACrops
         clsSetDiffFunction.SetRCommand("setdiff")
         clsSetDiffFunction.AddParameter("x", clsRFunctionParameter:=clsUpdatedDataNamesFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsSetDiffFunction.AddParameter("y", "existing_dfs", iPosition:=1, bIncludeArgumentName:=False)
+        clsSetDiffFunction.SetAssignTo("new_df_name")
 
-        clsFirstBracketOperator.SetOperation("[")
-        clsFirstBracketOperator.AddParameter("x", clsRFunctionParameter:=clsSetDiffFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsFirstBracketOperator.AddParameter("y", "1]", iPosition:=1, bIncludeArgumentName:=False)
-        clsFirstBracketOperator.SetAssignTo("new_df_name")
-        clsFirstBracketOperator.bSpaceAroundOperation = False
+        'clsFirstBracketOperator.SetOperation("[")
+        'clsFirstBracketOperator.AddParameter("x", clsRFunctionParameter:=clsSetDiffFunction, iPosition:=0, bIncludeArgumentName:=False)
+        'clsFirstBracketOperator.AddParameter("y", "1]", iPosition:=1, bIncludeArgumentName:=False)
+        'clsFirstBracketOperator.SetAssignTo("new_df_name")
+        'clsFirstBracketOperator.bSpaceAroundOperation = False
 
         clsStartsWithFunction.SetRCommand("startsWith")
         clsStartsWithFunction.AddParameter("x", "new_df_name", iPosition:=0, bIncludeArgumentName:=False)
@@ -332,8 +333,8 @@ Public Class dlgPICSACrops
         clsGetCropDefinitionFunction.SetRCommand("get_crop_definition")
         clsGetCropDefinitionFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsGetSeasonStartDefinitionFunction.SetRCommand("get_season_start_definition")
-        clsGetSeasonStartDefinitionFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFramePropsFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetCropDefinitionPropsFunction.SetRCommand("get_crop_definition")
+        clsGetCropDefinitionPropsFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFramePropsFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         ucrInputPlantingDates.SetName("160")
         ucrInputCropLengths.SetName("120")
@@ -369,7 +370,7 @@ Public Class dlgPICSACrops
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkDataCrops.SetRCode(clsCropsFunction, bReset)
         ucrSaveDefinitionCrops.SetRCode(clsGetCropDefinitionFunction, bReset)
-        ucrSaveDefinitionProportions.SetRCode(clsGetSeasonStartDefinitionFunction, bReset)
+        ucrSaveDefinitionProportions.SetRCode(clsGetCropDefinitionPropsFunction, bReset)
         If bReset Then
             ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
         End If
@@ -431,9 +432,9 @@ Public Class dlgPICSACrops
         End If
 
         If ucrChkDataProp.Checked AndAlso ucrSaveDefinitionProportions.ucrChkSave.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetSeasonStartDefinitionFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetCropDefinitionPropsFunction, iPosition:=3)
         Else
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetSeasonStartDefinitionFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetCropDefinitionPropsFunction)
         End If
         AddDataNames()
     End Sub
@@ -441,10 +442,10 @@ Public Class dlgPICSACrops
     Private Sub AddDataNames()
         If ucrSaveDefinitionProportions.ucrChkSave.Checked OrElse ucrSaveDefinitionCrops.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataNamesFunction, iPosition:=1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsFirstBracketOperator, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSetDiffFunction, iPosition:=1)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataNamesFunction)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFirstBracketOperator)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSetDiffFunction)
         End If
     End Sub
 
