@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports System.Text.RegularExpressions
 Public Class dlgClimaticBoxPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -76,6 +77,9 @@ Public Class dlgClimaticBoxPlot
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+
+    Private lstReceivers As New List(Of ucrReceiverSingle)
+    Private dctRecognisedTypes As New Dictionary(Of String, List(Of String))
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -133,6 +137,11 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
+        dctRecognisedTypes.Add("month", {"month", "mon", "mois"}.ToList())
+        lstReceivers.AddRange({ucrReceiverWithinYear})
+
+
+        ucrReceiverWithinYear.Tag = "month"
         ucrReceiverWithinYear.SetParameter(New RParameter("x", 1))
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
@@ -206,11 +215,13 @@ Public Class dlgClimaticBoxPlot
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
         clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
+        clsThemeFunc.AddParameter("legend.position", Chr(34) & "none" & Chr(34), iPosition:=7)
         clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90", iPosition:=0)
         clsTextElementFunc.AddParameter("hjust", "1", iPosition:=1)
         clsTextElementFunc.AddParameter("vjust", "0.5", iPosition:=2)
+
 
         ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
@@ -303,7 +314,7 @@ Public Class dlgClimaticBoxPlot
         bResetBoxLayerSubdialog = True
         ucrReceiverElement.SetMeAsReceiver()
 
-        ucrInputStation.SetName(strNone)
+        ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
         ucrInputYear.SetName(strNone)
         ucrInputYear.bUpdateRCodeFromControl = True
@@ -465,6 +476,7 @@ Public Class dlgClimaticBoxPlot
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        AutoFillReceivers()
         TestOKEnabled()
     End Sub
 
@@ -476,6 +488,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsGroupbyFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("fill", 25, bNewIncludeArgumentName:=True), iAdditionalPairNo:=1)
 
         ucrReceiverWithinYear.SetRCode(clsAsFactor2Function)
         ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
@@ -558,6 +571,35 @@ Public Class dlgClimaticBoxPlot
         AddRemoveFacets()
         SetOptionsButtonsText()
         autoTranslate(Me)
+    End Sub
+
+
+    Private Sub AutoFillReceivers()
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorClimaticBoxPlot.CurrentReceiver
+        Dim lstRecognisedValues As List(Of String) = New List(Of String)
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            Dim bFound As Boolean = False
+            ucrTempReceiver.SetMeAsReceiver()
+            If Not dctRecognisedTypes.TryGetValue(ucrTempReceiver.Tag, lstRecognisedValues) Then
+                Continue For
+            End If
+            For Each lviTempVariable As ListViewItem In ucrSelectorClimaticBoxPlot.lstAvailableVariable.Items
+                For Each strValue As String In lstRecognisedValues
+                    If Regex.Replace(lviTempVariable.Text.ToLower(), "[^a-zA-Z0-9]", String.Empty).Contains(strValue) Then
+                        ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                        bFound = True
+                        Exit For
+                    End If
+                Next
+                If bFound Then Exit For
+            Next
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
     End Sub
 
     Private Sub SetOptionsButtonsText()
@@ -711,6 +753,10 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
         AutoFill()
+    End Sub
+
+    Private Sub ucrSelectorClimaticBoxPlot_ControlValueChanged() Handles ucrSelectorClimaticBoxPlot.ControlValueChanged
+        AutoFillReceivers()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
