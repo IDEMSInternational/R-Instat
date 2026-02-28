@@ -78,8 +78,8 @@ Public Class dlgClimaticBoxPlot
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
 
-    Dim lstReceivers As New List(Of ucrReceiverSingle)
-    Dim dctRecognisedTypes As New Dictionary(Of String, List(Of String))
+    Private lstReceivers As New List(Of ucrReceiverSingle)
+    Private dctRecognisedTypes As New Dictionary(Of String, List(Of String))
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -586,7 +586,7 @@ Public Class dlgClimaticBoxPlot
             End If
             For Each lviTempVariable As ListViewItem In ucrSelectorClimaticBoxPlot.lstAvailableVariable.Items
                 For Each strValue As String In lstRecognisedValues
-                    If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                    If Regex.Replace(lviTempVariable.Text.ToLower(), "[^a-zA-Z0-9]", String.Empty).Contains(strValue) Then
                         ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                         bFound = True
                         Exit For
