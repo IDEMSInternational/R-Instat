@@ -131,6 +131,16 @@ Public Class dlgStartofRains
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
+        ucrPnlStart.AddRadioButton(rdoRain)
+        ucrPnlStart.AddRadioButton(rdoTemperature)
+        ucrPnlStart.AddFunctionNamesCondition(rdoRain, "last")
+        ucrPnlStart.AddFunctionNamesCondition(rdoTemperature, "first")
+
+        ucrPnlStart.AddToLinkedControls(ucrReceiverRainfall, {rdoRain}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        ucrPnlStart.AddToLinkedControls({ucrNudAmount, ucrNudTotalOverDays}, {rdoTemperature}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+
         ucrReceiverRainfall.SetParameter(New RParameter("x", 0))
         ucrReceiverRainfall.SetParameterIsString()
         ucrReceiverRainfall.bWithQuotes = False
@@ -226,6 +236,17 @@ Public Class dlgStartofRains
         ucrChkStatus.AddParameterValuesCondition(True, "sub3", "True")
         ucrChkStatus.AddParameterValuesCondition(False, "sub3", "False")
         ucrChkStatus.SetText("Occurrence")
+
+        ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
+        ucrNudAmount.DecimalPlaces = 2
+        ucrNudAmount.Increment = 0.1
+        ucrNudAmount.SetRDefault(30)
+        ucrNudAmount.SetLinkedDisplayControl(lblAmount)
+
+        ucrNudTotalOverDays.SetParameter(New RParameter("n", 1))
+        ucrNudTotalOverDays.SetMinMax(1, 366)
+        ucrNudTotalOverDays.SetRDefault(1)
+        ucrNudTotalOverDays.SetLinkedDisplayControl(lblTotalOverDays)
 
         ucrSaveDefinition.SetPrefix("start_rains_definition")
         ucrSaveDefinition.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
