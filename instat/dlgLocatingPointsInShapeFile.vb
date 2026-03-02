@@ -33,6 +33,7 @@ Public Class dlgLocatingPointsInShapeFile
     Private clsOpeningSubsetOperator, clsIsEqualToOperator, clsEqualOpeningSubsetOperator, clsClosingSubsetOperator As New ROperator
     Private lstLongReceivers As New List(Of ucrReceiverSingle)
     Private lstLatReceivers As New List(Of ucrReceiverSingle)
+    Private lstGeometryReceivers As New List(Of ucrReceiverSingle)
     Private clsGetDataFrame As New RFunction
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
@@ -49,18 +50,21 @@ Public Class dlgLocatingPointsInShapeFile
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
-        AutoFillReceivers(lstLongReceivers)
-        AutoFillReceivers(lstLatReceivers)
+        AutoFillReceivers(lstLongReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
+        AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
+        AutoFillReceivers(lstGeometryReceivers, ucrSelectorShapeFile, ucrSelectorShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Sub InitiliseDialog()
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "long", "LONGITUDE", "lont", "longitude"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude"}.ToList())
+        Dim kvpGeom As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("geometry", {"geometry"}.ToList())
 
-        lstRecognisedTypes.AddRange({kvpLongitude, kvpLatitude})
+        lstRecognisedTypes.AddRange({kvpLongitude, kvpLatitude, kvpGeom})
 
         lstLongReceivers.AddRange({ucrReceiverLongitude})
         lstLatReceivers.AddRange({ucrReceiverLatitude})
+        lstGeometryReceivers.AddRange({ucrReceiverGeometry})
 
         ucrBase.iHelpTopicID = 622
         ucrSelectorStationFile.SetParameter(New RParameter("x", 0))
@@ -82,8 +86,8 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverGeometry.SetParameter(New RParameter("x", 1))
         ucrReceiverGeometry.Selector = ucrSelectorShapeFile
         ucrReceiverGeometry.SetParameterIsRFunction()
-        'ucrReceiverGeometry.SetIncludedDataTypes({"sfc"})
-        'ucrReceiverGeometry.SetDataType("numeric")
+        ucrReceiverGeometry.Tag = "geometry"
+        ucrReceiverGeometry.SetDataType("numeric")
 
         ucrReceiverShapeFilePolygon.SetParameter(New RParameter("left", 0))
         ucrReceiverShapeFilePolygon.Selector = ucrSelectorShapeFile
@@ -207,12 +211,13 @@ Public Class dlgLocatingPointsInShapeFile
 
         ucrChkOmitMissing.SetRCode(clsStAsSfFunction, bReset)
 
-        AutoFillReceivers(lstLongReceivers)
-        AutoFillReceivers(lstLatReceivers)
+        AutoFillReceivers(lstLongReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
+        AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
+        AutoFillReceivers(lstGeometryReceivers, ucrSelectorShapeFile, ucrSelectorShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverLongitude.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverGeometry.IsEmpty OrElse (Not ucrReceiverStationFilePolygon.IsEmpty AndAlso ucrReceiverShapeFilePolygon.IsEmpty) OrElse Not ucrSaveNewColumnName.IsComplete Then
+        If ucrReceiverLongitude.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverGeometry.IsEmpty OrElse ucrReceiverShapeFilePolygon.IsEmpty OrElse Not ucrSaveNewColumnName.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -240,66 +245,61 @@ Public Class dlgLocatingPointsInShapeFile
         End If
     End Sub
 
-    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
-        If bisFilling OrElse lstReceivers Is Nothing Then
-            Exit Sub
-        End If
-
+    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle), ucrSelector As ucrSelector, cboDataFrame As ComboBox)
+        If bisFilling OrElse lstReceivers Is Nothing OrElse ucrSelector Is Nothing OrElse cboDataFrame Is Nothing Then Exit Sub
         bisFilling = True
 
-        Dim lstRecognisedValues As List(Of String)
-        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorStationFile.CurrentReceiver
-        Dim strSelectedValue As String
+        ' Save the currently selected receiver
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelector.CurrentReceiver
         Dim bFound As Boolean = False
 
-        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+        ' Get the currently selected DataFrame text
+        Dim dataFrameName As String = cboDataFrame.Text
+
+        ' Loop through each receiver to try auto-filling
+        For Each ucrTempReceiver As ucrReceiverSingle In lstReceivers
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+            Dim lstRecognisedValues As List(Of String) = GetRecognisedValues(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
-                Dim lstAvailable As List(Of String) = ucrSelectorStationFile.lstAvailableVariable.Items.Cast(Of ListViewItem) _
-                .Select(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty)).ToList()
-
-                If lstRecognisedValues.Contains("end_season") AndAlso lstAvailable.Contains("end_season") Then
-                    strSelectedValue = "end_season"
-                Else
-                    strSelectedValue = lstRecognisedValues.FirstOrDefault(Function(val) lstAvailable.Contains(val))
-                End If
-
-                If Not String.IsNullOrEmpty(strSelectedValue) Then
-                    Dim matchingItem As ListViewItem = ucrSelectorStationFile.lstAvailableVariable.Items.Cast(Of ListViewItem) _
-                    .FirstOrDefault(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty) = strSelectedValue)
-
-                    If matchingItem IsNot Nothing Then
-                        ucrTempReceiver.Add(matchingItem.Text, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                For Each lviTempVariable As ListViewItem In ucrSelector.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, dataFrameName)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
                     End If
-                End If
+                Next
             End If
         Next
 
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
+        ' Restore previous receiver
+        If ucrCurrentReceiver IsNot Nothing Then ucrCurrentReceiver.SetMeAsReceiver()
 
         bisFilling = False
     End Sub
 
     Private Sub ucrSelectorStationFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStationFile.ControlValueChanged
-        AutoFillReceivers(lstLongReceivers)
-        AutoFillReceivers(lstLatReceivers)
+        AutoFillReceivers(lstLongReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
+        AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Sub ucrSelectorStationFile_DataFrameChanged() Handles ucrSelectorStationFile.DataFrameChanged
-        AutoFillReceivers(lstLongReceivers)
-        AutoFillReceivers(lstLatReceivers)
+        AutoFillReceivers(lstLongReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
+        AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged
-        AutoFillReceivers(lstLatReceivers)
+        AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Sub ucrReceiverLongitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongitude.ControlValueChanged
-        AutoFillReceivers(lstLongReceivers)
+        AutoFillReceivers(lstLongReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
@@ -314,33 +314,12 @@ Public Class dlgLocatingPointsInShapeFile
         Return lstValues
     End Function
 
-    Private Sub AutoFillGeometryReceiver()
 
-        Dim strDataFrameName As String =
-        ucrSelectorShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-
-        If strDataFrameName = "" Then Exit Sub
-
-        Dim expResult As SymbolicExpression =
-        frmMain.clsRLink.RunInternalScriptGetValue(
-        "inherits(" & frmMain.clsRLink.strInstatDataObject &
-        "$get_data_frame('" & strDataFrameName & "'), 'sf')")
-
-        If expResult IsNot Nothing AndAlso expResult.AsLogical(0) Then
-            If ucrReceiverGeometry.IsEmpty Then
-                ucrReceiverGeometry.Add(strDataFrameName, "geometry")
-            End If
-        End If
-
-    End Sub
-
-    Private Sub ucrSelectorShapeFile_DataFrameChanged() _
-    Handles ucrSelectorShapeFile.DataFrameChanged
-
-        AutoFillGeometryReceiver()
+    Private Sub ucrSelectorShapeFile_DataFrameChanged() Handles ucrSelectorShapeFile.DataFrameChanged
+        AutoFillReceivers(lstGeometryReceivers, ucrSelectorShapeFile, ucrSelectorShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
     Private Sub ucrReceiverGeometry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGeometry.ControlValueChanged
-        AutoFillGeometryReceiver()
+        AutoFillReceivers(lstGeometryReceivers, ucrSelectorShapeFile, ucrSelectorShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 End Class
