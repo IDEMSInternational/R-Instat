@@ -35,7 +35,7 @@ Public Class dlgLocatingPointsInShapeFile
     Private lstLatReceivers As New List(Of ucrReceiverSingle)
     Private lstGeometryReceivers As New List(Of ucrReceiverSingle)
     Private clsGetDataFrame As New RFunction
-    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private lstRecognisedTypes As New Dictionary(Of String, List(Of String))
 
     Private Sub dlgLocatingPointsInShapeFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,11 +56,11 @@ Public Class dlgLocatingPointsInShapeFile
     End Sub
 
     Private Sub InitiliseDialog()
-        Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "long", "LONGITUDE", "lont", "longitude"}.ToList())
-        Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude"}.ToList())
-        Dim kvpGeom As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("geometry", {"geometry"}.ToList())
+        ucrBase.iHelpTopicID = 622
 
-        lstRecognisedTypes.AddRange({kvpLongitude, kvpLatitude, kvpGeom})
+        lstRecognisedTypes.Add("lon", New List(Of String) From {"lon", "long", "LONGITUDE", "lont", "longitude"})
+        lstRecognisedTypes.Add("lat", New List(Of String) From {"lat", "latitude"})
+        lstRecognisedTypes.Add("geometry", New List(Of String) From {"geometry"})
 
         lstLongReceivers.AddRange({ucrReceiverLongitude})
         lstLatReceivers.AddRange({ucrReceiverLatitude})
@@ -76,11 +76,13 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverLongitude.SetParameter(New RParameter("longitude", 0, bNewIncludeArgumentName:=False))
         ucrReceiverLongitude.Selector = ucrSelectorStationFile
         ucrReceiverLongitude.SetParameterIsString()
+        ucrReceiverLongitude.SetDataType("numeric")
         ucrReceiverLongitude.Tag = "lon"
 
         ucrReceiverLatitude.SetParameter(New RParameter("latitude", 1, bNewIncludeArgumentName:=False))
         ucrReceiverLatitude.Selector = ucrSelectorStationFile
         ucrReceiverLatitude.SetParameterIsString()
+        ucrReceiverLatitude.SetDataType("numeric")
         ucrReceiverLatitude.Tag = "lat"
 
         ucrReceiverGeometry.SetParameter(New RParameter("x", 1))
@@ -150,7 +152,6 @@ Public Class dlgLocatingPointsInShapeFile
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsConcFunction.SetRCommand("c")
-        'clsRemoveFunc.SetRCommand("rm")
 
         clsStCombineFunction.SetPackageName("sf")
         clsStCombineFunction.SetRCommand("st_combine")
@@ -303,17 +304,11 @@ Public Class dlgLocatingPointsInShapeFile
     End Sub
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
-        Dim lstValues As New List(Of String)
-
-        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
-            If kvpTemp.Key = strVariable Then
-                lstValues = kvpTemp.Value
-                Exit For
-            End If
-        Next
-        Return lstValues
+        If lstRecognisedTypes.ContainsKey(strVariable) Then
+            Return lstRecognisedTypes(strVariable)
+        End If
+        Return New List(Of String)()
     End Function
-
 
     Private Sub ucrSelectorShapeFile_DataFrameChanged() Handles ucrSelectorShapeFile.DataFrameChanged
         AutoFillReceivers(lstGeometryReceivers, ucrSelectorShapeFile, ucrSelectorShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames)
