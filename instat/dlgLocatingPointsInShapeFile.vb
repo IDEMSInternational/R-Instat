@@ -290,11 +290,6 @@ Public Class dlgLocatingPointsInShapeFile
         AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
 
-    Private Sub ucrSelectorStationFile_DataFrameChanged() Handles ucrSelectorStationFile.DataFrameChanged
-        AutoFillReceivers(lstLongReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
-        AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
-    End Sub
-
     Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged
         AutoFillReceivers(lstLatReceivers, ucrSelectorStationFile, ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames)
     End Sub
