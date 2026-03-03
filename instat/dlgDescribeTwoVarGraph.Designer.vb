@@ -297,7 +297,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkDiagonal)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkLower)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkUpper)
-        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(28, 664)
+        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(10, 375)
         Me.grpTypeOfDispaly.Margin = New System.Windows.Forms.Padding(4)
         Me.grpTypeOfDispaly.Name = "grpTypeOfDispaly"
         Me.grpTypeOfDispaly.Padding = New System.Windows.Forms.Padding(4)
