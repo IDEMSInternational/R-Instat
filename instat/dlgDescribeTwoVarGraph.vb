@@ -1198,7 +1198,7 @@ Public Class dlgDescribeTwoVarGraph
         Select Case ucrInputXSidePlotOptions.GetText
             Case "xsidedensity"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsidedensity, bIncludeArgumentName:=False, iPosition:=1)
-                clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, iPosition:=0)
+                clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
                 clsXsidedensity.AddParameter("alpha", "0.35", iPosition:=1)
                 clsXsidedensity.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
                 clsXsidedensity.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
@@ -1228,10 +1228,10 @@ Public Class dlgDescribeTwoVarGraph
         Select Case ucrInputXSidePlotOptions.GetText
             Case "xsidedensity"
                 clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsidedensity, bIncludeArgumentName:=False, iPosition:=1)
-                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, iPosition:=0)
-                clsYsidedensity.AddParameter("alpha", "0.35", iPosition:=1)
-                clsYsidedensity.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
-                clsYsidedensity.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+                clsYsidedensity.AddParameter("alpha", "0.35", iPosition:=2)
+                clsYsidedensity.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
+                clsYsidedensity.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=4)
+                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
             Case "xsidebar"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsidebar, bIncludeArgumentName:=False, iPosition:=1)
 
