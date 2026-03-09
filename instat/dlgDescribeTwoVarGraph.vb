@@ -472,13 +472,14 @@ Public Class dlgDescribeTwoVarGraph
         clsYsideboxplot.SetPackageName("ggside")
         clsYsideboxplot.SetRCommand("geom_ysideboxplot")
         clsYsideboxplot.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
-        clsYsideboxplot.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
 
         clsYsidefreqpoly.SetPackageName("ggside")
         clsYsidefreqpoly.SetRCommand("geom_ysidefreqpoly")
+        clsYsidefreqpoly.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsYsidehistogram.SetPackageName("ggside")
         clsYsidehistogram.SetRCommand("geom_ysidehistogram")
+        clsYsidehistogram.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsRFacet.SetPackageName("ggplot2")
         clsRFacet.SetRCommand("facet_wrap")
