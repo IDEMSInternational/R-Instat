@@ -25,7 +25,7 @@ Public Class dlgDescribeTwoVarGraph
     End Enum
 
     Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator As New ROperator
-    Private clsRGGplotFunction, clsXsidedensity, clsXsidebar, clsXsideboxplot, clsXsidefreqpoly, clsXsidehistogram,
+    Private clsRGGplotFunction, clsXsideDensityFunction, clsXsideBarFunction, clsXsideBoxplotFunction, clsXsideFreqpolyFunction, clsXsideHistogramFunction,
             clsYsidedensity, clsYsidebar, clsYsideboxplot, clsYsidefreqpoly, clsYsidehistogram, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
             clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
@@ -310,11 +310,11 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub SetDefaults()
         clsGGpairsFunction = New RFunction
         clsRGGplotFunction = New RFunction
-        clsXsidedensity = New RFunction
-        clsXsidebar = New RFunction
-        clsXsideboxplot = New RFunction
-        clsXsidehistogram = New RFunction
-        clsXsidefreqpoly = New RFunction
+        clsXsideDensityFunction = New RFunction
+        clsXsideBarFunction = New RFunction
+        clsXsideBoxplotFunction = New RFunction
+        clsXsideHistogramFunction = New RFunction
+        clsXsideFreqpolyFunction = New RFunction
         clsYsidedensity = New RFunction
         clsYsidebar = New RFunction
         clsYsideboxplot = New RFunction
@@ -432,25 +432,28 @@ Public Class dlgDescribeTwoVarGraph
         clsMosaicGgplotFunction.SetPackageName("ggplot2")
         clsMosaicGgplotFunction.SetRCommand("ggplot")
 
-        clsXsidedensity.SetPackageName("ggside")
-        clsXsidedensity.SetRCommand("geom_xsidedensity")
-        clsXsidedensity.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
-        clsXsidedensity.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
+        clsXsideDensityFunction.SetPackageName("ggside")
+        clsXsideDensityFunction.SetRCommand("geom_xsidedensity")
+        clsXsideDensityFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsXsideDensityFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
 
-        clsXsidebar.SetPackageName("ggside")
-        clsXsidebar.SetRCommand("geom_xsidebar")
-        clsXsidebar.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
-        clsXsidebar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
-        clsXsidebar.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+        clsXsideBarFunction.SetPackageName("ggside")
+        clsXsideBarFunction.SetRCommand("geom_xsidebar")
+        clsXsideBarFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsXsideBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
+        clsXsideBarFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
 
-        clsXsideboxplot.SetPackageName("ggside")
-        clsXsideboxplot.SetRCommand("geom_xsideboxplot")
+        clsXsideBoxplotFunction.SetPackageName("ggside")
+        clsXsideBoxplotFunction.SetRCommand("geom_xsideboxplot")
+        clsXsideBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-        clsXsidefreqpoly.SetPackageName("ggside")
-        clsXsidefreqpoly.SetRCommand("geom_xsidefreqpoly")
+        clsXsideFreqpolyFunction.SetPackageName("ggside")
+        clsXsideFreqpolyFunction.SetRCommand("geom_xsidefreqpoly")
+        clsXsideFreqpolyFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-        clsXsidehistogram.SetPackageName("ggside")
-        clsXsidehistogram.SetRCommand("geom_xsidehistogram")
+        clsXsideHistogramFunction.SetPackageName("ggside")
+        clsXsideHistogramFunction.SetRCommand("geom_xsidehistogram")
+        clsXsideHistogramFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsAesXLabelFunction.SetRCommand("aes")
         clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
@@ -1197,34 +1200,41 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub AddedXSidePlots()
         clsBaseOperator.RemoveParameterByName("ggside_x")
-        clsXsidedensity.RemoveParameterByName("alpha")
-        clsXsidedensity.RemoveParameterByName("colour")
-        clsXsidedensity.RemoveParameterByName("aes")
+        clsXsideDensityFunction.RemoveParameterByName("alpha")
+        clsXsideDensityFunction.RemoveParameterByName("colour")
+        clsXsideDensityFunction.RemoveParameterByName("aes")
         clsAesXLabelFunction.RemoveParameterByName("fill")
         If Not ucrChkXSidePlot.Checked Then
             Exit Sub
         End If
         Select Case ucrInputXSidePlotOptions.GetText
             Case "xsidedensity"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsidedensity, bIncludeArgumentName:=False, iPosition:=1)
+                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideDensityFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-                clsXsidedensity.AddParameter("alpha", "0.35", iPosition:=1)
-                clsXsidedensity.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
-                clsXsidedensity.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+                clsXsideDensityFunction.AddParameter("alpha", "0.35", iPosition:=1)
+                clsXsideDensityFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
+                clsXsideDensityFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
             Case "xsidebar"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsidebar, bIncludeArgumentName:=False, iPosition:=1)
-                clsXsidebar.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
-                clsXsidebar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
-                clsXsidebar.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideBarFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsXsideBarFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsXsideBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
+                clsXsideBarFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
                 clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
             Case "xsideboxplot"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideboxplot, bIncludeArgumentName:=False, iPosition:=1)
+                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideBoxplotFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsXsideBoxplotFunction.AddParameter("alpha", "0.35", iPosition:=2)
+                clsXsideBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
+                clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
             Case "xsidefreqpoly"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsidefreqpoly, bIncludeArgumentName:=False, iPosition:=1)
-
+                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideFreqpolyFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsXsideFreqpolyFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
+                clsXsideFreqpolyFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+                clsAesXLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
             Case "xsidehistogram"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsidehistogram, bIncludeArgumentName:=False, iPosition:=1)
-
+                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideHistogramFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsXsideHistogramFunction.AddParameter("alpha", "0.35", iPosition:=2)
+                clsXsideHistogramFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
+                clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
         End Select
     End Sub
 
