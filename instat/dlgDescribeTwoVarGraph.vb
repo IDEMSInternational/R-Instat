@@ -471,6 +471,8 @@ Public Class dlgDescribeTwoVarGraph
 
         clsYsideboxplot.SetPackageName("ggside")
         clsYsideboxplot.SetRCommand("geom_ysideboxplot")
+        clsYsideboxplot.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsYsideboxplot.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
 
         clsYsidefreqpoly.SetPackageName("ggside")
         clsYsidefreqpoly.SetRCommand("geom_ysidefreqpoly")
@@ -1234,27 +1236,34 @@ Public Class dlgDescribeTwoVarGraph
         If Not ucrChkXSidePlot.Checked Then
             Exit Sub
         End If
-        Select Case ucrInputXSidePlotOptions.GetText
-            Case "xsidedensity"
+        Select Case ucrInputYSidePlotOptions.GetText
+            Case "ysidedensity"
                 clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsidedensity, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsidedensity.AddParameter("alpha", "0.35", iPosition:=2)
                 clsYsidedensity.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
                 clsYsidedensity.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=4)
                 clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
-            Case "xsidebar"
+            Case "ysidebar"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsidebar, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsidebar.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsidebar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
                 clsYsidebar.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
                 clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
-            Case "xsideboxplot"
+            Case "ysideboxplot"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsideboxplot, bIncludeArgumentName:=False, iPosition:=1)
-            Case "xsidefreqpoly"
+                clsYsideboxplot.AddParameter("alpha", "0.35", iPosition:=2)
+                clsYsideboxplot.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
+                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
+            Case "ysidefreqpoly"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsidefreqpoly, bIncludeArgumentName:=False, iPosition:=1)
-
-            Case "xsidehistogram"
+                clsYsidefreqpoly.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
+                clsYsidefreqpoly.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+                clsAesYLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
+            Case "ysidehistogram"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsidehistogram, bIncludeArgumentName:=False, iPosition:=1)
-
+                clsYsidehistogram.AddParameter("alpha", "0.35", iPosition:=2)
+                clsYsidehistogram.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
+                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
         End Select
     End Sub
 
