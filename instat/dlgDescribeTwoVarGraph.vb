@@ -30,7 +30,7 @@ Public Class dlgDescribeTwoVarGraph
             clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
             clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
-            clsScaleColourViridisFunction, clsAesXLabelFunction, clsAesYLabelFunction, clsPairThemesFunction As New RFunction
+            clsScaleColourViridisFunction, clsAesLabelFunction, clsAesXLabelFunction, clsAesYLabelFunction, clsPairThemesFunction As New RFunction
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
@@ -354,6 +354,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGgmosaicProduct = New RFunction
         clsStatSummaryHline = New RFunction
         clsAesXLabelFunction = New RFunction
+        clsAesLabelFunction = New RFunction
         clsAesYLabelFunction = New RFunction
         clsAesNumericByNumeric = New RFunction
         clsAesCategoricalByCategoricalBarChart = New RFunction
@@ -455,6 +456,11 @@ Public Class dlgDescribeTwoVarGraph
         clsXsideHistogramFunction.SetRCommand("geom_xsidehistogram")
         clsXsideHistogramFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
 
+        clsAesLabelFunction.SetPackageName("ggplot2")
+        clsAesLabelFunction.SetRCommand("aes")
+        clsAesLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsAesXLabelFunction.SetPackageName("ggplot2")
         clsAesXLabelFunction.SetRCommand("aes")
         clsAesXLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
 
@@ -463,6 +469,7 @@ Public Class dlgDescribeTwoVarGraph
         clsYsideDensityFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
         clsYsideDensityFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=2)
 
+        clsAesYLabelFunction.SetPackageName("ggplot2")
         clsAesYLabelFunction.SetRCommand("aes")
         clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
 
@@ -1192,6 +1199,8 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrRecieverFill.ControlValueChanged, ucrInputXSidePlotOptions.ControlValueChanged
         AddedXSidePlots()
+        clsAesLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+        clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
     End Sub
 
     Private Sub ucrChkYSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSidePlot.ControlValueChanged, ucrRecieverFill.ControlValueChanged, ucrInputYSidePlotOptions.ControlValueChanged
