@@ -1203,6 +1203,13 @@ Public Class dlgDescribeTwoVarGraph
         clsXsideDensityFunction.RemoveParameterByName("alpha")
         clsXsideDensityFunction.RemoveParameterByName("colour")
         clsXsideDensityFunction.RemoveParameterByName("aes")
+        clsXsideBarFunction.RemoveParameterByName("stat")
+        clsXsideBarFunction.RemoveParameterByName("colour")
+        clsXsideBarFunction.RemoveParameterByName("aes")
+        clsXsideBoxplotFunction.RemoveParameterByName("alpha")
+        clsXsideBoxplotFunction.RemoveParameterByName("aes")
+        clsXsideHistogramFunction.RemoveParameterByName("alpha")
+        clsXsideHistogramFunction.RemoveParameterByName("aes")
         clsAesXLabelFunction.RemoveParameterByName("fill")
         If Not ucrChkXSidePlot.Checked Then
             Exit Sub
@@ -1242,6 +1249,13 @@ Public Class dlgDescribeTwoVarGraph
         clsYsideDensityFunction.RemoveParameterByName("alpha")
         clsYsideDensityFunction.RemoveParameterByName("colour")
         clsYsideDensityFunction.RemoveParameterByName("aes")
+        clsYsideBarFunction.RemoveParameterByName("stat")
+        clsYsideBarFunction.RemoveParameterByName("colour")
+        clsYsideBarFunction.RemoveParameterByName("aes")
+        clsYsideBoxplotFunction.RemoveParameterByName("alpha")
+        clsYsideBoxplotFunction.RemoveParameterByName("aes")
+        clsYsideHistogramFunction.RemoveParameterByName("alpha")
+        clsYsideHistogramFunction.RemoveParameterByName("aes")
         clsAesYLabelFunction.RemoveParameterByName("fill")
         clsBaseOperator.RemoveParameterByName("ggside_y")
         If Not ucrChkYSidePlot.Checked Then
