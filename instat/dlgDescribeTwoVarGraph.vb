@@ -1244,7 +1244,7 @@ Public Class dlgDescribeTwoVarGraph
         clsYsideDensityFunction.RemoveParameterByName("aes")
         clsAesYLabelFunction.RemoveParameterByName("fill")
         clsBaseOperator.RemoveParameterByName("ggside_y")
-        If Not ucrChkXSidePlot.Checked Then
+        If Not ucrChkYSidePlot.Checked Then
             Exit Sub
         End If
         Select Case ucrInputYSidePlotOptions.GetText
@@ -1255,26 +1255,25 @@ Public Class dlgDescribeTwoVarGraph
                 clsYsideDensityFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=4)
                 clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
             Case "ysidebar"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsideBarFunction, bIncludeArgumentName:=False, iPosition:=1)
-                clsYsideBarFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=1)
-                clsYsideBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
-                clsYsideBarFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
+                clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideBarFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsYsideBarFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
+                clsYsideBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=3)
+                clsYsideBarFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=4)
                 clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
             Case "ysideboxplot"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsideBoxplotFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideBoxplotFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsideBoxplotFunction.AddParameter("alpha", "0.35", iPosition:=2)
                 clsYsideBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
-                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
+                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
             Case "ysidefreqpoly"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsideFreqployFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideFreqployFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsideFreqployFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
-                clsYsideFreqployFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
-                clsAesYLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
+                clsAesYLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=3)
             Case "ysidehistogram"
-                clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsYsideHistogramFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideHistogramFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsideHistogramFunction.AddParameter("alpha", "0.35", iPosition:=2)
                 clsYsideHistogramFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
-                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
+                clsAesYLabelFunction.AddParameter("fill", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
         End Select
     End Sub
 
