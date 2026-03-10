@@ -1289,7 +1289,7 @@ Public Class dlgEndOfRainsSeason
         RemoveUnusedRow()
         StationType()
         EnableFilledvariable()
-        AddSaveDefinitionOptions()
+        SetDefaultPrefix()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -1625,7 +1625,7 @@ Public Class dlgEndOfRainsSeason
             clsFirstOrLastFunction = clsFirstDoyFunction
             Evaporation()
         End If
-        AddSaveDefinitionOptions()
+        SetDefaultPrefix()
         AddTypes()
     End Sub
 
@@ -1693,7 +1693,6 @@ Public Class dlgEndOfRainsSeason
 
             If rdoEndOfSeasons.Checked Then
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndSeasonDefFunction, iPosition:=16)
-                ucrSaveObject.SetPrefix("end_season_definition")
 
                 If ucrChkEndofSeasonDate.Checked Then
                     clsGetEndSeasonDefFunction.AddParameter("end_season_date", Chr(34) & ucrInputEndofSeasonDate.GetText & Chr(34), iPosition:=2)
@@ -1707,7 +1706,6 @@ Public Class dlgEndOfRainsSeason
 
             ElseIf rdoEndOfRains.Checked Then
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndRainDefFunction, iPosition:=16)
-                ucrSaveObject.SetPrefix("end_rain_definition")
 
                 If ucrChkEndofRainsDate.Checked Then
                     clsGetEndRainDefFunction.AddParameter("end_rains_date", Chr(34) & ucrInputEndofRainsDate.GetText & Chr(34), iPosition:=2)
@@ -1722,6 +1720,17 @@ Public Class dlgEndOfRainsSeason
 
         End If
     End Sub
+
+    Private Sub SetDefaultPrefix()
+        If rdoEndOfSeasons.Checked Then
+            ucrSaveObject.SetPrefix("end_season_definition")
+        ElseIf rdoEndOfRains.Checked Then
+            ucrSaveObject.SetPrefix("end_rain_definition")
+        End If
+
+        AddSaveDefinitionOptions()
+    End Sub
+
 
     Private Sub ucrSaveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlValueChanged
         If bIsUpdatingSaveObject Then
