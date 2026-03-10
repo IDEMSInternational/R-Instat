@@ -39,24 +39,21 @@ Partial Class dlgDescribeOneVariableLikertGraph
         Me.pnlGraph = New System.Windows.Forms.Panel()
         Me.cmdLikertOptions = New System.Windows.Forms.Button()
         Me.grpLikertOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoDensity = New System.Windows.Forms.RadioButton()
-        Me.rdoHeat = New System.Windows.Forms.RadioButton()
-        Me.rdoBar = New System.Windows.Forms.RadioButton()
-        Me.lblFactors = New System.Windows.Forms.Label()
-        Me.pnlSummary = New System.Windows.Forms.Panel()
-        Me.lblFactorsSummary = New System.Windows.Forms.Label()
         Me.ucrChkWrap = New instat.ucrCheck()
         Me.ucrNudWrap = New instat.ucrNud()
         Me.ucrChkCentre = New instat.ucrCheck()
         Me.ucrNudCentre = New instat.ucrNud()
         Me.ucrChkIncludeHistogram = New instat.ucrCheck()
+        Me.rdoDensity = New System.Windows.Forms.RadioButton()
+        Me.rdoHeat = New System.Windows.Forms.RadioButton()
+        Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.lblFactors = New System.Windows.Forms.Label()
+        Me.pnlSummary = New System.Windows.Forms.Panel()
+        Me.ucrSaveSummary = New instat.ucrSave()
         Me.ucrReceiverMultipleLikert = New instat.ucrReceiverMultiple()
         Me.ucrSelectorLikert = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverMultipleLikertSummary = New instat.ucrReceiverMultiple()
-        Me.ucrSelectorLikertSummary = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveSummary = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.pnlGraph.SuspendLayout()
         Me.grpLikertOptions.SuspendLayout()
@@ -88,9 +85,6 @@ Partial Class dlgDescribeOneVariableLikertGraph
         Me.pnlGraph.Controls.Add(Me.cmdLikertOptions)
         Me.pnlGraph.Controls.Add(Me.grpLikertOptions)
         Me.pnlGraph.Controls.Add(Me.ucrSaveGraph)
-        Me.pnlGraph.Controls.Add(Me.lblFactors)
-        Me.pnlGraph.Controls.Add(Me.ucrReceiverMultipleLikert)
-        Me.pnlGraph.Controls.Add(Me.ucrSelectorLikert)
         resources.ApplyResources(Me.pnlGraph, "pnlGraph")
         Me.pnlGraph.Name = "pnlGraph"
         '
@@ -114,45 +108,6 @@ Partial Class dlgDescribeOneVariableLikertGraph
         resources.ApplyResources(Me.grpLikertOptions, "grpLikertOptions")
         Me.grpLikertOptions.Name = "grpLikertOptions"
         Me.grpLikertOptions.TabStop = False
-        '
-        'rdoDensity
-        '
-        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
-        Me.rdoDensity.Name = "rdoDensity"
-        Me.rdoDensity.UseVisualStyleBackColor = True
-        '
-        'rdoHeat
-        '
-        resources.ApplyResources(Me.rdoHeat, "rdoHeat")
-        Me.rdoHeat.Name = "rdoHeat"
-        Me.rdoHeat.UseVisualStyleBackColor = True
-        '
-        'rdoBar
-        '
-        resources.ApplyResources(Me.rdoBar, "rdoBar")
-        Me.rdoBar.Checked = True
-        Me.rdoBar.Name = "rdoBar"
-        Me.rdoBar.TabStop = True
-        Me.rdoBar.UseVisualStyleBackColor = True
-        '
-        'lblFactors
-        '
-        resources.ApplyResources(Me.lblFactors, "lblFactors")
-        Me.lblFactors.Name = "lblFactors"
-        '
-        'pnlSummary
-        '
-        Me.pnlSummary.Controls.Add(Me.lblFactorsSummary)
-        Me.pnlSummary.Controls.Add(Me.ucrReceiverMultipleLikertSummary)
-        Me.pnlSummary.Controls.Add(Me.ucrSelectorLikertSummary)
-        Me.pnlSummary.Controls.Add(Me.ucrSaveSummary)
-        resources.ApplyResources(Me.pnlSummary, "pnlSummary")
-        Me.pnlSummary.Name = "pnlSummary"
-        '
-        'lblFactorsSummary
-        '
-        resources.ApplyResources(Me.lblFactorsSummary, "lblFactorsSummary")
-        Me.lblFactorsSummary.Name = "lblFactorsSummary"
         '
         'ucrChkWrap
         '
@@ -192,6 +147,26 @@ Partial Class dlgDescribeOneVariableLikertGraph
         Me.ucrChkIncludeHistogram.Checked = False
         Me.ucrChkIncludeHistogram.Name = "ucrChkIncludeHistogram"
         '
+        'rdoDensity
+        '
+        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
+        Me.rdoDensity.Name = "rdoDensity"
+        Me.rdoDensity.UseVisualStyleBackColor = True
+        '
+        'rdoHeat
+        '
+        resources.ApplyResources(Me.rdoHeat, "rdoHeat")
+        Me.rdoHeat.Name = "rdoHeat"
+        Me.rdoHeat.UseVisualStyleBackColor = True
+        '
+        'rdoBar
+        '
+        resources.ApplyResources(Me.rdoBar, "rdoBar")
+        Me.rdoBar.Checked = True
+        Me.rdoBar.Name = "rdoBar"
+        Me.rdoBar.TabStop = True
+        Me.rdoBar.UseVisualStyleBackColor = True
+        '
         'ucrPnlGraphType
         '
         resources.ApplyResources(Me.ucrPnlGraphType, "ucrPnlGraphType")
@@ -202,10 +177,26 @@ Partial Class dlgDescribeOneVariableLikertGraph
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
+        'lblFactors
+        '
+        resources.ApplyResources(Me.lblFactors, "lblFactors")
+        Me.lblFactors.Name = "lblFactors"
+        '
+        'pnlSummary
+        '
+        Me.pnlSummary.Controls.Add(Me.ucrSaveSummary)
+        resources.ApplyResources(Me.pnlSummary, "pnlSummary")
+        Me.pnlSummary.Name = "pnlSummary"
+        '
+        'ucrSaveSummary
+        '
+        resources.ApplyResources(Me.ucrSaveSummary, "ucrSaveSummary")
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        '
         'ucrReceiverMultipleLikert
         '
         resources.ApplyResources(Me.ucrReceiverMultipleLikert, "ucrReceiverMultipleLikert")
-        Me.ucrReceiverMultipleLikert.frmParent = Nothing
+        Me.ucrReceiverMultipleLikert.frmParent = Me
         Me.ucrReceiverMultipleLikert.Name = "ucrReceiverMultipleLikert"
         Me.ucrReceiverMultipleLikert.Selector = Nothing
         Me.ucrReceiverMultipleLikert.strNcFilePath = ""
@@ -219,28 +210,6 @@ Partial Class dlgDescribeOneVariableLikertGraph
         Me.ucrSelectorLikert.bUseCurrentFilter = True
         Me.ucrSelectorLikert.Name = "ucrSelectorLikert"
         '
-        'ucrReceiverMultipleLikertSummary
-        '
-        resources.ApplyResources(Me.ucrReceiverMultipleLikertSummary, "ucrReceiverMultipleLikertSummary")
-        Me.ucrReceiverMultipleLikertSummary.frmParent = Nothing
-        Me.ucrReceiverMultipleLikertSummary.Name = "ucrReceiverMultipleLikertSummary"
-        Me.ucrReceiverMultipleLikertSummary.Selector = Nothing
-        Me.ucrReceiverMultipleLikertSummary.strNcFilePath = ""
-        Me.ucrReceiverMultipleLikertSummary.ucrSelector = Nothing
-        '
-        'ucrSelectorLikertSummary
-        '
-        resources.ApplyResources(Me.ucrSelectorLikertSummary, "ucrSelectorLikertSummary")
-        Me.ucrSelectorLikertSummary.bDropUnusedFilterLevels = False
-        Me.ucrSelectorLikertSummary.bShowHiddenColumns = False
-        Me.ucrSelectorLikertSummary.bUseCurrentFilter = True
-        Me.ucrSelectorLikertSummary.Name = "ucrSelectorLikertSummary"
-        '
-        'ucrSaveSummary
-        '
-        resources.ApplyResources(Me.ucrSaveSummary, "ucrSaveSummary")
-        Me.ucrSaveSummary.Name = "ucrSaveSummary"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -252,6 +221,9 @@ Partial Class dlgDescribeOneVariableLikertGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.rdoSummary)
+        Me.Controls.Add(Me.ucrSelectorLikert)
+        Me.Controls.Add(Me.ucrReceiverMultipleLikert)
+        Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.pnlGraph)
         Me.Controls.Add(Me.pnlSummary)
         Me.Controls.Add(Me.ucrBase)
@@ -260,11 +232,9 @@ Partial Class dlgDescribeOneVariableLikertGraph
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeOneVariableLikertGraph"
         Me.pnlGraph.ResumeLayout(False)
-        Me.pnlGraph.PerformLayout()
         Me.grpLikertOptions.ResumeLayout(False)
         Me.grpLikertOptions.PerformLayout()
         Me.pnlSummary.ResumeLayout(False)
-        Me.pnlSummary.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -288,9 +258,6 @@ Partial Class dlgDescribeOneVariableLikertGraph
     Friend WithEvents ucrChkWrap As ucrCheck
     Friend WithEvents ucrNudWrap As ucrNud
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents ucrSelectorLikertSummary As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblFactorsSummary As Label
-    Friend WithEvents ucrReceiverMultipleLikertSummary As ucrReceiverMultiple
     Friend WithEvents ucrSaveSummary As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdLikertOptions As Button
