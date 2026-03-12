@@ -54,7 +54,7 @@ Partial Class dlgDeleteRowsOrColumns
         Me.ucrSelectorForDeleteColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForColumnsToDelete = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkRows_Almost_Empt = New instat.ucrCheck()
+        Me.ucrChkRowsAlmostEmpty = New instat.ucrCheck()
         Me.lblColumnsToIgnore = New System.Windows.Forms.Label()
         Me.ucrReceiverColumnsToIgnore = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
@@ -260,15 +260,15 @@ Partial Class dlgDeleteRowsOrColumns
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
-        'ucrChkRows_Almost_Empt
+        'ucrChkRowsAlmostEmpty
         '
-        Me.ucrChkRows_Almost_Empt.AutoSize = True
-        Me.ucrChkRows_Almost_Empt.Checked = False
-        Me.ucrChkRows_Almost_Empt.Location = New System.Drawing.Point(225, 227)
-        Me.ucrChkRows_Almost_Empt.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkRows_Almost_Empt.Name = "ucrChkRows_Almost_Empt"
-        Me.ucrChkRows_Almost_Empt.Size = New System.Drawing.Size(120, 23)
-        Me.ucrChkRows_Almost_Empt.TabIndex = 15
+        Me.ucrChkRowsAlmostEmpty.AutoSize = True
+        Me.ucrChkRowsAlmostEmpty.Checked = False
+        Me.ucrChkRowsAlmostEmpty.Location = New System.Drawing.Point(225, 227)
+        Me.ucrChkRowsAlmostEmpty.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkRowsAlmostEmpty.Name = "ucrChkRowsAlmostEmpty"
+        Me.ucrChkRowsAlmostEmpty.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkRowsAlmostEmpty.TabIndex = 15
         '
         'lblColumnsToIgnore
         '
@@ -296,7 +296,7 @@ Partial Class dlgDeleteRowsOrColumns
         Me.ucrReceiverColumnsToIgnore.ucrSelector = Nothing
         Me.ucrReceiverColumnsToIgnore.Visible = False
         '
-        'dlgDeleteRowsOrColums
+        'dlgDeleteRowsOrColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -304,7 +304,7 @@ Partial Class dlgDeleteRowsOrColumns
         Me.ClientSize = New System.Drawing.Size(416, 311)
         Me.Controls.Add(Me.ucrReceiverColumnsToIgnore)
         Me.Controls.Add(Me.lblColumnsToIgnore)
-        Me.Controls.Add(Me.ucrChkRows_Almost_Empt)
+        Me.Controls.Add(Me.ucrChkRowsAlmostEmpty)
         Me.Controls.Add(Me.ucrChkEmptyRows)
         Me.Controls.Add(Me.ucrChkEmptyColumns)
         Me.Controls.Add(Me.rdoEmpty)
@@ -324,7 +324,7 @@ Partial Class dlgDeleteRowsOrColumns
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDeleteRowsOrColums"
+        Me.Name = "dlgDeleteRowsOrColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Delete_Rows_Columns"
         Me.Text = "Delete Columns or Rows"
@@ -349,7 +349,7 @@ Partial Class dlgDeleteRowsOrColumns
     Friend WithEvents rdoEmpty As RadioButton
     Friend WithEvents ucrChkEmptyRows As ucrCheck
     Friend WithEvents ucrChkEmptyColumns As ucrCheck
-    Friend WithEvents ucrChkRows_Almost_Empt As ucrCheck
+    Friend WithEvents ucrChkRowsAlmostEmpty As ucrCheck
     Friend WithEvents lblColumnsToIgnore As Label
     Friend WithEvents ucrReceiverColumnsToIgnore As ucrReceiverMultiple
 End Class

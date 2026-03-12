@@ -53,7 +53,7 @@ Public Class dlgDeleteRowsOrColumns
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudFrom, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudTo, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls({ucrChkEmptyRows, ucrChkEmptyColumns, ucrChkRows_Almost_Empt}, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls({ucrChkEmptyRows, ucrChkEmptyColumns, ucrChkRowsAlmostEmpty}, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorForDeleteColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForDeleteColumns.SetParameterIsString()
@@ -83,7 +83,7 @@ Public Class dlgDeleteRowsOrColumns
         ucrChkEmptyRows.AddParameterPresentCondition(True, "y")
         ucrChkEmptyRows.AddParameterPresentCondition(False, "y", False)
 
-        ucrChkRows_Almost_Empt.SetText("Rows Almost Empty")
+        ucrChkRowsAlmostEmpty.SetText("Rows Almost Empty")
 
         ucrDataFrameLengthForDeleteRows.SetLinkedDisplayControl(lblNumberofRows)
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteColumns.ucrAvailableDataFrames)
@@ -147,7 +147,7 @@ Public Class dlgDeleteRowsOrColumns
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoEmpty.Checked Then
-            If ucrChkEmptyColumns.Checked OrElse ucrChkEmptyRows.Checked OrElse ucrChkRows_Almost_Empt.Checked Then
+            If ucrChkEmptyColumns.Checked OrElse ucrChkEmptyRows.Checked OrElse ucrChkRowsAlmostEmpty.Checked Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -187,12 +187,17 @@ Public Class dlgDeleteRowsOrColumns
         ElseIf rdoEmpty.Checked Then
             clsDummyFunction.AddParameter("checked", "empty", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveEmptyColumns)
-            ucrSelectorForDeleteColumns.SetVariablesVisible(ucrChkRows_Almost_Empt.Checked)
-            lblColumnsToIgnore.Visible = ucrChkRows_Almost_Empt.Checked
-            ucrReceiverColumnsToIgnore.Visible = ucrChkRows_Almost_Empt.Checked
-            If ucrChkRows_Almost_Empt.Checked Then
-                ucrReceiverColumnsToIgnore.SetMeAsReceiver()
-            End If
+            UpdateAlmostEmptyControlsVisibility()
+        End If
+    End Sub
+
+    Private Sub UpdateAlmostEmptyControlsVisibility()
+        Dim bAlmostEmptyChecked As Boolean = ucrChkRowsAlmostEmpty.Checked
+        ucrSelectorForDeleteColumns.SetVariablesVisible(bAlmostEmptyChecked)
+        lblColumnsToIgnore.Visible = bAlmostEmptyChecked
+        ucrReceiverColumnsToIgnore.Visible = bAlmostEmptyChecked
+        If bAlmostEmptyChecked Then
+            ucrReceiverColumnsToIgnore.SetMeAsReceiver()
         End If
     End Sub
 
@@ -212,8 +217,8 @@ Public Class dlgDeleteRowsOrColumns
         End If
     End Sub
 
-    Private Sub ucrChkEmptyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEmptyColumns.ControlValueChanged, ucrChkEmptyRows.ControlValueChanged, ucrChkRows_Almost_Empt.ControlValueChanged
-        If ucrChkEmptyRows.Checked OrElse ucrChkRows_Almost_Empt.Checked Then
+    Private Sub ucrChkEmptyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEmptyColumns.ControlValueChanged, ucrChkEmptyRows.ControlValueChanged, ucrChkRowsAlmostEmpty.ControlValueChanged
+        If ucrChkEmptyRows.Checked OrElse ucrChkRowsAlmostEmpty.Checked Then
             clsConcFunction.AddParameter("y", Chr(34) & "rows" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         Else
             clsConcFunction.RemoveParameterByName("y")
@@ -225,18 +230,13 @@ Public Class dlgDeleteRowsOrColumns
         End If
 
         If rdoEmpty.Checked Then
-            ucrSelectorForDeleteColumns.SetVariablesVisible(ucrChkRows_Almost_Empt.Checked)
-            lblColumnsToIgnore.Visible = ucrChkRows_Almost_Empt.Checked
-            ucrReceiverColumnsToIgnore.Visible = ucrChkRows_Almost_Empt.Checked
-            If ucrChkRows_Almost_Empt.Checked Then
-                ucrReceiverColumnsToIgnore.SetMeAsReceiver()
-            End If
+            UpdateAlmostEmptyControlsVisibility()
         End If
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged,
     ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudTo.ControlContentsChanged,
-    ucrChkEmptyColumns.ControlContentsChanged, ucrChkEmptyRows.ControlContentsChanged, ucrChkRows_Almost_Empt.ControlContentsChanged,
+    ucrChkEmptyColumns.ControlContentsChanged, ucrChkEmptyRows.ControlContentsChanged, ucrChkRowsAlmostEmpty.ControlContentsChanged,
     ucrReceiverColumnsToIgnore.ControlContentsChanged
         TestOKEnabled()
     End Sub
