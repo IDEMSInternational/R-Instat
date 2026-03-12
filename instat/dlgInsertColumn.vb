@@ -77,7 +77,7 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
-        dctDefaultValue.Add("NA", "NA_real_")
+        dctDefaultValue.Add("NA", "NA_character_")
         dctDefaultValue.Add("0", "0")
         dctDefaultValue.Add("Kisumu", Chr(34) & "Kisumu" & Chr(34))
         dctDefaultValue.Add("New Zealand", Chr(34) & "New Zealand" & Chr(34))
@@ -135,7 +135,7 @@ Public Class dlgInsertColumn
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE", iPosition:=7)
         clsInsertColumnFunction.AddParameter("before", "FALSE", iPosition:=3)
-        clsInsertColumnFunction.AddParameter("col_data", "NA", iPosition:=5)
+        clsInsertColumnFunction.AddParameter("col_data", "NA_character_", iPosition:=5)
         clsInsertColumnFunction.AddParameter("col_name", "X", iPosition:=6)
 
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
