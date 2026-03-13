@@ -84,6 +84,8 @@ Public Class dlgDeleteRowsOrColumns
         ucrChkEmptyRows.AddParameterPresentCondition(False, "y", False)
 
         ucrChkRowsAlmostEmpty.SetText("Rows Almost Empty")
+        ucrChkRowsAlmostEmpty.AddParameterPresentCondition(True, "z")
+        ucrChkRowsAlmostEmpty.AddParameterPresentCondition(False, "z", False)
 
         ucrDataFrameLengthForDeleteRows.SetLinkedDisplayControl(lblNumberofRows)
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteColumns.ucrAvailableDataFrames)
@@ -110,8 +112,6 @@ Public Class dlgDeleteRowsOrColumns
         clsDeleteRows.AddParameter("row_names", clsROperatorParameter:=clsOperatorRowNames)
 
         clsConcFunction.SetRCommand("c")
-        clsConcFunction.AddParameter("x", Chr(34) & "cols" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsConcFunction.AddParameter("y", Chr(34) & "rows" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
         clsRemoveEmptyColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_empty")
         clsRemoveEmptyColumns.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
@@ -131,6 +131,7 @@ Public Class dlgDeleteRowsOrColumns
         ucrNudFrom.SetRCode(clsOperatorRowNames, bReset)
         ucrChkEmptyColumns.SetRCode(clsConcFunction, bReset)
         ucrChkEmptyRows.SetRCode(clsConcFunction, bReset)
+        ucrChkRowsAlmostEmpty.SetRCode(clsConcFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -218,11 +219,18 @@ Public Class dlgDeleteRowsOrColumns
     End Sub
 
     Private Sub ucrChkEmptyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEmptyColumns.ControlValueChanged, ucrChkEmptyRows.ControlValueChanged, ucrChkRowsAlmostEmpty.ControlValueChanged
-        If ucrChkEmptyRows.Checked OrElse ucrChkRowsAlmostEmpty.Checked Then
+        If ucrChkEmptyRows.Checked Then
             clsConcFunction.AddParameter("y", Chr(34) & "rows" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         Else
             clsConcFunction.RemoveParameterByName("y")
         End If
+
+        If ucrChkRowsAlmostEmpty.Checked Then
+            clsConcFunction.AddParameter("z", Chr(34) & "rows" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        Else
+            clsConcFunction.RemoveParameterByName("z")
+        End If
+
         If ucrChkEmptyColumns.Checked Then
             clsConcFunction.AddParameter("x", Chr(34) & "cols" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         Else
