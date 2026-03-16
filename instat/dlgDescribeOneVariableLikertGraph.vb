@@ -30,8 +30,8 @@ Public Class dlgDescribeOneVariableLikertGraph
     Private clsDetachGrid As New RFunction
     Private clsDevOff As New RFunction
     Private clsGetDataFrame As New RFunction
-    Private clsDummyFunction As New RFunction
     Private clsLikertSummaryFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private Sub dlgDescribeOneVariableLikertGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -124,13 +124,16 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrSaveSummary.SetDataFrameSelector(ucrSelectorLikert.ucrAvailableDataFrames)
         ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
         ucrSaveSummary.SetCheckBoxText("Store Summary")
+
+        If Not clsDummyFunction.ContainsParameter("type") Then
+            clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
+        End If
     End Sub
 
     Private Sub SetDefaults()
         clsLikertFunction = New RFunction
         clsPlotFunction = New RFunction
         clsSummaryFunction = New RFunction
-        clsDummyFunction = New RFunction
 
         pnlGraph.Visible = bShowingGraph
         pnlSummary.Visible = Not bShowingGraph
@@ -144,8 +147,6 @@ Public Class dlgDescribeOneVariableLikertGraph
 
         clsLikertFunction.SetPackageName("likert")
         clsLikertFunction.SetRCommand("likert")
-
-        clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
 
         clsPlotFunction.SetRCommand("plot")
         clsPlotFunction.AddParameter("include.histogram", "FALSE", iPosition:=2)
@@ -176,8 +177,6 @@ Public Class dlgDescribeOneVariableLikertGraph
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         End If
-
-        ucrPnlGraphType.SetRDefault("bar")
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkIncludeHistogram.SetRCode(clsPlotFunction, bReset)
@@ -254,6 +253,7 @@ Public Class dlgDescribeOneVariableLikertGraph
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         If rdoBar.Checked Then
+            clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
             ucrChkIncludeHistogram.Enabled = True
             ucrChkCentre.Enabled = True
             ucrChkIncludeHistogram.chkCheck.Checked = bHistogramChecked
@@ -264,6 +264,7 @@ Public Class dlgDescribeOneVariableLikertGraph
                 clsPlotFunction.AddParameter("x", "likert_object", iPosition:=0, bIncludeArgumentName:=False)
             End If
         ElseIf rdoHeat.Checked Then
+            clsDummyFunction.AddParameter("type", Chr(34) & "heat" & Chr(34), iPosition:=0)
             ucrChkIncludeHistogram.chkCheck.Checked = False
             ucrChkCentre.chkCheck.Checked = False
             ucrChkIncludeHistogram.Enabled = False
@@ -274,6 +275,7 @@ Public Class dlgDescribeOneVariableLikertGraph
                 clsPlotFunction.AddParameter("x", "likert_object", iPosition:=0, bIncludeArgumentName:=False)
             End If
         ElseIf rdoDensity.Checked Then
+            clsDummyFunction.AddParameter("type", Chr(34) & "density" & Chr(34), iPosition:=0)
             ucrChkIncludeHistogram.chkCheck.Checked = False
             ucrChkCentre.chkCheck.Checked = False
             ucrChkIncludeHistogram.Enabled = False
