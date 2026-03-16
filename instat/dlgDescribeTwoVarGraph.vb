@@ -458,7 +458,7 @@ Public Class dlgDescribeTwoVarGraph
 
         clsAesLabelFunction.SetPackageName("ggplot2")
         clsAesLabelFunction.SetRCommand("aes")
-        clsAesLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
+        clsAesLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames, iPosition:=0)
 
         clsAesXLabelFunction.SetPackageName("ggplot2")
         clsAesXLabelFunction.SetRCommand("aes")
@@ -1200,7 +1200,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSidePlot.ControlValueChanged, ucrRecieverFill.ControlValueChanged, ucrInputXSidePlotOptions.ControlValueChanged
         AddedXSidePlots()
         clsAesLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-        clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
+        clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
     Private Sub ucrChkYSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSidePlot.ControlValueChanged, ucrRecieverFill.ControlValueChanged, ucrInputYSidePlotOptions.ControlValueChanged
