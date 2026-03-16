@@ -14,16 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat.dlgInsertColumn
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColums
-    Public enumDeleteRowsOrColumnsMode As String = DeleteRowsOrColumnsMode.Prepare
-
-    Public Enum DeleteRowsOrColumnsMode
-        Prepare
-        Climatic
-    End Enum
-
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsOperatorRowNames As New ROperator
@@ -183,15 +175,6 @@ Public Class dlgDeleteRowsOrColums
             ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveEmptyColumns)
             ucrSelectorForDeleteColumns.SetVariablesVisible(False)
         End If
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case enumDeleteRowsOrColumnsMode
-            Case DeleteRowsOrColumnsMode.Prepare
-                ucrBase.iHelpTopicID = 165
-            Case DeleteRowsOrColumnsMode.Climatic
-                ucrBase.iHelpTopicID = 754
-        End Select
     End Sub
 
     Private Sub ucrSelectorForDeleteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDeleteColumns.ControlValueChanged
