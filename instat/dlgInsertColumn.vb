@@ -202,7 +202,7 @@ Public Class dlgInsertColumn
             Case InsertColumnMode.Prepare
                 ucrBase.iHelpTopicID = 164
             Case InsertColumnMode.Climatic
-                ucrBase.iHelpTopicID = 844
+                ucrBase.iHelpTopicID = 752
         End Select
     End Sub
 
