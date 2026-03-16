@@ -3226,4 +3226,9 @@ Public Class frmMain
     Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
     End Sub
+
+    Private Sub DeleteColumnsRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteColumnsRowsToolStripMenuItem.Click
+        dlgDeleteRowsOrColums.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColums.DeleteRowsOrColumnsMode.Climatic
+        dlgDeleteRowsOrColums.ShowDialog()
+    End Sub
 End Class
