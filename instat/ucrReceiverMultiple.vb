@@ -199,10 +199,10 @@ Public Class ucrReceiverMultiple
 
         If strText.Length > maxLength Then
             ' Trim the string to the specified length and add ellipsis
-            strText = strText.Substring(0, maxLength) & "..."
+            Return strText.Substring(0, maxLength) & "..."
         End If
 
-        Return strText & ":"
+        Return strText
     End Function
 
     Public Overrides Function IsEmpty() As Boolean
