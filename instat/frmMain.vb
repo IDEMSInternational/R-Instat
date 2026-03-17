@@ -3231,4 +3231,9 @@ Public Class frmMain
         dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
         dlgInsertColumn.ShowDialog()
     End Sub
+
+    Private Sub DeleteRowsOrColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsOrColumnsToolStripMenuItem.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Climatic
+        dlgDeleteRowsOrColumns.ShowDialog()
+    End Sub
 End Class
