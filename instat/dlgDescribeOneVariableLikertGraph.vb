@@ -67,7 +67,7 @@ Public Class dlgDescribeOneVariableLikertGraph
     End Function
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 0
+        ucrBase.iHelpTopicID = 758
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
