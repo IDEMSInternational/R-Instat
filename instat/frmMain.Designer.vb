@@ -861,7 +861,7 @@ Partial Class frmMain
         '
         'mnuDescribeOneVariableLikertGraphs
         '
-        Me.mnuDescribeOneVariableLikertGraphs.Enabled = False
+        Me.mnuDescribeOneVariableLikertGraphs.Enabled = True
         Me.mnuDescribeOneVariableLikertGraphs.Name = "mnuDescribeOneVariableLikertGraphs"
         Me.mnuDescribeOneVariableLikertGraphs.Size = New System.Drawing.Size(155, 22)
         Me.mnuDescribeOneVariableLikertGraphs.Text = "Likert Graphs..."
