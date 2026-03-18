@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Windows.Forms.TabControl
 Imports instat.Translations
 
 Public Class sdgTableOptions
@@ -24,27 +23,7 @@ Public Class sdgTableOptions
     Private bFirstload As Boolean = True
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
-            'adding these  because it's ignored on first load
-            'ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
-        End If
         autoTranslate(Me)
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrSdgBaseButtons.iHelpTopicID = 146
-
-        ucrChkSelectTheme.Checked = False
-        ucrChkSelectTheme.SetText("Select Theme")
-
-        ucrCboSelectThemes.Visible = False
-        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
-        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
-
-        ucrChkManualTheme.SetText("Manual Theme")
-        btnManualTheme.Visible = False
     End Sub
 
     ''' <summary>
@@ -147,15 +126,70 @@ Public Class sdgTableOptions
     ' Themes
 
     Private Sub SetupTheme(clsOperator As ROperator)
-        If clsOperator.ContainsParameter("theme_format") Then
-            clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
-            ' TODO. Set up the themes R function controls with the parameter values
+        If bFirstload Then
+            InitialiseThemeControls()
+            bFirstload = False
         End If
 
-        ' TODO. This should be changed to checking for the `tab_options` paraneter from the ROperator
-        If ucrChkManualTheme.Checked Then
-            sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        ' Check for any theme functions and set the them controls accordingly
+        Dim clsThemeRParam As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt_theme_dark", "gt_theme_538", "gt_theme_dot_matrix", "gt_theme_espn", "gt_theme_excel", "gt_theme_guardian", "gt_theme_nytimes", "gt_theme_pff", "tab_options"}, clsOperator)
+        If clsThemeRParam.Count > 0 Then
+            Dim newClsThemeRFunction As RFunction = clsThemeRParam.Item(0).clsArgumentCodeStructure
+            Dim strCommand As String = newClsThemeRFunction.strRCommand
+            Dim strSupportedTheme As String = ""
+
+            If strCommand = "tab_options" Then
+                ucrChkManualTheme.Checked = True
+                Me.clsThemeRFunction = newClsThemeRFunction
+                sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+            Else
+                ' Get supported theme only
+                Select Case strCommand
+                    Case "gt_theme_dark"
+                        strSupportedTheme = "Dark Theme"
+                    Case "gt_theme_538"
+                        strSupportedTheme = "538 Theme"
+                    Case "gt_theme_dot_matrix"
+                        strSupportedTheme = "Dot Matrix Theme"
+                    Case "gt_theme_espn"
+                        strSupportedTheme = "Espn Theme"
+                    Case "gt_theme_excel"
+                        strSupportedTheme = "Excel Theme"
+                    Case "gt_theme_guardian"
+                        strSupportedTheme = "Guardian Theme"
+                    Case "gt_theme_nytimes"
+                        strSupportedTheme = "NY Times Theme"
+                    Case "gt_theme_pff"
+                        strSupportedTheme = "PFF Theme"
+                End Select
+
+                'If the theme is not supported then ignore it
+                If strSupportedTheme = "" Then
+                    ucrChkSelectTheme.Checked = False
+                Else
+                    ucrChkSelectTheme.Checked = True
+                    ucrCboSelectThemes.SetName(strSupportedTheme)
+                    Me.clsThemeRFunction = newClsThemeRFunction
+                End If
+            End If
+        Else
+            ucrChkManualTheme.Checked = False
+            ucrChkSelectTheme.Checked = False
         End If
+    End Sub
+
+    Private Sub InitialiseThemeControls()
+        ucrSdgBaseButtons.iHelpTopicID = 146
+
+        ucrChkSelectTheme.Checked = False
+        ucrChkSelectTheme.SetText("Select Theme")
+
+        ucrCboSelectThemes.Visible = False
+        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+
+        ucrChkManualTheme.SetText("Manual Theme")
+        btnManualTheme.Visible = False
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged

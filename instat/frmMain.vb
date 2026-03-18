@@ -44,6 +44,7 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
+    Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -642,6 +643,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataDataframeMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrColumnMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
@@ -658,6 +660,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrDataFrameMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel2.Controls.Add(ucrDataFrameMeta)
@@ -849,7 +852,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
-        dlgDeleteRowsOrColums.ShowDialog()
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
@@ -2595,9 +2598,6 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
-        If mnuViewSwapDataAndMetadata.Checked Then
-            ucrColumnMeta.RefreshGridData()
-        End If
     End Sub
 
     Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click
@@ -2897,7 +2897,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Trend
         dlgPICSARainfall.ShowDialog()
     End Sub
 
@@ -3211,6 +3211,13 @@ Public Class frmMain
         dlgRecodeFactor.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeOneVariableLikertGraphs_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableLikertGraphs.Click
+        If dlgDescribeOneVariableLikertGraph Is Nothing Then
+            dlgDescribeOneVariableLikertGraph = New dlgDescribeOneVariableLikertGraph
+        End If
+        dlgDescribeOneVariableLikertGraph.ShowDialog()
+    End Sub
+
     Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
         dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
         dlgCombine.ShowDialog()
@@ -3218,5 +3225,10 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
+    End Sub
+
+    Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
+        dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
+        dlgInsertColumn.ShowDialog()
     End Sub
 End Class
