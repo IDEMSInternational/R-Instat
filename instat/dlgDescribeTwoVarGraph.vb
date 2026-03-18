@@ -1244,7 +1244,6 @@ Public Class dlgDescribeTwoVarGraph
             Case "xsidefreqpoly"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideFreqpolyFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsXsideFreqpolyFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
-                clsXsideFreqpolyFunction.AddParameter("colour", Chr(34) & "NA" & Chr(34), iPosition:=3)
                 clsAesXLabelFunction.AddParameter("colour", ucrRecieverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
             Case "xsidehistogram"
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideHistogramFunction, bIncludeArgumentName:=False, iPosition:=1)
