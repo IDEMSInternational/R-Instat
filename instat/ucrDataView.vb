@@ -273,6 +273,7 @@ Public Class ucrDataView
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
         dlgName.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         dlgName.ShowDialog()
+        dlgName.bDefaultToSingle = True
     End Sub
 
     Public Sub WorksheetInserted()
@@ -692,6 +693,7 @@ Public Class ucrDataView
     Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
         dlgName.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         dlgName.ShowDialog()
+        dlgName.bDefaultToSingle = True
     End Sub
 
     Private Sub mnuDuplColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplColumn.Click
