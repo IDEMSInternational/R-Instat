@@ -807,6 +807,8 @@ Public Class dlgImportDataset
                                      strTempDataframe:=clsImportExcel.GetRObjectToAssignTo())
         Else
             ' Multiple sheets: clsImportExcelMulti |> lapply(dplyr::select, 1:33)
+            clsLapplySelect.ClearParameters()
+            clsLapplySelect.AddParameter("FUN", "dplyr::select", iPosition:=1, bIncludeArgumentName:=False)
             clsLapplySelect.AddParameter("...", clsROperatorParameter:=clsColRangeOperator, iPosition:=2, bIncludeArgumentName:=False)
 
             Dim clsImportMultiClone As RFunction = clsImportExcelMulti.Clone()
@@ -816,9 +818,10 @@ Public Class dlgImportDataset
             clsColSelectPipe.AddParameter("x", clsRFunctionParameter:=clsImportMultiClone, iPosition:=0)
             clsColSelectPipe.AddParameter("y", clsRFunctionParameter:=clsLapplySelect, iPosition:=1)
             clsColSelectPipe.SetAssignTo(clsImportExcelMulti.GetRObjectToAssignTo(),
-                                     strTempDataframe:=clsImportExcelMulti.GetRObjectToAssignTo(),
-                                     bDataFrameList:=True)
+                             strTempDataframe:=clsImportExcelMulti.GetRObjectToAssignTo(),
+                             bDataFrameList:=True)
         End If
+
         ' Restore data frame names so data_book$import_data includes data_names parameter
         If dctSelectedExcelSheets.Count > 1 Then
             ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
@@ -997,13 +1000,13 @@ Public Class dlgImportDataset
                 Try
                     ' Build R script using double quotes escaped properly
                     Dim strFilePath As String = strFilePathR.Replace("\", "/")
+                    Dim strEscapedSheet As String = strSheet.Replace("""", "\""")
                     Dim strScript As String = String.Format(
-                    "isTRUE(tryCatch({{" &
-                    "  tmp <- readxl::read_excel(path=""{0}"", sheet=""{1}"", n_max=1, col_names=FALSE);" &
-                    "  ncol(tmp) == 0" &
-                    "}}, error=function(e) TRUE))",
-                    strFilePath,
-                    strSheet)
+                        "isTRUE(tryCatch({{" &
+                        "  tmp <- readxl::read_excel(path=""{0}"", sheet=""{1}"", n_max=1, col_names=FALSE);" &
+                        "  ncol(tmp) == 0" &
+                        "}}, error=function(e) TRUE))",
+                        strFilePath, strEscapedSheet)
 
                     Dim expResult As SymbolicExpression =
                     frmMain.clsRLink.RunInternalScriptGetValue(strScript, bSilent:=True)
