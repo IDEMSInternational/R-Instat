@@ -2360,6 +2360,8 @@ Public Class sdgPlots
         clsGuideLegendFunction1 = New RFunction
         clsGuideFunction1 = New RFunction
         clsDummyFunction = New RFunction
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
 
         clsDummyFunction.AddParameter("palette", "sequential", iPosition:=0)
         clsDummyFunction.AddParameter("Check", "fill", iPosition:=1)
@@ -2559,6 +2561,18 @@ Public Class sdgPlots
 
         clsScalefillmanualFunction = New RFunction
         clsScalefillmanualFunction.SetRCommand("scale_fill_manual")
+
+        clsPlotElementTitleFunction = New RFunction
+        clsPlotElementTitleFunction.SetPackageName("ggplot2")
+        clsPlotElementTitleFunction.SetRCommand("element_text")
+
+        clsPlotElementSubTitleFunction = New RFunction
+        clsPlotElementSubTitleFunction.SetPackageName("ggplot2")
+        clsPlotElementSubTitleFunction.SetRCommand("element_text")
+
+        clsPlotElementCaptionFunction = New RFunction
+        clsPlotElementCaptionFunction.SetPackageName("ggplot2")
+        clsPlotElementCaptionFunction.SetRCommand("element_text")
 
         If Not clsBaseOperator.ContainsParameter("theme_name") Then
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -3180,13 +3194,13 @@ Public Class sdgPlots
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
                     clsFacetFunction.SetRCommand("facet_grid")
-                    clsFacetFunction.RemoveParameterByName("dir")
                     clsRowVarsFunction.ClearParameters()
                     clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsColVarsFunction.ClearParameters()
                     clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
+                    clsFacetFunction.RemoveParameterByName("dir")
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
@@ -3201,13 +3215,13 @@ Public Class sdgPlots
                     clsFacetFunction.AddParameter("space", Chr(34) & "fixed" & Chr(34))
                 End If
                 If ucrChkMargin.Checked Then
-                        clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
-                    Else
-                        clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
-                    End If
-                    clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
+                    clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
                 Else
-                    clsFacetFunction.RemoveParameterByName("space")
+                    clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
+                End If
+                clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
+            Else
+                clsFacetFunction.RemoveParameterByName("space")
                 clsFacetFunction.RemoveParameterByName("margins")
                 If rdoHorizontal.Checked Then
                     ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
@@ -3606,29 +3620,47 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
-        If clsPlotElementCaptionFunction.clsParameters.Count > 0 Then
+        If Not ucrNudCaptionSize.IsEmpty Then
+            clsPlotElementCaptionFunction.AddParameter("size",
+                                                     ucrNudCaptionSize.GetText(),
+                                                     iPosition:=0)
             clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
         Else
             clsThemeFunction.RemoveParameterByName("plot.caption")
+            clsPlotElementCaptionFunction.RemoveParameterByName("size")
+
         End If
         AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
-        If clsPlotElementTitleFunction.clsParameters.Count > 0 Then
+        If Not ucrNudTitleSize.IsEmpty Then
+            clsPlotElementTitleFunction.AddParameter("size",
+                                                     ucrNudTitleSize.GetText(),
+                                                     iPosition:=0)
             clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
         Else
             clsThemeFunction.RemoveParameterByName("plot.title")
+            clsPlotElementTitleFunction.RemoveParameterByName("size")
         End If
         AddRemoveTheme()
     End Sub
 
-    Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
-        If clsPlotElementSubTitleFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
+    Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) _
+    Handles ucrNudSubTitleSize.ControlValueChanged
+
+        If ucrNudSubTitleSize.GetText() <> "" Then
+            clsPlotElementSubTitleFunction.AddParameter("size",
+                                                     ucrNudSubTitleSize.GetText(),
+                                                     iPosition:=0)
+
+            clsThemeFunction.AddParameter("plot.subtitle",
+                                      clsRFunctionParameter:=clsPlotElementSubTitleFunction)
         Else
-            clsThemeFunction.RemoveParameterByName("plot.title")
+            clsPlotElementSubTitleFunction.RemoveParameterByName("size")
+            clsThemeFunction.RemoveParameterByName("plot.subtitle")
         End If
+
         AddRemoveTheme()
     End Sub
 
