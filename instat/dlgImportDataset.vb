@@ -257,6 +257,10 @@ Public Class dlgImportDataset
         ucrChkColumnsExcel.AddToLinkedControls(ucrNudColFromExcel, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkColumnsExcel.AddToLinkedControls(ucrNudColToExcel, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=33)
 
+        ucrNudColFromExcel.Visible = False
+        ucrNudColToExcel.Visible = False
+        lblColFrom.Visible = False
+        lblColTo.Visible = False
         ucrChkSheetsCheckAll.SetText("Select All")
 
         'hide since no longer using openxlsx package
@@ -1044,11 +1048,9 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        ' Gets the current number of visible data frames before importing
-        ' So the correct current data frame can be set after importing
         iDataFrameCount = frmMain.GetDataFrameCount()
-        ' Apply column selection at the last moment so all parameters are guaranteed to be set
-        If IsExcelFileFormat() AndAlso ucrChkColumnsExcel.Checked Then
+        ' Only apply column select if Range is NOT active, since range takes precedence
+        If IsExcelFileFormat() AndAlso ucrChkColumnsExcel.Checked AndAlso Not ucrChkRange.Checked Then
             ApplyColumnSelect()
         End If
     End Sub
@@ -1283,7 +1285,7 @@ Public Class dlgImportDataset
         ucrChkColumnsExcel.Enabled = Not bRangeChecked
         ucrNudColFromExcel.Enabled = Not bRangeChecked
         ucrNudColToExcel.Enabled = Not bRangeChecked
-
+        lblRowToSkipExcel.Enabled = Not bRangeChecked
         TryGridPreview()
         TestOkEnabled()
     End Sub
@@ -1410,9 +1412,10 @@ Public Class dlgImportDataset
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
         If strFileExtension = ".rds" _
-               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportExcelMulti _
-               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleFiles _
-               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleTextFiles Then
+                OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportExcelMulti _
+                OrElse ucrBase.clsRsyntax.clsBaseOperator Is clsColSelectPipe _
+                OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleFiles _
+                OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleTextFiles Then
             ucrChkDropEmptyCols.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
         Else
