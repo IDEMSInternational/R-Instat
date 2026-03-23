@@ -487,10 +487,9 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsBoxplotStat2Function, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsInOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-        ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsGroupbyFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverWithinYear.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("fill", 25, bNewIncludeArgumentName:=True), iAdditionalPairNo:=1)
 
-        ucrReceiverWithinYear.SetRCode(clsAsFactor2Function)
+        ucrReceiverWithinYear.SetRCode(clsAsFactor2Function, bReset)
         ucrReceiverLabelOutliers.SetRCode(clsRaes2Function, bReset)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorClimaticBoxPlot.SetRCode(clsFilteredDataOperator, bReset)
@@ -868,6 +867,20 @@ Public Class dlgClimaticBoxPlot
     End Sub
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged
         AddRemoveFacets()
+
+        If clsGroupbyFunction IsNot Nothing Then
+            If Not ucrReceiverStation.IsEmpty Then
+                clsGroupbyFunction.AddParameter("x", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
+            Else
+                clsGroupbyFunction.RemoveParameterByName("x")
+            End If
+
+            If Not ucrReceiverWithinYear.IsEmpty Then
+                clsGroupbyFunction.AddParameter("y", ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsGroupbyFunction.RemoveParameterByName("y")
+            End If
+        End If
     End Sub
 
     Private Sub ucrReceiverWithinYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWithinYear.ControlValueChanged
@@ -886,6 +899,12 @@ Public Class dlgClimaticBoxPlot
                 End If
             End If
         End If
+
+        'If Not ucrReceiverWithinYear.IsEmpty Then
+        '    clsGroupbyFunction.AddParameter("y", ucrReceiverWithinYear.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+        'Else
+        '    clsGroupbyFunction.RemoveParameterByName("y")
+        'End If
     End Sub
 
     Private Sub ucrNudOutlierCoefficient_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudOutlierCoefficient.ControlValueChanged, ucrChkLabel.ControlValueChanged
