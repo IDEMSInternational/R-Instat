@@ -837,6 +837,7 @@ Public Class dlgName
     Private Sub SetSingleOptionStatus(bDefaultToSingle As Boolean)
         If bDefaultToSingle Then
             rdoSingle.Checked = True
+            Me.bDefaultToSingle = False  ' Reset so it doesn't persist on reopen
         End If
     End Sub
 
