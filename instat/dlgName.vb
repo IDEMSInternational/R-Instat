@@ -57,7 +57,7 @@ Public Class dlgName
         End If
         autoTranslate(Me)
         DialogueSize()
-        SetFirstOptionStatus(bDefaultToSingle)
+        SetFirstOptionStatus(bDefaultToSingle) ' implemented a condition where the first option will be checked when the user interacts with the dialog via the right-click
     End Sub
 
     Private Sub InitialiseDialog()
