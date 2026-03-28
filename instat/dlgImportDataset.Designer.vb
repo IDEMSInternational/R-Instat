@@ -70,6 +70,11 @@ Partial Class dlgImportDataset
         Me.ucrInputTextFrom = New instat.ucrInputTextBox()
         Me.ucrNudMaxRowsExcel = New instat.ucrNud()
         Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
+        Me.ucrChkColumnsExcel = New instat.ucrCheck()
+        Me.lblColFrom = New System.Windows.Forms.Label()
+        Me.ucrNudColFromExcel = New instat.ucrNud()
+        Me.lblColTo = New System.Windows.Forms.Label()
+        Me.ucrNudColToExcel = New instat.ucrNud()
         Me.ucrNudRowsToSkipExcel = New instat.ucrNud()
         Me.lblMissingValueStringExcel = New System.Windows.Forms.Label()
         Me.ucrInputMissingValueStringExcel = New instat.ucrInputTextBox()
@@ -124,9 +129,10 @@ Partial Class dlgImportDataset
         '
         Me.lblTextFilePreview.AutoSize = True
         Me.lblTextFilePreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTextFilePreview.Location = New System.Drawing.Point(349, 51)
+        Me.lblTextFilePreview.Location = New System.Drawing.Point(436, 64)
+        Me.lblTextFilePreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTextFilePreview.Name = "lblTextFilePreview"
-        Me.lblTextFilePreview.Size = New System.Drawing.Size(91, 13)
+        Me.lblTextFilePreview.Size = New System.Drawing.Size(112, 16)
         Me.lblTextFilePreview.TabIndex = 7
         Me.lblTextFilePreview.Tag = "Input_File_Preview"
         Me.lblTextFilePreview.Text = "Text File Preview:"
@@ -135,9 +141,10 @@ Partial Class dlgImportDataset
         '
         Me.lblDataFrame.AutoSize = True
         Me.lblDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDataFrame.Location = New System.Drawing.Point(305, 230)
+        Me.lblDataFrame.Location = New System.Drawing.Point(381, 288)
+        Me.lblDataFrame.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDataFrame.Name = "lblDataFrame"
-        Me.lblDataFrame.Size = New System.Drawing.Size(106, 13)
+        Me.lblDataFrame.Size = New System.Drawing.Size(132, 16)
         Me.lblDataFrame.TabIndex = 9
         Me.lblDataFrame.Tag = "Data_Frame_Preview"
         Me.lblDataFrame.Text = "Data Frame Preview:"
@@ -146,9 +153,10 @@ Partial Class dlgImportDataset
         '
         Me.lblEncodingCSV.AutoSize = True
         Me.lblEncodingCSV.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEncodingCSV.Location = New System.Drawing.Point(3, 24)
+        Me.lblEncodingCSV.Location = New System.Drawing.Point(4, 30)
+        Me.lblEncodingCSV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEncodingCSV.Name = "lblEncodingCSV"
-        Me.lblEncodingCSV.Size = New System.Drawing.Size(55, 13)
+        Me.lblEncodingCSV.Size = New System.Drawing.Size(67, 16)
         Me.lblEncodingCSV.TabIndex = 0
         Me.lblEncodingCSV.Tag = "Encoding:"
         Me.lblEncodingCSV.Text = "Encoding:"
@@ -157,9 +165,10 @@ Partial Class dlgImportDataset
         '
         Me.lblHeadersCSV.AutoSize = True
         Me.lblHeadersCSV.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHeadersCSV.Location = New System.Drawing.Point(3, 55)
+        Me.lblHeadersCSV.Location = New System.Drawing.Point(4, 69)
+        Me.lblHeadersCSV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHeadersCSV.Name = "lblHeadersCSV"
-        Me.lblHeadersCSV.Size = New System.Drawing.Size(143, 13)
+        Me.lblHeadersCSV.Size = New System.Drawing.Size(180, 16)
         Me.lblHeadersCSV.TabIndex = 2
         Me.lblHeadersCSV.Tag = "Heading:"
         Me.lblHeadersCSV.Text = "First Line is Column Headers:"
@@ -168,9 +177,10 @@ Partial Class dlgImportDataset
         '
         Me.lblSeparatorCSV.AutoSize = True
         Me.lblSeparatorCSV.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSeparatorCSV.Location = New System.Drawing.Point(3, 86)
+        Me.lblSeparatorCSV.Location = New System.Drawing.Point(4, 108)
+        Me.lblSeparatorCSV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSeparatorCSV.Name = "lblSeparatorCSV"
-        Me.lblSeparatorCSV.Size = New System.Drawing.Size(56, 13)
+        Me.lblSeparatorCSV.Size = New System.Drawing.Size(70, 16)
         Me.lblSeparatorCSV.TabIndex = 8
         Me.lblSeparatorCSV.Tag = "Separator:"
         Me.lblSeparatorCSV.Text = "Separator:"
@@ -179,20 +189,22 @@ Partial Class dlgImportDataset
         '
         Me.lblDecimalCSV.AutoSize = True
         Me.lblDecimalCSV.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDecimalCSV.Location = New System.Drawing.Point(3, 117)
+        Me.lblDecimalCSV.Location = New System.Drawing.Point(4, 146)
+        Me.lblDecimalCSV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDecimalCSV.Name = "lblDecimalCSV"
-        Me.lblDecimalCSV.Size = New System.Drawing.Size(48, 13)
+        Me.lblDecimalCSV.Size = New System.Drawing.Size(60, 16)
         Me.lblDecimalCSV.TabIndex = 10
         Me.lblDecimalCSV.Tag = "Decimal:"
         Me.lblDecimalCSV.Text = "Decimal:"
         '
         'txtTextFilePreview
         '
-        Me.txtTextFilePreview.Location = New System.Drawing.Point(307, 68)
+        Me.txtTextFilePreview.Location = New System.Drawing.Point(384, 85)
+        Me.txtTextFilePreview.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTextFilePreview.Multiline = True
         Me.txtTextFilePreview.Name = "txtTextFilePreview"
         Me.txtTextFilePreview.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtTextFilePreview.Size = New System.Drawing.Size(338, 150)
+        Me.txtTextFilePreview.Size = New System.Drawing.Size(422, 186)
         Me.txtTextFilePreview.TabIndex = 8
         '
         'grdDataPreview
@@ -200,7 +212,8 @@ Partial Class dlgImportDataset
         Me.grdDataPreview.BackColor = System.Drawing.Color.White
         Me.grdDataPreview.ColumnHeaderContextMenuStrip = Nothing
         Me.grdDataPreview.LeadHeaderContextMenuStrip = Nothing
-        Me.grdDataPreview.Location = New System.Drawing.Point(309, 252)
+        Me.grdDataPreview.Location = New System.Drawing.Point(386, 315)
+        Me.grdDataPreview.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grdDataPreview.Name = "grdDataPreview"
         Me.grdDataPreview.Readonly = True
         Me.grdDataPreview.RowHeaderContextMenuStrip = Nothing
@@ -208,17 +221,18 @@ Partial Class dlgImportDataset
         Me.grdDataPreview.SheetTabContextMenuStrip = Nothing
         Me.grdDataPreview.SheetTabNewButtonVisible = False
         Me.grdDataPreview.SheetTabVisible = True
-        Me.grdDataPreview.SheetTabWidth = 60
+        Me.grdDataPreview.SheetTabWidth = 75
         Me.grdDataPreview.ShowScrollEndSpacing = True
-        Me.grdDataPreview.Size = New System.Drawing.Size(338, 153)
+        Me.grdDataPreview.Size = New System.Drawing.Size(422, 191)
         Me.grdDataPreview.TabIndex = 12
         '
         'lblFileOpenPath
         '
         Me.lblFileOpenPath.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFileOpenPath.Location = New System.Drawing.Point(7, 20)
+        Me.lblFileOpenPath.Location = New System.Drawing.Point(9, 25)
+        Me.lblFileOpenPath.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
-        Me.lblFileOpenPath.Size = New System.Drawing.Size(52, 13)
+        Me.lblFileOpenPath.Size = New System.Drawing.Size(65, 16)
         Me.lblFileOpenPath.TabIndex = 0
         Me.lblFileOpenPath.Text = "File:"
         '
@@ -226,18 +240,20 @@ Partial Class dlgImportDataset
         '
         Me.lblLinesToSkipCSV.AutoSize = True
         Me.lblLinesToSkipCSV.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLinesToSkipCSV.Location = New System.Drawing.Point(3, 209)
+        Me.lblLinesToSkipCSV.Location = New System.Drawing.Point(4, 261)
+        Me.lblLinesToSkipCSV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLinesToSkipCSV.Name = "lblLinesToSkipCSV"
-        Me.lblLinesToSkipCSV.Size = New System.Drawing.Size(75, 13)
+        Me.lblLinesToSkipCSV.Size = New System.Drawing.Size(92, 16)
         Me.lblLinesToSkipCSV.TabIndex = 14
         Me.lblLinesToSkipCSV.Text = "Lines To Skip:"
         '
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(403, 16)
+        Me.cmdBrowse.Location = New System.Drawing.Point(504, 20)
+        Me.cmdBrowse.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(66, 23)
+        Me.cmdBrowse.Size = New System.Drawing.Size(82, 29)
         Me.cmdBrowse.TabIndex = 2
         Me.cmdBrowse.Tag = "browse"
         Me.cmdBrowse.Text = "Browse"
@@ -260,9 +276,11 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblSeparatorCSV)
         Me.grpCSV.Controls.Add(Me.lblLinesToSkipCSV)
         Me.grpCSV.Controls.Add(Me.lblDecimalCSV)
-        Me.grpCSV.Location = New System.Drawing.Point(9, 99)
+        Me.grpCSV.Location = New System.Drawing.Point(11, 124)
+        Me.grpCSV.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpCSV.Name = "grpCSV"
-        Me.grpCSV.Size = New System.Drawing.Size(294, 268)
+        Me.grpCSV.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpCSV.Size = New System.Drawing.Size(368, 355)
         Me.grpCSV.TabIndex = 4
         Me.grpCSV.TabStop = False
         Me.grpCSV.Text = "Import csv Options"
@@ -273,12 +291,12 @@ Partial Class dlgImportDataset
         Me.ucrNudMaxRowsCSV.AutoSize = True
         Me.ucrNudMaxRowsCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRowsCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Location = New System.Drawing.Point(212, 237)
-        Me.ucrNudMaxRowsCSV.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudMaxRowsCSV.Location = New System.Drawing.Point(265, 310)
+        Me.ucrNudMaxRowsCSV.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudMaxRowsCSV.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxRowsCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRowsCSV.Name = "ucrNudMaxRowsCSV"
-        Me.ucrNudMaxRowsCSV.Size = New System.Drawing.Size(70, 20)
+        Me.ucrNudMaxRowsCSV.Size = New System.Drawing.Size(88, 25)
         Me.ucrNudMaxRowsCSV.TabIndex = 19
         Me.ucrNudMaxRowsCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -286,19 +304,20 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkMaxRowsCSV.AutoSize = True
         Me.ucrChkMaxRowsCSV.Checked = False
-        Me.ucrChkMaxRowsCSV.Location = New System.Drawing.Point(4, 237)
-        Me.ucrChkMaxRowsCSV.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkMaxRowsCSV.Location = New System.Drawing.Point(5, 312)
+        Me.ucrChkMaxRowsCSV.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkMaxRowsCSV.Name = "ucrChkMaxRowsCSV"
-        Me.ucrChkMaxRowsCSV.Size = New System.Drawing.Size(206, 23)
+        Me.ucrChkMaxRowsCSV.Size = New System.Drawing.Size(258, 36)
         Me.ucrChkMaxRowsCSV.TabIndex = 17
         '
         'lblNAStringsCSV
         '
         Me.lblNAStringsCSV.AutoSize = True
         Me.lblNAStringsCSV.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNAStringsCSV.Location = New System.Drawing.Point(3, 148)
+        Me.lblNAStringsCSV.Location = New System.Drawing.Point(4, 185)
+        Me.lblNAStringsCSV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNAStringsCSV.Name = "lblNAStringsCSV"
-        Me.lblNAStringsCSV.Size = New System.Drawing.Size(105, 13)
+        Me.lblNAStringsCSV.Size = New System.Drawing.Size(131, 16)
         Me.lblNAStringsCSV.TabIndex = 12
         Me.lblNAStringsCSV.Text = "Missing Value String:"
         '
@@ -306,10 +325,10 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkStringsAsFactorsCSV.AutoSize = True
         Me.ucrChkStringsAsFactorsCSV.Checked = False
-        Me.ucrChkStringsAsFactorsCSV.Location = New System.Drawing.Point(4, 180)
-        Me.ucrChkStringsAsFactorsCSV.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkStringsAsFactorsCSV.Location = New System.Drawing.Point(5, 225)
+        Me.ucrChkStringsAsFactorsCSV.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
-        Me.ucrChkStringsAsFactorsCSV.Size = New System.Drawing.Size(269, 23)
+        Me.ucrChkStringsAsFactorsCSV.Size = New System.Drawing.Size(336, 36)
         Me.ucrChkStringsAsFactorsCSV.TabIndex = 16
         '
         'ucrNudRowsToSkipCSV
@@ -317,12 +336,12 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipCSV.AutoSize = True
         Me.ucrNudRowsToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipCSV.Location = New System.Drawing.Point(210, 207)
-        Me.ucrNudRowsToSkipCSV.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudRowsToSkipCSV.Location = New System.Drawing.Point(262, 259)
+        Me.ucrNudRowsToSkipCSV.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudRowsToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.ucrNudRowsToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipCSV.Name = "ucrNudRowsToSkipCSV"
-        Me.ucrNudRowsToSkipCSV.Size = New System.Drawing.Size(70, 20)
+        Me.ucrNudRowsToSkipCSV.Size = New System.Drawing.Size(88, 25)
         Me.ucrNudRowsToSkipCSV.TabIndex = 15
         Me.ucrNudRowsToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -332,10 +351,10 @@ Partial Class dlgImportDataset
         Me.ucrInputHeadersCSV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputHeadersCSV.GetSetSelectedIndex = -1
         Me.ucrInputHeadersCSV.IsReadOnly = False
-        Me.ucrInputHeadersCSV.Location = New System.Drawing.Point(219, 50)
-        Me.ucrInputHeadersCSV.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputHeadersCSV.Location = New System.Drawing.Point(274, 62)
+        Me.ucrInputHeadersCSV.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
-        Me.ucrInputHeadersCSV.Size = New System.Drawing.Size(71, 21)
+        Me.ucrInputHeadersCSV.Size = New System.Drawing.Size(89, 26)
         Me.ucrInputHeadersCSV.TabIndex = 3
         '
         'ucrInputMissingValueStringCSV
@@ -344,10 +363,10 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringCSV.AutoSize = True
         Me.ucrInputMissingValueStringCSV.IsMultiline = False
         Me.ucrInputMissingValueStringCSV.IsReadOnly = False
-        Me.ucrInputMissingValueStringCSV.Location = New System.Drawing.Point(195, 145)
-        Me.ucrInputMissingValueStringCSV.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputMissingValueStringCSV.Location = New System.Drawing.Point(244, 181)
+        Me.ucrInputMissingValueStringCSV.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputMissingValueStringCSV.Name = "ucrInputMissingValueStringCSV"
-        Me.ucrInputMissingValueStringCSV.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputMissingValueStringCSV.Size = New System.Drawing.Size(112, 26)
         Me.ucrInputMissingValueStringCSV.TabIndex = 13
         '
         'ucrInputDecimalCSV
@@ -356,10 +375,10 @@ Partial Class dlgImportDataset
         Me.ucrInputDecimalCSV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDecimalCSV.GetSetSelectedIndex = -1
         Me.ucrInputDecimalCSV.IsReadOnly = False
-        Me.ucrInputDecimalCSV.Location = New System.Drawing.Point(133, 115)
-        Me.ucrInputDecimalCSV.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputDecimalCSV.Location = New System.Drawing.Point(166, 144)
+        Me.ucrInputDecimalCSV.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
-        Me.ucrInputDecimalCSV.Size = New System.Drawing.Size(157, 21)
+        Me.ucrInputDecimalCSV.Size = New System.Drawing.Size(196, 26)
         Me.ucrInputDecimalCSV.TabIndex = 11
         '
         'ucrInputSeparatorCSV
@@ -368,10 +387,10 @@ Partial Class dlgImportDataset
         Me.ucrInputSeparatorCSV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSeparatorCSV.GetSetSelectedIndex = -1
         Me.ucrInputSeparatorCSV.IsReadOnly = False
-        Me.ucrInputSeparatorCSV.Location = New System.Drawing.Point(134, 83)
-        Me.ucrInputSeparatorCSV.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputSeparatorCSV.Location = New System.Drawing.Point(168, 104)
+        Me.ucrInputSeparatorCSV.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
-        Me.ucrInputSeparatorCSV.Size = New System.Drawing.Size(157, 21)
+        Me.ucrInputSeparatorCSV.Size = New System.Drawing.Size(196, 26)
         Me.ucrInputSeparatorCSV.TabIndex = 9
         '
         'ucrInputEncodingCSV
@@ -380,14 +399,18 @@ Partial Class dlgImportDataset
         Me.ucrInputEncodingCSV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputEncodingCSV.GetSetSelectedIndex = -1
         Me.ucrInputEncodingCSV.IsReadOnly = False
-        Me.ucrInputEncodingCSV.Location = New System.Drawing.Point(133, 22)
-        Me.ucrInputEncodingCSV.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputEncodingCSV.Location = New System.Drawing.Point(166, 28)
+        Me.ucrInputEncodingCSV.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
-        Me.ucrInputEncodingCSV.Size = New System.Drawing.Size(157, 21)
+        Me.ucrInputEncodingCSV.Size = New System.Drawing.Size(196, 26)
         Me.ucrInputEncodingCSV.TabIndex = 1
         '
         'grpExcel
         '
+        Me.grpExcel.Controls.Add(Me.lblColFrom)
+        Me.grpExcel.Controls.Add(Me.ucrNudColFromExcel)
+        Me.grpExcel.Controls.Add(Me.lblColTo)
+        Me.grpExcel.Controls.Add(Me.ucrNudColToExcel)
         Me.grpExcel.Controls.Add(Me.lblTo)
         Me.grpExcel.Controls.Add(Me.ucrChkRange)
         Me.grpExcel.Controls.Add(Me.lblFrom)
@@ -395,6 +418,7 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.ucrInputTextFrom)
         Me.grpExcel.Controls.Add(Me.ucrNudMaxRowsExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkMaxRowsExcel)
+        Me.grpExcel.Controls.Add(Me.ucrChkColumnsExcel)
         Me.grpExcel.Controls.Add(Me.ucrNudRowsToSkipExcel)
         Me.grpExcel.Controls.Add(Me.lblMissingValueStringExcel)
         Me.grpExcel.Controls.Add(Me.ucrInputMissingValueStringExcel)
@@ -403,9 +427,11 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.lblRowToSkipExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkColumnNamesExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkTrimWSExcel)
-        Me.grpExcel.Location = New System.Drawing.Point(9, 50)
+        Me.grpExcel.Location = New System.Drawing.Point(11, 62)
+        Me.grpExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpExcel.Name = "grpExcel"
-        Me.grpExcel.Size = New System.Drawing.Size(291, 241)
+        Me.grpExcel.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpExcel.Size = New System.Drawing.Size(364, 364)
         Me.grpExcel.TabIndex = 5
         Me.grpExcel.TabStop = False
         Me.grpExcel.Text = "Import Excel Options"
@@ -415,9 +441,10 @@ Partial Class dlgImportDataset
         '
         Me.lblTo.AutoSize = True
         Me.lblTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTo.Location = New System.Drawing.Point(107, 168)
+        Me.lblTo.Location = New System.Drawing.Point(134, 210)
+        Me.lblTo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.Size = New System.Drawing.Size(27, 16)
         Me.lblTo.TabIndex = 32
         Me.lblTo.Text = "To:"
         '
@@ -425,19 +452,20 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkRange.AutoSize = True
         Me.ucrChkRange.Checked = False
-        Me.ucrChkRange.Location = New System.Drawing.Point(8, 137)
-        Me.ucrChkRange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkRange.Location = New System.Drawing.Point(10, 171)
+        Me.ucrChkRange.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkRange.Name = "ucrChkRange"
-        Me.ucrChkRange.Size = New System.Drawing.Size(170, 23)
+        Me.ucrChkRange.Size = New System.Drawing.Size(212, 36)
         Me.ucrChkRange.TabIndex = 7
         '
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
         Me.lblFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFrom.Location = New System.Drawing.Point(7, 168)
+        Me.lblFrom.Location = New System.Drawing.Point(9, 210)
+        Me.lblFrom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblFrom.Size = New System.Drawing.Size(41, 16)
         Me.lblFrom.TabIndex = 31
         Me.lblFrom.Text = "From:"
         '
@@ -447,9 +475,10 @@ Partial Class dlgImportDataset
         Me.ucrInputTextTo.AutoSize = True
         Me.ucrInputTextTo.IsMultiline = False
         Me.ucrInputTextTo.IsReadOnly = False
-        Me.ucrInputTextTo.Location = New System.Drawing.Point(166, 184)
+        Me.ucrInputTextTo.Location = New System.Drawing.Point(208, 230)
+        Me.ucrInputTextTo.Margin = New System.Windows.Forms.Padding(10, 10, 10, 10)
         Me.ucrInputTextTo.Name = "ucrInputTextTo"
-        Me.ucrInputTextTo.Size = New System.Drawing.Size(62, 20)
+        Me.ucrInputTextTo.Size = New System.Drawing.Size(78, 25)
         Me.ucrInputTextTo.TabIndex = 30
         '
         'ucrInputTextFrom
@@ -458,9 +487,10 @@ Partial Class dlgImportDataset
         Me.ucrInputTextFrom.AutoSize = True
         Me.ucrInputTextFrom.IsMultiline = False
         Me.ucrInputTextFrom.IsReadOnly = False
-        Me.ucrInputTextFrom.Location = New System.Drawing.Point(8, 183)
+        Me.ucrInputTextFrom.Location = New System.Drawing.Point(10, 229)
+        Me.ucrInputTextFrom.Margin = New System.Windows.Forms.Padding(10, 10, 10, 10)
         Me.ucrInputTextFrom.Name = "ucrInputTextFrom"
-        Me.ucrInputTextFrom.Size = New System.Drawing.Size(62, 20)
+        Me.ucrInputTextFrom.Size = New System.Drawing.Size(78, 25)
         Me.ucrInputTextFrom.TabIndex = 29
         '
         'ucrNudMaxRowsExcel
@@ -468,12 +498,12 @@ Partial Class dlgImportDataset
         Me.ucrNudMaxRowsExcel.AutoSize = True
         Me.ucrNudMaxRowsExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRowsExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Location = New System.Drawing.Point(168, 214)
-        Me.ucrNudMaxRowsExcel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudMaxRowsExcel.Location = New System.Drawing.Point(210, 268)
+        Me.ucrNudMaxRowsExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudMaxRowsExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxRowsExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRowsExcel.Name = "ucrNudMaxRowsExcel"
-        Me.ucrNudMaxRowsExcel.Size = New System.Drawing.Size(62, 20)
+        Me.ucrNudMaxRowsExcel.Size = New System.Drawing.Size(78, 25)
         Me.ucrNudMaxRowsExcel.TabIndex = 13
         Me.ucrNudMaxRowsExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -481,23 +511,83 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkMaxRowsExcel.AutoSize = True
         Me.ucrChkMaxRowsExcel.Checked = False
-        Me.ucrChkMaxRowsExcel.Location = New System.Drawing.Point(8, 214)
-        Me.ucrChkMaxRowsExcel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkMaxRowsExcel.Location = New System.Drawing.Point(10, 268)
+        Me.ucrChkMaxRowsExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkMaxRowsExcel.Name = "ucrChkMaxRowsExcel"
-        Me.ucrChkMaxRowsExcel.Size = New System.Drawing.Size(173, 23)
+        Me.ucrChkMaxRowsExcel.Size = New System.Drawing.Size(216, 36)
         Me.ucrChkMaxRowsExcel.TabIndex = 9
+        '
+        'ucrChkColumnsExcel
+        '
+        Me.ucrChkColumnsExcel.AutoSize = True
+        Me.ucrChkColumnsExcel.Checked = False
+        Me.ucrChkColumnsExcel.Location = New System.Drawing.Point(10, 302)
+        Me.ucrChkColumnsExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrChkColumnsExcel.Name = "ucrChkColumnsExcel"
+        Me.ucrChkColumnsExcel.Size = New System.Drawing.Size(175, 36)
+        Me.ucrChkColumnsExcel.TabIndex = 33
+        '
+        'lblColFrom
+        '
+        Me.lblColFrom.AutoSize = True
+        Me.lblColFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColFrom.Location = New System.Drawing.Point(9, 338)
+        Me.lblColFrom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColFrom.Name = "lblColFrom"
+        Me.lblColFrom.Size = New System.Drawing.Size(41, 16)
+        Me.lblColFrom.TabIndex = 34
+        Me.lblColFrom.Text = "From:"
+        '
+        'ucrNudColFromExcel
+        '
+        Me.ucrNudColFromExcel.AutoSize = True
+        Me.ucrNudColFromExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColFromExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColFromExcel.Location = New System.Drawing.Point(62, 335)
+        Me.ucrNudColFromExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrNudColFromExcel.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.ucrNudColFromExcel.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColFromExcel.Name = "ucrNudColFromExcel"
+        Me.ucrNudColFromExcel.Size = New System.Drawing.Size(69, 25)
+        Me.ucrNudColFromExcel.TabIndex = 35
+        Me.ucrNudColFromExcel.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'lblColTo
+        '
+        Me.lblColTo.AutoSize = True
+        Me.lblColTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColTo.Location = New System.Drawing.Point(144, 338)
+        Me.lblColTo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColTo.Name = "lblColTo"
+        Me.lblColTo.Size = New System.Drawing.Size(27, 16)
+        Me.lblColTo.TabIndex = 36
+        Me.lblColTo.Text = "To:"
+        '
+        'ucrNudColToExcel
+        '
+        Me.ucrNudColToExcel.AutoSize = True
+        Me.ucrNudColToExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColToExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColToExcel.Location = New System.Drawing.Point(181, 335)
+        Me.ucrNudColToExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrNudColToExcel.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.ucrNudColToExcel.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColToExcel.Name = "ucrNudColToExcel"
+        Me.ucrNudColToExcel.Size = New System.Drawing.Size(69, 25)
+        Me.ucrNudColToExcel.TabIndex = 37
+        Me.ucrNudColToExcel.Value = New Decimal(New Integer() {33, 0, 0, 0})
         '
         'ucrNudRowsToSkipExcel
         '
         Me.ucrNudRowsToSkipExcel.AutoSize = True
         Me.ucrNudRowsToSkipExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Location = New System.Drawing.Point(140, 111)
-        Me.ucrNudRowsToSkipExcel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudRowsToSkipExcel.Location = New System.Drawing.Point(175, 139)
+        Me.ucrNudRowsToSkipExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudRowsToSkipExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRowsToSkipExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipExcel.Name = "ucrNudRowsToSkipExcel"
-        Me.ucrNudRowsToSkipExcel.Size = New System.Drawing.Size(62, 20)
+        Me.ucrNudRowsToSkipExcel.Size = New System.Drawing.Size(78, 25)
         Me.ucrNudRowsToSkipExcel.TabIndex = 8
         Me.ucrNudRowsToSkipExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -505,9 +595,10 @@ Partial Class dlgImportDataset
         '
         Me.lblMissingValueStringExcel.AutoSize = True
         Me.lblMissingValueStringExcel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMissingValueStringExcel.Location = New System.Drawing.Point(2, 29)
+        Me.lblMissingValueStringExcel.Location = New System.Drawing.Point(2, 36)
+        Me.lblMissingValueStringExcel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMissingValueStringExcel.Name = "lblMissingValueStringExcel"
-        Me.lblMissingValueStringExcel.Size = New System.Drawing.Size(105, 13)
+        Me.lblMissingValueStringExcel.Size = New System.Drawing.Size(131, 16)
         Me.lblMissingValueStringExcel.TabIndex = 3
         Me.lblMissingValueStringExcel.Text = "Missing Value String:"
         '
@@ -517,10 +608,10 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringExcel.AutoSize = True
         Me.ucrInputMissingValueStringExcel.IsMultiline = False
         Me.ucrInputMissingValueStringExcel.IsReadOnly = False
-        Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(195, 25)
-        Me.ucrInputMissingValueStringExcel.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(244, 31)
+        Me.ucrInputMissingValueStringExcel.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputMissingValueStringExcel.Name = "ucrInputMissingValueStringExcel"
-        Me.ucrInputMissingValueStringExcel.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputMissingValueStringExcel.Size = New System.Drawing.Size(112, 26)
         Me.ucrInputMissingValueStringExcel.TabIndex = 5
         '
         'ucrInputNamedRegions
@@ -529,19 +620,20 @@ Partial Class dlgImportDataset
         Me.ucrInputNamedRegions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputNamedRegions.GetSetSelectedIndex = -1
         Me.ucrInputNamedRegions.IsReadOnly = False
-        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(148, 25)
-        Me.ucrInputNamedRegions.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(185, 31)
+        Me.ucrInputNamedRegions.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
-        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(102, 26)
         Me.ucrInputNamedRegions.TabIndex = 4
         '
         'lblNamedRegion
         '
         Me.lblNamedRegion.AutoSize = True
         Me.lblNamedRegion.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNamedRegion.Location = New System.Drawing.Point(7, 29)
+        Me.lblNamedRegion.Location = New System.Drawing.Point(9, 36)
+        Me.lblNamedRegion.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNamedRegion.Name = "lblNamedRegion"
-        Me.lblNamedRegion.Size = New System.Drawing.Size(93, 13)
+        Me.lblNamedRegion.Size = New System.Drawing.Size(117, 16)
         Me.lblNamedRegion.TabIndex = 2
         Me.lblNamedRegion.Text = "or Named Region:"
         '
@@ -549,9 +641,10 @@ Partial Class dlgImportDataset
         '
         Me.lblRowToSkipExcel.AutoSize = True
         Me.lblRowToSkipExcel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRowToSkipExcel.Location = New System.Drawing.Point(3, 113)
+        Me.lblRowToSkipExcel.Location = New System.Drawing.Point(4, 141)
+        Me.lblRowToSkipExcel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblRowToSkipExcel.Name = "lblRowToSkipExcel"
-        Me.lblRowToSkipExcel.Size = New System.Drawing.Size(73, 13)
+        Me.lblRowToSkipExcel.Size = New System.Drawing.Size(88, 16)
         Me.lblRowToSkipExcel.TabIndex = 7
         Me.lblRowToSkipExcel.Text = "Rows to Skip:"
         '
@@ -559,20 +652,20 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkColumnNamesExcel.AutoSize = True
         Me.ucrChkColumnNamesExcel.Checked = False
-        Me.ucrChkColumnNamesExcel.Location = New System.Drawing.Point(8, 52)
-        Me.ucrChkColumnNamesExcel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkColumnNamesExcel.Location = New System.Drawing.Point(10, 65)
+        Me.ucrChkColumnNamesExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkColumnNamesExcel.Name = "ucrChkColumnNamesExcel"
-        Me.ucrChkColumnNamesExcel.Size = New System.Drawing.Size(173, 23)
+        Me.ucrChkColumnNamesExcel.Size = New System.Drawing.Size(216, 36)
         Me.ucrChkColumnNamesExcel.TabIndex = 11
         '
         'ucrChkTrimWSExcel
         '
         Me.ucrChkTrimWSExcel.AutoSize = True
         Me.ucrChkTrimWSExcel.Checked = False
-        Me.ucrChkTrimWSExcel.Location = New System.Drawing.Point(8, 82)
-        Me.ucrChkTrimWSExcel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkTrimWSExcel.Location = New System.Drawing.Point(10, 102)
+        Me.ucrChkTrimWSExcel.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkTrimWSExcel.Name = "ucrChkTrimWSExcel"
-        Me.ucrChkTrimWSExcel.Size = New System.Drawing.Size(170, 23)
+        Me.ucrChkTrimWSExcel.Size = New System.Drawing.Size(212, 36)
         Me.ucrChkTrimWSExcel.TabIndex = 6
         '
         'grpRDS
@@ -584,9 +677,11 @@ Partial Class dlgImportDataset
         Me.grpRDS.Controls.Add(Me.ucrChkImportFiltersRDS)
         Me.grpRDS.Controls.Add(Me.ucrChkImportMetadataRDS)
         Me.grpRDS.Controls.Add(Me.ucrChkKeepExistingDataRDS)
-        Me.grpRDS.Location = New System.Drawing.Point(9, 50)
+        Me.grpRDS.Location = New System.Drawing.Point(11, 62)
+        Me.grpRDS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpRDS.Name = "grpRDS"
-        Me.grpRDS.Size = New System.Drawing.Size(239, 218)
+        Me.grpRDS.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpRDS.Size = New System.Drawing.Size(299, 272)
         Me.grpRDS.TabIndex = 6
         Me.grpRDS.TabStop = False
         Me.grpRDS.Text = "Import RDS Options"
@@ -596,79 +691,80 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkOverwriteRDS.AutoSize = True
         Me.ucrChkOverwriteRDS.Checked = False
-        Me.ucrChkOverwriteRDS.Location = New System.Drawing.Point(8, 175)
-        Me.ucrChkOverwriteRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkOverwriteRDS.Location = New System.Drawing.Point(10, 219)
+        Me.ucrChkOverwriteRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkOverwriteRDS.Name = "ucrChkOverwriteRDS"
-        Me.ucrChkOverwriteRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkOverwriteRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkOverwriteRDS.TabIndex = 6
         '
         'ucrChkImportObjectsRDS
         '
         Me.ucrChkImportObjectsRDS.AutoSize = True
         Me.ucrChkImportObjectsRDS.Checked = False
-        Me.ucrChkImportObjectsRDS.Location = New System.Drawing.Point(8, 71)
-        Me.ucrChkImportObjectsRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkImportObjectsRDS.Location = New System.Drawing.Point(10, 89)
+        Me.ucrChkImportObjectsRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkImportObjectsRDS.Name = "ucrChkImportObjectsRDS"
-        Me.ucrChkImportObjectsRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkImportObjectsRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkImportObjectsRDS.TabIndex = 2
         '
         'ucrChkImportCalculationsRDS
         '
         Me.ucrChkImportCalculationsRDS.AutoSize = True
         Me.ucrChkImportCalculationsRDS.Checked = False
-        Me.ucrChkImportCalculationsRDS.Location = New System.Drawing.Point(8, 123)
-        Me.ucrChkImportCalculationsRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkImportCalculationsRDS.Location = New System.Drawing.Point(10, 154)
+        Me.ucrChkImportCalculationsRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkImportCalculationsRDS.Name = "ucrChkImportCalculationsRDS"
-        Me.ucrChkImportCalculationsRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkImportCalculationsRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkImportCalculationsRDS.TabIndex = 4
         '
         'ucrChkImportChangesLogRDS
         '
         Me.ucrChkImportChangesLogRDS.AutoSize = True
         Me.ucrChkImportChangesLogRDS.Checked = False
-        Me.ucrChkImportChangesLogRDS.Location = New System.Drawing.Point(8, 149)
-        Me.ucrChkImportChangesLogRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkImportChangesLogRDS.Location = New System.Drawing.Point(10, 186)
+        Me.ucrChkImportChangesLogRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkImportChangesLogRDS.Name = "ucrChkImportChangesLogRDS"
-        Me.ucrChkImportChangesLogRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkImportChangesLogRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkImportChangesLogRDS.TabIndex = 5
         '
         'ucrChkImportFiltersRDS
         '
         Me.ucrChkImportFiltersRDS.AutoSize = True
         Me.ucrChkImportFiltersRDS.Checked = False
-        Me.ucrChkImportFiltersRDS.Location = New System.Drawing.Point(8, 97)
-        Me.ucrChkImportFiltersRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkImportFiltersRDS.Location = New System.Drawing.Point(10, 121)
+        Me.ucrChkImportFiltersRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkImportFiltersRDS.Name = "ucrChkImportFiltersRDS"
-        Me.ucrChkImportFiltersRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkImportFiltersRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkImportFiltersRDS.TabIndex = 3
         '
         'ucrChkImportMetadataRDS
         '
         Me.ucrChkImportMetadataRDS.AutoSize = True
         Me.ucrChkImportMetadataRDS.Checked = False
-        Me.ucrChkImportMetadataRDS.Location = New System.Drawing.Point(8, 45)
-        Me.ucrChkImportMetadataRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkImportMetadataRDS.Location = New System.Drawing.Point(10, 56)
+        Me.ucrChkImportMetadataRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkImportMetadataRDS.Name = "ucrChkImportMetadataRDS"
-        Me.ucrChkImportMetadataRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkImportMetadataRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkImportMetadataRDS.TabIndex = 1
         '
         'ucrChkKeepExistingDataRDS
         '
         Me.ucrChkKeepExistingDataRDS.AutoSize = True
         Me.ucrChkKeepExistingDataRDS.Checked = False
-        Me.ucrChkKeepExistingDataRDS.Location = New System.Drawing.Point(8, 21)
-        Me.ucrChkKeepExistingDataRDS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkKeepExistingDataRDS.Location = New System.Drawing.Point(10, 26)
+        Me.ucrChkKeepExistingDataRDS.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkKeepExistingDataRDS.Name = "ucrChkKeepExistingDataRDS"
-        Me.ucrChkKeepExistingDataRDS.Size = New System.Drawing.Size(205, 23)
+        Me.ucrChkKeepExistingDataRDS.Size = New System.Drawing.Size(256, 36)
         Me.ucrChkKeepExistingDataRDS.TabIndex = 0
         '
         'lblCannotImport
         '
         Me.lblCannotImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblCannotImport.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCannotImport.Location = New System.Drawing.Point(297, 290)
+        Me.lblCannotImport.Location = New System.Drawing.Point(371, 362)
+        Me.lblCannotImport.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCannotImport.Name = "lblCannotImport"
-        Me.lblCannotImport.Size = New System.Drawing.Size(366, 72)
+        Me.lblCannotImport.Size = New System.Drawing.Size(458, 90)
         Me.lblCannotImport.TabIndex = 13
         Me.lblCannotImport.Text = "Cannot import this file with the current options. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Modify options or select a di" &
     "fferent file."
@@ -679,9 +775,10 @@ Partial Class dlgImportDataset
         '
         Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
         Me.lblNoPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNoPreview.Location = New System.Drawing.Point(276, 329)
+        Me.lblNoPreview.Location = New System.Drawing.Point(345, 411)
+        Me.lblNoPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNoPreview.Name = "lblNoPreview"
-        Me.lblNoPreview.Size = New System.Drawing.Size(298, 54)
+        Me.lblNoPreview.Size = New System.Drawing.Size(372, 68)
         Me.lblNoPreview.TabIndex = 14
         Me.lblNoPreview.Text = "Preview not yet implemented for this file type"
         Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -691,18 +788,20 @@ Partial Class dlgImportDataset
         '
         Me.lblLinesToPreview.AutoSize = True
         Me.lblLinesToPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLinesToPreview.Location = New System.Drawing.Point(472, 230)
+        Me.lblLinesToPreview.Location = New System.Drawing.Point(590, 288)
+        Me.lblLinesToPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLinesToPreview.Name = "lblLinesToPreview"
-        Me.lblLinesToPreview.Size = New System.Drawing.Size(88, 13)
+        Me.lblLinesToPreview.Size = New System.Drawing.Size(107, 16)
         Me.lblLinesToPreview.TabIndex = 10
         Me.lblLinesToPreview.Text = "Lines to Preview:"
         '
         'cmdRefreshPreview
         '
         Me.cmdRefreshPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRefreshPreview.Location = New System.Drawing.Point(549, 412)
+        Me.cmdRefreshPreview.Location = New System.Drawing.Point(686, 515)
+        Me.cmdRefreshPreview.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdRefreshPreview.Name = "cmdRefreshPreview"
-        Me.cmdRefreshPreview.Size = New System.Drawing.Size(94, 23)
+        Me.cmdRefreshPreview.Size = New System.Drawing.Size(118, 29)
         Me.cmdRefreshPreview.TabIndex = 16
         Me.cmdRefreshPreview.Text = "Refresh Preview"
         Me.cmdRefreshPreview.UseVisualStyleBackColor = True
@@ -716,9 +815,11 @@ Partial Class dlgImportDataset
         Me.grpText.Controls.Add(Me.lblLinesToSkipText)
         Me.grpText.Controls.Add(Me.ucrChkColumnNamesText)
         Me.grpText.Controls.Add(Me.ucrChkMaxRowsText)
-        Me.grpText.Location = New System.Drawing.Point(9, 93)
+        Me.grpText.Location = New System.Drawing.Point(11, 116)
+        Me.grpText.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpText.Name = "grpText"
-        Me.grpText.Size = New System.Drawing.Size(290, 132)
+        Me.grpText.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpText.Size = New System.Drawing.Size(362, 165)
         Me.grpText.TabIndex = 17
         Me.grpText.TabStop = False
         Me.grpText.Text = "Import Text Options"
@@ -729,12 +830,12 @@ Partial Class dlgImportDataset
         Me.ucrNudMaxRowsText.AutoSize = True
         Me.ucrNudMaxRowsText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRowsText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxRowsText.Location = New System.Drawing.Point(168, 104)
-        Me.ucrNudMaxRowsText.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudMaxRowsText.Location = New System.Drawing.Point(210, 130)
+        Me.ucrNudMaxRowsText.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudMaxRowsText.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxRowsText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRowsText.Name = "ucrNudMaxRowsText"
-        Me.ucrNudMaxRowsText.Size = New System.Drawing.Size(62, 20)
+        Me.ucrNudMaxRowsText.Size = New System.Drawing.Size(78, 25)
         Me.ucrNudMaxRowsText.TabIndex = 12
         Me.ucrNudMaxRowsText.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -742,9 +843,10 @@ Partial Class dlgImportDataset
         '
         Me.lblMissingValueStringText.AutoSize = True
         Me.lblMissingValueStringText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMissingValueStringText.Location = New System.Drawing.Point(4, 47)
+        Me.lblMissingValueStringText.Location = New System.Drawing.Point(5, 59)
+        Me.lblMissingValueStringText.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMissingValueStringText.Name = "lblMissingValueStringText"
-        Me.lblMissingValueStringText.Size = New System.Drawing.Size(105, 13)
+        Me.lblMissingValueStringText.Size = New System.Drawing.Size(131, 16)
         Me.lblMissingValueStringText.TabIndex = 12
         Me.lblMissingValueStringText.Text = "Missing Value String:"
         '
@@ -753,12 +855,12 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipText.AutoSize = True
         Me.ucrNudRowsToSkipText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipText.Location = New System.Drawing.Point(210, 74)
-        Me.ucrNudRowsToSkipText.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudRowsToSkipText.Location = New System.Drawing.Point(262, 92)
+        Me.ucrNudRowsToSkipText.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudRowsToSkipText.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.ucrNudRowsToSkipText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipText.Name = "ucrNudRowsToSkipText"
-        Me.ucrNudRowsToSkipText.Size = New System.Drawing.Size(63, 20)
+        Me.ucrNudRowsToSkipText.Size = New System.Drawing.Size(79, 25)
         Me.ucrNudRowsToSkipText.TabIndex = 15
         Me.ucrNudRowsToSkipText.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -768,19 +870,20 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringText.AutoSize = True
         Me.ucrInputMissingValueStringText.IsMultiline = False
         Me.ucrInputMissingValueStringText.IsReadOnly = False
-        Me.ucrInputMissingValueStringText.Location = New System.Drawing.Point(195, 44)
-        Me.ucrInputMissingValueStringText.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputMissingValueStringText.Location = New System.Drawing.Point(244, 55)
+        Me.ucrInputMissingValueStringText.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputMissingValueStringText.Name = "ucrInputMissingValueStringText"
-        Me.ucrInputMissingValueStringText.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputMissingValueStringText.Size = New System.Drawing.Size(112, 26)
         Me.ucrInputMissingValueStringText.TabIndex = 13
         '
         'lblLinesToSkipText
         '
         Me.lblLinesToSkipText.AutoSize = True
         Me.lblLinesToSkipText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLinesToSkipText.Location = New System.Drawing.Point(4, 79)
+        Me.lblLinesToSkipText.Location = New System.Drawing.Point(5, 99)
+        Me.lblLinesToSkipText.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLinesToSkipText.Name = "lblLinesToSkipText"
-        Me.lblLinesToSkipText.Size = New System.Drawing.Size(75, 13)
+        Me.lblLinesToSkipText.Size = New System.Drawing.Size(92, 16)
         Me.lblLinesToSkipText.TabIndex = 14
         Me.lblLinesToSkipText.Text = "Lines To Skip:"
         '
@@ -788,20 +891,20 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkColumnNamesText.AutoSize = True
         Me.ucrChkColumnNamesText.Checked = False
-        Me.ucrChkColumnNamesText.Location = New System.Drawing.Point(8, 21)
-        Me.ucrChkColumnNamesText.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkColumnNamesText.Location = New System.Drawing.Point(10, 26)
+        Me.ucrChkColumnNamesText.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkColumnNamesText.Name = "ucrChkColumnNamesText"
-        Me.ucrChkColumnNamesText.Size = New System.Drawing.Size(206, 23)
+        Me.ucrChkColumnNamesText.Size = New System.Drawing.Size(258, 36)
         Me.ucrChkColumnNamesText.TabIndex = 17
         '
         'ucrChkMaxRowsText
         '
         Me.ucrChkMaxRowsText.AutoSize = True
         Me.ucrChkMaxRowsText.Checked = False
-        Me.ucrChkMaxRowsText.Location = New System.Drawing.Point(8, 104)
-        Me.ucrChkMaxRowsText.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkMaxRowsText.Location = New System.Drawing.Point(10, 130)
+        Me.ucrChkMaxRowsText.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkMaxRowsText.Name = "ucrChkMaxRowsText"
-        Me.ucrChkMaxRowsText.Size = New System.Drawing.Size(173, 23)
+        Me.ucrChkMaxRowsText.Size = New System.Drawing.Size(216, 36)
         Me.ucrChkMaxRowsText.TabIndex = 21
         '
         'rdoSeparatortext
@@ -812,9 +915,10 @@ Partial Class dlgImportDataset
         Me.rdoSeparatortext.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSeparatortext.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSeparatortext.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSeparatortext.Location = New System.Drawing.Point(9, 50)
+        Me.rdoSeparatortext.Location = New System.Drawing.Point(11, 62)
+        Me.rdoSeparatortext.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoSeparatortext.Name = "rdoSeparatortext"
-        Me.rdoSeparatortext.Size = New System.Drawing.Size(81, 40)
+        Me.rdoSeparatortext.Size = New System.Drawing.Size(101, 50)
         Me.rdoSeparatortext.TabIndex = 23
         Me.rdoSeparatortext.TabStop = True
         Me.rdoSeparatortext.Text = "Separator"
@@ -829,9 +933,10 @@ Partial Class dlgImportDataset
         Me.rdoFixedWidthText.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFixedWidthText.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFixedWidthText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFixedWidthText.Location = New System.Drawing.Point(88, 50)
+        Me.rdoFixedWidthText.Location = New System.Drawing.Point(110, 62)
+        Me.rdoFixedWidthText.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoFixedWidthText.Name = "rdoFixedWidthText"
-        Me.rdoFixedWidthText.Size = New System.Drawing.Size(81, 40)
+        Me.rdoFixedWidthText.Size = New System.Drawing.Size(101, 50)
         Me.rdoFixedWidthText.TabIndex = 24
         Me.rdoFixedWidthText.TabStop = True
         Me.rdoFixedWidthText.Text = "Fixed width"
@@ -846,9 +951,10 @@ Partial Class dlgImportDataset
         Me.rdoFixedWidthWhiteSpacesText.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFixedWidthWhiteSpacesText.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFixedWidthWhiteSpacesText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFixedWidthWhiteSpacesText.Location = New System.Drawing.Point(167, 50)
+        Me.rdoFixedWidthWhiteSpacesText.Location = New System.Drawing.Point(209, 62)
+        Me.rdoFixedWidthWhiteSpacesText.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoFixedWidthWhiteSpacesText.Name = "rdoFixedWidthWhiteSpacesText"
-        Me.rdoFixedWidthWhiteSpacesText.Size = New System.Drawing.Size(81, 40)
+        Me.rdoFixedWidthWhiteSpacesText.Size = New System.Drawing.Size(101, 50)
         Me.rdoFixedWidthWhiteSpacesText.TabIndex = 25
         Me.rdoFixedWidthWhiteSpacesText.TabStop = True
         Me.rdoFixedWidthWhiteSpacesText.Text = "Fixed width" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "white spaces"
@@ -860,18 +966,20 @@ Partial Class dlgImportDataset
         Me.clbSheets.CheckOnClick = True
         Me.clbSheets.FormattingEnabled = True
         Me.clbSheets.HorizontalScrollbar = True
-        Me.clbSheets.Location = New System.Drawing.Point(307, 93)
+        Me.clbSheets.Location = New System.Drawing.Point(384, 116)
+        Me.clbSheets.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.clbSheets.Name = "clbSheets"
-        Me.clbSheets.Size = New System.Drawing.Size(255, 124)
+        Me.clbSheets.Size = New System.Drawing.Size(318, 140)
         Me.clbSheets.TabIndex = 26
         '
         'lblSelectSheets
         '
         Me.lblSelectSheets.AutoSize = True
         Me.lblSelectSheets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectSheets.Location = New System.Drawing.Point(350, 50)
+        Me.lblSelectSheets.Location = New System.Drawing.Point(438, 62)
+        Me.lblSelectSheets.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelectSheets.Name = "lblSelectSheets"
-        Me.lblSelectSheets.Size = New System.Drawing.Size(76, 13)
+        Me.lblSelectSheets.Size = New System.Drawing.Size(93, 16)
         Me.lblSelectSheets.TabIndex = 27
         Me.lblSelectSheets.Tag = ""
         Me.lblSelectSheets.Text = "Select Sheets:"
@@ -880,9 +988,10 @@ Partial Class dlgImportDataset
         '
         Me.lblImportingSheets.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
         Me.lblImportingSheets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblImportingSheets.Location = New System.Drawing.Point(308, 263)
+        Me.lblImportingSheets.Location = New System.Drawing.Point(385, 329)
+        Me.lblImportingSheets.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblImportingSheets.Name = "lblImportingSheets"
-        Me.lblImportingSheets.Size = New System.Drawing.Size(338, 114)
+        Me.lblImportingSheets.Size = New System.Drawing.Size(422, 142)
         Me.lblImportingSheets.TabIndex = 28
         Me.lblImportingSheets.Text = "Importing the following sheets:"
         Me.lblImportingSheets.Visible = False
@@ -892,9 +1001,10 @@ Partial Class dlgImportDataset
         Me.cmdStepBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmdStepBack.ForeColor = System.Drawing.SystemColors.Control
         Me.cmdStepBack.Image = CType(resources.GetObject("cmdStepBack.Image"), System.Drawing.Image)
-        Me.cmdStepBack.Location = New System.Drawing.Point(603, 18)
+        Me.cmdStepBack.Location = New System.Drawing.Point(754, 22)
+        Me.cmdStepBack.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdStepBack.Name = "cmdStepBack"
-        Me.cmdStepBack.Size = New System.Drawing.Size(23, 24)
+        Me.cmdStepBack.Size = New System.Drawing.Size(29, 30)
         Me.cmdStepBack.TabIndex = 32
         Me.cmdStepBack.UseVisualStyleBackColor = True
         '
@@ -902,9 +1012,10 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkMultipleFiles.AutoSize = True
         Me.ucrChkMultipleFiles.Checked = False
-        Me.ucrChkMultipleFiles.Location = New System.Drawing.Point(472, 19)
+        Me.ucrChkMultipleFiles.Location = New System.Drawing.Point(590, 24)
+        Me.ucrChkMultipleFiles.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkMultipleFiles.Name = "ucrChkMultipleFiles"
-        Me.ucrChkMultipleFiles.Size = New System.Drawing.Size(173, 23)
+        Me.ucrChkMultipleFiles.Size = New System.Drawing.Size(216, 29)
         Me.ucrChkMultipleFiles.TabIndex = 30
         '
         'ucrNudPreviewLines
@@ -912,21 +1023,22 @@ Partial Class dlgImportDataset
         Me.ucrNudPreviewLines.AutoSize = True
         Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPreviewLines.Location = New System.Drawing.Point(595, 227)
-        Me.ucrNudPreviewLines.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudPreviewLines.Location = New System.Drawing.Point(744, 284)
+        Me.ucrNudPreviewLines.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
-        Me.ucrNudPreviewLines.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPreviewLines.Size = New System.Drawing.Size(62, 25)
         Me.ucrNudPreviewLines.TabIndex = 11
         Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPanelFixedWidthText
         '
         Me.ucrPanelFixedWidthText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPanelFixedWidthText.Location = New System.Drawing.Point(5, 47)
+        Me.ucrPanelFixedWidthText.Location = New System.Drawing.Point(6, 59)
+        Me.ucrPanelFixedWidthText.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
-        Me.ucrPanelFixedWidthText.Size = New System.Drawing.Size(253, 45)
+        Me.ucrPanelFixedWidthText.Size = New System.Drawing.Size(316, 56)
         Me.ucrPanelFixedWidthText.TabIndex = 22
         '
         'ucrInputFilePath
@@ -935,57 +1047,57 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(63, 17)
-        Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(79, 21)
+        Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(8, 10, 8, 10)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(336, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(420, 26)
         Me.ucrInputFilePath.TabIndex = 1
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 445)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 556)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(511, 65)
         Me.ucrBase.TabIndex = 15
         '
         'ucrChkSheetsCheckAll
         '
         Me.ucrChkSheetsCheckAll.AutoSize = True
         Me.ucrChkSheetsCheckAll.Checked = False
-        Me.ucrChkSheetsCheckAll.Location = New System.Drawing.Point(348, 66)
-        Me.ucrChkSheetsCheckAll.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkSheetsCheckAll.Location = New System.Drawing.Point(435, 82)
+        Me.ucrChkSheetsCheckAll.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkSheetsCheckAll.Name = "ucrChkSheetsCheckAll"
-        Me.ucrChkSheetsCheckAll.Size = New System.Drawing.Size(129, 23)
+        Me.ucrChkSheetsCheckAll.Size = New System.Drawing.Size(161, 29)
         Me.ucrChkSheetsCheckAll.TabIndex = 22
         '
         'ucrChkDropEmptyCols
         '
         Me.ucrChkDropEmptyCols.AutoSize = True
         Me.ucrChkDropEmptyCols.Checked = False
-        Me.ucrChkDropEmptyCols.Location = New System.Drawing.Point(8, 377)
-        Me.ucrChkDropEmptyCols.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrChkDropEmptyCols.Location = New System.Drawing.Point(10, 480)
+        Me.ucrChkDropEmptyCols.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrChkDropEmptyCols.Name = "ucrChkDropEmptyCols"
-        Me.ucrChkDropEmptyCols.Size = New System.Drawing.Size(274, 23)
+        Me.ucrChkDropEmptyCols.Size = New System.Drawing.Size(342, 29)
         Me.ucrChkDropEmptyCols.TabIndex = 31
         '
         'ucrSaveFile
         '
         Me.ucrSaveFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveFile.Location = New System.Drawing.Point(9, 412)
-        Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFile.Location = New System.Drawing.Point(11, 515)
+        Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrSaveFile.Name = "ucrSaveFile"
-        Me.ucrSaveFile.Size = New System.Drawing.Size(510, 22)
+        Me.ucrSaveFile.Size = New System.Drawing.Size(638, 28)
         Me.ucrSaveFile.TabIndex = 29
         '
         'dlgImportDataset
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(660, 502)
+        Me.ClientSize = New System.Drawing.Size(825, 628)
         Me.Controls.Add(Me.grpText)
         Me.Controls.Add(Me.cmdStepBack)
         Me.Controls.Add(Me.ucrChkMultipleFiles)
@@ -1016,6 +1128,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.grdDataPreview)
         Me.Controls.Add(Me.lblImportingSheets)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportDataset"
@@ -1109,4 +1222,9 @@ Partial Class dlgImportDataset
     Friend WithEvents cmdStepBack As Button
     Friend WithEvents ttCmdStepBack As ToolTip
     Friend WithEvents ucrInputNamedRegions As ucrInputComboBox
+    Friend WithEvents ucrChkColumnsExcel As ucrCheck
+    Friend WithEvents lblColFrom As Label
+    Friend WithEvents ucrNudColFromExcel As ucrNud
+    Friend WithEvents lblColTo As Label
+    Friend WithEvents ucrNudColToExcel As ucrNud
 End Class
