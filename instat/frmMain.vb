@@ -852,6 +852,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Prepare
         dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
