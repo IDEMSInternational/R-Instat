@@ -24,34 +24,16 @@ Partial Class dlgClimaticStationMaps
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.grpPoints = New System.Windows.Forms.GroupBox()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.grpBoxLabelOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputColour = New instat.ucrInputComboBox()
-        Me.ucrNudSize = New instat.ucrNud()
-        Me.ucrChkColour = New instat.ucrCheck()
-        Me.ucrChkSize = New instat.ucrCheck()
-        Me.ucrChkLabelAll = New instat.ucrCheck()
-        Me.ucrChkLabelledRectangle = New instat.ucrCheck()
         Me.lblLabels = New System.Windows.Forms.Label()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
-        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
-        Me.ucrSelectorStation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblShape = New System.Windows.Forms.Label()
         Me.lbllatitude = New System.Windows.Forms.Label()
-        Me.ucrReceiverColor = New instat.ucrReceiverSingle()
         Me.lblLongitude = New System.Windows.Forms.Label()
-        Me.ucrReceiverShape = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.grpMapOutline = New System.Windows.Forms.GroupBox()
-        Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
         Me.lblFill = New System.Windows.Forms.Label()
-        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
-        Me.ucrSelectorOutline = New instat.ucrSelectorByDataFrameAddRemove()
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemSFOptions = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,6 +44,24 @@ Partial Class dlgClimaticStationMaps
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrChkAddPoints = New instat.ucrCheck()
+        Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
+        Me.ucrSelectorOutline = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucrChkColour = New instat.ucrCheck()
+        Me.ucrChkLabelAll = New instat.ucrCheck()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.ucrChkSize = New instat.ucrCheck()
+        Me.ucrChkLabelledRectangle = New instat.ucrCheck()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
+        Me.ucrReceiverColor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverShape = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
+        Me.ucrSelectorStation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSaveMap = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPoints.SuspendLayout()
@@ -96,25 +96,13 @@ Partial Class dlgClimaticStationMaps
         Me.grpPoints.TabStop = False
         Me.grpPoints.Text = "Points"
         '
-        'ucrInputStation
-        '
-        Me.ucrInputStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputStation.GetSetSelectedIndex = -1
-        Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(388, 389)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(152, 32)
-        Me.ucrInputStation.TabIndex = 82
-        '
         'grpBoxLabelOptions
         '
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkColour)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelAll)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrInputColour)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrNudSize)
-        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkColour)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkSize)
-        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelAll)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelledRectangle)
         Me.grpBoxLabelOptions.Location = New System.Drawing.Point(32, 308)
         Me.grpBoxLabelOptions.Margin = New System.Windows.Forms.Padding(4)
@@ -124,72 +112,6 @@ Partial Class dlgClimaticStationMaps
         Me.grpBoxLabelOptions.TabIndex = 13
         Me.grpBoxLabelOptions.TabStop = False
         Me.grpBoxLabelOptions.Text = "Label Options:"
-        '
-        'ucrInputColour
-        '
-        Me.ucrInputColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColour.GetSetSelectedIndex = -1
-        Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(129, 141)
-        Me.ucrInputColour.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputColour.Name = "ucrInputColour"
-        Me.ucrInputColour.Size = New System.Drawing.Size(183, 32)
-        Me.ucrInputColour.TabIndex = 11
-        '
-        'ucrNudSize
-        '
-        Me.ucrNudSize.AutoSize = True
-        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(162, 62)
-        Me.ucrNudSize.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Size = New System.Drawing.Size(75, 30)
-        Me.ucrNudSize.TabIndex = 10
-        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkColour
-        '
-        Me.ucrChkColour.AutoSize = True
-        Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(9, 142)
-        Me.ucrChkColour.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(130, 51)
-        Me.ucrChkColour.TabIndex = 9
-        '
-        'ucrChkSize
-        '
-        Me.ucrChkSize.AutoSize = True
-        Me.ucrChkSize.Checked = False
-        Me.ucrChkSize.Location = New System.Drawing.Point(9, 62)
-        Me.ucrChkSize.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkSize.Name = "ucrChkSize"
-        Me.ucrChkSize.Size = New System.Drawing.Size(130, 51)
-        Me.ucrChkSize.TabIndex = 8
-        '
-        'ucrChkLabelAll
-        '
-        Me.ucrChkLabelAll.AutoSize = True
-        Me.ucrChkLabelAll.Checked = False
-        Me.ucrChkLabelAll.Location = New System.Drawing.Point(9, 104)
-        Me.ucrChkLabelAll.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkLabelAll.Name = "ucrChkLabelAll"
-        Me.ucrChkLabelAll.Size = New System.Drawing.Size(130, 51)
-        Me.ucrChkLabelAll.TabIndex = 7
-        '
-        'ucrChkLabelledRectangle
-        '
-        Me.ucrChkLabelledRectangle.AutoSize = True
-        Me.ucrChkLabelledRectangle.Checked = False
-        Me.ucrChkLabelledRectangle.Location = New System.Drawing.Point(9, 26)
-        Me.ucrChkLabelledRectangle.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkLabelledRectangle.Name = "ucrChkLabelledRectangle"
-        Me.ucrChkLabelledRectangle.Size = New System.Drawing.Size(130, 51)
-        Me.ucrChkLabelledRectangle.TabIndex = 6
         '
         'lblLabels
         '
@@ -201,19 +123,6 @@ Partial Class dlgClimaticStationMaps
         Me.lblLabels.TabIndex = 5
         Me.lblLabels.Text = "Labels (Optional):"
         '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.AutoSize = True
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(360, 168)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 6
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
         'lblFacet
         '
         Me.lblFacet.AutoSize = True
@@ -222,31 +131,6 @@ Partial Class dlgClimaticStationMaps
         Me.lblFacet.Size = New System.Drawing.Size(62, 20)
         Me.lblFacet.TabIndex = 11
         Me.lblFacet.Text = "Facets:"
-        '
-        'ucrReceiverFacet
-        '
-        Me.ucrReceiverFacet.AutoSize = True
-        Me.ucrReceiverFacet.frmParent = Me
-        Me.ucrReceiverFacet.Location = New System.Drawing.Point(360, 351)
-        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
-        Me.ucrReceiverFacet.Selector = Nothing
-        Me.ucrReceiverFacet.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverFacet.strNcFilePath = ""
-        Me.ucrReceiverFacet.TabIndex = 12
-        Me.ucrReceiverFacet.ucrSelector = Nothing
-        '
-        'ucrSelectorStation
-        '
-        Me.ucrSelectorStation.AutoSize = True
-        Me.ucrSelectorStation.bDropUnusedFilterLevels = False
-        Me.ucrSelectorStation.bShowHiddenColumns = False
-        Me.ucrSelectorStation.bUseCurrentFilter = True
-        Me.ucrSelectorStation.Location = New System.Drawing.Point(12, 24)
-        Me.ucrSelectorStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStation.Name = "ucrSelectorStation"
-        Me.ucrSelectorStation.Size = New System.Drawing.Size(477, 411)
-        Me.ucrSelectorStation.TabIndex = 0
         '
         'lblColor
         '
@@ -275,19 +159,6 @@ Partial Class dlgClimaticStationMaps
         Me.lbllatitude.TabIndex = 3
         Me.lbllatitude.Text = "Latitude:"
         '
-        'ucrReceiverColor
-        '
-        Me.ucrReceiverColor.AutoSize = True
-        Me.ucrReceiverColor.frmParent = Me
-        Me.ucrReceiverColor.Location = New System.Drawing.Point(360, 291)
-        Me.ucrReceiverColor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColor.Name = "ucrReceiverColor"
-        Me.ucrReceiverColor.Selector = Nothing
-        Me.ucrReceiverColor.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverColor.strNcFilePath = ""
-        Me.ucrReceiverColor.TabIndex = 10
-        Me.ucrReceiverColor.ucrSelector = Nothing
-        '
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
@@ -296,45 +167,6 @@ Partial Class dlgClimaticStationMaps
         Me.lblLongitude.Size = New System.Drawing.Size(84, 20)
         Me.lblLongitude.TabIndex = 1
         Me.lblLongitude.Text = "Longitude:"
-        '
-        'ucrReceiverShape
-        '
-        Me.ucrReceiverShape.AutoSize = True
-        Me.ucrReceiverShape.frmParent = Me
-        Me.ucrReceiverShape.Location = New System.Drawing.Point(360, 230)
-        Me.ucrReceiverShape.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverShape.Name = "ucrReceiverShape"
-        Me.ucrReceiverShape.Selector = Nothing
-        Me.ucrReceiverShape.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverShape.strNcFilePath = ""
-        Me.ucrReceiverShape.TabIndex = 8
-        Me.ucrReceiverShape.ucrSelector = Nothing
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.AutoSize = True
-        Me.ucrReceiverLatitude.frmParent = Me
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(360, 106)
-        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.TabIndex = 4
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrReceiverLongitude
-        '
-        Me.ucrReceiverLongitude.AutoSize = True
-        Me.ucrReceiverLongitude.frmParent = Me
-        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(360, 46)
-        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
-        Me.ucrReceiverLongitude.Selector = Nothing
-        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverLongitude.strNcFilePath = ""
-        Me.ucrReceiverLongitude.TabIndex = 2
-        Me.ucrReceiverLongitude.ucrSelector = Nothing
         '
         'grpMapOutline
         '
@@ -353,16 +185,6 @@ Partial Class dlgClimaticStationMaps
         Me.grpMapOutline.TabStop = False
         Me.grpMapOutline.Text = "Map Outline"
         '
-        'ucrChkAddPoints
-        '
-        Me.ucrChkAddPoints.AutoSize = True
-        Me.ucrChkAddPoints.Checked = False
-        Me.ucrChkAddPoints.Location = New System.Drawing.Point(346, 156)
-        Me.ucrChkAddPoints.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        Me.ucrChkAddPoints.Size = New System.Drawing.Size(180, 51)
-        Me.ucrChkAddPoints.TabIndex = 5
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -373,19 +195,6 @@ Partial Class dlgClimaticStationMaps
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Geometry"
         '
-        'ucrReceiverGeometry
-        '
-        Me.ucrReceiverGeometry.AutoSize = True
-        Me.ucrReceiverGeometry.frmParent = Me
-        Me.ucrReceiverGeometry.Location = New System.Drawing.Point(346, 48)
-        Me.ucrReceiverGeometry.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverGeometry.Name = "ucrReceiverGeometry"
-        Me.ucrReceiverGeometry.Selector = Nothing
-        Me.ucrReceiverGeometry.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverGeometry.strNcFilePath = ""
-        Me.ucrReceiverGeometry.TabIndex = 2
-        Me.ucrReceiverGeometry.ucrSelector = Nothing
-        '
         'lblFill
         '
         Me.lblFill.AutoSize = True
@@ -395,31 +204,6 @@ Partial Class dlgClimaticStationMaps
         Me.lblFill.Size = New System.Drawing.Size(105, 20)
         Me.lblFill.TabIndex = 3
         Me.lblFill.Text = "Fill (Optional):"
-        '
-        'ucrReceiverFill
-        '
-        Me.ucrReceiverFill.AutoSize = True
-        Me.ucrReceiverFill.frmParent = Me
-        Me.ucrReceiverFill.Location = New System.Drawing.Point(346, 111)
-        Me.ucrReceiverFill.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFill.Name = "ucrReceiverFill"
-        Me.ucrReceiverFill.Selector = Nothing
-        Me.ucrReceiverFill.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverFill.strNcFilePath = ""
-        Me.ucrReceiverFill.TabIndex = 4
-        Me.ucrReceiverFill.ucrSelector = Nothing
-        '
-        'ucrSelectorOutline
-        '
-        Me.ucrSelectorOutline.AutoSize = True
-        Me.ucrSelectorOutline.bDropUnusedFilterLevels = False
-        Me.ucrSelectorOutline.bShowHiddenColumns = False
-        Me.ucrSelectorOutline.bUseCurrentFilter = True
-        Me.ucrSelectorOutline.Location = New System.Drawing.Point(6, 22)
-        Me.ucrSelectorOutline.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorOutline.Name = "ucrSelectorOutline"
-        Me.ucrSelectorOutline.Size = New System.Drawing.Size(477, 411)
-        Me.ucrSelectorOutline.TabIndex = 0
         '
         'contextMenuStripOptions
         '
@@ -499,6 +283,222 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddPoints
+        '
+        Me.ucrChkAddPoints.AutoSize = True
+        Me.ucrChkAddPoints.Checked = False
+        Me.ucrChkAddPoints.Location = New System.Drawing.Point(346, 156)
+        Me.ucrChkAddPoints.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+        Me.ucrChkAddPoints.Size = New System.Drawing.Size(180, 51)
+        Me.ucrChkAddPoints.TabIndex = 5
+        '
+        'ucrReceiverGeometry
+        '
+        Me.ucrReceiverGeometry.AutoSize = True
+        Me.ucrReceiverGeometry.frmParent = Nothing
+        Me.ucrReceiverGeometry.Location = New System.Drawing.Point(346, 48)
+        Me.ucrReceiverGeometry.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverGeometry.Name = "ucrReceiverGeometry"
+        Me.ucrReceiverGeometry.Selector = Nothing
+        Me.ucrReceiverGeometry.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverGeometry.strNcFilePath = ""
+        Me.ucrReceiverGeometry.TabIndex = 2
+        Me.ucrReceiverGeometry.ucrSelector = Nothing
+        '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.AutoSize = True
+        Me.ucrReceiverFill.frmParent = Nothing
+        Me.ucrReceiverFill.Location = New System.Drawing.Point(346, 111)
+        Me.ucrReceiverFill.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.TabIndex = 4
+        Me.ucrReceiverFill.ucrSelector = Nothing
+        '
+        'ucrSelectorOutline
+        '
+        Me.ucrSelectorOutline.AutoSize = True
+        Me.ucrSelectorOutline.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOutline.bShowHiddenColumns = False
+        Me.ucrSelectorOutline.bUseCurrentFilter = True
+        Me.ucrSelectorOutline.Location = New System.Drawing.Point(6, 22)
+        Me.ucrSelectorOutline.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorOutline.Name = "ucrSelectorOutline"
+        Me.ucrSelectorOutline.Size = New System.Drawing.Size(477, 411)
+        Me.ucrSelectorOutline.TabIndex = 0
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(388, 389)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(152, 32)
+        Me.ucrInputStation.TabIndex = 82
+        '
+        'ucrChkColour
+        '
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(9, 142)
+        Me.ucrChkColour.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(130, 46)
+        Me.ucrChkColour.TabIndex = 9
+        '
+        'ucrChkLabelAll
+        '
+        Me.ucrChkLabelAll.AutoSize = True
+        Me.ucrChkLabelAll.Checked = False
+        Me.ucrChkLabelAll.Location = New System.Drawing.Point(9, 104)
+        Me.ucrChkLabelAll.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkLabelAll.Name = "ucrChkLabelAll"
+        Me.ucrChkLabelAll.Size = New System.Drawing.Size(130, 51)
+        Me.ucrChkLabelAll.TabIndex = 7
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(142, 141)
+        Me.ucrInputColour.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(170, 32)
+        Me.ucrInputColour.TabIndex = 11
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.AutoSize = True
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(162, 62)
+        Me.ucrNudSize.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudSize.TabIndex = 10
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkSize
+        '
+        Me.ucrChkSize.AutoSize = True
+        Me.ucrChkSize.Checked = False
+        Me.ucrChkSize.Location = New System.Drawing.Point(9, 62)
+        Me.ucrChkSize.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSize.Name = "ucrChkSize"
+        Me.ucrChkSize.Size = New System.Drawing.Size(130, 51)
+        Me.ucrChkSize.TabIndex = 8
+        '
+        'ucrChkLabelledRectangle
+        '
+        Me.ucrChkLabelledRectangle.AutoSize = True
+        Me.ucrChkLabelledRectangle.Checked = False
+        Me.ucrChkLabelledRectangle.Location = New System.Drawing.Point(9, 26)
+        Me.ucrChkLabelledRectangle.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkLabelledRectangle.Name = "ucrChkLabelledRectangle"
+        Me.ucrChkLabelledRectangle.Size = New System.Drawing.Size(130, 51)
+        Me.ucrChkLabelledRectangle.TabIndex = 6
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.AutoSize = True
+        Me.ucrReceiverStation.frmParent = Nothing
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(360, 168)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 6
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverFacet
+        '
+        Me.ucrReceiverFacet.AutoSize = True
+        Me.ucrReceiverFacet.frmParent = Nothing
+        Me.ucrReceiverFacet.Location = New System.Drawing.Point(360, 351)
+        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
+        Me.ucrReceiverFacet.Selector = Nothing
+        Me.ucrReceiverFacet.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverFacet.strNcFilePath = ""
+        Me.ucrReceiverFacet.TabIndex = 12
+        Me.ucrReceiverFacet.ucrSelector = Nothing
+        '
+        'ucrReceiverColor
+        '
+        Me.ucrReceiverColor.AutoSize = True
+        Me.ucrReceiverColor.frmParent = Nothing
+        Me.ucrReceiverColor.Location = New System.Drawing.Point(360, 291)
+        Me.ucrReceiverColor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColor.Name = "ucrReceiverColor"
+        Me.ucrReceiverColor.Selector = Nothing
+        Me.ucrReceiverColor.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverColor.strNcFilePath = ""
+        Me.ucrReceiverColor.TabIndex = 10
+        Me.ucrReceiverColor.ucrSelector = Nothing
+        '
+        'ucrReceiverShape
+        '
+        Me.ucrReceiverShape.AutoSize = True
+        Me.ucrReceiverShape.frmParent = Nothing
+        Me.ucrReceiverShape.Location = New System.Drawing.Point(360, 230)
+        Me.ucrReceiverShape.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverShape.Name = "ucrReceiverShape"
+        Me.ucrReceiverShape.Selector = Nothing
+        Me.ucrReceiverShape.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverShape.strNcFilePath = ""
+        Me.ucrReceiverShape.TabIndex = 8
+        Me.ucrReceiverShape.ucrSelector = Nothing
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.AutoSize = True
+        Me.ucrReceiverLatitude.frmParent = Nothing
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(360, 106)
+        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.TabIndex = 4
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.AutoSize = True
+        Me.ucrReceiverLongitude.frmParent = Nothing
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(360, 46)
+        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.TabIndex = 2
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
+        'ucrSelectorStation
+        '
+        Me.ucrSelectorStation.AutoSize = True
+        Me.ucrSelectorStation.bDropUnusedFilterLevels = False
+        Me.ucrSelectorStation.bShowHiddenColumns = False
+        Me.ucrSelectorStation.bUseCurrentFilter = True
+        Me.ucrSelectorStation.Location = New System.Drawing.Point(12, 24)
+        Me.ucrSelectorStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStation.Name = "ucrSelectorStation"
+        Me.ucrSelectorStation.Size = New System.Drawing.Size(477, 411)
+        Me.ucrSelectorStation.TabIndex = 0
         '
         'ucrSaveMap
         '
