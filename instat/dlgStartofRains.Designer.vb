@@ -44,61 +44,80 @@ Partial Class dlgStartofRains
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNewStatusColumnName = New instat.ucrInputTextBox()
+        Me.ucrChkAsDate = New instat.ucrCheck()
+        Me.ucrChkStatus = New instat.ucrCheck()
+        Me.ucrInputNewDateColumnName = New instat.ucrInputTextBox()
+        Me.ucrChkAsDoy = New instat.ucrCheck()
+        Me.ucrInputNewDoyColumnName = New instat.ucrInputTextBox()
+        Me.grpTemDisplay = New System.Windows.Forms.GroupBox()
+        Me.grpWinter = New System.Windows.Forms.GroupBox()
+        Me.ucrInputDayWinter = New instat.ucrInputTextBox()
+        Me.ucrInputOccuWinter = New instat.ucrInputTextBox()
+        Me.ucrChkDateWinter = New instat.ucrCheck()
+        Me.ucrChkOccuWinter = New instat.ucrCheck()
+        Me.ucrInputDateWinter = New instat.ucrInputTextBox()
+        Me.ucrChkDayWinter = New instat.ucrCheck()
+        Me.ucrInputTextTempday = New instat.ucrInputTextBox()
+        Me.ucrInputTextTemOccu = New instat.ucrInputTextBox()
+        Me.ucrChkTemDate = New instat.ucrCheck()
+        Me.ucrChkTemOccu = New instat.ucrCheck()
+        Me.ucrInputTextTemdate = New instat.ucrInputTextBox()
+        Me.ucrChkTemDay = New instat.ucrCheck()
         Me.grpConditionsForSatrtofRains = New System.Windows.Forms.GroupBox()
         Me.cmdAdditionnal = New System.Windows.Forms.Button()
+        Me.ucrChkAdditional = New instat.ucrCheck()
+        Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.lblFraction = New System.Windows.Forms.Label()
+        Me.ucrNudEvapo = New instat.ucrNud()
         Me.rdoEvapo = New System.Windows.Forms.RadioButton()
         Me.lblTROverDays = New System.Windows.Forms.Label()
+        Me.ucrNudTROverDays = New instat.ucrNud()
+        Me.ucrNudTRAmount = New instat.ucrNud()
         Me.lblTRVal = New System.Windows.Forms.Label()
+        Me.ucrChkTotalRainfall = New instat.ucrCheck()
+        Me.ucrNudTRPercentile = New instat.ucrNud()
         Me.rdoTRAmount = New System.Windows.Forms.RadioButton()
         Me.rdoTRPercentile = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTRCalculateBy = New instat.UcrPanel()
+        Me.ucrNudTotalOverDays = New instat.ucrNud()
+        Me.lblTotalOverDays = New System.Windows.Forms.Label()
+        Me.ucrNudAmount = New instat.ucrNud()
+        Me.lblAmount = New System.Windows.Forms.Label()
+        Me.grpTem = New System.Windows.Forms.GroupBox()
+        Me.lblTmax = New System.Windows.Forms.Label()
+        Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
+        Me.lblTmin = New System.Windows.Forms.Label()
+        Me.ucrReceiverTmin = New instat.ucrReceiverSingle()
+        Me.rdoWinter = New System.Windows.Forms.RadioButton()
+        Me.rdoSummer = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTem = New instat.UcrPanel()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrInputThreshold = New instat.ucrInputComboBox()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.ucrSaveDefinition = New instat.ucrSave()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputNewDoyColumnName = New instat.ucrInputTextBox()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
-        Me.ucrChkAdditional = New instat.ucrCheck()
-        Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
-        Me.ucrNudEvapo = New instat.ucrNud()
-        Me.ucrNudTROverDays = New instat.ucrNud()
-        Me.ucrNudTRAmount = New instat.ucrNud()
-        Me.ucrChkTotalRainfall = New instat.ucrCheck()
-        Me.ucrNudTRPercentile = New instat.ucrNud()
-        Me.ucrPnlTRCalculateBy = New instat.UcrPanel()
-        Me.ucrInputThreshold = New instat.ucrInputComboBox()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
-        Me.ucrInputNewStatusColumnName = New instat.ucrInputTextBox()
-        Me.ucrChkAsDate = New instat.ucrCheck()
-        Me.ucrChkStatus = New instat.ucrCheck()
-        Me.ucrInputNewDateColumnName = New instat.ucrInputTextBox()
-        Me.ucrChkAsDoy = New instat.ucrCheck()
         Me.ucrPnlStart = New instat.UcrPanel()
         Me.rdoTemperature = New System.Windows.Forms.RadioButton()
         Me.rdoRain = New System.Windows.Forms.RadioButton()
         Me.lblTem = New System.Windows.Forms.Label()
         Me.ucrReceiverTem = New instat.ucrReceiverSingle()
-        Me.ucrNudTotalOverDays = New instat.ucrNud()
-        Me.lblTotalOverDays = New System.Windows.Forms.Label()
-        Me.ucrNudAmount = New instat.ucrNud()
-        Me.lblAmount = New System.Windows.Forms.Label()
-        Me.grpTemDisplay = New System.Windows.Forms.GroupBox()
-        Me.ucrInputTextTemOccu = New instat.ucrInputTextBox()
-        Me.ucrChkTemDate = New instat.ucrCheck()
-        Me.ucrChkTemOccu = New instat.ucrCheck()
-        Me.ucrInputTextTemdate = New instat.ucrInputTextBox()
-        Me.ucrChkTemDay = New instat.ucrCheck()
-        Me.ucrInputTextTempday = New instat.ucrInputTextBox()
+        Me.ucrSaveDefinitionTem = New instat.ucrSave()
+        Me.ucrSaveDefinitionwinter = New instat.ucrSave()
         Me.grpDisplay.SuspendLayout()
-        Me.grpConditionsForSatrtofRains.SuspendLayout()
-        Me.grpRainParameters.SuspendLayout()
         Me.grpTemDisplay.SuspendLayout()
+        Me.grpWinter.SuspendLayout()
+        Me.grpConditionsForSatrtofRains.SuspendLayout()
+        Me.grpTem.SuspendLayout()
+        Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblRainfall
@@ -148,12 +167,12 @@ Partial Class dlgStartofRains
         '
         'grpDisplay
         '
-        Me.grpDisplay.Controls.Add(Me.grpTemDisplay)
         Me.grpDisplay.Controls.Add(Me.ucrInputNewStatusColumnName)
         Me.grpDisplay.Controls.Add(Me.ucrChkAsDate)
         Me.grpDisplay.Controls.Add(Me.ucrChkStatus)
         Me.grpDisplay.Controls.Add(Me.ucrInputNewDateColumnName)
         Me.grpDisplay.Controls.Add(Me.ucrChkAsDoy)
+        Me.grpDisplay.Controls.Add(Me.ucrInputNewDoyColumnName)
         Me.grpDisplay.Location = New System.Drawing.Point(13, 487)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Size = New System.Drawing.Size(535, 43)
@@ -161,14 +180,238 @@ Partial Class dlgStartofRains
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display"
         '
+        'ucrInputNewStatusColumnName
+        '
+        Me.ucrInputNewStatusColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewStatusColumnName.AutoSize = True
+        Me.ucrInputNewStatusColumnName.IsMultiline = False
+        Me.ucrInputNewStatusColumnName.IsReadOnly = False
+        Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(443, 15)
+        Me.ucrInputNewStatusColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputNewStatusColumnName.Name = "ucrInputNewStatusColumnName"
+        Me.ucrInputNewStatusColumnName.Size = New System.Drawing.Size(87, 21)
+        Me.ucrInputNewStatusColumnName.TabIndex = 51
+        '
+        'ucrChkAsDate
+        '
+        Me.ucrChkAsDate.AutoSize = True
+        Me.ucrChkAsDate.Checked = False
+        Me.ucrChkAsDate.Location = New System.Drawing.Point(184, 15)
+        Me.ucrChkAsDate.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkAsDate.Name = "ucrChkAsDate"
+        Me.ucrChkAsDate.Size = New System.Drawing.Size(51, 23)
+        Me.ucrChkAsDate.TabIndex = 48
+        '
+        'ucrChkStatus
+        '
+        Me.ucrChkStatus.AutoSize = True
+        Me.ucrChkStatus.Checked = False
+        Me.ucrChkStatus.Location = New System.Drawing.Point(356, 15)
+        Me.ucrChkStatus.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkStatus.Name = "ucrChkStatus"
+        Me.ucrChkStatus.Size = New System.Drawing.Size(84, 24)
+        Me.ucrChkStatus.TabIndex = 50
+        '
+        'ucrInputNewDateColumnName
+        '
+        Me.ucrInputNewDateColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDateColumnName.AutoSize = True
+        Me.ucrInputNewDateColumnName.IsMultiline = False
+        Me.ucrInputNewDateColumnName.IsReadOnly = False
+        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(238, 15)
+        Me.ucrInputNewDateColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
+        Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(85, 21)
+        Me.ucrInputNewDateColumnName.TabIndex = 49
+        '
+        'ucrChkAsDoy
+        '
+        Me.ucrChkAsDoy.AutoSize = True
+        Me.ucrChkAsDoy.Checked = False
+        Me.ucrChkAsDoy.Location = New System.Drawing.Point(5, 15)
+        Me.ucrChkAsDoy.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
+        Me.ucrChkAsDoy.Size = New System.Drawing.Size(51, 23)
+        Me.ucrChkAsDoy.TabIndex = 67
+        '
+        'ucrInputNewDoyColumnName
+        '
+        Me.ucrInputNewDoyColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDoyColumnName.AutoSize = True
+        Me.ucrInputNewDoyColumnName.IsMultiline = False
+        Me.ucrInputNewDoyColumnName.IsReadOnly = False
+        Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(59, 13)
+        Me.ucrInputNewDoyColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputNewDoyColumnName.Name = "ucrInputNewDoyColumnName"
+        Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(88, 21)
+        Me.ucrInputNewDoyColumnName.TabIndex = 68
+        '
+        'grpTemDisplay
+        '
+        Me.grpTemDisplay.Controls.Add(Me.ucrInputTextTempday)
+        Me.grpTemDisplay.Controls.Add(Me.ucrInputTextTemOccu)
+        Me.grpTemDisplay.Controls.Add(Me.ucrChkTemDate)
+        Me.grpTemDisplay.Controls.Add(Me.ucrChkTemOccu)
+        Me.grpTemDisplay.Controls.Add(Me.ucrInputTextTemdate)
+        Me.grpTemDisplay.Controls.Add(Me.ucrChkTemDay)
+        Me.grpTemDisplay.Location = New System.Drawing.Point(13, 486)
+        Me.grpTemDisplay.Name = "grpTemDisplay"
+        Me.grpTemDisplay.Size = New System.Drawing.Size(535, 43)
+        Me.grpTemDisplay.TabIndex = 68
+        Me.grpTemDisplay.TabStop = False
+        Me.grpTemDisplay.Text = "Display"
+        '
+        'grpWinter
+        '
+        Me.grpWinter.Controls.Add(Me.ucrInputDayWinter)
+        Me.grpWinter.Controls.Add(Me.ucrInputOccuWinter)
+        Me.grpWinter.Controls.Add(Me.ucrChkDateWinter)
+        Me.grpWinter.Controls.Add(Me.ucrChkOccuWinter)
+        Me.grpWinter.Controls.Add(Me.ucrInputDateWinter)
+        Me.grpWinter.Controls.Add(Me.ucrChkDayWinter)
+        Me.grpWinter.Location = New System.Drawing.Point(12, 489)
+        Me.grpWinter.Name = "grpWinter"
+        Me.grpWinter.Size = New System.Drawing.Size(535, 43)
+        Me.grpWinter.TabIndex = 76
+        Me.grpWinter.TabStop = False
+        Me.grpWinter.Text = "Display"
+        '
+        'ucrInputDayWinter
+        '
+        Me.ucrInputDayWinter.AddQuotesIfUnrecognised = True
+        Me.ucrInputDayWinter.AutoSize = True
+        Me.ucrInputDayWinter.IsMultiline = False
+        Me.ucrInputDayWinter.IsReadOnly = False
+        Me.ucrInputDayWinter.Location = New System.Drawing.Point(61, 14)
+        Me.ucrInputDayWinter.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputDayWinter.Name = "ucrInputDayWinter"
+        Me.ucrInputDayWinter.Size = New System.Drawing.Size(88, 21)
+        Me.ucrInputDayWinter.TabIndex = 75
+        '
+        'ucrInputOccuWinter
+        '
+        Me.ucrInputOccuWinter.AddQuotesIfUnrecognised = True
+        Me.ucrInputOccuWinter.AutoSize = True
+        Me.ucrInputOccuWinter.IsMultiline = False
+        Me.ucrInputOccuWinter.IsReadOnly = False
+        Me.ucrInputOccuWinter.Location = New System.Drawing.Point(443, 15)
+        Me.ucrInputOccuWinter.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputOccuWinter.Name = "ucrInputOccuWinter"
+        Me.ucrInputOccuWinter.Size = New System.Drawing.Size(87, 21)
+        Me.ucrInputOccuWinter.TabIndex = 51
+        '
+        'ucrChkDateWinter
+        '
+        Me.ucrChkDateWinter.AutoSize = True
+        Me.ucrChkDateWinter.Checked = False
+        Me.ucrChkDateWinter.Location = New System.Drawing.Point(184, 15)
+        Me.ucrChkDateWinter.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDateWinter.Name = "ucrChkDateWinter"
+        Me.ucrChkDateWinter.Size = New System.Drawing.Size(51, 23)
+        Me.ucrChkDateWinter.TabIndex = 48
+        '
+        'ucrChkOccuWinter
+        '
+        Me.ucrChkOccuWinter.AutoSize = True
+        Me.ucrChkOccuWinter.Checked = False
+        Me.ucrChkOccuWinter.Location = New System.Drawing.Point(356, 15)
+        Me.ucrChkOccuWinter.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkOccuWinter.Name = "ucrChkOccuWinter"
+        Me.ucrChkOccuWinter.Size = New System.Drawing.Size(84, 24)
+        Me.ucrChkOccuWinter.TabIndex = 50
+        '
+        'ucrInputDateWinter
+        '
+        Me.ucrInputDateWinter.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateWinter.AutoSize = True
+        Me.ucrInputDateWinter.IsMultiline = False
+        Me.ucrInputDateWinter.IsReadOnly = False
+        Me.ucrInputDateWinter.Location = New System.Drawing.Point(238, 15)
+        Me.ucrInputDateWinter.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputDateWinter.Name = "ucrInputDateWinter"
+        Me.ucrInputDateWinter.Size = New System.Drawing.Size(85, 21)
+        Me.ucrInputDateWinter.TabIndex = 49
+        '
+        'ucrChkDayWinter
+        '
+        Me.ucrChkDayWinter.AutoSize = True
+        Me.ucrChkDayWinter.Checked = False
+        Me.ucrChkDayWinter.Location = New System.Drawing.Point(5, 15)
+        Me.ucrChkDayWinter.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDayWinter.Name = "ucrChkDayWinter"
+        Me.ucrChkDayWinter.Size = New System.Drawing.Size(51, 23)
+        Me.ucrChkDayWinter.TabIndex = 67
+        '
+        'ucrInputTextTempday
+        '
+        Me.ucrInputTextTempday.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextTempday.AutoSize = True
+        Me.ucrInputTextTempday.IsMultiline = False
+        Me.ucrInputTextTempday.IsReadOnly = False
+        Me.ucrInputTextTempday.Location = New System.Drawing.Point(61, 14)
+        Me.ucrInputTextTempday.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputTextTempday.Name = "ucrInputTextTempday"
+        Me.ucrInputTextTempday.Size = New System.Drawing.Size(88, 21)
+        Me.ucrInputTextTempday.TabIndex = 75
+        '
+        'ucrInputTextTemOccu
+        '
+        Me.ucrInputTextTemOccu.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextTemOccu.AutoSize = True
+        Me.ucrInputTextTemOccu.IsMultiline = False
+        Me.ucrInputTextTemOccu.IsReadOnly = False
+        Me.ucrInputTextTemOccu.Location = New System.Drawing.Point(443, 15)
+        Me.ucrInputTextTemOccu.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputTextTemOccu.Name = "ucrInputTextTemOccu"
+        Me.ucrInputTextTemOccu.Size = New System.Drawing.Size(87, 21)
+        Me.ucrInputTextTemOccu.TabIndex = 51
+        '
+        'ucrChkTemDate
+        '
+        Me.ucrChkTemDate.AutoSize = True
+        Me.ucrChkTemDate.Checked = False
+        Me.ucrChkTemDate.Location = New System.Drawing.Point(184, 15)
+        Me.ucrChkTemDate.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkTemDate.Name = "ucrChkTemDate"
+        Me.ucrChkTemDate.Size = New System.Drawing.Size(51, 23)
+        Me.ucrChkTemDate.TabIndex = 48
+        '
+        'ucrChkTemOccu
+        '
+        Me.ucrChkTemOccu.AutoSize = True
+        Me.ucrChkTemOccu.Checked = False
+        Me.ucrChkTemOccu.Location = New System.Drawing.Point(356, 15)
+        Me.ucrChkTemOccu.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkTemOccu.Name = "ucrChkTemOccu"
+        Me.ucrChkTemOccu.Size = New System.Drawing.Size(84, 24)
+        Me.ucrChkTemOccu.TabIndex = 50
+        '
+        'ucrInputTextTemdate
+        '
+        Me.ucrInputTextTemdate.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextTemdate.AutoSize = True
+        Me.ucrInputTextTemdate.IsMultiline = False
+        Me.ucrInputTextTemdate.IsReadOnly = False
+        Me.ucrInputTextTemdate.Location = New System.Drawing.Point(238, 15)
+        Me.ucrInputTextTemdate.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputTextTemdate.Name = "ucrInputTextTemdate"
+        Me.ucrInputTextTemdate.Size = New System.Drawing.Size(85, 21)
+        Me.ucrInputTextTemdate.TabIndex = 49
+        '
+        'ucrChkTemDay
+        '
+        Me.ucrChkTemDay.AutoSize = True
+        Me.ucrChkTemDay.Checked = False
+        Me.ucrChkTemDay.Location = New System.Drawing.Point(5, 15)
+        Me.ucrChkTemDay.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkTemDay.Name = "ucrChkTemDay"
+        Me.ucrChkTemDay.Size = New System.Drawing.Size(51, 23)
+        Me.ucrChkTemDay.TabIndex = 67
+        '
         'grpConditionsForSatrtofRains
         '
-        Me.grpConditionsForSatrtofRains.Controls.Add(Me.ucrNudTotalOverDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.cmdAdditionnal)
-        Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblTotalOverDays)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.ucrChkAdditional)
-        Me.grpConditionsForSatrtofRains.Controls.Add(Me.ucrNudAmount)
-        Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblAmount)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.ucrReceiverEvap)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.lblFraction)
         Me.grpConditionsForSatrtofRains.Controls.Add(Me.ucrNudEvapo)
@@ -200,6 +443,29 @@ Partial Class dlgStartofRains
         Me.cmdAdditionnal.Text = "Add"
         Me.cmdAdditionnal.UseVisualStyleBackColor = True
         '
+        'ucrChkAdditional
+        '
+        Me.ucrChkAdditional.AutoSize = True
+        Me.ucrChkAdditional.Checked = False
+        Me.ucrChkAdditional.Location = New System.Drawing.Point(4, 151)
+        Me.ucrChkAdditional.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkAdditional.Name = "ucrChkAdditional"
+        Me.ucrChkAdditional.Size = New System.Drawing.Size(143, 29)
+        Me.ucrChkAdditional.TabIndex = 45
+        '
+        'ucrReceiverEvap
+        '
+        Me.ucrReceiverEvap.AutoSize = True
+        Me.ucrReceiverEvap.frmParent = Me
+        Me.ucrReceiverEvap.Location = New System.Drawing.Point(289, 81)
+        Me.ucrReceiverEvap.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
+        Me.ucrReceiverEvap.Selector = Nothing
+        Me.ucrReceiverEvap.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverEvap.strNcFilePath = ""
+        Me.ucrReceiverEvap.TabIndex = 24
+        Me.ucrReceiverEvap.ucrSelector = Nothing
+        '
         'lblFraction
         '
         Me.lblFraction.AutoSize = True
@@ -208,6 +474,20 @@ Partial Class dlgStartofRains
         Me.lblFraction.Size = New System.Drawing.Size(48, 13)
         Me.lblFraction.TabIndex = 25
         Me.lblFraction.Text = "Fraction:"
+        '
+        'ucrNudEvapo
+        '
+        Me.ucrNudEvapo.AutoSize = True
+        Me.ucrNudEvapo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudEvapo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudEvapo.Location = New System.Drawing.Point(484, 78)
+        Me.ucrNudEvapo.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudEvapo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudEvapo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudEvapo.Name = "ucrNudEvapo"
+        Me.ucrNudEvapo.Size = New System.Drawing.Size(42, 20)
+        Me.ucrNudEvapo.TabIndex = 26
+        Me.ucrNudEvapo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoEvapo
         '
@@ -230,6 +510,34 @@ Partial Class dlgStartofRains
         Me.lblTROverDays.Tag = ""
         Me.lblTROverDays.Text = "Over Days:"
         '
+        'ucrNudTROverDays
+        '
+        Me.ucrNudTROverDays.AutoSize = True
+        Me.ucrNudTROverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTROverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTROverDays.Location = New System.Drawing.Point(210, 21)
+        Me.ucrNudTROverDays.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudTROverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTROverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTROverDays.Name = "ucrNudTROverDays"
+        Me.ucrNudTROverDays.Size = New System.Drawing.Size(42, 20)
+        Me.ucrNudTROverDays.TabIndex = 19
+        Me.ucrNudTROverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTRAmount
+        '
+        Me.ucrNudTRAmount.AutoSize = True
+        Me.ucrNudTRAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTRAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTRAmount.Location = New System.Drawing.Point(289, 58)
+        Me.ucrNudTRAmount.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudTRAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTRAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTRAmount.Name = "ucrNudTRAmount"
+        Me.ucrNudTRAmount.Size = New System.Drawing.Size(42, 20)
+        Me.ucrNudTRAmount.TabIndex = 22
+        Me.ucrNudTRAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblTRVal
         '
         Me.lblTRVal.AutoSize = True
@@ -238,6 +546,30 @@ Partial Class dlgStartofRains
         Me.lblTRVal.Size = New System.Drawing.Size(37, 13)
         Me.lblTRVal.TabIndex = 20
         Me.lblTRVal.Text = "Value:"
+        '
+        'ucrChkTotalRainfall
+        '
+        Me.ucrChkTotalRainfall.AutoSize = True
+        Me.ucrChkTotalRainfall.Checked = False
+        Me.ucrChkTotalRainfall.Location = New System.Drawing.Point(4, 22)
+        Me.ucrChkTotalRainfall.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkTotalRainfall.Name = "ucrChkTotalRainfall"
+        Me.ucrChkTotalRainfall.Size = New System.Drawing.Size(131, 34)
+        Me.ucrChkTotalRainfall.TabIndex = 17
+        '
+        'ucrNudTRPercentile
+        '
+        Me.ucrNudTRPercentile.AutoSize = True
+        Me.ucrNudTRPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTRPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTRPercentile.Location = New System.Drawing.Point(289, 109)
+        Me.ucrNudTRPercentile.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudTRPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTRPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTRPercentile.Name = "ucrNudTRPercentile"
+        Me.ucrNudTRPercentile.Size = New System.Drawing.Size(42, 20)
+        Me.ucrNudTRPercentile.TabIndex = 28
+        Me.ucrNudTRPercentile.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoTRAmount
         '
@@ -261,6 +593,151 @@ Partial Class dlgStartofRains
         Me.rdoTRPercentile.Text = "Percentile"
         Me.rdoTRPercentile.UseVisualStyleBackColor = True
         '
+        'ucrPnlTRCalculateBy
+        '
+        Me.ucrPnlTRCalculateBy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTRCalculateBy.Location = New System.Drawing.Point(130, 55)
+        Me.ucrPnlTRCalculateBy.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlTRCalculateBy.Name = "ucrPnlTRCalculateBy"
+        Me.ucrPnlTRCalculateBy.Size = New System.Drawing.Size(165, 75)
+        Me.ucrPnlTRCalculateBy.TabIndex = 4
+        '
+        'ucrNudTotalOverDays
+        '
+        Me.ucrNudTotalOverDays.AutoSize = True
+        Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(226, 238)
+        Me.ucrNudTotalOverDays.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
+        Me.ucrNudTotalOverDays.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTotalOverDays.TabIndex = 78
+        Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblTotalOverDays
+        '
+        Me.lblTotalOverDays.AutoSize = True
+        Me.lblTotalOverDays.Location = New System.Drawing.Point(154, 240)
+        Me.lblTotalOverDays.Name = "lblTotalOverDays"
+        Me.lblTotalOverDays.Size = New System.Drawing.Size(66, 13)
+        Me.lblTotalOverDays.TabIndex = 77
+        Me.lblTotalOverDays.Text = "Over Day(s):"
+        '
+        'ucrNudAmount
+        '
+        Me.ucrNudAmount.AutoSize = True
+        Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAmount.Location = New System.Drawing.Point(61, 238)
+        Me.ucrNudAmount.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.Name = "ucrNudAmount"
+        Me.ucrNudAmount.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAmount.TabIndex = 76
+        Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblAmount
+        '
+        Me.lblAmount.AutoSize = True
+        Me.lblAmount.Location = New System.Drawing.Point(8, 240)
+        Me.lblAmount.Name = "lblAmount"
+        Me.lblAmount.Size = New System.Drawing.Size(46, 13)
+        Me.lblAmount.TabIndex = 75
+        Me.lblAmount.Text = "Amount:"
+        '
+        'grpTem
+        '
+        Me.grpTem.Controls.Add(Me.lblTmax)
+        Me.grpTem.Controls.Add(Me.ucrReceiverTmax)
+        Me.grpTem.Controls.Add(Me.lblTmin)
+        Me.grpTem.Controls.Add(Me.ucrReceiverTmin)
+        Me.grpTem.Controls.Add(Me.rdoWinter)
+        Me.grpTem.Controls.Add(Me.rdoSummer)
+        Me.grpTem.Controls.Add(Me.ucrPnlTem)
+        Me.grpTem.Location = New System.Drawing.Point(290, 219)
+        Me.grpTem.Name = "grpTem"
+        Me.grpTem.Size = New System.Drawing.Size(227, 92)
+        Me.grpTem.TabIndex = 80
+        Me.grpTem.TabStop = False
+        Me.grpTem.Text = "Temperatures"
+        '
+        'lblTmax
+        '
+        Me.lblTmax.AutoSize = True
+        Me.lblTmax.Location = New System.Drawing.Point(6, 61)
+        Me.lblTmax.Name = "lblTmax"
+        Me.lblTmax.Size = New System.Drawing.Size(33, 13)
+        Me.lblTmax.TabIndex = 77
+        Me.lblTmax.Text = "Tmax"
+        '
+        'ucrReceiverTmax
+        '
+        Me.ucrReceiverTmax.AutoSize = True
+        Me.ucrReceiverTmax.frmParent = Me
+        Me.ucrReceiverTmax.Location = New System.Drawing.Point(42, 58)
+        Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
+        Me.ucrReceiverTmax.Selector = Nothing
+        Me.ucrReceiverTmax.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverTmax.strNcFilePath = ""
+        Me.ucrReceiverTmax.TabIndex = 78
+        Me.ucrReceiverTmax.ucrSelector = Nothing
+        '
+        'lblTmin
+        '
+        Me.lblTmin.AutoSize = True
+        Me.lblTmin.Location = New System.Drawing.Point(9, 61)
+        Me.lblTmin.Name = "lblTmin"
+        Me.lblTmin.Size = New System.Drawing.Size(30, 13)
+        Me.lblTmin.TabIndex = 75
+        Me.lblTmin.Text = "Tmin"
+        '
+        'ucrReceiverTmin
+        '
+        Me.ucrReceiverTmin.AutoSize = True
+        Me.ucrReceiverTmin.frmParent = Me
+        Me.ucrReceiverTmin.Location = New System.Drawing.Point(42, 58)
+        Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
+        Me.ucrReceiverTmin.Selector = Nothing
+        Me.ucrReceiverTmin.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverTmin.strNcFilePath = ""
+        Me.ucrReceiverTmin.TabIndex = 76
+        Me.ucrReceiverTmin.ucrSelector = Nothing
+        '
+        'rdoWinter
+        '
+        Me.rdoWinter.AutoSize = True
+        Me.rdoWinter.Location = New System.Drawing.Point(143, 22)
+        Me.rdoWinter.Name = "rdoWinter"
+        Me.rdoWinter.Size = New System.Drawing.Size(56, 17)
+        Me.rdoWinter.TabIndex = 2
+        Me.rdoWinter.TabStop = True
+        Me.rdoWinter.Text = "Winter"
+        Me.rdoWinter.UseVisualStyleBackColor = True
+        '
+        'rdoSummer
+        '
+        Me.rdoSummer.AutoSize = True
+        Me.rdoSummer.Location = New System.Drawing.Point(17, 22)
+        Me.rdoSummer.Name = "rdoSummer"
+        Me.rdoSummer.Size = New System.Drawing.Size(63, 17)
+        Me.rdoSummer.TabIndex = 1
+        Me.rdoSummer.TabStop = True
+        Me.rdoSummer.Text = "Summer"
+        Me.rdoSummer.UseVisualStyleBackColor = True
+        '
+        'ucrPnlTem
+        '
+        Me.ucrPnlTem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTem.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlTem.Name = "ucrPnlTem"
+        Me.ucrPnlTem.Size = New System.Drawing.Size(215, 20)
+        Me.ucrPnlTem.TabIndex = 0
+        '
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
@@ -282,6 +759,30 @@ Partial Class dlgStartofRains
         Me.grpRainParameters.Size = New System.Drawing.Size(535, 40)
         Me.grpRainParameters.TabIndex = 64
         Me.grpRainParameters.TabStop = False
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputThreshold.GetSetSelectedIndex = -1
+        Me.ucrInputThreshold.IsReadOnly = False
+        Me.ucrInputThreshold.Location = New System.Drawing.Point(70, 9)
+        Me.ucrInputThreshold.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrInputThreshold.Size = New System.Drawing.Size(62, 21)
+        Me.ucrInputThreshold.TabIndex = 13
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.AutoSize = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(277, 11)
+        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.TabIndex = 15
         '
         'cmdDoyRange
         '
@@ -314,18 +815,6 @@ Partial Class dlgStartofRains
         Me.ucrSelectorForStartofRains.Name = "ucrSelectorForStartofRains"
         Me.ucrSelectorForStartofRains.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForStartofRains.TabIndex = 53
-        '
-        'ucrInputNewDoyColumnName
-        '
-        Me.ucrInputNewDoyColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewDoyColumnName.AutoSize = True
-        Me.ucrInputNewDoyColumnName.IsMultiline = False
-        Me.ucrInputNewDoyColumnName.IsReadOnly = False
-        Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(74, 502)
-        Me.ucrInputNewDoyColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputNewDoyColumnName.Name = "ucrInputNewDoyColumnName"
-        Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(88, 21)
-        Me.ucrInputNewDoyColumnName.TabIndex = 68
         '
         'ucrReceiverStation
         '
@@ -383,7 +872,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 572)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 571)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -401,182 +890,6 @@ Partial Class dlgStartofRains
         Me.ucrReceiverDOY.strNcFilePath = ""
         Me.ucrReceiverDOY.TabIndex = 61
         Me.ucrReceiverDOY.ucrSelector = Nothing
-        '
-        'ucrChkAdditional
-        '
-        Me.ucrChkAdditional.AutoSize = True
-        Me.ucrChkAdditional.Checked = False
-        Me.ucrChkAdditional.Location = New System.Drawing.Point(4, 151)
-        Me.ucrChkAdditional.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkAdditional.Name = "ucrChkAdditional"
-        Me.ucrChkAdditional.Size = New System.Drawing.Size(143, 29)
-        Me.ucrChkAdditional.TabIndex = 45
-        '
-        'ucrReceiverEvap
-        '
-        Me.ucrReceiverEvap.AutoSize = True
-        Me.ucrReceiverEvap.frmParent = Nothing
-        Me.ucrReceiverEvap.Location = New System.Drawing.Point(289, 81)
-        Me.ucrReceiverEvap.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
-        Me.ucrReceiverEvap.Selector = Nothing
-        Me.ucrReceiverEvap.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverEvap.strNcFilePath = ""
-        Me.ucrReceiverEvap.TabIndex = 24
-        Me.ucrReceiverEvap.ucrSelector = Nothing
-        '
-        'ucrNudEvapo
-        '
-        Me.ucrNudEvapo.AutoSize = True
-        Me.ucrNudEvapo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudEvapo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudEvapo.Location = New System.Drawing.Point(484, 78)
-        Me.ucrNudEvapo.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudEvapo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudEvapo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudEvapo.Name = "ucrNudEvapo"
-        Me.ucrNudEvapo.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudEvapo.TabIndex = 26
-        Me.ucrNudEvapo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTROverDays
-        '
-        Me.ucrNudTROverDays.AutoSize = True
-        Me.ucrNudTROverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTROverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTROverDays.Location = New System.Drawing.Point(210, 21)
-        Me.ucrNudTROverDays.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudTROverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTROverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTROverDays.Name = "ucrNudTROverDays"
-        Me.ucrNudTROverDays.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudTROverDays.TabIndex = 19
-        Me.ucrNudTROverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTRAmount
-        '
-        Me.ucrNudTRAmount.AutoSize = True
-        Me.ucrNudTRAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTRAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTRAmount.Location = New System.Drawing.Point(289, 58)
-        Me.ucrNudTRAmount.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudTRAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTRAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTRAmount.Name = "ucrNudTRAmount"
-        Me.ucrNudTRAmount.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudTRAmount.TabIndex = 22
-        Me.ucrNudTRAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkTotalRainfall
-        '
-        Me.ucrChkTotalRainfall.AutoSize = True
-        Me.ucrChkTotalRainfall.Checked = False
-        Me.ucrChkTotalRainfall.Location = New System.Drawing.Point(4, 22)
-        Me.ucrChkTotalRainfall.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkTotalRainfall.Name = "ucrChkTotalRainfall"
-        Me.ucrChkTotalRainfall.Size = New System.Drawing.Size(131, 34)
-        Me.ucrChkTotalRainfall.TabIndex = 17
-        '
-        'ucrNudTRPercentile
-        '
-        Me.ucrNudTRPercentile.AutoSize = True
-        Me.ucrNudTRPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTRPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTRPercentile.Location = New System.Drawing.Point(289, 109)
-        Me.ucrNudTRPercentile.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudTRPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTRPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTRPercentile.Name = "ucrNudTRPercentile"
-        Me.ucrNudTRPercentile.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudTRPercentile.TabIndex = 28
-        Me.ucrNudTRPercentile.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlTRCalculateBy
-        '
-        Me.ucrPnlTRCalculateBy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTRCalculateBy.Location = New System.Drawing.Point(130, 55)
-        Me.ucrPnlTRCalculateBy.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrPnlTRCalculateBy.Name = "ucrPnlTRCalculateBy"
-        Me.ucrPnlTRCalculateBy.Size = New System.Drawing.Size(165, 75)
-        Me.ucrPnlTRCalculateBy.TabIndex = 4
-        '
-        'ucrInputThreshold
-        '
-        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
-        Me.ucrInputThreshold.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputThreshold.GetSetSelectedIndex = -1
-        Me.ucrInputThreshold.IsReadOnly = False
-        Me.ucrInputThreshold.Location = New System.Drawing.Point(70, 9)
-        Me.ucrInputThreshold.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputThreshold.Name = "ucrInputThreshold"
-        Me.ucrInputThreshold.Size = New System.Drawing.Size(62, 21)
-        Me.ucrInputThreshold.TabIndex = 13
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.AutoSize = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(277, 11)
-        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 15
-        '
-        'ucrInputNewStatusColumnName
-        '
-        Me.ucrInputNewStatusColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewStatusColumnName.AutoSize = True
-        Me.ucrInputNewStatusColumnName.IsMultiline = False
-        Me.ucrInputNewStatusColumnName.IsReadOnly = False
-        Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(443, 15)
-        Me.ucrInputNewStatusColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputNewStatusColumnName.Name = "ucrInputNewStatusColumnName"
-        Me.ucrInputNewStatusColumnName.Size = New System.Drawing.Size(87, 21)
-        Me.ucrInputNewStatusColumnName.TabIndex = 51
-        '
-        'ucrChkAsDate
-        '
-        Me.ucrChkAsDate.AutoSize = True
-        Me.ucrChkAsDate.Checked = False
-        Me.ucrChkAsDate.Location = New System.Drawing.Point(184, 15)
-        Me.ucrChkAsDate.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkAsDate.Name = "ucrChkAsDate"
-        Me.ucrChkAsDate.Size = New System.Drawing.Size(51, 23)
-        Me.ucrChkAsDate.TabIndex = 48
-        '
-        'ucrChkStatus
-        '
-        Me.ucrChkStatus.AutoSize = True
-        Me.ucrChkStatus.Checked = False
-        Me.ucrChkStatus.Location = New System.Drawing.Point(356, 15)
-        Me.ucrChkStatus.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkStatus.Name = "ucrChkStatus"
-        Me.ucrChkStatus.Size = New System.Drawing.Size(84, 24)
-        Me.ucrChkStatus.TabIndex = 50
-        '
-        'ucrInputNewDateColumnName
-        '
-        Me.ucrInputNewDateColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewDateColumnName.AutoSize = True
-        Me.ucrInputNewDateColumnName.IsMultiline = False
-        Me.ucrInputNewDateColumnName.IsReadOnly = False
-        Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(238, 15)
-        Me.ucrInputNewDateColumnName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
-        Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(85, 21)
-        Me.ucrInputNewDateColumnName.TabIndex = 49
-        '
-        'ucrChkAsDoy
-        '
-        Me.ucrChkAsDoy.AutoSize = True
-        Me.ucrChkAsDoy.Checked = False
-        Me.ucrChkAsDoy.Location = New System.Drawing.Point(5, 15)
-        Me.ucrChkAsDoy.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
-        Me.ucrChkAsDoy.Size = New System.Drawing.Size(51, 23)
-        Me.ucrChkAsDoy.TabIndex = 67
         '
         'ucrPnlStart
         '
@@ -641,137 +954,28 @@ Partial Class dlgStartofRains
         Me.ucrReceiverTem.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTem.Name = "ucrReceiverTem"
         Me.ucrReceiverTem.Selector = Nothing
-        Me.ucrReceiverTem.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverTem.Size = New System.Drawing.Size(227, 92)
         Me.ucrReceiverTem.strNcFilePath = ""
         Me.ucrReceiverTem.TabIndex = 74
         Me.ucrReceiverTem.ucrSelector = Nothing
         '
-        'ucrNudTotalOverDays
+        'ucrSaveDefinitionTem
         '
-        Me.ucrNudTotalOverDays.AutoSize = True
-        Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(227, 2)
-        Me.ucrNudTotalOverDays.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
-        Me.ucrNudTotalOverDays.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTotalOverDays.TabIndex = 78
-        Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrSaveDefinitionTem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDefinitionTem.Location = New System.Drawing.Point(13, 537)
+        Me.ucrSaveDefinitionTem.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveDefinitionTem.Name = "ucrSaveDefinitionTem"
+        Me.ucrSaveDefinitionTem.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveDefinitionTem.TabIndex = 79
         '
-        'lblTotalOverDays
+        'ucrSaveDefinitionwinter
         '
-        Me.lblTotalOverDays.AutoSize = True
-        Me.lblTotalOverDays.Location = New System.Drawing.Point(155, 4)
-        Me.lblTotalOverDays.Name = "lblTotalOverDays"
-        Me.lblTotalOverDays.Size = New System.Drawing.Size(66, 13)
-        Me.lblTotalOverDays.TabIndex = 77
-        Me.lblTotalOverDays.Text = "Over Day(s):"
-        '
-        'ucrNudAmount
-        '
-        Me.ucrNudAmount.AutoSize = True
-        Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAmount.Location = New System.Drawing.Point(62, 2)
-        Me.ucrNudAmount.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAmount.Name = "ucrNudAmount"
-        Me.ucrNudAmount.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAmount.TabIndex = 76
-        Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblAmount
-        '
-        Me.lblAmount.AutoSize = True
-        Me.lblAmount.Location = New System.Drawing.Point(9, 4)
-        Me.lblAmount.Name = "lblAmount"
-        Me.lblAmount.Size = New System.Drawing.Size(46, 13)
-        Me.lblAmount.TabIndex = 75
-        Me.lblAmount.Text = "Amount:"
-        '
-        'grpTemDisplay
-        '
-        Me.grpTemDisplay.Controls.Add(Me.ucrInputTextTempday)
-        Me.grpTemDisplay.Controls.Add(Me.ucrInputTextTemOccu)
-        Me.grpTemDisplay.Controls.Add(Me.ucrChkTemDate)
-        Me.grpTemDisplay.Controls.Add(Me.ucrChkTemOccu)
-        Me.grpTemDisplay.Controls.Add(Me.ucrInputTextTemdate)
-        Me.grpTemDisplay.Controls.Add(Me.ucrChkTemDay)
-        Me.grpTemDisplay.Location = New System.Drawing.Point(0, 2)
-        Me.grpTemDisplay.Name = "grpTemDisplay"
-        Me.grpTemDisplay.Size = New System.Drawing.Size(535, 43)
-        Me.grpTemDisplay.TabIndex = 68
-        Me.grpTemDisplay.TabStop = False
-        Me.grpTemDisplay.Text = "Display"
-        '
-        'ucrInputTextTemOccu
-        '
-        Me.ucrInputTextTemOccu.AddQuotesIfUnrecognised = True
-        Me.ucrInputTextTemOccu.AutoSize = True
-        Me.ucrInputTextTemOccu.IsMultiline = False
-        Me.ucrInputTextTemOccu.IsReadOnly = False
-        Me.ucrInputTextTemOccu.Location = New System.Drawing.Point(443, 15)
-        Me.ucrInputTextTemOccu.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputTextTemOccu.Name = "ucrInputTextTemOccu"
-        Me.ucrInputTextTemOccu.Size = New System.Drawing.Size(87, 21)
-        Me.ucrInputTextTemOccu.TabIndex = 51
-        '
-        'ucrChkTemDate
-        '
-        Me.ucrChkTemDate.AutoSize = True
-        Me.ucrChkTemDate.Checked = False
-        Me.ucrChkTemDate.Location = New System.Drawing.Point(184, 15)
-        Me.ucrChkTemDate.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkTemDate.Name = "ucrChkTemDate"
-        Me.ucrChkTemDate.Size = New System.Drawing.Size(51, 23)
-        Me.ucrChkTemDate.TabIndex = 48
-        '
-        'ucrChkTemOccu
-        '
-        Me.ucrChkTemOccu.AutoSize = True
-        Me.ucrChkTemOccu.Checked = False
-        Me.ucrChkTemOccu.Location = New System.Drawing.Point(356, 15)
-        Me.ucrChkTemOccu.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkTemOccu.Name = "ucrChkTemOccu"
-        Me.ucrChkTemOccu.Size = New System.Drawing.Size(84, 24)
-        Me.ucrChkTemOccu.TabIndex = 50
-        '
-        'ucrInputTextTemdate
-        '
-        Me.ucrInputTextTemdate.AddQuotesIfUnrecognised = True
-        Me.ucrInputTextTemdate.AutoSize = True
-        Me.ucrInputTextTemdate.IsMultiline = False
-        Me.ucrInputTextTemdate.IsReadOnly = False
-        Me.ucrInputTextTemdate.Location = New System.Drawing.Point(238, 15)
-        Me.ucrInputTextTemdate.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputTextTemdate.Name = "ucrInputTextTemdate"
-        Me.ucrInputTextTemdate.Size = New System.Drawing.Size(85, 21)
-        Me.ucrInputTextTemdate.TabIndex = 49
-        '
-        'ucrChkTemDay
-        '
-        Me.ucrChkTemDay.AutoSize = True
-        Me.ucrChkTemDay.Checked = False
-        Me.ucrChkTemDay.Location = New System.Drawing.Point(5, 15)
-        Me.ucrChkTemDay.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkTemDay.Name = "ucrChkTemDay"
-        Me.ucrChkTemDay.Size = New System.Drawing.Size(51, 23)
-        Me.ucrChkTemDay.TabIndex = 67
-        '
-        'ucrInputTextTempday
-        '
-        Me.ucrInputTextTempday.AddQuotesIfUnrecognised = True
-        Me.ucrInputTextTempday.AutoSize = True
-        Me.ucrInputTextTempday.IsMultiline = False
-        Me.ucrInputTextTempday.IsReadOnly = False
-        Me.ucrInputTextTempday.Location = New System.Drawing.Point(61, 14)
-        Me.ucrInputTextTempday.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrInputTextTempday.Name = "ucrInputTextTempday"
-        Me.ucrInputTextTempday.Size = New System.Drawing.Size(88, 21)
-        Me.ucrInputTextTempday.TabIndex = 75
+        Me.ucrSaveDefinitionwinter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDefinitionwinter.Location = New System.Drawing.Point(13, 533)
+        Me.ucrSaveDefinitionwinter.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveDefinitionwinter.Name = "ucrSaveDefinitionwinter"
+        Me.ucrSaveDefinitionwinter.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveDefinitionwinter.TabIndex = 81
         '
         'dlgStartofRains
         '
@@ -779,6 +983,17 @@ Partial Class dlgStartofRains
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(555, 633)
+        Me.Controls.Add(Me.grpWinter)
+        Me.Controls.Add(Me.ucrSaveDefinitionwinter)
+        Me.Controls.Add(Me.ucrNudTotalOverDays)
+        Me.Controls.Add(Me.grpTem)
+        Me.Controls.Add(Me.lblTotalOverDays)
+        Me.Controls.Add(Me.grpRainParameters)
+        Me.Controls.Add(Me.ucrNudAmount)
+        Me.Controls.Add(Me.lblAmount)
+        Me.Controls.Add(Me.grpTemDisplay)
+        Me.Controls.Add(Me.ucrSaveDefinitionTem)
+        Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblTem)
         Me.Controls.Add(Me.ucrReceiverTem)
         Me.Controls.Add(Me.rdoTemperature)
@@ -798,9 +1013,6 @@ Partial Class dlgStartofRains
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.grpConditionsForSatrtofRains)
-        Me.Controls.Add(Me.grpRainParameters)
-        Me.Controls.Add(Me.ucrInputNewDoyColumnName)
-        Me.Controls.Add(Me.grpDisplay)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -810,12 +1022,16 @@ Partial Class dlgStartofRains
         Me.Text = "Start of the Season"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
-        Me.grpConditionsForSatrtofRains.ResumeLayout(False)
-        Me.grpConditionsForSatrtofRains.PerformLayout()
-        Me.grpRainParameters.ResumeLayout(False)
-        Me.grpRainParameters.PerformLayout()
         Me.grpTemDisplay.ResumeLayout(False)
         Me.grpTemDisplay.PerformLayout()
+        Me.grpWinter.ResumeLayout(False)
+        Me.grpWinter.PerformLayout()
+        Me.grpConditionsForSatrtofRains.ResumeLayout(False)
+        Me.grpConditionsForSatrtofRains.PerformLayout()
+        Me.grpTem.ResumeLayout(False)
+        Me.grpTem.PerformLayout()
+        Me.grpRainParameters.ResumeLayout(False)
+        Me.grpRainParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -878,4 +1094,21 @@ Partial Class dlgStartofRains
     Friend WithEvents ucrChkTemOccu As ucrCheck
     Friend WithEvents ucrInputTextTemdate As ucrInputTextBox
     Friend WithEvents ucrChkTemDay As ucrCheck
+    Friend WithEvents ucrSaveDefinitionTem As ucrSave
+    Friend WithEvents grpTem As GroupBox
+    Friend WithEvents lblTmax As Label
+    Friend WithEvents ucrReceiverTmax As ucrReceiverSingle
+    Friend WithEvents lblTmin As Label
+    Friend WithEvents ucrReceiverTmin As ucrReceiverSingle
+    Friend WithEvents rdoWinter As RadioButton
+    Friend WithEvents rdoSummer As RadioButton
+    Friend WithEvents ucrPnlTem As UcrPanel
+    Friend WithEvents grpWinter As GroupBox
+    Friend WithEvents ucrInputDayWinter As ucrInputTextBox
+    Friend WithEvents ucrInputOccuWinter As ucrInputTextBox
+    Friend WithEvents ucrChkDateWinter As ucrCheck
+    Friend WithEvents ucrChkOccuWinter As ucrCheck
+    Friend WithEvents ucrInputDateWinter As ucrInputTextBox
+    Friend WithEvents ucrChkDayWinter As ucrCheck
+    Friend WithEvents ucrSaveDefinitionwinter As ucrSave
 End Class
