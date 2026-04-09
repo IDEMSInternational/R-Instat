@@ -732,10 +732,6 @@ Public Class dlgPICSARainfall
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
 
-        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
-        clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
-        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumericX, iPosition:=1)
-        clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(bWithQuotes:=False), iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
@@ -997,23 +993,31 @@ Public Class dlgPICSARainfall
     Private Sub OpeningMode()
         Select Case enumPICSAMode
             Case PICSAMode.General
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
+                clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA General Graphs"
                 ucrBase.iHelpTopicID = 521
             Case PICSAMode.Trend
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
+                clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "Climatic Trend Graph"
                 ucrSave.SetPrefix("climatic_trend_graph")
             Case PICSAMode.Rainfall
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
+                clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
                 ucrChkLineofBestFit.Visible = False
                 ucrChkWithSE.Visible = False
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA Rainfall Graphs"
             Case PICSAMode.Temperature
+                clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumericX, iPosition:=1)
+                clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(bWithQuotes:=False), iPosition:=2)
                 ucrVariablesAsFactorForPicsa.Visible = True
                 ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
                 ucrReceiverForPICSA.Visible = False
