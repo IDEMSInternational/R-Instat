@@ -169,6 +169,14 @@ Public Class dlgPICSARainfall
         ucrReceiverForPICSA.SetParameterIsString()
         ucrReceiverForPICSA.bWithQuotes = False
 
+        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x", 0))
+        ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrReceiverColourBy)
+        ucrVariablesAsFactorForPicsa.Selector = ucrSelectorPICSARainfall
+        ucrVariablesAsFactorForPicsa.SetIncludedDataTypes({"numeric"}, True)
+        ucrVariablesAsFactorForPicsa.SetSelectorHeading("Numerics")
+        ucrVariablesAsFactorForPicsa.SetParameterIsString()
+        ucrVariablesAsFactorForPicsa.bWithQuotes = False
+
         ucrReceiverSecondYVar.SetParameter(New RParameter("yend"))
         ucrReceiverSecondYVar.Selector = ucrSelectorPICSARainfall
         ucrReceiverSecondYVar.SetIncludedDataTypes({"numeric"}, True)
@@ -362,6 +370,7 @@ Public Class dlgPICSARainfall
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
+        ucrVariablesAsFactorForPicsa.Visible = False
         ucrSelectorPICSARainfall.Reset()
         ucrSelectorPICSARainfall.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
@@ -725,6 +734,8 @@ Public Class dlgPICSARainfall
 
         clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
         clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
+        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumericX, iPosition:=1)
+        clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(bWithQuotes:=False), iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
@@ -744,6 +755,14 @@ Public Class dlgPICSARainfall
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
         ucrReceiverForPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
+
         ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsPoint2AesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
         ucrReceiverSecondYVar.AddAdditionalCodeParameterPair(clsAsDateYendFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
 
@@ -760,17 +779,27 @@ Public Class dlgPICSARainfall
 
         If bReset Then
             AutoFacetStation()
+            ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumericX, bReset)
             ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
             ucrReceiverSecondYVar.SetRCode(clsSegmentAesFunction, bReset)
         End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverForPICSA.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse Not ucrSave.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+        Select Case enumPICSAMode
+            Case PICSAMode.Rainfall OrElse PICSAMode.General OrElse PICSAMode.Trend
+                If (ucrReceiverForPICSA.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse Not ucrSave.IsComplete Then
+                    ucrBase.OKEnabled(False)
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
+            Case PICSAMode.Temperature
+                If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse Not ucrSave.IsComplete Then
+                    ucrBase.OKEnabled(False)
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
+        End Select
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -916,7 +945,7 @@ Public Class dlgPICSARainfall
         bResetSubdialog = False
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -970,18 +999,27 @@ Public Class dlgPICSARainfall
             Case PICSAMode.General
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
+                ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA General Graphs"
                 ucrBase.iHelpTopicID = 521
             Case PICSAMode.Trend
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
+                ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "Climatic Trend Graph"
                 ucrSave.SetPrefix("climatic_trend_graph")
             Case PICSAMode.Rainfall
                 ucrChkLineofBestFit.Visible = False
                 ucrChkWithSE.Visible = False
+                ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA Rainfall Graphs"
             Case PICSAMode.Temperature
+                ucrVariablesAsFactorForPicsa.Visible = True
+                ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
+                ucrReceiverForPICSA.Visible = False
+                lblSecondYVar.Visible = False
+                lblYVar.Visible = False
+                ucrReceiverSecondYVar.Visible = False
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
                 Me.Text = "PICSA Temperature Graphs"
@@ -989,6 +1027,13 @@ Public Class dlgPICSARainfall
         End Select
     End Sub
 
+    Private Sub YAxisDataTypeCheckPISCATemp()
+        If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
+            clsGeomLine.AddParameter("group", 0)
+        Else
+            clsGeomLine.RemoveParameterByName("group")
+        End If
+    End Sub
 
     Private Sub YAxisDataTypeCheck()
         If Not ucrReceiverForPICSA.IsEmpty Then
@@ -1018,6 +1063,10 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrReceiverForPICSA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForPICSA.ControlValueChanged
         YAxisDataTypeCheck()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
+        YAxisDataTypeCheckPISCATemp()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
@@ -1111,6 +1160,11 @@ Public Class dlgPICSARainfall
                     ucrReceiverForPICSA.Clear()
                 Else
                     ucrReceiverForPICSA.Add(clsParam.strArgumentValue)
+                End If
+                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                    ucrVariablesAsFactorForPicsa.Clear()
+                Else
+                    ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrReceiverColourBy.Add(clsParam.strArgumentValue)
