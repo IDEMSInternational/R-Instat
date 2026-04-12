@@ -2079,10 +2079,10 @@
     <Compile Include="dlgDeleteModels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteRowsOrColums.Designer.vb">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    <Compile Include="dlgDeleteRowsOrColumns.Designer.vb">
+      <DependentUpon>dlgDeleteRowsOrColumns.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteRowsOrColums.vb">
+    <Compile Include="dlgDeleteRowsOrColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteDataFrames.Designer.vb">
@@ -4325,11 +4325,11 @@
     <EmbeddedResource Include="dlgDeleteModels.sw-KE.resx">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColumns.resx">
+      <DependentUpon>dlgDeleteRowsOrColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColumns.sw-KE.resx">
+      <DependentUpon>dlgDeleteRowsOrColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDataFrames.resx">
       <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
