@@ -57,7 +57,7 @@ Public Class dlgPICSARainfall
     Private clsSegmentAesFunction As New RFunction
     Private clsGeomPoint2Function As New RFunction
     Private clsPoint2AesFunction As New RFunction
-
+    Private clsAsNumeric As New RFunction
     Private clsDatePeriodOperator As New ROperator
 
     Private clsAsFactorFunction As New RFunction
@@ -299,7 +299,7 @@ Public Class dlgPICSARainfall
         clsUpperTercileFunction = New RFunction
         clsRoundUpperTercileY = New RFunction
         clsAsDateUpperTercileY = New RFunction
-
+        clsAsNumeric = New RFunction
         clsStatRegEquationFunction = New RFunction
         clsStatsCorFunction = New RFunction
         clsGeomSmoothFunction = New RFunction
@@ -728,6 +728,7 @@ Public Class dlgPICSARainfall
 
         clsAsNumericX.SetRCommand("as.numeric")
         clsAsNumericY.SetRCommand("as.numeric")
+        clsAsNumeric.SetRCommand("as.numeric")
 
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
@@ -775,7 +776,7 @@ Public Class dlgPICSARainfall
 
         If bReset Then
             AutoFacetStation()
-            ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumericX, bReset)
+            ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
             ucrReceiverForPICSA.SetRCode(clsRaesFunction, bReset)
             ucrReceiverSecondYVar.SetRCode(clsSegmentAesFunction, bReset)
         End If
@@ -1016,7 +1017,7 @@ Public Class dlgPICSARainfall
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA Rainfall Graphs"
             Case PICSAMode.Temperature
-                clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumericX, iPosition:=1)
+                clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
                 clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(bWithQuotes:=False), iPosition:=2)
                 ucrVariablesAsFactorForPicsa.Visible = True
                 ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
