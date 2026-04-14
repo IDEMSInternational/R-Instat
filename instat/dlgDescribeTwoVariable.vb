@@ -288,6 +288,7 @@ Public Class dlgDescribeTwoVariable
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
+        clsPivotWiderFunction.AddParameter("names_expand", "TRUE", iPosition:=3)
 
         clsgtExtrasThemesFuction.SetPackageName("gtExtras")
 
