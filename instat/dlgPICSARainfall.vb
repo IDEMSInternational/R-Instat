@@ -782,20 +782,18 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub TestOkEnabled()
+        Dim bEnable As Boolean = False
+
         Select Case enumPICSAMode
-            Case PICSAMode.Rainfall OrElse PICSAMode.General OrElse PICSAMode.Trend
-                If (ucrReceiverForPICSA.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse Not ucrSave.IsComplete Then
-                    ucrBase.OKEnabled(False)
-                Else
-                    ucrBase.OKEnabled(True)
-                End If
+            Case PICSAMode.Rainfall, PICSAMode.General, PICSAMode.Trend
+                bEnable = Not (ucrReceiverForPICSA.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse
+                (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse
+                Not ucrSave.IsComplete)
             Case PICSAMode.Temperature
-                If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse (ucrChkIncludeStatus.Checked AndAlso ucrReceiverIncludeStatus.IsEmpty) OrElse Not ucrSave.IsComplete Then
-                    ucrBase.OKEnabled(False)
-                Else
-                    ucrBase.OKEnabled(True)
-                End If
+                bEnable = Not (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse Not ucrSave.IsComplete)
         End Select
+
+        ucrBase.OKEnabled(bEnable)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -941,7 +939,7 @@ Public Class dlgPICSARainfall
         bResetSubdialog = False
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged, ucrVariablesAsFactorForPicsa.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1042,6 +1040,7 @@ Public Class dlgPICSARainfall
                 Me.Text = "PICSA Temperature Graphs"
                 ucrBase.iHelpTopicID = 479
         End Select
+        TestOkEnabled()
     End Sub
 
     Private Sub YAxisDataTypeCheckPISCATemp()
