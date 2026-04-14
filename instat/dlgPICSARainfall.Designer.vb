@@ -252,7 +252,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(18, 375)
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(14, 375)
         Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(332, 34)
