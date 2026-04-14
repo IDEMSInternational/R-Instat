@@ -941,7 +941,7 @@ Public Class dlgPICSARainfall
         bResetSubdialog = False
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverForPICSA.ControlContentsChanged, ucrChkIncludeStatus.ControlContentsChanged, ucrReceiverIncludeStatus.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -997,6 +997,10 @@ Public Class dlgPICSARainfall
                 clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
+                ucrReceiverForPICSA.Visible = True
+                lblYVar.Visible = True
+                lblSecondYVar.Visible = True
+                ucrReceiverSecondYVar.Visible = True
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA General Graphs"
                 ucrBase.iHelpTopicID = 521
@@ -1005,6 +1009,10 @@ Public Class dlgPICSARainfall
                 clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
+                ucrReceiverForPICSA.Visible = True
+                lblYVar.Visible = True
+                lblSecondYVar.Visible = True
+                ucrReceiverSecondYVar.Visible = True
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "Climatic Trend Graph"
                 ucrSave.SetPrefix("climatic_trend_graph")
@@ -1013,6 +1021,10 @@ Public Class dlgPICSARainfall
                 clsRaesFunction.AddParameter("y", ucrReceiverForPICSA.GetVariableNames, iPosition:=1)
                 ucrChkLineofBestFit.Visible = False
                 ucrChkWithSE.Visible = False
+                ucrReceiverForPICSA.Visible = True
+                lblYVar.Visible = True
+                lblSecondYVar.Visible = True
+                ucrReceiverSecondYVar.Visible = True
                 ucrVariablesAsFactorForPicsa.Visible = False
                 Me.Text = "PICSA Rainfall Graphs"
             Case PICSAMode.Temperature
@@ -1026,6 +1038,7 @@ Public Class dlgPICSARainfall
                 ucrReceiverSecondYVar.Visible = False
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
+                ucrChkIncludeStatus.Visible = False
                 Me.Text = "PICSA Temperature Graphs"
                 ucrBase.iHelpTopicID = 479
         End Select
@@ -1069,7 +1082,7 @@ Public Class dlgPICSARainfall
         YAxisDataTypeCheck()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
+    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore)
         YAxisDataTypeCheckPISCATemp()
     End Sub
 

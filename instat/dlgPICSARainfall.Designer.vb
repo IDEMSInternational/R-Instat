@@ -368,11 +368,11 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrVariablesAsFactorForPicsa.AutoSize = True
         Me.ucrVariablesAsFactorForPicsa.frmParent = Me
-        Me.ucrVariablesAsFactorForPicsa.Location = New System.Drawing.Point(377, 63)
+        Me.ucrVariablesAsFactorForPicsa.Location = New System.Drawing.Point(372, 73)
         Me.ucrVariablesAsFactorForPicsa.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrVariablesAsFactorForPicsa.Name = "ucrVariablesAsFactorForPicsa"
         Me.ucrVariablesAsFactorForPicsa.Selector = Nothing
-        Me.ucrVariablesAsFactorForPicsa.Size = New System.Drawing.Size(188, 212)
+        Me.ucrVariablesAsFactorForPicsa.Size = New System.Drawing.Size(202, 195)
         Me.ucrVariablesAsFactorForPicsa.strNcFilePath = ""
         Me.ucrVariablesAsFactorForPicsa.TabIndex = 23
         Me.ucrVariablesAsFactorForPicsa.ucrSelector = Nothing
@@ -384,10 +384,10 @@ Partial Class dlgPICSARainfall
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(694, 724)
-        Me.Controls.Add(Me.lblSecondYVar)
         Me.Controls.Add(Me.ucrReceiverSecondYVar)
-        Me.Controls.Add(Me.lblYVar)
+        Me.Controls.Add(Me.lblSecondYVar)
         Me.Controls.Add(Me.ucrReceiverForPICSA)
+        Me.Controls.Add(Me.lblYVar)
         Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
         Me.Controls.Add(Me.ucrChkIncludeStatus)
         Me.Controls.Add(Me.ucrReceiverIncludeStatus)
