@@ -45,6 +45,10 @@ Public Class dlgImportDataset
     Private clsConcFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsEmptyDummyFunction As New RFunction
+    Private clsColSelectPipe As New ROperator
+    Private clsSelectFunc As New RFunction
+    Private clsLapplySelect As New RFunction
+    Private clsColRangeOperator As New ROperator
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
@@ -248,6 +252,15 @@ Public Class dlgImportDataset
         ucrNudMaxRowsExcel.Minimum = 0
         ucrNudMaxRowsExcel.Maximum = Decimal.MaxValue
 
+        ' COLUMNS TO IMPORT - Excel
+        ucrChkColumnsExcel.SetText("Columns to Import")
+        ucrChkColumnsExcel.AddToLinkedControls(ucrNudColFromExcel, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkColumnsExcel.AddToLinkedControls(ucrNudColToExcel, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=33)
+
+        ucrNudColFromExcel.Visible = False
+        ucrNudColToExcel.Visible = False
+        lblColFrom.Visible = False
+        lblColTo.Visible = False
         ucrChkSheetsCheckAll.SetText("Select All")
 
         'hide since no longer using openxlsx package
@@ -311,6 +324,22 @@ Public Class dlgImportDataset
         clsFileNamesWithExt = New RFunction
         clsDetectEmptyColsFunction = New RFunction
         clsEmptyDummyFunction = New RFunction
+
+        clsColSelectPipe = New ROperator
+        clsColSelectPipe.SetOperation("|>")
+        clsColSelectPipe.bSpaceAroundOperation = True
+
+        clsSelectFunc = New RFunction
+        clsSelectFunc.SetPackageName("dplyr")
+        clsSelectFunc.SetRCommand("select")
+
+        clsLapplySelect = New RFunction
+        clsLapplySelect.SetRCommand("lapply")
+        clsLapplySelect.AddParameter("FUN", "dplyr::select", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsColRangeOperator = New ROperator
+        clsColRangeOperator.SetOperation(":")
+        clsColRangeOperator.bSpaceAroundOperation = False
 
         ucrChkDropEmptyCols.Visible = False
         cmdStepBack.Visible = False
@@ -519,6 +548,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
         ucrSaveFile.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=7)
         ucrSaveFile.AddAdditionalRCode(clsJsonDataFrameFunction, iAdditionalPairNo:=8)
+        ucrSaveFile.AddAdditionalRCode(clsColSelectPipe, iAdditionalPairNo:=9)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'todo. commented temporarily until we are able to add an OR condition for the panel
@@ -759,6 +789,51 @@ Public Class dlgImportDataset
         RemoveMissingValues()
     End Sub
 
+    Private Sub ApplyColumnSelect()
+        ' Update column range from current UI values
+        Dim iFrom As Integer = CInt(ucrNudColFromExcel.Value)
+        Dim iTo As Integer = CInt(ucrNudColToExcel.Value)
+        clsColRangeOperator.AddParameter("x", iFrom.ToString(), iPosition:=0, bIncludeArgumentName:=False)
+        clsColRangeOperator.AddParameter("y", iTo.ToString(), iPosition:=1, bIncludeArgumentName:=False)
+
+        If dctSelectedExcelSheets.Count <= 1 Then
+            ' Single sheet: clsImportExcel |> dplyr::select(1:33)
+            clsSelectFunc.ClearParameters()
+            clsSelectFunc.AddParameter("cols", clsROperatorParameter:=clsColRangeOperator, iPosition:=0, bIncludeArgumentName:=False)
+
+            Dim clsImportClone As RFunction = clsImportExcel.Clone()
+            clsImportClone.RemoveAssignTo()
+            clsImportClone.bExcludeAssignedFunctionOutput = False
+
+            clsColSelectPipe.AddParameter("x", clsRFunctionParameter:=clsImportClone, iPosition:=0)
+            clsColSelectPipe.AddParameter("y", clsRFunctionParameter:=clsSelectFunc, iPosition:=1)
+            clsColSelectPipe.SetAssignTo(clsImportExcel.GetRObjectToAssignTo(),
+                                     strTempDataframe:=clsImportExcel.GetRObjectToAssignTo())
+        Else
+            ' Multiple sheets: clsImportExcelMulti |> lapply(dplyr::select, 1:33)
+            clsLapplySelect.ClearParameters()
+            clsLapplySelect.AddParameter("FUN", "dplyr::select", iPosition:=1, bIncludeArgumentName:=False)
+            clsLapplySelect.AddParameter("...", clsROperatorParameter:=clsColRangeOperator, iPosition:=2, bIncludeArgumentName:=False)
+
+            Dim clsImportMultiClone As RFunction = clsImportExcelMulti.Clone()
+            clsImportMultiClone.RemoveAssignTo()
+            clsImportMultiClone.bExcludeAssignedFunctionOutput = False
+
+            clsColSelectPipe.AddParameter("x", clsRFunctionParameter:=clsImportMultiClone, iPosition:=0)
+            clsColSelectPipe.AddParameter("y", clsRFunctionParameter:=clsLapplySelect, iPosition:=1)
+            clsColSelectPipe.SetAssignTo(clsImportExcelMulti.GetRObjectToAssignTo(),
+                             strTempDataframe:=clsImportExcelMulti.GetRObjectToAssignTo(),
+                             bDataFrameList:=True)
+        End If
+
+        ' Restore data frame names so data_book$import_data includes data_names parameter
+        If dctSelectedExcelSheets.Count > 1 Then
+            ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
+        End If
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsColSelectPipe)
+    End Sub
+
     Private Sub TryTextPreview()
         If Not bDialogLoaded Then
             Exit Sub
@@ -862,8 +937,12 @@ Public Class dlgImportDataset
         'If ucrChkDropEmptyCols is checked, add the script in the pipeOperator as the input to the data argument in the "convert_to_character_matrix" function
         'The pipeOperator feeds the imported data to the "remove_empty" function in the janitor package to remove all the empty rows and columns
         If ucrChkDropEmptyCols.Checked Then
+
             Dim clsPipeClone As ROperator = clsPipeOperator.Clone()
             clsPipeClone.RemoveAssignTo()
+
+            clsPipeClone.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
+
             clsAsCharacterFunc.AddParameter("data", clsPipeClone.ToScript())
         Else
             clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
@@ -891,7 +970,6 @@ Public Class dlgImportDataset
         If clsTempImport.ContainsParameter("n_max") Then
             clsTempImport.RemoveParameterByName("n_max")
         End If
-        clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
 
     End Sub
 
@@ -907,37 +985,74 @@ Public Class dlgImportDataset
         expSheet = frmMain.clsRLink.RunInternalScriptGetValue(clsGetExcelSheetNames.ToScript())
         chrSheets = expSheet?.AsCharacter
 
-        'store the checked items first temporarily 
+        ' Store the checked items first temporarily
         For i As Integer = 0 To clbSheets.CheckedItems.Count - 1
             lstCheckedItems.Add(clbSheets.CheckedItems(i).ToString)
         Next
 
         clbSheets.Items.Clear()
+
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
+            ' Add all sheets first
             clbSheets.Items.AddRange(chrSheets.ToArray())
-            'if there were previously checked items then restore them
+
+            ' Remove empty sheets by checking each one
+            ' Iterate backwards so removing items doesn't shift indices
+            For iIndex As Integer = clbSheets.Items.Count - 1 To 0 Step -1
+                Dim strSheet As String = clbSheets.Items(iIndex).ToString()
+                Dim bRemove As Boolean = False
+                Try
+                    ' Build R script using double quotes escaped properly
+                    Dim strFilePath As String = strFilePathR.Replace("\", "/")
+                    Dim strEscapedSheet As String = strSheet.Replace("""", "\""")
+                    Dim strScript As String = String.Format(
+                        "isTRUE(tryCatch({{" &
+                        "  tmp <- readxl::read_excel(path=""{0}"", sheet=""{1}"", n_max=1, col_names=FALSE);" &
+                        "  ncol(tmp) == 0" &
+                        "}}, error=function(e) TRUE))",
+                        strFilePath, strEscapedSheet)
+
+                    Dim expResult As SymbolicExpression =
+                    frmMain.clsRLink.RunInternalScriptGetValue(strScript, bSilent:=True)
+
+                    If expResult IsNot Nothing Then
+                        bRemove = expResult.AsLogical()(0)
+                    End If
+                Catch ex As Exception
+                    bRemove = False
+                End Try
+
+                If bRemove Then
+                    clbSheets.Items.RemoveAt(iIndex)
+                End If
+            Next
+
+            ' Restore previously checked items
             For Each strSelected As String In lstCheckedItems
                 For i As Integer = 0 To clbSheets.Items.Count - 1
                     If strSelected = clbSheets.Items(i).ToString Then
                         bSupressSheetChange = True
                         clbSheets.SetItemChecked(i, True)
                         bSupressSheetChange = False
-                        'sheet names are expected to be unique so exit inner for loop
                         Exit For
                     End If
                 Next
             Next
         End If
-        'set checked status of select all checkbox
+
+        ' Set checked status of select all checkbox
         bSupressCheckAllSheets = True
-        ucrChkSheetsCheckAll.Checked = chrSheets IsNot Nothing AndAlso clbSheets.CheckedItems.Count = chrSheets.Count
+        ucrChkSheetsCheckAll.Checked = clbSheets.Items.Count > 0 AndAlso
+                                   clbSheets.CheckedItems.Count = clbSheets.Items.Count
         bSupressCheckAllSheets = False
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'Gets the current number of (visible) data frame before importing
-        'So correct current data frame can be set after
         iDataFrameCount = frmMain.GetDataFrameCount()
+        ' Only apply column select if Range is NOT active, since range takes precedence
+        If IsExcelFileFormat() AndAlso ucrChkColumnsExcel.Checked AndAlso Not ucrChkRange.Checked Then
+            ApplyColumnSelect()
+        End If
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -978,8 +1093,9 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
-        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
-        ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
+    ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
+    ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged,
+    ucrChkColumnsExcel.ControlValueChanged, ucrNudColFromExcel.ControlValueChanged, ucrNudColToExcel.ControlValueChanged
         TryGridPreview()
         TestOkEnabled()
         HideDropEmptyCheckBox()
@@ -1087,10 +1203,11 @@ Public Class dlgImportDataset
 
     Private Sub InitializeSheetSelection()
         ' Ensure at least one sheet exists
-        If clbSheets.Items.Count > 0 Then
+        If clbSheets.Items.Count > 0 AndAlso clbSheets.CheckedItems.Count = 0 Then
             ' Temporarily remove event handling to prevent infinite recursion
             RemoveHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
             clbSheets.SetItemChecked(0, True) ' Check the first sheet
+            dctSelectedExcelSheets.Clear()
             dctSelectedExcelSheets(1) = clbSheets.Items.Item(0).ToString()
             AddHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
             lblImportingSheets.Hide()
@@ -1159,6 +1276,16 @@ Public Class dlgImportDataset
         Else
             clsImportExcelMulti.RemoveParameterByName("range")
         End If
+
+        ' Disable Skip/Rows/Columns controls when Range is active
+        Dim bRangeChecked As Boolean = ucrChkRange.Checked
+        ucrNudRowsToSkipExcel.Enabled = Not bRangeChecked
+        ucrChkMaxRowsExcel.Enabled = Not bRangeChecked
+        ucrNudMaxRowsExcel.Enabled = Not bRangeChecked
+        ucrChkColumnsExcel.Enabled = Not bRangeChecked
+        ucrNudColFromExcel.Enabled = Not bRangeChecked
+        ucrNudColToExcel.Enabled = Not bRangeChecked
+        lblRowToSkipExcel.Enabled = Not bRangeChecked
         TryGridPreview()
         TestOkEnabled()
     End Sub
@@ -1285,41 +1412,16 @@ Public Class dlgImportDataset
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
         If strFileExtension = ".rds" _
-               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportExcelMulti _
-               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleFiles _
-               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleTextFiles Then
+                OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportExcelMulti _
+                OrElse ucrBase.clsRsyntax.clsBaseOperator Is clsColSelectPipe _
+                OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleFiles _
+                OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleTextFiles Then
             ucrChkDropEmptyCols.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
         Else
             ucrChkDropEmptyCols.Visible = True
             If ucrChkDropEmptyCols.Checked Then
                 Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
-                Dim iTemp As Integer
-                Dim strRowMaxParamName As String = ""
-
-                If IsTextFileFormat() Then
-                    strRowMaxParamName = If(rdoSeparatortext.Checked, "nrows", "n_max")
-                ElseIf IsCSVFileFormat() Then
-                    strRowMaxParamName = "nrows"
-                ElseIf IsJSONFileFormat() Then
-                    strRowMaxParamName = "nrows"
-                ElseIf IsExcelFileFormat() Then
-                    strRowMaxParamName = "n_max"
-                ElseIf IsSavFileFormat() Then
-                    strRowMaxParamName = "n_max"
-                End If
-
-                'determine the correct maximum number of lines to preview 
-                If clsTempFunction.ContainsParameter(strRowMaxParamName) _
-                    AndAlso Integer.TryParse(clsTempFunction.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
-                    clsTempFunction.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
-                Else
-                    clsTempFunction.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
-                End If
-
-                If Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat() OrElse IsJSONFileFormat()) Then
-                    clsTempFunction.RemoveParameterByName(strRowMaxParamName)
-                End If
 
                 clsTempFunction.RemoveAssignTo()
                 clsTempFunction.bExcludeAssignedFunctionOutput = False
