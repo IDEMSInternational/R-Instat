@@ -2417,7 +2417,7 @@ Partial Class frmMain
         '
         'mnuClimaticDescribe
         '
-        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeTrendGraph, Me.mnuClimaticDescribeSeasonalGraph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator17, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots, Me.CheckSummaryToolStripMenuItem})
+        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeTrendGraph, Me.mnuClimaticDescribeSeasonalGraph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator17, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots})
         Me.mnuClimaticDescribe.Name = "mnuClimaticDescribe"
         Me.mnuClimaticDescribe.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticDescribe.Text = "Describe"
@@ -5966,7 +5966,6 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOneVariable As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableSummarise As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableGraph As ToolStripMenuItem
-    Friend WithEvents mnuDescribeOneVariableLikertGraphs As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariables As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesSummarise As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesTabulate As ToolStripMenuItem
@@ -6402,7 +6401,6 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextDefineOnStation As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDefineOnFarm As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesCorrelations As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTwoThreeVariablesMoreLikert As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesThreeWayFrequencies As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesPivotTable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator36 As ToolStripSeparator
