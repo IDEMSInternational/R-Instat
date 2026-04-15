@@ -1443,6 +1443,7 @@ Public Class dlgCheckSummary
             Dim clsAesMeanText As New RFunction
             clsAesMeanText.SetRCommand("aes")
 
+
             clsAesMeanText.AddParameter("x", "Inf", iPosition:=0)
             clsAesMeanText.AddParameter("y", "mean(" & strYVar & ", na.rm=TRUE)", iPosition:=1)
 
