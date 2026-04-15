@@ -60,6 +60,32 @@ Public Class dlgCheckSummary
     Private clsGeomPoint2Function As New RFunction
     Private clsPoint2AesFunction As New RFunction
 
+    ' ── Outliers tab R function objects ──
+    Private clsOutlierBaseOperator As New ROperator
+    Private clsOutlierRggplotFunction As New RFunction
+    Private clsOutlierRaesFunction As New RFunction
+    Private clsOutlierBoxplotFunction As New RFunction
+    Private clsOutlierBoxplotStatFunction As New RFunction
+    Private clsOutlierAddedJitterFunc As New RFunction
+    Private clsOutlierLabsFunction, clsOutlierXlabsFunction, clsOutlierYlabFunction As RFunction
+    Private clsOutlierXScaleContinuousFunction As New RFunction
+    Private clsOutlierYScaleContinuousFunction As New RFunction
+    Private clsOutlierThemeFunction As New RFunction
+    Private dctOutlierThemeFunctions As New Dictionary(Of String, RFunction)
+    Private clsOutlierFacetFunction As New RFunction
+    Private clsOutlierFacetVariablesOperator As New ROperator
+    Private clsOutlierVarsFunction As New RFunction
+    Private clsOutlierScaleFillViridisFunction As New RFunction
+    Private clsOutlierScaleColourViridisFunction As New RFunction
+    Private clsOutlierCoordPolarFunction As New RFunction
+    Private clsOutlierCoordPolarStartOperator As New ROperator
+    Private clsOutlierXScaleDateFunction As New RFunction
+    Private clsOutlierYScaleDateFunction As New RFunction
+    Private clsOutlierAnnotateFunction As New RFunction
+    Private bResetOutlierSubdialog As Boolean = True
+    Private strOutlierFirstParameterName As String = "geomfunc"
+    Private strOutlierGeomParameterNames() As String
+
 
     ' Plot Options Objects
     Private clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
@@ -263,7 +289,116 @@ Public Class dlgCheckSummary
         ucrSave.SetDataFrameSelector(ucrSelectorForCheckSummary.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
 
+        ' Outliers Initialisation
+        ucrVariablesAsFactorForCheckSummary.SetParameter(New RParameter("y", 0))
+        ' Note: We might need a factor receiver for Outliers later, but for now we initialize it
+        ' modelled after dlgBoxPlot
+        ucrVariablesAsFactorForCheckSummary.Selector = ucrSelectorForCheckSummary
+        ucrVariablesAsFactorForCheckSummary.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorForCheckSummary.strSelectorHeading = "Numerics"
+        ucrVariablesAsFactorForCheckSummary.SetParameterIsString()
+        ucrVariablesAsFactorForCheckSummary.bWithQuotes = False
+
+
+        ' X variable receiver                                                                                                                                                                               
+        ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
+        ucrByFactorsReceiver.Selector = ucrSelectorForCheckSummary
+        ucrByFactorsReceiver.SetParameterIsString()
+        ucrByFactorsReceiver.bWithQuotes = False
+        ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrByFactorsReceiver.bAddParameterIfEmpty = True
+        ucrByFactorsReceiver.SetLinkedDisplayControl(lblByFactors)
+
+        ' Fill by receiver                                                                                                                                                                                
+        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
+        ucrSecondFactorReceiver.Selector = ucrSelectorForCheckSummary
+        ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrSecondFactorReceiver.strSelectorHeading = "Factors"
+        ucrSecondFactorReceiver.SetParameterIsString()
+        ucrSecondFactorReceiver.bWithQuotes = False
+        ucrSecondFactorReceiver.SetLinkedDisplayControl(lblBySecondFactor)
+
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
+        ucrChkVarWidth.SetText("Variable Width")
+        ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVarWidth.SetRDefault("FALSE")
+
+        ' Label Outliers
+        ucrChkLabel.SetText("Label Outliers")
+        ucrChkLabel.AddParameterPresentCondition(True, "coef")
+        ucrChkLabel.AddParameterPresentCondition(False, "coef", False)
+        ucrChkLabel.AddToLinkedControls({ucrNudOutlierCoefficient}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
+        ucrNudOutlierCoefficient.DecimalPlaces = 1
+        ucrNudOutlierCoefficient.Increment = 0.1
+        ucrNudOutlierCoefficient.SetRDefault(1.5)
+        ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
+
+        ' Initialise added jitter function
+        clsOutlierAddedJitterFunc.SetPackageName("ggplot2")
+        clsOutlierAddedJitterFunc.SetRCommand("geom_jitter")
+        clsOutlierAddedJitterFunc.AddParameter("height", 0, iPosition:=1)
+        clsOutlierAddedJitterFunc.AddParameter("width", 0.2, iPosition:=2)
+
+        Dim clsOutlierAddedJitterParam As New RParameter
+        clsOutlierAddedJitterParam.SetArgumentName("add_jitter")
+        clsOutlierAddedJitterParam.SetArgument(clsOutlierAddedJitterFunc)
+        clsOutlierAddedJitterParam.Position = 3
+
+        ucrChkAddPoints.SetParameter(clsOutlierAddedJitterParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkAddPoints.SetText("Add Points")
+        ucrChkAddPoints.AddToLinkedControls({ucrNudJitter, ucrNudTransparency}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudJitter.SetParameter(New RParameter("width", 2))
+        ucrNudJitter.Minimum = 0
+        ucrNudJitter.DecimalPlaces = 2
+        ucrNudJitter.Increment = 0.01
+        ucrNudJitter.SetLinkedDisplayControl(lblJitter)
+
+        ucrNudTransparency.SetParameter(New RParameter("alpha", 2))
+        ucrNudTransparency.SetMinMax(0, 1)
+        ucrNudTransparency.DecimalPlaces = 2
+        ucrNudTransparency.Increment = 0.01
+        ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
+        ucrNudTransparency.SetRDefault(1)
+
         rdoBrokenStick.Enabled = False
+
+        ' Legend
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True},
+            bNewLinkedAddRemoveParameter:=True,
+            bNewLinkedHideIfParameterMissing:=True,
+            bNewLinkedChangeToDefaultState:=True,
+            objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        Dim dctLegendPosition As New Dictionary(Of String, String)
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
+
+        ' Facet By
+        ucrOutlier1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucrOutlier1stFactorReceiver.Selector = ucrSelectorForCheckSummary
+        ucrOutlier1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrOutlier1stFactorReceiver.strSelectorHeading = "Factors"
+        ucrOutlier1stFactorReceiver.bWithQuotes = False
+        ucrOutlier1stFactorReceiver.SetParameterIsString()
+        ucrOutlier1stFactorReceiver.SetValuesToIgnore({"."})
+        ucrOutlier1stFactorReceiver.SetParameterPosition(1)
+        ucrOutlier1stFactorReceiver.SetLinkedDisplayControl(lblOutlierFacetBy)
+
+        ucrOutlierInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
+        ucrOutlierInputStation.SetDropDownStyleAsNonEditable()
+
+        strOutlierGeomParameterNames = {strOutlierFirstParameterName}
 
         UpdateVisiblePanels()
     End Sub
@@ -638,7 +773,49 @@ Public Class dlgCheckSummary
 
         clsSegmentAesFunction.SetRCommand("aes")
 
+        ' ── Outliers defaults ──
+        clsOutlierBaseOperator = New ROperator
+        clsOutlierRggplotFunction = New RFunction
+        clsOutlierRaesFunction = New RFunction
+        clsOutlierBoxplotFunction = New RFunction
 
+        clsOutlierBoxplotFunction.SetPackageName("ggplot2")
+        clsOutlierBoxplotFunction.SetRCommand("geom_boxplot")
+        clsOutlierBoxplotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+
+        clsOutlierBaseOperator.SetOperation("+")
+        clsOutlierBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsOutlierRggplotFunction, iPosition:=0)
+        clsOutlierBaseOperator.AddParameter(strOutlierFirstParameterName, clsRFunctionParameter:=clsOutlierBoxplotFunction, iPosition:=2)
+
+        clsOutlierRggplotFunction.SetPackageName("ggplot2")
+        clsOutlierRggplotFunction.SetRCommand("ggplot")
+        clsOutlierRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsOutlierRaesFunction, iPosition:=1)
+        clsOutlierRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsOutlierRaesFunction, iPosition:=1)
+
+        clsOutlierRaesFunction.SetPackageName("ggplot2")
+        clsOutlierRaesFunction.SetRCommand("aes")
+
+        ' Plot options objects (clone from GgplotDefaults)
+        clsOutlierLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsOutlierXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsOutlierYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsOutlierXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsOutlierYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsOutlierAnnotateFunction = GgplotDefaults.clsAnnotateFunction
+        clsOutlierScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction.Clone()
+        clsOutlierScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction.Clone()
+        clsOutlierScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsOutlierScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsOutlierCoordPolarFunction = New RFunction
+        clsOutlierCoordPolarFunction.SetPackageName("ggplot2")
+        clsOutlierCoordPolarFunction.SetRCommand("coord_polar")
+        clsOutlierCoordPolarStartOperator = New ROperator
+        clsOutlierXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
+        clsOutlierYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+        clsOutlierThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctOutlierThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
+        clsOutlierBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
 
         UpdateRecentRCode()
         UpdateTrendRCode()
@@ -666,6 +843,21 @@ Public Class dlgCheckSummary
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
 
+        ' ── Outliers Controls ──
+        ucrVariablesAsFactorForCheckSummary.SetRCode(clsOutlierRaesFunction, bReset)
+        ucrByFactorsReceiver.SetRCode(clsOutlierRaesFunction, bReset)
+        ucrSecondFactorReceiver.SetRCode(clsOutlierRaesFunction, bReset)
+        ucrChkVarWidth.SetRCode(clsOutlierBoxplotFunction, bReset)
+        ucrChkLabel.SetRCode(clsOutlierBoxplotFunction, bReset)
+        ucrNudOutlierCoefficient.SetRCode(clsOutlierBoxplotFunction, bReset)
+        ucrChkAddPoints.SetRCode(clsOutlierBaseOperator, bReset)
+        ucrNudJitter.SetRCode(clsOutlierAddedJitterFunc, bReset)
+        ucrNudTransparency.SetRCode(clsOutlierAddedJitterFunc, bReset)
+
+        ucrChkLegend.SetRCode(clsOutlierThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsOutlierThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrOutlier1stFactorReceiver.SetRCode(clsOutlierFacetVariablesOperator, bReset)
+
         If bReset Then
             AddRemoveFacets()
         End If
@@ -688,6 +880,9 @@ Public Class dlgCheckSummary
         ElseIf rdoTrend.Checked Then
             ucrReceiverYVar.SetMeAsReceiver()
             UpdateTrendRCode()
+        ElseIf rdoOutliers.Checked Then
+            ucrVariablesAsFactorForCheckSummary.SetMeAsReceiver()
+            UpdateOutliersRCode()
         End If
         TestOKEnabled()
     End Sub
@@ -695,20 +890,50 @@ Public Class dlgCheckSummary
     Private Sub UpdateVisiblePanels()
         Dim bRecent As Boolean = rdoRecent.Checked
         Dim bTrend As Boolean = rdoTrend.Checked
+        Dim bOutliers As Boolean = rdoOutliers.Checked
 
         pnlRecent.Visible = bRecent
         pnlTrend.Visible = bTrend
+        pnlOutliers.Visible = bOutliers
 
         ucrSaveNewColumn.Visible = bRecent
 
         ucrChkPoints.Visible = bTrend
-        ucrSave.Visible = bTrend
-        cmdPlotOptions.Visible = bTrend
+        ucrSave.Visible = bTrend OrElse bOutliers
+        cmdPlotOptions.Visible = bTrend OrElse bOutliers
         ucrChkFirstAndLast.Visible = bTrend
         AddLineGroupbox.Visible = bTrend
 
+        ucrChkLabel.Visible = bOutliers
+        ucrChkAddPoints.Visible = bOutliers
+        ucrChkLegend.Visible = bOutliers
+        ' ucrInputLegendPosition visibility is managed by ucrChkLegend.AddToLinkedControls
+        lblOutlierFacetBy.Visible = bOutliers
+        ucrOutlier1stFactorReceiver.Visible = bOutliers
+        ucrOutlierInputStation.Visible = bOutliers
+        ' Linked nud/labels for jitter/coef are handled by AddToLinkedControls
+
+        If bRecent Then
+            ucrBase.clsRsyntax.iCallType = 0 ' Data modification
+        Else
+            ucrBase.clsRsyntax.iCallType = 3 ' Graphing
+        End If
+
+        If bTrend Then
+            ucrSave.SetPrefix("check_trend_graph")
+            ucrSave.SetRCode(clsBaseOperator, False)
+        ElseIf bOutliers Then
+            ucrSave.SetPrefix("outlier_boxplot")
+            ucrSave.SetRCode(clsOutlierBaseOperator, False)
+        End If
+
         If Not bRecent Then
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMaxYearAssign)
+        End If
+
+        If bOutliers Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsOutlierBaseOperator)
+        ElseIf Not bRecent Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDummyFunction)
         End If
     End Sub
@@ -718,6 +943,8 @@ Public Class dlgCheckSummary
             ucrBase.OKEnabled(Not ucrReceiverYear.IsEmpty AndAlso ucrSaveNewColumn.IsComplete() AndAlso IsRecentGridValid())
         ElseIf rdoTrend.Checked Then
             ucrBase.OKEnabled(Not ucrReceiverYVar.IsEmpty AndAlso Not ucrReceiverX.IsEmpty AndAlso ucrSave.IsComplete())
+        ElseIf rdoOutliers.Checked Then
+            ucrBase.OKEnabled(Not ucrVariablesAsFactorForCheckSummary.IsEmpty AndAlso Not ucrByFactorsReceiver.IsEmpty AndAlso ucrSave.IsComplete())
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -726,14 +953,123 @@ Public Class dlgCheckSummary
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged,
         ucrReceiverYVar.ControlContentsChanged, ucrReceiverSecondYVar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverColourBy.ControlContentsChanged,
         ucrReceiverFacetBy.ControlContentsChanged, ucrChkPoints.ControlContentsChanged, ucrChkFirstAndLast.ControlContentsChanged,
-        ucrChkWithSE.ControlContentsChanged, ucrSave.ControlContentsChanged
+        ucrChkWithSE.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrVariablesAsFactorForCheckSummary.ControlContentsChanged,
+        ucrByFactorsReceiver.ControlContentsChanged, ucrSecondFactorReceiver.ControlContentsChanged, ucrChkVarWidth.ControlContentsChanged,
+        ucrChkLabel.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged, ucrChkAddPoints.ControlContentsChanged,
+        ucrNudJitter.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrOutlier1stFactorReceiver.ControlContentsChanged
 
         If rdoRecent.Checked Then
             UpdateRecentRCode()
         ElseIf rdoTrend.Checked Then
             UpdateTrendRCode()
+        ElseIf rdoOutliers.Checked Then
+            UpdateOutliersRCode()
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub UpdateOutliersRCode()
+        If Not rdoOutliers.Checked Then Exit Sub
+
+        If ucrVariablesAsFactorForCheckSummary.IsEmpty OrElse
+           ucrByFactorsReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.SetBaseROperator(Nothing)
+            Exit Sub
+        End If
+
+        ' Attach data to ggplot
+        Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame
+        clsOutlierRggplotFunction.RemoveParameterByName("data")
+        clsOutlierRggplotFunction.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0)
+
+        ' Add Points — hide built-in outlier dots when jitter is on
+        If ucrChkAddPoints.Checked Then
+            clsOutlierBoxplotFunction.AddParameter("outlier.shape", "NA", iPosition:=2)
+        Else
+            clsOutlierBoxplotFunction.RemoveParameterByName("outlier.shape")
+        End If
+
+        AddRemoveOutlierTheme()
+        AddRemoveOutlierFacets()
+
+        ' Plot options (labs, scales etc.)
+        Dim bAddLabs As Boolean = False
+        If clsOutlierLabsFunction IsNot Nothing Then
+            For Each clsParam As RParameter In clsOutlierLabsFunction.clsParameters
+                If clsParam.strArgumentValue <> Chr(34) & Chr(34) Then
+                    bAddLabs = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        If bAddLabs Then
+            clsOutlierBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsOutlierLabsFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("labs")
+        End If
+
+        If clsOutlierXlabsFunction IsNot Nothing AndAlso clsOutlierXlabsFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsOutlierXlabsFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("xlab")
+        End If
+        If clsOutlierYlabFunction IsNot Nothing AndAlso clsOutlierYlabFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("ylab", clsRFunctionParameter:=clsOutlierYlabFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("ylab")
+        End If
+
+        If clsOutlierXScaleContinuousFunction IsNot Nothing AndAlso clsOutlierXScaleContinuousFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsOutlierXScaleContinuousFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("scale_x_continuous")
+        End If
+        If clsOutlierYScaleContinuousFunction IsNot Nothing AndAlso clsOutlierYScaleContinuousFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsOutlierYScaleContinuousFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("scale_y_continuous")
+        End If
+
+        If clsOutlierXScaleDateFunction IsNot Nothing AndAlso clsOutlierXScaleDateFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("scale_x_date", clsRFunctionParameter:=clsOutlierXScaleDateFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("scale_x_date")
+        End If
+        If clsOutlierYScaleDateFunction IsNot Nothing AndAlso clsOutlierYScaleDateFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("scale_y_date", clsRFunctionParameter:=clsOutlierYScaleDateFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("scale_y_date")
+        End If
+
+        If clsOutlierCoordPolarFunction IsNot Nothing AndAlso clsOutlierCoordPolarFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("coord_polar", clsRFunctionParameter:=clsOutlierCoordPolarFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("coord_polar")
+        End If
+
+        If clsOutlierScaleFillViridisFunction IsNot Nothing AndAlso clsOutlierScaleFillViridisFunction.iParameterCount > 1 Then
+            clsOutlierBaseOperator.AddParameter("scale_fill_viridis", clsRFunctionParameter:=clsOutlierScaleFillViridisFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("scale_fill_viridis")
+        End If
+        If clsOutlierScaleColourViridisFunction IsNot Nothing AndAlso clsOutlierScaleColourViridisFunction.iParameterCount > 1 Then
+            clsOutlierBaseOperator.AddParameter("scale_colour_viridis", clsRFunctionParameter:=clsOutlierScaleColourViridisFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("scale_colour_viridis")
+        End If
+
+        If clsOutlierAnnotateFunction IsNot Nothing AndAlso clsOutlierAnnotateFunction.iParameterCount > 1 Then
+            clsOutlierBaseOperator.AddParameter("annotate", clsRFunctionParameter:=clsOutlierAnnotateFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("annotate")
+        End If
+
+        clsOutlierBaseOperator.AddParameter(strOutlierFirstParameterName,
+            clsRFunctionParameter:=clsOutlierBoxplotFunction, iPosition:=2)
+
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsOutlierBaseOperator)
     End Sub
 
     Private Sub TrendOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMeanLine.CheckedChanged,
@@ -1316,24 +1652,49 @@ Public Class dlgCheckSummary
         UpdateTrendRCode()
     End Sub
 
-    Private Sub ucrInputStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                          clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction,
-                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions,
-                          ucrNewBaseSelector:=ucrSelectorForCheckSummary, bReset:=bResetSubdialog,
-                          clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
-                          clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                          clsNewFacetVariablesOperator:=clsFacetOperator, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                          clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewAnnotateFunction:=clsAnnotateFunction)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-        UpdateTrendRCode()
+        If rdoTrend.Checked Then
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+                              clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                              clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction,
+                              clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions,
+                              ucrNewBaseSelector:=ucrSelectorForCheckSummary, bReset:=bResetSubdialog,
+                              clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                              clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                              clsNewFacetVariablesOperator:=clsFacetOperator, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
+                              clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewAnnotateFunction:=clsAnnotateFunction)
+            sdgPlots.ShowDialog()
+            bResetSubdialog = False
+            UpdateTrendRCode()
+        ElseIf rdoOutliers.Checked Then
+            sdgPlots.SetRCode(
+                clsNewOperator:=clsOutlierBaseOperator,
+                clsNewCoordPolarFunction:=clsOutlierCoordPolarFunction,
+                clsNewCoordPolarStartOperator:=clsOutlierCoordPolarStartOperator,
+                clsNewYScalecontinuousFunction:=clsOutlierYScaleContinuousFunction,
+                clsNewXScalecontinuousFunction:=clsOutlierXScaleContinuousFunction,
+                clsNewLabsFunction:=clsOutlierLabsFunction,
+                clsNewXLabsTitleFunction:=clsOutlierXlabsFunction,
+                clsNewYLabTitleFunction:=clsOutlierYlabFunction,
+                clsNewFacetFunction:=clsOutlierFacetFunction,
+                clsNewThemeFunction:=clsOutlierThemeFunction,
+                dctNewThemeFunctions:=dctOutlierThemeFunctions,
+                ucrNewBaseSelector:=ucrSelectorForCheckSummary,
+                bReset:=bResetOutlierSubdialog,
+                clsNewGlobalAesFunction:=clsOutlierRaesFunction,
+                clsNewXScaleDateFunction:=clsOutlierXScaleDateFunction,
+                clsNewYScaleDateFunction:=clsOutlierYScaleDateFunction,
+                clsNewFacetVariablesOperator:=clsOutlierFacetVariablesOperator,
+                clsNewScaleFillViridisFunction:=clsOutlierScaleFillViridisFunction,
+                clsNewScaleColourViridisFunction:=clsOutlierScaleColourViridisFunction,
+                clsNewAnnotateFunction:=clsOutlierAnnotateFunction,
+                strMainDialogGeomParameterNames:=strOutlierGeomParameterNames,
+                bChangeAesParameter:=True)
+            sdgPlots.ShowDialog()
+            bResetOutlierSubdialog = False
+            UpdateOutliersRCode()
+        End If
     End Sub
 
     Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotOptionsToolStripMenuItem.Click
@@ -1385,5 +1746,78 @@ Public Class dlgCheckSummary
         Next
         TestOKEnabled()
         UpdateTrendRCode()
+    End Sub
+
+    Private Sub AddRemoveOutlierTheme()
+        If clsOutlierThemeFunction.iParameterCount > 0 Then
+            clsOutlierBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsOutlierThemeFunction, iPosition:=15)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub AddRemoveOutlierFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
+
+        clsOutlierBaseOperator.RemoveParameterByName("facets")
+        clsOutlierFacetFunction.RemoveParameterByName("facets")
+        clsOutlierFacetFunction.RemoveParameterByName("rows")
+        clsOutlierFacetFunction.RemoveParameterByName("cols")
+
+        If Not ucrOutlier1stFactorReceiver.IsEmpty Then
+            Select Case ucrOutlierInputStation.GetText()
+                Case strFacetWrap : bWrap = True
+                Case strFacetCol : bCol = True
+                Case strFacetRow : bRow = True
+                Case strFacetColAll : bColAll = True
+                Case strFacetRowAll : bRowAll = True
+            End Select
+        End If
+
+        If bWrap Then
+            clsOutlierFacetVariablesOperator.RemoveParameterByName("var1")
+            clsOutlierFacetVariablesOperator.AddParameter("var1", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            clsOutlierFacetFunction.AddParameter("facets", clsROperatorParameter:=clsOutlierFacetVariablesOperator, iPosition:=0)
+        ElseIf bRow Or bRowAll Then
+            clsOutlierVarsFunction.RemoveParameterByName("var")
+            clsOutlierVarsFunction.AddParameter("var", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            clsOutlierFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsOutlierVarsFunction)
+        ElseIf bCol Or bColAll Then
+            clsOutlierVarsFunction.RemoveParameterByName("var")
+            clsOutlierVarsFunction.AddParameter("var", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            clsOutlierFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsOutlierVarsFunction)
+        End If
+
+        If bRow Or bCol Or bRowAll Or bColAll Or bWrap Then
+            clsOutlierBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsOutlierFacetFunction)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("facets")
+        End If
+
+        If bWrap Then clsOutlierFacetFunction.SetRCommand("facet_wrap")
+        If bRow Or bCol Or bRowAll Or bColAll Then clsOutlierFacetFunction.SetRCommand("facet_grid")
+
+        If bRowAll Or bColAll Then
+            clsOutlierFacetFunction.AddParameter("margin", "TRUE")
+        Else
+            clsOutlierFacetFunction.RemoveParameterByName("margin")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        If rdoOutliers.Checked Then
+            AddRemoveOutlierTheme()
+            UpdateOutliersRCode()
+        End If
+    End Sub
+
+    Private Sub ucrOutlierInputStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrOutlierInputStation.ControlValueChanged
+        If Not rdoOutliers.Checked Then Exit Sub
+        AddRemoveOutlierFacets()
+        UpdateOutliersRCode()
     End Sub
 End Class
