@@ -46,12 +46,12 @@ Partial Class sdgImportFromClimSoft
         Me.chkRememberCredentials = New System.Windows.Forms.CheckBox()
         Me.btnConnect = New System.Windows.Forms.Button()
         Me.ucrComboBoxPort = New instat.ucrInputComboBox()
-        Me.ucrTxtHost = New instat.ucrInputTextBox()
         Me.ucrComboBoxDatabaseName = New instat.ucrInputComboBox()
         Me.ucrBaseSdgClimSoft = New instat.ucrButtonsSubdialogue()
         Me.ucrTxtUserName = New instat.ucrInputTextBox()
         Me.ucrInputDrv = New instat.ucrInputComboBox()
         Me.lblDrv = New System.Windows.Forms.Label()
+        Me.ucrInputHost = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblDatabaseName
@@ -147,18 +147,6 @@ Partial Class sdgImportFromClimSoft
         Me.ucrComboBoxPort.Size = New System.Drawing.Size(230, 32)
         Me.ucrComboBoxPort.TabIndex = 3
         '
-        'ucrTxtHost
-        '
-        Me.ucrTxtHost.AddQuotesIfUnrecognised = True
-        Me.ucrTxtHost.AutoSize = True
-        Me.ucrTxtHost.IsMultiline = False
-        Me.ucrTxtHost.IsReadOnly = False
-        Me.ucrTxtHost.Location = New System.Drawing.Point(154, 100)
-        Me.ucrTxtHost.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrTxtHost.Name = "ucrTxtHost"
-        Me.ucrTxtHost.Size = New System.Drawing.Size(230, 32)
-        Me.ucrTxtHost.TabIndex = 2
-        '
         'ucrComboBoxDatabaseName
         '
         Me.ucrComboBoxDatabaseName.AddQuotesIfUnrecognised = True
@@ -215,16 +203,28 @@ Partial Class sdgImportFromClimSoft
         Me.lblDrv.TabIndex = 10
         Me.lblDrv.Text = "drv:"
         '
+        'ucrInputHost
+        '
+        Me.ucrInputHost.AddQuotesIfUnrecognised = True
+        Me.ucrInputHost.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputHost.GetSetSelectedIndex = -1
+        Me.ucrInputHost.IsReadOnly = False
+        Me.ucrInputHost.Location = New System.Drawing.Point(154, 100)
+        Me.ucrInputHost.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputHost.Name = "ucrInputHost"
+        Me.ucrInputHost.Size = New System.Drawing.Size(230, 32)
+        Me.ucrInputHost.TabIndex = 11
+        '
         'sdgImportFromClimSoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(402, 365)
+        Me.Controls.Add(Me.ucrInputHost)
         Me.Controls.Add(Me.lblDrv)
         Me.Controls.Add(Me.ucrInputDrv)
         Me.Controls.Add(Me.ucrComboBoxPort)
-        Me.Controls.Add(Me.ucrTxtHost)
         Me.Controls.Add(Me.ucrComboBoxDatabaseName)
         Me.Controls.Add(Me.btnConnect)
         Me.Controls.Add(Me.chkRememberCredentials)
@@ -256,8 +256,8 @@ Partial Class sdgImportFromClimSoft
     Friend WithEvents chkRememberCredentials As CheckBox
     Friend WithEvents btnConnect As Button
     Friend WithEvents ucrComboBoxDatabaseName As ucrInputComboBox
-    Friend WithEvents ucrTxtHost As ucrInputTextBox
     Friend WithEvents ucrComboBoxPort As ucrInputComboBox
     Friend WithEvents ucrInputDrv As ucrInputComboBox
     Friend WithEvents lblDrv As Label
+    Friend WithEvents ucrInputHost As ucrInputComboBox
 End Class

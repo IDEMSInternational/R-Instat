@@ -132,11 +132,11 @@ Public Class dlgClimSoft
 
         'metadata controls
         '---------------------------------------
-        ucrChkImportStationsMetadata.SetText("Import All Stations Metadata")
+        ucrChkImportStationsMetadata.SetText("Import All Station Metadata")
         ucrChkImportStationsMetadata.SetParameter(New RParameter("import_stations", 0))
         ucrChkImportStationsMetadata.SetRDefault("FALSE")
 
-        ucrChkImportElementsMetadata.SetText("Import All Elements Metadata")
+        ucrChkImportElementsMetadata.SetText("Import All Element Metadata")
         ucrChkImportElementsMetadata.SetParameter(New RParameter("import_elements", 2))
         ucrChkImportElementsMetadata.SetRDefault("FALSE")
 

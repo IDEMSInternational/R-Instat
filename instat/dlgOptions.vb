@@ -149,6 +149,10 @@ Public Class dlgOptions
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
 
+        ucrInputUserName.SetRDefault("readonly")
+        ucrInputPort.SetRDefault("3306")
+        ucrInputHost.SetRDefault("35.210.141.130")
+        ucrInputDatabaseName.SetRDefault("mariadb_climsoft_db_v4_zambia")
         'maximum heights for output
         ucrChkMaxOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > -1
         ucrNudMaxOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > -1, frmMain.clsInstatOptions.iMaxOutputsHeight, clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
