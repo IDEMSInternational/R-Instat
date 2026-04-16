@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColumns
-    Public enumDeleteRowsOrColumnsMode As String = DeleteRowsOrColumnsMode.Prepare
+    Public enumDeleteRowsOrColumnsMode As DeleteRowsOrColumnsMode = DeleteRowsOrColumnsMode.Prepare
     Public Enum DeleteRowsOrColumnsMode
         Prepare
         Climatic
@@ -40,6 +40,7 @@ Public Class dlgDeleteRowsOrColumns
         bReset = False
         ReopenDialog()
         TestOKEnabled()
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
