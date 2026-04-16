@@ -285,12 +285,10 @@ Public Class dlgFromLibrary
             strRClass = Mid(strVecOutput(0), 5).Replace("""", "").ToLower
         End If
 
-        ' If the loaded object has a get_data_frame method (e.g. DataBook R6 objects),
-        ' treat it as "databook" regardless of what class() returned
-        Dim strHasGetDataFrame As CharacterVector = frmMain.clsRLink.RunInternalScriptGetOutput(
+        Dim expHasGetDataFrame As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(
             "is.function(try(" & strSelectedDataName & "$get_data_frame, silent=TRUE))", bSilent:=True)
-        If strHasGetDataFrame IsNot Nothing AndAlso strHasGetDataFrame.Length > 0 AndAlso
-           strHasGetDataFrame(0).Contains("TRUE") Then
+        If expHasGetDataFrame IsNot Nothing AndAlso
+           expHasGetDataFrame.AsLogical()(0) Then
             strRClass = "databook"
         End If
 
@@ -303,8 +301,8 @@ Public Class dlgFromLibrary
             clsLApplyFunction.AddParameter("FUN", strParameterValue:="data.frame", iPosition:=1)
             clsImportFunction.AddParameter("data_tables", clsRFunctionParameter:=clsLApplyFunction, iPosition:=0)
         Else
-            Dim clsListFunction As New RFunction
-            Dim clsListParameterFunction As New RFunction
+            Dim clsListFunction As New RFunction 'defines the list function. list(x=x)
+            Dim clsListParameterFunction As New RFunction 'defines the function that act as list parameters e.g list(y=fortify.zoo(x))
             clsListFunction.SetRCommand("list")
             Select Case strRClass
                 Case "zoo"
