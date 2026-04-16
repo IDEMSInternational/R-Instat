@@ -198,12 +198,13 @@ Public Class dlgPICSATemperature
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrSave.SetPrefix("picsa_temperature_graph")
+        ucrSave.SetPrefix("last_graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Store Graph")
         ucrSave.SetDataFrameSelector(ucrSelectorPICSATemperature.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -877,7 +878,7 @@ Public Class dlgPICSATemperature
         bResetSubdialog = False
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverPICSA.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
