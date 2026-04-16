@@ -285,6 +285,15 @@ Public Class dlgFromLibrary
             strRClass = Mid(strVecOutput(0), 5).Replace("""", "").ToLower
         End If
 
+        ' If the loaded object has a get_data_frame method (e.g. DataBook R6 objects),
+        ' treat it as "databook" regardless of what class() returned
+        Dim strHasGetDataFrame As CharacterVector = frmMain.clsRLink.RunInternalScriptGetOutput(
+            "is.function(try(" & strSelectedDataName & "$get_data_frame, silent=TRUE))", bSilent:=True)
+        If strHasGetDataFrame IsNot Nothing AndAlso strHasGetDataFrame.Length > 0 AndAlso
+           strHasGetDataFrame(0).Contains("TRUE") Then
+            strRClass = "databook"
+        End If
+
         If strRClass = "list" Then
             'some lists could be supplied in formats that R-Instat doesn't directly recognise as data frames
             'so always explicitly coerce the supplied list of data to type data.frame
@@ -294,13 +303,13 @@ Public Class dlgFromLibrary
             clsLApplyFunction.AddParameter("FUN", strParameterValue:="data.frame", iPosition:=1)
             clsImportFunction.AddParameter("data_tables", clsRFunctionParameter:=clsLApplyFunction, iPosition:=0)
         Else
-            Dim clsListFunction As New RFunction 'defines the list function. list(x=x)
-            Dim clsListParameterFunction As New RFunction 'defines the function that act as list parameters e.g list(y=fortify.zoo(x))
+            Dim clsListFunction As New RFunction
+            Dim clsListParameterFunction As New RFunction
             clsListFunction.SetRCommand("list")
             Select Case strRClass
                 Case "zoo"
                     'this is the recommended command for converting zoo object types to data frames.
-                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649
+                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649        
                     clsListParameterFunction.SetPackageName("zoo")
                     clsListParameterFunction.SetRCommand("fortify.zoo")
                     clsListParameterFunction.AddParameter("model", strParameterValue:=strSelectedDataName)
@@ -325,6 +334,11 @@ Public Class dlgFromLibrary
                     'currently this command loses data(some columns) of the matrix once it's coerced. See issue #5649
                     clsListParameterFunction.SetRCommand("data.frame")
                     clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case "databook"
+                    ' R6/DataBook objects must call $get_data_frame() to extract the underlying data.frame
+                    clsListParameterFunction.SetRCommand(strSelectedDataName & "$get_data_frame")
+                    clsListParameterFunction.AddParameter("data_name", Chr(34) & strSelectedDataName & Chr(34), iPosition:=0)
                     clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
                 Case Else
                     clsListFunction.AddParameter(ucrNewDataFrameName.GetText, strParameterValue:=strSelectedDataName)
