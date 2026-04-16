@@ -203,7 +203,7 @@ Public Class dlgSpells
         clsGetCalculations.Clear()
         clsGetLongestSpellDef.Clear()
         clsLinkedColsVector.Clear()
-        ucrSaveObject.SetRCode(Nothing, False)
+        ucrSaveObject.SetRCode(clsGetLongestSpellDef, bReset)
         UpdateDefinitionsOutput()
 
         ucrSelectorForSpells.Reset()
@@ -373,7 +373,7 @@ Public Class dlgSpells
 
         ' Save definitions
         clsGetCalculations.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculations.AddParameter("data_name", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
+        clsGetCalculations.AddParameter("data_name", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
 
         clsGetLongestSpellDef.SetRCommand("get_longest_spell_definition")
         clsGetLongestSpellDef.AddParameter("calculations", clsRFunctionParameter:=clsGetCalculations, iPosition:=0)
@@ -535,10 +535,6 @@ Public Class dlgSpells
         End If
         strCurrDataName = Chr(34) & selectedDataframe.Replace("""", "\""") & Chr(34)
 
-        ' Guarantees the parameter is safely replaced when changing datasets
-        clsGetCalculations.RemoveParameterByName("data_name")
-        clsGetCalculations.AddParameter("data_name", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
-
         clsLinkedDataFunction.RemoveParameterByName("data")
         clsLinkedDataFunction.AddParameter("data", strCurrDataName, iPosition:=0, bIncludeArgumentName:=False)
         RainDays()
@@ -592,14 +588,9 @@ Public Class dlgSpells
     End Sub
 
     Private Sub UpdateSaveDefinitions()
-        ' First, always remove the function to prevent duplicates
-        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetLongestSpellDef)
-
         If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
-            ' Set the assignment variable name from the save object
+            ' Sets the assignment variable name from the save object
             clsGetLongestSpellDef.SetAssignTo(ucrSaveObject.GetText())
-            ' Add the head of the function chain to the after-codes to be executed
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetLongestSpellDef, iPosition:=1)
         Else
             ' Clear the assignment when not active
             clsGetLongestSpellDef.SetAssignTo(Nothing)
