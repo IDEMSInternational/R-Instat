@@ -70,9 +70,6 @@ Public Class dlgImportDataset
             strDirectoryPathTemp = strFileToOpenOn
             strFileToOpenOn = ""
             bStartOpenDialog = False
-            'ElseIf bStartOpenDialog Then
-            '    GetFileFromOpenDialog()
-            '    bStartOpenDialog = False
         ElseIf bStartOpenDialog Then
             Me.BeginInvoke(Sub()
                                GetFileFromOpenDialog()
