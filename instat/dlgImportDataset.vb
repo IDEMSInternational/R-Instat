@@ -70,8 +70,13 @@ Public Class dlgImportDataset
             strDirectoryPathTemp = strFileToOpenOn
             strFileToOpenOn = ""
             bStartOpenDialog = False
+            'ElseIf bStartOpenDialog Then
+            '    GetFileFromOpenDialog()
+            '    bStartOpenDialog = False
         ElseIf bStartOpenDialog Then
-            GetFileFromOpenDialog()
+            Me.BeginInvoke(Sub()
+                               GetFileFromOpenDialog()
+                           End Sub)
             bStartOpenDialog = False
         Else
             'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
