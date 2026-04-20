@@ -28,17 +28,29 @@ Partial Class dlgCheckSummary
         Me.rdoRecent = New System.Windows.Forms.RadioButton()
         Me.pnlRecent = New System.Windows.Forms.Panel()
         Me.lblYearVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.grdRecent = New unvell.ReoGrid.ReoGridControl()
         Me.pnlTrend = New System.Windows.Forms.Panel()
         Me.lblSecondYVar = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondYVar = New instat.ucrReceiverSingle()
         Me.lblYVar = New System.Windows.Forms.Label()
+        Me.ucrReceiverYVar = New instat.ucrReceiverSingle()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverColourBy = New instat.ucrReceiverSingle()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.pnlOutliers = New System.Windows.Forms.Panel()
+        Me.ucrChkVarWidth = New instat.ucrCheck()
+        Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
+        Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
+        Me.ucrVariablesAsFactorForCheckSummary = New instat.ucrVariablesAsFactor()
         Me.AddLineGroupbox = New System.Windows.Forms.GroupBox()
+        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.rdoBrokenStick = New System.Windows.Forms.RadioButton()
         Me.rdoFittedLine = New System.Windows.Forms.RadioButton()
         Me.rdoMeanLine = New System.Windows.Forms.RadioButton()
@@ -57,24 +69,12 @@ Partial Class dlgCheckSummary
         Me.ucrChkLabel = New instat.ucrCheck()
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
-        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkFirstAndLast = New instat.ucrCheck()
         Me.cmdPlotOptions = New instat.ucrSplitButton()
-        Me.ucrChkVarWidth = New instat.ucrCheck()
-        Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
-        Me.ucrVariablesAsFactorForCheckSummary = New instat.ucrVariablesAsFactor()
         Me.ucrSelectorForCheckSummary = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.UcrBaseCheckSummary = New instat.ucrButtons()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrReceiverSecondYVar = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYVar = New instat.ucrReceiverSingle()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
-        Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrReceiverColourBy = New instat.ucrReceiverSingle()
         Me.pnlRecent.SuspendLayout()
         Me.pnlTrend.SuspendLayout()
         Me.pnlOutliers.SuspendLayout()
@@ -104,6 +104,7 @@ Partial Class dlgCheckSummary
         '
         Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoTable.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoTable.Enabled = False
         Me.rdoTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTable.FlatAppearance.BorderSize = 2
         Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -178,6 +179,19 @@ Partial Class dlgCheckSummary
         Me.lblYearVariable.TabIndex = 8
         Me.lblYearVariable.Text = "Year Variable:"
         '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.AutoSize = True
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(13, 34)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 9
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
         'grdRecent
         '
         Me.grdRecent.BackColor = System.Drawing.Color.White
@@ -225,6 +239,19 @@ Partial Class dlgCheckSummary
         Me.lblSecondYVar.Tag = ""
         Me.lblSecondYVar.Text = "Second Y Variable (Optional):"
         '
+        'ucrReceiverSecondYVar
+        '
+        Me.ucrReceiverSecondYVar.AutoSize = True
+        Me.ucrReceiverSecondYVar.frmParent = Me
+        Me.ucrReceiverSecondYVar.Location = New System.Drawing.Point(47, 81)
+        Me.ucrReceiverSecondYVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondYVar.Name = "ucrReceiverSecondYVar"
+        Me.ucrReceiverSecondYVar.Selector = Nothing
+        Me.ucrReceiverSecondYVar.Size = New System.Drawing.Size(145, 26)
+        Me.ucrReceiverSecondYVar.strNcFilePath = ""
+        Me.ucrReceiverSecondYVar.TabIndex = 17
+        Me.ucrReceiverSecondYVar.ucrSelector = Nothing
+        '
         'lblYVar
         '
         Me.lblYVar.AutoSize = True
@@ -236,6 +263,44 @@ Partial Class dlgCheckSummary
         Me.lblYVar.Tag = ""
         Me.lblYVar.Text = "Y Variable:"
         '
+        'ucrReceiverYVar
+        '
+        Me.ucrReceiverYVar.AutoSize = True
+        Me.ucrReceiverYVar.frmParent = Me
+        Me.ucrReceiverYVar.Location = New System.Drawing.Point(47, 35)
+        Me.ucrReceiverYVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYVar.Name = "ucrReceiverYVar"
+        Me.ucrReceiverYVar.Selector = Nothing
+        Me.ucrReceiverYVar.Size = New System.Drawing.Size(145, 26)
+        Me.ucrReceiverYVar.strNcFilePath = ""
+        Me.ucrReceiverYVar.TabIndex = 15
+        Me.ucrReceiverYVar.ucrSelector = Nothing
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(174, 212)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputStation.TabIndex = 24
+        '
+        'ucrReceiverFacetBy
+        '
+        Me.ucrReceiverFacetBy.AutoSize = True
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(47, 212)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 23
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
+        '
         'lblFacetBy
         '
         Me.lblFacetBy.AutoSize = True
@@ -246,6 +311,32 @@ Partial Class dlgCheckSummary
         Me.lblFacetBy.TabIndex = 22
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By (Optional):"
+        '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.AutoSize = True
+        Me.ucrReceiverX.frmParent = Me
+        Me.ucrReceiverX.Location = New System.Drawing.Point(47, 124)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(145, 26)
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.TabIndex = 19
+        Me.ucrReceiverX.ucrSelector = Nothing
+        '
+        'ucrReceiverColourBy
+        '
+        Me.ucrReceiverColourBy.AutoSize = True
+        Me.ucrReceiverColourBy.frmParent = Me
+        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(47, 169)
+        Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColourBy.Name = "ucrReceiverColourBy"
+        Me.ucrReceiverColourBy.Selector = Nothing
+        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(145, 26)
+        Me.ucrReceiverColourBy.strNcFilePath = ""
+        Me.ucrReceiverColourBy.TabIndex = 21
+        Me.ucrReceiverColourBy.ucrSelector = Nothing
         '
         'lblFactorOptional
         '
@@ -283,6 +374,29 @@ Partial Class dlgCheckSummary
         Me.pnlOutliers.TabIndex = 28
         Me.pnlOutliers.Visible = False
         '
+        'ucrChkVarWidth
+        '
+        Me.ucrChkVarWidth.AutoSize = True
+        Me.ucrChkVarWidth.Checked = False
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(59, 230)
+        Me.ucrChkVarWidth.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkVarWidth.TabIndex = 30
+        '
+        'ucrSecondFactorReceiver
+        '
+        Me.ucrSecondFactorReceiver.AutoSize = True
+        Me.ucrSecondFactorReceiver.frmParent = Me
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(59, 203)
+        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
+        Me.ucrSecondFactorReceiver.Selector = Nothing
+        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(145, 26)
+        Me.ucrSecondFactorReceiver.strNcFilePath = ""
+        Me.ucrSecondFactorReceiver.TabIndex = 29
+        Me.ucrSecondFactorReceiver.ucrSelector = Nothing
+        '
         'lblBySecondFactor
         '
         Me.lblBySecondFactor.AutoSize = True
@@ -305,6 +419,33 @@ Partial Class dlgCheckSummary
         Me.lblByFactors.Tag = ""
         Me.lblByFactors.Text = "X Variable:"
         '
+        'ucrByFactorsReceiver
+        '
+        Me.ucrByFactorsReceiver.AutoSize = True
+        Me.ucrByFactorsReceiver.frmParent = Me
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(59, 153)
+        Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
+        Me.ucrByFactorsReceiver.Selector = Nothing
+        Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(145, 26)
+        Me.ucrByFactorsReceiver.strNcFilePath = ""
+        Me.ucrByFactorsReceiver.TabIndex = 27
+        Me.ucrByFactorsReceiver.ucrSelector = Nothing
+        '
+        'ucrVariablesAsFactorForCheckSummary
+        '
+        Me.ucrVariablesAsFactorForCheckSummary.AutoSize = True
+        Me.ucrVariablesAsFactorForCheckSummary.frmParent = Me
+        Me.ucrVariablesAsFactorForCheckSummary.Location = New System.Drawing.Point(53, 19)
+        Me.ucrVariablesAsFactorForCheckSummary.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrVariablesAsFactorForCheckSummary.Name = "ucrVariablesAsFactorForCheckSummary"
+        Me.ucrVariablesAsFactorForCheckSummary.Selector = Nothing
+        Me.ucrVariablesAsFactorForCheckSummary.Size = New System.Drawing.Size(184, 130)
+        Me.ucrVariablesAsFactorForCheckSummary.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForCheckSummary.TabIndex = 25
+        Me.ucrVariablesAsFactorForCheckSummary.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForCheckSummary.ucrVariableSelector = Nothing
+        '
         'AddLineGroupbox
         '
         Me.AddLineGroupbox.Controls.Add(Me.ucrChkWithSE)
@@ -317,6 +458,16 @@ Partial Class dlgCheckSummary
         Me.AddLineGroupbox.TabIndex = 30
         Me.AddLineGroupbox.TabStop = False
         Me.AddLineGroupbox.Text = "Add Line"
+        '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.AutoSize = True
+        Me.ucrChkWithSE.Checked = False
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(153, 44)
+        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(111, 23)
+        Me.ucrChkWithSE.TabIndex = 21
         '
         'rdoBrokenStick
         '
@@ -519,16 +670,6 @@ Partial Class dlgCheckSummary
         Me.ucrSave.Size = New System.Drawing.Size(320, 24)
         Me.ucrSave.TabIndex = 32
         '
-        'ucrChkWithSE
-        '
-        Me.ucrChkWithSE.AutoSize = True
-        Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(153, 44)
-        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(111, 23)
-        Me.ucrChkWithSE.TabIndex = 21
-        '
         'ucrChkFirstAndLast
         '
         Me.ucrChkFirstAndLast.AutoSize = True
@@ -549,56 +690,6 @@ Partial Class dlgCheckSummary
         Me.cmdPlotOptions.Tag = "Plot Options"
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
-        '
-        'ucrChkVarWidth
-        '
-        Me.ucrChkVarWidth.AutoSize = True
-        Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(59, 230)
-        Me.ucrChkVarWidth.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
-        Me.ucrChkVarWidth.Size = New System.Drawing.Size(146, 23)
-        Me.ucrChkVarWidth.TabIndex = 30
-        '
-        'ucrSecondFactorReceiver
-        '
-        Me.ucrSecondFactorReceiver.AutoSize = True
-        Me.ucrSecondFactorReceiver.frmParent = Nothing
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(59, 203)
-        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
-        Me.ucrSecondFactorReceiver.Selector = Nothing
-        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(145, 26)
-        Me.ucrSecondFactorReceiver.strNcFilePath = ""
-        Me.ucrSecondFactorReceiver.TabIndex = 29
-        Me.ucrSecondFactorReceiver.ucrSelector = Nothing
-        '
-        'ucrByFactorsReceiver
-        '
-        Me.ucrByFactorsReceiver.AutoSize = True
-        Me.ucrByFactorsReceiver.frmParent = Nothing
-        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(59, 153)
-        Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
-        Me.ucrByFactorsReceiver.Selector = Nothing
-        Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(145, 26)
-        Me.ucrByFactorsReceiver.strNcFilePath = ""
-        Me.ucrByFactorsReceiver.TabIndex = 27
-        Me.ucrByFactorsReceiver.ucrSelector = Nothing
-        '
-        'ucrVariablesAsFactorForCheckSummary
-        '
-        Me.ucrVariablesAsFactorForCheckSummary.AutoSize = True
-        Me.ucrVariablesAsFactorForCheckSummary.frmParent = Nothing
-        Me.ucrVariablesAsFactorForCheckSummary.Location = New System.Drawing.Point(53, 19)
-        Me.ucrVariablesAsFactorForCheckSummary.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrVariablesAsFactorForCheckSummary.Name = "ucrVariablesAsFactorForCheckSummary"
-        Me.ucrVariablesAsFactorForCheckSummary.Selector = Nothing
-        Me.ucrVariablesAsFactorForCheckSummary.Size = New System.Drawing.Size(184, 113)
-        Me.ucrVariablesAsFactorForCheckSummary.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForCheckSummary.TabIndex = 25
-        Me.ucrVariablesAsFactorForCheckSummary.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForCheckSummary.ucrVariableSelector = Nothing
         '
         'ucrSelectorForCheckSummary
         '
@@ -630,19 +721,6 @@ Partial Class dlgCheckSummary
         Me.UcrBaseCheckSummary.Size = New System.Drawing.Size(408, 52)
         Me.UcrBaseCheckSummary.TabIndex = 24
         '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.AutoSize = True
-        Me.ucrReceiverYear.frmParent = Nothing
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(13, 34)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 9
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -651,83 +729,6 @@ Partial Class dlgCheckSummary
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(299, 36)
         Me.ucrPnlOptions.TabIndex = 13
-        '
-        'ucrReceiverSecondYVar
-        '
-        Me.ucrReceiverSecondYVar.AutoSize = True
-        Me.ucrReceiverSecondYVar.frmParent = Nothing
-        Me.ucrReceiverSecondYVar.Location = New System.Drawing.Point(47, 81)
-        Me.ucrReceiverSecondYVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondYVar.Name = "ucrReceiverSecondYVar"
-        Me.ucrReceiverSecondYVar.Selector = Nothing
-        Me.ucrReceiverSecondYVar.Size = New System.Drawing.Size(145, 26)
-        Me.ucrReceiverSecondYVar.strNcFilePath = ""
-        Me.ucrReceiverSecondYVar.TabIndex = 17
-        Me.ucrReceiverSecondYVar.ucrSelector = Nothing
-        '
-        'ucrReceiverYVar
-        '
-        Me.ucrReceiverYVar.AutoSize = True
-        Me.ucrReceiverYVar.frmParent = Nothing
-        Me.ucrReceiverYVar.Location = New System.Drawing.Point(47, 35)
-        Me.ucrReceiverYVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYVar.Name = "ucrReceiverYVar"
-        Me.ucrReceiverYVar.Selector = Nothing
-        Me.ucrReceiverYVar.Size = New System.Drawing.Size(145, 26)
-        Me.ucrReceiverYVar.strNcFilePath = ""
-        Me.ucrReceiverYVar.TabIndex = 15
-        Me.ucrReceiverYVar.ucrSelector = Nothing
-        '
-        'ucrInputStation
-        '
-        Me.ucrInputStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputStation.GetSetSelectedIndex = -1
-        Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(174, 212)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
-        Me.ucrInputStation.TabIndex = 24
-        '
-        'ucrReceiverFacetBy
-        '
-        Me.ucrReceiverFacetBy.AutoSize = True
-        Me.ucrReceiverFacetBy.frmParent = Nothing
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(47, 212)
-        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
-        Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.TabIndex = 23
-        Me.ucrReceiverFacetBy.ucrSelector = Nothing
-        '
-        'ucrReceiverX
-        '
-        Me.ucrReceiverX.AutoSize = True
-        Me.ucrReceiverX.frmParent = Nothing
-        Me.ucrReceiverX.Location = New System.Drawing.Point(47, 124)
-        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverX.Name = "ucrReceiverX"
-        Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(145, 26)
-        Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 19
-        Me.ucrReceiverX.ucrSelector = Nothing
-        '
-        'ucrReceiverColourBy
-        '
-        Me.ucrReceiverColourBy.AutoSize = True
-        Me.ucrReceiverColourBy.frmParent = Nothing
-        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(47, 169)
-        Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColourBy.Name = "ucrReceiverColourBy"
-        Me.ucrReceiverColourBy.Selector = Nothing
-        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(145, 26)
-        Me.ucrReceiverColourBy.strNcFilePath = ""
-        Me.ucrReceiverColourBy.TabIndex = 21
-        Me.ucrReceiverColourBy.ucrSelector = Nothing
         '
         'dlgCheckSummary
         '

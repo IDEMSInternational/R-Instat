@@ -39,6 +39,9 @@ Public Class dlgCheckSummary
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
     Private clsVarsFunction As New RFunction
+    ' Trend tab – separate Row/Col vars functions (required by sdgPlots.SetRCode)
+    Private clsRowVarsFunction As New RFunction
+    Private clsColVarsFunction As New RFunction
     Private clsGeomPoint As New RFunction
     Private clsGeomSmoothFunction As New RFunction
     Private clsGeomHlineMean As New RFunction
@@ -75,6 +78,9 @@ Public Class dlgCheckSummary
     Private clsOutlierFacetFunction As New RFunction
     Private clsOutlierFacetVariablesOperator As New ROperator
     Private clsOutlierVarsFunction As New RFunction
+    ' Outlier tab – separate Row/Col vars functions
+    Private clsOutlierRowVarsFunction As New RFunction
+    Private clsOutlierColVarsFunction As New RFunction
     Private clsOutlierScaleFillViridisFunction As New RFunction
     Private clsOutlierScaleColourViridisFunction As New RFunction
     Private clsOutlierCoordPolarFunction As New RFunction
@@ -112,11 +118,16 @@ Public Class dlgCheckSummary
     Private sdgLayerOptions As New sdgLayerOptions
     Private bResetSubdialog As Boolean = True
     Private bResetLineLayerSubdialog As Boolean = True
+    Private clsOutlierLocalRaesFunction As New RFunction
+    Private bResetOutlierLayerSubdialog As Boolean = True
 
     Private WithEvents contextMenuStripPlotOptions As New ContextMenuStrip
     Private WithEvents PlotOptionsToolStripMenuItem As New ToolStripMenuItem("Plot Options")
     Private WithEvents toolStripMenuItemLineOptions As New ToolStripMenuItem("Line Options")
     Private WithEvents toolStripMenuItemPointOption As New ToolStripMenuItem("Point Options")
+    Private WithEvents toolStripMenuItemOutlierBoxplotOptions As New ToolStripMenuItem("Boxplot Options")
+    Private WithEvents toolStripMenuItemOutlierJitterOptions As New ToolStripMenuItem("Jitter Options")
+    Private WithEvents toolStripMenuItemOutlierTextOptions As New ToolStripMenuItem("Text Options")
 
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
@@ -196,10 +207,13 @@ Public Class dlgCheckSummary
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ' Setup Plot Options Menu
+        ' Setup Plot Options Menu – items depend on which tab is active
         PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
         toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
         toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
+        toolStripMenuItemOutlierBoxplotOptions.Name = "toolStripMenuItemOutlierBoxplotOptions"
+        toolStripMenuItemOutlierJitterOptions.Name = "toolStripMenuItemOutlierJitterOptions"
+        toolStripMenuItemOutlierTextOptions.Name = "toolStripMenuItemOutlierTextOptions"
 
         contextMenuStripPlotOptions.Items.Clear()
         contextMenuStripPlotOptions.Items.Add(PlotOptionsToolStripMenuItem)
@@ -505,6 +519,7 @@ Public Class dlgCheckSummary
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+        clsOutlierLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
         clsAsDate = New RFunction
         clsAsDate.SetRCommand("as.Date")
@@ -620,6 +635,7 @@ Public Class dlgCheckSummary
 
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
+        bResetOutlierLayerSubdialog = True
 
         clsPipeOperator.SetOperation("%>%")
         clsBaseOperator.SetOperation("+")
@@ -806,16 +822,32 @@ Public Class dlgCheckSummary
         clsOutlierScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction.Clone()
         clsOutlierScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsOutlierScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
-        clsOutlierCoordPolarFunction = New RFunction
-        clsOutlierCoordPolarFunction.SetPackageName("ggplot2")
-        clsOutlierCoordPolarFunction.SetRCommand("coord_polar")
-        clsOutlierCoordPolarStartOperator = New ROperator
+        clsOutlierCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
+        clsOutlierCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsOutlierXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsOutlierYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         clsOutlierThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctOutlierThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
         clsOutlierBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+
+        ' Trend
+        clsRowVarsFunction = New RFunction
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction = New RFunction
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
+
+        ' Outlier
+        clsOutlierRowVarsFunction = New RFunction
+        clsOutlierRowVarsFunction.SetPackageName("ggplot2")
+        clsOutlierRowVarsFunction.SetRCommand("vars")
+
+        clsOutlierColVarsFunction = New RFunction
+        clsOutlierColVarsFunction.SetPackageName("ggplot2")
+        clsOutlierColVarsFunction.SetRCommand("vars")
 
         UpdateRecentRCode()
         UpdateTrendRCode()
@@ -901,6 +933,19 @@ Public Class dlgCheckSummary
         ucrChkPoints.Visible = bTrend
         ucrSave.Visible = bTrend OrElse bOutliers
         cmdPlotOptions.Visible = bTrend OrElse bOutliers
+
+        ' Rebuild the split-button dropdown to match the active tab
+        contextMenuStripPlotOptions.Items.Clear()
+        contextMenuStripPlotOptions.Items.Add(PlotOptionsToolStripMenuItem)
+        If bTrend Then
+            contextMenuStripPlotOptions.Items.Add(toolStripMenuItemLineOptions)
+            contextMenuStripPlotOptions.Items.Add(toolStripMenuItemPointOption)
+        ElseIf bOutliers Then
+            contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierBoxplotOptions)
+            contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierJitterOptions)
+            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked
+            contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierTextOptions)
+        End If
         ucrChkFirstAndLast.Visible = bTrend
         AddLineGroupbox.Visible = bTrend
 
@@ -964,6 +1009,10 @@ Public Class dlgCheckSummary
             UpdateTrendRCode()
         ElseIf rdoOutliers.Checked Then
             UpdateOutliersRCode()
+        End If
+        ' Keep Text Options item enabled only while Label Outliers is checked
+        If rdoOutliers.Checked Then
+            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked
         End If
         TestOKEnabled()
     End Sub
@@ -1040,12 +1089,6 @@ Public Class dlgCheckSummary
             clsOutlierBaseOperator.AddParameter("scale_y_date", clsRFunctionParameter:=clsOutlierYScaleDateFunction)
         Else
             clsOutlierBaseOperator.RemoveParameterByName("scale_y_date")
-        End If
-
-        If clsOutlierCoordPolarFunction IsNot Nothing AndAlso clsOutlierCoordPolarFunction.iParameterCount > 0 Then
-            clsOutlierBaseOperator.AddParameter("coord_polar", clsRFunctionParameter:=clsOutlierCoordPolarFunction)
-        Else
-            clsOutlierBaseOperator.RemoveParameterByName("coord_polar")
         End If
 
         If clsOutlierScaleFillViridisFunction IsNot Nothing AndAlso clsOutlierScaleFillViridisFunction.iParameterCount > 1 Then
@@ -1443,7 +1486,6 @@ Public Class dlgCheckSummary
             Dim clsAesMeanText As New RFunction
             clsAesMeanText.SetRCommand("aes")
 
-
             clsAesMeanText.AddParameter("x", "Inf", iPosition:=0)
             clsAesMeanText.AddParameter("y", "mean(" & strYVar & ", na.rm=TRUE)", iPosition:=1)
 
@@ -1664,7 +1706,9 @@ Public Class dlgCheckSummary
                               clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                               clsNewYScaleDateFunction:=clsYScaleDateFunction,
                               clsNewFacetVariablesOperator:=clsFacetOperator, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                              clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewAnnotateFunction:=clsAnnotateFunction)
+                              clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
+                              clsNewRowVarsFunction:=clsRowVarsFunction,
+                              clsNewColVarsFunction:=clsColVarsFunction)
             sdgPlots.ShowDialog()
             bResetSubdialog = False
             UpdateTrendRCode()
@@ -1690,6 +1734,8 @@ Public Class dlgCheckSummary
                 clsNewScaleFillViridisFunction:=clsOutlierScaleFillViridisFunction,
                 clsNewScaleColourViridisFunction:=clsOutlierScaleColourViridisFunction,
                 clsNewAnnotateFunction:=clsOutlierAnnotateFunction,
+                clsNewRowVarsFunction:=clsOutlierRowVarsFunction,
+                clsNewColVarsFunction:=clsOutlierColVarsFunction,
                 strMainDialogGeomParameterNames:=strOutlierGeomParameterNames,
                 bChangeAesParameter:=True)
             sdgPlots.ShowDialog()
@@ -1700,6 +1746,38 @@ Public Class dlgCheckSummary
 
     Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotOptionsToolStripMenuItem.Click
         cmdPlotOptions_Click(sender, e)
+    End Sub
+
+    Private Sub toolStripMenuItemOutlierBoxplotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOutlierBoxplotOptions.Click
+        openSdgLayerOptionsForOutlier(clsOutlierBoxplotFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemOutlierJitterOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOutlierJitterOptions.Click
+        openSdgLayerOptionsForOutlier(clsOutlierAddedJitterFunc)
+    End Sub
+
+    Private Sub toolStripMenuItemOutlierTextOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOutlierTextOptions.Click
+        If ucrChkLabel.Checked Then
+            openSdgLayerOptionsForOutlier(clsOutlierBoxplotStatFunction)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Opens the layer-options sub-dialog wired to Outlier-tab R objects,
+    ''' mirroring exactly what openSdgLayerOptions does for the Trend tab.
+    ''' </summary>
+    Private Sub openSdgLayerOptionsForOutlier(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsOutlierRggplotFunction,
+                                   clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsOutlierRaesFunction,
+                                   clsNewLocalAes:=clsOutlierLocalRaesFunction,
+                                   bFixGeom:=True,
+                                   ucrNewBaseSelector:=ucrSelectorForCheckSummary,
+                                   bApplyAesGlobally:=True,
+                                   bReset:=bResetOutlierLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetOutlierLayerSubdialog = False
+        UpdateOutliersRCode()
     End Sub
 
     Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click
@@ -1784,13 +1862,13 @@ Public Class dlgCheckSummary
             clsOutlierFacetVariablesOperator.AddParameter("var1", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
             clsOutlierFacetFunction.AddParameter("facets", clsROperatorParameter:=clsOutlierFacetVariablesOperator, iPosition:=0)
         ElseIf bRow Or bRowAll Then
-            clsOutlierVarsFunction.RemoveParameterByName("var")
-            clsOutlierVarsFunction.AddParameter("var", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-            clsOutlierFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsOutlierVarsFunction)
+            clsOutlierRowVarsFunction.RemoveParameterByName("var")
+            clsOutlierRowVarsFunction.AddParameter("var", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            clsOutlierFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsOutlierRowVarsFunction)
         ElseIf bCol Or bColAll Then
-            clsOutlierVarsFunction.RemoveParameterByName("var")
-            clsOutlierVarsFunction.AddParameter("var", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-            clsOutlierFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsOutlierVarsFunction)
+            clsOutlierColVarsFunction.RemoveParameterByName("var")
+            clsOutlierColVarsFunction.AddParameter("var", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            clsOutlierFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsOutlierColVarsFunction)
         End If
 
         If bRow Or bCol Or bRowAll Or bColAll Or bWrap Then
