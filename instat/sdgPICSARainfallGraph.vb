@@ -103,6 +103,7 @@ Public Class sdgPICSARainfallGraph
     Private clsPoint2AesFunction As New RFunction
     Private bSlope As Boolean = False
     Private bLine As Boolean = False
+    Private bIsTemperatureMode As Boolean = False
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         OpeningMode()
@@ -647,6 +648,10 @@ Public Class sdgPICSARainfallGraph
         ucrInputXaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
         ttPICSARainfallGraph.SetToolTip(ucrInputGraphcCaption.txtInput, "Type \n where you would like a new-line")
         bControlsInitialised = True
+    End Sub
+
+    Public Sub SetTemperatureMode(bTemperature As Boolean)
+        bIsTemperatureMode = bTemperature
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing,
@@ -1401,31 +1406,33 @@ Public Class sdgPICSARainfallGraph
         Dim tbPageSlope As TabPage = tbSlope
         Dim tbPageLines As TabPage = tpLines
 
-        Select Case dlgPICSARainfall.enumPICSAMode
-            Case dlgPICSARainfall.PICSAMode.Temperature
-                tbPICSA.TabPages.Remove(tpLines)
-                If Not bSlope AndAlso Not tbPICSA.TabPages.Contains(tbPageSlope) Then
-                    tbPICSA.TabPages.Add(tbPageSlope)
-                    bSlope = True
-                    bLine = False
-                End If
-            Case dlgPICSARainfall.PICSAMode.Rainfall
-                tbPICSA.TabPages.Remove(tbSlope)
-                If Not bLine AndAlso Not tbPICSA.TabPages.Contains(tbPageLines) Then
-                    tbPICSA.TabPages.Add(tbPageLines)
-                    bLine = True
-                    bSlope = False
-                End If
-            Case dlgPICSARainfall.PICSAMode.General
-                tbPICSA.TabPages.Remove(tpLines)
-                tbPICSA.TabPages.Remove(tbSlope)
-                If Not tbPICSA.TabPages.Contains(tbPageSlope) Then
-                    tbPICSA.TabPages.Add(tbPageLines)
-                End If
-                If Not tbPICSA.TabPages.Contains(tbPageSlope) Then
-                    tbPICSA.TabPages.Add(tbPageSlope)
-                End If
-        End Select
+        If bIsTemperatureMode Then
+            tbPICSA.TabPages.Remove(tpLines)
+            If Not bSlope AndAlso Not tbPICSA.TabPages.Contains(tbPageSlope) Then
+                tbPICSA.TabPages.Add(tbPageSlope)
+                bSlope = True
+                bLine = False
+            End If
+        Else
+            Select Case dlgPICSARainfall.enumPICSAMode
+                Case dlgPICSARainfall.PICSAMode.Rainfall
+                    tbPICSA.TabPages.Remove(tbSlope)
+                    If Not bLine AndAlso Not tbPICSA.TabPages.Contains(tbPageLines) Then
+                        tbPICSA.TabPages.Add(tbPageLines)
+                        bLine = True
+                        bSlope = False
+                    End If
+                Case dlgPICSARainfall.PICSAMode.General
+                    tbPICSA.TabPages.Remove(tpLines)
+                    tbPICSA.TabPages.Remove(tbSlope)
+                    If Not tbPICSA.TabPages.Contains(tbPageLines) Then
+                        tbPICSA.TabPages.Add(tbPageLines)
+                    End If
+                    If Not tbPICSA.TabPages.Contains(tbPageSlope) Then
+                        tbPICSA.TabPages.Add(tbPageSlope)
+                    End If
+            End Select
+        End If
     End Sub
 
     Private Sub XAxisAngleJust()
