@@ -82,7 +82,6 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
 
-
         clsSumCountMissingFunction.SetRCommand("summary_count_miss")
 
         ucrReceiverLabels.SetMeAsReceiver()
@@ -90,6 +89,7 @@ Public Class dlgLabelsLevels
 
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
+        AddNewLabels()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -112,8 +112,6 @@ Public Class dlgLabelsLevels
         'todo. commented out temporarily
         'until when full support of adding or removing specific parameters will be implemented
         'ucrFactorLabels.AddAdditionalCodeParameterPair(clsViewLabelsFunction, New RParameter("new_levels", 1), iAdditionalPairNo:=1)
-        ucrFactorLabels.SetRCode(clsViewLabelsFunction, bReset)
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -209,7 +207,19 @@ Public Class dlgLabelsLevels
         cmdAddLevel.Enabled = Not ucrReceiverLabels.IsEmpty
         CountLevels()
         TestOKEnabled()
+        AddNewLabels()
+    End Sub
 
+    Private Sub AddNewLabels()
+        Dim lstLabels As List(Of String) = ucrFactorLabels.GetCellValues(ucrFactor.DefaultColumnNames.Label, bWithQuotes:=True)
+
+        If lstLabels IsNot Nothing AndAlso lstLabels.Count > 0 Then
+            clsViewLabelsFunction.AddParameter("new_labels",
+        strParameterValue:=mdlCoreControl.GetRVector(lstLabels),
+        iPosition:=2)
+        Else
+            clsViewLabelsFunction.RemoveParameterByName("new_labels")
+        End If
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged
@@ -217,4 +227,5 @@ Public Class dlgLabelsLevels
         ucrReceiverLabels.SetMeAsReceiver()
         clsDummyFunction.AddParameter("strVal", ucrReceiverLabels.GetVariableNames(False))
     End Sub
+
 End Class

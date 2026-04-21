@@ -49,7 +49,7 @@ Partial Class dlgSelect
         Me.ucrChkDataframe = New instat.ucrCheck()
         Me.lblSelection = New System.Windows.Forms.Label()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
-        Me.lblFilterPreview = New System.Windows.Forms.Label()
+        Me.lblSelectionPreview = New System.Windows.Forms.Label()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.ucrInputNewDataFrameName = New instat.ucrInputComboBox()
         Me.ucrInputSelectPreview = New instat.ucrInputTextBox()
@@ -79,7 +79,7 @@ Partial Class dlgSelect
         '
         Me.rdoApplySave.AutoSize = True
         Me.rdoApplySave.Location = New System.Drawing.Point(7, 70)
-        Me.rdoApplySave.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoApplySave.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoApplySave.Name = "rdoApplySave"
         Me.rdoApplySave.Size = New System.Drawing.Size(83, 17)
         Me.rdoApplySave.TabIndex = 3
@@ -128,9 +128,9 @@ Partial Class dlgSelect
         Me.grpOptions.Controls.Add(Me.ucrChkMetaData)
         Me.grpOptions.Controls.Add(Me.ucrChkDataframe)
         Me.grpOptions.Location = New System.Drawing.Point(229, 206)
-        Me.grpOptions.Margin = New System.Windows.Forms.Padding(2)
+        Me.grpOptions.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Padding = New System.Windows.Forms.Padding(2)
+        Me.grpOptions.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grpOptions.Size = New System.Drawing.Size(193, 101)
         Me.grpOptions.TabIndex = 3
         Me.grpOptions.TabStop = False
@@ -143,7 +143,7 @@ Partial Class dlgSelect
         Me.ucrChkDialogue.Location = New System.Drawing.Point(10, 70)
         Me.ucrChkDialogue.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkDialogue.Name = "ucrChkDialogue"
-        Me.ucrChkDialogue.Size = New System.Drawing.Size(177, 23)
+        Me.ucrChkDialogue.Size = New System.Drawing.Size(177, 34)
         Me.ucrChkDialogue.TabIndex = 2
         '
         'ucrChkMetaData
@@ -153,7 +153,7 @@ Partial Class dlgSelect
         Me.ucrChkMetaData.Location = New System.Drawing.Point(10, 42)
         Me.ucrChkMetaData.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkMetaData.Name = "ucrChkMetaData"
-        Me.ucrChkMetaData.Size = New System.Drawing.Size(177, 23)
+        Me.ucrChkMetaData.Size = New System.Drawing.Size(177, 34)
         Me.ucrChkMetaData.TabIndex = 1
         '
         'ucrChkDataframe
@@ -163,7 +163,7 @@ Partial Class dlgSelect
         Me.ucrChkDataframe.Location = New System.Drawing.Point(10, 18)
         Me.ucrChkDataframe.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkDataframe.Name = "ucrChkDataframe"
-        Me.ucrChkDataframe.Size = New System.Drawing.Size(177, 23)
+        Me.ucrChkDataframe.Size = New System.Drawing.Size(177, 34)
         Me.ucrChkDataframe.TabIndex = 0
         '
         'lblSelection
@@ -189,16 +189,15 @@ Partial Class dlgSelect
         Me.cmdDefineNewSelect.Text = "Define New Selection"
         Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
         '
-        'lblFilterPreview
+        'lblSelectionPreview
         '
-        Me.lblFilterPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFilterPreview.Location = New System.Drawing.Point(10, 373)
-        Me.lblFilterPreview.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblFilterPreview.Name = "lblFilterPreview"
-        Me.lblFilterPreview.Size = New System.Drawing.Size(142, 22)
-        Me.lblFilterPreview.TabIndex = 7
-        Me.lblFilterPreview.Text = "Selection Preview:"
-        Me.lblFilterPreview.Visible = False
+        Me.lblSelectionPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectionPreview.Location = New System.Drawing.Point(10, 373)
+        Me.lblSelectionPreview.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblSelectionPreview.Name = "lblSelectionPreview"
+        Me.lblSelectionPreview.Size = New System.Drawing.Size(142, 22)
+        Me.lblSelectionPreview.TabIndex = 7
+        Me.lblSelectionPreview.Text = "Selection Preview:"
         '
         'lblNewDataFrameName
         '
@@ -216,7 +215,7 @@ Partial Class dlgSelect
         Me.ucrInputNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputNewDataFrameName.GetSetSelectedIndex = -1
         Me.ucrInputNewDataFrameName.IsReadOnly = False
-        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(146, 338)
+        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(213, 338)
         Me.ucrInputNewDataFrameName.Margin = New System.Windows.Forms.Padding(10, 10, 10, 10)
         Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
         Me.ucrInputNewDataFrameName.Size = New System.Drawing.Size(138, 22)
@@ -233,7 +232,6 @@ Partial Class dlgSelect
         Me.ucrInputSelectPreview.Name = "ucrInputSelectPreview"
         Me.ucrInputSelectPreview.Size = New System.Drawing.Size(254, 42)
         Me.ucrInputSelectPreview.TabIndex = 8
-        Me.ucrInputSelectPreview.Visible = False
         '
         'ucrReceiverSelect
         '
@@ -279,7 +277,7 @@ Partial Class dlgSelect
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrInputNewDataFrameName)
         Me.Controls.Add(Me.lblNewDataFrameName)
-        Me.Controls.Add(Me.lblFilterPreview)
+        Me.Controls.Add(Me.lblSelectionPreview)
         Me.Controls.Add(Me.ucrInputSelectPreview)
         Me.Controls.Add(Me.ucrReceiverSelect)
         Me.Controls.Add(Me.lblSelection)
@@ -312,7 +310,7 @@ Partial Class dlgSelect
     Friend WithEvents ucrSelectorForSelectColumns As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdDefineNewSelect As Button
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents lblSelectionPreview As Label
     Friend WithEvents ucrPnlApplyOptions As UcrPanel
     Friend WithEvents ucrInputNewDataFrameName As ucrInputComboBox
     Friend WithEvents lblNewDataFrameName As Label

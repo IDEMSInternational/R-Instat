@@ -14,7 +14,10 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports RDotNet
+
 Public Class ucrReorder
     Public Event OrderChanged()
     Public WithEvents ucrDataFrameList As ucrDataFrame
@@ -265,7 +268,7 @@ Public Class ucrReorder
                 chrTemp = CType(objTemp, CharacterVector)
                 FillListView(chrTemp)
             Else
-                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
+                MsgBoxTranslate("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
             End If
         End If
     End Sub

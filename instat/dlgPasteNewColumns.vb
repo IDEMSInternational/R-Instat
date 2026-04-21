@@ -136,13 +136,13 @@ Public Class dlgPasteNewColumns
             Dim clipBoardText As String = My.Computer.Clipboard.GetText.Trim().Replace("""", "\""")
             Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
             If arrStrTemp.Length > 1000 Then
-                MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
+                MsgBoxTranslate("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
                 clipBoardText = ""
             End If
             clsReadClipDataRFunction.AddParameter("x", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
         Catch ex As Exception
             'this error could be due to large clipboard data 
-            MsgBox("Requested clipboard operation did not succeed. Large data detected")
+            MsgBoxTranslate("Requested clipboard operation did not succeed. Large data detected")
         End Try
     End Sub
 

@@ -20,6 +20,7 @@ Imports RDotNet
 Public Class dlgImportfromClimMob
     Private clsKeysFunction, clsClimmobFunction, clsProjectsFunction, clsDplyrFunction, clsSecondDplyrFunction As New RFunction
     Private bFirstLoad As Boolean = True
+    Private bKeyRetrieved As Boolean = False
     Private bReset As Boolean = True
     Private clsFirstOperator, clsKeysOverallFunction As New ROperator
     Private clsSecondOperator As New ROperator
@@ -39,11 +40,13 @@ Public Class dlgImportfromClimMob
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        TestOKEnabled()
         bReset = False
     End Sub
 
     Private Sub InitialiseDialog()
 
+        ucrBase.iHelpTopicID = 670
         ucrInputServerName.SetItems({strClimmob3, str1000FARMS, strAVISA, strRTB})
         ucrInputServerName.SetDropDownStyleAsNonEditable()
         ucrInputServerName.SetLinkedDisplayControl(lblServerName)
@@ -51,11 +54,7 @@ Public Class dlgImportfromClimMob
 
         ucrInputChooseForm.SetParameter(New RParameter("right", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
-
-        ucrChkDefineTricotData.SetText("Define Tricot Data")
-        ucrChkDefineTricotData.Enabled = False
-
-        cmdTricotData.Visible = False
+        ucrInputChooseForm.SetDropDownStyleAsNonEditable()
 
         ucrSaveFile.SetPrefix("climmob_dataframe")
         ucrSaveFile.SetSaveTypeAsDataFrame()
@@ -86,7 +85,7 @@ Public Class dlgImportfromClimMob
 
         clsFirstOperator.SetOperation("$")
         clsFirstOperator.AddParameter("left", clsRFunctionParameter:=clsProjectsFunction, iPosition:=0)
-        clsFirstOperator.AddParameter("right", "project_id", iPosition:=1)
+        clsFirstOperator.AddParameter("right", "project_code", iPosition:=1)
         clsFirstOperator.bSpaceAroundOperation = False
 
         clsSecondOperator.SetOperation("%>%")
@@ -96,7 +95,7 @@ Public Class dlgImportfromClimMob
         clsSecondOperator.SetAssignTo("user_owner")
 
         clsThirdOperator.SetOperation("==")
-        clsThirdOperator.AddParameter("left", "project_id", iPosition:=0)
+        clsThirdOperator.AddParameter("left", "project_code", iPosition:=0)
         clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34), iPosition:=1) ' right = value in the ucrInputBox
         clsThirdOperator.bSpaceAroundOperation = False
 
@@ -136,7 +135,6 @@ Public Class dlgImportfromClimMob
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputChooseForm.AddAdditionalCodeParameterPair(clsClimmobFunction, New RParameter("project", 1), 1)
-
         ucrInputChooseForm.SetRCode(clsThirdOperator, bReset)
         ucrSaveFile.SetRCode(clsClimmobFunction, bReset)
     End Sub
@@ -144,6 +142,15 @@ Public Class dlgImportfromClimMob
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Public Sub TestOKEnabled()
+        If (ucrSaveFile.IsComplete AndAlso ucrInputChooseForm.GetText <> "") Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrInputServerName_NameChanged() Handles ucrInputServerName.ControlValueChanged
@@ -159,19 +166,31 @@ Public Class dlgImportfromClimMob
     Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.ControlValueChanged
         If ucrInputChooseForm.IsEmpty() Then
             clsThirdOperator.RemoveParameterByName("right")
+            ucrSaveFile.SetPrefix("climmob_dataframe")
         Else
             clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
+
+            ' Then: update the save-name if there's actually something selected:
+            ' Push the exact form name into the Data Frame name box:
+            ucrSaveFile.SetPrefix(ucrInputChooseForm.GetText())
+        End If
+    End Sub
+
+    Private Sub FindForms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Only disable on first load, otherwise restore last known state
+        If Not bKeyRetrieved Then
+            cmdFindForms.Enabled = False
+        Else
+            cmdFindForms.Enabled = True
         End If
     End Sub
 
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdKey.Click
         sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
         sdgImportFromClimMob.ShowDialog()
-    End Sub
-
-    Private Sub cmdTricotData_Click(sender As Object, e As EventArgs) Handles cmdTricotData.Click
-        'sdgDefineTricotData.Setup(clsKeysFunction.GetParameter("key"))
-        sdgDefineTricotData.ShowDialog()
+        ' Enable Find Forms
+        cmdFindForms.Enabled = True
+        bKeyRetrieved = True
     End Sub
 
     Private Sub ucrInputServerName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputServerName.ControlContentsChanged
@@ -204,11 +223,7 @@ Public Class dlgImportfromClimMob
         End If
     End Sub
 
-    Private Sub ucrChkDefineTricotData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineTricotData.ControlContentsChanged
-        If ucrChkDefineTricotData.Checked Then
-            cmdTricotData.Visible = True
-        Else
-            cmdTricotData.Visible = False
-        End If
+    Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged, ucrInputChooseForm.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

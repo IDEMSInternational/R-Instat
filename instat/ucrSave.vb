@@ -432,7 +432,7 @@ Public Class ucrSave
                 ucrInputTextSave.SetDefaultTypeAsLink()
                 btnColumnPosition.Visible = False
             Case Else
-                MsgBox("Developer error: unrecognised save type: " & strRObjectType)
+                MsgBoxTranslate("Developer error: unrecognised save type: " & strRObjectType)
         End Select
     End Sub
     ''' <summary>   Sets save type as column. </summary>
@@ -990,7 +990,8 @@ Public Class ucrSave
         Dim strDataName As String = If(ucrDataFrameSelector IsNot Nothing, ucrDataFrameSelector.cboAvailableDataFrames.Text, strGlobalDataName)
 
         sdgSaveColumnPosition.SetUp(strDataName, bInsertColumnBefore, strAdjacentColumn, bKeepExistingPosition)
-        sdgSaveColumnPosition.ShowDialog()
+        ' Pass the parent form as owner so sdgSaveColumnPosition.Owner is set and the sub-dialog can find the parent controls:
+        sdgSaveColumnPosition.ShowDialog(Me.FindForm())
 
         bInsertColumnBefore = sdgSaveColumnPosition.InsertColumnBefore
         strAdjacentColumn = sdgSaveColumnPosition.AdjacentColumn

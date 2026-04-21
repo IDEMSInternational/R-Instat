@@ -47,8 +47,21 @@ Public Class ucrLayerParameters
 
     Public Sub SetLayerParameters(Optional bReset As Boolean = False)
         Dim i As Integer = 0
-        'fill the labels and checkboxes
+        ' Fill the labels and checkboxes
         If clsCurrGeom IsNot Nothing Then
+            'Ensure clsGeomFunction Is Not null before using it
+            If clsGeomFunction IsNot Nothing AndAlso clsGeomFunction.strRCommand = "geom_likert" Then
+                ' Ensure "position" is set to ggstats::position_likert() if not manually changed
+                If Not clsGeomFunction.ContainsParameter("position") Then
+                    clsGeomFunction.AddParameter("position", "ggstats::position_likert()")
+                End If
+            End If
+            If clsGeomFunction IsNot Nothing AndAlso (clsGeomFunction.strRCommand = "geom_pyramid" OrElse clsGeomFunction.strRCommand = "geom_diverging") Then
+                ' Ensure "position" is set to ggstats::position_likert() if not manually changed
+                If Not clsGeomFunction.ContainsParameter("position") Then
+                    clsGeomFunction.AddParameter("position", "ggstats::position_diverging()")
+                End If
+            End If
             For i = 0 To (lstLayerParameterControl.Count - 1)
                 If (i < clsCurrGeom.clsLayerParameters.Count) Then
                     lstLayerParameterControl(i).SetControl(clsGeomFunction, clsCurrGeom.clsLayerParameters(i), bReset:=bReset)

@@ -138,7 +138,7 @@ Public Class dlgRestoreBackup
                     File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.FilePath(), True)
                 End If
             Catch ex As Exception
-                MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
@@ -147,7 +147,7 @@ Public Class dlgRestoreBackup
                     File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.FilePath(), True)
                 End If
             Catch ex As Exception
-                MsgBox("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
@@ -156,7 +156,7 @@ Public Class dlgRestoreBackup
                     File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.FilePath(), True)
                 End If
             Catch ex As Exception
-                MsgBox("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
     End Sub
@@ -207,14 +207,14 @@ Public Class dlgRestoreBackup
     End Function
 
     Private Sub ucrInputSavedPathData_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathData.Leave
-        If Not String.IsNullOrEmpty(ucrInputSavedPathData.IsEmpty) Then
-            frmMain.clsRecentItems.addToMenu(Replace(ucrInputSavedPathData.FilePath, "\", "/"))
+        If Not ucrInputSavedPathData.IsEmpty Then
+            frmMain.clsRecentItems.addToMenu(ucrInputSavedPathData.FilePath.Replace("\", "/"))
         End If
     End Sub
 
     Private Sub ucrInputSavedPathLog_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathLog.Leave
-        If Not String.IsNullOrEmpty(ucrInputSavedPathLog.IsEmpty) Then
-            frmMain.clsRecentItems.addToMenu(Replace(ucrInputSavedPathLog.FilePath, "\", "/"))
+        If Not ucrInputSavedPathLog.IsEmpty Then
+            frmMain.clsRecentItems.addToMenu(ucrInputSavedPathLog.FilePath.Replace("\", "/"))
         End If
     End Sub
 

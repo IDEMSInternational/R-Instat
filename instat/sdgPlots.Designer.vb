@@ -127,6 +127,8 @@ Partial Class sdgPlots
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
         Me.grpfillmanual = New System.Windows.Forms.GroupBox()
+        Me.ucrInputValue = New instat.ucrInputTextBox()
+        Me.ucrInputAesth = New instat.ucrInputTextBox()
         Me.ucrInputNavaluesManual = New instat.ucrInputTextBox()
         Me.ucrInputBreackmanual = New instat.ucrInputTextBox()
         Me.ucrInputLimitsmanual = New instat.ucrInputTextBox()
@@ -136,6 +138,8 @@ Partial Class sdgPlots
         Me.ucrChkNavaluemanual = New instat.ucrCheck()
         Me.ucrChkValueManual = New instat.ucrCheck()
         Me.grpmanualColour = New System.Windows.Forms.GroupBox()
+        Me.ucrInputValueColor = New instat.ucrInputTextBox()
+        Me.ucrInputAthsColor = New instat.ucrInputTextBox()
         Me.ucrInputNavaluesManualColor = New instat.ucrInputTextBox()
         Me.ucrInputBreackmanualcolor = New instat.ucrInputTextBox()
         Me.ucrInputLimitsmanualcolor = New instat.ucrInputTextBox()
@@ -649,10 +653,6 @@ Partial Class sdgPlots
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputAesth = New instat.ucrInputTextBox()
-        Me.ucrInputAthsColor = New instat.ucrInputTextBox()
-        Me.ucrInputValue = New instat.ucrInputTextBox()
-        Me.ucrInputValueColor = New instat.ucrInputTextBox()
         Me.tbpPlotsOptions.SuspendLayout
         Me.tbpFacet.SuspendLayout
         Me.tbpLayers.SuspendLayout
@@ -851,11 +851,11 @@ Partial Class sdgPlots
         Me.rdoHorizontal.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoHorizontal.Location = New System.Drawing.Point(8, 230)
         Me.rdoHorizontal.Name = "rdoHorizontal"
-        Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
+        Me.rdoHorizontal.Size = New System.Drawing.Size(47, 17)
         Me.rdoHorizontal.TabIndex = 12
         Me.rdoHorizontal.TabStop = True
-        Me.rdoHorizontal.Tag = "Horizontal"
-        Me.rdoHorizontal.Text = "Horizontal"
+        Me.rdoHorizontal.Tag = "Row"
+        Me.rdoHorizontal.Text = "Row"
         Me.rdoHorizontal.UseVisualStyleBackColor = True
         '
         'rdoVertical
@@ -867,8 +867,8 @@ Partial Class sdgPlots
         Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
         Me.rdoVertical.TabIndex = 13
         Me.rdoVertical.TabStop = True
-        Me.rdoVertical.Tag = "Vertical"
-        Me.rdoVertical.Text = "Vertical"
+        Me.rdoVertical.Tag = "Column"
+        Me.rdoVertical.Text = "Column"
         Me.rdoVertical.UseVisualStyleBackColor = True
         '
         'lblFactor2
@@ -1131,6 +1131,7 @@ Partial Class sdgPlots
         Me.ucrInputLegend.IsMultiline = False
         Me.ucrInputLegend.IsReadOnly = False
         Me.ucrInputLegend.Location = New System.Drawing.Point(133, 74)
+        Me.ucrInputLegend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputLegend.Name = "ucrInputLegend"
         Me.ucrInputLegend.Size = New System.Drawing.Size(160, 21)
         Me.ucrInputLegend.TabIndex = 11
@@ -1298,6 +1299,7 @@ Partial Class sdgPlots
         Me.ucrInputGraphSubTitle.IsMultiline = False
         Me.ucrInputGraphSubTitle.IsReadOnly = False
         Me.ucrInputGraphSubTitle.Location = New System.Drawing.Point(126, 68)
+        Me.ucrInputGraphSubTitle.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
         Me.ucrInputGraphSubTitle.Size = New System.Drawing.Size(166, 21)
         Me.ucrInputGraphSubTitle.TabIndex = 9
@@ -1309,6 +1311,7 @@ Partial Class sdgPlots
         Me.ucrInputGraphTitle.IsMultiline = False
         Me.ucrInputGraphTitle.IsReadOnly = False
         Me.ucrInputGraphTitle.Location = New System.Drawing.Point(126, 41)
+        Me.ucrInputGraphTitle.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
         Me.ucrInputGraphTitle.Size = New System.Drawing.Size(166, 21)
         Me.ucrInputGraphTitle.TabIndex = 9
@@ -1664,6 +1667,7 @@ Partial Class sdgPlots
         Me.ucrInputStartingAngle.IsMultiline = False
         Me.ucrInputStartingAngle.IsReadOnly = False
         Me.ucrInputStartingAngle.Location = New System.Drawing.Point(141, 95)
+        Me.ucrInputStartingAngle.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputStartingAngle.Name = "ucrInputStartingAngle"
         Me.ucrInputStartingAngle.Size = New System.Drawing.Size(43, 21)
         Me.ucrInputStartingAngle.TabIndex = 19
@@ -1777,6 +1781,30 @@ Partial Class sdgPlots
         Me.grpfillmanual.TabStop = False
         Me.grpfillmanual.Text = "Fill Scale"
         '
+        'ucrInputValue
+        '
+        Me.ucrInputValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputValue.AutoSize = True
+        Me.ucrInputValue.IsMultiline = False
+        Me.ucrInputValue.IsReadOnly = False
+        Me.ucrInputValue.Location = New System.Drawing.Point(250, 12)
+        Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputValue.Name = "ucrInputValue"
+        Me.ucrInputValue.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputValue.TabIndex = 11
+        '
+        'ucrInputAesth
+        '
+        Me.ucrInputAesth.AddQuotesIfUnrecognised = True
+        Me.ucrInputAesth.AutoSize = True
+        Me.ucrInputAesth.IsMultiline = False
+        Me.ucrInputAesth.IsReadOnly = False
+        Me.ucrInputAesth.Location = New System.Drawing.Point(250, 42)
+        Me.ucrInputAesth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputAesth.Name = "ucrInputAesth"
+        Me.ucrInputAesth.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputAesth.TabIndex = 10
+        '
         'ucrInputNavaluesManual
         '
         Me.ucrInputNavaluesManual.AddQuotesIfUnrecognised = True
@@ -1784,6 +1812,7 @@ Partial Class sdgPlots
         Me.ucrInputNavaluesManual.IsMultiline = False
         Me.ucrInputNavaluesManual.IsReadOnly = False
         Me.ucrInputNavaluesManual.Location = New System.Drawing.Point(250, 129)
+        Me.ucrInputNavaluesManual.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNavaluesManual.Name = "ucrInputNavaluesManual"
         Me.ucrInputNavaluesManual.Size = New System.Drawing.Size(177, 21)
         Me.ucrInputNavaluesManual.TabIndex = 9
@@ -1795,6 +1824,7 @@ Partial Class sdgPlots
         Me.ucrInputBreackmanual.IsMultiline = False
         Me.ucrInputBreackmanual.IsReadOnly = False
         Me.ucrInputBreackmanual.Location = New System.Drawing.Point(250, 101)
+        Me.ucrInputBreackmanual.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputBreackmanual.Name = "ucrInputBreackmanual"
         Me.ucrInputBreackmanual.Size = New System.Drawing.Size(177, 21)
         Me.ucrInputBreackmanual.TabIndex = 8
@@ -1806,6 +1836,7 @@ Partial Class sdgPlots
         Me.ucrInputLimitsmanual.IsMultiline = False
         Me.ucrInputLimitsmanual.IsReadOnly = False
         Me.ucrInputLimitsmanual.Location = New System.Drawing.Point(250, 72)
+        Me.ucrInputLimitsmanual.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputLimitsmanual.Name = "ucrInputLimitsmanual"
         Me.ucrInputLimitsmanual.Size = New System.Drawing.Size(177, 21)
         Me.ucrInputLimitsmanual.TabIndex = 7
@@ -1874,6 +1905,30 @@ Partial Class sdgPlots
         Me.grpmanualColour.TabStop = False
         Me.grpmanualColour.Text = "Colour Scale"
         '
+        'ucrInputValueColor
+        '
+        Me.ucrInputValueColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputValueColor.AutoSize = True
+        Me.ucrInputValueColor.IsMultiline = False
+        Me.ucrInputValueColor.IsReadOnly = False
+        Me.ucrInputValueColor.Location = New System.Drawing.Point(250, 13)
+        Me.ucrInputValueColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputValueColor.Name = "ucrInputValueColor"
+        Me.ucrInputValueColor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputValueColor.TabIndex = 13
+        '
+        'ucrInputAthsColor
+        '
+        Me.ucrInputAthsColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputAthsColor.AutoSize = True
+        Me.ucrInputAthsColor.IsMultiline = False
+        Me.ucrInputAthsColor.IsReadOnly = False
+        Me.ucrInputAthsColor.Location = New System.Drawing.Point(250, 43)
+        Me.ucrInputAthsColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputAthsColor.Name = "ucrInputAthsColor"
+        Me.ucrInputAthsColor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputAthsColor.TabIndex = 12
+        '
         'ucrInputNavaluesManualColor
         '
         Me.ucrInputNavaluesManualColor.AddQuotesIfUnrecognised = True
@@ -1881,6 +1936,7 @@ Partial Class sdgPlots
         Me.ucrInputNavaluesManualColor.IsMultiline = False
         Me.ucrInputNavaluesManualColor.IsReadOnly = False
         Me.ucrInputNavaluesManualColor.Location = New System.Drawing.Point(250, 130)
+        Me.ucrInputNavaluesManualColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNavaluesManualColor.Name = "ucrInputNavaluesManualColor"
         Me.ucrInputNavaluesManualColor.Size = New System.Drawing.Size(177, 21)
         Me.ucrInputNavaluesManualColor.TabIndex = 11
@@ -1892,6 +1948,7 @@ Partial Class sdgPlots
         Me.ucrInputBreackmanualcolor.IsMultiline = False
         Me.ucrInputBreackmanualcolor.IsReadOnly = False
         Me.ucrInputBreackmanualcolor.Location = New System.Drawing.Point(250, 101)
+        Me.ucrInputBreackmanualcolor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputBreackmanualcolor.Name = "ucrInputBreackmanualcolor"
         Me.ucrInputBreackmanualcolor.Size = New System.Drawing.Size(177, 21)
         Me.ucrInputBreackmanualcolor.TabIndex = 10
@@ -1903,6 +1960,7 @@ Partial Class sdgPlots
         Me.ucrInputLimitsmanualcolor.IsMultiline = False
         Me.ucrInputLimitsmanualcolor.IsReadOnly = False
         Me.ucrInputLimitsmanualcolor.Location = New System.Drawing.Point(250, 72)
+        Me.ucrInputLimitsmanualcolor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputLimitsmanualcolor.Name = "ucrInputLimitsmanualcolor"
         Me.ucrInputLimitsmanualcolor.Size = New System.Drawing.Size(177, 21)
         Me.ucrInputLimitsmanualcolor.TabIndex = 9
@@ -2022,6 +2080,7 @@ Partial Class sdgPlots
         Me.ucrInputGradientExpandColour.IsMultiline = False
         Me.ucrInputGradientExpandColour.IsReadOnly = False
         Me.ucrInputGradientExpandColour.Location = New System.Drawing.Point(283, 132)
+        Me.ucrInputGradientExpandColour.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputGradientExpandColour.Name = "ucrInputGradientExpandColour"
         Me.ucrInputGradientExpandColour.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputGradientExpandColour.TabIndex = 195
@@ -2141,6 +2200,7 @@ Partial Class sdgPlots
         Me.ucrInputGradientExpand.IsMultiline = False
         Me.ucrInputGradientExpand.IsReadOnly = False
         Me.ucrInputGradientExpand.Location = New System.Drawing.Point(283, 132)
+        Me.ucrInputGradientExpand.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputGradientExpand.Name = "ucrInputGradientExpand"
         Me.ucrInputGradientExpand.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputGradientExpand.TabIndex = 195
@@ -2342,6 +2402,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksw.IsMultiline = False
         Me.ucrInputTextBreaksw.IsReadOnly = False
         Me.ucrInputTextBreaksw.Location = New System.Drawing.Point(285, 31)
+        Me.ucrInputTextBreaksw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksw.Name = "ucrInputTextBreaksw"
         Me.ucrInputTextBreaksw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksw.TabIndex = 183
@@ -2353,6 +2414,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuew.IsMultiline = False
         Me.ucrInputTextNaValuew.IsReadOnly = False
         Me.ucrInputTextNaValuew.Location = New System.Drawing.Point(285, 120)
+        Me.ucrInputTextNaValuew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuew.Name = "ucrInputTextNaValuew"
         Me.ucrInputTextNaValuew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuew.TabIndex = 182
@@ -2364,6 +2426,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitw.IsMultiline = False
         Me.ucrInputTextLimitw.IsReadOnly = False
         Me.ucrInputTextLimitw.Location = New System.Drawing.Point(285, 54)
+        Me.ucrInputTextLimitw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitw.Name = "ucrInputTextLimitw"
         Me.ucrInputTextLimitw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitw.TabIndex = 181
@@ -2375,6 +2438,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandw.IsMultiline = False
         Me.ucrInputTextExpandw.IsReadOnly = False
         Me.ucrInputTextExpandw.Location = New System.Drawing.Point(285, 99)
+        Me.ucrInputTextExpandw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandw.Name = "ucrInputTextExpandw"
         Me.ucrInputTextExpandw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandw.TabIndex = 180
@@ -2632,6 +2696,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorw.IsMultiline = False
         Me.ucrInputTextBreaksColorw.IsReadOnly = False
         Me.ucrInputTextBreaksColorw.Location = New System.Drawing.Point(286, 33)
+        Me.ucrInputTextBreaksColorw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorw.Name = "ucrInputTextBreaksColorw"
         Me.ucrInputTextBreaksColorw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorw.TabIndex = 197
@@ -2643,6 +2708,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorw.IsMultiline = False
         Me.ucrInputTextNaValueColorw.IsReadOnly = False
         Me.ucrInputTextNaValueColorw.Location = New System.Drawing.Point(286, 122)
+        Me.ucrInputTextNaValueColorw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorw.Name = "ucrInputTextNaValueColorw"
         Me.ucrInputTextNaValueColorw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorw.TabIndex = 196
@@ -2654,6 +2720,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorw.IsMultiline = False
         Me.ucrInputTextLimitColorw.IsReadOnly = False
         Me.ucrInputTextLimitColorw.Location = New System.Drawing.Point(286, 56)
+        Me.ucrInputTextLimitColorw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorw.Name = "ucrInputTextLimitColorw"
         Me.ucrInputTextLimitColorw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorw.TabIndex = 195
@@ -2665,6 +2732,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorw.IsMultiline = False
         Me.ucrInputTextExpandColorw.IsReadOnly = False
         Me.ucrInputTextExpandColorw.Location = New System.Drawing.Point(286, 101)
+        Me.ucrInputTextExpandColorw.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorw.Name = "ucrInputTextExpandColorw"
         Me.ucrInputTextExpandColorw.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorw.TabIndex = 194
@@ -2773,6 +2841,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorCal.IsMultiline = False
         Me.ucrInputTextBreaksColorCal.IsReadOnly = False
         Me.ucrInputTextBreaksColorCal.Location = New System.Drawing.Point(286, 33)
+        Me.ucrInputTextBreaksColorCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorCal.Name = "ucrInputTextBreaksColorCal"
         Me.ucrInputTextBreaksColorCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorCal.TabIndex = 209
@@ -2784,6 +2853,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorCal.IsMultiline = False
         Me.ucrInputTextNaValueColorCal.IsReadOnly = False
         Me.ucrInputTextNaValueColorCal.Location = New System.Drawing.Point(286, 123)
+        Me.ucrInputTextNaValueColorCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorCal.Name = "ucrInputTextNaValueColorCal"
         Me.ucrInputTextNaValueColorCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorCal.TabIndex = 208
@@ -2795,6 +2865,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorCal.IsMultiline = False
         Me.ucrInputTextLimitColorCal.IsReadOnly = False
         Me.ucrInputTextLimitColorCal.Location = New System.Drawing.Point(286, 56)
+        Me.ucrInputTextLimitColorCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorCal.Name = "ucrInputTextLimitColorCal"
         Me.ucrInputTextLimitColorCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorCal.TabIndex = 207
@@ -2806,6 +2877,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorCal.IsMultiline = False
         Me.ucrInputTextExpandColorCal.IsReadOnly = False
         Me.ucrInputTextExpandColorCal.Location = New System.Drawing.Point(286, 101)
+        Me.ucrInputTextExpandColorCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorCal.Name = "ucrInputTextExpandColorCal"
         Me.ucrInputTextExpandColorCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorCal.TabIndex = 206
@@ -2936,6 +3008,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorhc.IsMultiline = False
         Me.ucrInputTextBreaksColorhc.IsReadOnly = False
         Me.ucrInputTextBreaksColorhc.Location = New System.Drawing.Point(286, 32)
+        Me.ucrInputTextBreaksColorhc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorhc.Name = "ucrInputTextBreaksColorhc"
         Me.ucrInputTextBreaksColorhc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorhc.TabIndex = 197
@@ -2947,6 +3020,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorhc.IsMultiline = False
         Me.ucrInputTextNaValueColorhc.IsReadOnly = False
         Me.ucrInputTextNaValueColorhc.Location = New System.Drawing.Point(286, 120)
+        Me.ucrInputTextNaValueColorhc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorhc.Name = "ucrInputTextNaValueColorhc"
         Me.ucrInputTextNaValueColorhc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorhc.TabIndex = 196
@@ -2958,6 +3032,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorhc.IsMultiline = False
         Me.ucrInputTextLimitColorhc.IsReadOnly = False
         Me.ucrInputTextLimitColorhc.Location = New System.Drawing.Point(286, 55)
+        Me.ucrInputTextLimitColorhc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorhc.Name = "ucrInputTextLimitColorhc"
         Me.ucrInputTextLimitColorhc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorhc.TabIndex = 195
@@ -2969,6 +3044,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorhc.IsMultiline = False
         Me.ucrInputTextExpandColorhc.IsReadOnly = False
         Me.ucrInputTextExpandColorhc.Location = New System.Drawing.Point(286, 100)
+        Me.ucrInputTextExpandColorhc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorhc.Name = "ucrInputTextExpandColorhc"
         Me.ucrInputTextExpandColorhc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorhc.TabIndex = 194
@@ -3099,6 +3175,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorfew.IsMultiline = False
         Me.ucrInputTextBreaksColorfew.IsReadOnly = False
         Me.ucrInputTextBreaksColorfew.Location = New System.Drawing.Point(285, 31)
+        Me.ucrInputTextBreaksColorfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorfew.Name = "ucrInputTextBreaksColorfew"
         Me.ucrInputTextBreaksColorfew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorfew.TabIndex = 225
@@ -3110,6 +3187,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorfew.IsMultiline = False
         Me.ucrInputTextExpandColorfew.IsReadOnly = False
         Me.ucrInputTextExpandColorfew.Location = New System.Drawing.Point(285, 120)
+        Me.ucrInputTextExpandColorfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorfew.Name = "ucrInputTextExpandColorfew"
         Me.ucrInputTextExpandColorfew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorfew.TabIndex = 224
@@ -3121,6 +3199,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorfew.IsMultiline = False
         Me.ucrInputTextLimitColorfew.IsReadOnly = False
         Me.ucrInputTextLimitColorfew.Location = New System.Drawing.Point(285, 54)
+        Me.ucrInputTextLimitColorfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorfew.Name = "ucrInputTextLimitColorfew"
         Me.ucrInputTextLimitColorfew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorfew.TabIndex = 223
@@ -3132,6 +3211,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorfew.IsMultiline = False
         Me.ucrInputTextNaValueColorfew.IsReadOnly = False
         Me.ucrInputTextNaValueColorfew.Location = New System.Drawing.Point(285, 99)
+        Me.ucrInputTextNaValueColorfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorfew.Name = "ucrInputTextNaValueColorfew"
         Me.ucrInputTextNaValueColorfew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorfew.TabIndex = 222
@@ -3240,6 +3320,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorsol.IsMultiline = False
         Me.ucrInputTextBreaksColorsol.IsReadOnly = False
         Me.ucrInputTextBreaksColorsol.Location = New System.Drawing.Point(286, 35)
+        Me.ucrInputTextBreaksColorsol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorsol.Name = "ucrInputTextBreaksColorsol"
         Me.ucrInputTextBreaksColorsol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorsol.TabIndex = 245
@@ -3251,6 +3332,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorsol.IsMultiline = False
         Me.ucrInputTextNaValueColorsol.IsReadOnly = False
         Me.ucrInputTextNaValueColorsol.Location = New System.Drawing.Point(286, 125)
+        Me.ucrInputTextNaValueColorsol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorsol.Name = "ucrInputTextNaValueColorsol"
         Me.ucrInputTextNaValueColorsol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorsol.TabIndex = 244
@@ -3262,6 +3344,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorsol.IsMultiline = False
         Me.ucrInputTextLimitColorsol.IsReadOnly = False
         Me.ucrInputTextLimitColorsol.Location = New System.Drawing.Point(286, 58)
+        Me.ucrInputTextLimitColorsol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorsol.Name = "ucrInputTextLimitColorsol"
         Me.ucrInputTextLimitColorsol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorsol.TabIndex = 243
@@ -3273,6 +3356,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorsol.IsMultiline = False
         Me.ucrInputTextExpandColorsol.IsReadOnly = False
         Me.ucrInputTextExpandColorsol.Location = New System.Drawing.Point(286, 104)
+        Me.ucrInputTextExpandColorsol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorsol.Name = "ucrInputTextExpandColorsol"
         Me.ucrInputTextExpandColorsol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorsol.TabIndex = 242
@@ -3381,6 +3465,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorpan.IsMultiline = False
         Me.ucrInputTextBreaksColorpan.IsReadOnly = False
         Me.ucrInputTextBreaksColorpan.Location = New System.Drawing.Point(286, 35)
+        Me.ucrInputTextBreaksColorpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorpan.Name = "ucrInputTextBreaksColorpan"
         Me.ucrInputTextBreaksColorpan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorpan.TabIndex = 245
@@ -3392,6 +3477,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorpan.IsMultiline = False
         Me.ucrInputTextNaValueColorpan.IsReadOnly = False
         Me.ucrInputTextNaValueColorpan.Location = New System.Drawing.Point(286, 126)
+        Me.ucrInputTextNaValueColorpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorpan.Name = "ucrInputTextNaValueColorpan"
         Me.ucrInputTextNaValueColorpan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorpan.TabIndex = 244
@@ -3403,6 +3489,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorpan.IsMultiline = False
         Me.ucrInputTextLimitColorpan.IsReadOnly = False
         Me.ucrInputTextLimitColorpan.Location = New System.Drawing.Point(286, 58)
+        Me.ucrInputTextLimitColorpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorpan.Name = "ucrInputTextLimitColorpan"
         Me.ucrInputTextLimitColorpan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorpan.TabIndex = 243
@@ -3414,6 +3501,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorpan.IsMultiline = False
         Me.ucrInputTextExpandColorpan.IsReadOnly = False
         Me.ucrInputTextExpandColorpan.Location = New System.Drawing.Point(286, 104)
+        Me.ucrInputTextExpandColorpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorpan.Name = "ucrInputTextExpandColorpan"
         Me.ucrInputTextExpandColorpan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorpan.TabIndex = 242
@@ -3522,6 +3610,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorg.IsMultiline = False
         Me.ucrInputTextBreaksColorg.IsReadOnly = False
         Me.ucrInputTextBreaksColorg.Location = New System.Drawing.Point(286, 37)
+        Me.ucrInputTextBreaksColorg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorg.Name = "ucrInputTextBreaksColorg"
         Me.ucrInputTextBreaksColorg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorg.TabIndex = 233
@@ -3533,6 +3622,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorg.IsMultiline = False
         Me.ucrInputTextNaValueColorg.IsReadOnly = False
         Me.ucrInputTextNaValueColorg.Location = New System.Drawing.Point(286, 128)
+        Me.ucrInputTextNaValueColorg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorg.Name = "ucrInputTextNaValueColorg"
         Me.ucrInputTextNaValueColorg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorg.TabIndex = 232
@@ -3544,6 +3634,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorg.IsMultiline = False
         Me.ucrInputTextLimitColorg.IsReadOnly = False
         Me.ucrInputTextLimitColorg.Location = New System.Drawing.Point(286, 60)
+        Me.ucrInputTextLimitColorg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorg.Name = "ucrInputTextLimitColorg"
         Me.ucrInputTextLimitColorg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorg.TabIndex = 231
@@ -3555,6 +3646,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorg.IsMultiline = False
         Me.ucrInputTextExpandColorg.IsReadOnly = False
         Me.ucrInputTextExpandColorg.Location = New System.Drawing.Point(286, 106)
+        Me.ucrInputTextExpandColorg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorg.Name = "ucrInputTextExpandColorg"
         Me.ucrInputTextExpandColorg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorg.TabIndex = 230
@@ -3663,6 +3755,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColor.IsMultiline = False
         Me.ucrInputTextBreaksColor.IsReadOnly = False
         Me.ucrInputTextBreaksColor.Location = New System.Drawing.Point(286, 36)
+        Me.ucrInputTextBreaksColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColor.Name = "ucrInputTextBreaksColor"
         Me.ucrInputTextBreaksColor.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColor.TabIndex = 221
@@ -3674,6 +3767,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColor.IsMultiline = False
         Me.ucrInputTextNaValueColor.IsReadOnly = False
         Me.ucrInputTextNaValueColor.Location = New System.Drawing.Point(286, 129)
+        Me.ucrInputTextNaValueColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColor.Name = "ucrInputTextNaValueColor"
         Me.ucrInputTextNaValueColor.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColor.TabIndex = 220
@@ -3685,6 +3779,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColor.IsMultiline = False
         Me.ucrInputTextLimitColor.IsReadOnly = False
         Me.ucrInputTextLimitColor.Location = New System.Drawing.Point(286, 59)
+        Me.ucrInputTextLimitColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColor.Name = "ucrInputTextLimitColor"
         Me.ucrInputTextLimitColor.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColor.TabIndex = 219
@@ -3696,6 +3791,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColor.IsMultiline = False
         Me.ucrInputTextExpandColor.IsReadOnly = False
         Me.ucrInputTextExpandColor.Location = New System.Drawing.Point(286, 106)
+        Me.ucrInputTextExpandColor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColor.Name = "ucrInputTextExpandColor"
         Me.ucrInputTextExpandColor.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColor.TabIndex = 218
@@ -3804,6 +3900,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorEx.IsMultiline = False
         Me.ucrInputTextBreaksColorEx.IsReadOnly = False
         Me.ucrInputTextBreaksColorEx.Location = New System.Drawing.Point(286, 35)
+        Me.ucrInputTextBreaksColorEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorEx.Name = "ucrInputTextBreaksColorEx"
         Me.ucrInputTextBreaksColorEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorEx.TabIndex = 209
@@ -3815,6 +3912,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorEx.IsMultiline = False
         Me.ucrInputTextNaValueColorEx.IsReadOnly = False
         Me.ucrInputTextNaValueColorEx.Location = New System.Drawing.Point(286, 127)
+        Me.ucrInputTextNaValueColorEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorEx.Name = "ucrInputTextNaValueColorEx"
         Me.ucrInputTextNaValueColorEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorEx.TabIndex = 208
@@ -3826,6 +3924,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorEx.IsMultiline = False
         Me.ucrInputTextLimitColorEx.IsReadOnly = False
         Me.ucrInputTextLimitColorEx.Location = New System.Drawing.Point(286, 58)
+        Me.ucrInputTextLimitColorEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorEx.Name = "ucrInputTextLimitColorEx"
         Me.ucrInputTextLimitColorEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorEx.TabIndex = 207
@@ -3837,6 +3936,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorEx.IsMultiline = False
         Me.ucrInputTextExpandColorEx.IsReadOnly = False
         Me.ucrInputTextExpandColorEx.Location = New System.Drawing.Point(286, 105)
+        Me.ucrInputTextExpandColorEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorEx.Name = "ucrInputTextExpandColorEx"
         Me.ucrInputTextExpandColorEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorEx.TabIndex = 206
@@ -3945,6 +4045,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorEcon.IsMultiline = False
         Me.ucrInputTextBreaksColorEcon.IsReadOnly = False
         Me.ucrInputTextBreaksColorEcon.Location = New System.Drawing.Point(285, 34)
+        Me.ucrInputTextBreaksColorEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorEcon.Name = "ucrInputTextBreaksColorEcon"
         Me.ucrInputTextBreaksColorEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorEcon.TabIndex = 221
@@ -3956,6 +4057,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorEcon.IsMultiline = False
         Me.ucrInputTextNaValueColorEcon.IsReadOnly = False
         Me.ucrInputTextNaValueColorEcon.Location = New System.Drawing.Point(285, 126)
+        Me.ucrInputTextNaValueColorEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorEcon.Name = "ucrInputTextNaValueColorEcon"
         Me.ucrInputTextNaValueColorEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorEcon.TabIndex = 220
@@ -3967,6 +4069,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorEcon.IsMultiline = False
         Me.ucrInputTextLimitColorEcon.IsReadOnly = False
         Me.ucrInputTextLimitColorEcon.Location = New System.Drawing.Point(285, 57)
+        Me.ucrInputTextLimitColorEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorEcon.Name = "ucrInputTextLimitColorEcon"
         Me.ucrInputTextLimitColorEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorEcon.TabIndex = 219
@@ -3978,6 +4081,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorEcon.IsMultiline = False
         Me.ucrInputTextExpandColorEcon.IsReadOnly = False
         Me.ucrInputTextExpandColorEcon.Location = New System.Drawing.Point(285, 103)
+        Me.ucrInputTextExpandColorEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorEcon.Name = "ucrInputTextExpandColorEcon"
         Me.ucrInputTextExpandColorEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorEcon.TabIndex = 218
@@ -4108,6 +4212,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorst.IsMultiline = False
         Me.ucrInputTextBreaksColorst.IsReadOnly = False
         Me.ucrInputTextBreaksColorst.Location = New System.Drawing.Point(285, 32)
+        Me.ucrInputTextBreaksColorst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorst.Name = "ucrInputTextBreaksColorst"
         Me.ucrInputTextBreaksColorst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorst.TabIndex = 211
@@ -4119,6 +4224,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorst.IsMultiline = False
         Me.ucrInputTextNaValueColorst.IsReadOnly = False
         Me.ucrInputTextNaValueColorst.Location = New System.Drawing.Point(285, 119)
+        Me.ucrInputTextNaValueColorst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorst.Name = "ucrInputTextNaValueColorst"
         Me.ucrInputTextNaValueColorst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorst.TabIndex = 210
@@ -4130,6 +4236,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorst.IsMultiline = False
         Me.ucrInputTextLimitColorst.IsReadOnly = False
         Me.ucrInputTextLimitColorst.Location = New System.Drawing.Point(285, 55)
+        Me.ucrInputTextLimitColorst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorst.Name = "ucrInputTextLimitColorst"
         Me.ucrInputTextLimitColorst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorst.TabIndex = 209
@@ -4141,6 +4248,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorst.IsMultiline = False
         Me.ucrInputTextExpandColorst.IsReadOnly = False
         Me.ucrInputTextExpandColorst.Location = New System.Drawing.Point(285, 99)
+        Me.ucrInputTextExpandColorst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorst.Name = "ucrInputTextExpandColorst"
         Me.ucrInputTextExpandColorst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorst.TabIndex = 208
@@ -4271,6 +4379,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorExn.IsMultiline = False
         Me.ucrInputTextBreaksColorExn.IsReadOnly = False
         Me.ucrInputTextBreaksColorExn.Location = New System.Drawing.Point(286, 31)
+        Me.ucrInputTextBreaksColorExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorExn.Name = "ucrInputTextBreaksColorExn"
         Me.ucrInputTextBreaksColorExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorExn.TabIndex = 197
@@ -4282,6 +4391,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorExn.IsMultiline = False
         Me.ucrInputTextExpandColorExn.IsReadOnly = False
         Me.ucrInputTextExpandColorExn.Location = New System.Drawing.Point(286, 119)
+        Me.ucrInputTextExpandColorExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorExn.Name = "ucrInputTextExpandColorExn"
         Me.ucrInputTextExpandColorExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorExn.TabIndex = 196
@@ -4293,6 +4403,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorExn.IsMultiline = False
         Me.ucrInputTextLimitColorExn.IsReadOnly = False
         Me.ucrInputTextLimitColorExn.Location = New System.Drawing.Point(286, 54)
+        Me.ucrInputTextLimitColorExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorExn.Name = "ucrInputTextLimitColorExn"
         Me.ucrInputTextLimitColorExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorExn.TabIndex = 195
@@ -4304,6 +4415,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorExn.IsMultiline = False
         Me.ucrInputTextNaValueColorExn.IsReadOnly = False
         Me.ucrInputTextNaValueColorExn.Location = New System.Drawing.Point(286, 98)
+        Me.ucrInputTextNaValueColorExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorExn.Name = "ucrInputTextNaValueColorExn"
         Me.ucrInputTextNaValueColorExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorExn.TabIndex = 194
@@ -4412,6 +4524,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorfiv.IsMultiline = False
         Me.ucrInputTextBreaksColorfiv.IsReadOnly = False
         Me.ucrInputTextBreaksColorfiv.Location = New System.Drawing.Point(285, 34)
+        Me.ucrInputTextBreaksColorfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorfiv.Name = "ucrInputTextBreaksColorfiv"
         Me.ucrInputTextBreaksColorfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorfiv.TabIndex = 233
@@ -4423,6 +4536,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorfiv.IsMultiline = False
         Me.ucrInputTextNaValueColorfiv.IsReadOnly = False
         Me.ucrInputTextNaValueColorfiv.Location = New System.Drawing.Point(285, 123)
+        Me.ucrInputTextNaValueColorfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorfiv.Name = "ucrInputTextNaValueColorfiv"
         Me.ucrInputTextNaValueColorfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorfiv.TabIndex = 232
@@ -4434,6 +4548,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorfiv.IsMultiline = False
         Me.ucrInputTextLimitColorfiv.IsReadOnly = False
         Me.ucrInputTextLimitColorfiv.Location = New System.Drawing.Point(285, 57)
+        Me.ucrInputTextLimitColorfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorfiv.Name = "ucrInputTextLimitColorfiv"
         Me.ucrInputTextLimitColorfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorfiv.TabIndex = 231
@@ -4445,6 +4560,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorfiv.IsMultiline = False
         Me.ucrInputTextExpandColorfiv.IsReadOnly = False
         Me.ucrInputTextExpandColorfiv.Location = New System.Drawing.Point(285, 102)
+        Me.ucrInputTextExpandColorfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorfiv.Name = "ucrInputTextExpandColorfiv"
         Me.ucrInputTextExpandColorfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorfiv.TabIndex = 230
@@ -4553,6 +4669,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksColorpt.IsMultiline = False
         Me.ucrInputTextBreaksColorpt.IsReadOnly = False
         Me.ucrInputTextBreaksColorpt.Location = New System.Drawing.Point(286, 35)
+        Me.ucrInputTextBreaksColorpt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksColorpt.Name = "ucrInputTextBreaksColorpt"
         Me.ucrInputTextBreaksColorpt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksColorpt.TabIndex = 245
@@ -4564,6 +4681,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueColorpt.IsMultiline = False
         Me.ucrInputTextNaValueColorpt.IsReadOnly = False
         Me.ucrInputTextNaValueColorpt.Location = New System.Drawing.Point(286, 124)
+        Me.ucrInputTextNaValueColorpt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueColorpt.Name = "ucrInputTextNaValueColorpt"
         Me.ucrInputTextNaValueColorpt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueColorpt.TabIndex = 244
@@ -4575,6 +4693,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitColorpt.IsMultiline = False
         Me.ucrInputTextLimitColorpt.IsReadOnly = False
         Me.ucrInputTextLimitColorpt.Location = New System.Drawing.Point(286, 58)
+        Me.ucrInputTextLimitColorpt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitColorpt.Name = "ucrInputTextLimitColorpt"
         Me.ucrInputTextLimitColorpt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitColorpt.TabIndex = 243
@@ -4586,6 +4705,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandColorpt.IsMultiline = False
         Me.ucrInputTextExpandColorpt.IsReadOnly = False
         Me.ucrInputTextExpandColorpt.Location = New System.Drawing.Point(286, 103)
+        Me.ucrInputTextExpandColorpt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandColorpt.Name = "ucrInputTextExpandColorpt"
         Me.ucrInputTextExpandColorpt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandColorpt.TabIndex = 242
@@ -4716,6 +4836,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksg.IsMultiline = False
         Me.ucrInputTextBreaksg.IsReadOnly = False
         Me.ucrInputTextBreaksg.Location = New System.Drawing.Point(285, 35)
+        Me.ucrInputTextBreaksg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksg.Name = "ucrInputTextBreaksg"
         Me.ucrInputTextBreaksg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksg.TabIndex = 121
@@ -4727,6 +4848,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueg.IsMultiline = False
         Me.ucrInputTextNaValueg.IsReadOnly = False
         Me.ucrInputTextNaValueg.Location = New System.Drawing.Point(285, 125)
+        Me.ucrInputTextNaValueg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueg.Name = "ucrInputTextNaValueg"
         Me.ucrInputTextNaValueg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueg.TabIndex = 120
@@ -4738,6 +4860,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitg.IsMultiline = False
         Me.ucrInputTextLimitg.IsReadOnly = False
         Me.ucrInputTextLimitg.Location = New System.Drawing.Point(285, 58)
+        Me.ucrInputTextLimitg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitg.Name = "ucrInputTextLimitg"
         Me.ucrInputTextLimitg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitg.TabIndex = 119
@@ -4749,6 +4872,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandg.IsMultiline = False
         Me.ucrInputTextExpandg.IsReadOnly = False
         Me.ucrInputTextExpandg.Location = New System.Drawing.Point(285, 103)
+        Me.ucrInputTextExpandg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandg.Name = "ucrInputTextExpandg"
         Me.ucrInputTextExpandg.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandg.TabIndex = 118
@@ -4857,6 +4981,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksfiv.IsMultiline = False
         Me.ucrInputTextBreaksfiv.IsReadOnly = False
         Me.ucrInputTextBreaksfiv.Location = New System.Drawing.Point(285, 34)
+        Me.ucrInputTextBreaksfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksfiv.Name = "ucrInputTextBreaksfiv"
         Me.ucrInputTextBreaksfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksfiv.TabIndex = 109
@@ -4868,6 +4993,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuefiv.IsMultiline = False
         Me.ucrInputTextNaValuefiv.IsReadOnly = False
         Me.ucrInputTextNaValuefiv.Location = New System.Drawing.Point(285, 124)
+        Me.ucrInputTextNaValuefiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuefiv.Name = "ucrInputTextNaValuefiv"
         Me.ucrInputTextNaValuefiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuefiv.TabIndex = 108
@@ -4879,6 +5005,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitfiv.IsMultiline = False
         Me.ucrInputTextLimitfiv.IsReadOnly = False
         Me.ucrInputTextLimitfiv.Location = New System.Drawing.Point(285, 57)
+        Me.ucrInputTextLimitfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitfiv.Name = "ucrInputTextLimitfiv"
         Me.ucrInputTextLimitfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitfiv.TabIndex = 107
@@ -4890,6 +5017,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandfiv.IsMultiline = False
         Me.ucrInputTextExpandfiv.IsReadOnly = False
         Me.ucrInputTextExpandfiv.Location = New System.Drawing.Point(285, 102)
+        Me.ucrInputTextExpandfiv.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandfiv.Name = "ucrInputTextExpandfiv"
         Me.ucrInputTextExpandfiv.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandfiv.TabIndex = 106
@@ -4998,6 +5126,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreakspt.IsMultiline = False
         Me.ucrInputTextBreakspt.IsReadOnly = False
         Me.ucrInputTextBreakspt.Location = New System.Drawing.Point(285, 34)
+        Me.ucrInputTextBreakspt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreakspt.Name = "ucrInputTextBreakspt"
         Me.ucrInputTextBreakspt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreakspt.TabIndex = 169
@@ -5009,6 +5138,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuept.IsMultiline = False
         Me.ucrInputTextNaValuept.IsReadOnly = False
         Me.ucrInputTextNaValuept.Location = New System.Drawing.Point(285, 126)
+        Me.ucrInputTextNaValuept.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuept.Name = "ucrInputTextNaValuept"
         Me.ucrInputTextNaValuept.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuept.TabIndex = 168
@@ -5020,6 +5150,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitpt.IsMultiline = False
         Me.ucrInputTextLimitpt.IsReadOnly = False
         Me.ucrInputTextLimitpt.Location = New System.Drawing.Point(285, 57)
+        Me.ucrInputTextLimitpt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitpt.Name = "ucrInputTextLimitpt"
         Me.ucrInputTextLimitpt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitpt.TabIndex = 167
@@ -5031,6 +5162,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandpt.IsMultiline = False
         Me.ucrInputTextExpandpt.IsReadOnly = False
         Me.ucrInputTextExpandpt.Location = New System.Drawing.Point(285, 104)
+        Me.ucrInputTextExpandpt.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandpt.Name = "ucrInputTextExpandpt"
         Me.ucrInputTextExpandpt.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandpt.TabIndex = 166
@@ -5161,6 +5293,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksst.IsMultiline = False
         Me.ucrInputTextBreaksst.IsReadOnly = False
         Me.ucrInputTextBreaksst.Location = New System.Drawing.Point(285, 31)
+        Me.ucrInputTextBreaksst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksst.Name = "ucrInputTextBreaksst"
         Me.ucrInputTextBreaksst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksst.TabIndex = 197
@@ -5172,6 +5305,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuest.IsMultiline = False
         Me.ucrInputTextNaValuest.IsReadOnly = False
         Me.ucrInputTextNaValuest.Location = New System.Drawing.Point(285, 120)
+        Me.ucrInputTextNaValuest.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuest.Name = "ucrInputTextNaValuest"
         Me.ucrInputTextNaValuest.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuest.TabIndex = 196
@@ -5183,6 +5317,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitst.IsMultiline = False
         Me.ucrInputTextLimitst.IsReadOnly = False
         Me.ucrInputTextLimitst.Location = New System.Drawing.Point(285, 54)
+        Me.ucrInputTextLimitst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitst.Name = "ucrInputTextLimitst"
         Me.ucrInputTextLimitst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitst.TabIndex = 195
@@ -5194,6 +5329,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandst.IsMultiline = False
         Me.ucrInputTextExpandst.IsReadOnly = False
         Me.ucrInputTextExpandst.Location = New System.Drawing.Point(285, 99)
+        Me.ucrInputTextExpandst.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandst.Name = "ucrInputTextExpandst"
         Me.ucrInputTextExpandst.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandst.TabIndex = 194
@@ -5302,6 +5438,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreakspan.IsMultiline = False
         Me.ucrInputTextBreakspan.IsReadOnly = False
         Me.ucrInputTextBreakspan.Location = New System.Drawing.Point(285, 33)
+        Me.ucrInputTextBreakspan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreakspan.Name = "ucrInputTextBreakspan"
         Me.ucrInputTextBreakspan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreakspan.TabIndex = 157
@@ -5313,6 +5450,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuepan.IsMultiline = False
         Me.ucrInputTextNaValuepan.IsReadOnly = False
         Me.ucrInputTextNaValuepan.Location = New System.Drawing.Point(285, 125)
+        Me.ucrInputTextNaValuepan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuepan.Name = "ucrInputTextNaValuepan"
         Me.ucrInputTextNaValuepan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuepan.TabIndex = 156
@@ -5324,6 +5462,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitpan.IsMultiline = False
         Me.ucrInputTextLimitpan.IsReadOnly = False
         Me.ucrInputTextLimitpan.Location = New System.Drawing.Point(285, 56)
+        Me.ucrInputTextLimitpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitpan.Name = "ucrInputTextLimitpan"
         Me.ucrInputTextLimitpan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitpan.TabIndex = 155
@@ -5335,6 +5474,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandpan.IsMultiline = False
         Me.ucrInputTextExpandpan.IsReadOnly = False
         Me.ucrInputTextExpandpan.Location = New System.Drawing.Point(285, 102)
+        Me.ucrInputTextExpandpan.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandpan.Name = "ucrInputTextExpandpan"
         Me.ucrInputTextExpandpan.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandpan.TabIndex = 154
@@ -5452,6 +5592,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandCal.IsMultiline = False
         Me.ucrInputTextExpandCal.IsReadOnly = False
         Me.ucrInputTextExpandCal.Location = New System.Drawing.Point(268, 104)
+        Me.ucrInputTextExpandCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandCal.Name = "ucrInputTextExpandCal"
         Me.ucrInputTextExpandCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandCal.TabIndex = 33
@@ -5492,6 +5633,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitCal.IsMultiline = False
         Me.ucrInputTextLimitCal.IsReadOnly = False
         Me.ucrInputTextLimitCal.Location = New System.Drawing.Point(268, 58)
+        Me.ucrInputTextLimitCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitCal.Name = "ucrInputTextLimitCal"
         Me.ucrInputTextLimitCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitCal.TabIndex = 29
@@ -5541,6 +5683,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksCal.IsMultiline = False
         Me.ucrInputTextBreaksCal.IsReadOnly = False
         Me.ucrInputTextBreaksCal.Location = New System.Drawing.Point(268, 35)
+        Me.ucrInputTextBreaksCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksCal.Name = "ucrInputTextBreaksCal"
         Me.ucrInputTextBreaksCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksCal.TabIndex = 28
@@ -5552,6 +5695,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueCal.IsMultiline = False
         Me.ucrInputTextNaValueCal.IsReadOnly = False
         Me.ucrInputTextNaValueCal.Location = New System.Drawing.Point(268, 127)
+        Me.ucrInputTextNaValueCal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueCal.Name = "ucrInputTextNaValueCal"
         Me.ucrInputTextNaValueCal.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueCal.TabIndex = 35
@@ -5584,6 +5728,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksEx.IsMultiline = False
         Me.ucrInputTextBreaksEx.IsReadOnly = False
         Me.ucrInputTextBreaksEx.Location = New System.Drawing.Point(285, 36)
+        Me.ucrInputTextBreaksEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksEx.Name = "ucrInputTextBreaksEx"
         Me.ucrInputTextBreaksEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksEx.TabIndex = 85
@@ -5595,6 +5740,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueEx.IsMultiline = False
         Me.ucrInputTextNaValueEx.IsReadOnly = False
         Me.ucrInputTextNaValueEx.Location = New System.Drawing.Point(285, 128)
+        Me.ucrInputTextNaValueEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueEx.Name = "ucrInputTextNaValueEx"
         Me.ucrInputTextNaValueEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueEx.TabIndex = 84
@@ -5606,6 +5752,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitEx.IsMultiline = False
         Me.ucrInputTextLimitEx.IsReadOnly = False
         Me.ucrInputTextLimitEx.Location = New System.Drawing.Point(285, 59)
+        Me.ucrInputTextLimitEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitEx.Name = "ucrInputTextLimitEx"
         Me.ucrInputTextLimitEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitEx.TabIndex = 83
@@ -5617,6 +5764,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandEx.IsMultiline = False
         Me.ucrInputTextExpandEx.IsReadOnly = False
         Me.ucrInputTextExpandEx.Location = New System.Drawing.Point(285, 105)
+        Me.ucrInputTextExpandEx.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandEx.Name = "ucrInputTextExpandEx"
         Me.ucrInputTextExpandEx.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandEx.TabIndex = 82
@@ -5725,6 +5873,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksEcon.IsMultiline = False
         Me.ucrInputTextBreaksEcon.IsReadOnly = False
         Me.ucrInputTextBreaksEcon.Location = New System.Drawing.Point(285, 35)
+        Me.ucrInputTextBreaksEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksEcon.Name = "ucrInputTextBreaksEcon"
         Me.ucrInputTextBreaksEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksEcon.TabIndex = 73
@@ -5736,6 +5885,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueEcon.IsMultiline = False
         Me.ucrInputTextNaValueEcon.IsReadOnly = False
         Me.ucrInputTextNaValueEcon.Location = New System.Drawing.Point(285, 126)
+        Me.ucrInputTextNaValueEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueEcon.Name = "ucrInputTextNaValueEcon"
         Me.ucrInputTextNaValueEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueEcon.TabIndex = 72
@@ -5747,6 +5897,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitEcon.IsMultiline = False
         Me.ucrInputTextLimitEcon.IsReadOnly = False
         Me.ucrInputTextLimitEcon.Location = New System.Drawing.Point(285, 58)
+        Me.ucrInputTextLimitEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitEcon.Name = "ucrInputTextLimitEcon"
         Me.ucrInputTextLimitEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitEcon.TabIndex = 71
@@ -5758,6 +5909,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandEcon.IsMultiline = False
         Me.ucrInputTextExpandEcon.IsReadOnly = False
         Me.ucrInputTextExpandEcon.Location = New System.Drawing.Point(285, 104)
+        Me.ucrInputTextExpandEcon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandEcon.Name = "ucrInputTextExpandEcon"
         Me.ucrInputTextExpandEcon.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandEcon.TabIndex = 70
@@ -5888,6 +6040,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksExn.IsMultiline = False
         Me.ucrInputTextBreaksExn.IsReadOnly = False
         Me.ucrInputTextBreaksExn.Location = New System.Drawing.Point(285, 32)
+        Me.ucrInputTextBreaksExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksExn.Name = "ucrInputTextBreaksExn"
         Me.ucrInputTextBreaksExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksExn.TabIndex = 99
@@ -5899,6 +6052,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValueExn.IsMultiline = False
         Me.ucrInputTextNaValueExn.IsReadOnly = False
         Me.ucrInputTextNaValueExn.Location = New System.Drawing.Point(285, 121)
+        Me.ucrInputTextNaValueExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValueExn.Name = "ucrInputTextNaValueExn"
         Me.ucrInputTextNaValueExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValueExn.TabIndex = 98
@@ -5910,6 +6064,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitExn.IsMultiline = False
         Me.ucrInputTextLimitExn.IsReadOnly = False
         Me.ucrInputTextLimitExn.Location = New System.Drawing.Point(285, 55)
+        Me.ucrInputTextLimitExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitExn.Name = "ucrInputTextLimitExn"
         Me.ucrInputTextLimitExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitExn.TabIndex = 97
@@ -5921,6 +6076,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandExn.IsMultiline = False
         Me.ucrInputTextExpandExn.IsReadOnly = False
         Me.ucrInputTextExpandExn.Location = New System.Drawing.Point(285, 100)
+        Me.ucrInputTextExpandExn.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandExn.Name = "ucrInputTextExpandExn"
         Me.ucrInputTextExpandExn.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandExn.TabIndex = 96
@@ -6029,6 +6185,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreakssol.IsMultiline = False
         Me.ucrInputTextBreakssol.IsReadOnly = False
         Me.ucrInputTextBreakssol.Location = New System.Drawing.Point(285, 35)
+        Me.ucrInputTextBreakssol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreakssol.Name = "ucrInputTextBreakssol"
         Me.ucrInputTextBreakssol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreakssol.TabIndex = 169
@@ -6040,6 +6197,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuesol.IsMultiline = False
         Me.ucrInputTextNaValuesol.IsReadOnly = False
         Me.ucrInputTextNaValuesol.Location = New System.Drawing.Point(285, 126)
+        Me.ucrInputTextNaValuesol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuesol.Name = "ucrInputTextNaValuesol"
         Me.ucrInputTextNaValuesol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuesol.TabIndex = 168
@@ -6051,6 +6209,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitsol.IsMultiline = False
         Me.ucrInputTextLimitsol.IsReadOnly = False
         Me.ucrInputTextLimitsol.Location = New System.Drawing.Point(285, 58)
+        Me.ucrInputTextLimitsol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitsol.Name = "ucrInputTextLimitsol"
         Me.ucrInputTextLimitsol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimitsol.TabIndex = 167
@@ -6062,6 +6221,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandsol.IsMultiline = False
         Me.ucrInputTextExpandsol.IsReadOnly = False
         Me.ucrInputTextExpandsol.Location = New System.Drawing.Point(285, 104)
+        Me.ucrInputTextExpandsol.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandsol.Name = "ucrInputTextExpandsol"
         Me.ucrInputTextExpandsol.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandsol.TabIndex = 166
@@ -6170,6 +6330,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaks.IsMultiline = False
         Me.ucrInputTextBreaks.IsReadOnly = False
         Me.ucrInputTextBreaks.Location = New System.Drawing.Point(269, 36)
+        Me.ucrInputTextBreaks.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaks.Name = "ucrInputTextBreaks"
         Me.ucrInputTextBreaks.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaks.TabIndex = 49
@@ -6181,6 +6342,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValue.IsMultiline = False
         Me.ucrInputTextNaValue.IsReadOnly = False
         Me.ucrInputTextNaValue.Location = New System.Drawing.Point(269, 127)
+        Me.ucrInputTextNaValue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValue.Name = "ucrInputTextNaValue"
         Me.ucrInputTextNaValue.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValue.TabIndex = 48
@@ -6192,6 +6354,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimit.IsMultiline = False
         Me.ucrInputTextLimit.IsReadOnly = False
         Me.ucrInputTextLimit.Location = New System.Drawing.Point(269, 59)
+        Me.ucrInputTextLimit.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimit.Name = "ucrInputTextLimit"
         Me.ucrInputTextLimit.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimit.TabIndex = 47
@@ -6203,6 +6366,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpand.IsMultiline = False
         Me.ucrInputTextExpand.IsReadOnly = False
         Me.ucrInputTextExpand.Location = New System.Drawing.Point(269, 105)
+        Me.ucrInputTextExpand.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpand.Name = "ucrInputTextExpand"
         Me.ucrInputTextExpand.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpand.TabIndex = 46
@@ -6333,6 +6497,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreaksfew.IsMultiline = False
         Me.ucrInputTextBreaksfew.IsReadOnly = False
         Me.ucrInputTextBreaksfew.Location = New System.Drawing.Point(285, 32)
+        Me.ucrInputTextBreaksfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreaksfew.Name = "ucrInputTextBreaksfew"
         Me.ucrInputTextBreaksfew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreaksfew.TabIndex = 97
@@ -6344,6 +6509,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuefew.IsMultiline = False
         Me.ucrInputTextNaValuefew.IsReadOnly = False
         Me.ucrInputTextNaValuefew.Location = New System.Drawing.Point(285, 121)
+        Me.ucrInputTextNaValuefew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuefew.Name = "ucrInputTextNaValuefew"
         Me.ucrInputTextNaValuefew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuefew.TabIndex = 96
@@ -6355,6 +6521,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimitfew.IsMultiline = False
         Me.ucrInputTextLimitfew.IsReadOnly = False
         Me.ucrInputTextLimitfew.Location = New System.Drawing.Point(285, 55)
+        Me.ucrInputTextLimitfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimitfew.Name = "ucrInputTextLimitfew"
         Me.ucrInputTextLimitfew.Size = New System.Drawing.Size(137, 24)
         Me.ucrInputTextLimitfew.TabIndex = 95
@@ -6366,6 +6533,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandfew.IsMultiline = False
         Me.ucrInputTextExpandfew.IsReadOnly = False
         Me.ucrInputTextExpandfew.Location = New System.Drawing.Point(285, 100)
+        Me.ucrInputTextExpandfew.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandfew.Name = "ucrInputTextExpandfew"
         Me.ucrInputTextExpandfew.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandfew.TabIndex = 94
@@ -6496,6 +6664,7 @@ Partial Class sdgPlots
         Me.ucrInputTextBreakshc.IsMultiline = False
         Me.ucrInputTextBreakshc.IsReadOnly = False
         Me.ucrInputTextBreakshc.Location = New System.Drawing.Point(285, 30)
+        Me.ucrInputTextBreakshc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextBreakshc.Name = "ucrInputTextBreakshc"
         Me.ucrInputTextBreakshc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextBreakshc.TabIndex = 147
@@ -6507,6 +6676,7 @@ Partial Class sdgPlots
         Me.ucrInputTextNaValuehc.IsMultiline = False
         Me.ucrInputTextNaValuehc.IsReadOnly = False
         Me.ucrInputTextNaValuehc.Location = New System.Drawing.Point(285, 119)
+        Me.ucrInputTextNaValuehc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextNaValuehc.Name = "ucrInputTextNaValuehc"
         Me.ucrInputTextNaValuehc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextNaValuehc.TabIndex = 146
@@ -6518,6 +6688,7 @@ Partial Class sdgPlots
         Me.ucrInputTextLimithc.IsMultiline = False
         Me.ucrInputTextLimithc.IsReadOnly = False
         Me.ucrInputTextLimithc.Location = New System.Drawing.Point(285, 53)
+        Me.ucrInputTextLimithc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextLimithc.Name = "ucrInputTextLimithc"
         Me.ucrInputTextLimithc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextLimithc.TabIndex = 145
@@ -6529,6 +6700,7 @@ Partial Class sdgPlots
         Me.ucrInputTextExpandhc.IsMultiline = False
         Me.ucrInputTextExpandhc.IsReadOnly = False
         Me.ucrInputTextExpandhc.Location = New System.Drawing.Point(285, 98)
+        Me.ucrInputTextExpandhc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTextExpandhc.Name = "ucrInputTextExpandhc"
         Me.ucrInputTextExpandhc.Size = New System.Drawing.Size(137, 23)
         Me.ucrInputTextExpandhc.TabIndex = 144
@@ -7240,6 +7412,7 @@ Partial Class sdgPlots
         Me.ucrInputXmax.IsMultiline = False
         Me.ucrInputXmax.IsReadOnly = False
         Me.ucrInputXmax.Location = New System.Drawing.Point(318, 127)
+        Me.ucrInputXmax.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputXmax.Name = "ucrInputXmax"
         Me.ucrInputXmax.Size = New System.Drawing.Size(116, 21)
         Me.ucrInputXmax.TabIndex = 50
@@ -7251,6 +7424,7 @@ Partial Class sdgPlots
         Me.ucrInputYmin.IsMultiline = False
         Me.ucrInputYmin.IsReadOnly = False
         Me.ucrInputYmin.Location = New System.Drawing.Point(318, 102)
+        Me.ucrInputYmin.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputYmin.Name = "ucrInputYmin"
         Me.ucrInputYmin.Size = New System.Drawing.Size(116, 21)
         Me.ucrInputYmin.TabIndex = 49
@@ -7262,6 +7436,7 @@ Partial Class sdgPlots
         Me.ucrInputXmin.IsMultiline = False
         Me.ucrInputXmin.IsReadOnly = False
         Me.ucrInputXmin.Location = New System.Drawing.Point(318, 77)
+        Me.ucrInputXmin.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputXmin.Name = "ucrInputXmin"
         Me.ucrInputXmin.Size = New System.Drawing.Size(116, 21)
         Me.ucrInputXmin.TabIndex = 48
@@ -7313,6 +7488,7 @@ Partial Class sdgPlots
         Me.ucrInputYmax.IsMultiline = False
         Me.ucrInputYmax.IsReadOnly = False
         Me.ucrInputYmax.Location = New System.Drawing.Point(319, 152)
+        Me.ucrInputYmax.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputYmax.Name = "ucrInputYmax"
         Me.ucrInputYmax.Size = New System.Drawing.Size(115, 21)
         Me.ucrInputYmax.TabIndex = 38
@@ -7324,6 +7500,7 @@ Partial Class sdgPlots
         Me.ucrInputYend.IsMultiline = False
         Me.ucrInputYend.IsReadOnly = False
         Me.ucrInputYend.Location = New System.Drawing.Point(319, 202)
+        Me.ucrInputYend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputYend.Name = "ucrInputYend"
         Me.ucrInputYend.Size = New System.Drawing.Size(115, 21)
         Me.ucrInputYend.TabIndex = 37
@@ -7335,6 +7512,7 @@ Partial Class sdgPlots
         Me.ucrInputXend.IsMultiline = False
         Me.ucrInputXend.IsReadOnly = False
         Me.ucrInputXend.Location = New System.Drawing.Point(319, 177)
+        Me.ucrInputXend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputXend.Name = "ucrInputXend"
         Me.ucrInputXend.Size = New System.Drawing.Size(115, 21)
         Me.ucrInputXend.TabIndex = 36
@@ -7461,6 +7639,7 @@ Partial Class sdgPlots
         Me.ucrInputLabel.IsMultiline = False
         Me.ucrInputLabel.IsReadOnly = False
         Me.ucrInputLabel.Location = New System.Drawing.Point(75, 154)
+        Me.ucrInputLabel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputLabel.Name = "ucrInputLabel"
         Me.ucrInputLabel.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLabel.TabIndex = 90
@@ -7483,6 +7662,7 @@ Partial Class sdgPlots
         Me.ucrInputY.IsMultiline = False
         Me.ucrInputY.IsReadOnly = False
         Me.ucrInputY.Location = New System.Drawing.Point(318, 52)
+        Me.ucrInputY.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputY.Name = "ucrInputY"
         Me.ucrInputY.Size = New System.Drawing.Size(116, 21)
         Me.ucrInputY.TabIndex = 70
@@ -7494,6 +7674,7 @@ Partial Class sdgPlots
         Me.ucrInputX.IsMultiline = False
         Me.ucrInputX.IsReadOnly = False
         Me.ucrInputX.Location = New System.Drawing.Point(318, 27)
+        Me.ucrInputX.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputX.Name = "ucrInputX"
         Me.ucrInputX.Size = New System.Drawing.Size(116, 21)
         Me.ucrInputX.TabIndex = 71
@@ -7524,50 +7705,6 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 1
-        '
-        'ucrInputAesth
-        '
-        Me.ucrInputAesth.AddQuotesIfUnrecognised = True
-        Me.ucrInputAesth.AutoSize = True
-        Me.ucrInputAesth.IsMultiline = False
-        Me.ucrInputAesth.IsReadOnly = False
-        Me.ucrInputAesth.Location = New System.Drawing.Point(250, 42)
-        Me.ucrInputAesth.Name = "ucrInputAesth"
-        Me.ucrInputAesth.Size = New System.Drawing.Size(177, 21)
-        Me.ucrInputAesth.TabIndex = 10
-        '
-        'ucrInputAthsColor
-        '
-        Me.ucrInputAthsColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputAthsColor.AutoSize = True
-        Me.ucrInputAthsColor.IsMultiline = False
-        Me.ucrInputAthsColor.IsReadOnly = False
-        Me.ucrInputAthsColor.Location = New System.Drawing.Point(250, 43)
-        Me.ucrInputAthsColor.Name = "ucrInputAthsColor"
-        Me.ucrInputAthsColor.Size = New System.Drawing.Size(177, 21)
-        Me.ucrInputAthsColor.TabIndex = 12
-        '
-        'ucrInputValue
-        '
-        Me.ucrInputValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputValue.AutoSize = True
-        Me.ucrInputValue.IsMultiline = False
-        Me.ucrInputValue.IsReadOnly = False
-        Me.ucrInputValue.Location = New System.Drawing.Point(250, 12)
-        Me.ucrInputValue.Name = "ucrInputValue"
-        Me.ucrInputValue.Size = New System.Drawing.Size(177, 21)
-        Me.ucrInputValue.TabIndex = 11
-        '
-        'ucrInputValueColor
-        '
-        Me.ucrInputValueColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputValueColor.AutoSize = True
-        Me.ucrInputValueColor.IsMultiline = False
-        Me.ucrInputValueColor.IsReadOnly = False
-        Me.ucrInputValueColor.Location = New System.Drawing.Point(250, 13)
-        Me.ucrInputValueColor.Name = "ucrInputValueColor"
-        Me.ucrInputValueColor.Size = New System.Drawing.Size(177, 21)
-        Me.ucrInputValueColor.TabIndex = 13
         '
         'sdgPlots
         '

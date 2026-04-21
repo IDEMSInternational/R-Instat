@@ -54,6 +54,8 @@ Public Class dlgMosaicPlot
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -170,7 +172,7 @@ Public Class dlgMosaicPlot
         ucr1stFactorReceiver.SetParameterPosition(1)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrChkJitter.SetText("Jitter")
@@ -376,15 +378,23 @@ Public Class dlgMosaicPlot
         End If
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
-            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
-                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
                 bUpdateComboOptions = False
                 ucrInputStation.SetName(strNone)
                 bUpdateComboOptions = True
             End If
-            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
-                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
-                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
                 ucrInputStation.SetName(strNone)
             End If
         End If
@@ -397,7 +407,6 @@ Public Class dlgMosaicPlot
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
         ucr1stFactorReceiver.SetRCode(Nothing)
@@ -405,10 +414,10 @@ Public Class dlgMosaicPlot
             Case strFacetWrap
                 ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
-            Case strFacetCol
+            Case strFacetCol, strFacetColAll
                 ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
                 ucr1stFactorReceiver.SetRCode(clsFacetColOp)
-            Case strFacetRow
+            Case strFacetRow, strFacetRowAll
                 ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
                 ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
         End Select
@@ -422,11 +431,13 @@ Public Class dlgMosaicPlot
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
-
+        clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
@@ -435,30 +446,36 @@ Public Class dlgMosaicPlot
                     bCol = True
                 Case strFacetRow
                     bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("facets")
         End If
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
         End If
-        If bRow OrElse bCol Then
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll Then
             clsFacetFunction.SetRCommand("facet_grid")
         End If
-        If bRow Then
+        If bRowAll OrElse bColAll Then
+            clsFacetFunction.AddParameter("margin", "TRUE")
+        Else
+            clsFacetFunction.RemoveParameterByName("margin")
+        End If
+        If bRow OrElse bRowAll Then
             clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf bCol AndAlso bWrap = False Then
+        ElseIf (bCol OrElse bColAll) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("left")
         End If
-        If bCol Then
+        If bCol OrElse bColAll Then
             clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf bRow AndAlso bWrap = False Then
+        ElseIf (bRow OrElse bColAll) AndAlso bWrap = False Then
             clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
         Else
             clsFacetVariablesOperator.RemoveParameterByName("right")
@@ -487,13 +504,12 @@ Public Class dlgMosaicPlot
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol
+                    Case strFacetCol, strFacetColAll
                         GetParameterValue(clsFacetColOp)
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         GetParameterValue(clsFacetRowOp)
                 End Select
             End If
-
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             Else
@@ -502,7 +518,6 @@ Public Class dlgMosaicPlot
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
-
         SetPipeAssignTo()
     End Sub
 
@@ -588,6 +603,7 @@ Public Class dlgMosaicPlot
                          clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableColour:=False, bNewEnableDiscrete:=False, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        ucr1stFactorReceiver.Add(sdgPlots.ucr1stFactorReceiver.GetText)
         bResetSubdialog = False
         SetRCodeForControls(False)
         AddRemoveXAxisTextParameters()

@@ -33,6 +33,8 @@ Public Class dlgCompareTreatmentLines
     ' String constants for Context variables
     Public strFacetRow As String = "Facet Row"
     Public strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
     Public strColour As String = "Colour"
     Public strNone As String = "None"
 
@@ -148,10 +150,10 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverContext2.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext2.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
-        ucrInputContext1.SetItems({strFacetRow, strFacetCol, strNone})
+        ucrInputContext1.SetItems({strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputContext1.SetDropDownStyleAsNonEditable()
 
-        ucrInputContext2.SetItems({strFacetRow, strFacetCol, strNone})
+        ucrInputContext2.SetItems({strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strNone})
         ucrInputContext2.SetDropDownStyleAsNonEditable()
 
         ucrSavePlot.SetPrefix("two_options")
@@ -170,7 +172,7 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverContext3.SetOptionsByContextTypesAllOptionsContextsBlockings()
         ucrReceiverContext3.SetLinkedDisplayControl(lblContext3)
 
-        ucrInputContext3.SetItems({strFacetRow, strFacetCol, strColour, strNone})
+        ucrInputContext3.SetItems({strFacetRow, strFacetCol, strColour, strFacetRowAll, strFacetColAll, strNone})
         ucrInputContext3.SetDropDownStyleAsNonEditable()
 
         ucrChkIncludeSmoothLine.SetText("Include Smooth Line")
@@ -320,6 +322,7 @@ Public Class dlgCompareTreatmentLines
                     Next
                 End If
             End If
+
             clsCompareLines.clsFacetColOp.ClearParameters()
             clsCompareLines.clsFacetRowOp.ClearParameters()
             clsCompareLines.clsFacetOp.ClearParameters()
@@ -328,41 +331,45 @@ Public Class dlgCompareTreatmentLines
 
             If Not ucrReceiverContext1.IsEmpty() Then
                 Select Case ucrInputContext1.GetText()
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         clsCompareLines.clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iRowVars)
-                        iRowVars = iRowVars + 1
-                    Case strFacetCol
+                        iRowVars += 1
+                    Case strFacetCol, strFacetColAll
                         clsCompareLines.clsFacetColOp.AddParameter(iColVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iColVars)
-                        iColVars = iColVars + 1
+                        iColVars += 1
                     Case strColour
                         clsComparePoints.clsPointAes.AddParameter("colour", ucrReceiverContext1.GetVariableNames(False), iPosition:=3)
                 End Select
             End If
+
             If Not ucrReceiverContext2.IsEmpty() Then
                 Select Case ucrInputContext2.GetText()
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         clsCompareLines.clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iRowVars)
-                        iRowVars = iRowVars + 1
-                    Case strFacetCol
+                        iRowVars += 1
+                    Case strFacetCol, strFacetColAll
                         clsCompareLines.clsFacetColOp.AddParameter(iColVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iColVars)
-                        iColVars = iColVars + 1
+                        iColVars += 1
                     Case strColour
                         clsComparePoints.clsPointAes.AddParameter("colour", ucrReceiverContext2.GetVariableNames(False), iPosition:=3)
                 End Select
             End If
+
             If Not ucrReceiverContext3.IsEmpty() Then
                 Select Case ucrInputContext3.GetText()
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         clsCompareLines.clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iRowVars)
-                        iRowVars = iRowVars + 1
-                    Case strFacetCol
+                        iRowVars += 1
+                    Case strFacetCol, strFacetColAll
                         clsCompareLines.clsFacetColOp.AddParameter(iColVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iColVars)
-                        iColVars = iColVars + 1
+                        iColVars += 1
                     Case strColour
                         clsComparePoints.clsPointAes.AddParameter("colour", ucrReceiverContext3.GetVariableNames(False), iPosition:=3)
                 End Select
             End If
+
             clsCompareLines.clsRFacetFunction.SetRCommand("facet_wrap")
+
             If (rdoLines.Checked AndAlso iRowVars = 2) OrElse (rdoPoints.Checked AndAlso iRowVars = 3) Then
                 clsCompareLines.clsFacetOp.AddParameter("left", "", iPosition:=0)
                 clsCompareLines.clsFacetOp.AddParameter("right", clsROperatorParameter:=clsCompareLines.clsFacetRowOp, iPosition:=1)
@@ -393,6 +400,7 @@ Public Class dlgCompareTreatmentLines
             End If
         End If
     End Sub
+
 
     Private Sub ucrChkIncludeBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeBoxplot.ControlValueChanged
         If ucrChkIncludeBoxplot.Checked Then
@@ -449,17 +457,18 @@ Public Class dlgCompareTreatmentLines
         Dim strContext3 As String
 
         bUpdating = True
+
         strContext1 = ucrInputContext1.GetText()
         strContext2 = ucrInputContext2.GetText()
         strContext3 = ucrInputContext3.GetText()
         If rdoLines.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsCompareLines.clsBaseOperator)
-            ucrInputContext1.SetItems({strFacetRow, strFacetCol, strNone})
-            ucrInputContext2.SetItems({strFacetRow, strFacetCol, strNone})
+            ucrInputContext1.SetItems({strFacetRow, strFacetRowAll, strFacetCol, strFacetColAll, strNone})
+            ucrInputContext2.SetItems({strFacetRow, strFacetRowAll, strFacetCol, strFacetColAll, strNone})
         ElseIf rdoPoints.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsComparePoints.clsBaseOperator)
-            ucrInputContext1.SetItems({strFacetRow, strFacetCol, strColour, strNone})
-            ucrInputContext2.SetItems({strFacetRow, strFacetCol, strColour, strNone})
+            ucrInputContext1.SetItems({strFacetRow, strFacetRowAll, strFacetCol, strFacetColAll, strColour, strNone})
+            ucrInputContext2.SetItems({strFacetRow, strFacetRowAll, strFacetCol, strFacetColAll, strColour, strNone})
         End If
         If rdoLines.Checked AndAlso strContext1 = strColour Then
             ucrInputContext1.SetName(strNone)

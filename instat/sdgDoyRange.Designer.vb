@@ -40,6 +40,7 @@ Partial Class sdgDoyRange
         Me.ucrPnlTo = New instat.UcrPanel()
         Me.ucrSelectorDoy = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseSub = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkUseDate = New instat.ucrCheck()
         Me.grpFrom.SuspendLayout()
         Me.grpTo.SuspendLayout()
         Me.SuspendLayout()
@@ -242,12 +243,22 @@ Partial Class sdgDoyRange
         Me.ucrBaseSub.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSub.TabIndex = 3
         '
+        'ucrChkUseDate
+        '
+        Me.ucrChkUseDate.AutoSize = True
+        Me.ucrChkUseDate.Checked = False
+        Me.ucrChkUseDate.Location = New System.Drawing.Point(257, 169)
+        Me.ucrChkUseDate.Name = "ucrChkUseDate"
+        Me.ucrChkUseDate.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkUseDate.TabIndex = 4
+        '
         'sdgDoyRange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(587, 357)
+        Me.Controls.Add(Me.ucrChkUseDate)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDoy)
         Me.Controls.Add(Me.grpFrom)
@@ -285,4 +296,5 @@ Partial Class sdgDoyRange
     Friend WithEvents ucrSelectorDoy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrDoyFrom As ucrDayOfYear
     Friend WithEvents lblToDays As Label
+    Friend WithEvents ucrChkUseDate As ucrCheck
 End Class

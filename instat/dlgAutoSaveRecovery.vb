@@ -121,7 +121,7 @@ Public Class dlgAutoSaveRecovery
                     File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText(), True)
                 End If
             Catch ex As Exception
-                MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
@@ -130,7 +130,7 @@ Public Class dlgAutoSaveRecovery
                     File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText(), True)
                 End If
             Catch ex As Exception
-                MsgBox("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
@@ -139,19 +139,19 @@ Public Class dlgAutoSaveRecovery
                     File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.GetText(), True)
                 End If
             Catch ex As Exception
-                MsgBox("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
     End Sub
 
     Private Sub cmdRunLog_Click(sender As Object, e As EventArgs) Handles cmdRunLog.Click
-        If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost." & Environment.NewLine & "Warning: running the log file can fail if files have been moved.", MessageBoxButtons.YesNo, "Are you sure you are finished?") = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost." & Environment.NewLine & "Warning: running the log file can fail if files have been moved.", MessageBoxButtons.YesNo, "Are you sure you are finished?") = MsgBoxResult.Yes Then
             SaveFiles()
             If File.Exists(strAutoSavedLogFilePaths(0)) Then
                 Try
                     strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
                 Catch ex As Exception
-                    MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
+                    MsgBoxTranslate("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
                     strScript = ""
                 End Try
             End If
@@ -161,7 +161,7 @@ Public Class dlgAutoSaveRecovery
     End Sub
 
     Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
-        If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
             SaveFiles()
             strLoadDateFilePath = strAutoSavedDataFilePaths(0)
             bUserClose = False
@@ -170,7 +170,7 @@ Public Class dlgAutoSaveRecovery
     End Sub
 
     Private Sub cmdNewSession_Click(sender As Object, e As EventArgs) Handles cmdNewSession.Click
-        If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
+        If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
             SaveFiles()
             bUserClose = False
             Close()
@@ -179,7 +179,7 @@ Public Class dlgAutoSaveRecovery
 
     Private Sub dlgAutoSaveRecovery_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If bUserClose Then
-            If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.No Then
+            If MsgBoxTranslate("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.No Then
                 e.Cancel = True
             End If
         End If

@@ -22,6 +22,7 @@ Public Class dlgVisualizeData
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -61,6 +62,7 @@ Public Class dlgVisualizeData
         Dim dctPaletteGuess As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 733
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
@@ -86,7 +88,7 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddToLinkedControls(ucrChkFacet, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat, rdoVisGuess}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputColourPalette, {rdoNumeric}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Viridis")
@@ -344,6 +346,8 @@ Public Class dlgVisualizeData
                 ucrBase.iHelpTopicID = 600
             Case VisualizeMode.Climatic
                 ucrBase.iHelpTopicID = 524
+            Case VisualizeMode.Tricot
+                ucrBase.iHelpTopicID = 733
         End Select
     End Sub
 

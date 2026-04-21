@@ -16,6 +16,7 @@
 
 Imports instat
 Imports RDotNet
+Imports instat.Translations
 
 Public Class ucrInput
     Public bUserTyped As Boolean = False
@@ -298,39 +299,39 @@ Public Class ucrInput
             Case 1
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox(Chr(34) & strText & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
+                        MsgBoxTranslate(Chr(34) & strText & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
                     Case "Numeric"
-                        MsgBox("Entry must be numeric.", vbOKOnly)
+                        MsgBoxTranslate("Entry must be numeric.", vbOKOnly)
                     Case "List"
-                        MsgBox("Textbox requires a list separated by commas.", vbOKOnly, "Validation Error")
+                        MsgBoxTranslate("Textbox requires a list separated by commas.", vbOKOnly, "Validation Error")
                     Case "NumericList"
-                        MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
+                        MsgBoxTranslate("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
                 End Select
             Case 2
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox("This name cannot start with " & strText(0), vbOKOnly)
+                        MsgBoxTranslate("This name cannot start with " & strText(0), vbOKOnly)
                     Case "Numeric"
-                        MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
+                        MsgBoxTranslate("This number must be: " & GetNumericRange(), vbOKOnly)
                     Case "NumericList"
-                        MsgBox("Each item in the list must be numeric.", vbOKOnly, "Validation Error")
+                        MsgBoxTranslate("Each item in the list must be numeric.", vbOKOnly, "Validation Error")
                 End Select
             Case 3
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+                        MsgBoxTranslate("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
                     Case "NumericList"
-                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
+                        MsgBoxTranslate("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
                 End Select
             Case 4
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox("This name cannot contain a space", vbOKOnly)
+                        MsgBoxTranslate("This name cannot contain a space", vbOKOnly)
                 End Select
             Case 5
                 Select Case strValidationType
                     Case "RVariable"
-                        MsgBox("This name contains an invalid character", vbOKOnly)
+                        MsgBoxTranslate("This name contains an invalid character", vbOKOnly)
 
                 End Select
         End Select
@@ -354,7 +355,7 @@ Public Class ucrInput
                     Dim vecOutput As CharacterVector
                     'is.numeric(x) returns true if the x expression is a valid one.
                     'So we use it here to check validity of the entry
-                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("is.numeric(" & strText & ")", bSilent:=True)
+                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("is.numeric(tryCatch(eval(parse(text=" & Chr(34) & strText & Chr(34) & ")), error=function(e) NA))", bSilent:=True)
                     If vecOutput IsNot Nothing AndAlso vecOutput.Length > 0 AndAlso Mid(vecOutput(0), 5).ToUpper = "TRUE" Then
                         iType = 0 'set as valid entry
                     End If
@@ -436,8 +437,14 @@ Public Class ucrInput
                 If strVal = "" Then Return 1
                 Dim clsTempParam As New RParameter
                 If bIsNumericInput Then
+                    Dim vecOutput As CharacterVector
                     If Not IsNumeric(strVal) AndAlso (Not (bAllowInf AndAlso ({"Inf", "-Inf"}.Contains(strVal)))) Then
-                        Return 2
+                        vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(
+                            "is.numeric(tryCatch(eval(parse(text=" & Chr(34) & strVal & Chr(34) & ")), error=function(e) NA))",
+                            bSilent:=True)
+                        If vecOutput Is Nothing OrElse vecOutput.Length = 0 OrElse vecOutput(0).ToUpperInvariant().Contains("FALSE") Then
+                            Return 2
+                        End If
                     ElseIf IsNumeric(strVal) AndAlso (strVal > dcmMaximum OrElse strVal < dcmMinimum) Then
                         Return 3
                     End If

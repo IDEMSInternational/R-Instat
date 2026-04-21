@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.dlgUnstack
 Imports instat.Translations
 
 Public Class dlgStack
@@ -21,6 +22,7 @@ Public Class dlgStack
     Public Enum StackMode
         Prepare
         Climatic
+        Tricot
     End Enum
 
 
@@ -49,6 +51,7 @@ Public Class dlgStack
         SetHelpOptions()
         bReset = False
         TestOKEnabled()
+        HideShowControls()
         autoTranslate(Me)
     End Sub
 
@@ -110,7 +113,6 @@ Public Class dlgStack
         ucrChkStackMultipleSets.AddToLinkedControls(ucrInputValuesTo, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropMissingValues, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropPrefix, {False}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStackMultipleSets.AddToLinkedControls(ucrInputDropPrefix, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrInputNamesTo, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddFunctionNamesCondition(True, "reshape")
         ucrChkStackMultipleSets.AddFunctionNamesCondition(False, "pivot_longer")
@@ -442,20 +444,31 @@ Public Class dlgStack
         ucrBase.clsRsyntax.SetBaseRFunction(If(ucrChkStackMultipleSets.Checked _
                                              , clsReshapeFunction, clsPivotLongerFunction))
         If ucrChkStackMultipleSets.Checked Then
-            ucrChkDropPrefix.Visible = False
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
             If ucrChkDropVariables.Checked Then
                 ucrReceiverDropValues.SetMeAsReceiver()
             End If
         Else
-            ucrChkDropPrefix.Visible = True
-        End If
-        If ucrChkStackMultipleSets.Checked = False Then
             If ucrChkDropVariables.Checked Then
                 ucrReceiverColumnsToBeStack.SetMeAsReceiver()
             End If
         End If
         TestOKEnabled()
+        HideShowControls()
+    End Sub
+
+    Private Sub HideShowControls()
+        If ucrChkStackMultipleSets.Checked Then
+            ucrChkDropPrefix.Visible = False
+            ucrInputDropPrefix.Visible = False
+        Else
+            ucrChkDropPrefix.Visible = True
+            If ucrChkDropPrefix.Checked Then
+                ucrInputDropPrefix.Visible = True
+            Else
+                ucrInputDropPrefix.Visible = False
+            End If
+        End If
     End Sub
 
     Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrReceiverFrequency.ControlValueChanged, ucrSelectorStack.ControlValueChanged
@@ -494,6 +507,8 @@ Public Class dlgStack
                 ucrBase.iHelpTopicID = 57
             Case StackMode.Climatic
                 ucrBase.iHelpTopicID = 607
+            Case UnstackMode.Tricot
+                ucrBase.iHelpTopicID = 750
         End Select
     End Sub
 
@@ -509,5 +524,9 @@ Public Class dlgStack
 
     Private Sub ucrReceiverDropValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDropValues.ControlValueChanged
         Excludevariables()
+    End Sub
+
+    Private Sub ucrChkDropPrefix_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropPrefix.ControlValueChanged, ucrInputDropPrefix.ControlValueChanged
+        HideShowControls()
     End Sub
 End Class

@@ -17,38 +17,93 @@
 Imports instat.Translations
 
 Public Class sdgDisplayModelOptions
-    Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction As RFunction
-    Private clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction As RFunction
-    Private clsGetDataFrameFunction, clsSndgetVarmataFunction, clsLevelFunction, clsFactorFunction As RFunction
-    Private clsStatsOperator, clsCoefOperator, clsAssignOperator, clsSpaceOperator As ROperator
-    Private clsGetObjectHeatFunction, clsGetObjectPlotFunction, clsGetObjectBarFunction, clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction As RFunction
-    Private bRCodeSet As Boolean = True
+    Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction,
+        clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
+    Private clsCoefFunction, clsStatsFunction, clsImportDataFunction, clsDefineAsTricotFunction As RFunction
+    Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction, clsWrapTrees As RFunction
+    Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
+    Private bInitialised As Boolean = False
+    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.nocovariates
+
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        SetHelpOptions()
     End Sub
 
+    Public Enum PlacketLuceModelMode
+        nocovariates
+        tree
+        ModelOneVarCov2
+        ModellingGeneral2
+    End Enum
+
     Private Sub InitialiseDialog()
-        ' InitialiseTabs()
+
+        ' Adding tooltips
+        AddToolTip(ucrChkModel, "Provides an overview of the model including" + Environment.NewLine +
+                   "item rankings, coefficients, And model fit.")
+        AddToolTip(ucrChkANOVA, "Assesses the goodness Of fit For the Plackett Luce model fitted")
+        AddToolTip(ucrChkEstimates, "Displays the model coefficients (item worths)." + Environment.NewLine +
+                   "With an Option To log-transform them For easier interpretation.")
+        AddToolTip(ucrChkConfLimits, "Shows confidence intervals For the estimated item worths," + Environment.NewLine +
+                   "indicating the uncertainty around Each value.")
+        AddToolTip(ucrChkAIC, "Displays Akaike's Information Criterion to help compare model quality," + Environment.NewLine +
+                   "with lower values indicating better fit.")
+        AddToolTip(ucrChkDeviance, "Reports the deviance statistic, measuring how well the model" + Environment.NewLine +
+                   "fits the observed data (lower is better).")
+        AddToolTip(ucrChkSndEstimetes, "Lists the predicted probabilities or rankings from the fitted model.")
+        AddToolTip(ucrChkParProp, "Shows the probability of one item being preferred over" + Environment.NewLine +
+                   "another based on the model.")
+        AddToolTip(ucrChkReability, "Measures how consistently the model distinguishes between items," + Environment.NewLine +
+                   "often used to assess precision or predictability.")
+        AddToolTip(ucrChkItemPara, "Lists the estimated worth (preference scores)" + Environment.NewLine +
+                   "of each item in the model.")
+        AddToolTip(ucrChkVaCoMa, "Displays the estimated variances and" + Environment.NewLine +
+                   "covariances between item parameters.")
+        AddToolTip(ucrChkQuasiVa, "Provides quasi-variances and standard errors," + Environment.NewLine +
+                   "allowing valid comparisons between multiple items" + Environment.NewLine +
+                   "without needing a reference item.")
+        AddToolTip(ucrChkRegret, "Displays regret values at each node, reflecting the potential loss from" + Environment.NewLine +
+                   "not choosing the optimal item (based on worst-case scenarios).")
+        AddToolTip(ucrChkNodeLabel, "Shows labels for each terminal node," + Environment.NewLine +
+                   "often based on top items or group summaries.")
+        AddToolTip(ucrChkNodeRules, "Lists the conditions (e.g. variable splits)" + Environment.NewLine +
+                   "used to form each node in the tree.")
+        AddToolTip(ucrChkTopItem, "Highlights the most preferred items within each terminal node," + Environment.NewLine +
+                   "helping interpret local preferences across subgroups.")
+        ttModelDisplay.SetToolTip(rdoMap, "Produces plots to highlight worth coefficients of" + Environment.NewLine +
+                   "items in a party tree of a list of PlackettLuce models." + Environment.NewLine +
+                   "The y axis gives the traits in the order that they have" + Environment.NewLine +
+                   "been entered on the main dialog.")
+        ttModelDisplay.SetToolTip(rdoBar, "Plots the item worths as a bar chart for a single model," + Environment.NewLine +
+                   "making it easy to compare relative rankings.")
+        ttModelDisplay.SetToolTip(rdoTree, "Shows the structure of the Plackett-Luce tree," + Environment.NewLine +
+                   "including the variables used for splits and the decision rules at each node.")
+
+
         ucrChkModel.SetText("Summary")
-        ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, True)
-        ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
+        ucrChkModel.AddParameterValuesCondition(True, "summary", "True")
+        ucrChkModel.AddParameterValuesCondition(False, "summary", "False")
 
         ucrChkANOVA.SetText("ANOVA")
         ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(True, {"gosset:::anova.PlackettLuce(.x)"}, True)
         ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(False, {"gosset:::anova.PlackettLuce(.x)"}, False)
 
-        ucrChkEstimates.SetText("Estimates")
+        ucrChkEstimates.SetText("Coefficients")
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(True, {"coef"}, True)
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(False, {"coef"}, False)
-        ucrChkEstimates.AddToLinkedControls(ucrChkLog, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkEstimates.AddToLinkedControls({ucrChkLog, ucrChkSave}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLog.SetText("Log")
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(True, {"log"}, True)
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(False, {"log"}, False)
+
+        ucrChkSave.SetText("Store as Data Frame")
+        ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(True, {"save"}, True)
+        ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(False, {"save"}, False)
 
         ucrChkConfLimits.SetText("Confidence Limits")
         ucrChkConfLimits.AddRSyntaxContainsFunctionNamesCondition(True, {"confint"}, True)
@@ -60,7 +115,6 @@ Public Class sdgDisplayModelOptions
         ucrNudConfLevel.Increment = 0.01
         ucrNudConfLevel.SetMinMax(0, 1)
         ucrNudConfLevel.SetLinkedDisplayControl(lblConfLevel)
-        'ucrNudConfLevel.SetRDefault(0.95)
 
         ucrChkAIC.SetText("AIC")
         ucrChkAIC.AddRSyntaxContainsFunctionNamesCondition(True, {"aic"}, True)
@@ -70,11 +124,11 @@ Public Class sdgDisplayModelOptions
         ucrChkDeviance.AddRSyntaxContainsFunctionNamesCondition(True, {"deviance"}, True)
         ucrChkDeviance.AddRSyntaxContainsFunctionNamesCondition(False, {"deviance"}, False)
 
-        ucrChkSndEstimetes.SetText("Estimates")
+        ucrChkSndEstimetes.SetText("Fitted Values")
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(True, {"snd_estimates"}, True)
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(False, {"snd_estimates"}, False)
 
-        ucrChkParProp.SetText("Pairewise Probabilities")
+        ucrChkParProp.SetText("Pairwise Probabilities")
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(True, {"pair"}, True)
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(False, {"pair"}, False)
 
@@ -117,32 +171,56 @@ Public Class sdgDisplayModelOptions
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
         ucrNudNumber.SetRDefault(1)
 
-        ucrChkPlot.SetText("Plot")
-        ucrChkBar.SetText("Bar Chart of Estimated Worth")
-        ucrChkHeat.SetText("Heatmap of Estimated Worth")
-        ucrChkTopItem.AddToLinkedControls(ucrChkLogGraphic, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        If Not bInitialised Then
+            ucrPnlPlots.AddRadioButton(rdoNoPlot)
+            ucrPnlPlots.AddRadioButton(rdoPlot)
+            ucrPnlPlots.AddRadioButton(rdoMap)
+            ucrPnlPlots.AddRadioButton(rdoBar)
+            ucrPnlPlots.AddRadioButton(rdoTree)
+            ucrPnlPlots.AddParameterValuesCondition(rdoNoPlot, "plot", "True")
+            ucrPnlPlots.AddParameterValuesCondition(rdoPlot, "plot", "False")
+            ucrPnlPlots.AddParameterValuesCondition(rdoMap, "plot", "False")
+            ucrPnlPlots.AddParameterValuesCondition(rdoBar, "plot", "False")
+            ucrPnlPlots.AddParameterValuesCondition(rdoTree, "plot", "False")
+            ucrPnlPlots.AddToLinkedControls({ucrChkLogGraphic}, {rdoMap}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+            ucrPnlPlots.AddToLinkedControls({ucrSavePlots}, {rdoMap, rdoBar, rdoPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+            bInitialised = True
+        End If
+
         ucrChkLogGraphic.SetText("Log")
 
+        ucrSavePlots.SetPrefix("plot")
+        ucrSavePlots.SetSaveTypeAsGraph()
+        ucrSavePlots.SetDataFrameSelector(dlgPlacketLuceModel.ucrSelectorTraitsPL.ucrAvailableDataFrames)
+        ucrSavePlots.SetCheckBoxText("Store Graph")
+        ucrSavePlots.SetIsComboBox()
+        ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrChkLogGraphic.Enabled = False
         bControlsInitialised = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewGetObjectHeatFunction As RFunction, clsNewGetObjectPlotFunction As RFunction, clsNewGetObjectBarFunction As RFunction, clsNewAddObjectHeatFunction As RFunction, clsNewAddObjectPlotFunction As RFunction, clsNewAddObjectBarFunction As RFunction, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewGetDataFrameFunction As RFunction, clsNewSndgetVarmataFunction As RFunction, clsNewLevelFunction As RFunction, clsNewFactorFunction As RFunction, clsNewStatsOperator As ROperator, clsNewAssigneOperator As ROperator, clsNewSpaceOperator As ROperator, clsNewCoefOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction,
+                        clsNewImportDataFunction As RFunction, clsNewDefineAsTricotFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction,
+                        clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction,
+                        clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction,
+                        clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, clsNewWrapTree As RFunction, Optional bReset As Boolean = False)
+
         ucrNudConfLevel.SetText("0.95")
-        bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseDialog()
         End If
 
         clsRSyntax = clsNewRSyntax
-        clsGetObjectHeatFunction = clsNewGetObjectHeatFunction
-        clsGetObjectPlotFunction = clsNewGetObjectPlotFunction
-        clsGetObjectBarFunction = clsNewGetObjectBarFunction
-        clsAddObjectHeatFunction = clsNewAddObjectHeatFunction
-        clsAddObjectPlotFunction = clsNewAddObjectPlotFunction
-        clsAddObjectBarFunction = clsNewAddObjectBarFunction
+        clsDummyFunction = New RFunction
+        clsDummyFunction.AddParameter("plot", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("summary", "True", iPosition:=1)
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
+        clsDefineAsTricotFunction = clsNewDefineAsTricotFunction
+        clsImportDataFunction = clsNewImportDataFunction
+        clsPipeOperator = clsNewPipeOperator
         clsConfidenLimFunction = clsNewConfidenLimFunction
         clsAICFunction = clsNewAICFunction
         clsDevianceFunction = clsNewDevianceFunction
@@ -161,26 +239,19 @@ Public Class sdgDisplayModelOptions
         clsPlotFunction = clsNewPlotFunction
         clsHeatFunction = clsNewHeatFunction
         clsBarfunction = clsNewBarfunction
-        clsStatsOperator = clsNewStatsOperator
-        clsCoefOperator = clsNewCoefOperator
-        clsGetDataFrameFunction = clsNewGetDataFrameFunction
-        clsLevelFunction = clsNewLevelFunction
-        clsFactorFunction = clsNewFactorFunction
+        clsTreeFunction = clsNewTreeFunction
         clsWrapBarFunction = clsNewWrapBarFunction
         clsWrapPlotFunction = clsNewWrapPlotFunction
-        clsAssignOperator = clsNewAssigneOperator
-        clsSpaceOperator = clsNewSpaceOperator
-        clsSndgetVarmataFunction = clsNewSndgetVarmataFunction
+        clsWrapTrees = clsNewWrapTree
 
         If bReset Then
             ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-            ucrChkModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkModel.SetRCode(clsDummyFunction, bReset)
             ucrChkEstimates.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkSave.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkLog.SetRCode(clsCoefFunction, bReset, bCloneIfNeeded:=True)
             ucrChkAIC.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-
             ucrChkConfLimits.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-
             ucrNudConfLevel.SetRCode(clsStatsFunction, bReset, bCloneIfNeeded:=True)
             ucrChkDeviance.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkItemPara.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
@@ -194,11 +265,21 @@ Public Class sdgDisplayModelOptions
             ucrChkTopItem.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkVaCoMa.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrNudConfLevel.SetRCode(clsStatsFunction, bReset)
-            ucrChkPlot.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-            ucrChkHeat.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-            ucrChkBar.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrSavePlots.AddAdditionalRCode(clsWrapPlotFunction, 1)
+            ucrSavePlots.AddAdditionalRCode(clsWrapBarFunction, 2)
+            ucrSavePlots.SetRCode(clsHeatFunction, bReset, bCloneIfNeeded:=True)
             ucrChkLogGraphic.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrPnlPlots.SetRCode(clsDummyFunction, bReset)
         End If
+        AddRemoveSummary()
+    End Sub
+
+    Private Sub AddToolTip(cntrl As ucrCore, value As String)
+        For Each element As Control In cntrl.Controls
+            If TypeOf element Is CheckBox Then
+                ttModelDisplay.SetToolTip(element, value)
+            End If
+        Next
     End Sub
 
     Private Sub ucrChkAIC_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAIC.ControlValueChanged
@@ -235,9 +316,10 @@ Public Class sdgDisplayModelOptions
 
     Private Sub ucrChkEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEstimates.ControlValueChanged
         If ucrChkEstimates.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsEstimatesFunction)
+            clsRSyntax.AddToBeforeCodes(clsEstimatesFunction, iPosition:=11)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsEstimatesFunction)
+            ucrChkSave.Checked = False
         End If
     End Sub
 
@@ -257,7 +339,26 @@ Public Class sdgDisplayModelOptions
         End If
     End Sub
 
+    Private Sub ucrChkSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlValueChanged
+        If ucrChkSave.Checked Then
+            clsEstimatesFunction.SetAssignTo("coefficients_data")
+            clsRSyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=12)
+            clsRSyntax.AddToBeforeCodes(clsImportDataFunction, iPosition:=13)
+            clsRSyntax.AddToBeforeCodes(clsDefineAsTricotFunction, iPosition:=14)
+        Else
+            clsEstimatesFunction.RemoveAssignTo()
+            clsRSyntax.RemoveFromBeforeCodes(clsPipeOperator)
+            clsRSyntax.RemoveFromBeforeCodes(clsImportDataFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsDefineAsTricotFunction)
+        End If
+    End Sub
+
+
     Private Sub ucrChkModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkModel.ControlValueChanged
+        AddRemoveSummary()
+    End Sub
+
+    Private Sub AddRemoveSummary()
         If ucrChkModel.Checked Then
             clsRSyntax.AddToBeforeCodes(clsSummaryFunction)
         Else
@@ -337,43 +438,46 @@ Public Class sdgDisplayModelOptions
         End If
     End Sub
 
-    Private Sub ucrChkPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPlot.ControlValueChanged
-        If ucrChkPlot.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsPlotFunction)
-            clsRSyntax.AddToBeforeCodes(clsWrapPlotFunction)
-            clsRSyntax.AddToBeforeCodes(clsAddObjectPlotFunction)
-            clsRSyntax.AddToBeforeCodes(clsGetObjectPlotFunction)
-        Else
-            clsRSyntax.RemoveFromBeforeCodes(clsPlotFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsWrapPlotFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsAddObjectPlotFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsGetObjectPlotFunction)
-        End If
-    End Sub
-
-    Private Sub ucrChkHeat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHeat.ControlValueChanged
-        If ucrChkHeat.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsHeatFunction)
-            clsRSyntax.AddToBeforeCodes(clsAddObjectHeatFunction)
-            clsRSyntax.AddToBeforeCodes(clsGetObjectHeatFunction)
-        Else
-            clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsAddObjectHeatFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsGetObjectHeatFunction)
-        End If
-    End Sub
-
-    Private Sub ucrChkBar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBar.ControlValueChanged
-        If ucrChkBar.Checked Then
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
+        If rdoBar.Checked Then
             clsRSyntax.AddToBeforeCodes(clsBarfunction)
             clsRSyntax.AddToBeforeCodes(clsWrapBarFunction)
-            clsRSyntax.AddToBeforeCodes(clsAddObjectBarFunction)
-            clsRSyntax.AddToBeforeCodes(clsGetObjectBarFunction)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsBarfunction)
             clsRSyntax.RemoveFromBeforeCodes(clsWrapBarFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsAddObjectBarFunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsGetObjectBarFunction)
+        End If
+        If rdoTree.Checked Then
+            clsRSyntax.AddToBeforeCodes(clsTreeFunction)
+            clsRSyntax.AddToBeforeCodes(clsWrapTrees)
+        Else
+            clsRSyntax.RemoveFromBeforeCodes(clsTreeFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsWrapTrees)
+        End If
+        If rdoPlot.Checked Then
+            clsRSyntax.AddToBeforeCodes(clsPlotFunction)
+            clsRSyntax.AddToBeforeCodes(clsWrapPlotFunction)
+        Else
+            clsRSyntax.RemoveFromBeforeCodes(clsPlotFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsWrapPlotFunction)
+        End If
+        If rdoMap.Checked Then
+            clsRSyntax.AddToBeforeCodes(clsHeatFunction)
+        Else
+            clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
         End If
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumPlacketLuceModelMode
+            Case PlacketLuceModelMode.nocovariates
+                ucrSdgButtons.iHelpTopicID = 722
+            Case PlacketLuceModelMode.tree
+                ucrSdgButtons.iHelpTopicID = 724
+            Case PlacketLuceModelMode.ModelOneVarCov2
+                ucrSdgButtons.iHelpTopicID = 726
+            Case PlacketLuceModelMode.ModellingGeneral2
+                ucrSdgButtons.iHelpTopicID = 728
+        End Select
+    End Sub
+
 End Class

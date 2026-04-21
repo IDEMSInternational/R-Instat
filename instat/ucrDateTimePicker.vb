@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports RDotNet
 
 Public Class ucrDateTimePicker
@@ -156,7 +158,7 @@ Public Class ucrDateTimePicker
                     'TODO case where parameter doesn't contain an R Date object e.g. this control could be used in as.Date and store a string.
                 End If
                 If bInvalid Then
-                    MsgBox("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to be an R expression which evaluates an R Date object")
+                    MsgBoxTranslate("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to be an R expression which evaluates an R Date object")
                 End If
             End If
         End If
@@ -176,7 +178,7 @@ Public Class ucrDateTimePicker
 
         MyBase.SetRDefault(objNewDefault)
         If Not Date.TryParse(objNewDefault, dtDefault) Then
-            MsgBox("Developer error: Cannot set the default value of control " & Me.Name & " because the value cannot be converted to a Date.")
+            MsgBoxTranslate("Developer error: Cannot set the default value of control " & Me.Name & " because the value cannot be converted to a Date.")
         End If
     End Sub
 

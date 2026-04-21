@@ -100,7 +100,7 @@ Public Class sdgVerificationSummaries
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         If clsListFunction.clsParameters.Count = 0 Then
-            MsgBox("No verification summary selected. Ok will not be enabled on the main dialog.", Title:="No verification summary selected", Buttons:=MsgBoxStyle.Information)
+            MsgBoxTranslate("No verification summary selected. Ok will not be enabled on the main dialog.", Title:="No verification summary selected", Buttons:=MsgBoxStyle.Information)
         End If
     End Sub
 

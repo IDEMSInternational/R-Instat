@@ -660,7 +660,7 @@ Public Class dlgOneVarFitModel
             ucrSaveModel.SetCheckBoxText("Store Estimate")
             ucrSaveModel.SetPrefix("ci")
         Else
-            MsgBox("Developer error: the Radio Button has not been added to the Panel.")
+            MsgBoxTranslate("Developer error: the Radio Button has not been added to the Panel.")
         End If
     End Sub
 
@@ -905,7 +905,7 @@ Public Class dlgOneVarFitModel
                 Case "variance"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsVarCIFunction)
                 Case Else
-                    MsgBox("Developer error: there is no Estimate called" & Chr(34) & ucrInputComboEstimate.GetValue() & Chr(34) & vbNewLine & "Default Estimate will be selected.")
+                    MsgBoxTranslate("Developer error: there is no Estimate called" & Chr(34) & ucrInputComboEstimate.GetValue() & Chr(34) & vbNewLine & "Default Estimate will be selected.")
             End Select
         End If
     End Sub
@@ -962,7 +962,7 @@ Public Class dlgOneVarFitModel
         End If
 
         If lstFactor.ToArray.Count = 0 Then
-            MsgBox("Developer error: there are no factor levels to be displayed" & Chr(34) & vbNewLine & "Success combobox will be displayed with no inputs")
+            MsgBoxTranslate("Developer error: there are no factor levels to be displayed" & Chr(34) & vbNewLine & "Success combobox will be displayed with no inputs")
         Else
             ucrInputSuccess.SetItems(lstFactor.ToArray)
             ucrInputSuccess.SetText(lstFactor(0))

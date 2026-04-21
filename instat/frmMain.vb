@@ -44,6 +44,7 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
+    Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -421,7 +422,7 @@ Public Class frmMain
                     clsInstatOptions = CType(New BinaryFormatter().Deserialize(FileStream), InstatOptions)
                 End Using
             Catch ex As Exception
-                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
+                MsgBoxTranslate("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
             End Try
         End If
 
@@ -510,7 +511,7 @@ Public Class frmMain
         If File.Exists(strMarkerFilePath) Then
             Dim lastExitStatus As String = File.ReadAllText(strMarkerFilePath).Trim()
             If lastExitStatus <> "CleanExit" AndAlso
-                MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
+                MsgBoxTranslate("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
                               "The Tools > Restore Backup dialog allows you to restore backed-up data, or save the corresponding log file." & Environment.NewLine &
                               "To proceed, click Yes.",
                               MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
@@ -544,7 +545,7 @@ Public Class frmMain
             Try
                 File.Delete(strAutoSavedLogFilePaths(1)) '1 to avoid deleting app_marker file
             Catch ex As Exception
-                MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                MsgBoxTranslate("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
             End Try
         End If
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
@@ -557,7 +558,7 @@ Public Class frmMain
                     End If
                 Next
             Catch ex As Exception
-                MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                MsgBoxTranslate("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
 
@@ -565,7 +566,7 @@ Public Class frmMain
             Try
                 File.Delete(strAutoSavedDataFilePaths(0))
             Catch ex As Exception
-                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                MsgBoxTranslate("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
         '---------------------------------------
@@ -642,6 +643,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataDataframeMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrColumnMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
@@ -658,6 +660,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrDataFrameMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel2.Controls.Add(ucrDataFrameMeta)
@@ -697,7 +700,7 @@ Public Class frmMain
                 End If
             End Using
         Catch ex As Exception
-            MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
+            MsgBoxTranslate("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
         End Try
     End Sub
 
@@ -849,7 +852,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
-        dlgDeleteRowsOrColums.ShowDialog()
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
@@ -909,6 +912,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
+        dlgRecodeFactor.enumRecodeFactorMode = dlgRecodeFactor.RecodeFactorMode.Prepare
         SetDefaultValueInReorderLevels()
         dlgRecodeFactor.ShowDialog()
     End Sub
@@ -949,12 +953,18 @@ Public Class frmMain
     End Sub
 
     Public Sub SetDefaultValueInReorderLevels()
+        ' Exit early if there's no dataset loaded
+        If Not frmEditor.IsDataSetLoaded() Then
+            Exit Sub
+        End If
+
         Dim strSelectedColumn As String = ""
         If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
             strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
         ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
             strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
         End If
+
         dlgReorderLevels.SelectedColumn = strSelectedColumn
         dlgRecodeFactor.SelectedColumn = strSelectedColumn
         dlgDummyVariables.SelectedColumn = strSelectedColumn
@@ -964,7 +974,9 @@ Public Class frmMain
         dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
 
+
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        dlgReorderLevels.enumReorderLevelsMode = dlgReorderLevels.ReorderLevelsMode.Prepare
         SetDefaultValueInReorderLevels()
         dlgReorderLevels.ShowDialog()
     End Sub
@@ -1026,6 +1038,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorCombine_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCombineFactors.Click
+        dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Prepare
         dlgCombine.ShowDialog()
     End Sub
 
@@ -1135,6 +1148,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseDataFrameRowNumbersNames_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameRowNumbersNames.Click
+        dlgRowNamesOrNumbers.enumRowNamesOrNumbersMode = dlgRowNamesOrNumbers.RowNamesOrNumbersMode.Prepare
         dlgRowNamesOrNumbers.ShowDialog()
     End Sub
 
@@ -1170,7 +1184,7 @@ Public Class frmMain
         Dim bClose As DialogResult = DialogResult.Yes
 
         If e.CloseReason = CloseReason.UserClosing Then
-            bClose = MsgBox("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
+            bClose = MsgBoxTranslate("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
         End If
         If bClose = DialogResult.Yes Then
             Try
@@ -1197,7 +1211,7 @@ Public Class frmMain
                 End Using
 
             Catch ex As Exception
-                MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
+                MsgBoxTranslate("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
         Else
             e.Cancel = True
@@ -1289,7 +1303,7 @@ Public Class frmMain
                 End If
             End If
         Catch ex As Exception
-            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+            MsgBoxTranslate("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
         End Try
     End Sub
 
@@ -1845,7 +1859,7 @@ Public Class frmMain
                                     MessageBoxButtons.YesNo, "Close Data") Then
             Exit Sub
         End If
-
+        SetToDefaultLayout()
         clsRLink.CloseDataBook()
         strSaveFilePath = ""
     End Sub
@@ -2883,7 +2897,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Trend
         dlgPICSARainfall.ShowDialog()
     End Sub
 
@@ -2920,51 +2934,39 @@ Public Class frmMain
     Private Sub mnuDescribePresentation_Click(sender As Object, e As EventArgs) Handles mnuDescribePresentation.Click
         dlgGeneralTable.ShowDialog()
     End Sub
-    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
+    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFileHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "13")
     End Sub
 
-    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
+    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "7")
     End Sub
 
-    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrepareToolStripMenuItem.Click
+    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "9")
     End Sub
 
-    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "18")
     End Sub
 
-    Private Sub ModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelToolStripMenuItem.Click
+    Private Sub ModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "17")
     End Sub
 
-    Private Sub StructuredToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StructuredToolStripMenuItem.Click
+    Private Sub StructuredToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
     End Sub
 
-    Private Sub ClimaticToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClimaticToolStripMenuItem.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "19")
-    End Sub
-
-    Private Sub ProcurementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcurementToolStripMenuItem.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "498")
-    End Sub
-
-    Private Sub ExperimentsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExperimentsToolStripMenuItem.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "570")
-    End Sub
-
-    Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.Click
+    Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuToolsHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "8")
     End Sub
 
-    Private Sub ViewToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ViewToolStripMenuItem.Click
+    Private Sub ViewToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles mnuViewHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "21")
     End Sub
 
-    Private Sub MenusAndDialogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenusAndDialogsToolStripMenuItem.Click
+    Private Sub MenusAndDialogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuMenusHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
     End Sub
 
@@ -2979,12 +2981,26 @@ Public Class frmMain
         ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
+        If mnuSwapDataMetadata.Checked Then
+            mnuSwapDataDataframeMetadata.Enabled = False
+            mnuViewSwapDataAndDataframeMetadata.Enabled = False
+        Else
+            mnuSwapDataDataframeMetadata.Enabled = True
+            mnuViewSwapDataAndDataframeMetadata.Enabled = True
+        End If
     End Sub
 
     Private Sub mnuSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataDataframeMetadata.Click
         mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
         UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
+        If mnuSwapDataDataframeMetadata.Checked Then
+            mnuSwapDataMetadata.Enabled = False
+            mnuViewSwapDataAndMetadata.Enabled = False
+        Else
+            mnuSwapDataMetadata.Enabled = True
+            mnuViewSwapDataAndMetadata.Enabled = True
+        End If
     End Sub
 
     Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuHelpResourcesSite.Click
@@ -3004,7 +3020,13 @@ Public Class frmMain
 
     Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
         ucrDataViewer.StartWait()
-        ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        If mnuSwapDataMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewColumnMetaData()
+        ElseIf mnuSwapDataDataframeMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataframeMetaData()
+        Else
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        End If
         ucrDataViewer.EndWait()
     End Sub
 
@@ -3025,6 +3047,10 @@ Public Class frmMain
         dlgTraitsXp.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeXpTraitCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraitCorrelations.Click
+        dlgTraitCorrelationsXp.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
         dlgDefineTricotData.ShowDialog()
     End Sub
@@ -3037,7 +3063,7 @@ Public Class frmMain
         dlgModellingTree.ShowDialog()
     End Sub
 
-    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotTransformClimMob.Click
+    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs)
         dlgTransformTricotData.ShowDialog()
     End Sub
 
@@ -3048,5 +3074,161 @@ Public Class frmMain
 
     Private Sub mnuTricotModelOverall_Click(sender As Object, e As EventArgs) Handles mnuTricotModelOverall.Click
         dlgTricotModelOneVarCov.ShowDialog()
+    End Sub
+
+    Private Sub StructuredToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStructuredHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
+    End Sub
+
+    Private Sub ClimaticToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "19")
+    End Sub
+
+    Private Sub ProcurementToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuProcurementHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "498")
+    End Sub
+
+    Private Sub ExperimentsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuExperimentsHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "570")
+    End Sub
+
+    Private Sub TricotMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTricotMenuHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "669")
+    End Sub
+
+    Private Sub TricotXPMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTricotXPMenuHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "729")
+    End Sub
+
+    Private Sub Summarise23VariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSummariseTricot.Click
+        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Tricot
+        dlgDescribeTwoVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGraphTricots_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphTricots.Click
+        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Tricot
+        dlgDescribeTwoVarGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuTidyAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuTidyAddMergeColumns.Click
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Tricot
+        dlgMergeAdditionalData.ShowDialog()
+    End Sub
+
+    Private Sub DuplicateRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTidyDuplicateRows.Click
+        dlgDuplicateRows.enumDuplicateMode = dlgDuplicateRows.DuplicateMode.Tricot
+        dlgDuplicateRows.ShowDialog()
+    End Sub
+
+    Private Sub AddKeyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddKeyToolStripMenuItem.Click
+        dlgAddKey.enumAddkeyMode = dlgAddKey.AddkeyMode.Tricot
+        dlgAddKey.ShowDialog()
+    End Sub
+
+    Private Sub mnuVisualizeTricot_Click(sender As Object, e As EventArgs)
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Describe
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    'Removed the transform tricot data dialog as it is not working
+    'Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs)
+    '    dlgTransformTricotData.ShowDialog()
+    'End Sub
+
+    'Visualise data dialog
+    Private Sub mnuTricotexamineeditdataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Tricot
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    'Pivot table dialog
+    Private Sub mnuTricotexamineeditdataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Tricot
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    'One Variable Summarise Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Tricot
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    'One Variable Graph Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Tricot
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    'One Variable Frequencies Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Tricot
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
+        dlgTricotModellingGeneral.ShowDialog()
+    End Sub
+
+    Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
+
+    End Sub
+
+    'Transform and define as tricot 
+    Private Sub mnuTransformAndDefineAsTricot_Click(sender As Object, e As EventArgs) Handles mnuTransformAndDefineAsTricot.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
+
+    'Stack pivot longer dialog
+    Private Sub mnuStackPivotLonger_Click(sender As Object, e As EventArgs) Handles mnuStackPivotLonger.Click
+        dlgStack.enumStackMode = dlgStack.StackMode.Tricot
+        dlgStack.ShowDialog()
+    End Sub
+
+    'Unstacked pivot wider dialog
+    Private Sub mnuUnstackPivotWider_Click(sender As Object, e As EventArgs) Handles mnuUnstackPivotWider.Click
+        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Tricot
+        dlgUnstack.ShowDialog()
+    End Sub
+
+    Private Sub mnuReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuReorderLevels.Click
+        dlgReorderLevels.enumReorderLevelsMode = dlgReorderLevels.ReorderLevelsMode.Tricot
+        dlgReorderLevels.ShowDialog()
+    End Sub
+
+    Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Tricot
+        dlgTransformText.ShowDialog()
+    End Sub
+
+    Private Sub RowNumbersNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowNumbersNamesToolStripMenuItem.Click
+        dlgRowNamesOrNumbers.enumRowNamesOrNumbersMode = dlgRowNamesOrNumbers.RowNamesOrNumbersMode.Tricot
+        dlgRowNamesOrNumbers.ShowDialog()
+    End Sub
+
+    Private Sub RecodeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeFactorToolStripMenuItem.Click
+        dlgRecodeFactor.enumRecodeFactorMode = dlgRecodeFactor.RecodeFactorMode.Tricot
+        SetDefaultValueInReorderLevels()
+        dlgRecodeFactor.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOneVariableLikertGraphs_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableLikertGraphs.Click
+        If dlgDescribeOneVariableLikertGraph Is Nothing Then
+            dlgDescribeOneVariableLikertGraph = New dlgDescribeOneVariableLikertGraph
+        End If
+        dlgDescribeOneVariableLikertGraph.ShowDialog()
+    End Sub
+
+    Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
+        dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
+        dlgCombine.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
+        dlgImportFromEPicsa.ShowDialog()
+    End Sub
+
+    Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
+        dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
+        dlgInsertColumn.ShowDialog()
     End Sub
 End Class

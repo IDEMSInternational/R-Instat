@@ -1,0 +1,252 @@
+[
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isComment",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParamPresentation",
+                "iStatementNumber": 0,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "comment"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 0,
+        "strFunctionName": "get_variables_metadata",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 1,
+        "strFunctionName": "get_object",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "operatorUpdateParam",
+        "iStatementNumber": 2,
+        "strFunctionName": "<-",
+        "iParameterNumber": 1,
+        "strValueKey": "overallTrait",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "operatorUpdateParam",
+        "iStatementNumber": 3,
+        "strFunctionName": "<-",
+        "iParameterNumber": 1,
+        "strValueKey": "traitsToCompareTo"
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isSaveAsTable",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "scriptInsert",
+                "iStatementNumber": 10,
+                "strScript": "\nlast_table <- corrr::fashion(kendall_rankings)\ndata_book$add_object(data_name=\"_dataFrame\", object_name=\"last_table\", object_type_label=\"table\", object_format=\"text\", object=last_table)\n\ndata_book$get_object_data(data_name=\"_dataFrame\", object_name=\"last_table\", as_file=TRUE)"
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 11,
+                "strFunctionName": "add_object",
+                "iParameterNumber": 0,
+                "strValueKey": "dataFrame",
+                "bIsQuoted": true
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 12,
+                "strFunctionName": "get_object_data",
+                "iParameterNumber": 0,
+                "strValueKey": "dataFrame",
+                "bIsQuoted": true
+            },
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "isDisplayOptions",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isIncludePValues",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "operatorUpdateParam",
+                                "iStatementNumber": 9,
+                                "strFunctionName": "<-",
+                                "iParameterNumber": 1,
+                                "strScript": "kendall_rankings"
+                            }
+                        ]
+                    },
+                    {
+                        "enumTransformationType": "functionAddParam",
+                        "iStatementNumber": 10,
+                        "strFunctionName": "fashion",
+                        "iParameterNumber": 1,
+                        "strParameterName": "decimals",
+                        "strValueKey": "decimalPlaces"
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isLeadingZeros",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "functionAddParam",
+                                "iStatementNumber": 10,
+                                "strFunctionName": "fashion",
+                                "iParameterNumber": 1,
+                                "strParameterName": "leading_zeros",
+                                "strScript": "TRUE"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "isStoreTableOrDataFrame",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorUpdateParam",
+                        "iStatementNumber": 10,
+                        "strFunctionName": "<-",
+                        "iParameterNumber": 0,
+                        "strValueKey": "storeTableOrDataFrame"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 11,
+                        "strFunctionName": "add_object",
+                        "iParameterNumber": 1,
+                        "strValueKey": "storeTableOrDataFrame",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 11,
+                        "strFunctionName": "add_object",
+                        "iParameterNumber": 4,
+                        "strValueKey": "storeTableOrDataFrame"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 12,
+                        "strFunctionName": "get_object_data",
+                        "iParameterNumber": 1,
+                        "strValueKey": "storeTableOrDataFrame",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 13,
+                        "strFunctionName": "c",
+                        "iParameterNumber": 0,
+                        "strValueKey": "storeTableOrDataFrame",
+                        "bIsQuoted": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isDisplayOptions",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "ifFalseExecuteChildTransformations",
+                "strValueKey": "isSaveAsTable",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "scriptInsert",
+                        "iStatementNumber": 10,
+                        "strScript": "\nlast_dataframe <- corrr::fashion(kendall_rankings, decimals=2)\ndata_book$import_data(data_tables=list(last_dataframe=last_dataframe))\n"
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isIncludePValues",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "operatorUpdateParam",
+                                "iStatementNumber": 9,
+                                "strFunctionName": "<-",
+                                "iParameterNumber": 1,
+                                "strScript": "kendall_rankings"
+                            }
+                        ]
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 10,
+                        "strFunctionName": "fashion",
+                        "iParameterNumber": 1,
+                        "strValueKey": "decimalPlaces"
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isLeadingZeros",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "functionAddParam",
+                                "iStatementNumber": 10,
+                                "strFunctionName": "fashion",
+                                "iParameterNumber": 1,
+                                "strParameterName": "leading_zeros",
+                                "strScript": "TRUE"
+                            }
+                        ]
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 12,
+                        "strFunctionName": "c",
+                        "iParameterNumber": 0,
+                        "strScript": "last_dataframe",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isStoreTableOrDataFrame",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "operatorUpdateParam",
+                                "iStatementNumber": 10,
+                                "strFunctionName": "<-",
+                                "iParameterNumber": 0,
+                                "strValueKey": "storeTableOrDataFrame"
+                            },
+                            {
+                                "enumTransformationType": "functionRemoveParamByName",
+                                "iStatementNumber": 11,
+                                "strFunctionName": "list",
+                                "strParameterName": "last_dataframe"
+                            },
+                            {
+                                "enumTransformationType": "functionAddParam",
+                                "iStatementNumber": 11,
+                                "strFunctionName": "list",
+                                "strParameterNameKey": "storeTableOrDataFrame",
+                                "strValueKey": "storeTableOrDataFrame"
+                            },
+                            {
+                                "enumTransformationType": "functionUpdateParamValue",
+                                "iStatementNumber": 12,
+                                "strFunctionName": "c",
+                                "iParameterNumber": 0,
+                                "strValueKey": "storeTableOrDataFrame",
+                                "bIsQuoted": true
+                            }
+                        ]
+                    }
+
+                ]
+            }
+        ]
+    }
+]

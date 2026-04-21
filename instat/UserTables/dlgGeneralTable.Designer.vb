@@ -24,11 +24,6 @@ Partial Class dlgGeneralTable
     Private Sub InitializeComponent()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.btnMoreOptions = New System.Windows.Forms.Button()
-        Me.grpBoxTitle = New System.Windows.Forms.GroupBox()
-        Me.ucrInputTitle = New instat.ucrInputTextBox()
-        Me.btnTitleStyle = New System.Windows.Forms.Button()
-        Me.lblHeaderTitle = New System.Windows.Forms.Label()
-        Me.ucrInputTitleFooter = New instat.ucrInputTextBox()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
@@ -55,7 +50,7 @@ Partial Class dlgGeneralTable
         Me.ucrNudColumn = New instat.ucrNud()
         Me.ucrReceiverMultipleColFactor = New instat.ucrReceiverMultiple()
         Me.grpPosition = New System.Windows.Forms.GroupBox()
-        Me.grpBoxTitle.SuspendLayout()
+        Me.ucrHeader = New instat.ucrHeader()
         Me.grpPosition.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -77,62 +72,6 @@ Partial Class dlgGeneralTable
         Me.btnMoreOptions.TabIndex = 25
         Me.btnMoreOptions.Text = "Table Options"
         Me.btnMoreOptions.UseVisualStyleBackColor = True
-        '
-        'grpBoxTitle
-        '
-        Me.grpBoxTitle.Controls.Add(Me.ucrInputTitle)
-        Me.grpBoxTitle.Controls.Add(Me.btnTitleStyle)
-        Me.grpBoxTitle.Controls.Add(Me.lblHeaderTitle)
-        Me.grpBoxTitle.Controls.Add(Me.ucrInputTitleFooter)
-        Me.grpBoxTitle.Location = New System.Drawing.Point(9, 401)
-        Me.grpBoxTitle.Name = "grpBoxTitle"
-        Me.grpBoxTitle.Size = New System.Drawing.Size(463, 100)
-        Me.grpBoxTitle.TabIndex = 34
-        Me.grpBoxTitle.TabStop = False
-        Me.grpBoxTitle.Text = "Title"
-        '
-        'ucrInputTitle
-        '
-        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputTitle.AutoSize = True
-        Me.ucrInputTitle.IsMultiline = False
-        Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(11, 21)
-        Me.ucrInputTitle.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputTitle.Name = "ucrInputTitle"
-        Me.ucrInputTitle.Size = New System.Drawing.Size(359, 21)
-        Me.ucrInputTitle.TabIndex = 28
-        '
-        'btnTitleStyle
-        '
-        Me.btnTitleStyle.Location = New System.Drawing.Point(374, 21)
-        Me.btnTitleStyle.Name = "btnTitleStyle"
-        Me.btnTitleStyle.Size = New System.Drawing.Size(79, 23)
-        Me.btnTitleStyle.TabIndex = 30
-        Me.btnTitleStyle.Text = "Style"
-        Me.btnTitleStyle.UseVisualStyleBackColor = True
-        '
-        'lblHeaderTitle
-        '
-        Me.lblHeaderTitle.AutoSize = True
-        Me.lblHeaderTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHeaderTitle.Location = New System.Drawing.Point(8, 51)
-        Me.lblHeaderTitle.Name = "lblHeaderTitle"
-        Me.lblHeaderTitle.Size = New System.Drawing.Size(63, 13)
-        Me.lblHeaderTitle.TabIndex = 20
-        Me.lblHeaderTitle.Text = "Title Footer:"
-        '
-        'ucrInputTitleFooter
-        '
-        Me.ucrInputTitleFooter.AddQuotesIfUnrecognised = True
-        Me.ucrInputTitleFooter.AutoSize = True
-        Me.ucrInputTitleFooter.IsMultiline = False
-        Me.ucrInputTitleFooter.IsReadOnly = False
-        Me.ucrInputTitleFooter.Location = New System.Drawing.Point(11, 68)
-        Me.ucrInputTitleFooter.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputTitleFooter.Name = "ucrInputTitleFooter"
-        Me.ucrInputTitleFooter.Size = New System.Drawing.Size(359, 21)
-        Me.ucrInputTitleFooter.TabIndex = 22
         '
         'rdoMultiple
         '
@@ -247,7 +186,7 @@ Partial Class dlgGeneralTable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 508)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 480)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(319, 24)
@@ -255,11 +194,12 @@ Partial Class dlgGeneralTable
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 536)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 513)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 26
         '
         'ucrReceiverMultipleCols
@@ -442,18 +382,26 @@ Partial Class dlgGeneralTable
         Me.grpPosition.Controls.Add(Me.ucrPnlPosition)
         Me.grpPosition.Controls.Add(Me.ucrNudRow)
         Me.grpPosition.Controls.Add(Me.ucrNudColumn)
-        Me.grpPosition.Location = New System.Drawing.Point(9, 330)
+        Me.grpPosition.Location = New System.Drawing.Point(8, 330)
         Me.grpPosition.Name = "grpPosition"
         Me.grpPosition.Size = New System.Drawing.Size(291, 67)
         Me.grpPosition.TabIndex = 150
         Me.grpPosition.TabStop = False
         Me.grpPosition.Text = "Position of Variables"
         '
+        'ucrHeader
+        '
+        Me.ucrHeader.Location = New System.Drawing.Point(7, 349)
+        Me.ucrHeader.Name = "ucrHeader"
+        Me.ucrHeader.Size = New System.Drawing.Size(470, 127)
+        Me.ucrHeader.TabIndex = 151
+        '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(476, 590)
+        Me.ClientSize = New System.Drawing.Size(480, 571)
+        Me.Controls.Add(Me.ucrHeader)
         Me.Controls.Add(Me.ucrChkPreview)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.lblRowFactor)
@@ -467,7 +415,6 @@ Partial Class dlgGeneralTable
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.rdoMultiple)
-        Me.Controls.Add(Me.grpBoxTitle)
         Me.Controls.Add(Me.ucrChkSelectTheme)
         Me.Controls.Add(Me.ucrNudPreview)
         Me.Controls.Add(Me.ucrSaveTable)
@@ -482,8 +429,6 @@ Partial Class dlgGeneralTable
         Me.Name = "dlgGeneralTable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Presentation Table"
-        Me.grpBoxTitle.ResumeLayout(False)
-        Me.grpBoxTitle.PerformLayout()
         Me.grpPosition.ResumeLayout(False)
         Me.grpPosition.PerformLayout()
         Me.ResumeLayout(False)
@@ -500,11 +445,6 @@ Partial Class dlgGeneralTable
     Friend WithEvents ucrChkPreview As ucrCheck
     Friend WithEvents ucrChkSelectTheme As ucrCheck
     Friend WithEvents ucrCboSelectThemes As ucrInputComboBox
-    Friend WithEvents grpBoxTitle As GroupBox
-    Friend WithEvents ucrInputTitle As ucrInputTextBox
-    Friend WithEvents btnTitleStyle As Button
-    Friend WithEvents lblHeaderTitle As Label
-    Friend WithEvents ucrInputTitleFooter As ucrInputTextBox
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoDataFrame As RadioButton
     Friend WithEvents rdoSingle As RadioButton
@@ -523,4 +463,5 @@ Partial Class dlgGeneralTable
     Friend WithEvents ucrPnlPosition As UcrPanel
     Friend WithEvents ucrReceiverMultipleColFactor As ucrReceiverMultiple
     Friend WithEvents grpPosition As GroupBox
+    Friend WithEvents ucrHeader As ucrHeader
 End Class

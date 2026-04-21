@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -72,7 +72,7 @@ Public Class ucrVariablesAsFactor
         OnSelectionChanged()
     End Sub
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
         'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
         Dim strVariables As String = ""
@@ -85,7 +85,7 @@ Public Class ucrVariablesAsFactor
             Else
                 strVariables = "value"
                 If bWithQuotes Then
-                    strVariables = Chr(34) & strVariables & Chr(34)
+                    strVariables = strQuotes & strVariables & strQuotes
                 End If
             End If
         End If
@@ -293,7 +293,7 @@ Public Class ucrVariablesAsFactor
                             End If
                         End If
                     Else
-                        MsgBox("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
+                        MsgBoxTranslate("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
                     End If
                 End If
             End If
@@ -327,7 +327,7 @@ Public Class ucrVariablesAsFactor
             If ucrNewSelector IsNot Nothing Then
                 ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
                 If ucrVariableSelector Is Nothing Then
-                    MsgBox("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
+                    MsgBoxTranslate("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
                 End If
             End If
 

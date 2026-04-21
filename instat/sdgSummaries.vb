@@ -217,8 +217,7 @@ Public Class sdgSummaries
         ucrInputComboPropTest.SetDropDownStyleAsNonEditable()
 
         ucrInputPropValue.SetParameter(New RParameter("prop_value", 6))
-        ucrInputPropValue.SetValidationTypeAsNumeric()
-        ucrInputPropValue.AddQuotesIfUnrecognised = False
+
 
         ucrInputComboCountTest.SetParameter(New RParameter("count_test", 7))
         Dim dctCountTest As New Dictionary(Of String, String)
@@ -231,8 +230,7 @@ Public Class sdgSummaries
         ucrInputComboCountTest.SetDropDownStyleAsNonEditable()
 
         ucrInputCountValue.SetParameter(New RParameter("count_value", 8))
-        ucrInputCountValue.SetValidationTypeAsNumeric()
-        ucrInputCountValue.AddQuotesIfUnrecognised = False
+
 
         ucrChkProportion.SetParameter(New RParameter("proportion_calc", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkProportion.SetText("Proportion")
@@ -441,9 +439,9 @@ Public Class sdgSummaries
             ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
         End If
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputCountValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+
         ucrInputComboCountTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -455,7 +453,7 @@ Public Class sdgSummaries
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+
         ucrChkTrimmedMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNTotal.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNonMissing.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -467,6 +465,8 @@ Public Class sdgSummaries
             ucrChkWhichmin.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrChkWhereMax.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrChkWhereMin.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkQuantile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         End If
         ucrChkMode.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMaximum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -508,7 +508,7 @@ Public Class sdgSummaries
         ucrChkMax.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkQ1.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkQ3.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkQuantile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+
         ucrChkSd.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkVar.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAngVar.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -550,7 +550,7 @@ Public Class sdgSummaries
                     End If
                 Next
                 If Not bTabFound Then
-                    MsgBox("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
+                    MsgBoxTranslate("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
                     tbSummaries.SelectedIndex = 0
                 End If
             Else
@@ -576,10 +576,10 @@ Public Class sdgSummaries
         'Temp solution to telling user why OK not enabled. Should be something on the main dialog to show this instead.
         'Maybe, number of summaries selected.
         If SummaryCount = 0 Then
-            MsgBox("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
+            MsgBoxTranslate("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
         End If
         If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
-            MsgBox("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
+            MsgBoxTranslate("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
             bOkEnabled = False
         Else
             bOkEnabled = True
@@ -701,6 +701,36 @@ Public Class sdgSummaries
             clsDefaultFunction.AddParameter("summary_where_y", ucrReceiverInclude.GetVariableNames, iPosition:=2)
         Else
             clsDefaultFunction.RemoveParameterByName("summary_where_y")
+        End If
+    End Sub
+
+    Private Sub ucrInputPropValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPropValue.ControlValueChanged, ucrChkProportion.ControlValueChanged
+
+        Dim strValue As String = ucrInputPropValue.GetText()
+
+        If ucrChkProportion.Checked AndAlso Not ucrInputPropValue.IsEmpty Then
+            If IsNumeric(strValue) Then
+                clsDefaultFunction.AddParameter("prop_value", strValue, iPosition:=6)
+            Else
+                clsDefaultFunction.AddParameter("prop_value", Chr(34) & "'" & strValue & "'" & Chr(34), iPosition:=6)
+            End If
+        Else
+            clsDefaultFunction.RemoveParameterByName("prop_value")
+        End If
+    End Sub
+
+    Private Sub ucrInputCountValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountValue.ControlValueChanged, ucrChkCount.ControlValueChanged
+
+        Dim strValue As String = ucrInputCountValue.GetText()
+
+        If ucrChkCount.Checked AndAlso Not ucrInputCountValue.IsEmpty Then
+            If IsNumeric(strValue) Then
+                clsDefaultFunction.AddParameter("count_value", strValue, iPosition:=8)
+            Else
+                clsDefaultFunction.AddParameter("count_value", Chr(34) & "'" & strValue & "'" & Chr(34), iPosition:=8)
+            End If
+        Else
+            clsDefaultFunction.RemoveParameterByName("count_value")
         End If
     End Sub
 

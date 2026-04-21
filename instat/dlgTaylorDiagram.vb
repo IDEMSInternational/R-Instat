@@ -116,7 +116,7 @@ Public Class dlgTaylorDiagram
 
     Private Sub ucrReceiverEstimated_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimated.ControlContentsChanged
         If ucrReceiverEstimated.Count > 2 Then
-            MsgBox("Note: estimated variables can only be two i.e. two lots of model predictions. Extra variables will be removed.", MsgBoxStyle.Exclamation)
+            MsgBoxTranslate("Note: estimated variables can only be two i.e. two lots of model predictions. Extra variables will be removed.", MsgBoxStyle.Exclamation)
             For i As Integer = ucrReceiverEstimated.Count - 1 To 0 Step -1
                 If i > 1 Then
                     ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()

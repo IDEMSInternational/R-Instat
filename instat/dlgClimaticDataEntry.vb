@@ -226,7 +226,7 @@ Public Class dlgClimaticDataEntry
         dfEditData = GetSelectedDataFrame()
 
         If dfEditData Is Nothing Then
-            MsgBox("No available data for this selection. Modify dates and try again.")
+            MsgBoxTranslate("No available data for this selection. Modify dates and try again.")
             Exit Sub
         End If
 
@@ -235,7 +235,7 @@ Public Class dlgClimaticDataEntry
                 bSetup = True
                 bShow = True
             Else
-                bShow = MsgBox("Are you sure you want to continue? If you reopen the subdialog the existing data entry will be lost. Return and click Ok to apply the existing change or continue to start again.", MsgBoxStyle.YesNo) = MsgBoxResult.Yes
+                bShow = MsgBoxTranslate("Are you sure you want to continue? If you reopen the subdialog the existing data entry will be lost. Return and click Ok to apply the existing change or continue to start again.", MsgBoxStyle.YesNo) = MsgBoxResult.Yes
                 bSetup = bShow
             End If
         Else

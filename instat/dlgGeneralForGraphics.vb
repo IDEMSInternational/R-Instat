@@ -47,13 +47,11 @@ Public Class dlgGeneralForGraphics
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
-    Private clsYScaleDiscreteFunction As New RFunction
-    Private clsXScaleDiscreteFunction As New RFunction
+    Private clsScaleColourFunction As New RFunction
+    Private clsScaleFillFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsFacetFunction As New RFunction
-    Private clsFacetVariablesOperator As New ROperator
-    Private clsFacetRowOp As New ROperator
-    Private clsFacetColOp As New ROperator
+    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
     Private clsAddCodeOperator As New ROperator
@@ -62,8 +60,13 @@ Public Class dlgGeneralForGraphics
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
+    Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
+    Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
     Private ReadOnly strNone As String = "None"
 
+    Private bNotSubdialogue As Boolean = False
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
     Private strPackageName As String
@@ -153,21 +156,37 @@ Public Class dlgGeneralForGraphics
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
-        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
         ucr1stFactorReceiver.Selector = ucrGraphicsSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.bWithQuotes = False
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.SetValuesToIgnore({"."})
-        ucr1stFactorReceiver.SetParameterPosition(1)
+        ucr1stFactorReceiver.SetParameterPosition(0)
 
-        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrChkAddCode.SetText("Add Code:")
         ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrInputAddCode.SetItems({"scale_colour_manual(values=c(" & Chr(34) & "red" & Chr(34) & "," & Chr(34) & "blue" & Chr(34) & "," & Chr(34) & "green" & Chr(34) & "," & Chr(34) & "black" & Chr(34) & "," & Chr(34) & "brown" & Chr(34) & "))", "scale_fill_manual(values = c(" & Chr(34) & "coral" & Chr(34) & "," & Chr(34) & "bisque4" & Chr(34) & "," & Chr(34) & "gold" & Chr(34) & "," & Chr(34) & "cyan" & Chr(34) & "," & Chr(34) & "khaki" & Chr(34) & "," & Chr(34) & "orange" & Chr(34) & "," & Chr(34) & "orchid" & Chr(34) & "))", "geom_hline(yintercept=20)", "geom_vline(xintercept=5) + geom_hline(yintercept = 1)", "geom_vline(xintercept=c(1,3,5),colour=" & Chr(34) & "green" & Chr(34) & ")", "scale_x_binned()", "scale_x_binned(n.breaks=20)", "scale_y_continuous(trans=" & Chr(34) & "log10" & Chr(34) & ", label=scales::dollar)"})
+
+        ucrChkFill.SetText("Add Scale Fill Identity")
+        ucrChkFill.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkFill.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkFill.AddToLinkedControls(ucrInputAddLegendRibbon, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAddLegendRibbon.SetValidationTypeAsList()
+        ucrInputAddLegendRibbon.SetItems({"Normal (Between Lower and Upper Tercile),Range 40th-90th Percentile", "A,B"})
+        ucrInputAddLegendRibbon.SetLinkedDisplayControl(lblFillidentity)
+
+        ucrChkColour.SetText("Add Scale Colour Identity")
+        ucrChkColour.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkColour.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkColour.AddToLinkedControls(ucrInputAddLegendLine, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAddLegendLine.SetValidationTypeAsList()
+        ucrInputAddLegendLine.SetItems({"Median,Record Low/High", "A,B", "maximum,minimum,mean"})
+        ucrInputAddLegendLine.SetLinkedDisplayControl(lblColouridentity)
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -186,12 +205,13 @@ Public Class dlgGeneralForGraphics
         clsScaleContinuousFunction = New RFunction
         clsLevelsFunction = New RFunction
         clsFacetFunction = New RFunction
-        clsFacetVariablesOperator = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
         clsAddCodeOperator = New ROperator
+        clsScaleFillFunction = New RFunction
+        clsScaleColourViridisFunction = New RFunction
 
         ucrSave.Reset()
 
@@ -219,14 +239,13 @@ Public Class dlgGeneralForGraphics
         clsGlobalAesFunction.SetRCommand("aes")
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
-        clsFacetVariablesOperator.SetOperation("~")
-        clsFacetVariablesOperator.bForceIncludeOperation = True
-        clsFacetVariablesOperator.bBrackets = False
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+        clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -244,6 +263,14 @@ Public Class dlgGeneralForGraphics
         clsScaleContinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsLevelsFunction, iPosition:=2)
 
         clsAddCodeOperator.SetOperation("", bBracketsTemp:=False)
+
+        clsScaleColourFunction.SetRCommand("scale_colour_identity")
+        clsScaleColourFunction.AddParameter("name", "NULL", iPosition:=0)
+        clsScaleColourFunction.AddParameter("guide", Chr(34) & "legend" & Chr(34), iPosition:=1)
+
+        clsScaleFillFunction.SetRCommand("scale_fill_identity")
+        clsScaleFillFunction.AddParameter("name", "NULL", iPosition:=0)
+        clsScaleFillFunction.AddParameter("guide", Chr(34) & "legend" & Chr(34), iPosition:=1)
 
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -289,6 +316,8 @@ Public Class dlgGeneralForGraphics
             ucrChkUseasNumeric.SetRCode(clsDummyFunction, bReset)
             ucrChkAddCode.SetRCode(clsAddCodeOperator, bReset)
             ucrInputAddCode.SetRCode(clsAddCodeOperator, bReset)
+            ucrChkColour.SetRCode(clsBaseOperator, bReset)
+            ucrChkFill.SetRCode(clsBaseOperator, bReset)
         End If
         ucrFillReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
@@ -296,6 +325,7 @@ Public Class dlgGeneralForGraphics
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
     End Sub
 
@@ -313,14 +343,44 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
+    Private Sub UpdatingFacetsFromSubdialog()
+        bNotSubdialogue = False
+
+        If clsFacetFunction.strRCommand = "facet_grid" Then
+            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAndColAll)
+                Else
+                    ucrInputStation.SetName(strFacetRowAndCol)
+                End If
+            ElseIf clsFacetFunction.ContainsParameter("rows") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAll)
+                Else
+                    ucrInputStation.SetName(strFacetRow)
+                End If
+            ElseIf clsFacetFunction.ContainsParameter("cols") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetColAll)
+                Else
+                    ucrInputStation.SetName(strFacetCol)
+                End If
+            End If
+        Else
+            ucrInputStation.SetName(strFacetWrap)
+        End If
+        bNotSubdialogue = True
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
-                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
+                          clsNewFacetFunction:=clsFacetFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewAesFunc:=clsGlobalAesFunction, bReset:=True)
+        UpdatingFacetsFromSubdialog()
         bResetSubdialog = False
     End Sub
 
@@ -336,10 +396,11 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrGraphicsSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetOptionsSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetOptionsSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.ShowDialog()
         sdgPlots.EnableLayersTab()
+        UpdatingFacetsFromSubdialog()
         bResetOptionsSubdialog = False
     End Sub
 
@@ -348,12 +409,13 @@ Public Class dlgGeneralForGraphics
                         clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                         clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                         clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                        clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+                        clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 1
         sdgPlots.ShowDialog()
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.EnableLayersTab()
         ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewAesFunc:=clsGlobalAesFunction, bReset:=True)
+        UpdatingFacetsFromSubdialog()
         bResetSubdialog = False
     End Sub
 
@@ -363,10 +425,11 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 2
         sdgPlots.ShowDialog()
         sdgPlots.EnableLayersTab()
+        UpdatingFacetsFromSubdialog()
         bResetSubdialog = False
     End Sub
 
@@ -376,9 +439,10 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetOptionsSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetOptionsSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 3
         sdgPlots.ShowDialog()
+        UpdatingFacetsFromSubdialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
     End Sub
@@ -389,9 +453,10 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetOptionsSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetOptionsSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 4
         sdgPlots.ShowDialog()
+        UpdatingFacetsFromSubdialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
     End Sub
@@ -402,11 +467,12 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 5
         sdgPlots.ShowDialog()
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.EnableLayersTab()
+        UpdatingFacetsFromSubdialog()
         bResetSubdialog = False
     End Sub
 
@@ -416,12 +482,13 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-        clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+        clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 6
         sdgPlots.ShowDialog()
         bResetOptionsSubdialog = False
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.EnableLayersTab()
+        UpdatingFacetsFromSubdialog()
         bResetSubdialog = False
     End Sub
 
@@ -431,9 +498,10 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetOptionsSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetOptionsSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 7
         sdgPlots.ShowDialog()
+        UpdatingFacetsFromSubdialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
     End Sub
@@ -444,9 +512,10 @@ Public Class dlgGeneralForGraphics
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetOptionsSubdialog)
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, bReset:=bResetOptionsSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 8
         sdgPlots.ShowDialog()
+        UpdatingFacetsFromSubdialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
     End Sub
@@ -660,15 +729,26 @@ Public Class dlgGeneralForGraphics
         End If
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
-            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
-                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll OrElse strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
                 bUpdateComboOptions = False
                 ucrInputStation.SetName(strNone)
                 bUpdateComboOptions = True
             End If
-            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
-                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
-                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll _
+            OrElse ucrInputStation.GetText = strFacetRowAndCol OrElse ucrInputStation.GetText = strFacetRowAndColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+            OrElse ((strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+             AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
                 ucrInputStation.SetName(strNone)
             End If
         End If
@@ -678,27 +758,18 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub UpdateParameters()
-        clsFacetVariablesOperator.RemoveParameterByName("var1")
-        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
-        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        ucr1stFactorReceiver.SetRCode(Nothing)
-        Select Case ucrInputStation.GetText()
-            Case strFacetWrap
-                ucr1stFactorReceiver.ChangeParameterName("var1")
-                ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
-            Case strFacetCol
-                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
-            Case strFacetRow
-                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
-                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
-        End Select
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
+
         If Not clsGlobalAesFunction.ContainsParameter("x") Then
             clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
+
+        If bNotSubdialogue Then
+            clsFacetFunction.ClearParameters()
+        End If
+
         bUpdatingParameters = False
     End Sub
 
@@ -706,11 +777,14 @@ Public Class dlgGeneralForGraphics
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
+        Dim bRowsAndCols As Boolean = False
+        Dim bRowsAndColsAll As Boolean = False
 
         If bUpdatingParameters Then
             Exit Sub
         End If
-
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -720,38 +794,57 @@ Public Class dlgGeneralForGraphics
                     bCol = True
                 Case strFacetRow
                     bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
+                Case strFacetRowAndCol
+                    bRowsAndCols = True
+                Case strFacetRowAndColAll
+                    bRowsAndColsAll = True
             End Select
         End If
-
-        If bWrap OrElse bRow OrElse bCol Then
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
+
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.RemoveParameterByName("cols")
+        Else
+            clsFacetFunction.RemoveParameterByName("facets")
         End If
-        If bRow OrElse bCol Then
+
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
             clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.RemoveParameterByName("facets")
         End If
-        If bRow Then
-            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        ElseIf bCol AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+
+        If bRowAll OrElse bColAll OrElse bRowsAndColsAll Then
+            clsFacetFunction.AddParameter("margins", "TRUE")
         Else
-            clsFacetVariablesOperator.RemoveParameterByName("left")
+            clsFacetFunction.RemoveParameterByName("margins")
         End If
-        If bCol Then
-            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-        ElseIf bRow AndAlso bWrap = False Then
-            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
-        Else
-            clsFacetVariablesOperator.RemoveParameterByName("right")
+
+        If bRowsAndCols OrElse bRowsAndColsAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
+        ElseIf bRow OrElse bRowAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("cols")
+        ElseIf bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
         End If
     End Sub
 
-    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
+
     Private Sub GetParameterValue(clsOperator As ROperator)
         Dim i As Integer = 0
         For Each clsTempParam As RParameter In clsOperator.clsParameters
@@ -766,13 +859,11 @@ Public Class dlgGeneralForGraphics
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
+                '' Feb 07 2026
+                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
-                        GetParameterValue(clsFacetVariablesOperator)
-                    Case strFacetCol
-                        GetParameterValue(clsFacetColOp)
-                    Case strFacetRow
-                        GetParameterValue(clsFacetRowOp)
+                        'GetParameterValue(clsFacetVariablesOperator)
                 End Select
             End If
 
@@ -809,5 +900,49 @@ Public Class dlgGeneralForGraphics
         Else
             clsBaseOperator.RemoveParameterByName("newcode")
         End If
+    End Sub
+
+    Private Sub SetCalculationColour()
+        Dim newItem As String = ucrInputAddLegendLine.GetText().Trim()
+
+        If Not String.IsNullOrEmpty(newItem) AndAlso Not ucrInputAddLegendLine.cboInput.Items.Contains(newItem) Then
+            ucrInputAddLegendLine.AddItems({newItem})
+        End If
+    End Sub
+
+    Private Sub SetCalculationFill()
+        Dim newItem As String = ucrInputAddLegendRibbon.GetText().Trim()
+
+        If Not String.IsNullOrEmpty(newItem) AndAlso Not ucrInputAddLegendRibbon.cboInput.Items.Contains(newItem) Then
+            ucrInputAddLegendRibbon.AddItems({newItem})
+        End If
+    End Sub
+
+    Private Sub ucrChkColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColour.ControlValueChanged, ucrInputAddLegendLine.ControlValueChanged
+        If ucrChkColour.Checked Then
+            If Not ucrInputAddLegendLine.IsEmpty Then
+                clsScaleColourFunction.AddParameter("labels", ucrInputAddLegendLine.clsRList.ToScript(), iPosition:=2)
+            Else
+                clsScaleColourFunction.RemoveParameterByName("labels")
+            End If
+            clsBaseOperator.AddParameter("scale_colour_identity", clsRFunctionParameter:=clsScaleColourFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale_colour_identity")
+        End If
+        SetCalculationFill()
+    End Sub
+
+    Private Sub ucrChkFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFill.ControlValueChanged, ucrInputAddLegendRibbon.ControlValueChanged
+        If ucrChkFill.Checked Then
+            If Not ucrInputAddLegendRibbon.IsEmpty Then
+                clsScaleFillFunction.AddParameter("labels", ucrInputAddLegendRibbon.clsRList.ToScript(), iPosition:=2)
+            Else
+                clsScaleFillFunction.RemoveParameterByName("labels")
+            End If
+            clsBaseOperator.AddParameter("scale_fill_identity", clsRFunctionParameter:=clsScaleFillFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale_fill_identity")
+        End If
+        SetCalculationColour()
     End Sub
 End Class

@@ -59,8 +59,6 @@ Public Class dlgColumnStructure
         ucrChkColourColumnsByStructure.SetText("Colour Columns by Structure")
         ucrChkColourColumnsByStructure.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         ucrChkColourColumnsByStructure.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
-        ucrChkColourColumnsByStructure.SetParameter(New RParameter("checked"))
-        ucrChkColourColumnsByStructure.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkColourColumnsByStructure.SetRDefault("TRUE")
     End Sub
 
@@ -87,9 +85,7 @@ Public Class dlgColumnStructure
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorColumnStructure.AddAdditionalCodeParameterPair(clsColourByMetadata, ucrSelectorColumnStructure.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorColumnStructure.AddAdditionalCodeParameterPair(clsUncolourByMetadata, ucrSelectorColumnStructure.GetParameter(), iAdditionalPairNo:=2)
-
         ucrSelectorColumnStructure.SetRCode(clsColumnStructure, bReset)
-        ucrChkColourColumnsByStructure.SetRCode(clsColourStructure, bReset)
 
         If bReset Then
             ucrReceiverLayout.SetRCode(clsColumnStructure, bReset)

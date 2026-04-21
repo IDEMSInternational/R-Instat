@@ -25,6 +25,7 @@ Public Class dlgFromLibrary
     Private bReset As Boolean = True
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
+    Private clsRemoveFunction As New RFunction
 
     'a string array that holds the packages displayed in the combobox 
     'todo. this property can be removed once the PR that enhances the inputCombobox control is merged
@@ -104,6 +105,8 @@ Public Class dlgFromLibrary
         clsDataFunction.SetRCommand("data")
         clsDataFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
 
+        clsRemoveFunction.SetRCommand("rm")
+
         'set up the import data function
         clsImportFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
@@ -139,10 +142,12 @@ Public Class dlgFromLibrary
             lstCollection.Visible = True
             cmdLibraryCollection.Visible = False
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveFunction)
         Else
             lstCollection.Visible = False
             cmdLibraryCollection.Visible = True
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDataFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveFunction)
         End If
         TestOkEnabled()
         EnableHelp()
@@ -267,8 +272,10 @@ Public Class dlgFromLibrary
 
         If strSelectedText.Contains("(") Then
             clsDataFunction.AddParameter("X", strDataNameFromBracket)
+            clsRemoveFunction.AddParameter("X", strDataNameFromBracket, bIncludeArgumentName:=False)
         Else
             clsDataFunction.AddParameter("X", strSelectedDataName)
+            clsRemoveFunction.AddParameter("X", strSelectedDataName, bIncludeArgumentName:=False)
         End If
 
         'calling RunInternalScriptGetOutput() twice because currently it can't execute multiple lines
@@ -276,6 +283,13 @@ Public Class dlgFromLibrary
         strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("class(" + strSelectedDataName + ")", bSilent:=True)
         If strVecOutput IsNot Nothing AndAlso strVecOutput.Length > 0 Then
             strRClass = Mid(strVecOutput(0), 5).Replace("""", "").ToLower
+        End If
+
+        Dim expHasGetDataFrame As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(
+            "is.function(try(" & strSelectedDataName & "$get_data_frame, silent=TRUE))", bSilent:=True)
+        If expHasGetDataFrame IsNot Nothing AndAlso
+           expHasGetDataFrame.AsLogical()(0) Then
+            strRClass = "databook"
         End If
 
         If strRClass = "list" Then
@@ -293,7 +307,7 @@ Public Class dlgFromLibrary
             Select Case strRClass
                 Case "zoo"
                     'this is the recommended command for converting zoo object types to data frames.
-                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649
+                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649        
                     clsListParameterFunction.SetPackageName("zoo")
                     clsListParameterFunction.SetRCommand("fortify.zoo")
                     clsListParameterFunction.AddParameter("model", strParameterValue:=strSelectedDataName)
@@ -318,6 +332,11 @@ Public Class dlgFromLibrary
                     'currently this command loses data(some columns) of the matrix once it's coerced. See issue #5649
                     clsListParameterFunction.SetRCommand("data.frame")
                     clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case "databook"
+                    ' R6/DataBook objects must call $get_data_frame() to extract the underlying data.frame
+                    clsListParameterFunction.SetRCommand(strSelectedDataName & "$get_data_frame")
+                    clsListParameterFunction.AddParameter("data_name", Chr(34) & strSelectedDataName & Chr(34), iPosition:=0)
                     clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
                 Case Else
                     clsListFunction.AddParameter(ucrNewDataFrameName.GetText, strParameterValue:=strSelectedDataName)

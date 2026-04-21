@@ -3,34 +3,56 @@
     Private clsGtRFunction, clsStubHeadRFunction, clsStubStyleRFunction, clsStubLocationRFunction As New RFunction
     Private bFirstload As Boolean = True
 
-    Private Sub initialiseDialog()
+    Private Sub initialiseControl()
         ucrReceiverSingleRowName.SetParameter(New RParameter("rowname_col", 0))
         ucrReceiverSingleRowName.SetParameterIsString()
-        ucrReceiverSingleRowName.Selector = ucrSelectorCols
+        ucrReceiverSingleRowName.Selector = ucrSelectorByDF
         ucrReceiverSingleRowName.SetLinkedDisplayControl(lblRowName)
 
         ucrReceiverSingleGroupByCol.SetParameter(New RParameter("groupname_col", 1))
         ucrReceiverSingleGroupByCol.SetParameterIsString()
-        ucrReceiverSingleGroupByCol.Selector = ucrSelectorCols
+        ucrReceiverSingleGroupByCol.Selector = ucrSelectorByDF
         ucrReceiverSingleGroupByCol.SetLinkedDisplayControl(lblGroupByCol)
 
         ucrInputStubHead.SetParameter(New RParameter("label", 0))
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, Optional strTableName As String = "")
         If bFirstload Then
-            initialiseDialog()
+            initialiseControl()
             bFirstload = False
         End If
 
+        ' TODO. This component no longer uses the table name. SO refactor accordingly
+
+        ' Set up the selector and receivers
+        ucrReceiverSingleRowName.strObjectName = strTableName
+        ucrReceiverSingleGroupByCol.strObjectName = strTableName
+
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleRowName.Selector = ucrSelectorByDF
+            ucrReceiverSingleGroupByCol.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleRowName.Selector = ucrSelectorByTableDF
+            ucrReceiverSingleGroupByCol.Selector = ucrSelectorByTableDF
+        End If
+
+        ' Important to reset the receivers so that they can reset their selector states
+        ucrReceiverSingleGroupByCol.SetMeAsReceiver()
+        ucrReceiverSingleGroupByCol.Clear()
+        ucrReceiverSingleRowName.SetMeAsReceiver()
+        ucrReceiverSingleRowName.Clear()
+
         Me.clsOperator = clsOperator
 
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        ucrReceiverSingleRowName.SetMeAsReceiver()
-
         ' The GT paramter should always be there.
-        clsGtRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
+        clsGtRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt", "format_gt_table"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
 
         clsStubHeadRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_stubhead"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
         If clsStubHeadRFunction Is Nothing Then
@@ -59,9 +81,7 @@
     End Sub
 
     Public Sub SetValuesToOperator()
-
         clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"tab_stubhead"}, clsOperator)
-
         If Not ucrInputStubHead.IsEmpty Then
             clsOperator.AddParameter(New RParameter(strParameterName:="tab_stubhead_param", strParamValue:=clsStubHeadRFunction, bNewIncludeArgumentName:=False))
         End If

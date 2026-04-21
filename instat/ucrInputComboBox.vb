@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports System.ComponentModel
 
 Public Class ucrInputComboBox
@@ -49,7 +51,7 @@ Public Class ucrInputComboBox
         If bAutoChangeOnLeave Then
             If Not IsValid(strCurrent) Then
                 'TODO This message should contain the same message from ValidateText()
-                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & Environment.NewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                'Select Case MsgBoxTranslate(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & Environment.NewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
                 '    Case MsgBoxResult.Yes
                 '        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
                 '    Case Else
@@ -248,7 +250,7 @@ Public Class ucrInputComboBox
         End If
         If bSetConditions Then
             If GetParameter() Is Nothing Then
-                MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+                MsgBoxTranslate("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
             End If
         End If
         For Each kvpTemp In dctItemParameterValuePairs

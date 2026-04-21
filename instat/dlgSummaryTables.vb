@@ -22,14 +22,13 @@ Public Class dlgSummaryTables
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
-    Private clsSummaryDefaultFunction, clsArrangeFunction, clsFrequencyDefaultFunction As New RFunction
+    Private clsSummaryDefaultFunction, clsSelectFunction, clsArrangeFunction, clsFrequencyDefaultFunction As New RFunction
     Private bRCodeSet As Boolean = True
     Private clsPivotWiderFunction As New RFunction
     Private ClsTabSpannerDelimFunction As New RFunction
     Private iUcrBaseXLocation, iDialogueXsize As Integer
-
+    Private firstAutoBumpDone As Boolean = False
     Private clsDummyFunction As New RFunction
-
     Private clsSummaryOperator, clsFrequencyOperator, clsJoiningPipeOperator, clsSpannerOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -182,12 +181,14 @@ Public Class dlgSummaryTables
         clsDummyFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         ClsTabSpannerDelimFunction = New RFunction
+        clsSelectFunction = New RFunction
         clsArrangeFunction = New RFunction
 
         clsJoiningPipeOperator = New ROperator
         clsSummaryOperator = New ROperator
         clsFrequencyOperator = New ROperator
         clsSpannerOperator = New ROperator
+        firstAutoBumpDone = False
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -199,6 +200,7 @@ Public Class dlgSummaryTables
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
         clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
 
+        clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
         clsPivotWiderFunction.AddParameter("names_sort", "TRUE", iPosition:=2)
@@ -221,13 +223,17 @@ Public Class dlgSummaryTables
 
         ' Gt function
         Dim clsGtFunction As New RFunction
-        clsGtFunction.SetPackageName("gt")
-        clsGtFunction.SetRCommand("gt")
+        clsGtFunction.SetPackageName("instatExtras")
+        clsGtFunction.SetRCommand("generate_summary_tables")
 
         ClsTabSpannerDelimFunction.SetPackageName("gt")
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
         ClsTabSpannerDelimFunction.AddParameter("delim", Chr(34) & "_" & Chr(34))
 
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+
+        clsArrangeFunction.SetPackageName("dplyr")
         clsArrangeFunction.SetRCommand("arrange")
 
         clsSummaryOperator.SetOperation("%>%")
@@ -324,7 +330,10 @@ Public Class dlgSummaryTables
             Exit Sub
         End If
 
-        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
+        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator, {
+                              EnumTableSubDialogTab.Header, EnumTableSubDialogTab.SourceNotes,
+                              EnumTableSubDialogTab.Themes, EnumTableSubDialogTab.OtherStyle,
+                              EnumTableSubDialogTab.Table})
         sdgTableOptions.ShowDialog(Me)
 
     End Sub
@@ -535,7 +544,6 @@ Public Class dlgSummaryTables
             ' Pass the remaining variables to the arrange parameter in clsArrangeFunction
             clsArrangeFunction.AddParameter("arrange", arrangeString, iPosition:=0, bIncludeArgumentName:=False)
 
-
         Else
             ' Step 1: Define the number of items to add based on UcrNudColumnSumFactors
             Dim numSumm As Integer = UcrNudColumnSumFactors.Value
@@ -550,11 +558,12 @@ Public Class dlgSummaryTables
             ' Step 4: Adjust positions if ucrNudPositionVar equals ucrNudPositionSum
             If positionVar = positionSum Then
                 ' If both are at their maximum values, position "variable" one step lower than positionVar
-                If positionVar = ucrNudPositionVar.Maximum Then
-                    positionVar = Math.Max(1, positionVar - 1)
+                ' but prefer keeping summary at the user-chosen position (so summary can be 1)
+                If positionVar < ucrNudPositionVar.Maximum Then
+                    positionVar = positionVar + 1
                 Else
-                    ' If not at maximum, position "summary" one step higher than positionSum
-                    positionSum = Math.Min(ucrNudPositionSum.Maximum, positionSum + 1)
+                    ' If variable can't move up (already max), then move summary down
+                    positionSum = Math.Max(1, positionSum - 1)
                 End If
             End If
 
@@ -578,30 +587,40 @@ Public Class dlgSummaryTables
                 End If
             End If
 
+            ' Step 6.5: If "summary" is in the row region, it must not be a column factor. We want to reorder it within the row region
+            Dim rowCount As Integer = Math.Max(varNames.Count - numSumm, 0)  ' number of row-factor positions
+            Dim idxSummary As Integer = varNames.IndexOf("summary")          ' 0-based index, -1 if not present
+
+            If idxSummary <> -1 AndAlso rowCount > 0 AndAlso idxSummary < rowCount Then
+                ' Desired 0-based position for summary within the row region, based on the nud
+                Dim desiredRowPos As Integer = Math.Max(0, Math.Min(positionSum - 1, rowCount - 1))
+
+                If idxSummary <> desiredRowPos Then
+                    varNames.RemoveAt(idxSummary)
+                    varNames.Insert(desiredRowPos, "summary")
+                End If
+            End If
+
             ' Step 7: Trim the list to include only the highest-positioned items, up to numSumm
-            Dim namesFromList As New List(Of String)
-            For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numSumm, 0) Step -1
-                namesFromList.Add(varNames(i))
-            Next
+            Dim startIndex As Integer = Math.Max(varNames.Count - numSumm, 0)
+            Dim namesFromList As List(Of String) = varNames.GetRange(startIndex, varNames.Count - startIndex)
 
             ' Convert namesFromList to a comma-separated string for names_from parameter
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
 
-            ' Step 8: Identify remaining variables that were not added to names_from
-            Dim remainingVars As List(Of String) = varNames.Except(namesFromList).ToList()
+            ' Step 8: Identify remaining variables (row factors) — preserve order
+            Dim remainingVars As List(Of String) = varNames.GetRange(0, rowCount)
 
-            ' Check if all variables are added to names_from
             If remainingVars.Count = 0 Then
-                ' If all variables are added to names_from, remove the arrange parameter
-                clsSummaryOperator.RemoveParameterByName("arrange")
+                ' If all variables are added to names_from, remove the select parameter
+                clsSummaryOperator.RemoveParameterByName("select")
             Else
-                ' Convert remaining variables to a comma-separated string for arrange parameter
-                Dim arrangeVars As String = String.Join(",", remainingVars)
-                clsArrangeFunction.AddParameter("arrange", arrangeVars, iPosition:=0)
-                clsSummaryOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=2)
+                ' Convert remaining variables to a comma-separated string for arrange 
+                Dim selectVars As String = String.Join(",", remainingVars) & ",tidyselect::everything()"
+                clsSelectFunction.AddParameter("select", selectVars, iPosition:=0, bIncludeArgumentName:=False)
+                clsSummaryOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
             End If
-
         End If
     End Sub
 
@@ -617,6 +636,9 @@ Public Class dlgSummaryTables
         Dim selectedCount As Integer = selectedVariables.Count
         ' Ensure ucrNudColFactors.Maximum does not exceed the number of selected variables
         If selectedCount > 0 Then
+            If selectedCount = 1 Then
+                ucrNudColFactors.Value = 1
+            End If
             ucrNudColFactors.Maximum = selectedCount
 
             If ucrNudColFactors.Value > selectedCount Then
@@ -679,14 +701,23 @@ Public Class dlgSummaryTables
         Dim selectedColFactors As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
         Dim defaultColFactors As Integer = selectedColFactors.Count
 
+        ' setting the maximum and minimums
+        UcrNudColumnSumFactors.Minimum = 0
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             UcrNudColumnSumFactors.Maximum = defaultColFactors + 2
+            If defaultColFactors = 1 Then
+                UcrNudColumnSumFactors.Value = 1
+            End If
         ElseIf ucrReceiverSummaryCols.Count > 1 OrElse ucrReorderSummary.Count > 1 Then
             UcrNudColumnSumFactors.Maximum = defaultColFactors + 1
         Else
             UcrNudColumnSumFactors.Maximum = defaultColFactors
         End If
-        UcrNudColumnSumFactors.Minimum = 0
-    End Sub
 
+        ' Only auto-bump Value from 0 to 1 the first time ever
+        If Not firstAutoBumpDone AndAlso (ucrReceiverSummaryCols.Count > 0 OrElse ucrReorderSummary.Count > 0) AndAlso UcrNudColumnSumFactors.Value = 0 AndAlso UcrNudColumnSumFactors.Maximum >= 1 Then
+            UcrNudColumnSumFactors.Value = 1
+            firstAutoBumpDone = True
+        End If
+    End Sub
 End Class

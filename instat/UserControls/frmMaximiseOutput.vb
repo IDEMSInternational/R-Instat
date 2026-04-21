@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
 Imports System.Runtime.InteropServices
+Imports instat
+Imports instat.Translations
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>
@@ -26,6 +28,10 @@ Public Class frmMaximiseOutput
     Private _strFileFilter As String = ""
     'todo. to be used by the output page to remember paths selected by user when saving outputs
     Public _strFileDestinationDirectory As String = ""
+
+    Private Sub frmMaximiseOutput_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
 
     Public Overloads Sub Show(strFileName As String, Optional bReplace As Boolean = True)
         Me._strDisplayedFileName = strFileName
@@ -63,10 +69,7 @@ Public Class frmMaximiseOutput
                     Return
                 End If
             Case Else
-                MessageBox.Show(Me, "The file type to be viewed is currently not suported",
-                            "Developer Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
+                MessageBox.Show(Me, GetTranslation("The file type to be viewed is currently not supported"), GetTranslation("Developer Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
         End Select
 
@@ -79,7 +82,7 @@ Public Class frmMaximiseOutput
     Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
         'copies displayed file to the destination folder selected by user
         Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Output"
+            dlgSaveFile.Title = GetTranslation("Save Output")
             dlgSaveFile.Filter = _strFileFilter
             dlgSaveFile.InitialDirectory = If(String.IsNullOrEmpty(_strFileDestinationDirectory),
                     frmMain.clsInstatOptions.strWorkingDirectory, _strFileDestinationDirectory)
