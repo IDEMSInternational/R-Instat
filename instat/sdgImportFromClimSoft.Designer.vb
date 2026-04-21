@@ -157,7 +157,7 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputHost.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputHost.Name = "ucrInputHost"
         Me.ucrInputHost.Size = New System.Drawing.Size(230, 32)
-        Me.ucrInputHost.TabIndex = 11
+        Me.ucrInputHost.TabIndex = 2
         '
         '
         'ucrComboBoxDatabaseName

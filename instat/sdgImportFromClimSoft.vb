@@ -59,13 +59,13 @@ Public Class sdgImportFromClimSoft
         ucrInputHost.SetParameter(New RParameter("host", 1))
         ucrInputHost.SetItems(dctHost)
         ucrInputHost.SetRDefault("35.210.141.130")
-        ucrInputHost.AddQuotesIfUnrecognised = False
+        ucrInputHost.AddQuotesIfUnrecognised = True
         ucrInputHost.bAllowNonConditionValues = True
 
         'ports
         dctPorts.Add("3308", "3308")
         dctPorts.Add("3306", "3306")
-        ucrComboBoxPort.SetRDefault("3306")
+        ucrComboBoxPort.SetRDefault(clsInstatOptionsDefaults.DEFAULTstrClimsoftPort)
         ucrComboBoxPort.SetParameter(New RParameter("port", 2))
         ucrComboBoxPort.SetItems(dctPorts)
         ucrComboBoxPort.AddQuotesIfUnrecognised = False
@@ -74,7 +74,7 @@ Public Class sdgImportFromClimSoft
 
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
-        ucrTxtUserName.SetRDefault("readonly")
+        ucrTxtUserName.SetRDefault(clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername)
 
         ucrInputDrv.SetParameter(New RParameter("drv", 4))
         dctDrv.Add("RMySQL::MySQL()", "RMySQL::MySQL()")
