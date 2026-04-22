@@ -155,6 +155,10 @@ Public Class dlgPICSATemperature
         ucrReceiverPICSA.SetSelectorHeading("Numerics")
         ucrReceiverPICSA.SetParameterIsString()
         ucrReceiverPICSA.bWithQuotes = False
+        ucrReceiverPICSA.AutoSize = False
+        ucrReceiverPICSA.Dock = DockStyle.None
+        ucrReceiverPICSA.Size = New Size(150, 150)
+        ucrReceiverPICSA.BringToFront()
 
         ucrReceiverX.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
         ucrReceiverX.SetParameterIsString()

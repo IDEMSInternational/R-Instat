@@ -263,13 +263,13 @@ Partial Class dlgPICSATemperature
         '
         'ucrReceiverPICSA
         '
-        Me.ucrReceiverPICSA.AutoSize = True
+        ucrReceiverPICSA.AutoSize = False
         Me.ucrReceiverPICSA.frmParent = Me
-        Me.ucrReceiverPICSA.Location = New System.Drawing.Point(363, 27)
+        Me.ucrReceiverPICSA.Location = New System.Drawing.Point(363, 56)
         Me.ucrReceiverPICSA.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrReceiverPICSA.Name = "ucrReceiverPICSA"
         Me.ucrReceiverPICSA.Selector = Nothing
-        Me.ucrReceiverPICSA.Size = New System.Drawing.Size(180, 207)
+        Me.ucrReceiverPICSA.Size = New System.Drawing.Size(137, 178)
         Me.ucrReceiverPICSA.strNcFilePath = ""
         Me.ucrReceiverPICSA.TabIndex = 38
         Me.ucrReceiverPICSA.ucrSelector = Nothing
