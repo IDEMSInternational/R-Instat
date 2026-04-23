@@ -908,6 +908,7 @@ Public Class dlgPICSATemperature
             clsBaseOperator.RemoveParameterByName("scale_x_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
+            clsRaesFunction.RemoveParameterByName("x")
         End If
     End Sub
 
