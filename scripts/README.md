@@ -1,10 +1,18 @@
-# R-Instat Translation Check
+# R-Instat Translation Tools
 
-Static analysis tool to detect missing translations in R-Instat VB.NET codebase.
+Static analysis + maintenance tools for the R-Instat VB.NET translation system.
 
 ## Overview
 
-This tool scans VB.NET files for user-facing strings (`.Text = "..."`, `SetText("...")`, etc.) and verifies they exist in the English translation JSON files. It's designed to run both locally and in CI, aligning with the existing runtime reflection system used by R-Instat.
+Three scripts keep the VB.NET code and the English source JSON
+(`instat/translations/en/r_instat_menus.json`,
+`r_instat_not_menus.json`) in sync:
+
+- **`check-translations`** — read-only. Reports strings present in code but missing from the EN JSON. Exits non-zero if any missing. Used by CI to fail PRs.
+- **`sync-translations`** — appends missing strings into the correct EN JSON file (menus vs. not_menus). Run locally before committing.
+- **`prune-orphans`** — removes EN JSON keys that are absent from both the pattern-based scan AND a broad scan of every string literal in the `.vb` codebase. Opt-in, destructive, dry-run by default.
+
+The EN JSON is the single source of truth. CI enforces that any new VB string has a matching key in the JSON before a PR merges.
 
 ## Quick Start
 
@@ -15,15 +23,33 @@ npm install
 # Build TypeScript
 npm run build
 
-# Run translation check on all files
+# Report what's missing (exits 1 if any)
 npm run check-translations
 
-# Run in CI mode (only changed files)
-npm run check-translations:ci
+# Append missing strings to the EN JSON
+npm run sync-translations
 
-# Run with verbose output
-npm run check-translations:verbose
+# Preview sync without writing
+npm run sync-translations:dry-run
+
+# Preview orphan prune candidates (dry-run by default)
+npm run prune-orphans
+
+# Actually delete prune-eligible orphans
+npm run prune-orphans:write
+
+# CI mode: changed files only, GitHub annotations
+npm run check-translations:ci
 ```
+
+## Developer workflow
+
+1. Edit VB, add new UI string.
+2. `npm run sync-translations` — EN JSON files get the new keys appended.
+3. Review the JSON diff and commit it alongside the VB edits.
+4. Push. CI runs `check-translations:ci` → passes.
+
+If step 2 is skipped: CI fails, the PR comment points at `npm run sync-translations`. Fix locally, push fix commit.
 
 ## Architecture
 
@@ -218,7 +244,7 @@ This tool is an **early warning gate** in the translation workflow, complementin
     │  CI Mode also outputs:                                          │
     │  • GitHub annotations (::warning file=...,line=...)             │
     │  • PR comment with markdown table                               │
-    │  • Review request to @ksiinga                                   │
+    │  • Non-zero exit code → fails the PR check                      │
     │                                                                 │
     └─────────────────────────────────────────────────────────────────┘
 ```
@@ -227,21 +253,27 @@ This tool is an **early warning gate** in the translation workflow, complementin
 
 ```
 scripts/
-├── check-translations.ts    # Main orchestrator (CLI, composition)
+├── check-translations.ts    # Read-only. Reports drift, exits 1 on missing.
+├── sync-translations.ts     # Write. Appends missing strings to EN JSON.
+├── prune-orphans.ts         # Write. Deletes orphans (broad-index safeguard).
 ├── lib/
-│   ├── pattern-matcher.ts   # SQLite LIKE pattern matching
+│   ├── pattern-matcher.ts         # SQLite LIKE pattern matching
 │   ├── control-name-inference.ts  # Form/control name inference
-│   ├── vbnet-parser.ts      # VB.NET string extraction
-│   ├── translation-checker.ts    # JSON loading/checking
-│   ├── reporter.ts          # Output formatting (console/JSON/GitHub)
-│   └── git-utils.ts         # Git operations (changed files, CI detection)
+│   ├── vbnet-parser.ts            # VB.NET string extraction
+│   ├── translation-checker.ts     # JSON loading/checking
+│   ├── translation-writer.ts      # JSON append/remove + menu route classifier
+│   ├── string-indexer.ts          # Broad VB string-literal index (prune safety)
+│   ├── scan.ts                    # Shared pure scan pipeline
+│   ├── orphan-finder.ts           # Finds JSON keys not seen by static analysis
+│   ├── reporter.ts                # Output formatting (console/JSON/GitHub)
+│   ├── git-utils.ts               # Git operations (changed files, CI detection)
+│   └── project-root.ts            # Project root discovery
 ├── package.json             # Dependencies (TypeScript only)
 ├── tsconfig.json            # TypeScript config
 ├── .gitignore               # Ignores dist/, node_modules/, report
 └── README.md                # This file
 
 .github/
-├── CODEOWNERS               # @ksiinga for translation files
 └── workflows/
     └── translation-check.yml  # CI workflow
 
@@ -281,6 +313,7 @@ Automatically filters out:
 
 ## CLI Options
 
+### `check-translations`
 ```
 --ci          CI mode: only check changed files, use GitHub-friendly output
 --verbose     Show detailed information including pattern matches
@@ -288,16 +321,45 @@ Automatically filters out:
 --help        Show help message
 ```
 
+### `sync-translations`
+```
+--dry-run     Report what would be added; write nothing
+--verbose     Show detailed scan logs
+--help        Show help message
+```
+
+### `prune-orphans`
+```
+--dry-run     (Default) Report candidates, write nothing
+--write       Write deletions (requires --yes)
+--yes         Confirm destructive deletion
+--verbose     Show detailed scan logs
+--help        Show help message
+```
+
+### Routing rule (sync-translations)
+
+Missing strings are routed by the VB control-name prefix:
+- `mnu*` → `r_instat_menus.json`
+- anything else → `r_instat_not_menus.json`
+
+### Safety rule (prune-orphans)
+
+An orphan is eligible to prune only if it is absent from BOTH:
+1. The pattern-based scan (`.Text=`, `SetText`, `SetLabel`, `SetLabelText`, `ToolTipText`), AND
+2. A broad index of every string literal in every `.vb` file under `instat/`.
+
+This catches strings invisible to pattern analysis (e.g. `MsgBox("...")`, `Throw New Exception("...")`, `.Items.Add("...")`, dynamic control calls).
+
 ## CI Integration
 
 The `.github/workflows/translation-check.yml` workflow:
 1. Triggers on PRs that modify VB.NET files
-2. Checks only changed files for missing translations
+2. Checks only changed files for missing translations (`check-translations:ci`)
 3. Posts a summary comment on the PR
-4. Requests review from translation oversight (`@ksiinga`) if violations found
-5. Adds `needs-translation-review` label to the PR
+4. **Fails the PR check** if any strings in code are missing from EN JSON
 
-The workflow does NOT fail the PR - it only requests reviews to ensure translation oversight.
+The EN JSON is the single source of truth. A failing check tells the author to run `npm run sync-translations` locally and commit the updated JSON.
 
 ## Output Formats
 

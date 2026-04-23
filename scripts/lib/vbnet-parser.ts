@@ -76,11 +76,11 @@ function joinContinuedLines(lines: string[]): Array<{ content: string; lineNumbe
 /**
  * Extracts VB.NET string literals from a line.
  * Handles both regular strings and escaped quotes ("").
- * 
+ *
  * @param line - Line of VB.NET code
  * @returns Extracted string value and position info
  */
-function extractStringLiteral(line: string, startIndex: number): { value: string; endIndex: number } | null {
+export function extractStringLiteral(line: string, startIndex: number): { value: string; endIndex: number } | null {
   // VB.NET strings use double quotes, with "" for escaped quotes
   if (line[startIndex] !== '"') {
     return null;

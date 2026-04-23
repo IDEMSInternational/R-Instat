@@ -8,6 +8,10 @@
     "check-translations": "node dist/check-translations.js",
     "check-translations:ci": "node dist/check-translations.js --ci",
     "check-translations:verbose": "node dist/check-translations.js --verbose",
+    "sync-translations": "node dist/sync-translations.js",
+    "sync-translations:dry-run": "node dist/sync-translations.js --dry-run",
+    "prune-orphans": "node dist/prune-orphans.js",
+    "prune-orphans:write": "node dist/prune-orphans.js --write --yes",
     "test": "node --test lib/*.test.ts"
   },
   "keywords": [

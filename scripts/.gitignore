@@ -1,3 +1,4 @@
 /dist
 node_modules/
 translation-report.json
+orphan-prune-candidates.json

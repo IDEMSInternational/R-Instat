@@ -121,3 +121,30 @@ dlgCalculator\_ucrCalc\_grpSymbols\_cmdNumbers%
 ucrScriptWindow\_tlpTableContainer\_TabControl
 ucrScriptWindow\_tlpTableContainer\_TabControl\_TabPageAdded
 ucrScriptWindow\_tlpTableContainer\_TabControl\_TabPageAdded\_txtScriptAdded
+
+# R package names exposed in the 'General for Graphics' geoms menu. These are
+# identifiers (GGally, ggalt, ggplot2, ...) and must not be translated.
+dlgGeneralForGraphics\_%ToolStripMenuItem
+sdgPlots\_rdoGgthemes
+
+# Date format tokens and R function names on the calculator's Dates tab.
+# These are R syntax (ymd, as.date, +%Y, "Mon, 4 Jun" sample output, ...)
+# and must not be translated.
+ucrCalculator\_cmdPlus%
+ucrCalculator\_cmdYmd%
+ucrCalculator\_cmdYear
+ucrCalculator\_cmdYday
+ucrCalculator\_cmdAs%
+ucrCalculator\_cmdMon4Jun
+ucrCalculator\_cmdwhere%
+ucrCalculator\_cmdwhich%
+
+# ggplot2 geom_* function names in the Additional Layers geoms menu.
+# These are R identifiers, not UI text.
+ucrAdditionalLayers\_toolStripMenuItemGeom%
+ucrAdditionalLayers\_grpGeoms
+
+# Axis coordinate labels ("x:", "y :") — mathematical notation, not translated.
+sdgPlots\_lblX
+sdgPlots\_lblY
+sdgThemesSub\_lblXCoord
