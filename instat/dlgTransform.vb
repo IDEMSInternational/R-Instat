@@ -125,6 +125,7 @@ Public Class dlgTransform
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        AddFormatParameters()
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -242,6 +243,7 @@ Public Class dlgTransform
 
         UcrInputPvalue.SetItems({strStar, strP, strPvalue})
         UcrInputPvalue.SetDropDownStyleAsNonEditable()
+        UcrInputPvalue.SetText(strPvalue)
 
         ucrPnlNonNegative.AddParameterValuesCondition(rdoSquareRoot, "check", "sqrt")
         ucrPnlNonNegative.AddParameterValuesCondition(rdoLogToBase10, "check", "log10")
@@ -321,7 +323,6 @@ Public Class dlgTransform
         ucrInputLogicOperations.SetItems({"==", "<", "<=", ">", ">=", "!=", "%in%", "is.na", "!is.na"})
         ucrInputLogicOperations.SetDropDownStyleAsNonEditable()
 
-
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 0))
         ucrNudDecimalPlaces.SetMinMax(iNewMin:=0, iNewMax:=22)
         ucrNudDecimalPlaces.SetRDefault(3)
@@ -335,7 +336,7 @@ Public Class dlgTransform
         ucrNudPercent.SetRDefault(2)
 
         UcrNudFraction.SetParameter(New RParameter("digits", 0))
-        UcrNudFraction.SetMinMax(iNewMin:=0, iNewMax:=22)
+        UcrNudFraction.SetMinMax(iNewMin:=1, iNewMax:=100)
         UcrNudFraction.SetRDefault(10)
 
         UcrInputNAOperations.SetParameter(New RParameter("na.form", 0))
@@ -496,7 +497,6 @@ Public Class dlgTransform
         clsSortColsFunction = New RFunction
         clsSignifColsFunction = New RFunction
         clsLagColsFunction = New RFunction
-        clsLeadColsFunction = New RFunction
         clsLeadColsFunction = New RFunction
         clsConcDiffColsFunction = New RFunction
         clsReplicateColsFunction = New RFunction
@@ -733,11 +733,8 @@ Public Class dlgTransform
         clsFormatDummyFunction.AddParameter("check", "DecimalFormat", iPosition:=0)
         clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
 
-        clsFormatFunction.AddParameter("fmt", "fmt_trace", bIncludeArgumentName:=True)
-
-
         clsColumnsFunction.SetRCommand("colnames")
-        clsColumnsFunction.AddParameter("col_data", "col",, bIncludeArgumentName:=False)
+        clsColumnsFunction.AddParameter("col_data", "col", bIncludeArgumentName:=False)
 
         clsPasteFunction.SetRCommand("paste0")
         clsPasteFunction.AddParameter("data", clsRFunctionParameter:=clsColumnsFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -773,7 +770,6 @@ Public Class dlgTransform
         ucrNudDecimalPlaces.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
         ucrNudScientific.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
         ucrNudPercent.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
-        UcrNudFraction.AddAdditionalCodeParameterPair(clsDescToolsFormatFunction, New RParameter("fmt", 1), iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=0)
 
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsAddConstantOperator, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=10)
@@ -846,7 +842,6 @@ Public Class dlgTransform
         ucrNudDecimalPlaces.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrNudScientific.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrNudPercent.SetRCode(clsDescToolsFormatFunction, bReset)
-        UcrNudFraction.SetRCode(clsDescToolsFormatFunction, bReset)
         ucrNudDiffLag.SetRCode(clsDiffFunction, bReset)
         ucrNudLagPosition.SetRCode(clsLagFunction, bReset)
         ucrInputPower.SetRCode(clsPowerOperator, bReset)
@@ -869,10 +864,10 @@ Public Class dlgTransform
             ucrChkMultiply.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkSubtract.SetRCode(clsNumericDummyFunction, bReset)
             ucrSaveNew.SetRCode(clsRoundFunction, bReset)
+            ucrPnlFormatOptions.SetRCode(clsFormatDummyFunction, bReset)
             ucrNudDecimalPlaces.SetRCode(clsDescToolsFormatFunction, bReset)
             ucrNudScientific.SetRCode(clsDescToolsFormatFunction, bReset)
             ucrNudPercent.SetRCode(clsDescToolsFormatFunction, bReset)
-            UcrNudFraction.SetRCode(clsDescToolsFormatFunction, bReset)
         End If
         bResetRCode = True
     End Sub
@@ -973,12 +968,12 @@ Public Class dlgTransform
         Return strValue
     End Function
 
-
     Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrPnlFormatOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
         ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrNudLagLeadPosition.ControlValueChanged,
         ucrNudLagPosition.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputMultiply.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged,
         ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrChkAddConstant.ControlValueChanged,
-        ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
+        ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged,
+        UcrInputPvalue.ControlValueChanged, UcrInputNAOperations.ControlValueChanged, UcrInputZeroOperations.ControlValueChanged, UcrInputAlignOperations.ControlValueChanged, UcrNudFraction.ControlValueChanged
         UpdateControlStates()
         ucrBase.clsRsyntax.ClearCodes()
         If rdoSingle.Checked Then
@@ -1257,6 +1252,7 @@ Public Class dlgTransform
     Private Sub AddFormatParameters()
         clsDescToolsFormatFunction.RemoveParameterByName("fmt")
         clsDescToolsFormatFunction.RemoveParameterByName("digits")
+        clsDescToolsFormatFunction.RemoveParameterByName("sci")
         clsDescToolsFormatFunction.RemoveParameterByName("na.form")
         clsDescToolsFormatFunction.RemoveParameterByName("zero.form")
         clsDescToolsFormatFunction.RemoveParameterByName("align")
@@ -1289,8 +1285,7 @@ Public Class dlgTransform
 
         ElseIf rdoFraction.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Fraction", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "frac" & Chr(34))
-
+            clsDescToolsFormatFunction.AddParameter("fmt", "function(x) instatExtras::frac_den(x, den=" & UcrNudFraction.GetText & ")")
         ElseIf rdoAlign.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Align", iPosition:=0)
             clsDescToolsFormatFunction.AddParameter("align", Chr(34) & UcrInputAlignOperations.GetText & Chr(34))
