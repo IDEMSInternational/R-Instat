@@ -732,7 +732,7 @@ Partial Class dlgEndOfRainsSeason
         Me.Name = "dlgEndOfRainsSeason"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "End_of_Rains_Season"
-        Me.Text = "End of Rains/Season"
+        Me.Text = "End of the Season"
         Me.grpEndofSeason.ResumeLayout(False)
         Me.grpEndofSeason.PerformLayout()
         Me.grpEndofRains.ResumeLayout(False)
