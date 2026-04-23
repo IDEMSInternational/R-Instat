@@ -721,7 +721,7 @@ Public Class dlgPICSATemperature
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
-        ucrReceiverX.SetRCode(clsAsNumericX, bReset)
+        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         ucrReceiverFacetBy.SetRCode(clsRowVarsFunction, bReset)
@@ -908,7 +908,6 @@ Public Class dlgPICSATemperature
             clsBaseOperator.RemoveParameterByName("scale_x_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
-            clsRaesFunction.RemoveParameterByName("x")
         End If
     End Sub
 
