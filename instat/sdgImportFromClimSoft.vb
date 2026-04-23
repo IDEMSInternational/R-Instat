@@ -58,7 +58,7 @@ Public Class sdgImportFromClimSoft
         dctHost.Add("127.0.0.1", "127.0.0.1")
         ucrInputHost.SetParameter(New RParameter("host", 1))
         ucrInputHost.SetItems(dctHost)
-        ucrInputHost.SetRDefault("35.210.141.130")
+        ucrInputHost.SetRDefault(clsInstatOptionsDefaults.DEFAULTstrClimsoftHost)
         ucrInputHost.AddQuotesIfUnrecognised = True
         ucrInputHost.bAllowNonConditionValues = True
 
