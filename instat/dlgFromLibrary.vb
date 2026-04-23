@@ -33,28 +33,32 @@ Public Class dlgFromLibrary
 
     Private strSelectedPackage As String = ""
     Private clsImportFunction As New RFunction 'the base function that call on import R-Instat function
-
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim finalizeLoad = Sub()
+                               If bReset Then
+                                   SetDefaults()
+                               End If
+                               SetRCodeforControls(bReset)
+
+                               If lstCollection.SelectedItems.Count > 0 Then
+                                   lstCollection.Select()
+                                   lstCollection.TopItem = lstCollection.SelectedItems(0)
+                               End If
+
+                               bReset = False
+                               TestOkEnabled()
+                               EnableHelp()
+                               autoTranslate(Me)
+                           End Sub
         If bFirstLoad Then
-            InitialiseDialog()
             bFirstLoad = False
+            Me.BeginInvoke(Sub()
+                               InitialiseDialog()
+                               finalizeLoad()
+                           End Sub)
+        Else
+            finalizeLoad()
         End If
-        If bReset Then
-            SetDefaults()
-        End If
-        SetRCodeforControls(bReset)
-
-        If lstCollection.SelectedItems.Count > 0 Then
-            'make the listview have the focus
-            lstCollection.Select()
-            'set the selected item to be visible 
-            lstCollection.TopItem = lstCollection.Items(lstCollection.Items.IndexOf(lstCollection.SelectedItems.Item(0)))
-        End If
-
-        bReset = False
-        TestOkEnabled()
-        EnableHelp()
-        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
