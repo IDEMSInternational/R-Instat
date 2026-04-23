@@ -239,6 +239,12 @@
     <Compile Include="dlgApsimx.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCheckSummary.Designer.vb">
+      <DependentUpon>dlgCheckSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCheckSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimograph.Designer.vb">
       <DependentUpon>dlgClimograph.vb</DependentUpon>
     </Compile>
@@ -3434,6 +3440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheckSummary.resx">
+      <DependentUpon>dlgCheckSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>

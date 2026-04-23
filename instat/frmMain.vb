@@ -3231,4 +3231,8 @@ Public Class frmMain
         dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
         dlgInsertColumn.ShowDialog()
     End Sub
+
+    Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
+        dlgCheckSummary.ShowDialog()
+    End Sub
 End Class
