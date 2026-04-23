@@ -2300,13 +2300,13 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareStartoftheRains.Name = "mnuClimaticPrepareStartoftheRains"
         Me.mnuClimaticPrepareStartoftheRains.Size = New System.Drawing.Size(189, 22)
-        Me.mnuClimaticPrepareStartoftheRains.Text = "Start of the Rains..."
+        Me.mnuClimaticPrepareStartoftheRains.Text = "Start of the Season..."
         '
         'mnuClimaticPrepareEndOfRains
         '
         Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
         Me.mnuClimaticPrepareEndOfRains.Size = New System.Drawing.Size(189, 22)
-        Me.mnuClimaticPrepareEndOfRains.Text = "End of Rains..."
+        Me.mnuClimaticPrepareEndOfRains.Text = "End of the Season..."
         '
         'mnuClimaticPrepareLengthOfSeason
         '
