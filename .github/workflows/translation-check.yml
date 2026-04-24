@@ -1,0 +1,101 @@
+name: Translation Check
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'instat/**/*.vb'
+      - 'instat/translations/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-translations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for git diff
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm ci || npm install
+
+      - name: Build TypeScript
+        working-directory: scripts
+        run: npm run build
+
+      - name: Run translation check
+        id: translation-check
+        working-directory: scripts
+        # Non-zero exit on missing translations fails this step and the job.
+        # Captures output to a report file so the follow-up step can post
+        # a PR comment even on failure.
+        run: |
+          set +e
+          npm run check-translations:ci > translation-report.txt 2>&1
+          status=$?
+          cat translation-report.txt
+          exit $status
+
+      - name: Add PR comment with results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            let report = '';
+            try {
+              report = fs.readFileSync('scripts/translation-report.txt', 'utf8');
+            } catch (e) {
+              report = 'Translation check completed (no detailed report available)';
+            }
+
+            const summaryMatch = report.match(/## Translation Check Results[\s\S]*?(?=###|$)/);
+            const summary = summaryMatch ? summaryMatch[0] : report.substring(0, 2000);
+
+            const failed = '${{ steps.translation-check.outcome }}' === 'failure';
+            const fixHint = failed
+              ? `\n\n**Missing translations detected.** Run \`npm run sync-translations\` locally and commit the updated \`instat/translations/en/*.json\`.`
+              : '';
+
+            const body = `## Translation Check Results\n\n${summary}${fixHint}\n\n---\n*This comment is automatically updated by the translation check workflow.*`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+
+            const botComment = comments.find(c =>
+              c.user.type === 'Bot' &&
+              c.body.includes('Translation Check Results')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              });
+            }
