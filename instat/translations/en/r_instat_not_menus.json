@@ -6872,5 +6872,19 @@
   "Cell Text Format Options": "Cell Text Format Options",
   "Link Email To:": "Link Email To:",
   "Display As Button": "Display As Button",
-  "Show underline": "Show underline"
+  "Show underline": "Show underline",
+  "Outlier Coefficient:": "Outlier Coefficient:",
+  "Label Outliers:": "Label Outliers:",
+  "Omit below threshold": "Omit below threshold",
+  "Add Why Variable": "Add Why Variable",
+  "Columns to Ignore:": "Columns to Ignore:",
+  "Rows Almost Empty": "Rows Almost Empty",
+  "Label Histogram": "Label Histogram",
+  "Specify Centre": "Specify Centre",
+  "Label Width": "Label Width",
+  "Columns to Import": "Columns to Import",
+  "Show Remaining Days": "Show Remaining Days",
+  "Climatic Trend Graph": "Climatic Trend Graph",
+  "Longest Spells": "Longest Spells",
+  "Insert Column/Rows...": "Insert Column/Rows..."
 }

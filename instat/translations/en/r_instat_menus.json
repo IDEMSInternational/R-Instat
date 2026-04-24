@@ -546,5 +546,7 @@
   "Run Current Statement/Selection": "Run Current Statement/Selection",
   "Reformat Code": "Reformat Code",
   "Load from File...": "Load from File...",
-  "Save to File...": "Save to File..."
+  "Save to File...": "Save to File...",
+  "Likert Graphs...": "Likert Graphs...",
+  "More Likert...": "More Likert..."
 }
