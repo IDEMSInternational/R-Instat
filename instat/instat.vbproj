@@ -257,6 +257,12 @@
     <Compile Include="dlgDefineTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDescribeOneVariableLikertGraph.Designer.vb">
+      <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeOneVariableLikertGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDistances.Designer.vb">
       <DependentUpon>dlgDistances.vb</DependentUpon>
     </Compile>
@@ -2073,10 +2079,10 @@
     <Compile Include="dlgDeleteModels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteRowsOrColums.Designer.vb">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    <Compile Include="dlgDeleteRowsOrColumns.Designer.vb">
+      <DependentUpon>dlgDeleteRowsOrColumns.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteRowsOrColums.vb">
+    <Compile Include="dlgDeleteRowsOrColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteDataFrames.Designer.vb">
@@ -3480,6 +3486,17 @@
     <EmbeddedResource Include="dlgDefineTricotData.resx">
       <DependentUpon>dlgDefineTricotData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeOneVariableLikertGraph.resx">
+      <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>dlgDescribeOneVariableLikertGraph1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeOneVariableLikertGraph.sw-KE.resx">
+      <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -4308,11 +4325,11 @@
     <EmbeddedResource Include="dlgDeleteModels.sw-KE.resx">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColumns.resx">
+      <DependentUpon>dlgDeleteRowsOrColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColumns.sw-KE.resx">
+      <DependentUpon>dlgDeleteRowsOrColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDataFrames.resx">
       <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>

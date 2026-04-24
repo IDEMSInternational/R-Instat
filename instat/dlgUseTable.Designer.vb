@@ -34,6 +34,9 @@ Partial Class dlgUseTable
         Me.lblFileType = New System.Windows.Forms.Label()
         Me.ucrChkExport = New instat.ucrCheck()
         Me.cboFileType = New System.Windows.Forms.ComboBox()
+        Me.ucrHeader = New instat.ucrHeader()
+        Me.ucrCboSelectThemes = New instat.ucrInputComboBox()
+        Me.ucrChkSelectTheme = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'btnTableOptions
@@ -58,7 +61,7 @@ Partial Class dlgUseTable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(11, 251)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(11, 438)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(390, 34)
@@ -91,16 +94,17 @@ Partial Class dlgUseTable
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(2, 397)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 566)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(8, 263)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(8, 457)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(158, 106)
@@ -116,7 +120,7 @@ Partial Class dlgUseTable
         Me.ucrFilePath.FilePathDialogTitle = "Export Data File"
         Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
-        Me.ucrFilePath.Location = New System.Drawing.Point(30, 346)
+        Me.ucrFilePath.Location = New System.Drawing.Point(30, 529)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
         Me.ucrFilePath.Size = New System.Drawing.Size(365, 34)
@@ -126,7 +130,7 @@ Partial Class dlgUseTable
         '
         Me.lblFileType.AutoSize = True
         Me.lblFileType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFileType.Location = New System.Drawing.Point(31, 320)
+        Me.lblFileType.Location = New System.Drawing.Point(31, 503)
         Me.lblFileType.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFileType.Name = "lblFileType"
         Me.lblFileType.Size = New System.Drawing.Size(86, 13)
@@ -137,7 +141,7 @@ Partial Class dlgUseTable
         '
         Me.ucrChkExport.AutoSize = True
         Me.ucrChkExport.Checked = False
-        Me.ucrChkExport.Location = New System.Drawing.Point(12, 290)
+        Me.ucrChkExport.Location = New System.Drawing.Point(12, 473)
         Me.ucrChkExport.Name = "ucrChkExport"
         Me.ucrChkExport.Size = New System.Drawing.Size(253, 23)
         Me.ucrChkExport.TabIndex = 31
@@ -146,16 +150,47 @@ Partial Class dlgUseTable
         '
         Me.cboFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboFileType.FormattingEnabled = True
-        Me.cboFileType.Location = New System.Drawing.Point(164, 313)
+        Me.cboFileType.Location = New System.Drawing.Point(164, 496)
         Me.cboFileType.Name = "cboFileType"
         Me.cboFileType.Size = New System.Drawing.Size(170, 21)
         Me.cboFileType.TabIndex = 32
+        '
+        'ucrHeader
+        '
+        Me.ucrHeader.Location = New System.Drawing.Point(21, 302)
+        Me.ucrHeader.Name = "ucrHeader"
+        Me.ucrHeader.Size = New System.Drawing.Size(470, 127)
+        Me.ucrHeader.TabIndex = 155
+        '
+        'ucrCboSelectThemes
+        '
+        Me.ucrCboSelectThemes.AddQuotesIfUnrecognised = True
+        Me.ucrCboSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboSelectThemes.GetSetSelectedIndex = -1
+        Me.ucrCboSelectThemes.IsReadOnly = False
+        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(107, 239)
+        Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrCboSelectThemes.Name = "ucrCboSelectThemes"
+        Me.ucrCboSelectThemes.Size = New System.Drawing.Size(168, 21)
+        Me.ucrCboSelectThemes.TabIndex = 152
+        '
+        'ucrChkSelectTheme
+        '
+        Me.ucrChkSelectTheme.AutoSize = True
+        Me.ucrChkSelectTheme.Checked = False
+        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(23, 239)
+        Me.ucrChkSelectTheme.Name = "ucrChkSelectTheme"
+        Me.ucrChkSelectTheme.Size = New System.Drawing.Size(94, 23)
+        Me.ucrChkSelectTheme.TabIndex = 153
         '
         'dlgUseTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 452)
+        Me.ClientSize = New System.Drawing.Size(513, 623)
+        Me.Controls.Add(Me.ucrHeader)
+        Me.Controls.Add(Me.ucrCboSelectThemes)
+        Me.Controls.Add(Me.ucrChkSelectTheme)
         Me.Controls.Add(Me.cboFileType)
         Me.Controls.Add(Me.ucrChkExport)
         Me.Controls.Add(Me.lblFileType)
@@ -189,4 +224,7 @@ Partial Class dlgUseTable
     Friend WithEvents lblFileType As Label
     Friend WithEvents ucrChkExport As ucrCheck
     Friend WithEvents cboFileType As ComboBox
+    Friend WithEvents ucrHeader As ucrHeader
+    Friend WithEvents ucrCboSelectThemes As ucrInputComboBox
+    Friend WithEvents ucrChkSelectTheme As ucrCheck
 End Class

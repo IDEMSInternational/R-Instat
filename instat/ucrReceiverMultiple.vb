@@ -156,6 +156,11 @@ Public Class ucrReceiverMultiple
     ''' that is not in the list of variables of the selector
     ''' </summary>
     Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        ' SAFETY: Selector may not yet be initialised during autofill
+        If Selector Is Nothing OrElse Selector.lstAvailableVariable Is Nothing Then
+            Exit Sub
+        End If
+
         Dim lstItemsToRemove As New List(Of ListViewItem)
         For Each lvi As ListViewItem In lstSelectedVariables.Items
             If Selector.lstAvailableVariable.FindItemWithText(lvi.Text) Is Nothing Then
@@ -195,11 +200,13 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Private Function ShortenString(strText As String) As String
-        Dim maxLength As Integer = 10
+        Dim maxLength As Integer = 6
+
         If strText.Length > maxLength Then
             ' Trim the string to the specified length and add ellipsis
             Return strText.Substring(0, maxLength) & "..."
         End If
+
         Return strText
     End Function
 

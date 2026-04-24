@@ -79,6 +79,7 @@ Partial Class dlgInventoryPlot
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkHierarchal = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.grpDetailsOptions.SuspendLayout()
         Me.grpPlotType.SuspendLayout()
@@ -253,6 +254,7 @@ Partial Class dlgInventoryPlot
         '
         'grpDetailsOptions
         '
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkHierarchal)
         Me.grpDetailsOptions.Controls.Add(Me.ucrChkMinute)
         Me.grpDetailsOptions.Controls.Add(Me.ucrSaveDetails)
         Me.grpDetailsOptions.Controls.Add(Me.ucrChkSecond)
@@ -262,7 +264,7 @@ Partial Class dlgInventoryPlot
         Me.grpDetailsOptions.Controls.Add(Me.ucrChkDay)
         Me.grpDetailsOptions.Location = New System.Drawing.Point(7, 316)
         Me.grpDetailsOptions.Name = "grpDetailsOptions"
-        Me.grpDetailsOptions.Size = New System.Drawing.Size(376, 114)
+        Me.grpDetailsOptions.Size = New System.Drawing.Size(376, 137)
         Me.grpDetailsOptions.TabIndex = 53
         Me.grpDetailsOptions.TabStop = False
         Me.grpDetailsOptions.Text = "Details Options"
@@ -280,7 +282,7 @@ Partial Class dlgInventoryPlot
         'ucrSaveDetails
         '
         Me.ucrSaveDetails.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDetails.Location = New System.Drawing.Point(6, 86)
+        Me.ucrSaveDetails.Location = New System.Drawing.Point(6, 112)
         Me.ucrSaveDetails.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDetails.Name = "ucrSaveDetails"
         Me.ucrSaveDetails.Size = New System.Drawing.Size(369, 21)
@@ -328,7 +330,7 @@ Partial Class dlgInventoryPlot
         '
         Me.ucrChkDay.AutoSize = True
         Me.ucrChkDay.Checked = False
-        Me.ucrChkDay.Location = New System.Drawing.Point(126, 62)
+        Me.ucrChkDay.Location = New System.Drawing.Point(126, 60)
         Me.ucrChkDay.Name = "ucrChkDay"
         Me.ucrChkDay.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkDay.TabIndex = 16
@@ -520,17 +522,27 @@ Partial Class dlgInventoryPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 435)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 459)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
+        '
+        'ucrChkHierarchal
+        '
+        Me.ucrChkHierarchal.AutoSize = True
+        Me.ucrChkHierarchal.Checked = False
+        Me.ucrChkHierarchal.Location = New System.Drawing.Point(126, 85)
+        Me.ucrChkHierarchal.Name = "ucrChkHierarchal"
+        Me.ucrChkHierarchal.Size = New System.Drawing.Size(192, 23)
+        Me.ucrChkHierarchal.TabIndex = 21
         '
         'dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(448, 489)
+        Me.ClientSize = New System.Drawing.Size(448, 513)
+        Me.Controls.Add(Me.grpDetailsOptions)
         Me.Controls.Add(Me.lblGraphTitle)
         Me.Controls.Add(Me.ucrChkDisplayRainDays)
         Me.Controls.Add(Me.grpPlotType)
@@ -540,7 +552,6 @@ Partial Class dlgInventoryPlot
         Me.Controls.Add(Me.ucrChkShowNonMissing)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
-        Me.Controls.Add(Me.grpDetailsOptions)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.cmdInventoryPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
@@ -613,4 +624,5 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrChkOmitStart As ucrCheck
     Friend WithEvents ucrChkOmitEnd As ucrCheck
+    Friend WithEvents ucrChkHierarchal As ucrCheck
 End Class
