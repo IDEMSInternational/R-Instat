@@ -1578,14 +1578,12 @@ Public Class dlgStartofRains
         Dim bOkEnabled As Boolean = False
 
         If rdoRain.Checked Then
-
             bOkEnabled = ValidateRainOption()
         ElseIf rdoSummer.Checked Then
             bOkEnabled = ValidateSummerOption()
         ElseIf rdoWinter.Checked Then
             bOkEnabled = ValidateWinterOption()
         End If
-
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
@@ -1595,33 +1593,26 @@ Public Class dlgStartofRains
             ucrInputThreshold.GetText = "" Then
             Return False
         End If
-
         If Not ucrChkTotalRainfall.Checked Then
             Return False
         End If
-
         If ucrNudTROverDays.GetText = "" Then Return False
-
         If Not ((rdoTRAmount.Checked AndAlso ucrNudTRAmount.GetText <> "") OrElse
                 (rdoTRPercentile.Checked AndAlso ucrNudTRPercentile.GetText <> "") OrElse
                 (rdoEvapo.Checked AndAlso Not ucrReceiverEvap.IsEmpty AndAlso ucrNudTRPercentile.GetText <> "")) Then
             Return False
         End If
-
         If Not (ucrChkAsDoy.Checked OrElse ucrChkAsDate.Checked OrElse ucrChkStatus.Checked) Then
             Return False
         End If
-
         If (ucrChkAsDoy.Checked AndAlso ucrInputNewDoyColumnName.IsEmpty) OrElse
            (ucrChkAsDate.Checked AndAlso ucrInputNewDateColumnName.IsEmpty) OrElse
            (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
             Return False
         End If
-
         If ucrSaveDefinition.ucrChkSave.Checked AndAlso Not ucrSaveDefinition.IsComplete Then
             Return False
         End If
-
         Return True
     End Function
 
@@ -1631,17 +1622,14 @@ Public Class dlgStartofRains
             ucrNudAmount.GetText = "" OrElse ucrNudTotalOverDays.GetText = "" Then
             Return False
         End If
-
         If Not (ucrChkTemDay.Checked OrElse ucrChkTemDate.Checked OrElse ucrChkTemOccu.Checked) Then
             Return False
         End If
-
         If (ucrChkTemDay.Checked AndAlso ucrInputTextTempday.IsEmpty) OrElse
            (ucrChkTemDate.Checked AndAlso ucrInputTextTemdate.IsEmpty) OrElse
            (ucrChkTemOccu.Checked AndAlso ucrInputTextTemOccu.IsEmpty) Then
             Return False
         End If
-
         Return True
     End Function
 
@@ -1651,20 +1639,16 @@ Public Class dlgStartofRains
             ucrNudAmount.GetText = "" OrElse ucrNudTotalOverDays.GetText = "" Then
             Return False
         End If
-
         If Not (ucrChkDayWinter.Checked OrElse ucrChkDateWinter.Checked OrElse ucrChkOccuWinter.Checked) Then
             Return False
         End If
-
         If (ucrChkDayWinter.Checked AndAlso ucrInputDayWinter.IsEmpty) OrElse
            (ucrChkDateWinter.Checked AndAlso ucrInputDateWinter.IsEmpty) OrElse
            (ucrChkOccuWinter.Checked AndAlso ucrInputOccuWinter.IsEmpty) Then
             Return False
         End If
-
         Return True
     End Function
-
 
     Private Sub ChangeFunctions()
         If rdoRain.Checked Then
@@ -1756,18 +1740,15 @@ Public Class dlgStartofRains
 
     Private Sub GroupByStationOptions()
         If Not ucrReceiverStation.IsEmpty Then
-            ' If rdoRain.Checked Then
             clsCombinationManipList.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
             clsListToTalRain.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
             clsCalcRainRollingSum.AddParameter("manipulations", clsRFunctionParameter:=clsListToTalRain, iPosition:=4)
-            'Else
             clsCombinationManipListSummerFunction.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
             clsListToTalSummerFunction.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
             clsCalcRollingmeanSummerFunction.AddParameter("manipulations", clsRFunctionParameter:=clsListToTalSummerFunction, iPosition:=4)
             clsCombinationManipListWinterFunction.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
             clsListToTalWinterFunction.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
             clsCalcRollingmeanWinterFunction.AddParameter("manipulations", clsRFunctionParameter:=clsListToTalWinterFunction, iPosition:=4)
-
             clsDeleteunusedrowFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=2)
             clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
             clsConvertStationtypeFunction.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
