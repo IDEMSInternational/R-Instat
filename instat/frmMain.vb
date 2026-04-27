@@ -852,6 +852,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Prepare
         dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
@@ -3230,5 +3231,10 @@ Public Class frmMain
     Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
         dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
         dlgInsertColumn.ShowDialog()
+    End Sub
+
+    Private Sub DeleteRowsOrColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsOrColumnsToolStripMenuItem.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Climatic
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 End Class
