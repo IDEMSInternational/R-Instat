@@ -21,20 +21,10 @@ jobs:
         with:
           fetch-depth: 0  # Full history for git diff
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: scripts/package-lock.json
-
-      - name: Install dependencies
-        working-directory: scripts
-        run: npm ci || npm install
-
-      - name: Build TypeScript
-        working-directory: scripts
-        run: npm run build
+          python-version: '3.11'
 
       - name: Run translation check
         id: translation-check
@@ -44,7 +34,7 @@ jobs:
         # a PR comment even on failure.
         run: |
           set +e
-          npm run check-translations:ci > translation-report.txt 2>&1
+          python check_translations.py --ci > translation-report.txt 2>&1
           status=$?
           cat translation-report.txt
           exit $status
@@ -68,7 +58,7 @@ jobs:
 
             const failed = '${{ steps.translation-check.outcome }}' === 'failure';
             const fixHint = failed
-              ? `\n\n**Missing translations detected.** Run \`npm run sync-translations\` locally and commit the updated \`instat/translations/en/*.json\`.`
+              ? `\n\n**Missing translations detected.** Run \`python scripts/sync_translations.py\` locally and commit the updated \`instat/translations/en/*.json\`.`
               : '';
 
             const body = `## Translation Check Results\n\n${summary}${fixHint}\n\n---\n*This comment is automatically updated by the translation check workflow.*`;
