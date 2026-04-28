@@ -15,6 +15,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -274,6 +275,12 @@ TOOLTIP_RE = re.compile(r"(?:Me\.)?(\w+)\.ToolTipText\s*=\s*\"", re.IGNORECASE)
 SETTEXT_RE = re.compile(r"(\w+)\.SetText\s*\(\s*\"", re.IGNORECASE)
 SETLABEL_RE = re.compile(r"(\w+)\.SetLabel\s*\(\s*\"", re.IGNORECASE)
 SETLABELTEXT_RE = re.compile(r"(\w+)\.SetLabelText\s*\(\s*\"", re.IGNORECASE)
+SETCHECKBOXTEXT_RE = re.compile(r"(\w+)\.SetCheckBoxText\s*\(\s*\"", re.IGNORECASE)
+
+# Method names whose first string-literal argument IS extracted for translation.
+# Update alongside the regexes above when adding a new UI text setter.
+KNOWN_TEXT_SETTERS = frozenset({"SetText", "SetLabelText", "SetCheckBoxText"})
+_TEXT_SETTER_FAMILY_RE = re.compile(r"\.(Set\w+Text)\s*\(")
 
 
 def _extract_by_regex(line: str, line_number: int, regex: re.Pattern[str], pattern_name: str) -> List[ExtractedString]:
@@ -314,6 +321,7 @@ def parse_vbnet_content(content: str, file_path: str) -> ParseResult:
             strings.extend(_extract_by_regex(line, line_number, SETTEXT_RE, "SetText"))
             strings.extend(_extract_by_regex(line, line_number, SETLABEL_RE, "SetLabel"))
             strings.extend(_extract_by_regex(line, line_number, SETLABELTEXT_RE, "SetLabelText"))
+            strings.extend(_extract_by_regex(line, line_number, SETCHECKBOXTEXT_RE, "SetCheckBoxText"))
     except Exception as exc:  # pragma: no cover - defensive
         errors.append(f"Error parsing content: {exc}")
 
@@ -371,6 +379,7 @@ def infer_control_name(code_line: str) -> Optional[str]:
         r"(\w+)\.SetText\s*\(",
         r"(\w+)\.SetLabel\s*\(",
         r"(\w+)\.SetLabelText\s*\(",
+        r"(\w+)\.SetCheckBoxText\s*\(",
     )
     for pat in patterns:
         match = re.search(pat, code_line, re.IGNORECASE)
@@ -517,17 +526,38 @@ def get_base_branch() -> str:
     return os.getenv("GITHUB_BASE_REF", "master")
 
 
+def _resolve_base_ref(base: str, base_dir: Path) -> Optional[str]:
+    """Return the first ref that exists locally: <base>, then origin/<base>.
+
+    Locally devs typically have only origin/master, not master. On GitHub
+    Actions with fetch-depth:0, master is checked out as a local branch.
+    """
+    for candidate in (base, f"origin/{base}"):
+        if _exec_git(["rev-parse", "--verify", "--quiet", candidate], base_dir):
+            return candidate
+    return None
+
+
 def get_changed_vbnet_files(base_dir: Path, base_branch: Optional[str] = None) -> Tuple[List[str], str, Optional[str]]:
     base = base_branch or get_base_branch()
-    merge_base = _exec_git(["merge-base", base, "HEAD"], base_dir)
+    resolved = _resolve_base_ref(base, base_dir)
+    if not resolved:
+        return [], base, (
+            f"Could not resolve base ref '{base}' (tried '{base}' and 'origin/{base}'). "
+            f"Fetch the base branch (e.g. `git fetch origin {base}`) or pass --base=<ref>."
+        )
 
+    merge_base = _exec_git(["merge-base", resolved, "HEAD"], base_dir)
     if merge_base:
         output = _exec_git(["diff", "--name-only", merge_base, "HEAD"], base_dir)
     else:
-        output = _exec_git(["diff", "--name-only", f"{base}...HEAD"], base_dir)
+        output = _exec_git(["diff", "--name-only", f"{resolved}...HEAD"], base_dir)
 
     if output is None:
-        return [], base, f"Could not get changed files from {base}"
+        return [], resolved, (
+            f"git diff against '{resolved}' failed. "
+            f"On a shallow clone, deepen with `git fetch --deepen=50 origin {base}`."
+        )
 
     files = [line.strip() for line in output.splitlines() if line.strip()]
     vb_files: List[str] = []
@@ -536,7 +566,30 @@ def get_changed_vbnet_files(base_dir: Path, base_branch: Optional[str] = None) -
         if lowered.endswith(".vb") and "instat/" in lowered:
             vb_files.append(file_path)
 
-    return vb_files, base, None
+    return vb_files, resolved, None
+
+
+def find_uncovered_text_setters(base_dir: Path, threshold: int = 5) -> List[Tuple[str, int]]:
+    """Return Set*Text method names used in VB code but missing an extractor regex.
+
+    Catches the next SetCheckBoxText-style coverage gap: any new `.Set\\w+Text(`
+    call site that isn't in KNOWN_TEXT_SETTERS will surface here once it crosses
+    the threshold (avoids noise from one-off helpers).
+    """
+    counts: Dict[str, int] = {}
+    for vb_file in find_vbnet_files(base_dir / "instat"):
+        try:
+            content = vb_file.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        for match in _TEXT_SETTER_FAMILY_RE.finditer(content):
+            name = match.group(1)
+            if name not in KNOWN_TEXT_SETTERS:
+                counts[name] = counts.get(name, 0) + 1
+    return sorted(
+        ((name, count) for name, count in counts.items() if count >= threshold),
+        key=lambda item: (-item[1], item[0]),
+    )
 
 
 def is_ci() -> bool:
@@ -559,7 +612,12 @@ def find_vbnet_files(instat_dir: Path) -> List[Path]:
     return files
 
 
-def resolve_files_to_scan(base_dir: Path, ci_mode: bool, explicit_files: Sequence[str]) -> Tuple[List[Path], Optional[str]]:
+def resolve_files_to_scan(
+    base_dir: Path,
+    ci_mode: bool,
+    explicit_files: Sequence[str],
+    base_branch: Optional[str] = None,
+) -> Tuple[List[Path], Optional[str]]:
     if explicit_files:
         paths: List[Path] = []
         for item in explicit_files:
@@ -570,10 +628,15 @@ def resolve_files_to_scan(base_dir: Path, ci_mode: bool, explicit_files: Sequenc
         return paths, None
 
     if ci_mode:
-        changed, base_branch, error = get_changed_vbnet_files(base_dir)
+        changed, resolved_base, error = get_changed_vbnet_files(base_dir, base_branch)
         if error:
+            print(
+                f"warning: --ci could not determine changed files: {error}\n"
+                f"warning: falling back to whole-repo scan.",
+                file=sys.stderr,
+            )
             return find_vbnet_files(base_dir / "instat"), error
-        return [(base_dir / p).resolve() for p in changed], f"CI mode base branch: {base_branch}"
+        return [(base_dir / p).resolve() for p in changed], f"CI mode base ref: {resolved_base}"
 
     return find_vbnet_files(base_dir / "instat"), None
 
@@ -584,11 +647,12 @@ def run_scan(
     ci_mode: bool = False,
     verbose: bool = False,
     files: Optional[Sequence[str]] = None,
+    base_branch: Optional[str] = None,
 ) -> Dict[str, object]:
     ignore_patterns = load_translate_ignore(base_dir)
     translations = load_english_translations(base_dir)
 
-    files_to_scan, ci_info = resolve_files_to_scan(base_dir, ci_mode, files or [])
+    files_to_scan, ci_info = resolve_files_to_scan(base_dir, ci_mode, files or [], base_branch)
 
     if verbose:
         print(f"Loaded {len(ignore_patterns.patterns)} ignore patterns")

@@ -16,6 +16,7 @@ from translation_common import (
     create_summary,
     find_orphans,
     find_project_root,
+    find_uncovered_text_setters,
     generate_console_summary,
     generate_github_report,
     is_ci,
@@ -40,6 +41,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="Show detailed information",
     )
     parser.add_argument("--json", action="store_true", help="Output summary as JSON")
+    parser.add_argument(
+        "--base",
+        default=None,
+        help="Base ref for --ci diff (default: $GITHUB_BASE_REF or master). "
+             "Use e.g. --base=origin/master locally to reproduce CI.",
+    )
     parser.add_argument("files", nargs="*", help="Optional explicit VB files to scan")
     return parser.parse_args(argv)
 
@@ -63,6 +70,7 @@ def main(argv: list[str]) -> int:
         ci_mode=ci_mode,
         verbose=options.verbose,
         files=options.files,
+        base_branch=options.base,
     )
 
     violations = scan_result["violations"]
@@ -94,6 +102,20 @@ def main(argv: list[str]) -> int:
             print("")
             print("To append missing strings to the EN JSON files, run:")
             print("  python scripts/sync_translations.py")
+
+    uncovered = find_uncovered_text_setters(base_dir)
+    if uncovered:
+        print("", file=sys.stderr)
+        print("error: extractor coverage gap detected.", file=sys.stderr)
+        print(
+            "The following Set*Text(...) methods are used in VB code but have no "
+            "extractor regex in translation_common.py. Strings passed to them are "
+            "silently invisible to check/sync. Add a regex and update KNOWN_TEXT_SETTERS:",
+            file=sys.stderr,
+        )
+        for name, count in uncovered:
+            print(f"  - {name} ({count} call sites)", file=sys.stderr)
+        return 1
 
     if summary["totalMissingTranslations"] > 0:
         return 1

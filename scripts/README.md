@@ -69,10 +69,12 @@ scripts/
 ### `check_translations.py`
 
 ```text
---ci          CI mode: changed files and GitHub-friendly output
---verbose     Detailed logs
---json        JSON summary output
-files...      Optional explicit VB file list
+--ci           CI mode: changed files and GitHub-friendly output
+--base=<ref>   Base ref for --ci diff (default: $GITHUB_BASE_REF or master).
+               Use --base=origin/master locally to reproduce CI behavior.
+--verbose      Detailed logs
+--json         JSON summary output
+files...       Optional explicit VB file list
 ```
 
 ### `sync_translations.py`
@@ -105,6 +107,28 @@ Examples:
 - `text:"ww "`
 - `%\_ucrInput%`
 
+## What gets extracted
+
+The scanner only sees strings passed via these patterns (defined in `translation_common.py`):
+
+- `<control>.Text = "..."` and `Me.<control>.Text = "..."` (Designer property assignments)
+- `<control>.ToolTipText = "..."`
+- `<control>.SetText("...")`
+- `<control>.SetLabel("...")`
+- `<control>.SetLabelText("...")`
+- `<control>.SetCheckBoxText("...")`
+
+Strings passed to other methods are invisible to both check and sync. To prevent silent gaps when new UI text setters are added, `check_translations.py` runs an extractor-coverage check that fails CI if any `Set\w+Text(...)` method appears in `instat/**/*.vb` more than 5 times without a matching extractor regex. Add the regex and update `KNOWN_TEXT_SETTERS` together.
+
 ## CI Integration
 
 The translation workflow runs `python scripts/check_translations.py --ci` on PRs touching VB files and fails the check if strings are missing from EN JSON.
+
+To reproduce a failing CI run locally for a PR you don't own:
+
+```bash
+gh pr checkout <PR-number>
+python scripts/check_translations.py --ci --base=origin/master
+```
+
+The `--base=origin/master` flag is important: locally `master` usually doesn't exist as a local branch, only `origin/master` does. CI runs against a checkout where `master` is available locally (via `fetch-depth: 0`), so it doesn't need this flag.
