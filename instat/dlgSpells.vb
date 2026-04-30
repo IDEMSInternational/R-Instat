@@ -27,7 +27,7 @@ Public Class dlgSpells
     Private clsCurrCalc, clsLinkedDataFunction, clsVectorConcatFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
-    Private clsGetLinkedDataName, clsGetCalculations, clsGetLongestSpellDef, clsLinkedColsVector As New RFunction
+    Private clsGetLinkedDataName, clsGetLongestSpellDef, clsLinkedColsVector As New RFunction
 
     Private strCurrDataName As String = ""
     Private strSpellDay As String = "spell_day"
@@ -156,6 +156,8 @@ Public Class dlgSpells
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDefineAsClimatic)
         End If
 
+        clsGetLongestSpellDef = New RFunction
+
         ' Use .Clear() instead of New RFunction so we don't orphan the previous memory instances
         clsSpellsManipulationsFunc.Clear()
         clsSpellManipulationsFunc.Clear()
@@ -200,10 +202,7 @@ Public Class dlgSpells
         clsGreaterThanOperator.Clear()
         clsLessThanOperator.Clear()
         clsGetLinkedDataName.Clear()
-        clsGetCalculations.Clear()
-        clsGetLongestSpellDef.Clear()
         clsLinkedColsVector.Clear()
-        ucrSaveObject.SetRCode(clsGetLongestSpellDef, bReset)
         UpdateDefinitionsOutput()
 
         ucrSelectorForSpells.Reset()
@@ -350,7 +349,6 @@ Public Class dlgSpells
 
         clsCurrCalc = clsMaxSpellSummary
 
-
         clsVectorConcatFunction.SetRCommand("c")
 
         clsVectorConcat2Function.SetRCommand("c")
@@ -371,18 +369,16 @@ Public Class dlgSpells
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
 
-        ' Save definitions
-        clsGetCalculations.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculations.AddParameter("data_name", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
-
-        clsGetLongestSpellDef.SetRCommand("get_longest_spell_definition")
-        clsGetLongestSpellDef.AddParameter("calculations", clsRFunctionParameter:=clsGetCalculations, iPosition:=0)
+        ' Save Definitions
+        clsGetLongestSpellDef.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_longest_spell_definition")
+        clsGetLongestSpellDef.AddParameter("linked_data_name", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
 
         AddDayRange()
         AddDateDoy()
         UpdateDateDoy()
         'Base Function
         ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=0)
+        AddRemoveDefinitionCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
     End Sub
 
@@ -394,16 +390,18 @@ Public Class dlgSpells
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsSpellFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsVectorConcat2Function, New RParameter("dry_spell"), iAdditionalPairNo:=2)
-        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDef, New RParameter("spell_column", 1), iAdditionalPairNo:=3)
+        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDef, New RParameter("spell_column", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
+        ucrSaveObject.SetRCode(clsGetLongestSpellDef, bReset)
         If bReset Then
             ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
             ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
         End If
+        UpdateDefinitionName()
         AddDateDoy()
         UpdateDateDoy()
     End Sub
@@ -429,6 +427,11 @@ Public Class dlgSpells
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
+            End If
+            If rdoAnnual.Checked Then
+                If ucrChkDefinitions.Checked AndAlso Not ucrSaveObject.IsComplete Then
+                    ucrBase.OKEnabled(False)
+                End If
             End If
         Else
             If Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso ((ucrInputCondition.GetText = strBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strExcludingBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strLessThan AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strGreaterThan AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
@@ -576,24 +579,36 @@ Public Class dlgSpells
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDefineAsClimatic)
         End If
 
-        UpdateSaveDefinitions()
+        AddRemoveDefinitionCodes()
         UpdateDefinitionsOutput()
         AddDateDoy()
         UpdateDateDoy()
     End Sub
 
     Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
-        UpdateSaveDefinitions()
+        AddRemoveDefinitionCodes()
         UpdateDefinitionsOutput()
     End Sub
 
-    Private Sub UpdateSaveDefinitions()
-        If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
-            ' Sets the assignment variable name from the save object
-            clsGetLongestSpellDef.SetAssignTo(ucrSaveObject.GetText())
+    Private Sub ucrSaveObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlContentsChanged
+        UpdateDefinitionName()
+        AddRemoveDefinitionCodes()
+    End Sub
+
+    Private Sub UpdateDefinitionName()
+        Dim strDefinitionName As String = ucrSaveObject.GetText()
+        If ucrChkDefinitions.Checked AndAlso strDefinitionName <> "" Then
+            clsGetLongestSpellDef.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=3)
         Else
-            ' Clear the assignment when not active
-            clsGetLongestSpellDef.SetAssignTo(Nothing)
+            clsGetLongestSpellDef.RemoveParameterByName("definition_name")
+        End If
+    End Sub
+
+    Private Sub AddRemoveDefinitionCodes()
+        If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetLongestSpellDef, iPosition:=1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetLongestSpellDef)
         End If
     End Sub
 
@@ -609,7 +624,7 @@ Public Class dlgSpells
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrChkDefinitions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
