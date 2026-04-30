@@ -722,6 +722,7 @@ def run_scan(
                 continue
 
             extracted_strings.add(extracted.value)
+            extracted_strings.add(normalize_string(extracted.value))
 
             translation_check = check_string_in_translations(extracted.value, translations)
             if not bool(translation_check["found"]):
