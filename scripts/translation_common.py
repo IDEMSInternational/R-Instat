@@ -116,7 +116,7 @@ def load_patterns(file_path: Path) -> PatternFile:
             file_path=file_path,
         )
 
-    for line in file_path.read_text(encoding="utf-8").splitlines():
+    for line in file_path.read_text(encoding="utf-8-sig").splitlines():
         trimmed = line.strip()
         if not trimmed or trimmed.startswith("#"):
             continue
@@ -432,7 +432,7 @@ def load_translation_file(file_path: Path) -> Tuple[Dict[str, str], Optional[str
         return {}, f"File not found: {file_path}"
 
     try:
-        raw = json.loads(file_path.read_text(encoding="utf-8"))
+        raw = json.loads(file_path.read_text(encoding="utf-8-sig"))
         if not isinstance(raw, dict):
             return {}, f"Invalid JSON object in: {file_path}"
         translations = {str(k): str(v) for k, v in raw.items()}
@@ -527,24 +527,33 @@ def get_base_branch() -> str:
 
 
 def _resolve_base_ref(base: str, base_dir: Path) -> Optional[str]:
-    """Return the first ref that exists locally: <base>, then origin/<base>.
+    """Return the first ref that exists locally.
 
-    Locally devs typically have only origin/master, not master. On GitHub
-    Actions with fetch-depth:0, master is checked out as a local branch.
+    Tries <base>, origin/<base>, upstream/<base>. Locally devs typically have
+    only origin/<base> (or upstream/<base> on a fork); on GitHub Actions with
+    fetch-depth:0, <base> is checked out as a local branch.
     """
-    for candidate in (base, f"origin/{base}"):
+    for candidate in (base, f"origin/{base}", f"upstream/{base}"):
         if _exec_git(["rev-parse", "--verify", "--quiet", candidate], base_dir):
             return candidate
     return None
+
+
+def _strip_remote_prefix(ref: str) -> str:
+    for prefix in ("origin/", "upstream/"):
+        if ref.startswith(prefix):
+            return ref[len(prefix):]
+    return ref
 
 
 def get_changed_vbnet_files(base_dir: Path, base_branch: Optional[str] = None) -> Tuple[List[str], str, Optional[str]]:
     base = base_branch or get_base_branch()
     resolved = _resolve_base_ref(base, base_dir)
     if not resolved:
+        hint_base = _strip_remote_prefix(base)
         return [], base, (
-            f"Could not resolve base ref '{base}' (tried '{base}' and 'origin/{base}'). "
-            f"Fetch the base branch (e.g. `git fetch origin {base}`) or pass --base=<ref>."
+            f"Could not resolve base ref '{base}' (tried '{base}', 'origin/{base}', 'upstream/{base}'). "
+            f"Fetch the base branch (e.g. `git fetch origin {hint_base}`) or pass --base=<ref>."
         )
 
     merge_base = _exec_git(["merge-base", resolved, "HEAD"], base_dir)
@@ -554,9 +563,10 @@ def get_changed_vbnet_files(base_dir: Path, base_branch: Optional[str] = None) -
         output = _exec_git(["diff", "--name-only", f"{resolved}...HEAD"], base_dir)
 
     if output is None:
+        hint_base = _strip_remote_prefix(resolved)
         return [], resolved, (
             f"git diff against '{resolved}' failed. "
-            f"On a shallow clone, deepen with `git fetch --deepen=50 origin {base}`."
+            f"On a shallow clone, deepen with `git fetch --deepen=50 origin {hint_base}`."
         )
 
     files = [line.strip() for line in output.splitlines() if line.strip()]
@@ -582,10 +592,13 @@ def find_uncovered_text_setters(base_dir: Path, threshold: int = 5) -> List[Tupl
             content = vb_file.read_text(encoding="utf-8")
         except Exception:
             continue
-        for match in _TEXT_SETTER_FAMILY_RE.finditer(content):
-            name = match.group(1)
-            if name not in KNOWN_TEXT_SETTERS:
-                counts[name] = counts.get(name, 0) + 1
+        for line in content.splitlines():
+            if line.lstrip().startswith("'"):
+                continue
+            for match in _TEXT_SETTER_FAMILY_RE.finditer(line):
+                name = match.group(1)
+                if name not in KNOWN_TEXT_SETTERS:
+                    counts[name] = counts.get(name, 0) + 1
     return sorted(
         ((name, count) for name, count in counts.items() if count >= threshold),
         key=lambda item: (-item[1], item[0]),
@@ -799,6 +812,11 @@ def _truncate(value: str, max_len: int) -> str:
     return value[:max_len] + "..."
 
 
+def _md_escape_cell(value: str) -> str:
+    """Escape characters that would break a markdown table cell."""
+    return value.replace("\\", "\\\\").replace("|", "\\|").replace("`", "\\`")
+
+
 def generate_console_summary(summary: Dict[str, object], report_path: Path) -> str:
     lines: List[str] = []
     lines.append("╔═══════════════════════════════════════════════════════════════╗")
@@ -859,9 +877,9 @@ def generate_github_report(summary: Dict[str, object]) -> str:
         lines.append("|------|------|--------|")
 
         for violation in violations[:20]:
-            file_path = str(violation["filePath"])  # type: ignore[index]
+            file_path = _md_escape_cell(str(violation["filePath"]))  # type: ignore[index]
             line_number = int(violation["lineNumber"])  # type: ignore[index]
-            value = _truncate(str(violation["string"]), 40)  # type: ignore[index]
+            value = _md_escape_cell(_truncate(str(violation["string"]), 40))  # type: ignore[index]
             lines.append(f"| `{file_path}` | {line_number} | \"{value}\" |")
 
         if len(violations) > 20:
@@ -872,12 +890,17 @@ def generate_github_report(summary: Dict[str, object]) -> str:
         lines.append("---")
         lines.append("")
 
-        for violation in violations:
+        annotation_cap = 50
+        for violation in violations[:annotation_cap]:
             file_path = str(violation["filePath"])  # type: ignore[index]
             line_number = int(violation["lineNumber"])  # type: ignore[index]
             value = _truncate(str(violation["string"]), 80)  # type: ignore[index]
             lines.append(
                 f"::warning file={file_path},line={line_number}::Missing translation: \"{value}\""
+            )
+        if len(violations) > annotation_cap:
+            lines.append(
+                f"::warning::{len(violations) - annotation_cap} additional missing strings omitted from annotations (see report)."
             )
     else:
         lines.append("✅ **No missing translations found!**")

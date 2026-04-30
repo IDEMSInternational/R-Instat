@@ -53,7 +53,7 @@ jobs:
               report = 'Translation check completed (no detailed report available)';
             }
 
-            const summaryMatch = report.match(/## Translation Check Results[\s\S]*?(?=###|$)/);
+            const summaryMatch = report.match(/## Translation Check Results[\s\S]*$/);
             const summary = summaryMatch ? summaryMatch[0] : report.substring(0, 2000);
 
             const failed = '${{ steps.translation-check.outcome }}' === 'failure';
@@ -61,7 +61,7 @@ jobs:
               ? `\n\n**Missing translations detected.** Run \`python scripts/sync_translations.py\` locally and commit the updated \`instat/translations/en/*.json\`.`
               : '';
 
-            const body = `## Translation Check Results\n\n${summary}${fixHint}\n\n---\n*This comment is automatically updated by the translation check workflow.*`;
+            const body = `${summary}${fixHint}\n\n---\n*This comment is automatically updated by the translation check workflow.*`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -71,7 +71,7 @@ jobs:
 
             const botComment = comments.find(c =>
               c.user.type === 'Bot' &&
-              c.body.includes('Translation Check Results')
+              c.body.includes('automatically updated by the translation check workflow')
             );
 
             if (botComment) {
