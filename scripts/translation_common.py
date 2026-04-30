@@ -526,21 +526,26 @@ def get_base_branch() -> str:
     return os.getenv("GITHUB_BASE_REF", "master")
 
 
+REMOTE_CANDIDATES: Tuple[str, ...] = ("origin", "upstream")
+
+
 def _resolve_base_ref(base: str, base_dir: Path) -> Optional[str]:
     """Return the first ref that exists locally.
 
-    Tries <base>, origin/<base>, upstream/<base>. Locally devs typically have
-    only origin/<base> (or upstream/<base> on a fork); on GitHub Actions with
-    fetch-depth:0, <base> is checked out as a local branch.
+    Tries <base>, then <remote>/<base> for each remote in REMOTE_CANDIDATES.
+    Locally devs typically have only origin/<base> (or upstream/<base> on a
+    fork); on GitHub Actions with fetch-depth:0, <base> is a local branch.
     """
-    for candidate in (base, f"origin/{base}", f"upstream/{base}"):
+    candidates = (base, *(f"{r}/{base}" for r in REMOTE_CANDIDATES))
+    for candidate in candidates:
         if _exec_git(["rev-parse", "--verify", "--quiet", candidate], base_dir):
             return candidate
     return None
 
 
 def _strip_remote_prefix(ref: str) -> str:
-    for prefix in ("origin/", "upstream/"):
+    for remote in REMOTE_CANDIDATES:
+        prefix = f"{remote}/"
         if ref.startswith(prefix):
             return ref[len(prefix):]
     return ref
@@ -551,8 +556,9 @@ def get_changed_vbnet_files(base_dir: Path, base_branch: Optional[str] = None) -
     resolved = _resolve_base_ref(base, base_dir)
     if not resolved:
         hint_base = _strip_remote_prefix(base)
+        tried = ", ".join(f"'{c}'" for c in (base, *(f"{r}/{base}" for r in REMOTE_CANDIDATES)))
         return [], base, (
-            f"Could not resolve base ref '{base}' (tried '{base}', 'origin/{base}', 'upstream/{base}'). "
+            f"Could not resolve base ref '{base}' (tried {tried}). "
             f"Fetch the base branch (e.g. `git fetch origin {hint_base}`) or pass --base=<ref>."
         )
 
@@ -593,7 +599,8 @@ def find_uncovered_text_setters(base_dir: Path, threshold: int = 5) -> List[Tupl
         except Exception:
             continue
         for line in content.splitlines():
-            if line.lstrip().startswith("'"):
+            stripped = line.lstrip()
+            if stripped.startswith("'") or stripped[:4].lower() == "rem ":
                 continue
             for match in _TEXT_SETTER_FAMILY_RE.finditer(line):
                 name = match.group(1)
@@ -855,8 +862,15 @@ def generate_console_summary(summary: Dict[str, object], report_path: Path) -> s
     return "\n".join(lines)
 
 
+REPORT_START_MARKER = "<!-- translation-check-report:start -->"
+REPORT_END_MARKER = "<!-- translation-check-report:end -->"
+TABLE_ROW_CAP = 20
+ANNOTATION_CAP = 50
+
+
 def generate_github_report(summary: Dict[str, object]) -> str:
     lines: List[str] = []
+    lines.append(REPORT_START_MARKER)
     lines.append("## Translation Check Results")
     lines.append("")
     lines.append("| Metric | Value |")
@@ -876,35 +890,35 @@ def generate_github_report(summary: Dict[str, object]) -> str:
         lines.append("| File | Line | String |")
         lines.append("|------|------|--------|")
 
-        for violation in violations[:20]:
-            file_path = _md_escape_cell(str(violation["filePath"]))  # type: ignore[index]
+        for violation in violations[:TABLE_ROW_CAP]:
+            file_path = str(violation["filePath"])  # type: ignore[index]
             line_number = int(violation["lineNumber"])  # type: ignore[index]
             value = _md_escape_cell(_truncate(str(violation["string"]), 40))  # type: ignore[index]
             lines.append(f"| `{file_path}` | {line_number} | \"{value}\" |")
 
-        if len(violations) > 20:
-            remaining = len(violations) - 20
+        if len(violations) > TABLE_ROW_CAP:
+            remaining = len(violations) - TABLE_ROW_CAP
             lines.append(f"| ... | ... | ... ({remaining} more) |")
 
         lines.append("")
         lines.append("---")
         lines.append("")
 
-        annotation_cap = 50
-        for violation in violations[:annotation_cap]:
+        for violation in violations[:ANNOTATION_CAP]:
             file_path = str(violation["filePath"])  # type: ignore[index]
             line_number = int(violation["lineNumber"])  # type: ignore[index]
             value = _truncate(str(violation["string"]), 80)  # type: ignore[index]
             lines.append(
                 f"::warning file={file_path},line={line_number}::Missing translation: \"{value}\""
             )
-        if len(violations) > annotation_cap:
+        if len(violations) > ANNOTATION_CAP:
             lines.append(
-                f"::warning::{len(violations) - annotation_cap} additional missing strings omitted from annotations (see report)."
+                f"::warning::{len(violations) - ANNOTATION_CAP} additional missing strings omitted from annotations (see report)."
             )
     else:
         lines.append("✅ **No missing translations found!**")
 
+    lines.append(REPORT_END_MARKER)
     return "\n".join(lines)
 
 

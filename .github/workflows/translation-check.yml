@@ -53,7 +53,7 @@ jobs:
               report = 'Translation check completed (no detailed report available)';
             }
 
-            const summaryMatch = report.match(/## Translation Check Results[\s\S]*$/);
+            const summaryMatch = report.match(/<!-- translation-check-report:start -->[\s\S]*?<!-- translation-check-report:end -->/);
             const summary = summaryMatch ? summaryMatch[0] : report.substring(0, 2000);
 
             const failed = '${{ steps.translation-check.outcome }}' === 'failure';
@@ -71,7 +71,7 @@ jobs:
 
             const botComment = comments.find(c =>
               c.user.type === 'Bot' &&
-              c.body.includes('automatically updated by the translation check workflow')
+              c.body.includes('<!-- translation-check-report:start -->')
             );
 
             if (botComment) {
