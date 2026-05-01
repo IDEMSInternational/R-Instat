@@ -27,7 +27,7 @@ Public Class dlgSpells
     Private clsCurrCalc, clsLinkedDataFunction, clsVectorConcatFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
-    Private clsGetLinkedDataName, clsGetLongestSpellDef, clsLinkedColsVector As New RFunction
+    Private clsGetLinkedDataNameFunction, clsGetLongestSpellDefFunction, clsLinkedColsVectorFunction As New RFunction
 
     Private strCurrDataName As String = ""
     Private strSpellDay As String = "spell_day"
@@ -150,13 +150,11 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetDefaults()
-        ucrChkDefinitions.Checked = False
-
         If clsDefineAsClimatic IsNot Nothing Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDefineAsClimatic)
         End If
 
-        clsGetLongestSpellDef = New RFunction
+        clsGetLongestSpellDefFunction = New RFunction
 
         ' Use .Clear() instead of New RFunction so we don't orphan the previous memory instances
         clsSpellsManipulationsFunc.Clear()
@@ -201,8 +199,8 @@ Public Class dlgSpells
         clsAdditionalConditionReplaceOperator.Clear()
         clsGreaterThanOperator.Clear()
         clsLessThanOperator.Clear()
-        clsGetLinkedDataName.Clear()
-        clsLinkedColsVector.Clear()
+        clsGetLinkedDataNameFunction.Clear()
+        clsLinkedColsVectorFunction.Clear()
         UpdateDefinitionsOutput()
 
         ucrSelectorForSpells.Reset()
@@ -213,6 +211,7 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetName(0.85)
 
         clsDummyFunction.AddParameter("day", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("def", "False", iPosition:=1)
 
         ' key
 
@@ -370,8 +369,8 @@ Public Class dlgSpells
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
 
         ' Save Definitions
-        clsGetLongestSpellDef.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_longest_spell_definition")
-        clsGetLongestSpellDef.AddParameter("linked_data_name", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
+        clsGetLongestSpellDefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_longest_spell_definition")
+        clsGetLongestSpellDefFunction.AddParameter("linked_data_name", "linked_data_name", iPosition:=0, bIncludeArgumentName:=False)
 
         AddDayRange()
         AddDateDoy()
@@ -390,15 +389,16 @@ Public Class dlgSpells
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsSpellFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsVectorConcat2Function, New RParameter("dry_spell"), iAdditionalPairNo:=2)
-        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDef, New RParameter("spell_column", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsGetLongestSpellDefFunction, New RParameter("spell_column", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
-        ucrSaveObject.SetRCode(clsGetLongestSpellDef, bReset)
+        ucrSaveObject.SetRCode(clsGetLongestSpellDefFunction, bReset)
         If bReset Then
             ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+            ucrChkDefinitions.SetRCode(clsDummyFunction, bReset)
             ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
         End If
         UpdateDefinitionName()
@@ -586,6 +586,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrChkDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitions.ControlValueChanged
+        UpdateDefinitionName()
         AddRemoveDefinitionCodes()
         UpdateDefinitionsOutput()
     End Sub
@@ -598,17 +599,17 @@ Public Class dlgSpells
     Private Sub UpdateDefinitionName()
         Dim strDefinitionName As String = ucrSaveObject.GetText()
         If ucrChkDefinitions.Checked AndAlso strDefinitionName <> "" Then
-            clsGetLongestSpellDef.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=3)
+            clsGetLongestSpellDefFunction.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=3)
         Else
-            clsGetLongestSpellDef.RemoveParameterByName("definition_name")
+            clsGetLongestSpellDefFunction.RemoveParameterByName("definition_name")
         End If
     End Sub
 
     Private Sub AddRemoveDefinitionCodes()
         If rdoAnnual.Checked AndAlso ucrChkDefinitions.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetLongestSpellDef, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetLongestSpellDefFunction, iPosition:=1)
         Else
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetLongestSpellDef)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetLongestSpellDefFunction)
         End If
     End Sub
 
