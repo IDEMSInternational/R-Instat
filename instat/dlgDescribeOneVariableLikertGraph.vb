@@ -16,6 +16,7 @@
 
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgDescribeOneVariableLikertGraph
     Private bFirstLoad As Boolean = True
@@ -128,6 +129,15 @@ Public Class dlgDescribeOneVariableLikertGraph
         If Not clsDummyFunction.ContainsParameter("type") Then
             clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
         End If
+
+        lblLevelWarning = New System.Windows.Forms.Label()
+        lblLevelWarning.AutoSize = False
+        lblLevelWarning.ForeColor = System.Drawing.Color.Red
+        lblLevelWarning.Text = "All selected factors must have the same number of levels."
+        lblLevelWarning.Visible = False
+        lblLevelWarning.Size = New System.Drawing.Size(200, 40)
+        Me.Controls.Add(lblLevelWarning)
+        lblLevelWarning.BringToFront()
     End Sub
 
     Private Sub SetDefaults()
@@ -187,15 +197,24 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrPnlGraphType.SetRCode(clsDummyFunction, bReset)
     End Sub
     Public Sub TestOKEnabled()
+        Dim bLevelsMatch As Boolean = SelectedVariablesHaveMatchingLevels()
+
+        If lblLevelWarning IsNot Nothing Then
+            lblLevelWarning.Visible = Not bLevelsMatch AndAlso Not ucrReceiverMultipleLikert.IsEmpty()
+            lblLevelWarning.Location = New System.Drawing.Point(
+            ucrReceiverMultipleLikert.Left,
+            ucrReceiverMultipleLikert.Bottom + 4)
+        End If
+
         If bShowingGraph Then
-            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete Then
+            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete OrElse Not bLevelsMatch Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
                 grpLikertOptions.Enabled = Not ucrReceiverMultipleLikert.IsEmpty()
             End If
         Else
-            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveSummary.IsComplete Then
+            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveSummary.IsComplete OrElse Not bLevelsMatch Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -328,4 +347,39 @@ Public Class dlgDescribeOneVariableLikertGraph
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDevOff)
         End If
     End Sub
+    Private Function SelectedVariablesHaveMatchingLevels() As Boolean
+        If ucrReceiverMultipleLikert.IsEmpty() Then Return True
+        Dim varNames As List(Of String) = ucrReceiverMultipleLikert.GetVariableNamesAsList()
+        If varNames.Count <= 1 Then Return True
+        Dim iExpectedLevels As Integer = -1
+        For Each strVar As String In varNames
+            Dim iLevels As Integer = GetVariableLevelCount(ucrSelectorLikert.strCurrentDataFrame, strVar)
+            If iLevels < 0 Then Continue For
+            If iExpectedLevels = -1 Then
+                iExpectedLevels = iLevels
+            ElseIf iLevels <> iExpectedLevels Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+    Private Function GetVariableLevelCount(strDataFrame As String, strVarName As String) As Integer
+        Try
+            Dim clsNlevels As New RFunction
+            clsNlevels.SetRCommand("nlevels")
+            Dim clsGetCol As New RFunction
+            clsGetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetCol.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsGetCol.AddParameter("col_names", Chr(34) & strVarName & Chr(34))
+            clsNlevels.AddParameter("x", clsRFunctionParameter:=clsGetCol, bIncludeArgumentName:=False)
+            Dim expResult As RDotNet.SymbolicExpression =
+                frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript(), bSilent:=True)
+            If expResult IsNot Nothing AndAlso
+                expResult.Type <> RDotNet.Internals.SymbolicExpressionType.Null Then
+                Return expResult.AsInteger()(0)
+            End If
+        Catch ex As Exception
+        End Try
+        Return -1
+    End Function
 End Class
