@@ -133,7 +133,7 @@ Public Class dlgDescribeOneVariableLikertGraph
         lblLevelWarning = New System.Windows.Forms.Label()
         lblLevelWarning.AutoSize = False
         lblLevelWarning.ForeColor = System.Drawing.Color.Red
-        lblLevelWarning.Text = "All selected factors must have the same number of levels."
+        lblLevelWarning.Text = GetTranslation("All selected factors must have the same number of levels.")
         lblLevelWarning.Visible = False
         lblLevelWarning.Size = New System.Drawing.Size(200, 40)
         Me.Controls.Add(lblLevelWarning)
@@ -372,13 +372,14 @@ Public Class dlgDescribeOneVariableLikertGraph
             clsGetCol.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
             clsGetCol.AddParameter("col_names", Chr(34) & strVarName & Chr(34))
             clsNlevels.AddParameter("x", clsRFunctionParameter:=clsGetCol, bIncludeArgumentName:=False)
-            Dim expResult As RDotNet.SymbolicExpression =
+            Dim expResult As SymbolicExpression =
                 frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript(), bSilent:=True)
             If expResult IsNot Nothing AndAlso
-                expResult.Type <> RDotNet.Internals.SymbolicExpressionType.Null Then
+                expResult.Type <> Internals.SymbolicExpressionType.Null Then
                 Return expResult.AsInteger()(0)
             End If
         Catch ex As Exception
+            Debug.WriteLine("GetVariableLevelCount failed for " & strVarName & ": " & ex.Message)
         End Try
         Return -1
     End Function
