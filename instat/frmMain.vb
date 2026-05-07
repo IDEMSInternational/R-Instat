@@ -2913,11 +2913,6 @@ Public Class frmMain
         dlgVisualizeData.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSAGeneralGrap_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGrap.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticDescribeClimograph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimograph.Click
         dlgClimograph.ShowDialog()
     End Sub
