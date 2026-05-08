@@ -548,7 +548,7 @@ Partial Class dlgCheckSummary
         Me.ucrOutlierInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrOutlierInputStation.GetSetSelectedIndex = -1
         Me.ucrOutlierInputStation.IsReadOnly = False
-        Me.ucrOutlierInputStation.Location = New System.Drawing.Point(342, 528)
+        Me.ucrOutlierInputStation.Location = New System.Drawing.Point(359, 528)
         Me.ucrOutlierInputStation.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrOutlierInputStation.Name = "ucrOutlierInputStation"
         Me.ucrOutlierInputStation.Size = New System.Drawing.Size(98, 21)
@@ -558,7 +558,7 @@ Partial Class dlgCheckSummary
         '
         Me.ucrOutlier1stFactorReceiver.AutoSize = True
         Me.ucrOutlier1stFactorReceiver.frmParent = Me
-        Me.ucrOutlier1stFactorReceiver.Location = New System.Drawing.Point(241, 529)
+        Me.ucrOutlier1stFactorReceiver.Location = New System.Drawing.Point(258, 529)
         Me.ucrOutlier1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrOutlier1stFactorReceiver.Name = "ucrOutlier1stFactorReceiver"
         Me.ucrOutlier1stFactorReceiver.Selector = Nothing
