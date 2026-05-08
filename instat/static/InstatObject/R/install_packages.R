@@ -200,6 +200,7 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/getPass/getPass
 install.packages("https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz", repos=NULL, type="source")
 install.packages("https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz", repos=NULL, type="source")
 install.packages("https://cran.r-project.org/src/contrib/Archive/climdex.pcic/climdex.pcic_1.1-11.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/rpivotTable/rpivotTable_0.3.0.tar.gz", repos = NULL, type = "source")
 
 # Only use internal library
 if (length(.libPaths()) >= 2){
