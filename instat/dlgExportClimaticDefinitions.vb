@@ -169,7 +169,7 @@ Public Class dlgExportClimaticDefinitions
             End If
 
             If Not ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyRainfall.IsEmpty Then
-                bReset = False
+                bOkEnable = False
             End If
 
             If Not ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyTemp.IsEmpty Then
@@ -179,7 +179,7 @@ Public Class dlgExportClimaticDefinitions
         ucrBase.OKEnabled(bOkEnable)
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
@@ -187,23 +187,20 @@ Public Class dlgExportClimaticDefinitions
         HideDisplayGroupedControls()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlContentsChanged,
-        ucrReceiverAnnualTempSummaries.ControlContentsChanged, ucrReceiverMonthlyRainfallSummaries.ControlContentsChanged, ucrReceiverMonthlyTempSummaries.ControlContentsChanged,
-        ucrReceiverMultipleAnnualRainfall.ControlContentsChanged, ucrReceiverMultipleAnnualTemp.ControlContentsChanged,
-        ucrReceiverMultipleMonthlyRainfall.ControlContentsChanged, ucrReceiverMultipleMonthlyTemp.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOkEnabled()
     End Sub
 
     Private Sub AddRemoveParamsInSummaryDefinitionsFunction()
-        AddRemoveParameter(ucrReceiverAnnualRainfallSummaries, clsFunction:=clsBuildSummaryLongAnnualRainFunction, paramName:="annual_rain_summary", iPositon:=0)
-        AddRemoveParameter(ucrReceiverAnnualTempSummaries, clsFunction:=clsBuildSummaryLongAnnualTempFunction, paramName:="annual_temp_summary", iPositon:=1)
-        AddRemoveParameter(ucrReceiverMonthlyRainfallSummaries, clsFunction:=clsBuildSummaryLongMonthlyRainFunction, paramName:="monthly_rain_summary", iPositon:=2)
-        AddRemoveParameter(ucrReceiverMonthlyTempSummaries, clsFunction:=clsBuildSummaryLongMonthlyTempFunction, paramName:="monthly_temp_summary", iPositon:=3)
+        AddRemoveParameter(ucrReceiverAnnualRainfallSummaries, clsFunction:=clsBuildSummaryLongAnnualRainFunction, paramName:="annual_rain_summary", iPosition:=0)
+        AddRemoveParameter(ucrReceiverAnnualTempSummaries, clsFunction:=clsBuildSummaryLongAnnualTempFunction, paramName:="annual_temp_summary", iPosition:=1)
+        AddRemoveParameter(ucrReceiverMonthlyRainfallSummaries, clsFunction:=clsBuildSummaryLongMonthlyRainFunction, paramName:="monthly_rain_summary", iPosition:=2)
+        AddRemoveParameter(ucrReceiverMonthlyTempSummaries, clsFunction:=clsBuildSummaryLongMonthlyTempFunction, paramName:="monthly_temp_summary", iPosition:=3)
     End Sub
 
-    Private Sub AddRemoveParameter(ucrReceiverSummary As ucrReceiverSingle, clsFunction As RFunction, paramName As String, iPositon As Integer)
+    Private Sub AddRemoveParameter(ucrReceiverSummary As ucrReceiverSingle, clsFunction As RFunction, paramName As String, iPosition As Integer)
         If Not ucrReceiverSummary.IsEmpty Then
-            clsCollateSummaryDefinitionsFunction.AddParameter(paramName, clsRFunctionParameter:=clsFunction, iPosition:=iPositon)
+            clsCollateSummaryDefinitionsFunction.AddParameter(paramName, clsRFunctionParameter:=clsFunction, iPosition:=iPosition)
         Else
             clsCollateSummaryDefinitionsFunction.RemoveParameterByName(paramName)
         End If
@@ -250,8 +247,7 @@ Public Class dlgExportClimaticDefinitions
         lblMonthlyTemp.Visible = ucrReceiverMultipleMonthlyTemp.Visible
     End Sub
 
-    Private Sub CoreControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged, ucrReceiverAnnualTempSummaries.ControlValueChanged,
-            ucrReceiverMonthlyRainfallSummaries.ControlValueChanged, ucrReceiverMonthlyTempSummaries.ControlValueChanged
+    Private Sub CoreControls_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveParamsInSummaryDefinitionsFunction()
         HideDisplayGroupedControls()
     End Sub

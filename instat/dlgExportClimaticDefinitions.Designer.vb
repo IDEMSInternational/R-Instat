@@ -22,8 +22,6 @@ Partial Class dlgExportClimaticDefinitions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.ttExportToGoogleBuckets = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblConnection = New System.Windows.Forms.Label()
         Me.btnConnection = New System.Windows.Forms.Button()
         Me.ucrSelectorExportToEPicsa = New instat.ucrSelectorByDataFrameAddRemove()
@@ -326,14 +324,13 @@ Partial Class dlgExportClimaticDefinitions
         Me.MinimizeBox = False
         Me.Name = "dlgExportClimaticDefinitions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Export to Google Buckets"
+        Me.Text = "Export to EPicsa"
         Me.grpDefinitionsProducts.ResumeLayout(False)
         Me.grpDefinitionsProducts.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ttExportToGoogleBuckets As ToolTip
     Friend WithEvents lblConnection As Label
     Friend WithEvents btnConnection As Button
     Friend WithEvents ucrSelectorExportToEPicsa As ucrSelectorByDataFrameAddRemove
