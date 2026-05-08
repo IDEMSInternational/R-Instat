@@ -115,8 +115,7 @@ packs <-
     "lemon",
     #"HistData", This is no longer used
     "caret",
-    "rpivotTable",
-    # For datasets
+       # For datasets
     "gcookbook",
     "tidytext",
     "janitor",
