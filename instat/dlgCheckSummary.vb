@@ -278,7 +278,7 @@ Public Class dlgCheckSummary
         ucrReceiverColourBy.SetParameterIsString()
 
 
-        ucrReceiverFacetBy.SetParameter(New RParameter(""))
+        ucrReceiverFacetBy.SetParameter(New RParameter("", 1))
         ucrReceiverFacetBy.Selector = ucrSelectorForCheckSummary
         ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
         ucrReceiverFacetBy.strSelectorHeading = "Factors"
@@ -475,7 +475,7 @@ Public Class dlgCheckSummary
 
         ' ... (Recent resets)
         If Not ucrSaveNewColumn.bUserTyped Then
-            ucrSaveNewColumn.SetPrefix("recent_years")
+            ucrSaveNewColumn.SetPrefix("recent")
         End If
 
         ResetRecentGridToDefaults()
@@ -794,6 +794,9 @@ Public Class dlgCheckSummary
         clsOutlierRggplotFunction = New RFunction
         clsOutlierRaesFunction = New RFunction
         clsOutlierBoxplotFunction = New RFunction
+        clsOutlierFacetVariablesOperator = New ROperator("~")
+        clsOutlierFacetVariablesOperator.bForceIncludeOperation = True
+        clsOutlierFacetVariablesOperator.bBrackets = False
 
         clsOutlierBoxplotFunction.SetPackageName("ggplot2")
         clsOutlierBoxplotFunction.SetRCommand("geom_boxplot")
@@ -914,6 +917,7 @@ Public Class dlgCheckSummary
             UpdateTrendRCode()
         ElseIf rdoOutliers.Checked Then
             ucrVariablesAsFactorForCheckSummary.SetMeAsReceiver()
+            AutoFillRecentColumnForOutliers()
             UpdateOutliersRCode()
         End If
         TestOKEnabled()
@@ -1859,7 +1863,7 @@ Public Class dlgCheckSummary
 
         If bWrap Then
             clsOutlierFacetVariablesOperator.RemoveParameterByName("var1")
-            clsOutlierFacetVariablesOperator.AddParameter("var1", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            clsOutlierFacetVariablesOperator.AddParameter("var1", ucrOutlier1stFactorReceiver.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
             clsOutlierFacetFunction.AddParameter("facets", clsROperatorParameter:=clsOutlierFacetVariablesOperator, iPosition:=0)
         ElseIf bRow Or bRowAll Then
             clsOutlierRowVarsFunction.RemoveParameterByName("var")
@@ -1898,5 +1902,72 @@ Public Class dlgCheckSummary
         If Not rdoOutliers.Checked Then Exit Sub
         AddRemoveOutlierFacets()
         UpdateOutliersRCode()
+    End Sub
+
+    Private Sub ucrSelectorForCheckSummary_DataFrameChanged() Handles ucrSelectorForCheckSummary.DataFrameChanged
+        If rdoOutliers.Checked Then
+            AutoFillRecentColumnForOutliers()
+            UpdateOutliersRCode()
+        End If
+    End Sub
+
+    Private Function GetFullVariableName(strBaseName As String) As String
+        If strBaseName = "" Then Return ""
+        For Each lvi As ListViewItem In ucrSelectorForCheckSummary.lstAvailableVariable.Items
+            Dim strText As String = lvi.Text
+            Dim strClean As String = strText.Split({" "c, "("c})(0).Trim()
+            If strClean.Equals(strBaseName, StringComparison.OrdinalIgnoreCase) Then
+                Return strText
+            End If
+        Next
+        Return ""
+    End Function
+
+    Private Sub AutoFillRecentColumnForOutliers()
+        Try
+            ucrByFactorsReceiver.SetMeAsReceiver()
+            ucrSelectorForCheckSummary.LoadList()
+
+            If ucrByFactorsReceiver.IsEmpty Then
+                Dim strRecentName As String = ucrSaveNewColumn.GetText().Trim()
+                Dim strFullRecentName As String = GetFullVariableName(strRecentName)
+
+                If strFullRecentName <> "" Then
+                    ucrByFactorsReceiver.Add(strFullRecentName)
+                Else
+                    Dim strFallbacks() As String = {"recent", "Recent", "recent1", "Recent1"}
+                    For Each strFallback In strFallbacks
+                        strFullRecentName = GetFullVariableName(strFallback)
+                        If strFullRecentName <> "" Then
+                            ucrByFactorsReceiver.Add(strFullRecentName)
+                            Exit For
+                        End If
+                    Next
+                End If
+            End If
+
+            If ucrOutlier1stFactorReceiver.IsEmpty Then
+                Dim strCurrentDataFrame As String = ucrSelectorForCheckSummary.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+                ucrOutlier1stFactorReceiver.AddItemsWithMetadataProperty(strCurrentDataFrame, "Climatic_Type", {"station_label"})
+
+                If ucrOutlier1stFactorReceiver.IsEmpty Then
+                    Dim strStationNames() As String = {"station", "Station", "Station_Name", "station_name", "Station Name", "station name"}
+                    For Each strName In strStationNames
+                        Dim strFullStationName As String = GetFullVariableName(strName)
+                        If strFullStationName <> "" Then
+                            ucrOutlier1stFactorReceiver.Add(strFullStationName)
+                            Exit For
+                        End If
+                    Next
+                End If
+
+                If Not ucrOutlier1stFactorReceiver.IsEmpty Then
+                    ucrOutlierInputStation.SetName(strFacetWrap)
+                End If
+            End If
+
+            ucrVariablesAsFactorForCheckSummary.SetMeAsReceiver()
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

@@ -370,7 +370,7 @@ Partial Class dlgCheckSummary
         Me.pnlOutliers.Controls.Add(Me.ucrVariablesAsFactorForCheckSummary)
         Me.pnlOutliers.Location = New System.Drawing.Point(286, 57)
         Me.pnlOutliers.Name = "pnlOutliers"
-        Me.pnlOutliers.Size = New System.Drawing.Size(303, 253)
+        Me.pnlOutliers.Size = New System.Drawing.Size(303, 306)
         Me.pnlOutliers.TabIndex = 28
         Me.pnlOutliers.Visible = False
         '
@@ -378,7 +378,7 @@ Partial Class dlgCheckSummary
         '
         Me.ucrChkVarWidth.AutoSize = True
         Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(59, 230)
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(59, 272)
         Me.ucrChkVarWidth.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(146, 23)
@@ -388,7 +388,7 @@ Partial Class dlgCheckSummary
         '
         Me.ucrSecondFactorReceiver.AutoSize = True
         Me.ucrSecondFactorReceiver.frmParent = Me
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(59, 203)
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(59, 247)
         Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
@@ -401,7 +401,7 @@ Partial Class dlgCheckSummary
         '
         Me.lblBySecondFactor.AutoSize = True
         Me.lblBySecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBySecondFactor.Location = New System.Drawing.Point(59, 188)
+        Me.lblBySecondFactor.Location = New System.Drawing.Point(59, 232)
         Me.lblBySecondFactor.Name = "lblBySecondFactor"
         Me.lblBySecondFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblBySecondFactor.TabIndex = 28
@@ -412,7 +412,7 @@ Partial Class dlgCheckSummary
         '
         Me.lblByFactors.AutoSize = True
         Me.lblByFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblByFactors.Location = New System.Drawing.Point(59, 138)
+        Me.lblByFactors.Location = New System.Drawing.Point(59, 181)
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(58, 13)
         Me.lblByFactors.TabIndex = 26
@@ -423,7 +423,7 @@ Partial Class dlgCheckSummary
         '
         Me.ucrByFactorsReceiver.AutoSize = True
         Me.ucrByFactorsReceiver.frmParent = Me
-        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(59, 153)
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(59, 201)
         Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
@@ -454,7 +454,7 @@ Partial Class dlgCheckSummary
         Me.AddLineGroupbox.Controls.Add(Me.rdoMeanLine)
         Me.AddLineGroupbox.Location = New System.Drawing.Point(29, 312)
         Me.AddLineGroupbox.Name = "AddLineGroupbox"
-        Me.AddLineGroupbox.Size = New System.Drawing.Size(264, 93)
+        Me.AddLineGroupbox.Size = New System.Drawing.Size(252, 93)
         Me.AddLineGroupbox.TabIndex = 30
         Me.AddLineGroupbox.TabStop = False
         Me.AddLineGroupbox.Text = "Add Line"
