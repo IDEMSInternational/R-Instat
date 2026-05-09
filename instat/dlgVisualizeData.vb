@@ -166,6 +166,11 @@ Public Class dlgVisualizeData
         ucrChkFacet.AddParameterValuesCondition(True, "checked", "True")
         ucrChkFacet.AddParameterValuesCondition(False, "checked", "False")
 
+        ucrChkLimitLength.SetText("Facets")
+        ucrChkLimitLength.AddParameterValuesCondition(True, "length", "True")
+        ucrChkLimitLength.AddParameterValuesCondition(False, "length", "False")
+
+
         ucrNudSamplingFunction.SetLinkedDisplayControl(lblSampling)
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -196,6 +201,8 @@ Public Class dlgVisualizeData
         ucrSaveGraph.Reset()
 
         clsCurrBaseFunction = clsVisDatFunction
+
+        clsDummyFunction.AddParameter("length", "FALSE", iPosition:=1)
 
         clsThemeFunction.SetPackageName("ggplot2")
         clsThemeFunction.SetRCommand("theme")
@@ -284,6 +291,7 @@ Public Class dlgVisualizeData
         If bReset Then
             ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
             ucrChkFacet.SetRCode(clsDummyFunction, bReset)
+            ucrChkLimitLength.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
