@@ -139,7 +139,7 @@ Public Class dlgVisualizeData
         ucrNudSamplingFunction.Minimum = 0.01
         ucrNudSamplingFunction.Maximum = 1
 
-        ucrChkAdjustSize.SetText("Adjust size of variable names:")
+        ucrChkAdjustSize.SetText("Size:")
         ucrChkAdjustSize.AddToLinkedControls(ucrNudAdjustSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrNudAdjustSize.SetParameter(New RParameter("size", 0))
         ucrNudAdjustSize.SetMinMax(0.1, 15)

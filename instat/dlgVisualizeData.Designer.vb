@@ -144,7 +144,7 @@ Partial Class dlgVisualizeData
         'lblMillionDataPoints
         '
         Me.lblMillionDataPoints.AutoSize = True
-        Me.lblMillionDataPoints.Location = New System.Drawing.Point(201, 73)
+        Me.lblMillionDataPoints.Location = New System.Drawing.Point(205, 73)
         Me.lblMillionDataPoints.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMillionDataPoints.Name = "lblMillionDataPoints"
         Me.lblMillionDataPoints.Size = New System.Drawing.Size(139, 20)
@@ -237,7 +237,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudAdjustSize.AutoSize = True
         Me.ucrNudAdjustSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAdjustSize.Increment = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAdjustSize.Location = New System.Drawing.Point(611, 410)
+        Me.ucrNudAdjustSize.Location = New System.Drawing.Point(531, 411)
         Me.ucrNudAdjustSize.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrNudAdjustSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAdjustSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -250,10 +250,10 @@ Partial Class dlgVisualizeData
         '
         Me.ucrChkAdjustSize.AutoSize = True
         Me.ucrChkAdjustSize.Checked = False
-        Me.ucrChkAdjustSize.Location = New System.Drawing.Point(369, 409)
+        Me.ucrChkAdjustSize.Location = New System.Drawing.Point(391, 409)
         Me.ucrChkAdjustSize.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAdjustSize.Name = "ucrChkAdjustSize"
-        Me.ucrChkAdjustSize.Size = New System.Drawing.Size(236, 34)
+        Me.ucrChkAdjustSize.Size = New System.Drawing.Size(134, 34)
         Me.ucrChkAdjustSize.TabIndex = 19
         '
         'ucrNudSamplingFunction
@@ -400,7 +400,7 @@ Partial Class dlgVisualizeData
         Me.grpDataFrame.Controls.Add(Me.lblSampling)
         Me.grpDataFrame.Location = New System.Drawing.Point(15, 372)
         Me.grpDataFrame.Name = "grpDataFrame"
-        Me.grpDataFrame.Size = New System.Drawing.Size(345, 115)
+        Me.grpDataFrame.Size = New System.Drawing.Size(363, 115)
         Me.grpDataFrame.TabIndex = 28
         Me.grpDataFrame.TabStop = False
         Me.grpDataFrame.Text = "Data Frame"
@@ -408,12 +408,12 @@ Partial Class dlgVisualizeData
         'grpNames
         '
         Me.grpNames.Controls.Add(Me.ucrChkLimitLength)
-        Me.grpNames.Location = New System.Drawing.Point(366, 382)
+        Me.grpNames.Location = New System.Drawing.Point(387, 382)
         Me.grpNames.Name = "grpNames"
-        Me.grpNames.Size = New System.Drawing.Size(320, 105)
+        Me.grpNames.Size = New System.Drawing.Size(228, 105)
         Me.grpNames.TabIndex = 29
         Me.grpNames.TabStop = False
-        Me.grpNames.Text = "Names"
+        Me.grpNames.Text = "Variable Names"
         '
         'ucrChkLimitLength
         '
@@ -422,7 +422,7 @@ Partial Class dlgVisualizeData
         Me.ucrChkLimitLength.Location = New System.Drawing.Point(3, 66)
         Me.ucrChkLimitLength.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLimitLength.Name = "ucrChkLimitLength"
-        Me.ucrChkLimitLength.Size = New System.Drawing.Size(218, 34)
+        Me.ucrChkLimitLength.Size = New System.Drawing.Size(135, 34)
         Me.ucrChkLimitLength.TabIndex = 30
         '
         'dlgVisualizeData
@@ -430,7 +430,7 @@ Partial Class dlgVisualizeData
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(691, 718)
+        Me.ClientSize = New System.Drawing.Size(619, 718)
         Me.Controls.Add(Me.ucrChkAdjustSize)
         Me.Controls.Add(Me.ucrNudAdjustSize)
         Me.Controls.Add(Me.grpNames)
