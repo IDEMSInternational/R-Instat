@@ -258,7 +258,7 @@ Partial Class dlgScatterPlot
         Me.ucrChkColour.Checked = False
         Me.ucrChkColour.Location = New System.Drawing.Point(98, 46)
         Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(114, 23)
+        Me.ucrChkColour.Size = New System.Drawing.Size(77, 23)
         Me.ucrChkColour.TabIndex = 84
         '
         'ucrChkPosition
@@ -267,7 +267,7 @@ Partial Class dlgScatterPlot
         Me.ucrChkPosition.Checked = False
         Me.ucrChkPosition.Location = New System.Drawing.Point(257, 46)
         Me.ucrChkPosition.Name = "ucrChkPosition"
-        Me.ucrChkPosition.Size = New System.Drawing.Size(79, 23)
+        Me.ucrChkPosition.Size = New System.Drawing.Size(72, 23)
         Me.ucrChkPosition.TabIndex = 83
         '
         'ucrChkSize
