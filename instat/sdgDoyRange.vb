@@ -214,8 +214,8 @@ Public Class sdgDoyRange
             ElseIf rdoFromVariable.Checked Then
                 clsDayFromOperator.AddParameter("from", strParameterValue:=ucrReceiverFrom.GetVariableNames(False), iPosition:=1)
             End If
+            UpdateCalculatedFrom()
         End If
-        UpdateCalculatedFrom()
     End Sub
 
     Private Sub Tordo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoToFixed.CheckedChanged, rdoToVariable.CheckedChanged, rdoLength.CheckedChanged
@@ -247,8 +247,8 @@ Public Class sdgDoyRange
                     clsIfElseFirstDoyFilledFunction.AddParameter("yes", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
                 End If
             End If
+            UpdateCalculatedFrom()
         End If
-        UpdateCalculatedFrom()
     End Sub
 
     Private Sub UpdateCalculatedFrom()
@@ -287,6 +287,12 @@ Public Class sdgDoyRange
     Public ReadOnly Property UseDateChecked As Boolean
         Get
             Return ucrChkUseDate.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property IsSeasonal As Boolean
+        Get
+            Return rdoFromVariable.Checked OrElse rdoToVariable.Checked OrElse rdoLength.Checked
         End Get
     End Property
 

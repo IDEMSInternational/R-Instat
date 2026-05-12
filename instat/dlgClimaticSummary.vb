@@ -374,7 +374,7 @@ Public Class dlgClimaticSummary
 
         sdgDoyRange.ShowDialog()
 
-        If sdgDoyRange.rdoFromVariable.Checked OrElse sdgDoyRange.rdoToVariable.Checked OrElse sdgDoyRange.rdoLength.Checked Then
+        If sdgDoyRange.IsSeasonal Then
             clsBuildClimaticSummaryDefinitions.AddParameter("seasonal", "TRUE", iPosition:=4)
         Else
             clsBuildClimaticSummaryDefinitions.RemoveParameterByName("seasonal")
