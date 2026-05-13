@@ -189,7 +189,9 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlContentsChanged,
         ucrReceiverAnnualTempSummaries.ControlContentsChanged, ucrReceiverMonthlyRainfallSummaries.ControlContentsChanged,
-        ucrReceiverMonthlyTempSummaries.ControlContentsChanged
+        ucrReceiverMonthlyTempSummaries.ControlContentsChanged, ucrReceiverMultipleAnnualRainfall.ControlContentsChanged,
+        ucrReceiverMultipleAnnualTemp.ControlContentsChanged, ucrReceiverMultipleMonthlyRainfall.ControlContentsChanged,
+        ucrReceiverMultipleMonthlyTemp.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -254,6 +256,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMonthlyTempSummaries.ControlValueChanged
         AddRemoveParamsInSummaryDefinitionsFunction()
         HideDisplayGroupedControls()
+        TestOkEnabled()
     End Sub
 
 End Class
