@@ -51,11 +51,9 @@ Public Class dlgFromLibrary
                                autoTranslate(Me)
                            End Sub
         If bFirstLoad Then
+            InitialiseDialog()
             bFirstLoad = False
-            Me.BeginInvoke(Sub()
-                               InitialiseDialog()
-                               finalizeLoad()
-                           End Sub)
+            Me.BeginInvoke(finalizeLoad)
         Else
             finalizeLoad()
         End If
