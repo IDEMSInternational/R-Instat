@@ -20,7 +20,7 @@ Public Class dlgStartofRains
     Private bResetSubdialog As Boolean = True
     Private clsCalcRainDay, clsCalcStartDOY, clsConvertssndLinkedVariableFunction, clsDeleteunusedrowFunction, clsRunStartStatus2Function, clsStartRainCombine2Function, clsInnerIfElseFunction, clsListFunction, clsNastatus2Function As New RFunction
     Private clsIfElseStatus2Function, clsConvertColumnType1Function, clsConvertColumnType2Function, clsGetColumnDataTypeFunction, clsStatRainStatus2Function, clsSetnameRainStatusFunction, clsCalculatedListformFunction, clsConvertLinkedvariablesvectorFunction As New RFunction
-    Private clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList, clsSetnameRainFunction, clsConvertColumnTypeFunction As New RFunction
+    Private clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilterFunction, clsCombinedListFunction, clsSetnameRainFunction, clsConvertColumnTypeFunction As New RFunction
     Private clsConvertLinkedVariablesFunction, clsStationTypeFunction, clsConvertStationtypeFunction, clsVectorFunction, clsGetlinkeddataFunction, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction As New RFunction
     Private clsSumEvapFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsFirstDate As New RFunction
@@ -148,7 +148,8 @@ Public Class dlgStartofRains
         ucrPnlStart.AddParameterPresentCondition(rdoTemperature, "Checked")
         ucrPnlStart.AddToLinkedControls({ucrSaveDefinition, ucrReceiverRainfall, ucrInputThreshold}, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStart.AddToLinkedControls({ucrNudTotalOverDays, ucrPnlTem}, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTem.AddToLinkedControls(ucrNudAmount, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
+        ucrPnlStart.AddToLinkedControls(ucrNudAmount, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
+        ucrPnlStart.AddToLinkedControls(ucrInputLogicOperations, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlTem.AddRadioButton(rdoSummer)
         ucrPnlTem.AddRadioButton(rdoWinter)
@@ -275,7 +276,6 @@ Public Class dlgStartofRains
         ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
         ucrNudAmount.DecimalPlaces = 2
         ucrNudAmount.Increment = 0.1
-        ucrNudAmount.SetLinkedDisplayControl(lblAmount)
 
         ucrNudTotalOverDays.SetParameter(New RParameter("n", 1))
         ucrNudTotalOverDays.SetMinMax(1, 366)
@@ -336,6 +336,9 @@ Public Class dlgStartofRains
         ucrChkOccuWinter.AddParameterValuesCondition(True, "sub3", "True")
         ucrChkOccuWinter.AddParameterValuesCondition(False, "sub3", "False")
         ucrChkOccuWinter.SetText("Occurrence")
+
+        ucrInputLogicOperations.SetItems({"==", "<", "<=", ">", ">="})
+        ucrInputLogicOperations.SetDropDownStyleAsNonEditable()
 
         ucrSaveDefinition.SetPrefix("start_rains_definition")
         ucrSaveDefinition.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
@@ -406,8 +409,8 @@ Public Class dlgStartofRains
         clsRainDayConditionOperator.Clear()
         clsCalcStartDOY.Clear()
         clsConditionsOrOverallOperator.Clear()
-        clsConditionsFilter.Clear()
-        clsCombinedList.Clear()
+        clsConditionsFilterFunction.Clear()
+        clsCombinedListFunction.Clear()
         clsCombinationCalc.Clear()
         clsListSubCalc.Clear()
         clsListCalFunction.Clear()
@@ -903,15 +906,15 @@ Public Class dlgStartofRains
         clsIsNaFirstDryPeriod.AddParameter("x", clsRFunctionParameter:=clsFirstDryPeriod, iPosition:=0)
 
         ' Combined filter
-        clsConditionsFilter.SetPackageName("instatCalculations")
-        clsConditionsFilter.SetRCommand("instat_calculation$new")
-        clsConditionsFilter.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsConditionsFilter.AddParameter("function_exp", clsROperatorParameter:=clsConditionsOrOverallOperator, iPosition:=1)
-        clsConditionsFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedList, iPosition:=4)
-        clsConditionsFilter.SetAssignTo("conditions_filter")
+        clsConditionsFilterFunction.SetPackageName("instatCalculations")
+        clsConditionsFilterFunction.SetRCommand("instat_calculation$new")
+        clsConditionsFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsConditionsFilterFunction.AddParameter("function_exp", clsROperatorParameter:=clsConditionsOrOverallOperator, iPosition:=1)
+        clsConditionsFilterFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedListFunction, iPosition:=4)
+        clsConditionsFilterFunction.SetAssignTo("conditions_filter")
 
-        clsCombinedList.SetRCommand("list")
-        clsCombinedList.AddParameter("tr_sub", clsRFunctionParameter:=clsCalcRainRollingSum, bIncludeArgumentName:=False, iPosition:=0)
+        clsCombinedListFunction.SetRCommand("list")
+        clsCombinedListFunction.AddParameter("tr_sub", clsRFunctionParameter:=clsCalcRainRollingSum, bIncludeArgumentName:=False, iPosition:=0)
 
         clsConditionsOrOverallOperator.SetOperation("|")
         clsConditionsOrOverallOperator.bToScriptAsRString = True
@@ -1037,7 +1040,7 @@ Public Class dlgStartofRains
         clsCombinationCalc.SetAssignTo("start_of_rains_combined")
 
         clsCombinationManipList.SetRCommand("list")
-        clsCombinationManipList.AddParameter("manip2", clsRFunctionParameter:=clsConditionsFilter, bIncludeArgumentName:=False, iPosition:=1)
+        clsCombinationManipList.AddParameter("manip2", clsRFunctionParameter:=clsConditionsFilterFunction, bIncludeArgumentName:=False, iPosition:=1)
         clsCombinationManipList.AddParameter("manip3", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=2)
         clsCombinationManipList.AddParameter("manip4", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=3)
 
@@ -1560,7 +1563,7 @@ Public Class dlgStartofRains
         ucrInputNewStatusColumnName.SetRCode(clsCalcStatus, bReset)
 
         'Total Rainfall
-        ucrChkTotalRainfall.SetRCode(clsCombinedList, bReset)
+        ucrChkTotalRainfall.SetRCode(clsCombinedListFunction, bReset)
         ucrNudTRPercentile.SetRCode(clsTRWetSpellFunction, bReset)
         ucrReceiverRainfall.SetRCode(clsRainRollingSumFunction, bReset)
 
@@ -1672,16 +1675,17 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub UpdateDayFilterPreview()
-        If ucrReceiverDOY.IsEmpty Then
-            ucrInputFilterPreview.SetName("")
-        Else
-            ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
-        End If
+        ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        SetReceiver()
+        ShowHideControls()
+        AdditionalCondition()
+        ChangeDSValue()
+        UpdateDayFilterPreview()
         TestOKEnabled()
     End Sub
 
@@ -1700,26 +1704,26 @@ Public Class dlgStartofRains
         If ucrChkTotalRainfall.Checked Then
             If rdoTRAmount.Checked Then
                 clsTRCombineOperator.RemoveParameterByName("evap")
-                clsCombinedList.RemoveParameterByName("tr_perc_sub")
+                clsCombinedListFunction.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_perc")
-                clsCombinedList.RemoveParameterByName("evap_frac")
+                clsCombinedListFunction.RemoveParameterByName("evap_frac")
                 clsTRCombineOperator.AddParameter("tr_amount", ucrNudTRAmount.Value, bIncludeArgumentName:=False, iPosition:=1)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFractionEvapFunction)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSumEvapFunction)
             ElseIf rdoTRPercentile.Checked Then
                 clsTRCombineOperator.RemoveParameterByName("evap")
                 clsTRCombineOperator.RemoveParameterByName("tr_amount")
-                clsCombinedList.RemoveParameterByName("evap_frac")
-                clsCombinedList.AddParameter("tr_perc_sub", clsRFunctionParameter:=clsTRWetSpell, bIncludeArgumentName:=False)
+                clsCombinedListFunction.RemoveParameterByName("evap_frac")
+                clsCombinedListFunction.AddParameter("tr_perc_sub", clsRFunctionParameter:=clsTRWetSpell, bIncludeArgumentName:=False)
                 clsTRCombineOperator.AddParameter("tr_perc", strParameterValue:=strWetSpell, iPosition:=1)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFractionEvapFunction)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSumEvapFunction)
             Else
-                clsCombinedList.RemoveParameterByName("tr_perc_sub")
+                clsCombinedListFunction.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_amount")
                 clsTRCombineOperator.RemoveParameterByName("tr_perc")
-                clsCombinedList.AddParameter("evap_frac", strSumFractionEvap, bIncludeArgumentName:=False, iPosition:=1)
+                clsCombinedListFunction.AddParameter("evap_frac", strSumFractionEvap, bIncludeArgumentName:=False, iPosition:=1)
                 clsTRCombineOperator.AddParameter("evap", strParameterValue:=strSumFractionEvap, iPosition:=1, bIncludeArgumentName:=False)
                 If Not ucrReceiverEvap.IsEmpty Then
                     clsFractionEvapFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")", iPosition:=3)
@@ -1731,8 +1735,8 @@ Public Class dlgStartofRains
             End If
         Else
             clsTRCombineOperator.RemoveParameterByName("tr_amount")
-            clsCombinedList.RemoveParameterByName("tr_perc_sub")
-            clsCombinedList.RemoveParameterByName("evap_frac")
+            clsCombinedListFunction.RemoveParameterByName("tr_perc_sub")
+            clsCombinedListFunction.RemoveParameterByName("evap_frac")
             clsTRCombineOperator.RemoveParameterByName("tr_perc")
             clsTRCombineOperator.RemoveParameterByName("evap")
         End If
@@ -2138,7 +2142,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub cmdAdditionnal_Click(sender As Object, e As EventArgs) Handles cmdAdditionnal.Click
-        sdgAdditionalCondition.SetRCode(clsNewCombinedList:=clsCombinedList, clsNewCalcRollSumNumberDryPeriod:=clsCalcRollSumNumberDryPeriod, clsNewCalcRainDayRollingSum:=clsCalcRainDayRollingSum, clsNewCalcDrySpellRollMax:=clsCalcDrySpellRollMax, clsNewConditionsAndOperator:=clsConditionsAndOperator, clsNewRollingSumRainDayOperator:=clsRollingSumRainDayOperator, clsNewDSCombineOperator:=clsDSCombineOperator, clsNewDPCombineOperator:=clsDPCombineOperator, clsNewSumRainDryPeriodIntervalPlusOperator:=clsSumRainDryPeriodIntervalPlusOperator, bReset:=bResetSubdialog)
+        sdgAdditionalCondition.SetRCode(clsNewCombinedList:=clsCombinedListFunction, clsNewCalcRollSumNumberDryPeriod:=clsCalcRollSumNumberDryPeriod, clsNewCalcRainDayRollingSum:=clsCalcRainDayRollingSum, clsNewCalcDrySpellRollMax:=clsCalcDrySpellRollMax, clsNewConditionsAndOperator:=clsConditionsAndOperator, clsNewRollingSumRainDayOperator:=clsRollingSumRainDayOperator, clsNewDSCombineOperator:=clsDSCombineOperator, clsNewDPCombineOperator:=clsDPCombineOperator, clsNewSumRainDryPeriodIntervalPlusOperator:=clsSumRainDryPeriodIntervalPlusOperator, bReset:=bResetSubdialog)
         sdgAdditionalCondition.ShowDialog()
         bResetSubdialog = False
         AdditionalCondition()
@@ -2151,9 +2155,9 @@ Public Class dlgStartofRains
                 clsConditionsAndOperator.AddParameter("rain_days", clsROperatorParameter:=clsRollingSumRainDayOperator, iPosition:=2, bIncludeArgumentName:=False)
                 clsIsNaOperatorStartDOY.AddParameter("2", clsRFunctionParameter:=clsIsNaFirstRollSumRainDay, iPosition:=2)
                 clsConditionsOrOverallOperator.AddParameter("is.na_roll_sum_rain_day", clsRFunctionParameter:=clsIsNaRollSumRainDay, iPosition:=3)
-                clsCombinedList.AddParameter("rd_sub", clsRFunctionParameter:=clsCalcRainDayRollingSum, bIncludeArgumentName:=False, iPosition:=1)
+                clsCombinedListFunction.AddParameter("rd_sub", clsRFunctionParameter:=clsCalcRainDayRollingSum, bIncludeArgumentName:=False, iPosition:=1)
             Else
-                clsCombinedList.RemoveParameterByName("rd_sub")
+                clsCombinedListFunction.RemoveParameterByName("rd_sub")
                 clsConditionsAndOperator.RemoveParameterByName("rain_days")
                 clsIsNaOperatorStartDOY.RemoveParameterByName("2")
                 clsConditionsOrOverallOperator.RemoveParameterByName("is.na_roll_sum_rain_day")
@@ -2162,10 +2166,10 @@ Public Class dlgStartofRains
                 clsConditionsAndOperator.AddParameter("dry_spell", clsROperatorParameter:=clsDSCombineOperator, iPosition:=3, bIncludeArgumentName:=False)
                 clsIsNaOperatorStartDOY.AddParameter("3", clsRFunctionParameter:=clsIsNaFirstDrySpell, iPosition:=3)
                 clsConditionsOrOverallOperator.AddParameter("is.na_dry_spell", clsRFunctionParameter:=clsIsNaDrySpell, iPosition:=4)
-                clsCombinedList.AddParameter("ds_sub", clsRFunctionParameter:=clsCalcDrySpellRollMax, iPosition:=2, bIncludeArgumentName:=False)
+                clsCombinedListFunction.AddParameter("ds_sub", clsRFunctionParameter:=clsCalcDrySpellRollMax, iPosition:=2, bIncludeArgumentName:=False)
             Else
                 clsConditionsAndOperator.RemoveParameterByName("dry_spell")
-                clsCombinedList.RemoveParameterByName("ds_sub")
+                clsCombinedListFunction.RemoveParameterByName("ds_sub")
                 clsIsNaOperatorStartDOY.RemoveParameterByName("3")
                 clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_spell")
             End If
@@ -2173,10 +2177,10 @@ Public Class dlgStartofRains
                 clsConditionsAndOperator.AddParameter("dry_period", clsROperatorParameter:=clsDPCombineOperator, iPosition:=4, bIncludeArgumentName:=False)
                 clsIsNaOperatorStartDOY.AddParameter("4", clsRFunctionParameter:=clsIsNaFirstDryPeriod, iPosition:=4)
                 clsConditionsOrOverallOperator.AddParameter("is.na_dry_period", clsRFunctionParameter:=clsIsNaDryPeriod, iPosition:=5)
-                clsCombinedList.AddParameter("dp_sub", clsRFunctionParameter:=clsCalcRollSumNumberDryPeriod, iPosition:=3, bIncludeArgumentName:=False)
+                clsCombinedListFunction.AddParameter("dp_sub", clsRFunctionParameter:=clsCalcRollSumNumberDryPeriod, iPosition:=3, bIncludeArgumentName:=False)
             Else
                 clsConditionsAndOperator.RemoveParameterByName("dry_period")
-                clsCombinedList.RemoveParameterByName("dp_sub")
+                clsCombinedListFunction.RemoveParameterByName("dp_sub")
                 clsIsNaOperatorStartDOY.RemoveParameterByName("4")
                 clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_period")
             End If
@@ -2218,9 +2222,9 @@ Public Class dlgStartofRains
                 clsRainDayRollingSumFunction.RemoveParameterByName("n")
             End If
         Else
-            clsCombinedList.RemoveParameterByName("rd_sub")
-            clsCombinedList.RemoveParameterByName("ds_sub")
-            clsCombinedList.RemoveParameterByName("dp_sub")
+            clsCombinedListFunction.RemoveParameterByName("rd_sub")
+            clsCombinedListFunction.RemoveParameterByName("ds_sub")
+            clsCombinedListFunction.RemoveParameterByName("dp_sub")
 
             clsIsNaOperatorStartDOY.RemoveParameterByName("4")
             clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_period")
@@ -2298,9 +2302,7 @@ Public Class dlgStartofRains
             Me.grpWinter.Location = New Size(13, 395)
             Me.ucrBase.Location = New Point(14, 452)
             Me.grpRainParameters.Location = New Point(13, 345)
-            Me.lblAmount.Location = New Point(10, 315)
             Me.lblTotalOverDays.Location = New Point(156, 315)
-            Me.ucrNudAmount.Location = New Point(63, 313)
             Me.ucrNudTotalOverDays.Location = New Point(228, 313)
         End If
     End Sub
@@ -2463,7 +2465,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub ucrNudTotalOverDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTotalOverDays.ControlValueChanged
-        AddRemoveTotalOverdays()
+        AddRemoveTotalOverDays()
     End Sub
 
     Private Sub ucrInputTextTemday_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTextTempday.ControlValueChanged
@@ -2596,86 +2598,97 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub ChangeDefaultvalue()
-        If rdoSummer.Checked Then
-            ucrNudAmount.SetText("30")
-        ElseIf rdoWinter.Checked Then
-            ucrNudAmount.SetText("0")
+        If rdoTemperature.Checked Then
+            ucrNudAmount.Visible = True
+            If rdoSummer.Checked Then
+                ucrNudAmount.SetText("30")
+                ucrInputLogicOperations.SetText(">")
+            ElseIf rdoWinter.Checked Then
+                ucrNudAmount.SetText("0")
+                ucrInputLogicOperations.SetText("<")
+            End If
+        Else
+            ucrNudAmount.Visible = False
         End If
     End Sub
 
     Private Sub SetupTemperatureRollingMean(isSummer As Boolean)
-        Dim clsRollingMean As RFunction = If(isSummer, clsRollingMeanSummerFunction, clsRollingMeanWinterFunction)
-        Dim clsCalcRolling As RFunction = If(isSummer, clsCalcRollingmeanSummerFunction, clsCalcRollingmeanWinterFunction)
+        Dim clsRollingMeanFunction As RFunction = If(isSummer, clsRollingMeanSummerFunction, clsRollingMeanWinterFunction)
+        Dim clsCalcRollingFunction As RFunction = If(isSummer, clsCalcRollingmeanSummerFunction, clsCalcRollingmeanWinterFunction)
         Dim strRollMean As String = If(isSummer, strRollMeanTem, strRollMeanTmin)
         Dim receiver As ucrReceiver = If(isSummer, ucrReceiverTmax, ucrReceiverTmin)
 
-        clsRollingMean.SetPackageName("RcppRoll")
-        clsRollingMean.SetRCommand("roll_meanr")
-        clsRollingMean.AddParameter("n", ucrNudTotalOverDays.GetText, iPosition:=1)
-        clsRollingMean.AddParameter("fill", "NA", iPosition:=2)
-        clsRollingMean.AddParameter("na.rm", "FALSE", iPosition:=3)
-        clsRollingMean.bToScriptAsRString = True
+        clsRollingMeanFunction.SetPackageName("RcppRoll")
+        clsRollingMeanFunction.SetRCommand("roll_meanr")
+        clsRollingMeanFunction.AddParameter("n", ucrNudTotalOverDays.GetText, iPosition:=1)
+        clsRollingMeanFunction.AddParameter("fill", "NA", iPosition:=2)
+        clsRollingMeanFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
+        clsRollingMeanFunction.bToScriptAsRString = True
 
-        clsCalcRolling.SetPackageName("instatCalculations")
-        clsCalcRolling.SetRCommand("instat_calculation$new")
-        clsCalcRolling.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsCalcRolling.AddParameter("function_exp", clsRFunctionParameter:=clsRollingMean, iPosition:=1)
-        clsCalcRolling.AddParameter("result_name", Chr(34) & strRollMean & Chr(34), iPosition:=2)
-        clsCalcRolling.SetAssignTo(strRollMean)
+        clsCalcRollingFunction.SetPackageName("instatCalculations")
+        clsCalcRollingFunction.SetRCommand("instat_calculation$new")
+        clsCalcRollingFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsCalcRollingFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRollingMeanFunction, iPosition:=1)
+        clsCalcRollingFunction.AddParameter("result_name", Chr(34) & strRollMean & Chr(34), iPosition:=2)
+        clsCalcRollingFunction.SetAssignTo(strRollMean)
 
         If Not receiver.IsEmpty Then
-            clsCalcRolling.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & receiver.GetVariableNames & ")", iPosition:=3)
+            clsCalcRollingFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & receiver.GetVariableNames & ")", iPosition:=3)
+        End If
+    End Sub
+
+    Private Sub ucrInputLogicOperations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLogicOperations.ControlValueChanged
+        If rdoTemperature.Checked Then
+            SetupTemperatureConditionsFilter(rdoSummer.Checked)
         End If
     End Sub
 
     Private Sub SetupTemperatureConditionsFilter(isSummer As Boolean)
-        Dim clsConditionsFilter As RFunction = If(isSummer, clsConditionsFilterSummerFunction, clsConditionsFilterWinterFunction)
-        Dim clsConditionsOrOverall As ROperator = If(isSummer, clsConditionsOrOverallSummerOperator, clsConditionsOrOverallWinterOperator)
-        Dim clsConditionsAnd As ROperator = If(isSummer, clsConditionsAndSummerOperator, clsConditionsAndWinterOperator)
-        Dim clsGreaterOrEqual As ROperator = If(isSummer, clsGreaterOrEqualSummerOperator, clsGreaterOrEqualWinterOperator)
-        Dim clsGreater As ROperator = If(isSummer, clsGreaterSummerOperator, clsGreaterWinterOperator)
-        Dim clsBar As ROperator = If(isSummer, clsBarSummerOperator, clsBarWinterOperator)
-        Dim clsIsNa As RFunction = If(isSummer, clsIsNaSummerFunction, clsIsNaWinterFunction)
-        Dim clsIsnaRollMean As RFunction = If(isSummer, clsIsnaRollMeanSummerFunction, clsIsnaRollMeanWinterFunction)
-        Dim clsCombinedList As RFunction = If(isSummer, clsCombinedListSummerFunction, clsCombinedListWinterFunction)
-        Dim clsCalcRolling As RFunction = If(isSummer, clsCalcRollingmeanSummerFunction, clsCalcRollingmeanWinterFunction)
+        Dim clsConditionsFilterOperator As RFunction = If(isSummer, clsConditionsFilterSummerFunction, clsConditionsFilterWinterFunction)
+        Dim clsConditionsOrOverallOperator As ROperator = If(isSummer, clsConditionsOrOverallSummerOperator, clsConditionsOrOverallWinterOperator)
+        Dim clsConditionsAndOperator As ROperator = If(isSummer, clsConditionsAndSummerOperator, clsConditionsAndWinterOperator)
+        Dim clsGreaterOrEqualOperator As ROperator = If(isSummer, clsGreaterOrEqualSummerOperator, clsGreaterOrEqualWinterOperator)
+        Dim clsGreaterOperator As ROperator = If(isSummer, clsGreaterSummerOperator, clsGreaterWinterOperator)
+        Dim clsBarOperator As ROperator = If(isSummer, clsBarSummerOperator, clsBarWinterOperator)
+        Dim clsIsNaFunction As RFunction = If(isSummer, clsIsNaSummerFunction, clsIsNaWinterFunction)
+        Dim clsIsnaRollMeanFunction As RFunction = If(isSummer, clsIsnaRollMeanSummerFunction, clsIsnaRollMeanWinterFunction)
+        Dim clsCombinedListFunction As RFunction = If(isSummer, clsCombinedListSummerFunction, clsCombinedListWinterFunction)
+        Dim clsCalcRollingFunction As RFunction = If(isSummer, clsCalcRollingmeanSummerFunction, clsCalcRollingmeanWinterFunction)
         Dim strRollMean As String = If(isSummer, strRollMeanTem, strRollMeanTmin)
         Dim receiver As ucrReceiver = If(isSummer, ucrReceiverTmax, ucrReceiverTmin)
-        clsConditionsFilter.SetPackageName("instatCalculations")
-    clsConditionsFilter.SetRCommand("instat_calculation$new")
-    clsConditionsFilter.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-    clsConditionsFilter.AddParameter("function_exp", clsROperatorParameter:=clsConditionsOrOverall, iPosition:=1)
-    clsConditionsFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedList, iPosition:=4)
-    clsConditionsFilter.SetAssignTo("conditions_filter")
-    
-    clsConditionsOrOverall.SetOperation("|")
-    clsConditionsOrOverall.bToScriptAsRString = True
-    clsConditionsOrOverall.AddParameter("conditions", clsROperatorParameter:=clsConditionsAnd, iPosition:=0)
-    clsConditionsOrOverall.AddParameter("is.na_tem", clsROperatorParameter:=clsBar, iPosition:=1)
-    
-    clsConditionsAnd.SetOperation("&")
-    clsConditionsAnd.AddParameter("left", clsROperatorParameter:=clsGreaterOrEqual, iPosition:=0)
-    clsConditionsAnd.AddParameter("right", clsROperatorParameter:=clsGreater, iPosition:=1)
+        clsConditionsFilterOperator.SetPackageName("instatCalculations")
+        clsConditionsFilterOperator.SetRCommand("instat_calculation$new")
+        clsConditionsFilterOperator.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsConditionsFilterOperator.AddParameter("function_exp", clsROperatorParameter:=clsConditionsOrOverallOperator, iPosition:=1)
+        clsConditionsFilterOperator.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedListFunction, iPosition:=4)
+        clsConditionsFilterOperator.SetAssignTo("conditions_filter")
 
-        clsGreaterOrEqual.SetOperation(If(isSummer, ">", "<"))
-        clsGreaterOrEqual.AddParameter("threshold", ucrNudAmount.GetText, iPosition:=1, bIncludeArgumentName:=False)
-    clsGreaterOrEqual.AddParameter("x", receiver.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
-    
-    clsGreater.SetOperation(">")
-    clsGreater.AddParameter("tr_left", strRollMean, iPosition:=0)
-    clsGreater.AddParameter("tr_amount", "1", iPosition:=1)
-    
-    clsBar.SetOperation("|")
-    clsBar.AddParameter("left", clsRFunctionParameter:=clsIsNa, iPosition:=0)
-    clsBar.AddParameter("right", clsRFunctionParameter:=clsIsnaRollMean, iPosition:=1)
-    
-    clsIsnaRollMean.SetRCommand("is.na")
-    clsIsnaRollMean.AddParameter("x", strRollMean, iPosition:=0)
-    
-    clsIsNa.SetRCommand("is.na")
-    clsIsNa.AddParameter("x", receiver.GetVariableNames, iPosition:=0)
-    
-    clsCombinedList.SetRCommand("list")
-    clsCombinedList.AddParameter("tr_sub", clsRFunctionParameter:=clsCalcRolling, bIncludeArgumentName:=False, iPosition:=0)
-End Sub
+        clsConditionsOrOverallOperator.SetOperation("|")
+        clsConditionsOrOverallOperator.bToScriptAsRString = True
+        clsConditionsOrOverallOperator.AddParameter("conditions", clsROperatorParameter:=clsConditionsAndOperator, iPosition:=0)
+        clsConditionsOrOverallOperator.AddParameter("is.na_tem", clsROperatorParameter:=clsBarOperator, iPosition:=1)
+
+        clsConditionsAndOperator.SetOperation("&")
+        clsConditionsAndOperator.AddParameter("left", clsROperatorParameter:=clsGreaterOrEqualOperator, iPosition:=0)
+        clsConditionsAndOperator.AddParameter("right", clsROperatorParameter:=clsGreaterOperator, iPosition:=1)
+
+        clsGreaterOrEqualOperator.SetOperation(ucrInputLogicOperations.GetText())
+        clsGreaterOrEqualOperator.AddParameter("threshold", ucrNudAmount.GetText, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsGreaterOperator.SetOperation(">")
+        clsGreaterOperator.AddParameter("tr_left", strRollMean, iPosition:=0)
+        clsGreaterOperator.AddParameter("tr_amount", "1", iPosition:=1)
+
+        clsBarOperator.SetOperation("|")
+        clsBarOperator.AddParameter("left", clsRFunctionParameter:=clsIsNaFunction, iPosition:=0)
+        clsBarOperator.AddParameter("right", clsRFunctionParameter:=clsIsnaRollMeanFunction, iPosition:=1)
+
+        clsIsnaRollMeanFunction.SetRCommand("is.na")
+        clsIsnaRollMeanFunction.AddParameter("x", strRollMean, iPosition:=0)
+
+        clsIsNaFunction.SetRCommand("is.na")
+
+        clsCombinedListFunction.SetRCommand("list")
+        clsCombinedListFunction.AddParameter("tr_sub", clsRFunctionParameter:=clsCalcRollingFunction, bIncludeArgumentName:=False, iPosition:=0)
+    End Sub
 End Class

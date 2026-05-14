@@ -82,9 +82,9 @@ Partial Class dlgStartofRains
         Me.ucrPnlTRCalculateBy = New instat.UcrPanel()
         Me.ucrNudTotalOverDays = New instat.ucrNud()
         Me.lblTotalOverDays = New System.Windows.Forms.Label()
-        Me.ucrNudAmount = New instat.ucrNud()
-        Me.lblAmount = New System.Windows.Forms.Label()
         Me.grpTem = New System.Windows.Forms.GroupBox()
+        Me.ucrNudAmount = New instat.ucrNud()
+        Me.ucrInputLogicOperations = New instat.ucrInputComboBox()
         Me.lblTmax = New System.Windows.Forms.Label()
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.lblTmin = New System.Windows.Forms.Label()
@@ -621,31 +621,10 @@ Partial Class dlgStartofRains
         Me.lblTotalOverDays.TabIndex = 77
         Me.lblTotalOverDays.Text = "Over Day(s):"
         '
-        'ucrNudAmount
-        '
-        Me.ucrNudAmount.AutoSize = True
-        Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAmount.Location = New System.Drawing.Point(61, 238)
-        Me.ucrNudAmount.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAmount.Name = "ucrNudAmount"
-        Me.ucrNudAmount.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAmount.TabIndex = 76
-        Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblAmount
-        '
-        Me.lblAmount.AutoSize = True
-        Me.lblAmount.Location = New System.Drawing.Point(8, 240)
-        Me.lblAmount.Name = "lblAmount"
-        Me.lblAmount.Size = New System.Drawing.Size(46, 13)
-        Me.lblAmount.TabIndex = 75
-        Me.lblAmount.Text = "Amount:"
-        '
         'grpTem
         '
+        Me.grpTem.Controls.Add(Me.ucrNudAmount)
+        Me.grpTem.Controls.Add(Me.ucrInputLogicOperations)
         Me.grpTem.Controls.Add(Me.lblTmax)
         Me.grpTem.Controls.Add(Me.ucrReceiverTmax)
         Me.grpTem.Controls.Add(Me.lblTmin)
@@ -653,12 +632,37 @@ Partial Class dlgStartofRains
         Me.grpTem.Controls.Add(Me.rdoWinter)
         Me.grpTem.Controls.Add(Me.rdoSummer)
         Me.grpTem.Controls.Add(Me.ucrPnlTem)
-        Me.grpTem.Location = New System.Drawing.Point(290, 219)
+        Me.grpTem.Location = New System.Drawing.Point(285, 219)
         Me.grpTem.Name = "grpTem"
-        Me.grpTem.Size = New System.Drawing.Size(227, 92)
+        Me.grpTem.Size = New System.Drawing.Size(262, 92)
         Me.grpTem.TabIndex = 80
         Me.grpTem.TabStop = False
         Me.grpTem.Text = "Temperatures"
+        '
+        'ucrNudAmount
+        '
+        Me.ucrNudAmount.AutoSize = True
+        Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAmount.Location = New System.Drawing.Point(203, 58)
+        Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.Name = "ucrNudAmount"
+        Me.ucrNudAmount.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAmount.TabIndex = 82
+        Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputLogicOperations
+        '
+        Me.ucrInputLogicOperations.AddQuotesIfUnrecognised = True
+        Me.ucrInputLogicOperations.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLogicOperations.GetSetSelectedIndex = -1
+        Me.ucrInputLogicOperations.IsReadOnly = False
+        Me.ucrInputLogicOperations.Location = New System.Drawing.Point(140, 58)
+        Me.ucrInputLogicOperations.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputLogicOperations.Name = "ucrInputLogicOperations"
+        Me.ucrInputLogicOperations.Size = New System.Drawing.Size(59, 21)
+        Me.ucrInputLogicOperations.TabIndex = 79
         '
         'lblTmax
         '
@@ -677,7 +681,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
-        Me.ucrReceiverTmax.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverTmax.Size = New System.Drawing.Size(95, 20)
         Me.ucrReceiverTmax.strNcFilePath = ""
         Me.ucrReceiverTmax.TabIndex = 78
         Me.ucrReceiverTmax.ucrSelector = Nothing
@@ -699,7 +703,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
-        Me.ucrReceiverTmin.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverTmin.Size = New System.Drawing.Size(95, 20)
         Me.ucrReceiverTmin.strNcFilePath = ""
         Me.ucrReceiverTmin.TabIndex = 76
         Me.ucrReceiverTmin.ucrSelector = Nothing
@@ -939,13 +943,11 @@ Partial Class dlgStartofRains
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(555, 633)
+        Me.Controls.Add(Me.grpTem)
         Me.Controls.Add(Me.grpWinter)
         Me.Controls.Add(Me.ucrNudTotalOverDays)
-        Me.Controls.Add(Me.grpTem)
         Me.Controls.Add(Me.lblTotalOverDays)
         Me.Controls.Add(Me.grpRainParameters)
-        Me.Controls.Add(Me.ucrNudAmount)
-        Me.Controls.Add(Me.lblAmount)
         Me.Controls.Add(Me.grpTemDisplay)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.rdoTemperature)
@@ -1035,8 +1037,6 @@ Partial Class dlgStartofRains
     Friend WithEvents rdoRain As RadioButton
     Friend WithEvents ucrNudTotalOverDays As ucrNud
     Friend WithEvents lblTotalOverDays As Label
-    Friend WithEvents ucrNudAmount As ucrNud
-    Friend WithEvents lblAmount As Label
     Friend WithEvents grpTemDisplay As GroupBox
     Friend WithEvents ucrInputTextTempday As ucrInputTextBox
     Friend WithEvents ucrInputTextTemOccu As ucrInputTextBox
@@ -1059,4 +1059,6 @@ Partial Class dlgStartofRains
     Friend WithEvents ucrChkOccuWinter As ucrCheck
     Friend WithEvents ucrInputDateWinter As ucrInputTextBox
     Friend WithEvents ucrChkDayWinter As ucrCheck
+    Friend WithEvents ucrInputLogicOperations As ucrInputComboBox
+    Friend WithEvents ucrNudAmount As ucrNud
 End Class
