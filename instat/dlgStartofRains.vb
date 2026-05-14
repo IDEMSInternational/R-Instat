@@ -233,7 +233,7 @@ Public Class dlgStartofRains
         ucrSaveDefinition.SetCheckBoxText("Store Definitions")
         ucrSaveDefinition.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveDefinition.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrSaveDefinition.SetDataNameAsRVariable("linked_data_name")  ' ← The New Change for SOF
+        ucrSaveDefinition.SetDataNameAsRVariable("linked_data_name")
 
         SetReceiver()
         AdditionalCondition()

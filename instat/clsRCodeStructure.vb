@@ -152,7 +152,7 @@ Public Class RCodeStructure
     '''             Note: if true then the returned string can no longer be used for the 
     '''             function or its parameters because it will not produce the correct script.</para>
     '''             </summary>
-    Public bDataFrameNameIsRVariable As Boolean = False
+    Public bToScriptAsRString As Boolean = False
 
     ''' <summary>
     ''' If <c>True</c>, the <c>data_name</c> parameter in the generated R script is written 
@@ -162,8 +162,7 @@ Public Class RCodeStructure
     ''' <code>data_book$add_object(data_name="my_dataframe", ...)</code>
     ''' Only set to <c>True</c> when the dataframe name is determined dynamically by an R variable.
     ''' </summary>
-
-    Public bToScriptAsRString As Boolean = False
+    Public bDataFrameNameIsRVariable As Boolean = False
 
     ''' <summary>   Tag object for any use. </summary>
     Public Tag As Object 'TODO SJL 03/04/20 This only seems to be used by dlgCalculationsSummary. Could we add something local to this dialog and then remove the tag from this calss?

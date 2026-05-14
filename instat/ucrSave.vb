@@ -48,10 +48,6 @@ Public Class ucrSave
 
     ''' <summary>   True if the control has not yet loaded. </summary>
 
-    Private strDataNameAsRVariable As String = ""
-    ''' <summary> If set, this R variable name is used for data_name instead of 
-    '''           the dataframe selector text. </summary>
-
     Public bFirstLoad As Boolean = True
 
     ''' <summary>   True to show, false to hide the check box. <para>
@@ -67,6 +63,10 @@ Public Class ucrSave
     '''             For example, radio buttons may require the control to switch between different 
     '''             states.</para>
     '''             </summary>
+    '''             
+    Private strDataNameAsRVariable As String = ""
+    ''' <summary> If set, this R variable name is used for data_name instead of 
+    '''           the dataframe selector text. </summary>
     Private bShowCheckBox As Boolean = True
     ''' <summary>   True to show, false to hide the label. </summary>
     '''             (mutually exclusive with bShowCheckBox, see note above) 
@@ -710,7 +710,7 @@ Public Class ucrSave
                                                                         strRObjectFormatToAssignTo:=_strRObjectFormat,
                                                                         strRDataFrameNameToAddObjectTo:=strDataName,
                                                                         strObjectName:=strSaveName,
-                                                                        bDataFrameNameIsRVariable:=bDataNameIsRVariable)  ' ← New Addition
+                                                                        bDataFrameNameIsRVariable:=bDataNameIsRVariable)
                                 End If
                         End Select
                     Else
