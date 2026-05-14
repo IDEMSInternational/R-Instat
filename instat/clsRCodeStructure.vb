@@ -534,9 +534,11 @@ Public Class RCodeStructure
                     If bDataFrameNameIsRVariable Then
                         ' No quotes — R variable
                         clsAddRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                        clsGetRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
                     Else
                         ' Quotes — plain string (existing behaviour unchanged)
                         clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                        clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
                     End If
                 End If
 
