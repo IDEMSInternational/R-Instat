@@ -18,7 +18,7 @@ def iter_translation_rows() -> list[tuple[str, str, str]]:
         language_code = language_dir.name
 
         for json_path in sorted(language_dir.glob("*.json")):
-            with json_path.open(encoding="utf-8") as json_file:
+            with json_path.open(encoding="utf-8-sig") as json_file:
                 contents = json.load(json_file)
 
             if not isinstance(contents, dict):

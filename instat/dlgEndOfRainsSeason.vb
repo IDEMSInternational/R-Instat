@@ -35,7 +35,7 @@ Public Class dlgEndOfRainsSeason
 
 #Region "general_code_structures"
     ' General
-    Private clsVectorFunction, clsGetEndRainDefFunction, clsGetEndSeasonDefFunction, clsGetCalculationsFunction, clsGetOffsetTermFunction, clsGetDataframeFunction, clsDeleteunusedrowFunction, clsStationtypeFunction, clsConvertColumnTypeStationFunction, clsConvertlinkedvariable1Function, clsConvertlinkedvariableFunction, clsConvertColumnType1Function, clsGetColumnDataTypeFunction, clsConvertColumnTypeFunction, clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
+    Private clsVectorFunction, clsGetEndRainDefFunction, clsGetEndSeasonDefFunction, clsGetOffsetTermFunction, clsDeleteunusedrowFunction, clsStationtypeFunction, clsConvertColumnTypeStationFunction, clsConvertlinkedvariable1Function, clsConvertlinkedvariableFunction, clsConvertColumnType1Function, clsGetColumnDataTypeFunction, clsConvertColumnTypeFunction, clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
     Private clsFirstOrLastFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
 
     ' Group by
@@ -408,9 +408,7 @@ Public Class dlgEndOfRainsSeason
         clsGetEndRainDefFunction = New RFunction
         clsGetEndSeasonDefFunction = New RFunction
         clsDeleteunusedrowFunction = New RFunction
-        clsGetCalculationsFunction = New RFunction
         clsGetOffsetTermFunction = New RFunction
-        clsGetDataframeFunction = New RFunction
         clsDefineAsClimatic = New RFunction
         clsVectorConcat2Function = New RFunction
         clsConditionCheckOperator = New ROperator
@@ -1195,25 +1193,15 @@ Public Class dlgEndOfRainsSeason
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
         clsDefineAsClimatic.iCallType = 2
 
-        clsGetDataframeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataframeFunction.AddParameter("summary_data", strLinkeddata, iPosition:=0, bIncludeArgumentName:=False)
-        clsGetDataframeFunction.SetAssignTo("summary_data")
-
-        clsGetCalculationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalculationsFunction.AddParameter("summary_data", strLinkeddata, iPosition:=0, bIncludeArgumentName:=False)
-        clsGetCalculationsFunction.SetAssignTo("calculations_data")
-
         clsGetOffsetTermFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_offset_term")
         clsGetOffsetTermFunction.SetAssignTo("definitions_offset")
 
-        clsGetEndRainDefFunction.SetRCommand("get_end_rains_definition")
-        clsGetEndRainDefFunction.AddParameter("summary_data", clsRFunctionParameter:=clsGetDataframeFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsGetEndRainDefFunction.AddParameter("summary_calc", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsGetEndRainDefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_end_rains_definition")
+        clsGetEndRainDefFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
         clsGetEndRainDefFunction.AddParameter("summary_offset", clsRFunctionParameter:=clsGetOffsetTermFunction, iPosition:=5, bIncludeArgumentName:=False)
 
-        clsGetEndSeasonDefFunction.SetRCommand("get_end_season_definition")
-        clsGetEndSeasonDefFunction.AddParameter("summary_data", clsRFunctionParameter:=clsGetDataframeFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsGetEndSeasonDefFunction.AddParameter("summary_calc", clsRFunctionParameter:=clsGetCalculationsFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsGetEndSeasonDefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_end_season_definition")
+        clsGetEndSeasonDefFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
         clsGetEndSeasonDefFunction.AddParameter("summary_offset", clsRFunctionParameter:=clsGetOffsetTermFunction, iPosition:=5, bIncludeArgumentName:=False)
 
         clsVectorCalFormListFunction.SetRCommand("c")
@@ -1341,6 +1329,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudAmount.SetRCode(clsEndRainsRollSumRainConditionOperator, bReset)
         ucrNudTotalOverDays.SetRCode(clsRollSumRainFunction, bReset)
         ucrPnlEndOfRainsAndSeasons.SetRCode(clsFirstOrLastFunction, bReset)
+        AddDefinitionName()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -1625,6 +1614,7 @@ Public Class dlgEndOfRainsSeason
             clsFirstOrLastFunction = clsFirstDoyFunction
             Evaporation()
         End If
+        AddDefinitionName()
         SetDefaultPrefix()
         AddTypes()
     End Sub
@@ -1737,9 +1727,25 @@ Public Class dlgEndOfRainsSeason
             Exit Sub
         End If
 
+        AddDefinitionName()
         bIsUpdatingSaveObject = True
         AddSaveDefinitionOptions()
         bIsUpdatingSaveObject = False
+    End Sub
+
+    Private Sub AddDefinitionName()
+        Dim strDefinitionName = ucrSaveObject.GetText()
+
+        If strDefinitionName <> "" Then
+            If rdoEndOfRains.Checked Then
+                clsGetEndRainDefFunction.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=1)
+            ElseIf rdoEndOfSeasons.Checked Then
+                clsGetEndSeasonDefFunction.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=1)
+            End If
+        Else
+            clsGetEndRainDefFunction.RemoveParameterByName("definition_name")
+            clsGetEndSeasonDefFunction.RemoveParameterByName("definition_name")
+        End If
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrChkEndofSeasonOccurence.ControlContentsChanged, ucrInputEndofSeasonOccurence.ControlContentsChanged, ucrChkEndofSeasonDate.ControlContentsChanged, ucrInputEndofSeasonDate.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrSaveObject.ControlContentsChanged
