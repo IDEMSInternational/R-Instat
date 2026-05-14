@@ -133,9 +133,9 @@ Public Class dlgDescribeOneVariableLikertGraph
         lblLevelWarning = New System.Windows.Forms.Label()
         lblLevelWarning.AutoSize = False
         lblLevelWarning.ForeColor = System.Drawing.Color.Red
-        lblLevelWarning.Text = GetTranslation("All selected factors must have the same number of levels.")
+        lblLevelWarning.Text = GetTranslation("All factors must have the same number of levels.")
         lblLevelWarning.Visible = False
-        lblLevelWarning.Size = New System.Drawing.Size(200, 40)
+        lblLevelWarning.Size = New System.Drawing.Size(160, 40)
         Me.Controls.Add(lblLevelWarning)
         lblLevelWarning.BringToFront()
     End Sub
