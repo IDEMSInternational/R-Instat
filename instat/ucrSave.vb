@@ -47,6 +47,11 @@ Public Class ucrSave
     End Enum
 
     ''' <summary>   True if the control has not yet loaded. </summary>
+
+    Private strDataNameAsRVariable As String = ""
+    ''' <summary> If set, this R variable name is used for data_name instead of 
+    '''           the dataframe selector text. </summary>
+
     Public bFirstLoad As Boolean = True
 
     ''' <summary>   True to show, false to hide the check box. <para>
@@ -264,6 +269,20 @@ Public Class ucrSave
             ucrInputTextSave.Visible = True
         End If
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Sets an R variable name to use for data_name instead of the dataframe 
+    '''           selector text.
+    '''           e.g. pass "linked_data_name" to produce data_name=linked_data_name (no quotes)
+    '''           Pass "" to revert to using the dataframe selector text (default behaviour)
+    ''' </summary>
+    ''' <param name="strRVariableName"> The R variable name to use for data_name </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetDataNameAsRVariable(strRVariableName As String)
+        strDataNameAsRVariable = strRVariableName
+        UpdateAssignTo()
+    End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the prefix for the text/combo box value to
     '''             <paramref name="strNewPrefix"/>. If <paramref name="strNewPrefix"/> is not an
@@ -646,7 +665,16 @@ Public Class ucrSave
                 If bRemove Then
                     clsTempCode.RemoveAssignTo()
                 Else
-                    strDataName = If(ucrDataFrameSelector IsNot Nothing, ucrDataFrameSelector.cboAvailableDataFrames.Text, strGlobalDataName)
+                    Dim bDataNameIsRVariable As Boolean = False
+                    If Not String.IsNullOrEmpty(strDataNameAsRVariable) Then
+                        strDataName = strDataNameAsRVariable
+                        bDataNameIsRVariable = True
+                    Else
+                        strDataName = If(ucrDataFrameSelector IsNot Nothing,
+                     ucrDataFrameSelector.cboAvailableDataFrames.Text,
+                     strGlobalDataName)
+                        bDataNameIsRVariable = False
+                    End If
                     strSaveName = If(bShowCheckBox AndAlso Not ucrChkSave.Checked, strAssignToIfUnchecked, GetText())
                     If strSaveName <> "" Then
                         Select Case _strRObjectLabel
@@ -678,10 +706,11 @@ Public Class ucrSave
                                                             bAssignToIsPrefix:=bAssignToIsPrefix)
                                 Else
                                     clsTempCode.SetAssignToOutputObject(strRObjectToAssignTo:=strSaveName,
-                                                                   strRObjectTypeLabelToAssignTo:=_strRObjectLabel,
-                                                                   strRObjectFormatToAssignTo:=_strRObjectFormat,
-                                                                   strRDataFrameNameToAddObjectTo:=strDataName,
-                                                                   strObjectName:=strSaveName)
+                                                                        strRObjectTypeLabelToAssignTo:=_strRObjectLabel,
+                                                                        strRObjectFormatToAssignTo:=_strRObjectFormat,
+                                                                        strRDataFrameNameToAddObjectTo:=strDataName,
+                                                                        strObjectName:=strSaveName,
+                                                                        bDataFrameNameIsRVariable:=bDataNameIsRVariable)  ' ← New Addition
                                 End If
                         End Select
                     Else
