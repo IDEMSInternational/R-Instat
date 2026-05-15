@@ -216,6 +216,7 @@ Public Class dlgVisualizeData
 
         clsElementTextFunction.SetPackageName("ggplot2")
         clsElementTextFunction.SetRCommand("element_text")
+        clsElementTextFunction.AddParameter("vjust", 0, iPosition:=1)
 
         clsGetVariableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetVariableFunction.SetAssignTo("colnames")
