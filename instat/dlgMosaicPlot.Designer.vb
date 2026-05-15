@@ -118,7 +118,7 @@ Partial Class dlgMosaicPlot
         Me.ucrNudXAxisLabelsAngle.AutoSize = True
         Me.ucrNudXAxisLabelsAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudXAxisLabelsAngle.Location = New System.Drawing.Point(140, 326)
+        Me.ucrNudXAxisLabelsAngle.Location = New System.Drawing.Point(140, 327)
         Me.ucrNudXAxisLabelsAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Name = "ucrNudXAxisLabelsAngle"
@@ -141,7 +141,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 278)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 305)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(224, 23)
         Me.ucrChkOmitMissing.TabIndex = 13
@@ -201,7 +201,7 @@ Partial Class dlgMosaicPlot
         'ucrSaveMosaicPlot
         '
         Me.ucrSaveMosaicPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveMosaicPlot.Location = New System.Drawing.Point(9, 513)
+        Me.ucrSaveMosaicPlot.Location = New System.Drawing.Point(9, 487)
         Me.ucrSaveMosaicPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveMosaicPlot.Name = "ucrSaveMosaicPlot"
         Me.ucrSaveMosaicPlot.Size = New System.Drawing.Size(317, 24)
@@ -211,7 +211,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkXAxisLabelAngle.AutoSize = True
         Me.ucrChkXAxisLabelAngle.Checked = False
-        Me.ucrChkXAxisLabelAngle.Location = New System.Drawing.Point(9, 326)
+        Me.ucrChkXAxisLabelAngle.Location = New System.Drawing.Point(9, 327)
         Me.ucrChkXAxisLabelAngle.Name = "ucrChkXAxisLabelAngle"
         Me.ucrChkXAxisLabelAngle.Size = New System.Drawing.Size(168, 23)
         Me.ucrChkXAxisLabelAngle.TabIndex = 14
@@ -232,7 +232,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 544)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 512)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
@@ -287,7 +287,7 @@ Partial Class dlgMosaicPlot
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(321, 381)
+        Me.ucrInputStation.Location = New System.Drawing.Point(333, 405)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(101, 21)
         Me.ucrInputStation.TabIndex = 96
@@ -296,7 +296,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucr1stFactorReceiver.AutoSize = True
         Me.ucr1stFactorReceiver.frmParent = Me
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(209, 382)
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(221, 406)
         Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
@@ -309,7 +309,7 @@ Partial Class dlgMosaicPlot
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(212, 367)
+        Me.lblFacetBy.Location = New System.Drawing.Point(224, 391)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
         Me.lblFacetBy.TabIndex = 94
@@ -322,7 +322,7 @@ Partial Class dlgMosaicPlot
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(91, 381)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(91, 404)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
         Me.ucrInputLegendPosition.TabIndex = 98
@@ -331,7 +331,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(9, 382)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(9, 405)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 97
@@ -340,7 +340,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkJitter.AutoSize = True
         Me.ucrChkJitter.Checked = False
-        Me.ucrChkJitter.Location = New System.Drawing.Point(9, 429)
+        Me.ucrChkJitter.Location = New System.Drawing.Point(9, 432)
         Me.ucrChkJitter.Name = "ucrChkJitter"
         Me.ucrChkJitter.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkJitter.TabIndex = 99
@@ -349,7 +349,7 @@ Partial Class dlgMosaicPlot
         '
         Me.lblSizeJitter.AutoSize = True
         Me.lblSizeJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSizeJitter.Location = New System.Drawing.Point(104, 431)
+        Me.lblSizeJitter.Location = New System.Drawing.Point(104, 434)
         Me.lblSizeJitter.Name = "lblSizeJitter"
         Me.lblSizeJitter.Size = New System.Drawing.Size(30, 13)
         Me.lblSizeJitter.TabIndex = 100
@@ -361,7 +361,7 @@ Partial Class dlgMosaicPlot
         Me.ucrNudJitter.AutoSize = True
         Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudJitter.Location = New System.Drawing.Point(140, 430)
+        Me.ucrNudJitter.Location = New System.Drawing.Point(140, 433)
         Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Name = "ucrNudJitter"
@@ -373,7 +373,7 @@ Partial Class dlgMosaicPlot
         '
         Me.lblColourJitter.AutoSize = True
         Me.lblColourJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColourJitter.Location = New System.Drawing.Point(224, 431)
+        Me.lblColourJitter.Location = New System.Drawing.Point(224, 434)
         Me.lblColourJitter.Name = "lblColourJitter"
         Me.lblColourJitter.Size = New System.Drawing.Size(40, 13)
         Me.lblColourJitter.TabIndex = 102
@@ -386,7 +386,7 @@ Partial Class dlgMosaicPlot
         Me.ucrColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrColors.GetSetSelectedIndex = -1
         Me.ucrColors.IsReadOnly = False
-        Me.ucrColors.Location = New System.Drawing.Point(272, 428)
+        Me.ucrColors.Location = New System.Drawing.Point(272, 431)
         Me.ucrColors.Name = "ucrColors"
         Me.ucrColors.Size = New System.Drawing.Size(70, 22)
         Me.ucrColors.TabIndex = 202
@@ -397,7 +397,7 @@ Partial Class dlgMosaicPlot
         Me.ucrColorsLabel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrColorsLabel.GetSetSelectedIndex = -1
         Me.ucrColorsLabel.IsReadOnly = False
-        Me.ucrColorsLabel.Location = New System.Drawing.Point(272, 473)
+        Me.ucrColorsLabel.Location = New System.Drawing.Point(272, 457)
         Me.ucrColorsLabel.Name = "ucrColorsLabel"
         Me.ucrColorsLabel.Size = New System.Drawing.Size(70, 22)
         Me.ucrColorsLabel.TabIndex = 207
@@ -406,7 +406,7 @@ Partial Class dlgMosaicPlot
         '
         Me.lblColourLabel.AutoSize = True
         Me.lblColourLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColourLabel.Location = New System.Drawing.Point(224, 475)
+        Me.lblColourLabel.Location = New System.Drawing.Point(224, 459)
         Me.lblColourLabel.Name = "lblColourLabel"
         Me.lblColourLabel.Size = New System.Drawing.Size(40, 13)
         Me.lblColourLabel.TabIndex = 206
@@ -418,7 +418,7 @@ Partial Class dlgMosaicPlot
         Me.ucrNudSizeLabel.AutoSize = True
         Me.ucrNudSizeLabel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeLabel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeLabel.Location = New System.Drawing.Point(140, 475)
+        Me.ucrNudSizeLabel.Location = New System.Drawing.Point(140, 459)
         Me.ucrNudSizeLabel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSizeLabel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeLabel.Name = "ucrNudSizeLabel"
@@ -430,7 +430,7 @@ Partial Class dlgMosaicPlot
         '
         Me.lblSizeLabel.AutoSize = True
         Me.lblSizeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSizeLabel.Location = New System.Drawing.Point(104, 475)
+        Me.lblSizeLabel.Location = New System.Drawing.Point(104, 459)
         Me.lblSizeLabel.Name = "lblSizeLabel"
         Me.lblSizeLabel.Size = New System.Drawing.Size(30, 13)
         Me.lblSizeLabel.TabIndex = 204
@@ -441,7 +441,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkLabel.AutoSize = True
         Me.ucrChkLabel.Checked = False
-        Me.ucrChkLabel.Location = New System.Drawing.Point(9, 471)
+        Me.ucrChkLabel.Location = New System.Drawing.Point(9, 455)
         Me.ucrChkLabel.Name = "ucrChkLabel"
         Me.ucrChkLabel.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLabel.TabIndex = 203
@@ -451,7 +451,7 @@ Partial Class dlgMosaicPlot
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(441, 605)
+        Me.ClientSize = New System.Drawing.Size(441, 569)
         Me.Controls.Add(Me.ucrColorsLabel)
         Me.Controls.Add(Me.lblColourLabel)
         Me.Controls.Add(Me.ucrNudSizeLabel)
