@@ -464,7 +464,11 @@ Public Class RCodeStructure
             If _strAssignToObjectTypeLabel = RObjectTypeLabel.Column Then
                 'for column object
                 clsAddRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-                clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                If bDataFrameNameIsRVariable Then
+                    clsAddRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                Else
+                    clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                End If
                 'if we need to assign to a named column
                 If Not bAssignToColumnWithoutNames Then
                     clsAddRObject.AddParameter("col_name", Chr(34) & _strAssignToName & Chr(34))
@@ -490,7 +494,11 @@ Public Class RCodeStructure
 
                 'todo. when is this ever used? as of 11/11/2022, this code is not used during execution
                 clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-                clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                If bDataFrameNameIsRVariable Then
+                    clsGetRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                Else
+                    clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                End If
                 clsGetRObject.AddParameter("col_names", Chr(34) & _strAssignToName & Chr(34))
                 ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
                 strRObject = clsGetRObject.ToScript()
