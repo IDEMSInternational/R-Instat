@@ -6844,5 +6844,13 @@
   "Store New Graph": "Store New Graph",
   "Enter Result": "Enter Result",
   "Estimated": "Estimated",
-  "Outfilled": "Outfilled"
+  "Outfilled": "Outfilled",
+  "Outliers": "Outliers",
+  "Year Variable:": "Year Variable:",
+  "Fill By (Optional):": "Fill By (Optional):",
+  "Fitted Line": "Fitted Line",
+  "Mean Line": "Mean Line",
+  "Jitter Width:": "Jitter Width:",
+  "Check Summary": "Check Summary",
+  "Label First and Last": "Label First and Last"
 }
