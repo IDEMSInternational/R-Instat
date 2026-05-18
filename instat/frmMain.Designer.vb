@@ -776,6 +776,7 @@ Partial Class frmMain
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -5789,6 +5790,14 @@ Partial Class frmMain
         '
         'frmMain
         '
+
+        'CheckSummaryToolStripMenuItem
+        '
+        Me.CheckSummaryToolStripMenuItem.Name = "CheckSummaryToolStripMenuItem"
+        Me.CheckSummaryToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
+        Me.CheckSummaryToolStripMenuItem.Text = "Check Summary"
+        '
+
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(1200, 692)
