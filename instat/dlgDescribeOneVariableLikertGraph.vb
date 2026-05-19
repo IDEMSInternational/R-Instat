@@ -350,12 +350,16 @@ Public Class dlgDescribeOneVariableLikertGraph
         End If
     End Sub
     Private Function SelectedVariablesHaveMatchingLevels() As Boolean
-        If ucrReceiverMultipleLikert.IsEmpty() Then Return True
-        Dim varNames As List(Of String) = ucrReceiverMultipleLikert.GetVariableNamesAsList()
-        If varNames.Count <= 1 Then Return True
+        Dim varNames As List(Of String)
         Dim iExpectedLevels As Integer = -1
+        Dim iLevels As Integer
+    
+        If ucrReceiverMultipleLikert.IsEmpty() Then Return True
+        varNames = ucrReceiverMultipleLikert.GetVariableNamesAsList()
+        If varNames.Count <= 1 Then Return True
+    
         For Each strVar As String In varNames
-            Dim iLevels As Integer = GetVariableLevelCount(ucrSelectorLikert.strCurrentDataFrame, strVar)
+            iLevels = GetVariableLevelCount(ucrSelectorLikert.strCurrentDataFrame, strVar)
             If iLevels < 0 Then Return False
             If iExpectedLevels = -1 Then
                 iExpectedLevels = iLevels
