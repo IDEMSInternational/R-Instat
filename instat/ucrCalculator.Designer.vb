@@ -3635,10 +3635,10 @@ Partial Class ucrCalculator
         Me.cmdSiginf.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdSiginf.Location = New System.Drawing.Point(100, 101)
         Me.cmdSiginf.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdSiginf.Name = "cmdSiginf"
+        Me.cmdSiginf.Name = "cmdSignif"
         Me.cmdSiginf.Size = New System.Drawing.Size(50, 30)
         Me.cmdSiginf.TabIndex = 145
-        Me.cmdSiginf.Text = "siginf"
+        Me.cmdSiginf.Text = "signif"
         Me.cmdSiginf.UseVisualStyleBackColor = True
         '
         'cmdAbs
