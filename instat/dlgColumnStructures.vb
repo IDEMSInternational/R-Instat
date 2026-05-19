@@ -31,6 +31,7 @@ Public Class dlgColumnStructure
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetColumnStructureInReceiver()
         bReset = False
         SetColumnStructureInReceiver()
         TestOKEnabled()
