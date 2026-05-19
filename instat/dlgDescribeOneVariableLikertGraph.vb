@@ -16,6 +16,7 @@
 
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgDescribeOneVariableLikertGraph
     Private bFirstLoad As Boolean = True
@@ -23,6 +24,7 @@ Public Class dlgDescribeOneVariableLikertGraph
     Private Shared bShowingGraph As Boolean = True
     Private bHistogramChecked As Boolean = False
     Private bCentreChecked As Boolean = False
+    Private bLevelsValid As Boolean = True
     Private clsLikertFunction As New RFunction
     Private clsPlotFunction As New RFunction
     Private clsSummaryFunction As New RFunction
@@ -128,6 +130,15 @@ Public Class dlgDescribeOneVariableLikertGraph
         If Not clsDummyFunction.ContainsParameter("type") Then
             clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
         End If
+
+        lblLevelWarning = New Label()
+        lblLevelWarning.AutoSize = False
+        lblLevelWarning.ForeColor = System.Drawing.Color.Red
+        lblLevelWarning.Text = GetTranslation("All factors must have the same number of levels.")
+        lblLevelWarning.Visible = False
+        lblLevelWarning.Size = New System.Drawing.Size(160, 40)
+        Controls.Add(lblLevelWarning)
+        lblLevelWarning.BringToFront()
     End Sub
 
     Private Sub SetDefaults()
@@ -171,6 +182,7 @@ Public Class dlgDescribeOneVariableLikertGraph
         cmdLikertOptions.Enabled = False
         bHistogramChecked = False
         bCentreChecked = False
+        bLevelsValid = True
 
         If bShowingGraph Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
@@ -187,15 +199,17 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrPnlGraphType.SetRCode(clsDummyFunction, bReset)
     End Sub
     Public Sub TestOKEnabled()
+        UpdateLevelWarning()
+
         If bShowingGraph Then
-            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete Then
+            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete OrElse Not bLevelsValid Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
                 grpLikertOptions.Enabled = Not ucrReceiverMultipleLikert.IsEmpty()
             End If
         Else
-            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveSummary.IsComplete Then
+            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveSummary.IsComplete OrElse Not bLevelsValid Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -212,6 +226,9 @@ Public Class dlgDescribeOneVariableLikertGraph
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleLikert.ControlContentsChanged,
         ucrSaveGraph.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
+        If ucrChangedControl Is ucrReceiverMultipleLikert Then
+            bLevelsValid = SelectedVariablesHaveMatchingLevels()
+        End If
         TestOKEnabled()
     End Sub
     Private Sub rdoGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGraph.CheckedChanged
@@ -296,17 +313,13 @@ Public Class dlgDescribeOneVariableLikertGraph
             clsGetDataFrame.SetAssignTo("likert_data")
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrame, iPosition:=0)
 
-            ' For summary and graph - single likert object
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertSummaryFunction)
             clsLikertSummaryFunction.RemoveParameterByName("items")
             clsLikertSummaryFunction.AddParameter("items", "likert_data", iPosition:=0, bIncludeArgumentName:=False)
             clsLikertSummaryFunction.SetAssignTo("likert_object")
             ucrBase.clsRsyntax.AddToBeforeCodes(clsLikertSummaryFunction, iPosition:=1)
 
-            ' Graph uses likert_object
             clsPlotFunction.AddParameter("x", "likert_object", iPosition:=0, bIncludeArgumentName:=False)
-
-            ' Summary uses likert_object
             clsSummaryFunction.AddParameter("object", "likert_object", bIncludeArgumentName:=False)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
@@ -328,4 +341,52 @@ Public Class dlgDescribeOneVariableLikertGraph
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDevOff)
         End If
     End Sub
+    Private Sub UpdateLevelWarning()
+        If lblLevelWarning IsNot Nothing Then
+            lblLevelWarning.Visible = Not bLevelsValid AndAlso Not ucrReceiverMultipleLikert.IsEmpty()
+            lblLevelWarning.Location = New System.Drawing.Point(
+                ucrReceiverMultipleLikert.Left,
+                ucrReceiverMultipleLikert.Bottom + 4)
+        End If
+    End Sub
+    Private Function SelectedVariablesHaveMatchingLevels() As Boolean
+        Dim varNames As List(Of String)
+        Dim iExpectedLevels As Integer = -1
+        Dim iLevels As Integer
+    
+        If ucrReceiverMultipleLikert.IsEmpty() Then Return True
+        varNames = ucrReceiverMultipleLikert.GetVariableNamesAsList()
+        If varNames.Count <= 1 Then Return True
+    
+        For Each strVar As String In varNames
+            iLevels = GetVariableLevelCount(ucrSelectorLikert.strCurrentDataFrame, strVar)
+            If iLevels < 0 Then Return False
+            If iExpectedLevels = -1 Then
+                iExpectedLevels = iLevels
+            ElseIf iLevels <> iExpectedLevels Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+    Private Function GetVariableLevelCount(strDataFrame As String, strVarName As String) As Integer
+        Try
+            Dim clsNlevels As New RFunction
+            clsNlevels.SetRCommand("nlevels")
+            Dim clsGetCol As New RFunction
+            clsGetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetCol.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsGetCol.AddParameter("col_names", Chr(34) & strVarName & Chr(34))
+            clsNlevels.AddParameter("x", clsRFunctionParameter:=clsGetCol, bIncludeArgumentName:=False)
+            Dim expResult As SymbolicExpression =
+                frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript(), bSilent:=True)
+            If expResult IsNot Nothing AndAlso
+                expResult.Type <> Internals.SymbolicExpressionType.Null Then
+                Return expResult.AsInteger()(0)
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("GetVariableLevelCount failed for " & strVarName & ": " & ex.Message)
+        End Try
+        Return -1
+    End Function
 End Class
