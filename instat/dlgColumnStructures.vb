@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 Public Class dlgColumnStructure
     Private bReset As Boolean = True
     Private clsColourByMetadata, clsColumnStructure, clsUncolourByMetadata As New RFunction
@@ -31,8 +30,8 @@ Public Class dlgColumnStructure
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        bReset = False
         SetColumnStructureInReceiver()
+        bReset = False
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -125,52 +124,11 @@ Public Class dlgColumnStructure
 
     Private Sub SetColumnStructureInReceiver()
         If ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            Dim strDataName As String = ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            'Dim currentColumns As List(Of String) = frmMain.clsRLink.GetColumnNames(strDataName)
-            Dim currentColumns As New HashSet(Of String)(frmMain.clsRLink.GetColumnNames(strDataName))
-
-            AddValidColumnsToReceiver(ucrReceiverLayout, strDataName, currentColumns, "Structure", {"structure_type_1_label"})
-            AddValidColumnsToReceiver(ucrReceiverTreatment, strDataName, currentColumns, "Structure", {"structure_type_2_label"})
-            AddValidColumnsToReceiver(ucrReceiverMeasurement, strDataName, currentColumns, "Structure", {"structure_type_3_label"})
-
+            ucrReceiverLayout.AddItemsWithMetadataProperty(ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Structure", {"structure_type_1_label"})
+            ucrReceiverTreatment.AddItemsWithMetadataProperty(ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Structure", {"structure_type_2_label"})
+            ucrReceiverMeasurement.AddItemsWithMetadataProperty(ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Structure", {"structure_type_3_label"})
             ucrReceiverLayout.SetMeAsReceiver()
         End If
-    End Sub
-
-    Private Sub AddValidColumnsToReceiver(receiver As ucrReceiver, strDataName As String, currentColumns As HashSet(Of String), strProperty As String, strValues As String())
-        ' Get columns with the metadata property from R
-        Dim clsGetItems As New RFunction
-        Dim clsIncludeList As New RFunction
-        Dim expColumns As SymbolicExpression
-        Dim lstItems As New List(Of KeyValuePair(Of String, String))
-
-        clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-        clsGetItems.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetItems.AddParameter("as_list", "TRUE")
-        clsIncludeList.SetRCommand("list")
-        clsIncludeList.AddParameter(strProperty, frmMain.clsRLink.GetListAsRString(strValues.ToList(), bWithQuotes:=False))
-        clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
-
-        expColumns = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
-
-        receiver.Clear()
-
-        If expColumns IsNot Nothing AndAlso expColumns.Type <> RDotNet.Internals.SymbolicExpressionType.Null Then
-            Dim vecColumns = expColumns.AsList
-            For i = 0 To vecColumns.Count - 1
-                Dim chrCols = vecColumns(i).AsCharacter
-                If chrCols IsNot Nothing Then
-                    For Each col As String In chrCols
-                        ' Only add if column still exists in dataset
-                        If currentColumns.Contains(col) Then
-                            lstItems.Add(New KeyValuePair(Of String, String)(strDataName, col))
-                        End If
-                    Next
-                End If
-            Next
-        End If
-        'DirectCast(receiver, ucrReceiverMultiple).AddMultiple(lstItems)
-        DirectCast(receiver, ucrReceiverMultiple).AddMultiple(lstItems.ToArray())
     End Sub
 
     Private Sub ucrSelectorColumnStructure_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColumnStructure.ControlContentsChanged
