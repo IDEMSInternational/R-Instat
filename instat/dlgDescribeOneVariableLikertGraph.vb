@@ -24,6 +24,7 @@ Public Class dlgDescribeOneVariableLikertGraph
     Private Shared bShowingGraph As Boolean = True
     Private bHistogramChecked As Boolean = False
     Private bCentreChecked As Boolean = False
+    Private bLevelsValid As Boolean = True
     Private clsLikertFunction As New RFunction
     Private clsPlotFunction As New RFunction
     Private clsSummaryFunction As New RFunction
@@ -130,13 +131,13 @@ Public Class dlgDescribeOneVariableLikertGraph
             clsDummyFunction.AddParameter("type", Chr(34) & "bar" & Chr(34), iPosition:=0)
         End If
 
-        lblLevelWarning = New System.Windows.Forms.Label()
+        lblLevelWarning = New Label()
         lblLevelWarning.AutoSize = False
         lblLevelWarning.ForeColor = System.Drawing.Color.Red
         lblLevelWarning.Text = GetTranslation("All factors must have the same number of levels.")
         lblLevelWarning.Visible = False
         lblLevelWarning.Size = New System.Drawing.Size(160, 40)
-        Me.Controls.Add(lblLevelWarning)
+        Controls.Add(lblLevelWarning)
         lblLevelWarning.BringToFront()
     End Sub
 
@@ -181,6 +182,7 @@ Public Class dlgDescribeOneVariableLikertGraph
         cmdLikertOptions.Enabled = False
         bHistogramChecked = False
         bCentreChecked = False
+        bLevelsValid = True
 
         If bShowingGraph Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
@@ -197,24 +199,17 @@ Public Class dlgDescribeOneVariableLikertGraph
         ucrPnlGraphType.SetRCode(clsDummyFunction, bReset)
     End Sub
     Public Sub TestOKEnabled()
-        Dim bLevelsMatch As Boolean = SelectedVariablesHaveMatchingLevels()
-
-        If lblLevelWarning IsNot Nothing Then
-            lblLevelWarning.Visible = Not bLevelsMatch AndAlso Not ucrReceiverMultipleLikert.IsEmpty()
-            lblLevelWarning.Location = New System.Drawing.Point(
-            ucrReceiverMultipleLikert.Left,
-            ucrReceiverMultipleLikert.Bottom + 4)
-        End If
+        UpdateLevelWarning()
 
         If bShowingGraph Then
-            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete OrElse Not bLevelsMatch Then
+            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveGraph.IsComplete OrElse Not bLevelsValid Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
                 grpLikertOptions.Enabled = Not ucrReceiverMultipleLikert.IsEmpty()
             End If
         Else
-            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveSummary.IsComplete OrElse Not bLevelsMatch Then
+            If ucrReceiverMultipleLikert.IsEmpty() OrElse Not ucrSaveSummary.IsComplete OrElse Not bLevelsValid Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -231,6 +226,9 @@ Public Class dlgDescribeOneVariableLikertGraph
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleLikert.ControlContentsChanged,
         ucrSaveGraph.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
+        If ucrChangedControl Is ucrReceiverMultipleLikert Then
+            bLevelsValid = SelectedVariablesHaveMatchingLevels()
+        End If
         TestOKEnabled()
     End Sub
     Private Sub rdoGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGraph.CheckedChanged
@@ -315,17 +313,13 @@ Public Class dlgDescribeOneVariableLikertGraph
             clsGetDataFrame.SetAssignTo("likert_data")
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrame, iPosition:=0)
 
-            ' For summary and graph - single likert object
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLikertSummaryFunction)
             clsLikertSummaryFunction.RemoveParameterByName("items")
             clsLikertSummaryFunction.AddParameter("items", "likert_data", iPosition:=0, bIncludeArgumentName:=False)
             clsLikertSummaryFunction.SetAssignTo("likert_object")
             ucrBase.clsRsyntax.AddToBeforeCodes(clsLikertSummaryFunction, iPosition:=1)
 
-            ' Graph uses likert_object
             clsPlotFunction.AddParameter("x", "likert_object", iPosition:=0, bIncludeArgumentName:=False)
-
-            ' Summary uses likert_object
             clsSummaryFunction.AddParameter("object", "likert_object", bIncludeArgumentName:=False)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrame)
@@ -347,6 +341,14 @@ Public Class dlgDescribeOneVariableLikertGraph
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDevOff)
         End If
     End Sub
+    Private Sub UpdateLevelWarning()
+        If lblLevelWarning IsNot Nothing Then
+            lblLevelWarning.Visible = Not bLevelsValid AndAlso Not ucrReceiverMultipleLikert.IsEmpty()
+            lblLevelWarning.Location = New System.Drawing.Point(
+                ucrReceiverMultipleLikert.Left,
+                ucrReceiverMultipleLikert.Bottom + 4)
+        End If
+    End Sub
     Private Function SelectedVariablesHaveMatchingLevels() As Boolean
         If ucrReceiverMultipleLikert.IsEmpty() Then Return True
         Dim varNames As List(Of String) = ucrReceiverMultipleLikert.GetVariableNamesAsList()
@@ -354,7 +356,7 @@ Public Class dlgDescribeOneVariableLikertGraph
         Dim iExpectedLevels As Integer = -1
         For Each strVar As String In varNames
             Dim iLevels As Integer = GetVariableLevelCount(ucrSelectorLikert.strCurrentDataFrame, strVar)
-            If iLevels < 0 Then Continue For
+            If iLevels < 0 Then Return False
             If iExpectedLevels = -1 Then
                 iExpectedLevels = iLevels
             ElseIf iLevels <> iExpectedLevels Then
