@@ -40,6 +40,7 @@ Public Class dlgName
     Private dctCaseOptions As New Dictionary(Of String, String)
     Private dctReplace As New Dictionary(Of String, String)
     Private bCurrentCell As Boolean = False
+    Public bDefaultToSingle As Boolean = False
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -56,6 +57,7 @@ Public Class dlgName
         End If
         autoTranslate(Me)
         DialogueSize()
+        SetFirstOptionStatus(bDefaultToSingle) ' implemented a condition where the first option will be checked when the user interacts with the dialog via the right-click
     End Sub
 
     Private Sub InitialiseDialog()
@@ -193,7 +195,7 @@ Public Class dlgName
         dctRowsCurrentName.Clear()
         bCurrentCell = False
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
-
+        SetFirstOptionStatus(bDefaultToSingle)
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
@@ -827,4 +829,12 @@ Public Class dlgName
             cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
         End If
     End Sub
+
+    Private Sub SetFirstOptionStatus(bDefaultToSingle As Boolean)
+        If bDefaultToSingle Then
+            rdoSingle.Checked = True
+            Me.bDefaultToSingle = False
+        End If
+    End Sub
+
 End Class

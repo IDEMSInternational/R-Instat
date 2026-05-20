@@ -33,28 +33,30 @@ Public Class dlgFromLibrary
 
     Private strSelectedPackage As String = ""
     Private clsImportFunction As New RFunction 'the base function that call on import R-Instat function
-
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim finalizeLoad = Sub()
+                               If bReset Then
+                                   SetDefaults()
+                               End If
+                               SetRCodeforControls(bReset)
+
+                               If lstCollection.SelectedItems.Count > 0 Then
+                                   lstCollection.Select()
+                                   lstCollection.TopItem = lstCollection.SelectedItems(0)
+                               End If
+
+                               bReset = False
+                               TestOkEnabled()
+                               EnableHelp()
+                               autoTranslate(Me)
+                           End Sub
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+            Me.BeginInvoke(finalizeLoad)
+        Else
+            finalizeLoad()
         End If
-        If bReset Then
-            SetDefaults()
-        End If
-        SetRCodeforControls(bReset)
-
-        If lstCollection.SelectedItems.Count > 0 Then
-            'make the listview have the focus
-            lstCollection.Select()
-            'set the selected item to be visible 
-            lstCollection.TopItem = lstCollection.Items(lstCollection.Items.IndexOf(lstCollection.SelectedItems.Item(0)))
-        End If
-
-        bReset = False
-        TestOkEnabled()
-        EnableHelp()
-        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -285,6 +287,13 @@ Public Class dlgFromLibrary
             strRClass = Mid(strVecOutput(0), 5).Replace("""", "").ToLower
         End If
 
+        Dim expHasGetDataFrame As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(
+            "is.function(try(" & strSelectedDataName & "$get_data_frame, silent=TRUE))", bSilent:=True)
+        If expHasGetDataFrame IsNot Nothing AndAlso
+           expHasGetDataFrame.AsLogical()(0) Then
+            strRClass = "databook"
+        End If
+
         If strRClass = "list" Then
             'some lists could be supplied in formats that R-Instat doesn't directly recognise as data frames
             'so always explicitly coerce the supplied list of data to type data.frame
@@ -300,7 +309,7 @@ Public Class dlgFromLibrary
             Select Case strRClass
                 Case "zoo"
                     'this is the recommended command for converting zoo object types to data frames.
-                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649
+                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649        
                     clsListParameterFunction.SetPackageName("zoo")
                     clsListParameterFunction.SetRCommand("fortify.zoo")
                     clsListParameterFunction.AddParameter("model", strParameterValue:=strSelectedDataName)
@@ -325,6 +334,11 @@ Public Class dlgFromLibrary
                     'currently this command loses data(some columns) of the matrix once it's coerced. See issue #5649
                     clsListParameterFunction.SetRCommand("data.frame")
                     clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case "databook"
+                    ' R6/DataBook objects must call $get_data_frame() to extract the underlying data.frame
+                    clsListParameterFunction.SetRCommand(strSelectedDataName & "$get_data_frame")
+                    clsListParameterFunction.AddParameter("data_name", Chr(34) & strSelectedDataName & Chr(34), iPosition:=0)
                     clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
                 Case Else
                     clsListFunction.AddParameter(ucrNewDataFrameName.GetText, strParameterValue:=strSelectedDataName)
