@@ -143,6 +143,7 @@ Public Class dlgSpells
         ucrChkDefinitions.AddToLinkedControls(ucrSaveObject, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
+        ucrSaveObject.SetDataNameAsRVariable("linked_data_name")
         ucrSaveObject.SetLabelText("Save Definitions Object:")
         ucrSaveObject.SetPrefix("Longest_Spells_Definition")
         ucrSaveObject.SetIsComboBox()
