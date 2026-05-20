@@ -90,7 +90,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(),
-                                   strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                   strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.Text,
                                            bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
                                            bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
                                            bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
@@ -267,7 +267,16 @@ Public Class dlgCalculator
                 clsAddColumnsToData.AddParameter("data_name", Chr(34) & strDF & Chr(34), iPosition:=0)
                 clsAddColumnsToData.AddParameter("col_name", Chr(34) & strCol & Chr(34), iPosition:=1)
                 clsAddColumnsToData.AddParameter("col_data", "calc_full", bIncludeArgumentName:=True, iPosition:=2)
-                clsAddColumnsToData.AddParameter("before", "FALSE", iPosition:=3)
+
+                ' Retrieve the before parameter which returns "TRUE" or "FALSE"
+                clsAddColumnsToData.AddParameter("before", ucrCalc.ucrSaveResultInto.GetText(ucrSave.SaveLocation.before), iPosition:=3)
+
+                ' Retrieve the adjacent column and meticulously handle the quotes
+                Dim strAdjacentCol As String = ucrCalc.ucrSaveResultInto.GetText(ucrSave.SaveLocation.adjacentColumn)
+                If Not String.IsNullOrEmpty(strAdjacentCol) Then
+                    strAdjacentCol = strAdjacentCol.Trim(Chr(34)) ' Strip out any existing quotes
+                    clsAddColumnsToData.AddParameter("adjacent_column", Chr(34) & strAdjacentCol & Chr(34), iPosition:=4)
+                End If
 
                 ucrBase.clsRsyntax.AddToAfterCodes(clsFilterIndexAssign, 120)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsCalcFullAssign, 121)
