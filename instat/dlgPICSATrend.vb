@@ -146,12 +146,12 @@ Public Class dlgPICSATrendGraph
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrSelectorPICSATemperature.SetParameter(New RParameter("data", 0))
-        ucrSelectorPICSATemperature.SetParameterIsrfunction()
+        ucrSelectorPICSATrend.SetParameter(New RParameter("data", 0))
+        ucrSelectorPICSATrend.SetParameterIsrfunction()
 
         ucrReceiverPICSATrend.SetParameter(New RParameter("x", 0))
         ucrReceiverPICSATrend.SetFactorReceiver(ucrReceiverColourBy)
-        ucrReceiverPICSATrend.Selector = ucrSelectorPICSATemperature
+        ucrReceiverPICSATrend.Selector = ucrSelectorPICSATrend
         ucrReceiverPICSATrend.SetIncludedDataTypes({"numeric"}, True)
         ucrReceiverPICSATrend.SetSelectorHeading("Numerics")
         ucrReceiverPICSATrend.SetParameterIsString()
@@ -163,7 +163,7 @@ Public Class dlgPICSATrendGraph
 
         ucrReceiverX.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
         ucrReceiverX.SetParameterIsString()
-        ucrReceiverX.Selector = ucrSelectorPICSATemperature
+        ucrReceiverX.Selector = ucrSelectorPICSATrend
         ucrReceiverX.SetClimaticType("year")
         ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
@@ -171,14 +171,14 @@ Public Class dlgPICSATrendGraph
         ucrReceiverX.bAddParameterIfEmpty = True
 
         ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
-        ucrReceiverColourBy.Selector = ucrSelectorPICSATemperature
+        ucrReceiverColourBy.Selector = ucrSelectorPICSATrend
         ucrReceiverColourBy.SetIncludedDataTypes({"factor"})
         ucrReceiverColourBy.strSelectorHeading = "Factors"
         ucrReceiverColourBy.bWithQuotes = False
         ucrReceiverColourBy.SetParameterIsString()
 
         ucrReceiverFacetBy.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
-        ucrReceiverFacetBy.Selector = ucrSelectorPICSATemperature
+        ucrReceiverFacetBy.Selector = ucrSelectorPICSATrend
         ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
         ucrReceiverFacetBy.strSelectorHeading = "Factors"
         ucrReceiverFacetBy.bWithQuotes = False
@@ -207,7 +207,7 @@ Public Class dlgPICSATrendGraph
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Store Graph")
-        ucrSave.SetDataFrameSelector(ucrSelectorPICSATemperature.ucrAvailableDataFrames)
+        ucrSave.SetDataFrameSelector(ucrSelectorPICSATrend.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
 
     End Sub
@@ -292,8 +292,8 @@ Public Class dlgPICSATrendGraph
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
 
-        ucrSelectorPICSATemperature.Reset()
-        ucrSelectorPICSATemperature.SetGgplotFunction(clsBaseOperator)
+        ucrSelectorPICSATrend.Reset()
+        ucrSelectorPICSATrend.SetGgplotFunction(clsBaseOperator)
 
         ucrSave.Reset()
         ucrReceiverPICSATrend.SetMeAsReceiver()
@@ -693,7 +693,7 @@ Public Class dlgPICSATrendGraph
 
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSATemperature.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSATrend.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
         clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(bWithQuotes:=False), iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -701,7 +701,7 @@ Public Class dlgPICSATrendGraph
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=4)
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSATemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSATrend.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
         TestOkEnabled()
@@ -716,7 +716,7 @@ Public Class dlgPICSATrendGraph
         ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
         ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
-        ucrSelectorPICSATemperature.SetRCode(clsPipeOperator, bReset)
+        ucrSelectorPICSATrend.SetRCode(clsPipeOperator, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
@@ -928,10 +928,10 @@ Public Class dlgPICSATrendGraph
     Private Sub AutoFacetStation()
         Dim ucrCurrentReceiver As ucrReceiver = Nothing
 
-        If ucrSelectorPICSATemperature.CurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver = ucrSelectorPICSATemperature.CurrentReceiver
+        If ucrSelectorPICSATrend.CurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver = ucrSelectorPICSATrend.CurrentReceiver
         End If
-        ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrSelectorPICSATemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrSelectorPICSATrend.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
@@ -942,7 +942,7 @@ Public Class dlgPICSATrendGraph
         YAxisDataTypeCheckPISCATemp()
     End Sub
 
-    Private Sub ucrSelectorPICSATemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSATemperature.ControlValueChanged
+    Private Sub ucrSelectorPICSATrend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSATrend.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
     End Sub
@@ -979,8 +979,8 @@ Public Class dlgPICSATrendGraph
     End Sub
 
     Private Sub SetPipeAssignTo()
-        If ucrSelectorPICSATemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
-            clsPipeOperator.SetAssignTo(ucrSelectorPICSATemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If ucrSelectorPICSATrend.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrSelectorPICSATrend.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         Else
             clsPipeOperator.RemoveAssignTo()
         End If
@@ -993,7 +993,7 @@ Public Class dlgPICSATrendGraph
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
                                    clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
-                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSATemperature,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSATrend,
                                    bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
@@ -1069,7 +1069,7 @@ Public Class dlgPICSATrendGraph
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
                           clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
                           clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, ucrNewBaseSelector:=ucrSelectorPICSATemperature, bReset:=bResetSubdialog)
+                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction, ucrNewBaseSelector:=ucrSelectorPICSATrend, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         UpdatingFacetOptions()
         bResetSubdialog = False

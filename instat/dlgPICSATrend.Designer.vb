@@ -24,7 +24,7 @@ Partial Class dlgPICSATrendGraph
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorPICSATemperature = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorPICSATrend = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
@@ -56,17 +56,17 @@ Partial Class dlgPICSATrendGraph
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrSelectorPICSATemperature
+        'ucrSelectorPICSATrend
         '
-        Me.ucrSelectorPICSATemperature.AutoSize = True
-        Me.ucrSelectorPICSATemperature.bDropUnusedFilterLevels = False
-        Me.ucrSelectorPICSATemperature.bShowHiddenColumns = False
-        Me.ucrSelectorPICSATemperature.bUseCurrentFilter = True
-        Me.ucrSelectorPICSATemperature.Location = New System.Drawing.Point(4, 26)
-        Me.ucrSelectorPICSATemperature.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorPICSATemperature.Name = "ucrSelectorPICSATemperature"
-        Me.ucrSelectorPICSATemperature.Size = New System.Drawing.Size(221, 189)
-        Me.ucrSelectorPICSATemperature.TabIndex = 2
+        Me.ucrSelectorPICSATrend.AutoSize = True
+        Me.ucrSelectorPICSATrend.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPICSATrend.bShowHiddenColumns = False
+        Me.ucrSelectorPICSATrend.bUseCurrentFilter = True
+        Me.ucrSelectorPICSATrend.Location = New System.Drawing.Point(4, 26)
+        Me.ucrSelectorPICSATrend.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorPICSATrend.Name = "ucrSelectorPICSATrend"
+        Me.ucrSelectorPICSATrend.Size = New System.Drawing.Size(221, 189)
+        Me.ucrSelectorPICSATrend.TabIndex = 2
         '
         'ucrInputStation
         '
@@ -274,7 +274,7 @@ Partial Class dlgPICSATrendGraph
         Me.Controls.Add(Me.ucrReceiverColourBy)
         Me.Controls.Add(Me.lblFactorOptional)
         Me.Controls.Add(Me.lblXVariable)
-        Me.Controls.Add(Me.ucrSelectorPICSATemperature)
+        Me.Controls.Add(Me.ucrSelectorPICSATrend)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -289,7 +289,7 @@ Partial Class dlgPICSATrendGraph
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorPICSATemperature As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorPICSATrend As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
