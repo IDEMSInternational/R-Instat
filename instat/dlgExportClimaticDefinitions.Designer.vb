@@ -47,6 +47,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrBase = New instat.ucrButtons()
         Me.lblAnnualMonthlyTempSummaries = New System.Windows.Forms.Label()
         Me.ucrReceiverAnnualMonthlyTempSummaries = New instat.ucrReceiverSingle()
+        Me.lblDataframes = New System.Windows.Forms.Label()
+        Me.ucrSelectorDataFramesExportToEPicsa = New instat.ucrSelectorAddRemove()
         Me.grpDefinitionsProducts.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -352,12 +354,34 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverAnnualMonthlyTempSummaries.TabIndex = 54
         Me.ucrReceiverAnnualMonthlyTempSummaries.ucrSelector = Nothing
         '
+        'lblDataframes
+        '
+        Me.lblDataframes.AutoSize = True
+        Me.lblDataframes.Location = New System.Drawing.Point(32, 61)
+        Me.lblDataframes.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDataframes.Name = "lblDataframes"
+        Me.lblDataframes.Size = New System.Drawing.Size(106, 20)
+        Me.lblDataframes.TabIndex = 55
+        Me.lblDataframes.Text = "Data Frames:"
+        '
+        'ucrSelectorDataFramesExportToEPicsa
+        '
+        Me.ucrSelectorDataFramesExportToEPicsa.AutoSize = True
+        Me.ucrSelectorDataFramesExportToEPicsa.bShowHiddenColumns = False
+        Me.ucrSelectorDataFramesExportToEPicsa.Location = New System.Drawing.Point(29, 85)
+        Me.ucrSelectorDataFramesExportToEPicsa.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDataFramesExportToEPicsa.Name = "ucrSelectorDataFramesExportToEPicsa"
+        Me.ucrSelectorDataFramesExportToEPicsa.Size = New System.Drawing.Size(324, 212)
+        Me.ucrSelectorDataFramesExportToEPicsa.TabIndex = 56
+        '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(804, 928)
+        Me.Controls.Add(Me.lblDataframes)
+        Me.Controls.Add(Me.ucrSelectorDataFramesExportToEPicsa)
         Me.Controls.Add(Me.lblAnnualMonthlyTempSummaries)
         Me.Controls.Add(Me.ucrReceiverAnnualMonthlyTempSummaries)
         Me.Controls.Add(Me.ucrBase)
@@ -411,4 +435,6 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrReceiverAnnualMonthlyTempSummaries As ucrReceiverSingle
     Friend WithEvents lblAnnualMonthlyTemp As Label
     Friend WithEvents ucrReceiverMultipleAnnualMonthlyTemp As ucrReceiverMultiple
+    Friend WithEvents lblDataframes As Label
+    Friend WithEvents ucrSelectorDataFramesExportToEPicsa As ucrSelectorAddRemove
 End Class

@@ -21,6 +21,13 @@ Public Class dlgExportClimaticDefinitions
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
             clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction As New RFunction
 
+    Private Enum SelectorMode
+        SingleReceivers
+        MultipleReceivers
+    End Enum
+
+    Private CurrentSelectorMode As SelectorMode
+
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,6 +41,7 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
         autoTranslate(Me)
         CheckAndUpdateConnectionStatus()
+        SetSelectorMode(SelectorMode.SingleReceivers)
         HideDisplayGroupedControls()
     End Sub
 
@@ -41,10 +49,15 @@ Public Class dlgExportClimaticDefinitions
         ' Selector
         ucrSelectorExportToEPicsa.SetParameter(New RParameter("data_name", 0))
         ucrSelectorExportToEPicsa.SetParameterIsString()
+        ucrSelectorExportToEPicsa.Visible = False
+
+        ucrSelectorDataFramesExportToEPicsa.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDataFramesExportToEPicsa.SetLinkedDisplayControl(lblDataframes)
+        ucrSelectorDataFramesExportToEPicsa.Visible = True
 
         ' Main Receivers
         ucrReceiverAnnualRainfallSummaries.SetParameter(New RParameter("data_name", 0))
-        ucrReceiverAnnualRainfallSummaries.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverAnnualRainfallSummaries.Selector = ucrSelectorDataFramesExportToEPicsa
         ucrReceiverAnnualRainfallSummaries.SetParameterIsString()
         ucrReceiverAnnualRainfallSummaries.SetMeAsReceiver()
         ucrReceiverAnnualRainfallSummaries.SetItemType("dataframe")
@@ -52,28 +65,28 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverAnnualRainfallSummaries.SetLinkedDisplayControl(lblAnnualRainfallSummaries)
 
         ucrReceiverMonthlyRainfallSummaries.SetParameter(New RParameter("data_name", 0))
-        ucrReceiverMonthlyRainfallSummaries.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverMonthlyRainfallSummaries.Selector = ucrSelectorDataFramesExportToEPicsa
         ucrReceiverMonthlyRainfallSummaries.SetParameterIsString()
         ucrReceiverMonthlyRainfallSummaries.SetItemType("dataframe")
         ucrReceiverMonthlyRainfallSummaries.strSelectorHeading = "Data Sets"
         ucrReceiverMonthlyRainfallSummaries.SetLinkedDisplayControl(lblMonthlyRainfallSummaries)
 
         ucrReceiverAnnualTempSummaries.SetParameter(New RParameter("data_name", 0))
-        ucrReceiverAnnualTempSummaries.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverAnnualTempSummaries.Selector = ucrSelectorDataFramesExportToEPicsa
         ucrReceiverAnnualTempSummaries.SetParameterIsString()
         ucrReceiverAnnualTempSummaries.SetItemType("dataframe")
         ucrReceiverAnnualTempSummaries.strSelectorHeading = "Data Sets"
         ucrReceiverAnnualTempSummaries.SetLinkedDisplayControl(lblAnnualTempSummaries)
 
         ucrReceiverMonthlyTempSummaries.SetParameter(New RParameter("data_name", 0))
-        ucrReceiverMonthlyTempSummaries.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverMonthlyTempSummaries.Selector = ucrSelectorDataFramesExportToEPicsa
         ucrReceiverMonthlyTempSummaries.SetParameterIsString()
         ucrReceiverMonthlyTempSummaries.SetItemType("dataframe")
         ucrReceiverMonthlyTempSummaries.strSelectorHeading = "Data Sets"
         ucrReceiverMonthlyTempSummaries.SetLinkedDisplayControl(lblMonthlyTempSummaries)
 
         ucrReceiverAnnualMonthlyTempSummaries.SetParameter(New RParameter("data_name", 0))
-        ucrReceiverAnnualMonthlyTempSummaries.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverAnnualMonthlyTempSummaries.Selector = ucrSelectorDataFramesExportToEPicsa
         ucrReceiverAnnualMonthlyTempSummaries.SetParameterIsString()
         ucrReceiverAnnualMonthlyTempSummaries.SetItemType("dataframe")
         ucrReceiverAnnualMonthlyTempSummaries.strSelectorHeading = "Data Sets"
@@ -130,6 +143,7 @@ Public Class dlgExportClimaticDefinitions
         clsBuildSummaryLongAnnualMonthlyTempFunction = New RFunction
 
         ucrSelectorExportToEPicsa.Reset()
+        ucrSelectorDataFramesExportToEPicsa.Reset()
 
         clsBuildSummaryLongAnnualRainFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$build_summary_long")
         clsBuildSummaryLongAnnualRainFunction.AddParameter("time_type", Chr(34) & "annual" & Chr(34), iPosition:=1)
@@ -212,6 +226,7 @@ Public Class dlgExportClimaticDefinitions
         SetRCodeForControls(True)
         TestOkEnabled()
         CheckAndUpdateConnectionStatus()
+        SetSelectorMode(SelectorMode.SingleReceivers)
         HideDisplayGroupedControls()
     End Sub
 
@@ -267,6 +282,35 @@ Public Class dlgExportClimaticDefinitions
         End If
     End Sub
 
+    Private Sub SetSelectorMode(mode As SelectorMode)
+        If CurrentSelectorMode = mode Then
+            Exit Sub
+        End If
+
+        CurrentSelectorMode = mode
+
+        Select Case mode
+            Case SelectorMode.SingleReceivers
+                ucrSelectorDataFramesExportToEPicsa.Visible = True
+                ucrSelectorExportToEPicsa.Visible = False
+            Case SelectorMode.MultipleReceivers
+                ucrSelectorDataFramesExportToEPicsa.Visible = False
+                ucrSelectorExportToEPicsa.Visible = True
+        End Select
+    End Sub
+
+    Private Sub SingleReceiver_Click(sender As Object, e As EventArgs) Handles ucrReceiverAnnualRainfallSummaries.Enter,
+        ucrReceiverAnnualTempSummaries.Enter, ucrReceiverMonthlyRainfallSummaries.Enter,
+        ucrReceiverMonthlyTempSummaries.Enter, ucrReceiverAnnualMonthlyTempSummaries.Enter
+        SetSelectorMode(SelectorMode.SingleReceivers)
+    End Sub
+
+    Private Sub MultipleReceiver_Click(sender As Object, e As EventArgs) Handles ucrReceiverMultipleAnnualRainfall.Enter,
+            ucrReceiverMultipleMonthlyRainfall.Enter, ucrReceiverMultipleAnnualTemp.Enter, ucrReceiverMultipleMonthlyTemp.Enter,
+            ucrReceiverMultipleAnnualMonthlyTemp.Enter
+        SetSelectorMode(SelectorMode.MultipleReceivers)
+    End Sub
+
     Private Sub HideDisplayGroupedControls()
         grpDefinitionsProducts.Visible = Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverAnnualMonthlyTempSummaries.IsEmpty)
         ucrReceiverMultipleAnnualRainfall.Visible = Not ucrReceiverAnnualRainfallSummaries.IsEmpty
@@ -284,7 +328,7 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
-    Private Sub CoreControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged,
+    Private Sub CoreControls_ControlValueChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged,
         ucrReceiverAnnualTempSummaries.ControlValueChanged, ucrReceiverMonthlyRainfallSummaries.ControlValueChanged,
         ucrReceiverMonthlyTempSummaries.ControlValueChanged, ucrReceiverAnnualMonthlyTempSummaries.ControlValueChanged
         AddRemoveParamsInSummaryDefinitionsFunction()
