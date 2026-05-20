@@ -328,7 +328,7 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
-    Private Sub CoreControls_ControlValueChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged,
+    Private Sub CoreControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged,
         ucrReceiverAnnualTempSummaries.ControlValueChanged, ucrReceiverMonthlyRainfallSummaries.ControlValueChanged,
         ucrReceiverMonthlyTempSummaries.ControlValueChanged, ucrReceiverAnnualMonthlyTempSummaries.ControlValueChanged
         AddRemoveParamsInSummaryDefinitionsFunction()
