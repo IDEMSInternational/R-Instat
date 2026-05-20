@@ -371,7 +371,15 @@ Public Class dlgClimaticSummary
         If Not bUseDate Then
             sdgDoyRange.ucrChkUseDate.Checked = False
         End If
+
         sdgDoyRange.ShowDialog()
+
+        If sdgDoyRange.IsSeasonal Then
+            clsBuildClimaticSummaryDefinitions.AddParameter("seasonal", "TRUE", iPosition:=4)
+        Else
+            clsBuildClimaticSummaryDefinitions.RemoveParameterByName("seasonal")
+        End If
+
         UpdateDayFilterPreview()
         AddDayRange()
         AddDateDoy()
