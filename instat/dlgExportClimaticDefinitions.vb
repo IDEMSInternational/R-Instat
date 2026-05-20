@@ -19,7 +19,7 @@ Public Class dlgExportClimaticDefinitions
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
-            clsBuildSummaryLongMonthlyTempFunction, clsCollateSummaryDefinitionsFunction As New RFunction
+            clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction As New RFunction
 
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -72,6 +72,13 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMonthlyTempSummaries.strSelectorHeading = "Data Sets"
         ucrReceiverMonthlyTempSummaries.SetLinkedDisplayControl(lblMonthlyTempSummaries)
 
+        ucrReceiverAnnualMonthlyTempSummaries.SetParameter(New RParameter("data_name", 0))
+        ucrReceiverAnnualMonthlyTempSummaries.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverAnnualMonthlyTempSummaries.SetParameterIsString()
+        ucrReceiverAnnualMonthlyTempSummaries.SetItemType("dataframe")
+        ucrReceiverAnnualMonthlyTempSummaries.strSelectorHeading = "Data Sets"
+        ucrReceiverAnnualMonthlyTempSummaries.SetLinkedDisplayControl(lblAnnualMonthlyTempSummaries)
+
         ' Annual Rainfall Products
         ucrReceiverMultipleAnnualRainfall.SetParameter(New RParameter("definitions", 3))
         ucrReceiverMultipleAnnualRainfall.Selector = ucrSelectorExportToEPicsa
@@ -104,6 +111,14 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMultipleMonthlyTemp.SetItemType("object")
         ucrReceiverMultipleMonthlyTemp.SetLinkedDisplayControl(lblMonthlyTemp)
 
+        ' Annual-Monthly Temperature Products
+        ucrReceiverMultipleAnnualMonthlyTemp.SetParameter(New RParameter("definitions", 3))
+        ucrReceiverMultipleAnnualMonthlyTemp.Selector = ucrSelectorExportToEPicsa
+        ucrReceiverMultipleAnnualMonthlyTemp.SetParameterIsString()
+        ucrReceiverMultipleAnnualMonthlyTemp.strSelectorHeading = "Objects"
+        ucrReceiverMultipleAnnualMonthlyTemp.SetItemType("object")
+        ucrReceiverMultipleAnnualMonthlyTemp.SetLinkedDisplayControl(lblAnnualMonthlyTemp)
+
         HideDisplayGroupedControls()
     End Sub
 
@@ -112,6 +127,7 @@ Public Class dlgExportClimaticDefinitions
         clsBuildSummaryLongMonthlyRainFunction = New RFunction
         clsBuildSummaryLongAnnualTempFunction = New RFunction
         clsBuildSummaryLongMonthlyTempFunction = New RFunction
+        clsBuildSummaryLongAnnualMonthlyTempFunction = New RFunction
 
         ucrSelectorExportToEPicsa.Reset()
 
@@ -135,6 +151,11 @@ Public Class dlgExportClimaticDefinitions
         clsBuildSummaryLongMonthlyTempFunction.AddParameter("summary_type", Chr(34) & "Temperature" & Chr(34), iPosition:=2)
         clsBuildSummaryLongMonthlyTempFunction.SetAssignTo("monthly_temp_longer")
 
+        clsBuildSummaryLongAnnualMonthlyTempFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$build_summary_long")
+        clsBuildSummaryLongAnnualMonthlyTempFunction.AddParameter("time_type", Chr(34) & "annual-monthly" & Chr(34), iPosition:=1)
+        clsBuildSummaryLongAnnualMonthlyTempFunction.AddParameter("summary_type", Chr(34) & "Temperature" & Chr(34), iPosition:=2)
+        clsBuildSummaryLongAnnualMonthlyTempFunction.SetAssignTo("annual_monthly_temp_longer")
+
         clsCollateSummaryDefinitionsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$collate_summary_definitions")
 
         HideDisplayGroupedControls()
@@ -147,17 +168,20 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMonthlyRainfallSummaries.SetRCode(clsBuildSummaryLongMonthlyRainFunction, bReset)
         ucrReceiverAnnualTempSummaries.SetRCode(clsBuildSummaryLongAnnualTempFunction, bReset)
         ucrReceiverMonthlyTempSummaries.SetRCode(clsBuildSummaryLongMonthlyTempFunction, bReset)
+        ucrReceiverAnnualMonthlyTempSummaries.SetRCode(clsBuildSummaryLongAnnualMonthlyTempFunction, bReset)
 
         ucrReceiverMultipleAnnualRainfall.SetRCode(clsBuildSummaryLongAnnualRainFunction, bReset)
         ucrReceiverMultipleAnnualTemp.SetRCode(clsBuildSummaryLongAnnualTempFunction, bReset)
         ucrReceiverMultipleMonthlyRainfall.SetRCode(clsBuildSummaryLongMonthlyRainFunction, bReset)
         ucrReceiverMultipleMonthlyTemp.SetRCode(clsBuildSummaryLongMonthlyTempFunction, bReset)
+        ucrReceiverMultipleAnnualMonthlyTemp.SetRCode(clsBuildSummaryLongAnnualMonthlyTempFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
         Dim bOkEnable As Boolean = True
         If ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverAnnualTempSummaries.IsEmpty AndAlso
-                ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty Then
+                ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso
+                ucrReceiverAnnualMonthlyTempSummaries.IsEmpty Then
             bOkEnable = False
         Else
             If Not ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualRainfall.IsEmpty Then
@@ -175,11 +199,15 @@ Public Class dlgExportClimaticDefinitions
             If Not ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyTemp.IsEmpty Then
                 bOkEnable = False
             End If
+
+            If Not ucrReceiverAnnualMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualMonthlyTemp.IsEmpty Then
+                bOkEnable = False
+            End If
         End If
         ucrBase.OKEnabled(bOkEnable)
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
@@ -189,9 +217,10 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlContentsChanged,
         ucrReceiverAnnualTempSummaries.ControlContentsChanged, ucrReceiverMonthlyRainfallSummaries.ControlContentsChanged,
-        ucrReceiverMonthlyTempSummaries.ControlContentsChanged, ucrReceiverMultipleAnnualRainfall.ControlContentsChanged,
-        ucrReceiverMultipleAnnualTemp.ControlContentsChanged, ucrReceiverMultipleMonthlyRainfall.ControlContentsChanged,
-        ucrReceiverMultipleMonthlyTemp.ControlContentsChanged
+        ucrReceiverMonthlyTempSummaries.ControlContentsChanged, ucrReceiverAnnualMonthlyTempSummaries.ControlContentsChanged,
+        ucrReceiverMultipleAnnualRainfall.ControlContentsChanged, ucrReceiverMultipleAnnualTemp.ControlContentsChanged,
+        ucrReceiverMultipleMonthlyRainfall.ControlContentsChanged, ucrReceiverMultipleMonthlyTemp.ControlContentsChanged,
+        ucrReceiverMultipleAnnualMonthlyTemp.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -200,6 +229,7 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveParameter(ucrReceiverAnnualTempSummaries, clsFunction:=clsBuildSummaryLongAnnualTempFunction, paramName:="annual_temp_summary", iPosition:=1)
         AddRemoveParameter(ucrReceiverMonthlyRainfallSummaries, clsFunction:=clsBuildSummaryLongMonthlyRainFunction, paramName:="monthly_rain_summary", iPosition:=2)
         AddRemoveParameter(ucrReceiverMonthlyTempSummaries, clsFunction:=clsBuildSummaryLongMonthlyTempFunction, paramName:="monthly_temp_summary", iPosition:=3)
+        AddRemoveParameter(ucrReceiverAnnualMonthlyTempSummaries, clsFunction:=clsBuildSummaryLongAnnualMonthlyTempFunction, paramName:="annual_monthly_temp_summary", iPosition:=4)
     End Sub
 
     Private Sub AddRemoveParameter(ucrReceiverSummary As ucrReceiverSingle, clsFunction As RFunction, paramName As String, iPosition As Integer)
@@ -238,22 +268,25 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub HideDisplayGroupedControls()
-        grpDefinitionsProducts.Visible = Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty)
+        grpDefinitionsProducts.Visible = Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverAnnualMonthlyTempSummaries.IsEmpty)
         ucrReceiverMultipleAnnualRainfall.Visible = Not ucrReceiverAnnualRainfallSummaries.IsEmpty
         ucrReceiverMultipleMonthlyRainfall.Visible = Not ucrReceiverMonthlyRainfallSummaries.IsEmpty
         ucrReceiverMultipleAnnualTemp.Visible = Not ucrReceiverAnnualTempSummaries.IsEmpty
         ucrReceiverMultipleMonthlyTemp.Visible = Not ucrReceiverMonthlyTempSummaries.IsEmpty
+        ucrReceiverMultipleAnnualMonthlyTemp.Visible = Not ucrReceiverAnnualMonthlyTempSummaries.IsEmpty
 
         ' Making sure all labels don't appear at once when the group box appears
         lblAnnualRainfall.Visible = ucrReceiverMultipleAnnualRainfall.Visible
         lblMonthlyRainfall.Visible = ucrReceiverMultipleMonthlyRainfall.Visible
         lblAnnualTemp.Visible = ucrReceiverMultipleAnnualTemp.Visible
         lblMonthlyTemp.Visible = ucrReceiverMultipleMonthlyTemp.Visible
+        lblAnnualMonthlyTemp.Visible = ucrReceiverMultipleAnnualMonthlyTemp.Visible
+
     End Sub
 
     Private Sub CoreControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged,
         ucrReceiverAnnualTempSummaries.ControlValueChanged, ucrReceiverMonthlyRainfallSummaries.ControlValueChanged,
-        ucrReceiverMonthlyTempSummaries.ControlValueChanged
+        ucrReceiverMonthlyTempSummaries.ControlValueChanged, ucrReceiverAnnualMonthlyTempSummaries.ControlValueChanged
         AddRemoveParamsInSummaryDefinitionsFunction()
         HideDisplayGroupedControls()
         TestOkEnabled()

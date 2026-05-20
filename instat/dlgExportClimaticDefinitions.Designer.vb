@@ -34,6 +34,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblMonthlyRainfallSummaries = New System.Windows.Forms.Label()
         Me.ucrReceiverMonthlyRainfallSummaries = New instat.ucrReceiverSingle()
         Me.grpDefinitionsProducts = New System.Windows.Forms.GroupBox()
+        Me.lblAnnualMonthlyTemp = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultipleAnnualMonthlyTemp = New instat.ucrReceiverMultiple()
         Me.lblMonthlyRainfall = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleMonthlyRainfall = New instat.ucrReceiverMultiple()
         Me.lblMonthlyTemp = New System.Windows.Forms.Label()
@@ -43,6 +45,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblAnnualRainfall = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleAnnualRainfall = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblAnnualMonthlyTempSummaries = New System.Windows.Forms.Label()
+        Me.ucrReceiverAnnualMonthlyTempSummaries = New instat.ucrReceiverSingle()
         Me.grpDefinitionsProducts.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -101,7 +105,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverAnnualRainfallSummaries.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAnnualRainfallSummaries.Name = "ucrReceiverAnnualRainfallSummaries"
         Me.ucrReceiverAnnualRainfallSummaries.Selector = Nothing
-        Me.ucrReceiverAnnualRainfallSummaries.Size = New System.Drawing.Size(251, 30)
+        Me.ucrReceiverAnnualRainfallSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverAnnualRainfallSummaries.strNcFilePath = ""
         Me.ucrReceiverAnnualRainfallSummaries.TabIndex = 21
         Me.ucrReceiverAnnualRainfallSummaries.ucrSelector = Nothing
@@ -110,7 +114,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.lblMonthlyTempSummaries.AutoSize = True
         Me.lblMonthlyTempSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMonthlyTempSummaries.Location = New System.Drawing.Point(403, 249)
+        Me.lblMonthlyTempSummaries.Location = New System.Drawing.Point(403, 234)
         Me.lblMonthlyTempSummaries.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMonthlyTempSummaries.Name = "lblMonthlyTempSummaries"
         Me.lblMonthlyTempSummaries.Size = New System.Drawing.Size(247, 20)
@@ -122,11 +126,11 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverMonthlyTempSummaries.AutoSize = True
         Me.ucrReceiverMonthlyTempSummaries.frmParent = Me
-        Me.ucrReceiverMonthlyTempSummaries.Location = New System.Drawing.Point(407, 271)
+        Me.ucrReceiverMonthlyTempSummaries.Location = New System.Drawing.Point(407, 256)
         Me.ucrReceiverMonthlyTempSummaries.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMonthlyTempSummaries.Name = "ucrReceiverMonthlyTempSummaries"
         Me.ucrReceiverMonthlyTempSummaries.Selector = Nothing
-        Me.ucrReceiverMonthlyTempSummaries.Size = New System.Drawing.Size(251, 30)
+        Me.ucrReceiverMonthlyTempSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverMonthlyTempSummaries.strNcFilePath = ""
         Me.ucrReceiverMonthlyTempSummaries.TabIndex = 25
         Me.ucrReceiverMonthlyTempSummaries.ucrSelector = Nothing
@@ -135,7 +139,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.lblAnnualTempSummaries.AutoSize = True
         Me.lblAnnualTempSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAnnualTempSummaries.Location = New System.Drawing.Point(403, 125)
+        Me.lblAnnualTempSummaries.Location = New System.Drawing.Point(403, 120)
         Me.lblAnnualTempSummaries.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAnnualTempSummaries.Name = "lblAnnualTempSummaries"
         Me.lblAnnualTempSummaries.Size = New System.Drawing.Size(242, 20)
@@ -147,11 +151,11 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverAnnualTempSummaries.AutoSize = True
         Me.ucrReceiverAnnualTempSummaries.frmParent = Me
-        Me.ucrReceiverAnnualTempSummaries.Location = New System.Drawing.Point(407, 147)
+        Me.ucrReceiverAnnualTempSummaries.Location = New System.Drawing.Point(407, 142)
         Me.ucrReceiverAnnualTempSummaries.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAnnualTempSummaries.Name = "ucrReceiverAnnualTempSummaries"
         Me.ucrReceiverAnnualTempSummaries.Selector = Nothing
-        Me.ucrReceiverAnnualTempSummaries.Size = New System.Drawing.Size(251, 30)
+        Me.ucrReceiverAnnualTempSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverAnnualTempSummaries.strNcFilePath = ""
         Me.ucrReceiverAnnualTempSummaries.TabIndex = 27
         Me.ucrReceiverAnnualTempSummaries.ucrSelector = Nothing
@@ -160,7 +164,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.lblMonthlyRainfallSummaries.AutoSize = True
         Me.lblMonthlyRainfallSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMonthlyRainfallSummaries.Location = New System.Drawing.Point(403, 187)
+        Me.lblMonthlyRainfallSummaries.Location = New System.Drawing.Point(403, 177)
         Me.lblMonthlyRainfallSummaries.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMonthlyRainfallSummaries.Name = "lblMonthlyRainfallSummaries"
         Me.lblMonthlyRainfallSummaries.Size = New System.Drawing.Size(209, 20)
@@ -172,17 +176,19 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverMonthlyRainfallSummaries.AutoSize = True
         Me.ucrReceiverMonthlyRainfallSummaries.frmParent = Me
-        Me.ucrReceiverMonthlyRainfallSummaries.Location = New System.Drawing.Point(407, 209)
+        Me.ucrReceiverMonthlyRainfallSummaries.Location = New System.Drawing.Point(407, 199)
         Me.ucrReceiverMonthlyRainfallSummaries.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMonthlyRainfallSummaries.Name = "ucrReceiverMonthlyRainfallSummaries"
         Me.ucrReceiverMonthlyRainfallSummaries.Selector = Nothing
-        Me.ucrReceiverMonthlyRainfallSummaries.Size = New System.Drawing.Size(251, 30)
+        Me.ucrReceiverMonthlyRainfallSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverMonthlyRainfallSummaries.strNcFilePath = ""
         Me.ucrReceiverMonthlyRainfallSummaries.TabIndex = 29
         Me.ucrReceiverMonthlyRainfallSummaries.ucrSelector = Nothing
         '
         'grpDefinitionsProducts
         '
+        Me.grpDefinitionsProducts.Controls.Add(Me.lblAnnualMonthlyTemp)
+        Me.grpDefinitionsProducts.Controls.Add(Me.ucrReceiverMultipleAnnualMonthlyTemp)
         Me.grpDefinitionsProducts.Controls.Add(Me.lblMonthlyRainfall)
         Me.grpDefinitionsProducts.Controls.Add(Me.ucrReceiverMultipleMonthlyRainfall)
         Me.grpDefinitionsProducts.Controls.Add(Me.lblMonthlyTemp)
@@ -195,16 +201,38 @@ Partial Class dlgExportClimaticDefinitions
         Me.grpDefinitionsProducts.Margin = New System.Windows.Forms.Padding(4)
         Me.grpDefinitionsProducts.Name = "grpDefinitionsProducts"
         Me.grpDefinitionsProducts.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpDefinitionsProducts.Size = New System.Drawing.Size(639, 481)
+        Me.grpDefinitionsProducts.Size = New System.Drawing.Size(769, 481)
         Me.grpDefinitionsProducts.TabIndex = 32
         Me.grpDefinitionsProducts.TabStop = False
         Me.grpDefinitionsProducts.Tag = ""
         Me.grpDefinitionsProducts.Text = "Definitions Products"
         '
+        'lblAnnualMonthlyTemp
+        '
+        Me.lblAnnualMonthlyTemp.AutoSize = True
+        Me.lblAnnualMonthlyTemp.Location = New System.Drawing.Point(537, 28)
+        Me.lblAnnualMonthlyTemp.Name = "lblAnnualMonthlyTemp"
+        Me.lblAnnualMonthlyTemp.Size = New System.Drawing.Size(217, 20)
+        Me.lblAnnualMonthlyTemp.TabIndex = 14
+        Me.lblAnnualMonthlyTemp.Text = "Annual Monthly Temperature:"
+        '
+        'ucrReceiverMultipleAnnualMonthlyTemp
+        '
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.AutoSize = True
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.frmParent = Me
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.Location = New System.Drawing.Point(541, 51)
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.Name = "ucrReceiverMultipleAnnualMonthlyTemp"
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.Selector = Nothing
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.Size = New System.Drawing.Size(213, 189)
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.strNcFilePath = ""
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.TabIndex = 13
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.ucrSelector = Nothing
+        '
         'lblMonthlyRainfall
         '
         Me.lblMonthlyRainfall.AutoSize = True
-        Me.lblMonthlyRainfall.Location = New System.Drawing.Point(13, 259)
+        Me.lblMonthlyRainfall.Location = New System.Drawing.Point(10, 259)
         Me.lblMonthlyRainfall.Name = "lblMonthlyRainfall"
         Me.lblMonthlyRainfall.Size = New System.Drawing.Size(125, 20)
         Me.lblMonthlyRainfall.TabIndex = 12
@@ -214,7 +242,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverMultipleMonthlyRainfall.AutoSize = True
         Me.ucrReceiverMultipleMonthlyRainfall.frmParent = Me
-        Me.ucrReceiverMultipleMonthlyRainfall.Location = New System.Drawing.Point(17, 282)
+        Me.ucrReceiverMultipleMonthlyRainfall.Location = New System.Drawing.Point(14, 282)
         Me.ucrReceiverMultipleMonthlyRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleMonthlyRainfall.Name = "ucrReceiverMultipleMonthlyRainfall"
         Me.ucrReceiverMultipleMonthlyRainfall.Selector = Nothing
@@ -226,7 +254,7 @@ Partial Class dlgExportClimaticDefinitions
         'lblMonthlyTemp
         '
         Me.lblMonthlyTemp.AutoSize = True
-        Me.lblMonthlyTemp.Location = New System.Drawing.Point(405, 259)
+        Me.lblMonthlyTemp.Location = New System.Drawing.Point(274, 259)
         Me.lblMonthlyTemp.Name = "lblMonthlyTemp"
         Me.lblMonthlyTemp.Size = New System.Drawing.Size(163, 20)
         Me.lblMonthlyTemp.TabIndex = 10
@@ -236,7 +264,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverMultipleMonthlyTemp.AutoSize = True
         Me.ucrReceiverMultipleMonthlyTemp.frmParent = Me
-        Me.ucrReceiverMultipleMonthlyTemp.Location = New System.Drawing.Point(409, 282)
+        Me.ucrReceiverMultipleMonthlyTemp.Location = New System.Drawing.Point(278, 282)
         Me.ucrReceiverMultipleMonthlyTemp.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleMonthlyTemp.Name = "ucrReceiverMultipleMonthlyTemp"
         Me.ucrReceiverMultipleMonthlyTemp.Selector = Nothing
@@ -248,7 +276,7 @@ Partial Class dlgExportClimaticDefinitions
         'lblAnnualTemp
         '
         Me.lblAnnualTemp.AutoSize = True
-        Me.lblAnnualTemp.Location = New System.Drawing.Point(405, 28)
+        Me.lblAnnualTemp.Location = New System.Drawing.Point(274, 28)
         Me.lblAnnualTemp.Name = "lblAnnualTemp"
         Me.lblAnnualTemp.Size = New System.Drawing.Size(158, 20)
         Me.lblAnnualTemp.TabIndex = 8
@@ -258,7 +286,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverMultipleAnnualTemp.AutoSize = True
         Me.ucrReceiverMultipleAnnualTemp.frmParent = Me
-        Me.ucrReceiverMultipleAnnualTemp.Location = New System.Drawing.Point(409, 51)
+        Me.ucrReceiverMultipleAnnualTemp.Location = New System.Drawing.Point(278, 51)
         Me.ucrReceiverMultipleAnnualTemp.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleAnnualTemp.Name = "ucrReceiverMultipleAnnualTemp"
         Me.ucrReceiverMultipleAnnualTemp.Selector = Nothing
@@ -270,7 +298,7 @@ Partial Class dlgExportClimaticDefinitions
         'lblAnnualRainfall
         '
         Me.lblAnnualRainfall.AutoSize = True
-        Me.lblAnnualRainfall.Location = New System.Drawing.Point(13, 28)
+        Me.lblAnnualRainfall.Location = New System.Drawing.Point(10, 28)
         Me.lblAnnualRainfall.Name = "lblAnnualRainfall"
         Me.lblAnnualRainfall.Size = New System.Drawing.Size(120, 20)
         Me.lblAnnualRainfall.TabIndex = 6
@@ -280,7 +308,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrReceiverMultipleAnnualRainfall.AutoSize = True
         Me.ucrReceiverMultipleAnnualRainfall.frmParent = Me
-        Me.ucrReceiverMultipleAnnualRainfall.Location = New System.Drawing.Point(17, 51)
+        Me.ucrReceiverMultipleAnnualRainfall.Location = New System.Drawing.Point(14, 51)
         Me.ucrReceiverMultipleAnnualRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleAnnualRainfall.Name = "ucrReceiverMultipleAnnualRainfall"
         Me.ucrReceiverMultipleAnnualRainfall.Selector = Nothing
@@ -299,12 +327,39 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 52
         '
+        'lblAnnualMonthlyTempSummaries
+        '
+        Me.lblAnnualMonthlyTempSummaries.AutoSize = True
+        Me.lblAnnualMonthlyTempSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAnnualMonthlyTempSummaries.Location = New System.Drawing.Point(403, 291)
+        Me.lblAnnualMonthlyTempSummaries.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblAnnualMonthlyTempSummaries.Name = "lblAnnualMonthlyTempSummaries"
+        Me.lblAnnualMonthlyTempSummaries.Size = New System.Drawing.Size(298, 20)
+        Me.lblAnnualMonthlyTempSummaries.TabIndex = 53
+        Me.lblAnnualMonthlyTempSummaries.Tag = "By_Factor:"
+        Me.lblAnnualMonthlyTempSummaries.Text = "Annual-Monthly Temperature Summaries"
+        '
+        'ucrReceiverAnnualMonthlyTempSummaries
+        '
+        Me.ucrReceiverAnnualMonthlyTempSummaries.AutoSize = True
+        Me.ucrReceiverAnnualMonthlyTempSummaries.frmParent = Me
+        Me.ucrReceiverAnnualMonthlyTempSummaries.Location = New System.Drawing.Point(407, 313)
+        Me.ucrReceiverAnnualMonthlyTempSummaries.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverAnnualMonthlyTempSummaries.Name = "ucrReceiverAnnualMonthlyTempSummaries"
+        Me.ucrReceiverAnnualMonthlyTempSummaries.Selector = Nothing
+        Me.ucrReceiverAnnualMonthlyTempSummaries.Size = New System.Drawing.Size(294, 30)
+        Me.ucrReceiverAnnualMonthlyTempSummaries.strNcFilePath = ""
+        Me.ucrReceiverAnnualMonthlyTempSummaries.TabIndex = 54
+        Me.ucrReceiverAnnualMonthlyTempSummaries.ucrSelector = Nothing
+        '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(677, 928)
+        Me.ClientSize = New System.Drawing.Size(804, 928)
+        Me.Controls.Add(Me.lblAnnualMonthlyTempSummaries)
+        Me.Controls.Add(Me.ucrReceiverAnnualMonthlyTempSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpDefinitionsProducts)
         Me.Controls.Add(Me.lblMonthlyRainfallSummaries)
@@ -352,4 +407,8 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrReceiverMultipleAnnualTemp As ucrReceiverMultiple
     Friend WithEvents lblAnnualRainfall As Label
     Friend WithEvents ucrReceiverMultipleAnnualRainfall As ucrReceiverMultiple
+    Friend WithEvents lblAnnualMonthlyTempSummaries As Label
+    Friend WithEvents ucrReceiverAnnualMonthlyTempSummaries As ucrReceiverSingle
+    Friend WithEvents lblAnnualMonthlyTemp As Label
+    Friend WithEvents ucrReceiverMultipleAnnualMonthlyTemp As ucrReceiverMultiple
 End Class
