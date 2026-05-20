@@ -149,17 +149,17 @@ Public Class dlgPICSATrendGraph
         ucrSelectorPICSATemperature.SetParameter(New RParameter("data", 0))
         ucrSelectorPICSATemperature.SetParameterIsrfunction()
 
-        ucrReceiverPICSA.SetParameter(New RParameter("x", 0))
-        ucrReceiverPICSA.SetFactorReceiver(ucrReceiverColourBy)
-        ucrReceiverPICSA.Selector = ucrSelectorPICSATemperature
-        ucrReceiverPICSA.SetIncludedDataTypes({"numeric"}, True)
-        ucrReceiverPICSA.SetSelectorHeading("Numerics")
-        ucrReceiverPICSA.SetParameterIsString()
-        ucrReceiverPICSA.bWithQuotes = False
-        ucrReceiverPICSA.AutoSize = False
-        ucrReceiverPICSA.Dock = DockStyle.None
-        ucrReceiverPICSA.Size = New Size(150, 150)
-        ucrReceiverPICSA.BringToFront()
+        ucrReceiverPICSATrend.SetParameter(New RParameter("x", 0))
+        ucrReceiverPICSATrend.SetFactorReceiver(ucrReceiverColourBy)
+        ucrReceiverPICSATrend.Selector = ucrSelectorPICSATemperature
+        ucrReceiverPICSATrend.SetIncludedDataTypes({"numeric"}, True)
+        ucrReceiverPICSATrend.SetSelectorHeading("Numerics")
+        ucrReceiverPICSATrend.SetParameterIsString()
+        ucrReceiverPICSATrend.bWithQuotes = False
+        ucrReceiverPICSATrend.AutoSize = False
+        ucrReceiverPICSATrend.Dock = DockStyle.None
+        ucrReceiverPICSATrend.Size = New Size(150, 150)
+        ucrReceiverPICSATrend.BringToFront()
 
         ucrReceiverX.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
         ucrReceiverX.SetParameterIsString()
@@ -291,10 +291,12 @@ Public Class dlgPICSATrendGraph
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
+
         ucrSelectorPICSATemperature.Reset()
         ucrSelectorPICSATemperature.SetGgplotFunction(clsBaseOperator)
+
         ucrSave.Reset()
-        ucrReceiverPICSA.SetMeAsReceiver()
+        ucrReceiverPICSATrend.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
@@ -706,13 +708,13 @@ Public Class dlgPICSATrendGraph
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
-        ucrReceiverPICSA.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsSegmentAesFunction, New RParameter("y", 1), iAdditionalPairNo:=6)
+        ucrReceiverPICSATrend.AddAdditionalCodeParameterPair(clsAsNumericY, New RParameter("y", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
         ucrSelectorPICSATemperature.SetRCode(clsPipeOperator, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
@@ -725,14 +727,14 @@ Public Class dlgPICSATrendGraph
 
         If bReset Then
             AutoFacetStation()
-            ucrReceiverPICSA.SetRCode(clsAsNumeric, bReset)
+            ucrReceiverPICSATrend.SetRCode(clsAsNumeric, bReset)
         End If
 
     End Sub
 
     Private Sub TestOkEnabled()
         Dim bEnable As Boolean = False
-        bEnable = Not (ucrReceiverPICSA.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse Not ucrSave.IsComplete)
+        bEnable = Not (ucrReceiverPICSATrend.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse Not ucrSave.IsComplete)
         ucrBase.OKEnabled(bEnable)
     End Sub
 
@@ -881,7 +883,7 @@ Public Class dlgPICSATrendGraph
         bResetSubdialog = False
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverPICSA.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverPICSATrend.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -909,7 +911,7 @@ Public Class dlgPICSATrendGraph
     End Sub
 
     Private Sub YAxisDataTypeCheckPISCATemp()
-        If Not ucrReceiverPICSA.IsEmpty Then
+        If Not ucrReceiverPICSATrend.IsEmpty Then
             clsBaseOperator.RemoveParameterByName("geom_segment")
             clsBaseOperator.RemoveParameterByName("geom_point2")
             clsGeomLine.AddParameter("group", 0)
@@ -936,7 +938,7 @@ Public Class dlgPICSATrendGraph
         AddRemoveGroupBy()
     End Sub
 
-    Private Sub ucrReceiverPICSA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPICSA.ControlValueChanged
+    Private Sub ucrReceiverPICSA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPICSATrend.ControlValueChanged
         YAxisDataTypeCheckPISCATemp()
     End Sub
 
@@ -1016,9 +1018,9 @@ Public Class dlgPICSATrendGraph
             ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value") Then
                 'Still might be in the case of bSingleVariable with mapping y="".
                 If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrReceiverPICSA.Clear()
+                    ucrReceiverPICSATrend.Clear()
                 Else
-                    ucrReceiverPICSA.Add(clsParam.strArgumentValue)
+                    ucrReceiverPICSATrend.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrReceiverColourBy.Add(clsParam.strArgumentValue)

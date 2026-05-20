@@ -42,7 +42,7 @@ Partial Class dlgPICSATrendGraph
         Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdPICSAOptions = New System.Windows.Forms.Button()
-        Me.ucrReceiverPICSA = New instat.ucrVariablesAsFactor()
+        Me.ucrReceiverPICSATrend = New instat.ucrVariablesAsFactor()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -242,17 +242,17 @@ Partial Class dlgPICSATrendGraph
         '
         'ucrReceiverPICSA
         '
-        Me.ucrReceiverPICSA.AutoSize = True
-        Me.ucrReceiverPICSA.frmParent = Me
-        Me.ucrReceiverPICSA.Location = New System.Drawing.Point(242, 37)
-        Me.ucrReceiverPICSA.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrReceiverPICSA.Name = "ucrReceiverPICSA"
-        Me.ucrReceiverPICSA.Selector = Nothing
-        Me.ucrReceiverPICSA.Size = New System.Drawing.Size(156, 119)
-        Me.ucrReceiverPICSA.strNcFilePath = ""
-        Me.ucrReceiverPICSA.TabIndex = 38
-        Me.ucrReceiverPICSA.ucrSelector = Nothing
-        Me.ucrReceiverPICSA.ucrVariableSelector = Nothing
+        Me.ucrReceiverPICSATrend.AutoSize = True
+        Me.ucrReceiverPICSATrend.frmParent = Me
+        Me.ucrReceiverPICSATrend.Location = New System.Drawing.Point(242, 37)
+        Me.ucrReceiverPICSATrend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrReceiverPICSATrend.Name = "ucrReceiverPICSA"
+        Me.ucrReceiverPICSATrend.Selector = Nothing
+        Me.ucrReceiverPICSATrend.Size = New System.Drawing.Size(156, 119)
+        Me.ucrReceiverPICSATrend.strNcFilePath = ""
+        Me.ucrReceiverPICSATrend.TabIndex = 38
+        Me.ucrReceiverPICSATrend.ucrSelector = Nothing
+        Me.ucrReceiverPICSATrend.ucrVariableSelector = Nothing
         '
         'dlgPICSATrendGraph
         '
@@ -260,7 +260,7 @@ Partial Class dlgPICSATrendGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 447)
-        Me.Controls.Add(Me.ucrReceiverPICSA)
+        Me.Controls.Add(Me.ucrReceiverPICSATrend)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdPICSAOptions)
         Me.Controls.Add(Me.ucrChkWithSE)
@@ -307,5 +307,5 @@ Partial Class dlgPICSATrendGraph
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLineOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
-    Friend WithEvents ucrReceiverPICSA As ucrVariablesAsFactor
+    Friend WithEvents ucrReceiverPICSATrend As ucrVariablesAsFactor
 End Class
