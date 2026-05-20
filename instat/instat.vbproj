@@ -341,6 +341,12 @@
     <Compile Include="dlgModellingTree.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPICSATrend.Designer.vb">
+      <DependentUpon>dlgPICSATrend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPICSATrend.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPlacketLuceModel.Designer.vb">
       <DependentUpon>dlgPlacketLuceModel.vb</DependentUpon>
     </Compile>
@@ -3572,6 +3578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteNewColumns.resx">
       <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPICSATrend.resx">
+      <DependentUpon>dlgPICSATrend.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPlacketLuceModel.resx">
       <DependentUpon>dlgPlacketLuceModel.vb</DependentUpon>
