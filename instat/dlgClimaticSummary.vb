@@ -165,6 +165,7 @@ Public Class dlgClimaticSummary
 
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
+        ucrSaveObject.SetDataNameAsRVariable("linked_data_name")
         ucrSaveObject.SetLabelText("Name:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
