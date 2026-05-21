@@ -261,4 +261,5 @@ Partial Class dlgDescribeOneVariableLikertGraph
     Friend WithEvents ucrSaveSummary As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdLikertOptions As Button
+    Friend WithEvents lblLevelWarning As Label
 End Class
