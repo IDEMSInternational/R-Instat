@@ -130,7 +130,7 @@ Public Class dlgPICSATrendGraph
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
 
-    Private Sub dlgPICSATemperature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgPICSATrendGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -957,7 +957,6 @@ Public Class dlgPICSATrendGraph
                 ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
-                        'GetParameterValue(clsFacetVariablesOperator)
                 End Select
             End If
             If clsRaesFunction.ContainsParameter("colour") Then

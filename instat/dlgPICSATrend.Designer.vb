@@ -246,7 +246,7 @@ Partial Class dlgPICSATrendGraph
         Me.ucrReceiverPICSATrend.frmParent = Me
         Me.ucrReceiverPICSATrend.Location = New System.Drawing.Point(242, 37)
         Me.ucrReceiverPICSATrend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrReceiverPICSATrend.Name = "ucrReceiverPICSA"
+        Me.ucrReceiverPICSATrend.Name = "ucrReceiverPICSATrend"
         Me.ucrReceiverPICSATrend.Selector = Nothing
         Me.ucrReceiverPICSATrend.Size = New System.Drawing.Size(156, 119)
         Me.ucrReceiverPICSATrend.strNcFilePath = ""
