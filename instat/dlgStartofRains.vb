@@ -238,6 +238,7 @@ Public Class dlgStartofRains
         SetReceiver()
         AdditionalCondition()
         ChangeDSValue()
+        AddStartRainsDefinitionParams()
     End Sub
 
     Private Sub SetDefaults()
