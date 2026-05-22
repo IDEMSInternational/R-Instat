@@ -603,7 +603,7 @@ Partial Class dlgStartofRains
         Me.ucrNudTotalOverDays.AutoSize = True
         Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(226, 238)
+        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(203, 93)
         Me.ucrNudTotalOverDays.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -615,7 +615,7 @@ Partial Class dlgStartofRains
         'lblTotalOverDays
         '
         Me.lblTotalOverDays.AutoSize = True
-        Me.lblTotalOverDays.Location = New System.Drawing.Point(154, 240)
+        Me.lblTotalOverDays.Location = New System.Drawing.Point(128, 95)
         Me.lblTotalOverDays.Name = "lblTotalOverDays"
         Me.lblTotalOverDays.Size = New System.Drawing.Size(66, 13)
         Me.lblTotalOverDays.TabIndex = 77
@@ -625,6 +625,8 @@ Partial Class dlgStartofRains
         '
         Me.grpTem.Controls.Add(Me.ucrNudAmount)
         Me.grpTem.Controls.Add(Me.ucrInputLogicOperations)
+        Me.grpTem.Controls.Add(Me.ucrNudTotalOverDays)
+        Me.grpTem.Controls.Add(Me.lblTotalOverDays)
         Me.grpTem.Controls.Add(Me.lblTmax)
         Me.grpTem.Controls.Add(Me.ucrReceiverTmax)
         Me.grpTem.Controls.Add(Me.lblTmin)
@@ -634,7 +636,7 @@ Partial Class dlgStartofRains
         Me.grpTem.Controls.Add(Me.ucrPnlTem)
         Me.grpTem.Location = New System.Drawing.Point(285, 219)
         Me.grpTem.Name = "grpTem"
-        Me.grpTem.Size = New System.Drawing.Size(262, 92)
+        Me.grpTem.Size = New System.Drawing.Size(262, 120)
         Me.grpTem.TabIndex = 80
         Me.grpTem.TabStop = False
         Me.grpTem.Text = "Temperatures"
@@ -644,7 +646,7 @@ Partial Class dlgStartofRains
         Me.ucrNudAmount.AutoSize = True
         Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAmount.Location = New System.Drawing.Point(203, 58)
+        Me.ucrNudAmount.Location = New System.Drawing.Point(203, 59)
         Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAmount.Name = "ucrNudAmount"
@@ -945,8 +947,6 @@ Partial Class dlgStartofRains
         Me.ClientSize = New System.Drawing.Size(555, 633)
         Me.Controls.Add(Me.grpTem)
         Me.Controls.Add(Me.grpWinter)
-        Me.Controls.Add(Me.ucrNudTotalOverDays)
-        Me.Controls.Add(Me.lblTotalOverDays)
         Me.Controls.Add(Me.grpRainParameters)
         Me.Controls.Add(Me.grpTemDisplay)
         Me.Controls.Add(Me.grpDisplay)

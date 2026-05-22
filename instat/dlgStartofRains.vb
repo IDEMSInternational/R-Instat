@@ -2302,8 +2302,6 @@ Public Class dlgStartofRains
             Me.grpWinter.Location = New Size(13, 395)
             Me.ucrBase.Location = New Point(14, 452)
             Me.grpRainParameters.Location = New Point(13, 345)
-            Me.lblTotalOverDays.Location = New Point(156, 315)
-            Me.ucrNudTotalOverDays.Location = New Point(228, 313)
         End If
     End Sub
 
