@@ -19,15 +19,11 @@ packs <-
     "plyr",
     "dplyr",
     "rtf",
-    #"openxlsx", This is no longer used
     "ggplot2",
     "extRemes",
     "GGally",
     "agridat",
-    #"DAAG", This is no longer used
     "FactoMineR",
-    #"plotrix", This is no longer used
-    #"candisc", This is no longer used
     "R6",
     "openair",
     "circular",
@@ -37,14 +33,12 @@ packs <-
     "devtools",
     "factoextra",
     "circlize",
-    #"CircStats", This is no longer used
     "gridExtra",
     "ggfortify",
     "rio",
     "readxl",
     "lme4",
     "ggthemes",
-    #"lazyeval", This is no longer used
     "stringr",
     "httr", 
     "jsonlite",
@@ -59,25 +53,17 @@ packs <-
     "sjmisc",
     "plotly",
     "svglite",
-    #"htmlTable", This is no longer used
-    #"rje", This is no longer used
     "tidyr",
-    #"faraway", This is no longer used
     "rrefine",
     "dae",
     "gapminder",
     "questionr",
     "nycflights13",
-    #"Lahman", This i no longer used
     "RcppRoll",
     "cmsaf",
     "sjlabelled",
     "maptools",
-    #"RColorBrewer", This is no longer used
-    #"colorRamps", This is no longer used
     "mapdata",
-    #"rworldmap", This is no longer used
-    #"rworldxtra", This is no longer used
     "e1071",
     "robustbase",
     "wakefield",
