@@ -306,7 +306,7 @@ Public Class clsRecentFiles
                     tooltip.SetToolTip(linkMenuItem, strFileName)
                     linkMenuItem.Tag = strPath 'path used when the link is clicked
                     'attach link click event handler for opening the file
-                    AddHandler linkMenuItem.Click, AddressOf OnMnuRecentOpenedFile_Click
+                    AddHandler linkMenuItem.DoubleClick, AddressOf OnMnuRecentOpenedFile_Click
                     ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
                 End If
 
