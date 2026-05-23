@@ -16,6 +16,7 @@
 
 Imports System.IO
 Imports instat.Translations
+Imports System.Windows.Forms
 
 Public Class clsRecentFiles
     Public lstRecentDialogs As New List(Of Form)
@@ -305,8 +306,9 @@ Public Class clsRecentFiles
                     ' Set the tooltip texts for the labels.
                     tooltip.SetToolTip(linkMenuItem, strFileName)
                     linkMenuItem.Tag = strPath 'path used when the link is clicked
-                    'attach link click event handler for opening the file
+                    'attach link double-click event handler for opening the file
                     AddHandler linkMenuItem.DoubleClick, AddressOf OnMnuRecentOpenedFile_Click
+                    AddHandler linkMenuItem.KeyDown, AddressOf OnRecentLinkLabelKeyDown
                     ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
                 End If
 
@@ -389,4 +391,12 @@ Public Class clsRecentFiles
             Return strName
         End If
     End Function
+
+    ''' Enables keyboard access for recent file links (Enter/Space).
+    Private Sub OnRecentLinkLabelKeyDown(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter OrElse e.KeyCode = Keys.Space Then
+            OnMnuRecentOpenedFile_Click(sender, EventArgs.Empty)
+            e.Handled = True
+        End If
+    End Sub
 End Class
