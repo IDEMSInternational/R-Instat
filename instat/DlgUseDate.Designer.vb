@@ -88,14 +88,15 @@ Partial Class dlgUseDate
         Me.ucrChkShiftYearNum = New instat.ucrCheck()
         Me.ucrChkShiftYearName = New instat.ucrCheck()
         Me.Panelformatmode = New System.Windows.Forms.Panel()
-        Me.ucrFormatNew = New instat.ucrSave()
+        Me.ucrNewColumnName = New instat.ucrInputTextBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.grpfrmdescrp = New System.Windows.Forms.GroupBox()
         Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.rdoUseColumn = New System.Windows.Forms.RadioButton()
         Me.rdoFormatColumn = New System.Windows.Forms.RadioButton()
-        Me.ComboBoxnewformat = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpUseColumnnewfrm = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboBoxNewFormat = New instat.ucrInputComboBox()
         Me.Panelusemode = New System.Windows.Forms.Panel()
         Me.ucrPnluseformat = New instat.UcrPanel()
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
@@ -650,21 +651,29 @@ Partial Class dlgUseDate
         '
         'Panelformatmode
         '
-        Me.Panelformatmode.Controls.Add(Me.ucrFormatNew)
+        Me.Panelformatmode.Controls.Add(Me.ucrNewColumnName)
+        Me.Panelformatmode.Controls.Add(Me.lblNewColumnName)
         Me.Panelformatmode.Controls.Add(Me.grpfrmdescrp)
         Me.Panelformatmode.Location = New System.Drawing.Point(10, 222)
         Me.Panelformatmode.Name = "Panelformatmode"
         Me.Panelformatmode.Size = New System.Drawing.Size(468, 282)
         Me.Panelformatmode.TabIndex = 28
         '
-        'ucrFormatNew
+        'ucrNewColumnName
         '
-        Me.ucrFormatNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrFormatNew.Location = New System.Drawing.Point(16, 249)
-        Me.ucrFormatNew.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrFormatNew.Name = "ucrFormatNew"
-        Me.ucrFormatNew.Size = New System.Drawing.Size(271, 22)
-        Me.ucrFormatNew.TabIndex = 29
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(121, 249)
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(150, 21)
+        Me.ucrNewColumnName.TabIndex = 29
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(16, 252)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 30
+        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'grpfrmdescrp
         '
@@ -718,14 +727,6 @@ Partial Class dlgUseDate
         Me.rdoFormatColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoFormatColumn.UseVisualStyleBackColor = True
         '
-        'ComboBoxnewformat
-        '
-        Me.ComboBoxnewformat.FormattingEnabled = True
-        Me.ComboBoxnewformat.Location = New System.Drawing.Point(0, 13)
-        Me.ComboBoxnewformat.Name = "ComboBoxnewformat"
-        Me.ComboBoxnewformat.Size = New System.Drawing.Size(163, 21)
-        Me.ComboBoxnewformat.TabIndex = 33
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -737,7 +738,7 @@ Partial Class dlgUseDate
         '
         'grpUseColumnnewfrm
         '
-        Me.grpUseColumnnewfrm.Controls.Add(Me.ComboBoxnewformat)
+        Me.grpUseColumnnewfrm.Controls.Add(Me.ucrInputComboBoxNewFormat)
         Me.grpUseColumnnewfrm.Controls.Add(Me.Label1)
         Me.grpUseColumnnewfrm.Location = New System.Drawing.Point(254, 115)
         Me.grpUseColumnnewfrm.Name = "grpUseColumnnewfrm"
@@ -745,6 +746,17 @@ Partial Class dlgUseDate
         Me.grpUseColumnnewfrm.TabIndex = 35
         Me.grpUseColumnnewfrm.TabStop = False
         Me.grpUseColumnnewfrm.Text = "New Format"
+        '
+        'ucrInputComboBoxNewFormat
+        '
+        Me.ucrInputComboBoxNewFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxNewFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboBoxNewFormat.GetSetSelectedIndex = -1
+        Me.ucrInputComboBoxNewFormat.IsReadOnly = False
+        Me.ucrInputComboBoxNewFormat.Location = New System.Drawing.Point(0, 13)
+        Me.ucrInputComboBoxNewFormat.Name = "ucrInputComboBoxNewFormat"
+        Me.ucrInputComboBoxNewFormat.Size = New System.Drawing.Size(163, 21)
+        Me.ucrInputComboBoxNewFormat.TabIndex = 33
         '
         'Panelusemode
         '
@@ -836,6 +848,7 @@ Partial Class dlgUseDate
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panelformatmode.ResumeLayout(False)
+        Me.Panelformatmode.PerformLayout()
         Me.grpfrmdescrp.ResumeLayout(False)
         Me.grpUseColumnnewfrm.ResumeLayout(False)
         Me.grpUseColumnnewfrm.PerformLayout()
@@ -843,68 +856,69 @@ Partial Class dlgUseDate
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
-    End Sub
+        End Sub
 
-    Friend WithEvents ucrSelectorUseDate As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblDateVariable As Label
-    Friend WithEvents ucrReceiverUseDate As ucrReceiverSingle
-    Friend WithEvents ttYearNumeric As ToolTip
-    Friend WithEvents ucrChkShiftYearName As ucrCheck
-    Friend WithEvents lblDayinYear366 As Label
-    Friend WithEvents ucrChkShiftPentadAbbr As ucrCheck
-    Friend WithEvents lblShiftYear As Label
-    Friend WithEvents ucrChkShiftYearNum As ucrCheck
-    Friend WithEvents lblShiftMonth As Label
-    Friend WithEvents ucrChkShiftDekadAbbr As ucrCheck
-    Friend WithEvents lblShiftPentad As Label
-    Friend WithEvents lblDayInYear As Label
-    Friend WithEvents ucrChkShiftMonthAbbr As ucrCheck
-    Friend WithEvents lblShiftNumeric As Label
-    Friend WithEvents lblShiftQuarter As Label
-    Friend WithEvents ucrChkShiftMonthName As ucrCheck
-    Friend WithEvents ucrChkShiftQuarterAbbr As ucrCheck
-    Friend WithEvents lblShiftAbbr As Label
-    Friend WithEvents lblShiftDekad As Label
-    Friend WithEvents ucrChkShiftDekadNum As ucrCheck
-    Friend WithEvents ucrChkShiftQuarterNum As ucrCheck
-    Friend WithEvents ucrChkDayInYearNum As ucrCheck
-    Friend WithEvents ucrChkShiftMonthNum As ucrCheck
-    Friend WithEvents lblShift As Label
-    Friend WithEvents ucrChkShiftDayInYearNum366 As ucrCheck
-    Friend WithEvents ucrChkShiftPentadNum As ucrCheck
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ucrChkDaysInMonthNum As ucrCheck
-    Friend WithEvents lblDaysInMonth As Label
-    Friend WithEvents ucrChkWeekName As ucrCheck
-    Friend WithEvents lblDayInMonth As Label
-    Friend WithEvents ucrChkDayInMonthNum As ucrCheck
-    Friend WithEvents lblNumeric As Label
-    Friend WithEvents ucrChkWeekAbbr As ucrCheck
-    Friend WithEvents lblWeek As Label
-    Friend WithEvents ucrChkWeekdayName As ucrCheck
-    Friend WithEvents lblWeekDay As Label
-    Friend WithEvents ucrChkWeekdayAbbr As ucrCheck
-    Friend WithEvents lblName As Label
-    Friend WithEvents ucrChkWeekNum As ucrCheck
-    Friend WithEvents lblLeapYear As Label
-    Friend WithEvents ucrChkWeekdayNum As ucrCheck
-    Friend WithEvents ucrChkLeapYearNum As ucrCheck
-    Friend WithEvents lblAbbr As Label
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents lblShifted As Label
-    Friend WithEvents ucrInputComboBoxStartingMonth As ucrInputComboBox
-    Friend WithEvents lblShiftStartingMonth As Label
-    Friend WithEvents ucrPnluseformat As UcrPanel
-    Friend WithEvents rdoUseColumn As RadioButton
-    Friend WithEvents rdoFormatColumn As RadioButton
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBoxnewformat As ComboBox
-    Friend WithEvents grpUseColumnnewfrm As GroupBox
-    Friend WithEvents grpfrmdescrp As GroupBox
-    Friend WithEvents Panelusemode As Panel
-    Friend WithEvents Panelformatmode As Panel
-    Friend WithEvents txtTextDateFormats As RichTextBox
-    Friend WithEvents cmdHelp As Button
-    Friend WithEvents ucrFormatNew As ucrSave
-End Class
+        Friend WithEvents ucrSelectorUseDate As ucrSelectorByDataFrameAddRemove
+        Friend WithEvents ucrBase As ucrButtons
+        Friend WithEvents lblDateVariable As Label
+        Friend WithEvents ucrReceiverUseDate As ucrReceiverSingle
+        Friend WithEvents ttYearNumeric As ToolTip
+        Friend WithEvents ucrChkShiftYearName As ucrCheck
+        Friend WithEvents lblDayinYear366 As Label
+        Friend WithEvents ucrChkShiftPentadAbbr As ucrCheck
+        Friend WithEvents lblShiftYear As Label
+        Friend WithEvents ucrChkShiftYearNum As ucrCheck
+        Friend WithEvents lblShiftMonth As Label
+        Friend WithEvents ucrChkShiftDekadAbbr As ucrCheck
+        Friend WithEvents lblShiftPentad As Label
+        Friend WithEvents lblDayInYear As Label
+        Friend WithEvents ucrChkShiftMonthAbbr As ucrCheck
+        Friend WithEvents lblShiftNumeric As Label
+        Friend WithEvents lblShiftQuarter As Label
+        Friend WithEvents ucrChkShiftMonthName As ucrCheck
+        Friend WithEvents ucrChkShiftQuarterAbbr As ucrCheck
+        Friend WithEvents lblShiftAbbr As Label
+        Friend WithEvents lblShiftDekad As Label
+        Friend WithEvents ucrChkShiftDekadNum As ucrCheck
+        Friend WithEvents ucrChkShiftQuarterNum As ucrCheck
+        Friend WithEvents ucrChkDayInYearNum As ucrCheck
+        Friend WithEvents ucrChkShiftMonthNum As ucrCheck
+        Friend WithEvents lblShift As Label
+        Friend WithEvents ucrChkShiftDayInYearNum366 As ucrCheck
+        Friend WithEvents ucrChkShiftPentadNum As ucrCheck
+        Friend WithEvents GroupBox2 As GroupBox
+        Friend WithEvents ucrChkDaysInMonthNum As ucrCheck
+        Friend WithEvents lblDaysInMonth As Label
+        Friend WithEvents ucrChkWeekName As ucrCheck
+        Friend WithEvents lblDayInMonth As Label
+        Friend WithEvents ucrChkDayInMonthNum As ucrCheck
+        Friend WithEvents lblNumeric As Label
+        Friend WithEvents ucrChkWeekAbbr As ucrCheck
+        Friend WithEvents lblWeek As Label
+        Friend WithEvents ucrChkWeekdayName As ucrCheck
+        Friend WithEvents lblWeekDay As Label
+        Friend WithEvents ucrChkWeekdayAbbr As ucrCheck
+        Friend WithEvents lblName As Label
+        Friend WithEvents ucrChkWeekNum As ucrCheck
+        Friend WithEvents lblLeapYear As Label
+        Friend WithEvents ucrChkWeekdayNum As ucrCheck
+        Friend WithEvents ucrChkLeapYearNum As ucrCheck
+        Friend WithEvents lblAbbr As Label
+        Friend WithEvents GroupBox1 As GroupBox
+        Friend WithEvents lblShifted As Label
+        Friend WithEvents ucrInputComboBoxStartingMonth As ucrInputComboBox
+        Friend WithEvents lblShiftStartingMonth As Label
+        Friend WithEvents ucrPnluseformat As UcrPanel
+        Friend WithEvents rdoUseColumn As RadioButton
+        Friend WithEvents rdoFormatColumn As RadioButton
+        Friend WithEvents Label1 As Label
+        Friend WithEvents ucrInputComboBoxNewFormat As ucrInputComboBox
+        Friend WithEvents grpUseColumnnewfrm As GroupBox
+        Friend WithEvents grpfrmdescrp As GroupBox
+        Friend WithEvents Panelusemode As Panel
+        Friend WithEvents Panelformatmode As Panel
+        Friend WithEvents txtTextDateFormats As RichTextBox
+        Friend WithEvents cmdHelp As Button
+        Friend WithEvents ucrNewColumnName As ucrInputTextBox
+        Friend WithEvents lblNewColumnName As Label
+        End Class

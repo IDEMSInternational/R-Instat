@@ -71,34 +71,33 @@ Public Class dlgUseDate
         ucrReceiverUseDate.SetParameterIsString()
 
         'Format controls
-        ComboBoxnewformat.Items.Clear()
-
+        Dim dctFormat As New Dictionary(Of String, String)
         ' Add the examples at the top of the dropdown - using proper R format codes
-        ComboBoxnewformat.Items.Add("%b %d")        ' Jan 5
-        ComboBoxnewformat.Items.Add("%b %d")        ' Jan 05
-        ComboBoxnewformat.Items.Add("%B %d")        ' January 5
-        ComboBoxnewformat.Items.Add("%d %b %Y")     ' 5 Jan 2025
-        ComboBoxnewformat.Items.Add("%d %b %y")     ' 5 Jan 25
-        ComboBoxnewformat.Items.Add("%a %d %b")     ' Mon 5 Jan
-        ComboBoxnewformat.Items.Add("%A %d %B %Y")  ' Monday 5 January 2025
-        ComboBoxnewformat.Items.Add("%d/%m/%Y")     ' 05/01/2025
-        
+        dctFormat.Add("Jan 5", Chr(34) & "%b %d" & Chr(34))
+        dctFormat.Add("January 5", Chr(34) & "%B %d" & Chr(34))
+        dctFormat.Add("5 Jan 2025", Chr(34) & "%d %b %Y" & Chr(34))
+        dctFormat.Add("5 Jan 25", Chr(34) & "%d %b %y" & Chr(34))
+        dctFormat.Add("Mon 5 Jan", Chr(34) & "%a %d %b" & Chr(34))
+        dctFormat.Add("Monday 5 January 2025", Chr(34) & "%A %d %B %Y" & Chr(34))
+        dctFormat.Add("05/01/2025", Chr(34) & "%d/%m/%Y" & Chr(34))
+
         ' Add individual format codes
-        ComboBoxnewformat.Items.Add("%d") ' Day as number (01-31)
-        ComboBoxnewformat.Items.Add("%j") ' Day of year (001-366)
-        ComboBoxnewformat.Items.Add("%m") ' Month as number (01-12)
-        ComboBoxnewformat.Items.Add("%b") ' Abbreviated month name
-        ComboBoxnewformat.Items.Add("%B") ' Full month name
-        ComboBoxnewformat.Items.Add("%y") ' 2-digit year
-        ComboBoxnewformat.Items.Add("%Y") ' 4-digit year
-        ComboBoxnewformat.Items.Add("%a") ' Abbreviated weekday name
-        ComboBoxnewformat.Items.Add("%A") ' Full weekday name
-        
-        ComboBoxnewformat.DropDownStyle = ComboBoxStyle.DropDown
-        
-        ' Set up tooltips for format codes
-        ttFormat.SetToolTip(ComboBoxnewformat, "Select a date format pattern")
-        AddHandler ComboBoxnewformat.DropDown, AddressOf ComboBoxnewformat_DropDown
+        dctFormat.Add("Day as number (01-31)", Chr(34) & "%d" & Chr(34))
+        dctFormat.Add("Day of year (001-366)", Chr(34) & "%j" & Chr(34))
+        dctFormat.Add("Month as number (01-12)", Chr(34) & "%m" & Chr(34))
+        dctFormat.Add("Abbreviated month name", Chr(34) & "%b" & Chr(34))
+        dctFormat.Add("Full month name", Chr(34) & "%B" & Chr(34))
+        dctFormat.Add("2-digit year", Chr(34) & "%y" & Chr(34))
+        dctFormat.Add("4-digit year", Chr(34) & "%Y" & Chr(34))
+        dctFormat.Add("Abbreviated weekday name", Chr(34) & "%a" & Chr(34))
+        dctFormat.Add("Full weekday name", Chr(34) & "%A" & Chr(34))
+
+        ucrInputComboBoxNewFormat.SetParameter(New RParameter("format_string", 5))
+        ucrInputComboBoxNewFormat.SetItems(dctFormat)
+        ucrInputComboBoxNewFormat.bUpdateRCodeFromControl = True
+        ucrInputComboBoxNewFormat.AddQuotesIfUnrecognised = True
+        ucrInputComboBoxNewFormat.bAllowNonConditionValues = True
+        ucrInputComboBoxNewFormat.SetToValue("Jan 5")
 
         'Year
         ucrChkShiftYearNum.SetParameter(New RParameter("year_val", 2))
@@ -114,98 +113,96 @@ Public Class dlgUseDate
         ucrChkLeapYearNum.SetRDefault("FALSE")
 
         'Month
-        ucrChkShiftMonthNum.SetParameter(New RParameter("month_val", 4))
+        ucrChkShiftMonthNum.SetParameter(New RParameter("month_val", 7))
         ucrChkShiftMonthNum.SetText("")
         ucrChkShiftMonthNum.SetRDefault("FALSE")
 
-        ucrChkShiftMonthAbbr.SetParameter(New RParameter("month_abbr", 5))
+        ucrChkShiftMonthAbbr.SetParameter(New RParameter("month_abbr", 8))
         ucrChkShiftMonthAbbr.SetText("")
         ucrChkShiftMonthAbbr.SetRDefault("FALSE")
 
-        ucrChkShiftMonthName.SetParameter(New RParameter("month_name", 6))
+        ucrChkShiftMonthName.SetParameter(New RParameter("month_name", 9))
         ucrChkShiftMonthName.SetText("")
         ucrChkShiftMonthName.SetRDefault("FALSE")
 
         'week
-        ucrChkWeekNum.SetParameter(New RParameter("week_val", 7))
+        ucrChkWeekNum.SetParameter(New RParameter("week_val", 10))
         ucrChkWeekNum.SetText("")
         ucrChkWeekNum.SetRDefault("FALSE")
 
-        ucrChkWeekAbbr.SetParameter(New RParameter("week_abbr", 8))
+        ucrChkWeekAbbr.SetParameter(New RParameter("week_abbr", 11))
         ucrChkWeekAbbr.SetText("")
         ucrChkWeekAbbr.SetRDefault("FALSE")
         ucrChkWeekAbbr.Enabled = False 'TODO. Temporary
 
-        ucrChkWeekName.SetParameter(New RParameter("week_name", 9))
+        ucrChkWeekName.SetParameter(New RParameter("week_name", 12))
         ucrChkWeekName.SetText("")
         ucrChkWeekName.SetRDefault("FALSE")
         ucrChkWeekName.Enabled = False 'TODO. Temporary
 
         'Week day
-        ucrChkWeekdayNum.SetParameter(New RParameter("weekday_val", 10))
+        ucrChkWeekdayNum.SetParameter(New RParameter("weekday_val", 13))
         ucrChkWeekdayNum.SetText("")
         ucrChkWeekdayNum.SetRDefault("FALSE")
 
-        ucrChkWeekdayAbbr.SetParameter(New RParameter("weekday_abbr", 11))
+        ucrChkWeekdayAbbr.SetParameter(New RParameter("weekday_abbr", 14))
         ucrChkWeekdayAbbr.SetText("")
         ucrChkWeekdayAbbr.SetRDefault("FALSE")
 
-        ucrChkWeekdayName.SetParameter(New RParameter("weekday_name", 12))
+        ucrChkWeekdayName.SetParameter(New RParameter("weekday_name", 15))
         ucrChkWeekdayName.SetText("")
         ucrChkWeekdayName.SetRDefault("FALSE")
 
         'Day
-        ucrChkDayInMonthNum.SetParameter(New RParameter("day_in_month", 13))
+        ucrChkDayInMonthNum.SetParameter(New RParameter("day_in_month", 16))
         ucrChkDayInMonthNum.SetText("")
         ucrChkDayInMonthNum.SetRDefault("FALSE")
 
-        ucrChkDaysInMonthNum.SetParameter(New RParameter("days_in_month", 23))
+        ucrChkDaysInMonthNum.SetParameter(New RParameter("days_in_month", 26))
         ucrChkDaysInMonthNum.SetText("")
         ucrChkDaysInMonthNum.SetRDefault("FALSE")
 
-        ucrChkDayInYearNum.SetParameter(New RParameter("day_in_year", 14))
+        ucrChkDayInYearNum.SetParameter(New RParameter("day_in_year", 17))
         ucrChkDayInYearNum.SetText("")
         ucrChkDayInYearNum.SetRDefault("FALSE")
 
-        ucrChkShiftDayInYearNum366.SetParameter(New RParameter("day_in_year_366 ", 15))
+        ucrChkShiftDayInYearNum366.SetParameter(New RParameter("day_in_year_366 ", 18))
         ucrChkShiftDayInYearNum366.SetText("")
         ucrChkShiftDayInYearNum366.SetRDefault("FALSE")
 
         'pentad
-        ucrChkShiftPentadNum.SetParameter(New RParameter("pentad_val", 16))
+        ucrChkShiftPentadNum.SetParameter(New RParameter("pentad_val", 19))
         ucrChkShiftPentadNum.SetText("")
         ucrChkShiftPentadNum.SetRDefault("FALSE")
 
-        ucrChkShiftPentadAbbr.SetParameter(New RParameter("pentad_abbr", 17))
+        ucrChkShiftPentadAbbr.SetParameter(New RParameter("pentad_abbr", 20))
         ucrChkShiftPentadAbbr.SetText("")
         ucrChkShiftPentadAbbr.SetRDefault("FALSE")
 
         'dekad
-        ucrChkShiftDekadNum.SetParameter(New RParameter("dekad_val", 18))
+        ucrChkShiftDekadNum.SetParameter(New RParameter("dekad_val", 21))
         ucrChkShiftDekadNum.SetText("")
         ucrChkShiftDekadNum.SetRDefault("FALSE")
 
-        ucrChkShiftDekadAbbr.SetParameter(New RParameter("dekad_abbr", 19))
+        ucrChkShiftDekadAbbr.SetParameter(New RParameter("dekad_abbr", 22))
         ucrChkShiftDekadAbbr.SetText("")
         ucrChkShiftDekadAbbr.SetRDefault("FALSE")
 
         'quarter
-        ucrChkShiftQuarterNum.SetParameter(New RParameter("quarter_val", 20))
+        ucrChkShiftQuarterNum.SetParameter(New RParameter("quarter_val", 23))
         ucrChkShiftQuarterNum.SetText("")
         ucrChkShiftQuarterNum.SetRDefault("FALSE")
 
-        ucrChkShiftQuarterAbbr.SetParameter(New RParameter("quarter_abbr", 21))
+        ucrChkShiftQuarterAbbr.SetParameter(New RParameter("quarter_abbr", 24))
         ucrChkShiftQuarterAbbr.SetText("")
         ucrChkShiftQuarterAbbr.SetRDefault("FALSE")
 
 
-        ucrPnluseformat.bAllowNonConditionValues = True
-        ucrPnluseformat.AddRadioButton(rdoUseColumn)
-        ucrPnluseformat.AddRadioButton(rdoFormatColumn)
-        ucrPnluseformat.bChangeParameterValue = False
-
-
-        rdoUseColumn.Checked = True
+        ucrPnluseformat.SetParameter(New RParameter("format_date", 4))
+        ucrPnluseformat.AddRadioButton(rdoUseColumn, "FALSE")
+        ucrPnluseformat.AddRadioButton(rdoFormatColumn, "TRUE")
+        ucrPnluseformat.bUpdateRCodeFromControl = True
+        ucrPnluseformat.bChangeParameterValue = True
 
         'start month
         Dim dctMonth As New Dictionary(Of String, String)
@@ -221,7 +218,7 @@ Public Class dlgUseDate
         dctMonth.Add("October", 10)
         dctMonth.Add("November", 11)
         dctMonth.Add("December", 12)
-        ucrInputComboBoxStartingMonth.SetParameter(New RParameter("s_start_month", 22))
+        ucrInputComboBoxStartingMonth.SetParameter(New RParameter("s_start_month", 25))
         ucrInputComboBoxStartingMonth.SetItems(dctMonth)
         ucrInputComboBoxStartingMonth.SetRDefault(1)
         ucrInputComboBoxStartingMonth.SetDropDownStyleAsNonEditable()
@@ -230,46 +227,45 @@ Public Class dlgUseDate
 
         ttYearNumeric.SetToolTip(ucrChkShiftYearNum.chkCheck, "When the year is shifted, this gives the starting year, for example 1984-1985 is given as 1984")
 
-        'Save control
-        ucrFormatNew.SetSaveTypeAsColumn()
-        ucrFormatNew.SetDataFrameSelector(ucrSelectorUseDate.ucrAvailableDataFrames)
-        ucrFormatNew.SetLabelText("New Column Name:")
-        ucrFormatNew.SetIsComboBox()
-        ucrFormatNew.SetPrefix("format_date")
-        ucrFormatNew.setLinkedReceiver(ucrReceiverUseDate)
+        'New Column Name
+        ucrNewColumnName.SetParameter(New RParameter("new_col_name", 6))
+        ucrNewColumnName.SetName("format_date")
+        ucrNewColumnName.bUpdateRCodeFromControl = True
+        ucrNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
 
+        'Linking
+        ucrPnluseformat.AddToLinkedControls(ucrNewColumnName, {rdoFormatColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnluseformat.AddToLinkedControls(ucrInputComboBoxNewFormat, {rdoFormatColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'Link "Use" components to rdoUseColumn so they are removed in Format mode
+        Dim lstUseControls As New List(Of ucrCore)({ucrChkShiftYearNum, ucrChkShiftYearName, ucrChkLeapYearNum, ucrChkShiftMonthNum, ucrChkShiftMonthAbbr, ucrChkShiftMonthName, ucrChkWeekNum, ucrChkWeekAbbr, ucrChkWeekName, ucrChkWeekdayNum, ucrChkWeekdayAbbr, ucrChkWeekdayName, ucrChkDayInMonthNum, ucrChkDaysInMonthNum, ucrChkDayInYearNum, ucrChkShiftDayInYearNum366, ucrChkShiftPentadNum, ucrChkShiftPentadAbbr, ucrChkShiftDekadNum, ucrChkShiftDekadAbbr, ucrChkShiftQuarterNum, ucrChkShiftQuarterAbbr, ucrInputComboBoxStartingMonth})
+        ucrPnluseformat.AddToLinkedControls(lstUseControls.ToArray(), {rdoUseColumn}, bNewLinkedAddRemoveParameter:=True)
+
+        For Each ucr In lstUseControls
+            ucr.bUpdateRCodeFromControl = True
+        Next
+
+        rdoUseColumn.Checked = True
+        UpdatePanelVisibility()
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-
-        ucrSelectorUseDate.Reset()
-        ComboBoxnewformat.Text = ""
-
-
-        rdoUseColumn.Checked = True
-        rdoFormatColumn.Checked = False
-
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
-        clsDefaultFunction.AddParameter("format_date", "FALSE", iPosition:=4)
-
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
-
-        ucrPnluseformat.SetRCode(clsDefaultFunction)
+        ucrSelectorUseDate.Reset()
+        ucrPnluseformat.SetToValue(rdoUseColumn)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        If bReset Then
-            ucrPnluseformat.SetRCode(clsDefaultFunction, bReset)
-        End If
+        SetRCode(Me, clsDefaultFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoFormatColumn.Checked Then
-            If Not ucrReceiverUseDate.IsEmpty() AndAlso Not String.IsNullOrEmpty(ComboBoxnewformat.Text) AndAlso ucrFormatNew.IsComplete() Then
+            If Not ucrReceiverUseDate.IsEmpty() AndAlso Not ucrInputComboBoxNewFormat.IsEmpty() AndAlso Not ucrNewColumnName.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -286,63 +282,6 @@ Public Class dlgUseDate
                 ucrBase.OKEnabled(False)
             End If
         End If
-    End Sub
-
-    Private Sub GroupBoxSettings()
-        If rdoUseColumn.Checked Then
-            Panelusemode.Visible = True
-            Panelformatmode.Visible = False
-            grpUseColumnnewfrm.Visible = False
-            grpfrmdescrp.Visible = False
-            clsDefaultFunction.AddParameter("format_date", "FALSE", iPosition:=4)
-            clsDefaultFunction.RemoveParameterByName("format_string")
-            clsDefaultFunction.RemoveParameterByName("new_col_name")
-            cmdHelp.Visible = False
-        ElseIf rdoFormatColumn.Checked Then
-            Panelusemode.Visible = False
-            Panelformatmode.Visible = True
-            grpUseColumnnewfrm.Visible = True
-            grpfrmdescrp.Visible = True
-            clsDefaultFunction.AddParameter("format_date", "TRUE", iPosition:=4)
-            If Not String.IsNullOrEmpty(ComboBoxnewformat.Text) Then
-                clsDefaultFunction.AddParameter("format_string", Chr(34) & ComboBoxnewformat.Text & Chr(34), iPosition:=5)
-            End If
-            clsDefaultFunction.AddParameter("new_col_name", Chr(34) & ucrFormatNew.GetText() & Chr(34), iPosition:=6)
-            cmdHelp.Visible = True
-        End If
-
-
-        ucrPnluseformat.SetRCode(clsDefaultFunction, bReset:=False)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ComboBoxnewformat_TextChanged(sender As Object, e As EventArgs) Handles ComboBoxnewformat.TextChanged
-        If rdoFormatColumn.Checked AndAlso Not String.IsNullOrEmpty(ComboBoxnewformat.Text) Then
-            clsDefaultFunction.AddParameter("format_string", Chr(34) & ComboBoxnewformat.Text & Chr(34), iPosition:=5)
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ComboBoxnewformat_DropDown(sender As Object, e As EventArgs)
-        ' Set tooltips for the format patterns when dropdown is shown
-        Select Case ComboBoxnewformat.SelectedItem
-            Case "%b %d"
-                ttFormat.SetToolTip(ComboBoxnewformat, "Jan 5")
-            Case "%B %d"
-                ttFormat.SetToolTip(ComboBoxnewformat, "January 5")
-            Case "%d %b %Y"
-                ttFormat.SetToolTip(ComboBoxnewformat, "5 Jan 2025")
-            Case "%d %b %y"
-                ttFormat.SetToolTip(ComboBoxnewformat, "5 Jan 25")
-            Case "%a %d %b"
-                ttFormat.SetToolTip(ComboBoxnewformat, "Mon 5 Jan")
-            Case "%A %d %B %Y"
-                ttFormat.SetToolTip(ComboBoxnewformat, "Monday 5 January 2025")
-            Case "%d/%m/%Y"
-                ttFormat.SetToolTip(ComboBoxnewformat, "05/01/2025")
-            Case Else
-                ttFormat.SetToolTip(ComboBoxnewformat, "Select a date format pattern")
-        End Select
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -379,37 +318,26 @@ Public Class dlgUseDate
         End Select
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkShiftPentadAbbr.ControlContentsChanged, ucrChkShiftDekadAbbr.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftYearName.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged, ucrChkDaysInMonthNum.ControlContentsChanged, ucrChkShiftQuarterAbbr.ControlContentsChanged, ucrFormatNew.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkShiftPentadAbbr.ControlContentsChanged, ucrChkShiftDekadAbbr.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftYearName.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged, ucrChkDaysInMonthNum.ControlContentsChanged, ucrChkShiftQuarterAbbr.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged, ucrInputComboBoxNewFormat.ControlContentsChanged, ucrPnluseformat.ControlContentsChanged
+        If ucrChangedControl Is ucrPnluseformat Then
+            UpdatePanelVisibility()
+        End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub UpdatePanelVisibility()
+        Panelusemode.Visible = rdoUseColumn.Checked
+        Panelformatmode.Visible = rdoFormatColumn.Checked
+        grpUseColumnnewfrm.Visible = rdoFormatColumn.Checked
+        grpfrmdescrp.Visible = rdoFormatColumn.Checked
+        cmdHelp.Visible = rdoFormatColumn.Checked
     End Sub
 
     Private Sub ucrInputComboBoxStartingMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxStartingMonth.ControlValueChanged
         Shifted()
     End Sub
 
-    Private Sub rdoUseColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoUseColumn.CheckedChanged
-        If rdoUseColumn.Checked Then
-        End If
-        GroupBoxSettings()
-    End Sub
-
-    Private Sub rdoFormatColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFormatColumn.CheckedChanged
-        If rdoFormatColumn.Checked Then
-        End If
-        GroupBoxSettings()
-    End Sub
-
-    Private Sub Controls_ControlValueChanged() Handles rdoUseColumn.CheckedChanged, rdoFormatColumn.CheckedChanged, ComboBoxnewformat.TextChanged, ucrReceiverUseDate.ControlContentsChanged
-        GroupBoxSettings()
-    End Sub
-
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         frmMain.clsRLink.RunScript(clsHelp.ToScript, iCallType:=2, strComment:="Display Help page for Date-Time Conversion Functions", bSeparateThread:=False, bUpdateGrids:=False)
-    End Sub
-
-    Private Sub ucrFormatNew_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFormatNew.ControlValueChanged
-        If rdoFormatColumn.Checked AndAlso ucrFormatNew.IsComplete() Then
-            clsDefaultFunction.AddParameter("new_col_name", Chr(34) & ucrFormatNew.GetText() & Chr(34), iPosition:=6)
-        End If
     End Sub
 End Class
