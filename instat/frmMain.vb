@@ -3216,6 +3216,10 @@ Public Class frmMain
         dlgCombine.ShowDialog()
     End Sub
 
+    Private Sub mnuDisableWarningMessage_Click(sender As Object, e As EventArgs) Handles mnuDisableWarningMessage.Click
+        mnuDisableWarningMessage.Checked = Not mnuDisableWarningMessage.Checked
+        ' Update the warning flag accordingly
+        clsWarningMessage.ShowWarning = Not mnuDisableWarningMessage.Checked
     Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
     End Sub
