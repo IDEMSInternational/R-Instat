@@ -114,7 +114,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrInputSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummary.GetSetSelectedIndex = -1
         Me.ucrInputSummary.IsReadOnly = False
-        Me.ucrInputSummary.Location = New System.Drawing.Point(82, 301)
+        Me.ucrInputSummary.Location = New System.Drawing.Point(116, 301)
         Me.ucrInputSummary.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSummary.Name = "ucrInputSummary"
         Me.ucrInputSummary.Size = New System.Drawing.Size(104, 21)
@@ -126,7 +126,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrInputTableChart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTableChart.GetSetSelectedIndex = -1
         Me.ucrInputTableChart.IsReadOnly = False
-        Me.ucrInputTableChart.Location = New System.Drawing.Point(82, 264)
+        Me.ucrInputTableChart.Location = New System.Drawing.Point(116, 264)
         Me.ucrInputTableChart.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputTableChart.Name = "ucrInputTableChart"
         Me.ucrInputTableChart.Size = New System.Drawing.Size(104, 21)

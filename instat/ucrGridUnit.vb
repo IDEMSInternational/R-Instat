@@ -41,7 +41,7 @@ Public Class ucrGridUnit
         ucrInputData.SetLinkedDisplayControl(lblData)
         ucrChkUnits.AddToLinkedControls(ucrInputVector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputVector.SetLinkedDisplayControl(lblVector)
-
+        bInitialiseControls = True
     End Sub
 
     Public Sub SetUnits(strNewAxis As String)
@@ -62,6 +62,11 @@ Public Class ucrGridUnit
         ucrInputUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputData.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputVector.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        If Not bReset AndAlso ucrChkUnits.Checked Then
+            If Not clsUnit.ContainsParameter("units") Then
+                ucrInputUnits.SetText("Centimetres")
+            End If
+        End If
     End Sub
 
     Private Sub AddRemoveElementLineAxis()

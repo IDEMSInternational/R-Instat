@@ -64,7 +64,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudDPOverallInterval.AutoSize = True
         Me.ucrNudDPOverallInterval.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDPOverallInterval.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDPOverallInterval.Location = New System.Drawing.Point(249, 104)
+        Me.ucrNudDPOverallInterval.Location = New System.Drawing.Point(302, 104)
         Me.ucrNudDPOverallInterval.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDPOverallInterval.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDPOverallInterval.Name = "ucrNudDPOverallInterval"
@@ -77,7 +77,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudDSMaximumDays.AutoSize = True
         Me.ucrNudDSMaximumDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDSMaximumDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDSMaximumDays.Location = New System.Drawing.Point(249, 44)
+        Me.ucrNudDSMaximumDays.Location = New System.Drawing.Point(302, 44)
         Me.ucrNudDSMaximumDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDSMaximumDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDSMaximumDays.Name = "ucrNudDSMaximumDays"
@@ -90,7 +90,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudDSLengthOfTime.AutoSize = True
         Me.ucrNudDSLengthOfTime.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDSLengthOfTime.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDSLengthOfTime.Location = New System.Drawing.Point(415, 44)
+        Me.ucrNudDSLengthOfTime.Location = New System.Drawing.Point(523, 44)
         Me.ucrNudDSLengthOfTime.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDSLengthOfTime.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDSLengthOfTime.Name = "ucrNudDSLengthOfTime"
@@ -112,7 +112,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudRDMinimumDays.AutoSize = True
         Me.ucrNudRDMinimumDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRDMinimumDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRDMinimumDays.Location = New System.Drawing.Point(249, 12)
+        Me.ucrNudRDMinimumDays.Location = New System.Drawing.Point(302, 12)
         Me.ucrNudRDMinimumDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRDMinimumDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRDMinimumDays.Name = "ucrNudRDMinimumDays"
@@ -125,7 +125,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudDPRainPeriod.AutoSize = True
         Me.ucrNudDPRainPeriod.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDPRainPeriod.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDPRainPeriod.Location = New System.Drawing.Point(415, 77)
+        Me.ucrNudDPRainPeriod.Location = New System.Drawing.Point(523, 77)
         Me.ucrNudDPRainPeriod.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDPRainPeriod.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDPRainPeriod.Name = "ucrNudDPRainPeriod"
@@ -136,7 +136,7 @@ Partial Class sdgAdditionalCondition
         'lblDPLength
         '
         Me.lblDPLength.AutoSize = True
-        Me.lblDPLength.Location = New System.Drawing.Point(313, 77)
+        Me.lblDPLength.Location = New System.Drawing.Point(363, 77)
         Me.lblDPLength.Name = "lblDPLength"
         Me.lblDPLength.Size = New System.Drawing.Size(100, 13)
         Me.lblDPLength.TabIndex = 76
@@ -154,7 +154,7 @@ Partial Class sdgAdditionalCondition
         'lblDSLengthofTime
         '
         Me.lblDSLengthofTime.AutoSize = True
-        Me.lblDSLengthofTime.Location = New System.Drawing.Point(296, 48)
+        Me.lblDSLengthofTime.Location = New System.Drawing.Point(346, 48)
         Me.lblDSLengthofTime.Name = "lblDSLengthofTime"
         Me.lblDSLengthofTime.Size = New System.Drawing.Size(117, 13)
         Me.lblDSLengthofTime.TabIndex = 71
@@ -174,7 +174,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudRDOutOfDays.AutoSize = True
         Me.ucrNudRDOutOfDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRDOutOfDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRDOutOfDays.Location = New System.Drawing.Point(415, 12)
+        Me.ucrNudRDOutOfDays.Location = New System.Drawing.Point(523, 12)
         Me.ucrNudRDOutOfDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRDOutOfDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRDOutOfDays.Name = "ucrNudRDOutOfDays"
@@ -187,7 +187,7 @@ Partial Class sdgAdditionalCondition
         Me.ucrNudDPMaxRain.AutoSize = True
         Me.ucrNudDPMaxRain.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDPMaxRain.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDPMaxRain.Location = New System.Drawing.Point(249, 76)
+        Me.ucrNudDPMaxRain.Location = New System.Drawing.Point(302, 76)
         Me.ucrNudDPMaxRain.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDPMaxRain.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDPMaxRain.Name = "ucrNudDPMaxRain"
@@ -225,7 +225,7 @@ Partial Class sdgAdditionalCondition
         'lblRDWidth
         '
         Me.lblRDWidth.AutoSize = True
-        Me.lblRDWidth.Location = New System.Drawing.Point(347, 12)
+        Me.lblRDWidth.Location = New System.Drawing.Point(397, 12)
         Me.lblRDWidth.Name = "lblRDWidth"
         Me.lblRDWidth.Size = New System.Drawing.Size(66, 13)
         Me.lblRDWidth.TabIndex = 66
@@ -235,7 +235,7 @@ Partial Class sdgAdditionalCondition
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(470, 179)
+        Me.ClientSize = New System.Drawing.Size(573, 179)
         Me.Controls.Add(Me.ucrChkNumberOfRainyDays)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.Controls.Add(Me.ucrNudDPOverallInterval)

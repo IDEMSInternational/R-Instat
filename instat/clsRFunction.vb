@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R function of the form
 '''             'RCommand(param1=param1Val, param2=param2Val, ...)'.
@@ -106,7 +107,7 @@ Public Class RFunction
             'TODO SJL if we only allow these 3 flags to be accessed through 'set/get' functions then we can guarantee that this error situation doesn't occur
             'TODO legacy comment:'should also check assignment of parameters'
             If IsAssigned() Then
-                MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+                MsgBoxTranslate("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
             End If
 
             'replace double quotes with single quotes

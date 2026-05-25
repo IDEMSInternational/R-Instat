@@ -40,6 +40,7 @@ Public Class dlgName
     Private dctCaseOptions As New Dictionary(Of String, String)
     Private dctReplace As New Dictionary(Of String, String)
     Private bCurrentCell As Boolean = False
+    Public bDefaultToSingle As Boolean = False
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -56,6 +57,7 @@ Public Class dlgName
         End If
         autoTranslate(Me)
         DialogueSize()
+        SetFirstOptionStatus(bDefaultToSingle) ' implemented a condition where the first option will be checked when the user interacts with the dialog via the right-click
     End Sub
 
     Private Sub InitialiseDialog()
@@ -193,7 +195,7 @@ Public Class dlgName
         dctRowsCurrentName.Clear()
         bCurrentCell = False
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
-
+        SetFirstOptionStatus(bDefaultToSingle)
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
@@ -323,7 +325,7 @@ Public Class dlgName
                             OrElse Boolean.TryParse(strValue, parsedValue) _
                             OrElse strValue.ToLower.Equals("t") OrElse strValue.ToLower.Equals("f") _
                             OrElse IsNumeric(strValue) Then
-                        MsgBox("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
+                        MsgBoxTranslate("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
                         bCurrentCell = False
                         Exit For
                     End If
@@ -404,7 +406,7 @@ Public Class dlgName
 
     Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
         If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
-            MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
+            MsgBoxTranslate("The column name must not be an empty string.", MsgBoxStyle.Information)
             e.IsCancelled = True
         End If
     End Sub
@@ -827,4 +829,12 @@ Public Class dlgName
             cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
         End If
     End Sub
+
+    Private Sub SetFirstOptionStatus(bDefaultToSingle As Boolean)
+        If bDefaultToSingle Then
+            rdoSingle.Checked = True
+            Me.bDefaultToSingle = False
+        End If
+    End Sub
+
 End Class

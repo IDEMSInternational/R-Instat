@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R command. 
 '''             The R command may include parameters and an assignment part.
@@ -152,6 +153,16 @@ Public Class RCodeStructure
     '''             function or its parameters because it will not produce the correct script.</para>
     '''             </summary>
     Public bToScriptAsRString As Boolean = False
+
+    ''' <summary>
+    ''' If <c>True</c>, the <c>data_name</c> parameter in the generated R script is written 
+    ''' without quotes, so R treats it as a variable resolved at runtime:
+    ''' <code>data_book$add_object(data_name=linked_data_name, ...)</code>
+    ''' If <c>False</c> (default), <c>data_name</c> is wrapped in quotes as a plain string:
+    ''' <code>data_book$add_object(data_name="my_dataframe", ...)</code>
+    ''' Only set to <c>True</c> when the dataframe name is determined dynamically by an R variable.
+    ''' </summary>
+    Public bDataFrameNameIsRVariable As Boolean = False
 
     ''' <summary>   Tag object for any use. </summary>
     Public Tag As Object 'TODO SJL 03/04/20 This only seems to be used by dlgCalculationsSummary. Could we add something local to this dialog and then remove the tag from this calss?
@@ -311,16 +322,18 @@ Public Class RCodeStructure
     ''' <param name="strObjectName">The new value for the object name</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetAssignToOutputObject(strRObjectToAssignTo As String,
-                                       strRObjectTypeLabelToAssignTo As String,
-                                       strRObjectFormatToAssignTo As String,
-                                       Optional strRDataFrameNameToAddObjectTo As String = "",
-                                       Optional strObjectName As String = "")
+                                   strRObjectTypeLabelToAssignTo As String,
+                                   strRObjectFormatToAssignTo As String,
+                                   Optional strRDataFrameNameToAddObjectTo As String = "",
+                                   Optional strObjectName As String = "",
+                                   Optional bDataFrameNameIsRVariable As Boolean = False)
 
         _strAssignToObject = strRObjectToAssignTo
         _strAssignToObjectTypeLabel = strRObjectTypeLabelToAssignTo
         _strAssignToObjectFormat = strRObjectFormatToAssignTo
         _strDataFrameNameToAddAssignToObject = strRDataFrameNameToAddObjectTo
         _strAssignToName = strObjectName
+        Me.bDataFrameNameIsRVariable = bDataFrameNameIsRVariable
     End Sub
 
     Public Sub SetAssignToColumnObject(strColToAssignTo As String,
@@ -366,6 +379,7 @@ Public Class RCodeStructure
         bAssignToIsPrefix = False
         bAssignToColumnWithoutNames = False
         bInsertColumnBefore = False
+        bDataFrameNameIsRVariable = False
 
         _strAssignToObject = ""
         _strAssignToName = ""
@@ -450,7 +464,11 @@ Public Class RCodeStructure
             If _strAssignToObjectTypeLabel = RObjectTypeLabel.Column Then
                 'for column object
                 clsAddRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-                clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                If bDataFrameNameIsRVariable Then
+                    clsAddRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                Else
+                    clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                End If
                 'if we need to assign to a named column
                 If Not bAssignToColumnWithoutNames Then
                     clsAddRObject.AddParameter("col_name", Chr(34) & _strAssignToName & Chr(34))
@@ -476,7 +494,11 @@ Public Class RCodeStructure
 
                 'todo. when is this ever used? as of 11/11/2022, this code is not used during execution
                 clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-                clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                If bDataFrameNameIsRVariable Then
+                    clsGetRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                Else
+                    clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                End If
                 clsGetRObject.AddParameter("col_names", Chr(34) & _strAssignToName & Chr(34))
                 ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
                 strRObject = clsGetRObject.ToScript()
@@ -517,8 +539,15 @@ Public Class RCodeStructure
                 clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
                 If Not String.IsNullOrEmpty(_strDataFrameNameToAddAssignToObject) Then
-                    clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
-                    clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                    If bDataFrameNameIsRVariable Then
+                        ' No quotes — R variable
+                        clsAddRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                        clsGetRObject.AddParameter("data_name", _strDataFrameNameToAddAssignToObject)
+                    Else
+                        ' Quotes — plain string (existing behaviour unchanged)
+                        clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                        clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
+                    End If
                 End If
 
                 clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
@@ -627,7 +656,7 @@ Public Class RCodeStructure
         Dim clsParam = New RParameter
 
         If strParameterName = "" Then
-            ' MsgBox("Developer Error: some parameter has been added without specifying a name. We want all
+            ' MsgBoxTranslate("Developer Error: some parameter has been added without specifying a name. We want all
             ' parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
             bIncludeArgumentName = False
             If iPosition = 0 Then
@@ -906,6 +935,7 @@ Public Class RCodeStructure
         clsTempCode.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
         clsTempCode.bToScriptAsRString = bToScriptAsRString
         clsTempCode.Tag = Tag
+        clsTempCode.bDataFrameNameIsRVariable = bDataFrameNameIsRVariable
         For Each clsRParam In clsParameters
             clsTempCode.AddParameter(clsRParam.Clone)
         Next

@@ -62,15 +62,17 @@ Partial Class dlgClimdexIndices
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblTmax
         '
         Me.lblTmax.AutoSize = True
         Me.lblTmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTmax.Location = New System.Drawing.Point(252, 264)
+        Me.lblTmax.Location = New System.Drawing.Point(378, 396)
+        Me.lblTmax.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTmax.Name = "lblTmax"
-        Me.lblTmax.Size = New System.Drawing.Size(117, 13)
+        Me.lblTmax.Size = New System.Drawing.Size(175, 20)
         Me.lblTmax.TabIndex = 12
         Me.lblTmax.Tag = "Maximum Temperature:"
         Me.lblTmax.Text = "Maximum Temperature:"
@@ -79,9 +81,10 @@ Partial Class dlgClimdexIndices
         '
         Me.lblTmin.AutoSize = True
         Me.lblTmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTmin.Location = New System.Drawing.Point(252, 303)
+        Me.lblTmin.Location = New System.Drawing.Point(378, 454)
+        Me.lblTmin.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTmin.Name = "lblTmin"
-        Me.lblTmin.Size = New System.Drawing.Size(114, 13)
+        Me.lblTmin.Size = New System.Drawing.Size(171, 20)
         Me.lblTmin.TabIndex = 14
         Me.lblTmin.Tag = "Minimum Temperature:"
         Me.lblTmin.Text = "Minimum Temperature:"
@@ -90,9 +93,10 @@ Partial Class dlgClimdexIndices
         '
         Me.lblPrec.AutoSize = True
         Me.lblPrec.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPrec.Location = New System.Drawing.Point(252, 223)
+        Me.lblPrec.Location = New System.Drawing.Point(378, 334)
+        Me.lblPrec.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPrec.Name = "lblPrec"
-        Me.lblPrec.Size = New System.Drawing.Size(68, 13)
+        Me.lblPrec.Size = New System.Drawing.Size(100, 20)
         Me.lblPrec.TabIndex = 10
         Me.lblPrec.Tag = ""
         Me.lblPrec.Text = "Precipitation:"
@@ -100,9 +104,10 @@ Partial Class dlgClimdexIndices
         'cmdIndices
         '
         Me.cmdIndices.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdIndices.Location = New System.Drawing.Point(331, 356)
+        Me.cmdIndices.Location = New System.Drawing.Point(496, 534)
+        Me.cmdIndices.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdIndices.Name = "cmdIndices"
-        Me.cmdIndices.Size = New System.Drawing.Size(74, 23)
+        Me.cmdIndices.Size = New System.Drawing.Size(111, 34)
         Me.cmdIndices.TabIndex = 19
         Me.cmdIndices.Tag = "Indices..."
         Me.cmdIndices.Text = "Indices..."
@@ -112,9 +117,10 @@ Partial Class dlgClimdexIndices
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(252, 63)
+        Me.lblStation.Location = New System.Drawing.Point(378, 94)
+        Me.lblStation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.Size = New System.Drawing.Size(64, 20)
         Me.lblStation.TabIndex = 4
         Me.lblStation.Tag = ""
         Me.lblStation.Text = "Station:"
@@ -123,9 +129,10 @@ Partial Class dlgClimdexIndices
         '
         Me.lblMonth.AutoSize = True
         Me.lblMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMonth.Location = New System.Drawing.Point(252, 180)
+        Me.lblMonth.Location = New System.Drawing.Point(378, 270)
+        Me.lblMonth.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.Size = New System.Drawing.Size(58, 20)
         Me.lblMonth.TabIndex = 8
         Me.lblMonth.Tag = "Month:"
         Me.lblMonth.Text = "Month:"
@@ -134,9 +141,10 @@ Partial Class dlgClimdexIndices
         '
         Me.lblYear.AutoSize = True
         Me.lblYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYear.Location = New System.Drawing.Point(252, 142)
+        Me.lblYear.Location = New System.Drawing.Point(378, 213)
+        Me.lblYear.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.Size = New System.Drawing.Size(47, 20)
         Me.lblYear.TabIndex = 6
         Me.lblYear.Tag = "Year:"
         Me.lblYear.Text = "Year:"
@@ -149,9 +157,10 @@ Partial Class dlgClimdexIndices
         Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnual.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnual.Location = New System.Drawing.Point(131, 13)
+        Me.rdoAnnual.Location = New System.Drawing.Point(96, 20)
+        Me.rdoAnnual.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoAnnual.Name = "rdoAnnual"
-        Me.rdoAnnual.Size = New System.Drawing.Size(91, 27)
+        Me.rdoAnnual.Size = New System.Drawing.Size(136, 40)
         Me.rdoAnnual.TabIndex = 1
         Me.rdoAnnual.TabStop = True
         Me.rdoAnnual.Text = "Annual"
@@ -166,9 +175,10 @@ Partial Class dlgClimdexIndices
         Me.rdoMonthly.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMonthly.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMonthly.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMonthly.Location = New System.Drawing.Point(219, 13)
+        Me.rdoMonthly.Location = New System.Drawing.Point(230, 20)
+        Me.rdoMonthly.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoMonthly.Name = "rdoMonthly"
-        Me.rdoMonthly.Size = New System.Drawing.Size(91, 27)
+        Me.rdoMonthly.Size = New System.Drawing.Size(136, 40)
         Me.rdoMonthly.TabIndex = 2
         Me.rdoMonthly.TabStop = True
         Me.rdoMonthly.Text = "Monthly"
@@ -180,9 +190,10 @@ Partial Class dlgClimdexIndices
         Me.lblSelectedIndices.AutoSize = True
         Me.lblSelectedIndices.ForeColor = System.Drawing.Color.Green
         Me.lblSelectedIndices.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedIndices.Location = New System.Drawing.Point(190, 360)
+        Me.lblSelectedIndices.Location = New System.Drawing.Point(285, 540)
+        Me.lblSelectedIndices.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelectedIndices.Name = "lblSelectedIndices"
-        Me.lblSelectedIndices.Size = New System.Drawing.Size(0, 13)
+        Me.lblSelectedIndices.Size = New System.Drawing.Size(0, 20)
         Me.lblSelectedIndices.TabIndex = 16
         Me.lblSelectedIndices.Tag = ""
         '
@@ -191,9 +202,10 @@ Partial Class dlgClimdexIndices
         Me.lblTotalIndices.AutoSize = True
         Me.lblTotalIndices.ForeColor = System.Drawing.Color.Green
         Me.lblTotalIndices.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTotalIndices.Location = New System.Drawing.Point(297, 360)
+        Me.lblTotalIndices.Location = New System.Drawing.Point(446, 540)
+        Me.lblTotalIndices.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTotalIndices.Name = "lblTotalIndices"
-        Me.lblTotalIndices.Size = New System.Drawing.Size(0, 13)
+        Me.lblTotalIndices.Size = New System.Drawing.Size(0, 20)
         Me.lblTotalIndices.TabIndex = 18
         Me.lblTotalIndices.Tag = ""
         '
@@ -201,9 +213,10 @@ Partial Class dlgClimdexIndices
         '
         Me.lblDate.AutoSize = True
         Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDate.Location = New System.Drawing.Point(252, 103)
+        Me.lblDate.Location = New System.Drawing.Point(378, 154)
+        Me.lblDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.Size = New System.Drawing.Size(48, 20)
         Me.lblDate.TabIndex = 21
         Me.lblDate.Tag = ""
         Me.lblDate.Text = "Date:"
@@ -211,9 +224,10 @@ Partial Class dlgClimdexIndices
         'lblOutof
         '
         Me.lblOutof.AutoSize = True
-        Me.lblOutof.Location = New System.Drawing.Point(145, 360)
+        Me.lblOutof.Location = New System.Drawing.Point(218, 540)
+        Me.lblOutof.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblOutof.Name = "lblOutof"
-        Me.lblOutof.Size = New System.Drawing.Size(150, 13)
+        Me.lblOutof.Size = New System.Drawing.Size(217, 20)
         Me.lblOutof.TabIndex = 23
         Me.lblOutof.Text = "Indices             selected out of"
         '
@@ -221,11 +235,11 @@ Partial Class dlgClimdexIndices
         '
         Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(252, 118)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(378, 177)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 22
         Me.ucrReceiverDate.ucrSelector = Nothing
@@ -233,20 +247,21 @@ Partial Class dlgClimdexIndices
         'ucrPnlAnnualMonthly
         '
         Me.ucrPnlAnnualMonthly.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlAnnualMonthly.Location = New System.Drawing.Point(105, 8)
+        Me.ucrPnlAnnualMonthly.Location = New System.Drawing.Point(77, 12)
+        Me.ucrPnlAnnualMonthly.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrPnlAnnualMonthly.Name = "ucrPnlAnnualMonthly"
-        Me.ucrPnlAnnualMonthly.Size = New System.Drawing.Size(228, 36)
+        Me.ucrPnlAnnualMonthly.Size = New System.Drawing.Size(454, 54)
         Me.ucrPnlAnnualMonthly.TabIndex = 0
         '
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(252, 157)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(378, 236)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.TabIndex = 7
         Me.ucrReceiverYear.ucrSelector = Nothing
@@ -255,11 +270,11 @@ Partial Class dlgClimdexIndices
         '
         Me.ucrReceiverMonth.AutoSize = True
         Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(252, 197)
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(378, 296)
         Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
         Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverMonth.strNcFilePath = ""
         Me.ucrReceiverMonth.TabIndex = 9
         Me.ucrReceiverMonth.ucrSelector = Nothing
@@ -268,20 +283,21 @@ Partial Class dlgClimdexIndices
         '
         Me.ucrChkSave.AutoSize = True
         Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(10, 282)
+        Me.ucrChkSave.Location = New System.Drawing.Point(15, 423)
+        Me.ucrChkSave.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(239, 23)
+        Me.ucrChkSave.Size = New System.Drawing.Size(358, 34)
         Me.ucrChkSave.TabIndex = 16
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(252, 78)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(378, 117)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 5
         Me.ucrReceiverStation.ucrSelector = Nothing
@@ -290,11 +306,11 @@ Partial Class dlgClimdexIndices
         '
         Me.ucrReceiverPrec.AutoSize = True
         Me.ucrReceiverPrec.frmParent = Me
-        Me.ucrReceiverPrec.Location = New System.Drawing.Point(252, 238)
+        Me.ucrReceiverPrec.Location = New System.Drawing.Point(378, 357)
         Me.ucrReceiverPrec.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPrec.Name = "ucrReceiverPrec"
         Me.ucrReceiverPrec.Selector = Nothing
-        Me.ucrReceiverPrec.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPrec.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverPrec.strNcFilePath = ""
         Me.ucrReceiverPrec.TabIndex = 11
         Me.ucrReceiverPrec.ucrSelector = Nothing
@@ -303,11 +319,11 @@ Partial Class dlgClimdexIndices
         '
         Me.ucrReceiverTmin.AutoSize = True
         Me.ucrReceiverTmin.frmParent = Me
-        Me.ucrReceiverTmin.Location = New System.Drawing.Point(252, 320)
+        Me.ucrReceiverTmin.Location = New System.Drawing.Point(378, 480)
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
-        Me.ucrReceiverTmin.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTmin.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverTmin.strNcFilePath = ""
         Me.ucrReceiverTmin.TabIndex = 15
         Me.ucrReceiverTmin.ucrSelector = Nothing
@@ -316,11 +332,11 @@ Partial Class dlgClimdexIndices
         '
         Me.ucrReceiverTmax.AutoSize = True
         Me.ucrReceiverTmax.frmParent = Me
-        Me.ucrReceiverTmax.Location = New System.Drawing.Point(252, 280)
+        Me.ucrReceiverTmax.Location = New System.Drawing.Point(378, 420)
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
-        Me.ucrReceiverTmax.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTmax.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverTmax.strNcFilePath = ""
         Me.ucrReceiverTmax.TabIndex = 13
         Me.ucrReceiverTmax.ucrSelector = Nothing
@@ -331,27 +347,47 @@ Partial Class dlgClimdexIndices
         Me.ucrSelectorClimdex.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimdex.bShowHiddenColumns = False
         Me.ucrSelectorClimdex.bUseCurrentFilter = True
-        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 64)
+        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(15, 96)
         Me.ucrSelectorClimdex.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimdex.Name = "ucrSelectorClimdex"
-        Me.ucrSelectorClimdex.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorClimdex.Size = New System.Drawing.Size(320, 274)
         Me.ucrSelectorClimdex.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 383)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 574)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 20
+        '
+        'rdoStation
+        '
+        Me.rdoStation.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatAppearance.BorderSize = 2
+        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoStation.Location = New System.Drawing.Point(364, 20)
+        Me.rdoStation.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoStation.Name = "rdoStation"
+        Me.rdoStation.Size = New System.Drawing.Size(136, 40)
+        Me.rdoStation.TabIndex = 24
+        Me.rdoStation.TabStop = True
+        Me.rdoStation.Text = "Station"
+        Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStation.UseVisualStyleBackColor = True
         '
         'dlgClimdexIndices
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(417, 440)
+        Me.ClientSize = New System.Drawing.Size(626, 660)
+        Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.lblSelectedIndices)
         Me.Controls.Add(Me.lblOutof)
         Me.Controls.Add(Me.lblDate)
@@ -377,6 +413,7 @@ Partial Class dlgClimdexIndices
         Me.Controls.Add(Me.ucrSelectorClimdex)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimdexIndices"
@@ -413,4 +450,5 @@ Partial Class dlgClimdexIndices
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblOutof As Label
+    Friend WithEvents rdoStation As RadioButton
 End Class

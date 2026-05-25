@@ -18,6 +18,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 ''' <summary>
 ''' <para>This control only accepts string parameter types</para> 
@@ -137,6 +138,10 @@ Public Class ucrFactor
         Public Const SelectorColumn As String = "Select"
     End Structure
 
+    Private WithEvents mnuCopyPaste As ContextMenuStrip
+    Private WithEvents mnuCopy As ToolStripMenuItem
+    Private WithEvents mnuPaste As ToolStripMenuItem
+
     Private Property SelectionControlsVisible As Boolean
         Get
             Return Me.Controls.Contains(pnlSelectOptions)
@@ -154,6 +159,107 @@ Public Class ucrFactor
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         lblSelected.ForeColor = Color.Red
+
+        ' Initialize Copy/Paste context menu
+        InitializeCopyPasteContextMenu()
+    End Sub
+
+    Private Sub InitializeCopyPasteContextMenu()
+        mnuCopyPaste = New ContextMenuStrip()
+
+        mnuCopy = New ToolStripMenuItem("Copy")
+        mnuCopy.ShortcutKeys = Keys.Control Or Keys.C
+        mnuCopyPaste.Items.Add(mnuCopy)
+
+        mnuPaste = New ToolStripMenuItem("Paste")
+        mnuPaste.ShortcutKeys = Keys.Control Or Keys.V
+        mnuCopyPaste.Items.Add(mnuPaste)
+
+        ' Attach to the grid
+        grdFactorData.ContextMenuStrip = mnuCopyPaste
+    End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        CopySelectedCells()
+    End Sub
+
+    Private Sub CopySelectedCells()
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+
+        Try
+            _grdSheet.Copy()
+        Catch ex As Exception
+            MsgBoxTranslate("Error copying cells: " & ex.Message, MsgBoxStyle.Exclamation, "Copy Error")
+        End Try
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteIntoCells()
+    End Sub
+
+    Private Sub PasteIntoCells()
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+
+        ' Check if we're in a read-only state
+        If _enumControlState <> ControlStates.NormalGrid Then
+            MsgBoxTranslate("Cannot paste in selector mode.", MsgBoxStyle.Information, "Paste Disabled")
+            Exit Sub
+        End If
+
+        Try
+            Dim clipboardData As String = Clipboard.GetText()
+            If String.IsNullOrEmpty(clipboardData) Then
+                Exit Sub
+            End If
+
+            ' Get current selection
+            Dim currentCell = _grdSheet.SelectionRange
+            Dim startRow As Integer = currentCell.Row
+            Dim startCol As Integer = currentCell.Col
+
+            ' Split clipboard data by rows and columns
+            Dim rows() As String = clipboardData.Split(New String() {vbCrLf, vbLf}, StringSplitOptions.None)
+
+            For rowIndex As Integer = 0 To rows.Length - 1
+                If startRow + rowIndex >= _grdSheet.Rows Then Exit For
+
+                Dim cells() As String = rows(rowIndex).Split(vbTab)
+
+                For colIndex As Integer = 0 To cells.Length - 1
+                    If startCol + colIndex >= _grdSheet.Columns Then Exit For
+
+                    Dim targetRow = startRow + rowIndex
+                    Dim targetCol = startCol + colIndex
+
+                    ' Check if the cell is editable
+                    Dim cell = _grdSheet.GetCell(targetRow, targetCol)
+                    If cell IsNot Nothing AndAlso Not cell.IsReadOnly Then
+                        ' Validate based on column type
+                        Dim colName = _grdSheet.ColumnHeaders(targetCol).Text
+                        If colName = DefaultColumnNames.Level Then
+                            ' Validate numeric for levels
+                            If IsNumeric(cells(colIndex)) AndAlso Not cells(colIndex).Contains(".") Then
+                                _grdSheet(targetRow, targetCol) = cells(colIndex)
+                                cell.Style.BackColor = Color.Gold
+                            End If
+                        Else
+                            _grdSheet(targetRow, targetCol) = cells(colIndex)
+                            cell.Style.BackColor = Color.Gold
+                        End If
+                    End If
+                Next
+            Next
+
+            ' Trigger validation and parameter update
+            OnControlValueChanged()
+
+        Catch ex As Exception
+            MsgBoxTranslate("Error pasting cells: " & ex.Message, MsgBoxStyle.Exclamation, "Paste Error")
+        End Try
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
@@ -167,7 +273,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub _grdSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles _grdSheet.BeforeCut
-        MsgBox("Cutting is currently disabled. This feature will be included in future versions." &
+        MsgBoxTranslate("Cutting is currently disabled. This feature will be included in future versions." &
                Environment.NewLine & "Try copying and deleting from one column cells at a time.",
                MsgBoxStyle.Information, "Cannot cut from cells")
         e.IsCancelled = True
@@ -175,7 +281,7 @@ Public Class ucrFactor
 
     Private Sub _grdSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles _grdSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. " &
+            MsgBoxTranslate("Deleting cells is currently disabled. " &
                    "This feature will be included in future versions." &
                    Environment.NewLine & "To remove a cell's value, replace the value with NA.",
                    MsgBoxStyle.Information, "Cannot delete cells.")
@@ -195,10 +301,10 @@ Public Class ucrFactor
         'do levels entry validation
         If _grdSheet.ColumnHeaders(e.Cell.Column).Text = DefaultColumnNames.Level Then
             If Not IsNumeric(e.Text) Then
-                MsgBox("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
+                MsgBoxTranslate("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
                 bValid = False
             ElseIf e.Text.Contains(".") Then
-                MsgBox("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
+                MsgBoxTranslate("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
 
                 bValid = False
             End If
@@ -213,7 +319,7 @@ Public Class ucrFactor
             OnControlValueChanged()
             e.Cell.Style.BackColor = Color.Gold
         Else
-        'Todo what will happen if the text is not valid
+            'Todo what will happen if the text is not valid
         End If
 
     End Sub
@@ -835,14 +941,14 @@ Public Class ucrFactor
         'to enforce developers use this control correctly do the following checks
         If iValueColIndex < 0 Then
             If Not bSilent Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iValueColIndex & " in the grid.")
+                MsgBoxTranslate("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iValueColIndex & " in the grid.")
             End If
             Exit Sub
         End If
 
         If cellValues.Count <> _grdSheet.Rows Then
             If Not bSilent Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid.")
+                MsgBoxTranslate("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid.")
             End If
             Exit Sub
         End If
@@ -909,7 +1015,7 @@ Public Class ucrFactor
                 SetSelectedRows(_grdSheet, iSelectorColIndex, iValueColIndex, arrCellValues, False)
             Case ControlStates.NormalGrid
                 If arrCellValues.Count <> _grdSheet.Rows Then
-                    MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid. check SetControl()")
+                    MsgBoxTranslate("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of rows in the grid. check SetControl()")
                     Exit Sub
                 End If
                 SetCellValues(_grdSheet, iValueColIndex, arrCellValues, False)

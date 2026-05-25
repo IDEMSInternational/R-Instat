@@ -92,19 +92,19 @@ Public Class ucrVariableName
             Case 0
                 RaiseEvent NameChanged()
             Case 1
-                MsgBox(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
+                MsgBoxTranslate(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
                 txtValidation.Focus()
             Case 2
-                MsgBox("This name cannot start with " & firstChar, vbOKOnly)
+                MsgBoxTranslate("This name cannot start with " & firstChar, vbOKOnly)
                 txtValidation.Focus()
             Case 3
-                MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+                MsgBoxTranslate("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
                 txtValidation.Focus()
             Case 4
-                MsgBox("This name cannot contain a space", vbOKOnly)
+                MsgBoxTranslate("This name cannot contain a space", vbOKOnly)
                 txtValidation.Focus()
             Case 5
-                MsgBox("This name cannot contain " & CurrChar, vbOKOnly)
+                MsgBoxTranslate("This name cannot contain " & CurrChar, vbOKOnly)
                 txtValidation.Focus()
         End Select
 
@@ -115,7 +115,7 @@ Public Class ucrVariableName
             txtValidation.Text = strName
             RaiseEvent NameChanged()
         Else
-            MsgBox(strName & "is not a valid R variable name", vbOKOnly)
+            MsgBoxTranslate(strName & "is not a valid R variable name", vbOKOnly)
         End If
     End Sub
 

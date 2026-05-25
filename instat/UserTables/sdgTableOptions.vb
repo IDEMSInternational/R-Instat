@@ -17,52 +17,13 @@
 Imports instat.Translations
 
 Public Class sdgTableOptions
-
     Private clsOperator As ROperator
-    Private clsThemeRFunction, clsSubMissingRFunction As RFunction
+    Private clsThemeRFunction As RFunction
+    Private tabsToUse As IEnumerable(Of EnumTableSubDialogTab)
     Private bFirstload As Boolean = True
 
-    Private ReadOnly strZero As String = "0"
-    Private ReadOnly strMultipleDashes As String = "...."
-    Private ReadOnly strMissing As String = "missing"
-    Private ReadOnly strStar As String = "***"
-
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
-            'adding these  because it's ignored on first load
-            ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
-        End If
         autoTranslate(Me)
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrSdgBaseButtons.iHelpTopicID = 146
-
-        ucrChkSelectTheme.Checked = True
-        ucrChkSelectTheme.SetText("Select Theme")
-        ucrChkManualTheme.SetText("Manual Theme")
-
-        ucrChkDataFormat.SetText("Specify the Data Format")
-        ucrChkMissingValues.SetText("Replace NA")
-        ucrChkDataFormat.Enabled = False
-        grpMissingValues.Visible = False
-        btnNumberFormat.Visible = False
-        btnDateFormat.Visible = False
-        btnTextFormat.Visible = False
-        rdoNumber.Visible = False
-        rdoDate.Visible = False
-        rdoText.Visible = False
-
-        ucrPnlFormat.AddRadioButton(rdoNumber)
-        ucrPnlFormat.AddRadioButton(rdoDate)
-        ucrPnlFormat.AddRadioButton(rdoText)
-
-        ucrTxtMissingText.SetItems({strZero, strMultipleDashes, strMissing, strStar})
-
-        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
-        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
     End Sub
 
     ''' <summary>
@@ -71,125 +32,200 @@ Public Class sdgTableOptions
     ''' </summary>
     ''' <param name="strDataFrameName">Name of the data frame contained in the data book</param>
     ''' <param name="clsNewOperator">R operator that has a 'gt' parameter that produces a 'gt' object.</param>
-    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator)
-        clsOperator = clsNewOperator
+    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator, tabsToUse As IEnumerable(Of EnumTableSubDialogTab), Optional strTableName As String = "")
+        Me.clsOperator = clsNewOperator
+        Me.tabsToUse = tabsToUse
 
-        ucrHeader.Setup(clsOperator)
-        ucrStub.Setup(strDataFrameName, clsOperator)
-        ucrRows.Setup(strDataFrameName, clsOperator)
-        ucrColumns.Setup(strDataFrameName, clsOperator)
-        ucrCells.Setup(strDataFrameName, clsOperator)
-        ucrSourceNotes.Setup(clsOperator)
-        ucrOtherStyles.Setup(clsOperator)
+        tbTableOptions.TabPages.Clear()
 
-        ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
-        ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
-        ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
-        ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
-        sdgTableStyles.GetNewUserInputAsRFunction()
-        SetupTheme(clsOperator)
-        SetupSubMissing(clsOperator)
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Header) Then
+            tbTableOptions.TabPages.Add(tbpHeader)
+            ucrHeader.Setup(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Stub) Then
+            tbTableOptions.TabPages.Add(tbpStub)
+            ucrStub.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Rows) Then
+            tbTableOptions.TabPages.Add(tbpRows)
+            ucrRows.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Columns) Then
+            tbTableOptions.TabPages.Add(tbpColumns)
+            ucrColumns.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Cells) Then
+            tbTableOptions.TabPages.Add(tbpCells)
+            ucrCells.Setup(strDataFrameName, clsOperator, strTableName)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.SourceNotes) Then
+            tbTableOptions.TabPages.Add(tbpSourceNotes)
+            ucrSourceNotes.Setup(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Themes) Then
+            tbTableOptions.TabPages.Add(tbpThemes)
+            SetupTheme(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.OtherStyle) Then
+            tbTableOptions.TabPages.Add(tbpOtherStyles)
+            ucrOtherStyles.Setup(clsOperator)
+        End If
+
+        If Me.tabsToUse.Contains(EnumTableSubDialogTab.Table) Then
+            tbTableOptions.TabPages.Add(tbpTable)
+            ucrTableOptions.Setup(clsOperator)
+        End If
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
-        ucrHeader.SetValuesToOperator()
-        ucrStub.SetValuesToOperator()
-        ucrColumns.SetValuesToOperator()
-        ucrRows.SetValuesToOperator()
-        ucrCells.SetValuesToOperator()
-        ucrSourceNotes.SetValuesToOperator()
-        ucrOtherStyles.SetValuesToOperator()
+        If tabsToUse.Contains(EnumTableSubDialogTab.Header) Then
+            ucrHeader.SetValuesToOperator()
+        End If
 
-        SetThemeValuesOnReturn(clsOperator)
-        SetSubMissingValuesOnReturn(clsOperator)
+        If tabsToUse.Contains(EnumTableSubDialogTab.Stub) Then
+            ucrStub.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Rows) Then
+            ucrRows.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Columns) Then
+            ucrColumns.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Cells) Then
+            ucrCells.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.SourceNotes) Then
+            ucrSourceNotes.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Themes) Then
+            SetThemeValuesOnReturn(clsOperator)
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.OtherStyle) Then
+            ucrOtherStyles.SetValuesToOperator()
+        End If
+
+        If tabsToUse.Contains(EnumTableSubDialogTab.Table) Then
+            ucrTableOptions.SetValuesToOperator()
+        End If
     End Sub
-
 
     '-----------------------------------------
     ' Themes
 
     Private Sub SetupTheme(clsOperator As ROperator)
-        If clsOperator.ContainsParameter("theme_format") Then
-            clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
-        Else
-            clsThemeRFunction = New RFunction
-            clsThemeRFunction.SetPackageName("gtExtras")
+        If bFirstload Then
+            InitialiseThemeControls()
+            bFirstload = False
         End If
-        If ucrChkManualTheme.Checked Then
-            sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+
+        ' Check for any theme functions and set the them controls accordingly
+        Dim clsThemeRParam As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt_theme_dark", "gt_theme_538", "gt_theme_dot_matrix", "gt_theme_espn", "gt_theme_excel", "gt_theme_guardian", "gt_theme_nytimes", "gt_theme_pff", "tab_options"}, clsOperator)
+        If clsThemeRParam.Count > 0 Then
+            Dim newClsThemeRFunction As RFunction = clsThemeRParam.Item(0).clsArgumentCodeStructure
+            Dim strCommand As String = newClsThemeRFunction.strRCommand
+            Dim strSupportedTheme As String = ""
+
+            If strCommand = "tab_options" Then
+                ucrChkManualTheme.Checked = True
+                Me.clsThemeRFunction = newClsThemeRFunction
+                sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+            Else
+                ' Get supported theme only
+                Select Case strCommand
+                    Case "gt_theme_dark"
+                        strSupportedTheme = "Dark Theme"
+                    Case "gt_theme_538"
+                        strSupportedTheme = "538 Theme"
+                    Case "gt_theme_dot_matrix"
+                        strSupportedTheme = "Dot Matrix Theme"
+                    Case "gt_theme_espn"
+                        strSupportedTheme = "Espn Theme"
+                    Case "gt_theme_excel"
+                        strSupportedTheme = "Excel Theme"
+                    Case "gt_theme_guardian"
+                        strSupportedTheme = "Guardian Theme"
+                    Case "gt_theme_nytimes"
+                        strSupportedTheme = "NY Times Theme"
+                    Case "gt_theme_pff"
+                        strSupportedTheme = "PFF Theme"
+                End Select
+
+                'If the theme is not supported then ignore it
+                If strSupportedTheme = "" Then
+                    ucrChkSelectTheme.Checked = False
+                Else
+                    ucrChkSelectTheme.Checked = True
+                    ucrCboSelectThemes.SetName(strSupportedTheme)
+                    Me.clsThemeRFunction = newClsThemeRFunction
+                End If
+            End If
+        Else
+            ucrChkManualTheme.Checked = False
+            ucrChkSelectTheme.Checked = False
         End If
     End Sub
 
-    Private Sub ucrChkDataFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataFormat.ControlValueChanged
-        If ucrChkDataFormat.Checked Then
-            ucrPnlFormat.Visible = True
-            rdoNumber.Visible = True
-            rdoDate.Visible = True
-            rdoText.Visible = True
-        Else
-            rdoNumber.Visible = False
-            rdoDate.Visible = False
-            rdoText.Visible = False
-        End If
+    Private Sub InitialiseThemeControls()
+        ucrSdgBaseButtons.iHelpTopicID = 146
 
+        ucrChkSelectTheme.Checked = False
+        ucrChkSelectTheme.SetText("Select Theme")
+
+        ucrCboSelectThemes.Visible = False
+        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+
+        ucrChkManualTheme.SetText("Manual Theme")
+        btnManualTheme.Visible = False
     End Sub
-
-    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
-        If ucrChkMissingValues.Checked Then
-            grpMissingValues.Visible = True
-        Else
-            grpMissingValues.Visible = False
-        End If
-    End Sub
-
-    Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged
-        If rdoNumber.Checked Then
-            btnNumberFormat.Visible = True
-        Else
-            btnNumberFormat.Visible = False
-        End If
-        If rdoDate.Checked Then
-            btnDateFormat.Visible = True
-        Else
-            btnDateFormat.Visible = False
-        End If
-        If rdoText.Checked Then
-            btnTextFormat.Visible = True
-        Else
-            btnTextFormat.Visible = False
-        End If
-    End Sub
-
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        clsThemeRFunction = New RFunction
         If ucrChkSelectTheme.Checked Then
-            btnManualTheme.Visible = False
-            ucrCboSelectThemes.Visible = True
-        ElseIf ucrChkSelectTheme.Checked Then
-            ucrChkManualTheme.Checked = True
-        Else
-            ucrCboSelectThemes.Visible = False
+            clsThemeRFunction.SetPackageName("gtExtras")
+            clsThemeRFunction.SetRCommand("gt_theme_dark")
+            ucrCboSelectThemes.SetName("Dark Theme")
         End If
+
+        ucrCboSelectThemes.Visible = ucrChkSelectTheme.Checked
+        If ucrChkSelectTheme.Checked AndAlso ucrChkManualTheme.Checked Then
+            ucrChkManualTheme.Checked = False
+        End If
+
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
-
+        clsThemeRFunction = New RFunction
         If ucrChkManualTheme.Checked Then
-            btnManualTheme.Visible = True
-            ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
-            btnManualTheme.Visible = ucrChkManualTheme.Checked
+            clsThemeRFunction.SetPackageName("gt")
+            clsThemeRFunction.SetRCommand("tab_options")
+        End If
+
+        btnManualTheme.Visible = ucrChkManualTheme.Checked
+        If ucrChkManualTheme.Checked AndAlso ucrChkSelectTheme.Checked Then
+            ucrChkSelectTheme.Checked = False
         End If
     End Sub
 
     Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
-        clsThemeRFunction.SetPackageName("gt")
-        clsThemeRFunction.SetRCommand("tab_options")
         sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
         sdgSummaryThemes.ShowDialog(Me)
     End Sub
 
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
-
         If clsThemeRFunction Is Nothing Then
             Exit Sub
         End If
@@ -218,79 +254,15 @@ Public Class sdgTableOptions
     End Sub
 
     Private Sub SetThemeValuesOnReturn(clsOperator As ROperator)
-        ' Set the themes parameter if there was a theme selected
-        If ucrChkManualTheme.Checked Then
-            sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        clsOperator.RemoveParameterByName("theme_format")
+
+        If Not ucrChkSelectTheme.Checked AndAlso Not ucrChkManualTheme.Checked Then
+            Exit Sub
         End If
+
         If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
             clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-        Else
-            clsOperator.RemoveParameterByName("theme_format")
         End If
-    End Sub
-
-    Private Sub btnTextFormat_Click(sender As Object, e As EventArgs) Handles btnTextFormat.Click
-        Dim clsFormatRFunction As RFunction = Nothing
-        sdgCellFormatTextOptions.ShowDialog(Me.ParentForm)
-        clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
-        If clsFormatRFunction Is Nothing Then
-            Exit Sub
-        End If
-    End Sub
-
-    Private Sub btnDateFormat_Click(sender As Object, e As EventArgs) Handles btnDateFormat.Click
-        Dim clsFormatRFunction As RFunction = Nothing
-        sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
-        clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
-        If clsFormatRFunction Is Nothing Then
-            Exit Sub
-        End If
-    End Sub
-
-    Private Sub btnNumberFormat_Click(sender As Object, e As EventArgs) Handles btnNumberFormat.Click
-        Dim clsFormatRFunction As RFunction = Nothing
-        sdgCellFormatNumberOptions.ShowDialog(Me.ParentForm)
-        clsFormatRFunction = sdgCellFormatNumberOptions.GetNewUserInputAsRFunction()
-
-        If clsFormatRFunction Is Nothing Then
-            Exit Sub
-        End If
-    End Sub
-
-    Private Sub SetupSubMissing(clsOperator As ROperator)
-        If clsOperator.ContainsParameter("sub_missing") Then
-            clsSubMissingRFunction = clsOperator.GetParameter("sub_missing").clsArgumentCodeStructure
-        Else
-            clsSubMissingRFunction = New RFunction
-            clsSubMissingRFunction.SetPackageName("gt")
-            clsSubMissingRFunction.SetRCommand("sub_missing")
-            ' seed it with whatever is currently in the text box (could be blank)
-            UpdateSubMissingParam(ucrTxtMissingText.GetText())
-        End If
-    End Sub
-
-    Private Sub UpdateSubMissingParam(strText As String)
-        If Not String.IsNullOrEmpty(strText) Then
-            clsOperator.RemoveParameterByName("sub_missing")
-            Dim quoted = Chr(34) & strText & Chr(34)
-            clsSubMissingRFunction.AddParameter(strParameterName:="missing_text",
-                                            strParameterValue:=quoted,
-                                            iPosition:=1)
-        End If
-    End Sub
-
-    Private Sub SetSubMissingValuesOnReturn(clsOperator As ROperator)
-        ' Set the sub_missing parameter if it was configured
-        If clsSubMissingRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsSubMissingRFunction.strRCommand) Then
-            clsOperator.AddParameter("sub_missing", clsRFunctionParameter:=clsSubMissingRFunction)
-        Else
-            clsOperator.RemoveParameterByName("sub_missing")
-        End If
-    End Sub
-
-    Private Sub ucrTxtMissingText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtMissingText.ControlValueChanged
-        UpdateSubMissingParam(ucrTxtMissingText.GetText())
     End Sub
     '-----------------------------------------
-
 End Class

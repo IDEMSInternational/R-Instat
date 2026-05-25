@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class dlgCalculationsSummary
     Public bFirstLoad As Boolean = True
     Public bResetSubdialog As Boolean = True
@@ -128,7 +129,7 @@ Public Class dlgCalculationsSummary
         If lstCalculations.SelectedItems.Count = 1 Then
             clsSelectedCalculationFunction = dctCalculations(lstCalculations.SelectedItems(0).Text)
             If clsSelectedCalculationFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedCalculationFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
-                MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
+                MsgBoxTranslate("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
             Else
                 sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
                 sdgCalculationsSummmary.ShowDialog()

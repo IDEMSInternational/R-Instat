@@ -24,7 +24,7 @@ Public Class ucrDataSelection
             lstAvailableVariable.Items.Remove(lstAvailableVariable.SelectedItem)
 
         Else
-            MsgBox("No item was selected", vbInformation, "Selection message")
+            MsgBoxTranslate("No item was selected", vbInformation, "Selection message")
         End If
     End Sub
 
@@ -33,7 +33,7 @@ Public Class ucrDataSelection
             lstAvailableVariable.Items.Add(lstSelectedVariables.SelectedItem)
             lstSelectedVariables.Items.Remove(lstSelectedVariables.SelectedItem)
         Else
-            MsgBox("No item was selected", vbInformation, "Selection message")
+            MsgBoxTranslate("No item was selected", vbInformation, "Selection message")
         End If
     End Sub
 
@@ -56,7 +56,7 @@ Public Class ucrDataSelection
             lstSelectedVariables.Items.Add(lstAvailableVariable.SelectedItem)
             lstAvailableVariable.Items.Remove(lstAvailableVariable.SelectedItem)
         Else
-            MsgBox("Please select a column", vbInformation, "Message from Instat")
+            MsgBoxTranslate("Please select a column", vbInformation, "Message from Instat")
         End If
     End Sub
 
@@ -65,7 +65,7 @@ Public Class ucrDataSelection
             lstAvailableVariable.Items.Add(lstSelectedVariables.SelectedItem)
             lstSelectedVariables.Items.Remove(lstSelectedVariables.SelectedItem)
         Else
-            MsgBox("Please select a column", vbInformation, "Message from Instat")
+            MsgBoxTranslate("Please select a column", vbInformation, "Message from Instat")
         End If
     End Sub
 End Class

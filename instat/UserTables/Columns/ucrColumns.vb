@@ -1,14 +1,7 @@
 ﻿Public Class ucrColumns
     Private bFirstload As Boolean = True
 
-    Private Sub ucrColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
-        End If
-    End Sub
-
-    Private Sub InitialiseDialog()
+    Private Sub InitialiseControl()
         ucrPnlCols.AddRadioButton(rdoColLabel)
         ucrPnlCols.AddRadioButton(rdoColStyles)
         ucrPnlCols.AddRadioButton(rdoColWidth)
@@ -21,15 +14,19 @@
         rdoColLabel.Checked = True
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        ucrColumnLabels.Setup(strDataFrameName, clsOperator)
-        ucrColumnStyles.Setup(strDataFrameName, clsOperator)
-        ucrColumnWidth.Setup(strDataFrameName, clsOperator)
-        ucrColumnFootNote.Setup(strDataFrameName, clsOperator)
-        ucrColumnSpanners.Setup(strDataFrameName, clsOperator)
-        ucrColumnHide.Setup(strDataFrameName, clsOperator)
-        ucrColumnMissingTexts.Setup(strDataFrameName, clsOperator)
-        ucrColumnNanoPlots.Setup(strDataFrameName, clsOperator)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        If bFirstload Then
+            InitialiseControl()
+            bFirstload = False
+        End If
+        ucrColumnLabels.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnStyles.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnWidth.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnFootNote.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnSpanners.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnHide.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnMissingTexts.Setup(strDataFrameName, clsOperator, strTableName)
+        ucrColumnNanoPlots.Setup(strDataFrameName, clsOperator, strTableName)
     End Sub
 
     Private Sub ucrPnlCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCols.ControlValueChanged

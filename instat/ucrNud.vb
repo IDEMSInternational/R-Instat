@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 Public Class ucrNud
     Public dScaleBy As Decimal = 1
@@ -114,7 +115,7 @@ Public Class ucrNud
 
         MyBase.SetRDefault(objNewDefault)
         If Not Decimal.TryParse(objNewDefault, dTemp) Then
-            MsgBox("Developer error: Cannot set the default value of the control because it cannot be converted to a decimal.")
+            MsgBoxTranslate("Developer error: Cannot set the default value of the control because it cannot be converted to a decimal.")
             MyBase.SetValueToRemoveParameter(Nothing)
         End If
     End Sub
@@ -124,7 +125,7 @@ Public Class ucrNud
 
         MyBase.SetValueToRemoveParameter(objNewValue)
         If Not Decimal.TryParse(objNewValue, dTemp) Then
-            MsgBox("Developer error: Cannot set the value to remove of the control because it cannot be converted to a decimal.")
+            MsgBoxTranslate("Developer error: Cannot set the value to remove of the control because it cannot be converted to a decimal.")
             MyBase.SetValueToRemoveParameter(Nothing)
         End If
     End Sub
@@ -139,7 +140,7 @@ Public Class ucrNud
                     bTemp = True
                 End If
             Else
-                MsgBox("Developer error: Cannot convert value to decimal for linked control.")
+                MsgBoxTranslate("Developer error: Cannot convert value to decimal for linked control.")
             End If
         Next
         Return bTemp
@@ -166,7 +167,7 @@ Public Class ucrNud
             If Decimal.TryParse(objTemp.ToString, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
                 Value = dNewValue
             Else
-                MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+                MsgBoxTranslate("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
             End If
         End If
         'Ensures Text is set correctly if it has been cleared by user.

@@ -55,6 +55,8 @@ Public Class dlgOptionsByContextBoxplot
     Private strFacetCol As String = "Facet Column"
     Private strColour As String = "Colour"
     Private strNone As String = "None"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
 
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
@@ -156,13 +158,13 @@ Public Class dlgOptionsByContextBoxplot
         ucrReceiverContext3.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext3.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
-        ucrInputContext1.SetItems({strFacetRow, strFacetCol, strColour, strNone})
+        ucrInputContext1.SetItems({strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strColour, strNone})
         ucrInputContext1.SetDropDownStyleAsNonEditable()
 
-        ucrInputContext2.SetItems({strFacetRow, strFacetCol, strColour, strNone})
+        ucrInputContext2.SetItems({strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strColour, strNone})
         ucrInputContext2.SetDropDownStyleAsNonEditable()
 
-        ucrInputContext3.SetItems({strFacetRow, strFacetCol, strColour, strNone})
+        ucrInputContext3.SetItems({strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strColour, strNone})
         ucrInputContext3.SetDropDownStyleAsNonEditable()
 
         ucrPnlPlotType.AddRadioButton(rdoBoxplot)
@@ -423,39 +425,38 @@ Public Class dlgOptionsByContextBoxplot
             clsFacetOp.ClearParameters()
             clsFacetFunction.RemoveParameterByName("dir")
             clsRaesGlobalFunction.RemoveParameterByName("fill")
-
             If Not ucrReceiverContext1.IsEmpty() Then
                 Select Case ucrInputContext1.GetText()
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iRowVars)
-                        iRowVars = iRowVars + 1
-                    Case strFacetCol
+                        iRowVars += 1
+                    Case strFacetCol, strFacetColAll
                         clsFacetColOp.AddParameter(iColVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iColVars)
-                        iColVars = iColVars + 1
+                        iColVars += 1
                     Case strColour
                         clsRaesGlobalFunction.AddParameter("fill", ucrReceiverContext1.GetVariableNames(False), iPosition:=3)
                 End Select
             End If
             If Not ucrReceiverContext2.IsEmpty() Then
                 Select Case ucrInputContext2.GetText()
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iRowVars)
-                        iRowVars = iRowVars + 1
-                    Case strFacetCol
+                        iRowVars += 1
+                    Case strFacetCol, strFacetColAll
                         clsFacetColOp.AddParameter(iColVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iColVars)
-                        iColVars = iColVars + 1
+                        iColVars += 1
                     Case strColour
                         clsRaesGlobalFunction.AddParameter("fill", ucrReceiverContext2.GetVariableNames(False), iPosition:=3)
                 End Select
             End If
             If Not ucrReceiverContext3.IsEmpty() Then
                 Select Case ucrInputContext3.GetText()
-                    Case strFacetRow
+                    Case strFacetRow, strFacetRowAll
                         clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iRowVars)
-                        iRowVars = iRowVars + 1
-                    Case strFacetCol
+                        iRowVars += 1
+                    Case strFacetCol, strFacetColAll
                         clsFacetColOp.AddParameter(iColVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iColVars)
-                        iColVars = iColVars + 1
+                        iColVars += 1
                     Case strColour
                         clsRaesGlobalFunction.AddParameter("fill", ucrReceiverContext3.GetVariableNames(False), iPosition:=3)
                 End Select
