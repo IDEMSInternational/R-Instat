@@ -48,7 +48,6 @@ Partial Class dlgUnstack
         Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrNudValuesFill = New instat.ucrNud()
         Me.ucrReceiverColumnToUnstack = New instat.ucrReceiverSingle()
-        Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrReceiverCarryColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverFactorToUnstackby = New instat.ucrReceiverSingle()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
@@ -57,6 +56,7 @@ Partial Class dlgUnstack
         Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
         Me.ucrChkValuesFill = New instat.ucrCheck()
         Me.ucrChkAddPrefix = New instat.ucrCheck()
+        Me.ucrNewDFName = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -141,11 +141,6 @@ Partial Class dlgUnstack
         Me.ucrReceiverColumnToUnstack.strNcFilePath = ""
         Me.ucrReceiverColumnToUnstack.ucrSelector = Nothing
         '
-        'ucrNewDFName
-        '
-        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
-        Me.ucrNewDFName.Name = "ucrNewDFName"
-        '
         'ucrReceiverCarryColumns
         '
         resources.ApplyResources(Me.ucrReceiverCarryColumns, "ucrReceiverCarryColumns")
@@ -203,10 +198,16 @@ Partial Class dlgUnstack
         Me.ucrChkAddPrefix.Checked = False
         Me.ucrChkAddPrefix.Name = "ucrChkAddPrefix"
         '
+        'ucrNewDFName
+        '
+        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrInputTextPrefix)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrNudValuesFill)
@@ -215,7 +216,6 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.rdoRestoreHierarchy)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
-        Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrReceiverCarryColumns)
         Me.Controls.Add(Me.ucrReceiverFactorToUnstackby)
         Me.Controls.Add(Me.lblFactorToUnstackBy)
@@ -240,7 +240,6 @@ Partial Class dlgUnstack
     Friend WithEvents lblFactorToUnstackBy As Label
     Friend WithEvents ucrReceiverFactorToUnstackby As ucrReceiverSingle
     Friend WithEvents ucrReceiverCarryColumns As ucrReceiverMultiple
-    Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents rdoRestoreHierarchy As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
@@ -254,4 +253,5 @@ Partial Class dlgUnstack
     Friend WithEvents ucrNudValuesFill As ucrNud
     Friend WithEvents ucrChkValuesFill As ucrCheck
     Friend WithEvents ucrChkCarryColumns As ucrCheck
+    Friend WithEvents ucrNewDFName As ucrSave
 End Class

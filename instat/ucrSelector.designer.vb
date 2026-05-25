@@ -47,6 +47,7 @@ Partial Class ucrSelector
         Me.AddAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSortToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectionMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -69,9 +70,9 @@ Partial Class ucrSelector
         '
         'SelectionMenuStrip
         '
-        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem, Me.ToolStripSeparator1, Me.mnuHelp})
+        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem, Me.mnuSortToolStrip, Me.ToolStripSeparator1, Me.mnuHelp})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(181, 142)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(181, 164)
         '
         'AddSelectedToolStripMenuItem
         '
@@ -111,6 +112,12 @@ Partial Class ucrSelector
         Me.mnuHelp.Size = New System.Drawing.Size(180, 22)
         Me.mnuHelp.Text = "Help"
         '
+        'mnuSortToolStrip
+        '
+        Me.mnuSortToolStrip.Name = "mnuSortToolStrip"
+        Me.mnuSortToolStrip.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSortToolStrip.Text = "Sort"
+        '
         'ucrSelector
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -131,4 +138,5 @@ Partial Class ucrSelector
     Friend WithEvents AddAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
+    Friend WithEvents mnuSortToolStrip As ToolStripMenuItem
 End Class

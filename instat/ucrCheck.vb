@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 Public Class ucrCheck
     ''Is the checkbox linked to specific parameter values when checked/unchecked
@@ -28,7 +29,7 @@ Public Class ucrCheck
 
         strValueIfChecked = strNewValueIfChecked
         If GetParameter() Is Nothing Then
-            MsgBox("Developer error: Parameter must be set before SetValueIfChecked can be run! Control will not update correctly.")
+            MsgBoxTranslate("Developer error: Parameter must be set before SetValueIfChecked can be run! Control will not update correctly.")
         Else
             AddParameterValuesCondition(True, GetParameter().strArgumentName, strValueIfChecked)
         End If
@@ -37,7 +38,7 @@ Public Class ucrCheck
     Public Sub SetValueIfUnchecked(strNewValueIfUnchecked As String)
         strValueIfUnchecked = strNewValueIfUnchecked
         If GetParameter() Is Nothing OrElse GetParameter().strArgumentName Is Nothing Then
-            MsgBox("Developer error: Parameter must be set with a parameter name before SetValueIfUnchecked can be run! Control will not update correctly.")
+            MsgBoxTranslate("Developer error: Parameter must be set with a parameter name before SetValueIfUnchecked can be run! Control will not update correctly.")
         Else
             AddParameterValuesCondition(False, GetParameter().strArgumentName, strValueIfUnchecked)
         End If
@@ -98,7 +99,7 @@ Public Class ucrCheck
                     bContainedIn = True
                 End If
             Else
-                MsgBox("Developer error: Cannot convert value to boolean for linked control.")
+                MsgBoxTranslate("Developer error: Cannot convert value to boolean for linked control.")
             End If
         Next
         Return bContainedIn

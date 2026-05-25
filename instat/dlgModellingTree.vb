@@ -86,6 +86,7 @@ Public Class dlgModellingTree
         ucrReceiverExpressionModellingTree.bWithQuotes = False
         ucrReceiverExpressionModellingTree.AddtoCombobox("1")
         ucrReceiverExpressionModellingTree.strSelectorHeading = "Variables"
+        ucrReceiverExpressionModellingTree.SetIncludedDataTypes({"numeric", "factor"})
 
         ucrInputCheck.SetLinkedDisplayControl(lblCheckVareity)
 
@@ -613,6 +614,9 @@ Public Class dlgModellingTree
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlackettLuceFunction)
         sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = False
         sdgPLModelOptions.ucrChkGamma.Enabled = False
+        sdgPLModelOptions.ucrChkGamma.Enabled = True
+        sdgPLModelOptions.ucrChkMinSize.Visible = True
+        sdgPLModelOptions.ucrChkPValue.Visible = True
         sdgPLModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
@@ -659,8 +663,8 @@ Public Class dlgModellingTree
         Dim chrOutput As CharacterVector
 
         If Not ucrReceiverExpressionModellingTree.IsEmpty AndAlso Not ucrReceiverModellingTree.IsEmpty Then
-            clsPackageCheck.SetPackageName("databook")
-            clsPackageCheck.SetRCommand("check_ID_data_level")
+
+            clsPackageCheck.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$check_ID_data_level")
             clsPackageCheck.AddParameter("data", Chr(34) & UcrSelectorByDataFrameForModellingTreeSecond.strCurrentDataFrame & Chr(34))
 
             expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)

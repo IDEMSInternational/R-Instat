@@ -224,7 +224,7 @@ Public Class dlgEnter
     Private Sub cmdRepelicationFunction_Click_1(sender As Object, e As EventArgs) Handles cmdRepelicationFunction.Click
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x = , times = , length = , each = )", 32)
-        Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
+        Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( , )", 4)
         End If
         TestOKEnabled()
     End Sub

@@ -29,7 +29,8 @@ Partial Class ucrColumnStyles
         Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnEnterStyle = New System.Windows.Forms.Button()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorByDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorByTableDF = New instat.ucrSelectorByOutputObject()
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,17 +108,27 @@ Partial Class ucrColumnStyles
         Me.btnEnterStyle.Text = "Enter Style"
         Me.btnEnterStyle.UseVisualStyleBackColor = True
         '
-        'ucrSelectorCols
+        'ucrSelectorByDF
         '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(5, 5)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 333
+        Me.ucrSelectorByDF.AutoSize = True
+        Me.ucrSelectorByDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorByDF.bShowHiddenColumns = False
+        Me.ucrSelectorByDF.bUseCurrentFilter = True
+        Me.ucrSelectorByDF.Location = New System.Drawing.Point(5, 5)
+        Me.ucrSelectorByDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByDF.Name = "ucrSelectorByDF"
+        Me.ucrSelectorByDF.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorByDF.TabIndex = 333
+        '
+        'ucrSelectorByTableDF
+        '
+        Me.ucrSelectorByTableDF.AutoSize = True
+        Me.ucrSelectorByTableDF.bShowHiddenColumns = False
+        Me.ucrSelectorByTableDF.Location = New System.Drawing.Point(0, 0)
+        Me.ucrSelectorByTableDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByTableDF.Name = "ucrSelectorByTableDF"
+        Me.ucrSelectorByTableDF.Size = New System.Drawing.Size(216, 194)
+        Me.ucrSelectorByTableDF.TabIndex = 359
         '
         'ucrColumnStyles
         '
@@ -129,7 +140,8 @@ Partial Class ucrColumnStyles
         Me.Controls.Add(Me.ucrReceiverMultipleCols)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnEnterStyle)
-        Me.Controls.Add(Me.ucrSelectorCols)
+        Me.Controls.Add(Me.ucrSelectorByDF)
+        Me.Controls.Add(Me.ucrSelectorByTableDF)
         Me.Name = "ucrColumnStyles"
         Me.Size = New System.Drawing.Size(556, 243)
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).EndInit()
@@ -145,5 +157,6 @@ Partial Class ucrColumnStyles
     Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
     Friend WithEvents Label1 As Label
     Friend WithEvents btnEnterStyle As Button
-    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorByDF As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorByTableDF As ucrSelectorByOutputObject
 End Class

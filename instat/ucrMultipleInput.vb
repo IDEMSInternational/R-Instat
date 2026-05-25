@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class ucrMultipleInput
     Public clsNumericList As New RFunction
     Public bIsNumericInput As Boolean = False
@@ -34,7 +35,7 @@ Public Class ucrMultipleInput
                 Dim clsTempParam As New RParameter
                 If bIsNumericInput Then
                     If Not IsNumeric(strVal) Then
-                        MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
+                        MsgBoxTranslate("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
                         txtNumericItems.Focus()
                         Exit Sub
                     End If

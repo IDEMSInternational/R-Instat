@@ -74,16 +74,13 @@ Public Class dlgTransformTricotData
 
         ucrReceiverTricotData.SetMeAsReceiver()
 
-        clsOutputDataLevelForCheck.SetPackageName("instatExtras")
-        clsOutputDataLevelForCheck.SetRCommand("summarise_data_levels")
+        clsOutputDataLevelForCheck.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summarise_data_levels")
 
-        clsOutputDataLevel.SetPackageName("instatExtras")
-        clsOutputDataLevel.SetRCommand("summarise_data_levels")
+        clsOutputDataLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summarise_data_levels")
         clsOutputDataLevel.SetAssignTo("output_data_levels")
 
-        clsCreateTricotData.SetPackageName("databook")
-        clsCreateTricotData.SetRCommand("create_tricot_datasets")
-        clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0, bIncludeArgumentName:=False)
+        clsCreateTricotData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_tricot_datasets")
+        clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0, bIncludeArgumentName:=True)
         clsCreateTricotData.SetAssignTo("output_data_levels")
 
         OverallSymbolOperator.SetOperation("[")
@@ -96,8 +93,9 @@ Public Class dlgTransformTricotData
         clsOutputLevelsOperator.AddParameter("right", "print", iPosition:=1)
         clsOutputLevelsOperator.bSpaceAroundOperation = False
 
-        clsDefineTricotDataFunction.SetRCommand("define_tricot_data")
-        clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=False)
+        clsDefineTricotDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_tricot")
+        clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=True)
+        clsDefineTricotDataFunction.iCallType = 2
 
         clsPlotOperator.SetOperation("%>%")
         clsPlotOperator.AddParameter("left", "output_data_levels", iPosition:=0)
@@ -173,7 +171,7 @@ Public Class dlgTransformTricotData
 
         clsIdVarietyOperator.SetOperation("%>%")
         clsIdVarietyOperator.AddParameter("left", "plot_data", iPosition:=0)
-        clsIdVarietyOperator.AddParameter("right", "pull(c(variety_col))", iPosition:=1)
+        clsIdVarietyOperator.AddParameter("right", "dplyr::pull(c(variety_col))", iPosition:=1)
         clsIdVarietyOperator.SetAssignTo("plot_data_variety_var")
 
         clsRankingFunction.SetPackageName("instatExtras")
@@ -184,6 +182,7 @@ Public Class dlgTransformTricotData
         clsRankingFunction.AddParameter("variety", clsROperatorParameter:=clsIdVarietyOperator, iPosition:=3)
         clsRankingFunction.AddParameter("false", "FALSE", bIncludeArgumentName:=False, iPosition:=4)
         clsRankingFunction.SetAssignTo("rankings_list")
+        clsRankingFunction.iCallType = 2
 
         clsAddFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddFunction.AddParameter("data_name", "plot_data_name", iPosition:=0)
@@ -200,6 +199,7 @@ Public Class dlgTransformTricotData
         clsRankingGroupedFunction.AddParameter("variety", "plot_data_variety_var", iPosition:=3)
         clsRankingGroupedFunction.AddParameter("true", "TRUE", bIncludeArgumentName:=False, iPosition:=4)
         clsRankingGroupedFunction.SetAssignTo("grouped_rankings_list")
+        clsRankingGroupedFunction.iCallType = 2
 
         clsAddGroupedFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddGroupedFunction.AddParameter("data_name", "plot_data_name", iPosition:=0)
@@ -249,7 +249,15 @@ Public Class dlgTransformTricotData
 
         sdgTransformations.SetRFunction(clsNewRFunction:=clsOutputDataLevel, clsNewDefaultFunction:=clsCreateTricotData, clsNewIDColsFunction:=clsIDColsFunction, clsNewVarietyColsFunction:=clsVarietyColsFunction, clsNewTraitColsFunction:=clsTraitColsFunction, clsNewDefineTricotDataFunction:=clsDefineTricotDataFunction, ucrNewBaseSelector:=ucrSelectorTricotData, bReset:=bResetSubdialog)
         sdgTransformations.ShowDialog()
+        ClearCheckOnSdgClose()
+        TestOKEnabled()
         bResetSubdialog = False
+    End Sub
+
+    Private Sub ClearCheckOnSdgClose()
+        bUniqueChecked = False
+        ucrInputTricotData.SetText("")
+        ucrInputTricotData.txtInput.BackColor = Color.White
     End Sub
 
     Private Sub TestOKEnabled()

@@ -68,10 +68,10 @@ Public Class sdgMapOption
 
     Private Sub CheckMinMaxValues()
         'If ucrInputLongMin.GetValue() > ucrInputLongMax.GetValue() OrElse ucrInputLongMin.GetValue() > ucrInputLongMax.GetValue() Then
-        '    MsgBox("You can not have minimum longitude value greater or equal to maximum longitude", vbOKOnly, "Warning")
+        '    MsgBoxTranslate("You can not have minimum longitude value greater or equal to maximum longitude", vbOKOnly, "Warning")
         '    'TODO sould we disable return button??
         'ElseIf ucrInputLatMin.GetValue() > ucrInputLatMax.GetValue() OrElse ucrInputLatMin.GetValue() > ucrInputLatMax.GetValue() Then
-        '    MsgBox("You can not have minimum latitude value greater or equal to maximum latitude", vbOKOnly, "Warning")
+        '    MsgBoxTranslate("You can not have minimum latitude value greater or equal to maximum latitude", vbOKOnly, "Warning")
 
         'End If
     End Sub

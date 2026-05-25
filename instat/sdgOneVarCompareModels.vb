@@ -116,26 +116,26 @@ Public Class sdgOneVarCompareModels
         '    clsCdfcompFunction.SetPackageName("fitdistrplus")
         '    clsCdfcompFunction.SetRCommand("cdfcomp")
         '    clsCdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-        '    frmMain.clsRLink.RunScript(clsCdfcompFunction.ToScript(), 3)
+        '    frmMain.clsRLink.RunRScript(clsCdfcompFunction.ToScript(), 3)
         'End If
         'If ucrChkPP.Checked Then
         '    clsPpcompFunction.SetPackageName("fitdistrplus")
         '    clsPpcompFunction.SetRCommand("ppcomp")
         '    clsPpcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-        '    frmMain.clsRLink.RunScript(clsPpcompFunction.ToScript(), 3)
+        '    frmMain.clsRLink.RunRScript(clsPpcompFunction.ToScript(), 3)
 
         'End If
         'If ucrChkQQ.Checked Then
         '    clsQqcompFunction.SetPackageName("fitdistrplus")
         '    clsQqcompFunction.SetRCommand("qqcomp")
         '    clsQqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-        '    frmMain.clsRLink.RunScript(clsQqcompFunction.ToScript(), 3)
+        '    frmMain.clsRLink.RunRScript(clsQqcompFunction.ToScript(), 3)
         'End If
         'If ucrChkDensity.Checked Then
         '    clsDenscompFunction.SetPackageName("fitdistrplus")
         '    clsDenscompFunction.SetRCommand("denscomp")
         '    clsDenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-        '    frmMain.clsRLink.RunScript(clsDenscompFunction.ToScript(), 3)
+        '    frmMain.clsRLink.RunRScript(clsDenscompFunction.ToScript(), 3)
         'End If
 
         'If ucrSaveDisplayChi.IsComplete Then
@@ -143,15 +143,15 @@ Public Class sdgOneVarCompareModels
         '    clsChisqtableOperator.AddParameter(clsRFunctionParameter:=clsRGofStat, iPosition:=0)
         '    clsChisqtableOperator.AddParameter(strParameterValue:="chisqtable")
 
-        '    frmMain.clsRLink.RunScript(clsChisqtableOperator.ToScript(), 0)
+        '    frmMain.clsRLink.RunRScript(clsChisqtableOperator.ToScript(), 0)
         '    clsRAsDataFrame.ToScript(strTemp)
-        '    frmMain.clsRLink.RunScript(strTemp, 0)
+        '    frmMain.clsRLink.RunRScript(strTemp, 0)
         'End If
         'If ucrChkInputChiSquareBreakpoints.Checked Then
         '    clsChisqbreaksOperator.SetOperation("$")
         '    clsChisqbreaksOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRGofStat)
         '    clsChisqbreaksOperator.AddParameter(strParameterValue:="chisqbreaks")
-        '    frmMain.clsRLink.RunScript(clsChisqbreaksOperator.ToScript(), 2)
+        '    frmMain.clsRLink.RunRScript(clsChisqbreaksOperator.ToScript(), 2)
         'End If
 
     End Sub

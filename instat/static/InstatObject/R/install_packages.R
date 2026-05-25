@@ -19,15 +19,15 @@ packs <-
     "plyr",
     "dplyr",
     "rtf",
-    "openxlsx",
+    #"openxlsx", This is no longer used
     "ggplot2",
     "extRemes",
     "GGally",
     "agridat",
-    "DAAG",
+    #"DAAG", This is no longer used
     "FactoMineR",
-    "plotrix",
-    "candisc",
+    #"plotrix", This is no longer used
+    #"candisc", This is no longer used
     "R6",
     "openair",
     "circular",
@@ -37,47 +37,47 @@ packs <-
     "devtools",
     "factoextra",
     "circlize",
-    "CircStats",
+    #"CircStats", This is no longer used
     "gridExtra",
     "ggfortify",
     "rio",
     "readxl",
     "lme4",
     "ggthemes",
-    "lazyeval",
+    #"lazyeval", This is no longer used
     "stringr",
-    "httr",
+    "httr", 
     "jsonlite",
     "fitdistrplus",
     "visreg",
     "mosaic",
     "ncdf4",
     "RMySQL",
-    "DBI",
+    "DBI", 
     "EnvStats",
     "sjPlot",
     "sjmisc",
     "plotly",
     "svglite",
-    "htmlTable",
-    "rje",
+    #"htmlTable", This is no longer used
+    #"rje", This is no longer used
     "tidyr",
-    "faraway",
+    #"faraway", This is no longer used
     "rrefine",
     "dae",
     "gapminder",
     "questionr",
     "nycflights13",
-    "Lahman",
+    #"Lahman", This i no longer used
     "RcppRoll",
     "cmsaf",
     "sjlabelled",
     "maptools",
-    "RColorBrewer",
-    "colorRamps",
+    #"RColorBrewer", This is no longer used
+    #"colorRamps", This is no longer used
     "mapdata",
-    "rworldmap",
-    "rworldxtra",
+    #"rworldmap", This is no longer used
+    #"rworldxtra", This is no longer used
     "e1071",
     "robustbase",
     "wakefield",
@@ -95,7 +95,7 @@ packs <-
     "treemapify",
     "stringdist",
     "imputeTS",
-    "chillR",
+    "chillR", 
     "patchwork",
     "changepoint",
     "trend",
@@ -113,10 +113,9 @@ packs <-
     # For comparison measures used in Climatic > Compare > Summary
     "hydroGOF",
     "lemon",
-    "HistData",
+    #"HistData", This is no longer used
     "caret",
-    "rpivotTable",
-    # For datasets
+       # For datasets
     "gcookbook",
     "tidytext",
     "janitor",
@@ -180,17 +179,17 @@ packs <-
     "waffle",
     # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
     "fivethirtyeight",
-    "CGPfunctions",
+    "CGPfunctions", 
     "ggside",
     "Weighted.Desc.Stat",
     "weights",
     "nanonext",
     "collapse",
-    "modeldata",
     "curl",
     "ClimMobTools",
     "gtsummary",
-    "ggthemes",
+    # quarto: R Interface to 'Quarto' Markdown Publishing System
+    "quarto",
     "PlackettLuce"
  )
 
@@ -200,6 +199,7 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/getPass/getPass
 install.packages("https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz", repos=NULL, type="source")
 install.packages("https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz", repos=NULL, type="source")
 install.packages("https://cran.r-project.org/src/contrib/Archive/climdex.pcic/climdex.pcic_1.1-11.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/rpivotTable/rpivotTable_0.3.0.tar.gz", repos=NULL, type = "source")
 
 # Only use internal library
 if (length(.libPaths()) >= 2){
@@ -208,12 +208,11 @@ if (length(.libPaths()) >= 2){
 }
 
 #install development packages not on CRAN
-devtools::install_github("ianmoran11/mmtable2")
-devtools::install_github("michael-franke/aida-package")
-devtools::install_github("rijaf-iri/CDT")
-devtools::install_github("IDEMSInternational/rapidpror")
-devtools::install_github("IDEMSInternational/epicsawrap")
-devtools::install_github("IDEMSInternational/instatCalculations", dependencies = FALSE, force = TRUE)
-devtools::install_github("IDEMSInternational/instatExtras", dependencies = TRUE, upgrade = "always", force = TRUE)
-devtools::install_github("IDEMSInternational/databook", dependencies = FALSE, force = TRUE)
-devtools::install_github("IDEMSInternational/instatClimatic", dependencies = FALSE, force = TRUE)
+devtools::install_github("michael-franke/aida-package", upgrade = "never")
+devtools::install_github("rijaf-iri/CDT", upgrade = "never")
+devtools::install_github("IDEMSInternational/rapidpror", upgrade = "never")
+devtools::install_github("IDEMSInternational/epicsawrap", upgrade = "never")
+devtools::install_github("IDEMSInternational/instatCalculations", dependencies = FALSE, force = TRUE, upgrade = "never")
+devtools::install_github("IDEMSInternational/instatExtras", dependencies = TRUE, upgrade = "never", force = TRUE)
+devtools::install_github("IDEMSInternational/databook", dependencies = FALSE, force = TRUE, upgrade = "never")
+devtools::install_github("IDEMSInternational/instatClimatic", dependencies = FALSE, force = TRUE, upgrade = "never")

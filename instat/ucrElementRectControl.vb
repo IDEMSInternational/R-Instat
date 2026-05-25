@@ -21,6 +21,7 @@ Public Class ucrElementRectControl
     Private clsThemeFunction As New RFunction
     Private clsElementLine As New RFunction
     Private clsBaseOperator As New ROperator
+    Private clsDummyFunction As New RFunction
 
     Public Sub InitialiseControl()
 
@@ -39,15 +40,15 @@ Public Class ucrElementRectControl
 
         ucrChkRectColour.SetText("Colour")
         ucrRectColors.SetParameter(New RParameter("colour"))
-        ucrChkRectColour.AddParameterPresentCondition(True, "colour")
-        ucrChkRectColour.AddParameterPresentCondition(False, "colour", False)
+        ucrChkRectColour.AddParameterValuesCondition(True, "colour", "True")
+        ucrChkRectColour.AddParameterValuesCondition(False, "colour", "False")
         ucrRectColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrRectColors.SetDropDownStyleAsNonEditable()
 
         ucrChkRectFill.SetText("Fill")
         ucrRectFill.SetParameter(New RParameter("fill"))
-        ucrChkRectFill.AddParameterPresentCondition(True, "fill")
-        ucrChkRectFill.AddParameterPresentCondition(False, "fill", False)
+        ucrChkRectFill.AddParameterValuesCondition(True, "fill", "True")
+        ucrChkRectFill.AddParameterValuesCondition(False, "fill", "False")
         ucrRectFill.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrRectFill.SetDropDownStyleAsNonEditable()
 
@@ -73,16 +74,19 @@ Public Class ucrElementRectControl
         clsBaseOperator = clsNewBaseOperator
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
+        clsDummyFunction = New RFunction
+
+        clsDummyFunction.AddParameter("fill", "false", iPosition:=0)
+        clsDummyFunction.AddParameter("colour", "false", iPosition:=1)
 
         ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-
-        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-
-        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-
+        If bReset Then
+            ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkRectColour.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkRectFill.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        End If
         ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 

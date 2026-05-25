@@ -173,10 +173,10 @@ Public Class sdgLinkedStationData
             bIsUnique = False
             If ucrReceiverStationMeta.IsEmpty Then
                 ucrInputCheckInput.SetName("Duplicate stations found.")
-                MsgBox("You have multiple rows with the same stations. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same stations. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
                 ucrInputCheckInput.SetName("Duplicate stations for station(s) were found.")
-                MsgBox("You have multiple rows with the same stations for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                MsgBoxTranslate("You have multiple rows with the same stations for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
             ucrInputCheckInput.SetName("No duplicate stations.")

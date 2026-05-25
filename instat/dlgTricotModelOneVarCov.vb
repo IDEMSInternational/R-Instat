@@ -159,7 +159,7 @@ Public Class dlgTricotModelOneVarCov
         ucrInputCheckVariety.txtInput.BackColor = Color.White
         ucrInputCheckVariety.IsReadOnly = True
 
-        clsCheckUniqueFunction.SetRCommand("check_variety_data_level")
+        clsCheckUniqueFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$check_variety_data_level")
         clsCheckUniqueFunction.AddParameter("col", Chr(34) & ucrVarietyLevelReceiver.GetVariableNames(bWithQuotes:=False) & Chr(34), iPosition:=1)
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
