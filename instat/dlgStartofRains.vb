@@ -27,7 +27,7 @@ Public Class dlgStartofRains
     Private clsDayFromAndToOperator, clsEvapOperator, clsDayFromOperator, clsRainDayConditionOperator, clsTRCombineOperator, clsStartStatusEqualsTrueOperator As New ROperator
     Private clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator, clsDayToOperator, clsRainDayOperator, clsConditionsAndOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList, clsApplyInstatFunction, clsFirstDOY, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
-    Private clsGetCalulationsFunction, clsGetOffsetTermFunction, clsGetStartRainsDefinitionsFunction As New RFunction
+    Private clsGetOffsetTermFunction, clsGetStartRainsDefinitionsFunction As New RFunction
 
     Private clsSpellsFunction, clsIfElseFirstDoyFilledFunction As New RFunction
     Private clsRainDaySpellsOperator As New ROperator
@@ -354,6 +354,7 @@ Public Class dlgStartofRains
         ShowHideControls()
         DialogueSize()
         ChangeDefaultvalue()
+        AddStartRainsDefinitionParams()
     End Sub
 
     Private Sub SetDefaults()
@@ -384,7 +385,6 @@ Public Class dlgStartofRains
         clsRainRollingSumFunction = New RFunction
         clsGetlinkeddataFunction = New RFunction
         clsVectorFunction = New RFunction
-        clsGetDataFrameFunction = New RFunction
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromList = New RFunction
         clsDummyFunction = New RFunction
@@ -397,7 +397,6 @@ Public Class dlgStartofRains
         clsListFunction = New RFunction
         clsDefineAsClimatic = New RFunction
         clsVectorConcat2Function = New RFunction
-        clsGetCalulationsFunction = New RFunction
         clsGetOffsetTermFunction = New RFunction
         clsGetStartRainsDefinitionsFunction = New RFunction
 
@@ -1053,11 +1052,6 @@ Public Class dlgStartofRains
         'Sub_Calculations List
         clsListSubCalc.SetRCommand("list")
 
-        ' IF ANY POTENTIAL PROBLEMS, REVERT THIS PART BACK TO ORIGINAL FORM
-        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataFrameFunction.AddParameter("x", strLinkedDataName, iPosition:=0, bIncludeArgumentName:=False)
-        clsGetDataFrameFunction.SetAssignTo("summary_data")
-
         clsGetlinkeddataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
         clsGetlinkeddataFunction.SetAssignTo(strLinkedDataName)
 
@@ -1149,16 +1143,11 @@ Public Class dlgStartofRains
         clsDeleteunusedrowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_unused_station_year_combinations")
         clsDeleteunusedrowFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
-        clsGetCalulationsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_calculations")
-        clsGetCalulationsFunction.AddParameter("x", strLinkedDataName, iPosition:=0, bIncludeArgumentName:=False)
-        clsGetCalulationsFunction.SetAssignTo("calculations_data")
-
         clsGetOffsetTermFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_offset_term")
         clsGetOffsetTermFunction.SetAssignTo("definitions_offset")
 
-        clsGetStartRainsDefinitionsFunction.SetRCommand("get_start_rains_definition")
-        clsGetStartRainsDefinitionsFunction.AddParameter("summary_data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
-        clsGetStartRainsDefinitionsFunction.AddParameter("calculations_data", clsRFunctionParameter:=clsGetCalulationsFunction, iPosition:=1)
+        clsGetStartRainsDefinitionsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_start_rains_definition")
+        clsGetStartRainsDefinitionsFunction.AddParameter("data_name", strLinkedDataName, iPosition:=0)
         clsGetStartRainsDefinitionsFunction.AddParameter("definitions_offset", clsRFunctionParameter:=clsGetOffsetTermFunction, iPosition:=5)
         SetupTemperatureRollingMean(True)
         'Functions and Operators for Tem rdo
@@ -1576,6 +1565,7 @@ Public Class dlgStartofRains
         ucrNudAmount.SetRCode(clsGreaterOrEqualSummerOperator, bReset)
 
         AdditionalCondition()
+        AddDefinitionName()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -2150,6 +2140,18 @@ Public Class dlgStartofRains
         ChangeDSValue()
     End Sub
 
+
+
+    Private Sub AddDefinitionName()
+        Dim strDefinitionName = ucrSaveDefinition.GetText()
+
+        If strDefinitionName <> "" Then
+            clsGetStartRainsDefinitionsFunction.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=1)
+        Else
+            clsGetStartRainsDefinitionsFunction.RemoveParameterByName("definition_name")
+        End If
+    End Sub
+
     Private Sub ChangeDSValue()
         If ucrChkAdditional.Checked Then
             If sdgAdditionalCondition.ucrChkNumberOfRainyDays.Checked Then
@@ -2307,6 +2309,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub ucrSaveDefinition_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrSaveDefinition.ControlValueChanged
+        AddDefinitionName()
         AddSaveDefinitionCodes()
     End Sub
 
