@@ -123,11 +123,10 @@ Public Class dlgStack
         ucrChkStackMultipleSets.AddFunctionNamesCondition(False, "pivot_longer")
 
         ucrInputNamesSep.SetParameter(New RParameter("names_sep", 0))
-        dctNamesSep.Add(".", Chr(34) & "\\." & Chr(34))
-        dctNamesSep.Add("_", Chr(34) & "\\_" & Chr(34))
-        dctNamesSep.Add(" - ", Chr(34) & "\-" & Chr(34))
+        dctNamesSep.Add("Period .", Chr(34) & "\\." & Chr(34))
+        dctNamesSep.Add("Underscore _", Chr(34) & "\\_" & Chr(34))
+        dctNamesSep.Add("Hyphen -", Chr(34) & "\-" & Chr(34))
         ucrInputNamesSep.SetItems(dctNamesSep)
-        ucrInputNamesSep.SetName("\\.")
 
         ucrFactorInto.SetParameter(New RParameter("timevar", 3))
         ucrFactorInto.SetRDefault("variable")
@@ -215,7 +214,7 @@ Public Class dlgStack
         ucrInputNamesTo.SetLinkedDisplayControl(lblNamesTo)
         ucrInputValuesTo.SetLinkedDisplayControl(lblValuesTo)
         ucrInputToken.SetLinkedDisplayControl(lblToken)
-        ucrInputNamesSep.SetLinkedDisplayControl(lblSets)
+        ucrInputNamesSep.SetLinkedDisplayControl(lblSeparatedBy)
         ucrInputFormat.SetLinkedDisplayControl(lblFormat)
         ucrInputOutput.SetLinkedDisplayControl(lblOutput)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
@@ -263,12 +262,6 @@ Public Class dlgStack
         clsSelectFunction.SetRCommand("select")
         clsSelectFunction.SetPackageName("dplyr")
 
-        'clsReshapeFunction.SetPackageName("stats")
-        'clsReshapeFunction.SetRCommand("reshape")
-        'clsReshapeFunction.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
-        'clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34), iPosition:=4)
-        'clsReshapeFunction.AddParameter("idvar", Chr(34) & "id" & Chr(34), iPosition:=5)
-
         clsSelectColumnsFunction.SetPackageName("dplyr")
         clsSelectColumnsFunction.SetRCommand("select")
 
@@ -286,8 +279,7 @@ Public Class dlgStack
 
         clsStackMultipleFunction.SetPackageName("tidyr")
         clsStackMultipleFunction.SetRCommand("pivot_longer")
-
-        'clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsFunction, iPosition:=1)
+        clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=0)
 
         clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetVariablesFunction.SetAssignTo("colnames")
@@ -338,9 +330,8 @@ Public Class dlgStack
         ucrPnlStack.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
-        'ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
-        ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
         ucrInputNamesSep.SetRCode(clsStackMultipleFunction, bReset)
+        ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
         If bReset Then
             ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
             ucrChkDropVariables.SetRCode(clsDummyFunction, bReset)
@@ -474,8 +465,7 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
-        'ucrBase.clsRsyntax.SetBaseRFunction(If(ucrChkStackMultipleSets.Checked _
-        '                                     , clsReshapeFunction, clsPivotLongerFunction))
+
         If ucrChkStackMultipleSets.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsStackOperator)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
@@ -591,4 +581,5 @@ Public Class dlgStack
             iPosition:=3
         )
     End Sub
+
 End Class
