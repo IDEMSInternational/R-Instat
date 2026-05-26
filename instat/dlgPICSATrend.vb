@@ -341,6 +341,7 @@ Public Class dlgPICSATrendGraph
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
         clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSATrend.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         SetPipeAssignTo()
 
         clsGroupByFunction.SetPackageName("dplyr")
@@ -694,7 +695,7 @@ Public Class dlgPICSATrendGraph
 
         clsVarsFunction.SetPackageName("ggplot2")
         clsVarsFunction.SetRCommand("vars")
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSATrend.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
         clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(bWithQuotes:=False), iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
