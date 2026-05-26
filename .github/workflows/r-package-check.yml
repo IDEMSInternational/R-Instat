@@ -54,10 +54,15 @@ jobs:
     - name: Set R-tools
       uses: r-windows/install-rtools@master 
 
-    # Test R package installation using the install_packages.R script
+    # Generate R scripts from r_packages.json
+    - name: Generate R scripts
+      run: python scripts/generate_r_scripts.py
+      shell: powershell
+
+    # Test R package installation using the generated install script
     - name: Test R packages installation
       run: |
-        $installScript = "${{ github.workspace }}\instat\static\InstatObject\R\install_packages.R"
+        $installScript = "${{ github.workspace }}\instat\static\InstatObject\R\install_packages_generated.R"
         Rscript $installScript
       shell: powershell
 
@@ -67,7 +72,7 @@ jobs:
       run: |
         Write-Host "Checking installed packages..."
         $R_HOME = $(Rscript -e 'cat(R.home())')
-        $checkScript = "${{ github.workspace }}\instat\static\InstatObject\R\check_packages.R"
+        $checkScript = "${{ github.workspace }}\instat\static\InstatObject\R\check_packages_generated.R"
         $reportFile  = "package-check-report.txt"
 
         & "$R_HOME\bin\Rscript.exe" $checkScript "${{ github.workspace }}" $reportFile

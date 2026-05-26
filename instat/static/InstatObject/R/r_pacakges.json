@@ -1,0 +1,910 @@
+{
+  "settings": {
+    "timezone": "GMT",
+    "locale_time": "C"
+  },
+  "packages": [
+    {
+      "name": "signmedian.test",
+      "installed_from": "http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz",
+      "type": "source",
+      "priority": 10
+    },
+
+    {
+      "name": "stringi",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 20
+    },
+    {
+      "name": "stringr",
+      "installed_from": "http://cran.us.r-project.org",
+      "type": "win.binary",
+      "priority": 20
+    },
+    {
+      "name": "RMySQL",
+      "installed_from": "http://cran.us.r-project.org",
+      "type": "win.binary",
+      "priority": 20
+    },
+    {
+      "name": "terra",
+      "installed_from": "http://cran.us.r-project.org",
+      "type": "win.binary",
+      "priority": 20
+    },
+    {
+      "name": "XML",
+      "installed_from": "http://cran.us.r-project.org",
+      "type": "win.binary",
+      "priority": 20
+    },
+
+    {
+      "name": "reshape2",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "lubridate",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "plyr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "dplyr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "rtf",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggplot2",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "extRemes",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "GGally",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "agridat",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "FactoMineR",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "R6",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "openair",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "circular",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "survival",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "Evapotranspiration",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "clifro",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "devtools",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "factoextra",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "circlize",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "gridExtra",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggfortify",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "rio",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "readxl",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "lme4",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggthemes",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "httr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "jsonlite",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "fitdistrplus",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "visreg",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "mosaic",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ncdf4",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "DBI",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "EnvStats",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "sjPlot",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "sjmisc",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "plotly",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "svglite",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "tidyr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "rrefine",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "dae",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "gapminder",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "questionr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "nycflights13",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "RcppRoll",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "cmsaf",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "sjlabelled",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "maptools",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "mapdata",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "e1071",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "robustbase",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "wakefield",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "Hmisc",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "SPEI",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "agricolae",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "sf",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "weathermetrics",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "geosphere",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggmosaic",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "readODS",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggalt",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggpmisc",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "treemapify",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "stringdist",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "imputeTS",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "chillR",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "patchwork",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "changepoint",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "trend",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "pbs",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "visdat",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "texmex",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "zyp",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "DescTools",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "MKinfer",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggplotify",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "clipr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ecmwfr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "hydroGOF",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "lemon",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "caret",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "gcookbook",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "tidytext",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "janitor",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggwordcloud",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "rcorpora",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "mlbench",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "splines2",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "mc2d",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "skimr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "fastDummies",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "statip",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "corrr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "dslabs",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "coin",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "conf.design",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "pingr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "vcdExtra",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "apsimx",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "primes",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "Zseq",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "gtExtras",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "segmented",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "verification",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "prediction",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "agriTutorial",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "arm",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "rstanarm",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "statsr",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "statquotes",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "HH",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "datasauRus",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "desplot",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "formattable",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "geomtextpath",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "moderndive",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "modeldata",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ISLR",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "waffle",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "fivethirtyeight",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "CGPfunctions",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ggside",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "Weighted.Desc.Stat",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "weights",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "nanonext",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "collapse",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "curl",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "ClimMobTools",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "gtsummary",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "quarto",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+    {
+      "name": "PlackettLuce",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30
+    },
+
+    {
+      "name": "getPass",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz",
+      "type": "source",
+      "priority": 40
+    },
+    {
+      "name": "PCICt",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz",
+      "type": "source",
+      "priority": 40
+    },
+    {
+      "name": "ncdf4.helpers",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz",
+      "type": "source",
+      "priority": 40
+    },
+    {
+      "name": "climdex.pcic",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/climdex.pcic/climdex.pcic_1.1-11.tar.gz",
+      "type": "source",
+      "priority": 40
+    },
+    {
+      "name": "rpivotTable",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/rpivotTable/rpivotTable_0.3.0.tar.gz",
+      "type": "source",
+      "priority": 40
+    },
+
+    {
+      "name": "aida",
+      "installed_from": "michael-franke/aida-package",
+      "type": "github",
+      "priority": 50
+    },
+    {
+      "name": "CDT",
+      "installed_from": "rijaf-iri/CDT",
+      "type": "github",
+      "priority": 50
+    },
+    {
+      "name": "rapidpror",
+      "installed_from": "IDEMSInternational/rapidpror",
+      "type": "github",
+      "priority": 50
+    },
+    {
+      "name": "epicsawrap",
+      "installed_from": "IDEMSInternational/epicsawrap",
+      "type": "github",
+      "priority": 50
+    },
+    {
+      "name": "instatCalculations",
+      "installed_from": "IDEMSInternational/instatCalculations",
+      "type": "github",
+      "priority": 50,
+      "options": { "force": true }
+    },
+    {
+      "name": "instatExtras",
+      "installed_from": "IDEMSInternational/instatExtras",
+      "type": "github",
+      "priority": 50,
+      "options": { "force": true }
+    },
+    {
+      "name": "databook",
+      "installed_from": "IDEMSInternational/databook",
+      "type": "github",
+      "priority": 50,
+      "options": { "force": true }
+    },
+    {
+      "name": "instatClimatic",
+      "installed_from": "IDEMSInternational/instatClimatic",
+      "type": "github",
+      "priority": 50,
+      "options": { "force": true }
+    }
+  ]
+}
