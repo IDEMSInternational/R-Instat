@@ -30,9 +30,11 @@ Package types
                 The .libPaths() internal-library block is inserted automatically
                 before the first github-type package.
 
-Package options (optional JSON field)
+Package options (optional JSON fields)
 --------------------------------------
-    force       bool  — adds force = TRUE to devtools::install_github()
+    force               bool  — adds force = TRUE to devtools::install_github()
+    install_dependencies  bool  — sets the dependencies argument.
+                          Defaults to FALSE if not present in the JSON entry.
 """
 
 import json
@@ -65,27 +67,31 @@ _SECTION_LABELS = {
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _install_deps(pkg: dict) -> bool:
+    """Returns the install_dependencies value; defaults to False if not set."""
+    return bool(pkg.get("install_dependencies", False))
+
+
 def _load(json_path: Path):
     with open(json_path, encoding="utf-8") as fh:
         data = json.load(fh)
     settings = data.get("settings", {})
     packages = sorted(
         data.get("packages", []),
-        key=lambda p: (p.get("priority", 9999), p["type"], p.get("installed_from", ""), p["name"]),
+        key=lambda p: (p.get("priority", 9999), p["type"], p.get("installed_from", ""), _install_deps(p), p["name"]),
     )
     return settings, packages
 
 
 def _group_key(pkg):
-    """Packages with the same (priority, type, installed_from) are batched."""
-    return (pkg.get("priority", 9999), pkg["type"], pkg.get("installed_from", ""))
+    """Packages with the same (priority, type, installed_from, deps) are batched."""
+    return (pkg.get("priority", 9999), pkg["type"], pkg.get("installed_from", ""), _install_deps(pkg))
 
 
 def _github_line(pkg: dict) -> str:
-    opts = pkg.get("options", {})
     parts = [f'devtools::install_github("{pkg["installed_from"]}"']
     parts.append("dependencies = FALSE")
-    if opts.get("force"):
+    if pkg.get("force"):
         parts.append("force = TRUE")
     parts.append('upgrade = "never"')
     return ", ".join(parts) + ")"
@@ -112,8 +118,9 @@ def generate_install_r(settings: dict, packages: list, out_path: Path) -> None:
     internal_library_done = False
     last_type = None
 
-    for (priority, pkg_type, source), group_iter in groupby(packages, key=_group_key):
+    for (priority, pkg_type, source, deps), group_iter in groupby(packages, key=_group_key):
         group = list(group_iter)
+        deps_r = "TRUE" if deps else "FALSE"
 
         # Insert internal-library block once, just before the first GitHub install
         if pkg_type == "github" and not internal_library_done:
@@ -130,7 +137,7 @@ def generate_install_r(settings: dict, packages: list, out_path: Path) -> None:
             for pkg in group:
                 lines.append(
                     f'install.packages("{pkg["installed_from"]}", '
-                    f'repos = NULL, type = "source", dependencies = FALSE)'
+                    f'repos = NULL, type = "source", dependencies = {deps_r})'
                 )
 
         elif pkg_type == "win.binary":
@@ -138,7 +145,7 @@ def generate_install_r(settings: dict, packages: list, out_path: Path) -> None:
                 pkg = group[0]
                 lines.append(
                     f'install.packages("{pkg["name"]}", '
-                    f"dependencies = FALSE, repos = '{source}', "
+                    f"dependencies = {deps_r}, repos = '{source}', "
                     f'type = "win.binary")'
                 )
             else:
@@ -148,7 +155,7 @@ def generate_install_r(settings: dict, packages: list, out_path: Path) -> None:
                     f"  c(",
                     f"    {name_csv}",
                     "  ),",
-                    f"  dependencies = FALSE, repos = '{source}', type = \"win.binary\"",
+                    f"  dependencies = {deps_r}, repos = '{source}', type = \"win.binary\"",
                     ")",
                 ]
 

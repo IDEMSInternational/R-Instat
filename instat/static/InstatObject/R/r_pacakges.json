@@ -8,891 +8,1034 @@
       "name": "signmedian.test",
       "installed_from": "http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz",
       "type": "source",
-      "priority": 10
+      "priority": 10,
+      "install_dependencies": false
     },
-
     {
       "name": "stringi",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 20
+      "priority": 20,
+      "install_dependencies": false
     },
     {
       "name": "stringr",
       "installed_from": "http://cran.us.r-project.org",
       "type": "win.binary",
-      "priority": 20
+      "priority": 20,
+      "install_dependencies": false
     },
     {
       "name": "RMySQL",
       "installed_from": "http://cran.us.r-project.org",
       "type": "win.binary",
-      "priority": 20
+      "priority": 20,
+      "install_dependencies": false
     },
     {
       "name": "terra",
       "installed_from": "http://cran.us.r-project.org",
       "type": "win.binary",
-      "priority": 20
+      "priority": 20,
+      "install_dependencies": false
     },
     {
       "name": "XML",
       "installed_from": "http://cran.us.r-project.org",
       "type": "win.binary",
-      "priority": 20
+      "priority": 20,
+      "install_dependencies": false
     },
-
     {
       "name": "reshape2",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "lubridate",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "plyr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "dplyr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "rtf",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggplot2",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "extRemes",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "GGally",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "agridat",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "FactoMineR",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "R6",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "openair",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "circular",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "survival",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "Evapotranspiration",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "clifro",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/clifro/clifro_3.2-5.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "devtools",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "factoextra",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "circlize",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "gridExtra",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggfortify",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "rio",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "readxl",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "lme4",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggthemes",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "httr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "jsonlite",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "fitdistrplus",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "visreg",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "mosaic",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ncdf4",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "DBI",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "EnvStats",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "sjPlot",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "sjmisc",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "plotly",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "svglite",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "tidyr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "rrefine",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "dae",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "gapminder",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "questionr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "nycflights13",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "RcppRoll",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "cmsaf",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "sjlabelled",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "maptools",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/maptools/maptools_1.1-8.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "mapdata",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "e1071",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "robustbase",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "wakefield",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "Hmisc",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "SPEI",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "agricolae",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "sf",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "weathermetrics",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "geosphere",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggmosaic",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggmosaic/ggmosaic_0.3.3.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "readODS",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggalt",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggalt/ggalt_0.4.0.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "ggpmisc",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "treemapify",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "stringdist",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "imputeTS",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "chillR",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "patchwork",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "changepoint",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "trend",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "pbs",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "visdat",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "texmex",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "zyp",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "DescTools",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "MKinfer",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggplotify",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "clipr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ecmwfr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "hydroGOF",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "lemon",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "caret",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "gcookbook",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "tidytext",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "janitor",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggwordcloud",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "rcorpora",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "mlbench",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "splines2",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "mc2d",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "skimr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "fastDummies",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "statip",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "corrr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "dslabs",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "coin",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "conf.design",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "pingr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "vcdExtra",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "apsimx",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "primes",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "Zseq",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "gtExtras",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "segmented",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "verification",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "prediction",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "agriTutorial",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "arm",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "rstanarm",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "statsr",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "statquotes",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "HH",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "datasauRus",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "desplot",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "formattable",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "geomtextpath",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "moderndive",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "modeldata",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ISLR",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "fivethirtyeight",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ggside",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "Weighted.Desc.Stat",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "weights",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "nanonext",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "collapse",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "curl",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "ClimMobTools",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "gtsummary",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "quarto",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
     {
       "name": "PlackettLuce",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
-      "priority": 30
+      "priority": 30,
+      "install_dependencies": true
     },
-
     {
       "name": "getPass",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "PCICt",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "ncdf4.helpers",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "climdex.pcic",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/climdex.pcic/climdex.pcic_1.1-11.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
     {
       "name": "rpivotTable",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/rpivotTable/rpivotTable_0.3.0.tar.gz",
       "type": "source",
-      "priority": 40
+      "priority": 40,
+      "install_dependencies": false
     },
-
     {
       "name": "aida",
       "installed_from": "michael-franke/aida-package",
       "type": "github",
-      "priority": 50
+      "priority": 50,
+      "install_dependencies": false
     },
     {
       "name": "CDT",
       "installed_from": "rijaf-iri/CDT",
       "type": "github",
-      "priority": 50
+      "priority": 50,
+      "install_dependencies": false
     },
     {
       "name": "rapidpror",
       "installed_from": "IDEMSInternational/rapidpror",
       "type": "github",
-      "priority": 50
+      "priority": 50,
+      "install_dependencies": false
     },
     {
       "name": "epicsawrap",
       "installed_from": "IDEMSInternational/epicsawrap",
       "type": "github",
-      "priority": 50
+      "priority": 50,
+      "install_dependencies": false
     },
     {
       "name": "instatCalculations",
       "installed_from": "IDEMSInternational/instatCalculations",
       "type": "github",
       "priority": 50,
-      "options": { "force": true }
+      "install_dependencies": false,
+      "force": true
     },
     {
       "name": "instatExtras",
       "installed_from": "IDEMSInternational/instatExtras",
       "type": "github",
       "priority": 50,
-      "options": { "force": true }
+      "install_dependencies": false,
+      "force": true
     },
     {
       "name": "databook",
       "installed_from": "IDEMSInternational/databook",
       "type": "github",
       "priority": 50,
-      "options": { "force": true }
+      "install_dependencies": false,
+      "force": true
     },
     {
       "name": "instatClimatic",
       "installed_from": "IDEMSInternational/instatClimatic",
       "type": "github",
       "priority": 50,
-      "options": { "force": true }
+      "install_dependencies": false,
+      "force": true
     }
   ]
 }
