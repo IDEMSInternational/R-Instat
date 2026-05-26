@@ -134,9 +134,9 @@
     },
     {
       "name": "clifro",
-      "installed_from": "https://cloud.r-project.org",
-      "type": "win.binary",
-      "priority": 30
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/clifro/clifro_3.2-5.tar.gz",
+      "type": "source",
+      "priority": 40
     },
     {
       "name": "devtools",
@@ -320,9 +320,9 @@
     },
     {
       "name": "maptools",
-      "installed_from": "https://cloud.r-project.org",
-      "type": "win.binary",
-      "priority": 30
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/maptools/maptools_1.1-8.tar.gz",
+      "type": "source",
+      "priority": 40
     },
     {
       "name": "mapdata",
@@ -386,9 +386,9 @@
     },
     {
       "name": "ggmosaic",
-      "installed_from": "https://cloud.r-project.org",
-      "type": "win.binary",
-      "priority": 30
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggmosaic/ggmosaic_0.3.3.tar.gz",
+      "type": "source",
+      "priority": 40
     },
     {
       "name": "readODS",
@@ -398,9 +398,9 @@
     },
     {
       "name": "ggalt",
-      "installed_from": "https://cloud.r-project.org",
-      "type": "win.binary",
-      "priority": 30
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggalt/ggalt_0.4.0.tar.gz",
+      "type": "source",
+      "priority": 40
     },
     {
       "name": "ggpmisc",
@@ -745,19 +745,7 @@
       "priority": 30
     },
     {
-      "name": "waffle",
-      "installed_from": "https://cloud.r-project.org",
-      "type": "win.binary",
-      "priority": 30
-    },
-    {
       "name": "fivethirtyeight",
-      "installed_from": "https://cloud.r-project.org",
-      "type": "win.binary",
-      "priority": 30
-    },
-    {
-      "name": "CGPfunctions",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
       "priority": 30
