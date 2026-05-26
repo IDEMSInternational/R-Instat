@@ -89,8 +89,9 @@ def _group_key(pkg):
 
 
 def _github_line(pkg: dict) -> str:
+    deps_r = "TRUE" if _install_deps(pkg) else "FALSE"
     parts = [f'devtools::install_github("{pkg["installed_from"]}"']
-    parts.append("dependencies = FALSE")
+    parts.append(f"dependencies = {deps_r}")
     if pkg.get("force"):
         parts.append("force = TRUE")
     parts.append('upgrade = "never"')
