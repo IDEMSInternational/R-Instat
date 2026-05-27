@@ -20,28 +20,28 @@
     },
     {
       "name": "stringr",
-      "installed_from": "http://cran.us.r-project.org",
+      "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
       "priority": 20,
       "install_dependencies": false
     },
     {
       "name": "RMySQL",
-      "installed_from": "http://cran.us.r-project.org",
+      "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
       "priority": 20,
       "install_dependencies": false
     },
     {
       "name": "terra",
-      "installed_from": "http://cran.us.r-project.org",
+      "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
       "priority": 20,
       "install_dependencies": false
     },
     {
       "name": "XML",
-      "installed_from": "http://cran.us.r-project.org",
+      "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
       "priority": 20,
       "install_dependencies": false
