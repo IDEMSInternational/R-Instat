@@ -98,7 +98,7 @@ def _github_line(pkg: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Generator: install_packages.R
+# Generator: install_packages_generated.R (default)
 # ---------------------------------------------------------------------------
 
 def generate_install_r(settings: dict, packages: list, out_path: Path) -> None:
