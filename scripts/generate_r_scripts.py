@@ -11,7 +11,7 @@ Usage
 -----
     python generate_r_scripts.py [json_path] [install_out] [check_out]
 
-    json_path    Path to r_packages.json  (default: r_pacakges.json in same dir)
+    json_path    Path to r_packages.json  (default: r_packages.json in same dir)
     install_out  Output path for install script
                  (default: install_packages_generated.R in same dir)
     check_out    Output path for check script
@@ -261,7 +261,7 @@ def generate_check_r(packages: list, out_path: Path) -> None:
 def main() -> None:
     argv = sys.argv[1:]
 
-    json_path    = Path(argv[0]) if len(argv) > 0 else R_DIR / "r_pacakges.json"
+    json_path    = Path(argv[0]) if len(argv) > 0 else R_DIR / "r_packages.json"
     install_out  = Path(argv[1]) if len(argv) > 1 else R_DIR / "install_packages_generated.R"
     check_out    = Path(argv[2]) if len(argv) > 2 else R_DIR / "check_packages_generated.R"
 
