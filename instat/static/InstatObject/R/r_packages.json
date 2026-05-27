@@ -957,13 +957,6 @@
       "install_dependencies": true
     },
     {
-      "name": "ggmosaic",
-      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggmosaic/ggmosaic_0.3.3.tar.gz",
-      "type": "source",
-      "priority": 40,
-      "install_dependencies": true
-    },
-    {
       "name": "getPass",
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz",
       "type": "source",
@@ -997,6 +990,13 @@
       "type": "source",
       "priority": 40,
       "install_dependencies": false
+    },    
+    {
+      "name": "ggmosaic",
+      "installed_from": "https://github.com/haleyjeppson/ggmosaic",
+      "type": "github",
+      "priority": 50,
+      "install_dependencies": true
     },
     {
       "name": "aida",
