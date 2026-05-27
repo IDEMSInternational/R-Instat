@@ -2,8 +2,7 @@
 """
 generate_r_scripts.py
 
-Generates install_packages.R and check_packages.R from r_packages.json.
-
+Generates install_packages_generated.R and check_packages_generated.R from r_packages.json.
 The JSON is the single source of truth.  Edit it there, then re-run this
 script to regenerate both R files.
 
