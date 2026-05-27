@@ -446,24 +446,10 @@
       "install_dependencies": true
     },
     {
-      "name": "ggmosaic",
-      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggmosaic/ggmosaic_0.3.3.tar.gz",
-      "type": "source",
-      "priority": 40,
-      "install_dependencies": true
-    },
-    {
       "name": "readODS",
       "installed_from": "https://cloud.r-project.org",
       "type": "win.binary",
       "priority": 30,
-      "install_dependencies": true
-    },
-    {
-      "name": "ggalt",
-      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggalt/ggalt_0.4.0.tar.gz",
-      "type": "source",
-      "priority": 40,
       "install_dependencies": true
     },
     {
@@ -941,6 +927,41 @@
       "type": "win.binary",
       "priority": 30,
       "install_dependencies": true
+    },    
+    {
+      "name": "proj4",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30,
+      "install_dependencies": true
+    }, 
+    {
+      "name": "ash",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30,
+      "install_dependencies": true
+    }, 
+    {
+      "name": "productplots",
+      "installed_from": "https://cloud.r-project.org",
+      "type": "win.binary",
+      "priority": 30,
+      "install_dependencies": true
+    }, 
+    {
+      "name": "ggalt",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggalt/ggalt_0.4.0.tar.gz",
+      "type": "source",
+      "priority": 40,
+      "install_dependencies": true
+    },
+    {
+      "name": "ggmosaic",
+      "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggmosaic/ggmosaic_0.3.3.tar.gz",
+      "type": "source",
+      "priority": 40,
+      "install_dependencies": true
     },
     {
       "name": "getPass",
@@ -996,20 +1017,20 @@
       "installed_from": "IDEMSInternational/rapidpror",
       "type": "github",
       "priority": 50,
-      "install_dependencies": false
+      "install_dependencies": true
     },
     {
       "name": "epicsawrap",
       "installed_from": "IDEMSInternational/epicsawrap",
       "type": "github",
-      "priority": 50,
-      "install_dependencies": false
+      "priority": 51,
+      "install_dependencies": true
     },
     {
       "name": "instatCalculations",
       "installed_from": "IDEMSInternational/instatCalculations",
       "type": "github",
-      "priority": 50,
+      "priority": 52,
       "install_dependencies": false,
       "force": true
     },
@@ -1017,15 +1038,15 @@
       "name": "instatExtras",
       "installed_from": "IDEMSInternational/instatExtras",
       "type": "github",
-      "priority": 50,
-      "install_dependencies": false,
+      "priority": 53,
+      "install_dependencies": true,
       "force": true
     },
     {
       "name": "databook",
       "installed_from": "IDEMSInternational/databook",
       "type": "github",
-      "priority": 50,
+      "priority": 54,
       "install_dependencies": false,
       "force": true
     },
@@ -1033,7 +1054,7 @@
       "name": "instatClimatic",
       "installed_from": "IDEMSInternational/instatClimatic",
       "type": "github",
-      "priority": 50,
+      "priority": 55,
       "install_dependencies": false,
       "force": true
     }
