@@ -190,7 +190,7 @@ def generate_check_r(packages: list, out_path: Path) -> None:
         "# Edit r_packages.json and re-run generate_r_scripts.py instead.",
         "# Verifies that all required R packages are installed.",
         "#",
-        "# Usage: Rscript check_packages.R [workspace_root] [output_file]",
+        "# Usage: Rscript check_packages_generated.R [workspace_root] [output_file]",
         "#   workspace_root  Unused; kept for workflow compatibility",
         "#   output_file     Path to write the markdown report",
         "#                   (default: package-check-report.txt)",
