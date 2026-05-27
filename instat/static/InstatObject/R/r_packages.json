@@ -450,7 +450,7 @@
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggmosaic/ggmosaic_0.3.3.tar.gz",
       "type": "source",
       "priority": 40,
-      "install_dependencies": false
+      "install_dependencies": true
     },
     {
       "name": "readODS",
@@ -464,7 +464,7 @@
       "installed_from": "https://cran.r-project.org/src/contrib/Archive/ggalt/ggalt_0.4.0.tar.gz",
       "type": "source",
       "priority": 40,
-      "install_dependencies": false
+      "install_dependencies": true
     },
     {
       "name": "ggpmisc",
