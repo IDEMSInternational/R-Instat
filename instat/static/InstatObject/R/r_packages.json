@@ -982,14 +982,14 @@
       "installed_from": "michael-franke/aida-package",
       "type": "github",
       "priority": 50,
-      "install_dependencies": false
+      "install_dependencies": true
     },
     {
       "name": "CDT",
       "installed_from": "rijaf-iri/CDT",
       "type": "github",
       "priority": 50,
-      "install_dependencies": false
+      "install_dependencies": true
     },
     {
       "name": "rapidpror",

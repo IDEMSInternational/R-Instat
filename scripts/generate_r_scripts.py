@@ -78,14 +78,14 @@ def _load(json_path: Path):
     settings = data.get("settings", {})
     packages = sorted(
         data.get("packages", []),
-        key=lambda p: (p.get("priority", 9999), p["type"], p.get("installed_from", ""), _install_deps(p), p["name"]),
+        key=lambda p: (p.get("priority", 9999), p["type"], p.get("installed_from", ""), _install_deps(p), p.get("force", False), p["name"]),
     )
     return settings, packages
 
 
 def _group_key(pkg):
-    """Packages with the same (priority, type, installed_from, deps) are batched."""
-    return (pkg.get("priority", 9999), pkg["type"], pkg.get("installed_from", ""), _install_deps(pkg))
+    """Packages with the same (priority, type, installed_from, deps, force) are batched."""
+    return (pkg.get("priority", 9999), pkg["type"], pkg.get("installed_from", ""), _install_deps(pkg), pkg.get("force", False))
 
 
 def _github_line(pkg: dict) -> str:
@@ -119,7 +119,7 @@ def generate_install_r(settings: dict, packages: list, out_path: Path) -> None:
     internal_library_done = False
     last_type = None
 
-    for (priority, pkg_type, source, deps), group_iter in groupby(packages, key=_group_key):
+    for (priority, pkg_type, source, deps, force), group_iter in groupby(packages, key=_group_key):
         group = list(group_iter)
         deps_r = "TRUE" if deps else "FALSE"
 

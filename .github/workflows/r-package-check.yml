@@ -66,7 +66,7 @@ jobs:
         Rscript $installScript
       shell: powershell
 
-    # Verify all packages from install_packages.R are installed
+    # Verify all packages from r_packages.json are installed
     - name: Analyze installation results
       id: analyze-packages
       run: |
@@ -100,7 +100,7 @@ jobs:
 
           const failed = '${{ steps.analyze-packages.outcome }}' === 'failure';
           const fixHint = failed
-            ? `\n\n**Missing packages detected.** Ensure all packages in \`instat/static/InstatObject/R/install_packages.R\` install correctly on the target R version.`
+            ? `\n\n**Missing packages detected.** Ensure all packages in \`instat/static/InstatObject/R/r_packages.json\` install correctly on the target R version.`
             : '';
 
           const body = `${summary}${fixHint}\n\n---\n*This comment is automatically updated by the R package check workflow.*`;
