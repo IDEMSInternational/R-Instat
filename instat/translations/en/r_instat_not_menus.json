@@ -6858,5 +6858,9 @@
   "Annual-Monthly Temperature Summaries": "Annual-Monthly Temperature Summaries",
   "Export to EPicsa": "Export to EPicsa",
   "db.epicsa.idems.international": "db.epicsa.idems.international",
-  "PICSA Trend Graph": "PICSA Trend Graph"
+  "PICSA Trend Graph": "PICSA Trend Graph",
+  "Prop Definition": "Prop Definition",
+  "Crop Definition": "Crop Definition",
+  "Prop Summaries": "Prop Summaries",
+  "Crop Summaries": "Crop Summaries"
 }
