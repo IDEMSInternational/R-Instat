@@ -316,6 +316,27 @@ Public Class dlgExportClimaticDefinitions
         End If
     End Sub
 
+    Private Sub RemoveRelatedParams(clsRFunction As RFunction, paramName As String, iPosition As Integer, ucrReceiverCore As ucrReceiverSingle, ucrReceiverAssociated As ucrReceiverSingle)
+        If ucrReceiverCore.IsEmpty Then
+            If clsRFunction.ContainsParameter(paramName) Then
+                clsRFunction.RemoveParameterByName(paramName)
+            End If
+        Else
+            If Not ucrReceiverAssociated.IsEmpty Then
+                clsRFunction.AddParameter(paramName, ucrReceiverAssociated.GetVariableNames(), iPosition:=iPosition)
+            End If
+        End If
+    End Sub
+
+    Private Sub CoreCropPropSummaryReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCropSummaries.ControlValueChanged,
+            ucrReceiverPropSummaries.ControlValueChanged
+        ' Removes the parameter if the core receiver is empty and adds it back in if it's filled
+        ' For instance if ucrReceiverCropSummaries is empty, then the associated `crop_definition` parameter should be taken out of the
+        ' clsBuildCropLongerFunction RFunction. But if ucrReceiverCropSummaries is later filled, then we add the `crop_definition` paramter back again
+        RemoveRelatedParams(clsBuildCropLongerFunction, paramName:="crop_definition", iPosition:=2, ucrReceiverCore:=ucrReceiverCropSummaries, ucrReceiverAssociated:=ucrReceiverCropDefinition)
+        RemoveRelatedParams(clsBuildCropLongerFunction, paramName:="prop_definition", iPosition:=3, ucrReceiverCore:=ucrReceiverPropSummaries, ucrReceiverAssociated:=ucrReceiverPropDefinition)
+    End Sub
+
     Private Sub btnConnection_Click(sender As Object, e As EventArgs) Handles btnConnection.Click
         Using dlg As New sdgImportFromClimSoft
             AddHandler dlg.Shown, AddressOf SetEPicsaSubDialogDefaults
