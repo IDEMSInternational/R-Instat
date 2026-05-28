@@ -560,15 +560,6 @@ Public Class dlgClimaticSummary
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetClimaticSummariesFunction, iPosition:=3)
                 UpdateDefinitionName()
 
-                ' Configure save object prefix
-                If rdoAnnual.Checked Then
-                    ucrSaveObject.SetPrefix("Annual_Definitions")
-                ElseIf rdoWithinYear.Checked Then
-                    ucrSaveObject.SetPrefix("Within_Year_Definitions")
-                ElseIf rdoAnnualWithinYear.Checked Then
-                    ucrSaveObject.SetPrefix("Annual_Within_Year_Definitions")
-                End If
-
             Else
                 ' Remove all definition-related code if checkbox is unchecked
                 ' Note: The functions are already removed at the top of the sub
