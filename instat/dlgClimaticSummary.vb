@@ -156,7 +156,7 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverYear}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoAnnualWithinYear, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrChkAddDateColumn}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkDefinitions}, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkDefinitions}, {rdoAnnual, rdoWithinYear, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
         ucrInputFilterPreview.IsReadOnly = True
@@ -331,6 +331,9 @@ Public Class dlgClimaticSummary
                 End If
             ElseIf rdoAnnualWithinYear.Checked Then
                 If ucrReceiverDOY.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverWithinYear.IsEmpty Then
+                    bOkEnabled = False
+                End If
+                If ucrChkDefinitions.Checked AndAlso Not ucrSaveObject.IsComplete Then
                     bOkEnabled = False
                 End If
             ElseIf rdoStation.Checked Then
@@ -537,7 +540,7 @@ Public Class dlgClimaticSummary
 
         ' Reset the call type to prevent output unless explicitly requested
 
-        If (rdoAnnual.Checked OrElse rdoWithinYear.Checked) Then
+        If (rdoAnnual.Checked OrElse rdoWithinYear.Checked OrElse rdoAnnualWithinYear.Checked) Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=2)
             clsGetSummaryVariablesFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             ' Set call type to 2 to trigger the definition summary output
@@ -562,6 +565,8 @@ Public Class dlgClimaticSummary
                     ucrSaveObject.SetPrefix("Annual_Definitions")
                 ElseIf rdoWithinYear.Checked Then
                     ucrSaveObject.SetPrefix("Within_Year_Definitions")
+                ElseIf rdoAnnualWithinYear.Checked Then
+                    ucrSaveObject.SetPrefix("Annual_Within_Year_Definitions")
                 End If
 
             Else
@@ -574,11 +579,12 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub SetSaveDefaultPrefix()
-        ' Configure save object prefix
         If rdoAnnual.Checked Then
             ucrSaveObject.SetPrefix("Annual_Definitions")
         ElseIf rdoWithinYear.Checked Then
             ucrSaveObject.SetPrefix("Within_Year_Definitions")
+        ElseIf rdoAnnualWithinYear.Checked Then
+            ucrSaveObject.SetPrefix("Annual_Within_Year_Definitions")
         End If
 
         AddSaveDefinitionOptions()
