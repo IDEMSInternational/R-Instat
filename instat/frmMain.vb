@@ -3224,4 +3224,8 @@ Public Class frmMain
         dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
         dlgInsertColumn.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesMoreLikert_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesMoreLikert.Click
+        dlgDescribeTwoVariableMoreLikertGraphs.ShowDialog()
+    End Sub
 End Class
