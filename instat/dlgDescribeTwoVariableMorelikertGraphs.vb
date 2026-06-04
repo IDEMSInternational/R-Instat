@@ -225,17 +225,6 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             ucrNudCutoff.Top + (ucrNudCutoff.Height - lblCutoffClampWarning.PreferredHeight) \ 2)
         Me.Controls.Add(lblCutoffClampWarning)
 
-        'Dim lblCutoffClampWarning As New Label()
-        'lblCutoffClampWarning.Name = "lblCutoffClampWarning"
-        'lblCutoffClampWarning.Text = "Cutoff exceeds remaining levels"
-        'lblCutoffClampWarning.ForeColor = Color.Red
-        'lblCutoffClampWarning.AutoSize = True
-        'lblCutoffClampWarning.Visible = False
-        'lblCutoffClampWarning.Location = New Point(
-        'ucrNudCutoff.Right + 5,
-        'ucrNudCutoff.Top + (ucrNudCutoff.Height - lblCutoffClampWarning.PreferredHeight) \ 2)
-        'Me.Controls.Add(lblCutoffClampWarning)
-
         ' Side-chart-only controls start hidden
         lblCutoffLevel.Visible = False
         ucrNudCutoffLevel.Visible = False
@@ -515,7 +504,9 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
 
         If ucrReceiverMultipleGGLikert.IsEmpty() OrElse iNumLevels <= 0 Then Exit Sub
 
-        Dim strFirstVar As String = ucrReceiverMultipleGGLikert.GetVariableNamesAsList()(0)
+        Dim varNames As List(Of String) = ucrReceiverMultipleGGLikert.GetVariableNamesAsList()
+        If varNames Is Nothing OrElse varNames.Count = 0 Then Exit Sub
+        Dim strFirstVar As String = varNames(0)
         If String.IsNullOrEmpty(strFirstVar) Then Exit Sub
 
         Dim iSelectedIndex As Integer = CInt(ucrNudCutoffLevel.Value)
@@ -736,7 +727,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         End If
 
         Dim arrLevels = expResult.AsNumeric()
-        If arrLevels.Length = 0 Then
+        If arrLevels Is Nothing OrElse arrLevels.Length = 0 Then
             bLevelsMatch = True
             Exit Sub
         End If
