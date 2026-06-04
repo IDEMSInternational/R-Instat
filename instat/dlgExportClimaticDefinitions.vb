@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgExportClimaticDefinitions
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private dctReceiverMap As New Dictionary(Of ucrReceiver, ucrReceiverSingle)
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
             clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction,
             clsBuildCropLongerFunction As New RFunction
@@ -107,7 +108,6 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverPropSummaries.strSelectorHeading = "Data Sets"
         ucrReceiverPropSummaries.SetLinkedDisplayControl(lblPropSummaries)
 
-
         ' Annual Rainfall Products
         ucrReceiverMultipleAnnualRainfall.SetParameter(New RParameter("definitions", 3))
         ucrReceiverMultipleAnnualRainfall.Selector = ucrSelectorExportToEPicsa
@@ -163,6 +163,15 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverPropDefinition.strSelectorHeading = "Objects"
         ucrReceiverPropDefinition.SetItemType("object")
         ucrReceiverPropDefinition.SetLinkedDisplayControl(lblPropDefinition)
+
+        ' Dictionary mapping receivers in the groupbox (single/multiple) to their corresponding main receivers
+        dctReceiverMap.Add(ucrReceiverMultipleAnnualRainfall, ucrReceiverAnnualRainfallSummaries)
+        dctReceiverMap.Add(ucrReceiverMultipleMonthlyRainfall, ucrReceiverMonthlyRainfallSummaries)
+        dctReceiverMap.Add(ucrReceiverMultipleAnnualTemp, ucrReceiverAnnualTempSummaries)
+        dctReceiverMap.Add(ucrReceiverMultipleMonthlyTemp, ucrReceiverMonthlyTempSummaries)
+        dctReceiverMap.Add(ucrReceiverMultipleAnnualMonthlyTemp, ucrReceiverAnnualMonthlyTempSummaries)
+        dctReceiverMap.Add(ucrReceiverCropDefinition, ucrReceiverCropSummaries)
+        dctReceiverMap.Add(ucrReceiverPropDefinition, ucrReceiverPropSummaries)
 
         HideDisplayGroupedControls()
     End Sub
@@ -391,6 +400,18 @@ Public Class dlgExportClimaticDefinitions
     Private Sub MultipleReceiver_Click(sender As Object, e As EventArgs) Handles ucrReceiverMultipleAnnualRainfall.Enter,
             ucrReceiverMultipleMonthlyRainfall.Enter, ucrReceiverMultipleAnnualTemp.Enter, ucrReceiverMultipleMonthlyTemp.Enter,
             ucrReceiverMultipleAnnualMonthlyTemp.Enter, ucrReceiverPropDefinition.Enter, ucrReceiverCropDefinition.Enter
+        Dim ucrReceiverCurrent As ucrReceiver = DirectCast(sender, ucrReceiver)
+        Dim ucrReceiverDataframe As ucrReceiverSingle
+        Dim strDataframe As String = ""
+
+        ' Setting the dataframe in the object selector to be the dataframe name in the corresponding main single receiver
+        If dctReceiverMap.TryGetValue(ucrReceiverCurrent, ucrReceiverDataframe) Then
+            If Not ucrReceiverDataframe.IsEmpty() Then
+                strDataframe = ucrReceiverDataframe.GetVariableNames(bWithQuotes:=False)
+                ucrSelectorExportToEPicsa.ucrAvailableDataFrames.SetDataframe(strDataframe)
+            End If
+        End If
+
         SetSelectorMode(SelectorMode.Objects)
     End Sub
 

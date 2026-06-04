@@ -142,7 +142,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMonthlyTempSummaries.Selector = Nothing
         Me.ucrReceiverMonthlyTempSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverMonthlyTempSummaries.strNcFilePath = ""
-        Me.ucrReceiverMonthlyTempSummaries.TabIndex = 25
+        Me.ucrReceiverMonthlyTempSummaries.TabIndex = 24
         Me.ucrReceiverMonthlyTempSummaries.ucrSelector = Nothing
         '
         'lblAnnualTempSummaries
@@ -167,7 +167,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverAnnualTempSummaries.Selector = Nothing
         Me.ucrReceiverAnnualTempSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverAnnualTempSummaries.strNcFilePath = ""
-        Me.ucrReceiverAnnualTempSummaries.TabIndex = 27
+        Me.ucrReceiverAnnualTempSummaries.TabIndex = 22
         Me.ucrReceiverAnnualTempSummaries.ucrSelector = Nothing
         '
         'lblMonthlyRainfallSummaries
@@ -192,7 +192,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMonthlyRainfallSummaries.Selector = Nothing
         Me.ucrReceiverMonthlyRainfallSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverMonthlyRainfallSummaries.strNcFilePath = ""
-        Me.ucrReceiverMonthlyRainfallSummaries.TabIndex = 29
+        Me.ucrReceiverMonthlyRainfallSummaries.TabIndex = 23
         Me.ucrReceiverMonthlyRainfallSummaries.ucrSelector = Nothing
         '
         'grpDefinitionsProducts
@@ -255,7 +255,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverPropDefinition.Selector = Nothing
         Me.ucrReceiverPropDefinition.Size = New System.Drawing.Size(213, 30)
         Me.ucrReceiverPropDefinition.strNcFilePath = ""
-        Me.ucrReceiverPropDefinition.TabIndex = 62
+        Me.ucrReceiverPropDefinition.TabIndex = 34
         Me.ucrReceiverPropDefinition.ucrSelector = Nothing
         '
         'lblAnnualMonthlyTemp
@@ -277,7 +277,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverCropDefinition.Selector = Nothing
         Me.ucrReceiverCropDefinition.Size = New System.Drawing.Size(213, 30)
         Me.ucrReceiverCropDefinition.strNcFilePath = ""
-        Me.ucrReceiverCropDefinition.TabIndex = 64
+        Me.ucrReceiverCropDefinition.TabIndex = 33
         Me.ucrReceiverCropDefinition.ucrSelector = Nothing
         '
         'ucrReceiverMultipleAnnualMonthlyTemp
@@ -290,7 +290,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMultipleAnnualMonthlyTemp.Selector = Nothing
         Me.ucrReceiverMultipleAnnualMonthlyTemp.Size = New System.Drawing.Size(213, 127)
         Me.ucrReceiverMultipleAnnualMonthlyTemp.strNcFilePath = ""
-        Me.ucrReceiverMultipleAnnualMonthlyTemp.TabIndex = 13
+        Me.ucrReceiverMultipleAnnualMonthlyTemp.TabIndex = 30
         Me.ucrReceiverMultipleAnnualMonthlyTemp.ucrSelector = Nothing
         '
         'lblMonthlyRainfall
@@ -312,7 +312,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMultipleMonthlyRainfall.Selector = Nothing
         Me.ucrReceiverMultipleMonthlyRainfall.Size = New System.Drawing.Size(213, 127)
         Me.ucrReceiverMultipleMonthlyRainfall.strNcFilePath = ""
-        Me.ucrReceiverMultipleMonthlyRainfall.TabIndex = 11
+        Me.ucrReceiverMultipleMonthlyRainfall.TabIndex = 31
         Me.ucrReceiverMultipleMonthlyRainfall.ucrSelector = Nothing
         '
         'lblMonthlyTemp
@@ -334,7 +334,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMultipleMonthlyTemp.Selector = Nothing
         Me.ucrReceiverMultipleMonthlyTemp.Size = New System.Drawing.Size(213, 127)
         Me.ucrReceiverMultipleMonthlyTemp.strNcFilePath = ""
-        Me.ucrReceiverMultipleMonthlyTemp.TabIndex = 9
+        Me.ucrReceiverMultipleMonthlyTemp.TabIndex = 32
         Me.ucrReceiverMultipleMonthlyTemp.ucrSelector = Nothing
         '
         'lblAnnualTemp
@@ -356,7 +356,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMultipleAnnualTemp.Selector = Nothing
         Me.ucrReceiverMultipleAnnualTemp.Size = New System.Drawing.Size(213, 127)
         Me.ucrReceiverMultipleAnnualTemp.strNcFilePath = ""
-        Me.ucrReceiverMultipleAnnualTemp.TabIndex = 7
+        Me.ucrReceiverMultipleAnnualTemp.TabIndex = 29
         Me.ucrReceiverMultipleAnnualTemp.ucrSelector = Nothing
         '
         'lblAnnualRainfall
@@ -378,7 +378,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMultipleAnnualRainfall.Selector = Nothing
         Me.ucrReceiverMultipleAnnualRainfall.Size = New System.Drawing.Size(213, 127)
         Me.ucrReceiverMultipleAnnualRainfall.strNcFilePath = ""
-        Me.ucrReceiverMultipleAnnualRainfall.TabIndex = 5
+        Me.ucrReceiverMultipleAnnualRainfall.TabIndex = 28
         Me.ucrReceiverMultipleAnnualRainfall.ucrSelector = Nothing
         '
         'ucrBase
@@ -413,7 +413,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverAnnualMonthlyTempSummaries.Selector = Nothing
         Me.ucrReceiverAnnualMonthlyTempSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverAnnualMonthlyTempSummaries.strNcFilePath = ""
-        Me.ucrReceiverAnnualMonthlyTempSummaries.TabIndex = 54
+        Me.ucrReceiverAnnualMonthlyTempSummaries.TabIndex = 25
         Me.ucrReceiverAnnualMonthlyTempSummaries.ucrSelector = Nothing
         '
         'lblDataframes
@@ -458,7 +458,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverPropSummaries.Selector = Nothing
         Me.ucrReceiverPropSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverPropSummaries.strNcFilePath = ""
-        Me.ucrReceiverPropSummaries.TabIndex = 58
+        Me.ucrReceiverPropSummaries.TabIndex = 27
         Me.ucrReceiverPropSummaries.ucrSelector = Nothing
         '
         'lblCropSummaries
@@ -483,7 +483,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverCropSummaries.Selector = Nothing
         Me.ucrReceiverCropSummaries.Size = New System.Drawing.Size(294, 30)
         Me.ucrReceiverCropSummaries.strNcFilePath = ""
-        Me.ucrReceiverCropSummaries.TabIndex = 60
+        Me.ucrReceiverCropSummaries.TabIndex = 26
         Me.ucrReceiverCropSummaries.ucrSelector = Nothing
         '
         'dlgExportClimaticDefinitions
