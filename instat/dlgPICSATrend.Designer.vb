@@ -51,7 +51,7 @@ Partial Class dlgPICSATrendGraph
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(20, 586)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 0
@@ -75,7 +75,7 @@ Partial Class dlgPICSATrendGraph
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
         Me.ucrInputStation.Location = New System.Drawing.Point(554, 430)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(123, 32)
         Me.ucrInputStation.TabIndex = 31
@@ -159,8 +159,8 @@ Partial Class dlgPICSATrendGraph
         '
         Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(6, 448)
-        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(6, 443)
+        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         Me.ucrChkWithSE.Size = New System.Drawing.Size(332, 34)
         Me.ucrChkWithSE.TabIndex = 33
@@ -170,7 +170,7 @@ Partial Class dlgPICSATrendGraph
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(6, 398)
-        Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(332, 34)
         Me.ucrChkLineofBestFit.TabIndex = 32
@@ -179,8 +179,8 @@ Partial Class dlgPICSATrendGraph
         '
         Me.ucrChkPoints.AutoSize = True
         Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(6, 486)
-        Me.ucrChkPoints.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkPoints.Location = New System.Drawing.Point(6, 487)
+        Me.ucrChkPoints.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkPoints.Name = "ucrChkPoints"
         Me.ucrChkPoints.Size = New System.Drawing.Size(332, 36)
         Me.ucrChkPoints.TabIndex = 34
@@ -199,7 +199,7 @@ Partial Class dlgPICSATrendGraph
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.Location = New System.Drawing.Point(6, 346)
-        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(226, 34)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
@@ -213,31 +213,31 @@ Partial Class dlgPICSATrendGraph
         Me.contextMenuStripOptions.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(148, 70)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(194, 100)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(193, 32)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemLineOptions
         '
         Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(147, 22)
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(193, 32)
         Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
         'toolStripMenuItemPointOption
         '
         Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(147, 22)
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(193, 32)
         Me.toolStripMenuItemPointOption.Text = "Point Options"
         '
         'cmdPICSAOptions
         '
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPICSAOptions.Location = New System.Drawing.Point(6, 310)
-        Me.cmdPICSAOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdPICSAOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
         Me.cmdPICSAOptions.Size = New System.Drawing.Size(226, 34)
         Me.cmdPICSAOptions.TabIndex = 36
@@ -250,7 +250,7 @@ Partial Class dlgPICSATrendGraph
         Me.ucrReceiverPICSATrend.AutoSize = True
         Me.ucrReceiverPICSATrend.frmParent = Me
         Me.ucrReceiverPICSATrend.Location = New System.Drawing.Point(363, 56)
-        Me.ucrReceiverPICSATrend.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrReceiverPICSATrend.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrReceiverPICSATrend.Name = "ucrReceiverPICSATrend"
         Me.ucrReceiverPICSATrend.Selector = Nothing
         Me.ucrReceiverPICSATrend.Size = New System.Drawing.Size(234, 178)
@@ -282,7 +282,7 @@ Partial Class dlgPICSATrendGraph
         Me.Controls.Add(Me.ucrSelectorPICSATrend)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPICSATrendGraph"
