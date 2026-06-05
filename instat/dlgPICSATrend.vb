@@ -879,7 +879,7 @@ Public Class dlgPICSATrendGraph
                                       clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY,
                                       clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY,
                                       clsNewPoint2AesFunction:=clsPoint2AesFunction, clsNewSegmentAes:=clsSegmentAesFunction, clsNewAsDateYend:=clsAsDateYendFunction, bReset:=bResetSubdialog)
-        sdgPICSARainfallGraph.SetTemperatureMode(False)
+        sdgPICSARainfallGraph.SetTemperatureMode(True)
         sdgPICSARainfallGraph.ShowDialog()
         AddRemoveGroupBy()
         bResetSubdialog = False

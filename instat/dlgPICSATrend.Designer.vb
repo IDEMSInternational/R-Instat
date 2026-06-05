@@ -50,10 +50,10 @@ Partial Class dlgPICSATrendGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(13, 391)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Location = New System.Drawing.Point(20, 586)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 0
         '
         'ucrSelectorPICSATrend
@@ -62,10 +62,10 @@ Partial Class dlgPICSATrendGraph
         Me.ucrSelectorPICSATrend.bDropUnusedFilterLevels = False
         Me.ucrSelectorPICSATrend.bShowHiddenColumns = False
         Me.ucrSelectorPICSATrend.bUseCurrentFilter = True
-        Me.ucrSelectorPICSATrend.Location = New System.Drawing.Point(4, 26)
+        Me.ucrSelectorPICSATrend.Location = New System.Drawing.Point(6, 39)
         Me.ucrSelectorPICSATrend.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPICSATrend.Name = "ucrSelectorPICSATrend"
-        Me.ucrSelectorPICSATrend.Size = New System.Drawing.Size(221, 189)
+        Me.ucrSelectorPICSATrend.Size = New System.Drawing.Size(332, 284)
         Me.ucrSelectorPICSATrend.TabIndex = 2
         '
         'ucrInputStation
@@ -74,21 +74,21 @@ Partial Class dlgPICSATrendGraph
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(369, 287)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputStation.Location = New System.Drawing.Point(554, 430)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputStation.Size = New System.Drawing.Size(123, 32)
         Me.ucrInputStation.TabIndex = 31
         '
         'ucrReceiverFacetBy
         '
         Me.ucrReceiverFacetBy.AutoSize = True
         Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(242, 287)
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(363, 430)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
         Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(188, 39)
         Me.ucrReceiverFacetBy.strNcFilePath = ""
         Me.ucrReceiverFacetBy.TabIndex = 30
         Me.ucrReceiverFacetBy.ucrSelector = Nothing
@@ -97,9 +97,10 @@ Partial Class dlgPICSATrendGraph
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(242, 273)
+        Me.lblFacetBy.Location = New System.Drawing.Point(363, 410)
+        Me.lblFacetBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
+        Me.lblFacetBy.Size = New System.Drawing.Size(149, 20)
         Me.lblFacetBy.TabIndex = 29
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By (Optional):"
@@ -108,11 +109,11 @@ Partial Class dlgPICSATrendGraph
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(242, 199)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(363, 298)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(145, 26)
+        Me.ucrReceiverX.Size = New System.Drawing.Size(218, 39)
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.TabIndex = 26
         Me.ucrReceiverX.ucrSelector = Nothing
@@ -121,11 +122,11 @@ Partial Class dlgPICSATrendGraph
         '
         Me.ucrReceiverColourBy.AutoSize = True
         Me.ucrReceiverColourBy.frmParent = Me
-        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(242, 244)
+        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(363, 366)
         Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColourBy.Name = "ucrReceiverColourBy"
         Me.ucrReceiverColourBy.Selector = Nothing
-        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(145, 26)
+        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(218, 39)
         Me.ucrReceiverColourBy.strNcFilePath = ""
         Me.ucrReceiverColourBy.TabIndex = 28
         Me.ucrReceiverColourBy.ucrSelector = Nothing
@@ -134,9 +135,10 @@ Partial Class dlgPICSATrendGraph
         '
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorOptional.Location = New System.Drawing.Point(242, 226)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(363, 339)
+        Me.lblFactorOptional.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(103, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(154, 20)
         Me.lblFactorOptional.TabIndex = 27
         Me.lblFactorOptional.Tag = "Factor_Optional:"
         Me.lblFactorOptional.Text = "Colour By (Optional):"
@@ -145,9 +147,10 @@ Partial Class dlgPICSATrendGraph
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(242, 184)
+        Me.lblXVariable.Location = New System.Drawing.Point(363, 276)
+        Me.lblXVariable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXVariable.Size = New System.Drawing.Size(86, 20)
         Me.lblXVariable.TabIndex = 25
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
@@ -156,48 +159,49 @@ Partial Class dlgPICSATrendGraph
         '
         Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(4, 299)
-        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(6, 448)
+        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(221, 23)
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(332, 34)
         Me.ucrChkWithSE.TabIndex = 33
         '
         'ucrChkLineofBestFit
         '
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(4, 265)
-        Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(6, 398)
+        Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(221, 23)
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(332, 34)
         Me.ucrChkLineofBestFit.TabIndex = 32
         '
         'ucrChkPoints
         '
         Me.ucrChkPoints.AutoSize = True
         Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(4, 324)
-        Me.ucrChkPoints.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkPoints.Location = New System.Drawing.Point(6, 486)
+        Me.ucrChkPoints.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(221, 24)
+        Me.ucrChkPoints.Size = New System.Drawing.Size(332, 36)
         Me.ucrChkPoints.TabIndex = 34
         '
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(4, 357)
-        Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSave.Location = New System.Drawing.Point(6, 536)
+        Me.ucrSave.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(480, 36)
         Me.ucrSave.TabIndex = 35
         '
         'cmdOptions
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(4, 231)
+        Me.cmdOptions.Location = New System.Drawing.Point(6, 346)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(151, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(226, 34)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 37
         Me.cmdOptions.Tag = "Plot Options"
@@ -232,23 +236,24 @@ Partial Class dlgPICSATrendGraph
         'cmdPICSAOptions
         '
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(4, 207)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(6, 310)
+        Me.cmdPICSAOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(151, 23)
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(226, 34)
         Me.cmdPICSAOptions.TabIndex = 36
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
         Me.cmdPICSAOptions.UseVisualStyleBackColor = True
         '
-        'ucrReceiverPICSA
+        'ucrReceiverPICSATrend
         '
         Me.ucrReceiverPICSATrend.AutoSize = True
         Me.ucrReceiverPICSATrend.frmParent = Me
-        Me.ucrReceiverPICSATrend.Location = New System.Drawing.Point(242, 37)
-        Me.ucrReceiverPICSATrend.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrReceiverPICSATrend.Location = New System.Drawing.Point(363, 56)
+        Me.ucrReceiverPICSATrend.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrReceiverPICSATrend.Name = "ucrReceiverPICSATrend"
         Me.ucrReceiverPICSATrend.Selector = Nothing
-        Me.ucrReceiverPICSATrend.Size = New System.Drawing.Size(156, 119)
+        Me.ucrReceiverPICSATrend.Size = New System.Drawing.Size(234, 178)
         Me.ucrReceiverPICSATrend.strNcFilePath = ""
         Me.ucrReceiverPICSATrend.TabIndex = 38
         Me.ucrReceiverPICSATrend.ucrSelector = Nothing
@@ -256,10 +261,10 @@ Partial Class dlgPICSATrendGraph
         '
         'dlgPICSATrendGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(462, 447)
+        Me.ClientSize = New System.Drawing.Size(693, 670)
         Me.Controls.Add(Me.ucrReceiverPICSATrend)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdPICSAOptions)
@@ -277,12 +282,14 @@ Partial Class dlgPICSATrendGraph
         Me.Controls.Add(Me.ucrSelectorPICSATrend)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPICSATrendGraph"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "PICSA Trend Graph"
+        Me.Text = "Trend Graph"
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
