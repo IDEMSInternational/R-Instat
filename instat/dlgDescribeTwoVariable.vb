@@ -1416,6 +1416,7 @@ Public Class dlgDescribeTwoVariable
         End If
         FactorColumns()
         AddRemoveFrequencyParameters()
+        RemoveAddPerTotalThreeVar()
         ChangeBaseRCode()
     End Sub
 
@@ -1587,6 +1588,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondTwoVariableFactor.ControlContentsChanged
         AssignSecondVariableType()
         RemoveAddPerTotalThreeVar()
+        AddRemoveFrequencyParameters()
         ChangeBaseRCode()
         UpdateSummaryTableFunction()
         ChangeLocations()
@@ -1691,6 +1693,7 @@ Public Class dlgDescribeTwoVariable
         ChangeBaseRCode()
         ManageControlsVisibility()
         AddRemoveThirdAnovaParam()
+        AddRemoveFrequencyParameters()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
