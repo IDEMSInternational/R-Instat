@@ -1446,7 +1446,7 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoTotal.Checked Then
             clsThreeVariableCombineFrequencyParametersFunction.RemoveParameterByName("perc_total_factors")
         End If
-
+        AddRemoveFrequencyParameters()
     End Sub
 
     'This sub is used to update the base R code when the control value changes in the ucrSelectorDescribeTwoVar.
