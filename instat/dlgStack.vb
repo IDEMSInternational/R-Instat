@@ -122,10 +122,10 @@ Public Class dlgStack
         ucrChkStackMultipleSets.AddFunctionNamesCondition(True, "reshape")
         ucrChkStackMultipleSets.AddFunctionNamesCondition(False, "pivot_longer")
 
-        ucrInputNamesSep.SetParameter(New RParameter("names_sep", 0))
+        ucrInputNamesSep.SetParameter(New RParameter("names_sep", 1))
         dctNamesSep.Add("Period .", Chr(34) & "\\." & Chr(34))
-        dctNamesSep.Add("Underscore _", Chr(34) & "\\_" & Chr(34))
-        dctNamesSep.Add("Hyphen -", Chr(34) & "\-" & Chr(34))
+        dctNamesSep.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        dctNamesSep.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         ucrInputNamesSep.SetItems(dctNamesSep)
 
         ucrFactorInto.SetParameter(New RParameter("timevar", 3))
@@ -279,7 +279,7 @@ Public Class dlgStack
 
         clsStackMultipleFunction.SetPackageName("tidyr")
         clsStackMultipleFunction.SetRCommand("pivot_longer")
-        clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=0)
+        clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=1)
 
         clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetVariablesFunction.SetAssignTo("colnames")
@@ -572,6 +572,7 @@ Public Class dlgStack
         Dim strFactorName As String = ucrFactorInto.GetText()
 
         If strFactorName = "" Then
+            clsStackMultipleFunction.RemoveParameterByName("names_to")
             Exit Sub
         End If
 
