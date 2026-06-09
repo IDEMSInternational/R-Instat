@@ -335,7 +335,7 @@ Public Class dlgCheckSummary
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkVarWidth.SetRDefault("FALSE")
+        ucrChkVarWidth.SetRDefault("TRUE")
 
         ' Label Outliers
         ucrChkLabel.SetText("Label Outliers")
@@ -1934,12 +1934,16 @@ Public Class dlgCheckSummary
 
                 If strFullRecentName <> "" Then
                     ucrByFactorsReceiver.Add(strFullRecentName)
+                    ' Auto-fill Fill by receiver with the same recent column
+                    ucrSecondFactorReceiver.Add(strFullRecentName)
                 Else
                     Dim strFallbacks() As String = {"recent", "Recent", "recent1", "Recent1"}
                     For Each strFallback In strFallbacks
                         strFullRecentName = GetFullVariableName(strFallback)
                         If strFullRecentName <> "" Then
                             ucrByFactorsReceiver.Add(strFullRecentName)
+                            ' Auto-fill Fill by receiver with the same recent column
+                            ucrSecondFactorReceiver.Add(strFullRecentName)
                             Exit For
                         End If
                     Next
