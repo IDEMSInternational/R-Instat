@@ -886,6 +886,7 @@ Public Class dlgPICSARainfall
 
         If bRowsAndCols OrElse bRowsAndColsAll Then
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsRowVarsFunction.RemoveParameterByName("cols")
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
         ElseIf bRow OrElse bRowAll Then
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
@@ -911,6 +912,7 @@ Public Class dlgPICSARainfall
                                        clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY,
                                        clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY,
                                        clsNewPoint2AesFunction:=clsPoint2AesFunction, clsNewSegmentAes:=clsSegmentAesFunction, clsNewAsDateYend:=clsAsDateYendFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetTemperatureMode(False)
         sdgPICSARainfallGraph.ShowDialog()
         AddRemoveGroupBy()
         bResetSubdialog = False
@@ -1025,9 +1027,9 @@ Public Class dlgPICSARainfall
         SetPipeAssignTo()
     End Sub
 
-    Private Sub GetParameterValue(clsOperator As ROperator)
-        Dim i As Integer = 0
-        For Each clsTempParam As RParameter In clsOperator.clsParameters
+    Private Sub GetParameterValue(clsFunction As RFunction, ByRef i As Integer)
+        'Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsFunction.clsParameters
             If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
                 clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
                 i = i + 1
@@ -1036,16 +1038,17 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub AddRemoveGroupBy()
-
+        Dim i As Integer = 0
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
-                '' Feb 07 2026
-                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
-                Select Case ucrInputStation.GetText()
-                    Case strFacetWrap
-                        'GetParameterValue(clsFacetVariablesOperator)
-                End Select
+
+                If ucrInputStation.GetText() = strFacetRowAndCol OrElse ucrInputStation.GetText() = strFacetRowAndColAll Then
+                    GetParameterValue(clsRowVarsFunction, i)
+                    GetParameterValue(clsColVarsFunction, i)
+                Else
+                    GetParameterValue(clsRowVarsFunction, i)
+                End If
             End If
             If clsRaesFunction.ContainsParameter("colour") Then
                 clsGroupByFunction.AddParameter("colour",
