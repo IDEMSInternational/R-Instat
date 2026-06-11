@@ -18,35 +18,37 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblLevelsWarning = New System.Windows.Forms.Label()
-        Me.ucrSelectorGGLikert = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleGGLikert = New instat.ucrReceiverMultiple()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.cmdLikertOptions = New System.Windows.Forms.Button()
+        Me.grpLabels = New System.Windows.Forms.GroupBox()
+        Me.grpType = New System.Windows.Forms.GroupBox()
+        Me.rdoLikert = New System.Windows.Forms.RadioButton()
+        Me.rdoStacked = New System.Windows.Forms.RadioButton()
+        Me.rdoSide = New System.Windows.Forms.RadioButton()
+        Me.lblCutoffLevel = New System.Windows.Forms.Label()
+        Me.lblExclude = New System.Windows.Forms.Label()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelectorGGLikert = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverMultipleGGLikert = New instat.ucrReceiverMultiple()
+        Me.ucrChkWrap = New instat.ucrCheck()
+        Me.ucrNudWrap = New instat.ucrNud()
+        Me.ucrChkValues = New instat.ucrCheck()
+        Me.ucrChkTotals = New instat.ucrCheck()
         Me.ucrChkSort = New instat.ucrCheck()
         Me.ucrChkDescending = New instat.ucrCheck()
         Me.ucrChkReverse = New instat.ucrCheck()
         Me.ucrChkSymmetric = New instat.ucrCheck()
         Me.ucrChkCutoff = New instat.ucrCheck()
         Me.ucrNudCutoff = New instat.ucrNud()
-        Me.grpLabels = New System.Windows.Forms.GroupBox()
-        Me.ucrChkWrap = New instat.ucrCheck()
-        Me.ucrNudWrap = New instat.ucrNud()
-        Me.ucrChkValues = New instat.ucrCheck()
-        Me.ucrChkTotals = New instat.ucrCheck()
-        Me.grpType = New System.Windows.Forms.GroupBox()
-        Me.rdoLikert = New System.Windows.Forms.RadioButton()
-        Me.rdoStacked = New System.Windows.Forms.RadioButton()
-        Me.rdoSide = New System.Windows.Forms.RadioButton()
-        Me.lblCutoffLevel = New System.Windows.Forms.Label()
         Me.ucrNudCutoffLevel = New instat.ucrNud()
-        Me.lblExclude = New System.Windows.Forms.Label()
         Me.ucrNudExclude = New instat.ucrNud()
         Me.ucrSaveGGLikert = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
-        Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.grpLabels.SuspendLayout()
         Me.grpType.SuspendLayout()
         Me.SuspendLayout()
@@ -61,18 +63,6 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         Me.lblLevelsWarning.Text = "All factors must have the same number of levels."
         Me.lblLevelsWarning.Visible = False
         '
-        'ucrSelectorGGLikert
-        '
-        Me.ucrSelectorGGLikert.AutoSize = True
-        Me.ucrSelectorGGLikert.bDropUnusedFilterLevels = False
-        Me.ucrSelectorGGLikert.bShowHiddenColumns = False
-        Me.ucrSelectorGGLikert.bUseCurrentFilter = True
-        Me.ucrSelectorGGLikert.Location = New System.Drawing.Point(9, 10)
-        Me.ucrSelectorGGLikert.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorGGLikert.Name = "ucrSelectorGGLikert"
-        Me.ucrSelectorGGLikert.Size = New System.Drawing.Size(213, 220)
-        Me.ucrSelectorGGLikert.TabIndex = 0
-        '
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
@@ -83,22 +73,9 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         Me.lblFactors.TabIndex = 1
         Me.lblFactors.Text = "Factors:"
         '
-        'ucrReceiverMultipleGGLikert
-        '
-        Me.ucrReceiverMultipleGGLikert.AutoSize = True
-        Me.ucrReceiverMultipleGGLikert.frmParent = Me
-        Me.ucrReceiverMultipleGGLikert.Location = New System.Drawing.Point(232, 60)
-        Me.ucrReceiverMultipleGGLikert.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleGGLikert.Name = "ucrReceiverMultipleGGLikert"
-        Me.ucrReceiverMultipleGGLikert.Selector = Nothing
-        Me.ucrReceiverMultipleGGLikert.Size = New System.Drawing.Size(167, 130)
-        Me.ucrReceiverMultipleGGLikert.strNcFilePath = ""
-        Me.ucrReceiverMultipleGGLikert.TabIndex = 2
-        Me.ucrReceiverMultipleGGLikert.ucrSelector = Nothing
-        '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 234)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 196)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdPlotOptions.TabIndex = 4
@@ -108,72 +85,12 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         'cmdLikertOptions
         '
         Me.cmdLikertOptions.Enabled = False
-        Me.cmdLikertOptions.Location = New System.Drawing.Point(9, 263)
+        Me.cmdLikertOptions.Location = New System.Drawing.Point(9, 224)
         Me.cmdLikertOptions.Name = "cmdLikertOptions"
         Me.cmdLikertOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdLikertOptions.TabIndex = 5
         Me.cmdLikertOptions.Text = "Likert Options"
         Me.cmdLikertOptions.UseVisualStyleBackColor = True
-        '
-        'ucrChkSort
-        '
-        Me.ucrChkSort.AutoSize = True
-        Me.ucrChkSort.Checked = False
-        Me.ucrChkSort.Location = New System.Drawing.Point(9, 298)
-        Me.ucrChkSort.Name = "ucrChkSort"
-        Me.ucrChkSort.Size = New System.Drawing.Size(148, 23)
-        Me.ucrChkSort.TabIndex = 6
-        '
-        'ucrChkDescending
-        '
-        Me.ucrChkDescending.AutoSize = True
-        Me.ucrChkDescending.Checked = False
-        Me.ucrChkDescending.Enabled = False
-        Me.ucrChkDescending.Location = New System.Drawing.Point(25, 323)
-        Me.ucrChkDescending.Name = "ucrChkDescending"
-        Me.ucrChkDescending.Size = New System.Drawing.Size(148, 23)
-        Me.ucrChkDescending.TabIndex = 7
-        '
-        'ucrChkReverse
-        '
-        Me.ucrChkReverse.AutoSize = True
-        Me.ucrChkReverse.Checked = False
-        Me.ucrChkReverse.Location = New System.Drawing.Point(9, 350)
-        Me.ucrChkReverse.Name = "ucrChkReverse"
-        Me.ucrChkReverse.Size = New System.Drawing.Size(148, 23)
-        Me.ucrChkReverse.TabIndex = 8
-        '
-        'ucrChkSymmetric
-        '
-        Me.ucrChkSymmetric.AutoSize = True
-        Me.ucrChkSymmetric.Checked = False
-        Me.ucrChkSymmetric.Location = New System.Drawing.Point(9, 376)
-        Me.ucrChkSymmetric.Name = "ucrChkSymmetric"
-        Me.ucrChkSymmetric.Size = New System.Drawing.Size(148, 23)
-        Me.ucrChkSymmetric.TabIndex = 9
-        '
-        'ucrChkCutoff
-        '
-        Me.ucrChkCutoff.AutoSize = True
-        Me.ucrChkCutoff.Checked = False
-        Me.ucrChkCutoff.Location = New System.Drawing.Point(9, 402)
-        Me.ucrChkCutoff.Name = "ucrChkCutoff"
-        Me.ucrChkCutoff.Size = New System.Drawing.Size(148, 23)
-        Me.ucrChkCutoff.TabIndex = 10
-        '
-        'ucrNudCutoff
-        '
-        Me.ucrNudCutoff.AutoSize = True
-        Me.ucrNudCutoff.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCutoff.Increment = New Decimal(New Integer() {5, 0, 0, 65536})
-        Me.ucrNudCutoff.Location = New System.Drawing.Point(160, 403)
-        Me.ucrNudCutoff.Maximum = New Decimal(New Integer() {9, 0, 0, 0})
-        Me.ucrNudCutoff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCutoff.Name = "ucrNudCutoff"
-        Me.ucrNudCutoff.Size = New System.Drawing.Size(55, 20)
-        Me.ucrNudCutoff.TabIndex = 11
-        Me.ucrNudCutoff.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCutoff.Visible = False
         '
         'grpLabels
         '
@@ -184,51 +101,10 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         Me.grpLabels.Location = New System.Drawing.Point(232, 222)
         Me.grpLabels.Name = "grpLabels"
         Me.grpLabels.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpLabels.Size = New System.Drawing.Size(209, 100)
+        Me.grpLabels.Size = New System.Drawing.Size(167, 100)
         Me.grpLabels.TabIndex = 3
         Me.grpLabels.TabStop = False
         Me.grpLabels.Text = "Labels"
-        '
-        'ucrChkWrap
-        '
-        Me.ucrChkWrap.AutoSize = True
-        Me.ucrChkWrap.Checked = False
-        Me.ucrChkWrap.Location = New System.Drawing.Point(6, 18)
-        Me.ucrChkWrap.Name = "ucrChkWrap"
-        Me.ucrChkWrap.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkWrap.TabIndex = 0
-        '
-        'ucrNudWrap
-        '
-        Me.ucrNudWrap.AutoSize = True
-        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWrap.Location = New System.Drawing.Point(148, 20)
-        Me.ucrNudWrap.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.ucrNudWrap.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.ucrNudWrap.Name = "ucrNudWrap"
-        Me.ucrNudWrap.Size = New System.Drawing.Size(55, 20)
-        Me.ucrNudWrap.TabIndex = 1
-        Me.ucrNudWrap.Value = New Decimal(New Integer() {20, 0, 0, 0})
-        Me.ucrNudWrap.Visible = False
-        '
-        'ucrChkValues
-        '
-        Me.ucrChkValues.AutoSize = True
-        Me.ucrChkValues.Checked = True
-        Me.ucrChkValues.Location = New System.Drawing.Point(6, 47)
-        Me.ucrChkValues.Name = "ucrChkValues"
-        Me.ucrChkValues.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkValues.TabIndex = 2
-        '
-        'ucrChkTotals
-        '
-        Me.ucrChkTotals.AutoSize = True
-        Me.ucrChkTotals.Checked = True
-        Me.ucrChkTotals.Location = New System.Drawing.Point(6, 72)
-        Me.ucrChkTotals.Name = "ucrChkTotals"
-        Me.ucrChkTotals.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkTotals.TabIndex = 3
         '
         'grpType
         '
@@ -239,10 +115,10 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         Me.grpType.Controls.Add(Me.ucrNudCutoffLevel)
         Me.grpType.Controls.Add(Me.lblExclude)
         Me.grpType.Controls.Add(Me.ucrNudExclude)
-        Me.grpType.Location = New System.Drawing.Point(9, 432)
+        Me.grpType.Location = New System.Drawing.Point(9, 366)
         Me.grpType.Name = "grpType"
         Me.grpType.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpType.Size = New System.Drawing.Size(436, 70)
+        Me.grpType.Size = New System.Drawing.Size(432, 49)
         Me.grpType.TabIndex = 16
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
@@ -289,6 +165,198 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         Me.lblCutoffLevel.TabIndex = 3
         Me.lblCutoffLevel.Text = "Cutoff at:"
         '
+        'lblExclude
+        '
+        Me.lblExclude.AutoSize = True
+        Me.lblExclude.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExclude.Location = New System.Drawing.Point(334, 24)
+        Me.lblExclude.Name = "lblExclude"
+        Me.lblExclude.Size = New System.Drawing.Size(48, 13)
+        Me.lblExclude.TabIndex = 5
+        Me.lblExclude.Text = "Exclude:"
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(220, 428)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 27
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By:"
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(94, 426)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 75
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(9, 425)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 74
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(358, 424)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(83, 21)
+        Me.ucrInputStation.TabIndex = 29
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(275, 422)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(80, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 28
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrSelectorGGLikert
+        '
+        Me.ucrSelectorGGLikert.AutoSize = True
+        Me.ucrSelectorGGLikert.bDropUnusedFilterLevels = False
+        Me.ucrSelectorGGLikert.bShowHiddenColumns = False
+        Me.ucrSelectorGGLikert.bUseCurrentFilter = True
+        Me.ucrSelectorGGLikert.Location = New System.Drawing.Point(9, 10)
+        Me.ucrSelectorGGLikert.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorGGLikert.Name = "ucrSelectorGGLikert"
+        Me.ucrSelectorGGLikert.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorGGLikert.TabIndex = 0
+        '
+        'ucrReceiverMultipleGGLikert
+        '
+        Me.ucrReceiverMultipleGGLikert.AutoSize = True
+        Me.ucrReceiverMultipleGGLikert.frmParent = Me
+        Me.ucrReceiverMultipleGGLikert.Location = New System.Drawing.Point(232, 60)
+        Me.ucrReceiverMultipleGGLikert.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleGGLikert.Name = "ucrReceiverMultipleGGLikert"
+        Me.ucrReceiverMultipleGGLikert.Selector = Nothing
+        Me.ucrReceiverMultipleGGLikert.Size = New System.Drawing.Size(138, 130)
+        Me.ucrReceiverMultipleGGLikert.strNcFilePath = ""
+        Me.ucrReceiverMultipleGGLikert.TabIndex = 2
+        Me.ucrReceiverMultipleGGLikert.ucrSelector = Nothing
+        '
+        'ucrChkWrap
+        '
+        Me.ucrChkWrap.AutoSize = True
+        Me.ucrChkWrap.Checked = False
+        Me.ucrChkWrap.Location = New System.Drawing.Point(6, 18)
+        Me.ucrChkWrap.Name = "ucrChkWrap"
+        Me.ucrChkWrap.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkWrap.TabIndex = 0
+        '
+        'ucrNudWrap
+        '
+        Me.ucrNudWrap.AutoSize = True
+        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWrap.Location = New System.Drawing.Point(110, 20)
+        Me.ucrNudWrap.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.ucrNudWrap.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.ucrNudWrap.Name = "ucrNudWrap"
+        Me.ucrNudWrap.Size = New System.Drawing.Size(55, 20)
+        Me.ucrNudWrap.TabIndex = 1
+        Me.ucrNudWrap.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        Me.ucrNudWrap.Visible = False
+        '
+        'ucrChkValues
+        '
+        Me.ucrChkValues.AutoSize = True
+        Me.ucrChkValues.Checked = True
+        Me.ucrChkValues.Location = New System.Drawing.Point(6, 44)
+        Me.ucrChkValues.Name = "ucrChkValues"
+        Me.ucrChkValues.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkValues.TabIndex = 2
+        '
+        'ucrChkTotals
+        '
+        Me.ucrChkTotals.AutoSize = True
+        Me.ucrChkTotals.Checked = True
+        Me.ucrChkTotals.Location = New System.Drawing.Point(6, 70)
+        Me.ucrChkTotals.Name = "ucrChkTotals"
+        Me.ucrChkTotals.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkTotals.TabIndex = 3
+        '
+        'ucrChkSort
+        '
+        Me.ucrChkSort.AutoSize = True
+        Me.ucrChkSort.Checked = False
+        Me.ucrChkSort.Location = New System.Drawing.Point(9, 338)
+        Me.ucrChkSort.Name = "ucrChkSort"
+        Me.ucrChkSort.Size = New System.Drawing.Size(96, 23)
+        Me.ucrChkSort.TabIndex = 6
+        '
+        'ucrChkDescending
+        '
+        Me.ucrChkDescending.AutoSize = True
+        Me.ucrChkDescending.Checked = False
+        Me.ucrChkDescending.Enabled = False
+        Me.ucrChkDescending.Location = New System.Drawing.Point(111, 338)
+        Me.ucrChkDescending.Name = "ucrChkDescending"
+        Me.ucrChkDescending.Size = New System.Drawing.Size(97, 23)
+        Me.ucrChkDescending.TabIndex = 7
+        '
+        'ucrChkReverse
+        '
+        Me.ucrChkReverse.AutoSize = True
+        Me.ucrChkReverse.Checked = False
+        Me.ucrChkReverse.Location = New System.Drawing.Point(9, 254)
+        Me.ucrChkReverse.Name = "ucrChkReverse"
+        Me.ucrChkReverse.Size = New System.Drawing.Size(148, 23)
+        Me.ucrChkReverse.TabIndex = 8
+        '
+        'ucrChkSymmetric
+        '
+        Me.ucrChkSymmetric.AutoSize = True
+        Me.ucrChkSymmetric.Checked = False
+        Me.ucrChkSymmetric.Location = New System.Drawing.Point(9, 282)
+        Me.ucrChkSymmetric.Name = "ucrChkSymmetric"
+        Me.ucrChkSymmetric.Size = New System.Drawing.Size(148, 23)
+        Me.ucrChkSymmetric.TabIndex = 9
+        '
+        'ucrChkCutoff
+        '
+        Me.ucrChkCutoff.AutoSize = True
+        Me.ucrChkCutoff.Checked = False
+        Me.ucrChkCutoff.Location = New System.Drawing.Point(9, 310)
+        Me.ucrChkCutoff.Name = "ucrChkCutoff"
+        Me.ucrChkCutoff.Size = New System.Drawing.Size(98, 23)
+        Me.ucrChkCutoff.TabIndex = 10
+        '
+        'ucrNudCutoff
+        '
+        Me.ucrNudCutoff.AutoSize = True
+        Me.ucrNudCutoff.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCutoff.Increment = New Decimal(New Integer() {5, 0, 0, 65536})
+        Me.ucrNudCutoff.Location = New System.Drawing.Point(115, 310)
+        Me.ucrNudCutoff.Maximum = New Decimal(New Integer() {9, 0, 0, 0})
+        Me.ucrNudCutoff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCutoff.Name = "ucrNudCutoff"
+        Me.ucrNudCutoff.Size = New System.Drawing.Size(55, 20)
+        Me.ucrNudCutoff.TabIndex = 11
+        Me.ucrNudCutoff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCutoff.Visible = False
+        '
         'ucrNudCutoffLevel
         '
         Me.ucrNudCutoffLevel.AutoSize = True
@@ -301,16 +369,6 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         Me.ucrNudCutoffLevel.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudCutoffLevel.TabIndex = 4
         Me.ucrNudCutoffLevel.Value = New Decimal(New Integer() {5, 0, 0, 0})
-        '
-        'lblExclude
-        '
-        Me.lblExclude.AutoSize = True
-        Me.lblExclude.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExclude.Location = New System.Drawing.Point(334, 24)
-        Me.lblExclude.Name = "lblExclude"
-        Me.lblExclude.Size = New System.Drawing.Size(48, 13)
-        Me.lblExclude.TabIndex = 5
-        Me.lblExclude.Text = "Exclude:"
         '
         'ucrNudExclude
         '
@@ -328,7 +386,7 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         'ucrSaveGGLikert
         '
         Me.ucrSaveGGLikert.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGGLikert.Location = New System.Drawing.Point(9, 512)
+        Me.ucrSaveGGLikert.Location = New System.Drawing.Point(9, 454)
         Me.ucrSaveGGLikert.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGGLikert.Name = "ucrSaveGGLikert"
         Me.ucrSaveGGLikert.Size = New System.Drawing.Size(361, 24)
@@ -338,53 +396,19 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 543)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 485)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 18
-        '
-        'ucrInputStation
-        '
-        Me.ucrInputStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputStation.GetSetSelectedIndex = -1
-        Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(336, 356)
-        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(98, 21)
-        Me.ucrInputStation.TabIndex = 29
-        '
-        'ucr1stFactorReceiver
-        '
-        Me.ucr1stFactorReceiver.AutoSize = True
-        Me.ucr1stFactorReceiver.frmParent = Me
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(235, 357)
-        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
-        Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(98, 26)
-        Me.ucr1stFactorReceiver.strNcFilePath = ""
-        Me.ucr1stFactorReceiver.TabIndex = 28
-        Me.ucr1stFactorReceiver.ucrSelector = Nothing
-        '
-        'lblFacetBy
-        '
-        Me.lblFacetBy.AutoSize = True
-        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(235, 342)
-        Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
-        Me.lblFacetBy.TabIndex = 27
-        Me.lblFacetBy.Tag = ""
-        Me.lblFacetBy.Text = "Facet By:"
         '
         'dlgDescribeTwoVariableMoreLikertGraphs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(453, 603)
+        Me.ClientSize = New System.Drawing.Size(449, 538)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -450,4 +474,6 @@ Partial Class dlgDescribeTwoVariableMoreLikertGraphs
     Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class
