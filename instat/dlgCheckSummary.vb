@@ -88,6 +88,13 @@ Public Class dlgCheckSummary
     Private clsOutlierXScaleDateFunction As New RFunction
     Private clsOutlierYScaleDateFunction As New RFunction
     Private clsOutlierAnnotateFunction As New RFunction
+    ' Outlier Labeling Functions
+    Private clsOutlierRoundFunction, clsOutlierLabelAfterFunction, clsOutlierAesLabelFunction, clsOutlierLabelSummaryFunction, clsOutlierIfFunction,
+        clsOutlierLengthFunction, clsOutlierGroupbyFunction, clsOutlierBoxplotStat2Function, clsOutlierMutateLabelFunction, clsOutlierFilterElement2Function, clsOutlierUngroupFunction,
+        clsOutlierAsFactor2Function, clsOutlierMutate2Function, clsOutlierGeomTextFunction, clsOutlierRaes2Function, clsOutlierPositionNudgeFunction As RFunction
+    ' Outlier Labeling Operators
+    Private clsOutlierOpenBraquetOperator, clsOutlierSpaceOperator, clsOutlierBraquetOperator, clsOutlierSemiCommatOperator, clsOutlierDollardOperator, clsOutlierEqualOperator,
+        clsOutlierAssigneOperator, clsOutlierPipeLabelOperator, clsOutlierInOperator, clsOutlierDollarSignOperator As ROperator
     Private bResetOutlierSubdialog As Boolean = True
     Private strOutlierFirstParameterName As String = "geomfunc"
     Private strOutlierGeomParameterNames() As String
@@ -340,7 +347,6 @@ Public Class dlgCheckSummary
         ' Label Outliers
         ucrChkLabel.SetText("Label Outliers")
         ucrChkLabel.AddParameterPresentCondition(True, "coef")
-        ucrChkLabel.AddParameterPresentCondition(False, "coef", False)
         ucrChkLabel.AddToLinkedControls({ucrNudOutlierCoefficient}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
@@ -348,6 +354,17 @@ Public Class dlgCheckSummary
         ucrNudOutlierCoefficient.Increment = 0.1
         ucrNudOutlierCoefficient.SetRDefault(1.5)
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
+
+        ucrChkLabeloutliers.SetText("Check Outliers:")
+        ucrChkLabeloutliers.AddParameterPresentCondition(True, "label")
+        ucrChkLabeloutliers.AddParameterPresentCondition(True, "label_geom")
+        ucrChkLabeloutliers.AddToLinkedControls(ucrReceiverLabelOutliers, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrReceiverLabelOutliers.SetParameter(New RParameter("label", 1))
+        ucrReceiverLabelOutliers.SetParameterIsString()
+        ucrReceiverLabelOutliers.Selector = ucrSelectorForCheckSummary
+        ucrReceiverLabelOutliers.bWithQuotes = False
+        ucrReceiverLabelOutliers.SetLinkedDisplayControl(lblVariable)
 
         ' Initialise added jitter function
         clsOutlierAddedJitterFunc.SetPackageName("ggplot2")
@@ -362,6 +379,7 @@ Public Class dlgCheckSummary
 
         ucrChkAddPoints.SetParameter(clsOutlierAddedJitterParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkAddPoints.SetText("Add Points")
+        ucrChkAddPoints.AddParameterPresentCondition(True, "add_jitter")
         ucrChkAddPoints.AddToLinkedControls({ucrNudJitter, ucrNudTransparency}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudJitter.SetParameter(New RParameter("width", 2))
@@ -467,6 +485,9 @@ Public Class dlgCheckSummary
         ucrChkPoints.Checked = True
         ucrChkFirstAndLast.Checked = False
         ucrChkWithSE.Checked = False
+        ucrChkLabel.Checked = False
+        ucrChkLabeloutliers.Checked = False
+        ucrChkAddPoints.Checked = False
 
         ucrSelectorForCheckSummary.Reset()
         ucrSaveNewColumn.Reset()
@@ -852,6 +873,146 @@ Public Class dlgCheckSummary
         clsOutlierColVarsFunction.SetPackageName("ggplot2")
         clsOutlierColVarsFunction.SetRCommand("vars")
 
+        ' Outlier Labeling
+        clsOutlierLabelSummaryFunction = New RFunction
+        clsOutlierAesLabelFunction = New RFunction
+        clsOutlierRoundFunction = New RFunction
+        clsOutlierLabelAfterFunction = New RFunction
+        clsOutlierBoxplotStatFunction = New RFunction
+        clsOutlierIfFunction = New RFunction
+        clsOutlierLengthFunction = New RFunction
+        clsOutlierOpenBraquetOperator = New ROperator
+        clsOutlierAssigneOperator = New ROperator
+        clsOutlierDollardOperator = New ROperator
+        clsOutlierSemiCommatOperator = New ROperator
+        clsOutlierSpaceOperator = New ROperator
+        clsOutlierEqualOperator = New ROperator
+        clsOutlierBraquetOperator = New ROperator
+
+        clsOutlierGroupbyFunction = New RFunction
+        clsOutlierBoxplotStat2Function = New RFunction
+        clsOutlierDollarSignOperator = New ROperator
+        clsOutlierInOperator = New ROperator
+        clsOutlierMutateLabelFunction = New RFunction
+        clsOutlierFilterElement2Function = New RFunction
+        clsOutlierUngroupFunction = New RFunction
+        clsOutlierAsFactor2Function = New RFunction
+        clsOutlierMutate2Function = New RFunction
+        clsOutlierPipeLabelOperator = New ROperator
+        clsOutlierRaes2Function = New RFunction
+        clsOutlierPositionNudgeFunction = New RFunction
+        clsOutlierGeomTextFunction = New RFunction
+
+        clsOutlierLabelSummaryFunction.SetPackageName("ggplot2")
+        clsOutlierLabelSummaryFunction.SetRCommand("stat_summary")
+        clsOutlierLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsOutlierAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
+        clsOutlierLabelSummaryFunction.AddParameter("fun", clsROperatorParameter:=clsOutlierOpenBraquetOperator, iPosition:=2)
+        clsOutlierLabelSummaryFunction.AddParameter("hjust", "-0.2", iPosition:=3)
+
+        clsOutlierOpenBraquetOperator.SetOperation("{")
+        clsOutlierOpenBraquetOperator.AddParameter("left", "\ (y)", iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierOpenBraquetOperator.AddParameter("right", clsROperatorParameter:=clsOutlierAssigneOperator, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsOutlierAssigneOperator.SetOperation("<-")
+        clsOutlierAssigneOperator.AddParameter("left", "o", iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierAssigneOperator.AddParameter("right", clsROperatorParameter:=clsOutlierDollardOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierDollardOperator.SetOperation("$")
+        clsOutlierDollardOperator.AddParameter("left", clsRFunctionParameter:=clsOutlierBoxplotStatFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierDollardOperator.AddParameter("right", clsROperatorParameter:=clsOutlierSemiCommatOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierBoxplotStatFunction.SetPackageName("grDevices")
+        clsOutlierBoxplotStatFunction.SetRCommand("boxplot.stats")
+        clsOutlierBoxplotStatFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsOutlierSemiCommatOperator.SetOperation(";")
+        clsOutlierSemiCommatOperator.AddParameter("left", "out", iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierSemiCommatOperator.AddParameter("right", clsROperatorParameter:=clsOutlierSpaceOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierSpaceOperator.SetOperation("")
+        clsOutlierSpaceOperator.AddParameter("left", clsRFunctionParameter:=clsOutlierIfFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierSpaceOperator.AddParameter("right", clsROperatorParameter:=clsOutlierBraquetOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierIfFunction.SetRCommand("if")
+        clsOutlierIfFunction.AddParameter("x", clsROperatorParameter:=clsOutlierEqualOperator, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsOutlierEqualOperator.SetOperation("==")
+        clsOutlierEqualOperator.AddParameter("left", clsRFunctionParameter:=clsOutlierLengthFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierEqualOperator.AddParameter("right", "0", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierLengthFunction.SetRCommand("length")
+        clsOutlierLengthFunction.AddParameter("x", "o", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsOutlierBraquetOperator.SetOperation("}")
+        clsOutlierBraquetOperator.AddParameter("left", "NaN else o", iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierBraquetOperator.AddParameter("right", "", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierAesLabelFunction.SetRCommand("aes")
+        clsOutlierAesLabelFunction.AddParameter("label", clsRFunctionParameter:=clsOutlierRoundFunction, iPosition:=0)
+
+        clsOutlierRoundFunction.SetRCommand("round")
+        clsOutlierRoundFunction.AddParameter("x", clsRFunctionParameter:=clsOutlierLabelAfterFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierRoundFunction.AddParameter("y", "1", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierLabelAfterFunction.SetPackageName("ggplot2")
+        clsOutlierLabelAfterFunction.SetRCommand("after_stat")
+        clsOutlierLabelAfterFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsOutlierGroupbyFunction.SetPackageName("dplyr")
+        clsOutlierGroupbyFunction.SetRCommand("group_by")
+
+        clsOutlierBoxplotStat2Function.SetPackageName("grDevices")
+        clsOutlierBoxplotStat2Function.SetRCommand("boxplot.stats")
+
+        clsOutlierDollarSignOperator.SetOperation("$")
+        clsOutlierDollarSignOperator.AddParameter("x", clsRFunctionParameter:=clsOutlierBoxplotStat2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsOutlierDollarSignOperator.AddParameter("y", "out", iPosition:=1, bIncludeArgumentName:=False)
+        clsOutlierDollarSignOperator.bSpaceAroundOperation = False
+
+        clsOutlierInOperator.SetOperation("%in%")
+        clsOutlierInOperator.AddParameter("y", clsROperatorParameter:=clsOutlierDollarSignOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsOutlierMutateLabelFunction.SetPackageName("dplyr")
+        clsOutlierMutateLabelFunction.SetRCommand("mutate")
+        clsOutlierMutateLabelFunction.AddParameter("is_out", clsROperatorParameter:=clsOutlierInOperator, iPosition:=0)
+
+        clsOutlierFilterElement2Function.SetPackageName("dplyr")
+        clsOutlierFilterElement2Function.SetRCommand("filter")
+        clsOutlierFilterElement2Function.AddParameter("x", "is_out", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsOutlierUngroupFunction.SetPackageName("dplyr")
+        clsOutlierUngroupFunction.SetRCommand("ungroup")
+
+        clsOutlierAsFactor2Function.SetPackageName("instatExtras")
+        clsOutlierAsFactor2Function.SetRCommand("make_factor")
+
+        clsOutlierMutate2Function.SetPackageName("dplyr")
+        clsOutlierMutate2Function.SetRCommand("mutate")
+
+        clsOutlierPipeLabelOperator.SetOperation("%>%")
+        clsOutlierPipeLabelOperator.SetAssignTo("outliers")
+        clsOutlierPipeLabelOperator.AddParameter("group_by", clsRFunctionParameter:=clsOutlierGroupbyFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsOutlierPipeLabelOperator.AddParameter("mutate", clsRFunctionParameter:=clsOutlierMutateLabelFunction, iPosition:=2, bIncludeArgumentName:=False)
+        clsOutlierPipeLabelOperator.AddParameter("filter", clsRFunctionParameter:=clsOutlierFilterElement2Function, iPosition:=3, bIncludeArgumentName:=False)
+        clsOutlierPipeLabelOperator.AddParameter("ungroup", clsRFunctionParameter:=clsOutlierUngroupFunction, iPosition:=4, bIncludeArgumentName:=False)
+        clsOutlierPipeLabelOperator.AddParameter("mutate2", clsRFunctionParameter:=clsOutlierMutate2Function, iPosition:=5, bIncludeArgumentName:=False)
+
+        clsOutlierRaes2Function.SetPackageName("ggplot2")
+        clsOutlierRaes2Function.SetRCommand("aes")
+
+        clsOutlierPositionNudgeFunction.SetPackageName("ggplot2")
+        clsOutlierPositionNudgeFunction.SetRCommand("position_nudge")
+        clsOutlierPositionNudgeFunction.AddParameter("x", "0.05", iPosition:=0)
+
+        clsOutlierGeomTextFunction.SetPackageName("ggplot2")
+        clsOutlierGeomTextFunction.SetRCommand("geom_text")
+        clsOutlierGeomTextFunction.AddParameter("data", "outliers", iPosition:=0)
+        clsOutlierGeomTextFunction.AddParameter("x", clsRFunctionParameter:=clsOutlierRaes2Function, iPosition:=1, bIncludeArgumentName:=False)
+        clsOutlierGeomTextFunction.AddParameter("hjust", "-0.2", iPosition:=2)
+        clsOutlierGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsOutlierPositionNudgeFunction, iPosition:=3)
+        clsOutlierGeomTextFunction.AddParameter("size", "3", iPosition:=4)
+
         UpdateRecentRCode()
         UpdateTrendRCode()
 
@@ -888,6 +1049,8 @@ Public Class dlgCheckSummary
         ucrChkAddPoints.SetRCode(clsOutlierBaseOperator, bReset)
         ucrNudJitter.SetRCode(clsOutlierAddedJitterFunc, bReset)
         ucrNudTransparency.SetRCode(clsOutlierAddedJitterFunc, bReset)
+        ucrChkLabeloutliers.SetRCode(clsOutlierBaseOperator, bReset)
+        ucrReceiverLabelOutliers.SetRCode(clsOutlierRaes2Function, bReset)
 
         ucrChkLegend.SetRCode(clsOutlierThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsOutlierThemeFunction, bReset, bCloneIfNeeded:=True)
@@ -947,7 +1110,7 @@ Public Class dlgCheckSummary
         ElseIf bOutliers Then
             contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierBoxplotOptions)
             contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierJitterOptions)
-            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked
+            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked OrElse ucrChkLabeloutliers.Checked
             contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierTextOptions)
         End If
         ucrChkFirstAndLast.Visible = bTrend
@@ -956,6 +1119,7 @@ Public Class dlgCheckSummary
         ucrChkLabel.Visible = bOutliers
         ucrChkAddPoints.Visible = bOutliers
         ucrChkLegend.Visible = bOutliers
+        ucrChkLabeloutliers.Visible = bOutliers
         ' ucrInputLegendPosition visibility is managed by ucrChkLegend.AddToLinkedControls
         lblOutlierFacetBy.Visible = bOutliers
         ucrOutlier1stFactorReceiver.Visible = bOutliers
@@ -1004,7 +1168,7 @@ Public Class dlgCheckSummary
         ucrReceiverFacetBy.ControlContentsChanged, ucrChkPoints.ControlContentsChanged, ucrChkFirstAndLast.ControlContentsChanged,
         ucrChkWithSE.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrVariablesAsFactorForCheckSummary.ControlContentsChanged,
         ucrByFactorsReceiver.ControlContentsChanged, ucrSecondFactorReceiver.ControlContentsChanged, ucrChkVarWidth.ControlContentsChanged,
-        ucrChkLabel.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged, ucrChkAddPoints.ControlContentsChanged,
+        ucrChkLabel.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged, ucrChkAddPoints.ControlContentsChanged, ucrChkLabeloutliers.ControlContentsChanged, ucrReceiverLabelOutliers.ControlContentsChanged,
         ucrNudJitter.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrOutlier1stFactorReceiver.ControlContentsChanged
 
         If rdoRecent.Checked Then
@@ -1016,7 +1180,7 @@ Public Class dlgCheckSummary
         End If
         ' Keep Text Options item enabled only while Label Outliers is checked
         If rdoOutliers.Checked Then
-            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked
+            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked OrElse ucrChkLabeloutliers.Checked
         End If
         TestOKEnabled()
     End Sub
@@ -1035,11 +1199,23 @@ Public Class dlgCheckSummary
         clsOutlierRggplotFunction.RemoveParameterByName("data")
         clsOutlierRggplotFunction.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0)
 
-        ' Add Points — hide built-in outlier dots when jitter is on
-        If ucrChkAddPoints.Checked Then
+        ' Outlier visibility and coefficient
+        If ucrChkAddPoints.Checked OrElse (Not ucrChkLabel.Checked AndAlso Not ucrChkLabeloutliers.Checked) Then
             clsOutlierBoxplotFunction.AddParameter("outlier.shape", "NA", iPosition:=2)
         Else
             clsOutlierBoxplotFunction.RemoveParameterByName("outlier.shape")
+        End If
+
+        ' Only add coef if ucrChkLabel is checked
+        If Not ucrChkLabel.Checked Then
+            clsOutlierBoxplotFunction.RemoveParameterByName("coef")
+        End If
+
+        ' Add Points — Jitter layer
+        If ucrChkAddPoints.Checked Then
+            clsOutlierBaseOperator.AddParameter("add_jitter", clsRFunctionParameter:=clsOutlierAddedJitterFunc, iPosition:=3)
+        Else
+            clsOutlierBaseOperator.RemoveParameterByName("add_jitter")
         End If
 
         AddRemoveOutlierTheme()
@@ -1115,8 +1291,93 @@ Public Class dlgCheckSummary
         clsOutlierBaseOperator.AddParameter(strOutlierFirstParameterName,
             clsRFunctionParameter:=clsOutlierBoxplotFunction, iPosition:=2)
 
+        AddOutlierLabelFunctions()
 
         ucrBase.clsRsyntax.SetBaseROperator(clsOutlierBaseOperator)
+    End Sub
+
+    Private Sub AddOutlierLabelFunctions()
+        ' Update the stat_summary function to handle Dates
+        clsOutlierBoxplotStatFunction.RemoveParameterByName("x")
+        clsOutlierBoxplotStatFunction.AddParameter("x", "as.numeric(y)", iPosition:=0, bIncludeArgumentName:=False)
+
+        If ucrChkLabeloutliers.Checked Then
+            If Not ucrNudOutlierCoefficient.IsEmpty Then
+                clsOutlierBoxplotStatFunction.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
+                clsOutlierBoxplotStat2Function.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
+            Else
+                clsOutlierBoxplotStatFunction.RemoveParameterByName("coef")
+                clsOutlierBoxplotStat2Function.RemoveParameterByName("coef")
+            End If
+
+            If Not ucrReceiverLabelOutliers.IsEmpty Then
+                ' Set the data frame for the pipe
+                Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame
+                clsOutlierPipeLabelOperator.RemoveParameterByName("data")
+                clsOutlierPipeLabelOperator.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
+
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsOutlierPipeLabelOperator, iPosition:=0)
+
+                ' Update group_by and mutate steps for labeling
+                clsOutlierGroupbyFunction.ClearParameters()
+                Dim lstGroupByVars As New List(Of String)
+                If Not ucrByFactorsReceiver.IsEmpty Then
+                    Dim strVar As String = ucrByFactorsReceiver.GetVariableNames(False)
+                    If Not lstGroupByVars.Contains(strVar) Then lstGroupByVars.Add(strVar)
+                End If
+                If Not ucrSecondFactorReceiver.IsEmpty Then
+                    Dim strVar As String = ucrSecondFactorReceiver.GetVariableNames(False)
+                    If Not lstGroupByVars.Contains(strVar) Then lstGroupByVars.Add(strVar)
+                End If
+                If Not ucrOutlier1stFactorReceiver.IsEmpty Then
+                    Dim strVar As String = ucrOutlier1stFactorReceiver.GetVariableNames(False)
+                    If Not lstGroupByVars.Contains(strVar) Then lstGroupByVars.Add(strVar)
+                End If
+
+                For i As Integer = 0 To lstGroupByVars.Count - 1
+                    clsOutlierGroupbyFunction.AddParameter("var" & i, lstGroupByVars(i), iPosition:=i, bIncludeArgumentName:=False)
+                Next
+
+                ' Numeric variable for outlier calculation
+                Dim strNumVar As String = ucrVariablesAsFactorForCheckSummary.GetVariableNames(False)
+                ' Always wrap in as.numeric for outlier calculation to support Dates and avoid binary + errors
+                Dim strNumVarForStats As String = "as.numeric(" & strNumVar & ")"
+
+                ' Ensure boxplot.stats has the numeric variable
+                clsOutlierBoxplotStat2Function.ClearParameters()
+                clsOutlierBoxplotStat2Function.AddParameter("x", strNumVarForStats, iPosition:=0, bIncludeArgumentName:=False)
+                If Not ucrNudOutlierCoefficient.IsEmpty Then
+                    clsOutlierBoxplotStat2Function.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
+                End If
+
+                ' Update the is_out comparison
+                clsOutlierInOperator.ClearParameters()
+                clsOutlierInOperator.AddParameter("left", strNumVarForStats, iPosition:=0, bIncludeArgumentName:=False)
+                clsOutlierInOperator.AddParameter("right", clsROperatorParameter:=clsOutlierDollarSignOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+                clsOutlierMutate2Function.ClearParameters()
+                clsOutlierMutate2Function.SetRCommand("mutate")
+                ' Labeling variable
+                Dim strLabelVar As String = ucrReceiverLabelOutliers.GetVariableNames(False)
+                clsOutlierMutate2Function.AddParameter(strLabelVar, clsRFunctionParameter:=clsOutlierAsFactor2Function, iPosition:=0)
+                clsOutlierAsFactor2Function.RemoveParameterByName("x")
+                clsOutlierAsFactor2Function.AddParameter("x", strLabelVar, bIncludeArgumentName:=False)
+
+                clsOutlierRaes2Function.RemoveParameterByName("label")
+                clsOutlierRaes2Function.AddParameter("label", strLabelVar)
+
+                clsOutlierBaseOperator.RemoveParameterByName("label")
+                clsOutlierBaseOperator.AddParameter("label_geom", clsRFunctionParameter:=clsOutlierGeomTextFunction, bIncludeArgumentName:=False)
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsOutlierPipeLabelOperator)
+                clsOutlierBaseOperator.RemoveParameterByName("label_geom")
+                clsOutlierBaseOperator.AddParameter("label", clsRFunctionParameter:=clsOutlierLabelSummaryFunction, bIncludeArgumentName:=False)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsOutlierPipeLabelOperator)
+            clsOutlierBaseOperator.RemoveParameterByName("label_geom")
+            clsOutlierBaseOperator.RemoveParameterByName("label")
+        End If
     End Sub
 
     Private Sub TrendOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMeanLine.CheckedChanged,

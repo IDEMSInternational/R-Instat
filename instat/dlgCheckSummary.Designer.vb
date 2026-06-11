@@ -75,6 +75,9 @@ Partial Class dlgCheckSummary
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.UcrBaseCheckSummary = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.lblVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverLabelOutliers = New instat.ucrReceiverSingle()
+        Me.ucrChkLabeloutliers = New instat.ucrCheck()
         Me.pnlRecent.SuspendLayout()
         Me.pnlTrend.SuspendLayout()
         Me.pnlOutliers.SuspendLayout()
@@ -362,6 +365,9 @@ Partial Class dlgCheckSummary
         '
         'pnlOutliers
         '
+        Me.pnlOutliers.Controls.Add(Me.lblVariable)
+        Me.pnlOutliers.Controls.Add(Me.ucrReceiverLabelOutliers)
+        Me.pnlOutliers.Controls.Add(Me.ucrChkLabeloutliers)
         Me.pnlOutliers.Controls.Add(Me.ucrChkVarWidth)
         Me.pnlOutliers.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.pnlOutliers.Controls.Add(Me.lblBySecondFactor)
@@ -370,7 +376,7 @@ Partial Class dlgCheckSummary
         Me.pnlOutliers.Controls.Add(Me.ucrVariablesAsFactorForCheckSummary)
         Me.pnlOutliers.Location = New System.Drawing.Point(286, 57)
         Me.pnlOutliers.Name = "pnlOutliers"
-        Me.pnlOutliers.Size = New System.Drawing.Size(303, 306)
+        Me.pnlOutliers.Size = New System.Drawing.Size(303, 368)
         Me.pnlOutliers.TabIndex = 28
         Me.pnlOutliers.Visible = False
         '
@@ -730,6 +736,38 @@ Partial Class dlgCheckSummary
         Me.ucrPnlOptions.Size = New System.Drawing.Size(299, 36)
         Me.ucrPnlOptions.TabIndex = 13
         '
+        'lblVariable
+        '
+        Me.lblVariable.AutoSize = True
+        Me.lblVariable.Location = New System.Drawing.Point(58, 322)
+        Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Size = New System.Drawing.Size(48, 13)
+        Me.lblVariable.TabIndex = 40
+        Me.lblVariable.Text = "Variable:"
+        '
+        'ucrReceiverLabelOutliers
+        '
+        Me.ucrReceiverLabelOutliers.AutoSize = True
+        Me.ucrReceiverLabelOutliers.frmParent = Me
+        Me.ucrReceiverLabelOutliers.Location = New System.Drawing.Point(115, 322)
+        Me.ucrReceiverLabelOutliers.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLabelOutliers.Name = "ucrReceiverLabelOutliers"
+        Me.ucrReceiverLabelOutliers.Selector = Nothing
+        Me.ucrReceiverLabelOutliers.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLabelOutliers.strNcFilePath = ""
+        Me.ucrReceiverLabelOutliers.TabIndex = 39
+        Me.ucrReceiverLabelOutliers.ucrSelector = Nothing
+        '
+        'ucrChkLabeloutliers
+        '
+        Me.ucrChkLabeloutliers.AutoSize = True
+        Me.ucrChkLabeloutliers.Checked = False
+        Me.ucrChkLabeloutliers.Location = New System.Drawing.Point(61, 299)
+        Me.ucrChkLabeloutliers.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkLabeloutliers.Name = "ucrChkLabeloutliers"
+        Me.ucrChkLabeloutliers.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkLabeloutliers.TabIndex = 38
+        '
         'dlgCheckSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -836,4 +874,7 @@ Partial Class dlgCheckSummary
     Friend WithEvents lblOutlierFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents lblVariable As Label
+    Friend WithEvents ucrReceiverLabelOutliers As ucrReceiverSingle
+    Friend WithEvents ucrChkLabeloutliers As ucrCheck
 End Class
