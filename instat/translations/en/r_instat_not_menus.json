@@ -6852,5 +6852,7 @@
   "Mean Line": "Mean Line",
   "Jitter Width:": "Jitter Width:",
   "Check Summary": "Check Summary",
-  "Label First and Last": "Label First and Last"
+  "Label First and Last": "Label First and Last",
+  "Check Outliers:": "Check Outliers:",
+  "PICSA Trend Graph": "PICSA Trend Graph"
 }
