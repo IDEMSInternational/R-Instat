@@ -4380,9 +4380,9 @@ Public Class ucrCalculator
 
     Private Sub cmdMode1_Click(sender As Object, e As EventArgs) Handles cmdMode1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(x = , na.rm = TRUE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(x = , na.rm = TRUE)", 14)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean( , na.rm = TRUE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean( , na.rm = TRUE)", 14)
         End If
     End Sub
 
@@ -5192,9 +5192,9 @@ Public Class ucrCalculator
 
     Private Sub cmdFreqMode1_Click(sender As Object, e As EventArgs) Handles cmdFreqMode1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(rep(x = , times = ), na.rm = TRUE)", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(rep(x = , times = ), na.rm = TRUE)", 25)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(rep( , ), na.rm = TRUE)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(rep( , ), na.rm = TRUE)", 17)
         End If
     End Sub
 
