@@ -628,7 +628,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkInteraction.AutoSize = True
         Me.ucrChkInteraction.Checked = False
-        Me.ucrChkInteraction.Location = New System.Drawing.Point(473, 376)
+        Me.ucrChkInteraction.Location = New System.Drawing.Point(26, 610)
         Me.ucrChkInteraction.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkInteraction.Name = "ucrChkInteraction"
         Me.ucrChkInteraction.Size = New System.Drawing.Size(214, 34)
@@ -706,6 +706,7 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(723, 700)
+        Me.Controls.Add(Me.ucrChkInteraction)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.grpDisplayVars)
         Me.Controls.Add(Me.cmdMissingOptions)
@@ -745,7 +746,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrChkSwapXYVar)
         Me.Controls.Add(Me.ucrChkMeans)
         Me.Controls.Add(Me.ucrChkOmitMissing)
-        Me.Controls.Add(Me.ucrChkInteraction)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
