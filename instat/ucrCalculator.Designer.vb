@@ -3650,9 +3650,9 @@ Partial Class ucrCalculator
         Me.cmdQuantile3.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdQuantile3.Location = New System.Drawing.Point(342, 282)
         Me.cmdQuantile3.Name = "cmdQuantile3"
-        Me.cmdQuantile3.Size = New System.Drawing.Size(84, 45)
+        Me.cmdQuantile3.Size = New System.Drawing.Size(95, 45)
         Me.cmdQuantile3.TabIndex = 194
-        Me.cmdQuantile3.Text = "quantile3"
+        Me.cmdQuantile3.Text = "quantile 3"
         Me.cmdQuantile3.UseVisualStyleBackColor = True
         '
         'cmdwheremin
@@ -3661,7 +3661,7 @@ Partial Class ucrCalculator
         Me.cmdwheremin.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdwheremin.Location = New System.Drawing.Point(322, 238)
         Me.cmdwheremin.Name = "cmdwheremin"
-        Me.cmdwheremin.Size = New System.Drawing.Size(104, 45)
+        Me.cmdwheremin.Size = New System.Drawing.Size(115, 45)
         Me.cmdwheremin.TabIndex = 193
         Me.cmdwheremin.Text = "where.min"
         Me.cmdwheremin.UseVisualStyleBackColor = True
@@ -3758,7 +3758,7 @@ Partial Class ucrCalculator
         Me.cmdKurtosis.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdKurtosis.Location = New System.Drawing.Point(342, 152)
         Me.cmdKurtosis.Name = "cmdKurtosis"
-        Me.cmdKurtosis.Size = New System.Drawing.Size(84, 45)
+        Me.cmdKurtosis.Size = New System.Drawing.Size(95, 45)
         Me.cmdKurtosis.TabIndex = 182
         Me.cmdKurtosis.Text = "kurtosis"
         Me.cmdKurtosis.UseVisualStyleBackColor = True
@@ -3768,7 +3768,7 @@ Partial Class ucrCalculator
         Me.cmdMode1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdMode1.Location = New System.Drawing.Point(342, 64)
         Me.cmdMode1.Name = "cmdMode1"
-        Me.cmdMode1.Size = New System.Drawing.Size(84, 45)
+        Me.cmdMode1.Size = New System.Drawing.Size(95, 45)
         Me.cmdMode1.TabIndex = 180
         Me.cmdMode1.Text = "mode1"
         Me.cmdMode1.UseVisualStyleBackColor = True
@@ -3808,7 +3808,7 @@ Partial Class ucrCalculator
         Me.cmdnth.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdnth.Location = New System.Drawing.Point(342, 195)
         Me.cmdnth.Name = "cmdnth"
-        Me.cmdnth.Size = New System.Drawing.Size(84, 45)
+        Me.cmdnth.Size = New System.Drawing.Size(95, 45)
         Me.cmdnth.TabIndex = 176
         Me.cmdnth.Text = "nth"
         Me.cmdnth.UseVisualStyleBackColor = True
@@ -3925,7 +3925,7 @@ Partial Class ucrCalculator
         Me.cmdIQR.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdIQR.Location = New System.Drawing.Point(342, 108)
         Me.cmdIQR.Name = "cmdIQR"
-        Me.cmdIQR.Size = New System.Drawing.Size(84, 45)
+        Me.cmdIQR.Size = New System.Drawing.Size(95, 45)
         Me.cmdIQR.TabIndex = 165
         Me.cmdIQR.Text = "IQR"
         Me.cmdIQR.UseVisualStyleBackColor = True
@@ -3947,7 +3947,7 @@ Partial Class ucrCalculator
         Me.cmdRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdRange.Location = New System.Drawing.Point(342, 21)
         Me.cmdRange.Name = "cmdRange"
-        Me.cmdRange.Size = New System.Drawing.Size(84, 45)
+        Me.cmdRange.Size = New System.Drawing.Size(95, 45)
         Me.cmdRange.TabIndex = 163
         Me.cmdRange.Text = "range"
         Me.cmdRange.UseVisualStyleBackColor = True
