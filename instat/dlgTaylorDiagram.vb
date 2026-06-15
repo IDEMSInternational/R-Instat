@@ -19,6 +19,7 @@ Public Class dlgTaylorDiagram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsTaylorDiagramFunction As New RFunction
+    Private clsTaylorDiagramOperator As New ROperator
     Private Sub dlgTaylorDiagram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -80,6 +81,7 @@ Public Class dlgTaylorDiagram
 
     Private Sub SetDefaults()
         clsTaylorDiagramFunction = New RFunction
+        clsTaylorDiagramOperator = New ROperator
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
@@ -87,13 +89,20 @@ Public Class dlgTaylorDiagram
 
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
-        clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        'clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsTaylorDiagramOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
+
+        clsTaylorDiagramOperator.SetOperation("$")
+        clsTaylorDiagramOperator.AddParameter("left", clsRFunctionParameter:=clsTaylorDiagramFunction)
+        clsTaylorDiagramOperator.AddParameter("right", "plot")
+
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
+        ucrBase.clsRsyntax.SetBaseROperator(clsTaylorDiagramOperator)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, clsTaylorDiagramFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
