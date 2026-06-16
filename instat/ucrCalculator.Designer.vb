@@ -3770,7 +3770,7 @@ Partial Class ucrCalculator
         Me.cmdMode1.Name = "cmdMode1"
         Me.cmdMode1.Size = New System.Drawing.Size(95, 45)
         Me.cmdMode1.TabIndex = 180
-        Me.cmdMode1.Text = "mode1"
+        Me.cmdMode1.Text = "gmean"
         Me.cmdMode1.UseVisualStyleBackColor = True
         '
         'cmdMode
@@ -4177,7 +4177,7 @@ Partial Class ucrCalculator
         Me.cmdFreqMode1.Name = "cmdFreqMode1"
         Me.cmdFreqMode1.Size = New System.Drawing.Size(92, 45)
         Me.cmdFreqMode1.TabIndex = 176
-        Me.cmdFreqMode1.Text = "mode1"
+        Me.cmdFreqMode1.Text = "gmean"
         Me.cmdFreqMode1.UseVisualStyleBackColor = True
         '
         'cmdFreqMax
