@@ -185,8 +185,8 @@ Public Class dlgConditionalQuantilePlot
         ucrNudMinNumPoints.SetRCode(clsConditionalQuantileFunction, bReset)
         'ucrNudColumns.SetRCode(clsConditionalQuantileFunction, bReset)
         ucrInputLegendPosition.SetRCode(clsConditionalQuantileFunction, bReset)
-        ucrSavePlot.SetRCode(clsConditionalQuantileFunction, bReset)
-        ucrSavePlot.AddAdditionalRCode(clsConditionalEvalFunction)
+        ucrSavePlot.SetRCode(clsConditionalQuantileOperator, bReset)
+        ucrSavePlot.AddAdditionalRCode(clsConditionalEvalOperator)
         ucrReceiverMultipleObs.SetRCode(clsConditionalEvalFunction, bReset)
         ucrReceiverMultiplePred.SetRCode(clsConditionalEvalFunction, bReset)
         ucrReceiverStatistics.SetRCode(clsConditionalEvalFunction, bReset)
@@ -226,7 +226,7 @@ Public Class dlgConditionalQuantilePlot
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoQuantiles.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalQuantileFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalQuantileFunction)
             ucrBase.clsRsyntax.SetBaseROperator(clsConditionalQuantileOperator)
             ucrSavePlot.SetPrefix("cond_quantile_plot")
             Me.Size = New System.Drawing.Size(Me.Width, 489)
@@ -234,7 +234,7 @@ Public Class dlgConditionalQuantilePlot
             ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 370)
             cmdPlotOptions.Text = "Conditional Quantile Options"
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalEvalFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalEvalFunction)
             ucrBase.clsRsyntax.SetBaseROperator(clsConditionalEvalOperator)
             ucrSavePlot.SetPrefix("cond_eval_plot")
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)

@@ -103,6 +103,7 @@ Public Class dlgTaylorDiagram
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         SetRCode(Me, clsTaylorDiagramFunction, bReset)
+        ucrSavePlot.SetRCode(clsTaylorDiagramOperator, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
