@@ -29,4 +29,6 @@ Public Interface IColumnMetaDataGrid
 
     Sub SetNonEditableColumns(lstNonEditableColumns As List(Of String))
 
+    Event WorksheetChanged()
+
 End Interface

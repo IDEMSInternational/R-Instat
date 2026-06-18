@@ -44,6 +44,7 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
+    Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -851,7 +852,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
-        dlgDeleteRowsOrColums.ShowDialog()
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
@@ -1560,8 +1561,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperatureGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Temperature
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATemperature.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSACrops_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACrops.Click
@@ -2896,8 +2896,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATrendGraph.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
@@ -2911,11 +2910,6 @@ Public Class frmMain
     Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
         dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
         dlgVisualizeData.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPICSAGeneralGrap_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGrap.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeClimograph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimograph.Click
@@ -3210,6 +3204,13 @@ Public Class frmMain
         dlgRecodeFactor.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeOneVariableLikertGraphs_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableLikertGraphs.Click
+        If dlgDescribeOneVariableLikertGraph Is Nothing Then
+            dlgDescribeOneVariableLikertGraph = New dlgDescribeOneVariableLikertGraph
+        End If
+        dlgDescribeOneVariableLikertGraph.ShowDialog()
+    End Sub
+
     Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
         dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
         dlgCombine.ShowDialog()
@@ -3217,5 +3218,10 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
+    End Sub
+
+    Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
+        dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
+        dlgInsertColumn.ShowDialog()
     End Sub
 End Class
