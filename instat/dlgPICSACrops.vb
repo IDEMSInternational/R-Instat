@@ -230,12 +230,14 @@ Public Class dlgPICSACrops
         ucrSaveDefinitionCrops.SetIsComboBox()
         ucrSaveDefinitionCrops.SetCheckBoxText("Store Crops Data Definitions")
         ucrSaveDefinitionCrops.SetDataFrameSelector(ucrSelectorForCrops.ucrAvailableDataFrames)
+        ucrSaveDefinitionCrops.SetDataNameAsRVariable("new_crop_def")
 
         ucrSaveDefinitionProportions.SetPrefix("crops_proportion_definition")
         ucrSaveDefinitionProportions.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveDefinitionProportions.SetIsComboBox()
         ucrSaveDefinitionProportions.SetCheckBoxText("Store Proportion Definitions")
         ucrSaveDefinitionProportions.SetDataFrameSelector(ucrSelectorForCrops.ucrAvailableDataFrames)
+        ucrSaveDefinitionProportions.SetDataNameAsRVariable("new_crop_prop")
 
         'Linking of controls
         ucrChkDataProp.AddToLinkedControls({ucrChkDataCrops, ucrSaveDefinitionProportions}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
