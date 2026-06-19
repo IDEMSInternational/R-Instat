@@ -21,7 +21,10 @@ Public Class dlgExportClimaticDefinitions
     Private dctReceiverMap As New Dictionary(Of ucrReceiver, ucrReceiverSingle)
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
             clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction,
-            clsBuildCropLongerFunction As New RFunction
+            clsBuildCropLongerFunction, clsExportToDBFunction As New RFunction
+    Private clsSummaryDataOperator, clsDefinitionDataOperator, clsSummaryStationMetadataOperator, clsCropDataOperator As ROperator
+    Private clsDummyFunction, clsCollateStationMetadataFunction As RFunction
+    Private _sdgImportFromClimSoft As sdgImportFromClimSoft
 
     Private Enum SelectorMode
         Dataframes
@@ -43,12 +46,35 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
         autoTranslate(Me)
         CheckAndUpdateConnectionStatus()
-        SetSelectorMode(SelectorMode.Dataframes)
         HideDisplayGroupedControls()
+        SetDialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
-        ' Selector
+        ucrPnlExportToEPicsa.AddRadioButton(rdoSummaryData)
+        ucrPnlExportToEPicsa.AddRadioButton(rdoStationMetadata)
+        ucrPnlExportToEPicsa.AddParameterValuesCondition(rdoSummaryData, "checked", "summary_data")
+        ucrPnlExportToEPicsa.AddParameterValuesCondition(rdoStationMetadata, "checked", "station_metadata")
+
+        ucrPnlExportToEPicsa.AddToLinkedControls(
+            {
+                ucrSelectorDataFramesExportToEPicsa, ucrReceiverAnnualRainfallSummaries, ucrReceiverMonthlyRainfallSummaries, ucrReceiverAnnualTempSummaries,
+                ucrReceiverMonthlyTempSummaries, ucrReceiverAnnualMonthlyTempSummaries, ucrReceiverCropSummaries, ucrReceiverPropSummaries, ucrReceiverMultipleAnnualRainfall,
+                ucrReceiverMultipleAnnualTemp, ucrReceiverMultipleMonthlyRainfall, ucrReceiverMultipleMonthlyTemp, ucrReceiverMultipleAnnualMonthlyTemp, ucrReceiverCropDefinition,
+                ucrReceiverPropDefinition
+            },
+            {rdoSummaryData}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True
+        )
+        ucrPnlExportToEPicsa.AddToLinkedControls(
+            {
+                ucrSelectorStationMetadata, ucrReceiverStationID, ucrReceiverStationName, ucrReceiverLongitude, ucrReceiverLatitude, ucrReceiverElevation, ucrReceiverDistrict, ucrReceiverCountryCode
+            },
+            {rdoStationMetadata}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True
+        )
+
+        ucrSelectorExportToEPicsa.Visible = False
+
+        ' Selectors
         ucrSelectorExportToEPicsa.SetParameter(New RParameter("data_name", 0))
         ucrSelectorExportToEPicsa.SetParameterIsString()
         ucrSelectorExportToEPicsa.Visible = False
@@ -57,7 +83,57 @@ Public Class dlgExportClimaticDefinitions
         ucrSelectorDataFramesExportToEPicsa.SetLinkedDisplayControl(lblDataframes)
         ucrSelectorDataFramesExportToEPicsa.Visible = True
 
-        ' Main Receivers
+        ucrSelectorStationMetadata.SetParameter(New RParameter("data", 0))
+        ucrSelectorStationMetadata.SetParameterIsString()
+        ucrSelectorStationMetadata.Visible = False
+
+
+        ' Station Metadata Receivers
+        ucrReceiverStationID.SetParameter(New RParameter("station_id", 1))
+        ucrReceiverStationID.Selector = ucrSelectorStationMetadata
+        ucrReceiverStationID.SetParameterIsString()
+        ucrReceiverStationID.SetMeAsReceiver()
+        ucrReceiverStationID.strSelectorHeading = "Variables"
+        ucrReceiverStationID.SetLinkedDisplayControl(lblStationID)
+
+        ucrReceiverStationName.SetParameter(New RParameter("station_name", 2))
+        ucrReceiverStationName.Selector = ucrSelectorStationMetadata
+        ucrReceiverStationName.SetParameterIsString()
+        ucrReceiverStationName.strSelectorHeading = "Variables"
+        ucrReceiverStationName.SetLinkedDisplayControl(lblStationName)
+
+        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 3))
+        ucrReceiverLongitude.Selector = ucrSelectorStationMetadata
+        ucrReceiverLongitude.SetParameterIsString()
+        ucrReceiverLongitude.strSelectorHeading = "Variables"
+        ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
+
+        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 4))
+        ucrReceiverLatitude.Selector = ucrSelectorStationMetadata
+        ucrReceiverLatitude.SetParameterIsString()
+        ucrReceiverLatitude.strSelectorHeading = "Variables"
+        ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitiude)
+
+        ucrReceiverElevation.SetParameter(New RParameter("elevation", 5))
+        ucrReceiverElevation.Selector = ucrSelectorStationMetadata
+        ucrReceiverElevation.SetParameterIsString()
+        ucrReceiverElevation.strSelectorHeading = "Variables"
+        ucrReceiverElevation.SetLinkedDisplayControl(lblElevation)
+
+        ucrReceiverDistrict.SetParameter(New RParameter("district", 6))
+        ucrReceiverDistrict.Selector = ucrSelectorStationMetadata
+        ucrReceiverDistrict.SetParameterIsString()
+        ucrReceiverDistrict.strSelectorHeading = "Variables"
+        ucrReceiverDistrict.SetLinkedDisplayControl(lblDistrict)
+
+        ucrReceiverCountryCode.SetParameter(New RParameter("country_code", 7))
+        ucrReceiverCountryCode.Selector = ucrSelectorStationMetadata
+        ucrReceiverCountryCode.SetParameterIsString()
+        ucrReceiverCountryCode.strSelectorHeading = "Variables"
+        ucrReceiverCountryCode.SetLinkedDisplayControl(lblCountryCode)
+
+
+        ' Summary Data Main Receivers
         ucrReceiverAnnualRainfallSummaries.SetParameter(New RParameter("data_name", 0))
         ucrReceiverAnnualRainfallSummaries.Selector = ucrSelectorDataFramesExportToEPicsa
         ucrReceiverAnnualRainfallSummaries.SetParameterIsString()
@@ -174,6 +250,7 @@ Public Class dlgExportClimaticDefinitions
         dctReceiverMap.Add(ucrReceiverPropDefinition, ucrReceiverPropSummaries)
 
         HideDisplayGroupedControls()
+        SetSummaryDataDefaultSelector()
     End Sub
 
     Private Sub SetDefaults()
@@ -183,6 +260,18 @@ Public Class dlgExportClimaticDefinitions
         clsBuildSummaryLongMonthlyTempFunction = New RFunction
         clsBuildSummaryLongAnnualMonthlyTempFunction = New RFunction
         clsBuildCropLongerFunction = New RFunction
+        clsExportToDBFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsCollateStationMetadataFunction = New RFunction
+
+        clsSummaryDataOperator = New ROperator
+        clsDefinitionDataOperator = New ROperator
+        clsSummaryStationMetadataOperator = New ROperator
+        clsCropDataOperator = New ROperator
+
+        Dim strSummaryDef = "summary_def"
+
+        clsDummyFunction.AddParameter("checked", "summary_data", iPosition:=0)
 
         ucrSelectorExportToEPicsa.Reset()
         ucrSelectorDataFramesExportToEPicsa.Reset()
@@ -212,14 +301,48 @@ Public Class dlgExportClimaticDefinitions
         clsBuildSummaryLongAnnualMonthlyTempFunction.AddParameter("summary_type", Chr(34) & "Temperature" & Chr(34), iPosition:=2)
         clsBuildSummaryLongAnnualMonthlyTempFunction.SetAssignTo("annual_monthly_temp_longer")
 
-        clsCollateSummaryDefinitionsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$collate_summary_definitions")
-
         clsBuildCropLongerFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$build_crop_longer")
         clsBuildCropLongerFunction.SetAssignTo("crop_summary_longer")
 
+        clsCollateSummaryDefinitionsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$collate_summary_definitions")
+        clsCollateSummaryDefinitionsFunction.SetAssignTo(strSummaryDef)
+
+        clsSummaryDataOperator.SetOperation("$")
+        clsSummaryDataOperator.AddParameter("x", clsRFunctionParameter:=clsCollateSummaryDefinitionsFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsSummaryDataOperator.AddParameter("y", "summary", iPosition:=1, bIncludeArgumentName:=False)
+        clsSummaryDataOperator.bAllBrackets = False
+        clsSummaryDataOperator.bSpaceAroundOperation = False
+
+        clsDefinitionDataOperator.SetOperation("$")
+        clsDefinitionDataOperator.AddParameter("x", strSummaryDef, iPosition:=0, bIncludeArgumentName:=False)
+        clsDefinitionDataOperator.AddParameter("y", "definition", iPosition:=1, bIncludeArgumentName:=False)
+        clsDefinitionDataOperator.bAllBrackets = False
+        clsDefinitionDataOperator.bSpaceAroundOperation = False
+
+        clsSummaryStationMetadataOperator.SetOperation("$")
+        clsSummaryStationMetadataOperator.AddParameter("x", strSummaryDef, iPosition:=0, bIncludeArgumentName:=False)
+        clsSummaryStationMetadataOperator.AddParameter("y", "summary_station_metadata", iPosition:=1, bIncludeArgumentName:=False)
+        clsSummaryStationMetadataOperator.bAllBrackets = False
+        clsSummaryStationMetadataOperator.bSpaceAroundOperation = False
+
+        clsCropDataOperator.SetOperation("$")
+        clsCropDataOperator.AddParameter("x", strSummaryDef, iPosition:=0, bIncludeArgumentName:=False)
+        clsCropDataOperator.AddParameter("y", "crop", iPosition:=1, bIncludeArgumentName:=False)
+        clsCropDataOperator.bAllBrackets = False
+        clsCropDataOperator.bSpaceAroundOperation = False
+
+        clsExportToDBFunction.SetPackageName("epicsawrap")
+        clsExportToDBFunction.SetRCommand("export_to_db")
+        clsExportToDBFunction.AddParameter("con", "con", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsCollateStationMetadataFunction.SetPackageName("epicsawrap")
+        clsCollateStationMetadataFunction.SetRCommand("collate_station_metadata")
+        clsCollateStationMetadataFunction.SetAssignTo("collate_station_metadata")
+
         HideDisplayGroupedControls()
         AddRemoveParamsInSummaryDefinitionsFunction()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCollateSummaryDefinitionsFunction)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsExportToDBFunction, iPosition:=2)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsExportToDBFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -238,44 +361,57 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMultipleAnnualMonthlyTemp.SetRCode(clsBuildSummaryLongAnnualMonthlyTempFunction, bReset)
         ucrReceiverCropDefinition.SetRCode(clsBuildCropLongerFunction, bReset)
         ucrReceiverPropDefinition.SetRCode(clsBuildCropLongerFunction, bReset)
+
+        ucrPnlExportToEPicsa.SetRCode(clsDummyFunction)
+
+        ' Station Metadata
+        ucrSelectorStationMetadata.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverStationID.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverStationName.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverLongitude.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverLatitude.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverElevation.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverDistrict.SetRCode(clsCollateStationMetadataFunction, bReset)
+        ucrReceiverCountryCode.SetRCode(clsCollateStationMetadataFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
         Dim bOkEnable As Boolean = True
-        If ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverAnnualTempSummaries.IsEmpty AndAlso
+        If rdoSummaryData.Checked Then
+            If ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverAnnualTempSummaries.IsEmpty AndAlso
                 ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso
                 ucrReceiverAnnualMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverPropSummaries.IsEmpty AndAlso
                 ucrReceiverCropSummaries.IsEmpty Then
-            bOkEnable = False
-        Else
-            If Not ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualRainfall.IsEmpty Then
                 bOkEnable = False
-            End If
+            Else
+                If Not ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualRainfall.IsEmpty Then
+                    bOkEnable = False
+                End If
 
-            If Not ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualTemp.IsEmpty Then
-                bOkEnable = False
-            End If
+                If Not ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualTemp.IsEmpty Then
+                    bOkEnable = False
+                End If
 
-            If Not ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyRainfall.IsEmpty Then
-                bOkEnable = False
-            End If
+                If Not ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyRainfall.IsEmpty Then
+                    bOkEnable = False
+                End If
 
-            If Not ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyTemp.IsEmpty Then
-                bOkEnable = False
-            End If
+                If Not ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleMonthlyTemp.IsEmpty Then
+                    bOkEnable = False
+                End If
 
-            If Not ucrReceiverAnnualMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualMonthlyTemp.IsEmpty Then
-                bOkEnable = False
-            End If
+                If Not ucrReceiverAnnualMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverMultipleAnnualMonthlyTemp.IsEmpty Then
+                    bOkEnable = False
+                End If
 
-            If Not ucrReceiverCropSummaries.IsEmpty AndAlso ucrReceiverCropDefinition.IsEmpty Then
-                bOkEnable = False
-            End If
+                If Not ucrReceiverCropSummaries.IsEmpty AndAlso ucrReceiverCropDefinition.IsEmpty Then
+                    bOkEnable = False
+                End If
 
-            If Not ucrReceiverPropSummaries.IsEmpty AndAlso ucrReceiverPropDefinition.IsEmpty Then
-                bOkEnable = False
+                If Not ucrReceiverPropSummaries.IsEmpty AndAlso ucrReceiverPropDefinition.IsEmpty Then
+                    bOkEnable = False
+                End If
             End If
-
         End If
         ucrBase.OKEnabled(bOkEnable)
     End Sub
@@ -284,9 +420,13 @@ Public Class dlgExportClimaticDefinitions
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-        CheckAndUpdateConnectionStatus()
-        SetSelectorMode(SelectorMode.Dataframes)
+        SetSummaryDataDefaultSelector()
         HideDisplayGroupedControls()
+        If _sdgImportFromClimSoft IsNot Nothing Then
+            _sdgImportFromClimSoft.Reset()
+        End If
+
+        CheckAndUpdateConnectionStatus()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlContentsChanged,
@@ -296,9 +436,58 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMultipleMonthlyRainfall.ControlContentsChanged, ucrReceiverMultipleMonthlyTemp.ControlContentsChanged,
         ucrReceiverMultipleAnnualMonthlyTemp.ControlContentsChanged, ucrReceiverCropSummaries.ControlContentsChanged,
         ucrReceiverCropDefinition.ControlContentsChanged, ucrReceiverPropSummaries.ControlContentsChanged,
-        ucrReceiverPropDefinition.ControlContentsChanged
+        ucrReceiverPropDefinition.ControlContentsChanged, ucrPnlExportToEPicsa.ControlContentsChanged,
+        ucrReceiverStationID.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged,
+        ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
+        ucrReceiverElevation.ControlContentsChanged, ucrReceiverDistrict.ControlContentsChanged, ucrReceiverCountryCode.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrPnlExportToEPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportToEPicsa.ControlValueChanged
+        If rdoSummaryData.Checked Then
+            SetSelectorMode(SelectorMode.Dataframes)
+            clsDummyFunction.AddParameter("checked", "summary_data", iPosition:=0)
+        Else
+            clsDummyFunction.AddParameter("checked", "station_metadata", iPosition:=0)
+            grpDefinitionsProducts.Visible = False
+        End If
+
+        HideDisplayGroupedControls()
+        SetDialogSize()
+        ChangeExportToDBParams()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetDialogSize()
+        If rdoSummaryData.Checked Then
+            Me.Size = New Size(557, 334)
+            'Me.Size = New Size(555, 750)
+            ucrPnlExportToEPicsa.Location = New Point(150, 7)
+        Else
+            Me.Size = New Size(557, 334)
+            'Me.Size = New Size(500, 500)
+            ucrPnlExportToEPicsa.Location = New Point(125, 7)
+        End If
+    End Sub
+
+    Private Sub ChangeExportToDBParams()
+        If rdoSummaryData.Checked Then
+            clsExportToDBFunction.RemoveParameterByName("station_metadata")
+
+            clsExportToDBFunction.AddParameter("summary_data", clsROperatorParameter:=clsSummaryDataOperator, iPosition:=1)
+            clsExportToDBFunction.AddParameter("summary_station_metadata", clsROperatorParameter:=clsSummaryStationMetadataOperator, iPosition:=2)
+            clsExportToDBFunction.AddParameter("definition_data", clsROperatorParameter:=clsDefinitionDataOperator, iPosition:=3)
+            clsExportToDBFunction.AddParameter("crop_data", clsROperatorParameter:=clsCropDataOperator, iPosition:=4)
+        Else
+            clsExportToDBFunction.RemoveParameterByName("summary_data")
+            clsExportToDBFunction.RemoveParameterByName("summary_station_metadata")
+            clsExportToDBFunction.RemoveParameterByName("definition_data")
+            clsExportToDBFunction.RemoveParameterByName("crop_data")
+
+            clsExportToDBFunction.AddParameter("station_metadata", clsRFunctionParameter:=clsCollateStationMetadataFunction, iPosition:=1)
+        End If
+    End Sub
+
 
     Private Sub AddRemoveParamsInSummaryDefinitionsFunction()
         AddRemoveParameter(clsCollateSummaryDefinitionsFunction, clsFunctionParameter:=clsBuildSummaryLongAnnualRainFunction, paramName:="annual_rain_summary", iPosition:=0, ucrReceiverAnnualRainfallSummaries)
@@ -337,6 +526,12 @@ Public Class dlgExportClimaticDefinitions
         End If
     End Sub
 
+    Private Sub SetSummaryDataDefaultSelector()
+        If rdoSummaryData.Checked Then
+            SetSelectorMode(SelectorMode.Dataframes)
+        End If
+    End Sub
+
     Private Sub CoreCropPropSummaryReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCropSummaries.ControlValueChanged,
             ucrReceiverPropSummaries.ControlValueChanged
         ' Removes the parameter if the core receiver is empty and adds it back in if it's filled
@@ -347,29 +542,37 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub btnConnection_Click(sender As Object, e As EventArgs) Handles btnConnection.Click
-        Using dlg As New sdgImportFromClimSoft
-            AddHandler dlg.Shown, AddressOf SetEPicsaSubDialogDefaults
-            dlg.ShowDialog()
-        End Using
+
+        If _sdgImportFromClimSoft Is Nothing Then
+            _sdgImportFromClimSoft = New sdgImportFromClimSoft
+            AddHandler _sdgImportFromClimSoft.Shown, AddressOf SetEPicsaSubDialogDefaults
+        End If
+
+        _sdgImportFromClimSoft.SetUp(clsNewRSyntax:=ucrBase.clsRsyntax)
+        _sdgImportFromClimSoft.ShowDialog()
 
         CheckAndUpdateConnectionStatus()
     End Sub
 
     Private Sub SetEPicsaSubDialogDefaults(sender As Object, e As EventArgs)
         Dim dlg As sdgImportFromClimSoft = DirectCast(sender, sdgImportFromClimSoft)
-        'sdgImportFromClimSoft.ucrComboBoxDatabaseName.SetText("")
+        dlg.ucrComboBoxDatabaseName.SetText("epicsa")
         dlg.ucrInputDrv.SetText("RPostgres::Postgres()")
         dlg.ucrTxtHost.SetText("db.epicsa.idems.international")
         dlg.ucrComboBoxPort.SetText("5432")
+
+        dlg.ucrTxtHost.OnControlValueChanged()
     End Sub
 
     Private Sub CheckAndUpdateConnectionStatus()
-        If sdgImportFromClimSoft.IsConnectionIsActive() Then
-            lblConnection.Text = "Connected"
-            lblConnection.ForeColor = Color.Green
-        Else
-            lblConnection.Text = "No Connection"
-            lblConnection.ForeColor = Color.Red
+        If _sdgImportFromClimSoft IsNot Nothing Then
+            If _sdgImportFromClimSoft.IsConnectionIsActive() Then
+                lblConnection.Text = "Connected"
+                lblConnection.ForeColor = Color.Green
+            Else
+                lblConnection.Text = "No Connection"
+                lblConnection.ForeColor = Color.Red
+            End If
         End If
     End Sub
 
@@ -416,25 +619,51 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub HideDisplayGroupedControls()
-        grpDefinitionsProducts.Visible = Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso
+        If rdoSummaryData.Checked Then
+            grpDefinitionsProducts.Visible = Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso
             ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso
             ucrReceiverAnnualMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverCropSummaries.IsEmpty AndAlso ucrReceiverPropSummaries.IsEmpty)
-        ucrReceiverMultipleAnnualRainfall.Visible = Not ucrReceiverAnnualRainfallSummaries.IsEmpty
-        ucrReceiverMultipleMonthlyRainfall.Visible = Not ucrReceiverMonthlyRainfallSummaries.IsEmpty
-        ucrReceiverMultipleAnnualTemp.Visible = Not ucrReceiverAnnualTempSummaries.IsEmpty
-        ucrReceiverMultipleMonthlyTemp.Visible = Not ucrReceiverMonthlyTempSummaries.IsEmpty
-        ucrReceiverMultipleAnnualMonthlyTemp.Visible = Not ucrReceiverAnnualMonthlyTempSummaries.IsEmpty
-        ucrReceiverPropDefinition.Visible = Not ucrReceiverPropSummaries.IsEmpty
-        ucrReceiverCropDefinition.Visible = Not ucrReceiverCropSummaries.IsEmpty
+            ucrReceiverMultipleAnnualRainfall.Visible = Not ucrReceiverAnnualRainfallSummaries.IsEmpty
+            ucrReceiverMultipleMonthlyRainfall.Visible = Not ucrReceiverMonthlyRainfallSummaries.IsEmpty
+            ucrReceiverMultipleAnnualTemp.Visible = Not ucrReceiverAnnualTempSummaries.IsEmpty
+            ucrReceiverMultipleMonthlyTemp.Visible = Not ucrReceiverMonthlyTempSummaries.IsEmpty
+            ucrReceiverMultipleAnnualMonthlyTemp.Visible = Not ucrReceiverAnnualMonthlyTempSummaries.IsEmpty
+            ucrReceiverPropDefinition.Visible = Not ucrReceiverPropSummaries.IsEmpty
+            ucrReceiverCropDefinition.Visible = Not ucrReceiverCropSummaries.IsEmpty
 
-        ' Making sure all labels don't appear at once when the group box appears
-        lblAnnualRainfall.Visible = ucrReceiverMultipleAnnualRainfall.Visible
-        lblMonthlyRainfall.Visible = ucrReceiverMultipleMonthlyRainfall.Visible
-        lblAnnualTemp.Visible = ucrReceiverMultipleAnnualTemp.Visible
-        lblMonthlyTemp.Visible = ucrReceiverMultipleMonthlyTemp.Visible
-        lblAnnualMonthlyTemp.Visible = ucrReceiverMultipleAnnualMonthlyTemp.Visible
-        lblCropDefinition.Visible = ucrReceiverCropDefinition.Visible
-        lblPropDefinition.Visible = ucrReceiverPropDefinition.Visible
+            ' Making sure all labels don't appear at once when the group box appears
+            lblAnnualRainfall.Visible = ucrReceiverMultipleAnnualRainfall.Visible
+            lblMonthlyRainfall.Visible = ucrReceiverMultipleMonthlyRainfall.Visible
+            lblAnnualTemp.Visible = ucrReceiverMultipleAnnualTemp.Visible
+            lblMonthlyTemp.Visible = ucrReceiverMultipleMonthlyTemp.Visible
+            lblAnnualMonthlyTemp.Visible = ucrReceiverMultipleAnnualMonthlyTemp.Visible
+            lblCropDefinition.Visible = ucrReceiverCropDefinition.Visible
+            lblPropDefinition.Visible = ucrReceiverPropDefinition.Visible
+
+            lblStationID.Visible = False
+            lblStationName.Visible = False
+            lblLatitiude.Visible = False
+            lblLongitude.Visible = False
+            lblElevation.Visible = False
+            lblDistrict.Visible = False
+            lblCountryCode.Visible = False
+        Else
+            lblAnnualMonthlyTemp.Visible = False
+            lblAnnualMonthlyTempSummaries.Visible = False
+            lblAnnualRainfall.Visible = False
+            lblAnnualRainfallSummaries.Visible = False
+            lblAnnualTemp.Visible = False
+            lblAnnualTempSummaries.Visible = False
+            lblCropDefinition.Visible = False
+            lblCropSummaries.Visible = False
+            lblDataframes.Visible = False
+            lblMonthlyRainfall.Visible = False
+            lblMonthlyRainfallSummaries.Visible = False
+            lblMonthlyTemp.Visible = False
+            lblMonthlyTempSummaries.Visible = False
+            lblPropDefinition.Visible = False
+            lblPropSummaries.Visible = False
+        End If
     End Sub
 
     Private Sub CoreControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRainfallSummaries.ControlValueChanged,

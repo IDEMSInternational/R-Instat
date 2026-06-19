@@ -20,9 +20,11 @@ Imports RDotNet
 Public Class sdgImportFromClimSoft
     Private clsRDatabaseConnect As RFunction
     Private clsRDatabaseDisconnect As RFunction
+    Private clsRGetDatabaseConnection As RFunction
 
     Private bFirstLoad As Boolean = True
     Private bConnected As Boolean
+    Private clsRSyntax As RSyntax
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -58,6 +60,7 @@ Public Class sdgImportFromClimSoft
         'ports
         dctPorts.Add("3308", "3308")
         dctPorts.Add("3306", "3306")
+        dctPorts.Add("5432", "5432")
         ucrComboBoxPort.SetParameter(New RParameter("port", 2))
         ucrComboBoxPort.SetItems(dctPorts)
         ucrComboBoxPort.AddQuotesIfUnrecognised = False
@@ -79,6 +82,7 @@ Public Class sdgImportFromClimSoft
 
     Private Sub SetDefaults()
         clsRDatabaseConnect = New RFunction
+        clsRGetDatabaseConnection = New RFunction
         clsRDatabaseDisconnect = New RFunction
 
         'set database connect R command and it's parameter values(from previous set values if available)
@@ -91,6 +95,9 @@ Public Class sdgImportFromClimSoft
 
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
+
+        'get database connection
+        clsRGetDatabaseConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_database_connection")
 
         bConnected = IsConnectionIsActive()
         UpdateConnectionAndControlsState()
@@ -146,6 +153,27 @@ Public Class sdgImportFromClimSoft
     Private Sub Disconnect()
         frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = False
+        AddRemoveDatabaseConnectToScriptCodes()
+    End Sub
+
+    Public Sub SetUp(Optional clsNewRSyntax As RSyntax = Nothing)
+        clsRSyntax = clsNewRSyntax
+        AddRemoveDatabaseConnectToScriptCodes()
+    End Sub
+
+
+    Private Sub AddRemoveDatabaseConnectToScriptCodes()
+        Dim clsTempDBConnectFunction As New RFunction
+        If clsRSyntax IsNot Nothing AndAlso clsRDatabaseConnect IsNot Nothing Then
+            'clsTempDBConnectFunction = clsRDatabaseConnect.Clone()
+            'clsTempDBConnectFunction.SetAssignTo("con")
+            clsRGetDatabaseConnection.SetAssignTo("con")
+            If bConnected Then
+                clsRSyntax.AddToBeforeCodes(clsRGetDatabaseConnection, iPosition:=1)
+            Else
+                clsRSyntax.RemoveFromBeforeCodes(clsRGetDatabaseConnection)
+            End If
+        End If
     End Sub
 
     ''' <summary>
@@ -154,6 +182,7 @@ Public Class sdgImportFromClimSoft
     Private Sub Connect()
         frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = IsConnectionIsActive()
+        AddRemoveDatabaseConnectToScriptCodes()
     End Sub
 
     Public Sub Reset()
