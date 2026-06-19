@@ -6857,7 +6857,6 @@
   "Annual Rainfall:": "Annual Rainfall:",
   "Export to EPicsa": "Export to EPicsa",
   "db.epicsa.idems.international": "db.epicsa.idems.international",
-  "PICSA Trend Graph": "PICSA Trend Graph",
   "Prop Definition": "Prop Definition",
   "Crop Definition": "Crop Definition",
   "Annual-Monthly Temperature Summaries:": "Annual-Monthly Temperature Summaries:",
@@ -6865,7 +6864,7 @@
   "Crop Summaries:": "Crop Summaries:",
   "Summary Data": "Summary Data",
   "Country Code:": "Country Code:",
-  "epicsa": "epicsa"
+  "epicsa": "epicsa",
   "PICSA Trend Graph": "PICSA Trend Graph",
   "Save Definitions Object:": "Save Definitions Object:",
   "quantile 2": "quantile 2",
