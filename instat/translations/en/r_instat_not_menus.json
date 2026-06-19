@@ -6855,18 +6855,20 @@
   "Monthly Temperature:": "Monthly Temperature:",
   "Annual Temperature:": "Annual Temperature:",
   "Annual Rainfall:": "Annual Rainfall:",
-  "Annual-Monthly Temperature Summaries": "Annual-Monthly Temperature Summaries",
   "Export to EPicsa": "Export to EPicsa",
   "db.epicsa.idems.international": "db.epicsa.idems.international",
   "PICSA Trend Graph": "PICSA Trend Graph",
   "Prop Definition": "Prop Definition",
   "Crop Definition": "Crop Definition",
-  "Prop Summaries": "Prop Summaries",
-  "Crop Summaries": "Crop Summaries",
   "Annual-Monthly Temperature Summaries:": "Annual-Monthly Temperature Summaries:",
   "Prop Summaries:": "Prop Summaries:",
   "Crop Summaries:": "Crop Summaries:",
   "Summary Data": "Summary Data",
   "Country Code:": "Country Code:",
   "epicsa": "epicsa"
+  "PICSA Trend Graph": "PICSA Trend Graph",
+  "Save Definitions Object:": "Save Definitions Object:",
+  "quantile 2": "quantile 2",
+  "quantile 3": "quantile 3",
+  "gmean": "gmean"
 }
