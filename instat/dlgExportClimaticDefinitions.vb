@@ -26,12 +26,12 @@ Public Class dlgExportClimaticDefinitions
     Private clsDummyFunction, clsCollateStationMetadataFunction As RFunction
     Private _sdgImportFromClimSoft As sdgImportFromClimSoft
 
-    Private Enum SelectorMode
+    Private Enum SummaryDataSelectorMode
         Dataframes
         Objects
     End Enum
 
-    Private CurrentSelectorMode As SelectorMode
+    Private CurrentSummaryDataSelectorMode As SummaryDataSelectorMode
 
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -45,9 +45,10 @@ Public Class dlgExportClimaticDefinitions
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        SetSummaryDataDefaultSelector()
+        SetDialogSize()
         CheckAndUpdateConnectionStatus()
         HideDisplayGroupedControls()
-        SetDialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -250,7 +251,6 @@ Public Class dlgExportClimaticDefinitions
         dctReceiverMap.Add(ucrReceiverPropDefinition, ucrReceiverPropSummaries)
 
         HideDisplayGroupedControls()
-        SetSummaryDataDefaultSelector()
     End Sub
 
     Private Sub SetDefaults()
@@ -425,7 +425,7 @@ Public Class dlgExportClimaticDefinitions
         If _sdgImportFromClimSoft IsNot Nothing Then
             _sdgImportFromClimSoft.Reset()
         End If
-
+        SetDialogSize()
         CheckAndUpdateConnectionStatus()
     End Sub
 
@@ -445,7 +445,7 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub ucrPnlExportToEPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportToEPicsa.ControlValueChanged
         If rdoSummaryData.Checked Then
-            SetSelectorMode(SelectorMode.Dataframes)
+            SetSelectorMode(SummaryDataSelectorMode.Dataframes)
             clsDummyFunction.AddParameter("checked", "summary_data", iPosition:=0)
         Else
             clsDummyFunction.AddParameter("checked", "station_metadata", iPosition:=0)
@@ -459,15 +459,23 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub SetDialogSize()
+        Me.AutoSize = False
+
         If rdoSummaryData.Checked Then
-            Me.Size = New Size(557, 334)
-            'Me.Size = New Size(555, 750)
+            If grpDefinitionsProducts.Visible Then
+                Me.Size = New Size(555, 680)
+            Else
+                Me.Size = New Size(500, 680)
+            End If
+            ucrBase.Location = New Point(12, 585)
             ucrPnlExportToEPicsa.Location = New Point(150, 7)
         Else
-            Me.Size = New Size(557, 334)
-            'Me.Size = New Size(500, 500)
+            Me.Size = New Size(500, 500)
             ucrPnlExportToEPicsa.Location = New Point(125, 7)
+            ucrBase.Location = New Point(12, 405)
         End If
+
+        Me.StartPosition = FormStartPosition.CenterScreen
     End Sub
 
     Private Sub ChangeExportToDBParams()
@@ -528,7 +536,7 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub SetSummaryDataDefaultSelector()
         If rdoSummaryData.Checked Then
-            SetSelectorMode(SelectorMode.Dataframes)
+            SetSelectorMode(SummaryDataSelectorMode.Dataframes)
         End If
     End Sub
 
@@ -576,18 +584,18 @@ Public Class dlgExportClimaticDefinitions
         End If
     End Sub
 
-    Private Sub SetSelectorMode(mode As SelectorMode)
-        If CurrentSelectorMode = mode Then
+    Private Sub SetSelectorMode(mode As SummaryDataSelectorMode)
+        If CurrentSummaryDataSelectorMode = mode Then
             Exit Sub
         End If
 
-        CurrentSelectorMode = mode
+        CurrentSummaryDataSelectorMode = mode
 
         Select Case mode
-            Case SelectorMode.Dataframes
+            Case SummaryDataSelectorMode.Dataframes
                 ucrSelectorDataFramesExportToEPicsa.Visible = True
                 ucrSelectorExportToEPicsa.Visible = False
-            Case SelectorMode.Objects
+            Case SummaryDataSelectorMode.Objects
                 ucrSelectorDataFramesExportToEPicsa.Visible = False
                 ucrSelectorExportToEPicsa.Visible = True
         End Select
@@ -597,7 +605,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverAnnualTempSummaries.Enter, ucrReceiverMonthlyRainfallSummaries.Enter,
         ucrReceiverMonthlyTempSummaries.Enter, ucrReceiverAnnualMonthlyTempSummaries.Enter, ucrReceiverCropSummaries.Enter,
         ucrReceiverPropSummaries.Enter
-        SetSelectorMode(SelectorMode.Dataframes)
+        SetSelectorMode(SummaryDataSelectorMode.Dataframes)
     End Sub
 
     Private Sub MultipleReceiver_Click(sender As Object, e As EventArgs) Handles ucrReceiverMultipleAnnualRainfall.Enter,
@@ -615,7 +623,7 @@ Public Class dlgExportClimaticDefinitions
             End If
         End If
 
-        SetSelectorMode(SelectorMode.Objects)
+        SetSelectorMode(SummaryDataSelectorMode.Objects)
     End Sub
 
     Private Sub HideDisplayGroupedControls()
@@ -672,6 +680,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverCropSummaries.ControlValueChanged, ucrReceiverPropSummaries.ControlValueChanged
         AddRemoveParamsInSummaryDefinitionsFunction()
         HideDisplayGroupedControls()
+        SetDialogSize()
         TestOkEnabled()
     End Sub
 
