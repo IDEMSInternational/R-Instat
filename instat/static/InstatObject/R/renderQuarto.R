@@ -21,7 +21,7 @@ writeLines(src, qmd)
 # Render all formats listed in the Quarto script
 # Please be patient, this may take some minutes
 old <- setwd(tmpdir); on.exit(setwd(old))
-quarto_render(basename(qmd), quiet = TRUE)
+quarto_render(basename(qmd), quiet = <<QUIET>>)
 
 # Find all files generated (excluding the '.qmd' file itself)
 stem <- tools::file_path_sans_ext(basename(qmd))

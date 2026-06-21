@@ -529,6 +529,10 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+    Public Sub CreateNewQuartoTab()
+        AddTab(enumScriptTypeNew:=ScriptType.quarto)
+    End Sub
+
     Private Sub EnableDisableButtons()
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
         Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
@@ -907,6 +911,9 @@ Public Class ucrScript
 
         'replace the placeholder with the actual quarto script
         strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript)
+        strQuartoRenderScript = strQuartoRenderScript.Replace(
+    "<<QUIET>>",
+    If(frmMain.bShowRenderDetails, "FALSE", "TRUE"))
 
         Return strQuartoRenderScript
     End Function
@@ -929,7 +936,25 @@ Public Class ucrScript
         'replace the placeholder with the correct file path to InstatObject\R
         strQuartoTemplate = strQuartoTemplate.Replace("<<R_PATH>>", strInstatObjectRPath.Replace("\", "/"))
 
+        If Not frmMain.bQuartoHTML Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  html: default" & vbCrLf, "")
+        End If
+
+        If Not frmMain.bQuartoPDF Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  pdf:  default" & vbCrLf, "")
+        End If
+
+        If Not frmMain.bQuartoPPTX Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  pptx: default" & vbCrLf, "")
+        End If
+
+        If Not frmMain.bQuartoDOCX Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  docx: default" & vbCrLf, "")
+        End If
+
         Return strQuartoTemplate
+
+
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1601,4 +1626,7 @@ Public Class ucrScript
         clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
 
+    Private Sub cmdRecordQuarto_Click(sender As Object, e As EventArgs) Handles cmdRecordQuarto.Click
+        dlgRecordQuarto.ShowDialog()
+    End Sub
 End Class                                                                                                                                                       
