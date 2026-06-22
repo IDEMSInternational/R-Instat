@@ -33,6 +33,9 @@ Partial Class dlgRecordQuarto
         Me.ucrChkHtml = New instat.ucrCheck()
         Me.ucrChkSaveReopen = New instat.ucrCheck()
         Me.grpFormat = New System.Windows.Forms.GroupBox()
+        Me.lblSaveAs = New System.Windows.Forms.Label()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.cmdBrowseFile = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblFileLocation
@@ -73,7 +76,7 @@ Partial Class dlgRecordQuarto
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(19, 360)
+        Me.ucrBase.Location = New System.Drawing.Point(19, 406)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -96,7 +99,7 @@ Partial Class dlgRecordQuarto
         Me.ucrChkDocs.Location = New System.Drawing.Point(17, 188)
         Me.ucrChkDocs.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDocs.Name = "ucrChkDocs"
-        Me.ucrChkDocs.Size = New System.Drawing.Size(367, 34)
+        Me.ucrChkDocs.Size = New System.Drawing.Size(343, 34)
         Me.ucrChkDocs.TabIndex = 23
         '
         'ucrChkPptx
@@ -148,11 +151,48 @@ Partial Class dlgRecordQuarto
         Me.grpFormat.TabStop = False
         Me.grpFormat.Text = "Output Format"
         '
+        'lblSaveAs
+        '
+        Me.lblSaveAs.AutoSize = True
+        Me.lblSaveAs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSaveAs.Location = New System.Drawing.Point(28, 361)
+        Me.lblSaveAs.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSaveAs.Name = "lblSaveAs"
+        Me.lblSaveAs.Size = New System.Drawing.Size(72, 20)
+        Me.lblSaveAs.TabIndex = 29
+        Me.lblSaveAs.Text = "Save As:"
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.AutoSize = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(167, 352)
+        Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(273, 32)
+        Me.ucrInputFilePath.TabIndex = 30
+        '
+        'cmdBrowseFile
+        '
+        Me.cmdBrowseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBrowseFile.Location = New System.Drawing.Point(453, 350)
+        Me.cmdBrowseFile.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdBrowseFile.Name = "cmdBrowseFile"
+        Me.cmdBrowseFile.Size = New System.Drawing.Size(120, 34)
+        Me.cmdBrowseFile.TabIndex = 31
+        Me.cmdBrowseFile.Text = "Browse"
+        Me.cmdBrowseFile.UseVisualStyleBackColor = True
+        '
         'dlgRecordQuarto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(653, 462)
+        Me.ClientSize = New System.Drawing.Size(662, 494)
+        Me.Controls.Add(Me.cmdBrowseFile)
+        Me.Controls.Add(Me.ucrInputFilePath)
+        Me.Controls.Add(Me.lblSaveAs)
         Me.Controls.Add(Me.ucrChkSaveReopen)
         Me.Controls.Add(Me.ucrChkHtml)
         Me.Controls.Add(Me.ucrChkPdf)
@@ -186,4 +226,7 @@ Partial Class dlgRecordQuarto
     Friend WithEvents ucrChkHtml As ucrCheck
     Friend WithEvents ucrChkSaveReopen As ucrCheck
     Friend WithEvents grpFormat As GroupBox
+    Friend WithEvents lblSaveAs As Label
+    Friend WithEvents ucrInputFilePath As ucrInputTextBox
+    Friend WithEvents cmdBrowseFile As Button
 End Class

@@ -941,7 +941,7 @@ Public Class ucrScript
         End If
 
         If Not frmMain.bQuartoPDF Then
-            strQuartoTemplate = strQuartoTemplate.Replace("  pdf:  default" & vbCrLf, "")
+            strQuartoTemplate = strQuartoTemplate.Replace("  pdf: default" & vbCrLf, "")
         End If
 
         If Not frmMain.bQuartoPPTX Then

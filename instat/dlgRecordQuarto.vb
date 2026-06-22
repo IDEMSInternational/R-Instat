@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
+'Imports System.IO
 Imports instat.Translations
 
 Public Class dlgRecordQuarto
@@ -22,8 +22,6 @@ Public Class dlgRecordQuarto
     Private bReset As Boolean = True
     Private clsSaveRDSFunction As New RFunction
     Public clsRLink As RLink
-
-
 
     Private Sub dlgRecordQuarto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -36,6 +34,8 @@ Public Class dlgRecordQuarto
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        SetSaveWorkspaceControlsVisibility()
+
         autoTranslate(Me)
     End Sub
 
@@ -44,11 +44,14 @@ Public Class dlgRecordQuarto
         ucrInputFileLocation.IsReadOnly = True
         ucrInputFileLocation.SetLinkedDisplayControl(lblFileLocation)
 
+        ucrInputFilePath.SetParameter(New RParameter("file", 0))
+        ucrInputFilePath.IsReadOnly = True
+
         ucrChkRenderDetails.SetText("Show Rendering Details")
 
         ucrChkHtml.SetText("HTML")
         ucrChkDocs.SetText("Document")
-        ucrChkPdf.SetText("PDF")
+        ucrChkPdf.SetText("Pdf")
         ucrChkPptx.SetText("Powerpoint")
 
         ucrChkSaveReopen.SetText("Save and Reopen Workspace")
@@ -57,6 +60,7 @@ Public Class dlgRecordQuarto
 
     Private Sub SetDefaults()
         clsSaveRDSFunction = New RFunction
+
 
         clsSaveRDSFunction.SetRCommand("saveRDS")
 
@@ -106,24 +110,21 @@ Public Class dlgRecordQuarto
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputFileLocation.SetRCode(clsSaveRDSFunction, bReset)
+        ucrInputFilePath.SetRCode(clsSaveRDSFunction, bReset)
     End Sub
 
     Private Sub SaveDataBook()
 
-        Dim strQmdFile As String = ucrInputFileLocation.GetText()
+        Dim strRdsFile As String = ucrInputFilePath.GetText
 
-        If strQmdFile = "" Then
+        If String.IsNullOrWhiteSpace(strRdsFile) Then
             Exit Sub
         End If
 
-        Dim strRdsFile As String =
-            IO.Path.ChangeExtension(strQmdFile, ".rds")
-
-
-
-        clsSaveRDSFunction.AddParameter("file",
-                                        Chr(34) & strRdsFile.Replace("\", "/") & Chr(34),
-                                        iPosition:=1)
+        clsSaveRDSFunction.AddParameter(
+        "file",
+        Chr(34) & strRdsFile.Replace("\", "/") & Chr(34),
+        iPosition:=1)
 
         frmMain.clsRLink.RunScript(clsSaveRDSFunction.ToScript())
     End Sub
@@ -149,11 +150,19 @@ Public Class dlgRecordQuarto
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputFileLocation.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        Dim bEnable As Boolean = Not ucrInputFileLocation.IsEmpty
+
+        If ucrChkSaveReopen.Checked Then
+            bEnable = bEnable AndAlso Not String.IsNullOrWhiteSpace(ucrInputFilePath.GetText())
         End If
+
+        bEnable = bEnable AndAlso
+              (ucrChkHtml.Checked OrElse
+               ucrChkPdf.Checked OrElse
+               ucrChkPptx.Checked OrElse
+               ucrChkDocs.Checked)
+
+        ucrBase.OKEnabled(bEnable)
     End Sub
 
     Private Function IsValid() As Boolean
@@ -196,10 +205,7 @@ Public Class dlgRecordQuarto
         End If
 
         SaveQuartoFile()
-        Dim strRdsFile As String =
-    IO.Path.ChangeExtension(
-        ucrInputFileLocation.GetText(),
-        ".rds")
+        Dim strRdsFile As String = ucrInputFilePath.GetText
 
         If ucrChkSaveReopen.Checked Then
 
@@ -224,9 +230,16 @@ Public Class dlgRecordQuarto
 
         frmMain.bShowRenderDetails = ucrChkRenderDetails.Checked
 
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "\", "/"))
+        frmMain.bDataSaved = True
+
         Me.Close()
     End Sub
 
+    Private Sub ucrFilePath_FilePathChanged()
+        TestOkEnabled()
+    End Sub
 
     Private Sub StartQuartoSession(strRdsFile As String)
 
@@ -255,7 +268,7 @@ Public Class dlgRecordQuarto
 
     End Sub
 
-    Private Sub ucrInputFileLocation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFileLocation.ControlContentsChanged
+    Private Sub ucrInputFileLocation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFileLocation.ControlContentsChanged, ucrChkSaveReopen.ControlContentsChanged, ucrChkPptx.ControlContentsChanged, ucrChkPdf.ControlContentsChanged, ucrChkHtml.ControlContentsChanged, ucrChkDocs.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -265,6 +278,44 @@ Public Class dlgRecordQuarto
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrChkSaveReopen_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSaveReopen.ControlValueChanged
+        SetSaveWorkspaceControlsVisibility()
+    End Sub
 
+    Private Sub SetSaveWorkspaceControlsVisibility()
+        ucrInputFilePath.Visible = ucrChkSaveReopen.Checked
+        cmdBrowseFile.Visible = ucrChkSaveReopen.Checked
+        lblSaveAs.Visible = ucrChkSaveReopen.Checked
+    End Sub
 
+    Private Sub cmdBrowseFile_Click(sender As Object, e As EventArgs) Handles cmdBrowseFile.Click
+        Using dlgSave As New SaveFileDialog
+
+            dlgSave.Title = "Save Data File"
+
+            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+
+            dlgSave.DefaultExt = "RDS"
+
+            dlgSave.AddExtension = True
+
+            If ucrInputFilePath.GetText() <> "" Then
+                dlgSave.InitialDirectory =
+                IO.Path.GetDirectoryName(
+                    ucrInputFilePath.GetText().Replace("/", "\"))
+            Else
+                dlgSave.InitialDirectory =
+                frmMain.clsInstatOptions.strWorkingDirectory
+            End If
+
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName(
+                dlgSave.FileName.Replace("\", "/"))
+            End If
+
+        End Using
+
+        TestOkEnabled()
+
+    End Sub
 End Class
