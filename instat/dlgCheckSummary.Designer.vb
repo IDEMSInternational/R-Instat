@@ -511,7 +511,7 @@ Partial Class dlgCheckSummary
         'lblOutlierCoefficient
         '
         Me.lblOutlierCoefficient.AutoSize = True
-        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(147, 493)
+        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(344, 432)
         Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
         Me.lblOutlierCoefficient.Size = New System.Drawing.Size(96, 13)
         Me.lblOutlierCoefficient.TabIndex = 38
@@ -541,7 +541,7 @@ Partial Class dlgCheckSummary
         '
         Me.lblOutlierFacetBy.AutoSize = True
         Me.lblOutlierFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblOutlierFacetBy.Location = New System.Drawing.Point(241, 514)
+        Me.lblOutlierFacetBy.Location = New System.Drawing.Point(258, 514)
         Me.lblOutlierFacetBy.Name = "lblOutlierFacetBy"
         Me.lblOutlierFacetBy.Size = New System.Drawing.Size(52, 13)
         Me.lblOutlierFacetBy.TabIndex = 45
@@ -638,7 +638,7 @@ Partial Class dlgCheckSummary
         Me.ucrNudOutlierCoefficient.AutoSize = True
         Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(251, 490)
+        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(448, 429)
         Me.ucrNudOutlierCoefficient.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -670,7 +670,7 @@ Partial Class dlgCheckSummary
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(29, 433)
+        Me.ucrSave.Location = New System.Drawing.Point(29, 565)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(320, 24)
@@ -712,7 +712,7 @@ Partial Class dlgCheckSummary
         'ucrSaveNewColumn
         '
         Me.ucrSaveNewColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(29, 433)
+        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(29, 565)
         Me.ucrSaveNewColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
         Me.ucrSaveNewColumn.Size = New System.Drawing.Size(320, 24)
@@ -722,7 +722,7 @@ Partial Class dlgCheckSummary
         '
         Me.UcrBaseCheckSummary.AutoSize = True
         Me.UcrBaseCheckSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrBaseCheckSummary.Location = New System.Drawing.Point(29, 552)
+        Me.UcrBaseCheckSummary.Location = New System.Drawing.Point(29, 605)
         Me.UcrBaseCheckSummary.Name = "UcrBaseCheckSummary"
         Me.UcrBaseCheckSummary.Size = New System.Drawing.Size(408, 52)
         Me.UcrBaseCheckSummary.TabIndex = 24
@@ -773,7 +773,7 @@ Partial Class dlgCheckSummary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(589, 615)
+        Me.ClientSize = New System.Drawing.Size(589, 680)
         Me.Controls.Add(Me.ucrOutlierInputStation)
         Me.Controls.Add(Me.ucrOutlier1stFactorReceiver)
         Me.Controls.Add(Me.lblOutlierFacetBy)

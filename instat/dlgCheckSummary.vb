@@ -39,7 +39,6 @@ Public Class dlgCheckSummary
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
     Private clsVarsFunction As New RFunction
-    ' Trend tab – separate Row/Col vars functions (required by sdgPlots.SetRCode)
     Private clsRowVarsFunction As New RFunction
     Private clsColVarsFunction As New RFunction
     Private clsGeomPoint As New RFunction
@@ -47,16 +46,20 @@ Public Class dlgCheckSummary
     Private clsGeomHlineMean As New RFunction
     Private clsMeanFunction As New RFunction
     Private clsGeomHlineAesMean As New RFunction
+    Private clsGroupByMeanFunction As New RFunction
+    Private ReadOnly strMeanColumnName As String = ".mean_y"
     Private clsGeomTextFirstLast As New RFunction
-    Private clsSliceFirstLast As New RFunction
-    Private clsGroupByFirstLast As New RFunction
-    Private clsOrOperator As New ROperator
-    Private clsEqualsMinOperator As New ROperator
-    Private clsEqualsMaxOperator As New ROperator
-    Private clsMinFunction As New RFunction
-    Private clsMaxFunctionFirstLast As New RFunction
     Private clsAesTextFirstLast As New RFunction
     Private clsGeomPointFirstLast As New RFunction
+    Private clsGroupByFirstLast As New RFunction
+    Private clsFilterFirstLastFunction As New RFunction
+    Private clsSliceMinFirstLast As New RFunction
+    Private clsSliceMaxFirstLast As New RFunction
+    Private clsMaxSidePipeOperator As New ROperator
+    Private clsBindRowsFirstLast As New RFunction
+    Private clsUngroupFirstLast As New RFunction
+    Private clsDistinctFirstLast As New RFunction
+    Private clsFirstLastPipeOperator As New ROperator
 
     Private clsGeomSegmentFunction As New RFunction
     Private clsSegmentAesFunction As New RFunction
@@ -136,6 +139,14 @@ Public Class dlgCheckSummary
     Private WithEvents toolStripMenuItemOutlierJitterOptions As New ToolStripMenuItem("Jitter Options")
     Private WithEvents toolStripMenuItemOutlierTextOptions As New ToolStripMenuItem("Text Options")
 
+    Private Function GetCleanDataFrameParam() As RFunction
+        Dim clsClean As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsClean.RemoveParameterByName("stack_data")
+        clsClean.RemoveParameterByName("measure.vars")
+        clsClean.RemoveParameterByName("id.vars")
+        Return clsClean
+    End Function
+
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
@@ -149,6 +160,7 @@ Public Class dlgCheckSummary
     Private WithEvents grdRecentWorkSheet As Worksheet
 
     Private bUpdatingRecentGrid As Boolean = False
+    Private strOutliersListLoadedForDataFrame As String = Nothing
 
     Private clsLocalRaesFunction As New RFunction
 
@@ -205,6 +217,7 @@ Public Class dlgCheckSummary
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        UpdateVisiblePanels()
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
@@ -214,7 +227,6 @@ Public Class dlgCheckSummary
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ' Setup Plot Options Menu – items depend on which tab is active
         PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
         toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
         toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
@@ -312,10 +324,9 @@ Public Class dlgCheckSummary
 
         ' Outliers Initialisation
         ucrVariablesAsFactorForCheckSummary.SetParameter(New RParameter("y", 0))
-        ' Note: We might need a factor receiver for Outliers later, but for now we initialize it
-        ' modelled after dlgBoxPlot
+        ucrVariablesAsFactorForCheckSummary.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForCheckSummary.Selector = ucrSelectorForCheckSummary
-        ucrVariablesAsFactorForCheckSummary.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorForCheckSummary.SetIncludedDataTypes({"numeric"}, True)
         ucrVariablesAsFactorForCheckSummary.strSelectorHeading = "Numerics"
         ucrVariablesAsFactorForCheckSummary.SetParameterIsString()
         ucrVariablesAsFactorForCheckSummary.bWithQuotes = False
@@ -344,10 +355,7 @@ Public Class dlgCheckSummary
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("TRUE")
 
-        ' Label Outliers
-        ucrChkLabel.SetText("Label Outliers")
-        ucrChkLabel.AddParameterPresentCondition(True, "coef")
-        ucrChkLabel.AddToLinkedControls({ucrNudOutlierCoefficient}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ' Label Outliers]
 
         ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
         ucrNudOutlierCoefficient.DecimalPlaces = 1
@@ -355,10 +363,9 @@ Public Class dlgCheckSummary
         ucrNudOutlierCoefficient.SetRDefault(1.5)
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
 
-        ucrChkLabeloutliers.SetText("Check Outliers:")
-        ucrChkLabeloutliers.AddParameterPresentCondition(True, "label")
-        ucrChkLabeloutliers.AddParameterPresentCondition(True, "label_geom")
+        ucrChkLabeloutliers.SetText("Label Outliers")
         ucrChkLabeloutliers.AddToLinkedControls(ucrReceiverLabelOutliers, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLabeloutliers.AddToLinkedControls({ucrNudOutlierCoefficient}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverLabelOutliers.SetParameter(New RParameter("label", 1))
         ucrReceiverLabelOutliers.SetParameterIsString()
@@ -438,6 +445,7 @@ Public Class dlgCheckSummary
     Private clsWithFunction As New RFunction
 
     Private Sub SetDefaults()
+        strOutliersListLoadedForDataFrame = Nothing
         clsRecentIfElseFunction = New RFunction
         clsInnerIfElseFunction = New RFunction
         clsMaxFunction = New RFunction
@@ -460,15 +468,19 @@ Public Class dlgCheckSummary
         clsGeomHlineMean = New RFunction
         clsMeanFunction = New RFunction
         clsGeomHlineAesMean = New RFunction
+        clsGroupByMeanFunction = New RFunction
         clsGeomTextFirstLast = New RFunction
-        clsSliceFirstLast = New RFunction
-        clsGroupByFirstLast = New RFunction
-        clsOrOperator = New ROperator
-        clsEqualsMinOperator = New ROperator
-        clsEqualsMaxOperator = New ROperator
-        clsMinFunction = New RFunction
-        clsMaxFunctionFirstLast = New RFunction
         clsAesTextFirstLast = New RFunction
+        clsGeomPointFirstLast = New RFunction
+        clsGroupByFirstLast = New RFunction
+        clsFilterFirstLastFunction = New RFunction
+        clsSliceMinFirstLast = New RFunction
+        clsSliceMaxFirstLast = New RFunction
+        clsMaxSidePipeOperator = New ROperator
+        clsBindRowsFirstLast = New RFunction
+        clsUngroupFirstLast = New RFunction
+        clsDistinctFirstLast = New RFunction
+        clsFirstLastPipeOperator = New ROperator
 
         clsGeomSegmentFunction = New RFunction
         clsSegmentAesFunction = New RFunction
@@ -764,30 +776,49 @@ Public Class dlgCheckSummary
         clsGroupByFirstLast.SetPackageName("dplyr")
         clsGroupByFirstLast.SetRCommand("group_by")
 
-        clsSliceFirstLast.SetPackageName("dplyr")
-        clsSliceFirstLast.SetRCommand("slice")
-        clsSliceFirstLast.AddParameter("data", clsRFunctionParameter:=clsGroupByFirstLast, iPosition:=0, bIncludeArgumentName:=False)
+        clsGroupByMeanFunction.SetPackageName("dplyr")
+        clsGroupByMeanFunction.SetRCommand("group_by")
 
-        clsOrOperator.SetOperation("|")
+        clsFilterFirstLastFunction.SetPackageName("dplyr")
+        clsFilterFirstLastFunction.SetRCommand("filter")
 
-        clsOrOperator.AddParameter("left", clsROperatorParameter:=clsEqualsMinOperator)
-        clsOrOperator.AddParameter("right", clsROperatorParameter:=clsEqualsMaxOperator)
+        clsSliceMinFirstLast.SetPackageName("dplyr")
+        clsSliceMinFirstLast.SetRCommand("slice_min")
+        clsSliceMinFirstLast.AddParameter("n", "1", iPosition:=1)
+        clsSliceMinFirstLast.AddParameter("with_ties", "FALSE", iPosition:=2)
 
-        clsEqualsMinOperator.SetOperation("==")
-        clsEqualsMinOperator.AddParameter("right", clsRFunctionParameter:=clsMinFunction)
+        clsSliceMaxFirstLast.SetPackageName("dplyr")
+        clsSliceMaxFirstLast.SetRCommand("slice_max")
+        clsSliceMaxFirstLast.AddParameter("n", "1", iPosition:=1)
+        clsSliceMaxFirstLast.AddParameter("with_ties", "FALSE", iPosition:=2)
 
-        clsEqualsMaxOperator.SetOperation("==")
-        clsEqualsMaxOperator.AddParameter("right", clsRFunctionParameter:=clsMaxFunctionFirstLast)
+        clsMaxSidePipeOperator.SetOperation("%>%")
+        clsMaxSidePipeOperator.AddParameter("filter", clsRFunctionParameter:=clsFilterFirstLastFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsMaxSidePipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFirstLast, iPosition:=2, bIncludeArgumentName:=False)
+        clsMaxSidePipeOperator.AddParameter("slice_max", clsRFunctionParameter:=clsSliceMaxFirstLast, iPosition:=3, bIncludeArgumentName:=False)
 
-        clsMinFunction.SetRCommand("min")
-        clsMinFunction.AddParameter("na.rm", "TRUE")
+        clsBindRowsFirstLast.SetPackageName("dplyr")
+        clsBindRowsFirstLast.SetRCommand("bind_rows")
+        clsBindRowsFirstLast.AddParameter("y", clsROperatorParameter:=clsMaxSidePipeOperator, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsMaxFunctionFirstLast.SetRCommand("max")
-        clsMaxFunctionFirstLast.AddParameter("na.rm", "TRUE")
+        clsUngroupFirstLast.SetPackageName("dplyr")
+        clsUngroupFirstLast.SetRCommand("ungroup")
+
+        clsDistinctFirstLast.SetPackageName("dplyr")
+        clsDistinctFirstLast.SetRCommand("distinct")
+
+        clsFirstLastPipeOperator.SetOperation("%>%")
+        clsFirstLastPipeOperator.SetAssignTo("first_last")
+        clsFirstLastPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsFilterFirstLastFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsFirstLastPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFirstLast, iPosition:=2, bIncludeArgumentName:=False)
+        clsFirstLastPipeOperator.AddParameter("slice_min", clsRFunctionParameter:=clsSliceMinFirstLast, iPosition:=3, bIncludeArgumentName:=False)
+        clsFirstLastPipeOperator.AddParameter("bind_rows", clsRFunctionParameter:=clsBindRowsFirstLast, iPosition:=4, bIncludeArgumentName:=False)
+        clsFirstLastPipeOperator.AddParameter("ungroup", clsRFunctionParameter:=clsUngroupFirstLast, iPosition:=5, bIncludeArgumentName:=False)
+        clsFirstLastPipeOperator.AddParameter("distinct", clsRFunctionParameter:=clsDistinctFirstLast, iPosition:=6, bIncludeArgumentName:=False)
 
         clsGeomTextFirstLast.SetPackageName("ggplot2")
         clsGeomTextFirstLast.SetRCommand("geom_text")
-        clsGeomTextFirstLast.AddParameter("data", clsRFunctionParameter:=clsSliceFirstLast)
+        clsGeomTextFirstLast.AddParameter("data", "first_last", iPosition:=0)
         clsGeomTextFirstLast.AddParameter("mapping", clsRFunctionParameter:=clsAesTextFirstLast)
         clsGeomTextFirstLast.AddParameter("vjust", "-0.6")
         clsGeomTextFirstLast.AddParameter("colour", """black""")
@@ -795,7 +826,7 @@ Public Class dlgCheckSummary
 
         clsGeomPointFirstLast.SetPackageName("ggplot2")
         clsGeomPointFirstLast.SetRCommand("geom_point")
-        clsGeomPointFirstLast.AddParameter("data", clsRFunctionParameter:=clsSliceFirstLast)
+        clsGeomPointFirstLast.AddParameter("data", "first_last", iPosition:=0)
         clsGeomPointFirstLast.AddParameter("shape", "18") ' Diamond shape
         clsGeomPointFirstLast.AddParameter("size", "3")
         clsGeomPointFirstLast.AddParameter("colour", """darkred""")
@@ -815,6 +846,13 @@ Public Class dlgCheckSummary
         clsOutlierRggplotFunction = New RFunction
         clsOutlierRaesFunction = New RFunction
         clsOutlierBoxplotFunction = New RFunction
+
+        clsOutlierAddedJitterFunc.Clear()
+        clsOutlierAddedJitterFunc.SetPackageName("ggplot2")
+        clsOutlierAddedJitterFunc.SetRCommand("geom_jitter")
+        clsOutlierAddedJitterFunc.AddParameter("height", 0, iPosition:=1)
+        clsOutlierAddedJitterFunc.AddParameter("width", 0.2, iPosition:=2)
+
         clsOutlierFacetVariablesOperator = New ROperator("~")
         clsOutlierFacetVariablesOperator.bForceIncludeOperation = True
         clsOutlierFacetVariablesOperator.bBrackets = False
@@ -996,7 +1034,6 @@ Public Class dlgCheckSummary
         clsOutlierPipeLabelOperator.AddParameter("mutate", clsRFunctionParameter:=clsOutlierMutateLabelFunction, iPosition:=2, bIncludeArgumentName:=False)
         clsOutlierPipeLabelOperator.AddParameter("filter", clsRFunctionParameter:=clsOutlierFilterElement2Function, iPosition:=3, bIncludeArgumentName:=False)
         clsOutlierPipeLabelOperator.AddParameter("ungroup", clsRFunctionParameter:=clsOutlierUngroupFunction, iPosition:=4, bIncludeArgumentName:=False)
-        clsOutlierPipeLabelOperator.AddParameter("mutate2", clsRFunctionParameter:=clsOutlierMutate2Function, iPosition:=5, bIncludeArgumentName:=False)
 
         clsOutlierRaes2Function.SetPackageName("ggplot2")
         clsOutlierRaes2Function.SetRCommand("aes")
@@ -1044,7 +1081,6 @@ Public Class dlgCheckSummary
         ucrByFactorsReceiver.SetRCode(clsOutlierRaesFunction, bReset)
         ucrSecondFactorReceiver.SetRCode(clsOutlierRaesFunction, bReset)
         ucrChkVarWidth.SetRCode(clsOutlierBoxplotFunction, bReset)
-        ucrChkLabel.SetRCode(clsOutlierBoxplotFunction, bReset)
         ucrNudOutlierCoefficient.SetRCode(clsOutlierBoxplotFunction, bReset)
         ucrChkAddPoints.SetRCode(clsOutlierBaseOperator, bReset)
         ucrNudJitter.SetRCode(clsOutlierAddedJitterFunc, bReset)
@@ -1079,7 +1115,6 @@ Public Class dlgCheckSummary
             ucrReceiverYVar.SetMeAsReceiver()
             UpdateTrendRCode()
         ElseIf rdoOutliers.Checked Then
-            ucrVariablesAsFactorForCheckSummary.SetMeAsReceiver()
             AutoFillRecentColumnForOutliers()
             UpdateOutliersRCode()
         End If
@@ -1110,21 +1145,25 @@ Public Class dlgCheckSummary
         ElseIf bOutliers Then
             contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierBoxplotOptions)
             contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierJitterOptions)
-            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked OrElse ucrChkLabeloutliers.Checked
+            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabeloutliers.Checked
             contextMenuStripPlotOptions.Items.Add(toolStripMenuItemOutlierTextOptions)
         End If
         ucrChkFirstAndLast.Visible = bTrend
         AddLineGroupbox.Visible = bTrend
 
-        ucrChkLabel.Visible = bOutliers
+        ucrChkLabel.Visible = False
         ucrChkAddPoints.Visible = bOutliers
         ucrChkLegend.Visible = bOutliers
         ucrChkLabeloutliers.Visible = bOutliers
-        ' ucrInputLegendPosition visibility is managed by ucrChkLegend.AddToLinkedControls
         lblOutlierFacetBy.Visible = bOutliers
         ucrOutlier1stFactorReceiver.Visible = bOutliers
         ucrOutlierInputStation.Visible = bOutliers
-        ' Linked nud/labels for jitter/coef are handled by AddToLinkedControls
+
+        ucrNudJitter.Visible = bOutliers AndAlso ucrChkAddPoints.Checked
+        ucrNudTransparency.Visible = bOutliers AndAlso ucrChkAddPoints.Checked
+        ucrInputLegendPosition.Visible = bOutliers AndAlso ucrChkLegend.Checked
+        ucrNudOutlierCoefficient.Visible = bOutliers AndAlso ucrChkLabeloutliers.Checked
+        ucrReceiverLabelOutliers.Visible = bOutliers AndAlso ucrChkLabeloutliers.Checked
 
         If bRecent Then
             ucrBase.clsRsyntax.iCallType = 0 ' Data modification
@@ -1142,6 +1181,13 @@ Public Class dlgCheckSummary
 
         If Not bRecent Then
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMaxYearAssign)
+        End If
+
+        If Not bTrend Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFirstLastPipeOperator)
+        End If
+        If Not bOutliers Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsOutlierPipeLabelOperator)
         End If
 
         If bOutliers Then
@@ -1168,7 +1214,7 @@ Public Class dlgCheckSummary
         ucrReceiverFacetBy.ControlContentsChanged, ucrChkPoints.ControlContentsChanged, ucrChkFirstAndLast.ControlContentsChanged,
         ucrChkWithSE.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrVariablesAsFactorForCheckSummary.ControlContentsChanged,
         ucrByFactorsReceiver.ControlContentsChanged, ucrSecondFactorReceiver.ControlContentsChanged, ucrChkVarWidth.ControlContentsChanged,
-        ucrChkLabel.ControlContentsChanged, ucrNudOutlierCoefficient.ControlContentsChanged, ucrChkAddPoints.ControlContentsChanged, ucrChkLabeloutliers.ControlContentsChanged, ucrReceiverLabelOutliers.ControlContentsChanged,
+        ucrNudOutlierCoefficient.ControlContentsChanged, ucrChkAddPoints.ControlContentsChanged, ucrChkLabeloutliers.ControlContentsChanged, ucrReceiverLabelOutliers.ControlContentsChanged,
         ucrNudJitter.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrOutlier1stFactorReceiver.ControlContentsChanged
 
         If rdoRecent.Checked Then
@@ -1180,7 +1226,7 @@ Public Class dlgCheckSummary
         End If
         ' Keep Text Options item enabled only while Label Outliers is checked
         If rdoOutliers.Checked Then
-            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabel.Checked OrElse ucrChkLabeloutliers.Checked
+            toolStripMenuItemOutlierTextOptions.Enabled = ucrChkLabeloutliers.Checked
         End If
         TestOKEnabled()
     End Sub
@@ -1200,23 +1246,20 @@ Public Class dlgCheckSummary
         clsOutlierRggplotFunction.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0)
 
         ' Outlier visibility and coefficient
-        If ucrChkAddPoints.Checked OrElse (Not ucrChkLabel.Checked AndAlso Not ucrChkLabeloutliers.Checked) Then
+        If ucrChkAddPoints.Checked OrElse Not ucrChkLabeloutliers.Checked Then
             clsOutlierBoxplotFunction.AddParameter("outlier.shape", "NA", iPosition:=2)
         Else
             clsOutlierBoxplotFunction.RemoveParameterByName("outlier.shape")
         End If
 
-        ' Only add coef if ucrChkLabel is checked
-        If Not ucrChkLabel.Checked Then
+
+        If ucrChkLabeloutliers.Checked AndAlso Not ucrNudOutlierCoefficient.IsEmpty Then
+            clsOutlierBoxplotFunction.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=2)
+        Else
             clsOutlierBoxplotFunction.RemoveParameterByName("coef")
         End If
 
-        ' Add Points — Jitter layer
-        If ucrChkAddPoints.Checked Then
-            clsOutlierBaseOperator.AddParameter("add_jitter", clsRFunctionParameter:=clsOutlierAddedJitterFunc, iPosition:=3)
-        Else
-            clsOutlierBaseOperator.RemoveParameterByName("add_jitter")
-        End If
+
 
         AddRemoveOutlierTheme()
         AddRemoveOutlierFacets()
@@ -1296,6 +1339,21 @@ Public Class dlgCheckSummary
         ucrBase.clsRsyntax.SetBaseROperator(clsOutlierBaseOperator)
     End Sub
 
+
+    Private Function IsLabelOutliersVariableUsable() As Boolean
+        If ucrReceiverLabelOutliers.IsEmpty Then Return False
+
+        Dim strLabelVar As String = ucrReceiverLabelOutliers.GetVariableNames(False).Trim()
+        For Each clsParam As RParameter In ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame.clsParameters
+            If clsParam.strArgumentName = "measure.vars" Then
+                If clsParam.strArgumentValue.Contains(Chr(34) & strLabelVar & Chr(34)) Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
     Private Sub AddOutlierLabelFunctions()
         ' Update the stat_summary function to handle Dates
         clsOutlierBoxplotStatFunction.RemoveParameterByName("x")
@@ -1310,11 +1368,11 @@ Public Class dlgCheckSummary
                 clsOutlierBoxplotStat2Function.RemoveParameterByName("coef")
             End If
 
-            If Not ucrReceiverLabelOutliers.IsEmpty Then
-                ' Set the data frame for the pipe
+            If IsLabelOutliersVariableUsable() Then
                 Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame
                 clsOutlierPipeLabelOperator.RemoveParameterByName("data")
                 clsOutlierPipeLabelOperator.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
+
 
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsOutlierPipeLabelOperator, iPosition:=0)
 
@@ -1355,13 +1413,8 @@ Public Class dlgCheckSummary
                 clsOutlierInOperator.AddParameter("left", strNumVarForStats, iPosition:=0, bIncludeArgumentName:=False)
                 clsOutlierInOperator.AddParameter("right", clsROperatorParameter:=clsOutlierDollarSignOperator, iPosition:=1, bIncludeArgumentName:=False)
 
-                clsOutlierMutate2Function.ClearParameters()
-                clsOutlierMutate2Function.SetRCommand("mutate")
-                ' Labeling variable
+
                 Dim strLabelVar As String = ucrReceiverLabelOutliers.GetVariableNames(False)
-                clsOutlierMutate2Function.AddParameter(strLabelVar, clsRFunctionParameter:=clsOutlierAsFactor2Function, iPosition:=0)
-                clsOutlierAsFactor2Function.RemoveParameterByName("x")
-                clsOutlierAsFactor2Function.AddParameter("x", strLabelVar, bIncludeArgumentName:=False)
 
                 clsOutlierRaes2Function.RemoveParameterByName("label")
                 clsOutlierRaes2Function.AddParameter("label", strLabelVar)
@@ -1511,7 +1564,7 @@ Public Class dlgCheckSummary
         End If
 
         Dim strYearVar As String = ucrReceiverYear.GetVariableNames.Replace("]", "").Replace("""", "")
-        Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        Dim clsDataFrameParam As RFunction = GetCleanDataFrameParam()
         clsDataFrameParam.RemoveParameterByName("use_current_filter")
         clsDataFrameParam.AddParameter("use_current_filter", "FALSE")
 
@@ -1603,6 +1656,7 @@ Public Class dlgCheckSummary
         clsBaseOperator.RemoveParameterByName("geom_hline_mean")
         clsBaseOperator.RemoveParameterByName("label_first_last")
         clsBaseOperator.RemoveParameterByName("point_first_last")
+        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFirstLastPipeOperator)
 
         clsBaseOperator.RemoveParameterByName("theme")
         clsBaseOperator.RemoveParameterByName("labs")
@@ -1622,21 +1676,6 @@ Public Class dlgCheckSummary
         clsBaseOperator.RemoveParameterByName("text_median")
         clsBaseOperator.RemoveParameterByName("text_lower_tercile")
         clsBaseOperator.RemoveParameterByName("text_upper_tercile")
-
-        clsPipeOperator.RemoveParameterByName("data_frame")
-        clsPipeOperator.RemoveParameterByName("mutate_step")
-
-        Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame
-
-        clsRggplotFunction.RemoveParameterByName("data")
-
-        If clsMutateFunction.iParameterCount > 0 Then
-            clsPipeOperator.AddParameter("data_frame", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
-            clsPipeOperator.AddParameter("mutate_step", clsRFunctionParameter:=clsMutateFunction, iPosition:=1, bIncludeArgumentName:=False)
-            clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
-        Else
-            clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0)
-        End If
 
         Dim strXVar As String = ucrReceiverX.GetVariableNames.Replace("]", "").Replace("""", "").Replace("'", "")
         Dim strXExpression As String = "as.numeric(" & strXVar & ")"
@@ -1733,12 +1772,14 @@ Public Class dlgCheckSummary
 
 
         clsGeomHlineAesMean.ClearParameters()
+        clsMutateFunction.RemoveParameterByName(strMeanColumnName)
 
         If clsSubDialogGeomHlineMean.iParameterCount > 0 Then
             clsBaseOperator.AddParameter("geom_hline_mean_sdg", clsRFunctionParameter:=clsSubDialogGeomHlineMean, iPosition:=3)
         ElseIf rdoMeanLine.Checked Then
-            Dim strYVar As String = ucrReceiverYVar.GetVariableNames.Replace("""", "")
-            clsGeomHlineAesMean.AddParameter("yintercept", "mean(" & strYVar & ", na.rm=TRUE)", bIncludeArgumentName:=True)
+            clsMutateFunction.AddParameter(strMeanColumnName, clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
+
+            clsGeomHlineAesMean.AddParameter("yintercept", strMeanColumnName, bIncludeArgumentName:=True)
             If ucrReceiverColourBy.IsEmpty Then
                 clsGeomHlineMean.AddParameter("colour", """darkgreen""")
                 clsGeomHlineMean.AddParameter("linetype", """dashed""")
@@ -1752,9 +1793,9 @@ Public Class dlgCheckSummary
             clsAesMeanText.SetRCommand("aes")
 
             clsAesMeanText.AddParameter("x", "Inf", iPosition:=0)
-            clsAesMeanText.AddParameter("y", "mean(" & strYVar & ", na.rm=TRUE)", iPosition:=1)
+            clsAesMeanText.AddParameter("y", strMeanColumnName, iPosition:=1)
 
-            Dim strLabelExpr As String = "paste(" & """Mean = """ & ", round(mean(" & strYVar & ", na.rm=TRUE), 2))"
+            Dim strLabelExpr As String = "paste(" & """Mean = """ & ", round(" & strMeanColumnName & ", 2))"
             clsAesMeanText.AddParameter("label", strLabelExpr, iPosition:=2)
 
             clsGeomTextLabelMeanLine.AddParameter("mapping", clsRFunctionParameter:=clsAesMeanText)
@@ -1769,6 +1810,7 @@ Public Class dlgCheckSummary
 
             clsGeomTextLabelMeanLine.ClearParameters()
         End If
+
 
 
         If clsGeomHlineMedian.iParameterCount > 0 Then
@@ -1805,27 +1847,56 @@ Public Class dlgCheckSummary
         End If
 
         If ucrChkFirstAndLast.Checked Then
-            clsGroupByFirstLast.ClearParameters()
-            clsGroupByFirstLast.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
+            Dim strYVarFirstLast As String = ucrReceiverYVar.GetVariableNames.Replace("""", "")
 
+            clsGroupByFirstLast.ClearParameters()
+            Dim lstFirstLastGroupVars As New List(Of String)
             If Not ucrReceiverFacetBy.IsEmpty Then
-                clsGroupByFirstLast.AddParameter("facet", ucrReceiverFacetBy.GetVariableNames(False), bIncludeArgumentName:=False)
+                Dim strVar As String = ucrReceiverFacetBy.GetVariableNames(False)
+                If Not lstFirstLastGroupVars.Contains(strVar) Then lstFirstLastGroupVars.Add(strVar)
             End If
             If Not ucrReceiverColourBy.IsEmpty Then
-                clsGroupByFirstLast.AddParameter("colour", ucrReceiverColourBy.GetVariableNames(False), bIncludeArgumentName:=False)
+                Dim strVar As String = ucrReceiverColourBy.GetVariableNames(False)
+                If Not lstFirstLastGroupVars.Contains(strVar) Then lstFirstLastGroupVars.Add(strVar)
             End If
+            For i As Integer = 0 To lstFirstLastGroupVars.Count - 1
+                clsGroupByFirstLast.AddParameter(i, lstFirstLastGroupVars(i), bIncludeArgumentName:=False, iPosition:=i)
+            Next
 
-            Dim strSliceExpr As String = "c(which.min(as.numeric(" & strXVar & ")), which.max(as.numeric(" & strXVar & ")))"
 
-            strSliceExpr = "unique(" & strSliceExpr & ")"
+            clsFilterFirstLastFunction.ClearParameters()
+            clsFilterFirstLastFunction.AddParameter("naY", "!is.na(" & strYVarFirstLast & ")", iPosition:=0, bIncludeArgumentName:=False)
+            clsFilterFirstLastFunction.AddParameter("naX", "!is.na(" & strXVar & ")", iPosition:=1, bIncludeArgumentName:=False)
 
-            clsSliceFirstLast.AddParameter("rows", strSliceExpr, iPosition:=1, bIncludeArgumentName:=False)
+            clsSliceMinFirstLast.RemoveParameterByName("order_by")
+            clsSliceMinFirstLast.AddParameter("order_by", strXVar, iPosition:=0, bIncludeArgumentName:=False)
+            clsSliceMaxFirstLast.RemoveParameterByName("order_by")
+            clsSliceMaxFirstLast.AddParameter("order_by", strXVar, iPosition:=0, bIncludeArgumentName:=False)
 
-            clsAesTextFirstLast.AddParameter("label", strXVar, iPosition:=0)
+
+            clsDistinctFirstLast.ClearParameters()
+            For i As Integer = 0 To lstFirstLastGroupVars.Count - 1
+                clsDistinctFirstLast.AddParameter(i, lstFirstLastGroupVars(i), bIncludeArgumentName:=False, iPosition:=i)
+            Next
+            clsDistinctFirstLast.AddParameter(lstFirstLastGroupVars.Count, strXVar, bIncludeArgumentName:=False, iPosition:=lstFirstLastGroupVars.Count)
+            clsDistinctFirstLast.AddParameter(".keep_all", "TRUE", iPosition:=lstFirstLastGroupVars.Count + 1)
+
+
+            Dim clsFirstLastDataFrameParam As RFunction = GetCleanDataFrameParam()
+            clsFirstLastPipeOperator.RemoveParameterByName("data")
+            clsFirstLastPipeOperator.AddParameter("data", clsRFunctionParameter:=clsFirstLastDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
+            clsMaxSidePipeOperator.RemoveParameterByName("data")
+            clsMaxSidePipeOperator.AddParameter("data", clsRFunctionParameter:=clsFirstLastDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
+
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsFirstLastPipeOperator, iPosition:=0)
+
+            clsAesTextFirstLast.RemoveParameterByName("label")
+            clsAesTextFirstLast.AddParameter("label", strYVarFirstLast, iPosition:=0)
 
             clsBaseOperator.AddParameter("point_first_last", clsRFunctionParameter:=clsGeomPointFirstLast, iPosition:=5)
             clsBaseOperator.AddParameter("label_first_last", clsRFunctionParameter:=clsGeomTextFirstLast, iPosition:=6)
         End If
+
 
         If clsThemeFunction.iParameterCount > 0 Then
             clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction)
@@ -1854,7 +1925,42 @@ Public Class dlgCheckSummary
         End If
 
         AddRemoveFacets()
+        AddRemoveTrendMeanGroupBy()
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+    End Sub
+
+    Private Sub AddRemoveTrendMeanGroupBy()
+        Dim clsDataFrameParam As RFunction = GetCleanDataFrameParam()
+
+        clsRggplotFunction.RemoveParameterByName("data")
+        clsPipeOperator.RemoveParameterByName("data_frame")
+        clsPipeOperator.RemoveParameterByName("group_by_step")
+        clsPipeOperator.RemoveParameterByName("mutate_step")
+
+        If clsMutateFunction.iParameterCount > 0 Then
+            clsGroupByMeanFunction.ClearParameters()
+            Dim lstGroupByVars As New List(Of String)
+            If Not ucrReceiverFacetBy.IsEmpty Then
+                Dim strVar As String = ucrReceiverFacetBy.GetVariableNames(False)
+                If Not lstGroupByVars.Contains(strVar) Then lstGroupByVars.Add(strVar)
+            End If
+            If Not ucrReceiverColourBy.IsEmpty Then
+                Dim strVar As String = ucrReceiverColourBy.GetVariableNames(False)
+                If Not lstGroupByVars.Contains(strVar) Then lstGroupByVars.Add(strVar)
+            End If
+            For i As Integer = 0 To lstGroupByVars.Count - 1
+                clsGroupByMeanFunction.AddParameter(i, lstGroupByVars(i), bIncludeArgumentName:=False, iPosition:=i)
+            Next
+
+            clsPipeOperator.AddParameter("data_frame", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
+            If clsGroupByMeanFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by_step", clsRFunctionParameter:=clsGroupByMeanFunction, iPosition:=1, bIncludeArgumentName:=False)
+            End If
+            clsPipeOperator.AddParameter("mutate_step", clsRFunctionParameter:=clsMutateFunction, iPosition:=2, bIncludeArgumentName:=False)
+            clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        Else
+            clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0)
+        End If
     End Sub
 
     Private Sub AddRemoveFacets()
@@ -2022,15 +2128,12 @@ Public Class dlgCheckSummary
     End Sub
 
     Private Sub toolStripMenuItemOutlierTextOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOutlierTextOptions.Click
-        If ucrChkLabel.Checked Then
+        If ucrChkLabeloutliers.Checked Then
             openSdgLayerOptionsForOutlier(clsOutlierBoxplotStatFunction)
         End If
     End Sub
 
-    ''' <summary>
-    ''' Opens the layer-options sub-dialog wired to Outlier-tab R objects,
-    ''' mirroring exactly what openSdgLayerOptions does for the Trend tab.
-    ''' </summary>
+
     Private Sub openSdgLayerOptionsForOutlier(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsOutlierRggplotFunction,
                                    clsNewGeomFunc:=clsNewGeomFunc,
@@ -2172,6 +2275,12 @@ Public Class dlgCheckSummary
         End If
     End Sub
 
+    Private Sub OutliersOverlapReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged, ucrReceiverLabelOutliers.ControlValueChanged
+        If rdoOutliers.Checked Then
+            ucrVariablesAsFactorForCheckSummary.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Function GetFullVariableName(strBaseName As String) As String
         If strBaseName = "" Then Return ""
         For Each lvi As ListViewItem In ucrSelectorForCheckSummary.lstAvailableVariable.Items
@@ -2186,8 +2295,15 @@ Public Class dlgCheckSummary
 
     Private Sub AutoFillRecentColumnForOutliers()
         Try
-            ucrByFactorsReceiver.SetMeAsReceiver()
-            ucrSelectorForCheckSummary.LoadList()
+            Dim strCurrentDataFrameForList As String = ucrSelectorForCheckSummary.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+            If strOutliersListLoadedForDataFrame <> strCurrentDataFrameForList Then
+                ucrSelectorForCheckSummary.LoadList()
+                strOutliersListLoadedForDataFrame = strCurrentDataFrameForList
+            End If
+
+            If ucrByFactorsReceiver.IsEmpty OrElse ucrOutlier1stFactorReceiver.IsEmpty Then
+                ucrByFactorsReceiver.SetMeAsReceiver()
+            End If
 
             If ucrByFactorsReceiver.IsEmpty Then
                 Dim strRecentName As String = ucrSaveNewColumn.GetText().Trim()
