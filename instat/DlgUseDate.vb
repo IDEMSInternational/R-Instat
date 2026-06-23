@@ -241,12 +241,7 @@ Public Class dlgUseDate
         Dim lstUseControls As New List(Of ucrCore)({ucrChkShiftYearNum, ucrChkShiftYearName, ucrChkLeapYearNum, ucrChkShiftMonthNum, ucrChkShiftMonthAbbr, ucrChkShiftMonthName, ucrChkWeekNum, ucrChkWeekAbbr, ucrChkWeekName, ucrChkWeekdayNum, ucrChkWeekdayAbbr, ucrChkWeekdayName, ucrChkDayInMonthNum, ucrChkDaysInMonthNum, ucrChkDayInYearNum, ucrChkShiftDayInYearNum366, ucrChkShiftPentadNum, ucrChkShiftPentadAbbr, ucrChkShiftDekadNum, ucrChkShiftDekadAbbr, ucrChkShiftQuarterNum, ucrChkShiftQuarterAbbr, ucrInputComboBoxStartingMonth})
         ucrPnluseformat.AddToLinkedControls(lstUseControls.ToArray(), {rdoUseColumn}, bNewLinkedAddRemoveParameter:=True)
 
-        For Each ucr In lstUseControls
-            ucr.bUpdateRCodeFromControl = True
-        Next
 
-        rdoUseColumn.Checked = True
-        UpdatePanelVisibility()
     End Sub
 
     Private Sub SetDefaults()
