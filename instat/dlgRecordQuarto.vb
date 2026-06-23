@@ -226,7 +226,8 @@ Public Class dlgRecordQuarto
         frmMain.bQuartoPPTX = ucrChkPptx.Checked
         frmMain.bQuartoDOCX = ucrChkDocs.Checked
 
-        frmMain.ucrScriptWindow.CreateNewQuartoTab()
+        frmMain.ucrScriptWindow.CreateNewQuartoTab(
+    IO.Path.GetFileName(frmMain.strCurrentQuartoFile))
 
         frmMain.bShowRenderDetails = ucrChkRenderDetails.Checked
 
@@ -235,10 +236,6 @@ Public Class dlgRecordQuarto
         frmMain.bDataSaved = True
 
         Me.Close()
-    End Sub
-
-    Private Sub ucrFilePath_FilePathChanged()
-        TestOkEnabled()
     End Sub
 
     Private Sub StartQuartoSession(strRdsFile As String)

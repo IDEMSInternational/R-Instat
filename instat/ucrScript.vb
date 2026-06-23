@@ -439,7 +439,7 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False)
+    Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False, Optional strTabLabel As String = "")
         If enumScriptTypeNew <> ScriptType.rScript AndAlso enumScriptTypeNew <> ScriptType.quarto Then
             MsgBoxTranslate("Developer error: The new tab cannot be " & enumScriptType.ToString() & ", it must be R script or Quarto.", MsgBoxStyle.Critical, "New Tab")
             Exit Sub
@@ -515,10 +515,14 @@ Public Class ucrScript
             clsScriptLog.ReadOnly = True
         Else
             Static iTabCounter As Integer = 1
-            Dim strTabLabel As String = "Untitled" & iTabCounter _
-                                        & If(enumScriptTypeNew = ScriptType.quarto, ".qmd", "")
+
+            If String.IsNullOrWhiteSpace(strTabLabel) Then
+                strTabLabel = "Untitled" & iTabCounter &
+                  If(enumScriptTypeNew = ScriptType.quarto, ".qmd", "")
+                iTabCounter += 1
+            End If
+
             tabPageAdded.Text = strTabLabel
-            iTabCounter += 1
         End If
 
         TabControl.TabPages.Add(tabPageAdded)
@@ -529,8 +533,9 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Public Sub CreateNewQuartoTab()
-        AddTab(enumScriptTypeNew:=ScriptType.quarto)
+    Public Sub CreateNewQuartoTab(Optional strTabLabel As String = "")
+        AddTab(enumScriptTypeNew:=ScriptType.quarto,
+           strTabLabel:=strTabLabel)
     End Sub
 
     Private Sub EnableDisableButtons()
