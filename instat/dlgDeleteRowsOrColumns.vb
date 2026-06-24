@@ -16,6 +16,12 @@
 
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColumns
+    Public enumDeleteRowsOrColumnsMode As DeleteRowsOrColumnsMode = DeleteRowsOrColumnsMode.Prepare
+    Public Enum DeleteRowsOrColumnsMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsOperatorRowNames As New ROperator
@@ -34,6 +40,7 @@ Public Class dlgDeleteRowsOrColumns
         bReset = False
         ReopenDialog()
         TestOKEnabled()
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -240,6 +247,15 @@ Public Class dlgDeleteRowsOrColumns
         If rdoEmpty.Checked Then
             UpdateAlmostEmptyControlsVisibility()
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumDeleteRowsOrColumnsMode
+            Case DeleteRowsOrColumnsMode.Prepare
+                ucrBase.iHelpTopicID = 165
+            Case DeleteRowsOrColumnsMode.Climatic
+                ucrBase.iHelpTopicID = 754
+        End Select
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged,

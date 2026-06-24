@@ -232,6 +232,10 @@ Partial Class frmMain
         Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamineReplaceValues = New System.Windows.Forms.ToolStripMenuItem()
         Me.InsertColumnRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+
+        Me.DeleteRowsOrColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+
+
         Me.mnuClimaticTidyandExamineDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator54 = New System.Windows.Forms.ToolStripSeparator()
@@ -2048,7 +2052,7 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineTidyDailyData, Me.ToolStripSeparator71, Me.mnuClimaticTidyandExamineReplaceValues, Me.InsertColumnRowsToolStripMenuItem, Me.mnuClimaticTidyandExamineDuplicateRows, Me.mnuClimaticTidyandExamineNonNumericCases, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineTransformText, Me.mnuClimaticTidyandExamineSplitText, Me.ToolStripSeparator80, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuClimaticTidyDataKey})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineTidyDailyData, Me.ToolStripSeparator71, Me.mnuClimaticTidyandExamineReplaceValues, Me.InsertColumnRowsToolStripMenuItem, Me.DeleteRowsOrColumnsToolStripMenuItem, Me.mnuClimaticTidyandExamineDuplicateRows, Me.mnuClimaticTidyandExamineNonNumericCases, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineTransformText, Me.mnuClimaticTidyandExamineSplitText, Me.ToolStripSeparator80, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuClimaticTidyDataKey})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         Me.mnuClimaticTidyandExamine.Size = New System.Drawing.Size(325, 34)
         Me.mnuClimaticTidyandExamine.Text = "Tidy Data"
@@ -2073,8 +2077,19 @@ Partial Class frmMain
         'InsertColumnRowsToolStripMenuItem
         '
         Me.InsertColumnRowsToolStripMenuItem.Name = "InsertColumnRowsToolStripMenuItem"
+
+        Me.InsertColumnRowsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.InsertColumnRowsToolStripMenuItem.Text = "Insert Columns/Rows..."
+        '
+        'DeleteRowsOrColumnsToolStripMenuItem
+        '
+        Me.DeleteRowsOrColumnsToolStripMenuItem.Name = "DeleteRowsOrColumnsToolStripMenuItem"
+        Me.DeleteRowsOrColumnsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.DeleteRowsOrColumnsToolStripMenuItem.Text = "Delete Columns/Rows..."
+
         Me.InsertColumnRowsToolStripMenuItem.Size = New System.Drawing.Size(301, 34)
         Me.InsertColumnRowsToolStripMenuItem.Text = "Insert Column/Rows..."
+
         '
         'mnuClimaticTidyandExamineDuplicateRows
         '
@@ -5601,8 +5616,13 @@ Partial Class frmMain
         '
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
+
+        Me.splOverall.Location = New System.Drawing.Point(0, 61)
+        Me.splOverall.Margin = New System.Windows.Forms.Padding(1)
+
         Me.splOverall.Location = New System.Drawing.Point(0, 72)
         Me.splOverall.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -5625,7 +5645,11 @@ Partial Class frmMain
         Me.splExtraWindows.BackColor = System.Drawing.Color.LightGray
         Me.splExtraWindows.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splExtraWindows.Location = New System.Drawing.Point(0, 0)
+
+        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(1)
+
         Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+
         Me.splExtraWindows.Name = "splExtraWindows"
         '
         'splExtraWindows.Panel1
@@ -5647,7 +5671,11 @@ Partial Class frmMain
         Me.splMetadata.BackColor = System.Drawing.Color.LightGray
         Me.splMetadata.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splMetadata.Location = New System.Drawing.Point(0, 0)
+
+        Me.splMetadata.Margin = New System.Windows.Forms.Padding(1)
+
         Me.splMetadata.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+
         Me.splMetadata.Name = "splMetadata"
         '
         'splMetadata.Panel1
@@ -5705,7 +5733,11 @@ Partial Class frmMain
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
         Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
+
+        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(1)
+
         Me.splDataOutput.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+
         Me.splDataOutput.Name = "splDataOutput"
         '
         'splDataOutput.Panel1
@@ -5799,7 +5831,11 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
+
+        Me.Margin = New System.Windows.Forms.Padding(1)
+
         Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+
         Me.Name = "frmMain"
         Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -6584,4 +6620,5 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOneVariableLikertGraphs As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesMoreLikert As ToolStripMenuItem
     Friend WithEvents InsertColumnRowsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeleteRowsOrColumnsToolStripMenuItem As ToolStripMenuItem
 End Class
