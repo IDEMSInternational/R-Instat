@@ -621,6 +621,7 @@ Public Class ucrColumnMetadata
     End Sub
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
         dlgName.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        dlgName.bDefaultToSingle = True
         dlgName.ShowDialog()
     End Sub
 
