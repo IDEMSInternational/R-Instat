@@ -121,7 +121,7 @@ Public Class dlgAutoSaveRecovery
                     File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText(), True)
                 End If
             Catch ex As Exception
-                MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, Title:="Error copying/deleting file")
             End Try
         End If
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
@@ -130,7 +130,7 @@ Public Class dlgAutoSaveRecovery
                     File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText(), True)
                 End If
             Catch ex As Exception
-                MsgBoxTranslate("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, Title:="Error copying/deleting file")
             End Try
         End If
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
@@ -139,7 +139,7 @@ Public Class dlgAutoSaveRecovery
                     File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.GetText(), True)
                 End If
             Catch ex As Exception
-                MsgBoxTranslate("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+                MsgBoxTranslate("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, Title:="Error copying/deleting file")
             End Try
         End If
     End Sub
@@ -151,7 +151,7 @@ Public Class dlgAutoSaveRecovery
                 Try
                     strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
                 Catch ex As Exception
-                    MsgBoxTranslate("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
+                    MsgBoxTranslate("Could not read log file." & Environment.NewLine & ex.Message, Title:="Cannot read file")
                     strScript = ""
                 End Try
             End If

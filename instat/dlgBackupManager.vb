@@ -197,7 +197,7 @@ Public Class dlgBackupManager
         Try
             File.Copy(strSourceFileName, strDestFilename, True)
         Catch ex As Exception
-            MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
+            MsgBoxTranslate("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, Title:="Error copying/deleting file")
         End Try
     End Sub
 
