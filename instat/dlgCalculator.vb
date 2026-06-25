@@ -215,8 +215,6 @@ Public Class dlgCalculator
     ''' </summary>
     Private Sub SaveResults()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
-            Dim strDF As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
-            Dim strCol As String = ucrCalc.ucrSaveResultInto.GetText
 
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsToData)
@@ -224,16 +222,15 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCalcFullAssign)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsIndexAssign)
 
-            clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & strCol & Chr(34), iPosition:=1)
+            clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrCalc.ucrSaveResultInto.GetText() & Chr(34), iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 160)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
 
-            ucrBase.clsRsyntax.SetAssignTo("calc", strTempColumn:="", strTempDataframe:=strDF,
-                                           bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
-                                           bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
-                                           bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
-                                           bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
+            ucrBase.clsRsyntax.SetAssignTo("calc", strTempColumn:="", strTempDataframe:="")
+
+            Dim strDF As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
+            Dim strCol As String = ucrCalc.ucrSaveResultInto.GetText
 
             If Not String.IsNullOrEmpty(strDF) AndAlso Not String.IsNullOrEmpty(strCol) Then
                 clsGetDataframe.AddParameter("data_name", Chr(34) & strDF & Chr(34), iPosition:=0)
