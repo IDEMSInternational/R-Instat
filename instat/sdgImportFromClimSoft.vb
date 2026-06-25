@@ -153,28 +153,34 @@ Public Class sdgImportFromClimSoft
     Private Sub Disconnect()
         frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = False
-        AddRemoveDatabaseConnectToScriptCodes()
+        'AddRemoveDatabaseConnectToScriptCodes()
     End Sub
 
-    Public Sub SetUp(Optional clsNewRSyntax As RSyntax = Nothing)
-        clsRSyntax = clsNewRSyntax
-        AddRemoveDatabaseConnectToScriptCodes()
-    End Sub
-
-
-    Private Sub AddRemoveDatabaseConnectToScriptCodes()
-        Dim clsTempDBConnectFunction As New RFunction
-        If clsRSyntax IsNot Nothing AndAlso clsRDatabaseConnect IsNot Nothing Then
-            'clsTempDBConnectFunction = clsRDatabaseConnect.Clone()
-            'clsTempDBConnectFunction.SetAssignTo("con")
-            clsRGetDatabaseConnection.SetAssignTo("con")
-            If bConnected Then
-                clsRSyntax.AddToBeforeCodes(clsRGetDatabaseConnection, iPosition:=1)
-            Else
-                clsRSyntax.RemoveFromBeforeCodes(clsRGetDatabaseConnection)
-            End If
+    Public Function GetRDatabaseConnectionFunction() As RFunction
+        If clsRDatabaseConnect IsNot Nothing Then
+            Return clsRDatabaseConnect
         End If
-    End Sub
+    End Function
+
+    'Public Sub SetUp(Optional clsNewRSyntax As RSyntax = Nothing)
+    '    clsRSyntax = clsNewRSyntax
+    '    AddRemoveDatabaseConnectToScriptCodes()
+    'End Sub
+
+
+    'Private Sub AddRemoveDatabaseConnectToScriptCodes()
+    '    Dim clsTempDBConnectFunction As New RFunction
+    '    If clsRSyntax IsNot Nothing AndAlso clsRDatabaseConnect IsNot Nothing Then
+    '        'clsTempDBConnectFunction = clsRDatabaseConnect.Clone()
+    '        'clsTempDBConnectFunction.SetAssignTo("con")
+    '        clsRGetDatabaseConnection.SetAssignTo("con")
+    '        If bConnected Then
+    '            clsRSyntax.AddToBeforeCodes(clsRGetDatabaseConnection, iPosition:=1)
+    '        Else
+    '            clsRSyntax.RemoveFromBeforeCodes(clsRGetDatabaseConnection)
+    '        End If
+    '    End If
+    'End Sub
 
     ''' <summary>
     '''  will display an R password input prompt, to enter password and attempt connecting to database
@@ -182,7 +188,7 @@ Public Class sdgImportFromClimSoft
     Private Sub Connect()
         frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = IsConnectionIsActive()
-        AddRemoveDatabaseConnectToScriptCodes()
+        'AddRemoveDatabaseConnectToScriptCodes()
     End Sub
 
     Public Sub Reset()

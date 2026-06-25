@@ -18,12 +18,13 @@ Imports instat.Translations
 Public Class dlgExportClimaticDefinitions
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bDBConnected As Boolean = False
     Private dctReceiverMap As New Dictionary(Of ucrReceiver, ucrReceiverSingle)
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
             clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction,
             clsBuildCropLongerFunction, clsExportToDBFunction As New RFunction
     Private clsSummaryDataOperator, clsDefinitionDataOperator, clsSummaryStationMetadataOperator, clsCropDataOperator As ROperator
-    Private clsDummyFunction, clsCollateStationMetadataFunction As RFunction
+    Private clsDummyFunction, clsCollateStationMetadataFunction, clsDBWriteFunction, clsDBConnectionFunction As RFunction
     Private _sdgImportFromClimSoft As sdgImportFromClimSoft
 
     Private Enum SummaryDataSelectorMode
@@ -263,6 +264,8 @@ Public Class dlgExportClimaticDefinitions
         clsExportToDBFunction = New RFunction
         clsDummyFunction = New RFunction
         clsCollateStationMetadataFunction = New RFunction
+        clsDBWriteFunction = New RFunction
+        clsDBConnectionFunction = New RFunction
 
         clsSummaryDataOperator = New ROperator
         clsDefinitionDataOperator = New ROperator
@@ -332,16 +335,21 @@ Public Class dlgExportClimaticDefinitions
         clsCropDataOperator.bSpaceAroundOperation = False
 
         clsExportToDBFunction.SetPackageName("epicsawrap")
-        clsExportToDBFunction.SetRCommand("export_to_db")
+        clsExportToDBFunction.SetRCommand("export_to_database")
         clsExportToDBFunction.AddParameter("con", "con", iPosition:=0, bIncludeArgumentName:=False)
 
         clsCollateStationMetadataFunction.SetPackageName("epicsawrap")
         clsCollateStationMetadataFunction.SetRCommand("collate_station_metadata")
         clsCollateStationMetadataFunction.SetAssignTo("collate_station_metadata")
 
+        clsDBWriteFunction.SetRCommand("library")
+        clsDBWriteFunction.AddParameter("x", "DBI", iPosition:=0, bIncludeArgumentName:=False)
+
         HideDisplayGroupedControls()
         AddRemoveParamsInSummaryDefinitionsFunction()
         'ucrBase.clsRsyntax.AddToAfterCodes(clsExportToDBFunction, iPosition:=2)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDBWriteFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsExportToDBFunction)
     End Sub
 
@@ -556,10 +564,37 @@ Public Class dlgExportClimaticDefinitions
             AddHandler _sdgImportFromClimSoft.Shown, AddressOf SetEPicsaSubDialogDefaults
         End If
 
-        _sdgImportFromClimSoft.SetUp(clsNewRSyntax:=ucrBase.clsRsyntax)
+        'GetDBConnection()
+        AddRemoveDBConnectionCodes()
+        '_sdgImportFromClimSoft.SetUp(clsNewRSyntax:=ucrBase.clsRsyntax)
         _sdgImportFromClimSoft.ShowDialog()
 
         CheckAndUpdateConnectionStatus()
+    End Sub
+
+    'Private Sub GetDBConnection()
+    '    If _sdgImportFromClimSoft IsNot Nothing Then
+    '        clsDBConnectionFunction = _sdgImportFromClimSoft.GetRDatabaseConnectionFunction()
+    '    End If
+    'End Sub
+
+    Private Sub AddRemoveDBConnectionCodes()
+        If _sdgImportFromClimSoft IsNot Nothing Then
+            clsDBConnectionFunction = _sdgImportFromClimSoft.GetRDatabaseConnectionFunction()
+
+            If ucrBase.clsRsyntax.ContainsCode(clsDBConnectionFunction) Then
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDBConnectionFunction)
+            End If
+
+            If bDBConnected Then
+                If clsDBConnectionFunction IsNot Nothing Then
+                    clsDBConnectionFunction.SetAssignTo("con")
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsDBConnectionFunction, iPosition:=1)
+                Else
+                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDBConnectionFunction)
+                End If
+            End If
+        End If
     End Sub
 
     Private Sub SetEPicsaSubDialogDefaults(sender As Object, e As EventArgs)
@@ -570,18 +605,22 @@ Public Class dlgExportClimaticDefinitions
         dlg.ucrComboBoxPort.SetText("5432")
 
         dlg.ucrTxtHost.OnControlValueChanged()
+        'GetDBConnection()
     End Sub
 
     Private Sub CheckAndUpdateConnectionStatus()
         If _sdgImportFromClimSoft IsNot Nothing Then
             If _sdgImportFromClimSoft.IsConnectionIsActive() Then
+                bDBConnected = True
                 lblConnection.Text = "Connected"
                 lblConnection.ForeColor = Color.Green
             Else
+                bDBConnected = False
                 lblConnection.Text = "No Connection"
                 lblConnection.ForeColor = Color.Red
             End If
         End If
+        AddRemoveDBConnectionCodes()
     End Sub
 
     Private Sub SetSelectorMode(mode As SummaryDataSelectorMode)
