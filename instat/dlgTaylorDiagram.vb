@@ -36,7 +36,7 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID= 643
+        ucrBase.iHelpTopicID = 643
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
@@ -89,21 +89,20 @@ Public Class dlgTaylorDiagram
 
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
-        'clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        clsTaylorDiagramOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsTaylorDiagramOperator.SetOperation("$")
         clsTaylorDiagramOperator.AddParameter("left", clsRFunctionParameter:=clsTaylorDiagramFunction)
         clsTaylorDiagramOperator.AddParameter("right", "plot")
 
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
         ucrBase.clsRsyntax.SetBaseROperator(clsTaylorDiagramOperator)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         SetRCode(Me, clsTaylorDiagramFunction, bReset)
-        ucrSavePlot.SetRCode(clsTaylorDiagramOperator, bReset)
+        ucrSavePlot.SetRCode(clsTaylorDiagramFunction, bReset)
+        ucrSavePlot.AddAdditionalRCode(clsTaylorDiagramOperator, iAdditionalPairNo:=1)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
