@@ -24,7 +24,6 @@ Public Class sdgImportFromClimSoft
 
     Private bFirstLoad As Boolean = True
     Private bConnected As Boolean
-    Private clsRSyntax As RSyntax
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -153,7 +152,6 @@ Public Class sdgImportFromClimSoft
     Private Sub Disconnect()
         frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = False
-        'AddRemoveDatabaseConnectToScriptCodes()
     End Sub
 
     Public Function GetRDatabaseConnectionFunction() As RFunction
@@ -162,33 +160,12 @@ Public Class sdgImportFromClimSoft
         End If
     End Function
 
-    'Public Sub SetUp(Optional clsNewRSyntax As RSyntax = Nothing)
-    '    clsRSyntax = clsNewRSyntax
-    '    AddRemoveDatabaseConnectToScriptCodes()
-    'End Sub
-
-
-    'Private Sub AddRemoveDatabaseConnectToScriptCodes()
-    '    Dim clsTempDBConnectFunction As New RFunction
-    '    If clsRSyntax IsNot Nothing AndAlso clsRDatabaseConnect IsNot Nothing Then
-    '        'clsTempDBConnectFunction = clsRDatabaseConnect.Clone()
-    '        'clsTempDBConnectFunction.SetAssignTo("con")
-    '        clsRGetDatabaseConnection.SetAssignTo("con")
-    '        If bConnected Then
-    '            clsRSyntax.AddToBeforeCodes(clsRGetDatabaseConnection, iPosition:=1)
-    '        Else
-    '            clsRSyntax.RemoveFromBeforeCodes(clsRGetDatabaseConnection)
-    '        End If
-    '    End If
-    'End Sub
-
     ''' <summary>
     '''  will display an R password input prompt, to enter password and attempt connecting to database
     ''' </summary>
     Private Sub Connect()
         frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = IsConnectionIsActive()
-        'AddRemoveDatabaseConnectToScriptCodes()
     End Sub
 
     Public Sub Reset()

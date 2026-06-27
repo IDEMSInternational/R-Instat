@@ -23,8 +23,8 @@ Public Class dlgExportClimaticDefinitions
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
             clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction,
             clsBuildCropLongerFunction, clsExportToDBFunction As New RFunction
-    Private clsSummaryDataOperator, clsDefinitionDataOperator, clsSummaryStationMetadataOperator, clsCropDataOperator As ROperator
-    Private clsDummyFunction, clsCollateStationMetadataFunction, clsDBWriteFunction, clsDBConnectionFunction As RFunction
+    Private clsSummaryDataOperator, clsDefinitionDataOperator, clsSummaryStationMetadataOperator, clsCropDataOperator, clsCommentOperator As ROperator
+    Private clsDummyFunction, clsCollateStationMetadataFunction, clsDBWriteFunction, clsDBConnectionFunction, clsGetDBConnectionFunction As RFunction
     Private _sdgImportFromClimSoft As sdgImportFromClimSoft
 
     Private Enum SummaryDataSelectorMode
@@ -266,11 +266,13 @@ Public Class dlgExportClimaticDefinitions
         clsCollateStationMetadataFunction = New RFunction
         clsDBWriteFunction = New RFunction
         clsDBConnectionFunction = New RFunction
+        clsGetDBConnectionFunction = New RFunction
 
         clsSummaryDataOperator = New ROperator
         clsDefinitionDataOperator = New ROperator
         clsSummaryStationMetadataOperator = New ROperator
         clsCropDataOperator = New ROperator
+        clsCommentOperator = New ROperator
 
         Dim strSummaryDef = "summary_def"
 
@@ -345,9 +347,15 @@ Public Class dlgExportClimaticDefinitions
         clsDBWriteFunction.SetRCommand("library")
         clsDBWriteFunction.AddParameter("x", "DBI", iPosition:=0, bIncludeArgumentName:=False)
 
+        clsCommentOperator.SetOperation("#")
+        clsCommentOperator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
+        clsCommentOperator.bAllBrackets = False
+
+        clsGetDBConnectionFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_database_connection")
+        clsGetDBConnectionFunction.SetAssignTo("con")
+
         HideDisplayGroupedControls()
         AddRemoveParamsInSummaryDefinitionsFunction()
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsExportToDBFunction, iPosition:=2)
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDBWriteFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsExportToDBFunction)
@@ -420,7 +428,16 @@ Public Class dlgExportClimaticDefinitions
                     bOkEnable = False
                 End If
             End If
+        Else
+            If ucrReceiverStationID.IsEmpty OrElse ucrReceiverStationName.IsEmpty Then
+                bOkEnable = False
+            End If
         End If
+
+        If _sdgImportFromClimSoft IsNot Nothing AndAlso Not _sdgImportFromClimSoft.IsConnectionIsActive() Then
+            bOkEnable = False
+        End If
+
         ucrBase.OKEnabled(bOkEnable)
     End Sub
 
@@ -564,19 +581,12 @@ Public Class dlgExportClimaticDefinitions
             AddHandler _sdgImportFromClimSoft.Shown, AddressOf SetEPicsaSubDialogDefaults
         End If
 
-        'GetDBConnection()
         AddRemoveDBConnectionCodes()
-        '_sdgImportFromClimSoft.SetUp(clsNewRSyntax:=ucrBase.clsRsyntax)
         _sdgImportFromClimSoft.ShowDialog()
 
         CheckAndUpdateConnectionStatus()
     End Sub
 
-    'Private Sub GetDBConnection()
-    '    If _sdgImportFromClimSoft IsNot Nothing Then
-    '        clsDBConnectionFunction = _sdgImportFromClimSoft.GetRDatabaseConnectionFunction()
-    '    End If
-    'End Sub
 
     Private Sub AddRemoveDBConnectionCodes()
         If _sdgImportFromClimSoft IsNot Nothing Then
@@ -588,10 +598,12 @@ Public Class dlgExportClimaticDefinitions
 
             If bDBConnected Then
                 If clsDBConnectionFunction IsNot Nothing Then
-                    clsDBConnectionFunction.SetAssignTo("con")
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsDBConnectionFunction, iPosition:=1)
+                    clsCommentOperator.AddParameter("right", clsRFunctionParameter:=clsDBConnectionFunction, iPosition:=1, bIncludeArgumentName:=False)
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsCommentOperator, iPosition:=1)
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDBConnectionFunction, iPosition:=2)
                 Else
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDBConnectionFunction)
+                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCommentOperator)
+                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDBConnectionFunction)
                 End If
             End If
         End If
@@ -605,7 +617,8 @@ Public Class dlgExportClimaticDefinitions
         dlg.ucrComboBoxPort.SetText("5432")
 
         dlg.ucrTxtHost.OnControlValueChanged()
-        'GetDBConnection()
+
+        dlg.chkRememberCredentials.Checked = False
     End Sub
 
     Private Sub CheckAndUpdateConnectionStatus()
@@ -620,6 +633,7 @@ Public Class dlgExportClimaticDefinitions
                 lblConnection.ForeColor = Color.Red
             End If
         End If
+
         AddRemoveDBConnectionCodes()
     End Sub
 
