@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -30,7 +30,7 @@ Public Class dlgCheckSummary
     Private clsMaxYearAssign As New RFunction
     Private clsFactorFunction As New RFunction
     Private clsDummyFunction As New RFunction
-
+    Private clsWithFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsRggplotFunction As New RFunction
     Private clsGeomLine As New RFunction
@@ -102,7 +102,6 @@ Public Class dlgCheckSummary
     Private strOutlierFirstParameterName As String = "geomfunc"
     Private strOutlierGeomParameterNames() As String
 
-
     ' Plot Options Objects
     Private clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
     Private clsXScalecontinuousFunction As New RFunction
@@ -165,38 +164,12 @@ Public Class dlgCheckSummary
     Private clsLocalRaesFunction As New RFunction
 
     Private clsMutateFunction As New RFunction
-    Private clsMedianFunction As New RFunction
-    Private clsLowerTercileFunction As New RFunction
-    Private clsUpperTercileFunction As New RFunction
     Private clsAsDateMeanY As New RFunction
-    Private clsAsDateMedianY As New RFunction
-    Private clsAsDateLowerTercileY As New RFunction
-    Private clsAsDateUpperTercileY As New RFunction
 
     Private clsGeomTextLabelMeanLine As New RFunction
     Private clsRoundMeanY As New RFunction
     Private clsPasteMeanY As New RFunction
     Private clsFormatMeanY As New RFunction
-    Private clsGeomTextLabelMedianLine As New RFunction
-    Private clsRoundMedianY As New RFunction
-    Private clsPasteMedianY As New RFunction
-    Private clsFormatMedianY As New RFunction
-    Private clsGeomTextLabelLowerTercileLine As New RFunction
-    Private clsRoundLowerTercileY As New RFunction
-    Private clsPasteLowerTercileY As New RFunction
-    Private clsFormatLowerTercileY As New RFunction
-    Private clsGeomTextLabelUpperTercileLine As New RFunction
-    Private clsRoundUpperTercileY As New RFunction
-    Private clsPasteUpperTercileY As New RFunction
-    Private clsFormatUpperTercileY As New RFunction
-
-    Private clsGeomHlineMedian As New RFunction
-    Private clsGeomHlineLowerTercile As New RFunction
-    Private clsGeomHlineUpperTercile As New RFunction
-
-    Private clsGeomHlineAesMedian As New RFunction
-    Private clsGeomHlineAesLowerTercile As New RFunction
-    Private clsGeomHlineAesUpperTercile As New RFunction
 
     Private clsSubDialogGeomHlineMean As New RFunction
     Private clsSubDialogGeomHlineAesMean As New RFunction
@@ -296,7 +269,6 @@ Public Class dlgCheckSummary
         ucrReceiverColourBy.bWithQuotes = False
         ucrReceiverColourBy.SetParameterIsString()
 
-
         ucrReceiverFacetBy.SetParameter(New RParameter("", 1))
         ucrReceiverFacetBy.Selector = ucrSelectorForCheckSummary
         ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
@@ -314,6 +286,8 @@ Public Class dlgCheckSummary
 
         ucrChkFirstAndLast.SetText("Label First and Last")
         ucrChkWithSE.SetText("With Standard Error")
+        ucrChkWithSE.AddParameterValuesCondition(True, "se", "TRUE")
+        ucrChkWithSE.AddParameterValuesCondition(False, "se", "FALSE")
 
         ucrSave.SetPrefix("check_trend_graph")
         ucrSave.SetIsComboBox()
@@ -331,8 +305,7 @@ Public Class dlgCheckSummary
         ucrVariablesAsFactorForCheckSummary.SetParameterIsString()
         ucrVariablesAsFactorForCheckSummary.bWithQuotes = False
 
-
-        ' X variable receiver                                                                                                                                                                               
+        ' X variable receiver
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorForCheckSummary
         ucrByFactorsReceiver.SetParameterIsString()
@@ -341,7 +314,7 @@ Public Class dlgCheckSummary
         ucrByFactorsReceiver.bAddParameterIfEmpty = True
         ucrByFactorsReceiver.SetLinkedDisplayControl(lblByFactors)
 
-        ' Fill by receiver                                                                                                                                                                                
+        ' Fill by receiver
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSelectorForCheckSummary
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -354,8 +327,6 @@ Public Class dlgCheckSummary
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("TRUE")
-
-        ' Label Outliers]
 
         ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
         ucrNudOutlierCoefficient.DecimalPlaces = 1
@@ -402,6 +373,7 @@ Public Class dlgCheckSummary
         ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetRDefault(1)
 
+        'Broken stick regression is not implemented yet, so this option is disabled for now
         rdoBrokenStick.Enabled = False
 
         ' Legend
@@ -441,8 +413,6 @@ Public Class dlgCheckSummary
 
         UpdateVisiblePanels()
     End Sub
-
-    Private clsWithFunction As New RFunction
 
     Private Sub SetDefaults()
         strOutliersListLoadedForDataFrame = Nothing
@@ -496,10 +466,8 @@ Public Class dlgCheckSummary
         rdoBrokenStick.Checked = False
         ucrChkPoints.Checked = True
         ucrChkFirstAndLast.Checked = False
-        ucrChkWithSE.Checked = False
         ucrChkLabel.Checked = False
         ucrChkLabeloutliers.Checked = False
-        ucrChkAddPoints.Checked = False
 
         ucrSelectorForCheckSummary.Reset()
         ucrSaveNewColumn.Reset()
@@ -530,7 +498,6 @@ Public Class dlgCheckSummary
         clsDummyFunction.SetRCommand("c")
 
         clsWithFunction.SetRCommand("with")
-
 
         ' Trend Function Config
         ' Initialize Plot Options Objects
@@ -702,6 +669,7 @@ Public Class dlgCheckSummary
 
         clsGeomSmoothFunction.SetPackageName("ggplot2")
         clsGeomSmoothFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothFunction.AddParameter("se", "FALSE")
 
         clsGeomHlineMean.SetPackageName("ggplot2")
         clsGeomHlineMean.SetRCommand("geom_hline")
@@ -716,49 +684,14 @@ Public Class dlgCheckSummary
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
 
-        clsMedianFunction.SetRCommand("median")
-        clsMedianFunction.AddParameter("na.rm", "TRUE")
-
-        clsLowerTercileFunction.SetRCommand("quantile")
-        clsLowerTercileFunction.AddParameter("probs", "1/3")
-        clsLowerTercileFunction.AddParameter("na.rm", "TRUE")
-        clsLowerTercileFunction.AddParameter("type", "8")
-
-        clsUpperTercileFunction.SetRCommand("quantile")
-        clsUpperTercileFunction.AddParameter("probs", "2/3")
-        clsUpperTercileFunction.AddParameter("na.rm", "TRUE")
-        clsUpperTercileFunction.AddParameter("type", "8")
-
         clsAsDateMeanY.SetRCommand("as.Date")
-        clsAsDateMedianY.SetRCommand("as.Date")
-        clsAsDateLowerTercileY.SetRCommand("as.Date")
-        clsAsDateUpperTercileY.SetRCommand("as.Date")
 
         clsRoundMeanY.SetRCommand("round")
         clsRoundMeanY.AddParameter("digits", "1")
-        clsRoundMedianY.SetRCommand("round")
-        clsRoundMedianY.AddParameter("digits", "1")
-        clsRoundLowerTercileY.SetRCommand("round")
-        clsRoundLowerTercileY.AddParameter("digits", "1")
-        clsRoundUpperTercileY.SetRCommand("round")
-        clsRoundUpperTercileY.AddParameter("digits", "1")
 
         clsPasteMeanY.SetRCommand("paste")
-        clsPasteMedianY.SetRCommand("paste")
-        clsPasteLowerTercileY.SetRCommand("paste")
-        clsPasteUpperTercileY.SetRCommand("paste")
 
         clsFormatMeanY.SetRCommand("format")
-        clsFormatMedianY.SetRCommand("format")
-        clsFormatLowerTercileY.SetRCommand("format")
-        clsFormatUpperTercileY.SetRCommand("format")
-
-        clsGeomHlineMedian.SetPackageName("ggplot2")
-        clsGeomHlineMedian.SetRCommand("geom_hline")
-        clsGeomHlineLowerTercile.SetPackageName("ggplot2")
-        clsGeomHlineLowerTercile.SetRCommand("geom_hline")
-        clsGeomHlineUpperTercile.SetPackageName("ggplot2")
-        clsGeomHlineUpperTercile.SetRCommand("geom_hline")
 
         clsSubDialogGeomHlineMean.SetPackageName("ggplot2")
         clsSubDialogGeomHlineMean.SetRCommand("geom_hline")
@@ -766,12 +699,6 @@ Public Class dlgCheckSummary
 
         clsGeomTextLabelMeanLine.SetPackageName("ggplot2")
         clsGeomTextLabelMeanLine.SetRCommand("geom_text")
-        clsGeomTextLabelMedianLine.SetPackageName("ggplot2")
-        clsGeomTextLabelMedianLine.SetRCommand("geom_text")
-        clsGeomTextLabelLowerTercileLine.SetPackageName("ggplot2")
-        clsGeomTextLabelLowerTercileLine.SetRCommand("geom_text")
-        clsGeomTextLabelUpperTercileLine.SetPackageName("ggplot2")
-        clsGeomTextLabelUpperTercileLine.SetRCommand("geom_text")
 
         clsGroupByFirstLast.SetPackageName("dplyr")
         clsGroupByFirstLast.SetRCommand("group_by")
@@ -1065,9 +992,6 @@ Public Class dlgCheckSummary
 
         ucrReceiverYVar.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverYVar.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
-        ucrReceiverYVar.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
-        ucrReceiverYVar.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
-        ucrReceiverYVar.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
 
         ucrReceiverYVar.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
@@ -1096,7 +1020,6 @@ Public Class dlgCheckSummary
             AddRemoveFacets()
         End If
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles UcrBaseCheckSummary.ClickReset
         bReset = True
@@ -1252,14 +1175,11 @@ Public Class dlgCheckSummary
             clsOutlierBoxplotFunction.RemoveParameterByName("outlier.shape")
         End If
 
-
         If ucrChkLabeloutliers.Checked AndAlso Not ucrNudOutlierCoefficient.IsEmpty Then
             clsOutlierBoxplotFunction.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=2)
         Else
             clsOutlierBoxplotFunction.RemoveParameterByName("coef")
         End If
-
-
 
         AddRemoveOutlierTheme()
         AddRemoveOutlierFacets()
@@ -1339,7 +1259,6 @@ Public Class dlgCheckSummary
         ucrBase.clsRsyntax.SetBaseROperator(clsOutlierBaseOperator)
     End Sub
 
-
     Private Function IsLabelOutliersVariableUsable() As Boolean
         If ucrReceiverLabelOutliers.IsEmpty Then Return False
 
@@ -1372,7 +1291,6 @@ Public Class dlgCheckSummary
                 Dim clsDataFrameParam As RFunction = ucrSelectorForCheckSummary.ucrAvailableDataFrames.clsCurrDataFrame
                 clsOutlierPipeLabelOperator.RemoveParameterByName("data")
                 clsOutlierPipeLabelOperator.AddParameter("data", clsRFunctionParameter:=clsDataFrameParam, iPosition:=0, bIncludeArgumentName:=False)
-
 
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsOutlierPipeLabelOperator, iPosition:=0)
 
@@ -1412,7 +1330,6 @@ Public Class dlgCheckSummary
                 clsOutlierInOperator.ClearParameters()
                 clsOutlierInOperator.AddParameter("left", strNumVarForStats, iPosition:=0, bIncludeArgumentName:=False)
                 clsOutlierInOperator.AddParameter("right", clsROperatorParameter:=clsOutlierDollarSignOperator, iPosition:=1, bIncludeArgumentName:=False)
-
 
                 Dim strLabelVar As String = ucrReceiverLabelOutliers.GetVariableNames(False)
 
@@ -1551,7 +1468,6 @@ Public Class dlgCheckSummary
             strText = ""
         End If
 
-
         Dim strEscaped As String = strText.Replace("\\", "\\\\").Replace("""", "\""")
         Return """" & strEscaped & """"
     End Function
@@ -1668,14 +1584,8 @@ Public Class dlgCheckSummary
         clsBaseOperator.RemoveParameterByName("scale_y_date")
 
         clsBaseOperator.RemoveParameterByName("geom_hline_mean_sdg")
-        clsBaseOperator.RemoveParameterByName("geom_hline_median")
-        clsBaseOperator.RemoveParameterByName("geom_hline_lower_tercile")
-        clsBaseOperator.RemoveParameterByName("geom_hline_upper_tercile")
 
         clsBaseOperator.RemoveParameterByName("text_mean")
-        clsBaseOperator.RemoveParameterByName("text_median")
-        clsBaseOperator.RemoveParameterByName("text_lower_tercile")
-        clsBaseOperator.RemoveParameterByName("text_upper_tercile")
 
         Dim strXVar As String = ucrReceiverX.GetVariableNames.Replace("]", "").Replace("""", "").Replace("'", "")
         Dim strXExpression As String = "as.numeric(" & strXVar & ")"
@@ -1700,7 +1610,6 @@ Public Class dlgCheckSummary
             clsGeomPoint2Function.AddParameter("shape", "17")
 
             clsPoint2AesFunction.SetRCommand("aes")
-
 
             clsSegmentAesFunction.AddParameter("x", strXExpression, iPosition:=0)
             clsSegmentAesFunction.AddParameter("xend", strXExpression, iPosition:=1)
@@ -1743,7 +1652,6 @@ Public Class dlgCheckSummary
             clsBaseOperator.RemoveParameterByName("geom_point2")
         End If
 
-
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
             clsBaseOperator.RemoveParameterByName("scale_x_continuous")
@@ -1769,7 +1677,6 @@ Public Class dlgCheckSummary
             End If
             clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
         End If
-
 
         clsGeomHlineAesMean.ClearParameters()
         clsMutateFunction.RemoveParameterByName(strMeanColumnName)
@@ -1811,30 +1718,8 @@ Public Class dlgCheckSummary
             clsGeomTextLabelMeanLine.ClearParameters()
         End If
 
-
-
-        If clsGeomHlineMedian.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("geom_hline_median", clsRFunctionParameter:=clsGeomHlineMedian)
-        End If
-        If clsGeomHlineLowerTercile.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("geom_hline_lower_tercile", clsRFunctionParameter:=clsGeomHlineLowerTercile)
-        End If
-        If clsGeomHlineUpperTercile.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("geom_hline_upper_tercile", clsRFunctionParameter:=clsGeomHlineUpperTercile)
-        End If
-
-
         If clsGeomTextLabelMeanLine.iParameterCount > 0 Then
             clsBaseOperator.AddParameter("text_mean", clsRFunctionParameter:=clsGeomTextLabelMeanLine)
-        End If
-        If clsGeomTextLabelMedianLine.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("text_median", clsRFunctionParameter:=clsGeomTextLabelMedianLine)
-        End If
-        If clsGeomTextLabelLowerTercileLine.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("text_lower_tercile", clsRFunctionParameter:=clsGeomTextLabelLowerTercileLine)
-        End If
-        If clsGeomTextLabelUpperTercileLine.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("text_upper_tercile", clsRFunctionParameter:=clsGeomTextLabelUpperTercileLine)
         End If
 
         If rdoFittedLine.Checked Then
@@ -1863,7 +1748,6 @@ Public Class dlgCheckSummary
                 clsGroupByFirstLast.AddParameter(i, lstFirstLastGroupVars(i), bIncludeArgumentName:=False, iPosition:=i)
             Next
 
-
             clsFilterFirstLastFunction.ClearParameters()
             clsFilterFirstLastFunction.AddParameter("naY", "!is.na(" & strYVarFirstLast & ")", iPosition:=0, bIncludeArgumentName:=False)
             clsFilterFirstLastFunction.AddParameter("naX", "!is.na(" & strXVar & ")", iPosition:=1, bIncludeArgumentName:=False)
@@ -1873,14 +1757,12 @@ Public Class dlgCheckSummary
             clsSliceMaxFirstLast.RemoveParameterByName("order_by")
             clsSliceMaxFirstLast.AddParameter("order_by", strXVar, iPosition:=0, bIncludeArgumentName:=False)
 
-
             clsDistinctFirstLast.ClearParameters()
             For i As Integer = 0 To lstFirstLastGroupVars.Count - 1
                 clsDistinctFirstLast.AddParameter(i, lstFirstLastGroupVars(i), bIncludeArgumentName:=False, iPosition:=i)
             Next
             clsDistinctFirstLast.AddParameter(lstFirstLastGroupVars.Count, strXVar, bIncludeArgumentName:=False, iPosition:=lstFirstLastGroupVars.Count)
             clsDistinctFirstLast.AddParameter(".keep_all", "TRUE", iPosition:=lstFirstLastGroupVars.Count + 1)
-
 
             Dim clsFirstLastDataFrameParam As RFunction = GetCleanDataFrameParam()
             clsFirstLastPipeOperator.RemoveParameterByName("data")
@@ -1896,7 +1778,6 @@ Public Class dlgCheckSummary
             clsBaseOperator.AddParameter("point_first_last", clsRFunctionParameter:=clsGeomPointFirstLast, iPosition:=5)
             clsBaseOperator.AddParameter("label_first_last", clsRFunctionParameter:=clsGeomTextFirstLast, iPosition:=6)
         End If
-
 
         If clsThemeFunction.iParameterCount > 0 Then
             clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction)
@@ -2066,7 +1947,6 @@ Public Class dlgCheckSummary
         UpdateTrendRCode()
     End Sub
 
-
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         If rdoTrend.Checked Then
             sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
@@ -2133,7 +2013,6 @@ Public Class dlgCheckSummary
         End If
     End Sub
 
-
     Private Sub openSdgLayerOptionsForOutlier(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsOutlierRggplotFunction,
                                    clsNewGeomFunc:=clsNewGeomFunc,
@@ -2172,13 +2051,13 @@ Public Class dlgCheckSummary
                 Else
                     ucrReceiverX.Add(clsParam.strArgumentValue)
                 End If
-                'In the y case, the value stored in the clsReasFunction in the multiple variables 
-                '  case is "value", however that one shouldn't be written in the multiple 
-                '  variables receiver (otherwise it would stack all variables and the stack 
+                'In the y case, the value stored in the clsReasFunction in the multiple variables
+                '  case is "value", however that one shouldn't be written in the multiple
+                '  variables receiver (otherwise it would stack all variables and the stack
                 '  ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables 
-                '  independently from the multiple variables method? Here if the receiver is 
-                '  actually in single mode, the variable "value" will still be given back, which 
+                'Warning: what if someone used the name value for one of it's variables
+                '  independently from the multiple variables method? Here if the receiver is
+                '  actually in single mode, the variable "value" will still be given back, which
                 '  throws the problem back to the creation of "value" in the multiple receiver case.
             ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value") Then
                 'Still might be in the case of bSingleVariable with mapping y="".
