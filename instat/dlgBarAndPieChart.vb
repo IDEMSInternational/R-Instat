@@ -830,8 +830,6 @@ Public Class dlgBarAndPieChart
         sdgPlots.SetFacetWrapDirection()
         bNotSubdialogue = True
         bResetSubdialog = False
-        bNotSubdialogue = True
-        bResetSubdialog = False
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
