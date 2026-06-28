@@ -804,8 +804,11 @@ Public Class dlgBarAndPieChart
         sdgPlots.ShowDialog()
         bNotSubdialogue = False
         If Not sdgPlots.ucr1stFactorReceiver.IsEmpty() AndAlso Not sdgPlots.ucr2ndFactorReceiver.IsEmpty() Then
-
-            ucrInputStation.SetName(strFacetRowAndColAll)
+            If clsFacetFunction.ContainsParameter("margins") Then
+                ucrInputStation.SetName(strFacetRowAndColAll)
+            Else
+                ucrInputStation.SetName(strFacetRowAndCol)
+            End If
         ElseIf clsFacetFunction.strRCommand = "facet_grid" Then
 
             If clsFacetFunction.ContainsParameter("rows") Then
@@ -1254,7 +1257,7 @@ Public Class dlgBarAndPieChart
             clsRowVarsFunction.RemoveParameterByName("cols")
         ElseIf Not String.IsNullOrEmpty(sdgPlots.SecondFacetVariable) Then
             clsRowVarsFunction.AddParameter("cols",
-                                    sdgPlots.SecondFacetVariable,
+                                    sdgPlots.SecondFacetVariable, bIncludeArgumentName:=False,
                                     iPosition:=1)
         End If
 
