@@ -6849,5 +6849,13 @@
   "Save Definitions Object:": "Save Definitions Object:",
   "quantile 2": "quantile 2",
   "quantile 3": "quantile 3",
-  "gmean": "gmean"
+  "gmean": "gmean",
+  "Outliers": "Outliers",
+  "Year Variable:": "Year Variable:",
+  "Fill By (Optional):": "Fill By (Optional):",
+  "Fitted Line": "Fitted Line",
+  "Mean Line": "Mean Line",
+  "Jitter Width:": "Jitter Width:",
+  "Check Summary": "Check Summary",
+  "Label First and Last": "Label First and Last"
 }
