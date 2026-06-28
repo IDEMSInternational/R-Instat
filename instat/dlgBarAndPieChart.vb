@@ -803,19 +803,18 @@ Public Class dlgBarAndPieChart
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bNotSubdialogue = False
-        If clsFacetFunction.strRCommand = "facet_grid" Then
-            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
-                If clsFacetFunction.ContainsParameter("margins") Then
-                    ucrInputStation.SetName(strFacetRowAndColAll)
-                Else
-                    ucrInputStation.SetName(strFacetRowAndCol)
-                End If
-            ElseIf clsFacetFunction.ContainsParameter("rows") Then
+        If Not sdgPlots.ucr1stFactorReceiver.IsEmpty() AndAlso Not sdgPlots.ucr2ndFactorReceiver.IsEmpty() Then
+
+            ucrInputStation.SetName(strFacetRowAndColAll)
+        ElseIf clsFacetFunction.strRCommand = "facet_grid" Then
+
+            If clsFacetFunction.ContainsParameter("rows") Then
                 If clsFacetFunction.ContainsParameter("margins") Then
                     ucrInputStation.SetName(strFacetRowAll)
                 Else
                     ucrInputStation.SetName(strFacetRow)
                 End If
+
             ElseIf clsFacetFunction.ContainsParameter("cols") Then
                 If clsFacetFunction.ContainsParameter("margins") Then
                     ucrInputStation.SetName(strFacetColAll)
@@ -823,9 +822,14 @@ Public Class dlgBarAndPieChart
                     ucrInputStation.SetName(strFacetCol)
                 End If
             End If
+
         Else
             ucrInputStation.SetName(strFacetWrap)
         End If
+        ' Update facet_wrap direction ("dir") from Plot Options.
+        sdgPlots.SetFacetWrapDirection()
+        bNotSubdialogue = True
+        bResetSubdialog = False
         bNotSubdialogue = True
         bResetSubdialog = False
     End Sub
@@ -1248,8 +1252,18 @@ Public Class dlgBarAndPieChart
             clsFacetFunction.RemoveParameterByName("facets")
         End If
 
+        If bRowsAndCols OrElse bRowsAndColsAll Then
+            clsRowVarsFunction.RemoveParameterByName("cols")
+        ElseIf Not String.IsNullOrEmpty(sdgPlots.SecondFacetVariable) Then
+            clsRowVarsFunction.AddParameter("cols",
+                                    sdgPlots.SecondFacetVariable,
+                                    iPosition:=1)
+        End If
+
         If bRowAll OrElse bColAll OrElse bRowsAndColsAll Then
             clsFacetFunction.AddParameter("margins", "TRUE")
+        ElseIf bRow OrElse bCol OrElse bRowsAndCols Then
+            clsFacetFunction.AddParameter("margins", "FALSE")
         Else
             clsFacetFunction.RemoveParameterByName("margins")
         End If
@@ -1264,6 +1278,8 @@ Public Class dlgBarAndPieChart
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
             clsFacetFunction.RemoveParameterByName("rows")
         End If
+        ' Update facet_wrap direction ("dir") from Plot Options.
+        sdgPlots.SetFacetWrapDirection()
     End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
