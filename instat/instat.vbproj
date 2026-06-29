@@ -269,6 +269,12 @@
     <Compile Include="dlgDescribeOneVariableLikertGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDescribeTwoVariableMorelikertGraphs.Designer.vb">
+      <DependentUpon>dlgDescribeTwoVariableMorelikertGraphs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeTwoVariableMorelikertGraphs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDistances.Designer.vb">
       <DependentUpon>dlgDistances.vb</DependentUpon>
     </Compile>
