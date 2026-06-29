@@ -250,7 +250,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
-        clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
+        clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction.Clone()
 
         ucrInputStation.SetName(strFacetWrap)
         ucrNudCutoff.Value = 0
