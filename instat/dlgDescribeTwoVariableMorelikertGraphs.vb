@@ -44,6 +44,8 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
     Private clsDummyFunction As New RFunction
     Private clsWrapDummyFunction As New RFunction
     Private clsCutoffDummyFunction As New RFunction
+    Private clsGetDf As New RFunction
+    Private clsGetDfAssignOperator As New ROperator
     Private iNumLevels As Integer
 
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
@@ -209,6 +211,8 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         clsDummyFunction = New RFunction
         clsWrapDummyFunction = New RFunction
         clsCutoffDummyFunction = New RFunction
+        clsGetDf = New RFunction
+        clsGetDfAssignOperator = New ROperator
 
         ucrSelectorGGLikert.Reset()
         ucrSaveGGLikert.Reset()
@@ -428,23 +432,21 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             Dim strVarVector As String = "c(" & String.Join(",", varNames.Select(Function(v) Chr(34) & v & Chr(34))) & ")"
 
             Dim strScript As String = String.Format(
-            "invisible(lapply({0}, function(v) {{" &
-            "current_label <- attr(data_book$get_data_frame(data_name = {1})[[v]], 'label');" &
-            "needs_fix <- is.null(current_label) || nchar(trimws(current_label)) == 0;" &
-            "if (needs_fix) {{" &
-            "clean_label <- trimws(gsub('.', ' ', v, fixed = TRUE));" &
-            "clean_label <- trimws(gsub('\\s+', ' ', clean_label));" &
-            "data_book$rename_column_in_data(data_name = {1}, type = " & Chr(34) & "single" & Chr(34) & ", column_name = v, new_val = v, label = clean_label)" &
-            "}}" &
-            "}}))",
-            strVarVector,
-            strDataFrame)
+        "invisible(lapply({0}, function(v) {{" &
+        "current_label <- attr(data_book$get_data_frame(data_name = {1})[[v]], 'label');" &
+        "needs_fix <- is.null(current_label) || nchar(trimws(current_label)) == 0;" &
+        "if (needs_fix) {{" &
+        "clean_label <- trimws(gsub('.', ' ', v, fixed = TRUE));" &
+        "clean_label <- trimws(gsub('\\s+', ' ', clean_label));" &
+        "data_book$rename_column_in_data(data_name = {1}, type = " & Chr(34) & "single" & Chr(34) & ", column_name = v, new_val = v, label = clean_label)" &
+        "}}" &
+        "}}))",
+        strVarVector,
+        strDataFrame)
             frmMain.clsRLink.RunInternalScript(strScript, bSilent:=True)
 
-            Dim clsGetDf As New RFunction
-            clsGetDf.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-            clsGetDf.AddParameter("data_name", strDataFrame)
-            clsGGLikertFunction.AddParameter("data", clsRFunctionParameter:=clsGetDf, iPosition:=0, bIncludeArgumentName:=True)
+            Dim clsGetDataFrameFunction As RFunction = ucrSelectorGGLikert.ucrAvailableDataFrames.clsCurrDataFrame.Clone
+            clsGGLikertFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0, bIncludeArgumentName:=True)
         End If
     End Sub
     Private Sub UpdateSortParameter()
