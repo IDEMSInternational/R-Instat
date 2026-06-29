@@ -215,6 +215,7 @@ Public Class dlgRecordQuarto
         Else
 
             StartEmptyQuartoSession()
+            frmMain.strSaveFilePath = ""
 
         End If
 
@@ -226,14 +227,23 @@ Public Class dlgRecordQuarto
         frmMain.bQuartoPPTX = ucrChkPptx.Checked
         frmMain.bQuartoDOCX = ucrChkDocs.Checked
 
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+
+
         frmMain.ucrScriptWindow.CreateNewQuartoTab(
     IO.Path.GetFileName(frmMain.strCurrentQuartoFile))
 
         frmMain.bShowRenderDetails = ucrChkRenderDetails.Checked
 
-        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "\", "/"))
-        frmMain.bDataSaved = True
+        If ucrChkSaveReopen.Checked AndAlso
+       Not String.IsNullOrWhiteSpace(frmMain.strSaveFilePath) Then
+
+            frmMain.clsRecentItems.addToMenu(
+            frmMain.strSaveFilePath.Replace("\", "/"))
+
+            frmMain.bDataSaved = True
+        End If
+
 
         Me.Close()
     End Sub

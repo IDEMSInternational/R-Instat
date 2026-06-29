@@ -941,6 +941,29 @@ Public Class ucrScript
         'replace the placeholder with the correct file path to InstatObject\R
         strQuartoTemplate = strQuartoTemplate.Replace("<<R_PATH>>", strInstatObjectRPath.Replace("\", "/"))
 
+        If frmMain.bRecordQuarto AndAlso
+   Not String.IsNullOrWhiteSpace(frmMain.strSaveFilePath) Then
+
+            Dim strLoadWorkspace As String =
+        "new_RDS <- readRDS(file=""" &
+        frmMain.strSaveFilePath.Replace("\", "/") &
+        """)" & vbCrLf &
+        "data_book$import_RDS(data_RDS=new_RDS)" & vbCrLf &
+        "rm(new_RDS)"
+
+            strQuartoTemplate =
+        strQuartoTemplate.Replace(
+            "<<LOAD_WORKSPACE>>",
+            strLoadWorkspace)
+        Else
+
+            strQuartoTemplate =
+        strQuartoTemplate.Replace(
+            "<<LOAD_WORKSPACE>>",
+            "")
+
+        End If
+
         If Not frmMain.bQuartoHTML Then
             strQuartoTemplate = strQuartoTemplate.Replace("  html: default" & vbCrLf, "")
         End If
