@@ -109,7 +109,6 @@ Public Class dlgRecordQuarto
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputFileLocation.SetRCode(clsSaveRDSFunction, bReset)
         ucrInputFilePath.SetRCode(clsSaveRDSFunction, bReset)
     End Sub
 
@@ -215,7 +214,6 @@ Public Class dlgRecordQuarto
         Else
 
             StartEmptyQuartoSession()
-            frmMain.strSaveFilePath = ""
 
         End If
 
@@ -287,6 +285,10 @@ Public Class dlgRecordQuarto
 
     Private Sub ucrChkSaveReopen_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSaveReopen.ControlValueChanged
         SetSaveWorkspaceControlsVisibility()
+        If Not ucrChkSaveReopen.Checked Then
+            ucrInputFilePath.SetName("")
+            frmMain.strSaveFilePath = ""
+        End If
     End Sub
 
     Private Sub SetSaveWorkspaceControlsVisibility()
