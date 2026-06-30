@@ -73,6 +73,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 759
         ucrBase.clsRsyntax.iCallType = 3
@@ -190,6 +191,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
     End Sub
+
     Private Sub SetDefaults()
         clsGGLikertFunction = New RFunction
         clsBaseOperator = New ROperator
@@ -230,6 +232,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
 
         clsRowVarsFunction.SetPackageName("ggplot2")
         clsRowVarsFunction.SetRCommand("vars")
+
         clsColVarsFunction.SetPackageName("ggplot2")
         clsColVarsFunction.SetRCommand("vars")
 
@@ -260,6 +263,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         iNumLevels = Nothing
         bResetSubdialog = True
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
 
@@ -275,22 +279,52 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset)
 
-        If Not rdoStacked.Checked Then
-            If bReset Then
-                ucrChkReverse.SetRCode(clsGGLikertFunction, bReset)
-                ucrChkSymmetric.SetRCode(clsGGLikertFunction, bReset)
-            End If
-            If ucrChkCutoff.Checked AndAlso Not clsGGLikertFunction.ContainsParameter("cutoff") Then
-                clsGGLikertFunction.AddParameter("cutoff", ucrNudCutoff.nudUpDown.Text, iPosition:=13)
-            End If
-            ucrNudCutoff.SetRCode(clsGGLikertFunction, bReset)
+        If bReset Then
+            ucrChkReverse.SetRCode(clsGGLikertFunction, bReset)
+            ucrChkSymmetric.SetRCode(clsGGLikertFunction, bReset)
         End If
 
         bRCodeSet = True
         AddRemoveFacets()
         AddRemoveTheme()
         UpdateControlsVisibility()
+        AddRemoveCutoff()
     End Sub
+
+    Private Sub AddRemoveCutoff()
+        If Not rdoStacked.Checked Then
+            If ucrChkCutoff.Checked AndAlso Not clsGGLikertFunction.ContainsParameter("cutoff") Then
+                clsGGLikertFunction.AddParameter("cutoff", ucrNudCutoff.nudUpDown.Text, iPosition:=13)
+            End If
+        Else
+            clsGGLikertFunction.RemoveParameterByName("cutoff")
+        End If
+    End Sub
+
+    Private Sub SymmetryAddParameters()
+        If Not rdoStacked.Checked Then
+            If ucrChkSymmetric.Checked Then
+                clsGGLikertFunction.AddParameter("symmetric", "TRUE", iPosition:=12)
+            Else
+                clsGGLikertFunction.RemoveParameterByName("symmetric")
+            End If
+        Else
+            clsGGLikertFunction.RemoveParameterByName("symmetric")
+        End If
+    End Sub
+
+    Private Sub ReverseAddParameters()
+        If Not rdoStacked.Checked Then
+            If ucrChkReverse.Checked Then
+                clsGGLikertFunction.AddParameter("reverse_likert", "TRUE", iPosition:=11)
+            Else
+                clsGGLikertFunction.RemoveParameterByName("reverse_likert")
+            End If
+        Else
+            clsGGLikertFunction.RemoveParameterByName("reverse_likert")
+        End If
+    End Sub
+
     Private Sub TestOkEnabled()
         Dim varNames As List(Of String) = ucrReceiverMultipleGGLikert.GetVariableNamesAsList()
         Dim bSingleVar As Boolean = varNames IsNot Nothing AndAlso varNames.Count = 1
@@ -301,6 +335,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
                             bLevelsMatch
         ucrBase.OKEnabled(bCanOk)
     End Sub
+
     Private Sub UpdateControlsVisibility()
         Dim bIsLikert As Boolean = rdoLikert.Checked
         Dim bIsStacked As Boolean = rdoStacked.Checked
@@ -322,6 +357,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         ucrChkDescending.Enabled = ucrChkSort.Checked
         ucrInputLegendPosition.Enabled = ucrChkLegend.Checked
     End Sub
+
     Private Sub ucrPnlChartType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlChartType.ControlValueChanged
         If rdoLikert.Checked Then
             clsDummyFunction.AddParameter("chart_type", Chr(34) & "likert" & Chr(34), iPosition:=0)
@@ -352,7 +388,11 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             clsGGLikertFunction.RemoveParameterByName("cutoff")
         End If
         AddRemoveFacets()
+        AddRemoveCutoff()
+        SymmetryAddParameters()
+        ReverseAddParameters()
     End Sub
+
     Private Sub UpdateSideValuesParameter()
         clsGGLikertFunction.RemoveParameterByName("side_values")
 
@@ -378,6 +418,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             End If
         End If
     End Sub
+
     Private Sub UpdateCutoffExcludeBounds()
         Dim iMaxCutoff As Decimal = Math.Max(0, iNumLevels - CInt(ucrNudExclude.Value) - 1)
         ucrNudCutoff.nudUpDown.Maximum = Math.Max(iMaxCutoff, ucrNudCutoff.Value)
@@ -387,6 +428,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         ucrNudExclude.nudUpDown.Maximum = Math.Max(iMaxExclude, ucrNudExclude.Value)
         If ucrNudExclude.Value > iMaxExclude Then ucrNudExclude.Value = iMaxExclude
     End Sub
+
     Private Sub AddRemoveFacets()
         If bRCodeSet Then
             clsGGLikertFunction.RemoveParameterByName("facet_rows")
@@ -407,6 +449,8 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             End If
         End If
     End Sub
+
+    'ggstacked doesn't have built in facet parameters and gglikert and gg_side facets is done via built in facet_grid
     Private Function BuildFacetFunction() As RFunction
         Dim clsFacet As New RFunction
         clsFacet.SetPackageName("ggplot2")
@@ -423,6 +467,8 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         End Select
         Return clsFacet
     End Function
+
+    'This add column labels to data since gglikert only works with data that has column labels
     Private Sub UpdateDataAndSetLabels()
         clsGGLikertFunction.RemoveParameterByName("data")
 
@@ -449,6 +495,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             clsGGLikertFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0, bIncludeArgumentName:=True)
         End If
     End Sub
+
     Private Sub UpdateSortParameter()
         If ucrChkSort.Checked Then
             Dim strSortValue As String = If(ucrChkDescending.Checked, "descending", "ascending")
@@ -457,6 +504,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             clsGGLikertFunction.AddParameter("sort", Chr(34) & "none" & Chr(34), iPosition:=10)
         End If
     End Sub
+
     Private Sub CheckSelectedFactorsHaveSameLevels()
         If ucrReceiverMultipleGGLikert.IsEmpty() Then
             bLevelsMatch = True
@@ -498,6 +546,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             End If
         End If
     End Sub
+
     Private Sub UpdateExcludeFillParameter()
         clsGGLikertFunction.RemoveParameterByName("exclude_fill_values")
 
@@ -518,6 +567,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             clsGGLikertFunction.AddParameter("exclude_fill_values", clsRFunctionParameter:=clsExcludeVector, iPosition:=31)
         End If
     End Sub
+
     Private Sub AddRemoveTheme()
         If clsThemeFunction.iParameterCount > 0 Then
             clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
@@ -525,47 +575,61 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             clsBaseOperator.RemoveParameterByName("theme")
         End If
     End Sub
+
     Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         AddRemoveTheme()
         UpdateControlsVisibility()
     End Sub
+
     Private Sub ucrReceiverMultipleGGLikert_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleGGLikert.ControlValueChanged
         UpdateDataAndSetLabels()
         CheckSelectedFactorsHaveSameLevels()
         If rdoSide.Checked Then UpdateSideValuesParameter()
         TestOkEnabled()
     End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleGGLikert.ControlContentsChanged, ucrSaveGGLikert.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
     Private Sub ucrSelectorGGLikert_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorGGLikert.ControlValueChanged
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorGGLikert.strCurrentDataFrame, strTempGraph:="last_graph")
         UpdateDataAndSetLabels()
     End Sub
+
     Private Sub ucrChkSort_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSort.ControlValueChanged
         ucrChkDescending.Enabled = ucrChkSort.Checked
         If Not ucrChkSort.Checked Then ucrChkDescending.Checked = False
         UpdateSortParameter()
     End Sub
+
     Private Sub ucrChkDescending_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDescending.ControlValueChanged
         UpdateSortParameter()
     End Sub
+
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged
         AddRemoveFacets()
     End Sub
+
     Private Sub ucrInputStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
         AddRemoveFacets()
     End Sub
+
     Private Sub ucrNudCutoff_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCutoff.ControlValueChanged
         UpdateCutoffExcludeBounds()
+        AddRemoveCutoff()
     End Sub
+
     Private Sub ucrNudExclude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudExclude.ControlValueChanged
         UpdateCutoffExcludeBounds()
         UpdateExcludeFillParameter()
     End Sub
+
     Private Sub ucrNudCutoffLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCutoffLevel.ControlValueChanged
         UpdateSideValuesParameter()
+        AddRemoveCutoff()
     End Sub
+
     Private Sub ucrChkWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWrap.ControlValueChanged
         If bRCodeSet Then
             If ucrChkWrap.Checked Then
@@ -576,6 +640,7 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
         End If
         UpdateControlsVisibility()
     End Sub
+
     Private Sub ucrChkCutoff_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCutoff.ControlValueChanged
         If bRCodeSet Then
             If ucrChkCutoff.Checked Then
@@ -585,7 +650,9 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             End If
         End If
         UpdateControlsVisibility()
+        AddRemoveCutoff()
     End Sub
+
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         If clsBaseOperator IsNot Nothing Then
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -611,5 +678,12 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             bResetSubdialog = False
             AddRemoveTheme()
         End If
+    End Sub
+    Private Sub ucrChkSymmetric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSymmetric.ControlValueChanged
+        SymmetryAddParameters()
+    End Sub
+
+    Private Sub ucrChkReverse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReverse.ControlValueChanged
+        ReverseAddParameters()
     End Sub
 End Class
