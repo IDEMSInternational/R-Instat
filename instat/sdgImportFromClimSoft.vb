@@ -20,6 +20,7 @@ Imports RDotNet
 Public Class sdgImportFromClimSoft
     Private clsRDatabaseConnect As RFunction
     Private clsRDatabaseDisconnect As RFunction
+    Private clsRGetDatabaseConnection As RFunction
 
     Private bFirstLoad As Boolean = True
     Private bConnected As Boolean
@@ -58,6 +59,7 @@ Public Class sdgImportFromClimSoft
         'ports
         dctPorts.Add("3308", "3308")
         dctPorts.Add("3306", "3306")
+        dctPorts.Add("5432", "5432")
         ucrComboBoxPort.SetParameter(New RParameter("port", 2))
         ucrComboBoxPort.SetItems(dctPorts)
         ucrComboBoxPort.AddQuotesIfUnrecognised = False
@@ -79,6 +81,7 @@ Public Class sdgImportFromClimSoft
 
     Private Sub SetDefaults()
         clsRDatabaseConnect = New RFunction
+        clsRGetDatabaseConnection = New RFunction
         clsRDatabaseDisconnect = New RFunction
 
         'set database connect R command and it's parameter values(from previous set values if available)
@@ -91,6 +94,9 @@ Public Class sdgImportFromClimSoft
 
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
+
+        'get database connection
+        clsRGetDatabaseConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_database_connection")
 
         bConnected = IsConnectionIsActive()
         UpdateConnectionAndControlsState()
@@ -147,6 +153,12 @@ Public Class sdgImportFromClimSoft
         frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         bConnected = False
     End Sub
+
+    Public Function GetRDatabaseConnectionFunction() As RFunction
+        If clsRDatabaseConnect IsNot Nothing Then
+            Return clsRDatabaseConnect
+        End If
+    End Function
 
     ''' <summary>
     '''  will display an R password input prompt, to enter password and attempt connecting to database
