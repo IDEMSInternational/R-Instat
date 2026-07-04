@@ -325,6 +325,7 @@ Public Class dlgEvapotranspiration
         ucrReceiverTmin.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverHumidityMax.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverHumidityMin.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrReceiverStation.SetRCode(clsDataFunctionHSFunction, bReset)
         ucrInputTimeStep.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrInputCrop.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteithFunction, bReset)
