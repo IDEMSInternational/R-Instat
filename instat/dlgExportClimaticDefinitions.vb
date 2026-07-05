@@ -656,7 +656,7 @@ Public Class dlgExportClimaticDefinitions
         If dctReceiverMap.TryGetValue(ucrReceiverCurrent, ucrReceiverDataframe) Then
             If Not ucrReceiverDataframe.IsEmpty() Then
                 strDataframe = ucrReceiverDataframe.GetVariableNames(bWithQuotes:=False)
-                ucrSelectorExportToEPicsa.ucrAvailableDataFrames.SetDataframe(strDataframe)
+                ucrSelectorExportToEPicsa.SetDataframe(strDataframe, bEnableDataframe:=False, bSilent:=True)
             End If
         End If
 
