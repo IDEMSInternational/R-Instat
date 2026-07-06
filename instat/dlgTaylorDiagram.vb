@@ -38,6 +38,7 @@ Public Class dlgTaylorDiagram
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 643
         ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
         ucrSelectorTaylorDiagram.SetParameterIsrfunction()
