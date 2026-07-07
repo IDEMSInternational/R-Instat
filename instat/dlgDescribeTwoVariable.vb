@@ -633,7 +633,6 @@ Public Class dlgDescribeTwoVariable
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
         If rdoThreeVariable.Checked Then
-            ucrChkSwapXYVar.Visible = IsNumericByNumericByFactor()
 
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                 ucrReorderSummary.Visible = True
