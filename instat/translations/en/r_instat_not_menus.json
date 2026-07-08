@@ -6847,7 +6847,7 @@
   "Outfilled": "Outfilled",
   "PICSA Trend Graph": "PICSA Trend Graph",
   "Save Definitions Object:": "Save Definitions Object:",
-  "Separated by:": "Separated by:"
+  "Separated by:": "Separated by:",
   "Trend Graph": "Trend Graph",
   "File Location:": "File Location:",
   "Output Format": "Output Format",
@@ -6857,7 +6857,6 @@
   "PDF": "PDF",
   "Powerpoint": "Powerpoint",
   "Save and Reopen Workspace": "Save and Reopen Workspace",
-  "Save Definitions Object:": "Save Definitions Object:",
   "Pdf": "Pdf",
   "quantile 2": "quantile 2",
   "quantile 3": "quantile 3",
@@ -6879,6 +6878,5 @@
   "More Likert Graph (gglikert)": "More Likert Graph (gglikert)",
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
-  "Totals": "Totals",
-  "Label First and Last": "Label First and Last"
+  "Totals": "Totals"
 }
