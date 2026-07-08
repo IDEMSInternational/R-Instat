@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Diagnostics
 Imports instat.Translations
 Public Class dlgExportClimaticDefinitions
     Private bFirstLoad As Boolean = True
@@ -26,6 +27,7 @@ Public Class dlgExportClimaticDefinitions
     Private clsSummaryDataOperator, clsDefinitionDataOperator, clsSummaryStationMetadataOperator, clsCropDataOperator As ROperator
     Private clsDummyFunction, clsCollateStationMetadataFunction, clsDBWriteFunction, clsGetDBConnectionFunction As RFunction
     Private _sdgImportFromClimSoft As sdgImportFromClimSoft
+    Private strCurrentEPicsaDataframe As String = ""
 
     Private Enum SummaryDataSelectorMode
         Dataframes
@@ -86,7 +88,7 @@ Public Class dlgExportClimaticDefinitions
         ucrSelectorDataFramesExportToEPicsa.Visible = True
 
         ucrSelectorStationMetadata.SetParameter(New RParameter("data", 0))
-        ucrSelectorStationMetadata.SetParameterIsString()
+        ucrSelectorStationMetadata.SetParameterIsrfunction()
         ucrSelectorStationMetadata.Visible = False
 
 
@@ -278,6 +280,9 @@ Public Class dlgExportClimaticDefinitions
 
         ucrSelectorExportToEPicsa.Reset()
         ucrSelectorDataFramesExportToEPicsa.Reset()
+        ucrSelectorStationMetadata.Reset()
+
+        strCurrentEPicsaDataframe = ""
 
         clsBuildSummaryLongAnnualRainFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$build_summary_long")
         clsBuildSummaryLongAnnualRainFunction.AddParameter("time_type", Chr(34) & "annual" & Chr(34), iPosition:=1)
@@ -372,6 +377,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverCropDefinition.SetRCode(clsBuildCropLongerFunction, bReset)
         ucrReceiverPropDefinition.SetRCode(clsBuildCropLongerFunction, bReset)
 
+
         ucrPnlExportToEPicsa.SetRCode(clsDummyFunction)
 
         ' Station Metadata
@@ -428,7 +434,7 @@ Public Class dlgExportClimaticDefinitions
             End If
         End If
 
-        If _sdgImportFromClimSoft IsNot Nothing AndAlso Not _sdgImportFromClimSoft.IsConnectionIsActive() Then
+        If Not bDBConnected Then
             bOkEnable = False
         End If
 
@@ -477,11 +483,12 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
     End Sub
 
+
     Private Sub SetDialogSize()
         Me.AutoSize = False
 
         If rdoSummaryData.Checked Then
-            If grpDefinitionsProducts.Visible Then
+            If GetGrpBoxVisibility() Then
                 Me.Size = New Size(555, 680)
             Else
                 Me.Size = New Size(500, 680)
@@ -494,7 +501,14 @@ Public Class dlgExportClimaticDefinitions
             ucrBase.Location = New Point(12, 405)
         End If
 
-        Me.StartPosition = FormStartPosition.CenterScreen
+        CenterDialog()
+    End Sub
+
+    Private Sub CenterDialog()
+        Dim WorkingArea = Screen.FromControl(Me).WorkingArea
+
+        ' Manually Centering Dialog 
+        Me.Location = New Point(WorkingArea.Left + (WorkingArea.Width - Me.Width) \ 2, WorkingArea.Top + (WorkingArea.Height - Me.Height) \ 2)
     End Sub
 
     Private Sub ChangeExportToDBParams()
@@ -579,6 +593,7 @@ Public Class dlgExportClimaticDefinitions
         _sdgImportFromClimSoft.ShowDialog()
 
         CheckAndUpdateConnectionStatus()
+        TestOkEnabled()
     End Sub
 
 
@@ -648,6 +663,7 @@ Public Class dlgExportClimaticDefinitions
     Private Sub MultipleReceiver_Click(sender As Object, e As EventArgs) Handles ucrReceiverMultipleAnnualRainfall.Enter,
             ucrReceiverMultipleMonthlyRainfall.Enter, ucrReceiverMultipleAnnualTemp.Enter, ucrReceiverMultipleMonthlyTemp.Enter,
             ucrReceiverMultipleAnnualMonthlyTemp.Enter, ucrReceiverPropDefinition.Enter, ucrReceiverCropDefinition.Enter
+
         Dim ucrReceiverCurrent As ucrReceiver = DirectCast(sender, ucrReceiver)
         Dim ucrReceiverDataframe As ucrReceiverSingle
         Dim strDataframe As String = ""
@@ -656,18 +672,25 @@ Public Class dlgExportClimaticDefinitions
         If dctReceiverMap.TryGetValue(ucrReceiverCurrent, ucrReceiverDataframe) Then
             If Not ucrReceiverDataframe.IsEmpty() Then
                 strDataframe = ucrReceiverDataframe.GetVariableNames(bWithQuotes:=False)
-                ucrSelectorExportToEPicsa.SetDataframe(strDataframe, bEnableDataframe:=False, bSilent:=True)
+                If strDataframe <> strCurrentEPicsaDataframe Then
+                    ucrSelectorExportToEPicsa.SetDataframe(strDataframe, bEnableDataframe:=False, bSilent:=True)
+                    strCurrentEPicsaDataframe = strDataframe
+                End If
             End If
         End If
 
         SetSelectorMode(SummaryDataSelectorMode.Objects)
     End Sub
 
-    Private Sub HideDisplayGroupedControls()
-        If rdoSummaryData.Checked Then
-            grpDefinitionsProducts.Visible = Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso
+    Private Function GetGrpBoxVisibility() As Boolean
+        Return Not (ucrReceiverAnnualRainfallSummaries.IsEmpty AndAlso ucrReceiverMonthlyRainfallSummaries.IsEmpty AndAlso
             ucrReceiverAnnualTempSummaries.IsEmpty AndAlso ucrReceiverMonthlyTempSummaries.IsEmpty AndAlso
             ucrReceiverAnnualMonthlyTempSummaries.IsEmpty AndAlso ucrReceiverCropSummaries.IsEmpty AndAlso ucrReceiverPropSummaries.IsEmpty)
+    End Function
+
+    Private Sub HideDisplayGroupedControls()
+        If rdoSummaryData.Checked Then
+            grpDefinitionsProducts.Visible = GetGrpBoxVisibility()
             ucrReceiverMultipleAnnualRainfall.Visible = Not ucrReceiverAnnualRainfallSummaries.IsEmpty
             ucrReceiverMultipleMonthlyRainfall.Visible = Not ucrReceiverMonthlyRainfallSummaries.IsEmpty
             ucrReceiverMultipleAnnualTemp.Visible = Not ucrReceiverAnnualTempSummaries.IsEmpty
