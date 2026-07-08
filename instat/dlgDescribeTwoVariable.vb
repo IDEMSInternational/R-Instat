@@ -1856,12 +1856,14 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub AddInteraction()
+        clsRAnovaTable2Function.RemoveParameterByName("interaction")
+        clsRAnovaSwapTable2Funtion.RemoveParameterByName("interaction")
         If rdoThreeVariable.Checked AndAlso ucrChkInteraction.Checked Then
             clsRAnovaTable2Function.AddParameter("interaction", "TRUE", iPosition:=7)
             clsRAnovaSwapTable2Funtion.AddParameter("interaction", "TRUE", iPosition:=7)
         Else
-            clsRAnovaTable2Function.RemoveParameterByName("interaction")
-            clsRAnovaSwapTable2Funtion.RemoveParameterByName("interaction")
+            clsRAnovaTable2Function.AddParameter("interaction", "FALSE", iPosition:=7)
+            clsRAnovaSwapTable2Funtion.AddParameter("interaction", "FALSE", iPosition:=7)
         End If
     End Sub
 
