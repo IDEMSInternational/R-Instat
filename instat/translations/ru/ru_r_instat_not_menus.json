@@ -6846,6 +6846,7 @@
   "Estimated": "Estimated",
   "Outfilled": "Outfilled",
   "PICSA Trend Graph": "PICSA Trend Graph",
+  "Trend Graph": "Trend Graph",
   "File Location:": "File Location:",
   "Output Format": "Output Format",
   "Record Quarto": "Record Quarto",
@@ -6866,5 +6867,15 @@
   "Mean Line": "Mean Line",
   "Jitter Width:": "Jitter Width:",
   "Check Summary": "Check Summary",
-  "Label First and Last": "Label First and Last"
+  "Label First and Last": "Label First and Last",
+  "All factors must have the same number of levels.": "All factors must have the same number of levels.",
+  "Likert": "Likert",
+  "Stacked": "Stacked",
+  "Side": "Side",
+  "Cutoff at: ": "Cutoff at: ",
+  "Exclude:": "Exclude:",
+  "More Likert Graph (gglikert)": "More Likert Graph (gglikert)",
+  "Symmetric": "Symmetric",
+  "Cutoff": "Cutoff",
+  "Totals": "Totals"
 }
