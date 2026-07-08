@@ -22,4 +22,7 @@ data_book <- DataBook$new()
 
 # Setting display options (e.g Number of significant digits)
 options(digits=4, show.signif.stars=FALSE, dplyr.summarise.inform=FALSE, R.commands.displayed.in.the.output.window=TRUE, Comments.from.dialogs.displayed.in.the.output.window=TRUE)
+
+<<LOAD_WORKSPACE>>
+
 ```
