@@ -397,7 +397,7 @@ Public Class dlgExportClimaticDefinitions
     Private Sub SyncEPicsaDataframeThenSetRCode(ucrReceiverMulti As ucrReceiver, clsFunction As RFunction, bReset As Boolean)
         Dim ucrReceiverDataframe As ucrReceiverSingle = Nothing
 
-        If dctReceiverMap.TryGetValue(ucrReceiverMulti, ucrReceiverDataframe) AndAlso Not ucrReceiverDataframe.IsEmpty() Then
+        If dctReceiverMap.TryGetValue(ucrReceiverMulti, ucrReceiverDataframe) AndAlso ucrReceiverDataframe IsNot Nothing AndAlso Not ucrReceiverDataframe.IsEmpty() Then
             Dim strDataframe As String = ucrReceiverDataframe.GetVariableNames(bWithQuotes:=False)
             If strDataframe <> strCurrentEPicsaDataframe Then
                 ucrSelectorExportToEPicsa.SetDataframe(strDataframe, bEnableDataframe:=False, bSilent:=True)
@@ -504,9 +504,11 @@ Public Class dlgExportClimaticDefinitions
         Dim lstItems As New List(Of KeyValuePair(Of String, String))
         Dim lstDataFrames As List(Of String) = ucrReceiverCurrent.GetItemsDataFrames()
         Dim strDataFrame As String = If(lstDataFrames.Count > 0, lstDataFrames(0), "")
-        For Each strItem As String In ucrReceiverCurrent.GetVariableNamesList(bWithQuotes:=False)
-            lstItems.Add(New KeyValuePair(Of String, String)(strDataFrame, strItem))
-        Next
+        If ucrReceiverCurrent IsNot Nothing Then
+            For Each strItem As String In ucrReceiverCurrent.GetVariableNamesList(bWithQuotes:=False)
+                lstItems.Add(New KeyValuePair(Of String, String)(strDataFrame, strItem))
+            Next
+        End If
         dctCurrentMultipleReceiverSnapshot(ucrReceiverCurrent) = lstItems
 
     End Sub
@@ -515,7 +517,7 @@ Public Class dlgExportClimaticDefinitions
         For Each kvpEntry In dctCurrentMultipleReceiverSnapshot
             Dim ucrReceiverTemp As ucrReceiver = kvpEntry.Key
             Dim lstExpected As List(Of KeyValuePair(Of String, String)) = kvpEntry.Value
-            If lstExpected.Count > 0 AndAlso ucrReceiverTemp.IsEmpty() Then
+            If (lstExpected IsNot Nothing AndAlso lstExpected.Count > 0) AndAlso (ucrReceiverTemp IsNot Nothing AndAlso ucrReceiverTemp.IsEmpty()) Then
                 For Each kvpDataframeVariable As KeyValuePair(Of String, String) In lstExpected
                     Dim strDataframe = kvpDataframeVariable.Key
                     If strDataframe <> strCurrentEPicsaDataframe Then
@@ -533,7 +535,7 @@ Public Class dlgExportClimaticDefinitions
         For Each ucrReceiverTemp As ucrReceiver In {ucrReceiverMultipleAnnualRainfall, ucrReceiverMultipleMonthlyRainfall,
             ucrReceiverMultipleAnnualTemp, ucrReceiverMultipleMonthlyTemp, ucrReceiverMultipleAnnualMonthlyTemp,
             ucrReceiverPropDefinition, ucrReceiverCropDefinition}
-            If ucrSelectorExportToEPicsa.CurrentReceiver.Equals(ucrReceiverTemp) Then
+            If ucrSelectorExportToEPicsa.CurrentReceiver IsNot Nothing AndAlso ucrSelectorExportToEPicsa.CurrentReceiver.Equals(ucrReceiverTemp) Then
                 ucrReceiverCurrent = ucrReceiverTemp
             End If
         Next
