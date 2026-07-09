@@ -21,6 +21,7 @@ Public Class dlgExportClimaticDefinitions
     Private bReset As Boolean = True
     Private bDBConnected As Boolean = False
     Private dctReceiverMap As New Dictionary(Of ucrReceiver, ucrReceiverSingle)
+    Private dctCurrentMultipleReceiverSnapshot As New Dictionary(Of ucrReceiver, List(Of KeyValuePair(Of String, String)))
     Private clsBuildSummaryLongAnnualRainFunction, clsBuildSummaryLongMonthlyRainFunction, clsBuildSummaryLongAnnualTempFunction,
             clsBuildSummaryLongMonthlyTempFunction, clsBuildSummaryLongAnnualMonthlyTempFunction, clsCollateSummaryDefinitionsFunction,
             clsBuildCropLongerFunction, clsExportToDBFunction As New RFunction
@@ -52,6 +53,7 @@ Public Class dlgExportClimaticDefinitions
         SetDialogSize()
         CheckAndUpdateConnectionStatus()
         HideDisplayGroupedControls()
+        RestoreMultipleReceiversIfStripped()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -369,14 +371,14 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverCropSummaries.SetRCode(clsBuildCropLongerFunction, bReset)
         ucrReceiverPropSummaries.SetRCode(clsBuildCropLongerFunction, bReset)
 
-        ucrReceiverMultipleAnnualRainfall.SetRCode(clsBuildSummaryLongAnnualRainFunction, bReset)
-        ucrReceiverMultipleAnnualTemp.SetRCode(clsBuildSummaryLongAnnualTempFunction, bReset)
-        ucrReceiverMultipleMonthlyRainfall.SetRCode(clsBuildSummaryLongMonthlyRainFunction, bReset)
-        ucrReceiverMultipleMonthlyTemp.SetRCode(clsBuildSummaryLongMonthlyTempFunction, bReset)
-        ucrReceiverMultipleAnnualMonthlyTemp.SetRCode(clsBuildSummaryLongAnnualMonthlyTempFunction, bReset)
-        ucrReceiverCropDefinition.SetRCode(clsBuildCropLongerFunction, bReset)
-        ucrReceiverPropDefinition.SetRCode(clsBuildCropLongerFunction, bReset)
-
+        ' Sync the shared object selector's dataframe to THIS receiver's dataframe to prevent clearing of receivers on dataframe change
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverMultipleAnnualRainfall, clsBuildSummaryLongAnnualRainFunction, bReset)
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverMultipleAnnualTemp, clsBuildSummaryLongAnnualTempFunction, bReset)
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverMultipleMonthlyRainfall, clsBuildSummaryLongMonthlyRainFunction, bReset)
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverMultipleMonthlyTemp, clsBuildSummaryLongMonthlyTempFunction, bReset)
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverMultipleAnnualMonthlyTemp, clsBuildSummaryLongAnnualMonthlyTempFunction, bReset)
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverCropDefinition, clsBuildCropLongerFunction, bReset)
+        SyncEPicsaDataframeThenSetRCode(ucrReceiverPropDefinition, clsBuildCropLongerFunction, bReset)
 
         ucrPnlExportToEPicsa.SetRCode(clsDummyFunction)
 
@@ -389,6 +391,19 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverElevation.SetRCode(clsCollateStationMetadataFunction, bReset)
         ucrReceiverDistrict.SetRCode(clsCollateStationMetadataFunction, bReset)
         ucrReceiverCountryCode.SetRCode(clsCollateStationMetadataFunction, bReset)
+    End Sub
+
+    Private Sub SyncEPicsaDataframeThenSetRCode(ucrReceiverMulti As ucrReceiver, clsFunction As RFunction, bReset As Boolean)
+        Dim ucrReceiverDataframe As ucrReceiverSingle = Nothing
+
+        If dctReceiverMap.TryGetValue(ucrReceiverMulti, ucrReceiverDataframe) AndAlso Not ucrReceiverDataframe.IsEmpty() Then
+            Dim strDataframe As String = ucrReceiverDataframe.GetVariableNames(bWithQuotes:=False)
+            If strDataframe <> strCurrentEPicsaDataframe Then
+                ucrSelectorExportToEPicsa.SetDataframe(strDataframe, bEnableDataframe:=False, bSilent:=True)
+                strCurrentEPicsaDataframe = strDataframe
+            End If
+        End If
+        ucrReceiverMulti.SetRCode(clsFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -483,6 +498,47 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
     End Sub
 
+    Private Sub SnapshotCurrentMultipleReceiver(ucrReceiverCurrent As ucrReceiver)
+        dctCurrentMultipleReceiverSnapshot.Clear()
+        Dim lstItems As New List(Of KeyValuePair(Of String, String))
+        Dim lstDataFrames As List(Of String) = ucrReceiverCurrent.GetItemsDataFrames()
+        Dim strDataFrame As String = If(lstDataFrames.Count > 0, lstDataFrames(0), "")
+        For Each strItem As String In ucrReceiverCurrent.GetVariableNamesList(bWithQuotes:=False)
+            lstItems.Add(New KeyValuePair(Of String, String)(strDataFrame, strItem))
+        Next
+        dctCurrentMultipleReceiverSnapshot(ucrReceiverCurrent) = lstItems
+
+    End Sub
+
+    Private Sub RestoreMultipleReceiversIfStripped()
+        For Each kvpEntry In dctCurrentMultipleReceiverSnapshot
+            Dim ucrReceiverTemp As ucrReceiver = kvpEntry.Key
+            Dim lstExpected As List(Of KeyValuePair(Of String, String)) = kvpEntry.Value
+            If lstExpected.Count > 0 AndAlso ucrReceiverTemp.IsEmpty() Then
+                For Each kvpDataframeVariable As KeyValuePair(Of String, String) In lstExpected
+                    Dim strDataframe = kvpDataframeVariable.Key
+                    If strDataframe <> strCurrentEPicsaDataframe Then
+                        ucrSelectorExportToEPicsa.SetDataframe(kvpDataframeVariable.Key, bEnableDataframe:=False, bSilent:=True)
+                    End If
+                    ucrReceiverTemp.Add(strItem:=kvpDataframeVariable.Value, strDataFrame:=kvpDataframeVariable.Key)
+                    strCurrentEPicsaDataframe = kvpDataframeVariable.Key
+                Next
+            End If
+        Next
+    End Sub
+
+    Private Sub dlgExportClimaticDefinitions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Dim ucrReceiverCurrent As ucrReceiver
+        For Each ucrReceiverTemp As ucrReceiver In {ucrReceiverMultipleAnnualRainfall, ucrReceiverMultipleMonthlyRainfall,
+            ucrReceiverMultipleAnnualTemp, ucrReceiverMultipleMonthlyTemp, ucrReceiverMultipleAnnualMonthlyTemp,
+            ucrReceiverPropDefinition, ucrReceiverCropDefinition}
+            If ucrSelectorExportToEPicsa.CurrentReceiver.Equals(ucrReceiverTemp) Then
+                ucrReceiverCurrent = ucrReceiverTemp
+            End If
+        Next
+
+        SnapshotCurrentMultipleReceiver(ucrReceiverCurrent)
+    End Sub
 
     Private Sub SetDialogSize()
         Me.AutoSize = False
@@ -576,14 +632,11 @@ Public Class dlgExportClimaticDefinitions
     Private Sub CoreCropPropSummaryReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCropSummaries.ControlValueChanged,
             ucrReceiverPropSummaries.ControlValueChanged
         ' Removes the parameter if the core receiver is empty and adds it back in if it's filled
-        ' For instance if ucrReceiverCropSummaries is empty, then the associated `crop_definition` parameter should be taken out of the
-        ' clsBuildCropLongerFunction RFunction. But if ucrReceiverCropSummaries is later filled, then we add the `crop_definition` paramter back again
         RemoveRelatedParams(clsBuildCropLongerFunction, paramName:="crop_definition", iPosition:=2, ucrReceiverCore:=ucrReceiverCropSummaries, ucrReceiverAssociated:=ucrReceiverCropDefinition)
         RemoveRelatedParams(clsBuildCropLongerFunction, paramName:="prop_definition", iPosition:=3, ucrReceiverCore:=ucrReceiverPropSummaries, ucrReceiverAssociated:=ucrReceiverPropDefinition)
     End Sub
 
     Private Sub btnConnection_Click(sender As Object, e As EventArgs) Handles btnConnection.Click
-
         If _sdgImportFromClimSoft Is Nothing Then
             _sdgImportFromClimSoft = New sdgImportFromClimSoft
             AddHandler _sdgImportFromClimSoft.Shown, AddressOf SetEPicsaSubDialogDefaults
@@ -663,7 +716,6 @@ Public Class dlgExportClimaticDefinitions
     Private Sub MultipleReceiver_Click(sender As Object, e As EventArgs) Handles ucrReceiverMultipleAnnualRainfall.Enter,
             ucrReceiverMultipleMonthlyRainfall.Enter, ucrReceiverMultipleAnnualTemp.Enter, ucrReceiverMultipleMonthlyTemp.Enter,
             ucrReceiverMultipleAnnualMonthlyTemp.Enter, ucrReceiverPropDefinition.Enter, ucrReceiverCropDefinition.Enter
-
         Dim ucrReceiverCurrent As ucrReceiver = DirectCast(sender, ucrReceiver)
         Dim ucrReceiverDataframe As ucrReceiverSingle
         Dim strDataframe As String = ""
