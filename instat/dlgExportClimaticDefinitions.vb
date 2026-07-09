@@ -538,7 +538,6 @@ Public Class dlgExportClimaticDefinitions
                 ucrReceiverCurrent = ucrReceiverTemp
             End If
         Next
-
         SnapshotCurrentMultipleReceiver(ucrReceiverCurrent)
     End Sub
 
