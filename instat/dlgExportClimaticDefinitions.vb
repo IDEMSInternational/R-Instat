@@ -57,6 +57,8 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
+
         ucrPnlExportToEPicsa.AddRadioButton(rdoSummaryData)
         ucrPnlExportToEPicsa.AddRadioButton(rdoStationMetadata)
         ucrPnlExportToEPicsa.AddParameterValuesCondition(rdoSummaryData, "checked", "summary_data")
