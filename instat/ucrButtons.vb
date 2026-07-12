@@ -116,7 +116,20 @@ Public Class ucrButtons
 
     '"Ok", "Ok and Close" and "Ok and Keep" Click event 
     Private Sub Ok_Click(sender As Object, e As EventArgs) Handles cmdOk.Click, toolStripMenuItemOkClose.Click, toolStripMenuItemOkKeep.Click
-        OnScriptButtonsClick(sender, e, bAddScriptToScriptWindowOnClickOk, Not sender Is toolStripMenuItemOkKeep)
+        If frmMain.bRecordQuarto Then
+
+            'Add the new chunk to the Quarto document
+            OnScriptButtonsClick(sender, e, False, False)
+
+            'Render the updated Quarto document
+            frmMain.ucrScriptWindow.RunCurrentQuarto()
+
+            If Not sender Is toolStripMenuItemOkKeep Then
+                ParentForm.Close()
+            End If
+        Else
+            OnScriptButtonsClick(sender, e, bAddScriptToScriptWindowOnClickOk, Not sender Is toolStripMenuItemOkKeep)
+        End If
     End Sub
 
     '"To Script", "To Script and Close" and "To Script and Keep" Click event 
@@ -219,10 +232,16 @@ Public Class ucrButtons
             End If
 
             If bIsQuarto Then
-                Dim strOpenCodeBlock As String = "```{r warning=FALSE, message=FALSE}" & Environment.NewLine
+                Dim strOpenCodeBlock As String =
+        "```{r warning=" & frmMain.bQuartoWarning.ToString().ToUpper() &
+        ", message=" & frmMain.bQuartoMessage.ToString().ToUpper() &
+        ", echo=" & frmMain.bQuartoEcho.ToString().ToUpper() &
+        ", eval=" & frmMain.bQuartoEval.ToString().ToUpper() &
+        "}" & Environment.NewLine
+
                 frmMain.AddToScriptWindow(strOpenCodeBlock,
-                      bMakeVisible:=bMakeVisibleScriptWindow,
-                      bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+        bMakeVisible:=bMakeVisibleScriptWindow,
+        bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         End If
 
@@ -334,7 +353,20 @@ Public Class ucrButtons
 
     Public Sub OKEnabled(bEnabled As Boolean)
         cmdOk.Enabled = bEnabled
+
+        If frmMain.bRecordQuarto Then
+            cmdPaste.Enabled = False
+        Else
+            cmdPaste.Enabled = bEnabled
+        End If
+    End Sub
+
+    Public Sub SetToScriptEnabled(bEnabled As Boolean)
         cmdPaste.Enabled = bEnabled
+
+        toolStripMenuItemToScriptClose.Enabled = bEnabled
+        toolStripMenuItemToScriptKeep.Enabled = bEnabled
+        toolStripMenuItemToScriptOk.Enabled = bEnabled
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load

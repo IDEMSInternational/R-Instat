@@ -35,8 +35,14 @@ Public Class dlgRecordQuarto
         bReset = False
         TestOkEnabled()
         SetSaveWorkspaceControlsVisibility()
-
+        ucrBase.SetToScriptEnabled(False)
         autoTranslate(Me)
+    End Sub
+
+    Private Sub dlgRecordQuarto_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        If Not frmMain.bRecordQuarto Then
+            ucrBase.SetToScriptEnabled(True)
+        End If
     End Sub
 
     Private Sub Initializedialog()
@@ -53,6 +59,11 @@ Public Class dlgRecordQuarto
         ucrChkDocs.SetText("Document")
         ucrChkPdf.SetText("Pdf")
         ucrChkPptx.SetText("Powerpoint")
+
+        ucrChkDisplayOptions.SetText("Display Code")
+        ucrChkDisplayRMsgs.SetText("Display R Messages")
+        ucrChkDisplayWarnings.SetText("Display Warnings")
+        ucrChkGiveROutput.SetText("Give R Output")
 
         ucrChkSaveReopen.SetText("Save and Reopen Workspace")
 
@@ -73,6 +84,14 @@ Public Class dlgRecordQuarto
         ucrChkPdf.Checked = True
         ucrChkPptx.Checked = True
         ucrChkDocs.Checked = True
+
+        ucrChkDisplayRMsgs.Checked = False
+        ucrChkDisplayWarnings.Checked = False
+        ucrChkDisplayOptions.Checked = False
+        ucrChkGiveROutput.Checked = True
+
+
+
     End Sub
 
 
@@ -224,6 +243,11 @@ Public Class dlgRecordQuarto
         frmMain.bQuartoPDF = ucrChkPdf.Checked
         frmMain.bQuartoPPTX = ucrChkPptx.Checked
         frmMain.bQuartoDOCX = ucrChkDocs.Checked
+
+        frmMain.bQuartoEcho = ucrChkDisplayOptions.Checked
+        frmMain.bQuartoWarning = ucrChkDisplayWarnings.Checked
+        frmMain.bQuartoMessage = ucrChkDisplayRMsgs.Checked
+        frmMain.bQuartoEval = ucrChkGiveROutput.Checked
 
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
 
