@@ -13,6 +13,8 @@ import sys
 from pathlib import Path
 
 from translation_common import (
+    REPORT_END_MARKER,
+    REPORT_START_MARKER,
     create_summary,
     find_orphans,
     find_project_root,
@@ -65,13 +67,26 @@ def main(argv: list[str]) -> int:
         print(f"Base directory: {base_dir}")
         print(f"CI mode: {ci_mode}")
 
-    scan_result = run_scan(
-        base_dir,
-        ci_mode=ci_mode,
-        verbose=options.verbose,
-        files=options.files,
-        base_branch=options.base,
-    )
+    try:
+        scan_result = run_scan(
+            base_dir,
+            ci_mode=ci_mode,
+            verbose=options.verbose,
+            files=options.files,
+            base_branch=options.base,
+        )
+    except RuntimeError as exc:
+        if ci_mode:
+            print(REPORT_START_MARKER)
+            print("## Translation Check Results")
+            print("")
+            print("❌ **Translation check failed before scan completed.**")
+            print("")
+            print(f"Error: `{str(exc)}`")
+            print(REPORT_END_MARKER)
+        else:
+            print(str(exc), file=sys.stderr)
+        return 1
 
     violations = scan_result["violations"]
     stats = scan_result["stats"]
