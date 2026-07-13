@@ -3147,6 +3147,8 @@ Public Class sdgPlots
             clsFacetFunction.RemoveParameterByName("facets")
             clsFacetFunction.RemoveParameterByName("cols")
             clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.RemoveParameterByName("dir")
+
             If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
                 'If two receivers are filled, wrap is used as facet_wrap(vars(factor1, factor2)), while grid is used as facet_grid(rows= vars(factor1), cols= vars(factor2)).
@@ -3157,11 +3159,6 @@ Public Class sdgPlots
                 If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
                     clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    Else
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    End If
                     clsFacetFunction.RemoveParameterByName("rows")
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
@@ -3173,7 +3170,6 @@ Public Class sdgPlots
                         clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                         clsFacetFunction.RemoveParameterByName("rows")
                     End If
-                    clsFacetFunction.RemoveParameterByName("dir")
                     clsFacetFunction.RemoveParameterByName("facets")
                 End If
             ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
@@ -3182,11 +3178,6 @@ Public Class sdgPlots
                     clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                     clsRowVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    Else
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    End If
                     clsFacetFunction.RemoveParameterByName("rows")
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
@@ -3197,7 +3188,6 @@ Public Class sdgPlots
                     clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
-                    clsFacetFunction.RemoveParameterByName("dir")
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
@@ -3212,13 +3202,12 @@ Public Class sdgPlots
                     clsFacetFunction.AddParameter("space", Chr(34) & "fixed" & Chr(34))
                 End If
                 If ucrChkMargin.Checked Then
-                        clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
-                    Else
-                        clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
-                    End If
-                    clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
-                Else
-                    clsFacetFunction.RemoveParameterByName("space")
+                    clsFacetFunction.AddParameter("margins",
+                              If(ucrChkMargin.Checked, "TRUE", "FALSE"))
+                End If
+                clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
+            Else
+                clsFacetFunction.RemoveParameterByName("space")
                 clsFacetFunction.RemoveParameterByName("margins")
                 If rdoHorizontal.Checked Then
                     ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
@@ -3232,6 +3221,21 @@ Public Class sdgPlots
                 Else
                     clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
                 End If
+            End If
+        End If
+    End Sub
+
+    ' Updates the facet_wrap direction parameter based on the current
+    ' Horizontal/Vertical setting. The "dir" parameter is only valid
+    ' for facet_wrap and is removed for facet_grid.
+    Public Sub SetFacetWrapDirection()
+        clsFacetFunction.RemoveParameterByName("dir")
+
+        If clsFacetFunction.strRCommand = "facet_wrap" Then
+            If rdoHorizontal.Checked Then
+                clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+            Else
+                clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
             End If
         End If
     End Sub
@@ -3324,6 +3328,7 @@ Public Class sdgPlots
         FacetsNumberOfRowsOrColumns()
         AddRemoveFacets()
     End Sub
+
     Private Sub SecondFactorReceiverEnabled()
         If bRCodeSet Then
             If ucr1stFactorReceiver.IsEmpty() Then
@@ -3340,6 +3345,7 @@ Public Class sdgPlots
 
     Private Sub ucrPnlHorizonatalVertical_ControlValueChanged() Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
         SetFacetParameters()
+        SetFacetWrapDirection()
     End Sub
 
 
@@ -3413,6 +3419,12 @@ Public Class sdgPlots
             Return "discrete"
         End If
     End Function
+
+    Public ReadOnly Property SecondFacetVariable As String
+        Get
+            Return ucr2ndFactorReceiver.GetVariableNames(False)
+        End Get
+    End Property
 
     Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
         sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
