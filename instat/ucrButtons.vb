@@ -354,7 +354,7 @@ Public Class ucrButtons
     Public Sub OKEnabled(bEnabled As Boolean)
         cmdOk.Enabled = bEnabled
 
-        If frmMain.bRecordQuarto Then
+        If TypeOf ParentForm Is dlgRecordQuarto OrElse frmMain.bRecordQuarto Then
             cmdPaste.Enabled = False
         Else
             cmdPaste.Enabled = bEnabled

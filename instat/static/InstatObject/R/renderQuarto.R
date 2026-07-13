@@ -6,7 +6,7 @@ if (is.null(quarto_path()) || !file.exists(quarto_path())) {
   stop("Cannot find the Quarto CLI. Please download and install from https://quarto.org/")
 }
 
-STEM <- "inline"          # basename for all temporary files
+STEM <- STEM <- paste0("inline_", format(Sys.time(), "%Y%m%d_%H%M%S"))          # basename for all temporary files
 
 src <- '<<QUARTO_SCRIPT>>'
 
