@@ -429,9 +429,17 @@ Public Class dlgClimaticStationMaps
 
         strDataframeName = ucrSelectorOutline.strCurrentDataFrame
 
-        expItems = RunFilterAvailabilityCheckInternally(data_name:=strDataframeName)
+        If String.IsNullOrEmpty(strDataframeName) Then
+            ucrChkSelectFilter.Checked = False
+            ucrChkSelectFilter.Enabled = False
+            ToggleSelectFilterInputComboBoxVisibility()
+            bCorrectFiltersInBothDataframes = False
+            Exit Sub
+        End If
 
-        If expItems Is Nothing OrElse expItems.Type = Internals.SymbolicExpressionType.Null OrElse (expItems IsNot Nothing AndAlso expItems.AsList().AsCharacter.Count.Equals(1)) Then
+        expItems = RunFilterAvailabilityCheckInternally(data_name:=strDataframeName)
+        ' If the filter has only one item, then it'll always be the default `no filter` option
+        If expItems Is Nothing OrElse expItems.Type = Internals.SymbolicExpressionType.Null OrElse (expItems IsNot Nothing AndAlso expItems.AsCharacter.Count = 1) Then
             ucrChkSelectFilter.Checked = False
             ucrChkSelectFilter.Enabled = False
             ToggleSelectFilterInputComboBoxVisibility()
@@ -441,7 +449,7 @@ Public Class dlgClimaticStationMaps
 
         ToggleSelectFilterInputComboBoxVisibility()
 
-        filterArray = expItems.AsList().AsCharacter().ToArray()
+        filterArray = expItems.AsCharacter().ToArray()
         ucrInputComboSelectFilter.SetItems(filterArray)
         ucrInputComboSelectFilter.SetText(filterArray(0))
 
@@ -461,18 +469,24 @@ Public Class dlgClimaticStationMaps
         strFirstDataframeName = ucrSelectorOutline.strCurrentDataFrame
         strSecondDataframeName = ucrSelectorStation.strCurrentDataFrame
 
+        If String.IsNullOrEmpty(strFirstDataframeName) OrElse String.IsNullOrEmpty(strSecondDataframeName) Then
+            ucrChkSelectFilter.Checked = False
+            ucrChkSelectFilter.Enabled = False
+            ToggleSelectFilterInputComboBoxVisibility()
+            bCorrectFiltersInBothDataframes = False
+            Exit Sub
+        End If
+
         expItems = RunFilterAvailabilityCheckInternally(data_name:=strSecondDataframeName)
 
-        If expItems Is Nothing OrElse expItems.Type = Internals.SymbolicExpressionType.Null OrElse (expItems IsNot Nothing AndAlso expItems.AsList().AsCharacter.Count.Equals(1)) Then
-            Debug.Print("Hmmmmmmmmmmmmm")
+        ' If the filter has only one item, then it'll always be the default `no filter` option
+        If expItems Is Nothing OrElse expItems.Type = Internals.SymbolicExpressionType.Null OrElse (expItems IsNot Nothing AndAlso expItems.AsCharacter.Count = 1) Then
             bCorrectFiltersInBothDataframes = False
             ucrChkSelectFilter.ForeColor = Color.Red
-            'ucrInputComboSelectFilter.ForeColor = Color.Red
             TestOkEnabled()
             MessageBox.Show(Me, "Selected filter must Apply to both dataframes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
-        ElseIf expItems.AsList().AsCharacter.Contains(ucrInputComboSelectFilter.GetText()) Then
-            Debug.Print("Hoooooyaaaa")
+        ElseIf expItems.AsCharacter.Contains(ucrInputComboSelectFilter.GetText()) Then
             ucrChkSelectFilter.ForeColor = Color.Green
 
             ' Apply filters
@@ -481,16 +495,11 @@ Public Class dlgClimaticStationMaps
             clsApplyFilterToFirstDataframe.AddParameter("filter_name", Chr(34) & ucrInputComboSelectFilter.GetText() & Chr(34))
 
             ' Applying first filter
-            Debug.Print("Applying Filter To First Dataframe")
-            Debug.Print("Before Running Internally " & Environment.NewLine & clsApplyFilterToFirstDataframe.ToScript())
             frmMain.clsRLink.RunScript(clsApplyFilterToFirstDataframe.ToScript(), bSilent:=True, bSeparateThread:=False)
-            Debug.Print("After Running Internally " & Environment.NewLine & clsApplyFilterToFirstDataframe.ToScript())
-            Debug.Print("Finished Applying Filter To First Dataframe")
 
             ' Applying Second filter
             Try
                 If strFirstDataframeName <> strSecondDataframeName Then
-                    Debug.Print("Applying Filter To Second Dataframe")
                     clsApplyFilterToSecondDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
                     clsApplyFilterToSecondDataframe.AddParameter("data_name", Chr(34) & strSecondDataframeName & Chr(34))
                     clsApplyFilterToSecondDataframe.AddParameter("filter_name", Chr(34) & ucrInputComboSelectFilter.GetText() & Chr(34))
@@ -510,11 +519,15 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Function RunFilterAvailabilityCheckInternally(data_name As String) As SymbolicExpression
-        Dim clsGetFilterNamesFunction As New RFunction
-        Dim expItems As SymbolicExpression
-        clsGetFilterNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_names")
-        clsGetFilterNamesFunction.AddParameter("data_name", Chr(34) & data_name & Chr(34))
-        Return frmMain.clsRLink.RunInternalScriptGetValue(clsGetFilterNamesFunction.ToScript(), bSilent:=True)
+        Try
+            Dim clsGetFilterNamesFunction As New RFunction
+            Dim expItems As SymbolicExpression
+            clsGetFilterNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_names")
+            clsGetFilterNamesFunction.AddParameter("data_name", Chr(34) & data_name & Chr(34))
+            Return frmMain.clsRLink.RunInternalScriptGetValue(clsGetFilterNamesFunction.ToScript(), bSilent:=True)
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 
 
