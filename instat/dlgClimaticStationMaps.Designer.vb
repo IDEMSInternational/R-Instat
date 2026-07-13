@@ -38,7 +38,6 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
         Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
-        Me.ucrSelectorStation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblShape = New System.Windows.Forms.Label()
         Me.lbllatitude = New System.Windows.Forms.Label()
@@ -47,6 +46,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverShape = New instat.ucrReceiverSingle()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
+        Me.ucrSelectorStation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpMapOutline = New System.Windows.Forms.GroupBox()
         Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -64,6 +64,8 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrChkSelectFilter = New instat.ucrCheck()
+        Me.ucrInputComboSelectFilter = New instat.ucrInputComboBox()
         Me.grpPoints.SuspendLayout()
         Me.grpBoxLabelOptions.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
@@ -255,18 +257,6 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverFacet.TabIndex = 12
         Me.ucrReceiverFacet.ucrSelector = Nothing
         '
-        'ucrSelectorStation
-        '
-        Me.ucrSelectorStation.AutoSize = True
-        Me.ucrSelectorStation.bDropUnusedFilterLevels = False
-        Me.ucrSelectorStation.bShowHiddenColumns = False
-        Me.ucrSelectorStation.bUseCurrentFilter = True
-        Me.ucrSelectorStation.Location = New System.Drawing.Point(12, 24)
-        Me.ucrSelectorStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStation.Name = "ucrSelectorStation"
-        Me.ucrSelectorStation.Size = New System.Drawing.Size(477, 411)
-        Me.ucrSelectorStation.TabIndex = 0
-        '
         'lblColor
         '
         Me.lblColor.AutoSize = True
@@ -355,8 +345,22 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverLongitude.TabIndex = 2
         Me.ucrReceiverLongitude.ucrSelector = Nothing
         '
+        'ucrSelectorStation
+        '
+        Me.ucrSelectorStation.AutoSize = True
+        Me.ucrSelectorStation.bDropUnusedFilterLevels = False
+        Me.ucrSelectorStation.bShowHiddenColumns = False
+        Me.ucrSelectorStation.bUseCurrentFilter = True
+        Me.ucrSelectorStation.Location = New System.Drawing.Point(12, 24)
+        Me.ucrSelectorStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStation.Name = "ucrSelectorStation"
+        Me.ucrSelectorStation.Size = New System.Drawing.Size(477, 411)
+        Me.ucrSelectorStation.TabIndex = 0
+        '
         'grpMapOutline
         '
+        Me.grpMapOutline.Controls.Add(Me.ucrInputComboSelectFilter)
+        Me.grpMapOutline.Controls.Add(Me.ucrChkSelectFilter)
         Me.grpMapOutline.Controls.Add(Me.ucrChkAddPoints)
         Me.grpMapOutline.Controls.Add(Me.Label1)
         Me.grpMapOutline.Controls.Add(Me.ucrReceiverGeometry)
@@ -379,7 +383,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(346, 156)
         Me.ucrChkAddPoints.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        Me.ucrChkAddPoints.Size = New System.Drawing.Size(180, 51)
+        Me.ucrChkAddPoints.Size = New System.Drawing.Size(180, 36)
         Me.ucrChkAddPoints.TabIndex = 5
         '
         'Label1
@@ -519,6 +523,28 @@ Partial Class dlgClimaticStationMaps
         Me.ucrChkLegend.Size = New System.Drawing.Size(147, 36)
         Me.ucrChkLegend.TabIndex = 29
         '
+        'ucrChkSelectFilter
+        '
+        Me.ucrChkSelectFilter.AutoSize = True
+        Me.ucrChkSelectFilter.Checked = False
+        Me.ucrChkSelectFilter.Location = New System.Drawing.Point(346, 203)
+        Me.ucrChkSelectFilter.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSelectFilter.Name = "ucrChkSelectFilter"
+        Me.ucrChkSelectFilter.Size = New System.Drawing.Size(180, 36)
+        Me.ucrChkSelectFilter.TabIndex = 31
+        '
+        'ucrInputComboSelectFilter
+        '
+        Me.ucrInputComboSelectFilter.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboSelectFilter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboSelectFilter.GetSetSelectedIndex = -1
+        Me.ucrInputComboSelectFilter.IsReadOnly = False
+        Me.ucrInputComboSelectFilter.Location = New System.Drawing.Point(346, 249)
+        Me.ucrInputComboSelectFilter.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputComboSelectFilter.Name = "ucrInputComboSelectFilter"
+        Me.ucrInputComboSelectFilter.Size = New System.Drawing.Size(168, 32)
+        Me.ucrInputComboSelectFilter.TabIndex = 31
+        '
         'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -590,4 +616,6 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucrChkSelectFilter As ucrCheck
+    Friend WithEvents ucrInputComboSelectFilter As ucrInputComboBox
 End Class

@@ -49,6 +49,7 @@ Public Class dlgClimaticStationMaps
     Private clsDummyFunction As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsRowVarsFunction, clsColVarsFunction As New RFunction
+    'Private dctFilterNamesDictionary As New Dictionary(Of String, String)
 
     Private ReadOnly strNone As String = "None"
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
@@ -62,6 +63,8 @@ Public Class dlgClimaticStationMaps
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
     Private bNotSubdialogue As Boolean = False
+
+    Private bCorrectFiltersInBothDataframes As Boolean = False
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -77,6 +80,7 @@ Public Class dlgClimaticStationMaps
         autoTranslate(Me)
         TestOkEnabled()
         ChangeSize()
+        CheckAvailableFiltersInFirstSelectorDataframe()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -211,6 +215,16 @@ Public Class dlgClimaticStationMaps
         ucrChkAddPoints.SetText("Add Points")
         ucrChkAddPoints.AddParameterPresentCondition(True, "geom_point")
         ucrChkAddPoints.AddParameterPresentCondition(False, "geom_point", False)
+
+        ucrChkSelectFilter.SetText("Select Filter")
+        ucrChkSelectFilter.AddParameterValuesCondition(True, "select_filter", "True")
+        ucrChkSelectFilter.AddParameterValuesCondition(False, "select_filter", "False")
+
+        ucrInputComboSelectFilter.SetParameter(New RParameter("filter_name", 1))
+        ucrInputComboSelectFilter.SetDropDownStyleAsNonEditable()
+        'ucrInputComboSelectFilter.SetItems(dctFilterNamesDictionary)
+
+        ToggleSelectFilterInputComboBoxVisibility()
         ChangeSize()
     End Sub
 
@@ -252,6 +266,8 @@ Public Class dlgClimaticStationMaps
         bResetSFLayerSubdialog = True
         ucrInputLegendPosition.SetName("None")
         ucrInputStation.SetName(strFacetWrap)
+        ucrChkAddPoints.Checked = False
+        ucrInputComboSelectFilter.Reset()
 
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
@@ -259,6 +275,7 @@ Public Class dlgClimaticStationMaps
 
         clsDummyFunction.AddParameter("checked", "False", iPosition:=0)
         clsDummyFunction.AddParameter("check", "False", iPosition:=1)
+        clsDummyFunction.AddParameter("select_filter", "False", iPosition:=2)
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -372,6 +389,7 @@ Public Class dlgClimaticStationMaps
             ucrChkLabelledRectangle.SetRCode(clsGGplotOperator, bReset)
             ucrChkLabelAll.SetRCode(clsLabelRepelFunction, bReset)
             ucrChkSize.SetRCode(clsDummyFunction, bReset)
+            ucrChkSelectFilter.SetRCode(clsDummyFunction, bReset)
             ucrChkColour.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
@@ -391,12 +409,136 @@ Public Class dlgClimaticStationMaps
             bOkEnabled = True
         End If
 
+        If ucrChkSelectFilter.Checked AndAlso Not bCorrectFiltersInBothDataframes Then
+            bOkEnabled = False
+        End If
+
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+
+    Private Sub CheckAvailableFiltersInFirstSelectorDataframe()
+        Dim expItems As SymbolicExpression
+        Dim filterArray() As String
+        Dim strDataframeName As String
+
+        strDataframeName = ucrSelectorOutline.strCurrentDataFrame
+
+        expItems = RunFilterAvailabilityCheckInternally(data_name:=strDataframeName)
+
+        If expItems Is Nothing OrElse expItems.Type = Internals.SymbolicExpressionType.Null OrElse (expItems IsNot Nothing AndAlso expItems.AsList().AsCharacter.Count.Equals(1)) Then
+            ucrChkSelectFilter.Checked = False
+            ucrChkSelectFilter.Enabled = False
+            ToggleSelectFilterInputComboBoxVisibility()
+            bCorrectFiltersInBothDataframes = False
+            Exit Sub
+        End If
+
+        ToggleSelectFilterInputComboBoxVisibility()
+
+        filterArray = expItems.AsList().AsCharacter().ToArray()
+        ucrInputComboSelectFilter.SetItems(filterArray)
+        ucrInputComboSelectFilter.SetText(filterArray(0))
+
+        ucrChkSelectFilter.Enabled = True
+        bCorrectFiltersInBothDataframes = True
+
+        ApplyFilterToDataframes()
+    End Sub
+
+    Private Sub CheckFiltersInSecondSelectorDataframeAndApply()
+        Dim expItems As SymbolicExpression
+        Dim strFirstDataframeName As String
+        Dim strSecondDataframeName As String
+        Dim clsApplyFilterToFirstDataframe As New RFunction
+        Dim clsApplyFilterToSecondDataframe As New RFunction
+
+        strFirstDataframeName = ucrSelectorOutline.strCurrentDataFrame
+        strSecondDataframeName = ucrSelectorStation.strCurrentDataFrame
+
+        expItems = RunFilterAvailabilityCheckInternally(data_name:=strSecondDataframeName)
+
+        If expItems Is Nothing OrElse expItems.Type = Internals.SymbolicExpressionType.Null OrElse (expItems IsNot Nothing AndAlso expItems.AsList().AsCharacter.Count.Equals(1)) Then
+            Debug.Print("Hmmmmmmmmmmmmm")
+            bCorrectFiltersInBothDataframes = False
+            ucrChkSelectFilter.ForeColor = Color.Red
+            'ucrInputComboSelectFilter.ForeColor = Color.Red
+            TestOkEnabled()
+            MessageBox.Show(Me, "Selected filter must Apply to both dataframes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        ElseIf expItems.AsList().AsCharacter.Contains(ucrInputComboSelectFilter.GetText()) Then
+            Debug.Print("Hoooooyaaaa")
+            ucrChkSelectFilter.ForeColor = Color.Green
+
+            ' Apply filters
+            clsApplyFilterToFirstDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
+            clsApplyFilterToFirstDataframe.AddParameter("data_name", Chr(34) & strFirstDataframeName & Chr(34))
+            clsApplyFilterToFirstDataframe.AddParameter("filter_name", Chr(34) & ucrInputComboSelectFilter.GetText() & Chr(34))
+
+            ' Applying first filter
+            Debug.Print("Applying Filter To First Dataframe")
+            Debug.Print("Before Running Internally " & Environment.NewLine & clsApplyFilterToFirstDataframe.ToScript())
+            frmMain.clsRLink.RunScript(clsApplyFilterToFirstDataframe.ToScript(), bSilent:=True, bSeparateThread:=False)
+            Debug.Print("After Running Internally " & Environment.NewLine & clsApplyFilterToFirstDataframe.ToScript())
+            Debug.Print("Finished Applying Filter To First Dataframe")
+
+            ' Applying Second filter
+            Try
+                If strFirstDataframeName <> strSecondDataframeName Then
+                    Debug.Print("Applying Filter To Second Dataframe")
+                    clsApplyFilterToSecondDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
+                    clsApplyFilterToSecondDataframe.AddParameter("data_name", Chr(34) & strSecondDataframeName & Chr(34))
+                    clsApplyFilterToSecondDataframe.AddParameter("filter_name", Chr(34) & ucrInputComboSelectFilter.GetText() & Chr(34))
+
+                    frmMain.clsRLink.RunScript(clsApplyFilterToSecondDataframe.ToScript(), bSilent:=True, bSeparateThread:=False)
+                End If
+            Catch ex As Exception
+                bCorrectFiltersInBothDataframes = False
+                ucrChkSelectFilter.ForeColor = Color.Red
+                TestOkEnabled()
+                MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+
+            bCorrectFiltersInBothDataframes = True
+            TestOkEnabled()
+        End If
+    End Sub
+
+    Private Function RunFilterAvailabilityCheckInternally(data_name As String) As SymbolicExpression
+        Dim clsGetFilterNamesFunction As New RFunction
+        Dim expItems As SymbolicExpression
+        clsGetFilterNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_names")
+        clsGetFilterNamesFunction.AddParameter("data_name", Chr(34) & data_name & Chr(34))
+        Return frmMain.clsRLink.RunInternalScriptGetValue(clsGetFilterNamesFunction.ToScript(), bSilent:=True)
+    End Function
+
+
+    Private Sub ApplyFilterToDataframes()
+        If ucrChkAddPoints.Checked AndAlso ucrChkSelectFilter.Checked Then
+            CheckFiltersInSecondSelectorDataframeAndApply()
+        End If
+    End Sub
+
+    Private Sub ToggleSelectFilterInputComboBoxVisibility()
+        If ucrChkSelectFilter.Checked Then
+            ucrInputComboSelectFilter.Visible = True
+        Else
+            ucrInputComboSelectFilter.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrChkSelectFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectFilter.ControlValueChanged
+        ToggleSelectFilterInputComboBoxVisibility()
+        ApplyFilterToDataframes()
+    End Sub
+
+    Private Sub ucrInputComboSelectFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSelectFilter.ControlValueChanged
+        ApplyFilterToDataframes()
     End Sub
 
     Private Sub ucrReceiverShape_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShape.ControlValueChanged
@@ -673,6 +815,7 @@ Public Class dlgClimaticStationMaps
     Private Sub ucrChkAddPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoints.ControlValueChanged
         ChangeSize()
         AddExtraGeoms()
+        ApplyFilterToDataframes()
     End Sub
 
     Private Sub AutoFillGeometry()
@@ -714,7 +857,16 @@ Public Class dlgClimaticStationMaps
 
     Private Sub ucrSelectorOutline_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOutline.ControlValueChanged
         AutoFillGeometry()
+        CheckAvailableFiltersInFirstSelectorDataframe()
     End Sub
+
+    Private Sub ucrSelectorStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStation.ControlValueChanged
+        ApplyFilterToDataframes()
+    End Sub
+
+    'Private Sub ucrSelectorStation_DataframeChanged() Handles ucrSelectorStation.DataFrameChanged
+    '    ApplyFilterToDataframes()
+    'End Sub
 
     Private Sub ucrReceiverFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
