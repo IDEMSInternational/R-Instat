@@ -30,7 +30,7 @@ Public Class dlgOneVariableSummarise
     Private bRCodeSet As Boolean = True
     Private clsSummaryFunction, clsSummariesList, clsGtFunction,
         clsConcFunction, clsSummaryTableFunction, clsDummyFunction,
-        clsSkimrFunction, clsPivotWiderFunction As New RFunction
+        clsSkimrFunction, clsPivotWiderFunction, clsSelectedColumnsFunction As New RFunction
 
     Private clsPipeOperator, clsJoiningPipeOperator As New ROperator
     Private clsSummaryOperator As New ROperator
@@ -68,6 +68,7 @@ Public Class dlgOneVariableSummarise
 
         ucrReceiverOneVarSummarise.SetParameter(New RParameter("object", 1))
         ucrReceiverOneVarSummarise.SetParameterIsRFunction()
+        ucrReceiverOneVarSummarise.bForceAsDataFrame = True
         ucrReceiverOneVarSummarise.Selector = ucrSelectorOneVarSummarise
         ucrReceiverOneVarSummarise.SetMeAsReceiver()
 
@@ -131,6 +132,7 @@ Public Class dlgOneVariableSummarise
         clsDummyFunction = New RFunction
         clsSkimrFunction = New RFunction
         clsPivotWiderFunction = New RFunction
+        clsSelectedColumnsFunction = New RFunction
 
         clsPipeOperator = New ROperator
 
@@ -182,9 +184,11 @@ Public Class dlgOneVariableSummarise
         clsSummariesList.AddParameter("summary_count_all", Chr(34) & "summary_count_all" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
+        clsSelectedColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsSelectedColumnsFunction.AddParameter("force_as_data_frame", "TRUE", iPosition:=2)
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("maxsum", "12", iPosition:=2)
-        clsSummaryFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSelectedColumnsFunction, iPosition:=0)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                    strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -207,7 +211,6 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=2)
-        ucrReceiverOneVarSummarise.AddAdditionalCodeParameterPair(clsSummaryFunction, New RParameter("object", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
@@ -260,9 +263,12 @@ Public Class dlgOneVariableSummarise
             clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames(), iPosition:=4)
             clsSkimrFunction.AddParameter("col_names", ucrReceiverOneVarSummarise.GetVariableNames(),
                                           bIncludeArgumentName:=False, iPosition:=1)
+            clsSelectedColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorOneVarSummarise.strCurrentDataFrame & Chr(34), iPosition:=0)
+            clsSelectedColumnsFunction.AddParameter("col_names", ucrReceiverOneVarSummarise.GetVariableNames(), iPosition:=1)
         Else
             clsSummaryTableFunction.RemoveParameterByName("columns_to_summarise")
             clsSkimrFunction.RemoveParameterByName("col_names")
+            clsSelectedColumnsFunction.RemoveParameterByName("col_names")
         End If
     End Sub
 
@@ -298,6 +304,10 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
         clsJoiningPipeOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
         clsSkimrFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
+        clsSelectedColumnsFunction.SetAssignTo(ucrSelectorOneVarSummarise.strCurrentDataFrame)
+        If Not ucrReceiverOneVarSummarise.IsEmpty Then
+            clsSelectedColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorOneVarSummarise.strCurrentDataFrame & Chr(34), iPosition:=0)
+        End If
     End Sub
 
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
