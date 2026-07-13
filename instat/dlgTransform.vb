@@ -852,7 +852,6 @@ Public Class dlgTransform
             ucrChkMultiply.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkSubtract.SetRCode(clsNumericDummyFunction, bReset)
             ucrSaveNew.SetRCode(clsRoundFunction, bReset)
-            ucrPnlFormatOptions.SetRCode(clsFormatDummyFunction, bReset)
         End If
         bResetRCode = True
     End Sub
@@ -942,16 +941,7 @@ Public Class dlgTransform
         SetRCodeForControls(True)
         TestOKEnabled()
         ucrChkEditPreview.Checked = False
-        rdoDecimalFormat.Checked = True
     End Sub
-
-    Private Function GetParamValue(ucrDropdown As ucrInput, Optional ucrTextbox As ucrInput = Nothing) As String
-        Dim strValue As String = ucrDropdown.GetText()
-        If ucrTextbox IsNot Nothing AndAlso Not String.IsNullOrEmpty(ucrTextbox.GetText()) Then
-            strValue = ucrTextbox.GetText()
-        End If
-        Return strValue
-    End Function
 
     Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrPnlFormatOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
         ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrNudLagLeadPosition.ControlValueChanged,
@@ -960,7 +950,6 @@ Public Class dlgTransform
         ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged,
         UcrInputPvalue.ControlValueChanged, UcrInputNAOperations.ControlValueChanged, UcrInputZeroOperations.ControlValueChanged, UcrNudFraction.ControlValueChanged,
         ucrNudDecimalPlaces.ControlValueChanged, ucrNudScientific.ControlValueChanged, ucrNudPercent.ControlValueChanged
-        UpdateControlStates()
         ucrBase.clsRsyntax.ClearCodes()
         If rdoSingle.Checked Then
             If rdoRank.Checked Then
@@ -1152,15 +1141,6 @@ Public Class dlgTransform
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
         ElseIf rdoFormat.Checked Then
             AddFormatParameters()
-            If rdoDecimalFormat.Checked Then
-            ElseIf rdoScientific.Checked Then
-            ElseIf rdoPercent.Checked Then
-            ElseIf rdoNA.Checked Then
-            ElseIf rdoZero.Checked Then
-            ElseIf rdoPvalue.Checked Then
-            ElseIf rdoFraction.Checked Then
-            ElseIf rdoFractions.Checked Then
-            End If
         ElseIf rdoNonNegative.Checked Then
             clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
             If rdoSquareRoot.Checked Then
@@ -1253,41 +1233,41 @@ Public Class dlgTransform
 
         If rdoDecimalFormat.Checked Then
             clsFormatDummyFunction.AddParameter("check", "DecimalFormat", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("digits", ucrNudDecimalPlaces.GetText)
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudDecimalPlaces.GetText, iPosition:=0)
 
         ElseIf rdoScientific.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Scientific", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("digits", ucrNudScientific.GetText)
-            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "e" & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudScientific.GetText, iPosition:=0)
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "e" & Chr(34), iPosition:=1)
 
         ElseIf rdoPercent.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Percent", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("digits", ucrNudPercent.GetText)
-            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("digits", ucrNudPercent.GetText, iPosition:=0)
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & "%" & Chr(34), iPosition:=1)
 
         ElseIf rdoNA.Checked Then
             clsFormatDummyFunction.AddParameter("check", "NA", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("na.form", Chr(34) & GetNAOrZeroFormValue(UcrInputNAOperations.GetText) & Chr(34))
-            clsDescToolsFormatFunction.AddParameter("digits", "2")
+            clsDescToolsFormatFunction.AddParameter("na.form", Chr(34) & GetNAOrZeroFormValue(UcrInputNAOperations.GetText) & Chr(34), iPosition:=0)
+            clsDescToolsFormatFunction.AddParameter("digits", "2", iPosition:=1)
 
         ElseIf rdoZero.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Zero", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("zero.form", Chr(34) & GetNAOrZeroFormValue(UcrInputZeroOperations.GetText) & Chr(34))
-            clsDescToolsFormatFunction.AddParameter("digits", "2")
+            clsDescToolsFormatFunction.AddParameter("zero.form", Chr(34) & GetNAOrZeroFormValue(UcrInputZeroOperations.GetText) & Chr(34), iPosition:=0)
+            clsDescToolsFormatFunction.AddParameter("digits", "2", iPosition:=1)
 
         ElseIf rdoPvalue.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Pvalue", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & UcrInputPvalue.GetText & Chr(34))
-            clsDescToolsFormatFunction.AddParameter("digits", "3")
-            clsDescToolsFormatFunction.AddParameter("eps", "0.001")
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & UcrInputPvalue.GetText & Chr(34), iPosition:=0)
+            clsDescToolsFormatFunction.AddParameter("digits", "3", iPosition:=1)
+            clsDescToolsFormatFunction.AddParameter("eps", "0.001", iPosition:=2)
 
         ElseIf rdoFraction.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Fraction", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("fmt", "function(x) instatExtras::frac_den(x, den=" & UcrNudFraction.GetText & ")")
+            clsDescToolsFormatFunction.AddParameter("fmt", "function(x) instatExtras::frac_den(x, den=" & UcrNudFraction.GetText & ")", iPosition:=0)
 
         ElseIf rdoFractions.Checked Then
             clsFormatDummyFunction.AddParameter("check", "Fractions", iPosition:=0)
-            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & strFrac & Chr(34))
+            clsDescToolsFormatFunction.AddParameter("fmt", Chr(34) & strFrac & Chr(34), iPosition:=0)
 
         End If
     End Sub
@@ -1303,41 +1283,6 @@ Public Class dlgTransform
         End If
         Return strSelected
     End Function
-
-    Private Sub UpdateControlStates()
-
-        ucrNudDecimalPlaces.Enabled = False
-        ucrNudScientific.Enabled = False
-        ucrNudPercent.Enabled = False
-        UcrNudFraction.Enabled = False
-
-        UcrInputNAOperations.Enabled = False
-        UcrInputZeroOperations.Enabled = False
-        UcrInputPvalue.Enabled = False
-
-        If rdoDecimalFormat.Checked Then
-            ucrNudDecimalPlaces.Enabled = True
-
-        ElseIf rdoScientific.Checked Then
-            ucrNudScientific.Enabled = True
-
-        ElseIf rdoPercent.Checked Then
-            ucrNudPercent.Enabled = True
-
-        ElseIf rdoFraction.Checked Then
-            UcrNudFraction.Enabled = True
-
-        ElseIf rdoNA.Checked Then
-            UcrInputNAOperations.Enabled = True
-
-        ElseIf rdoZero.Checked Then
-            UcrInputZeroOperations.Enabled = True
-
-        ElseIf rdoPvalue.Checked Then
-            UcrInputPvalue.Enabled = True
-
-        End If
-    End Sub
 
     Private Sub ResetPreview()
         If Not bResetRCode Then
