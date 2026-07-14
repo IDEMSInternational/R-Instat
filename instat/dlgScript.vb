@@ -23,6 +23,10 @@ Public Class dlgScript
     Private clsGetRObjectFunction, clsGetSelectedDataFrameFunction As New RFunction
     Private dctOutputObjectTypes As New Dictionary(Of String, String)
     Private dctOutputObjectFormats As New Dictionary(Of String, String)
+    Private dctXSidePlot As New Dictionary(Of String, String)
+    Private dctYSidePlot As New Dictionary(Of String, String)
+    Private dctLabel As New Dictionary(Of String, String)
+    Private dctText As New Dictionary(Of String, String)
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -56,6 +60,54 @@ Public Class dlgScript
         dctOutputObjectFormats.Add("Text", RObjectFormat.Text)
         dctOutputObjectFormats.Add("Html", RObjectFormat.Html)
 
+        dctText.Add("None ", " ")
+        dctText.Add("Textpath", "geomtextpath::geom_textpath")
+        dctText.Add("Textabline", "geomtextpath::geom_textabline")
+        dctText.Add("Textsegment", "geomtextpath::geom_textsegment")
+        dctText.Add("Textline", "geomtextpath::geom_textline")
+        dctText.Add("Texthline", "geomtextpath::geom_texthline")
+        dctText.Add("Textvline", "geomtextpath::geom_textvline")
+        dctText.Add("Textdensity", "geomtextpath::geom_textdensity")
+        dctText.Add("Textsmooth", "geomtextpath::geom_textsmooth")
+        dctText.Add("Textdensity2d", "geomtextpath::geom_textdensity2d")
+        dctText.Add("Textsf", "geomtextpath::geom_textsf")
+
+        dctLabel.Add("None ", " ")
+        dctLabel.Add("labelpath", "geomtextpath::geom_labelpath")
+        dctLabel.Add("labelabline", "geomtextpath::geom_labelabline")
+        dctLabel.Add("labelsegment", "geomtextpath::geom_labelsegment")
+        dctLabel.Add("labelline", "geomtextpath::geom_labelline")
+        dctLabel.Add("labelhline", "geomtextpath::geom_labelhline")
+        dctLabel.Add("labelvline", "geomtextpath::geom_labelvline")
+        dctLabel.Add("labeldensity", "geomtextpath::geom_labeldensity")
+        dctLabel.Add("labelsmooth", "geomtextpath::geom_labelsmooth")
+        dctLabel.Add("labeldensity2d", "geomtextpath::geom_labeldensity2d")
+        dctLabel.Add("labelsf", "geomtextpath::geom_labelsf")
+
+        dctXSidePlot.Add("None ", " ")
+        dctXSidePlot.Add("GeomBar", "ggside::geom_xsidebar()")
+        dctXSidePlot.Add("GeomBoxplot", "ggside::geom_xsideboxplot()")
+        dctXSidePlot.Add("GeomDensity", "ggside::geom_xsidedensity()")
+        dctXSidePlot.Add("GeomFreqpoly", "ggside::geom_xsidefreqpoly()")
+        dctXSidePlot.Add("GeomHistogram", "ggside::geom_xsidehistogram()")
+        dctXSidePlot.Add("GeomLine", "ggside::geom_xsideline()")
+        dctXSidePlot.Add("GeomPoint", "ggside::geom_xsidepoint()")
+        dctXSidePlot.Add("GeomText", "ggside::geom_xsidetext()")
+        dctXSidePlot.Add("GeomTile", "ggside::geom_xsidetile()")
+        dctXSidePlot.Add("GeomViolin", "ggside::geom_xsideviolin()")
+
+        dctYSidePlot.Add("None ", " ")
+        dctYSidePlot.Add("GeomBar", "ggside::geom_ysidebar()")
+        dctYSidePlot.Add("GeomBoxplot", "ggside::geom_ysideboxplot()")
+        dctYSidePlot.Add("GeomDensity", "ggside::geom_ysidedensity()")
+        dctYSidePlot.Add("GeomFreqpoly", "ggside::geom_ysidefreqpoly()")
+        dctYSidePlot.Add("GeomHistogram", "ggside::geom_ysidehistogram()")
+        dctYSidePlot.Add("GeomLine", "ggside::geom_ysideline()")
+        dctYSidePlot.Add("GeomPoint", "ggside::geom_ysidepoint()")
+        dctYSidePlot.Add("GeomText", "ggside::geom_ysidetext()")
+        dctYSidePlot.Add("GeomTile", "ggside::geom_ysidetile()")
+        dctYSidePlot.Add("GeomViolin", "ggside::geom_ysideviolin()")
+
         '--------------------------------
         'save controls
         ucrPnlSaveData.AddRadioButton(rdoSaveDataFrame)
@@ -72,6 +124,22 @@ Public Class dlgScript
         ucrCboSaveOutputObjectFormat.SetLinkedDisplayControl(lblSaveObjectFormat)
         ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = 0
 
+        ucrCboInputXSide.SetItems(dctXSidePlot, bSetConditions:=False)
+        ucrCboInputXSide.SetDropDownStyleAsNonEditable()
+        ucrCboInputXSide.GetSetSelectedIndex = 0
+
+        ucrCboInputYSide.SetItems(dctYSidePlot, bSetConditions:=False)
+        ucrCboInputYSide.SetDropDownStyleAsNonEditable()
+        ucrCboInputYSide.GetSetSelectedIndex = 0
+
+        ucrCboInputText.SetItems(dctText, bSetConditions:=False)
+        ucrCboInputText.SetDropDownStyleAsNonEditable()
+        ucrCboInputText.GetSetSelectedIndex = 0
+
+        ucrCboInputlabel.SetItems(dctLabel, bSetConditions:=False)
+        ucrCboInputlabel.SetDropDownStyleAsNonEditable()
+        ucrCboInputlabel.GetSetSelectedIndex = 0
+
         ucrSaveObject.SetLabelText("Store Graph")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
@@ -84,12 +152,20 @@ Public Class dlgScript
 
         ucrChkDisplayGraph.SetText("Display Output")
 
+        ucrChkLabel.SetText("Label Option")
+        ucrChkText.SetText("Text Option")
+
+        ucrChkXSide.SetText("Top")
+        ucrChkYSide.SetText("Right")
         '--------------------------------
         'Get data controls
 
         ucrPnlGetData.AddRadioButton(rdoGetDataFrame)
         ucrPnlGetData.AddRadioButton(rdoGetColumn)
         ucrPnlGetData.AddRadioButton(rdoGetOutputObject)
+
+        ucrPnlGraph.AddRadioButton(rdoTextPath)
+        ucrPnlGraph.AddRadioButton(rdoSidePlot)
 
         ucrDataFrameGetDF.SetLabelText("Get Data Frame:")
 
@@ -163,6 +239,15 @@ Public Class dlgScript
         ucrSelectorForRank.SetItemType("column_selection")
         ucrReceiverRank.strSelectorHeading = "Column selections"
 
+        ucrReceiverTextPath.SetParameter(New RParameter("label", 0))
+        ucrReceiverTextPath.Selector = ucrSelectorTextPath
+        ucrReceiverTextPath.SetMeAsReceiver()
+        ucrReceiverTextPath.bUseFilteredData = False
+        ucrReceiverTextPath.SetParameterIsRFunction()
+
+        ucrSelectorTextPath.SetItemType("column")
+        ucrReceiverTextPath.strSelectorHeading = "Variables"
+
     End Sub
 
     'todo. this function should eventually be removed once we have a control that displays packages
@@ -209,6 +294,8 @@ Public Class dlgScript
         ucrDataFrameGetDF.Reset()
         rdoGetDataFrame.Checked = True
         rdoDataFrame.Checked = True
+        rdoSidePlot.Checked = True
+        rdoTextPath.Enabled = False
         ucrSelectorForRank.Reset()
         ucrReceiverForCalculation.Clear()
         'activate the selected tab to library tab
@@ -906,5 +993,177 @@ Public Class dlgScript
     Private Sub ucrReceiverRank_Enter(sender As Object, e As EventArgs) Handles ucrReceiverRank.Enter
         ucrSelectorForRank.SetItemType("column_selection")
     End Sub
+
+    Private Sub ucrPnlGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraph.ControlValueChanged
+        If rdoTextPath.Checked Then
+            ucrSelectorTextPath.SetVisible(True)
+            lblText.Visible = True
+            ucrReceiverTextPath.SetVisible(True)
+            ucrCboInputText.SetVisible(True)
+            ucrCboInputText.OnControlValueChanged()
+            ucrCboInputlabel.SetVisible(True)
+            ucrCboInputlabel.OnControlValueChanged()
+            ucrChkText.SetVisible(True)
+            ucrChkText.OnControlValueChanged()
+            ucrChkLabel.SetVisible(True)
+            ucrChkLabel.OnControlValueChanged()
+            ucrChkXSide.SetVisible(False)
+            ucrChkYSide.SetVisible(False)
+            ucrCboInputXSide.SetVisible(False)
+            ucrCboInputYSide.SetVisible(False)
+        ElseIf rdoSidePlot.Checked Then
+            ucrChkXSide.SetVisible(True)
+            ucrChkXSide.OnControlValueChanged()
+            ucrChkYSide.SetVisible(True)
+            ucrChkYSide.OnControlValueChanged()
+            ucrCboInputXSide.SetVisible(True)
+            ucrCboInputXSide.OnControlValueChanged()
+            ucrCboInputYSide.SetVisible(True)
+            ucrCboInputYSide.OnControlValueChanged()
+            lblText.Visible = False
+            ucrSelectorTextPath.SetVisible(False)
+            ucrReceiverTextPath.SetVisible(False)
+            ucrCboInputText.SetVisible(False)
+            ucrCboInputlabel.SetVisible(False)
+            ucrChkText.SetVisible(False)
+            ucrChkLabel.SetVisible(False)
+        End If
+    End Sub
+
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged, ucrCboInputlabel.ControlValueChanged
+        ucrCboInputlabel.Visible = ucrChkLabel.Checked
+    End Sub
+
+    Private Sub ucrChkText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkText.ControlValueChanged, ucrCboInputText.ControlValueChanged
+        ucrCboInputText.Visible = ucrChkText.Checked
+    End Sub
+
+    Private Sub ucrChkXSide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSide.ControlValueChanged, ucrCboInputXSide.ControlValueChanged
+        ucrCboInputXSide.Visible = ucrChkXSide.Checked
+    End Sub
+
+    Private Sub ucrChkYSide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSide.ControlValueChanged, ucrCboInputYSide.ControlValueChanged
+        ucrCboInputYSide.Visible = ucrChkYSide.Checked
+    End Sub
+
+    Private Sub ucrCboInputXSide_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboInputXSide.ControlContentsChanged, ucrCboInputYSide.ControlContentsChanged
+        Dim strScript As String = ""
+        Dim strXSide As String = ""
+        Dim strYSide As String = ""
+
+        If ucrChkXSide.Checked Then
+            If Not ucrCboInputXSide.IsEmpty() Then
+                Dim strSelectedX As String = ucrCboInputXSide.GetValue()
+                If dctXSidePlot.ContainsKey(strSelectedX) Then
+                    strXSide = dctXSidePlot(strSelectedX)
+                End If
+            End If
+        End If
+
+        If ucrChkYSide.Checked Then
+            If Not ucrCboInputYSide.IsEmpty() Then
+                Dim strSelectedY As String = ucrCboInputYSide.GetValue()
+                If dctYSidePlot.ContainsKey(strSelectedY) Then
+                    strYSide = dctYSidePlot(strSelectedY)
+                End If
+            End If
+        End If
+
+        If Not String.IsNullOrEmpty(strXSide) Then
+            strScript &= " + " & strXSide
+        End If
+        If Not String.IsNullOrEmpty(strYSide) Then
+            strScript &= " + " & strYSide
+        End If
+
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrCboInputText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboInputText.ControlContentsChanged, ucrCboInputlabel.ControlContentsChanged
+        Dim strSelectedText As String = ucrCboInputText.GetValue()
+        Dim strSelectedLabel As String = ucrCboInputlabel.GetValue()
+        Dim strLabel As String = ucrReceiverTextPath.GetVariableNames()
+
+        ' Define additional parameters for specific text geoms
+        Dim dctAdditionalTextParams As New Dictionary(Of String, String)
+        dctAdditionalTextParams.Add("geomtextpath::geom_textabline", "slope=0.5, intercept=4")
+        dctAdditionalTextParams.Add("geomtextpath::geom_textvline", "xintercept=2")
+        dctAdditionalTextParams.Add("geomtextpath::geom_texthline", "yintercept=3")
+        dctAdditionalTextParams.Add("geomtextpath::geom_textdensity", "y=..density..")
+        dctAdditionalTextParams.Add("geomtextpath::geom_textsegment", "xend=4, yend=7")
+
+        ' Define additional parameters for specific label geoms
+        Dim dctAdditionalLabelParams As New Dictionary(Of String, String)
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelabline", "slope=0.5, intercept=4")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelvline", "xintercept=2")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelhline", "yintercept=3")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labeldensity", "y=..density..")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelsegment", "xend=4, yend=7")
+
+        ' Initialize the script
+        Dim strScript As String = ""
+
+        ' Check if either ucrChkLabel or ucrChkText is checked
+        Dim bShowLabel As Boolean = ucrChkLabel.Checked
+        Dim strAesLabel As String = ""
+        Dim bShowText As Boolean = ucrChkText.Checked
+        Dim strAesText As String = ""
+
+        ' If either is checked and label is not empty, construct aes(label=)
+        If bShowLabel AndAlso Not String.IsNullOrEmpty(strLabel) Then
+            strAesLabel = "label=" & strLabel
+        End If
+        If bShowText AndAlso Not String.IsNullOrEmpty(strLabel) Then
+            strAesText = "label=" & strLabel
+        End If
+
+        ' Check if a valid geom_textpath is selected
+        If ucrChkText.Checked Then
+            If Not ucrCboInputText.IsEmpty Then
+                If dctText.ContainsKey(strSelectedText) Then
+                    Dim strGeomFunction As String = dctText(strSelectedText)
+                    Dim strAdditionalParams As String = ""
+                    If dctAdditionalTextParams.ContainsKey(strGeomFunction) Then
+                        strAdditionalParams = dctAdditionalTextParams(strGeomFunction)
+                    End If
+                    If Not String.IsNullOrEmpty(strAdditionalParams) Then
+                        If Not String.IsNullOrEmpty(strAesText) Then
+                            strAesText &= ", "
+                        End If
+                        strAesText &= strAdditionalParams
+                    End If
+
+                    ' Construct the script with all aes() params combined
+                    strScript &= " + " & strGeomFunction & "(aes(" & strAesText & "))"
+                End If
+            End If
+        End If
+
+        ' Check if a valid geom_label is selected
+        If ucrChkLabel.Checked Then
+            If Not ucrCboInputlabel.IsEmpty Then
+                If dctLabel.ContainsKey(strSelectedLabel) Then
+                    Dim strGeomLabelFunction As String = dctLabel(strSelectedLabel)
+                    Dim strAdditionalParams As String = ""
+
+                    If dctAdditionalLabelParams.ContainsKey(strGeomLabelFunction) Then
+                        strAdditionalParams = dctAdditionalLabelParams(strGeomLabelFunction)
+                    End If
+                    If Not String.IsNullOrEmpty(strAdditionalParams) Then
+                        If Not String.IsNullOrEmpty(strAesLabel) Then
+                            strAesLabel &= ", "
+                        End If
+                        strAesLabel &= strAdditionalParams
+                    End If
+                    ' Construct the script with all aes() params combined
+                    strScript &= " + " & strGeomLabelFunction & "(aes(" & strAesLabel & "))"
+                End If
+            End If
+        End If
+
+        ' Display or preview the constructed script
+        PreviewScript(strScript)
+    End Sub
+
 
 End Class
