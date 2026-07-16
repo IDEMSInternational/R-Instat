@@ -6899,5 +6899,10 @@
   "More Likert Graph (gglikert)": "More Likert Graph (gglikert)",
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
-  "Totals": "Totals"
+  "Totals": "Totals",
+  "Knitr Option": "Knitr Option",
+  "Display Code": "Display Code",
+  "Display R Messages": "Display R Messages",
+  "Display Warnings": "Display Warnings",
+  "Give R Output": "Give R Output"
 }
