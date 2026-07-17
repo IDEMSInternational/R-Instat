@@ -6867,6 +6867,8 @@
   "Summary Data": "Summary Data",
   "Country Code:": "Country Code:",
   "epicsa": "epicsa",
+  "Select Filter": "Select Filter",
+  "Save Definitions Object:": "Save Definitions Object:",
   "PICSA Trend Graph": "PICSA Trend Graph",
   "Trend Graph": "Trend Graph",
   "File Location:": "File Location:",
@@ -6877,7 +6879,6 @@
   "PDF": "PDF",
   "Powerpoint": "Powerpoint",
   "Save and Reopen Workspace": "Save and Reopen Workspace",
-  "Save Definitions Object:": "Save Definitions Object:",
   "Pdf": "Pdf",
   "quantile 2": "quantile 2",
   "quantile 3": "quantile 3",
@@ -6899,6 +6900,5 @@
   "More Likert Graph (gglikert)": "More Likert Graph (gglikert)",
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
-  "Totals": "Totals",
-  "Label First and Last": "Label First and Last"
+  "Totals": "Totals"
 }
