@@ -3387,6 +3387,9 @@ Public Class sdgPlots
     End Sub
 
     Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudCaptionSize, ucrInputTemp:=ucrInputGraphCaption, strThemeFunctionSizeName:="plot.caption", clsPlotElementTextSizeFunction:=clsPlotElementCaptionFunction)
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudTitleSize, ucrInputTemp:=ucrInputGraphTitle, strThemeFunctionSizeName:="plot.title", clsPlotElementTextSizeFunction:=clsPlotElementTitleFunction)
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudSubTitleSize, ucrInputTemp:=ucrInputGraphSubTitle, strThemeFunctionSizeName:="plot.subtitle", clsPlotElementTextSizeFunction:=clsPlotElementSubTitleFunction)
         AddRemoveLabs()
     End Sub
 
@@ -3628,30 +3631,33 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
-        If clsPlotElementCaptionFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
+    Private Sub AddRemoveTextSizes(ucrNudTemp As ucrNud, ucrInputTemp As ucrInputTextBox, strThemeFunctionSizeName As String, clsPlotElementTextSizeFunction As RFunction)
+        Dim strTextSize = ucrNudTemp.GetText()
+
+        If Not ucrInputTemp.IsEmpty() Then
+            If strTextSize <> "" Then
+                clsPlotElementTextSizeFunction.AddParameter("size", strTextSize, iPosition:=0)
+            Else
+                clsPlotElementTextSizeFunction.RemoveParameterByName("size")
+            End If
+            clsThemeFunction.AddParameter(strThemeFunctionSizeName, clsRFunctionParameter:=clsPlotElementTextSizeFunction)
         Else
-            clsThemeFunction.RemoveParameterByName("plot.caption")
+            clsThemeFunction.RemoveParameterByName(strThemeFunctionSizeName)
         End If
+    End Sub
+
+    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudCaptionSize, ucrInputTemp:=ucrInputGraphCaption, strThemeFunctionSizeName:="plot.caption", clsPlotElementTextSizeFunction:=clsPlotElementCaptionFunction)
         AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
-        If clsPlotElementTitleFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.title")
-        End If
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudTitleSize, ucrInputTemp:=ucrInputGraphTitle, strThemeFunctionSizeName:="plot.title", clsPlotElementTextSizeFunction:=clsPlotElementTitleFunction)
         AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
-        If clsPlotElementSubTitleFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.title")
-        End If
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudSubTitleSize, ucrInputTemp:=ucrInputGraphSubTitle, strThemeFunctionSizeName:="plot.subtitle", clsPlotElementTextSizeFunction:=clsPlotElementSubTitleFunction)
         AddRemoveTheme()
     End Sub
 

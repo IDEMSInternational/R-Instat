@@ -48,6 +48,8 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrSelectorStation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpMapOutline = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboSelectFilter = New instat.ucrInputComboBox()
+        Me.ucrChkSelectFilter = New instat.ucrCheck()
         Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
@@ -64,8 +66,6 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
-        Me.ucrChkSelectFilter = New instat.ucrCheck()
-        Me.ucrInputComboSelectFilter = New instat.ucrInputComboBox()
         Me.grpPoints.SuspendLayout()
         Me.grpBoxLabelOptions.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
@@ -376,6 +376,28 @@ Partial Class dlgClimaticStationMaps
         Me.grpMapOutline.TabStop = False
         Me.grpMapOutline.Text = "Map Outline"
         '
+        'ucrInputComboSelectFilter
+        '
+        Me.ucrInputComboSelectFilter.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboSelectFilter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboSelectFilter.GetSetSelectedIndex = -1
+        Me.ucrInputComboSelectFilter.IsReadOnly = False
+        Me.ucrInputComboSelectFilter.Location = New System.Drawing.Point(346, 249)
+        Me.ucrInputComboSelectFilter.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputComboSelectFilter.Name = "ucrInputComboSelectFilter"
+        Me.ucrInputComboSelectFilter.Size = New System.Drawing.Size(168, 32)
+        Me.ucrInputComboSelectFilter.TabIndex = 31
+        '
+        'ucrChkSelectFilter
+        '
+        Me.ucrChkSelectFilter.AutoSize = True
+        Me.ucrChkSelectFilter.Checked = False
+        Me.ucrChkSelectFilter.Location = New System.Drawing.Point(346, 203)
+        Me.ucrChkSelectFilter.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSelectFilter.Name = "ucrChkSelectFilter"
+        Me.ucrChkSelectFilter.Size = New System.Drawing.Size(180, 36)
+        Me.ucrChkSelectFilter.TabIndex = 31
+        '
         'ucrChkAddPoints
         '
         Me.ucrChkAddPoints.AutoSize = True
@@ -441,7 +463,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSelectorOutline.Location = New System.Drawing.Point(6, 22)
         Me.ucrSelectorOutline.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOutline.Name = "ucrSelectorOutline"
-        Me.ucrSelectorOutline.Size = New System.Drawing.Size(477, 411)
+        Me.ucrSelectorOutline.Size = New System.Drawing.Size(477, 293)
         Me.ucrSelectorOutline.TabIndex = 0
         '
         'contextMenuStripOptions
@@ -522,28 +544,6 @@ Partial Class dlgClimaticStationMaps
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(147, 36)
         Me.ucrChkLegend.TabIndex = 29
-        '
-        'ucrChkSelectFilter
-        '
-        Me.ucrChkSelectFilter.AutoSize = True
-        Me.ucrChkSelectFilter.Checked = False
-        Me.ucrChkSelectFilter.Location = New System.Drawing.Point(346, 203)
-        Me.ucrChkSelectFilter.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkSelectFilter.Name = "ucrChkSelectFilter"
-        Me.ucrChkSelectFilter.Size = New System.Drawing.Size(180, 36)
-        Me.ucrChkSelectFilter.TabIndex = 31
-        '
-        'ucrInputComboSelectFilter
-        '
-        Me.ucrInputComboSelectFilter.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboSelectFilter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboSelectFilter.GetSetSelectedIndex = -1
-        Me.ucrInputComboSelectFilter.IsReadOnly = False
-        Me.ucrInputComboSelectFilter.Location = New System.Drawing.Point(346, 249)
-        Me.ucrInputComboSelectFilter.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputComboSelectFilter.Name = "ucrInputComboSelectFilter"
-        Me.ucrInputComboSelectFilter.Size = New System.Drawing.Size(168, 32)
-        Me.ucrInputComboSelectFilter.TabIndex = 31
         '
         'dlgClimaticStationMaps
         '
