@@ -54,6 +54,10 @@ Public Class frmMain
     Public bQuartoPDF As Boolean = True
     Public bQuartoPPTX As Boolean = True
     Public bQuartoDOCX As Boolean = True
+    Public bQuartoEcho As Boolean = True          'Display Code
+    Public bQuartoWarning As Boolean = False      'Display Warnings
+    Public bQuartoMessage As Boolean = False      'Display R Messages
+    Public bQuartoEval As Boolean = True          'Give R Output
 
     Public ReadOnly Property DataBook As clsDataBook
         Get

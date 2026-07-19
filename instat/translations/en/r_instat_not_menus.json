@@ -6900,5 +6900,10 @@
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
   "Totals": "Totals",
-  "Label First and Last": "Label First and Last"
+  "Knitr Option": "Knitr Option",
+  "Display Code": "Display Code",
+  "Display R Messages": "Display R Messages",
+  "Display Warnings": "Display Warnings",
+  "Give R Output": "Give R Output",
+  "Save and Reopen Workspace:": "Save and Reopen Workspace:"
 }
