@@ -6899,6 +6899,7 @@
   "More Likert Graph (gglikert)": "More Likert Graph (gglikert)",
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
-  "Totals": "Totals",
-  "Label First and Last": "Label First and Last"
+  "Use ": "Use ",
+  "New Format": "New Format",
+  "Totals": "Totals"
 }
