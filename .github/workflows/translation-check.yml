@@ -18,20 +18,23 @@ jobs:
 
     steps:
       - name: Checkout trusted base tooling
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: base
           persist-credentials: false
 
       - name: Checkout PR content
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.sha }}
           path: pr
           fetch-depth: 0
           persist-credentials: false
+          # Reviewed opt-in: the PR checkout is treated only as data below;
+          # no PR code is executed in this privileged pull_request_target context.
+          allow-unsafe-pr-checkout: true
 
       - name: Fetch base branch for diff
         working-directory: pr
@@ -40,7 +43,7 @@ jobs:
           git fetch --no-tags base "refs/heads/${{ github.event.pull_request.base.ref }}:refs/remotes/base/${{ github.event.pull_request.base.ref }}"
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -58,7 +61,7 @@ jobs:
 
       - name: Add PR comment with results
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
