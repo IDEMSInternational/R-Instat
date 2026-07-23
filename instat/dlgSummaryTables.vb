@@ -204,6 +204,7 @@ Public Class dlgSummaryTables
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
         clsPivotWiderFunction.AddParameter("names_sort", "TRUE", iPosition:=2)
+        clsPivotWiderFunction.AddParameter("names_sep", Chr(34) & "\u241F" & Chr(34), iPosition:=3)
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
@@ -228,7 +229,7 @@ Public Class dlgSummaryTables
 
         ClsTabSpannerDelimFunction.SetPackageName("gt")
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
-        ClsTabSpannerDelimFunction.AddParameter("delim", Chr(34) & "_" & Chr(34))
+        ClsTabSpannerDelimFunction.AddParameter("delim", Chr(34) & "\u241F" & Chr(34))
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
