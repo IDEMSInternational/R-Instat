@@ -6,9 +6,6 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-    paths:
-      - 'instat/**/*.vb'
-      - 'instat/translations/**'
 
 permissions:
   contents: read
@@ -20,27 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout trusted base tooling
-        uses: actions/checkout@v4
+      # Check out R-Instat code
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
-          path: base
-          persist-credentials: false
-
-      - name: Checkout PR content
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
-          path: pr
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Fetch base branch for diff
-        working-directory: pr
-        run: |
-          git remote add base "https://github.com/${{ github.repository }}.git"
-          git fetch --no-tags base "refs/heads/${{ github.event.pull_request.base.ref }}:refs/remotes/base/${{ github.event.pull_request.base.ref }}"
           fetch-depth: 0   
 
       - name: Setup Python
