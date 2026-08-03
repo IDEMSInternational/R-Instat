@@ -6900,5 +6900,7 @@
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
   "Totals": "Totals",
-  "Label First and Last": "Label First and Last"
+  "Fraction": "Fraction",
+  "Zero": "Zero",
+  "Scientific": "Scientific"
 }
