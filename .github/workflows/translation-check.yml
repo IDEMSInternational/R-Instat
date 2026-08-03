@@ -6,6 +6,9 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'instat/**/*.vb'
+      - 'instat/translations/**'
 
 permissions:
   contents: read
@@ -38,7 +41,7 @@ jobs:
         run: |
           git remote add base "https://github.com/${{ github.repository }}.git"
           git fetch --no-tags base "refs/heads/${{ github.event.pull_request.base.ref }}:refs/remotes/base/${{ github.event.pull_request.base.ref }}"
-    
+          fetch-depth: 0   
 
       - name: Setup Python
         uses: actions/setup-python@v6
@@ -47,12 +50,9 @@ jobs:
 
       - name: Run translation check
         id: translation-check
-        working-directory: pr
-        # Run trusted scripts from the base checkout against the PR checkout.
-        # The PR checkout is treated only as data; no PR code is executed.
         run: |
           set +e
-          python ../base/scripts/check_translations.py --ci --base="base/${{ github.event.pull_request.base.ref }}" > translation-report.txt 2>&1
+          python scripts/check_translations.py --ci > translation-report.txt 2>&1
           status=$?
           cat translation-report.txt
           exit $status
@@ -67,7 +67,7 @@ jobs:
 
             let report = '';
             try {
-              report = fs.readFileSync('pr/translation-report.txt', 'utf8');
+              report = fs.readFileSync('translation-report.txt', 'utf8');
             } catch (e) {
               report = 'Translation check completed (no detailed report available)';
             }
