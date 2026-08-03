@@ -2701,7 +2701,7 @@ Public Class ucrCalculator
         Dim clsColorListFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("data_book$nrows")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsWakefieldNrowFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsColorListFunction.SetPackageName("grDevices")
         clsColorListFunction.SetRCommand("colors")
@@ -2722,7 +2722,7 @@ Public Class ucrCalculator
         Dim clsColorListFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("data_book$nrows")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsWakefieldNrowFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsColorListFunction.SetRCommand("c")
         clsColorListFunction.AddParameter("r", Chr(34) & "Red" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
@@ -2748,7 +2748,7 @@ Public Class ucrCalculator
         Dim clsStartDateFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("data_book$nrows")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsWakefieldNrowFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsStartDateFunction.SetRCommand("Sys.Date")
 
@@ -2771,7 +2771,7 @@ Public Class ucrCalculator
         Dim clsWakefieldNrowFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("data_book$nrows")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsWakefieldNrowFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsWakefieldDeathFunction.SetPackageName("wakefield")
         clsWakefieldDeathFunction.SetRCommand("death")
@@ -2787,7 +2787,7 @@ Public Class ucrCalculator
         Dim clsWakefieldNrowFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("data_book$nrows")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsWakefieldNrowFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsWakefieldgrade_letterFunction.SetPackageName("wakefield")
         clsWakefieldgrade_letterFunction.SetRCommand("grade_letter")
@@ -4679,7 +4679,7 @@ Public Class ucrCalculator
     Private Sub cmdFibonacci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci.Click
         Dim clsFibonacciFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand("data_book$nrows")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsFibonacciFunction.SetPackageName("Zseq")
@@ -4798,8 +4798,8 @@ Public Class ucrCalculator
         Dim clsNRowsFunction As New RFunction
         Dim clsGeneratePrimesFunction As New RFunction
 
-        clsNRowsFunction.SetRCommand("nrow")
-        clsNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsNRowsFunction.SetRCommand("data_book$nrows")
+        clsNRowsFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsGeneratePrimesFunction.SetPackageName("primes")
         clsGeneratePrimesFunction.SetRCommand("generate_n_primes")
@@ -4860,7 +4860,7 @@ Public Class ucrCalculator
         clsPrimesFunction.AddParameter("min", "0", iPosition:=0)
         clsPrimesFunction.AddParameter("max", "1000000", iPosition:=1)
 
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand("data_book$nrows")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRepFunction.SetRCommand("rep")
@@ -4895,7 +4895,7 @@ Public Class ucrCalculator
         Dim clsKTuplePrimeFunction As New RFunction
         Dim clsTuplePatternFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand("data_book$nrows")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsTuplePatternFunction.SetRCommand("c")
@@ -4925,8 +4925,8 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ZseqFunctions(strRCommand As String)
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsZseqFunction.SetPackageName("Zseq")
         clsZseqFunction.SetRCommand(strRCommand)
@@ -4943,8 +4943,8 @@ Public Class ucrCalculator
     Private Sub cmdCatalan_Click(sender As Object, e As EventArgs) Handles cmdCatalan.Click
         Dim clsCatalanFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsCatalanFunction.SetPackageName("Zseq")
         clsCatalanFunction.SetRCommand("Catalan")
@@ -4977,7 +4977,7 @@ Public Class ucrCalculator
     Private Sub cmdPadovan_Click(sender As Object, e As EventArgs) Handles cmdPadovan.Click
         Dim clsPadovanFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand("data_book$nrows")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsPadovanFunction.SetPackageName("Zseq")
@@ -5020,7 +5020,7 @@ Public Class ucrCalculator
         clsUglyFunction.AddParameter("n", "100", iPosition:=0)
         clsUglyFunction.AddParameter("gmp", "FALSE", iPosition:=1)
 
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand("data_book$nrows")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRepFunction.SetRCommand("rep")
@@ -5137,7 +5137,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLucas_Click(sender As Object, e As EventArgs) Handles cmdLucas.Click
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand("data_book$nrows")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsZseqFunction.SetPackageName("Zseq")
@@ -5500,8 +5500,8 @@ Public Class ucrCalculator
     Private Sub cmduniform_Click(sender As Object, e As EventArgs) Handles cmduniform.Click
         Dim clsUniformFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsUniformFunction.SetRCommand("runif")
         clsUniformFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5514,8 +5514,8 @@ Public Class ucrCalculator
     Private Sub cmdpoisson_Click(sender As Object, e As EventArgs) Handles cmdpoisson.Click
         Dim clsPoissonFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsPoissonFunction.SetRCommand("rpois")
         clsPoissonFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5527,8 +5527,8 @@ Public Class ucrCalculator
     Private Sub cmdRan_normal_Click(sender As Object, e As EventArgs) Handles cmdRan_normal.Click
         Dim clsNormalFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsNormalFunction.SetRCommand("rnorm")
         clsNormalFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5541,8 +5541,8 @@ Public Class ucrCalculator
     Private Sub cmduni_integer_Click(sender As Object, e As EventArgs) Handles cmduni_integer.Click
         Dim clsUnitegerFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsUnitegerFunction.SetRCommand("sample.int")
         clsUnitegerFunction.AddParameter("n", "5", iPosition:=0)
@@ -5555,8 +5555,8 @@ Public Class ucrCalculator
     Private Sub cmdbernoulli_Click(sender As Object, e As EventArgs) Handles cmdbernoulli.Click
         Dim clsBernoulliFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsBernoulliFunction.SetRCommand("rbinom")
         clsBernoulliFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5569,8 +5569,8 @@ Public Class ucrCalculator
     Private Sub cmdbinomial_Click(sender As Object, e As EventArgs) Handles cmdbinomial.Click
         Dim clsBinomialFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsBinomialFunction.SetRCommand("rbinom")
         clsBinomialFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5584,7 +5584,7 @@ Public Class ucrCalculator
         Dim clsNbinomialFunction As New RFunction
 
         clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsNbinomialFunction.SetRCommand("rnbinom")
         clsNbinomialFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5597,8 +5597,8 @@ Public Class ucrCalculator
     Private Sub cmdRan_gamma_Click(sender As Object, e As EventArgs) Handles cmdRan_gamma.Click
         Dim clsGammaFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsGammaFunction.SetRCommand("rgamma")
         clsGammaFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5611,8 +5611,8 @@ Public Class ucrCalculator
     Private Sub cmdRan_beta_Click(sender As Object, e As EventArgs) Handles cmdRan_beta.Click
         Dim clsBetaFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsBetaFunction.SetRCommand("rbeta")
         clsBetaFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
@@ -5625,8 +5625,8 @@ Public Class ucrCalculator
     Private Sub cmdRan_sample_Click(sender As Object, e As EventArgs) Handles cmdRan_sample.Click
         Dim clsSampleFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsDataFunction.SetRCommand("data_book$nrows")
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsSampleFunction.SetRCommand("sample")
         clsSampleFunction.AddParameter("x", " ", iPosition:=0)
