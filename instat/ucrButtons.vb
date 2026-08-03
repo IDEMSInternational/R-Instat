@@ -239,7 +239,19 @@ Public Class ucrButtons
             Else
                 strComment = ""
             End If
-            If bRun Then
+            If frmMain.bRecordQuarto Then
+
+                frmMain.clsRLink.RunScript(clsRsyntax.GetScript(),
+                                           clsRsyntax.iCallType,
+                                           strComment:=strComment,
+                                           bSeparateThread:=clsRsyntax.bSeparateThread)
+
+                AddToScriptWindow(clsRsyntax.GetScript(), True)
+
+                frmMain.SaveCurrentQuartoFile()
+
+
+            ElseIf bRun Then
                 frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 strExpected &= lstBeforeScripts(i) & vbLf
@@ -310,6 +322,10 @@ Public Class ucrButtons
             frmMain.AddToScriptWindow(strCloseCodeBlock,
                   bMakeVisible:=bMakeVisibleScriptWindow,
                   bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+        End If
+
+        If frmMain.bRecordQuarto Then
+            frmMain.SaveCurrentQuartoFile()
         End If
 
         CreateRScriptUsingXpBackEnd(strExpected)
