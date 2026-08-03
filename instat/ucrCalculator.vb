@@ -6205,8 +6205,8 @@ Public Class ucrCalculator
         Dim clsCmbnFunction As New RFunction
 
         Dim dataFrameName As String = ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
-        Dim DataFunction1 As String = "(nrow(" & dataFrameName & ")-1):0"
-        Dim DataFunction2 As String = " [1:nrow(" & dataFrameName & ")-1]"
+        Dim DataFunction1 As String = "(data_book$nrows(" & dataFrameName & ")-1):0"
+        Dim DataFunction2 As String = " [1:data_book$nrows(" & dataFrameName & ")-1]"
 
         clsCoeffs2Function.AddParameter("map", clsRFunctionParameter:=clsMapFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsCoeffs2Function.SetRCommand("as.numeric")
