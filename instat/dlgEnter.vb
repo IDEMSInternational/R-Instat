@@ -165,6 +165,7 @@ Public Class dlgEnter
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
         ucrChkStoreScalar.Checked = False
+        lblEnterLengthValue.Text = "-"
         SaveResults()
         TestOKEnabled()
     End Sub
@@ -458,4 +459,26 @@ Public Class dlgEnter
     Private Sub ucrSaveEnterResultInto_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveEnterResultInto.ControlContentsChanged
         SaveResults()
     End Sub
+    Private Sub ucrTryModelling_AfterTry(bValid As Boolean) Handles ucrTryModelling.AfterTry
+        UpdateEnterLengthDisplay(bValid)
+    End Sub
+
+    Private Sub UpdateEnterLengthDisplay(bValid As Boolean)
+        If Not bValid OrElse ucrReceiverForEnterCalculation.IsEmpty OrElse ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" Then
+            lblEnterLengthValue.Text = "-"
+            Exit Sub
+        End If
+
+        Dim strDataFrame As String = ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        Dim strExpression As String = ucrReceiverForEnterCalculation.GetText()
+        Dim strScript As String = "with(" & strDataFrame & ", length(" & strExpression & "))"
+        Dim expLength As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(strScript, bSilent:=True)
+
+        If expLength IsNot Nothing AndAlso Not expLength.Type = Internals.SymbolicExpressionType.Null Then
+            lblEnterLengthValue.Text = expLength.AsInteger(0).ToString()
+        Else
+            lblEnterLengthValue.Text = "-"
+        End If
+    End Sub
+
 End Class
