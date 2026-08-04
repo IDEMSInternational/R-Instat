@@ -690,6 +690,7 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(482, 550)
+        Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.grpDisplayVars)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
@@ -704,7 +705,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrReceiverSecondTwoVariableFactor)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
-        Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.ucrInputMarginName)
         Me.Controls.Add(Me.lblMarginName)
