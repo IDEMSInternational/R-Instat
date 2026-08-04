@@ -6901,5 +6901,8 @@
   "Cutoff": "Cutoff",
   "Use ": "Use ",
   "New Format": "New Format",
-  "Totals": "Totals"
+  "Totals": "Totals",
+  "Fraction": "Fraction",
+  "Zero": "Zero",
+  "Scientific": "Scientific"
 }
