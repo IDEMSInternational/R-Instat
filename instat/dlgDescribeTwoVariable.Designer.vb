@@ -135,7 +135,7 @@ Partial Class dlgDescribeTwoVariable
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(146, 365)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(148, 374)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdMissingOptions.TabIndex = 21
@@ -321,7 +321,7 @@ Partial Class dlgDescribeTwoVariable
         'lblMarginName
         '
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(15, 320)
+        Me.lblMarginName.Location = New System.Drawing.Point(17, 333)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(93, 15)
         Me.lblMarginName.TabIndex = 19
@@ -448,7 +448,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(15, 451)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(15, 440)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(306, 24)
@@ -460,7 +460,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(114, 318)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(116, 331)
         Me.ucrInputMarginName.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         Me.ucrInputMarginName.Size = New System.Drawing.Size(137, 21)
@@ -480,7 +480,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(15, 489)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 473)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -537,10 +537,10 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkDisplayMargins.AutoSize = True
         Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(17, 296)
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(17, 374)
         Me.ucrChkDisplayMargins.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(122, 23)
         Me.ucrChkDisplayMargins.TabIndex = 18
         '
         'ucrChkLevSig
@@ -607,7 +607,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkInteraction.AutoSize = True
         Me.ucrChkInteraction.Checked = False
-        Me.ucrChkInteraction.Location = New System.Drawing.Point(17, 293)
+        Me.ucrChkInteraction.Location = New System.Drawing.Point(17, 304)
         Me.ucrChkInteraction.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkInteraction.Name = "ucrChkInteraction"
         Me.ucrChkInteraction.Size = New System.Drawing.Size(143, 23)
@@ -689,7 +689,7 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(482, 550)
+        Me.ClientSize = New System.Drawing.Size(482, 531)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.grpDisplayVars)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
