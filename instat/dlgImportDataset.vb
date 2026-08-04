@@ -534,7 +534,6 @@ Public Class dlgImportDataset
         End Using
     End Sub
 
-
     Private Sub CheckAndRedirectNETCDFFiles()
         If strFileExtension = ".nc" Then
             Me.Close()
@@ -545,7 +544,6 @@ Public Class dlgImportDataset
             dlgOpenNetCDF.ShowDialog()
         End If
     End Sub
-
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportTextFileFormats, New RParameter("file", 0), iAdditionalPairNo:=1)
@@ -682,8 +680,6 @@ Public Class dlgImportDataset
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
             End If
-
-
         End If
 
         ucrInputFilePath.SetName(strFilePathR)
@@ -693,9 +689,6 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.Hide()
         ExcelSheetsPreviewVisible(False)
         ucrSaveFile.Hide()
-
-
-
 
         If bImportFromFolder Then
             'set the cleaned file names as the data frame names
@@ -729,7 +722,6 @@ Public Class dlgImportDataset
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
             End If
-
         Else
             'don't enable multiple files import for the following files; .rds, .xlsx, .xls
             ucrChkMultipleFiles.SetVisible(Not {".rds", ".xls", ".xlsx"}.Contains(strFileExtension))
