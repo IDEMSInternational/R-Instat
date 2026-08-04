@@ -4193,7 +4193,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLikert7.ClickNow can 
+    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLikert7.Click
         Dim clsWakefieldLikert7Function As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsLikert7ListFunction As New RFunction
