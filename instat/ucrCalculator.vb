@@ -4680,9 +4680,9 @@ Public Class ucrCalculator
         Dim clsFibonacciFunction As New RFunction
 
         clsDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$nrows")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
-        clsFibonacciFunction.SetPackageName("Zseq")
+        clsFibonacciFunction.SetPackageName("DescTools")
         clsFibonacciFunction.SetRCommand("Fibonacci")
         clsFibonacciFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
 
