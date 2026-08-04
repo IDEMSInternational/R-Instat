@@ -73,8 +73,10 @@ Public Class dlgImportDataset
         ElseIf bStartOpenDialog Then
             Me.BeginInvoke(Sub()
                                GetFileFromOpenDialog()
+                               CheckAndRedirectNETCDFFiles()
                            End Sub)
             bStartOpenDialog = False
+
         Else
             'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
             If String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
@@ -89,6 +91,7 @@ Public Class dlgImportDataset
                 End If
             End If
         End If
+
         HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
@@ -469,7 +472,7 @@ Public Class dlgImportDataset
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.qmd;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly;*.dat|" &
+            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.qmd;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly;*.nc;*.dat|" &
                              "Comma separated files|*.csv|" &
                              "Text data file|*.txt|" &
                              "Excel files|*.xls;*.xlsx|" &
@@ -497,8 +500,10 @@ Public Class dlgImportDataset
                              "Shallow XML documents|*.xml|" &
                              "Single-table HTML documents|*.html|" &
                              "DLY|*.dly|" &
+                             "NETCDF files|*.nc|" &
                              "DAT|*.dat|" &
                              "All files|*.*"
+
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
@@ -528,6 +533,19 @@ Public Class dlgImportDataset
             End If
         End Using
     End Sub
+
+
+    Private Sub CheckAndRedirectNETCDFFiles()
+        If strFileExtension = ".nc" Then
+            Me.Close()
+
+            If strFilePathR <> "" Then
+                dlgOpenNetCDF.SetFilePath(strFilePath:=strFilePathR)
+            End If
+            dlgOpenNetCDF.ShowDialog()
+        End If
+    End Sub
+
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportTextFileFormats, New RParameter("file", 0), iAdditionalPairNo:=1)
@@ -664,6 +682,8 @@ Public Class dlgImportDataset
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
             End If
+
+
         End If
 
         ucrInputFilePath.SetName(strFilePathR)
@@ -673,6 +693,9 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.Hide()
         ExcelSheetsPreviewVisible(False)
         ucrSaveFile.Hide()
+
+
+
 
         If bImportFromFolder Then
             'set the cleaned file names as the data frame names
@@ -977,6 +1000,7 @@ Public Class dlgImportDataset
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         GetFileFromOpenDialog()
+        CheckAndRedirectNETCDFFiles()
     End Sub
 
     Private Sub FillExcelSheets()
