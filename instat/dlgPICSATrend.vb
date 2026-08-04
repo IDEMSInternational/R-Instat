@@ -951,26 +951,27 @@ Public Class dlgPICSATrendGraph
     End Sub
 
     Private Sub AddRemoveGroupBy()
-
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
-            If clsBaseOperator.ContainsParameter("facets") Then
-                '' Feb 07 2026
-                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
+            If clsBaseOperator.ContainsParameter("facets") AndAlso Not ucrReceiverFacetBy.IsEmpty Then
                 Select Case ucrInputStation.GetText()
-                    Case strFacetWrap
+                    Case strFacetWrap, strFacetRow, strFacetRowAll, strFacetCol, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll
+                        clsGroupByFunction.AddParameter("facet_group",
+                                                ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False),
+                                                bIncludeArgumentName:=False,
+                                                iPosition:=1)
                 End Select
             End If
             If clsRaesFunction.ContainsParameter("colour") Then
                 clsGroupByFunction.AddParameter("colour",
-                                            ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False),
-                                            bIncludeArgumentName:=False,
-                                            iPosition:=0)
+                                        ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False),
+                                        bIncludeArgumentName:=False,
+                                        iPosition:=0)
             End If
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by",
-                                         clsRFunctionParameter:=clsGroupByFunction,
-                                         iPosition:=1)
+                                     clsRFunctionParameter:=clsGroupByFunction,
+                                     iPosition:=1)
             Else
                 clsPipeOperator.RemoveParameterByName("group_by")
             End If
