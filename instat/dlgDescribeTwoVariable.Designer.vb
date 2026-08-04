@@ -69,7 +69,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
-        Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
@@ -91,6 +90,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplayVars = New System.Windows.Forms.GroupBox()
         Me.ucrChkPercentagesVars = New instat.ucrCheck()
         Me.ucrPnlDisplayVars = New instat.UcrPanel()
+        Me.ucrSaveTable = New instat.ucrSave()
         Me.grpSummaries.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
         Me.grpDisplayVars.SuspendLayout()
@@ -342,7 +342,7 @@ Partial Class dlgDescribeTwoVariable
         'lblMarginName
         '
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(22, 480)
+        Me.lblMarginName.Location = New System.Drawing.Point(22, 489)
         Me.lblMarginName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(140, 22)
@@ -466,22 +466,13 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVars.TabIndex = 6
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         '
-        'ucrSaveTable
-        '
-        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(22, 676)
-        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(419, 36)
-        Me.ucrSaveTable.TabIndex = 24
-        '
         'ucrInputMarginName
         '
         Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(171, 477)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(171, 486)
         Me.ucrInputMarginName.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         Me.ucrInputMarginName.Size = New System.Drawing.Size(206, 32)
@@ -700,6 +691,15 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrPnlDisplayVars.Size = New System.Drawing.Size(302, 51)
         Me.ucrPnlDisplayVars.TabIndex = 50
         '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTable.Location = New System.Drawing.Point(26, 661)
+        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(419, 36)
+        Me.ucrSaveTable.TabIndex = 50
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -799,7 +799,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents grpDisplay As GroupBox
     Friend WithEvents ucrChkDisplayAsPercentage As ucrCheck
-    Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents ucrReceiverFirstVars As ucrReceiverMultiple
     Friend WithEvents ucrChkCorrelations As ucrCheck
     Friend WithEvents ucrChkSwapXYVar As ucrCheck
@@ -817,4 +816,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents rdoTotal As RadioButton
     Friend WithEvents ucrChkPercentagesVars As ucrCheck
     Friend WithEvents ucrPnlDisplayVars As UcrPanel
+    Friend WithEvents ucrSaveTable As ucrSave
 End Class

@@ -311,12 +311,14 @@ Public Class dlgDescribeTwoVariable
         clsCombineSwapAnova2Table.SetRCommand("c")
 
         clsMappingFunction.SetPackageName("purrr")
-        clsMappingFunction.SetRCommand("walk")
+        'clsMappingFunction.SetRCommand("walk")
+        clsMappingFunction.SetRCommand("map")
         clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsYlistOperator, iPosition:=0)
         clsMappingFunction.AddParameter(".f", clsROperatorParameter:=clsAnovaTable2Operator, iPosition:=1)
 
         clsMapping2Function.SetPackageName("purrr")
-        clsMapping2Function.SetRCommand("walk")
+        'clsMapping2Function.SetRCommand("walk")
+        clsMapping2Function.SetRCommand("map")
         clsMapping2Function.AddParameter(".x", clsROperatorParameter:=clsYlist2Operator, iPosition:=0)
         clsMapping2Function.AddParameter(".f", clsROperatorParameter:=clsAnovaSwapTable2Opeator, iPosition:=1)
 
@@ -684,7 +686,6 @@ Public Class dlgDescribeTwoVariable
             ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
-                'ucrSaveTable.Reset()
                 clsMappingFunction.RemoveAssignTo()
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
@@ -712,13 +713,13 @@ Public Class dlgDescribeTwoVariable
                 ucrChkMeans.Location = New Point(310, 210)
 
             ElseIf IsNumericByFactor() Then
+                ucrSaveTable.Visible = True
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 ucrChkInteraction.Visible = False
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
                 ucrChkTotal.Visible = True
-                ucrSaveTable.Visible = True
-                ucrSaveTable.Location = New Point(23, 450)
+                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 450)
                 ucrChkTotal.Location = New Point(310, 189)
                 ucrChkMeans.Location = New Point(310, 210)
                 ucrChkLevSig.Location = New Point(397, 186)
@@ -727,7 +728,6 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_model")
                 ucrSaveTable.SetCheckBoxText("Store Model")
-
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
                 cmdFormatTable.Visible = True
@@ -813,6 +813,7 @@ Public Class dlgDescribeTwoVariable
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                                     strObjectName:="last_table")
             ElseIf IsFactorByNumericByNumeric() Then
+
                 cmdFormatTable.Visible = True
                 ucrSaveTable.Visible = True
                 ucrSaveTable.Location = New Point(iUcrBaseXLocation, 300)
@@ -969,6 +970,13 @@ Public Class dlgDescribeTwoVariable
         ChangeBaseRCode()
     End Sub
 
+    'Private Sub CheckSaveControlVisibility()
+    '    If (Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondTwoVariableFactor.IsEmpty) OrElse Not ucrReceiverSkimrGroupByFactor.IsEmpty OrElse
+    '        Not ucrReceiverSecondSkimrGroupByFactor.IsEmpty OrElse Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
+    '        ChangeBaseRCode()
+    '    End If
+    'End Sub
+
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
 
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -1023,8 +1031,8 @@ Public Class dlgDescribeTwoVariable
                     cmdFormatTable.Location = New Point(330, 450)
                 End If
             ElseIf IsNumericByFactor() Then
-                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 329)
-                ucrSaveTable.Size = New Point(350, 30)
+                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 349)
+                ucrSaveTable.Size = New Point(350, 20)
                 ucrBase.Location = New Point(iUcrBaseXLocation, 369)
                 Me.Size = New Point(iDialogueXsize, 465)
             ElseIf IsFactorByFactor() Then
