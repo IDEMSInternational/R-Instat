@@ -263,6 +263,12 @@
     <Compile Include="dlgDefineTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDescribeMoreLikertGraphs.Designer.vb">
+      <DependentUpon>dlgDescribeMoreLikertGraphs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeMoreLikertGraphs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeOneVariableLikertGraph.Designer.vb">
       <DependentUpon>dlgDescribeOneVariableLikertGraph.vb</DependentUpon>
     </Compile>

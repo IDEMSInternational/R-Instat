@@ -3262,4 +3262,8 @@ Public Class frmMain
     Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
         dlgCheckSummary.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesMoreLikert_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesMoreLikert.Click
+        dlgDescribeTwoVariableMoreLikertGraphs.ShowDialog()
+    End Sub
 End Class
