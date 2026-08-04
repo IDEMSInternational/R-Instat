@@ -32,7 +32,8 @@ Public Class dlgDescribeTwoVarGraph
             clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
             clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
-            clsScaleColourViridisFunction, clsAesLabelFunction, clsAesXLabelFunction, clsAesYLabelFunction, clsPairThemesFunction As New RFunction
+            clsScaleColourViridisFunction, clsAesLabelFunction, clsAesXLabelFunction, clsAesYLabelFunction, clsPairThemesFunction, clsSidePlotThemeFunction,
+            clsTextXTopElementFunction, clsTicksXTopElementFunction, clsTitleXTopElementFunction As New RFunction
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
@@ -122,7 +123,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverColour.SetLinkedDisplayControl(lblColour)
         ucrReceiverColour.bWithQuotes = False
 
-        ucrReceiverFill.SetParameter(New RParameter("Fill", iNewPosition:=0))
+        ucrReceiverFill.SetParameter(New RParameter("fill", iNewPosition:=0))
         ucrReceiverFill.SetParameterIsString()
         ucrReceiverFill.SetDataType("factor")
         ucrReceiverFill.strSelectorHeading = "Factors"
@@ -378,6 +379,10 @@ Public Class dlgDescribeTwoVarGraph
         clsDiagonalListFunction = New RFunction
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
+        clsSidePlotThemeFunction = New RFunction
+        clsTextXTopElementFunction = New RFunction
+        clsTicksXTopElementFunction = New RFunction
+        clsTitleXTopElementFunction = New RFunction
         clsBaseOperator = New ROperator
 
         bResetSubdialog = True
@@ -604,6 +609,22 @@ Public Class dlgDescribeTwoVarGraph
         clsStatSummaryCrossbar.AddParameter("size", "0.5", iPosition:=6)
         clsStatSummaryCrossbar.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=7)
 
+        clsTextXTopElementFunction.SetPackageName("ggplot2")
+        clsTextXTopElementFunction.SetRCommand("element_blank")
+
+        clsTicksXTopElementFunction.SetPackageName("ggplot2")
+        clsTicksXTopElementFunction.SetRCommand("element_blank")
+
+        clsTitleXTopElementFunction.SetPackageName("ggplot2")
+        clsTitleXTopElementFunction.SetRCommand("element_blank")
+
+        clsSidePlotThemeFunction.SetPackageName("ggplot2")
+        clsSidePlotThemeFunction.SetRCommand("theme")
+        clsSidePlotThemeFunction.AddParameter("ggside.panel.scale", "0.3", iPosition:=0)
+        clsSidePlotThemeFunction.AddParameter("axis.text.x.top", clsRFunctionParameter:=clsTextXTopElementFunction, iPosition:=1)
+        clsSidePlotThemeFunction.AddParameter("axis.ticks.x.top", clsRFunctionParameter:=clsTicksXTopElementFunction, iPosition:=2)
+        clsSidePlotThemeFunction.AddParameter("axis.title.x.top", clsRFunctionParameter:=clsTitleXTopElementFunction, iPosition:=3)
+
         clsBaseOperator.AddParameter("facet_wrap", clsRFunctionParameter:=clsRFacet)
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -652,7 +673,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
-
+        ucrReceiverFill.SetRCode(clsAesNumericByCategoricalYNumeric, bReset)
         If bReset Then
             ucrChkXSidePlot.SetRCode(clsDummyFunction, bReset)
             ucrChkYSidePlot.SetRCode(clsDummyFunction, bReset)
@@ -729,6 +750,7 @@ Public Class dlgDescribeTwoVarGraph
             ucrInputCategoricalByCategorical.Visible = False
             RemoveAllGeomsStats()
             If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" Then
+                ucrChkXSidePlot.Visible = True
                 ucrInputNumericByNumeric.Visible = True
                 AddRemoveFreeScaleX(False)
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByNumeric, iPosition:=0)
@@ -746,12 +768,15 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" Then
+                ucrChkXSidePlot.Visible = False
                 ucrInputCategoricalByNumeric.Visible = True
                 ucrChkFreeScaleYAxis.Checked = False
                 ucrChkFreeScaleYAxis.Visible = False
                 AddRemoveFreeScaleX(True)
                 Select Case ucrInputCategoricalByNumeric.GetText
                     Case "Boxplot"
+                        ucrInputYSidePlotOptions.SetItems({"boxplot"})
+                        ucrInputYSidePlotOptions.SetName("ysideboxplot")
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericYNumeric
                         clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
@@ -818,6 +843,7 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_freqpoly", clsRFunctionParameter:=clsGeomFreqPoly, iPosition:=1)
                 End Select
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+                ucrChkXSidePlot.Visible = False
                 ucrInputNumericByCategorical.Visible = True
                 AddRemoveFreeScaleX(True)
                 Select Case ucrInputNumericByCategorical.GetText
@@ -1268,6 +1294,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsAesXLabelFunction.AddParameter("fill", ucrReceiverFill.GetVariableNames(bWithQuotes:=False), iPosition:=5)
                 clsXsideHistogramFunction.AddParameter("aes", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
         End Select
+        AddRemoveSidePlotThemeFunction()
     End Sub
 
     Private Sub AddedYSidePlots()
@@ -1302,8 +1329,9 @@ Public Class dlgDescribeTwoVarGraph
             Case "ysideboxplot"
                 clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideBoxplotFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsideBoxplotFunction.AddParameter("alpha", "0.35", iPosition:=2)
-                clsYsideBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
                 clsAesYLabelFunction.AddParameter("fill", ucrReceiverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
+                clsAesYLabelFunction.AddParameter("x", "1", iPosition:=3)
+                clsYsideBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
             Case "ysidefreqpoly"
                 clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideFreqployFunction, bIncludeArgumentName:=False, iPosition:=1)
                 clsYsideFreqployFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=2)
@@ -1314,6 +1342,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsYsideHistogramFunction.AddParameter("aes", clsRFunctionParameter:=clsAesYLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
                 clsAesYLabelFunction.AddParameter("fill", ucrReceiverFill.GetVariableNames(bWithQuotes:=False), iPosition:=4)
         End Select
+        AddRemoveSidePlotThemeFunction()
     End Sub
 
     Private Sub HideShowFillReceiver()
@@ -1321,6 +1350,14 @@ Public Class dlgDescribeTwoVarGraph
             ucrReceiverFill.Visible = False
         Else
             ucrReceiverFill.Visible = True
+        End If
+    End Sub
+
+    Private Sub AddRemoveSidePlotThemeFunction()
+        If ucrChkXSidePlot.Checked OrElse ucrChkYSidePlot.Checked Then
+            clsBaseOperator.AddParameter("side_plot_theme", clsRFunctionParameter:=clsSidePlotThemeFunction, bIncludeArgumentName:=False, iPosition:=8)
+        Else
+            clsBaseOperator.RemoveParameterByName("side_plot_theme")
         End If
     End Sub
 
