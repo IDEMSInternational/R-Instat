@@ -166,8 +166,13 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub SetInternalFilePathName()
-        If strFilePathName <> "" AndAlso ucrInputPath IsNot Nothing AndAlso ucrInputPath.IsEmpty Then
+        Dim strFileName As String
+
+        If strFilePathName <> "" AndAlso ucrInputPath IsNot Nothing Then
             ucrInputPath.SetName(strFilePathName)
+            strFileName = Path.GetFileNameWithoutExtension(strFilePathName)
+            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+            clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFilePathName, "\", "/") & Chr(34))
         End If
     End Sub
 
