@@ -121,8 +121,8 @@ Public Class ucrButtons
             'Add the new chunk to the Quarto document
             OnScriptButtonsClick(sender, e, False, False)
 
-            'Render the updated Quarto document
-            frmMain.ucrScriptWindow.RunCurrentQuarto()
+            'Run the same R code so output appears in the Output window
+            OnScriptButtonsClick(sender, e, True, False)
 
             If Not sender Is toolStripMenuItemOkKeep Then
                 ParentForm.Close()
