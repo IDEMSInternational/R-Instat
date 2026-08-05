@@ -75,7 +75,7 @@ Public Class ucrCalculator
         'Temp disabled::Needs discussions to see if they are needed
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
-        ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
+        ttCalculator.SetToolTip(cmdSignif, "signif(x,3) to round to 3 significant figures")
 
         'Transform keyboard tooltips
         ttCalculator.SetToolTip(cmdSortF, """Use only With extreme care"" sorts a vector into ascending Or descending order. For example sort(c(5, 7, 4, 4, 3)) = (3, 4, 4, 5, 7)")
@@ -1270,7 +1270,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdSiginf_Click(sender As Object, e As EventArgs) Handles cmdSiginf.Click
+    Private Sub cmdSiginf_Click(sender As Object, e As EventArgs) Handles cmdSignif.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= , digits=6)", 12)
         Else

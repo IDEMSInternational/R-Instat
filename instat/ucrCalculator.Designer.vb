@@ -284,7 +284,7 @@ Partial Class ucrCalculator
         Me.cmdLogit = New System.Windows.Forms.Button()
         Me.cmdSign = New System.Windows.Forms.Button()
         Me.cmdRound = New System.Windows.Forms.Button()
-        Me.cmdSiginf = New System.Windows.Forms.Button()
+        Me.cmdSignif = New System.Windows.Forms.Button()
         Me.cmdAbs = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
         Me.cmdDeg = New System.Windows.Forms.Button()
@@ -3502,7 +3502,7 @@ Partial Class ucrCalculator
         Me.grpMaths.Controls.Add(Me.cmdLogit)
         Me.grpMaths.Controls.Add(Me.cmdSign)
         Me.grpMaths.Controls.Add(Me.cmdRound)
-        Me.grpMaths.Controls.Add(Me.cmdSiginf)
+        Me.grpMaths.Controls.Add(Me.cmdSignif)
         Me.grpMaths.Controls.Add(Me.cmdAbs)
         Me.grpMaths.Controls.Add(Me.cmdExp)
         Me.grpMaths.Controls.Add(Me.cmdDeg)
@@ -3631,15 +3631,15 @@ Partial Class ucrCalculator
         '
         'cmdSiginf
         '
-        Me.cmdSiginf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdSiginf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSiginf.Location = New System.Drawing.Point(100, 101)
-        Me.cmdSiginf.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdSiginf.Name = "cmdSiginf"
-        Me.cmdSiginf.Size = New System.Drawing.Size(50, 30)
-        Me.cmdSiginf.TabIndex = 145
-        Me.cmdSiginf.Text = "siginf"
-        Me.cmdSiginf.UseVisualStyleBackColor = True
+        Me.cmdSignif.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdSignif.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSignif.Location = New System.Drawing.Point(100, 101)
+        Me.cmdSignif.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdSignif.Name = "cmdSignif"
+        Me.cmdSignif.Size = New System.Drawing.Size(50, 30)
+        Me.cmdSignif.TabIndex = 145
+        Me.cmdSignif.Text = "signif"
+        Me.cmdSignif.UseVisualStyleBackColor = True
         '
         'cmdAbs
         '
@@ -8912,7 +8912,7 @@ Partial Class ucrCalculator
     Friend WithEvents grpMaths As GroupBox
     Friend WithEvents cmdSign As Button
     Friend WithEvents cmdRound As Button
-    Friend WithEvents cmdSiginf As Button
+    Friend WithEvents cmdSignif As Button
     Friend WithEvents cmdAbs As Button
     Friend WithEvents cmdExp As Button
     Friend WithEvents cmdDeg As Button

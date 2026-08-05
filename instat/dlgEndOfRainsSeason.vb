@@ -365,6 +365,7 @@ Public Class dlgEndOfRainsSeason
 
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
+        ucrSaveObject.SetDataNameAsRVariable("linked_data_name")
         ucrSaveObject.SetCheckBoxText("Store Definitions:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)

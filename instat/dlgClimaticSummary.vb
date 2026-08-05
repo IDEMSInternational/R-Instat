@@ -165,6 +165,7 @@ Public Class dlgClimaticSummary
 
         ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveObject.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
+        ucrSaveObject.SetDataNameAsRVariable("linked_data_name")
         ucrSaveObject.SetLabelText("Name:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
@@ -371,7 +372,15 @@ Public Class dlgClimaticSummary
         If Not bUseDate Then
             sdgDoyRange.ucrChkUseDate.Checked = False
         End If
+
         sdgDoyRange.ShowDialog()
+
+        If sdgDoyRange.IsSeasonal Then
+            clsBuildClimaticSummaryDefinitions.AddParameter("seasonal", "TRUE", iPosition:=4)
+        Else
+            clsBuildClimaticSummaryDefinitions.RemoveParameterByName("seasonal")
+        End If
+
         UpdateDayFilterPreview()
         AddDayRange()
         AddDateDoy()

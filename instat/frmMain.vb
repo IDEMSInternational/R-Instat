@@ -2896,8 +2896,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Trend
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATrendGraph.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
