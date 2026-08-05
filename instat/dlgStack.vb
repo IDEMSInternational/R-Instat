@@ -92,6 +92,9 @@ Public Class dlgStack
         ucrReceiverFrequency.Selector = ucrSelectorStack
         ucrReceiverFrequency.SetParameterIsString()
 
+        ucrNudSets.SetParameter(New RParameter("num", 1, bNewIncludeArgumentName:=False))
+        ucrNudSets.Minimum = 2
+
         ucrReceiverDropValues.SetParameter(New RParameter("drop", 4))
         ucrReceiverDropValues.Selector = ucrSelectorStack
         ucrReceiverDropValues.SetParameterIsString()
@@ -128,6 +131,7 @@ Public Class dlgStack
         dctNamesSep.Add("Underscore _", Chr(34) & "_" & Chr(34))
         dctNamesSep.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         ucrInputNamesSep.SetItems(dctNamesSep)
+        ucrInputNamesSep.SetRDefault(Chr(34) & "\\." & Chr(34))
 
         ucrFactorInto.SetParameter(New RParameter("timevar", 3))
         ucrFactorInto.SetRDefault("variable")
@@ -262,6 +266,8 @@ Public Class dlgStack
 
         clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
         clsDummyFunction.AddParameter("checked", "all_columns", iPosition:=1)
+        clsDummyFunction.AddParameter("check", "separate", iPosition:=2)
+
 
         clsPivotLongerFunction.SetRCommand("pivot_longer")
         clsPivotLongerFunction.SetPackageName("tidyr")
@@ -312,7 +318,7 @@ Public Class dlgStack
         clsStackOperator.AddParameter("right3", clsRFunctionParameter:=clsSelectIDFunction, iPosition:=3)
         clsStackOperator.AddParameter("right4", clsRFunctionParameter:=clsStackMultipleFunction, iPosition:=4)
         clsStackOperator.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
-
+        AddStackNamesParmeter()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
     End Sub
@@ -343,11 +349,13 @@ Public Class dlgStack
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputNamesSep.SetRCode(clsStackMultipleFunction, bReset)
         ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
+        ucrNudSets.SetRCode(clsMakePatternsFunction, bReset)
         If bReset Then
             ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
             ucrChkDropVariables.SetRCode(clsDummyFunction, bReset)
             ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
             ucrPnlCarryColumns.SetRCode(clsDummyFunction, bReset)
+            ucrPnlMultipleStack.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -420,6 +428,8 @@ Public Class dlgStack
             ucrBase.clsRsyntax.SetBaseRFunction(clsTypeConvertFunction)
             ucrReceiverExpand.SetMeAsReceiver()
         End If
+        AddStackNamesParmeter()
+        HideShowControls()
     End Sub
 
     Private Sub CarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCarryColumns.ControlValueChanged,
@@ -451,12 +461,14 @@ Public Class dlgStack
             Next
 
         End If
+        Dim lstControlVars As List(Of String) = ucrReceiverColumnsToBeStack.GetVariableNamesAsList()
 
-        'Dim iPosition As Integer = 0
-        For Each strColumn In ucrReceiverColumnsToBeStack.GetVariableNamesAsList
-            clsMakePatternsFunction.AddParameter("items", strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-            iPosition = iPosition + 1
-        Next
+        Dim strControlVar As String = "c(" &
+    String.Join(", ", lstControlVars.Select(Function(x) Chr(34) & x & Chr(34))) &
+    ")"
+
+        clsMakePatternsFunction.AddParameter("items", strControlVar, iPosition:=0)
+
         AddRemoveDataOrPipeOperator()
     End Sub
 
@@ -495,6 +507,7 @@ Public Class dlgStack
                 ucrReceiverColumnsToBeStack.SetMeAsReceiver()
             End If
         End If
+        AddStackNamesParmeter()
         TestOKEnabled()
         HideShowControls()
     End Sub
@@ -514,6 +527,7 @@ Public Class dlgStack
                 ucrInputDropPrefix.Visible = False
             End If
         End If
+        grpStackColSets.Visible = rdoPivotLonger.Checked AndAlso ucrChkStackMultipleSets.Checked
     End Sub
 
     Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrReceiverFrequency.ControlValueChanged, ucrSelectorStack.ControlValueChanged
@@ -604,11 +618,19 @@ Public Class dlgStack
     End Sub
 
     Private Sub AddStackNamesParmeter()
+        ' Remove both parameters first
+        clsStackMultipleFunction.RemoveParameterByName("names_sep")
+        clsStackMultipleFunction.RemoveParameterByName("names_pattern")
+
         If rdoSeperatedBy.Checked Then
             clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=1)
         Else
             clsStackMultipleFunction.AddParameter("names_pattern", clsRFunctionParameter:=clsMakePatternsFunction, iPosition:=1)
 
         End If
+    End Sub
+
+    Private Sub ucrPnlMultipleStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMultipleStack.ControlValueChanged
+        AddStackNamesParmeter()
     End Sub
 End Class
