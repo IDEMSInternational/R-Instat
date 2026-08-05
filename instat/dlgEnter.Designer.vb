@@ -78,7 +78,6 @@ Partial Class dlgEnter
         Me.ttEnter = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStripBase = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuBase = New System.Windows.Forms.ToolStripMenuItem()
-        Me.checkScalars = New System.Windows.Forms.CheckBox()
         Me.lblEnterLength = New System.Windows.Forms.Label()
         Me.lblEnterLengthValue = New System.Windows.Forms.Label()
         Me.ucrChkStoreScalar = New instat.ucrCheck()
@@ -245,7 +244,7 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdConcantenateFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdExponential)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdQuotes)
-        Me.grpEnterKeyboard2.Location = New System.Drawing.Point(441, 50)
+        Me.grpEnterKeyboard2.Location = New System.Drawing.Point(477, 50)
         Me.grpEnterKeyboard2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -280,7 +279,7 @@ Partial Class dlgEnter
         'btnExample
         '
         Me.btnExample.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnExample.Location = New System.Drawing.Point(436, 16)
+        Me.btnExample.Location = New System.Drawing.Point(443, 16)
         Me.btnExample.Margin = New System.Windows.Forms.Padding(2)
         Me.btnExample.Name = "btnExample"
         Me.btnExample.Size = New System.Drawing.Size(64, 22)
@@ -309,7 +308,7 @@ Partial Class dlgEnter
         Me.grpBasic.Controls.Add(Me.cmd2)
         Me.grpBasic.Controls.Add(Me.cmd0)
         Me.grpBasic.Controls.Add(Me.cmd1)
-        Me.grpBasic.Location = New System.Drawing.Point(233, 51)
+        Me.grpBasic.Location = New System.Drawing.Point(265, 51)
         Me.grpBasic.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpBasic.Name = "grpBasic"
         Me.grpBasic.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -546,22 +545,11 @@ Partial Class dlgEnter
         Me.ToolStripMenuBase.Size = New System.Drawing.Size(98, 22)
         Me.ToolStripMenuBase.Text = "base"
         '
-        'checkScalars
-        '
-        Me.checkScalars.AutoSize = True
-        Me.checkScalars.Location = New System.Drawing.Point(233, 193)
-        Me.checkScalars.Margin = New System.Windows.Forms.Padding(2)
-        Me.checkScalars.Name = "checkScalars"
-        Me.checkScalars.Size = New System.Drawing.Size(61, 17)
-        Me.checkScalars.TabIndex = 216
-        Me.checkScalars.Text = "Scalars"
-        Me.checkScalars.UseVisualStyleBackColor = True
-        '
         'lblEnterLength
         '
         Me.lblEnterLength.AutoSize = True
         Me.lblEnterLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEnterLength.Location = New System.Drawing.Point(414, 237)
+        Me.lblEnterLength.Location = New System.Drawing.Point(426, 237)
         Me.lblEnterLength.Name = "lblEnterLength"
         Me.lblEnterLength.Size = New System.Drawing.Size(43, 13)
         Me.lblEnterLength.TabIndex = 217
@@ -572,7 +560,7 @@ Partial Class dlgEnter
         Me.lblEnterLengthValue.AutoSize = True
         Me.lblEnterLengthValue.BackColor = System.Drawing.Color.White
         Me.lblEnterLengthValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEnterLengthValue.Location = New System.Drawing.Point(480, 237)
+        Me.lblEnterLengthValue.Location = New System.Drawing.Point(492, 237)
         Me.lblEnterLengthValue.Name = "lblEnterLengthValue"
         Me.lblEnterLengthValue.Size = New System.Drawing.Size(10, 13)
         Me.lblEnterLengthValue.TabIndex = 218
@@ -597,14 +585,14 @@ Partial Class dlgEnter
         Me.ucrSelectorEnter.Location = New System.Drawing.Point(13, 41)
         Me.ucrSelectorEnter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorEnter.Name = "ucrSelectorEnter"
-        Me.ucrSelectorEnter.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorEnter.Size = New System.Drawing.Size(249, 183)
         Me.ucrSelectorEnter.TabIndex = 214
         '
         'cmdRHelp
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripBase
-        Me.cmdRHelp.Location = New System.Drawing.Point(526, 187)
+        Me.cmdRHelp.Location = New System.Drawing.Point(562, 187)
         Me.cmdRHelp.Name = "cmdRHelp"
         Me.cmdRHelp.Size = New System.Drawing.Size(68, 23)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripBase
@@ -659,10 +647,9 @@ Partial Class dlgEnter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(596, 396)
+        Me.ClientSize = New System.Drawing.Size(639, 396)
         Me.Controls.Add(Me.lblEnterLengthValue)
         Me.Controls.Add(Me.lblEnterLength)
-        Me.Controls.Add(Me.checkScalars)
         Me.Controls.Add(Me.ucrChkStoreScalar)
         Me.Controls.Add(Me.ucrSelectorEnter)
         Me.Controls.Add(Me.cmdRHelp)
@@ -735,7 +722,6 @@ Partial Class dlgEnter
     Friend WithEvents ToolStripMenuBase As ToolStripMenuItem
     Friend WithEvents ucrSelectorEnter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrChkStoreScalar As ucrCheck
-    Friend WithEvents checkScalars As CheckBox
     Friend WithEvents lblEnterLength As Label
     Friend WithEvents lblEnterLengthValue As Label
 End Class
