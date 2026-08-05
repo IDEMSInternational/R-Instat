@@ -102,16 +102,21 @@ Public Class frmMain
 
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+    End Sub
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            'Initialise Cef runtime here (rather than in the constructor) so that any message
+            'shown is properly owned by the visible main form and only ever appears once at startup.
+            'If the runtime fails to initialise, R-Instat still works - html outputs are then
+            'shown in the default browser instead of the output window.
             If Not CefRuntimeWrapper.InitialiseCefRuntime() Then
                 MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Html content will be shown in your default browser.",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
 
         End If
-    End Sub
-
-    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         '---------------------------------------
         'Gets the path for the executable file that started the application, not including the executable name.
