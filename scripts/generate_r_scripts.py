@@ -91,8 +91,6 @@ def _github_line(pkg: dict) -> str:
     deps_r = "TRUE" if _install_deps(pkg) else "FALSE"
     parts = [f'pak::pak("{pkg["installed_from"]}"']
     parts.append(f"dependencies = {deps_r}")
-    if pkg.get("ask"):
-        parts.append("ask = FALSE")
     parts.append("ask = FALSE")
     return ", ".join(parts) + ")"
 
