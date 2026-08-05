@@ -6903,6 +6903,12 @@
   "Fill (Third Variable)": "Fill (Third Variable)",
   "X Side Plot": "X Side Plot",
   "Y Side Plot": "Y Side Plot",
+  "Knitr Option": "Knitr Option",
+  "Display Code": "Display Code",
+  "Display R Messages": "Display R Messages",
+  "Display Warnings": "Display Warnings",
+  "Give R Output": "Give R Output",
+  "Save and Reopen Workspace:": "Save and Reopen Workspace:",
   "Fraction": "Fraction",
   "Zero": "Zero",
   "Scientific": "Scientific"
