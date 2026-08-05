@@ -287,6 +287,12 @@
     <Compile Include="dlgEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExperimentsGreaterthanDesign.Designer.vb">
+      <DependentUpon>dlgExperimentsGreaterthanDesign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExperimentsGreaterthanDesign.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportClimaticDefinitions.Designer.vb">
       <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
     </Compile>
@@ -341,6 +347,18 @@
     <Compile Include="dlgImportOpenAppBuilder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgModelGreaterThanMultipleComparisons.Designer.vb">
+      <DependentUpon>dlgModelGreaterThanMultipleComparisons.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgModelGreaterThanMultipleComparisons.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgModelGreaterThanOneButton.Designer.vb">
+      <DependentUpon>dlgModelGreaterThanOneButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgModelGreaterThanOneButton.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgModellingTree.Designer.vb">
       <DependentUpon>dlgModellingTree.vb</DependentUpon>
     </Compile>
@@ -357,6 +375,12 @@
       <DependentUpon>dlgPlacketLuceModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPlacketLuceModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPrepareDataReshapeGreaterThanUnnest.Designer.vb">
+      <DependentUpon>dlgPrepareDataReshapeGreaterThanUnnest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPrepareDataReshapeGreaterThanUnnest.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
@@ -3534,6 +3558,9 @@
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExperimentsGreaterthanDesign.resx">
+      <DependentUpon>dlgExperimentsGreaterthanDesign.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportClimaticDefinitions.resx">
       <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3581,6 +3608,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMachineLearning.resx">
       <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgModelGreaterThanMultipleComparisons.resx">
+      <DependentUpon>dlgModelGreaterThanMultipleComparisons.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgModelGreaterThanOneButton.resx">
+      <DependentUpon>dlgModelGreaterThanOneButton.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgModellingTree.resx">
       <DependentUpon>dlgModellingTree.vb</DependentUpon>
