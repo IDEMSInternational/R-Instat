@@ -5583,7 +5583,7 @@ Public Class ucrCalculator
     Private Sub cmdnbinomial_Click(sender As Object, e As EventArgs) Handles cmdnbinomial.Click
         Dim clsNbinomialFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$nrows")
         clsDataFunction.AddParameter("x", """" & ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString() & """", iPosition:=0)
 
         clsNbinomialFunction.SetRCommand("rnbinom")
