@@ -6909,5 +6909,11 @@
   "Save and Reopen Workspace:": "Save and Reopen Workspace:",
   "Fraction": "Fraction",
   "Zero": "Zero",
-  "Scientific": "Scientific"
+  "Scientific": "Scientific",
+  "Stack Into N Sets": "Stack Into N Sets",
+  "Names Separator": "Names Separator",
+  "Stack Column Sets": "Stack Column Sets",
+  "Number of Sets ": "Number of Sets ",
+  "Variable Names": "Variable Names",
+  "Limit Length": "Limit Length"
 }
