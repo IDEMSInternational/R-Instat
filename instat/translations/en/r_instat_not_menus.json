@@ -6900,5 +6900,7 @@
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
   "Totals": "Totals",
-  "Label First and Last": "Label First and Last"
+  "Fill (Third Variable)": "Fill (Third Variable)",
+  "X Side Plot": "X Side Plot",
+  "Y Side Plot": "Y Side Plot"
 }
