@@ -6902,5 +6902,9 @@
   "Totals": "Totals",
   "Fraction": "Fraction",
   "Zero": "Zero",
-  "Scientific": "Scientific"
+  "Scientific": "Scientific",
+  "dlgExperimentsGreaterthanDesign": "dlgExperimentsGreaterthanDesign",
+  "dlgModelGreaterThanMultipleComparisons": "dlgModelGreaterThanMultipleComparisons",
+  "dlgModelGreaterThanOneButton": "dlgModelGreaterThanOneButton",
+  "dlgPrepareDataReshapeGreaterthanUnnest": "dlgPrepareDataReshapeGreaterthanUnnest"
 }
