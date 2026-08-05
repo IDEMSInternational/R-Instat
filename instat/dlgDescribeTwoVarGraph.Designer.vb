@@ -152,8 +152,6 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'grpSummaries
         '
-        Me.grpSummaries.Controls.Add(Me.ucrInputCategoricalByCategorical)
-        Me.grpSummaries.Controls.Add(Me.ucrInputCategoricalByNumeric)
         Me.grpSummaries.Controls.Add(Me.ucrInputNumericByCategorical)
         Me.grpSummaries.Controls.Add(Me.ucrInputNumericByNumeric)
         Me.grpSummaries.Controls.Add(Me.lblFirstType)
@@ -161,6 +159,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpSummaries.Controls.Add(Me.lblGraph)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
+        Me.grpSummaries.Controls.Add(Me.ucrInputCategoricalByCategorical)
+        Me.grpSummaries.Controls.Add(Me.ucrInputCategoricalByNumeric)
         Me.grpSummaries.Location = New System.Drawing.Point(15, 380)
         Me.grpSummaries.Margin = New System.Windows.Forms.Padding(4)
         Me.grpSummaries.Name = "grpSummaries"
