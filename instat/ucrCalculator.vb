@@ -569,7 +569,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdMode, strTooltipCmdMode)
         ttCalculator.SetToolTip(cmdListMode, strTooltipCmdMode)
 
-        Const strTooltipCmdMode1 = "the first mode. So mode1(c(10,2,2,3,3)) = 2"
+        Const strTooltipCmdMode1 = "The geometric mean."
         ttCalculator.SetToolTip(cmdMode1, strTooltipCmdMode1)
         ttCalculator.SetToolTip(cmdListMode1, strTooltipCmdMode1)
 
@@ -1218,7 +1218,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 12)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round( ,0)", 3)
         End If
     End Sub
 
@@ -2489,20 +2489,18 @@ Public Class ucrCalculator
 
     Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
         Dim clsSummaryModeFunction As New RFunction
+        Dim clsRepFunction As New RFunction
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsSummaryModeFunction.SetPackageName("DescTools")
+        clsSummaryModeFunction.SetRCommand("Mode")
 
-        clsSummaryModeFunction.SetPackageName("statip")
-        clsSummaryModeFunction.SetRCommand("mfv")
         clsSummaryModeFunction.AddParameter("x", "", iPosition:=0)
         clsSummaryModeFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSummaryModeFunction, iPosition:=0)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 34)
+        clsRepFunction = clsSummaryModeFunction
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 13)
     End Sub
 
     Private Sub cmdNA_Click(sender As Object, e As EventArgs) Handles cmdNA.Click
@@ -4380,9 +4378,9 @@ Public Class ucrCalculator
 
     Private Sub cmdMode1_Click(sender As Object, e As EventArgs) Handles cmdMode1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na.rm = TRUE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(x = , na.rm = TRUE)", 15)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1( , na.rm = TRUE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean( , na.rm = TRUE)", 15)
         End If
     End Sub
 
@@ -4844,17 +4842,13 @@ Public Class ucrCalculator
 
     Private Sub cmdPhi_Click(sender As Object, e As EventArgs) Handles cmdPhi.Click
 
-        Dim clsPhiNRowsFunction As New RFunction
         Dim clsPhiFunction As New RFunction
-
-        clsPhiNRowsFunction.SetRCommand("nrow")
-        clsPhiNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
         clsPhiFunction.SetPackageName("primes")
         clsPhiFunction.SetRCommand("phi")
-        clsPhiFunction.AddParameter("n", clsRFunctionParameter:=clsPhiNRowsFunction, iPosition:=0)
+        clsPhiFunction.AddParameter("n", "", iPosition:=0)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPhiFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPhiFunction.ToScript, 1)
 
     End Sub
 
@@ -5196,9 +5190,9 @@ Public Class ucrCalculator
 
     Private Sub cmdFreqMode1_Click(sender As Object, e As EventArgs) Handles cmdFreqMode1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(rep(x = , times= ), na.rm = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(rep(x = , times = ), na.rm = TRUE)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(rep( , ), na.rm = TRUE)", 19)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Gmean(rep( , ), na.rm = TRUE)", 18)
         End If
     End Sub
 
@@ -5293,7 +5287,7 @@ Public Class ucrCalculator
     Private Sub StatipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatipToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Summary" Then
-            strPackageName = "statip"
+            strPackageName = "DescTools"
         End If
         OpenHelpPage()
     End Sub

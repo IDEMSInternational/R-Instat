@@ -439,7 +439,7 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False)
+    Private Sub AddTab(Optional enumScriptTypeNew As ScriptType = ScriptType.rScript, Optional bIsLogTab As Boolean = False, Optional strTabLabel As String = "")
         If enumScriptTypeNew <> ScriptType.rScript AndAlso enumScriptTypeNew <> ScriptType.quarto Then
             MsgBoxTranslate("Developer error: The new tab cannot be " & enumScriptType.ToString() & ", it must be R script or Quarto.", MsgBoxStyle.Critical, "New Tab")
             Exit Sub
@@ -515,10 +515,14 @@ Public Class ucrScript
             clsScriptLog.ReadOnly = True
         Else
             Static iTabCounter As Integer = 1
-            Dim strTabLabel As String = "Untitled" & iTabCounter _
-                                        & If(enumScriptTypeNew = ScriptType.quarto, ".qmd", "")
+
+            If String.IsNullOrWhiteSpace(strTabLabel) Then
+                strTabLabel = "Untitled" & iTabCounter &
+                  If(enumScriptTypeNew = ScriptType.quarto, ".qmd", "")
+                iTabCounter += 1
+            End If
+
             tabPageAdded.Text = strTabLabel
-            iTabCounter += 1
         End If
 
         TabControl.TabPages.Add(tabPageAdded)
@@ -527,6 +531,11 @@ Public Class ucrScript
         bIsTextChanged = False
         clsRScript = Nothing
         EnableDisableButtons()
+    End Sub
+
+    Public Sub CreateNewQuartoTab(Optional strTabLabel As String = "")
+        AddTab(enumScriptTypeNew:=ScriptType.quarto,
+           strTabLabel:=strTabLabel)
     End Sub
 
     Private Sub EnableDisableButtons()
@@ -907,6 +916,9 @@ Public Class ucrScript
 
         'replace the placeholder with the actual quarto script
         strQuartoRenderScript = strQuartoRenderScript.Replace("<<QUARTO_SCRIPT>>", strScript)
+        strQuartoRenderScript = strQuartoRenderScript.Replace(
+    "<<QUIET>>",
+    If(frmMain.bShowRenderDetails, "FALSE", "TRUE"))
 
         Return strQuartoRenderScript
     End Function
@@ -929,7 +941,48 @@ Public Class ucrScript
         'replace the placeholder with the correct file path to InstatObject\R
         strQuartoTemplate = strQuartoTemplate.Replace("<<R_PATH>>", strInstatObjectRPath.Replace("\", "/"))
 
+        If frmMain.bRecordQuarto AndAlso
+   Not String.IsNullOrWhiteSpace(frmMain.strSaveFilePath) Then
+
+            Dim strLoadWorkspace As String =
+        "new_RDS <- readRDS(file=""" &
+        frmMain.strSaveFilePath.Replace("\", "/") &
+        """)" & vbCrLf &
+        "data_book$import_RDS(data_RDS=new_RDS)" & vbCrLf &
+        "rm(new_RDS)"
+
+            strQuartoTemplate =
+        strQuartoTemplate.Replace(
+            "<<LOAD_WORKSPACE>>",
+            strLoadWorkspace)
+        Else
+
+            strQuartoTemplate =
+        strQuartoTemplate.Replace(
+            "<<LOAD_WORKSPACE>>",
+            "")
+
+        End If
+
+        If Not frmMain.bQuartoHTML Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  html: default" & vbCrLf, "")
+        End If
+
+        If Not frmMain.bQuartoPDF Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  pdf: default" & vbCrLf, "")
+        End If
+
+        If Not frmMain.bQuartoPPTX Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  pptx: default" & vbCrLf, "")
+        End If
+
+        If Not frmMain.bQuartoDOCX Then
+            strQuartoTemplate = strQuartoTemplate.Replace("  docx: default" & vbCrLf, "")
+        End If
+
         Return strQuartoTemplate
+
+
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1601,4 +1654,7 @@ Public Class ucrScript
         clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
 
+    Private Sub cmdRecordQuarto_Click(sender As Object, e As EventArgs) Handles cmdRecordQuarto.Click
+        dlgRecordQuarto.ShowDialog()
+    End Sub
 End Class                                                                                                                                                       

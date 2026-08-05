@@ -45,6 +45,16 @@ Public Class frmMain
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
     Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
+
+    Public bRecordQuarto As Boolean = False
+    Public strCurrentQuartoFile As String = ""
+    Public strCurrentQuartoRdsFile As String = ""
+    Public bShowRenderDetails As Boolean = True
+    Public bQuartoHTML As Boolean = True
+    Public bQuartoPDF As Boolean = True
+    Public bQuartoPPTX As Boolean = True
+    Public bQuartoDOCX As Boolean = True
+
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -598,6 +608,30 @@ Public Class frmMain
     ' Need to fix this so that all of frmMain can be translated
     Public Sub TranslateFrmMainMenu()
         translateMenu(mnuBar.Items, Me)
+    End Sub
+
+    Public Sub AppendToQuartoFile(strScript As String)
+
+        If String.IsNullOrEmpty(strCurrentQuartoFile) Then
+            Exit Sub
+        End If
+
+        IO.File.AppendAllText(
+        strCurrentQuartoFile.Replace("/", "\"),
+        strScript & Environment.NewLine)
+
+    End Sub
+
+    Public Sub SaveCurrentQuartoFile()
+
+        If String.IsNullOrEmpty(strCurrentQuartoFile) Then
+            Exit Sub
+        End If
+
+        File.WriteAllText(
+        strCurrentQuartoFile,
+        ucrScriptWindow.clsScriptActive.Text)
+
     End Sub
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
@@ -3223,5 +3257,13 @@ Public Class frmMain
     Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
         dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
         dlgInsertColumn.ShowDialog()
+    End Sub
+
+    Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
+        dlgCheckSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesMoreLikert_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesMoreLikert.Click
+        dlgDescribeTwoVariableMoreLikertGraphs.ShowDialog()
     End Sub
 End Class

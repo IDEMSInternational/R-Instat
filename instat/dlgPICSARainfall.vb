@@ -913,6 +913,7 @@ Public Class dlgPICSARainfall
                                        clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY,
                                        clsNewPoint2AesFunction:=clsPoint2AesFunction, clsNewSegmentAes:=clsSegmentAesFunction, clsNewAsDateYend:=clsAsDateYendFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.SetTemperatureMode(False)
+        sdgPICSARainfallGraph.SetPICSAMode(PICSAMode.Rainfall)
         sdgPICSARainfallGraph.ShowDialog()
         AddRemoveGroupBy()
         bResetSubdialog = False
