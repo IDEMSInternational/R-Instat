@@ -634,6 +634,9 @@ Public Class dlgDescribeTwoVariable
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
+            If IsNumericByFactor() Then
+                ucrSaveTable.Visible = True
+            End If
         End If
         If rdoThreeVariable.Checked Then
 
@@ -719,7 +722,6 @@ Public Class dlgDescribeTwoVariable
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
                 ucrChkTotal.Visible = True
-                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 450)
                 ucrChkTotal.Location = New Point(310, 189)
                 ucrChkMeans.Location = New Point(310, 210)
                 ucrChkLevSig.Location = New Point(397, 186)
@@ -970,13 +972,6 @@ Public Class dlgDescribeTwoVariable
         ChangeBaseRCode()
     End Sub
 
-    'Private Sub CheckSaveControlVisibility()
-    '    If (Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondTwoVariableFactor.IsEmpty) OrElse Not ucrReceiverSkimrGroupByFactor.IsEmpty OrElse
-    '        Not ucrReceiverSecondSkimrGroupByFactor.IsEmpty OrElse Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
-    '        ChangeBaseRCode()
-    '    End If
-    'End Sub
-
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
 
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -1031,7 +1026,7 @@ Public Class dlgDescribeTwoVariable
                     cmdFormatTable.Location = New Point(330, 450)
                 End If
             ElseIf IsNumericByFactor() Then
-                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 349)
+                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 339)
                 ucrSaveTable.Size = New Point(350, 20)
                 ucrBase.Location = New Point(iUcrBaseXLocation, 369)
                 Me.Size = New Point(iDialogueXsize, 465)
