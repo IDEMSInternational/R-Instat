@@ -667,6 +667,10 @@ Public Class dlgMosaicPlot
         openSdgLayerOptions(clsMosaicTextFunction)
     End Sub
 
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
     Private Sub ucrChkJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkJitter.ControlValueChanged, ucrColors.ControlValueChanged, ucrNudJitter.ControlValueChanged
         If ucrChkJitter.Checked Then
             clsBaseOperator.AddParameter("geom_mosaic_jitter", clsRFunctionParameter:=clsMosaicJitterFunction)

@@ -10,7 +10,7 @@ editor: visual
 
 Prepare R environment for R-Instat dialog scripts:
 
-```{r warning=FALSE, message=FALSE}
+```{r <<CHUNK_OPTIONS>>}
 # Initialising R (e.g Loading R packages)
 library(databook)
 library(instatExtras)
