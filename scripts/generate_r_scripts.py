@@ -31,7 +31,7 @@ Package types
 
 Package options (optional JSON fields)
 --------------------------------------
-    force               bool  — adds force = TRUE to pak::pak()
+    force               bool  — adds ask = FALSE to pak::pak()
     install_dependencies  bool  — sets the dependencies argument.
                           Defaults to FALSE if not present in the JSON entry.
 """
@@ -91,8 +91,8 @@ def _github_line(pkg: dict) -> str:
     deps_r = "TRUE" if _install_deps(pkg) else "FALSE"
     parts = [f'pak::pak("{pkg["installed_from"]}"']
     parts.append(f"dependencies = {deps_r}")
-    if pkg.get("force"):
-        parts.append("force = TRUE")
+    if pkg.get("ask"):
+        parts.append("ask = FALSE")
     parts.append("ask = FALSE")
     return ", ".join(parts) + ")"
 
