@@ -64,6 +64,8 @@ Partial Class dlgSpells
         Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.rdoAnnual = New System.Windows.Forms.RadioButton()
         Me.lblDataFrameName = New System.Windows.Forms.Label()
+        Me.ucrChkDefinitions = New instat.ucrCheck()
+        Me.ucrSaveObject = New instat.ucrSave()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -327,7 +329,7 @@ Partial Class dlgSpells
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 387)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 434)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -378,12 +380,33 @@ Partial Class dlgSpells
         Me.lblDataFrameName.TabIndex = 27
         Me.lblDataFrameName.Text = "Data Frame Name:"
         '
+        'ucrChkDefinitions
+        '
+        Me.ucrChkDefinitions.AutoSize = True
+        Me.ucrChkDefinitions.Checked = False
+        Me.ucrChkDefinitions.Location = New System.Drawing.Point(10, 393)
+        Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
+        Me.ucrChkDefinitions.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkDefinitions.TabIndex = 49
+        '
+        'ucrSaveObject
+        '
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveObject.Location = New System.Drawing.Point(171, 393)
+        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveObject.Name = "ucrSaveObject"
+        Me.ucrSaveObject.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveObject.TabIndex = 50
+        '
         'dlgSpells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(461, 441)
+        Me.ClientSize = New System.Drawing.Size(461, 491)
+        Me.Controls.Add(Me.ucrSaveObject)
+        Me.Controls.Add(Me.ucrChkDefinitions)
         Me.Controls.Add(Me.lblDataFrameName)
         Me.Controls.Add(Me.rdoAnnual)
         Me.Controls.Add(Me.rdoStation)
@@ -443,4 +466,6 @@ Partial Class dlgSpells
     Friend WithEvents rdoStation As RadioButton
     Friend WithEvents rdoAnnual As RadioButton
     Friend WithEvents lblDataFrameName As Label
+    Friend WithEvents ucrChkDefinitions As ucrCheck
+    Friend WithEvents ucrSaveObject As ucrSave
 End Class

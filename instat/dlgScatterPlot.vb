@@ -146,8 +146,6 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.AddParameterPresentCondition(False, "geom_rug", False)
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkAddSidePlot.SetText("Side Plot")
-        ucrChkAddSidePlot.Enabled = False
 
         ucrChkSize.SetText("Size")
         ucrChkSize.AddParameterPresentCondition(True, "geom_point")
@@ -331,6 +329,7 @@ Public Class dlgScatterPlot
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
         ucrSaveScatterPlot.Reset()
+        ucrVariablesAsFactorForScatter.SetDefaults()
         ucrVariablesAsFactorForScatter.SetMeAsReceiver()
         sdgPlots.Reset()
         bResetSubdialog = True
@@ -534,7 +533,7 @@ Public Class dlgScatterPlot
             ucrInputStation.SetName(strFacetWrap)
         End If
         bNotSubdialogue = True
-            bResetSubdialog = False
+        bResetSubdialog = False
     End Sub
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
         EnableDisableOptions(clsRScatterGeomFunction)

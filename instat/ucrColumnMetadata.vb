@@ -620,8 +620,11 @@ Public Class ucrColumnMetadata
         End If
     End Sub
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgName.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
-        dlgName.ShowDialog()
+        If _grid.CurrentWorksheet IsNot Nothing AndAlso _grid.GetSelectedRows().Count > 0 Then
+            dlgName.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+            dlgName.bDefaultToSingle = True
+            dlgName.ShowDialog()
+        End If
     End Sub
 
     Private Sub mnuConvert_Click(sender As Object, e As EventArgs)
@@ -669,7 +672,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
     Private Sub deleteDataFrame_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
@@ -733,7 +736,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click, mnuHelp2.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "697")
     End Sub
 
     Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click

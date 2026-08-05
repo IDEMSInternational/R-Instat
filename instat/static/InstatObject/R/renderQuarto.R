@@ -6,7 +6,7 @@ if (is.null(quarto_path()) || !file.exists(quarto_path())) {
   stop("Cannot find the Quarto CLI. Please download and install from https://quarto.org/")
 }
 
-STEM <- "inline"          # basename for all temporary files
+STEM <- paste0("inline_", format(Sys.time(), "%Y%m%d_%H%M%S"))          # basename for all temporary files
 
 src <- '<<QUARTO_SCRIPT>>'
 
@@ -21,7 +21,7 @@ writeLines(src, qmd)
 # Render all formats listed in the Quarto script
 # Please be patient, this may take some minutes
 old <- setwd(tmpdir); on.exit(setwd(old))
-quarto_render(basename(qmd), quiet = TRUE)
+quarto_render(basename(qmd), quiet = <<QUIET>>)
 
 # Find all files generated (excluding the '.qmd' file itself)
 stem <- tools::file_path_sans_ext(basename(qmd))
