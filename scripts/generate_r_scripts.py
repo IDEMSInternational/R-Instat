@@ -31,7 +31,7 @@ Package types
 
 Package options (optional JSON fields)
 --------------------------------------
-    force               bool  — adds ask = FALSE to pak::pak()
+    force                 (to remove now) bool  for devtools::install_github with force = TRUE. No equivalent needed now we are using pak::pak
     install_dependencies  bool  — sets the dependencies argument.
                           Defaults to FALSE if not present in the JSON entry.
 """
