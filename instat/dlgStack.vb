@@ -320,7 +320,7 @@ Public Class dlgStack
         clsStackOperator.AddParameter("right2", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         clsStackOperator.AddParameter("right4", clsRFunctionParameter:=clsStackMultipleFunction, iPosition:=4)
         clsStackOperator.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
-        'AddStackNamesParmeter()
+        AddStackNamesParmeter()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
     End Sub
@@ -494,7 +494,7 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
+    Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged, ucrChkDropVariables.ControlValueChanged
 
         If ucrChkStackMultipleSets.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsStackOperator)
@@ -630,16 +630,17 @@ Public Class dlgStack
     Private Sub AddStackNamesParmeter()
         ' Remove both parameters first
         clsStackMultipleFunction.RemoveParameterByName("names_pattern")
+        clsStackMultipleFunction.RemoveParameterByName("names_sep")
+
 
         If rdoSeperatedBy.Checked Then
             clsStackOperator.AddParameter("right3", clsRFunctionParameter:=clsSelectIDFunction, iPosition:=3)
-            'clsStackMultipleFunction.AddParameter("names_sep",
-            '                                 Chr(34) & "\\." & Chr(34),
-            '                                 iPosition:=1)
+            clsStackMultipleFunction.AddParameter("names_sep",
+                                            Chr(34) & "\\." & Chr(34),
+                                            iPosition:=1)
         Else
             clsStackMultipleFunction.AddParameter("names_pattern", clsRFunctionParameter:=clsMakePatternsFunction, iPosition:=1)
             clsStackOperator.RemoveParameterByName("right3")
-            clsStackMultipleFunction.RemoveParameterByName("names_sep")
 
         End If
     End Sub
@@ -653,10 +654,4 @@ Public Class dlgStack
         clsMakePatternsFunction.AddParameter("num", ucrNudSets.GetText, bIncludeArgumentName:=False, iPosition:=1)
     End Sub
 
-    Private Sub ucrInputNamesSep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNamesSep.ControlValueChanged
-        clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=1)
-
-        AddStackNamesParmeter()
-
-    End Sub
 End Class
