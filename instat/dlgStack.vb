@@ -296,6 +296,7 @@ Public Class dlgStack
         clsStackMultipleFunction.SetPackageName("tidyr")
         clsStackMultipleFunction.SetRCommand("pivot_longer")
 
+        clsMakePatternsFunction.SetPackageName("instatExtras")
         clsMakePatternsFunction.SetRCommand("make_names_pattern")
 
         clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
@@ -315,7 +316,6 @@ Public Class dlgStack
 
         clsStackOperator.SetOperation("%>%")
         clsStackOperator.AddParameter("right2", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
-        clsStackOperator.AddParameter("right3", clsRFunctionParameter:=clsSelectIDFunction, iPosition:=3)
         clsStackOperator.AddParameter("right4", clsRFunctionParameter:=clsStackMultipleFunction, iPosition:=4)
         clsStackOperator.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         AddStackNamesParmeter()
@@ -603,6 +603,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrFactorInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorInto.ControlValueChanged
+        SetNamesToParameter()
+    End Sub
+
+    Private Sub SetNamesToParameter()
         Dim strFactorName As String = ucrFactorInto.GetText()
 
         If strFactorName = "" Then
@@ -610,11 +614,19 @@ Public Class dlgStack
             Exit Sub
         End If
 
-        clsStackMultipleFunction.AddParameter(
-            "names_to",
-            "c(" & Chr(34) & strFactorName & Chr(34) & ", " & Chr(34) & ".value" & Chr(34) & ")",
-            iPosition:=3
-        )
+        Dim strNamesTo As String
+
+        If rdoSeperatedBy.Checked Then
+            ' factor first, .value second
+            strNamesTo = "c(" & Chr(34) & strFactorName & Chr(34) & ", " &
+                           Chr(34) & ".value" & Chr(34) & ")"
+        Else
+            ' .value first, factor second
+            strNamesTo = "c(" & Chr(34) & ".value" & Chr(34) & ", " &
+                           Chr(34) & strFactorName & Chr(34) & ")"
+        End If
+
+        clsStackMultipleFunction.AddParameter("names_to", strNamesTo, iPosition:=3)
     End Sub
 
     Private Sub AddStackNamesParmeter()
@@ -623,14 +635,16 @@ Public Class dlgStack
         clsStackMultipleFunction.RemoveParameterByName("names_pattern")
 
         If rdoSeperatedBy.Checked Then
+            clsStackOperator.AddParameter("right3", clsRFunctionParameter:=clsSelectIDFunction, iPosition:=3)
             clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=1)
         Else
             clsStackMultipleFunction.AddParameter("names_pattern", clsRFunctionParameter:=clsMakePatternsFunction, iPosition:=1)
-
+            clsStackOperator.RemoveParameterByName("right3")
         End If
     End Sub
 
     Private Sub ucrPnlMultipleStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMultipleStack.ControlValueChanged
         AddStackNamesParmeter()
+        SetNamesToParameter()
     End Sub
 End Class
