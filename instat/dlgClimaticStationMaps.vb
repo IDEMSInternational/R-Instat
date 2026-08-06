@@ -21,7 +21,7 @@ Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsScaleShapeFunction, clsLabelRepelFunction, clsTextRepelFunction As New RFunction
-    Private clsGGplotOperator, clsFacetOp As New ROperator
+    Private clsGGplotOperator As New ROperator
 
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
@@ -49,7 +49,6 @@ Public Class dlgClimaticStationMaps
     Private clsDummyFunction As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsRowVarsFunction, clsColVarsFunction As New RFunction
-    'Private dctFilterNamesDictionary As New Dictionary(Of String, String)
 
     Private ReadOnly strNone As String = "None"
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
@@ -130,10 +129,6 @@ Public Class dlgClimaticStationMaps
         ucrReceiverColor.SetParameterIsString()
         ucrReceiverColor.bWithQuotes = False
 
-        'ucrReceiverFacet.SetParameter(New RParameter("wrap", bNewIncludeArgumentName:=False))
-        'ucrReceiverFacet.Selector = ucrSelectorStation
-        'ucrReceiverFacet.SetParameterIsString()
-        'ucrReceiverFacet.bWithQuotes = False
         ucrReceiverFacet.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
         ucrReceiverFacet.Selector = ucrSelectorStation
         ucrReceiverFacet.SetIncludedDataTypes({"factor"})
@@ -222,7 +217,6 @@ Public Class dlgClimaticStationMaps
 
         ucrInputComboSelectFilter.SetParameter(New RParameter("filter_name", 1))
         ucrInputComboSelectFilter.SetDropDownStyleAsNonEditable()
-        'ucrInputComboSelectFilter.SetItems(dctFilterNamesDictionary)
 
         ToggleSelectFilterInputComboBoxVisibility()
         ChangeSize()
@@ -248,7 +242,6 @@ Public Class dlgClimaticStationMaps
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
         clsYlimFunction = New RFunction
-        clsFacetOp = New ROperator
 
         clsCoordPolarFunction = New RFunction
         clsCoordPolarStartOperator = New ROperator
@@ -307,10 +300,6 @@ Public Class dlgClimaticStationMaps
         clsColVarsFunction.SetPackageName("ggplot2")
         clsColVarsFunction.SetRCommand("vars")
 
-        'clsFacetOp.SetOperation("~")
-        'clsFacetOp.bForceIncludeOperation = True
-        'clsFacetOp.bBrackets = False
-
         clsLabelRepelFunction.SetPackageName("ggrepel")
         clsLabelRepelFunction.SetRCommand("geom_label_repel")
         clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
@@ -347,9 +336,6 @@ Public Class dlgClimaticStationMaps
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
-        'clsRFacetFunction.RemoveParameterByName("facets")
-        'clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
-
         clsXlimFunction.SetRCommand("xlim")
         clsYlimFunction.SetRCommand("ylim")
 
@@ -376,7 +362,6 @@ Public Class dlgClimaticStationMaps
         ucrReceiverLatitude.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
-        'ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
         ucrReceiverFacet.SetRCode(clsRowVarsFunction, bReset)
         ucrReceiverStation.SetRCode(clsLabelRepelAesFunction, bReset)
         ucrInputColour.SetRCode(clsLabelRepelFunction, bReset)
@@ -415,12 +400,12 @@ Public Class dlgClimaticStationMaps
 
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
 
     Private Sub CheckAvailableFiltersInFirstSelectorDataframe()
         Dim expItems As SymbolicExpression
@@ -529,7 +514,6 @@ Public Class dlgClimaticStationMaps
             Return Nothing
         End Try
     End Function
-
 
     Private Sub ApplyFilterToDataframes()
         If ucrChkAddPoints.Checked AndAlso ucrChkSelectFilter.Checked Then
@@ -739,7 +723,6 @@ Public Class dlgClimaticStationMaps
         End If
     End Sub
 
-
     Private Sub ChangeSize()
         If ucrChkAddPoints.Checked Then
             grpPoints.Visible = True
@@ -820,7 +803,6 @@ Public Class dlgClimaticStationMaps
         AddRemoveFacets()
     End Sub
 
-
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         AddExtraGeoms()
     End Sub
@@ -876,10 +858,6 @@ Public Class dlgClimaticStationMaps
     Private Sub ucrSelectorStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStation.ControlValueChanged
         ApplyFilterToDataframes()
     End Sub
-
-    'Private Sub ucrSelectorStation_DataframeChanged() Handles ucrSelectorStation.DataFrameChanged
-    '    ApplyFilterToDataframes()
-    'End Sub
 
     Private Sub ucrReceiverFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
