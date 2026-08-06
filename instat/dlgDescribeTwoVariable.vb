@@ -33,16 +33,15 @@ Public Class dlgDescribeTwoVariable
     Private clsCombineFrequencyParametersFunction, clsCombineFrequencyColParametersFunction, clsCombineFunction, clsCombineSwapAnova2Table, clsCombineAnova2Function, clsSummariseFunction,
        clsDummyFunction, clsGroupByFunction, clsRAnovaFunction, clsCorrFunction, clsRAnovaTableFunction,
         clsRCorrelationFunction, clsSkimrFunction, clsSummariesListFunction, clsCombineAnovaFunction,
-        clsSummaryTableCombineFactorsFunction, clsSummaryTableFunction, clsRAnovaSwapTable2Funtion,
-        clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction, clsMappingFunction, clsMapping2Function, clsRAnovaTable2Function,
-        clsNamesFunction, clsAddObjectFunction, clsGetObjectFunction As New RFunction
+        clsSummaryTableCombineFactorsFunction, clsSummaryTableFunction, clsRAnovaSwapTable2Funtion, clsMapSetNamesFunction,
+        clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction, clsMappingFunction, clsMapping2Function, clsRAnovaTable2Function As New RFunction
 
     'FORMAT TABLE FUNCTIONS
     Private clsgtExtrasThemesFuction, clsCrossDfFunction, clsListFunction, clsGtRFunction As New RFunction
 
     Private clsGroupByPipeOperator, clsSummaryOperator, clsGroupByPipeOperator2, clsGroupByPipeOperator3, clsGroupByPipeOperator4, clsGroupByPipeOperatorData As New ROperator
 
-    Private clsTildOperator, clsMapOperator, clsGtTableROperator, clsPivotOperator, clsAssignmentOperator As New ROperator
+    Private clsTildOperator, clsMapOperator, clsGtTableROperator, clsPivotOperator As New ROperator
 
     Private clsgtFunction, clsMapSummaryFunction, clsMap2SummaryFunction, clsMapGtFunction As New RFunction
     'Frequency Parameters
@@ -51,7 +50,7 @@ Public Class dlgDescribeTwoVariable
                                                           "signif_fig", "include_margins"})
 
     'Format Operators
-    Private clsPipeOperator, clsFactorOperator, clsSummariesOperator, clsTabFootnoteOperator,
+    Private clsPipeOperator, clsFactorOperator, clsSummariesOperator, clsTabFootnoteOperator, clsMapPipeOperator,
             clsJoiningPipeOperator, clsMutableOperator, clsAnovaSwapTable2Opeator, clsAnovaTable2Operator, clsYlist2Operator, clsYlistOperator As New ROperator
     Private iUcrBaseXLocation, iDialogueXsize As Integer
 
@@ -222,7 +221,9 @@ Public Class dlgDescribeTwoVariable
         clsJoiningPipeOperator = New ROperator
         clsPipeOperator = New ROperator
         clsTabFootnoteOperator = New ROperator
+        clsMapPipeOperator = New ROperator
         clsgtFunction = New RFunction
+        clsMapSetNamesFunction = New RFunction
 
         clsSummaryOperator = New ROperator
         clsMapOperator = New ROperator
@@ -251,9 +252,6 @@ Public Class dlgDescribeTwoVariable
         clsCrossDfFunction = New RFunction
         clsListFunction = New RFunction
         clsMap2SummaryFunction = New RFunction
-        clsNamesFunction = New RFunction
-        clsAddObjectFunction = New RFunction
-        clsGetObjectFunction = New RFunction
 
         clsTildOperator = New ROperator
         clsMapSummaryFunction = New RFunction
@@ -262,8 +260,6 @@ Public Class dlgDescribeTwoVariable
         clsFactorOperator = New ROperator
         clsSummariesOperator = New ROperator
         clsGtTableROperator = New ROperator
-        clsAssignmentOperator = New ROperator
-
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -454,23 +450,14 @@ Public Class dlgDescribeTwoVariable
         clsMapOperator.AddParameter("right", clsROperatorParameter:=clsPivotOperator)
         clsMapOperator.bBrackets = False
 
-        clsNamesFunction.SetRCommand("names")
+        clsMapSetNamesFunction.SetPackageName("purrr")
+        clsMapSetNamesFunction.SetRCommand("set_names")
+        clsMapSetNamesFunction.AddParameter("x", "y_col_names_list", iPosition:=0, bIncludeArgumentName:=False)
 
-        clsAssignmentOperator.SetOperation("<-")
-        clsAssignmentOperator.AddParameter("left", clsRFunctionParameter:=clsNamesFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsAssignmentOperator.AddParameter("right", "y_col_names_list", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsAddObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        clsAddObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.strCurrentDataFrame & Chr(34), iPosition:=0)
-        clsAddObjectFunction.AddParameter("object_name", Chr(34) & ucrSaveTable.GetText() & Chr(34), iPosition:=1)
-        clsAddObjectFunction.AddParameter("object_type_label", Chr(34) & "model" & Chr(34), iPosition:=2)
-        clsAddObjectFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
-        clsAddObjectFunction.AddParameter("object", ucrSaveTable.GetText(), iPosition:=4)
-
-        clsGetObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.strCurrentDataFrame & Chr(34), iPosition:=0)
-        clsGetObjectFunction.AddParameter("object_name", Chr(34) & ucrSaveTable.GetText() & Chr(34), iPosition:=1)
-        clsGetObjectFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+        clsMapPipeOperator.SetOperation("%>%")
+        clsMapPipeOperator.AddParameter("left", clsRFunctionParameter:=clsMappingFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsMapPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMapSetNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsMapPipeOperator.bSpaceAroundOperation = True
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
@@ -498,12 +485,11 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayAsPercentage.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("percentage_type", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsThreeVariableCombineFrequencyParametersFunction, New RParameter("include_margins", iNewPosition:=5), iAdditionalPairNo:=2)
         ucrChkInteraction.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("interaction", iNewPosition:=7), iAdditionalPairNo:=1)
-        'ucrSaveTable.AddAdditionalCodeParameterPair(clsNamesFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
 
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSaveTable.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=1)
         ucrSaveTable.AddAdditionalRCode(clsGroupByPipeOperator4, iAdditionalPairNo:=2)
-        'ucrSaveTable.AddAdditionalRCode(clsMappingFunction, iAdditionalPairNo:=3)
+        ucrSaveTable.AddAdditionalRCode(clsMapPipeOperator, iAdditionalPairNo:=3)
 
         ucrChkOmitMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrReceiverSecondTwoVariableFactor.SetRCode(clsDummyFunction, bReset)
@@ -546,40 +532,6 @@ Public Class dlgDescribeTwoVariable
                 AndAlso (IsFactorByFactor() OrElse IsNumericByFactor() _
                 OrElse IsFactorByNumeric() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByNumericByNumeric() _
                 OrElse IsFactorByNumericByNumeric() OrElse IsNumericByFactorByNumeric() OrElse IsFactorByFactorByFactor() OrElse IsNumericByNumeric())) AndAlso ucrSaveTable.IsComplete)
-    End Sub
-
-    Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControls As ucrCore) Handles ucrSaveTable.ControlValueChanged
-        Dim strModelSaveName As String = ucrSaveTable.GetText()
-
-        If IsNumericByFactor() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
-            If ucrSaveTable.ucrChkSave.Checked Then
-                clsNamesFunction.AddParameter("x", strModelSaveName, iPosition:=0, bIncludeArgumentName:=False)
-                clsAddObjectFunction.AddParameter("object_name", Chr(34) & strModelSaveName & Chr(34), iPosition:=1)
-                clsAddObjectFunction.AddParameter("object", strModelSaveName, iPosition:=4)
-                clsGetObjectFunction.AddParameter("object_name", Chr(34) & strModelSaveName & Chr(34), iPosition:=1)
-                clsMappingFunction.SetAssignTo(strModelSaveName)
-            Else
-                Dim strLastModel As String = "last_model"
-                clsNamesFunction.AddParameter("x", strLastModel, iPosition:=0, bIncludeArgumentName:=False)
-                clsAddObjectFunction.AddParameter("object_name", Chr(34) & strLastModel & Chr(34), iPosition:=1)
-                clsAddObjectFunction.AddParameter("object", strLastModel, iPosition:=4)
-                clsGetObjectFunction.AddParameter("object_name", Chr(34) & strLastModel & Chr(34), iPosition:=1)
-                clsMappingFunction.SetAssignTo(strLastModel)
-            End If
-        End If
-        AddRemoveModelSaveCodes()
-    End Sub
-
-    Private Sub AddRemoveModelSaveCodes()
-        If IsNumericByFactor() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAssignmentOperator, iPosition:=1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAddObjectFunction, iPosition:=1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectFunction, iPosition:=2)
-        Else
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAssignmentOperator)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddObjectFunction)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectFunction)
-        End If
     End Sub
 
     Private Sub RemoveAddPerTotal()
@@ -720,6 +672,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ChangeBaseRCode()
         clsMappingFunction.RemoveAssignTo()
+        clsMapPipeOperator.RemoveAssignTo()
         ucrSaveTable.Visible = False
         ucrReorderSummary.Visible = False
         cmdSummaries.Visible = False
@@ -749,7 +702,6 @@ Public Class dlgDescribeTwoVariable
             ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
-                'clsMappingFunction.RemoveAssignTo()
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)
@@ -777,7 +729,7 @@ Public Class dlgDescribeTwoVariable
 
             ElseIf IsNumericByFactor() Then
                 ucrSaveTable.Visible = True
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                 ucrChkInteraction.Visible = False
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
@@ -790,7 +742,6 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_model")
                 ucrSaveTable.SetCheckBoxText("Store Model")
-                AddRemoveModelSaveCodes()
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
                 cmdFormatTable.Visible = True
@@ -911,11 +862,9 @@ Public Class dlgDescribeTwoVariable
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)
                 Else
                     clsDummyFunction.AddParameter("var", "False", iPosition:=5)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                 End If
-                AddRemoveModelSaveCodes()
             ElseIf IsNumericByNumericByNumeric() Then
-                'clsMappingFunction.RemoveAssignTo()
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
                 ucrChkMeans.Visible = True
@@ -938,12 +887,11 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                 ucrSaveTable.SetPrefix("three_var_model")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_model")
                 ucrSaveTable.SetCheckBoxText("Store Model")
-                AddRemoveModelSaveCodes()
             ElseIf IsNumericByFactorByNumeric() Then
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = True
@@ -955,12 +903,11 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                 ucrSaveTable.SetPrefix("three_var_model")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_model")
                 ucrSaveTable.SetCheckBoxText("Store Model")
-                AddRemoveModelSaveCodes()
             ElseIf IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric() Then
                 ucrSaveTable.SetPrefix("summary_table")
                 cmdFormatTable.Visible = True
@@ -1545,9 +1492,6 @@ Public Class dlgDescribeTwoVariable
         ' Always update the data parameter for these functions
         clsRAnovaTable2Function.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsRAnovaSwapTable2Funtion.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-
-        clsAddObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.strCurrentDataFrame & Chr(34), iPosition:=0)
-        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.strCurrentDataFrame & Chr(34), iPosition:=0)
 
         ' --- Clear all variable receivers to avoid referencing old variables ---
         ucrReceiverFirstVars.ResetText()
