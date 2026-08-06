@@ -44,6 +44,7 @@ Public Class dlgConditionalQuantilePlot
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctStatistics As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 642
 
         ucrConditionalQuantilePlotSelector.SetParameter(New RParameter("mydata", 0))
@@ -157,7 +158,11 @@ Public Class dlgConditionalQuantilePlot
         clsConditionalQuantileOperator.SetOperation("$")
         clsConditionalQuantileOperator.AddParameter("left", clsRFunctionParameter:=clsConditionalQuantileFunction)
         clsConditionalQuantileOperator.AddParameter("right", "plot")
-        clsConditionalQuantileOperator.SetAssignTo("last_graph", strTempDataframe:=ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsConditionalQuantileOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                                                strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                                                strRDataFrameNameToAddObjectTo:=ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                                                strObjectName:="last_graph")
 
         clsConditionalEvalFunction.SetPackageName("openair")
         clsConditionalEvalFunction.SetRCommand("conditionalEval")
@@ -165,7 +170,11 @@ Public Class dlgConditionalQuantilePlot
         clsConditionalEvalOperator.SetOperation("$")
         clsConditionalEvalOperator.AddParameter("left", clsRFunctionParameter:=clsConditionalEvalFunction)
         clsConditionalEvalOperator.AddParameter("right", "plot")
-        clsConditionalEvalOperator.SetAssignTo("last_graph", strTempDataframe:=ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsConditionalEvalOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                                           strRDataFrameNameToAddObjectTo:=ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                                           strObjectName:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsConditionalQuantileOperator)
