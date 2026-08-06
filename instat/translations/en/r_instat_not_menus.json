@@ -6899,6 +6899,8 @@
   "More Likert Graph (gglikert)": "More Likert Graph (gglikert)",
   "Symmetric": "Symmetric",
   "Cutoff": "Cutoff",
+  "Use ": "Use ",
+  "New Format": "New Format",
   "Totals": "Totals",
   "Knitr Option": "Knitr Option",
   "Display Code": "Display Code",
