@@ -550,18 +550,28 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControls As ucrCore) Handles ucrSaveTable.ControlValueChanged
         Dim strModelSaveName As String = ucrSaveTable.GetText()
-        If ucrSaveTable.ucrChkSave.Checked Then
-            clsNamesFunction.AddParameter("x", strModelSaveName, iPosition:=0, bIncludeArgumentName:=False)
-            clsAddObjectFunction.AddParameter("object_name", Chr(34) & strModelSaveName & Chr(34), iPosition:=1)
-            clsAddObjectFunction.AddParameter("object", strModelSaveName, iPosition:=4)
-            clsGetObjectFunction.AddParameter("object_name", Chr(34) & strModelSaveName & Chr(34), iPosition:=1)
-            clsMappingFunction.SetAssignTo(strModelSaveName)
+
+        If IsNumericByFactor() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+            If ucrSaveTable.ucrChkSave.Checked Then
+                clsNamesFunction.AddParameter("x", strModelSaveName, iPosition:=0, bIncludeArgumentName:=False)
+                clsAddObjectFunction.AddParameter("object_name", Chr(34) & strModelSaveName & Chr(34), iPosition:=1)
+                clsAddObjectFunction.AddParameter("object", strModelSaveName, iPosition:=4)
+                clsGetObjectFunction.AddParameter("object_name", Chr(34) & strModelSaveName & Chr(34), iPosition:=1)
+                clsMappingFunction.SetAssignTo(strModelSaveName)
+            Else
+                Dim strLastModel As String = "last_model"
+                clsNamesFunction.AddParameter("x", strLastModel, iPosition:=0, bIncludeArgumentName:=False)
+                clsAddObjectFunction.AddParameter("object_name", Chr(34) & strLastModel & Chr(34), iPosition:=1)
+                clsAddObjectFunction.AddParameter("object", strLastModel, iPosition:=4)
+                clsGetObjectFunction.AddParameter("object_name", Chr(34) & strLastModel & Chr(34), iPosition:=1)
+                clsMappingFunction.SetAssignTo(strLastModel)
+            End If
         End If
         AddRemoveModelSaveCodes()
     End Sub
 
     Private Sub AddRemoveModelSaveCodes()
-        If ucrSaveTable.ucrChkSave.Checked Then
+        If IsNumericByFactor() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsAssignmentOperator, iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddObjectFunction, iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectFunction, iPosition:=2)
