@@ -64,6 +64,9 @@ Public Class dlgDescribeTwoVarGraph
 
     Private strFirstVariablesType, strSecondVariableType As String
 
+    Private strXSidePlotInputDefault As String = ""
+    Private strYSidePlotInputDefault As String = ""
+
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -756,9 +759,11 @@ Public Class dlgDescribeTwoVarGraph
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByNumeric, iPosition:=0)
                 clsGlobalAes = clsAesNumericByNumeric
                 ucrInputYSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                ucrInputYSidePlotOptions.SetName("Density")
+                'ucrInputYSidePlotOptions.SetName("Density")
+                ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                 ucrInputXSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                ucrInputXSidePlotOptions.SetName("Density")
+                'ucrInputXSidePlotOptions.SetName("Density")
+                ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                 Select Case ucrInputNumericByNumeric.GetText
                     Case "Scatter plot"
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
@@ -783,26 +788,32 @@ Public Class dlgDescribeTwoVarGraph
                 Select Case ucrInputCategoricalByNumeric.GetText
                     Case "Boxplot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericYNumeric
                         clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
                     Case "Point plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericYNumeric
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
                     Case "Jitter plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
@@ -810,17 +821,21 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
                     Case "Violin plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericYNumeric
                         clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
                     Case "Boxplot + Jitter"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
@@ -829,9 +844,11 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
                     Case "Violin plot + Jitter plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
@@ -840,18 +857,22 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
                     Case "Violin plot + Boxplot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputXSidePlotOptions.SetName("Boxplot")
+                        'ucrInputXSidePlotOptions.SetName("Boxplot")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericYNumeric
                         clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
                         clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=2)
                     Case "Summary Plot"
                         ucrInputYSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                        ucrInputYSidePlotOptions.SetName("Density")
+                        'ucrInputYSidePlotOptions.SetName("Density")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                        ucrInputXSidePlotOptions.SetName("Density")
+                        'ucrInputXSidePlotOptions.SetName("Density")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericYNumeric
                         clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
@@ -859,9 +880,11 @@ Public Class dlgDescribeTwoVarGraph
                         clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineCategoricalByNumeric, iPosition:=0)
                     Case "Summary Plot + Points"
                         ucrInputYSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                        ucrInputYSidePlotOptions.SetName("Density")
+                        'ucrInputYSidePlotOptions.SetName("Density")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                        ucrInputXSidePlotOptions.SetName("Density")
+                        'ucrInputXSidePlotOptions.SetName("Density")
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
@@ -899,20 +922,23 @@ Public Class dlgDescribeTwoVarGraph
                 Select Case ucrInputNumericByCategorical.GetText
                     Case "Boxplot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
                     Case "Point plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
                     Case "Jitter plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
@@ -920,13 +946,15 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
                     Case "Violin plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
                     Case "Boxplot + Jitter"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
@@ -935,7 +963,8 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
                     Case "Violin plot + Jitter plot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
@@ -944,14 +973,16 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
                     Case "Violin plot + Boxplot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
-                        ucrInputYSidePlotOptions.SetName("Boxplot")
+                        'ucrInputYSidePlotOptions.SetName("Boxplot")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=0)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
                         clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=2)
                     Case "Summary Plot"
                         ucrInputYSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                        ucrInputYSidePlotOptions.SetName("Density")
+                        'ucrInputYSidePlotOptions.SetName("Density")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
@@ -959,7 +990,8 @@ Public Class dlgDescribeTwoVarGraph
                         clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineNumericByCategorical, iPosition:=0)
                     Case "Summary Plot + Points"
                         ucrInputYSidePlotOptions.SetItems({"Density", "Boxplot", "Frequency Polygon", "Histogram"})
-                        ucrInputYSidePlotOptions.SetName("Density")
+                        'ucrInputYSidePlotOptions.SetName("Density")
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
@@ -1022,6 +1054,8 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
         Dim iPosition As Integer = 0
         Dim iNumVariables As Integer = ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False).Count
+        RestoreXSidePlotInputOption()
+        RestoreYSidePlotInputOption()
         Results()
         EnableVisibleLabelControls()
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
@@ -1037,11 +1071,14 @@ Public Class dlgDescribeTwoVarGraph
             clsAesCategoricalByCategoricalMosaicPlot.AddParameter("fill", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)(0), iPosition:=1)
         End If
         'HideShowSidePlotInputBox()
+        MatchSameCategoricalVariablesInReceivers(ucrReceiverFirstVars)
     End Sub
 
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        RestoreXSidePlotInputOption()
+        RestoreYSidePlotInputOption()
         Results()
         EnableVisibleLabelControls()
         ChangeGeomToMosaicAndFacet()
@@ -1200,8 +1237,10 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoBy.Checked Then
+            ucrReceiverFill.Visible = ucrChkXSidePlot.Checked OrElse ucrChkYSidePlot.Checked
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
+            ucrReceiverFill.Visible = False
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
         End If
         If bRCodeSet Then
@@ -1323,7 +1362,7 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrChkXSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged, ucrChkXSidePlot.ControlValueChanged, ucrInputXSidePlotOptions.ControlValueChanged
-        'HideShowSidePlotInputBox()
+        RestoreXSidePlotInputOption()
         HideShowFillReceiver()
         AddedXSidePlots()
         clsAesLabelFunction.AddParameter("colour", ucrReceiverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
@@ -1331,9 +1370,28 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrChkYSidePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged, ucrChkYSidePlot.ControlValueChanged, ucrInputYSidePlotOptions.ControlValueChanged
-        'HideShowSidePlotInputBox()
+        RestoreYSidePlotInputOption()
         HideShowFillReceiver()
         AddedYSidePlots()
+    End Sub
+
+    Private Sub RestoreXSidePlotInputOption()
+        If Not ucrInputXSidePlotOptions.IsEmpty() Then
+            strXSidePlotInputDefault = ucrInputXSidePlotOptions.GetText()
+        Else
+            If Not ucrInputXSidePlotOptions.cboInput.Items().Contains(strXSidePlotInputDefault) AndAlso ucrInputXSidePlotOptions.cboInput.Items().Count > 0 Then
+                strXSidePlotInputDefault = ucrInputXSidePlotOptions.cboInput.Items(0)
+            End If
+        End If
+    End Sub
+    Private Sub RestoreYSidePlotInputOption()
+        If Not ucrInputYSidePlotOptions.IsEmpty() Then
+            strYSidePlotInputDefault = ucrInputYSidePlotOptions.GetText()
+        Else
+            If Not ucrInputYSidePlotOptions.cboInput.Items().Contains(strYSidePlotInputDefault) AndAlso ucrInputYSidePlotOptions.cboInput.Items().Count > 0 Then
+                strYSidePlotInputDefault = ucrInputYSidePlotOptions.cboInput.Items(0)
+            End If
+        End If
     End Sub
 
     Private Sub AddedXSidePlots()
@@ -1441,10 +1499,87 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
-    'Private Sub HideShowSidePlotInputBox()
-    '    ucrInputXSidePlotOptions.Visible = ucrChkXSidePlot.Visible AndAlso ucrChkXSidePlot.Checked
-    '    ucrInputYSidePlotOptions.Visible = ucrChkYSidePlot.Visible AndAlso ucrChkYSidePlot.Checked
-    'End Sub
+    Private Sub ucrReceiverSecondVar_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondVar.SelectionChanged
+        MatchSameCategoricalVariablesInReceivers(ucrReceiverSecondVar)
+    End Sub
+
+    Private Sub ucrReceiverFill_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFill.SelectionChanged
+        MatchSameCategoricalVariablesInReceivers(ucrReceiverFill)
+    End Sub
+
+    Private Function GetReceiverVariableType(ucrTempReceiver As ucrReceiverSingle) As String
+        Dim strTempVariableType As String = ""
+
+        If Not ucrTempReceiver.IsEmpty() Then
+            strTempVariableType = ucrTempReceiver.strCurrDataType
+        End If
+
+        If strTempVariableType.Contains("factor") OrElse strTempVariableType.Contains("character") OrElse strTempVariableType.Contains("logical") Then
+            strTempVariableType = "categorical"
+        End If
+
+        Return strTempVariableType
+    End Function
+
+    Private Sub MatchSameCategoricalVariablesInReceivers(sender As ucrReceiver)
+        If Not bRCodeSet OrElse rdoPairs.Checked OrElse sender.IsEmpty() Then
+            Exit Sub
+        End If
+        Dim bContainedInMultipleReceiver As Boolean = False
+        Dim strFillVariableType As String = ""
+        Dim strColorVariableType As String = ""
+
+        strFillVariableType = GetReceiverVariableType(ucrReceiverFill)
+        strColorVariableType = GetReceiverVariableType(ucrReceiverColour)
+
+        Dim bIsCategoricalVariables As Boolean = ((strFirstVariablesType = "categorical" OrElse strFirstVariablesType = "categoric") AndAlso strSecondVariableType = "categorical") OrElse
+                                     (strFillVariableType <> "" AndAlso strFirstVariablesType = "categorical" AndAlso strFillVariableType = "categorical") OrElse
+                                     (strColorVariableType <> "" AndAlso strFirstVariablesType = "categorical" AndAlso strColorVariableType = "categorical")
+
+
+        If bIsCategoricalVariables AndAlso ucrReceiverFill IsNot Nothing AndAlso ucrReceiverFirstVars IsNot Nothing AndAlso
+            ucrReceiverSecondVar IsNot Nothing AndAlso ucrReceiverColour IsNot Nothing AndAlso sender IsNot Nothing Then
+            If TypeOf (sender) Is ucrReceiverSingle Then
+                bContainedInMultipleReceiver = ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList().Contains(
+                    TryCast(sender, ucrReceiverSingle).GetVariableNames()
+                )
+            Else
+                Dim lstMultipleVariables As String() = ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList()
+                If rdoBy.Checked Then
+                    Dim bTempConContainedInMultipleReceiver As Boolean = False
+                    bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverSecondVar.GetVariableNames())
+                    If ucrReceiverFill IsNot Nothing AndAlso ucrReceiverFill.Visible AndAlso Not ucrReceiverFill.IsEmpty() Then
+                        bTempConContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverFill.GetVariableNames())
+                    End If
+                    bContainedInMultipleReceiver = bContainedInMultipleReceiver OrElse bTempConContainedInMultipleReceiver
+                    'Else
+                    '    bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverColour.GetVariableNames())
+                End If
+            End If
+
+            If sender Is ucrReceiverFirstVars Then
+                If bContainedInMultipleReceiver And strFirstVariablesType = "categorical" Then
+                    DisplayWarning("First Variable")
+                End If
+            ElseIf sender Is ucrReceiverSecondVar Then
+                If bContainedInMultipleReceiver And strSecondVariableType = "categorical" Then
+                    DisplayWarning("Second Variable")
+                End If
+            ElseIf sender Is ucrReceiverFill Then
+                If bContainedInMultipleReceiver And strFillVariableType = "categorical" Then
+                    DisplayWarning("Fill Variable")
+                End If
+                'ElseIf sender Is ucrReceiverColour Then
+                '    If bContainedInMultipleReceiver And strColorVariableType = "categorical" Then
+                '        DisplayWarning("Colour Variable")
+                '    End If
+            End If
+        End If
+    End Sub
+
+    Private Sub DisplayWarning(strMessage As String)
+        MsgBoxTranslate("Pick a categorical variable different from those selected in the " & strMessage & " to avoid Errors", vbOKOnly, "Matching Factor Variables")
+    End Sub
 
     Private Sub AddRemoveSidePlotThemeFunction()
         If ucrChkXSidePlot.Checked OrElse ucrChkYSidePlot.Checked Then
