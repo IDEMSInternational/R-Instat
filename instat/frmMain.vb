@@ -3275,4 +3275,20 @@ Public Class frmMain
     Private Sub mnuDescribeTwoThreeVariablesMoreLikert_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesMoreLikert.Click
         dlgDescribeTwoVariableMoreLikertGraphs.ShowDialog()
     End Sub
+
+    Private Sub mnuUnnest_Click(sender As Object, e As EventArgs) Handles mnuUnnest.Click
+        dlgPrepareDataReshapeUnnest.ShowDialog()
+    End Sub
+
+    Private Sub mnuExperimentsDesign_Click(sender As Object, e As EventArgs) Handles mnuExperimentsDesign.Click
+        dlgExperimentsDesign.ShowDialog()
+    End Sub
+
+    Private Sub mnuExperimentsOneButton_Click(sender As Object, e As EventArgs) Handles mnuExperimentsOneButton.Click
+        dlgExperimentsOneButton.ShowDialog()
+    End Sub
+
+    Private Sub mnuMultipleComparisons_Click(sender As Object, e As EventArgs) Handles mnuMultipleComparisons.Click
+        dlgModelMultipleComparisons.ShowDialog()
+    End Sub
 End Class
