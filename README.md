@@ -30,7 +30,7 @@ We welcome anyone who wants to contribute to our project in a variety of ways:
 
 - Bug reports are welcomed and can be filed on our [issues page](https://github.com/africanmathsinitiative/R-Instat/issues).
 - To give more general feedback/suggestions/comments email us at r-instat (at) africanmathsinitiative.net
-- To contribute to the development, please see our contributing document (not yet available)
+- Contributors with repository access should follow the [developer Git setup](docs/developer-git-setup.md).
 
 ## License
 

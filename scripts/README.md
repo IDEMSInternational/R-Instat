@@ -1,4 +1,13 @@
-﻿# R-Instat Translation Tools
+﻿# R-Instat Scripts
+
+## Git remote setup
+
+`setup_git_remotes.py` safely migrates a personal-fork checkout to use the
+shared repository as `origin`, without recloning. See the
+[developer Git setup](../docs/developer-git-setup.md) for the guarded migration,
+branch publishing, and bandwidth-efficient clone workflows.
+
+## Translation tools
 
 Python static-analysis and maintenance tools for the R-Instat VB.NET translation system.
 
