@@ -221,6 +221,7 @@ Public Class dlgCalculator
     ''' </summary>
     Private Sub SaveResults()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
+
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsToData)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFilterIndexAssign)
@@ -231,6 +232,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 160)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
+
             ucrBase.clsRsyntax.SetAssignTo("calc", strTempColumn:="", strTempDataframe:="")
 
             Dim strDF As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
@@ -462,5 +464,3 @@ Public Class dlgCalculator
         End Select
     End Sub
 End Class
-
-
