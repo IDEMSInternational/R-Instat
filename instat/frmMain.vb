@@ -895,6 +895,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Prepare
         dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
@@ -3268,11 +3269,8 @@ Public Class frmMain
         dlgInsertColumn.ShowDialog()
     End Sub
 
-    Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
-        dlgCheckSummary.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeTwoThreeVariablesMoreLikert_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesMoreLikert.Click
-        dlgDescribeTwoVariableMoreLikertGraphs.ShowDialog()
+    Private Sub DeleteRowsOrColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsOrColumnsToolStripMenuItem.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Climatic
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 End Class
