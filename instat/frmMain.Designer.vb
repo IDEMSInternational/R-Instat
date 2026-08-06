@@ -4370,6 +4370,7 @@ Partial Class frmMain
         '
         'mnuUnnest
         '
+        Me.mnuUnnest.Enabled = False
         Me.mnuUnnest.Name = "mnuUnnest"
         Me.mnuUnnest.Size = New System.Drawing.Size(243, 26)
         Me.mnuUnnest.Text = "Unnest..."
@@ -5148,7 +5149,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(171, 26)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(224, 26)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -5190,7 +5191,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(171, 26)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(224, 26)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -5209,7 +5210,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(171, 26)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(224, 26)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -5245,7 +5246,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(171, 26)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(224, 26)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -5269,15 +5270,16 @@ Partial Class frmMain
         '
         'mnuExperimentsDesign
         '
+        Me.mnuExperimentsDesign.Enabled = False
         Me.mnuExperimentsDesign.Name = "mnuExperimentsDesign"
-        Me.mnuExperimentsDesign.Size = New System.Drawing.Size(171, 26)
+        Me.mnuExperimentsDesign.Size = New System.Drawing.Size(224, 26)
         Me.mnuExperimentsDesign.Text = "Design"
         '
         'mnuOptionsByContextModel
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel, Me.mnuExperimentsOneButton, Me.mnuMultipleComparisons})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(171, 26)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(224, 26)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -5294,12 +5296,14 @@ Partial Class frmMain
         '
         'mnuExperimentsOneButton
         '
+        Me.mnuExperimentsOneButton.Enabled = False
         Me.mnuExperimentsOneButton.Name = "mnuExperimentsOneButton"
         Me.mnuExperimentsOneButton.Size = New System.Drawing.Size(246, 26)
         Me.mnuExperimentsOneButton.Text = "One Button..."
         '
         'mnuMultipleComparisons
         '
+        Me.mnuMultipleComparisons.Enabled = False
         Me.mnuMultipleComparisons.Name = "mnuMultipleComparisons"
         Me.mnuMultipleComparisons.Size = New System.Drawing.Size(246, 26)
         Me.mnuMultipleComparisons.Text = "Multiple Comparisons..."
@@ -5308,7 +5312,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCropModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCropModelApsimxExamples})
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(171, 26)
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(224, 26)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model"
         '
         'mnuOptionsByContextCropModelApsimxExamples
