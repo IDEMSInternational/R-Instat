@@ -1,5 +1,9 @@
 # R-Instat
 
+<!-- hy-mt2-i18n:start -->
+**English** · [中文](./README_zh-CN.md) · [日本語](./README_ja.md) · [Español](./README_es.md)
+<!-- hy-mt2-i18n:end -->
+
 R-Instat is free, menu driven statistics software powered by R. It is designed to exploit the power of the R statistical system, while simultaneously being as easy to use as other traditional point and click statistics software, through its menu and dialog-based interface.
 
 ## Download
