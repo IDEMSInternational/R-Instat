@@ -234,8 +234,8 @@ Public Class dlgUseDate
         ucrNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
 
         'Linking
-        ucrPnluseformat.AddToLinkedControls(ucrNewColumnName, {rdoFormatColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnluseformat.AddToLinkedControls(ucrInputComboBoxNewFormat, {rdoFormatColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnluseformat.AddToLinkedControls(ucrNewColumnName, {rdoFormatColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="format_date")
+        ucrPnluseformat.AddToLinkedControls(ucrInputComboBoxNewFormat, {rdoFormatColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Jan 5")
 
         'Link "Use" components to rdoUseColumn so they are removed in Format mode
         Dim lstUseControls As New List(Of ucrCore)({ucrChkShiftYearNum, ucrChkShiftYearName, ucrChkLeapYearNum, ucrChkShiftMonthNum, ucrChkShiftMonthAbbr, ucrChkShiftMonthName, ucrChkWeekNum, ucrChkWeekAbbr, ucrChkWeekName, ucrChkWeekdayNum, ucrChkWeekdayAbbr, ucrChkWeekdayName, ucrChkDayInMonthNum, ucrChkDaysInMonthNum, ucrChkDayInYearNum, ucrChkShiftDayInYearNum366, ucrChkShiftPentadNum, ucrChkShiftPentadAbbr, ucrChkShiftDekadNum, ucrChkShiftDekadAbbr, ucrChkShiftQuarterNum, ucrChkShiftQuarterAbbr, ucrInputComboBoxStartingMonth})
@@ -252,6 +252,9 @@ Public Class dlgUseDate
 
         ucrSelectorUseDate.Reset()
         ucrPnluseformat.SetToValue(rdoUseColumn)
+        ucrInputComboBoxNewFormat.SetToValue("Jan 5")
+        ucrNewColumnName.SetName("format_date")
+        UpdatePanelVisibility()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -280,6 +283,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        bReset = True
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
