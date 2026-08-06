@@ -6914,6 +6914,9 @@
   "Names Separator": "Names Separator",
   "Stack Column Sets": "Stack Column Sets",
   "Number of Sets ": "Number of Sets ",
+  "dlgExperimentsGreaterthanDesign": "dlgExperimentsGreaterthanDesign",
+  "One Button": "One Button",
+  "Multiple Comparisons": "Multiple Comparisons",
   "Variable Names": "Variable Names",
   "Limit Length": "Limit Length"
 }

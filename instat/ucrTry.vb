@@ -28,6 +28,7 @@ Public Class ucrTry
     Private arrAssociatedControls As ucrCore()
     Public Property RunCommandAsMultipleLines As Boolean = False
 
+    Public Event AfterTry(bValid As Boolean)
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -91,8 +92,10 @@ Public Class ucrTry
             SetToCommandOrModel()
             If Not IsNothing(ucrReceiverScript) AndAlso ucrReceiverScript.IsEmpty() Then
                 ucrInputTryMessage.SetName("")
+                RaiseEvent AfterTry(False)
             ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl() Then
                 ucrInputTryMessage.SetName("")
+                RaiseEvent AfterTry(False)
             Else
                 For Each clsTempCode In clsRSyntax.GetBeforeCodes()
                     Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
@@ -172,13 +175,15 @@ Public Class ucrTry
                             AddButtonInTryTextBox()
                         End If
                     End If
-                    End If
+                    RaiseEvent AfterTry(bValid)
+                End If
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName(Translations.GetTranslation(CommandModel & " produced an error. Modify input before running."))
             strError = strErrorDetail
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
             AddButtonInTryTextBox()
+            RaiseEvent AfterTry(False)
         Finally
             lstScripts = New List(Of String)
             For Each clsTempCode In clsRSyntax.GetAfterCodes()
