@@ -84,13 +84,11 @@ Partial Class dlgStack
         Me.ucrPnlCarryColumns = New instat.UcrPanel()
         Me.ucrChkDropMissingValues = New instat.ucrCheck()
         Me.ucrInputNamesSep = New instat.ucrInputComboBox()
-        Me.lblSeparatedBy = New System.Windows.Forms.Label()
         Me.rdoNSets = New System.Windows.Forms.RadioButton()
         Me.rdoSeperatedBy = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMultipleStack = New instat.UcrPanel()
         Me.ucrNudSets = New instat.ucrNud()
         Me.grpStackColSets = New System.Windows.Forms.GroupBox()
-        Me.lblSets = New System.Windows.Forms.Label()
         Me.grpStackColSets.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -591,25 +589,16 @@ Partial Class dlgStack
         Me.ucrInputNamesSep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputNamesSep.GetSetSelectedIndex = -1
         Me.ucrInputNamesSep.IsReadOnly = False
-        Me.ucrInputNamesSep.Location = New System.Drawing.Point(87, 59)
+        Me.ucrInputNamesSep.Location = New System.Drawing.Point(128, 26)
         Me.ucrInputNamesSep.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputNamesSep.Name = "ucrInputNamesSep"
         Me.ucrInputNamesSep.Size = New System.Drawing.Size(104, 21)
         Me.ucrInputNamesSep.TabIndex = 46
         '
-        'lblSeparatedBy
-        '
-        Me.lblSeparatedBy.AutoSize = True
-        Me.lblSeparatedBy.Location = New System.Drawing.Point(10, 59)
-        Me.lblSeparatedBy.Name = "lblSeparatedBy"
-        Me.lblSeparatedBy.Size = New System.Drawing.Size(73, 13)
-        Me.lblSeparatedBy.TabIndex = 47
-        Me.lblSeparatedBy.Text = "Separated by:"
-        '
         'rdoNSets
         '
         Me.rdoNSets.AutoSize = True
-        Me.rdoNSets.Location = New System.Drawing.Point(126, 28)
+        Me.rdoNSets.Location = New System.Drawing.Point(11, 57)
         Me.rdoNSets.Name = "rdoNSets"
         Me.rdoNSets.Size = New System.Drawing.Size(109, 17)
         Me.rdoNSets.TabIndex = 48
@@ -634,7 +623,7 @@ Partial Class dlgStack
         Me.ucrPnlMultipleStack.Location = New System.Drawing.Point(8, 23)
         Me.ucrPnlMultipleStack.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlMultipleStack.Name = "ucrPnlMultipleStack"
-        Me.ucrPnlMultipleStack.Size = New System.Drawing.Size(245, 25)
+        Me.ucrPnlMultipleStack.Size = New System.Drawing.Size(112, 62)
         Me.ucrPnlMultipleStack.TabIndex = 50
         '
         'ucrNudSets
@@ -642,7 +631,7 @@ Partial Class dlgStack
         Me.ucrNudSets.AutoSize = True
         Me.ucrNudSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSets.Location = New System.Drawing.Point(202, 57)
+        Me.ucrNudSets.Location = New System.Drawing.Point(128, 57)
         Me.ucrNudSets.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrNudSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -654,29 +643,18 @@ Partial Class dlgStack
         'grpStackColSets
         '
         Me.grpStackColSets.Controls.Add(Me.rdoSeperatedBy)
-        Me.grpStackColSets.Controls.Add(Me.lblSeparatedBy)
         Me.grpStackColSets.Controls.Add(Me.ucrNudSets)
         Me.grpStackColSets.Controls.Add(Me.ucrInputNamesSep)
         Me.grpStackColSets.Controls.Add(Me.rdoNSets)
         Me.grpStackColSets.Controls.Add(Me.ucrPnlMultipleStack)
-        Me.grpStackColSets.Controls.Add(Me.lblSets)
         Me.grpStackColSets.Location = New System.Drawing.Point(15, 299)
         Me.grpStackColSets.Margin = New System.Windows.Forms.Padding(2)
         Me.grpStackColSets.Name = "grpStackColSets"
         Me.grpStackColSets.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpStackColSets.Size = New System.Drawing.Size(261, 93)
+        Me.grpStackColSets.Size = New System.Drawing.Size(246, 93)
         Me.grpStackColSets.TabIndex = 52
         Me.grpStackColSets.TabStop = False
         Me.grpStackColSets.Text = "Stack Column Sets"
-        '
-        'lblSets
-        '
-        Me.lblSets.AutoSize = True
-        Me.lblSets.Location = New System.Drawing.Point(114, 61)
-        Me.lblSets.Name = "lblSets"
-        Me.lblSets.Size = New System.Drawing.Size(83, 13)
-        Me.lblSets.TabIndex = 52
-        Me.lblSets.Text = "Number of Sets "
         '
         'dlgStack
         '
@@ -786,11 +764,9 @@ Partial Class dlgStack
     Friend WithEvents lblDropValues As Label
     Friend WithEvents ucrSaveNewDataName As ucrSave
     Friend WithEvents ucrInputNamesSep As ucrInputComboBox
-    Friend WithEvents lblSeparatedBy As Label
     Friend WithEvents grpStackColSets As GroupBox
     Friend WithEvents rdoSeperatedBy As RadioButton
     Friend WithEvents ucrNudSets As ucrNud
     Friend WithEvents rdoNSets As RadioButton
     Friend WithEvents ucrPnlMultipleStack As UcrPanel
-    Friend WithEvents lblSets As Label
 End Class

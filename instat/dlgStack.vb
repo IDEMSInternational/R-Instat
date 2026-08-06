@@ -36,9 +36,11 @@ Public Class dlgStack
     Private clsGetVariablesFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsStackMultipleFunction As New RFunction
+    Private clsFactorFunction As New RFunction
     Private clsMutateFunction As New RFunction
     Private clsRowNumberFunction As New RFunction
     Private clsMakePatternsFunction As New RFunction
+    Private clsMutateFactorFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsStackOperator As New ROperator
     Private bFirstLoad As Boolean = True
@@ -94,7 +96,6 @@ Public Class dlgStack
 
         ucrNudSets.Minimum = 2
         ucrNudSets.SetText("2")
-        ucrNudSets.SetLinkedDisplayControl(lblSets)
 
         ucrReceiverDropValues.SetParameter(New RParameter("drop", 4))
         ucrReceiverDropValues.Selector = ucrSelectorStack
@@ -227,7 +228,6 @@ Public Class dlgStack
         ucrInputNamesTo.SetLinkedDisplayControl(lblNamesTo)
         ucrInputValuesTo.SetLinkedDisplayControl(lblValuesTo)
         ucrInputToken.SetLinkedDisplayControl(lblToken)
-        ucrInputNamesSep.SetLinkedDisplayControl(lblSeparatedBy)
         ucrInputFormat.SetLinkedDisplayControl(lblFormat)
         ucrInputOutput.SetLinkedDisplayControl(lblOutput)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
@@ -256,6 +256,8 @@ Public Class dlgStack
         clsRowNumberFunction = New RFunction
         clsMakePatternsFunction = New RFunction
         clsSelectIDFunction = New RFunction
+        clsMutateFactorFunction = New RFunction
+        clsFactorFunction = New RFunction
         clsPipeOperator = New ROperator
         clsStackOperator = New ROperator
 
@@ -293,6 +295,11 @@ Public Class dlgStack
         clsRowNumberFunction.SetPackageName("dplyr")
         clsRowNumberFunction.SetRCommand("row_number")
 
+        clsFactorFunction.SetRCommand("factor")
+
+        clsMutateFactorFunction.SetPackageName("dplyr")
+        clsMutateFactorFunction.SetRCommand("mutate")
+
         clsStackMultipleFunction.SetPackageName("tidyr")
         clsStackMultipleFunction.SetRCommand("pivot_longer")
         clsStackMultipleFunction.AddParameter("names_sep", Chr(34) & "\\." & Chr(34), iPosition:=1)
@@ -321,7 +328,7 @@ Public Class dlgStack
         clsStackOperator.AddParameter("right4", clsRFunctionParameter:=clsStackMultipleFunction, iPosition:=4)
         clsStackOperator.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         AddStackNamesParmeter()
-
+        AddFactorVarParameter()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
     End Sub
 
@@ -430,6 +437,7 @@ Public Class dlgStack
             ucrReceiverExpand.SetMeAsReceiver()
         End If
         AddStackNamesParmeter()
+        AddFactorVarParameter()
         HideShowControls()
     End Sub
 
@@ -509,6 +517,7 @@ Public Class dlgStack
             End If
         End If
         AddStackNamesParmeter()
+        AddFactorVarParameter()
         TestOKEnabled()
         HideShowControls()
     End Sub
@@ -602,8 +611,29 @@ Public Class dlgStack
 
     Private Sub ucrFactorInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorInto.ControlValueChanged
         SetNamesToParameter()
+        AddFactorVarParameter()
     End Sub
 
+    Private Sub AddFactorVarParameter()
+        Dim strFactorName As String = ucrFactorInto.GetText()
+
+        If ucrChkStackMultipleSets.Checked Then
+            If Not ucrFactorInto.IsEmpty Then
+                clsMutateFactorFunction.AddParameter("variable", clsRFunctionParameter:=clsFactorFunction, iPosition:=0)
+                clsFactorFunction.AddParameter("var", strFactorName, bIncludeArgumentName:=False, iPosition:=0)
+                clsStackOperator.AddParameter("right5", clsRFunctionParameter:=clsMutateFactorFunction, iPosition:=5)
+            Else
+                clsMutateFactorFunction.RemoveParameterByName("variable")
+                clsFactorFunction.RemoveParameterByName("var")
+                clsStackOperator.RemoveParameterByName("right5")
+            End If
+        Else
+            clsStackOperator.RemoveParameterByName("right5")
+            clsMutateFactorFunction.RemoveParameterByName("variable")
+            clsFactorFunction.RemoveParameterByName("var")
+        End If
+
+    End Sub
     Private Sub SetNamesToParameter()
         Dim strFactorName As String = ucrFactorInto.GetText()
 
