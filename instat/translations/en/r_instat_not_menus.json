@@ -6908,5 +6908,10 @@
   "Save and Reopen Workspace:": "Save and Reopen Workspace:",
   "Fraction": "Fraction",
   "Zero": "Zero",
-  "Scientific": "Scientific"
+  "Scientific": "Scientific",
+  "dlgExperimentsGreaterthanDesign": "dlgExperimentsGreaterthanDesign",
+  "One Button": "One Button",
+  "Multiple Comparisons": "Multiple Comparisons",
+  "Variable Names": "Variable Names",
+  "Limit Length": "Limit Length"
 }
