@@ -313,13 +313,11 @@ Public Class dlgDescribeTwoVariable
         clsCombineSwapAnova2Table.SetRCommand("c")
 
         clsMappingFunction.SetPackageName("purrr")
-        'clsMappingFunction.SetRCommand("walk")
         clsMappingFunction.SetRCommand("map")
         clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsYlistOperator, iPosition:=0)
         clsMappingFunction.AddParameter(".f", clsROperatorParameter:=clsAnovaTable2Operator, iPosition:=1)
 
         clsMapping2Function.SetPackageName("purrr")
-        'clsMapping2Function.SetRCommand("walk")
         clsMapping2Function.SetRCommand("map")
         clsMapping2Function.AddParameter(".x", clsROperatorParameter:=clsYlist2Operator, iPosition:=0)
         clsMapping2Function.AddParameter(".f", clsROperatorParameter:=clsAnovaSwapTable2Opeator, iPosition:=1)
@@ -875,7 +873,6 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                'ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                 ucrSaveTable.SetPrefix("three_var_model")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
