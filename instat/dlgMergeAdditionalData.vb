@@ -346,5 +346,4 @@ Public Class dlgMergeAdditionalData
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRemoveToFilter)
         End If
     End Sub
-
 End Class
