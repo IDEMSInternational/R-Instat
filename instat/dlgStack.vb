@@ -632,8 +632,8 @@ Public Class dlgStack
             clsMutateFactorFunction.RemoveParameterByName("variable")
             clsFactorFunction.RemoveParameterByName("var")
         End If
-
     End Sub
+
     Private Sub SetNamesToParameter()
         Dim strFactorName As String = ucrFactorInto.GetText()
 
