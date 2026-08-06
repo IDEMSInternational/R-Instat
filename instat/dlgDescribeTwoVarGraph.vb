@@ -392,6 +392,12 @@ Public Class dlgDescribeTwoVarGraph
         'Reset
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
+        ucrInputXSidePlotOptions.SetItems({"Density", "Bar", "Boxplot", "Frequency Polygon", "Histogram"})
+        ucrInputXSidePlotOptions.SetName("Density")
+
+        ucrInputYSidePlotOptions.SetItems({"Density", "Bar", "Boxplot", "Frequency Polygon", "Histogram"})
+        ucrInputYSidePlotOptions.SetName("Density")
+
 
         ucrReceiverFirstVars.SetMeAsReceiver()
 
