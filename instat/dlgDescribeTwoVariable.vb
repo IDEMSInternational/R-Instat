@@ -866,7 +866,7 @@ Public Class dlgDescribeTwoVariable
                 End If
             ElseIf IsNumericByNumericByNumeric() Then
                 cmdFormatTable.Visible = False
-                ucrSaveTable.Visible = False
+                ucrSaveTable.Visible = True
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
                 ucrChkTotal.Visible = True
@@ -875,7 +875,12 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                'ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
+                ucrSaveTable.SetPrefix("three_var_model")
+                ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+                ucrSaveTable.SetAssignToIfUncheckedValue("last_model")
+                ucrSaveTable.SetCheckBoxText("Store Model")
             ElseIf IsNumericByFactorByFactor() Then
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = True
