@@ -47,6 +47,20 @@ Public Class dlgImportGriddedData
         ucrInputSource.SetItems(dctDownloadPairs)
         ucrInputSource.SetDropDownStyleAsNonEditable()
 
+        ucrPnlOptions.AddRadioButton(rdoIRIValue)
+        ucrPnlOptions.AddRadioButton(rdoIRIVariable)
+        ucrPnlOptions.AddParameterPresentCondition(rdoIRIValue, {"min_lon", "min_lat"})
+        ucrPnlOptions.AddParameterPresentCondition(rdoIRIVariable, {"id_variable", "latitude", "longitude"})
+        'ucrPnlOptions.AddToLinkedControls({grpLocationRange, grpDateRange}, {rdoIRIValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlOptions.AddToLinkedControls({grpImportIRIVariable}, {rdoIRIVariable}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=False)
+
+        ucrPnlMaxPlantingDate.AddRadioButton(rdoVariableMaxPlant)
+        ucrPnlMaxPlantingDate.AddRadioButton(rdoMaxPlantValue)
+        ucrPnlMaxPlantingDate.AddParameterPresentCondition(rdoVariableMaxPlant, {"max_planting_date_variable"})
+        ucrPnlMaxPlantingDate.AddParameterPresentCondition(rdoMaxPlantValue, {"max_planting_date_value"})
+        ucrPnlMaxPlantingDate.AddToLinkedControls({ucrReceiverMaxPlantingDate}, {rdoVariableMaxPlant}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMaxPlantingDate.AddToLinkedControls({ucrNudMaxPlantingDate}, {rdoMaxPlantValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrInputData.SetParameter(New RParameter("data", 1))
         ucrInputData.SetDropDownStyleAsNonEditable()
 
@@ -75,6 +89,24 @@ Public Class dlgImportGriddedData
 
         ucrInputNewDataFrameName.SetParameter(New RParameter("name", 9))
 
+        ucrReceiverIDVariable.Selector = ucrSelectorIRIVariable
+        ucrReceiverLatitude.Selector = ucrSelectorIRIVariable
+        ucrReceiverLongtitude.Selector = ucrSelectorIRIVariable
+        ucrReceiverMinPlantingDate.Selector = ucrSelectorIRIVariable
+        ucrReceiverMaxPlantingDate.Selector = ucrSelectorIRIVariable
+
+        ucrReceiverIDVariable.SetParameter(New RParameter("id_variable", 1))
+        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 2))
+        ucrReceiverLongtitude.SetParameter(New RParameter("longitude", 3))
+        ucrReceiverMinPlantingDate.SetParameter(New RParameter("min_planting_date", 4))
+        ucrReceiverMaxPlantingDate.SetParameter(New RParameter("max_planting_date_variable", 5))
+        ucrNudMaxPlantingDate.SetParameter(New RParameter("max_planting_date_value", 6))
+
+        ucrReceiverIDVariable.SetLinkedDisplayControl(lblIDVariable)
+        ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
+        ucrReceiverLongtitude.SetLinkedDisplayControl(lblLongtude)
+        ucrReceiverMinPlantingDate.SetLinkedDisplayControl(lblPlantingDateMin)
+        ucrReceiverMaxPlantingDate.SetLinkedDisplayControl(lblPlantingDateMax)
         ucrPnlLocationRange.SetParameter(New RParameter("download_type", 10))
         ucrPnlLocationRange.AddRadioButton(rdoArea, Chr(34) & "Area" & Chr(34))
         ucrPnlLocationRange.AddRadioButton(rdoPoint, Chr(34) & "Point" & Chr(34))
