@@ -161,11 +161,21 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse ucrInputFilePath.IsEmpty OrElse (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+        Dim bValueModeInvalid As Boolean =
+        rdoIRIValue.Checked AndAlso
+        (ucrInputNewDataFrameName.IsEmpty OrElse ucrInputFilePath.IsEmpty OrElse
+         (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse
+         (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse
+         (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue))
+
+        Dim bVariableModeInvalid As Boolean =
+        rdoIRIVariable.Checked AndAlso
+        (ucrReceiverIDVariable.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongtitude.IsEmpty OrElse
+         ucrReceiverMinPlantingDate.IsEmpty OrElse
+         (rdoVariableMaxPlant.Checked AndAlso ucrReceiverMaxPlantingDate.IsEmpty) OrElse
+         (rdoMaxPlantValue.Checked AndAlso ucrNudMaxPlantingDate.IsEmpty))
+
+        ucrBase.OKEnabled(Not (bValueModeInvalid OrElse bVariableModeInvalid))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -273,7 +283,14 @@ Public Class dlgImportGriddedData
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged,
+    ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged,
+    ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged,
+    ucrPnlDateRange.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrPnlLocationRange.ControlContentsChanged,
+    ucrPnlMaxPlantingDate.ControlContentsChanged, ucrReceiverIDVariable.ControlContentsChanged,
+    ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongtitude.ControlContentsChanged,
+    ucrReceiverMinPlantingDate.ControlContentsChanged, ucrReceiverMaxPlantingDate.ControlContentsChanged,
+    ucrNudMaxPlantingDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
