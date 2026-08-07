@@ -44,6 +44,21 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
+    Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
+
+    Public bRecordQuarto As Boolean = False
+    Public strCurrentQuartoFile As String = ""
+    Public strCurrentQuartoRdsFile As String = ""
+    Public bShowRenderDetails As Boolean = True
+    Public bQuartoHTML As Boolean = True
+    Public bQuartoPDF As Boolean = True
+    Public bQuartoPPTX As Boolean = True
+    Public bQuartoDOCX As Boolean = True
+    Public bQuartoEcho As Boolean = True          'Display Code
+    Public bQuartoWarning As Boolean = False      'Display Warnings
+    Public bQuartoMessage As Boolean = False      'Display R Messages
+    Public bQuartoEval As Boolean = True          'Give R Output
+
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -91,16 +106,21 @@ Public Class frmMain
 
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+    End Sub
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            'Initialise Cef runtime here (rather than in the constructor) so that any message
+            'shown is properly owned by the visible main form and only ever appears once at startup.
+            'If the runtime fails to initialise, R-Instat still works - html outputs are then
+            'shown in the default browser instead of the output window.
             If Not CefRuntimeWrapper.InitialiseCefRuntime() Then
                 MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Html content will be shown in your default browser.",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
 
         End If
-    End Sub
-
-    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         '---------------------------------------
         'Gets the path for the executable file that started the application, not including the executable name.
@@ -421,7 +441,7 @@ Public Class frmMain
                     clsInstatOptions = CType(New BinaryFormatter().Deserialize(FileStream), InstatOptions)
                 End Using
             Catch ex As Exception
-                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
+                MsgBoxTranslate("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
             End Try
         End If
 
@@ -510,7 +530,7 @@ Public Class frmMain
         If File.Exists(strMarkerFilePath) Then
             Dim lastExitStatus As String = File.ReadAllText(strMarkerFilePath).Trim()
             If lastExitStatus <> "CleanExit" AndAlso
-                MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
+                MsgBoxTranslate("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
                               "The Tools > Restore Backup dialog allows you to restore backed-up data, or save the corresponding log file." & Environment.NewLine &
                               "To proceed, click Yes.",
                               MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
@@ -544,7 +564,7 @@ Public Class frmMain
             Try
                 File.Delete(strAutoSavedLogFilePaths(1)) '1 to avoid deleting app_marker file
             Catch ex As Exception
-                MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                MsgBoxTranslate("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
             End Try
         End If
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
@@ -557,7 +577,7 @@ Public Class frmMain
                     End If
                 Next
             Catch ex As Exception
-                MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                MsgBoxTranslate("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
 
@@ -565,7 +585,7 @@ Public Class frmMain
             Try
                 File.Delete(strAutoSavedDataFilePaths(0))
             Catch ex As Exception
-                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                MsgBoxTranslate("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
         '---------------------------------------
@@ -597,6 +617,30 @@ Public Class frmMain
     ' Need to fix this so that all of frmMain can be translated
     Public Sub TranslateFrmMainMenu()
         translateMenu(mnuBar.Items, Me)
+    End Sub
+
+    Public Sub AppendToQuartoFile(strScript As String)
+
+        If String.IsNullOrEmpty(strCurrentQuartoFile) Then
+            Exit Sub
+        End If
+
+        IO.File.AppendAllText(
+        strCurrentQuartoFile.Replace("/", "\"),
+        strScript & Environment.NewLine)
+
+    End Sub
+
+    Public Sub SaveCurrentQuartoFile()
+
+        If String.IsNullOrEmpty(strCurrentQuartoFile) Then
+            Exit Sub
+        End If
+
+        File.WriteAllText(
+        strCurrentQuartoFile,
+        ucrScriptWindow.clsScriptActive.Text)
+
     End Sub
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
@@ -642,6 +686,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataDataframeMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrColumnMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
@@ -658,6 +703,7 @@ Public Class frmMain
             mnuViewSwapDataAndScript.Checked = False
             mnuSwapDataMetadata.Checked = False
             mnuSwapDataLogScript.Checked = False
+            ucrDataFrameMeta.RefreshGridData()
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel2.Controls.Add(ucrDataFrameMeta)
@@ -697,7 +743,7 @@ Public Class frmMain
                 End If
             End Using
         Catch ex As Exception
-            MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
+            MsgBoxTranslate("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
         End Try
     End Sub
 
@@ -849,7 +895,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
-        dlgDeleteRowsOrColums.ShowDialog()
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
@@ -1181,7 +1227,7 @@ Public Class frmMain
         Dim bClose As DialogResult = DialogResult.Yes
 
         If e.CloseReason = CloseReason.UserClosing Then
-            bClose = MsgBox("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
+            bClose = MsgBoxTranslate("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
         End If
         If bClose = DialogResult.Yes Then
             Try
@@ -1208,7 +1254,7 @@ Public Class frmMain
                 End Using
 
             Catch ex As Exception
-                MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
+                MsgBoxTranslate("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
         Else
             e.Cancel = True
@@ -1300,7 +1346,7 @@ Public Class frmMain
                 End If
             End If
         Catch ex As Exception
-            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+            MsgBoxTranslate("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
         End Try
     End Sub
 
@@ -1558,8 +1604,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperatureGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Temperature
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATemperature.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSACrops_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACrops.Click
@@ -1856,7 +1901,7 @@ Public Class frmMain
                                     MessageBoxButtons.YesNo, "Close Data") Then
             Exit Sub
         End If
-
+        SetToDefaultLayout()
         clsRLink.CloseDataBook()
         strSaveFilePath = ""
     End Sub
@@ -2894,8 +2939,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATrendGraph.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
@@ -2909,11 +2953,6 @@ Public Class frmMain
     Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
         dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
         dlgVisualizeData.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPICSAGeneralGrap_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGrap.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeClimograph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimograph.Click
@@ -2955,10 +2994,6 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
     End Sub
 
-
-
-
-
     Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuToolsHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "8")
     End Sub
@@ -2982,12 +3017,26 @@ Public Class frmMain
         ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
+        If mnuSwapDataMetadata.Checked Then
+            mnuSwapDataDataframeMetadata.Enabled = False
+            mnuViewSwapDataAndDataframeMetadata.Enabled = False
+        Else
+            mnuSwapDataDataframeMetadata.Enabled = True
+            mnuViewSwapDataAndDataframeMetadata.Enabled = True
+        End If
     End Sub
 
     Private Sub mnuSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataDataframeMetadata.Click
         mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
         UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
+        If mnuSwapDataDataframeMetadata.Checked Then
+            mnuSwapDataMetadata.Enabled = False
+            mnuViewSwapDataAndMetadata.Enabled = False
+        Else
+            mnuSwapDataMetadata.Enabled = True
+            mnuViewSwapDataAndMetadata.Enabled = True
+        End If
     End Sub
 
     Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuHelpResourcesSite.Click
@@ -3198,8 +3247,48 @@ Public Class frmMain
         dlgRecodeFactor.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeOneVariableLikertGraphs_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableLikertGraphs.Click
+        If dlgDescribeOneVariableLikertGraph Is Nothing Then
+            dlgDescribeOneVariableLikertGraph = New dlgDescribeOneVariableLikertGraph
+        End If
+        dlgDescribeOneVariableLikertGraph.ShowDialog()
+    End Sub
+
     Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
         dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
         dlgCombine.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
+        dlgImportFromEPicsa.ShowDialog()
+    End Sub
+
+    Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
+        dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
+        dlgInsertColumn.ShowDialog()
+    End Sub
+
+    Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
+        dlgCheckSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesMoreLikert_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesMoreLikert.Click
+        dlgDescribeTwoVariableMoreLikertGraphs.ShowDialog()
+    End Sub
+
+    Private Sub mnuUnnest_Click(sender As Object, e As EventArgs) Handles mnuUnnest.Click
+        dlgPrepareDataReshapeUnnest.ShowDialog()
+    End Sub
+
+    Private Sub mnuExperimentsDesign_Click(sender As Object, e As EventArgs) Handles mnuExperimentsDesign.Click
+        dlgExperimentsDesign.ShowDialog()
+    End Sub
+
+    Private Sub mnuExperimentsOneButton_Click(sender As Object, e As EventArgs) Handles mnuExperimentsOneButton.Click
+        dlgExperimentsOneButton.ShowDialog()
+    End Sub
+
+    Private Sub mnuMultipleComparisons_Click(sender As Object, e As EventArgs) Handles mnuMultipleComparisons.Click
+        dlgModelMultipleComparisons.ShowDialog()
     End Sub
 End Class

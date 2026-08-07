@@ -24,48 +24,48 @@ Partial Class sdgThemesSub
     Private Sub InitializeComponent()
         Me.TabThemes = New System.Windows.Forms.TabControl()
         Me.tbTitles = New System.Windows.Forms.TabPage()
-        Me.tbLabels = New System.Windows.Forms.TabPage()
-        Me.tbAxes = New System.Windows.Forms.TabPage()
-        Me.tbPanel = New System.Windows.Forms.TabPage()
-        Me.tbBackground = New System.Windows.Forms.TabPage()
-        Me.tbLegend = New System.Windows.Forms.TabPage()
-        Me.grpLegendPosition = New System.Windows.Forms.GroupBox()
-        Me.rdoColour = New System.Windows.Forms.RadioButton()
-        Me.rdoFill = New System.Windows.Forms.RadioButton()
-        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
-        Me.rdoVertical = New System.Windows.Forms.RadioButton()
-        Me.rdoCoordinates = New System.Windows.Forms.RadioButton()
-        Me.rdoSpecific = New System.Windows.Forms.RadioButton()
-        Me.lblYCoord = New System.Windows.Forms.Label()
-        Me.lblXCoord = New System.Windows.Forms.Label()
-        Me.lblLegendPosition = New System.Windows.Forms.Label()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.ucrThemeTitleYAxis = New instat.ucrELementTextControl()
         Me.ucrThemeTitleXAxis = New instat.ucrELementTextControl()
         Me.ucrPlotTitle = New instat.ucrELementTextControl()
+        Me.tbLabels = New System.Windows.Forms.TabPage()
         Me.ucrThemeLeftYAxis = New instat.ucrELementTextControl()
         Me.ucrThemeBottomXAxis = New instat.ucrELementTextControl()
         Me.ucrThemeAxesTickLabels = New instat.ucrELementTextControl()
+        Me.tbAxes = New System.Windows.Forms.TabPage()
         Me.ucrYAxisLines = New instat.ucrElementLineControl()
         Me.ucrTickMarksYAxis = New instat.ucrElementLineControl()
         Me.ucrXAxisLines = New instat.ucrElementLineControl()
         Me.ucrTickMarksXAxis = New instat.ucrElementLineControl()
         Me.ucrThemeAxesLines = New instat.ucrElementLineControl()
         Me.ucrTickMarksAxes = New instat.ucrElementLineControl()
+        Me.tbPanel = New System.Windows.Forms.TabPage()
         Me.ucrPanelGridMinor = New instat.ucrElementLineControl()
         Me.ucrPanelGridMajor = New instat.ucrElementLineControl()
         Me.ucrPanelGrid = New instat.ucrElementLineControl()
+        Me.tbBackground = New System.Windows.Forms.TabPage()
         Me.ucrPanelBackground = New instat.ucrElementRectControl()
         Me.ucrPanelBorder = New instat.ucrElementRectControl()
+        Me.tbLegend = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddLegend = New instat.ucrCheck()
+        Me.grpLegendPosition = New System.Windows.Forms.GroupBox()
+        Me.rdoColour = New System.Windows.Forms.RadioButton()
+        Me.rdoFill = New System.Windows.Forms.RadioButton()
         Me.ucrPnlReverse = New instat.UcrPanel()
+        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
+        Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.ucrPnlDirection = New instat.UcrPanel()
         Me.ucrChkReverse = New instat.ucrCheck()
         Me.ucrChkDirection = New instat.ucrCheck()
         Me.ucrNudY = New instat.ucrNud()
+        Me.rdoCoordinates = New System.Windows.Forms.RadioButton()
         Me.ucrNudX = New instat.ucrNud()
+        Me.rdoSpecific = New System.Windows.Forms.RadioButton()
+        Me.lblYCoord = New System.Windows.Forms.Label()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.lblXCoord = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
-        Me.ucrChkAddLegend = New instat.ucrCheck()
+        Me.lblLegendPosition = New System.Windows.Forms.Label()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.TabThemes.SuspendLayout()
         Me.tbTitles.SuspendLayout()
         Me.tbLabels.SuspendLayout()
@@ -103,195 +103,6 @@ Partial Class sdgThemesSub
         Me.tbTitles.Text = "Titles"
         Me.tbTitles.UseVisualStyleBackColor = True
         '
-        'tbLabels
-        '
-        Me.tbLabels.Controls.Add(Me.ucrThemeLeftYAxis)
-        Me.tbLabels.Controls.Add(Me.ucrThemeBottomXAxis)
-        Me.tbLabels.Controls.Add(Me.ucrThemeAxesTickLabels)
-        Me.tbLabels.Location = New System.Drawing.Point(4, 22)
-        Me.tbLabels.Name = "tbLabels"
-        Me.tbLabels.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbLabels.Size = New System.Drawing.Size(519, 461)
-        Me.tbLabels.TabIndex = 1
-        Me.tbLabels.Text = "Labels"
-        Me.tbLabels.UseVisualStyleBackColor = True
-        '
-        'tbAxes
-        '
-        Me.tbAxes.Controls.Add(Me.ucrYAxisLines)
-        Me.tbAxes.Controls.Add(Me.ucrTickMarksYAxis)
-        Me.tbAxes.Controls.Add(Me.ucrXAxisLines)
-        Me.tbAxes.Controls.Add(Me.ucrTickMarksXAxis)
-        Me.tbAxes.Controls.Add(Me.ucrThemeAxesLines)
-        Me.tbAxes.Controls.Add(Me.ucrTickMarksAxes)
-        Me.tbAxes.Location = New System.Drawing.Point(4, 22)
-        Me.tbAxes.Name = "tbAxes"
-        Me.tbAxes.Size = New System.Drawing.Size(519, 461)
-        Me.tbAxes.TabIndex = 2
-        Me.tbAxes.Text = "Axes"
-        Me.tbAxes.UseVisualStyleBackColor = True
-        '
-        'tbPanel
-        '
-        Me.tbPanel.Controls.Add(Me.ucrPanelGridMinor)
-        Me.tbPanel.Controls.Add(Me.ucrPanelGridMajor)
-        Me.tbPanel.Controls.Add(Me.ucrPanelGrid)
-        Me.tbPanel.Location = New System.Drawing.Point(4, 22)
-        Me.tbPanel.Name = "tbPanel"
-        Me.tbPanel.Size = New System.Drawing.Size(519, 461)
-        Me.tbPanel.TabIndex = 3
-        Me.tbPanel.Text = "Grid Lines"
-        Me.tbPanel.UseVisualStyleBackColor = True
-        '
-        'tbBackground
-        '
-        Me.tbBackground.Controls.Add(Me.ucrPanelBackground)
-        Me.tbBackground.Controls.Add(Me.ucrPanelBorder)
-        Me.tbBackground.Location = New System.Drawing.Point(4, 22)
-        Me.tbBackground.Name = "tbBackground"
-        Me.tbBackground.Size = New System.Drawing.Size(519, 461)
-        Me.tbBackground.TabIndex = 4
-        Me.tbBackground.Text = "Panel"
-        Me.tbBackground.UseVisualStyleBackColor = True
-        '
-        'tbLegend
-        '
-        Me.tbLegend.Controls.Add(Me.ucrChkAddLegend)
-        Me.tbLegend.Controls.Add(Me.grpLegendPosition)
-        Me.tbLegend.Location = New System.Drawing.Point(4, 22)
-        Me.tbLegend.Name = "tbLegend"
-        Me.tbLegend.Size = New System.Drawing.Size(519, 461)
-        Me.tbLegend.TabIndex = 5
-        Me.tbLegend.Text = "Legend"
-        Me.tbLegend.UseVisualStyleBackColor = True
-        '
-        'grpLegendPosition
-        '
-        Me.grpLegendPosition.Controls.Add(Me.rdoColour)
-        Me.grpLegendPosition.Controls.Add(Me.rdoFill)
-        Me.grpLegendPosition.Controls.Add(Me.ucrPnlReverse)
-        Me.grpLegendPosition.Controls.Add(Me.rdoHorizontal)
-        Me.grpLegendPosition.Controls.Add(Me.rdoVertical)
-        Me.grpLegendPosition.Controls.Add(Me.ucrPnlDirection)
-        Me.grpLegendPosition.Controls.Add(Me.ucrChkReverse)
-        Me.grpLegendPosition.Controls.Add(Me.ucrChkDirection)
-        Me.grpLegendPosition.Controls.Add(Me.ucrNudY)
-        Me.grpLegendPosition.Controls.Add(Me.rdoCoordinates)
-        Me.grpLegendPosition.Controls.Add(Me.ucrNudX)
-        Me.grpLegendPosition.Controls.Add(Me.rdoSpecific)
-        Me.grpLegendPosition.Controls.Add(Me.lblYCoord)
-        Me.grpLegendPosition.Controls.Add(Me.ucrPnlOptions)
-        Me.grpLegendPosition.Controls.Add(Me.lblXCoord)
-        Me.grpLegendPosition.Controls.Add(Me.ucrInputLegendPosition)
-        Me.grpLegendPosition.Controls.Add(Me.lblLegendPosition)
-        Me.grpLegendPosition.Location = New System.Drawing.Point(6, 53)
-        Me.grpLegendPosition.Name = "grpLegendPosition"
-        Me.grpLegendPosition.Size = New System.Drawing.Size(413, 146)
-        Me.grpLegendPosition.TabIndex = 6
-        Me.grpLegendPosition.TabStop = False
-        Me.grpLegendPosition.Text = "Legend Position"
-        '
-        'rdoColour
-        '
-        Me.rdoColour.AutoSize = True
-        Me.rdoColour.Location = New System.Drawing.Point(244, 84)
-        Me.rdoColour.Name = "rdoColour"
-        Me.rdoColour.Size = New System.Drawing.Size(55, 17)
-        Me.rdoColour.TabIndex = 341
-        Me.rdoColour.TabStop = True
-        Me.rdoColour.Text = "Colour"
-        Me.rdoColour.UseVisualStyleBackColor = True
-        '
-        'rdoFill
-        '
-        Me.rdoFill.AutoSize = True
-        Me.rdoFill.Location = New System.Drawing.Point(119, 84)
-        Me.rdoFill.Name = "rdoFill"
-        Me.rdoFill.Size = New System.Drawing.Size(37, 17)
-        Me.rdoFill.TabIndex = 340
-        Me.rdoFill.TabStop = True
-        Me.rdoFill.Text = "Fill"
-        Me.rdoFill.UseVisualStyleBackColor = True
-        '
-        'rdoHorizontal
-        '
-        Me.rdoHorizontal.AutoSize = True
-        Me.rdoHorizontal.Location = New System.Drawing.Point(244, 112)
-        Me.rdoHorizontal.Name = "rdoHorizontal"
-        Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
-        Me.rdoHorizontal.TabIndex = 338
-        Me.rdoHorizontal.TabStop = True
-        Me.rdoHorizontal.Text = "Horizontal"
-        Me.rdoHorizontal.UseVisualStyleBackColor = True
-        '
-        'rdoVertical
-        '
-        Me.rdoVertical.AutoSize = True
-        Me.rdoVertical.Location = New System.Drawing.Point(119, 112)
-        Me.rdoVertical.Name = "rdoVertical"
-        Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
-        Me.rdoVertical.TabIndex = 337
-        Me.rdoVertical.TabStop = True
-        Me.rdoVertical.Text = "Vertical"
-        Me.rdoVertical.UseVisualStyleBackColor = True
-        '
-        'rdoCoordinates
-        '
-        Me.rdoCoordinates.AutoSize = True
-        Me.rdoCoordinates.Location = New System.Drawing.Point(195, 22)
-        Me.rdoCoordinates.Name = "rdoCoordinates"
-        Me.rdoCoordinates.Size = New System.Drawing.Size(81, 17)
-        Me.rdoCoordinates.TabIndex = 329
-        Me.rdoCoordinates.TabStop = True
-        Me.rdoCoordinates.Text = "Coordinates"
-        Me.rdoCoordinates.UseVisualStyleBackColor = True
-        '
-        'rdoSpecific
-        '
-        Me.rdoSpecific.AutoSize = True
-        Me.rdoSpecific.Location = New System.Drawing.Point(10, 22)
-        Me.rdoSpecific.Name = "rdoSpecific"
-        Me.rdoSpecific.Size = New System.Drawing.Size(63, 17)
-        Me.rdoSpecific.TabIndex = 328
-        Me.rdoSpecific.TabStop = True
-        Me.rdoSpecific.Text = "Specific"
-        Me.rdoSpecific.UseVisualStyleBackColor = True
-        '
-        'lblYCoord
-        '
-        Me.lblYCoord.AutoSize = True
-        Me.lblYCoord.Location = New System.Drawing.Point(329, 52)
-        Me.lblYCoord.Name = "lblYCoord"
-        Me.lblYCoord.Size = New System.Drawing.Size(15, 13)
-        Me.lblYCoord.TabIndex = 8
-        Me.lblYCoord.Text = "y:"
-        '
-        'lblXCoord
-        '
-        Me.lblXCoord.AutoSize = True
-        Me.lblXCoord.Location = New System.Drawing.Point(239, 52)
-        Me.lblXCoord.Name = "lblXCoord"
-        Me.lblXCoord.Size = New System.Drawing.Size(15, 13)
-        Me.lblXCoord.TabIndex = 7
-        Me.lblXCoord.Text = "x:"
-        '
-        'lblLegendPosition
-        '
-        Me.lblLegendPosition.AutoSize = True
-        Me.lblLegendPosition.Location = New System.Drawing.Point(6, 52)
-        Me.lblLegendPosition.Name = "lblLegendPosition"
-        Me.lblLegendPosition.Size = New System.Drawing.Size(47, 13)
-        Me.lblLegendPosition.TabIndex = 1
-        Me.lblLegendPosition.Text = "Position:"
-        '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(160, 495)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
-        Me.ucrBaseSubdialog.TabIndex = 2
-        '
         'ucrThemeTitleYAxis
         '
         Me.ucrThemeTitleYAxis.AutoSize = True
@@ -316,6 +127,19 @@ Partial Class sdgThemesSub
         Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 226)
         Me.ucrPlotTitle.TabIndex = 1
         '
+        'tbLabels
+        '
+        Me.tbLabels.Controls.Add(Me.ucrThemeLeftYAxis)
+        Me.tbLabels.Controls.Add(Me.ucrThemeBottomXAxis)
+        Me.tbLabels.Controls.Add(Me.ucrThemeAxesTickLabels)
+        Me.tbLabels.Location = New System.Drawing.Point(4, 22)
+        Me.tbLabels.Name = "tbLabels"
+        Me.tbLabels.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbLabels.Size = New System.Drawing.Size(519, 461)
+        Me.tbLabels.TabIndex = 1
+        Me.tbLabels.Text = "Labels"
+        Me.tbLabels.UseVisualStyleBackColor = True
+        '
         'ucrThemeLeftYAxis
         '
         Me.ucrThemeLeftYAxis.AutoSize = True
@@ -339,6 +163,21 @@ Partial Class sdgThemesSub
         Me.ucrThemeAxesTickLabels.Name = "ucrThemeAxesTickLabels"
         Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
         Me.ucrThemeAxesTickLabels.TabIndex = 2
+        '
+        'tbAxes
+        '
+        Me.tbAxes.Controls.Add(Me.ucrYAxisLines)
+        Me.tbAxes.Controls.Add(Me.ucrTickMarksYAxis)
+        Me.tbAxes.Controls.Add(Me.ucrXAxisLines)
+        Me.tbAxes.Controls.Add(Me.ucrTickMarksXAxis)
+        Me.tbAxes.Controls.Add(Me.ucrThemeAxesLines)
+        Me.tbAxes.Controls.Add(Me.ucrTickMarksAxes)
+        Me.tbAxes.Location = New System.Drawing.Point(4, 22)
+        Me.tbAxes.Name = "tbAxes"
+        Me.tbAxes.Size = New System.Drawing.Size(519, 461)
+        Me.tbAxes.TabIndex = 2
+        Me.tbAxes.Text = "Axes"
+        Me.tbAxes.UseVisualStyleBackColor = True
         '
         'ucrYAxisLines
         '
@@ -388,6 +227,18 @@ Partial Class sdgThemesSub
         Me.ucrTickMarksAxes.Size = New System.Drawing.Size(257, 122)
         Me.ucrTickMarksAxes.TabIndex = 4
         '
+        'tbPanel
+        '
+        Me.tbPanel.Controls.Add(Me.ucrPanelGridMinor)
+        Me.tbPanel.Controls.Add(Me.ucrPanelGridMajor)
+        Me.tbPanel.Controls.Add(Me.ucrPanelGrid)
+        Me.tbPanel.Location = New System.Drawing.Point(4, 22)
+        Me.tbPanel.Name = "tbPanel"
+        Me.tbPanel.Size = New System.Drawing.Size(519, 461)
+        Me.tbPanel.TabIndex = 3
+        Me.tbPanel.Text = "Grid Lines"
+        Me.tbPanel.UseVisualStyleBackColor = True
+        '
         'ucrPanelGridMinor
         '
         Me.ucrPanelGridMinor.AutoSize = True
@@ -412,6 +263,17 @@ Partial Class sdgThemesSub
         Me.ucrPanelGrid.Size = New System.Drawing.Size(254, 124)
         Me.ucrPanelGrid.TabIndex = 2
         '
+        'tbBackground
+        '
+        Me.tbBackground.Controls.Add(Me.ucrPanelBackground)
+        Me.tbBackground.Controls.Add(Me.ucrPanelBorder)
+        Me.tbBackground.Location = New System.Drawing.Point(4, 22)
+        Me.tbBackground.Name = "tbBackground"
+        Me.tbBackground.Size = New System.Drawing.Size(519, 461)
+        Me.tbBackground.TabIndex = 4
+        Me.tbBackground.Text = "Panel"
+        Me.tbBackground.UseVisualStyleBackColor = True
+        '
         'ucrPanelBackground
         '
         Me.ucrPanelBackground.AutoSize = True
@@ -428,6 +290,74 @@ Partial Class sdgThemesSub
         Me.ucrPanelBorder.Size = New System.Drawing.Size(253, 132)
         Me.ucrPanelBorder.TabIndex = 0
         '
+        'tbLegend
+        '
+        Me.tbLegend.Controls.Add(Me.ucrChkAddLegend)
+        Me.tbLegend.Controls.Add(Me.grpLegendPosition)
+        Me.tbLegend.Location = New System.Drawing.Point(4, 22)
+        Me.tbLegend.Name = "tbLegend"
+        Me.tbLegend.Size = New System.Drawing.Size(519, 461)
+        Me.tbLegend.TabIndex = 5
+        Me.tbLegend.Text = "Legend"
+        Me.tbLegend.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddLegend
+        '
+        Me.ucrChkAddLegend.AutoSize = True
+        Me.ucrChkAddLegend.Checked = False
+        Me.ucrChkAddLegend.Location = New System.Drawing.Point(15, 19)
+        Me.ucrChkAddLegend.Name = "ucrChkAddLegend"
+        Me.ucrChkAddLegend.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkAddLegend.TabIndex = 332
+        '
+        'grpLegendPosition
+        '
+        Me.grpLegendPosition.Controls.Add(Me.rdoColour)
+        Me.grpLegendPosition.Controls.Add(Me.rdoFill)
+        Me.grpLegendPosition.Controls.Add(Me.ucrPnlReverse)
+        Me.grpLegendPosition.Controls.Add(Me.rdoHorizontal)
+        Me.grpLegendPosition.Controls.Add(Me.rdoVertical)
+        Me.grpLegendPosition.Controls.Add(Me.ucrPnlDirection)
+        Me.grpLegendPosition.Controls.Add(Me.ucrChkReverse)
+        Me.grpLegendPosition.Controls.Add(Me.ucrChkDirection)
+        Me.grpLegendPosition.Controls.Add(Me.ucrNudY)
+        Me.grpLegendPosition.Controls.Add(Me.rdoCoordinates)
+        Me.grpLegendPosition.Controls.Add(Me.ucrNudX)
+        Me.grpLegendPosition.Controls.Add(Me.rdoSpecific)
+        Me.grpLegendPosition.Controls.Add(Me.lblYCoord)
+        Me.grpLegendPosition.Controls.Add(Me.ucrPnlOptions)
+        Me.grpLegendPosition.Controls.Add(Me.lblXCoord)
+        Me.grpLegendPosition.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpLegendPosition.Controls.Add(Me.lblLegendPosition)
+        Me.grpLegendPosition.Location = New System.Drawing.Point(6, 53)
+        Me.grpLegendPosition.Name = "grpLegendPosition"
+        Me.grpLegendPosition.Size = New System.Drawing.Size(413, 146)
+        Me.grpLegendPosition.TabIndex = 6
+        Me.grpLegendPosition.TabStop = False
+        Me.grpLegendPosition.Text = "Legend Position"
+        '
+        'rdoColour
+        '
+        Me.rdoColour.AutoSize = True
+        Me.rdoColour.Location = New System.Drawing.Point(244, 84)
+        Me.rdoColour.Name = "rdoColour"
+        Me.rdoColour.Size = New System.Drawing.Size(55, 17)
+        Me.rdoColour.TabIndex = 341
+        Me.rdoColour.TabStop = True
+        Me.rdoColour.Text = "Colour"
+        Me.rdoColour.UseVisualStyleBackColor = True
+        '
+        'rdoFill
+        '
+        Me.rdoFill.AutoSize = True
+        Me.rdoFill.Location = New System.Drawing.Point(119, 84)
+        Me.rdoFill.Name = "rdoFill"
+        Me.rdoFill.Size = New System.Drawing.Size(37, 17)
+        Me.rdoFill.TabIndex = 340
+        Me.rdoFill.TabStop = True
+        Me.rdoFill.Text = "Fill"
+        Me.rdoFill.UseVisualStyleBackColor = True
+        '
         'ucrPnlReverse
         '
         Me.ucrPnlReverse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -435,6 +365,28 @@ Partial Class sdgThemesSub
         Me.ucrPnlReverse.Name = "ucrPnlReverse"
         Me.ucrPnlReverse.Size = New System.Drawing.Size(281, 26)
         Me.ucrPnlReverse.TabIndex = 339
+        '
+        'rdoHorizontal
+        '
+        Me.rdoHorizontal.AutoSize = True
+        Me.rdoHorizontal.Location = New System.Drawing.Point(244, 112)
+        Me.rdoHorizontal.Name = "rdoHorizontal"
+        Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
+        Me.rdoHorizontal.TabIndex = 338
+        Me.rdoHorizontal.TabStop = True
+        Me.rdoHorizontal.Text = "Horizontal"
+        Me.rdoHorizontal.UseVisualStyleBackColor = True
+        '
+        'rdoVertical
+        '
+        Me.rdoVertical.AutoSize = True
+        Me.rdoVertical.Location = New System.Drawing.Point(119, 112)
+        Me.rdoVertical.Name = "rdoVertical"
+        Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
+        Me.rdoVertical.TabIndex = 337
+        Me.rdoVertical.TabStop = True
+        Me.rdoVertical.Text = "Vertical"
+        Me.rdoVertical.UseVisualStyleBackColor = True
         '
         'ucrPnlDirection
         '
@@ -475,6 +427,17 @@ Partial Class sdgThemesSub
         Me.ucrNudY.TabIndex = 330
         Me.ucrNudY.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'rdoCoordinates
+        '
+        Me.rdoCoordinates.AutoSize = True
+        Me.rdoCoordinates.Location = New System.Drawing.Point(195, 22)
+        Me.rdoCoordinates.Name = "rdoCoordinates"
+        Me.rdoCoordinates.Size = New System.Drawing.Size(81, 17)
+        Me.rdoCoordinates.TabIndex = 329
+        Me.rdoCoordinates.TabStop = True
+        Me.rdoCoordinates.Text = "Coordinates"
+        Me.rdoCoordinates.UseVisualStyleBackColor = True
+        '
         'ucrNudX
         '
         Me.ucrNudX.AutoSize = True
@@ -488,6 +451,26 @@ Partial Class sdgThemesSub
         Me.ucrNudX.TabIndex = 7
         Me.ucrNudX.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'rdoSpecific
+        '
+        Me.rdoSpecific.AutoSize = True
+        Me.rdoSpecific.Location = New System.Drawing.Point(10, 22)
+        Me.rdoSpecific.Name = "rdoSpecific"
+        Me.rdoSpecific.Size = New System.Drawing.Size(63, 17)
+        Me.rdoSpecific.TabIndex = 328
+        Me.rdoSpecific.TabStop = True
+        Me.rdoSpecific.Text = "Specific"
+        Me.rdoSpecific.UseVisualStyleBackColor = True
+        '
+        'lblYCoord
+        '
+        Me.lblYCoord.AutoSize = True
+        Me.lblYCoord.Location = New System.Drawing.Point(329, 52)
+        Me.lblYCoord.Name = "lblYCoord"
+        Me.lblYCoord.Size = New System.Drawing.Size(15, 13)
+        Me.lblYCoord.TabIndex = 8
+        Me.lblYCoord.Text = "y:"
+        '
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -495,6 +478,15 @@ Partial Class sdgThemesSub
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(356, 26)
         Me.ucrPnlOptions.TabIndex = 327
+        '
+        'lblXCoord
+        '
+        Me.lblXCoord.AutoSize = True
+        Me.lblXCoord.Location = New System.Drawing.Point(239, 52)
+        Me.lblXCoord.Name = "lblXCoord"
+        Me.lblXCoord.Size = New System.Drawing.Size(15, 13)
+        Me.lblXCoord.TabIndex = 7
+        Me.lblXCoord.Text = "x:"
         '
         'ucrInputLegendPosition
         '
@@ -507,14 +499,22 @@ Partial Class sdgThemesSub
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLegendPosition.TabIndex = 0
         '
-        'ucrChkAddLegend
+        'lblLegendPosition
         '
-        Me.ucrChkAddLegend.AutoSize = True
-        Me.ucrChkAddLegend.Checked = False
-        Me.ucrChkAddLegend.Location = New System.Drawing.Point(15, 19)
-        Me.ucrChkAddLegend.Name = "ucrChkAddLegend"
-        Me.ucrChkAddLegend.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkAddLegend.TabIndex = 332
+        Me.lblLegendPosition.AutoSize = True
+        Me.lblLegendPosition.Location = New System.Drawing.Point(6, 52)
+        Me.lblLegendPosition.Name = "lblLegendPosition"
+        Me.lblLegendPosition.Size = New System.Drawing.Size(47, 13)
+        Me.lblLegendPosition.TabIndex = 1
+        Me.lblLegendPosition.Text = "Position:"
+        '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.AutoSize = True
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(160, 495)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSubdialog.TabIndex = 2
         '
         'sdgThemesSub
         '

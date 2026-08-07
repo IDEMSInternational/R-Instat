@@ -55,7 +55,7 @@ Public Class dlgFind
         Dim s As String = tmpTxtBox.Text
         Dim j As Integer = s.IndexOf(txtFindWhat.Text, targetPos)
         If j < 0 Then
-            MsgBox("Not found")
+            MsgBoxTranslate("Not found")
             txtFindWhat.Focus()
         Else
             tmpTxtBox.Focus()
@@ -84,7 +84,7 @@ Public Class dlgFind
         If startIndex < addressList.Count Then
             currSheet.StartEdit(addressList.Item(startIndex).Item1, addressList.Item(startIndex).Item2)
         Else
-            MsgBox("End of search")
+            MsgBoxTranslate("End of search")
         End If
 
         targetPos = startIndex + 1

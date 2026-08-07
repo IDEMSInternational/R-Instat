@@ -97,7 +97,7 @@ Partial Class dlgRestrict
         'rdoSavefilter
         '
         Me.rdoSavefilter.AutoSize = True
-        Me.rdoSavefilter.Location = New System.Drawing.Point(302, 19)
+        Me.rdoSavefilter.Location = New System.Drawing.Point(316, 19)
         Me.rdoSavefilter.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoSavefilter.Name = "rdoSavefilter"
         Me.rdoSavefilter.Size = New System.Drawing.Size(75, 17)
@@ -108,9 +108,9 @@ Partial Class dlgRestrict
         '
         'rdoApplyAsSubset
         '
-        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(160, 19)
+        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(158, 19)
         Me.rdoApplyAsSubset.Name = "rdoApplyAsSubset"
-        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(122, 17)
+        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(151, 17)
         Me.rdoApplyAsSubset.TabIndex = 1
         Me.rdoApplyAsSubset.TabStop = True
         Me.rdoApplyAsSubset.Text = "As Subset"
@@ -191,7 +191,7 @@ Partial Class dlgRestrict
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 333)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8

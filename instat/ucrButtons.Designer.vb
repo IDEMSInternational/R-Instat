@@ -53,6 +53,7 @@ Partial Class ucrButtons
         Me.toolStripMenuItemToScriptKeep = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdPaste = New instat.ucrSplitButton()
         Me.cmdOk = New instat.ucrSplitButton()
+        Me.toolStripMenuItemToScriptOk = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripOk.SuspendLayout()
         Me.contextMenuStripToScript.SuspendLayout()
         Me.SuspendLayout()
@@ -137,20 +138,20 @@ Partial Class ucrButtons
         '
         'contextMenuStripToScript
         '
-        Me.contextMenuStripToScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemToScriptClose, Me.toolStripMenuItemToScriptKeep})
+        Me.contextMenuStripToScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemToScriptClose, Me.toolStripMenuItemToScriptKeep, Me.toolStripMenuItemToScriptOk})
         Me.contextMenuStripToScript.Name = "contextMenuStripToScript"
-        Me.contextMenuStripToScript.Size = New System.Drawing.Size(165, 48)
+        Me.contextMenuStripToScript.Size = New System.Drawing.Size(181, 92)
         '
         'toolStripMenuItemToScriptClose
         '
         Me.toolStripMenuItemToScriptClose.Name = "toolStripMenuItemToScriptClose"
-        Me.toolStripMenuItemToScriptClose.Size = New System.Drawing.Size(164, 22)
+        Me.toolStripMenuItemToScriptClose.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemToScriptClose.Text = "To Script && Close"
         '
         'toolStripMenuItemToScriptKeep
         '
         Me.toolStripMenuItemToScriptKeep.Name = "toolStripMenuItemToScriptKeep"
-        Me.toolStripMenuItemToScriptKeep.Size = New System.Drawing.Size(164, 22)
+        Me.toolStripMenuItemToScriptKeep.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemToScriptKeep.Text = "To Script && Keep"
         '
         'cmdPaste
@@ -179,6 +180,12 @@ Partial Class ucrButtons
         Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
         '
+        'toolStripMenuItemToScriptOk
+        '
+        Me.toolStripMenuItemToScriptOk.Name = "toolStripMenuItemToScriptOk"
+        Me.toolStripMenuItemToScriptOk.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemToScriptOk.Text = "To Script && Ok"
+        '
         'ucrButtons
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -193,7 +200,7 @@ Partial Class ucrButtons
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(410, 52)
+        Me.Size = New System.Drawing.Size(408, 52)
         Me.contextMenuStripOk.ResumeLayout(False)
         Me.contextMenuStripToScript.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -214,4 +221,5 @@ Partial Class ucrButtons
     Friend WithEvents contextMenuStripToScript As ContextMenuStrip
     Friend WithEvents toolStripMenuItemToScriptClose As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemToScriptKeep As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemToScriptOk As ToolStripMenuItem
 End Class

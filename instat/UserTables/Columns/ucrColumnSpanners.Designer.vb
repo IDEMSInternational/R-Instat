@@ -26,7 +26,7 @@ Partial Class ucrColumnSpanners
         Me.btnClearSpanners = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.btnAddColSpanner = New System.Windows.Forms.Button()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorByDF = New instat.ucrSelectorByDataFrameAddRemove()
         Me.dataGridColSpanners = New System.Windows.Forms.DataGridView()
         Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colSpanners = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -35,6 +35,7 @@ Partial Class ucrColumnSpanners
         Me.lblColSpanner = New System.Windows.Forms.Label()
         Me.ucrInputColSpanner = New instat.ucrInputTextBox()
         Me.btnStyle = New System.Windows.Forms.Button()
+        Me.ucrSelectorByTableDF = New instat.ucrSelectorByOutputObject()
         CType(Me.dataGridColSpanners, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -42,21 +43,18 @@ Partial Class ucrColumnSpanners
         '
         Me.lblSpanners.AutoSize = True
         Me.lblSpanners.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSpanners.Location = New System.Drawing.Point(368, 263)
-        Me.lblSpanners.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSpanners.Location = New System.Drawing.Point(245, 171)
         Me.lblSpanners.Name = "lblSpanners"
-        Me.lblSpanners.Size = New System.Drawing.Size(140, 20)
+        Me.lblSpanners.Size = New System.Drawing.Size(93, 13)
         Me.lblSpanners.TabIndex = 297
         Me.lblSpanners.Text = "Column Spanners:"
         '
         'btnClearSpanners
         '
-        Me.btnClearSpanners.Enabled = False
         Me.btnClearSpanners.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearSpanners.Location = New System.Drawing.Point(714, 249)
-        Me.btnClearSpanners.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnClearSpanners.Location = New System.Drawing.Point(476, 162)
         Me.btnClearSpanners.Name = "btnClearSpanners"
-        Me.btnClearSpanners.Size = New System.Drawing.Size(112, 35)
+        Me.btnClearSpanners.Size = New System.Drawing.Size(75, 23)
         Me.btnClearSpanners.TabIndex = 295
         Me.btnClearSpanners.Tag = ""
         Me.btnClearSpanners.Text = "Clear"
@@ -66,10 +64,9 @@ Partial Class ucrColumnSpanners
         '
         Me.lblColumns.AutoSize = True
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(363, 8)
-        Me.lblColumns.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColumns.Location = New System.Drawing.Point(242, 5)
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(85, 20)
+        Me.lblColumns.Size = New System.Drawing.Size(56, 13)
         Me.lblColumns.TabIndex = 294
         Me.lblColumns.Text = "Column(s):"
         '
@@ -77,38 +74,36 @@ Partial Class ucrColumnSpanners
         '
         Me.btnAddColSpanner.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnAddColSpanner.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddColSpanner.Location = New System.Drawing.Point(364, 212)
-        Me.btnAddColSpanner.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnAddColSpanner.Location = New System.Drawing.Point(243, 138)
         Me.btnAddColSpanner.Name = "btnAddColSpanner"
-        Me.btnAddColSpanner.Size = New System.Drawing.Size(132, 35)
+        Me.btnAddColSpanner.Size = New System.Drawing.Size(88, 23)
         Me.btnAddColSpanner.TabIndex = 292
         Me.btnAddColSpanner.Tag = ""
         Me.btnAddColSpanner.Text = "Add"
         Me.btnAddColSpanner.UseVisualStyleBackColor = True
         '
-        'ucrSelectorCols
+        'ucrSelectorByDF
         '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(6, 8)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(320, 282)
-        Me.ucrSelectorCols.TabIndex = 290
+        Me.ucrSelectorByDF.AutoSize = True
+        Me.ucrSelectorByDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorByDF.bShowHiddenColumns = False
+        Me.ucrSelectorByDF.bUseCurrentFilter = True
+        Me.ucrSelectorByDF.Location = New System.Drawing.Point(4, 5)
+        Me.ucrSelectorByDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByDF.Name = "ucrSelectorByDF"
+        Me.ucrSelectorByDF.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorByDF.TabIndex = 290
         '
         'dataGridColSpanners
         '
         Me.dataGridColSpanners.AllowUserToAddRows = False
         Me.dataGridColSpanners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridColSpanners.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colSpanners, Me.colStyleExpression})
-        Me.dataGridColSpanners.Location = New System.Drawing.Point(360, 289)
-        Me.dataGridColSpanners.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.dataGridColSpanners.Location = New System.Drawing.Point(240, 188)
         Me.dataGridColSpanners.Name = "dataGridColSpanners"
         Me.dataGridColSpanners.ReadOnly = True
         Me.dataGridColSpanners.RowHeadersWidth = 62
-        Me.dataGridColSpanners.Size = New System.Drawing.Size(466, 112)
+        Me.dataGridColSpanners.Size = New System.Drawing.Size(311, 73)
         Me.dataGridColSpanners.TabIndex = 289
         '
         'colLabel
@@ -139,11 +134,11 @@ Partial Class ucrColumnSpanners
         '
         Me.ucrReceiverMultipleCols.AutoSize = True
         Me.ucrReceiverMultipleCols.frmParent = Nothing
-        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(360, 32)
+        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(240, 21)
         Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
         Me.ucrReceiverMultipleCols.Selector = Nothing
-        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(180, 98)
+        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(120, 64)
         Me.ucrReceiverMultipleCols.strNcFilePath = ""
         Me.ucrReceiverMultipleCols.TabIndex = 299
         Me.ucrReceiverMultipleCols.ucrSelector = Nothing
@@ -152,10 +147,9 @@ Partial Class ucrColumnSpanners
         '
         Me.lblColSpanner.AutoSize = True
         Me.lblColSpanner.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColSpanner.Location = New System.Drawing.Point(368, 145)
-        Me.lblColSpanner.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColSpanner.Location = New System.Drawing.Point(245, 94)
         Me.lblColSpanner.Name = "lblColSpanner"
-        Me.lblColSpanner.Size = New System.Drawing.Size(117, 20)
+        Me.lblColSpanner.Size = New System.Drawing.Size(79, 13)
         Me.lblColSpanner.TabIndex = 301
         Me.lblColSpanner.Text = "Spanner Label:"
         '
@@ -165,29 +159,39 @@ Partial Class ucrColumnSpanners
         Me.ucrInputColSpanner.AutoSize = True
         Me.ucrInputColSpanner.IsMultiline = False
         Me.ucrInputColSpanner.IsReadOnly = False
-        Me.ucrInputColSpanner.Location = New System.Drawing.Point(364, 171)
-        Me.ucrInputColSpanner.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputColSpanner.Location = New System.Drawing.Point(243, 111)
+        Me.ucrInputColSpanner.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputColSpanner.Name = "ucrInputColSpanner"
-        Me.ucrInputColSpanner.Size = New System.Drawing.Size(176, 32)
+        Me.ucrInputColSpanner.Size = New System.Drawing.Size(117, 21)
         Me.ucrInputColSpanner.TabIndex = 307
         '
         'btnStyle
         '
         Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnStyle.Location = New System.Drawing.Point(549, 166)
-        Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnStyle.Location = New System.Drawing.Point(366, 108)
         Me.btnStyle.Name = "btnStyle"
-        Me.btnStyle.Size = New System.Drawing.Size(74, 35)
+        Me.btnStyle.Size = New System.Drawing.Size(49, 23)
         Me.btnStyle.TabIndex = 308
         Me.btnStyle.Tag = ""
         Me.btnStyle.Text = "Style"
         Me.btnStyle.UseVisualStyleBackColor = True
         '
+        'ucrSelectorByTableDF
+        '
+        Me.ucrSelectorByTableDF.AutoSize = True
+        Me.ucrSelectorByTableDF.bShowHiddenColumns = False
+        Me.ucrSelectorByTableDF.Location = New System.Drawing.Point(3, 4)
+        Me.ucrSelectorByTableDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByTableDF.Name = "ucrSelectorByTableDF"
+        Me.ucrSelectorByTableDF.Size = New System.Drawing.Size(216, 194)
+        Me.ucrSelectorByTableDF.TabIndex = 361
+        '
         'ucrColumnSpanners
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSelectorByTableDF)
         Me.Controls.Add(Me.btnStyle)
         Me.Controls.Add(Me.ucrInputColSpanner)
         Me.Controls.Add(Me.lblColSpanner)
@@ -196,11 +200,10 @@ Partial Class ucrColumnSpanners
         Me.Controls.Add(Me.btnClearSpanners)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.btnAddColSpanner)
-        Me.Controls.Add(Me.ucrSelectorCols)
+        Me.Controls.Add(Me.ucrSelectorByDF)
         Me.Controls.Add(Me.dataGridColSpanners)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrColumnSpanners"
-        Me.Size = New System.Drawing.Size(831, 408)
+        Me.Size = New System.Drawing.Size(554, 265)
         CType(Me.dataGridColSpanners, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -210,7 +213,7 @@ Partial Class ucrColumnSpanners
     Friend WithEvents btnClearSpanners As Button
     Friend WithEvents lblColumns As Label
     Friend WithEvents btnAddColSpanner As Button
-    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorByDF As ucrSelectorByDataFrameAddRemove
     Friend WithEvents dataGridColSpanners As DataGridView
     Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
     Friend WithEvents lblColSpanner As Label
@@ -219,4 +222,5 @@ Partial Class ucrColumnSpanners
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colSpanners As DataGridViewTextBoxColumn
     Friend WithEvents colStyleExpression As DataGridViewTextBoxColumn
+    Friend WithEvents ucrSelectorByTableDF As ucrSelectorByOutputObject
 End Class

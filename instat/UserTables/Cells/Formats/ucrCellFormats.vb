@@ -1,27 +1,38 @@
 ﻿Public Class ucrCellFormats
-
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
-
     Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
+        ucrReceiverMultipleCols.Selector = ucrSelectorByDF
         ucrReceiverMultipleCols.SetMeAsReceiver()
 
         cboSelectFormat.SelectedIndex = 0
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
         If bFirstload Then
             InitialiseControl()
             bFirstload = False
         End If
 
+        ' Set up the selector and receiver
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
+        End If
+        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverMultipleCols.Clear()
+
         Me.clsOperator = clsOperator
 
-        ' Set up the selector
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrRowExpression.Setup(strDataFrameName)
 
         ' Clear and Set up the data grid with contents
@@ -35,6 +46,11 @@
         For Each clsRParam As RParameter In lstRParams
 
             Dim clsFormatRFunction As RFunction = clsRParam.clsArgumentCodeStructure
+
+            ' Only use functions that affect specific cells. 
+            If Not (clsFormatRFunction.ContainsParameter("columns") AndAlso clsFormatRFunction.ContainsParameter("rows")) Then
+                Continue For
+            End If
 
             ' Create a new row that represents the tab_row_group() parameters
             Dim row As New DataGridViewRow
@@ -73,8 +89,6 @@
         ElseIf cboSelectFormat.Text = "Date" Then
             sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
             clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
-        ElseIf cboSelectFormat.Text = "Missing" Then
-            ' TODO
         End If
 
         If clsFormatRFunction Is Nothing Then
@@ -84,13 +98,11 @@
         AddFormatParameterToGrid(clsFormatRFunction)
         ucrReceiverMultipleCols.Clear()
         ucrRowExpression.Clear()
-
     End Sub
-
 
     Private Sub AddFormatParameterToGrid(clsFormatRFunction As RFunction)
 
-        Dim strColumnsExpression As String = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False)
+        Dim strColumnsExpression As String = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=True, strQuotes:="`")
         Dim strRowsExpression As String = ucrRowExpression.GetText
 
         ' Add columns parameter

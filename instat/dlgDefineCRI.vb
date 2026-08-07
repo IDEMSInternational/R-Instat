@@ -294,7 +294,7 @@ Public Class dlgCorruptionDefineCRI
                 strIndexValues = ExtractItemsFromRList(lviCondition.SubItems(1).Text)
                 ucrGridWeights.SetCellValues(strWeightColumn, strIndexValues, bRaisedControlValueChangedEvent:=True)
             Else
-                MsgBox("Cannot detect column or column data in the data. Editing of this component not possible", MsgBoxStyle.Exclamation, "Cannot edit component")
+                MsgBoxTranslate("Cannot detect column or column data in the data. Editing of this component not possible", MsgBoxStyle.Exclamation, "Cannot edit component")
             End If
         End If
     End Sub

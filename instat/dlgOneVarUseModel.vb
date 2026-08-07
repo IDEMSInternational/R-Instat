@@ -201,13 +201,13 @@ Public Class dlgOneVarUseModel
 
     'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
     '    If ucrChkProduceBootstrap.Checked Then
-    '        frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=2)
+    '        frmMain.clsRLink.RunRScript(clsRBootFunction.ToScript(), iCallType:=2)
     '    End If
     'End Sub
 
     'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
     '    If bPlot Then
-    '        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
+    '        frmMain.clsRLink.RunRScript(clsRPlotFunction.ToScript(), iCallType:=3)
     '    Else
 
     '    End If

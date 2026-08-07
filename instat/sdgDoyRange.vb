@@ -290,6 +290,12 @@ Public Class sdgDoyRange
         End Get
     End Property
 
+    Public ReadOnly Property IsSeasonal As Boolean
+        Get
+            Return rdoFromVariable.Checked OrElse rdoToVariable.Checked OrElse rdoLength.Checked
+        End Get
+    End Property
+
     Public Sub SetUseDateVisibility(bVisible As Boolean)
         bUseDateVisibility = bVisible
         If bControlsInitialised Then

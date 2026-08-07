@@ -1,7 +1,6 @@
 ﻿####################################################################################################
 #
-# This file provides a way to ignore specified WinForm controls when the application or dialog is 
-# translated into a different language.
+# This file provides a way to ignore specified WinForm controls or strings from translations 
 # 
 # For example, this file can be used to ensure that a specific label's text stays the same, even 
 # when the rest of the dialog is translated into French or Portuguese.
@@ -18,6 +17,12 @@
 #     - The name of a specific control to ignore. The name must be identical to the name in the 
 #       'form_controls.form_name' column in the 'rInstatTranslations.db' database 
 #       (e.g. 'dlgAugment_ucrModelReceiver_txtReceiverSingle')
+#
+#     - A specific string literal to ignore, by prefixing with 'text:'
+#       (e.g. 'text:n:' or 'text:About R').
+#       This ignores the text regardless of which control it appears in.
+#       If the string includes leading/trailing spaces, use double quotes,
+#       e.g. 'text:"ww "'.
 # 
 #     - A group of controls to ignore. The group is specified using SQLite pattern matching 
 #       (see https://www.sqlite.org/lang_expr.html). Examples (note that the '_' character must be 
@@ -34,6 +39,9 @@
 #       the 'lblTitle' label:
 #         'dlgBarChart\_%'
 #         '!dlgBarChart\_%\_lblTitle'
+#       Negation also works for string rules, e.g.:
+#         'text:n:'
+#         '!text:n:'
 #
 #     - Blank lines are ignored, they can be used as separators for readability
 #
@@ -121,3 +129,93 @@ dlgCalculator\_ucrCalc\_grpSymbols\_cmdNumbers%
 ucrScriptWindow\_tlpTableContainer\_TabControl
 ucrScriptWindow\_tlpTableContainer\_TabControl\_TabPageAdded
 ucrScriptWindow\_tlpTableContainer\_TabControl\_TabPageAdded\_txtScriptAdded
+
+# R package names exposed in the 'General for Graphics' geoms menu. These are
+# identifiers (GGally, ggalt, ggplot2, ...) and must not be translated.
+dlgGeneralForGraphics\_%ToolStripMenuItem
+sdgPlots\_rdoGgthemes
+
+# Date format tokens and R function names on the calculator's Dates tab.
+# These are R syntax (ymd, as.date, +%Y, "Mon, 4 Jun" sample output, ...)
+# and must not be translated.
+ucrCalculator\_cmdPlus%
+ucrCalculator\_cmdYmd%
+ucrCalculator\_cmdYear
+ucrCalculator\_cmdYday
+ucrCalculator\_cmdAs%
+ucrCalculator\_cmdMon4Jun
+ucrCalculator\_cmdwhere%
+ucrCalculator\_cmdwhich%
+
+# ggplot2 geom_* function names in the Additional Layers geoms menu.
+# These are R identifiers, not UI text.
+ucrAdditionalLayers\_toolStripMenuItemGeom%
+ucrAdditionalLayers\_grpGeoms
+
+# Axis coordinate labels ("x:", "y :") — mathematical notation, not translated.
+sdgPlots\_lblX
+sdgPlots\_lblY
+sdgThemesSub\_lblXCoord
+
+text:( )
+text:x:
+text:y:
+text:"\" \""
+text:wm
+text:"ww "
+text:"0.25 x 0.25"
+text:"v. "
+text:"n:"
+text:"wd"
+text:"ws"
+text:"| or"
+text:"\\\\ escape"
+text:"- to"
+text:"* 0+"
+text:"+ 1+"
+text:"{ m,n } "
+text:"[^ ] not"
+text:"{ n} "
+text:"[ ] or"
+text:"\\\\s space"
+text:"\\\\d digit"
+text:"$ end"
+text:"^ begin"
+text:". any"
+text:"Flows To Import"
+text:"MJ.m^-2.min^-1"
+text:"MJ.kg^-1"
+text:"Lambda"
+text:"drv:"
+text:"1/mu^2"
+text:"bs"
+text:"as"
+text:"xmax :"
+text:"ymin :"
+text:"xmin :"
+text:"xend :"
+text:"ymax :"
+text:"yend :"
+text:A1
+text:"Functions"
+text:"digitsum*"
+text:"digitsqu*"
+text:"digitsqu"
+text:"decimals*"
+text:"fractions*"
+text:"pascal*"
+text:"digitssq"
+text:"digitssq*"
+text:"cssq*"
+text:"ave_both"
+text:"ave_fac"
+text:"ave"
+text:"combn"
+text:"cssq"
+text:"coeffs2"
+text:"ssq*"
+text:"coeffs"
+text:"ave_fun"
+text:"roots"
+text:"polynomial"
+text:"origin"

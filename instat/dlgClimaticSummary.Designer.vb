@@ -69,6 +69,8 @@ Partial Class dlgClimaticSummary
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.ucrChkDayRange = New instat.ucrCheck()
+        Me.ucrChkDefinitions = New instat.ucrCheck()
+        Me.ucrSaveObject = New instat.ucrSave()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -421,7 +423,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(5, 427)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 472)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -446,12 +448,33 @@ Partial Class dlgClimaticSummary
         Me.ucrChkDayRange.Size = New System.Drawing.Size(108, 27)
         Me.ucrChkDayRange.TabIndex = 25
         '
+        'ucrChkDefinitions
+        '
+        Me.ucrChkDefinitions.AutoSize = True
+        Me.ucrChkDefinitions.Checked = False
+        Me.ucrChkDefinitions.Location = New System.Drawing.Point(12, 435)
+        Me.ucrChkDefinitions.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDefinitions.Name = "ucrChkDefinitions"
+        Me.ucrChkDefinitions.Size = New System.Drawing.Size(178, 25)
+        Me.ucrChkDefinitions.TabIndex = 21
+        '
+        'ucrSaveObject
+        '
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveObject.Location = New System.Drawing.Point(155, 435)
+        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveObject.Name = "ucrSaveObject"
+        Me.ucrSaveObject.Size = New System.Drawing.Size(198, 24)
+        Me.ucrSaveObject.TabIndex = 51
+        '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(452, 478)
+        Me.ClientSize = New System.Drawing.Size(436, 534)
+        Me.Controls.Add(Me.ucrSaveObject)
+        Me.Controls.Add(Me.ucrChkDefinitions)
         Me.Controls.Add(Me.ucrChkDayRange)
         Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoStation)
@@ -521,4 +544,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents rdoStation As RadioButton
     Friend WithEvents rdoDaily As RadioButton
     Friend WithEvents ucrChkDayRange As ucrCheck
+    Friend WithEvents ucrChkDefinitions As ucrCheck
+    Friend WithEvents ucrSaveObject As ucrSave
 End Class

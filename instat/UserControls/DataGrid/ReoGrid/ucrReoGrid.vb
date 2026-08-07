@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
@@ -21,6 +23,8 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
+    Public Event WorksheetChanged()
+
 
     ''' <summary>
     ''' Gets current worksheet adapter
@@ -201,7 +205,7 @@ Public MustInherit Class ucrReoGrid
 
     Protected Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            MsgBoxTranslate("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
             e.IsCancelled = True
         End If
     End Sub
@@ -272,5 +276,11 @@ Public MustInherit Class ucrReoGrid
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.SheetTabWidth = 450
+    End Sub
+
+    Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged
+
+        RaiseEvent WorksheetChanged()
+
     End Sub
 End Class

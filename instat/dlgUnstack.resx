@@ -184,7 +184,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSingle.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="rdoMultiple.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoMultiple.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="rdoRestoreHierarchy.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -256,7 +256,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoRestoreHierarchy.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblMultipleColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,13 +316,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumnToUnstack.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrInputTextPrefix.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="ucrInputTextPrefix.Location" type="System.Drawing.Point, System.Drawing">
     <value>145, 331</value>
+  </data>
+  <data name="ucrInputTextPrefix.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
   </data>
   <data name="ucrInputTextPrefix.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 21</value>
@@ -340,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputTextPrefix.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkCarryColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,7 +370,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkCarryColumns.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrNudValuesFill.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -391,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudValuesFill.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -421,7 +424,7 @@
     <value>399, 24</value>
   </data>
   <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>46</value>
   </data>
   <data name="&gt;&gt;ucrNewDFName.Name" xml:space="preserve">
     <value>ucrNewDFName</value>
@@ -433,7 +436,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>0</value>
   </data>
   <data name="ucrReceiverCarryColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -676,6 +679,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumnToUnstack.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
 </root>

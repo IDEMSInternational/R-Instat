@@ -283,7 +283,7 @@ Public Class dlgCompareColumns
                     clsDummyOperator = clsIsEqualToOperator
                 End If
             Else
-                MsgBox("Receivers must have the same data type, OK will not be enabled")
+                MsgBoxTranslate("Receivers must have the same data type, OK will not be enabled")
             End If
         End If
         TestOkEnabled()

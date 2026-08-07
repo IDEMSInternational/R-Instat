@@ -23,6 +23,15 @@ Public Class ucrColumnMetadataLinuxGrid
 
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
+    Public Shadows Event WorksheetChanged() Implements IColumnMetaDataGrid.WorksheetChanged
+
+    Private Sub tcTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcTabs.SelectedIndexChanged
+
+        RaiseEvent WorksheetChanged()
+
+    End Sub
+
+
     Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
         dataGrid.Columns.Clear()

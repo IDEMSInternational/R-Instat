@@ -86,9 +86,9 @@ Public Class dlgInstallRPackage
         clsDetachFunction.SetRCommand("detach_package")
         clsDetachFunction.AddParameter("unload ", "TRUE", iPosition:=1)
 
-        clsRepositoryFunction.SetRCommand("install_github")
-        clsRepositoryFunction.SetPackageName("devtools")
-        clsRepositoryFunction.AddParameter("upgrade", Chr(34) & "never" & Chr(34), iPosition:=1)
+        clsRepositoryFunction.SetRCommand("pak")
+        clsRepositoryFunction.SetPackageName("pak")
+        clsRepositoryFunction.AddParameter("ask", "FALSE", iPosition:=1)
 
         clsAfterOptionsFunc.SetRCommand("options")
         clsAfterOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="0")
@@ -182,9 +182,9 @@ Public Class dlgInstallRPackage
                     ucrInputMessage.SetText("Package exists and not currently installed.")
                     ucrInputMessage.txtInput.BackColor = Color.LightGreen
                 ElseIf rdoRPackage.Checked Then
-                    ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection?")
-                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
-                    bUniqueChecked = False
+                    ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection? OK is enabled, but package may not install. Try to change to a different internet if installation fails.")
+                    ucrInputMessage.txtInput.BackColor = Color.Gold
+                    bUniqueChecked = True
                 End If
             Case "3"
                 If rdoCRAN.Checked Then

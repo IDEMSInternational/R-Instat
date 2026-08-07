@@ -208,7 +208,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 12)
         Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
-        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(137, 65)
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(162, 65)
         Me.ucrPnlColumnFactor.TabIndex = 29
         '
         'ucrReorderSummary

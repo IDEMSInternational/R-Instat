@@ -44,6 +44,21 @@ Partial Class dlgPICSARainfall
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblIncludeStatus = New System.Windows.Forms.Label()
+        Me.lblYVar = New System.Windows.Forms.Label()
+        Me.lblSecondYVar = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondYVar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverForPICSA = New instat.ucrReceiverSingle()
+        Me.ucrChkIncludeStatus = New instat.ucrCheck()
+        Me.ucrReceiverIncludeStatus = New instat.ucrReceiverSingle()
+        Me.ucrChkWithSE = New instat.ucrCheck()
+        Me.ucrChkLineofBestFit = New instat.ucrCheck()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrChkPoints = New instat.ucrCheck()
@@ -51,15 +66,6 @@ Partial Class dlgPICSARainfall
         Me.ucrSelectorPICSARainfall = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColourBy = New instat.ucrReceiverSingle()
-        Me.ucrVariablesAsFactorForPicsa = New instat.ucrVariablesAsFactor()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.cmdOptions = New instat.ucrSplitButton()
-        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrChkWithSE = New instat.ucrCheck()
-        Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -67,10 +73,11 @@ Partial Class dlgPICSARainfall
         '
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorOptional.Location = New System.Drawing.Point(248, 245)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(372, 266)
+        Me.lblFactorOptional.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(103, 13)
-        Me.lblFactorOptional.TabIndex = 7
+        Me.lblFactorOptional.Size = New System.Drawing.Size(154, 20)
+        Me.lblFactorOptional.TabIndex = 9
         Me.lblFactorOptional.Tag = "Factor_Optional:"
         Me.lblFactorOptional.Text = "Colour By (Optional):"
         '
@@ -78,10 +85,11 @@ Partial Class dlgPICSARainfall
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(248, 201)
+        Me.lblXVariable.Location = New System.Drawing.Point(372, 203)
+        Me.lblXVariable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 5
+        Me.lblXVariable.Size = New System.Drawing.Size(86, 20)
+        Me.lblXVariable.TabIndex = 7
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
         '
@@ -89,19 +97,20 @@ Partial Class dlgPICSARainfall
         '
         Me.lblAvailable.AutoSize = True
         Me.lblAvailable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAvailable.Location = New System.Drawing.Point(26, 14)
+        Me.lblAvailable.Location = New System.Drawing.Point(39, 21)
+        Me.lblAvailable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAvailable.Name = "lblAvailable"
-        Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
+        Me.lblAvailable.Size = New System.Drawing.Size(0, 20)
         Me.lblAvailable.TabIndex = 2
         '
         'cmdPICSAOptions
         '
-        Me.cmdPICSAOptions.Enabled = False
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 195)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(14, 292)
+        Me.cmdPICSAOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(151, 23)
-        Me.cmdPICSAOptions.TabIndex = 12
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(226, 34)
+        Me.cmdPICSAOptions.TabIndex = 17
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
         Me.cmdPICSAOptions.UseVisualStyleBackColor = True
@@ -110,103 +119,157 @@ Partial Class dlgPICSARainfall
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(248, 291)
+        Me.lblFacetBy.Location = New System.Drawing.Point(372, 337)
+        Me.lblFacetBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
-        Me.lblFacetBy.TabIndex = 9
+        Me.lblFacetBy.Size = New System.Drawing.Size(149, 20)
+        Me.lblFacetBy.TabIndex = 11
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By (Optional):"
         '
-        'ucrReceiverFacetBy
+        'contextMenuStripOptions
         '
-        Me.ucrReceiverFacetBy.AutoSize = True
-        Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(248, 306)
-        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
-        Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.TabIndex = 10
-        Me.ucrReceiverFacetBy.ucrSelector = Nothing
+        Me.contextMenuStripOptions.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(194, 100)
         '
-        'ucrReceiverX
+        'PlotOptionsToolStripMenuItem
         '
-        Me.ucrReceiverX.AutoSize = True
-        Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(248, 216)
-        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverX.Name = "ucrReceiverX"
-        Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 6
-        Me.ucrReceiverX.ucrSelector = Nothing
+        Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(193, 32)
+        Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
-        'ucrChkPoints
+        'toolStripMenuItemLineOptions
         '
-        Me.ucrChkPoints.AutoSize = True
-        Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
-        Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(221, 24)
-        Me.ucrChkPoints.TabIndex = 14
+        Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(193, 32)
+        Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
-        'ucrSave
+        'toolStripMenuItemPointOption
         '
-        Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(9, 337)
-        Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(320, 24)
-        Me.ucrSave.TabIndex = 15
+        Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(193, 32)
+        Me.toolStripMenuItemPointOption.Text = "Point Options"
         '
-        'ucrSelectorPICSARainfall
+        'lblIncludeStatus
         '
-        Me.ucrSelectorPICSARainfall.AutoSize = True
-        Me.ucrSelectorPICSARainfall.bDropUnusedFilterLevels = False
-        Me.ucrSelectorPICSARainfall.bShowHiddenColumns = False
-        Me.ucrSelectorPICSARainfall.bUseCurrentFilter = True
-        Me.ucrSelectorPICSARainfall.Location = New System.Drawing.Point(9, 9)
-        Me.ucrSelectorPICSARainfall.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorPICSARainfall.Name = "ucrSelectorPICSARainfall"
-        Me.ucrSelectorPICSARainfall.Size = New System.Drawing.Size(221, 189)
-        Me.ucrSelectorPICSARainfall.TabIndex = 1
+        Me.lblIncludeStatus.AutoSize = True
+        Me.lblIncludeStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblIncludeStatus.Location = New System.Drawing.Point(372, 478)
+        Me.lblIncludeStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIncludeStatus.Name = "lblIncludeStatus"
+        Me.lblIncludeStatus.Size = New System.Drawing.Size(122, 20)
+        Me.lblIncludeStatus.TabIndex = 14
+        Me.lblIncludeStatus.Tag = ""
+        Me.lblIncludeStatus.Text = "Status Variable:"
         '
-        'ucrBase
+        'lblYVar
         '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 366)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.lblYVar.AutoSize = True
+        Me.lblYVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYVar.Location = New System.Drawing.Point(372, 71)
+        Me.lblYVar.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblYVar.Name = "lblYVar"
+        Me.lblYVar.Size = New System.Drawing.Size(86, 20)
+        Me.lblYVar.TabIndex = 3
+        Me.lblYVar.Tag = ""
+        Me.lblYVar.Text = "Y Variable:"
         '
-        'ucrReceiverColourBy
+        'lblSecondYVar
         '
-        Me.ucrReceiverColourBy.AutoSize = True
-        Me.ucrReceiverColourBy.frmParent = Me
-        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(248, 260)
-        Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColourBy.Name = "ucrReceiverColourBy"
-        Me.ucrReceiverColourBy.Selector = Nothing
-        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverColourBy.strNcFilePath = ""
-        Me.ucrReceiverColourBy.TabIndex = 8
-        Me.ucrReceiverColourBy.ucrSelector = Nothing
+        Me.lblSecondYVar.AutoSize = True
+        Me.lblSecondYVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondYVar.Location = New System.Drawing.Point(372, 140)
+        Me.lblSecondYVar.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSecondYVar.Name = "lblSecondYVar"
+        Me.lblSecondYVar.Size = New System.Drawing.Size(218, 20)
+        Me.lblSecondYVar.TabIndex = 5
+        Me.lblSecondYVar.Tag = ""
+        Me.lblSecondYVar.Text = "Second Y Variable (Optional):"
         '
-        'ucrVariablesAsFactorForPicsa
+        'ucrReceiverSecondYVar
         '
-        Me.ucrVariablesAsFactorForPicsa.AutoSize = True
-        Me.ucrVariablesAsFactorForPicsa.frmParent = Me
-        Me.ucrVariablesAsFactorForPicsa.Location = New System.Drawing.Point(248, 23)
-        Me.ucrVariablesAsFactorForPicsa.Name = "ucrVariablesAsFactorForPicsa"
-        Me.ucrVariablesAsFactorForPicsa.Selector = Nothing
-        Me.ucrVariablesAsFactorForPicsa.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorForPicsa.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForPicsa.TabIndex = 3
-        Me.ucrVariablesAsFactorForPicsa.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForPicsa.ucrVariableSelector = Nothing
+        Me.ucrReceiverSecondYVar.AutoSize = True
+        Me.ucrReceiverSecondYVar.frmParent = Me
+        Me.ucrReceiverSecondYVar.Location = New System.Drawing.Point(372, 160)
+        Me.ucrReceiverSecondYVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondYVar.Name = "ucrReceiverSecondYVar"
+        Me.ucrReceiverSecondYVar.Selector = Nothing
+        Me.ucrReceiverSecondYVar.Size = New System.Drawing.Size(218, 39)
+        Me.ucrReceiverSecondYVar.strNcFilePath = ""
+        Me.ucrReceiverSecondYVar.TabIndex = 6
+        Me.ucrReceiverSecondYVar.ucrSelector = Nothing
+        '
+        'ucrReceiverForPICSA
+        '
+        Me.ucrReceiverForPICSA.AutoSize = True
+        Me.ucrReceiverForPICSA.frmParent = Me
+        Me.ucrReceiverForPICSA.Location = New System.Drawing.Point(372, 91)
+        Me.ucrReceiverForPICSA.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForPICSA.Name = "ucrReceiverForPICSA"
+        Me.ucrReceiverForPICSA.Selector = Nothing
+        Me.ucrReceiverForPICSA.Size = New System.Drawing.Size(218, 39)
+        Me.ucrReceiverForPICSA.strNcFilePath = ""
+        Me.ucrReceiverForPICSA.TabIndex = 4
+        Me.ucrReceiverForPICSA.ucrSelector = Nothing
+        '
+        'ucrChkIncludeStatus
+        '
+        Me.ucrChkIncludeStatus.AutoSize = True
+        Me.ucrChkIncludeStatus.Checked = False
+        Me.ucrChkIncludeStatus.Location = New System.Drawing.Point(14, 498)
+        Me.ucrChkIncludeStatus.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkIncludeStatus.Name = "ucrChkIncludeStatus"
+        Me.ucrChkIncludeStatus.Size = New System.Drawing.Size(281, 36)
+        Me.ucrChkIncludeStatus.TabIndex = 15
+        '
+        'ucrReceiverIncludeStatus
+        '
+        Me.ucrReceiverIncludeStatus.AutoSize = True
+        Me.ucrReceiverIncludeStatus.frmParent = Me
+        Me.ucrReceiverIncludeStatus.Location = New System.Drawing.Point(372, 498)
+        Me.ucrReceiverIncludeStatus.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIncludeStatus.Name = "ucrReceiverIncludeStatus"
+        Me.ucrReceiverIncludeStatus.Selector = Nothing
+        Me.ucrReceiverIncludeStatus.Size = New System.Drawing.Size(218, 38)
+        Me.ucrReceiverIncludeStatus.strNcFilePath = ""
+        Me.ucrReceiverIncludeStatus.TabIndex = 16
+        Me.ucrReceiverIncludeStatus.ucrSelector = Nothing
+        '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.AutoSize = True
+        Me.ucrChkWithSE.Checked = False
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(14, 422)
+        Me.ucrChkWithSE.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(332, 34)
+        Me.ucrChkWithSE.TabIndex = 20
+        '
+        'ucrChkLineofBestFit
+        '
+        Me.ucrChkLineofBestFit.AutoSize = True
+        Me.ucrChkLineofBestFit.Checked = False
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(18, 375)
+        Me.ucrChkLineofBestFit.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(332, 34)
+        Me.ucrChkLineofBestFit.TabIndex = 19
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(14, 328)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(226, 34)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 18
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrInputStation
         '
@@ -214,75 +277,107 @@ Partial Class dlgPICSARainfall
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(375, 306)
+        Me.ucrInputStation.Location = New System.Drawing.Point(562, 357)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
-        Me.ucrInputStation.TabIndex = 11
+        Me.ucrInputStation.Size = New System.Drawing.Size(123, 32)
+        Me.ucrInputStation.TabIndex = 13
         '
-        'cmdOptions
+        'ucrReceiverFacetBy
         '
-        Me.cmdOptions.AutoSize = True
-        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 219)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(151, 23)
-        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.TabIndex = 13
-        Me.cmdOptions.Tag = "Plot Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        Me.ucrReceiverFacetBy.AutoSize = True
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(372, 357)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(188, 39)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 12
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
-        'contextMenuStripOptions
+        'ucrReceiverX
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
-        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(151, 70)
+        Me.ucrReceiverX.AutoSize = True
+        Me.ucrReceiverX.frmParent = Me
+        Me.ucrReceiverX.Location = New System.Drawing.Point(372, 225)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(218, 39)
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.TabIndex = 8
+        Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'PlotOptionsToolStripMenuItem
+        'ucrChkPoints
         '
-        Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
+        Me.ucrChkPoints.AutoSize = True
+        Me.ucrChkPoints.Checked = False
+        Me.ucrChkPoints.Location = New System.Drawing.Point(14, 544)
+        Me.ucrChkPoints.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkPoints.Name = "ucrChkPoints"
+        Me.ucrChkPoints.Size = New System.Drawing.Size(332, 36)
+        Me.ucrChkPoints.TabIndex = 21
         '
-        'toolStripMenuItemLineOptions
+        'ucrSave
         '
-        Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(150, 22)
-        Me.toolStripMenuItemLineOptions.Text = "Line Options"
+        Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSave.Location = New System.Drawing.Point(14, 590)
+        Me.ucrSave.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSave.Name = "ucrSave"
+        Me.ucrSave.Size = New System.Drawing.Size(480, 36)
+        Me.ucrSave.TabIndex = 22
         '
-        'toolStripMenuItemPointOption
+        'ucrSelectorPICSARainfall
         '
-        Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(150, 22)
-        Me.toolStripMenuItemPointOption.Text = "Point Options "
+        Me.ucrSelectorPICSARainfall.AutoSize = True
+        Me.ucrSelectorPICSARainfall.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPICSARainfall.bShowHiddenColumns = False
+        Me.ucrSelectorPICSARainfall.bUseCurrentFilter = True
+        Me.ucrSelectorPICSARainfall.Location = New System.Drawing.Point(14, 14)
+        Me.ucrSelectorPICSARainfall.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorPICSARainfall.Name = "ucrSelectorPICSARainfall"
+        Me.ucrSelectorPICSARainfall.Size = New System.Drawing.Size(332, 284)
+        Me.ucrSelectorPICSARainfall.TabIndex = 1
         '
-        'ucrChkWithSE
+        'ucrBase
         '
-        Me.ucrChkWithSE.AutoSize = True
-        Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 281)
-        Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(221, 23)
-        Me.ucrChkWithSE.TabIndex = 39
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(14, 633)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 0
         '
-        'ucrChkLineofBestFit
+        'ucrReceiverColourBy
         '
-        Me.ucrChkLineofBestFit.AutoSize = True
-        Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 256)
-        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(221, 23)
-        Me.ucrChkLineofBestFit.TabIndex = 38
+        Me.ucrReceiverColourBy.AutoSize = True
+        Me.ucrReceiverColourBy.frmParent = Me
+        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(372, 293)
+        Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColourBy.Name = "ucrReceiverColourBy"
+        Me.ucrReceiverColourBy.Selector = Nothing
+        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(218, 39)
+        Me.ucrReceiverColourBy.strNcFilePath = ""
+        Me.ucrReceiverColourBy.TabIndex = 10
+        Me.ucrReceiverColourBy.ucrSelector = Nothing
         '
         'dlgPICSARainfall
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(463, 420)
+        Me.ClientSize = New System.Drawing.Size(694, 724)
+        Me.Controls.Add(Me.lblSecondYVar)
+        Me.Controls.Add(Me.ucrReceiverSecondYVar)
+        Me.Controls.Add(Me.lblYVar)
+        Me.Controls.Add(Me.ucrReceiverForPICSA)
+        Me.Controls.Add(Me.ucrChkIncludeStatus)
+        Me.Controls.Add(Me.ucrReceiverIncludeStatus)
+        Me.Controls.Add(Me.lblIncludeStatus)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
-        Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucrReceiverFacetBy)
@@ -298,6 +393,7 @@ Partial Class dlgPICSARainfall
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblAvailable)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPICSARainfall"
@@ -318,7 +414,6 @@ Partial Class dlgPICSARainfall
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
-    Friend WithEvents ucrVariablesAsFactorForPicsa As ucrVariablesAsFactor
     Friend WithEvents cmdPICSAOptions As Button
     Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
@@ -330,4 +425,11 @@ Partial Class dlgPICSARainfall
     Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
     Friend WithEvents ucrChkWithSE As ucrCheck
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
+    Friend WithEvents ucrReceiverIncludeStatus As ucrReceiverSingle
+    Friend WithEvents lblIncludeStatus As Label
+    Friend WithEvents ucrChkIncludeStatus As ucrCheck
+    Friend WithEvents lblYVar As Label
+    Friend WithEvents ucrReceiverForPICSA As ucrReceiverSingle
+    Friend WithEvents lblSecondYVar As Label
+    Friend WithEvents ucrReceiverSecondYVar As ucrReceiverSingle
 End Class

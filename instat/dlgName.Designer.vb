@@ -237,6 +237,7 @@ Partial Class dlgName
         Me.ucrInputBy.IsMultiline = False
         Me.ucrInputBy.IsReadOnly = False
         Me.ucrInputBy.Location = New System.Drawing.Point(96, 152)
+        Me.ucrInputBy.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputBy.Name = "ucrInputBy"
         Me.ucrInputBy.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBy.TabIndex = 27
@@ -259,6 +260,7 @@ Partial Class dlgName
         Me.ucrInputReplace.IsMultiline = False
         Me.ucrInputReplace.IsReadOnly = False
         Me.ucrInputReplace.Location = New System.Drawing.Point(96, 123)
+        Me.ucrInputReplace.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputReplace.Name = "ucrInputReplace"
         Me.ucrInputReplace.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputReplace.TabIndex = 26
@@ -345,7 +347,7 @@ Partial Class dlgName
         '
         'rdoSelectedColumn
         '
-        Me.rdoSelectedColumn.Location = New System.Drawing.Point(331, 62)
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(389, 62)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(189, 24)
         Me.rdoSelectedColumn.TabIndex = 21
@@ -356,7 +358,7 @@ Partial Class dlgName
         'rdoWholeDataFrame
         '
         Me.rdoWholeDataFrame.AutoSize = True
-        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(227, 66)
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(260, 66)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
         Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
         Me.rdoWholeDataFrame.TabIndex = 20
@@ -380,6 +382,7 @@ Partial Class dlgName
         Me.ucrInputVariableLabel.IsMultiline = False
         Me.ucrInputVariableLabel.IsReadOnly = False
         Me.ucrInputVariableLabel.Location = New System.Drawing.Point(251, 177)
+        Me.ucrInputVariableLabel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputVariableLabel.Name = "ucrInputVariableLabel"
         Me.ucrInputVariableLabel.Size = New System.Drawing.Size(194, 21)
         Me.ucrInputVariableLabel.TabIndex = 7
@@ -404,6 +407,7 @@ Partial Class dlgName
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(251, 130)
+        Me.ucrInputNewName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(148, 21)
         Me.ucrInputNewName.TabIndex = 6
@@ -500,7 +504,9 @@ Partial Class dlgName
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 540)
+        Me.ClientSize = New System.Drawing.Size(561, 540)
+        Me.Controls.Add(Me.rdoSelectedColumn)
+        Me.Controls.Add(Me.rdoWholeDataFrame)
         Me.Controls.Add(Me.rdoLabels)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
@@ -519,8 +525,6 @@ Partial Class dlgName
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverColumns)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.rdoSelectedColumn)
-        Me.Controls.Add(Me.rdoWholeDataFrame)
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)

@@ -1,24 +1,27 @@
 ﻿Imports System.Reflection
 
 Public Class ucrColumnLabels
-
     Private clsOperator As New ROperator
-    Private bFirstload As Boolean = True
 
-    Private Sub InitialiseDialog()
-        ucrReceiverSingleCol.Selector = ucrSelectorCols
-        ucrReceiverSingleCol.SetMeAsReceiver()
-    End Sub
-
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        ' Set up the selector and receiver
+        ucrReceiverSingleCol.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleCol.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleCol.Selector = ucrSelectorByTableDF
         End If
+        ucrReceiverSingleCol.SetMeAsReceiver()
+        ucrReceiverSingleCol.Clear()
 
         Me.clsOperator = clsOperator
 
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
         dataGridColLabels.Rows.Clear()
 
         Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"cols_label"}, clsOperator)
@@ -40,7 +43,7 @@ Public Class ucrColumnLabels
         Dim strColumnName As String = ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False)
         Dim strColumnLabel As String = ucrInputColLabel.GetValue()
 
-        Dim clsRParam As New RParameter(strParameterName:=clsTablesUtils.GetStringValue(strColumnName, False), strParamValue:=clsTablesUtils.GetStringValue(strColumnLabel, True))
+        Dim clsRParam As New RParameter(strParameterName:=clsTablesUtils.GetStringValue(strColumnName, True, "`"), strParamValue:=clsTablesUtils.GetStringValue(strColumnLabel, True))
         Dim row As DataGridViewRow = Nothing
 
         ' Update column label if column exists

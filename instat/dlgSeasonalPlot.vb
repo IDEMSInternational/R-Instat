@@ -526,7 +526,7 @@ Public Class dlgSeasonalPlot
 
         ' Used to return a developer error if R Code cannot be set.
         Dim ReferenceSummaryDevError = Sub()
-                                           MsgBox("Developer error: in " & ucrInputReferenceSummary.Name & ". Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
+                                           MsgBoxTranslate("Developer error: in " & ucrInputReferenceSummary.Name & ". Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
                                        End Sub
 
         ' mutate is used in clsPipeOperator to calculate proportions for "Prop Above" and "Prop Below" summaries

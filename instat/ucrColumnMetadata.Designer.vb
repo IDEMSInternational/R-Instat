@@ -56,6 +56,17 @@ Partial Class ucrColumnMetadata
         Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderColumnMetadata = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.TblPanPageDisplay = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblColFirst = New System.Windows.Forms.Label()
+        Me.lblColDisplay = New System.Windows.Forms.Label()
+        Me.lblColNext = New System.Windows.Forms.Label()
+        Me.lblColBack = New System.Windows.Forms.Label()
+        Me.lblRowLast = New System.Windows.Forms.Label()
+        Me.lblRowFirst = New System.Windows.Forms.Label()
+        Me.lblRowDisplay = New System.Windows.Forms.Label()
+        Me.lblRowNext = New System.Windows.Forms.Label()
+        Me.lblColLast = New System.Windows.Forms.Label()
+        Me.lblRowBack = New System.Windows.Forms.Label()
         Me.ucrLinuxGrid = New instat.ucrColumnMetadataLinuxGrid()
         Me.ucrReoGrid = New instat.ucrColumnMetadataReoGrid()
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,10 +93,12 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertToDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
         Me.cellContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
         Me.propertiesContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
+        Me.TblPanPageDisplay.SuspendLayout()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -200,17 +213,167 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.Controls.Add(Me.TblPanPageDisplay, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderColumnMetadata, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.ucrLinuxGrid, 0, 1)
         Me.tlpTableContainer.Controls.Add(Me.ucrReoGrid, 1, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 2
+        Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(568, 405)
         Me.tlpTableContainer.TabIndex = 7
+        '
+        'TblPanPageDisplay
+        '
+        Me.TblPanPageDisplay.AutoSize = True
+        Me.TblPanPageDisplay.ColumnCount = 12
+        Me.tlpTableContainer.SetColumnSpan(Me.TblPanPageDisplay, 2)
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColFirst, 7, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColDisplay, 6, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColNext, 9, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColBack, 8, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowLast, 5, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowFirst, 2, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowDisplay, 1, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowNext, 4, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColLast, 10, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowBack, 3, 0)
+        Me.TblPanPageDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TblPanPageDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TblPanPageDisplay.Location = New System.Drawing.Point(0, 385)
+        Me.TblPanPageDisplay.Margin = New System.Windows.Forms.Padding(0)
+        Me.TblPanPageDisplay.Name = "TblPanPageDisplay"
+        Me.TblPanPageDisplay.RowCount = 1
+        Me.TblPanPageDisplay.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TblPanPageDisplay.Size = New System.Drawing.Size(568, 20)
+        Me.TblPanPageDisplay.TabIndex = 9
+        '
+        'lblColFirst
+        '
+        Me.lblColFirst.AutoSize = True
+        Me.lblColFirst.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColFirst.Location = New System.Drawing.Point(350, 0)
+        Me.lblColFirst.Name = "lblColFirst"
+        Me.lblColFirst.Size = New System.Drawing.Size(18, 20)
+        Me.lblColFirst.TabIndex = 15
+        Me.lblColFirst.Text = "«"
+        Me.lblColFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColDisplay
+        '
+        Me.lblColDisplay.AutoSize = True
+        Me.lblColDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColDisplay.Location = New System.Drawing.Point(287, 0)
+        Me.lblColDisplay.Name = "lblColDisplay"
+        Me.lblColDisplay.Size = New System.Drawing.Size(57, 20)
+        Me.lblColDisplay.TabIndex = 14
+        Me.lblColDisplay.Text = "Label1"
+        Me.lblColDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColNext
+        '
+        Me.lblColNext.AutoSize = True
+        Me.lblColNext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColNext.Location = New System.Drawing.Point(398, 0)
+        Me.lblColNext.Name = "lblColNext"
+        Me.lblColNext.Size = New System.Drawing.Size(18, 20)
+        Me.lblColNext.TabIndex = 13
+        Me.lblColNext.Text = ">"
+        Me.lblColNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColBack
+        '
+        Me.lblColBack.AutoSize = True
+        Me.lblColBack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColBack.Location = New System.Drawing.Point(374, 0)
+        Me.lblColBack.Name = "lblColBack"
+        Me.lblColBack.Size = New System.Drawing.Size(18, 20)
+        Me.lblColBack.TabIndex = 12
+        Me.lblColBack.Text = "<"
+        Me.lblColBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowLast
+        '
+        Me.lblRowLast.AutoSize = True
+        Me.lblRowLast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowLast.Location = New System.Drawing.Point(263, 0)
+        Me.lblRowLast.Name = "lblRowLast"
+        Me.lblRowLast.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowLast.TabIndex = 11
+        Me.lblRowLast.Text = "»"
+        Me.lblRowLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowFirst
+        '
+        Me.lblRowFirst.AutoSize = True
+        Me.lblRowFirst.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowFirst.Location = New System.Drawing.Point(191, 0)
+        Me.lblRowFirst.Name = "lblRowFirst"
+        Me.lblRowFirst.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowFirst.TabIndex = 10
+        Me.lblRowFirst.Text = "«"
+        Me.lblRowFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowDisplay
+        '
+        Me.lblRowDisplay.AutoSize = True
+        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblRowDisplay.Location = New System.Drawing.Point(128, 0)
+        Me.lblRowDisplay.Name = "lblRowDisplay"
+        Me.lblRowDisplay.Size = New System.Drawing.Size(57, 20)
+        Me.lblRowDisplay.TabIndex = 9
+        Me.lblRowDisplay.Text = "Label1"
+        Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblRowNext
+        '
+        Me.lblRowNext.AutoSize = True
+        Me.lblRowNext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowNext.Location = New System.Drawing.Point(239, 0)
+        Me.lblRowNext.Name = "lblRowNext"
+        Me.lblRowNext.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowNext.TabIndex = 8
+        Me.lblRowNext.Text = ">"
+        Me.lblRowNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColLast
+        '
+        Me.lblColLast.AutoSize = True
+        Me.lblColLast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColLast.Location = New System.Drawing.Point(422, 0)
+        Me.lblColLast.Name = "lblColLast"
+        Me.lblColLast.Size = New System.Drawing.Size(18, 20)
+        Me.lblColLast.TabIndex = 7
+        Me.lblColLast.Text = "»"
+        Me.lblColLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowBack
+        '
+        Me.lblRowBack.AutoSize = True
+        Me.lblRowBack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowBack.Location = New System.Drawing.Point(215, 0)
+        Me.lblRowBack.Name = "lblRowBack"
+        Me.lblRowBack.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowBack.TabIndex = 5
+        Me.lblRowBack.Text = "<"
+        Me.lblRowBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ucrLinuxGrid
         '
@@ -218,7 +381,7 @@ Partial Class ucrColumnMetadata
         Me.ucrLinuxGrid.Location = New System.Drawing.Point(2, 22)
         Me.ucrLinuxGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.ucrLinuxGrid.Name = "ucrLinuxGrid"
-        Me.ucrLinuxGrid.Size = New System.Drawing.Size(280, 381)
+        Me.ucrLinuxGrid.Size = New System.Drawing.Size(280, 361)
         Me.ucrLinuxGrid.TabIndex = 7
         '
         'ucrReoGrid
@@ -227,7 +390,7 @@ Partial Class ucrColumnMetadata
         Me.ucrReoGrid.Location = New System.Drawing.Point(286, 22)
         Me.ucrReoGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.ucrReoGrid.Name = "ucrReoGrid"
-        Me.ucrReoGrid.Size = New System.Drawing.Size(280, 381)
+        Me.ucrReoGrid.Size = New System.Drawing.Size(280, 361)
         Me.ucrReoGrid.TabIndex = 8
         '
         'mnuColumnRename
@@ -353,7 +516,7 @@ Partial Class ucrColumnMetadata
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertVariate, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToDate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextSelectColumns, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator3, Me.mnuHelp1})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 468)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 446)
         '
         'mnuConvertToDate
         '
@@ -385,6 +548,9 @@ Partial Class ucrColumnMetadata
         Me.statusColumnMenu.ResumeLayout(False)
         Me.propertiesContextMenuStrip.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
+        Me.tlpTableContainer.PerformLayout()
+        Me.TblPanPageDisplay.ResumeLayout(False)
+        Me.TblPanPageDisplay.PerformLayout()
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -432,4 +598,16 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuHelp2 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuConvertToDate As ToolStripMenuItem
+    Friend WithEvents TblPanPageDisplay As TableLayoutPanel
+    Friend WithEvents lblColFirst As Label
+    Friend WithEvents lblColDisplay As Label
+    Friend WithEvents lblColNext As Label
+    Friend WithEvents lblColBack As Label
+    Friend WithEvents lblRowLast As Label
+    Friend WithEvents lblRowFirst As Label
+    Friend WithEvents lblRowDisplay As Label
+    Friend WithEvents lblRowNext As Label
+    Friend WithEvents lblColLast As Label
+    Friend WithEvents lblRowBack As Label
+    Friend WithEvents ttGoToRowOrColPage As ToolTip
 End Class
