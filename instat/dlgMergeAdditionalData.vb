@@ -32,6 +32,8 @@ Public Class dlgMergeAdditionalData
     Private clsLeftJoinFunction As New RFunction
     Private clsByListFunction As New RFunction
     Private clsGetVariablesFunction As New RFunction
+    Private clsRemoveToFilter As New RFunction
+    Private clsRemoveFromFilter As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bBySpecified As Boolean
     Private bJoinColsAreUnique As Boolean = False
@@ -49,6 +51,8 @@ Public Class dlgMergeAdditionalData
         SetHelpOptions()
         SetMergingBy()
         autoTranslate(Me)
+        RemoveCurrentFilterTo()
+        RemoveCurrentFilterFrom()
         TestOkEnabled()
     End Sub
 
@@ -83,6 +87,8 @@ Public Class dlgMergeAdditionalData
         clsListFunction = New RFunction
         clsGetColumnsFromData = New RFunction
         clsGetVariablesFunction = New RFunction
+        clsRemoveToFilter = New RFunction
+        clsRemoveFromFilter = New RFunction
 
         ucrToDataFrame.Reset()
         ucrFromDataFrame.Reset()
@@ -91,6 +97,9 @@ Public Class dlgMergeAdditionalData
         ucrInputCheckInput.Reset()
 
         clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+
+        clsRemoveToFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsRemoveFromFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
 
         clsLeftJoinFunction.SetPackageName("dplyr")
         clsLeftJoinFunction.SetRCommand("left_join")
@@ -107,7 +116,8 @@ Public Class dlgMergeAdditionalData
         clsImportDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
         clsImportDataFunction.AddParameter("data_tables", clsRFunctionParameter:=clsListFunction, iPosition:=0)
         clsImportDataFunction.AddParameter("prefix", "FALSE", iPosition:=1)
-
+        RemoveCurrentFilterFrom()
+        RemoveCurrentFilterTo()
         SetDataFrameAssign()
         ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
         bResetSubdialog = True
@@ -146,6 +156,12 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub DataFrames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFromDataFrame.ControlValueChanged, ucrToDataFrame.ControlValueChanged
+
+        clsRemoveToFilter.AddParameter("data_name",
+    Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        clsRemoveFromFilter.AddParameter("data_name",
+    Chr(34) & ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         ' Ensures options set on the subdialog are "reset" since they depend on data frame choice
         clsLeftJoinFunction.RemoveParameterByName("by")
         clsByListFunction.ClearParameters()
@@ -313,5 +329,21 @@ Public Class dlgMergeAdditionalData
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub RemoveCurrentFilterFrom()
+        If frmMain.ucrDataViewer.GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bFilterApplied Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsRemoveFromFilter, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRemoveFromFilter)
+        End If
+    End Sub
+
+    Private Sub RemoveCurrentFilterTo()
+        If frmMain.ucrDataViewer.GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bFilterApplied Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsRemoveToFilter, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRemoveToFilter)
+        End If
     End Sub
 End Class
