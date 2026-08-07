@@ -6917,5 +6917,15 @@
   "One Button": "One Button",
   "Multiple Comparisons": "Multiple Comparisons",
   "Variable Names": "Variable Names",
-  "Limit Length": "Limit Length"
+  "Limit Length": "Limit Length",
+  "Special": "Special",
+  "Factorial": "Factorial",
+  "rbd": "rbd",
+  "Response:": "Response:",
+  "Rep :": "Rep :",
+  "Factor A:": "Factor A:",
+  "Factor B:": "Factor B:",
+  "Design:": "Design:",
+  "Treat :": "Treat :",
+  "Generate Plot": "Generate Plot"
 }
