@@ -19,6 +19,8 @@ Public Class dlgSaveAs
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSaveFunction As New RFunction
+    Private clsRemoveCurrentColSelection As New RFunction
+    Dim strDataName As String = frmMain.ucrDataViewer.GetCurrentDataFrameFocus.strName
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -46,12 +48,19 @@ Public Class dlgSaveAs
 
     Private Sub SetDefaults()
         clsSaveFunction = New RFunction
+        clsRemoveCurrentColSelection = New RFunction
 
         ucrFilePath.ResetPathControl()
 
         clsSaveFunction.SetRCommand("saveRDS")
         clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
 
+        clsRemoveCurrentColSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
+        clsRemoveCurrentColSelection.AddParameter("data_name",
+                                                 Chr(34) & strDataName & Chr(34),
+                                                 iPosition:=0)
+        ucrBase.clsRsyntax.ClearCodes()
+        RemoveCurrentColSelection()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveFunction)
     End Sub
 
@@ -83,6 +92,14 @@ Public Class dlgSaveAs
 
     Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub RemoveCurrentColSelection()
+        If frmMain.IsColumnSelectionApplied Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsRemoveCurrentColSelection)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRemoveCurrentColSelection)
+        End If
     End Sub
 
 End Class

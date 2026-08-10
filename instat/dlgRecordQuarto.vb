@@ -34,9 +34,14 @@ Public Class dlgRecordQuarto
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-        SetSaveWorkspaceControlsVisibility()
-
+        ucrBase.SetToScriptEnabled(False)
         autoTranslate(Me)
+    End Sub
+
+    Private Sub dlgRecordQuarto_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        If Not frmMain.bRecordQuarto Then
+            ucrBase.SetToScriptEnabled(True)
+        End If
     End Sub
 
     Private Sub Initializedialog()
@@ -54,7 +59,11 @@ Public Class dlgRecordQuarto
         ucrChkPdf.SetText("Pdf")
         ucrChkPptx.SetText("Powerpoint")
 
-        ucrChkSaveReopen.SetText("Save and Reopen Workspace")
+        ucrChkDisplayOptions.SetText("Display Code")
+        ucrChkDisplayRMsgs.SetText("Display R Messages")
+        ucrChkDisplayWarnings.SetText("Display Warnings")
+        ucrChkGiveROutput.SetText("Give R Output")
+
 
     End Sub
 
@@ -73,6 +82,14 @@ Public Class dlgRecordQuarto
         ucrChkPdf.Checked = True
         ucrChkPptx.Checked = True
         ucrChkDocs.Checked = True
+
+        ucrChkDisplayRMsgs.Checked = False
+        ucrChkDisplayWarnings.Checked = False
+        ucrChkDisplayOptions.Checked = False
+        ucrChkGiveROutput.Checked = True
+
+
+
     End Sub
 
 
@@ -149,11 +166,7 @@ Public Class dlgRecordQuarto
     End Sub
 
     Private Sub TestOkEnabled()
-        Dim bEnable As Boolean = Not ucrInputFileLocation.IsEmpty
-
-        If ucrChkSaveReopen.Checked Then
-            bEnable = bEnable AndAlso Not String.IsNullOrWhiteSpace(ucrInputFilePath.GetText())
-        End If
+        Dim bEnable As Boolean = Not ucrInputFileLocation.IsEmpty AndAlso Not String.IsNullOrWhiteSpace(ucrInputFilePath.GetText())
 
         bEnable = bEnable AndAlso
               (ucrChkHtml.Checked OrElse
@@ -206,16 +219,12 @@ Public Class dlgRecordQuarto
         SaveQuartoFile()
         Dim strRdsFile As String = ucrInputFilePath.GetText
 
-        If ucrChkSaveReopen.Checked Then
 
-            SaveDataBook()
+        SaveDataBook()
             StartQuartoSession(strRdsFile)
 
-        Else
 
-            StartEmptyQuartoSession()
 
-        End If
 
         frmMain.bRecordQuarto = True
         frmMain.strCurrentQuartoFile = ucrInputFileLocation.GetText()
@@ -225,6 +234,11 @@ Public Class dlgRecordQuarto
         frmMain.bQuartoPPTX = ucrChkPptx.Checked
         frmMain.bQuartoDOCX = ucrChkDocs.Checked
 
+        frmMain.bQuartoEcho = ucrChkDisplayOptions.Checked
+        frmMain.bQuartoWarning = ucrChkDisplayWarnings.Checked
+        frmMain.bQuartoMessage = ucrChkDisplayRMsgs.Checked
+        frmMain.bQuartoEval = ucrChkGiveROutput.Checked
+
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
 
 
@@ -233,8 +247,7 @@ Public Class dlgRecordQuarto
 
         frmMain.bShowRenderDetails = ucrChkRenderDetails.Checked
 
-        If ucrChkSaveReopen.Checked AndAlso
-       Not String.IsNullOrWhiteSpace(frmMain.strSaveFilePath) Then
+        If Not String.IsNullOrWhiteSpace(frmMain.strSaveFilePath) Then
 
             frmMain.clsRecentItems.addToMenu(
             frmMain.strSaveFilePath.Replace("\", "/"))
@@ -273,7 +286,7 @@ Public Class dlgRecordQuarto
 
     End Sub
 
-    Private Sub ucrInputFileLocation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFileLocation.ControlContentsChanged, ucrChkSaveReopen.ControlContentsChanged, ucrChkPptx.ControlContentsChanged, ucrChkPdf.ControlContentsChanged, ucrChkHtml.ControlContentsChanged, ucrChkDocs.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
+    Private Sub ucrInputFileLocation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFileLocation.ControlContentsChanged, ucrChkPptx.ControlContentsChanged, ucrChkPdf.ControlContentsChanged, ucrChkHtml.ControlContentsChanged, ucrChkDocs.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -283,19 +296,6 @@ Public Class dlgRecordQuarto
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkSaveReopen_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSaveReopen.ControlValueChanged
-        SetSaveWorkspaceControlsVisibility()
-        If Not ucrChkSaveReopen.Checked Then
-            ucrInputFilePath.SetName("")
-            frmMain.strSaveFilePath = ""
-        End If
-    End Sub
-
-    Private Sub SetSaveWorkspaceControlsVisibility()
-        ucrInputFilePath.Visible = ucrChkSaveReopen.Checked
-        cmdBrowseFile.Visible = ucrChkSaveReopen.Checked
-        lblSaveAs.Visible = ucrChkSaveReopen.Checked
-    End Sub
 
     Private Sub cmdBrowseFile_Click(sender As Object, e As EventArgs) Handles cmdBrowseFile.Click
         Using dlgSave As New SaveFileDialog
