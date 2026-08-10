@@ -213,7 +213,6 @@ Public Class dlgUseDate
         SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
-
     Private Sub SetDefaultColumn()
         If strDefaultDataFrame <> "" Then
             ucrSelectorUseDate.SetDataframe(strDefaultDataFrame)
