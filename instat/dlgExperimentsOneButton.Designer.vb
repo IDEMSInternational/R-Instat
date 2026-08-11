@@ -310,7 +310,7 @@ Partial Class dlgExperimentsOneButton
         'lblExplanatory
         '
         Me.lblExplanatory.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExplanatory.Location = New System.Drawing.Point(246, 258)
+        Me.lblExplanatory.Location = New System.Drawing.Point(246, 285)
         Me.lblExplanatory.Name = "lblExplanatory"
         Me.lblExplanatory.Size = New System.Drawing.Size(140, 13)
         Me.lblExplanatory.TabIndex = 105
@@ -319,7 +319,7 @@ Partial Class dlgExperimentsOneButton
         'lblLocations
         '
         Me.lblLocations.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLocations.Location = New System.Drawing.Point(246, 258)
+        Me.lblLocations.Location = New System.Drawing.Point(246, 285)
         Me.lblLocations.Name = "lblLocations"
         Me.lblLocations.Size = New System.Drawing.Size(124, 13)
         Me.lblLocations.TabIndex = 107
@@ -558,7 +558,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrReceiverExplanatory.AutoSize = True
         Me.ucrReceiverExplanatory.frmParent = Me
-        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(246, 275)
+        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(246, 301)
         Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
         Me.ucrReceiverExplanatory.Selector = Nothing
@@ -571,7 +571,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrReceiverLocations.AutoSize = True
         Me.ucrReceiverLocations.frmParent = Me
-        Me.ucrReceiverLocations.Location = New System.Drawing.Point(246, 275)
+        Me.ucrReceiverLocations.Location = New System.Drawing.Point(246, 301)
         Me.ucrReceiverLocations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLocations.Name = "ucrReceiverLocations"
         Me.ucrReceiverLocations.Selector = Nothing
