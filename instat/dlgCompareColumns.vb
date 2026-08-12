@@ -254,7 +254,7 @@ Public Class dlgCompareColumns
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
-                    clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
+                    'clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
                     clsDummyOperator = clsLessorEqualToOperator
                 End If
@@ -262,7 +262,7 @@ Public Class dlgCompareColumns
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
-                    clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
+                    ucrInputTolerance.SetRCode(clsLessorEqualToOperator, False)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
                     clsDummyOperator = clsLessorEqualToOperator
                 End If
