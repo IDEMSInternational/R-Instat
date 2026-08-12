@@ -142,11 +142,9 @@ Public Class dlgModelMultipleComparisons
             ucrChkAdjustment.SetRCode(clsMultipleComparisonsFunction, bReset)
 
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignModelOperator)
-
             ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleComparisonsFunction)
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveModelMultipleComparisons.GetText())
-
             ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunction)
+
         End If
     End Sub
 
@@ -187,7 +185,12 @@ Public Class dlgModelMultipleComparisons
 
     Private Sub ucrSaveModelMultipleComparisons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveModelMultipleComparisons.ControlValueChanged
         If ucrSaveModelMultipleComparisons.GetText() <> "" AndAlso ucrSaveModelMultipleComparisons.IsComplete() Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveModelMultipleComparisons.GetText())
+            clsMultipleComparisonsFunction.SetAssignToOutputObject(
+            strRObjectToAssignTo:=ucrSaveModelMultipleComparisons.GetText(),
+            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+            strRObjectFormatToAssignTo:=RObjectFormat.Text,
+            strRDataFrameNameToAddObjectTo:=ucrSelectorModelMultipleComparisons.strCurrentDataFrame,
+            strObjectName:=ucrSaveModelMultipleComparisons.GetText())
         End If
     End Sub
 
