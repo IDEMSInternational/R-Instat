@@ -101,6 +101,7 @@ Partial Class dlgExperimentsOneButton
         'rdoSpecial
         '
         Me.rdoSpecial.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSpecial.Enabled = False
         Me.rdoSpecial.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpecial.FlatAppearance.BorderSize = 2
         Me.rdoSpecial.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
