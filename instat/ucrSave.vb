@@ -1027,6 +1027,7 @@ Public Class ucrSave
         bKeepExistingPosition = sdgSaveColumnPosition.KeepExistingPosition
 
         UpdateAssignTo()
+        OnControlValueChanged()
     End Sub
 
     '''--------------------------------------------------------------------------------------------
