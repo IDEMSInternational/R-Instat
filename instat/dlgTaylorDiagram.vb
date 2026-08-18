@@ -19,6 +19,8 @@ Public Class dlgTaylorDiagram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsTaylorDiagramFunction As New RFunction
+    Private clsGetObjectDataFunction As New RFunction
+    Private clsDevOff As New RFunction
     Private Sub dlgTaylorDiagram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -35,8 +37,8 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID= 643
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.iHelpTopicID = 643
+        'ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
         ucrSelectorTaylorDiagram.SetParameterIsrfunction()
@@ -80,6 +82,8 @@ Public Class dlgTaylorDiagram
 
     Private Sub SetDefaults()
         clsTaylorDiagramFunction = New RFunction
+        clsGetObjectDataFunction = New RFunction
+        clsDevOff = New RFunction
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
@@ -89,7 +93,16 @@ Public Class dlgTaylorDiagram
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
         clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+
+        clsDevOff.SetRCommand("dev.off")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDevOff, iPosition:=1)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -112,6 +125,18 @@ Public Class dlgTaylorDiagram
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSelectorTaylorDiagram_DataFrameChanged() Handles ucrSelectorTaylorDiagram.DataFrameChanged
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrSavePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlValueChanged
+        If ucrSavePlot.ucrChkSave.Checked Then
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & ucrSavePlot.GetText & Chr(34), iPosition:=1)
+        Else
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        End If
     End Sub
 
     Private Sub ucrReceiverEstimated_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimated.ControlContentsChanged
