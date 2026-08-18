@@ -6913,5 +6913,10 @@
   "One Button": "One Button",
   "Multiple Comparisons": "Multiple Comparisons",
   "Variable Names": "Variable Names",
-  "Limit Length": "Limit Length"
+  "Limit Length": "Limit Length",
+  "rep_times": "rep_times",
+  "rep_each": "rep_each",
+  "rnormal": "rnormal",
+  "rfactor": "rfactor",
+  "[ : ]": "[ : ]"
 }
