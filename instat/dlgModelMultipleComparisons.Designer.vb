@@ -30,6 +30,8 @@ Partial Class dlgModelMultipleComparisons
         Me.ucrChkAdjustment = New instat.ucrCheck()
         Me.ucrInputComboBoxDescending = New instat.ucrInputComboBox()
         Me.ucrChkDescending = New instat.ucrCheck()
+        Me.ucrInputComboBoxDisplayLetters = New instat.ucrInputComboBox()
+        Me.ucrChkDisplayLetters = New instat.ucrCheck()
         Me.ucrInputComboBoxConfidenceInterval = New instat.ucrInputComboBox()
         Me.ucrChkConfidenceInterval = New instat.ucrCheck()
         Me.ucrInputComboBoxAlpha = New instat.ucrInputComboBox()
@@ -45,7 +47,7 @@ Partial Class dlgModelMultipleComparisons
         'lblMultipleMeanComparisonModeltoUse
         '
         Me.lblMultipleMeanComparisonModeltoUse.AutoSize = True
-        Me.lblMultipleMeanComparisonModeltoUse.Location = New System.Drawing.Point(231, 44)
+        Me.lblMultipleMeanComparisonModeltoUse.Location = New System.Drawing.Point(230, 44)
         Me.lblMultipleMeanComparisonModeltoUse.Name = "lblMultipleMeanComparisonModeltoUse"
         Me.lblMultipleMeanComparisonModeltoUse.Size = New System.Drawing.Size(84, 13)
         Me.lblMultipleMeanComparisonModeltoUse.TabIndex = 28
@@ -55,7 +57,7 @@ Partial Class dlgModelMultipleComparisons
         'lblVariabletoUse
         '
         Me.lblVariabletoUse.AutoSize = True
-        Me.lblVariabletoUse.Location = New System.Drawing.Point(231, 85)
+        Me.lblVariabletoUse.Location = New System.Drawing.Point(231, 87)
         Me.lblVariabletoUse.Name = "lblVariabletoUse"
         Me.lblVariabletoUse.Size = New System.Drawing.Size(77, 13)
         Me.lblVariabletoUse.TabIndex = 30
@@ -65,7 +67,7 @@ Partial Class dlgModelMultipleComparisons
         'lblBy
         '
         Me.lblBy.AutoSize = True
-        Me.lblBy.Location = New System.Drawing.Point(231, 126)
+        Me.lblBy.Location = New System.Drawing.Point(231, 130)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(70, 13)
         Me.lblBy.TabIndex = 32
@@ -75,7 +77,7 @@ Partial Class dlgModelMultipleComparisons
         'btnTransformation
         '
         Me.btnTransformation.Enabled = False
-        Me.btnTransformation.Location = New System.Drawing.Point(230, 173)
+        Me.btnTransformation.Location = New System.Drawing.Point(230, 180)
         Me.btnTransformation.Name = "btnTransformation"
         Me.btnTransformation.Size = New System.Drawing.Size(120, 25)
         Me.btnTransformation.TabIndex = 34
@@ -89,21 +91,21 @@ Partial Class dlgModelMultipleComparisons
         Me.ucrInputComboBoxAdjustment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboBoxAdjustment.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxAdjustment.IsReadOnly = False
-        Me.ucrInputComboBoxAdjustment.Location = New System.Drawing.Point(95, 286)
+        Me.ucrInputComboBoxAdjustment.Location = New System.Drawing.Point(138, 314)
         Me.ucrInputComboBoxAdjustment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInputComboBoxAdjustment.Name = "ucrInputComboBoxAdjustment"
         Me.ucrInputComboBoxAdjustment.Size = New System.Drawing.Size(84, 22)
-        Me.ucrInputComboBoxAdjustment.TabIndex = 42
+        Me.ucrInputComboBoxAdjustment.TabIndex = 44
         '
         'ucrChkAdjustment
         '
         Me.ucrChkAdjustment.AutoSize = True
         Me.ucrChkAdjustment.Checked = False
-        Me.ucrChkAdjustment.Location = New System.Drawing.Point(9, 286)
+        Me.ucrChkAdjustment.Location = New System.Drawing.Point(9, 314)
         Me.ucrChkAdjustment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrChkAdjustment.Name = "ucrChkAdjustment"
         Me.ucrChkAdjustment.Size = New System.Drawing.Size(140, 24)
-        Me.ucrChkAdjustment.TabIndex = 41
+        Me.ucrChkAdjustment.TabIndex = 43
         '
         'ucrInputComboBoxDescending
         '
@@ -111,21 +113,43 @@ Partial Class dlgModelMultipleComparisons
         Me.ucrInputComboBoxDescending.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboBoxDescending.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxDescending.IsReadOnly = False
-        Me.ucrInputComboBoxDescending.Location = New System.Drawing.Point(95, 258)
+        Me.ucrInputComboBoxDescending.Location = New System.Drawing.Point(138, 286)
         Me.ucrInputComboBoxDescending.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInputComboBoxDescending.Name = "ucrInputComboBoxDescending"
         Me.ucrInputComboBoxDescending.Size = New System.Drawing.Size(84, 22)
-        Me.ucrInputComboBoxDescending.TabIndex = 40
+        Me.ucrInputComboBoxDescending.TabIndex = 42
         '
         'ucrChkDescending
         '
         Me.ucrChkDescending.AutoSize = True
         Me.ucrChkDescending.Checked = False
-        Me.ucrChkDescending.Location = New System.Drawing.Point(9, 258)
+        Me.ucrChkDescending.Location = New System.Drawing.Point(9, 286)
         Me.ucrChkDescending.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrChkDescending.Name = "ucrChkDescending"
         Me.ucrChkDescending.Size = New System.Drawing.Size(140, 24)
-        Me.ucrChkDescending.TabIndex = 39
+        Me.ucrChkDescending.TabIndex = 41
+        '
+        'ucrInputComboBoxDisplayLetters
+        '
+        Me.ucrInputComboBoxDisplayLetters.AddQuotesIfUnrecognised = False
+        Me.ucrInputComboBoxDisplayLetters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboBoxDisplayLetters.GetSetSelectedIndex = -1
+        Me.ucrInputComboBoxDisplayLetters.IsReadOnly = True
+        Me.ucrInputComboBoxDisplayLetters.Location = New System.Drawing.Point(138, 258)
+        Me.ucrInputComboBoxDisplayLetters.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrInputComboBoxDisplayLetters.Name = "ucrInputComboBoxDisplayLetters"
+        Me.ucrInputComboBoxDisplayLetters.Size = New System.Drawing.Size(84, 22)
+        Me.ucrInputComboBoxDisplayLetters.TabIndex = 40
+        '
+        'ucrChkDisplayLetters
+        '
+        Me.ucrChkDisplayLetters.AutoSize = True
+        Me.ucrChkDisplayLetters.Checked = False
+        Me.ucrChkDisplayLetters.Location = New System.Drawing.Point(9, 258)
+        Me.ucrChkDisplayLetters.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrChkDisplayLetters.Name = "ucrChkDisplayLetters"
+        Me.ucrChkDisplayLetters.Size = New System.Drawing.Size(140, 24)
+        Me.ucrChkDisplayLetters.TabIndex = 39
         '
         'ucrInputComboBoxConfidenceInterval
         '
@@ -133,10 +157,10 @@ Partial Class dlgModelMultipleComparisons
         Me.ucrInputComboBoxConfidenceInterval.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboBoxConfidenceInterval.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxConfidenceInterval.IsReadOnly = False
-        Me.ucrInputComboBoxConfidenceInterval.Location = New System.Drawing.Point(136, 230)
+        Me.ucrInputComboBoxConfidenceInterval.Location = New System.Drawing.Point(138, 230)
         Me.ucrInputComboBoxConfidenceInterval.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInputComboBoxConfidenceInterval.Name = "ucrInputComboBoxConfidenceInterval"
-        Me.ucrInputComboBoxConfidenceInterval.Size = New System.Drawing.Size(68, 22)
+        Me.ucrInputComboBoxConfidenceInterval.Size = New System.Drawing.Size(84, 22)
         Me.ucrInputComboBoxConfidenceInterval.TabIndex = 38
         '
         'ucrChkConfidenceInterval
@@ -155,10 +179,10 @@ Partial Class dlgModelMultipleComparisons
         Me.ucrInputComboBoxAlpha.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboBoxAlpha.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxAlpha.IsReadOnly = True
-        Me.ucrInputComboBoxAlpha.Location = New System.Drawing.Point(95, 202)
+        Me.ucrInputComboBoxAlpha.Location = New System.Drawing.Point(138, 202)
         Me.ucrInputComboBoxAlpha.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInputComboBoxAlpha.Name = "ucrInputComboBoxAlpha"
-        Me.ucrInputComboBoxAlpha.Size = New System.Drawing.Size(72, 22)
+        Me.ucrInputComboBoxAlpha.Size = New System.Drawing.Size(84, 22)
         Me.ucrInputComboBoxAlpha.TabIndex = 36
         '
         'ucrChkAlpha
@@ -175,7 +199,7 @@ Partial Class dlgModelMultipleComparisons
         '
         Me.ucrReceiverBy.AutoSize = True
         Me.ucrReceiverBy.frmParent = Me
-        Me.ucrReceiverBy.Location = New System.Drawing.Point(230, 145)
+        Me.ucrReceiverBy.Location = New System.Drawing.Point(230, 147)
         Me.ucrReceiverBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverBy.Name = "ucrReceiverBy"
         Me.ucrReceiverBy.Selector = Nothing
@@ -201,7 +225,7 @@ Partial Class dlgModelMultipleComparisons
         '
         Me.ucrReceiverMultipleMeanComparisonUseModel.AutoSize = True
         Me.ucrReceiverMultipleMeanComparisonUseModel.frmParent = Me
-        Me.ucrReceiverMultipleMeanComparisonUseModel.Location = New System.Drawing.Point(230, 63)
+        Me.ucrReceiverMultipleMeanComparisonUseModel.Location = New System.Drawing.Point(230, 61)
         Me.ucrReceiverMultipleMeanComparisonUseModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleMeanComparisonUseModel.Name = "ucrReceiverMultipleMeanComparisonUseModel"
         Me.ucrReceiverMultipleMeanComparisonUseModel.Selector = Nothing
@@ -213,7 +237,7 @@ Partial Class dlgModelMultipleComparisons
         'ucrSaveModelMultipleComparisons
         '
         Me.ucrSaveModelMultipleComparisons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveModelMultipleComparisons.Location = New System.Drawing.Point(9, 328)
+        Me.ucrSaveModelMultipleComparisons.Location = New System.Drawing.Point(9, 351)
         Me.ucrSaveModelMultipleComparisons.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModelMultipleComparisons.Name = "ucrSaveModelMultipleComparisons"
         Me.ucrSaveModelMultipleComparisons.Size = New System.Drawing.Size(306, 24)
@@ -223,8 +247,8 @@ Partial Class dlgModelMultipleComparisons
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 360)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 383)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 24
@@ -245,11 +269,13 @@ Partial Class dlgModelMultipleComparisons
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 422)
+        Me.ClientSize = New System.Drawing.Size(419, 439)
         Me.Controls.Add(Me.ucrInputComboBoxAdjustment)
         Me.Controls.Add(Me.ucrChkAdjustment)
         Me.Controls.Add(Me.ucrInputComboBoxDescending)
         Me.Controls.Add(Me.ucrChkDescending)
+        Me.Controls.Add(Me.ucrInputComboBoxDisplayLetters)
+        Me.Controls.Add(Me.ucrChkDisplayLetters)
         Me.Controls.Add(Me.ucrInputComboBoxConfidenceInterval)
         Me.Controls.Add(Me.ucrChkConfidenceInterval)
         Me.Controls.Add(Me.ucrInputComboBoxAlpha)
@@ -288,6 +314,8 @@ Partial Class dlgModelMultipleComparisons
     Friend WithEvents btnTransformation As Button
     Friend WithEvents ucrChkConfidenceInterval As ucrCheck
     Friend WithEvents ucrInputComboBoxConfidenceInterval As ucrInputComboBox
+    Friend WithEvents ucrChkDisplayLetters As ucrCheck
+    Friend WithEvents ucrInputComboBoxDisplayLetters As ucrInputComboBox
     Friend WithEvents ucrChkDescending As ucrCheck
     Friend WithEvents ucrInputComboBoxDescending As ucrInputComboBox
     Friend WithEvents ucrChkAdjustment As ucrCheck

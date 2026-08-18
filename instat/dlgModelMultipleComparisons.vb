@@ -43,7 +43,7 @@ Public Class dlgModelMultipleComparisons
 
         ucrBase.iHelpTopicID = 0
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrReceiverMultipleMeanComparisonUseModel.SetItemType(RObjectTypeLabel.Model)
         ucrReceiverMultipleMeanComparisonUseModel.Selector = ucrSelectorModelMultipleComparisons
@@ -65,7 +65,6 @@ Public Class dlgModelMultipleComparisons
         ucrInputComboBoxAlpha.SetDropDownStyleAsNonEditable()
         ucrInputComboBoxAlpha.AddQuotesIfUnrecognised = False
         ucrInputComboBoxAlpha.SetParameter(New RParameter("sig", 3))
-        ucrInputComboBoxAlpha.SetRDefault("0.05")
         ucrChkAlpha.AddToLinkedControls(ucrInputComboBoxAlpha, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05")
 
         ucrChkConfidenceInterval.SetText("Confidence Interval")
@@ -73,15 +72,20 @@ Public Class dlgModelMultipleComparisons
         ucrInputComboBoxConfidenceInterval.SetDropDownStyleAsNonEditable()
         ucrInputComboBoxConfidenceInterval.AddQuotesIfUnrecognised = True
         ucrInputComboBoxConfidenceInterval.SetParameter(New RParameter("int.type", 4))
-        ucrInputComboBoxConfidenceInterval.SetRDefault(Chr(34) & "ci" & Chr(34))
         ucrChkConfidenceInterval.AddToLinkedControls(ucrInputComboBoxConfidenceInterval, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="ci")
+
+        ucrChkDisplayLetters.SetText("Display Letters")
+        ucrInputComboBoxDisplayLetters.SetItems({"TRUE", "FALSE"})
+        ucrInputComboBoxDisplayLetters.SetDropDownStyleAsNonEditable()
+        ucrInputComboBoxDisplayLetters.AddQuotesIfUnrecognised = False
+        ucrInputComboBoxDisplayLetters.SetParameter(New RParameter("groups", 7))
+        ucrChkDisplayLetters.AddToLinkedControls(ucrInputComboBoxDisplayLetters, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
 
         ucrChkDescending.SetText("Descending")
         ucrInputComboBoxDescending.SetItems({"TRUE", "FALSE"})
         ucrInputComboBoxDescending.SetDropDownStyleAsNonEditable()
         ucrInputComboBoxDescending.AddQuotesIfUnrecognised = False
         ucrInputComboBoxDescending.SetParameter(New RParameter("descending", 5))
-        ucrInputComboBoxDescending.SetRDefault("TRUE")
         ucrChkDescending.AddToLinkedControls(ucrInputComboBoxDescending, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
 
         ucrChkAdjustment.SetText("Adjustment")
@@ -89,10 +93,10 @@ Public Class dlgModelMultipleComparisons
         ucrInputComboBoxAdjustment.SetDropDownStyleAsNonEditable()
         ucrInputComboBoxAdjustment.AddQuotesIfUnrecognised = True
         ucrInputComboBoxAdjustment.SetParameter(New RParameter("adjust", 6))
-        ucrInputComboBoxAdjustment.SetRDefault(Chr(34) & "tukey" & Chr(34))
         ucrChkAdjustment.AddToLinkedControls(ucrInputComboBoxAdjustment, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tukey")
 
-        ucrSaveModelMultipleComparisons.SetLabelText("Store mct:")
+        ucrSaveModelMultipleComparisons.SetPrefix("mct")
+        ucrSaveModelMultipleComparisons.SetCheckBoxText("Store mct:")
         ucrSaveModelMultipleComparisons.SetIsComboBox()
         ucrSaveModelMultipleComparisons.SetSaveType(strRObjectType:=RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
     End Sub
@@ -108,6 +112,7 @@ Public Class dlgModelMultipleComparisons
         clsAssignModelOperator.AddParameter("right", clsRFunctionParameter:=clsGetModelFunction, iPosition:=1)
         clsAssignModelOperator.bToScriptAsRString = False
 
+
         clsMultipleComparisonsFunction = New RFunction
         clsMultipleComparisonsFunction.SetPackageName("biometryassist")
         clsMultipleComparisonsFunction.SetRCommand("multiple_comparisons")
@@ -119,18 +124,17 @@ Public Class dlgModelMultipleComparisons
         clsRmFunction.bToScriptAsRString = False
 
         ucrSelectorModelMultipleComparisons.Reset()
-
         ucrSaveModelMultipleComparisons.Reset()
-        ucrSaveModelMultipleComparisons.SetName("mct_obj")
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
 
         ucrReceiverLabelVariable.SetRCode(clsMultipleComparisonsFunction, bReset)
         ucrReceiverBy.SetRCode(clsMultipleComparisonsFunction, bReset)
+        ucrInputComboBoxDisplayLetters.SetRCode(clsMultipleComparisonsFunction, bReset)
+        ucrInputComboBoxConfidenceInterval.SetRCode(clsMultipleComparisonsFunction, bReset)
 
         ucrInputComboBoxAlpha.SetRCode(clsMultipleComparisonsFunction, bReset)
-        ucrInputComboBoxConfidenceInterval.SetRCode(clsMultipleComparisonsFunction, bReset)
         ucrInputComboBoxDescending.SetRCode(clsMultipleComparisonsFunction, bReset)
         ucrInputComboBoxAdjustment.SetRCode(clsMultipleComparisonsFunction, bReset)
 
@@ -138,6 +142,7 @@ Public Class dlgModelMultipleComparisons
 
             ucrChkAlpha.SetRCode(clsMultipleComparisonsFunction, bReset)
             ucrChkConfidenceInterval.SetRCode(clsMultipleComparisonsFunction, bReset)
+            ucrChkDisplayLetters.SetRCode(clsMultipleComparisonsFunction, bReset)
             ucrChkDescending.SetRCode(clsMultipleComparisonsFunction, bReset)
             ucrChkAdjustment.SetRCode(clsMultipleComparisonsFunction, bReset)
 
@@ -170,10 +175,24 @@ Public Class dlgModelMultipleComparisons
     Private Sub ucrReceiverMultipleMeanComparisonUseModel_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverMultipleMeanComparisonUseModel.SelectionChanged
         If Not ucrReceiverMultipleMeanComparisonUseModel.IsEmpty() Then
             clsGetModelFunction.AddParameter("object_name", ucrReceiverMultipleMeanComparisonUseModel.GetVariableNames())
+            UpdateSaveName()
         Else
             clsGetModelFunction.RemoveParameterByName("object_name")
         End If
         TestOkEnabled()
+    End Sub
+
+    'Updates the Default name In the "Store mct:" save control based On the currently selected model, rather than the Label Variable
+    'strips off the prefix before the first underscore And uses the remainder As the suffix For the mct Object name
+    Private Sub UpdateSaveName()
+        Dim strModelName As String = ucrReceiverMultipleMeanComparisonUseModel.GetVariableNames(bWithQuotes:=False)
+        Dim iUnderscoreIndex As Integer = strModelName.IndexOf("_"c)
+
+        If iUnderscoreIndex >= 0 AndAlso iUnderscoreIndex < strModelName.Length - 1 Then
+            ucrSaveModelMultipleComparisons.SetName("mct_" & strModelName.Substring(iUnderscoreIndex + 1))
+        Else
+            ucrSaveModelMultipleComparisons.SetName("mct_" & strModelName)
+        End If
     End Sub
 
     Private Sub ucrSelectorModelMultipleComparisons_DataFrameChanged() Handles ucrSelectorModelMultipleComparisons.DataFrameChanged
@@ -184,15 +203,22 @@ Public Class dlgModelMultipleComparisons
     End Sub
 
     Private Sub ucrSaveModelMultipleComparisons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveModelMultipleComparisons.ControlValueChanged
-        If ucrSaveModelMultipleComparisons.GetText() <> "" AndAlso ucrSaveModelMultipleComparisons.IsComplete() Then
+        If ucrSaveModelMultipleComparisons.ucrChkSave.Checked AndAlso ucrSaveModelMultipleComparisons.GetText() <> "" AndAlso ucrSaveModelMultipleComparisons.IsComplete() Then
             clsMultipleComparisonsFunction.SetAssignToOutputObject(
-            strRObjectToAssignTo:=ucrSaveModelMultipleComparisons.GetText(),
-            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
-            strRObjectFormatToAssignTo:=RObjectFormat.Text,
-            strRDataFrameNameToAddObjectTo:=ucrSelectorModelMultipleComparisons.strCurrentDataFrame,
-            strObjectName:=ucrSaveModelMultipleComparisons.GetText())
+        strRObjectToAssignTo:=ucrSaveModelMultipleComparisons.GetText(),
+        strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+        strRObjectFormatToAssignTo:=RObjectFormat.Text,
+        strRDataFrameNameToAddObjectTo:=ucrSelectorModelMultipleComparisons.strCurrentDataFrame,
+        strObjectName:=ucrSaveModelMultipleComparisons.GetText())
+        Else
+            clsMultipleComparisonsFunction.RemoveAssignTo()
         End If
     End Sub
+
+    Private Sub ucrReceiverLabelVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabelVariable.SelectionChanged
+        TestOkEnabled()
+    End Sub
+
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles _
         ucrReceiverLabelVariable.ControlContentsChanged,
@@ -201,6 +227,7 @@ Public Class dlgModelMultipleComparisons
         ucrChkAlpha.ControlContentsChanged,
         ucrInputComboBoxAlpha.ControlContentsChanged,
         ucrChkConfidenceInterval.ControlContentsChanged,
+        ucrChkDisplayLetters.ControlContentsChanged,
         ucrInputComboBoxConfidenceInterval.ControlContentsChanged,
         ucrChkDescending.ControlContentsChanged,
         ucrInputComboBoxDescending.ControlContentsChanged,
