@@ -69,7 +69,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
-        Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
@@ -91,6 +90,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplayVars = New System.Windows.Forms.GroupBox()
         Me.ucrChkPercentagesVars = New instat.ucrCheck()
         Me.ucrPnlDisplayVars = New instat.UcrPanel()
+        Me.ucrSaveTable = New instat.ucrSave()
         Me.grpSummaries.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
         Me.grpDisplayVars.SuspendLayout()
@@ -321,7 +321,7 @@ Partial Class dlgDescribeTwoVariable
         'lblMarginName
         '
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(15, 320)
+        Me.lblMarginName.Location = New System.Drawing.Point(15, 326)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(93, 15)
         Me.lblMarginName.TabIndex = 19
@@ -343,7 +343,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkDisplayAsPercentage.AutoSize = True
         Me.ucrChkDisplayAsPercentage.Checked = False
         Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 21)
-        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
         Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(171, 34)
         Me.ucrChkDisplayAsPercentage.TabIndex = 54
@@ -352,7 +352,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.rdoOCol.AutoSize = True
         Me.rdoOCol.Location = New System.Drawing.Point(288, 238)
-        Me.rdoOCol.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoOCol.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoOCol.Name = "rdoOCol"
         Me.rdoOCol.Size = New System.Drawing.Size(61, 17)
         Me.rdoOCol.TabIndex = 40
@@ -364,7 +364,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.rdoOCell.AutoSize = True
         Me.rdoOCell.Location = New System.Drawing.Point(410, 237)
-        Me.rdoOCell.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoOCell.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoOCell.Name = "rdoOCell"
         Me.rdoOCell.Size = New System.Drawing.Size(56, 17)
         Me.rdoOCell.TabIndex = 41
@@ -376,7 +376,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.rdoORow.AutoSize = True
         Me.rdoORow.Location = New System.Drawing.Point(351, 238)
-        Me.rdoORow.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoORow.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoORow.Name = "rdoORow"
         Me.rdoORow.Size = New System.Drawing.Size(54, 17)
         Me.rdoORow.TabIndex = 42
@@ -401,7 +401,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrpnlPercent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrpnlPercent.Location = New System.Drawing.Point(283, 235)
-        Me.ucrpnlPercent.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrpnlPercent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrpnlPercent.Name = "ucrpnlPercent"
         Me.ucrpnlPercent.Size = New System.Drawing.Size(187, 25)
         Me.ucrpnlPercent.TabIndex = 43
@@ -445,23 +445,14 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVars.TabIndex = 6
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         '
-        'ucrSaveTable
-        '
-        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(15, 451)
-        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(306, 24)
-        Me.ucrSaveTable.TabIndex = 24
-        '
         'ucrInputMarginName
         '
         Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(114, 318)
-        Me.ucrInputMarginName.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(114, 324)
+        Me.ucrInputMarginName.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         Me.ucrInputMarginName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMarginName.TabIndex = 22
@@ -469,7 +460,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrReorderSummary
         '
         Me.ucrReorderSummary.Location = New System.Drawing.Point(275, 273)
-        Me.ucrReorderSummary.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrReorderSummary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrReorderSummary.Name = "ucrReorderSummary"
         Me.ucrReorderSummary.Size = New System.Drawing.Size(194, 156)
         Me.ucrReorderSummary.TabIndex = 16
@@ -481,7 +472,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(15, 489)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 25
@@ -515,7 +506,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrPnlDescribe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlDescribe.Location = New System.Drawing.Point(92, 3)
-        Me.ucrPnlDescribe.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlDescribe.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
         Me.ucrPnlDescribe.Size = New System.Drawing.Size(317, 34)
         Me.ucrPnlDescribe.TabIndex = 0
@@ -538,7 +529,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkDisplayMargins.AutoSize = True
         Me.ucrChkDisplayMargins.Checked = False
         Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(17, 296)
-        Me.ucrChkDisplayMargins.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkDisplayMargins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
         Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkDisplayMargins.TabIndex = 18
@@ -548,7 +539,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkLevSig.AutoSize = True
         Me.ucrChkLevSig.Checked = False
         Me.ucrChkLevSig.Location = New System.Drawing.Point(397, 186)
-        Me.ucrChkLevSig.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkLevSig.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkLevSig.Name = "ucrChkLevSig"
         Me.ucrChkLevSig.Size = New System.Drawing.Size(86, 23)
         Me.ucrChkLevSig.TabIndex = 38
@@ -558,7 +549,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkTotal.AutoSize = True
         Me.ucrChkTotal.Checked = False
         Me.ucrChkTotal.Location = New System.Drawing.Point(310, 186)
-        Me.ucrChkTotal.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkTotal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkTotal.Name = "ucrChkTotal"
         Me.ucrChkTotal.Size = New System.Drawing.Size(97, 23)
         Me.ucrChkTotal.TabIndex = 44
@@ -568,7 +559,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkMeans.AutoSize = True
         Me.ucrChkMeans.Checked = False
         Me.ucrChkMeans.Location = New System.Drawing.Point(310, 208)
-        Me.ucrChkMeans.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkMeans.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkMeans.Name = "ucrChkMeans"
         Me.ucrChkMeans.Size = New System.Drawing.Size(97, 23)
         Me.ucrChkMeans.TabIndex = 37
@@ -578,7 +569,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkCorrelations.AutoSize = True
         Me.ucrChkCorrelations.Checked = False
         Me.ucrChkCorrelations.Location = New System.Drawing.Point(310, 254)
-        Me.ucrChkCorrelations.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkCorrelations.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkCorrelations.Name = "ucrChkCorrelations"
         Me.ucrChkCorrelations.Size = New System.Drawing.Size(149, 23)
         Me.ucrChkCorrelations.TabIndex = 35
@@ -588,7 +579,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkSwapXYVar.AutoSize = True
         Me.ucrChkSwapXYVar.Checked = False
         Me.ucrChkSwapXYVar.Location = New System.Drawing.Point(310, 231)
-        Me.ucrChkSwapXYVar.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkSwapXYVar.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSwapXYVar.Name = "ucrChkSwapXYVar"
         Me.ucrChkSwapXYVar.Size = New System.Drawing.Size(157, 23)
         Me.ucrChkSwapXYVar.TabIndex = 36
@@ -598,7 +589,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(310, 277)
-        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkOmitMissing.TabIndex = 0
@@ -608,7 +599,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkInteraction.AutoSize = True
         Me.ucrChkInteraction.Checked = False
         Me.ucrChkInteraction.Location = New System.Drawing.Point(17, 293)
-        Me.ucrChkInteraction.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkInteraction.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkInteraction.Name = "ucrChkInteraction"
         Me.ucrChkInteraction.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkInteraction.TabIndex = 45
@@ -617,7 +608,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.rdoRow.AutoSize = True
         Me.rdoRow.Location = New System.Drawing.Point(6, 54)
-        Me.rdoRow.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoRow.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.Size = New System.Drawing.Size(61, 17)
         Me.rdoRow.TabIndex = 46
@@ -629,7 +620,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.rdoTotal.AutoSize = True
         Me.rdoTotal.Location = New System.Drawing.Point(149, 54)
-        Me.rdoTotal.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoTotal.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoTotal.Name = "rdoTotal"
         Me.rdoTotal.Size = New System.Drawing.Size(63, 17)
         Me.rdoTotal.TabIndex = 47
@@ -641,7 +632,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.rdoColumn.AutoSize = True
         Me.rdoColumn.Location = New System.Drawing.Point(69, 54)
-        Me.rdoColumn.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoColumn.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rdoColumn.Name = "rdoColumn"
         Me.rdoColumn.Size = New System.Drawing.Size(74, 17)
         Me.rdoColumn.TabIndex = 48
@@ -657,9 +648,9 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplayVars.Controls.Add(Me.rdoTotal)
         Me.grpDisplayVars.Controls.Add(Me.ucrPnlDisplayVars)
         Me.grpDisplayVars.Location = New System.Drawing.Point(252, 250)
-        Me.grpDisplayVars.Margin = New System.Windows.Forms.Padding(2)
+        Me.grpDisplayVars.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grpDisplayVars.Name = "grpDisplayVars"
-        Me.grpDisplayVars.Padding = New System.Windows.Forms.Padding(2)
+        Me.grpDisplayVars.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grpDisplayVars.Size = New System.Drawing.Size(221, 90)
         Me.grpDisplayVars.TabIndex = 49
         Me.grpDisplayVars.TabStop = False
@@ -670,19 +661,28 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkPercentagesVars.AutoSize = True
         Me.ucrChkPercentagesVars.Checked = False
         Me.ucrChkPercentagesVars.Location = New System.Drawing.Point(6, 19)
-        Me.ucrChkPercentagesVars.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkPercentagesVars.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkPercentagesVars.Name = "ucrChkPercentagesVars"
-        Me.ucrChkPercentagesVars.Size = New System.Drawing.Size(201, 23)
+        Me.ucrChkPercentagesVars.Size = New System.Drawing.Size(201, 34)
         Me.ucrChkPercentagesVars.TabIndex = 19
         '
         'ucrPnlDisplayVars
         '
         Me.ucrPnlDisplayVars.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlDisplayVars.Location = New System.Drawing.Point(6, 45)
-        Me.ucrPnlDisplayVars.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlDisplayVars.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlDisplayVars.Name = "ucrPnlDisplayVars"
         Me.ucrPnlDisplayVars.Size = New System.Drawing.Size(201, 34)
         Me.ucrPnlDisplayVars.TabIndex = 50
+        '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTable.Location = New System.Drawing.Point(17, 441)
+        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(279, 24)
+        Me.ucrSaveTable.TabIndex = 50
         '
         'dlgDescribeTwoVariable
         '
@@ -690,6 +690,7 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(482, 550)
+        Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.grpDisplayVars)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
@@ -704,7 +705,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrReceiverSecondTwoVariableFactor)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
-        Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.ucrInputMarginName)
         Me.Controls.Add(Me.lblMarginName)
@@ -782,7 +782,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents grpDisplay As GroupBox
     Friend WithEvents ucrChkDisplayAsPercentage As ucrCheck
-    Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents ucrReceiverFirstVars As ucrReceiverMultiple
     Friend WithEvents ucrChkCorrelations As ucrCheck
     Friend WithEvents ucrChkSwapXYVar As ucrCheck
@@ -800,4 +799,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents rdoTotal As RadioButton
     Friend WithEvents ucrChkPercentagesVars As ucrCheck
     Friend WithEvents ucrPnlDisplayVars As UcrPanel
+    Friend WithEvents ucrSaveTable As ucrSave
 End Class
