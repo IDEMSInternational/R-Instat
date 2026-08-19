@@ -132,7 +132,6 @@ Public Class dlgCompareColumns
         clsLessorEqualToOperator = New ROperator
         clsDummyOperator = New ROperator
 
-        ucrBase.clsRsyntax.ClearCodes()
         rdoByRow.Checked = True
 
         ucrSelectorCompareColumns.Reset()
@@ -159,7 +158,6 @@ Public Class dlgCompareColumns
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.iCallType = 2
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -179,11 +177,11 @@ Public Class dlgCompareColumns
         ucrChkIntersection.SetRCode(clsCompareColumnsFunction, bReset)
         ucrChkUnion.SetRCode(clsCompareColumnsFunction, bReset)
         ucrChkAllValues.SetRCode(clsCompareColumnsFunction, bReset)
-        ucrInputTolerance.SetRCode(clsLessorEqualToOperator, bReset)
 
         ucrSaveLogical.AddAdditionalRCode(clsLessorEqualToOperator, iAdditionalPairNo:=1)
         ucrSaveLogical.AddAdditionalRCode(clsYinXOperator, iAdditionalPairNo:=2)
         ucrSaveLogical.SetRCode(clsIsEqualToOperator, bReset)
+        ucrInputTolerance.SetRCode(clsLessorEqualToOperator, bReset)
     End Sub
 
 
@@ -213,6 +211,7 @@ Public Class dlgCompareColumns
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        SetBaseSyntax()
         TestOkEnabled()
     End Sub
 
@@ -225,46 +224,89 @@ Public Class dlgCompareColumns
         End Select
     End Sub
 
+
+    Private Sub SetBaseSyntax()
+        ucrBase.clsRsyntax.ClearCodes()
+
+
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
+
+        If rdoByValue.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumnsFunction)
+
+            ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
+
+        ElseIf rdoByRow.Checked Then
+
+
+            If ({"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+            {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+           ({"Date", "date"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+            {"Date", "date"}.Contains(ucrReceiverSecond.strCurrDataType)) Then
+
+                ucrBase.clsRsyntax.SetBaseROperator(clsLessorEqualToOperator)
+
+            ElseIf ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+               {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+               (ucrReceiverFirst.strCurrDataType = "logical" AndAlso
+                ucrReceiverSecond.strCurrDataType = "logical") Then
+
+                ucrBase.clsRsyntax.SetBaseROperator(clsIsEqualToOperator)
+
+            End If
+
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
+
+        End If
+
+    End Sub
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        ' Clear receiver-generated code when changing mode
+        'ucrReceiverFirst.Clear()
+        'ucrReceiverSecond.Clear()
+        'ucrBase.clsRsyntax.ClearCodes()
+
         If rdoByValue.Checked Then
             ucrInputTolerance.Visible = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumnsFunction)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.07)
         ElseIf rdoByRow.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.68)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.62)
             ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.8)
         End If
+        SetBaseSyntax()
         CheckDatatype()
     End Sub
 
     Private Sub CheckDatatype()
+
+
+        ' Remove previous datatype-specific parameters
+        clsLessorEqualToOperator.RemoveParameterByName("first")
+        clsSummaryFunction.RemoveParameterByName("object")
+
+        clsIsEqualToOperator.RemoveParameterByName("first")
+        clsIsEqualToOperator.RemoveParameterByName("second")
+
         If ucrReceiverSecond.IsEmpty OrElse ucrReceiverFirst.IsEmpty Then
             TestOkEnabled()
             Exit Sub
+
         Else
             If {"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
-                    clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
-                    clsDummyOperator = clsLessorEqualToOperator
                 End If
             ElseIf {"Date", "date"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"Date", "date"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
-                    clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
-                    clsDummyOperator = clsLessorEqualToOperator
                 End If
             ElseIf {"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
@@ -272,7 +314,6 @@ Public Class dlgCompareColumns
                     clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsFirstAsCharacterFunction, iPosition:=0)
                     clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsSecondAsCharacterFunction, iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsIsEqualToOperator, iPosition:=1)
-                    clsDummyOperator = clsIsEqualToOperator
                 End If
             ElseIf ucrReceiverFirst.strCurrDataType = "logical" AndAlso ucrReceiverSecond.strCurrDataType = "logical" Then
                 If rdoByRow.Checked Then
@@ -280,7 +321,6 @@ Public Class dlgCompareColumns
                     clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsFirstAsCharacterFunction, iPosition:=0)
                     clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsSecondAsCharacterFunction, iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsIsEqualToOperator, iPosition:=1)
-                    clsDummyOperator = clsIsEqualToOperator
                 End If
             Else
                 MsgBoxTranslate("Receivers must have the same data type, OK will not be enabled")
