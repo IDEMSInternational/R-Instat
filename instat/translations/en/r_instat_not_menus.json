@@ -6952,5 +6952,7 @@
   "Parent 1:": "Parent 1:",
   "Parent 2:": "Parent 2:",
   "Tester:": "Tester:",
-  "Checks": "Checks"
+  "Checks": "Checks",
+  "Select the check levels:": "Select the check levels:",
+  "Select Checks": "Select Checks"
 }

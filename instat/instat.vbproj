@@ -481,6 +481,12 @@
     <Compile Include="Climsoft\sdgClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgChecksFromFactor.Designer.vb">
+      <DependentUpon>sdgChecksFromFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgChecksFromFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </Compile>
