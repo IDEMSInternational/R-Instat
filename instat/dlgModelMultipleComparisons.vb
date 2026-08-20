@@ -125,6 +125,12 @@ Public Class dlgModelMultipleComparisons
 
         ucrSelectorModelMultipleComparisons.Reset()
         ucrSaveModelMultipleComparisons.Reset()
+        ucrSaveModelMultipleComparisons.ucrChkSave.Checked = False
+
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignModelOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleComparisonsFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -146,10 +152,6 @@ Public Class dlgModelMultipleComparisons
             ucrChkDescending.SetRCode(clsMultipleComparisonsFunction, bReset)
             ucrChkAdjustment.SetRCode(clsMultipleComparisonsFunction, bReset)
 
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignModelOperator)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleComparisonsFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRmFunction)
-
         End If
     End Sub
 
@@ -164,11 +166,6 @@ Public Class dlgModelMultipleComparisons
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-
-        If Not String.IsNullOrEmpty(ucrSelectorModelMultipleComparisons.strCurrentDataFrame) Then
-            clsGetModelFunction.AddParameter("data_name", Chr(34) & ucrSelectorModelMultipleComparisons.strCurrentDataFrame & Chr(34))
-        End If
-
         TestOkEnabled()
     End Sub
 
