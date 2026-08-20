@@ -57,6 +57,10 @@ Public Class sdgChecksFromFactor
         End If
     End Sub
 
+
+    '' Re-ticks grid rows to match the "checks" parameter's current value after the grid is
+    '' repopulated from R (e.g. when the data frame or treatment factor changes), so
+    '' previously selected check varieties stay selected if they're still present.
     Private Sub RestoreChecks()
         Dim pChecks As RParameter = ucrChecksLevels.GetParameter()
         If pChecks Is Nothing OrElse String.IsNullOrEmpty(pChecks.strArgumentValue) OrElse pChecks.strArgumentValue = "none" Then Return
@@ -78,6 +82,9 @@ Public Class sdgChecksFromFactor
         Next
     End Sub
 
+
+    ' Fires when the grid's selection changes. If nothing is selected, removes the "checks"
+    ' parameter entirely rather than leaving an empty one on the function.
     Private Sub ucrChecksLevels_ControlValueChanged(ucrChangedControl As ucrCore)
         If Not ucrChecksLevels.IsAnyGridRowSelected() Then
             clsAugmentedFunction.RemoveParameterByName("checks")

@@ -33,7 +33,6 @@ Public Class dlgExperimentsOneButton
     Private clsBkDiallelFunction As New RFunction
     Private clsBkLxtFunction As New RFunction
     Private clsBkAugmentedFunction As New RFunction
-    Private clsChecksVectorFunction As New RFunction
 
     Private clsBkPlotFunction As New RFunction
     Private clsCheckGraphFunction As New RFunction
@@ -153,7 +152,6 @@ Public Class dlgExperimentsOneButton
         clsBkDiallelFunction = New RFunction
         clsBkLxtFunction = New RFunction
         clsBkAugmentedFunction = New RFunction
-        clsChecksVectorFunction = New RFunction
         clsBkPlotFunction = New RFunction
         clsCheckGraphFunction = New RFunction
         clsAddPlotObjectFunction = New RFunction
@@ -164,6 +162,8 @@ Public Class dlgExperimentsOneButton
         ucrSave.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
+        ucrSave.ucrChkSave.Checked = False
+        ucrSaveGraph.ucrChkSave.Checked = False
 
         clsDummyFunction.AddParameter("top_option", "General", iPosition:=0)
         clsDummyFunction.AddParameter("plot", "True", iPosition:=1)
@@ -190,8 +190,6 @@ Public Class dlgExperimentsOneButton
         clsBkAugmentedFunction.SetPackageName("BKBreed")
         clsBkAugmentedFunction.SetRCommand("bk_augmented")
         clsBkAugmentedFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
-
-        clsChecksVectorFunction.SetRCommand("c")
 
         clsBkPlotFunction.SetPackageName("BKBreed")
         clsBkPlotFunction.SetRCommand("bk_plot")
@@ -223,49 +221,49 @@ Public Class dlgExperimentsOneButton
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
 
-        ucrAlpha.SetRCode(clsBkRbdFunction, bReset)
         ucrAlpha.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("alpha", 5), iAdditionalPairNo:=1)
         ucrAlpha.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("alpha", 5), iAdditionalPairNo:=2)
         ucrAlpha.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("alpha", 5), iAdditionalPairNo:=3)
         ucrAlpha.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("alpha", 6), iAdditionalPairNo:=4)
+        ucrAlpha.SetRCode(clsBkRbdFunction, bReset)
 
-        ucrReceiverResponse.SetRCode(clsBkRbdFunction, bReset)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("trait", 1), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("trait", 1), iAdditionalPairNo:=2)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("trait", 1), iAdditionalPairNo:=3)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("trait", 1), iAdditionalPairNo:=4)
+        ucrReceiverResponse.SetRCode(clsBkRbdFunction, bReset)
 
-        UcrReceiverTreat.SetRCode(clsBkRbdFunction, bReset)
         UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("gen", 2), iAdditionalPairNo:=1)
+        UcrReceiverTreat.SetRCode(clsBkRbdFunction, bReset)
 
-        ucrReceiverFactorA.SetRCode(clsBkFrbdFunction, bReset)
         ucrReceiverFactorA.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("parent1", 2), iAdditionalPairNo:=1)
         ucrReceiverFactorA.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("line", 2), iAdditionalPairNo:=2)
+        ucrReceiverFactorA.SetRCode(clsBkFrbdFunction, bReset)
 
-        ucrReceiverFactorB.SetRCode(clsBkFrbdFunction, bReset)
         ucrReceiverFactorB.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("parent2", 3), iAdditionalPairNo:=1)
         ucrReceiverFactorB.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("tester", 3), iAdditionalPairNo:=2)
+        ucrReceiverFactorB.SetRCode(clsBkFrbdFunction, bReset)
 
-        ucrRep.SetRCode(clsBkRbdFunction, bReset)
         ucrRep.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("rep", 4), iAdditionalPairNo:=1)
         ucrRep.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("rep", 4), iAdditionalPairNo:=2)
         ucrRep.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("rep", 4), iAdditionalPairNo:=3)
         ucrRep.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("rep", 4), iAdditionalPairNo:=4)
+        ucrRep.SetRCode(clsBkRbdFunction, bReset)
 
-        ucrSave.SetRCode(clsBkRbdFunction, bReset)
         ucrSave.AddAdditionalRCode(clsBkFrbdFunction, iAdditionalPairNo:=1)
         ucrSave.AddAdditionalRCode(clsBkDiallelFunction, iAdditionalPairNo:=2)
         ucrSave.AddAdditionalRCode(clsBkLxtFunction, iAdditionalPairNo:=3)
         ucrSave.AddAdditionalRCode(clsBkAugmentedFunction, iAdditionalPairNo:=4)
+        ucrSave.SetRCode(clsBkRbdFunction, bReset)
 
         ucrBlock.SetRCode(clsBkAugmentedFunction, bReset)
 
         If bReset Then
-            UcrCheckAlphaExperiments.SetRCode(clsBkRbdFunction, bReset)
             UcrCheckAlphaExperiments.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("alpha", 5), iAdditionalPairNo:=1)
             UcrCheckAlphaExperiments.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("alpha", 5), iAdditionalPairNo:=2)
             UcrCheckAlphaExperiments.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("alpha", 5), iAdditionalPairNo:=3)
             UcrCheckAlphaExperiments.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("alpha", 6), iAdditionalPairNo:=4)
+            UcrCheckAlphaExperiments.SetRCode(clsBkRbdFunction, bReset)
 
             ucrPnlExperimentsOneButtonOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkPlot.SetRCode(clsDummyFunction, bReset)
@@ -276,14 +274,31 @@ Public Class dlgExperimentsOneButton
         bRCodeSet = True
     End Sub
 
+    ' At least 2 check varieties must be selected before OK/To Script is enabled.
+    ' If none have been selected yet, the "checks" parameter either doesn't exist on the
+    ' function or its value is empty, so there are 0 checks. Otherwise, sdgChecksFromFactor writes "checks" as a plain quoted name string (e.g. c("A", "B"))
+    Private Function GetCheckedVarietyCount() As Integer
+        Dim clsChecksParameter As RParameter = clsBkAugmentedFunction.GetParameter("checks")
+        If clsChecksParameter Is Nothing OrElse String.IsNullOrEmpty(clsChecksParameter.strArgumentValue) Then
+            Return 0
+        End If
+        Dim iQuoteCount As Integer = clsChecksParameter.strArgumentValue.Count(Function(c) c = Chr(34))
+        Return iQuoteCount \ 2
+    End Function
+
     Private Sub btnChecks_Click(sender As Object, e As EventArgs) Handles btnChecks.Click
         sdgChecksSubdialog.SetRFunction(clsBkAugmentedFunction, UcrReceiverTreat, bResetChecksSubdialog)
-        bResetChecksSubdialog = True
         sdgChecksSubdialog.ShowDialog()
+        bResetChecksSubdialog = False
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
         If Not ucrSave.IsComplete Then
+            UcrBaseExperimentsOneButton.OKEnabled(False)
+            Return
+        End If
+        If rdoAugmented.Checked AndAlso GetCheckedVarietyCount() < 2 Then
             UcrBaseExperimentsOneButton.OKEnabled(False)
             Return
         End If
@@ -296,6 +311,12 @@ Public Class dlgExperimentsOneButton
         TestOKEnabled()
     End Sub
 
+
+    ' Fires when the selected design changes. Shows/hides the controls relevant to the new
+    ' design (Factor A/B vs Treatment, Block/Checks for Augmented only), repositions the Rep
+    ' row when Augmented needs room for the Block row above it, and relabels Factor A/B per
+    ' design. If the tree is already bound, swaps the dialog's base R function and refreshes
+    ' the plot code to match.
     Private Sub DesignRadio_CheckedChanged(sender As Object, e As EventArgs) Handles rdorbd.CheckedChanged, rdoFactorial.CheckedChanged,
         rdoDiallel.CheckedChanged, rdoLxt.CheckedChanged, rdoAugmented.CheckedChanged
 
@@ -349,13 +370,6 @@ Public Class dlgExperimentsOneButton
         TestOKEnabled()
     End Sub
 
-    Private Sub TopOption_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecial.CheckedChanged
-        If Not rdorbd.Checked AndAlso Not rdoFactorial.Checked AndAlso Not rdoDiallel.Checked AndAlso
-        Not rdoLxt.Checked AndAlso Not rdoAugmented.Checked Then
-            rdorbd.Checked = True
-        End If
-    End Sub
-
     Private Function GetActiveDesignFunction() As RFunction
         If rdorbd.Checked Then
             Return clsBkRbdFunction
@@ -405,12 +419,16 @@ Public Class dlgExperimentsOneButton
         End If
     End Sub
 
+    'Pushes the current data frame's name into the plot-pipeline functions that need to reference it ($add_object / $get_object_data).
     Private Sub UpdatePlotDataFrameName()
         Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         clsAddPlotObjectFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsGetPlotObjectDataFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
     End Sub
 
+    'Rebuilds the after-code plot pipeline bk_plot -> check_graph -> $add_object -> $get_object_data
+    'strips the old pipeline first so toggling "Generate Plot" off removes it cleanly
+    'only re-adds it If the checkbox Is checked And both a model name And graph name can be resolved.
     Private Sub UpdatePlotCode()
         UcrBaseExperimentsOneButton.clsRsyntax.RemoveFromAfterCodes(clsGetPlotObjectDataFunction)
         UcrBaseExperimentsOneButton.clsRsyntax.RemoveFromAfterCodes(clsAddPlotObjectFunction)
