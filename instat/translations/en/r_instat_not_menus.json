@@ -6955,4 +6955,9 @@
   "Checks": "Checks",
   "Select the check levels:": "Select the check levels:",
   "Select Checks": "Select Checks"
+  "Label Variable:": "Label Variable:",
+  "By (Optional):": "By (Optional):",
+  "Adjustment": "Adjustment",
+  "Store mct:": "Store mct:",
+  "Display Letters": "Display Letters"
 }
