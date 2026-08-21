@@ -5317,7 +5317,6 @@ Partial Class frmMain
         '
         'mnuMultipleComparisons
         '
-        Me.mnuMultipleComparisons.Enabled = False
         Me.mnuMultipleComparisons.Name = "mnuMultipleComparisons"
         Me.mnuMultipleComparisons.Size = New System.Drawing.Size(200, 22)
         Me.mnuMultipleComparisons.Text = "Multiple Comparisons..."
