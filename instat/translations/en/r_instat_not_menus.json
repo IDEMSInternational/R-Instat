@@ -6870,7 +6870,6 @@
   "Select Filter": "Select Filter",
   "Save Definitions Object:": "Save Definitions Object:",
   "PICSA Trend Graph": "PICSA Trend Graph",
-  "Save Definitions Object:": "Save Definitions Object:",
   "Separated by:": "Separated by:",
   "Trend Graph": "Trend Graph",
   "File Location:": "File Location:",
@@ -6924,6 +6923,11 @@
   "Multiple Comparisons": "Multiple Comparisons",
   "Variable Names": "Variable Names",
   "Limit Length": "Limit Length",
+  "rep_times": "rep_times",
+  "rep_each": "rep_each",
+  "rnormal": "rnormal",
+  "rfactor": "rfactor",
+  "[ : ]": "[ : ]",
   "Special": "Special",
   "Factorial": "Factorial",
   "rbd": "rbd",
@@ -6933,5 +6937,10 @@
   "Factor B:": "Factor B:",
   "Design:": "Design:",
   "Treat :": "Treat :",
-  "Generate Plot": "Generate Plot"
+  "Generate Plot": "Generate Plot",
+  "Label Variable:": "Label Variable:",
+  "By (Optional):": "By (Optional):",
+  "Adjustment": "Adjustment",
+  "Store mct:": "Store mct:",
+  "Display Letters": "Display Letters"
 }
