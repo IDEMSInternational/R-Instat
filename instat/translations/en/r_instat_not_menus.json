@@ -6923,6 +6923,11 @@
   "Multiple Comparisons": "Multiple Comparisons",
   "Variable Names": "Variable Names",
   "Limit Length": "Limit Length",
+  "rep_times": "rep_times",
+  "rep_each": "rep_each",
+  "rnormal": "rnormal",
+  "rfactor": "rfactor",
+  "[ : ]": "[ : ]",
   "Special": "Special",
   "Factorial": "Factorial",
   "rbd": "rbd",
@@ -6936,5 +6941,10 @@
   "JSON Columns": "JSON Columns",
   "JSON": "JSON",
   "Check Unique Keys": "Check Unique Keys",
-  "New ID Name:": "New ID Name:"
+  "New ID Name:": "New ID Name:",
+  "Label Variable:": "Label Variable:",
+  "By (Optional):": "By (Optional):",
+  "Adjustment": "Adjustment",
+  "Store mct:": "Store mct:",
+  "Display Letters": "Display Letters"
 }

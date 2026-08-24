@@ -45,7 +45,10 @@ Partial Class dlgEnter
         Me.cmdExponential = New System.Windows.Forms.Button()
         Me.cmdConcantenateFunction = New System.Windows.Forms.Button()
         Me.cmdSequenceFunction = New System.Windows.Forms.Button()
-        Me.cmdRepelicationFunction = New System.Windows.Forms.Button()
+        Me.cmdRepTimes = New System.Windows.Forms.Button()
+        Me.cmdRepEach = New System.Windows.Forms.Button()
+        Me.cmdRnormal = New System.Windows.Forms.Button()
+        Me.cmdRfactor = New System.Windows.Forms.Button()
         Me.cmdLogical = New System.Windows.Forms.Button()
         Me.cmdPi = New System.Windows.Forms.Button()
         Me.cmdLetters2 = New System.Windows.Forms.Button()
@@ -96,7 +99,7 @@ Partial Class dlgEnter
         '
         Me.chkShowEnterArguments.AutoSize = True
         Me.chkShowEnterArguments.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkShowEnterArguments.Location = New System.Drawing.Point(307, 18)
+        Me.chkShowEnterArguments.Location = New System.Drawing.Point(435, 19)
         Me.chkShowEnterArguments.Name = "chkShowEnterArguments"
         Me.chkShowEnterArguments.Size = New System.Drawing.Size(109, 17)
         Me.chkShowEnterArguments.TabIndex = 155
@@ -141,7 +144,7 @@ Partial Class dlgEnter
         'cmdConcantenateFunction
         '
         Me.cmdConcantenateFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdConcantenateFunction.Location = New System.Drawing.Point(4, 101)
+        Me.cmdConcantenateFunction.Location = New System.Drawing.Point(52, 72)
         Me.cmdConcantenateFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdConcantenateFunction.Name = "cmdConcantenateFunction"
         Me.cmdConcantenateFunction.Size = New System.Drawing.Size(49, 30)
@@ -162,17 +165,53 @@ Partial Class dlgEnter
         Me.cmdSequenceFunction.Text = "seq"
         Me.cmdSequenceFunction.UseVisualStyleBackColor = True
         '
-        'cmdRepelicationFunction
+        'cmdRepTimes
         '
-        Me.cmdRepelicationFunction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRepelicationFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRepelicationFunction.Location = New System.Drawing.Point(4, 43)
-        Me.cmdRepelicationFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdRepelicationFunction.Name = "cmdRepelicationFunction"
-        Me.cmdRepelicationFunction.Size = New System.Drawing.Size(49, 30)
-        Me.cmdRepelicationFunction.TabIndex = 148
-        Me.cmdRepelicationFunction.Text = "rep"
-        Me.cmdRepelicationFunction.UseVisualStyleBackColor = True
+        Me.cmdRepTimes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRepTimes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRepTimes.Location = New System.Drawing.Point(4, 14)
+        Me.cmdRepTimes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRepTimes.Name = "cmdRepTimes"
+        Me.cmdRepTimes.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRepTimes.TabIndex = 148
+        Me.cmdRepTimes.Text = "rep_times"
+        Me.cmdRepTimes.UseVisualStyleBackColor = True
+        '
+        'cmdRepEach
+        '
+        Me.cmdRepEach.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRepEach.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRepEach.Location = New System.Drawing.Point(4, 43)
+        Me.cmdRepEach.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRepEach.Name = "cmdRepEach"
+        Me.cmdRepEach.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRepEach.TabIndex = 219
+        Me.cmdRepEach.Text = "rep_each"
+        Me.cmdRepEach.UseVisualStyleBackColor = True
+        '
+        'cmdRnormal
+        '
+        Me.cmdRnormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRnormal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRnormal.Location = New System.Drawing.Point(4, 130)
+        Me.cmdRnormal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRnormal.Name = "cmdRnormal"
+        Me.cmdRnormal.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRnormal.TabIndex = 220
+        Me.cmdRnormal.Text = "rnormal"
+        Me.cmdRnormal.UseVisualStyleBackColor = True
+        '
+        'cmdRfactor
+        '
+        Me.cmdRfactor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRfactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRfactor.Location = New System.Drawing.Point(52, 130)
+        Me.cmdRfactor.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRfactor.Name = "cmdRfactor"
+        Me.cmdRfactor.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRfactor.TabIndex = 221
+        Me.cmdRfactor.Text = "rfactor"
+        Me.cmdRfactor.UseVisualStyleBackColor = True
         '
         'cmdLogical
         '
@@ -188,7 +227,7 @@ Partial Class dlgEnter
         'cmdPi
         '
         Me.cmdPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPi.Location = New System.Drawing.Point(52, 72)
+        Me.cmdPi.Location = New System.Drawing.Point(4, 101)
         Me.cmdPi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPi.Name = "cmdPi"
         Me.cmdPi.Size = New System.Drawing.Size(49, 30)
@@ -215,23 +254,27 @@ Partial Class dlgEnter
         Me.cmdMonths.Name = "cmdMonths"
         Me.cmdMonths.Size = New System.Drawing.Size(49, 30)
         Me.cmdMonths.TabIndex = 151
-        Me.cmdMonths.Text = "months "
+        Me.cmdMonths.Text = "months"
         Me.cmdMonths.UseVisualStyleBackColor = True
         '
         'cmdColon
         '
         Me.cmdColon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdColon.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdColon.Location = New System.Drawing.Point(4, 14)
+        Me.cmdColon.Location = New System.Drawing.Point(100, 130)
         Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
         Me.cmdColon.Size = New System.Drawing.Size(49, 30)
         Me.cmdColon.TabIndex = 151
-        Me.cmdColon.Text = "[:]"
+        Me.cmdColon.Text = "[ : ]"
         Me.cmdColon.UseVisualStyleBackColor = True
         '
         'grpEnterKeyboard2
         '
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRfactor)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRnormal)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepEach)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepTimes)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdText)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdFactor)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
@@ -239,7 +282,6 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLetters2)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdPi)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLogical)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepelicationFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequenceFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdConcantenateFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdExponential)
@@ -248,7 +290,7 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpEnterKeyboard2.Size = New System.Drawing.Size(156, 134)
+        Me.grpEnterKeyboard2.Size = New System.Drawing.Size(156, 168)
         Me.grpEnterKeyboard2.TabIndex = 159
         Me.grpEnterKeyboard2.TabStop = False
         '
@@ -273,13 +315,13 @@ Partial Class dlgEnter
         Me.cmdFactor.Name = "cmdFactor"
         Me.cmdFactor.Size = New System.Drawing.Size(49, 30)
         Me.cmdFactor.TabIndex = 153
-        Me.cmdFactor.Text = "factor "
+        Me.cmdFactor.Text = "factor"
         Me.cmdFactor.UseVisualStyleBackColor = True
         '
         'btnExample
         '
         Me.btnExample.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnExample.Location = New System.Drawing.Point(443, 16)
+        Me.btnExample.Location = New System.Drawing.Point(562, 15)
         Me.btnExample.Margin = New System.Windows.Forms.Padding(2)
         Me.btnExample.Name = "btnExample"
         Me.btnExample.Size = New System.Drawing.Size(64, 22)
@@ -548,6 +590,7 @@ Partial Class dlgEnter
         'lblEnterLength
         '
         Me.lblEnterLength.AutoSize = True
+        Me.lblEnterLength.Enabled = False
         Me.lblEnterLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblEnterLength.Location = New System.Drawing.Point(426, 237)
         Me.lblEnterLength.Name = "lblEnterLength"
@@ -558,11 +601,14 @@ Partial Class dlgEnter
         'lblEnterLengthValue
         '
         Me.lblEnterLengthValue.AutoSize = True
-        Me.lblEnterLengthValue.BackColor = System.Drawing.Color.White
+        Me.lblEnterLengthValue.BackColor = System.Drawing.SystemColors.Control
+        Me.lblEnterLengthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblEnterLengthValue.Enabled = False
         Me.lblEnterLengthValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblEnterLengthValue.Location = New System.Drawing.Point(492, 237)
+        Me.lblEnterLengthValue.MinimumSize = New System.Drawing.Size(40, 18)
         Me.lblEnterLengthValue.Name = "lblEnterLengthValue"
-        Me.lblEnterLengthValue.Size = New System.Drawing.Size(10, 13)
+        Me.lblEnterLengthValue.Size = New System.Drawing.Size(40, 18)
         Me.lblEnterLengthValue.TabIndex = 218
         Me.lblEnterLengthValue.Text = "-"
         '
@@ -592,7 +638,7 @@ Partial Class dlgEnter
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripBase
-        Me.cmdRHelp.Location = New System.Drawing.Point(562, 187)
+        Me.cmdRHelp.Location = New System.Drawing.Point(565, 215)
         Me.cmdRHelp.Name = "cmdRHelp"
         Me.cmdRHelp.Size = New System.Drawing.Size(68, 23)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripBase
@@ -623,11 +669,11 @@ Partial Class dlgEnter
         '
         Me.ucrReceiverForEnterCalculation.AutoSize = True
         Me.ucrReceiverForEnterCalculation.frmParent = Me
-        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(69, 16)
+        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(65, 16)
         Me.ucrReceiverForEnterCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
         Me.ucrReceiverForEnterCalculation.Selector = Nothing
-        Me.ucrReceiverForEnterCalculation.Size = New System.Drawing.Size(229, 28)
+        Me.ucrReceiverForEnterCalculation.Size = New System.Drawing.Size(341, 28)
         Me.ucrReceiverForEnterCalculation.strNcFilePath = ""
         Me.ucrReceiverForEnterCalculation.TabIndex = 153
         Me.ucrReceiverForEnterCalculation.ucrSelector = Nothing
@@ -684,7 +730,10 @@ Partial Class dlgEnter
     Friend WithEvents cmdExponential As Button
     Friend WithEvents cmdConcantenateFunction As Button
     Friend WithEvents cmdSequenceFunction As Button
-    Friend WithEvents cmdRepelicationFunction As Button
+    Friend WithEvents cmdRepTimes As Button
+    Friend WithEvents cmdRepEach As Button
+    Friend WithEvents cmdRnormal As Button
+    Friend WithEvents cmdRfactor As Button
     Friend WithEvents cmdLogical As Button
     Friend WithEvents cmdPi As Button
     Friend WithEvents cmdLetters2 As Button
