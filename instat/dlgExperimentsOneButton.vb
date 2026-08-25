@@ -293,8 +293,25 @@ Public Class dlgExperimentsOneButton
         TestOKEnabled()
     End Sub
 
+
+    ' Returns True only when every receiver required by the currently selected design has a
+    ' value. Response and Rep are required for every design; Factor A/B only for the
+    ' factor-pair designs (Factorial/Diallel/Lxt); Treat for rbd and Augmented; Block only
+    ' for Augmented.
+    Private Function CheckReceiversAreComplete() As Boolean
+        If ucrReceiverResponse.IsEmpty() OrElse ucrRep.IsEmpty() Then Return False
+
+        If rdoFactorial.Checked OrElse rdoDiallel.Checked OrElse rdoLxt.Checked Then
+            Return Not ucrReceiverFactorA.IsEmpty() AndAlso Not ucrReceiverFactorB.IsEmpty()
+        ElseIf rdoAugmented.Checked Then
+            Return Not UcrReceiverTreat.IsEmpty() AndAlso Not ucrBlock.IsEmpty()
+        Else
+            Return Not UcrReceiverTreat.IsEmpty()
+        End If
+    End Function
+
     Private Sub TestOKEnabled()
-        If Not ucrSave.IsComplete Then
+        If Not CheckReceiversAreComplete() OrElse Not ucrSave.IsComplete Then
             UcrBaseExperimentsOneButton.OKEnabled(False)
             Return
         End If
