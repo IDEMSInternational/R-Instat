@@ -30,7 +30,6 @@ Public Class dlgCompareColumns
     Private clsCompareColumnsFunction, clsAbsoluteFunction As New RFunction
     Private clsFirstAsCharacterFunction, clsSecondAsCharacterFunction, clsSummaryFunction As New RFunction
     Private clsYinXOperator, clsIsEqualToOperator, clsSubtractOperator, clsLessorEqualToOperator As New ROperator
-    Private clsDummyOperator As ROperator
 
     Private Sub dlgCompareColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -130,7 +129,6 @@ Public Class dlgCompareColumns
         clsIsEqualToOperator = New ROperator
         clsSubtractOperator = New ROperator
         clsLessorEqualToOperator = New ROperator
-        clsDummyOperator = New ROperator
 
         rdoByRow.Checked = True
 
@@ -224,48 +222,36 @@ Public Class dlgCompareColumns
         End Select
     End Sub
 
-
     Private Sub SetBaseSyntax()
         ucrBase.clsRsyntax.ClearCodes()
-
 
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
 
         If rdoByValue.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumnsFunction)
-
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
 
         ElseIf rdoByRow.Checked Then
-
 
             If ({"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
             {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
            ({"Date", "date"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
             {"Date", "date"}.Contains(ucrReceiverSecond.strCurrDataType)) Then
 
-                ucrBase.clsRsyntax.SetBaseROperator(clsLessorEqualToOperator)
 
             ElseIf ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
                {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
                (ucrReceiverFirst.strCurrDataType = "logical" AndAlso
                 ucrReceiverSecond.strCurrDataType = "logical") Then
 
-                ucrBase.clsRsyntax.SetBaseROperator(clsIsEqualToOperator)
-
             End If
-
-            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
-
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         End If
 
     End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        ' Clear receiver-generated code when changing mode
-        'ucrReceiverFirst.Clear()
-        'ucrReceiverSecond.Clear()
-        'ucrBase.clsRsyntax.ClearCodes()
 
         If rdoByValue.Checked Then
             ucrInputTolerance.Visible = False
@@ -283,8 +269,6 @@ Public Class dlgCompareColumns
 
     Private Sub CheckDatatype()
 
-
-        ' Remove previous datatype-specific parameters
         clsLessorEqualToOperator.RemoveParameterByName("first")
         clsSummaryFunction.RemoveParameterByName("object")
 
