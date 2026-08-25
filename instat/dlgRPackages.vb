@@ -29,7 +29,7 @@ Public Class dlgInstallRPackage
         Dim dctPackages As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 592
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 0
         ucrInputTextBoxRPackage.SetParameter(New RParameter("pkgs", 1))
         ucrPnlRPackages.AddRadioButton(rdoCRAN)
         ucrPnlRPackages.AddRadioButton(rdoRPackage)
