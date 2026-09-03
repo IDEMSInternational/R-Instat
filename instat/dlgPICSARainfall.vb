@@ -886,7 +886,6 @@ Public Class dlgPICSARainfall
 
         If bRowsAndCols OrElse bRowsAndColsAll Then
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-            clsRowVarsFunction.RemoveParameterByName("cols")
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
         ElseIf bRow OrElse bRowAll Then
             clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
