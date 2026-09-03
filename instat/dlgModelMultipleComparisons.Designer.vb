@@ -443,7 +443,7 @@ Partial Class dlgModelMultipleComparisons
         Me.MinimizeBox = False
         Me.Name = "dlgModelMultipleComparisons"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Comparisons"
+        Me.Text = "Multiple Comparisons"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

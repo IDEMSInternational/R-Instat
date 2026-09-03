@@ -54,7 +54,7 @@ Public Class dlgModelMultipleComparisons
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        UpdateComparisonUI()
+        UpdateComparisonUI(bReset)
         AddComparisonParameters()
         bReset = False
         autoTranslate(Me)
@@ -259,7 +259,7 @@ Public Class dlgModelMultipleComparisons
 
     Private Sub ucrPnlComparisonType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlComparisonType.ControlValueChanged
         If bFirstLoad Then Return
-        UpdateComparisonUI()
+        UpdateComparisonUI(True)
         AddComparisonParameters()
         UpdateReferenceLevels()
         UpdateClassifyAndByParameters()
@@ -270,30 +270,42 @@ Public Class dlgModelMultipleComparisons
 
     ' Updates control visibility and explicitly rebuilds the dropdown lists
     ' and default values from scratch to ensure the available UI options
-    ' strictly match the currently selected comparison mode.`
-
-    Private Sub UpdateComparisonUI()
+    ' strictly match the currently selected comparison mode.
+    Private Sub UpdateComparisonUI(bReset As Boolean)
 
         btnTransformation.Visible = rdoMultiple.Checked
         ucrInputGenerateMultipleComparisonGraphs.Visible = rdoMultiple.Checked AndAlso ucrChkGenerateMultipleComparisonPlot.Checked
 
+        Dim strCurrentAdjustment As String = ucrInputComboBoxAdjustment.GetText()
+        Dim strCurrentDescending As String = ucrInputComboBoxDescending.GetText()
+
         If rdoMultiple.Checked Then
             ucrInputComboBoxAdjustment.SetItems({strAdjustTukey, "bonferroni", strAdjustHolm, "hochberg", "hommel", "BH", "BY", "none"})
-            ucrInputComboBoxAdjustment.SetText(strAdjustTukey)
-
             ucrInputComboBoxDescending.SetItems({"TRUE", "FALSE"})
-            ucrInputComboBoxDescending.SetText("FALSE")
         Else
             ucrInputComboBoxDescending.SetItems({"NULL", "TRUE", "FALSE"})
-            ucrInputComboBoxDescending.SetText("NULL")
 
             If rdoPairwise.Checked Then
                 ucrInputComboBoxAdjustment.SetItems({strAdjustHolm, "bonferroni", "hochberg", "hommel", "BH", "BY", "none"})
-                ucrInputComboBoxAdjustment.SetText(strAdjustHolm)
             ElseIf rdoReference.Checked Then
                 ucrInputComboBoxAdjustment.SetItems({strAdjustDunnett, strAdjustHolm, "bonferroni", "hochberg", "hommel", "BH", "BY", "none"})
-                ucrInputComboBoxAdjustment.SetText(strAdjustDunnett)
             End If
+        End If
+
+        If bReset Then
+            If rdoMultiple.Checked Then
+                ucrInputComboBoxAdjustment.SetText(strAdjustTukey)
+                ucrInputComboBoxDescending.SetText("FALSE")
+            ElseIf rdoPairwise.Checked Then
+                ucrInputComboBoxAdjustment.SetText(strAdjustHolm)
+                ucrInputComboBoxDescending.SetText("NULL")
+            ElseIf rdoReference.Checked Then
+                ucrInputComboBoxAdjustment.SetText(strAdjustDunnett)
+                ucrInputComboBoxDescending.SetText("NULL")
+            End If
+        Else
+            ucrInputComboBoxAdjustment.SetText(strCurrentAdjustment)
+            ucrInputComboBoxDescending.SetText(strCurrentDescending)
         End If
     End Sub
 
@@ -525,7 +537,7 @@ Public Class dlgModelMultipleComparisons
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        UpdateComparisonUI()
+        UpdateComparisonUI(True)
         AddComparisonParameters()
         TestOkEnabled()
     End Sub
