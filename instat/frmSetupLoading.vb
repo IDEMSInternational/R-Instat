@@ -54,7 +54,7 @@ Public Class frmSetupLoading
             Try
                 Process.Start(strHyperlink)
             Catch ex As Exception
-                MsgBoxTranslate("Sorry, we couldn't open this link (" & strHyperlink & ")" & Environment.NewLine & ex.Message, "Cannot open link")
+                MsgBoxTranslate("Sorry, we couldn't open this link (" & strHyperlink & ")" & Environment.NewLine & ex.Message, Title:="Cannot open link")
             End Try
         End If
     End Sub
