@@ -24,6 +24,7 @@ Public Class dlgExperimentsOneButton
 
     Private ReadOnly strLastModel As String = "last_model"
     Private ReadOnly strLastGraph As String = "last_graph"
+    Private ReadOnly strPackageBKBreed As String = "BKBreed"
 
     Private ptRepLabelDefaultLocation As Point
     Private ptRepReceiverDefaultLocation As Point
@@ -33,6 +34,11 @@ Public Class dlgExperimentsOneButton
     Private clsBkDiallelFunction As New RFunction
     Private clsBkLxtFunction As New RFunction
     Private clsBkAugmentedFunction As New RFunction
+    Private clsBkDiversityFunction As New RFunction
+    Private clsBkPathFunction As New RFunction
+    Private clsBkStabilityFunction As New RFunction
+    Private clsBkVariabilityFunction As New RFunction
+    Private clsBkCorrelationFunction As New RFunction
 
     Private clsBkPlotFunction As New RFunction
     Private clsCheckGraphFunction As New RFunction
@@ -66,14 +72,30 @@ Public Class dlgExperimentsOneButton
         ucrPnlExperimentsOneButtonOptions.AddParameterValuesCondition(rdoGeneral, "top_option", "General")
         ucrPnlExperimentsOneButtonOptions.AddParameterValuesCondition(rdoSpecial, "top_option", "Special")
 
-        ucrPnlDesign.SetParameter(New RParameter("design", 1))
-        ucrPnlDesign.AddRadioButton(rdorbd, Chr(34) & "rbd" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoFactorial, Chr(34) & "frbd" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoDiallel, Chr(34) & "diallel" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoLxt, Chr(34) & "lxt" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoAugmented, Chr(34) & "augmented" & Chr(34))
+        ucrPnlDesign.AddRadioButton(rdorbd)
+        ucrPnlDesign.AddRadioButton(rdoFactorial)
+        ucrPnlDesign.AddRadioButton(rdoDiallel)
+        ucrPnlDesign.AddRadioButton(rdoLxt)
+        ucrPnlDesign.AddRadioButton(rdoAugmented)
+        ucrPnlDesign.AddRadioButton(rdoDiversity)
+        ucrPnlDesign.AddRadioButton(rdoPath)
+        ucrPnlDesign.AddRadioButton(rdoStability)
+        ucrPnlDesign.AddRadioButton(rdoVariability)
+        ucrPnlDesign.AddRadioButton(rdoCorrelations)
+
+        ucrPnlDesign.AddParameterValuesCondition(rdorbd, "design", Chr(34) & "rbd" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoFactorial, "design", Chr(34) & "frbd" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoDiallel, "design", Chr(34) & "diallel" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoLxt, "design", Chr(34) & "lxt" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoAugmented, "design", Chr(34) & "augmented" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoDiversity, "design", Chr(34) & "diversity" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoPath, "design", Chr(34) & "path" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoStability, "design", Chr(34) & "stability" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoVariability, "design", Chr(34) & "variability" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoCorrelations, "design", Chr(34) & "correlation" & Chr(34))
 
         ttDesign.SetToolTip(rdoLxt, "Line by Tester")
+        ttVariability.SetToolTip(ucrNudSelectionDifferential, "The value 2.063 is the differential for 5% intensity")
 
         ucrSelectorForRank.SetParameter(New RParameter("data", 0))
         ucrSelectorForRank.SetParameterIsrfunction()
@@ -83,6 +105,12 @@ Public Class dlgExperimentsOneButton
         ucrReceiverResponse.SetParameterIsString()
         ucrReceiverResponse.SetDataType("numeric")
         ucrReceiverResponse.strSelectorHeading = "Numerics"
+
+        ucrReceiverMultipleResponses.Selector = ucrSelectorForRank
+        ucrReceiverMultipleResponses.SetParameter(New RParameter("traits", 1))
+        ucrReceiverMultipleResponses.SetParameterIsString()
+        ucrReceiverMultipleResponses.SetDataType("numeric")
+        ucrReceiverMultipleResponses.strSelectorHeading = "Numerics"
 
         UcrCheckAlphaExperiments.SetText("Alpha")
         ucrAlpha.SetItems({"0.001", "0.01", "0.02", "0.05", "0.1"})
@@ -121,6 +149,55 @@ Public Class dlgExperimentsOneButton
         ucrBlock.SetDataType("factor")
         ucrBlock.strSelectorHeading = "Factors"
 
+        ucrPnlClustering.SetParameter(New RParameter("method", 4))
+        ucrPnlClustering.AddRadioButton(rdoTocher, Chr(34) & "tocher" & Chr(34))
+        ucrPnlClustering.AddRadioButton(rdoHierarchical, Chr(34) & "hierarchical" & Chr(34))
+        ucrPnlClustering.AddParameterValuesCondition(rdoTocher, "method", Chr(34) & "tocher" & Chr(34))
+        ucrPnlClustering.AddParameterValuesCondition(rdoHierarchical, "method", Chr(34) & "hierarchical" & Chr(34))
+        ucrPnlClustering.SetRDefault(Chr(34) & "tocher" & Chr(34))
+        ucrNudClusters.SetParameter(New RParameter("clusters", 5))
+        ucrNudClusters.SetRDefault("2")
+
+        ucrPnlCorrelationType.SetParameter(New RParameter("type", 5))
+        ucrPnlCorrelationType.AddRadioButton(rdoGenotypic, Chr(34) & "genotypic" & Chr(34))
+        ucrPnlCorrelationType.AddRadioButton(rdoPhenotypic, Chr(34) & "phenotypic" & Chr(34))
+        ucrPnlCorrelationType.AddParameterValuesCondition(rdoGenotypic, "type", Chr(34) & "genotypic" & Chr(34))
+        ucrPnlCorrelationType.AddParameterValuesCondition(rdoPhenotypic, "type", Chr(34) & "phenotypic" & Chr(34))
+        ucrPnlCorrelationType.SetRDefault(Chr(34) & "genotypic" & Chr(34))
+
+        ucrReceiverExplanatory.Selector = ucrSelectorForRank
+        ucrReceiverExplanatory.SetParameter(New RParameter("traits", 1))
+        ucrReceiverExplanatory.SetParameterIsString()
+        ucrReceiverExplanatory.SetDataType("numeric")
+        ucrReceiverExplanatory.strSelectorHeading = "Numerics"
+
+        ucrReceiverLocations.Selector = ucrSelectorForRank
+        ucrReceiverLocations.SetParameter(New RParameter("env", 3))
+        ucrReceiverLocations.SetParameterIsString()
+        ucrReceiverLocations.SetDataType("factor")
+        ucrReceiverLocations.strSelectorHeading = "Factors"
+
+        ucrNudSelectionDifferential.SetParameter(New RParameter("k", 4))
+        ucrNudSelectionDifferential.SetRDefault("2.063")
+
+        UcrChkSelectionDifferential.SetText("Selection Differential")
+        UcrChkSelectionDifferential.AddToLinkedControls(ucrNudSelectionDifferential, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="2.063")
+
+        ucrPnlDesign.AddToLinkedControls({ucrPnlClustering}, {rdoDiversity}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlClustering.AddToLinkedControls({ucrNudClusters}, {rdoHierarchical}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDesign.AddToLinkedControls({ucrPnlCorrelationType, ucrReceiverExplanatory}, {rdoPath}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDesign.AddToLinkedControls({ucrReceiverLocations}, {rdoStability}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDesign.AddToLinkedControls({UcrChkSelectionDifferential}, {rdoVariability}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlDesign.AddToLinkedControls({ucrReceiverMultipleResponses}, {rdoCorrelations, rdoDiversity, rdoVariability}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlClustering.SetLinkedDisplayControl(grpClusteringMethod)
+        ucrNudClusters.SetLinkedDisplayControl(lblClusters)
+        ucrPnlCorrelationType.SetLinkedDisplayControl(grpCorrelationType)
+        ucrReceiverExplanatory.SetLinkedDisplayControl(lblExplanatory)
+        ucrReceiverLocations.SetLinkedDisplayControl(lblLocations)
+        ucrReceiverMultipleResponses.SetLinkedDisplayControl(lblMultipleResponses)
+
         ucrChkPlot.SetText("Generate Plot")
         ucrChkPlot.AddParameterValuesCondition(True, "plot", "True")
         ucrChkPlot.AddParameterValuesCondition(False, "plot", "False")
@@ -152,6 +229,12 @@ Public Class dlgExperimentsOneButton
         clsBkDiallelFunction = New RFunction
         clsBkLxtFunction = New RFunction
         clsBkAugmentedFunction = New RFunction
+        clsBkDiversityFunction = New RFunction
+        clsBkPathFunction = New RFunction
+        clsBkStabilityFunction = New RFunction
+        clsBkVariabilityFunction = New RFunction
+        clsBkCorrelationFunction = New RFunction
+
         clsBkPlotFunction = New RFunction
         clsCheckGraphFunction = New RFunction
         clsAddPlotObjectFunction = New RFunction
@@ -162,6 +245,9 @@ Public Class dlgExperimentsOneButton
         ucrSave.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
+        ucrReceiverMultipleResponses.SetMeAsReceiver()
+        ucrReceiverExplanatory.SetMeAsReceiver()
+
         ucrSave.ucrChkSave.Checked = False
         ucrSaveGraph.ucrChkSave.Checked = False
 
@@ -171,27 +257,47 @@ Public Class dlgExperimentsOneButton
 
         clsCurrentDataFrameFunction = ucrSelectorForRank.ucrAvailableDataFrames.clsCurrDataFrame
 
-        clsBkRbdFunction.SetPackageName("BKBreed")
+        clsBkRbdFunction.SetPackageName(strPackageBKBreed)
         clsBkRbdFunction.SetRCommand("bk_rbd")
         clsBkRbdFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
-        clsBkFrbdFunction.SetPackageName("BKBreed")
+        clsBkFrbdFunction.SetPackageName(strPackageBKBreed)
         clsBkFrbdFunction.SetRCommand("bk_frbd")
         clsBkFrbdFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
-        clsBkDiallelFunction.SetPackageName("BKBreed")
+        clsBkDiallelFunction.SetPackageName(strPackageBKBreed)
         clsBkDiallelFunction.SetRCommand("bk_diallel")
         clsBkDiallelFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
-        clsBkLxtFunction.SetPackageName("BKBreed")
+        clsBkLxtFunction.SetPackageName(strPackageBKBreed)
         clsBkLxtFunction.SetRCommand("bk_lxt")
         clsBkLxtFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
-        clsBkAugmentedFunction.SetPackageName("BKBreed")
+        clsBkAugmentedFunction.SetPackageName(strPackageBKBreed)
         clsBkAugmentedFunction.SetRCommand("bk_augmented")
         clsBkAugmentedFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
-        clsBkPlotFunction.SetPackageName("BKBreed")
+        clsBkDiversityFunction.SetPackageName(strPackageBKBreed)
+        clsBkDiversityFunction.SetRCommand("bk_diversity")
+        clsBkDiversityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+
+        clsBkPathFunction.SetPackageName(strPackageBKBreed)
+        clsBkPathFunction.SetRCommand("bk_path")
+        clsBkPathFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+
+        clsBkStabilityFunction.SetPackageName(strPackageBKBreed)
+        clsBkStabilityFunction.SetRCommand("bk_stability")
+        clsBkStabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+
+        clsBkVariabilityFunction.SetPackageName(strPackageBKBreed)
+        clsBkVariabilityFunction.SetRCommand("bk_variability")
+        clsBkVariabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+
+        clsBkCorrelationFunction.SetPackageName(strPackageBKBreed)
+        clsBkCorrelationFunction.SetRCommand("bk_correlation")
+        clsBkCorrelationFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+
+        clsBkPlotFunction.SetPackageName(strPackageBKBreed)
         clsBkPlotFunction.SetRCommand("bk_plot")
         clsBkPlotFunction.SetAssignTo(strLastGraph)
 
@@ -221,42 +327,88 @@ Public Class dlgExperimentsOneButton
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
 
-        ucrAlpha.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("alpha", 5), iAdditionalPairNo:=1)
-        ucrAlpha.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("alpha", 5), iAdditionalPairNo:=2)
-        ucrAlpha.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("alpha", 5), iAdditionalPairNo:=3)
-        ucrAlpha.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("alpha", 6), iAdditionalPairNo:=4)
+        If bReset Then
+            ucrAlpha.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("alpha", 5), iAdditionalPairNo:=1)
+            ucrAlpha.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("alpha", 5), iAdditionalPairNo:=2)
+            ucrAlpha.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("alpha", 5), iAdditionalPairNo:=3)
+            ucrAlpha.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("alpha", 6), iAdditionalPairNo:=4)
+        End If
         ucrAlpha.SetRCode(clsBkRbdFunction, bReset)
 
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("trait", 1), iAdditionalPairNo:=1)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("trait", 1), iAdditionalPairNo:=2)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("trait", 1), iAdditionalPairNo:=3)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("trait", 1), iAdditionalPairNo:=4)
+        If bReset Then
+            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("trait", 1), iAdditionalPairNo:=1)
+            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("trait", 1), iAdditionalPairNo:=2)
+            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("trait", 1), iAdditionalPairNo:=3)
+            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("trait", 1), iAdditionalPairNo:=4)
+            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkStabilityFunction, New RParameter("trait", 1), iAdditionalPairNo:=5)
+            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkPathFunction, New RParameter("dependent", 2), iAdditionalPairNo:=6)
+        End If
         ucrReceiverResponse.SetRCode(clsBkRbdFunction, bReset)
 
-        UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("gen", 2), iAdditionalPairNo:=1)
+        If bReset Then
+            ucrReceiverMultipleResponses.AddAdditionalCodeParameterPair(clsBkDiversityFunction, New RParameter("traits", 1), iAdditionalPairNo:=1)
+            ucrReceiverMultipleResponses.AddAdditionalCodeParameterPair(clsBkVariabilityFunction, New RParameter("traits", 1), iAdditionalPairNo:=2)
+        End If
+        ucrReceiverMultipleResponses.SetMeAsReceiver()
+        ucrReceiverMultipleResponses.SetRCode(clsBkCorrelationFunction, bReset)
+
+        ucrReceiverExplanatory.SetRCode(clsBkPathFunction, bReset)
+
+        If bReset Then
+            UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("gen", 2), iAdditionalPairNo:=1)
+            UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkDiversityFunction, New RParameter("gen", 2), iAdditionalPairNo:=2)
+            UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkPathFunction, New RParameter("gen", 3), iAdditionalPairNo:=3)
+            UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkStabilityFunction, New RParameter("gen", 2), iAdditionalPairNo:=4)
+            UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkVariabilityFunction, New RParameter("gen", 2), iAdditionalPairNo:=5)
+            UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkCorrelationFunction, New RParameter("gen", 2), iAdditionalPairNo:=6)
+        End If
         UcrReceiverTreat.SetRCode(clsBkRbdFunction, bReset)
 
-        ucrReceiverFactorA.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("parent1", 2), iAdditionalPairNo:=1)
-        ucrReceiverFactorA.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("line", 2), iAdditionalPairNo:=2)
+        If bReset Then
+            ucrReceiverFactorA.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("parent1", 2), iAdditionalPairNo:=1)
+            ucrReceiverFactorA.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("line", 2), iAdditionalPairNo:=2)
+        End If
         ucrReceiverFactorA.SetRCode(clsBkFrbdFunction, bReset)
 
-        ucrReceiverFactorB.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("parent2", 3), iAdditionalPairNo:=1)
-        ucrReceiverFactorB.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("tester", 3), iAdditionalPairNo:=2)
+        If bReset Then
+            ucrReceiverFactorB.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("parent2", 3), iAdditionalPairNo:=1)
+            ucrReceiverFactorB.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("tester", 3), iAdditionalPairNo:=2)
+        End If
         ucrReceiverFactorB.SetRCode(clsBkFrbdFunction, bReset)
 
-        ucrRep.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("rep", 4), iAdditionalPairNo:=1)
-        ucrRep.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("rep", 4), iAdditionalPairNo:=2)
-        ucrRep.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("rep", 4), iAdditionalPairNo:=3)
-        ucrRep.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("rep", 4), iAdditionalPairNo:=4)
+        If bReset Then
+            ucrRep.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("rep", 4), iAdditionalPairNo:=1)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkDiallelFunction, New RParameter("rep", 4), iAdditionalPairNo:=2)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkLxtFunction, New RParameter("rep", 4), iAdditionalPairNo:=3)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("rep", 4), iAdditionalPairNo:=4)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkDiversityFunction, New RParameter("rep", 3), iAdditionalPairNo:=5)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkPathFunction, New RParameter("rep", 4), iAdditionalPairNo:=6)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkStabilityFunction, New RParameter("rep", 4), iAdditionalPairNo:=7)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkVariabilityFunction, New RParameter("rep", 3), iAdditionalPairNo:=8)
+            ucrRep.AddAdditionalCodeParameterPair(clsBkCorrelationFunction, New RParameter("rep", 3), iAdditionalPairNo:=9)
+        End If
         ucrRep.SetRCode(clsBkRbdFunction, bReset)
 
-        ucrSave.AddAdditionalRCode(clsBkFrbdFunction, iAdditionalPairNo:=1)
-        ucrSave.AddAdditionalRCode(clsBkDiallelFunction, iAdditionalPairNo:=2)
-        ucrSave.AddAdditionalRCode(clsBkLxtFunction, iAdditionalPairNo:=3)
-        ucrSave.AddAdditionalRCode(clsBkAugmentedFunction, iAdditionalPairNo:=4)
+        If bReset Then
+            ucrSave.AddAdditionalRCode(clsBkFrbdFunction, iAdditionalPairNo:=1)
+            ucrSave.AddAdditionalRCode(clsBkDiallelFunction, iAdditionalPairNo:=2)
+            ucrSave.AddAdditionalRCode(clsBkLxtFunction, iAdditionalPairNo:=3)
+            ucrSave.AddAdditionalRCode(clsBkAugmentedFunction, iAdditionalPairNo:=4)
+            ucrSave.AddAdditionalRCode(clsBkDiversityFunction, iAdditionalPairNo:=5)
+            ucrSave.AddAdditionalRCode(clsBkPathFunction, iAdditionalPairNo:=6)
+            ucrSave.AddAdditionalRCode(clsBkStabilityFunction, iAdditionalPairNo:=7)
+            ucrSave.AddAdditionalRCode(clsBkVariabilityFunction, iAdditionalPairNo:=8)
+            ucrSave.AddAdditionalRCode(clsBkCorrelationFunction, iAdditionalPairNo:=9)
+        End If
         ucrSave.SetRCode(clsBkRbdFunction, bReset)
 
         ucrBlock.SetRCode(clsBkAugmentedFunction, bReset)
+
+        ucrPnlClustering.SetRCode(clsBkDiversityFunction, bReset)
+        ucrNudClusters.SetRCode(clsBkDiversityFunction, bReset)
+        ucrPnlCorrelationType.SetRCode(clsBkPathFunction, bReset)
+        ucrReceiverLocations.SetRCode(clsBkStabilityFunction, bReset)
+        ucrNudSelectionDifferential.SetRCode(clsBkVariabilityFunction, bReset)
 
         If bReset Then
             UcrCheckAlphaExperiments.AddAdditionalCodeParameterPair(clsBkFrbdFunction, New RParameter("alpha", 5), iAdditionalPairNo:=1)
@@ -269,14 +421,10 @@ Public Class dlgExperimentsOneButton
             ucrChkPlot.SetRCode(clsDummyFunction, bReset)
             ucrPnlDesign.SetRCode(clsDummyFunction, bReset)
         End If
-
         UpdatePlotCode()
         bRCodeSet = True
     End Sub
 
-    ' At least 2 check varieties must be selected before OK/To Script is enabled.
-    ' If none have been selected yet, the "checks" parameter either doesn't exist on the
-    ' function or its value is empty, so there are 0 checks. Otherwise, sdgChecksFromFactor writes "checks" as a plain quoted name string (e.g. c("A", "B"))
     Private Function GetCheckedVarietyCount() As Integer
         Dim clsChecksParameter As RParameter = clsBkAugmentedFunction.GetParameter("checks")
         If clsChecksParameter Is Nothing OrElse String.IsNullOrEmpty(clsChecksParameter.strArgumentValue) Then
@@ -287,24 +435,30 @@ Public Class dlgExperimentsOneButton
     End Function
 
     Private Sub btnChecks_Click(sender As Object, e As EventArgs) Handles btnChecks.Click
-        sdgChecksSubdialog.SetRFunction(clsBkAugmentedFunction, UcrReceiverTreat, bResetChecksSubdialog)
-        sdgChecksSubdialog.ShowDialog()
+        sdgChecksFromFactor.SetRFunction(clsBkAugmentedFunction, UcrReceiverTreat, bResetChecksSubdialog)
+        sdgChecksFromFactor.ShowDialog()
         bResetChecksSubdialog = False
         TestOKEnabled()
     End Sub
 
-
-    ' Returns True only when every receiver required by the currently selected design has a
-    ' value. Response and Rep are required for every design; Factor A/B only for the
-    ' factor-pair designs (Factorial/Diallel/Lxt); Treat for rbd and Augmented; Block only
-    ' for Augmented.
     Private Function CheckReceiversAreComplete() As Boolean
-        If ucrReceiverResponse.IsEmpty() OrElse ucrRep.IsEmpty() Then Return False
+        If ucrRep.IsEmpty() Then Return False
+
+        If rdoCorrelations.Checked OrElse rdoDiversity.Checked OrElse rdoVariability.Checked Then
+            If ucrReceiverMultipleResponses.IsEmpty() Then Return False
+            If rdoDiversity.Checked AndAlso ucrReceiverMultipleResponses.Count() < 2 Then Return False
+        Else
+            If ucrReceiverResponse.IsEmpty() Then Return False
+        End If
 
         If rdoFactorial.Checked OrElse rdoDiallel.Checked OrElse rdoLxt.Checked Then
             Return Not ucrReceiverFactorA.IsEmpty() AndAlso Not ucrReceiverFactorB.IsEmpty()
         ElseIf rdoAugmented.Checked Then
             Return Not UcrReceiverTreat.IsEmpty() AndAlso Not ucrBlock.IsEmpty()
+        ElseIf rdoPath.Checked Then
+            Return Not UcrReceiverTreat.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty()
+        ElseIf rdoStability.Checked Then
+            Return Not UcrReceiverTreat.IsEmpty() AndAlso Not ucrReceiverLocations.IsEmpty()
         Else
             Return Not UcrReceiverTreat.IsEmpty()
         End If
@@ -328,14 +482,34 @@ Public Class dlgExperimentsOneButton
         TestOKEnabled()
     End Sub
 
+    Private Sub TopOption_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGeneral.CheckedChanged, rdoSpecial.CheckedChanged
+        Dim rdoChanged As RadioButton = DirectCast(sender, RadioButton)
+        If Not rdoChanged.Checked Then Return
 
-    ' Fires when the selected design changes. Shows/hides the controls relevant to the new
-    ' design (Factor A/B vs Treatment, Block/Checks for Augmented only), repositions the Rep
-    ' row when Augmented needs room for the Block row above it, and relabels Factor A/B per
-    ' design. If the tree is already bound, swaps the dialog's base R function and refreshes
-    ' the plot code to match.
+        Dim bIsGeneral As Boolean = rdoGeneral.Checked
+
+        rdorbd.Visible = bIsGeneral
+        rdoFactorial.Visible = bIsGeneral
+        rdoDiallel.Visible = bIsGeneral
+        rdoLxt.Visible = bIsGeneral
+        rdoAugmented.Visible = bIsGeneral
+
+        rdoDiversity.Visible = Not bIsGeneral
+        rdoPath.Visible = Not bIsGeneral
+        rdoStability.Visible = Not bIsGeneral
+        rdoVariability.Visible = Not bIsGeneral
+        rdoCorrelations.Visible = Not bIsGeneral
+
+        If bIsGeneral AndAlso Not (rdorbd.Checked OrElse rdoFactorial.Checked OrElse rdoDiallel.Checked OrElse rdoLxt.Checked OrElse rdoAugmented.Checked) Then
+            rdorbd.Checked = True
+        ElseIf Not bIsGeneral AndAlso Not (rdoDiversity.Checked OrElse rdoPath.Checked OrElse rdoStability.Checked OrElse rdoVariability.Checked OrElse rdoCorrelations.Checked) Then
+            rdoDiversity.Checked = True
+        End If
+    End Sub
+
     Private Sub DesignRadio_CheckedChanged(sender As Object, e As EventArgs) Handles rdorbd.CheckedChanged, rdoFactorial.CheckedChanged,
-        rdoDiallel.CheckedChanged, rdoLxt.CheckedChanged, rdoAugmented.CheckedChanged
+        rdoDiallel.CheckedChanged, rdoLxt.CheckedChanged, rdoAugmented.CheckedChanged, rdoDiversity.CheckedChanged,
+        rdoPath.CheckedChanged, rdoStability.CheckedChanged, rdoVariability.CheckedChanged, rdoCorrelations.CheckedChanged
 
         Dim rdoChanged As RadioButton = DirectCast(sender, RadioButton)
         If Not rdoChanged.Checked Then Return
@@ -343,6 +517,7 @@ Public Class dlgExperimentsOneButton
         Dim bIsFactorLike As Boolean = rdoFactorial.Checked OrElse rdoDiallel.Checked OrElse rdoLxt.Checked
         Dim bIsAugmented As Boolean = rdoAugmented.Checked
         Dim bIsGeneralAlphaDesign As Boolean = rdorbd.Checked OrElse bIsFactorLike OrElse bIsAugmented
+
 
         lblFactorA.Visible = bIsFactorLike
         ucrReceiverFactorA.Visible = bIsFactorLike
@@ -367,8 +542,7 @@ Public Class dlgExperimentsOneButton
         End If
 
         UcrCheckAlphaExperiments.Visible = bIsGeneralAlphaDesign
-        ucrAlpha.Visible = bIsGeneralAlphaDesign AndAlso UcrCheckAlphaExperiments.Checked
-
+        ucrAlpha.Visible = UcrCheckAlphaExperiments.Visible AndAlso UcrCheckAlphaExperiments.Checked
         If rdoFactorial.Checked Then
             lblFactorA.Text = "Factor A:"
             lblFactorB.Text = "Factor B:"
@@ -379,12 +553,12 @@ Public Class dlgExperimentsOneButton
             lblFactorA.Text = "Line:"
             lblFactorB.Text = "Tester:"
         End If
+        TestOKEnabled()
 
         If bRCodeSet Then
             UcrBaseExperimentsOneButton.clsRsyntax.SetBaseRFunction(GetActiveDesignFunction())
             UpdatePlotCode()
         End If
-        TestOKEnabled()
     End Sub
 
     Private Function GetActiveDesignFunction() As RFunction
@@ -398,6 +572,16 @@ Public Class dlgExperimentsOneButton
             Return clsBkLxtFunction
         ElseIf rdoAugmented.Checked Then
             Return clsBkAugmentedFunction
+        ElseIf rdoDiversity.Checked Then
+            Return clsBkDiversityFunction
+        ElseIf rdoPath.Checked Then
+            Return clsBkPathFunction
+        ElseIf rdoStability.Checked Then
+            Return clsBkStabilityFunction
+        ElseIf rdoVariability.Checked Then
+            Return clsBkVariabilityFunction
+        ElseIf rdoCorrelations.Checked Then
+            Return clsBkCorrelationFunction
         End If
         Return clsBkRbdFunction
     End Function
@@ -410,6 +594,11 @@ Public Class dlgExperimentsOneButton
         clsBkDiallelFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsBkLxtFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsBkAugmentedFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkDiversityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkPathFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkStabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkVariabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkCorrelationFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         UpdatePlotDataFrameName()
     End Sub
 
@@ -428,7 +617,9 @@ Public Class dlgExperimentsOneButton
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, UcrReceiverTreat.ControlContentsChanged,
         ucrReceiverFactorA.ControlContentsChanged, ucrReceiverFactorB.ControlContentsChanged,
         ucrRep.ControlContentsChanged, ucrBlock.ControlContentsChanged, ucrAlpha.ControlContentsChanged,
-        ucrSave.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+        ucrSave.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged,
+        ucrReceiverLocations.ControlContentsChanged, ucrNudSelectionDifferential.ControlContentsChanged, ucrReceiverMultipleResponses.ControlContentsChanged,
+        ucrNudClusters.ControlContentsChanged
 
         If bRCodeSet Then
             TestOKEnabled()
@@ -436,16 +627,12 @@ Public Class dlgExperimentsOneButton
         End If
     End Sub
 
-    'Pushes the current data frame's name into the plot-pipeline functions that need to reference it ($add_object / $get_object_data).
     Private Sub UpdatePlotDataFrameName()
         Dim strDataFrame As String = ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         clsAddPlotObjectFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsGetPlotObjectDataFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
     End Sub
 
-    'Rebuilds the after-code plot pipeline bk_plot -> check_graph -> $add_object -> $get_object_data
-    'strips the old pipeline first so toggling "Generate Plot" off removes it cleanly
-    'only re-adds it If the checkbox Is checked And both a model name And graph name can be resolved.
     Private Sub UpdatePlotCode()
         UcrBaseExperimentsOneButton.clsRsyntax.RemoveFromAfterCodes(clsGetPlotObjectDataFunction)
         UcrBaseExperimentsOneButton.clsRsyntax.RemoveFromAfterCodes(clsAddPlotObjectFunction)
