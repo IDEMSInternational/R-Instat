@@ -43,7 +43,6 @@ Partial Class dlgExperimentsOneButton
         Me.lblClusters = New System.Windows.Forms.Label()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.lblLocations = New System.Windows.Forms.Label()
-        Me.lblSelectionDifferential = New System.Windows.Forms.Label()
         Me.lblMultipleResponses = New System.Windows.Forms.Label()
         Me.rdoGenotypic = New System.Windows.Forms.RadioButton()
         Me.rdoHierarchical = New System.Windows.Forms.RadioButton()
@@ -51,6 +50,7 @@ Partial Class dlgExperimentsOneButton
         Me.rdoTocher = New System.Windows.Forms.RadioButton()
         Me.grpClusteringMethod = New System.Windows.Forms.GroupBox()
         Me.grpCorrelationType = New System.Windows.Forms.GroupBox()
+        Me.UcrChkSelectionDifferential = New instat.ucrCheck()
         Me.ucrReceiverExplanatory = New instat.ucrReceiverMultiple()
         Me.ucrPnlClustering = New instat.UcrPanel()
         Me.ucrNudClusters = New instat.ucrNud()
@@ -169,13 +169,13 @@ Partial Class dlgExperimentsOneButton
         Me.lblResponse.Location = New System.Drawing.Point(295, 125)
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Size = New System.Drawing.Size(100, 20)
-        Me.lblResponse.TabIndex = 74
+        Me.lblResponse.TabIndex = 73
         Me.lblResponse.Text = "Response:"
         Me.lblResponse.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
         'lblRep
         '
-        Me.lblRep.Location = New System.Drawing.Point(295, 278)
+        Me.lblRep.Location = New System.Drawing.Point(294, 338)
         Me.lblRep.Name = "lblRep"
         Me.lblRep.Size = New System.Drawing.Size(100, 20)
         Me.lblRep.TabIndex = 80
@@ -184,7 +184,7 @@ Partial Class dlgExperimentsOneButton
         '
         'lblFactorA
         '
-        Me.lblFactorA.Location = New System.Drawing.Point(295, 176)
+        Me.lblFactorA.Location = New System.Drawing.Point(294, 236)
         Me.lblFactorA.Name = "lblFactorA"
         Me.lblFactorA.Size = New System.Drawing.Size(100, 20)
         Me.lblFactorA.TabIndex = 76
@@ -193,7 +193,7 @@ Partial Class dlgExperimentsOneButton
         '
         'lblFactorB
         '
-        Me.lblFactorB.Location = New System.Drawing.Point(295, 225)
+        Me.lblFactorB.Location = New System.Drawing.Point(295, 285)
         Me.lblFactorB.Name = "lblFactorB"
         Me.lblFactorB.Size = New System.Drawing.Size(100, 20)
         Me.lblFactorB.TabIndex = 78
@@ -210,7 +210,7 @@ Partial Class dlgExperimentsOneButton
         '
         'lblTreat
         '
-        Me.lblTreat.Location = New System.Drawing.Point(295, 176)
+        Me.lblTreat.Location = New System.Drawing.Point(295, 236)
         Me.lblTreat.Name = "lblTreat"
         Me.lblTreat.Size = New System.Drawing.Size(100, 20)
         Me.lblTreat.TabIndex = 88
@@ -219,7 +219,7 @@ Partial Class dlgExperimentsOneButton
         '
         'lblBlock
         '
-        Me.lblBlock.Location = New System.Drawing.Point(295, 227)
+        Me.lblBlock.Location = New System.Drawing.Point(294, 287)
         Me.lblBlock.Name = "lblBlock"
         Me.lblBlock.Size = New System.Drawing.Size(100, 20)
         Me.lblBlock.TabIndex = 95
@@ -228,7 +228,7 @@ Partial Class dlgExperimentsOneButton
         '
         'btnChecks
         '
-        Me.btnChecks.Location = New System.Drawing.Point(295, 352)
+        Me.btnChecks.Location = New System.Drawing.Point(294, 402)
         Me.btnChecks.Name = "btnChecks"
         Me.btnChecks.Size = New System.Drawing.Size(175, 32)
         Me.btnChecks.TabIndex = 84
@@ -301,7 +301,7 @@ Partial Class dlgExperimentsOneButton
         'lblExplanatory
         '
         Me.lblExplanatory.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.lblExplanatory.Location = New System.Drawing.Point(295, 329)
+        Me.lblExplanatory.Location = New System.Drawing.Point(294, 385)
         Me.lblExplanatory.Name = "lblExplanatory"
         Me.lblExplanatory.Size = New System.Drawing.Size(150, 20)
         Me.lblExplanatory.TabIndex = 132
@@ -311,30 +311,21 @@ Partial Class dlgExperimentsOneButton
         'lblLocations
         '
         Me.lblLocations.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.lblLocations.Location = New System.Drawing.Point(294, 329)
+        Me.lblLocations.Location = New System.Drawing.Point(294, 389)
         Me.lblLocations.Name = "lblLocations"
         Me.lblLocations.Size = New System.Drawing.Size(100, 20)
         Me.lblLocations.TabIndex = 133
         Me.lblLocations.Text = "Locations:"
         Me.lblLocations.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
-        'lblSelectionDifferential
-        '
-        Me.lblSelectionDifferential.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.lblSelectionDifferential.Location = New System.Drawing.Point(9, 341)
-        Me.lblSelectionDifferential.Name = "lblSelectionDifferential"
-        Me.lblSelectionDifferential.Size = New System.Drawing.Size(152, 25)
-        Me.lblSelectionDifferential.TabIndex = 135
-        Me.lblSelectionDifferential.Text = "Selection Differential:"
-        Me.lblSelectionDifferential.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'lblMultipleResponses
         '
-        Me.lblMultipleResponses.Location = New System.Drawing.Point(295, 105)
+        Me.lblMultipleResponses.Location = New System.Drawing.Point(295, 101)
         Me.lblMultipleResponses.Name = "lblMultipleResponses"
-        Me.lblMultipleResponses.Size = New System.Drawing.Size(125, 20)
-        Me.lblMultipleResponses.TabIndex = 136
-        Me.lblMultipleResponses.Text = "Response Variables:"
+        Me.lblMultipleResponses.Size = New System.Drawing.Size(150, 24)
+        Me.lblMultipleResponses.TabIndex = 72
+        Me.lblMultipleResponses.Text = "Responses:"
+        Me.lblMultipleResponses.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
         'rdoGenotypic
         '
@@ -408,15 +399,25 @@ Partial Class dlgExperimentsOneButton
         Me.grpCorrelationType.TabStop = False
         Me.grpCorrelationType.Text = "Correlation Type"
         '
+        'UcrChkSelectionDifferential
+        '
+        Me.UcrChkSelectionDifferential.AutoSize = True
+        Me.UcrChkSelectionDifferential.Checked = False
+        Me.UcrChkSelectionDifferential.Location = New System.Drawing.Point(11, 337)
+        Me.UcrChkSelectionDifferential.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.UcrChkSelectionDifferential.Name = "UcrChkSelectionDifferential"
+        Me.UcrChkSelectionDifferential.Size = New System.Drawing.Size(150, 29)
+        Me.UcrChkSelectionDifferential.TabIndex = 149
+        '
         'ucrReceiverExplanatory
         '
         Me.ucrReceiverExplanatory.AutoSize = True
         Me.ucrReceiverExplanatory.frmParent = Me
-        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(295, 351)
+        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(294, 406)
         Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
         Me.ucrReceiverExplanatory.Selector = Nothing
-        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(175, 50)
+        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(175, 108)
         Me.ucrReceiverExplanatory.strNcFilePath = ""
         Me.ucrReceiverExplanatory.TabIndex = 138
         Me.ucrReceiverExplanatory.ucrSelector = Nothing
@@ -452,9 +453,9 @@ Partial Class dlgExperimentsOneButton
         Me.ucrReceiverMultipleResponses.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleResponses.Name = "ucrReceiverMultipleResponses"
         Me.ucrReceiverMultipleResponses.Selector = Nothing
-        Me.ucrReceiverMultipleResponses.Size = New System.Drawing.Size(175, 50)
+        Me.ucrReceiverMultipleResponses.Size = New System.Drawing.Size(175, 108)
         Me.ucrReceiverMultipleResponses.strNcFilePath = ""
-        Me.ucrReceiverMultipleResponses.TabIndex = 137
+        Me.ucrReceiverMultipleResponses.TabIndex = 75
         Me.ucrReceiverMultipleResponses.ucrSelector = Nothing
         '
         'ucrPnlCorrelationType
@@ -470,7 +471,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrReceiverLocations.AutoSize = True
         Me.ucrReceiverLocations.frmParent = Me
-        Me.ucrReceiverLocations.Location = New System.Drawing.Point(294, 349)
+        Me.ucrReceiverLocations.Location = New System.Drawing.Point(294, 409)
         Me.ucrReceiverLocations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLocations.Name = "ucrReceiverLocations"
         Me.ucrReceiverLocations.Selector = Nothing
@@ -492,7 +493,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrBlock.AutoSize = True
         Me.ucrBlock.frmParent = Me
-        Me.ucrBlock.Location = New System.Drawing.Point(295, 245)
+        Me.ucrBlock.Location = New System.Drawing.Point(294, 305)
         Me.ucrBlock.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrBlock.Name = "ucrBlock"
         Me.ucrBlock.Selector = Nothing
@@ -537,7 +538,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrRep.AutoSize = True
         Me.ucrRep.frmParent = Me
-        Me.ucrRep.Location = New System.Drawing.Point(295, 297)
+        Me.ucrRep.Location = New System.Drawing.Point(294, 357)
         Me.ucrRep.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrRep.Name = "ucrRep"
         Me.ucrRep.Selector = Nothing
@@ -550,7 +551,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrReceiverFactorA.AutoSize = True
         Me.ucrReceiverFactorA.frmParent = Me
-        Me.ucrReceiverFactorA.Location = New System.Drawing.Point(295, 195)
+        Me.ucrReceiverFactorA.Location = New System.Drawing.Point(294, 255)
         Me.ucrReceiverFactorA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorA.Name = "ucrReceiverFactorA"
         Me.ucrReceiverFactorA.Selector = Nothing
@@ -563,7 +564,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.ucrReceiverFactorB.AutoSize = True
         Me.ucrReceiverFactorB.frmParent = Me
-        Me.ucrReceiverFactorB.Location = New System.Drawing.Point(295, 245)
+        Me.ucrReceiverFactorB.Location = New System.Drawing.Point(295, 305)
         Me.ucrReceiverFactorB.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorB.Name = "ucrReceiverFactorB"
         Me.ucrReceiverFactorB.Selector = Nothing
@@ -616,7 +617,7 @@ Partial Class dlgExperimentsOneButton
         '
         Me.UcrReceiverTreat.AutoSize = True
         Me.UcrReceiverTreat.frmParent = Me
-        Me.UcrReceiverTreat.Location = New System.Drawing.Point(295, 195)
+        Me.UcrReceiverTreat.Location = New System.Drawing.Point(295, 255)
         Me.UcrReceiverTreat.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverTreat.Name = "UcrReceiverTreat"
         Me.UcrReceiverTreat.Selector = Nothing
@@ -660,13 +661,14 @@ Partial Class dlgExperimentsOneButton
         Me.ucrAlpha.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrAlpha.Name = "ucrAlpha"
         Me.ucrAlpha.Size = New System.Drawing.Size(90, 25)
-        Me.ucrAlpha.TabIndex = 73
+        Me.ucrAlpha.TabIndex = 136
         '
         'dlgExperimentsOneButton
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(535, 686)
+        Me.ClientSize = New System.Drawing.Size(537, 686)
+        Me.Controls.Add(Me.UcrChkSelectionDifferential)
         Me.Controls.Add(Me.ucrReceiverExplanatory)
         Me.Controls.Add(Me.lblExplanatory)
         Me.Controls.Add(Me.grpClusteringMethod)
@@ -708,7 +710,6 @@ Partial Class dlgExperimentsOneButton
         Me.Controls.Add(Me.rdoVariability)
         Me.Controls.Add(Me.rdoPath)
         Me.Controls.Add(Me.ucrNudSelectionDifferential)
-        Me.Controls.Add(Me.lblSelectionDifferential)
         Me.Controls.Add(Me.UcrCheckAlphaExperiments)
         Me.Controls.Add(Me.ucrAlpha)
         Me.Controls.Add(Me.btnChecks)
@@ -770,7 +771,6 @@ Partial Class dlgExperimentsOneButton
     Friend WithEvents ucrReceiverExplanatory As instat.ucrReceiverMultiple
     Friend WithEvents lblLocations As Label
     Friend WithEvents ucrReceiverLocations As instat.ucrReceiverSingle
-    Friend WithEvents lblSelectionDifferential As Label
     Friend WithEvents ucrNudSelectionDifferential As instat.ucrNud
     Friend WithEvents lblMultipleResponses As Label
     Friend WithEvents ucrReceiverMultipleResponses As instat.ucrReceiverMultiple
@@ -782,4 +782,5 @@ Partial Class dlgExperimentsOneButton
     Friend WithEvents ucrPnlClustering As instat.UcrPanel
     Friend WithEvents grpCorrelationType As GroupBox
     Friend WithEvents ucrPnlCorrelationType As instat.UcrPanel
+    Friend WithEvents UcrChkSelectionDifferential As ucrCheck
 End Class

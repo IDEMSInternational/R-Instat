@@ -72,17 +72,27 @@ Public Class dlgExperimentsOneButton
         ucrPnlExperimentsOneButtonOptions.AddParameterValuesCondition(rdoGeneral, "top_option", "General")
         ucrPnlExperimentsOneButtonOptions.AddParameterValuesCondition(rdoSpecial, "top_option", "Special")
 
-        ucrPnlDesign.SetParameter(New RParameter("design", 1))
-        ucrPnlDesign.AddRadioButton(rdorbd, Chr(34) & "rbd" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoFactorial, Chr(34) & "frbd" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoDiallel, Chr(34) & "diallel" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoLxt, Chr(34) & "lxt" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoAugmented, Chr(34) & "augmented" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoDiversity, Chr(34) & "diversity" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoPath, Chr(34) & "path" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoStability, Chr(34) & "stability" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoVariability, Chr(34) & "variability" & Chr(34))
-        ucrPnlDesign.AddRadioButton(rdoCorrelations, Chr(34) & "correlation" & Chr(34))
+        ucrPnlDesign.AddRadioButton(rdorbd)
+        ucrPnlDesign.AddRadioButton(rdoFactorial)
+        ucrPnlDesign.AddRadioButton(rdoDiallel)
+        ucrPnlDesign.AddRadioButton(rdoLxt)
+        ucrPnlDesign.AddRadioButton(rdoAugmented)
+        ucrPnlDesign.AddRadioButton(rdoDiversity)
+        ucrPnlDesign.AddRadioButton(rdoPath)
+        ucrPnlDesign.AddRadioButton(rdoStability)
+        ucrPnlDesign.AddRadioButton(rdoVariability)
+        ucrPnlDesign.AddRadioButton(rdoCorrelations)
+
+        ucrPnlDesign.AddParameterValuesCondition(rdorbd, "design", Chr(34) & "rbd" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoFactorial, "design", Chr(34) & "frbd" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoDiallel, "design", Chr(34) & "diallel" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoLxt, "design", Chr(34) & "lxt" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoAugmented, "design", Chr(34) & "augmented" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoDiversity, "design", Chr(34) & "diversity" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoPath, "design", Chr(34) & "path" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoStability, "design", Chr(34) & "stability" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoVariability, "design", Chr(34) & "variability" & Chr(34))
+        ucrPnlDesign.AddParameterValuesCondition(rdoCorrelations, "design", Chr(34) & "correlation" & Chr(34))
 
         ttDesign.SetToolTip(rdoLxt, "Line by Tester")
         ttVariability.SetToolTip(ucrNudSelectionDifferential, "The value 2.063 is the differential for 5% intensity")
@@ -98,6 +108,7 @@ Public Class dlgExperimentsOneButton
 
         ucrReceiverMultipleResponses.Selector = ucrSelectorForRank
         ucrReceiverMultipleResponses.SetParameter(New RParameter("traits", 1))
+        ucrReceiverMultipleResponses.SetParameterIsString()
         ucrReceiverMultipleResponses.SetDataType("numeric")
         ucrReceiverMultipleResponses.strSelectorHeading = "Numerics"
 
@@ -145,6 +156,7 @@ Public Class dlgExperimentsOneButton
         ucrPnlClustering.AddParameterValuesCondition(rdoHierarchical, "method", Chr(34) & "hierarchical" & Chr(34))
         ucrPnlClustering.SetRDefault(Chr(34) & "tocher" & Chr(34))
         ucrNudClusters.SetParameter(New RParameter("clusters", 5))
+        ucrNudClusters.SetRDefault("2")
 
         ucrPnlCorrelationType.SetParameter(New RParameter("type", 5))
         ucrPnlCorrelationType.AddRadioButton(rdoGenotypic, Chr(34) & "genotypic" & Chr(34))
@@ -154,7 +166,8 @@ Public Class dlgExperimentsOneButton
         ucrPnlCorrelationType.SetRDefault(Chr(34) & "genotypic" & Chr(34))
 
         ucrReceiverExplanatory.Selector = ucrSelectorForRank
-        ucrReceiverExplanatory.SetParameter(New RParameter("path_traits", 1))
+        ucrReceiverExplanatory.SetParameter(New RParameter("traits", 1))
+        ucrReceiverExplanatory.SetParameterIsString()
         ucrReceiverExplanatory.SetDataType("numeric")
         ucrReceiverExplanatory.strSelectorHeading = "Numerics"
 
@@ -167,20 +180,22 @@ Public Class dlgExperimentsOneButton
         ucrNudSelectionDifferential.SetParameter(New RParameter("k", 4))
         ucrNudSelectionDifferential.SetRDefault("2.063")
 
+        UcrChkSelectionDifferential.SetText("Selection Differential")
+        UcrChkSelectionDifferential.AddToLinkedControls(ucrNudSelectionDifferential, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="2.063")
+
         ucrPnlDesign.AddToLinkedControls({ucrPnlClustering}, {rdoDiversity}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlClustering.AddToLinkedControls({ucrNudClusters}, {rdoHierarchical}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDesign.AddToLinkedControls({ucrPnlCorrelationType, ucrReceiverExplanatory}, {rdoPath}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDesign.AddToLinkedControls({ucrReceiverLocations}, {rdoStability}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDesign.AddToLinkedControls({ucrNudSelectionDifferential}, {rdoVariability}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDesign.AddToLinkedControls({UcrChkSelectionDifferential}, {rdoVariability}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlDesign.AddToLinkedControls({ucrReceiverMultipleResponses}, {rdoCorrelations}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDesign.AddToLinkedControls({ucrReceiverMultipleResponses}, {rdoCorrelations, rdoDiversity, rdoVariability}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlClustering.SetLinkedDisplayControl(grpClusteringMethod)
         ucrNudClusters.SetLinkedDisplayControl(lblClusters)
         ucrPnlCorrelationType.SetLinkedDisplayControl(grpCorrelationType)
         ucrReceiverExplanatory.SetLinkedDisplayControl(lblExplanatory)
         ucrReceiverLocations.SetLinkedDisplayControl(lblLocations)
-        ucrNudSelectionDifferential.SetLinkedDisplayControl(lblSelectionDifferential)
         ucrReceiverMultipleResponses.SetLinkedDisplayControl(lblMultipleResponses)
 
         ucrChkPlot.SetText("Generate Plot")
@@ -327,17 +342,17 @@ Public Class dlgExperimentsOneButton
             ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("trait", 1), iAdditionalPairNo:=4)
             ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkStabilityFunction, New RParameter("trait", 1), iAdditionalPairNo:=5)
             ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkPathFunction, New RParameter("dependent", 2), iAdditionalPairNo:=6)
-            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkDiversityFunction, New RParameter("traits", 1), iAdditionalPairNo:=7)
-            ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBkVariabilityFunction, New RParameter("traits", 1), iAdditionalPairNo:=8)
         End If
         ucrReceiverResponse.SetRCode(clsBkRbdFunction, bReset)
 
+        If bReset Then
+            ucrReceiverMultipleResponses.AddAdditionalCodeParameterPair(clsBkDiversityFunction, New RParameter("traits", 1), iAdditionalPairNo:=1)
+            ucrReceiverMultipleResponses.AddAdditionalCodeParameterPair(clsBkVariabilityFunction, New RParameter("traits", 1), iAdditionalPairNo:=2)
+        End If
+        ucrReceiverMultipleResponses.SetMeAsReceiver()
         ucrReceiverMultipleResponses.SetRCode(clsBkCorrelationFunction, bReset)
 
-        If bReset Then
-            ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBkPathFunction, New RParameter("traits", 1), iAdditionalPairNo:=1)
-        End If
-        ucrReceiverExplanatory.SetRCode(clsDummyFunction, bReset)
+        ucrReceiverExplanatory.SetRCode(clsBkPathFunction, bReset)
 
         If bReset Then
             UcrReceiverTreat.AddAdditionalCodeParameterPair(clsBkAugmentedFunction, New RParameter("gen", 2), iAdditionalPairNo:=1)
@@ -406,7 +421,6 @@ Public Class dlgExperimentsOneButton
             ucrChkPlot.SetRCode(clsDummyFunction, bReset)
             ucrPnlDesign.SetRCode(clsDummyFunction, bReset)
         End If
-
         UpdatePlotCode()
         bRCodeSet = True
     End Sub
@@ -430,8 +444,9 @@ Public Class dlgExperimentsOneButton
     Private Function CheckReceiversAreComplete() As Boolean
         If ucrRep.IsEmpty() Then Return False
 
-        If rdoCorrelations.Checked Then
+        If rdoCorrelations.Checked OrElse rdoDiversity.Checked OrElse rdoVariability.Checked Then
             If ucrReceiverMultipleResponses.IsEmpty() Then Return False
+            If rdoDiversity.Checked AndAlso ucrReceiverMultipleResponses.Count() < 2 Then Return False
         Else
             If ucrReceiverResponse.IsEmpty() Then Return False
         End If
@@ -503,7 +518,6 @@ Public Class dlgExperimentsOneButton
         Dim bIsAugmented As Boolean = rdoAugmented.Checked
         Dim bIsGeneralAlphaDesign As Boolean = rdorbd.Checked OrElse bIsFactorLike OrElse bIsAugmented
 
-        Dim bIsMultipleResponse As Boolean = rdoCorrelations.Checked
 
         lblFactorA.Visible = bIsFactorLike
         ucrReceiverFactorA.Visible = bIsFactorLike
@@ -515,11 +529,6 @@ Public Class dlgExperimentsOneButton
         lblBlock.Visible = bIsAugmented
         ucrBlock.Visible = bIsAugmented
         btnChecks.Visible = bIsAugmented
-
-        lblResponse.Visible = Not bIsMultipleResponse
-        ucrReceiverResponse.Visible = Not bIsMultipleResponse
-        lblMultipleResponses.Visible = bIsMultipleResponse
-        ucrReceiverMultipleResponses.Visible = bIsMultipleResponse
 
         If bIsAugmented Then
             Dim iRepLabelY As Integer = ucrBlock.Bottom + 6
@@ -534,8 +543,6 @@ Public Class dlgExperimentsOneButton
 
         UcrCheckAlphaExperiments.Visible = bIsGeneralAlphaDesign
         ucrAlpha.Visible = UcrCheckAlphaExperiments.Visible AndAlso UcrCheckAlphaExperiments.Checked
-        lblSelectionDifferential.Visible = rdoVariability.Checked
-
         If rdoFactorial.Checked Then
             lblFactorA.Text = "Factor A:"
             lblFactorB.Text = "Factor B:"
@@ -546,12 +553,12 @@ Public Class dlgExperimentsOneButton
             lblFactorA.Text = "Line:"
             lblFactorB.Text = "Tester:"
         End If
+        TestOKEnabled()
 
         If bRCodeSet Then
             UcrBaseExperimentsOneButton.clsRsyntax.SetBaseRFunction(GetActiveDesignFunction())
             UpdatePlotCode()
         End If
-        TestOKEnabled()
     End Sub
 
     Private Function GetActiveDesignFunction() As RFunction
