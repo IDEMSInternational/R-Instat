@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
+Imports System.Reflection
 Imports instat
 Imports instat.Translations
 Imports unvell.ReoGrid
@@ -23,6 +25,7 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
+    Private _sheetListMenu As ContextMenuStrip
     Public Event WorksheetChanged()
 
 
@@ -276,6 +279,40 @@ Public MustInherit Class ucrReoGrid
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.SheetTabWidth = 450
+        SetupSheetListMenuWithCurrentTick()
+    End Sub
+
+    Private Sub SetupSheetListMenuWithCurrentTick()
+        If Not grdData.HasSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl) Then
+            Exit Sub
+        End If
+
+        _sheetListMenu = New ContextMenuStrip()
+        AddHandler _sheetListMenu.Opening, AddressOf SheetListMenu_Opening
+
+        Dim clsSheetListMenuField As FieldInfo = grdData.GetType().GetField("sheetListMenu",
+            BindingFlags.NonPublic Or BindingFlags.Instance)
+        clsSheetListMenuField?.SetValue(grdData, _sheetListMenu)
+    End Sub
+
+    Private Sub SheetListMenu_Opening(sender As Object, e As CancelEventArgs)
+        _sheetListMenu.Items.Clear()
+
+        For Each worksheet In grdData.Worksheets
+            Dim menuItem As New ToolStripMenuItem(worksheet.Name) With {
+                .Tag = worksheet,
+                .Checked = worksheet Is grdData.CurrentWorksheet
+            }
+            AddHandler menuItem.Click, AddressOf SheetListMenuItem_Click
+            _sheetListMenu.Items.Add(menuItem)
+        Next
+    End Sub
+
+    Private Sub SheetListMenuItem_Click(sender As Object, e As EventArgs)
+        Dim worksheet As Worksheet = TryCast(DirectCast(sender, ToolStripMenuItem).Tag, Worksheet)
+        If worksheet IsNot Nothing Then
+            grdData.CurrentWorksheet = worksheet
+        End If
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged
