@@ -21,6 +21,7 @@ Public Class dlgTaylorDiagram
     Private clsTaylorDiagramFunction As New RFunction
     Private clsGetObjectDataFunction As New RFunction
     Private clsDevOff As New RFunction
+
     Private Sub dlgTaylorDiagram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -78,12 +79,20 @@ Public Class dlgTaylorDiagram
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorTaylorDiagram.ucrAvailableDataFrames)
         ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
+
+        clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+
+        clsDevOff.SetRCommand("dev.off")
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDevOff, iPosition:=1)
     End Sub
 
     Private Sub SetDefaults()
         clsTaylorDiagramFunction = New RFunction
-        clsGetObjectDataFunction = New RFunction
-        clsDevOff = New RFunction
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
@@ -93,16 +102,7 @@ Public Class dlgTaylorDiagram
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
         clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
-
-        clsDevOff.SetRCommand("dev.off")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDevOff, iPosition:=1)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
