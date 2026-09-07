@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExperimentsOneButton
     Inherits System.Windows.Forms.Form
 
@@ -70,7 +86,7 @@ Partial Class dlgExperimentsOneButton
         Me.ucrPnlExperimentsOneButtonOptions = New instat.UcrPanel()
         Me.ucrPnlDesign = New instat.UcrPanel()
         Me.UcrReceiverTreat = New instat.ucrReceiverSingle()
-        Me.ucrNudSelectionDifferential = New instat.ucrNud()
+        Me.ucrNudSelectionDifferential = New instat.ucrInputComboBox()
         Me.UcrCheckAlphaExperiments = New instat.ucrCheck()
         Me.ucrAlpha = New instat.ucrInputComboBox()
         Me.grpClusteringMethod.SuspendLayout()
@@ -628,18 +644,16 @@ Partial Class dlgExperimentsOneButton
         '
         'ucrNudSelectionDifferential
         '
-        Me.ucrNudSelectionDifferential.AutoSize = True
-        Me.ucrNudSelectionDifferential.DecimalPlaces = New Decimal(New Integer() {3, 0, 0, 0})
-        Me.ucrNudSelectionDifferential.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudSelectionDifferential.AddQuotesIfUnrecognised = False
+        Me.ucrNudSelectionDifferential.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNudSelectionDifferential.GetSetSelectedIndex = -1
+        Me.ucrNudSelectionDifferential.IsReadOnly = False
         Me.ucrNudSelectionDifferential.Location = New System.Drawing.Point(187, 341)
-        Me.ucrNudSelectionDifferential.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrNudSelectionDifferential.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.ucrNudSelectionDifferential.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSelectionDifferential.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudSelectionDifferential.Name = "ucrNudSelectionDifferential"
         Me.ucrNudSelectionDifferential.Size = New System.Drawing.Size(90, 25)
         Me.ucrNudSelectionDifferential.TabIndex = 134
         Me.ttVariability.SetToolTip(Me.ucrNudSelectionDifferential, "The value 2.063 is the differential for 5% intensity")
-        Me.ucrNudSelectionDifferential.Value = New Decimal(New Integer() {2063, 0, 0, 196608})
         '
         'UcrCheckAlphaExperiments
         '
@@ -709,10 +723,10 @@ Partial Class dlgExperimentsOneButton
         Me.Controls.Add(Me.rdoDiversity)
         Me.Controls.Add(Me.rdoVariability)
         Me.Controls.Add(Me.rdoPath)
-        Me.Controls.Add(Me.ucrNudSelectionDifferential)
         Me.Controls.Add(Me.UcrCheckAlphaExperiments)
-        Me.Controls.Add(Me.ucrAlpha)
         Me.Controls.Add(Me.btnChecks)
+        Me.Controls.Add(Me.ucrNudSelectionDifferential)
+        Me.Controls.Add(Me.ucrAlpha)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -771,7 +785,7 @@ Partial Class dlgExperimentsOneButton
     Friend WithEvents ucrReceiverExplanatory As instat.ucrReceiverMultiple
     Friend WithEvents lblLocations As Label
     Friend WithEvents ucrReceiverLocations As instat.ucrReceiverSingle
-    Friend WithEvents ucrNudSelectionDifferential As instat.ucrNud
+    Friend WithEvents ucrNudSelectionDifferential As instat.ucrInputComboBox
     Friend WithEvents lblMultipleResponses As Label
     Friend WithEvents ucrReceiverMultipleResponses As instat.ucrReceiverMultiple
     Friend WithEvents rdoGenotypic As RadioButton

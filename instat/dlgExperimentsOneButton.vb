@@ -154,16 +154,13 @@ Public Class dlgExperimentsOneButton
         ucrPnlClustering.AddRadioButton(rdoHierarchical, Chr(34) & "hierarchical" & Chr(34))
         ucrPnlClustering.AddParameterValuesCondition(rdoTocher, "method", Chr(34) & "tocher" & Chr(34))
         ucrPnlClustering.AddParameterValuesCondition(rdoHierarchical, "method", Chr(34) & "hierarchical" & Chr(34))
-        ucrPnlClustering.SetRDefault(Chr(34) & "tocher" & Chr(34))
         ucrNudClusters.SetParameter(New RParameter("clusters", 5))
-        ucrNudClusters.SetRDefault("2")
 
         ucrPnlCorrelationType.SetParameter(New RParameter("type", 5))
         ucrPnlCorrelationType.AddRadioButton(rdoGenotypic, Chr(34) & "genotypic" & Chr(34))
         ucrPnlCorrelationType.AddRadioButton(rdoPhenotypic, Chr(34) & "phenotypic" & Chr(34))
         ucrPnlCorrelationType.AddParameterValuesCondition(rdoGenotypic, "type", Chr(34) & "genotypic" & Chr(34))
         ucrPnlCorrelationType.AddParameterValuesCondition(rdoPhenotypic, "type", Chr(34) & "phenotypic" & Chr(34))
-        ucrPnlCorrelationType.SetRDefault(Chr(34) & "genotypic" & Chr(34))
 
         ucrReceiverExplanatory.Selector = ucrSelectorForRank
         ucrReceiverExplanatory.SetParameter(New RParameter("traits", 1))
@@ -177,14 +174,16 @@ Public Class dlgExperimentsOneButton
         ucrReceiverLocations.SetDataType("factor")
         ucrReceiverLocations.strSelectorHeading = "Factors"
 
+        ucrNudSelectionDifferential.SetItems({"2.063"})
         ucrNudSelectionDifferential.SetParameter(New RParameter("k", 4))
-        ucrNudSelectionDifferential.SetRDefault("2.063")
+        ucrNudSelectionDifferential.SetText("2.063")
+
 
         UcrChkSelectionDifferential.SetText("Selection Differential")
         UcrChkSelectionDifferential.AddToLinkedControls(ucrNudSelectionDifferential, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="2.063")
 
         ucrPnlDesign.AddToLinkedControls({ucrPnlClustering}, {rdoDiversity}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlClustering.AddToLinkedControls({ucrNudClusters}, {rdoHierarchical}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlClustering.AddToLinkedControls({ucrNudClusters}, {rdoHierarchical}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="2")
         ucrPnlDesign.AddToLinkedControls({ucrPnlCorrelationType, ucrReceiverExplanatory}, {rdoPath}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDesign.AddToLinkedControls({ucrReceiverLocations}, {rdoStability}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDesign.AddToLinkedControls({UcrChkSelectionDifferential}, {rdoVariability}, bNewLinkedHideIfParameterMissing:=True)
@@ -250,6 +249,7 @@ Public Class dlgExperimentsOneButton
 
         ucrSave.ucrChkSave.Checked = False
         ucrSaveGraph.ucrChkSave.Checked = False
+        UcrChkSelectionDifferential.Checked = False
 
         clsDummyFunction.AddParameter("top_option", "General", iPosition:=0)
         clsDummyFunction.AddParameter("plot", "True", iPosition:=1)
@@ -280,6 +280,7 @@ Public Class dlgExperimentsOneButton
         clsBkDiversityFunction.SetPackageName(strPackageBKBreed)
         clsBkDiversityFunction.SetRCommand("bk_diversity")
         clsBkDiversityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkDiversityFunction.AddParameter("clusters", "2", iPosition:=5)
 
         clsBkPathFunction.SetPackageName(strPackageBKBreed)
         clsBkPathFunction.SetRCommand("bk_path")
@@ -292,6 +293,7 @@ Public Class dlgExperimentsOneButton
         clsBkVariabilityFunction.SetPackageName(strPackageBKBreed)
         clsBkVariabilityFunction.SetRCommand("bk_variability")
         clsBkVariabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkVariabilityFunction.AddParameter("k", "2.063", iPosition:=4)
 
         clsBkCorrelationFunction.SetPackageName(strPackageBKBreed)
         clsBkCorrelationFunction.SetRCommand("bk_correlation")
@@ -404,8 +406,8 @@ Public Class dlgExperimentsOneButton
 
         ucrBlock.SetRCode(clsBkAugmentedFunction, bReset)
 
-        ucrPnlClustering.SetRCode(clsBkDiversityFunction, bReset)
         ucrNudClusters.SetRCode(clsBkDiversityFunction, bReset)
+        ucrPnlClustering.SetRCode(clsBkDiversityFunction, bReset)
         ucrPnlCorrelationType.SetRCode(clsBkPathFunction, bReset)
         ucrReceiverLocations.SetRCode(clsBkStabilityFunction, bReset)
         ucrNudSelectionDifferential.SetRCode(clsBkVariabilityFunction, bReset)
@@ -594,8 +596,8 @@ Public Class dlgExperimentsOneButton
         clsBkDiallelFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsBkLxtFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsBkAugmentedFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
-        clsBkDiversityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
-        clsBkPathFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
+        clsBkDiversityFunction.AddParameter("method", Chr(34) & "tocher" & Chr(34), iPosition:=4)
+        clsBkPathFunction.AddParameter("type", Chr(34) & "genotypic" & Chr(34), iPosition:=5)
         clsBkStabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsBkVariabilityFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsBkCorrelationFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
