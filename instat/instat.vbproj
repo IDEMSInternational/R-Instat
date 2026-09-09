@@ -395,6 +395,12 @@
     <Compile Include="dlgRecordQuarto.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgResiduals.Designer.vb">
+      <DependentUpon>dlgResiduals.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgResiduals.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRestoreBackup.Designer.vb">
       <DependentUpon>dlgRestoreBackup.vb</DependentUpon>
     </Compile>
