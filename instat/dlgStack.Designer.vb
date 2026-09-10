@@ -50,7 +50,6 @@ Partial Class dlgStack
         Me.ttPattern = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.lblVariable = New System.Windows.Forms.Label()
-        Me.lblSets = New System.Windows.Forms.Label()
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.rdoExpand = New System.Windows.Forms.RadioButton()
         Me.lblExpandFactor = New System.Windows.Forms.Label()
@@ -59,7 +58,6 @@ Partial Class dlgStack
         Me.rdoCarryColumns = New System.Windows.Forms.RadioButton()
         Me.lblDropValues = New System.Windows.Forms.Label()
         Me.ucrSaveNewDataName = New instat.ucrSave()
-        Me.ucrNudNoSets = New instat.ucrNud()
         Me.ucrReceiverDropValues = New instat.ucrReceiverMultiple()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.ucrChkToLowerCase = New instat.ucrCheck()
@@ -85,6 +83,13 @@ Partial Class dlgStack
         Me.ucrChkDropVariables = New instat.ucrCheck()
         Me.ucrPnlCarryColumns = New instat.UcrPanel()
         Me.ucrChkDropMissingValues = New instat.ucrCheck()
+        Me.ucrInputNamesSep = New instat.ucrInputComboBox()
+        Me.rdoNSets = New System.Windows.Forms.RadioButton()
+        Me.rdoSeperatedBy = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMultipleStack = New instat.UcrPanel()
+        Me.ucrNudSets = New instat.ucrNud()
+        Me.grpStackColSets = New System.Windows.Forms.GroupBox()
+        Me.grpStackColSets.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -102,7 +107,7 @@ Partial Class dlgStack
         '
         Me.lblValuesTo.AutoSize = True
         Me.lblValuesTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblValuesTo.Location = New System.Drawing.Point(7, 274)
+        Me.lblValuesTo.Location = New System.Drawing.Point(7, 253)
         Me.lblValuesTo.Name = "lblValuesTo"
         Me.lblValuesTo.Size = New System.Drawing.Size(54, 13)
         Me.lblValuesTo.TabIndex = 10
@@ -113,7 +118,7 @@ Partial Class dlgStack
         '
         Me.lblNamesTo.AutoSize = True
         Me.lblNamesTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNamesTo.Location = New System.Drawing.Point(8, 250)
+        Me.lblNamesTo.Location = New System.Drawing.Point(8, 230)
         Me.lblNamesTo.Name = "lblNamesTo"
         Me.lblNamesTo.Size = New System.Drawing.Size(55, 13)
         Me.lblNamesTo.TabIndex = 8
@@ -128,7 +133,7 @@ Partial Class dlgStack
         Me.rdoPivotLonger.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPivotLonger.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPivotLonger.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPivotLonger.Location = New System.Drawing.Point(76, 12)
+        Me.rdoPivotLonger.Location = New System.Drawing.Point(76, 8)
         Me.rdoPivotLonger.Name = "rdoPivotLonger"
         Me.rdoPivotLonger.Size = New System.Drawing.Size(95, 28)
         Me.rdoPivotLonger.TabIndex = 1
@@ -144,7 +149,7 @@ Partial Class dlgStack
         Me.rdoUnnest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoUnnest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoUnnest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnnest.Location = New System.Drawing.Point(169, 12)
+        Me.rdoUnnest.Location = New System.Drawing.Point(169, 8)
         Me.rdoUnnest.Name = "rdoUnnest"
         Me.rdoUnnest.Size = New System.Drawing.Size(92, 28)
         Me.rdoUnnest.TabIndex = 2
@@ -203,21 +208,11 @@ Partial Class dlgStack
         Me.lblVariable.Tag = "Columns_to_Stack:"
         Me.lblVariable.Text = "Variable:"
         '
-        'lblSets
-        '
-        Me.lblSets.AutoSize = True
-        Me.lblSets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSets.Location = New System.Drawing.Point(220, 323)
-        Me.lblSets.Name = "lblSets"
-        Me.lblSets.Size = New System.Drawing.Size(31, 13)
-        Me.lblSets.TabIndex = 31
-        Me.lblSets.Text = "Sets:"
-        '
         'lblFactorInto
         '
         Me.lblFactorInto.AutoSize = True
         Me.lblFactorInto.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorInto.Location = New System.Drawing.Point(8, 248)
+        Me.lblFactorInto.Location = New System.Drawing.Point(8, 228)
         Me.lblFactorInto.Name = "lblFactorInto"
         Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
         Me.lblFactorInto.TabIndex = 33
@@ -232,7 +227,7 @@ Partial Class dlgStack
         Me.rdoExpand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoExpand.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoExpand.Location = New System.Drawing.Point(259, 12)
+        Me.rdoExpand.Location = New System.Drawing.Point(259, 8)
         Me.rdoExpand.Name = "rdoExpand"
         Me.rdoExpand.Size = New System.Drawing.Size(91, 28)
         Me.rdoExpand.TabIndex = 34
@@ -298,24 +293,11 @@ Partial Class dlgStack
         'ucrSaveNewDataName
         '
         Me.ucrSaveNewDataName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 365)
+        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 395)
         Me.ucrSaveNewDataName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
         Me.ucrSaveNewDataName.Size = New System.Drawing.Size(403, 22)
         Me.ucrSaveNewDataName.TabIndex = 45
-        '
-        'ucrNudNoSets
-        '
-        Me.ucrNudNoSets.AutoSize = True
-        Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoSets.Location = New System.Drawing.Point(280, 320)
-        Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoSets.Name = "ucrNudNoSets"
-        Me.ucrNudNoSets.Size = New System.Drawing.Size(31, 24)
-        Me.ucrNudNoSets.TabIndex = 30
-        Me.ucrNudNoSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverDropValues
         '
@@ -348,6 +330,7 @@ Partial Class dlgStack
         Me.ucrChkToLowerCase.AutoSize = True
         Me.ucrChkToLowerCase.Checked = False
         Me.ucrChkToLowerCase.Location = New System.Drawing.Point(10, 246)
+        Me.ucrChkToLowerCase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkToLowerCase.Name = "ucrChkToLowerCase"
         Me.ucrChkToLowerCase.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkToLowerCase.TabIndex = 17
@@ -358,7 +341,7 @@ Partial Class dlgStack
         Me.ucrInputNamesTo.AutoSize = True
         Me.ucrInputNamesTo.IsMultiline = False
         Me.ucrInputNamesTo.IsReadOnly = False
-        Me.ucrInputNamesTo.Location = New System.Drawing.Point(143, 247)
+        Me.ucrInputNamesTo.Location = New System.Drawing.Point(143, 229)
         Me.ucrInputNamesTo.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputNamesTo.Name = "ucrInputNamesTo"
         Me.ucrInputNamesTo.Size = New System.Drawing.Size(75, 21)
@@ -405,8 +388,9 @@ Partial Class dlgStack
         '
         Me.ucrPnlStack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlStack.Location = New System.Drawing.Point(67, 3)
+        Me.ucrPnlStack.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlStack.Name = "ucrPnlStack"
-        Me.ucrPnlStack.Size = New System.Drawing.Size(299, 49)
+        Me.ucrPnlStack.Size = New System.Drawing.Size(299, 40)
         Me.ucrPnlStack.TabIndex = 0
         '
         'ucrInputValuesTo
@@ -415,7 +399,7 @@ Partial Class dlgStack
         Me.ucrInputValuesTo.AutoSize = True
         Me.ucrInputValuesTo.IsMultiline = False
         Me.ucrInputValuesTo.IsReadOnly = False
-        Me.ucrInputValuesTo.Location = New System.Drawing.Point(143, 272)
+        Me.ucrInputValuesTo.Location = New System.Drawing.Point(143, 255)
         Me.ucrInputValuesTo.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputValuesTo.Name = "ucrInputValuesTo"
         Me.ucrInputValuesTo.Size = New System.Drawing.Size(75, 21)
@@ -427,7 +411,7 @@ Partial Class dlgStack
         Me.ucrSelectorStack.bDropUnusedFilterLevels = False
         Me.ucrSelectorStack.bShowHiddenColumns = False
         Me.ucrSelectorStack.bUseCurrentFilter = True
-        Me.ucrSelectorStack.Location = New System.Drawing.Point(10, 55)
+        Me.ucrSelectorStack.Location = New System.Drawing.Point(10, 43)
         Me.ucrSelectorStack.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStack.Name = "ucrSelectorStack"
         Me.ucrSelectorStack.Size = New System.Drawing.Size(213, 183)
@@ -437,7 +421,7 @@ Partial Class dlgStack
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 387)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 421)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -450,6 +434,7 @@ Partial Class dlgStack
         Me.ucrInputToken.GetSetSelectedIndex = -1
         Me.ucrInputToken.IsReadOnly = False
         Me.ucrInputToken.Location = New System.Drawing.Point(312, 119)
+        Me.ucrInputToken.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputToken.Name = "ucrInputToken"
         Me.ucrInputToken.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputToken.TabIndex = 9
@@ -461,6 +446,7 @@ Partial Class dlgStack
         Me.ucrInputFormat.GetSetSelectedIndex = -1
         Me.ucrInputFormat.IsReadOnly = False
         Me.ucrInputFormat.Location = New System.Drawing.Point(311, 160)
+        Me.ucrInputFormat.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputFormat.Name = "ucrInputFormat"
         Me.ucrInputFormat.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputFormat.TabIndex = 11
@@ -470,6 +456,7 @@ Partial Class dlgStack
         Me.ucrChkPunctuation.AutoSize = True
         Me.ucrChkPunctuation.Checked = False
         Me.ucrChkPunctuation.Location = New System.Drawing.Point(10, 273)
+        Me.ucrChkPunctuation.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkPunctuation.Name = "ucrChkPunctuation"
         Me.ucrChkPunctuation.Size = New System.Drawing.Size(156, 23)
         Me.ucrChkPunctuation.TabIndex = 19
@@ -479,6 +466,7 @@ Partial Class dlgStack
         Me.ucrChkUrl.AutoSize = True
         Me.ucrChkUrl.Checked = False
         Me.ucrChkUrl.Location = New System.Drawing.Point(10, 297)
+        Me.ucrChkUrl.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkUrl.Name = "ucrChkUrl"
         Me.ucrChkUrl.Size = New System.Drawing.Size(156, 23)
         Me.ucrChkUrl.TabIndex = 21
@@ -488,6 +476,7 @@ Partial Class dlgStack
         Me.ucrChkDropPrefix.AutoSize = True
         Me.ucrChkDropPrefix.Checked = False
         Me.ucrChkDropPrefix.Location = New System.Drawing.Point(10, 297)
+        Me.ucrChkDropPrefix.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDropPrefix.Name = "ucrChkDropPrefix"
         Me.ucrChkDropPrefix.Size = New System.Drawing.Size(193, 23)
         Me.ucrChkDropPrefix.TabIndex = 27
@@ -496,7 +485,8 @@ Partial Class dlgStack
         '
         Me.ucrChkStackMultipleSets.AutoSize = True
         Me.ucrChkStackMultipleSets.Checked = False
-        Me.ucrChkStackMultipleSets.Location = New System.Drawing.Point(10, 320)
+        Me.ucrChkStackMultipleSets.Location = New System.Drawing.Point(9, 275)
+        Me.ucrChkStackMultipleSets.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
         Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(231, 24)
         Me.ucrChkStackMultipleSets.TabIndex = 29
@@ -507,7 +497,7 @@ Partial Class dlgStack
         Me.ucrFactorInto.AutoSize = True
         Me.ucrFactorInto.IsMultiline = False
         Me.ucrFactorInto.IsReadOnly = False
-        Me.ucrFactorInto.Location = New System.Drawing.Point(82, 245)
+        Me.ucrFactorInto.Location = New System.Drawing.Point(82, 226)
         Me.ucrFactorInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorInto.Name = "ucrFactorInto"
         Me.ucrFactorInto.Size = New System.Drawing.Size(75, 21)
@@ -569,6 +559,7 @@ Partial Class dlgStack
         Me.ucrChkDropVariables.AutoSize = True
         Me.ucrChkDropVariables.Checked = False
         Me.ucrChkDropVariables.Location = New System.Drawing.Point(312, 197)
+        Me.ucrChkDropVariables.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDropVariables.Name = "ucrChkDropVariables"
         Me.ucrChkDropVariables.Size = New System.Drawing.Size(161, 24)
         Me.ucrChkDropVariables.TabIndex = 42
@@ -577,6 +568,7 @@ Partial Class dlgStack
         '
         Me.ucrPnlCarryColumns.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCarryColumns.Location = New System.Drawing.Point(259, 189)
+        Me.ucrPnlCarryColumns.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlCarryColumns.Name = "ucrPnlCarryColumns"
         Me.ucrPnlCarryColumns.Size = New System.Drawing.Size(229, 48)
         Me.ucrPnlCarryColumns.TabIndex = 39
@@ -586,18 +578,93 @@ Partial Class dlgStack
         Me.ucrChkDropMissingValues.AutoSize = True
         Me.ucrChkDropMissingValues.Checked = False
         Me.ucrChkDropMissingValues.Location = New System.Drawing.Point(10, 343)
+        Me.ucrChkDropMissingValues.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDropMissingValues.Name = "ucrChkDropMissingValues"
         Me.ucrChkDropMissingValues.Size = New System.Drawing.Size(193, 23)
         Me.ucrChkDropMissingValues.TabIndex = 26
+        '
+        'ucrInputNamesSep
+        '
+        Me.ucrInputNamesSep.AddQuotesIfUnrecognised = True
+        Me.ucrInputNamesSep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputNamesSep.GetSetSelectedIndex = -1
+        Me.ucrInputNamesSep.IsReadOnly = False
+        Me.ucrInputNamesSep.Location = New System.Drawing.Point(128, 26)
+        Me.ucrInputNamesSep.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrInputNamesSep.Name = "ucrInputNamesSep"
+        Me.ucrInputNamesSep.Size = New System.Drawing.Size(104, 21)
+        Me.ucrInputNamesSep.TabIndex = 46
+        '
+        'rdoNSets
+        '
+        Me.rdoNSets.AutoSize = True
+        Me.rdoNSets.Location = New System.Drawing.Point(11, 57)
+        Me.rdoNSets.Name = "rdoNSets"
+        Me.rdoNSets.Size = New System.Drawing.Size(109, 17)
+        Me.rdoNSets.TabIndex = 48
+        Me.rdoNSets.TabStop = True
+        Me.rdoNSets.Text = "Stack Into N Sets"
+        Me.rdoNSets.UseVisualStyleBackColor = True
+        '
+        'rdoSeperatedBy
+        '
+        Me.rdoSeperatedBy.AutoSize = True
+        Me.rdoSeperatedBy.Location = New System.Drawing.Point(11, 28)
+        Me.rdoSeperatedBy.Name = "rdoSeperatedBy"
+        Me.rdoSeperatedBy.Size = New System.Drawing.Size(107, 17)
+        Me.rdoSeperatedBy.TabIndex = 49
+        Me.rdoSeperatedBy.TabStop = True
+        Me.rdoSeperatedBy.Text = "Names Separator"
+        Me.rdoSeperatedBy.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMultipleStack
+        '
+        Me.ucrPnlMultipleStack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlMultipleStack.Location = New System.Drawing.Point(8, 23)
+        Me.ucrPnlMultipleStack.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlMultipleStack.Name = "ucrPnlMultipleStack"
+        Me.ucrPnlMultipleStack.Size = New System.Drawing.Size(112, 62)
+        Me.ucrPnlMultipleStack.TabIndex = 50
+        '
+        'ucrNudSets
+        '
+        Me.ucrNudSets.AutoSize = True
+        Me.ucrNudSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSets.Location = New System.Drawing.Point(128, 57)
+        Me.ucrNudSets.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrNudSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSets.Name = "ucrNudSets"
+        Me.ucrNudSets.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSets.TabIndex = 51
+        Me.ucrNudSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'grpStackColSets
+        '
+        Me.grpStackColSets.Controls.Add(Me.rdoSeperatedBy)
+        Me.grpStackColSets.Controls.Add(Me.ucrNudSets)
+        Me.grpStackColSets.Controls.Add(Me.ucrInputNamesSep)
+        Me.grpStackColSets.Controls.Add(Me.rdoNSets)
+        Me.grpStackColSets.Controls.Add(Me.ucrPnlMultipleStack)
+        Me.grpStackColSets.Location = New System.Drawing.Point(15, 299)
+        Me.grpStackColSets.Margin = New System.Windows.Forms.Padding(2)
+        Me.grpStackColSets.Name = "grpStackColSets"
+        Me.grpStackColSets.Padding = New System.Windows.Forms.Padding(2)
+        Me.grpStackColSets.Size = New System.Drawing.Size(246, 93)
+        Me.grpStackColSets.TabIndex = 52
+        Me.grpStackColSets.TabStop = False
+        Me.grpStackColSets.Text = "Stack Column Sets"
         '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(483, 442)
+        Me.ClientSize = New System.Drawing.Size(483, 485)
+        Me.Controls.Add(Me.grpStackColSets)
+        Me.Controls.Add(Me.ucrChkStackMultipleSets)
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.rdoCarryAllColumns)
-        Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrReceiverDropValues)
         Me.Controls.Add(Me.lblDropValues)
         Me.Controls.Add(Me.rdoCarryColumns)
@@ -606,7 +673,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.rdoExpand)
         Me.Controls.Add(Me.ucrChkToLowerCase)
         Me.Controls.Add(Me.ucrInputNamesTo)
-        Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrInputDropPrefix)
         Me.Controls.Add(Me.ucrInputOutput)
         Me.Controls.Add(Me.ucrReceiverTextColumn)
@@ -623,7 +689,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrChkUrl)
         Me.Controls.Add(Me.ucrChkDropPrefix)
         Me.Controls.Add(Me.lblOutput)
-        Me.Controls.Add(Me.ucrChkStackMultipleSets)
         Me.Controls.Add(Me.ucrFactorInto)
         Me.Controls.Add(Me.lblNamesTo)
         Me.Controls.Add(Me.lblFactorInto)
@@ -648,6 +713,8 @@ Partial Class dlgStack
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stack_join_columns"
         Me.Text = "Stack (Pivot Longer)"
+        Me.grpStackColSets.ResumeLayout(False)
+        Me.grpStackColSets.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -681,8 +748,6 @@ Partial Class dlgStack
     Friend WithEvents ucrChkDropMissingValues As ucrCheck
     Friend WithEvents ucrChkDropPrefix As ucrCheck
     Friend WithEvents ucrInputDropPrefix As ucrInputTextBox
-    Friend WithEvents lblSets As Label
-    Friend WithEvents ucrNudNoSets As ucrNud
     Friend WithEvents ucrChkStackMultipleSets As ucrCheck
     Friend WithEvents ucrFactorInto As ucrInputTextBox
     Friend WithEvents lblFactorInto As Label
@@ -698,4 +763,10 @@ Partial Class dlgStack
     Friend WithEvents ucrReceiverDropValues As ucrReceiverMultiple
     Friend WithEvents lblDropValues As Label
     Friend WithEvents ucrSaveNewDataName As ucrSave
+    Friend WithEvents ucrInputNamesSep As ucrInputComboBox
+    Friend WithEvents grpStackColSets As GroupBox
+    Friend WithEvents rdoSeperatedBy As RadioButton
+    Friend WithEvents ucrNudSets As ucrNud
+    Friend WithEvents rdoNSets As RadioButton
+    Friend WithEvents ucrPnlMultipleStack As UcrPanel
 End Class

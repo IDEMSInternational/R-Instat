@@ -40,6 +40,7 @@ Public Class dlgOpenNetCDF
     Private strLong As String
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
+    Private strFilePathName As String = ""
     Private iExpandedWidth As Integer
     Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library" & "\" & "Climatic" & "\" & "_Satellite" & "\"
     Private bFromLibrary As Boolean = False
@@ -76,6 +77,7 @@ Public Class dlgOpenNetCDF
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        SetInternalFilePathName()
     End Sub
 
     Private Sub OpenFile()
@@ -156,6 +158,21 @@ Public Class dlgOpenNetCDF
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Public Sub SetFilePath(strFilePath As String)
+        strFilePathName = strFilePath
+    End Sub
+
+    Private Sub SetInternalFilePathName()
+        Dim strFileName As String
+
+        If strFilePathName <> "" AndAlso ucrInputPath IsNot Nothing Then
+            ucrInputPath.SetName(strFilePathName)
+            strFileName = Path.GetFileNameWithoutExtension(strFilePathName)
+            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+            clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFilePathName, "\", "/") & Chr(34))
         End If
     End Sub
 

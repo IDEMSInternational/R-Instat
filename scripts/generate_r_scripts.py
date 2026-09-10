@@ -25,13 +25,13 @@ Package types
                 Packages sharing the same priority + repo are batched into a
                 single install.packages(c(...)) call.
     github      GitHub package; installed via
-                    devtools::install_github(repo, ...)
+                    pak::pak(repo, ...)
                 The .libPaths() internal-library block is inserted automatically
                 before the first github-type package.
 
 Package options (optional JSON fields)
 --------------------------------------
-    force               bool  — adds force = TRUE to devtools::install_github()
+    force                 (to remove now) bool  for devtools::install_github with force = TRUE. No equivalent needed now we are using pak::pak
     install_dependencies  bool  — sets the dependencies argument.
                           Defaults to FALSE if not present in the JSON entry.
 """
@@ -89,11 +89,9 @@ def _group_key(pkg):
 
 def _github_line(pkg: dict) -> str:
     deps_r = "TRUE" if _install_deps(pkg) else "FALSE"
-    parts = [f'devtools::install_github("{pkg["installed_from"]}"']
+    parts = [f'pak::pak("{pkg["installed_from"]}"']
     parts.append(f"dependencies = {deps_r}")
-    if pkg.get("force"):
-        parts.append("force = TRUE")
-    parts.append('upgrade = "never"')
+    parts.append("ask = FALSE")
     return ", ".join(parts) + ")"
 
 

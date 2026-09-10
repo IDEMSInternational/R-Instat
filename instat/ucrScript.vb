@@ -964,6 +964,17 @@ Public Class ucrScript
 
         End If
 
+        Dim strChunkOptions As String =
+    "warning=" & frmMain.bQuartoWarning.ToString().ToUpper() &
+    ", message=" & frmMain.bQuartoMessage.ToString().ToUpper() &
+    ", echo=" & frmMain.bQuartoEcho.ToString().ToUpper() &
+    ", eval=" & frmMain.bQuartoEval.ToString().ToUpper()
+
+        strQuartoTemplate =
+    strQuartoTemplate.Replace(
+        "<<CHUNK_OPTIONS>>",
+        strChunkOptions)
+
         If Not frmMain.bQuartoHTML Then
             strQuartoTemplate = strQuartoTemplate.Replace("  html: default" & vbCrLf, "")
         End If
@@ -1405,6 +1416,24 @@ Public Class ucrScript
         SetFocusAndScrollCaret()
     End Sub
 
+    Public Sub RunCurrentQuarto()
+
+        If enumScriptType <> ScriptType.quarto Then
+            Exit Sub
+        End If
+
+        Dim strScriptToRun As String =
+        GetQuartoRenderScript(clsScriptActive.Text)
+
+        frmSetupLoading.Show()
+        RunRScript(strScriptToRun,
+               "Code to render the Quarto script in the Script Window")
+        frmSetupLoading.Close()
+
+        SetFocusAndScrollCaret()
+
+    End Sub
+
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
         Dim bIsRScript As Boolean = enumScriptType = ScriptType.rScript
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
@@ -1654,7 +1683,38 @@ Public Class ucrScript
         clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
 
+    Private Sub UpdateRecordQuartoButton()
+
+        cmdRecordQuarto.Text = If(frmMain.bRecordQuarto,
+                              "Stop Quarto",
+                              "Record Quarto")
+
+    End Sub
+
     Private Sub cmdRecordQuarto_Click(sender As Object, e As EventArgs) Handles cmdRecordQuarto.Click
-        dlgRecordQuarto.ShowDialog()
+        If frmMain.bRecordQuarto Then
+
+            If MessageBox.Show(
+                "This will stop the current Quarto recording session." &
+                Environment.NewLine & Environment.NewLine &
+                "Do you want to continue?",
+                "Stop Quarto",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) = DialogResult.No Then
+                Exit Sub
+            End If
+
+            frmMain.bRecordQuarto = False
+            frmMain.strCurrentQuartoFile = ""
+            frmMain.strCurrentQuartoRdsFile = ""
+            frmMain.strSaveFilePath = ""
+
+        Else
+
+            dlgRecordQuarto.ShowDialog()
+
+        End If
+
+        UpdateRecordQuartoButton()
     End Sub
 End Class                                                                                                                                                       
