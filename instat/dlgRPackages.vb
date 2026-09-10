@@ -29,7 +29,7 @@ Public Class dlgInstallRPackage
         Dim dctPackages As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 592
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 2
         ucrInputTextBoxRPackage.SetParameter(New RParameter("pkgs", 1))
         ucrPnlRPackages.AddRadioButton(rdoCRAN)
         ucrPnlRPackages.AddRadioButton(rdoRPackage)
@@ -246,12 +246,14 @@ Public Class dlgInstallRPackage
 
     Private Sub ucrPnlRPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRPackages.ControlValueChanged
         If rdoCRAN.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsBeforeOptionsFunc)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAfterOptionsFunc)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDetachFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDisplayRFunction)
         Else
+            ucrBase.clsRsyntax.iCallType = 0
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDetachFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepositoryFunction)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBeforeOptionsFunc)
