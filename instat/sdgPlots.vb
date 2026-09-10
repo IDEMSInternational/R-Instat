@@ -2351,6 +2351,8 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
+        If clsNewColVarsFunction Is Nothing Then clsNewColVarsFunction = New RFunction
+        If clsNewRowVarsFunction Is Nothing Then clsNewRowVarsFunction = New RFunction
         clsColVarsFunction = clsNewColVarsFunction
         clsRowVarsFunction = clsNewRowVarsFunction
 
