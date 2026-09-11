@@ -1,0 +1,45 @@
+name: Refresh translations database
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - instat/translations/**/*.json
+
+jobs:
+  refresh-translations-db:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Refresh translations database
+        run: python scripts/update_translations_db.py
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: Refresh translations database
+          branch: automation/refresh-translations-db
+          delete-branch: true
+          title: Refresh translations database
+          body: |
+            Refreshes instat/translations/rInstatTranslations.db from the JSON translation files in instat/translations.
+
+            This PR was created automatically by GitHub Actions.
+          add-paths: |
+            instat/translations/rInstatTranslations.db

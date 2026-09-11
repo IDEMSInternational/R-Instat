@@ -1,0 +1,61 @@
+name: Translation Check
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'instat/**/*.vb'
+      - 'instat/translations/**'
+      - 'scripts/check_translations.py'
+      - 'scripts/translation_common.py'
+      - 'scripts/sync_translations.py'
+      - '.github/workflows/translation-check.yml'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'instat/**/*.vb'
+      - 'instat/translations/**'
+      - 'scripts/check_translations.py'
+      - 'scripts/translation_common.py'
+      - 'scripts/sync_translations.py'
+      - '.github/workflows/translation-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check-translations:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out R-Instat code
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      # PRs diff against the base branch; pushes diff against the previous tip.
+      # If the base can't be resolved, the script falls back to a whole-repo scan.
+      - name: Run translation check
+        id: translation-check
+        run: |
+          set +e
+          base_args=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            base_args="--base=${{ github.event.before }}"
+          fi
+          python scripts/check_translations.py --ci $base_args > translation-report.txt 2>&1
+          status=$?
+          cat translation-report.txt
+          exit $status
+
+      # Landing page for anyone clicking the check — works for fork PRs too,
+      # since the step summary needs no token.
+      - name: Add report to job summary
+        if: always()
+        run: grep -v '^::warning' translation-report.txt >> "$GITHUB_STEP_SUMMARY" || true

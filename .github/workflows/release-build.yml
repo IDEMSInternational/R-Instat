@@ -187,9 +187,13 @@ jobs:
       run: |
         Get-ChildItem "D:\a\R-Instat\R-Instat\instat\bin\x64\Release\static\R"
      
+    - name: Generate R scripts
+      run: python scripts/generate_r_scripts.py
+      shell: powershell
+
     - name: Install R packages (64 bit)
       run: |
-        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" "${{ github.workspace }}\instat\static\InstatObject\R\install_packages.R"
+        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" "${{ github.workspace }}\instat\static\InstatObject\R\install_packages_generated.R"
       shell: cmd     
 
     - name: Generate Rsetup.R file

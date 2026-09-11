@@ -45,6 +45,20 @@ Public Class frmMain
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
     Public dlgDescribeOneVariableLikertGraph As dlgDescribeOneVariableLikertGraph
+
+    Public bRecordQuarto As Boolean = False
+    Public strCurrentQuartoFile As String = ""
+    Public strCurrentQuartoRdsFile As String = ""
+    Public bShowRenderDetails As Boolean = True
+    Public bQuartoHTML As Boolean = True
+    Public bQuartoPDF As Boolean = True
+    Public bQuartoPPTX As Boolean = True
+    Public bQuartoDOCX As Boolean = True
+    Public bQuartoEcho As Boolean = True          'Display Code
+    Public bQuartoWarning As Boolean = False      'Display Warnings
+    Public bQuartoMessage As Boolean = False      'Display R Messages
+    Public bQuartoEval As Boolean = True          'Give R Output
+
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -92,16 +106,21 @@ Public Class frmMain
 
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+    End Sub
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            'Initialise Cef runtime here (rather than in the constructor) so that any message
+            'shown is properly owned by the visible main form and only ever appears once at startup.
+            'If the runtime fails to initialise, R-Instat still works - html outputs are then
+            'shown in the default browser instead of the output window.
             If Not CefRuntimeWrapper.InitialiseCefRuntime() Then
                 MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Html content will be shown in your default browser.",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
 
         End If
-    End Sub
-
-    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         '---------------------------------------
         'Gets the path for the executable file that started the application, not including the executable name.
@@ -600,6 +619,30 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
     End Sub
 
+    Public Sub AppendToQuartoFile(strScript As String)
+
+        If String.IsNullOrEmpty(strCurrentQuartoFile) Then
+            Exit Sub
+        End If
+
+        IO.File.AppendAllText(
+        strCurrentQuartoFile.Replace("/", "\"),
+        strScript & Environment.NewLine)
+
+    End Sub
+
+    Public Sub SaveCurrentQuartoFile()
+
+        If String.IsNullOrEmpty(strCurrentQuartoFile) Then
+            Exit Sub
+        End If
+
+        File.WriteAllText(
+        strCurrentQuartoFile,
+        ucrScriptWindow.clsScriptActive.Text)
+
+    End Sub
+
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
         mnuTbLan.Visible = bVisible
     End Sub
@@ -852,7 +895,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
-        dlgDeleteRowsOrColums.ShowDialog()
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Prepare
+        dlgDeleteRowsOrColumns.ShowDialog()
     End Sub
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
@@ -1561,8 +1605,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperatureGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Temperature
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATemperature.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSACrops_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACrops.Click
@@ -2897,8 +2940,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
+        dlgPICSATrendGraph.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
@@ -2912,11 +2954,6 @@ Public Class frmMain
     Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
         dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
         dlgVisualizeData.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPICSAGeneralGrap_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGrap.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeClimograph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimograph.Click
@@ -3225,5 +3262,35 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileImportFromEPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromEPICSA.Click
         dlgImportFromEPicsa.ShowDialog()
+    End Sub
+
+    Private Sub InsertColumnRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertColumnRowsToolStripMenuItem.Click
+        dlgInsertColumn.enumInsertColumnMode = dlgInsertColumn.InsertColumnMode.Climatic
+        dlgInsertColumn.ShowDialog()
+    End Sub
+
+    Private Sub DeleteRowsOrColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsOrColumnsToolStripMenuItem.Click
+        dlgDeleteRowsOrColumns.enumDeleteRowsOrColumnsMode = dlgDeleteRowsOrColumns.DeleteRowsOrColumnsMode.Climatic
+        dlgDeleteRowsOrColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuUnnest_Click(sender As Object, e As EventArgs) Handles mnuUnnest.Click
+        dlgPrepareDataReshapeUnnest.ShowDialog()
+    End Sub
+
+    Private Sub mnuExperimentsDesign_Click(sender As Object, e As EventArgs) Handles mnuExperimentsDesign.Click
+        dlgExperimentsDesign.ShowDialog()
+    End Sub
+
+    Private Sub mnuExperimentsOneButton_Click(sender As Object, e As EventArgs) Handles mnuExperimentsOneButton.Click
+        dlgExperimentsOneButton.ShowDialog()
+    End Sub
+
+    Private Sub mnuMultipleComparisons_Click(sender As Object, e As EventArgs) Handles mnuMultipleComparisons.Click
+        dlgModelMultipleComparisons.ShowDialog()
+    End Sub
+
+    Private Sub mnuResiduals_Click(sender As Object, e As EventArgs) Handles mnuResiduals.Click
+        dlgResiduals.ShowDialog()
     End Sub
 End Class

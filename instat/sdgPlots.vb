@@ -2351,6 +2351,8 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
+        If clsNewColVarsFunction Is Nothing Then clsNewColVarsFunction = New RFunction
+        If clsNewRowVarsFunction Is Nothing Then clsNewRowVarsFunction = New RFunction
         clsColVarsFunction = clsNewColVarsFunction
         clsRowVarsFunction = clsNewRowVarsFunction
 
@@ -2359,7 +2361,18 @@ Public Class sdgPlots
         clsGuideFunction = New RFunction
         clsGuideLegendFunction1 = New RFunction
         clsGuideFunction1 = New RFunction
+        clsPlotElementCaptionFunction = New RFunction
+        clsPlotElementSubTitleFunction = New RFunction
+        clsPlotElementTitleFunction = New RFunction
+        clsPlotLegendTitleFunction = New RFunction
+        clsPlotElementTagFunction = New RFunction
         clsDummyFunction = New RFunction
+
+        clsPlotElementCaptionFunction.SetRCommand("element_text")
+        clsPlotElementSubTitleFunction.SetRCommand("element_text")
+        clsPlotElementTitleFunction.SetRCommand("element_text")
+        clsPlotLegendTitleFunction.SetRCommand("element_text")
+        clsPlotElementTagFunction.SetRCommand("element_text")
 
         clsDummyFunction.AddParameter("palette", "sequential", iPosition:=0)
         clsDummyFunction.AddParameter("Check", "fill", iPosition:=1)
@@ -3057,11 +3070,11 @@ Public Class sdgPlots
 
         'labels
         If bReset Then
-            ucrNudTitleSize.SetRCode(clsPlotElementTitleFunction, bReset, bCloneIfNeeded:=True)
-            ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitleFunction, bReset, bCloneIfNeeded:=True)
-            ucrNudCaptionSize.SetRCode(clsPlotElementCaptionFunction, bReset, bCloneIfNeeded:=True)
-            ucrNudLegendSize.SetRCode(clsPlotLegendTitleFunction, bReset, bCloneIfNeeded:=True)
-            ucrNudTagSize.SetRCode(clsPlotElementTagFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudTitleSize.SetRCode(clsPlotElementTitleFunction, bReset)
+            ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitleFunction, bReset)
+            ucrNudCaptionSize.SetRCode(clsPlotElementCaptionFunction, bReset)
+            ucrNudLegendSize.SetRCode(clsPlotLegendTitleFunction, bReset)
+            ucrNudTagSize.SetRCode(clsPlotElementTagFunction, bReset)
         End If
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
@@ -3136,6 +3149,8 @@ Public Class sdgPlots
             clsFacetFunction.RemoveParameterByName("facets")
             clsFacetFunction.RemoveParameterByName("cols")
             clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.RemoveParameterByName("dir")
+
             If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
                 'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
                 'If two receivers are filled, wrap is used as facet_wrap(vars(factor1, factor2)), while grid is used as facet_grid(rows= vars(factor1), cols= vars(factor2)).
@@ -3146,11 +3161,6 @@ Public Class sdgPlots
                 If (Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked) Then
                     clsFacetFunction.SetRCommand("facet_wrap")
                     clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    Else
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    End If
                     clsFacetFunction.RemoveParameterByName("rows")
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
@@ -3162,7 +3172,6 @@ Public Class sdgPlots
                         clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                         clsFacetFunction.RemoveParameterByName("rows")
                     End If
-                    clsFacetFunction.RemoveParameterByName("dir")
                     clsFacetFunction.RemoveParameterByName("facets")
                 End If
             ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
@@ -3171,11 +3180,6 @@ Public Class sdgPlots
                     clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsRowVarsFunction.AddParameter("rows", ucr1stFactorReceiver.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                     clsRowVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
-                    If rdoHorizontal.Checked Then
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                    Else
-                        clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                    End If
                     clsFacetFunction.RemoveParameterByName("rows")
                     clsFacetFunction.RemoveParameterByName("cols")
                 Else
@@ -3186,7 +3190,6 @@ Public Class sdgPlots
                     clsColVarsFunction.AddParameter("cols", ucr2ndFactorReceiver.GetVariableNames(False), bIncludeArgumentName:=False)
                     clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                     clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
-                    clsFacetFunction.RemoveParameterByName("dir")
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
@@ -3201,13 +3204,12 @@ Public Class sdgPlots
                     clsFacetFunction.AddParameter("space", Chr(34) & "fixed" & Chr(34))
                 End If
                 If ucrChkMargin.Checked Then
-                        clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
-                    Else
-                        clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
-                    End If
-                    clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
-                Else
-                    clsFacetFunction.RemoveParameterByName("space")
+                    clsFacetFunction.AddParameter("margins",
+                              If(ucrChkMargin.Checked, "TRUE", "FALSE"))
+                End If
+                clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
+            Else
+                clsFacetFunction.RemoveParameterByName("space")
                 clsFacetFunction.RemoveParameterByName("margins")
                 If rdoHorizontal.Checked Then
                     ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
@@ -3221,6 +3223,21 @@ Public Class sdgPlots
                 Else
                     clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
                 End If
+            End If
+        End If
+    End Sub
+
+    ' Updates the facet_wrap direction parameter based on the current
+    ' Horizontal/Vertical setting. The "dir" parameter is only valid
+    ' for facet_wrap and is removed for facet_grid.
+    Public Sub SetFacetWrapDirection()
+        clsFacetFunction.RemoveParameterByName("dir")
+
+        If clsFacetFunction.strRCommand = "facet_wrap" Then
+            If rdoHorizontal.Checked Then
+                clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+            Else
+                clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
             End If
         End If
     End Sub
@@ -3313,6 +3330,7 @@ Public Class sdgPlots
         FacetsNumberOfRowsOrColumns()
         AddRemoveFacets()
     End Sub
+
     Private Sub SecondFactorReceiverEnabled()
         If bRCodeSet Then
             If ucr1stFactorReceiver.IsEmpty() Then
@@ -3329,6 +3347,7 @@ Public Class sdgPlots
 
     Private Sub ucrPnlHorizonatalVertical_ControlValueChanged() Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
         SetFacetParameters()
+        SetFacetWrapDirection()
     End Sub
 
 
@@ -3370,6 +3389,9 @@ Public Class sdgPlots
     End Sub
 
     Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudCaptionSize, ucrInputTemp:=ucrInputGraphCaption, strThemeFunctionSizeName:="plot.caption", clsPlotElementTextSizeFunction:=clsPlotElementCaptionFunction)
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudTitleSize, ucrInputTemp:=ucrInputGraphTitle, strThemeFunctionSizeName:="plot.title", clsPlotElementTextSizeFunction:=clsPlotElementTitleFunction)
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudSubTitleSize, ucrInputTemp:=ucrInputGraphSubTitle, strThemeFunctionSizeName:="plot.subtitle", clsPlotElementTextSizeFunction:=clsPlotElementSubTitleFunction)
         AddRemoveLabs()
     End Sub
 
@@ -3402,6 +3424,12 @@ Public Class sdgPlots
             Return "discrete"
         End If
     End Function
+
+    Public ReadOnly Property SecondFacetVariable As String
+        Get
+            Return ucr2ndFactorReceiver.GetVariableNames(False)
+        End Get
+    End Property
 
     Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
         sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
@@ -3605,30 +3633,33 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
-        If clsPlotElementCaptionFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
+    Private Sub AddRemoveTextSizes(ucrNudTemp As ucrNud, ucrInputTemp As ucrInputTextBox, strThemeFunctionSizeName As String, clsPlotElementTextSizeFunction As RFunction)
+        Dim strTextSize = ucrNudTemp.GetText()
+
+        If Not ucrInputTemp.IsEmpty() Then
+            If strTextSize <> "" Then
+                clsPlotElementTextSizeFunction.AddParameter("size", strTextSize, iPosition:=0)
+            Else
+                clsPlotElementTextSizeFunction.RemoveParameterByName("size")
+            End If
+            clsThemeFunction.AddParameter(strThemeFunctionSizeName, clsRFunctionParameter:=clsPlotElementTextSizeFunction)
         Else
-            clsThemeFunction.RemoveParameterByName("plot.caption")
+            clsThemeFunction.RemoveParameterByName(strThemeFunctionSizeName)
         End If
+    End Sub
+
+    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudCaptionSize, ucrInputTemp:=ucrInputGraphCaption, strThemeFunctionSizeName:="plot.caption", clsPlotElementTextSizeFunction:=clsPlotElementCaptionFunction)
         AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
-        If clsPlotElementTitleFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.title")
-        End If
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudTitleSize, ucrInputTemp:=ucrInputGraphTitle, strThemeFunctionSizeName:="plot.title", clsPlotElementTextSizeFunction:=clsPlotElementTitleFunction)
         AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
-        If clsPlotElementSubTitleFunction.clsParameters.Count > 0 Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.title")
-        End If
+        AddRemoveTextSizes(ucrNudTemp:=ucrNudSubTitleSize, ucrInputTemp:=ucrInputGraphSubTitle, strThemeFunctionSizeName:="plot.subtitle", clsPlotElementTextSizeFunction:=clsPlotElementSubTitleFunction)
         AddRemoveTheme()
     End Sub
 

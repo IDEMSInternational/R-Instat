@@ -27,6 +27,12 @@ Public Class ucrColumnMetadataReoGrid
     Public Event DeleteLabels(strColumnName As String) Implements IColumnMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
+    Public Shadows Event WorksheetChanged() Implements IColumnMetaDataGrid.WorksheetChanged
+
+    Private Sub BaseWorksheetChanged() Handles MyBase.WorksheetChanged
+        RaiseEvent WorksheetChanged()
+    End Sub
+
     Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
         grdData.CurrentWorksheet.Columns = columnMetaData.iColumnCount
         For i = 0 To columnMetaData.iColumnCount - 1

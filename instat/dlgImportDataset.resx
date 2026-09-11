@@ -120,9 +120,9 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdStepBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAABGdBTUEAALGPC/xhBQAAAENJREFUOE9j
-        IAL8h9JkA5ABMEwWQDaALIOQNSHTRBuErhidTdAgbIqw8fEahE2SWDG8gGQN2MCoIZhg1BBMQMAQBgYA
-        bRok3Hu/+V4AAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAABGdBTUEAALGPC/xhBQAAAERJREFUOE9j
+        YCAM/qMLkApABsAwWQDZALIMQtaETBNtELpidDZBg7ApwsZHF0MB2CSJFcMLSNaADYwagglGDcEEBA0B
+        AG0aJNyEhcDiAAAAAElFTkSuQmCC
 </value>
   </data>
   <metadata name="ttCmdStepBack.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

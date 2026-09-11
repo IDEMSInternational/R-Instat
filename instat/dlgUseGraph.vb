@@ -36,6 +36,8 @@ Public Class dlgUseGraph
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private clsColVarsFunction As New RFunction
+    Private clsRowVarsFunction As New RFunction
 
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -117,7 +119,8 @@ Public Class dlgUseGraph
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
-
+        clsColVarsFunction = New RFunction
+        clsRowVarsFunction = New RFunction
         clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
@@ -157,7 +160,8 @@ Public Class dlgUseGraph
                           clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction,
                           ucrNewBaseSelector:=ucrGraphsSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewColVarsFunction:=clsColVarsFunction, clsNewRowVarsFunction:=clsRowVarsFunction,
+                          bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
     End Sub
 

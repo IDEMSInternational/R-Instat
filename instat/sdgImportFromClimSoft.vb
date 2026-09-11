@@ -58,6 +58,7 @@ Public Class sdgImportFromClimSoft
         'ports
         dctPorts.Add("3308", "3308")
         dctPorts.Add("3306", "3306")
+        dctPorts.Add("5432", "5432")
         ucrComboBoxPort.SetParameter(New RParameter("port", 2))
         ucrComboBoxPort.SetItems(dctPorts)
         ucrComboBoxPort.AddQuotesIfUnrecognised = False
