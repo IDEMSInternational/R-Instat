@@ -761,7 +761,6 @@ Public Class dlgTransform
         ucrNudLagPosition.AddAdditionalCodeParameterPair(clsLagColsFunction, New RParameter("lag", 1), iAdditionalPairNo:=1)
         ucrNudSignifDigits.AddAdditionalCodeParameterPair(clsSignifColsFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
         ucrInputPower.AddAdditionalCodeParameterPair(clsPowerColsOperator, New RParameter("y", 1), iAdditionalPairNo:=1)
-        ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=0)
 
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsAddConstantOperator, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=10)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsScaleSubtractOperator, New RParameter("x", 0), iAdditionalPairNo:=11)
@@ -803,6 +802,7 @@ Public Class dlgTransform
         ucrInputSubtract.AddAdditionalCodeParameterPair(clsScaleSubtractColsOperator, New RParameter("u", 1), iAdditionalPairNo:=1)
         ucrInputConstant.AddAdditionalCodeParameterPair(clsAddConstantColsOperator, New RParameter("c", 1), iAdditionalPairNo:=1)
 
+        ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=0)
         ucrSaveNew.AddAdditionalRCode(clsLeadFunction, iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLagFunction, iAdditionalPairNo:=2)
         ucrSaveNew.AddAdditionalRCode(clsSignifFunction, iAdditionalPairNo:=3)
@@ -818,7 +818,7 @@ Public Class dlgTransform
         ucrSaveNew.AddAdditionalRCode(clsPreviewOperator, iAdditionalPairNo:=13)
         ucrSaveNew.AddAdditionalRCode(clsBooleanOperator, iAdditionalPairNo:=14)
         ucrSaveNew.AddAdditionalRCode(clsIsNAFunction, iAdditionalPairNo:=15)
-        ucrSaveNew.AddAdditionalRCode(clsDescToolsFormatFunction, iAdditionalPairNo:=16)
+        ucrSaveNew.AddAdditionalRCode(clsRoundFunction, iAdditionalPairNo:=16)
 
         ucrPnlTransformOptions.SetRCode(clsDummyTransformFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsDummyTransformFunction, bReset)
@@ -924,7 +924,7 @@ Public Class dlgTransform
         If rdoSingle.Checked Then
             ucrSaveNew.SetLabelText("New Column Name:")
             ' Only set prefix if the control is empty or hasn't been user-modified
-            If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty AndAlso String.IsNullOrEmpty(ucrSaveNew.GetText()) Then
+            If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
         ElseIf rdoMultiple.Checked Then
