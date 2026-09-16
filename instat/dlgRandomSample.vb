@@ -26,9 +26,14 @@ Public Class dlgRandomSample
     Private bFirstLoad As Boolean = True
     Private clsMultipleSamplesFunction As New RFunction
     Private clsDistributionFunction As New RFunction
+    Private clsRoundFunction As New RFunction
     Private clsSetSeed As New RFunction
     Private clsRNGKindFunction As New RFunction
     Private bReset As Boolean = True
+
+    Private ReadOnly astrDiscreteDistributionTags() As String = {
+        "Geometric", "Bernoulli", "Binomial", "Poisson", "Negative_Binomial", "Discrete_Empirical"
+    }
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -84,6 +89,8 @@ Public Class dlgRandomSample
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
+        ucrRoundToWholeNumbers.SetText("Whole Numbers")
+
         ucrSaveRandomSample.SetSaveTypeAsColumn()
         ucrSaveRandomSample.SetDataFrameSelector(ucrDataFrameRandomSamples)
         ucrSaveRandomSample.SetIsComboBox()
@@ -94,15 +101,17 @@ Public Class dlgRandomSample
         clsMultipleSamplesFunction = New RFunction
         clsDistributionFunction = New RFunction
         clsRNGKindFunction = New RFunction
+        clsRoundFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrDataFrameRandomSamples.Reset()
         ucrSaveRandomSample.Reset()
+        ucrRoundToWholeNumbers.Checked = False
         SetNewColumName()
 
         clsSetSeed.SetRCommand("set.seed")
-
         clsRNGKindFunction.SetRCommand("RNGkind")
+        clsRoundFunction.SetRCommand("round")
 
         ucrDistWithParameters.SetRDistributions()
         ucrDistWithParameters.SetParameters()
@@ -115,12 +124,13 @@ Public Class dlgRandomSample
         clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
 
         clsMultipleSamplesFunction.SetAssignToColumnObject(ucrSaveRandomSample.GetText(),
-                                                    ucrSaveRandomSample.GetText,
-                                                    ucrDataFrameRandomSamples.cboAvailableDataFrames.Text,
-                                                    bAssignToIsPrefix:=True)
+                                                ucrSaveRandomSample.GetText,
+                                                ucrDataFrameRandomSamples.cboAvailableDataFrames.Text,
+                                                bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         SetDataFrameAndDistributionParameters()
+        SetRoundControlAvailability()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -159,6 +169,28 @@ Public Class dlgRandomSample
         End Select
     End Sub
 
+    Private Sub UpdateRoundExpression()
+        If ucrRoundToWholeNumbers.Checked Then
+            clsRoundFunction = New RFunction
+            clsRoundFunction.SetRCommand("round")
+            clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsDistributionFunction, iPosition:=0)
+            clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsRoundFunction, iPosition:=1)
+        Else
+            clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub SetRoundControlAvailability()
+        If ucrDistWithParameters.clsCurrDistribution IsNot Nothing AndAlso
+        astrDiscreteDistributionTags.Contains(ucrDistWithParameters.clsCurrDistribution.strNameTag) Then
+            ucrRoundToWholeNumbers.Checked = False
+            ucrRoundToWholeNumbers.Enabled = False
+        Else
+            ucrRoundToWholeNumbers.Enabled = True
+        End If
+        UpdateRoundExpression()
+    End Sub
+
     Private Sub SetNewColumName()
         If ucrNudNumberOfSamples.Value = 1 Then
             ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
@@ -187,6 +219,12 @@ Public Class dlgRandomSample
 
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistWithParameters.DistributionsIndexChanged
         SetDataFrameAndDistributionParameters()
+        SetRoundControlAvailability()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrRoundToWholeNumbers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrRoundToWholeNumbers.ControlValueChanged
+        UpdateRoundExpression()
         TestOKEnabled()
     End Sub
 
@@ -195,8 +233,8 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrDataFrameRandomSamples.ControlContentsChanged,
-        ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged,
-        ucrChkRngKind.ControlContentsChanged
+    ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged,
+    ucrChkRngKind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -222,5 +260,9 @@ Public Class dlgRandomSample
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRNGKindFunction)
         End If
+    End Sub
+
+    Private Sub ucrDistWithParameters_ParameterChanged(ucrChangedControl As ucrCore) Handles ucrDistWithParameters.ControlContentsChanged
+
     End Sub
 End Class
