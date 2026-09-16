@@ -119,6 +119,13 @@ Public Class sdgDataOptions
             End If
         ElseIf tbcDataOptions.SelectedTab Is tbColumns AndAlso Not ucrReceiverSelect.IsEmpty Then
             If rdoColumnsForAllDialogs.Checked Then
+                If frmMain.IsColumnSelectionApplied Then
+                    ' remove the existing current column selection
+                    frmMain.clsRLink.RunScript(clsRemoveCurrentColumnSelection.ToScript(),
+                                       strComment:="Data Options subdialog: Remove previous current column selection",
+                                       iCallType:=2)
+                End If
+
                 clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
                 clsSetCurrentColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
                 clsSetCurrentColumnSelection.AddParameter("name", ucrReceiverSelect.GetVariableNames())
