@@ -3289,4 +3289,8 @@ Public Class frmMain
     Private Sub mnuMultipleComparisons_Click(sender As Object, e As EventArgs) Handles mnuMultipleComparisons.Click
         dlgModelMultipleComparisons.ShowDialog()
     End Sub
+
+    Private Sub mnuResiduals_Click(sender As Object, e As EventArgs) Handles mnuResiduals.Click
+        dlgResiduals.ShowDialog()
+    End Sub
 End Class
