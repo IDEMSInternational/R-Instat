@@ -29,11 +29,10 @@ Public Class dlgColumnStructure
         End If
         If bReset Then
             SetDefaults()
+            SetColumnStructureInReceiver()
         End If
         SetRCodeForControls(bReset)
-        SetColumnStructureInReceiver()
         bReset = False
-        SetColumnStructureInReceiver()
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -72,14 +71,17 @@ Public Class dlgColumnStructure
         clsColourStructure = clsUncolourByMetadata
 
         ucrSelectorColumnStructure.Reset()
-        SetColumnStructureInReceiver()
+
+        ucrReceiverLayout.Clear()
+        ucrReceiverTreatment.Clear()
+        ucrReceiverMeasurement.Clear()
         ucrReceiverLayout.SetMeAsReceiver()
 
-        clsColumnStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+        ucrChkColourColumnsByStructure.Checked = True
 
+        clsColumnStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
         clsColourByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsColourByMetadata.AddParameter("property", Chr(34) & "Structure" & Chr(34))
-
         clsUncolourByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsColumnStructure)
