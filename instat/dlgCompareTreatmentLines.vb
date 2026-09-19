@@ -207,9 +207,8 @@ Public Class dlgCompareTreatmentLines
         clsCompareLines.SetDefaults()
         clsComparePoints.SetDefaults()
 
-        clsComparePoints.clsFacetColOp = clsCompareLines.clsFacetColOp
-        clsComparePoints.clsFacetRowOp = clsCompareLines.clsFacetRowOp
-        clsComparePoints.clsFacetOp = clsCompareLines.clsFacetOp
+        clsComparePoints.clsColVarsFunction = clsCompareLines.clsColVarsFunction
+        clsComparePoints.clsRowVarsFunction = clsCompareLines.clsRowVarsFunction
         clsComparePoints.clsRFacetFunction = clsCompareLines.clsRFacetFunction
 
         ucrSelectorPlot.Reset()
@@ -323,19 +322,18 @@ Public Class dlgCompareTreatmentLines
                 End If
             End If
 
-            clsCompareLines.clsFacetColOp.ClearParameters()
-            clsCompareLines.clsFacetRowOp.ClearParameters()
-            clsCompareLines.clsFacetOp.ClearParameters()
+            clsCompareLines.clsColVarsFunction.ClearParameters()
+            clsCompareLines.clsRowVarsFunction.ClearParameters()
             clsCompareLines.clsRFacetFunction.RemoveParameterByName("dir")
             clsComparePoints.clsPointAes.RemoveParameterByName("colour")
 
             If Not ucrReceiverContext1.IsEmpty() Then
                 Select Case ucrInputContext1.GetText()
                     Case strFacetRow, strFacetRowAll
-                        clsCompareLines.clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iRowVars)
+                        clsCompareLines.clsRowVarsFunction.AddParameter(iRowVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iRowVars)
                         iRowVars += 1
                     Case strFacetCol, strFacetColAll
-                        clsCompareLines.clsFacetColOp.AddParameter(iColVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iColVars)
+                        clsCompareLines.clsColVarsFunction.AddParameter(iColVars, ucrReceiverContext1.GetVariableNames(False), iPosition:=iColVars)
                         iColVars += 1
                     Case strColour
                         clsComparePoints.clsPointAes.AddParameter("colour", ucrReceiverContext1.GetVariableNames(False), iPosition:=3)
@@ -345,10 +343,10 @@ Public Class dlgCompareTreatmentLines
             If Not ucrReceiverContext2.IsEmpty() Then
                 Select Case ucrInputContext2.GetText()
                     Case strFacetRow, strFacetRowAll
-                        clsCompareLines.clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iRowVars)
+                        clsCompareLines.clsRowVarsFunction.AddParameter(iRowVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iRowVars)
                         iRowVars += 1
                     Case strFacetCol, strFacetColAll
-                        clsCompareLines.clsFacetColOp.AddParameter(iColVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iColVars)
+                        clsCompareLines.clsColVarsFunction.AddParameter(iColVars, ucrReceiverContext2.GetVariableNames(False), iPosition:=iColVars)
                         iColVars += 1
                     Case strColour
                         clsComparePoints.clsPointAes.AddParameter("colour", ucrReceiverContext2.GetVariableNames(False), iPosition:=3)
@@ -358,10 +356,10 @@ Public Class dlgCompareTreatmentLines
             If Not ucrReceiverContext3.IsEmpty() Then
                 Select Case ucrInputContext3.GetText()
                     Case strFacetRow, strFacetRowAll
-                        clsCompareLines.clsFacetRowOp.AddParameter(iRowVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iRowVars)
+                        clsCompareLines.clsRowVarsFunction.AddParameter(iRowVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iRowVars)
                         iRowVars += 1
                     Case strFacetCol, strFacetColAll
-                        clsCompareLines.clsFacetColOp.AddParameter(iColVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iColVars)
+                        clsCompareLines.clsColVarsFunction.AddParameter(iColVars, ucrReceiverContext3.GetVariableNames(False), iPosition:=iColVars)
                         iColVars += 1
                     Case strColour
                         clsComparePoints.clsPointAes.AddParameter("colour", ucrReceiverContext3.GetVariableNames(False), iPosition:=3)
@@ -371,25 +369,30 @@ Public Class dlgCompareTreatmentLines
             clsCompareLines.clsRFacetFunction.SetRCommand("facet_wrap")
 
             If (rdoLines.Checked AndAlso iRowVars = 2) OrElse (rdoPoints.Checked AndAlso iRowVars = 3) Then
-                clsCompareLines.clsFacetOp.AddParameter("left", "", iPosition:=0)
-                clsCompareLines.clsFacetOp.AddParameter("right", clsROperatorParameter:=clsCompareLines.clsFacetRowOp, iPosition:=1)
+                clsCompareLines.clsRFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsCompareLines.clsRowVarsFunction, iPosition:=0)
                 clsCompareLines.clsRFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("rows")
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("cols")
             ElseIf (rdoLines.Checked AndAlso iColVars = 2) OrElse (rdoPoints.Checked AndAlso iColVars = 3) Then
-                clsCompareLines.clsFacetOp.AddParameter("left", "", iPosition:=0)
-                clsCompareLines.clsFacetOp.AddParameter("right", clsROperatorParameter:=clsCompareLines.clsFacetColOp, iPosition:=1)
+                clsCompareLines.clsRFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsCompareLines.clsColVarsFunction, iPosition:=0)
                 clsCompareLines.clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("rows")
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("cols")
             ElseIf iRowVars >= 1 AndAlso iColVars >= 1 Then
-                clsCompareLines.clsFacetOp.AddParameter("left", clsROperatorParameter:=clsCompareLines.clsFacetRowOp, iPosition:=0)
-                clsCompareLines.clsFacetOp.AddParameter("right", clsROperatorParameter:=clsCompareLines.clsFacetColOp, iPosition:=1)
                 clsCompareLines.clsRFacetFunction.SetRCommand("facet_grid")
+                clsCompareLines.clsRFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsCompareLines.clsRowVarsFunction, iPosition:=0)
+                clsCompareLines.clsRFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsCompareLines.clsColVarsFunction, iPosition:=1)
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("facets")
             ElseIf iRowVars >= 1 AndAlso iColVars = 0 Then
-                clsCompareLines.clsFacetOp.AddParameter("left", "", iPosition:=0)
-                clsCompareLines.clsFacetOp.AddParameter("right", clsROperatorParameter:=clsCompareLines.clsFacetRowOp, iPosition:=1)
+                clsCompareLines.clsRFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsCompareLines.clsRowVarsFunction, iPosition:=0)
                 clsCompareLines.clsRFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("rows")
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("cols")
             ElseIf iColVars >= 1 AndAlso iRowVars = 0 Then
-                clsCompareLines.clsFacetOp.AddParameter("left", "", iPosition:=0)
-                clsCompareLines.clsFacetOp.AddParameter("right", clsROperatorParameter:=clsCompareLines.clsFacetColOp, iPosition:=1)
+                clsCompareLines.clsRFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsCompareLines.clsColVarsFunction, iPosition:=0)
                 clsCompareLines.clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("rows")
+                clsCompareLines.clsRFacetFunction.RemoveParameterByName("cols")
             End If
             If iRowVars > 0 OrElse iColVars > 0 Then
                 clsCompareLines.clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsCompareLines.clsRFacetFunction, iPosition:=10)
