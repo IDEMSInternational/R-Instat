@@ -86,9 +86,9 @@ Public Class dlgInstallRPackage
         clsDetachFunction.SetRCommand("detach_package")
         clsDetachFunction.AddParameter("unload ", "TRUE", iPosition:=1)
 
-        clsRepositoryFunction.SetRCommand("install_github")
-        clsRepositoryFunction.SetPackageName("devtools")
-        clsRepositoryFunction.AddParameter("upgrade", Chr(34) & "never" & Chr(34), iPosition:=1)
+        clsRepositoryFunction.SetRCommand("pak")
+        clsRepositoryFunction.SetPackageName("pak")
+        clsRepositoryFunction.AddParameter("ask", "FALSE", iPosition:=1)
 
         clsAfterOptionsFunc.SetRCommand("options")
         clsAfterOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="0")

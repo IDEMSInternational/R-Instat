@@ -21,6 +21,7 @@ Public Class dlgGeneralTable
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private Const DoubleUnitSeparator As String = "\u001F\u001F" 'Double unit separator
 
     Private Sub dlgGeneralTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -222,11 +223,11 @@ Public Class dlgGeneralTable
 
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
-        clsPivotWiderFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=2)
+        clsPivotWiderFunction.AddParameter("names_sep", Chr(34) & DoubleUnitSeparator & Chr(34), iPosition:=2)
 
         clsPivotWiderAscolumnFunction.SetPackageName("tidyr")
         clsPivotWiderAscolumnFunction.SetRCommand("pivot_wider")
-        clsPivotWiderAscolumnFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=3)
+        clsPivotWiderAscolumnFunction.AddParameter("names_sep", Chr(34) & DoubleUnitSeparator & Chr(34), iPosition:=3)
         clsPivotWiderAscolumnFunction.AddParameter("values_from", Chr(34) & "value" & Chr(34), iPosition:=2)
 
         clsFormatTableFunction.SetRCommand("format_gt_table")
@@ -245,7 +246,7 @@ Public Class dlgGeneralTable
 
         clsSpannerFunction.SetPackageName("gt")
         clsSpannerFunction.SetRCommand("tab_spanner_delim")
-        clsSpannerFunction.AddParameter("delim", Chr(34) & "__" & Chr(34), iPosition:=0)
+        clsSpannerFunction.AddParameter("delim", Chr(34) & DoubleUnitSeparator & Chr(34), iPosition:=0)
 
         clsCompleteFunction.SetPackageName("tidyr")
         clsCompleteFunction.SetRCommand("complete")

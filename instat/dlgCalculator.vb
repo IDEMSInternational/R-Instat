@@ -138,6 +138,13 @@ Public Class dlgCalculator
         clsGetFullDataframe.AddParameter("use_current_filter", "FALSE")
         clsGetFullDataframe.SetAssignTo("`_df_full`")
 
+        clsAttachScalarsFunction.SetRCommand("attach")
+        clsAttachScalarsFunction.AddParameter("what", "scalars", iPosition:=0)
+
+        clsDetachScalarsFunction.SetRCommand("detach")
+        clsDetachScalarsFunction.AddParameter("name", "scalars", iPosition:=0)
+        clsDetachScalarsFunction.AddParameter("unload", "TRUE", iPosition:=1)
+
         clsRowNamesFiltered.SetRCommand("rownames")
         clsRowNamesFull.SetRCommand("rownames")
         clsInOperator.SetOperation("%in%")
@@ -158,7 +165,6 @@ Public Class dlgCalculator
         clsAddColumnsToData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetFullDataframe, 1)
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 100)
 
@@ -215,16 +221,18 @@ Public Class dlgCalculator
     ''' </summary>
     Private Sub SaveResults()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
+
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsToData)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFilterIndexAssign)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCalcFullAssign)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsIndexAssign)
-
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetFullDataframe, 1)
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrCalc.ucrSaveResultInto.GetText() & Chr(34), iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 160)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
+
             ucrBase.clsRsyntax.SetAssignTo("calc", strTempColumn:="", strTempDataframe:="")
 
             Dim strDF As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
@@ -267,7 +275,13 @@ Public Class dlgCalculator
                 clsAddColumnsToData.AddParameter("data_name", Chr(34) & strDF & Chr(34), iPosition:=0)
                 clsAddColumnsToData.AddParameter("col_name", Chr(34) & strCol & Chr(34), iPosition:=1)
                 clsAddColumnsToData.AddParameter("col_data", "calc_full", bIncludeArgumentName:=True, iPosition:=2)
-                clsAddColumnsToData.AddParameter("before", "FALSE", iPosition:=3)
+                clsAddColumnsToData.AddParameter("before", ucrCalc.ucrSaveResultInto.GetText(ucrSave.SaveLocation.before), iPosition:=3)
+
+                Dim strAdjacentColumn As String = ucrCalc.ucrSaveResultInto.GetText(ucrSave.SaveLocation.adjacentColumn)
+                If Not String.IsNullOrEmpty(strAdjacentColumn) Then
+                    strAdjacentColumn = strAdjacentColumn.Trim(Chr(34))
+                    clsAddColumnsToData.AddParameter("adjacent_column", Chr(34) & strAdjacentColumn & Chr(34), iPosition:=4)
+                End If
 
                 ucrBase.clsRsyntax.AddToAfterCodes(clsFilterIndexAssign, 120)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsCalcFullAssign, 121)
@@ -281,6 +295,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCalcFullAssign)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsIndexAssign)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetFullDataframe)
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 5
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -302,8 +317,9 @@ Public Class dlgCalculator
             clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsScalarsDataFuntion, 1)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 3)
             ucrBase.clsRsyntax.SetAssignTo(strResut)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
@@ -316,10 +332,12 @@ Public Class dlgCalculator
             clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsScalarsDataFuntion, 1)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 3)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsScalarsDataFuntion)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachScalarsFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = True
@@ -358,14 +376,13 @@ Public Class dlgCalculator
             clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             SaveResults()
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetFullDataframe, 1)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetFullDataframe, 2)
 
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 100)
             ucrCalc.ucrSaveResultInto.Enabled = True
             ucrCalc.ucrChkStoreScalar.Visible = True
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetFullDataframe)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
             ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
@@ -453,5 +470,3 @@ Public Class dlgCalculator
         End Select
     End Sub
 End Class
-
-

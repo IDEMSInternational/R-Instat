@@ -104,6 +104,7 @@ Public Class sdgPICSARainfallGraph
     Private bSlope As Boolean = False
     Private bLine As Boolean = False
     Private bIsTemperatureMode As Boolean = False
+    Private _PICSAMode As dlgPICSARainfall.PICSAMode = dlgPICSARainfall.PICSAMode.Rainfall
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         OpeningMode()
@@ -652,6 +653,10 @@ Public Class sdgPICSARainfallGraph
 
     Public Sub SetTemperatureMode(bTemperature As Boolean)
         bIsTemperatureMode = bTemperature
+    End Sub
+
+    Public Sub SetPICSAMode(mode As dlgPICSARainfall.PICSAMode)
+        _PICSAMode = mode
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing,
@@ -1405,7 +1410,6 @@ Public Class sdgPICSARainfallGraph
     Private Sub OpeningMode()
         Dim tbPageSlope As TabPage = tbSlope
         Dim tbPageLines As TabPage = tpLines
-
         If bIsTemperatureMode Then
             tbPICSA.TabPages.Remove(tpLines)
             If Not bSlope AndAlso Not tbPICSA.TabPages.Contains(tbPageSlope) Then
@@ -1414,7 +1418,7 @@ Public Class sdgPICSARainfallGraph
                 bLine = False
             End If
         Else
-            Select Case dlgPICSARainfall.enumPICSAMode
+            Select Case _PICSAMode
                 Case dlgPICSARainfall.PICSAMode.Rainfall
                     tbPICSA.TabPages.Remove(tbSlope)
                     If Not bLine AndAlso Not tbPICSA.TabPages.Contains(tbPageLines) Then
@@ -1423,8 +1427,6 @@ Public Class sdgPICSARainfallGraph
                         bSlope = False
                     End If
                 Case dlgPICSARainfall.PICSAMode.General
-                    tbPICSA.TabPages.Remove(tpLines)
-                    tbPICSA.TabPages.Remove(tbSlope)
                     If Not tbPICSA.TabPages.Contains(tbPageLines) Then
                         tbPICSA.TabPages.Add(tbPageLines)
                     End If

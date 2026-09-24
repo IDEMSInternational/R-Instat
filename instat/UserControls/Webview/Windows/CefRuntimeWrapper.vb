@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -29,6 +29,8 @@ Imports CefSharp.WinForms
 ''' '''---------------------------------------------------------------------------------------------
 Public NotInheritable Class CefRuntimeWrapper
 
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     ''' Declare constructor 'Private' to prevent instantiation of this class (see class comments
@@ -47,8 +49,10 @@ Public NotInheritable Class CefRuntimeWrapper
     Public Shared Function InitialiseCefRuntime() As Boolean
         Try
 
+            'if already initialised then nothing more to do, treat as success
+            '(previously returned False which callers treated as an initialisation failure)
             If IsCefInitilised() Then
-                Return False
+                Return True
             End If
 
 
@@ -83,11 +87,17 @@ Public NotInheritable Class CefRuntimeWrapper
             'settings.RegisterScheme(GetCustomSheme())
 
             'Perform dependency check to make sure all relevant resources are in our output directory then initialise cef
-            Return Cef.Initialize(settings, performDependencyCheck:=True, browserProcessHandler:=Nothing)
+            Dim bInitialised As Boolean = Cef.Initialize(settings, performDependencyCheck:=True, browserProcessHandler:=Nothing)
+            If Not bInitialised Then
+                Logger.Warn("Cef.Initialize returned False. Html content will be shown in the default browser.")
+            End If
+            Return bInitialised
 
         Catch ex As Exception
             'An exception "Could not load file or assembly 'CefSharp.Core.Runtime.dll' or one of its dependencies. The specified module could not be found.":"CefSharp.Core.Runtime.dll"
             'could be thrown.
+            'Log the full exception so the cause can be diagnosed from user logs
+            Logger.Warn(ex, "Cef runtime could not be initialised. Html content will be shown in the default browser.")
             Return False
         End Try
     End Function
