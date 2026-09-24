@@ -65,9 +65,9 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.lblShapeFilePolygon.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblShapeFilePolygon.Location = New System.Drawing.Point(245, 94)
         Me.lblShapeFilePolygon.Name = "lblShapeFilePolygon"
-        Me.lblShapeFilePolygon.Size = New System.Drawing.Size(99, 13)
+        Me.lblShapeFilePolygon.Size = New System.Drawing.Size(51, 13)
         Me.lblShapeFilePolygon.TabIndex = 3
-        Me.lblShapeFilePolygon.Text = "Location (Optional):"
+        Me.lblShapeFilePolygon.Text = "Location:"
         '
         'ucrReceiverShapeFilePolygon
         '
@@ -229,7 +229,7 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(7, 488)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrSaveNewColumnName
