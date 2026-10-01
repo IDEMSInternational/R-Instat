@@ -52,6 +52,7 @@ Partial Class dlgRandomSample
         Me.ucrDataFrameRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrRoundToWholeNumbers = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSampleSize
@@ -145,6 +146,7 @@ Partial Class dlgRandomSample
         Me.ucrSampleSize.IsMultiline = False
         Me.ucrSampleSize.IsReadOnly = True
         Me.ucrSampleSize.Location = New System.Drawing.Point(372, 152)
+        Me.ucrSampleSize.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 7
@@ -177,11 +179,21 @@ Partial Class dlgRandomSample
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'ucrRoundToWholeNumbers
+        '
+        Me.ucrRoundToWholeNumbers.AutoSize = True
+        Me.ucrRoundToWholeNumbers.Checked = False
+        Me.ucrRoundToWholeNumbers.Location = New System.Drawing.Point(262, 184)
+        Me.ucrRoundToWholeNumbers.Name = "ucrRoundToWholeNumbers"
+        Me.ucrRoundToWholeNumbers.Size = New System.Drawing.Size(138, 23)
+        Me.ucrRoundToWholeNumbers.TabIndex = 12
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(479, 336)
+        Me.Controls.Add(Me.ucrRoundToWholeNumbers)
         Me.Controls.Add(Me.ucrInputRngKind)
         Me.Controls.Add(Me.ucrChkRngKind)
         Me.Controls.Add(Me.ucrSaveRandomSample)
@@ -218,4 +230,5 @@ Partial Class dlgRandomSample
     Friend WithEvents ttRngKind As ToolTip
     Friend WithEvents ucrChkRngKind As ucrCheck
     Friend WithEvents ucrInputRngKind As ucrInputComboBox
+    Friend WithEvents ucrRoundToWholeNumbers As ucrCheck
 End Class
