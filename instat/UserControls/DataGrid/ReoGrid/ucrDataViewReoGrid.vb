@@ -17,6 +17,7 @@
 Imports System.Text.RegularExpressions
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 Public Class ucrDataViewReoGrid
     Implements IDataViewGrid
@@ -34,6 +35,8 @@ Public Class ucrDataViewReoGrid
     Public Event FindRow() Implements IDataViewGrid.FindRow
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
+
+    Public Event WorksheetInserted() Implements IDataViewGrid.WorksheetInserted
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
@@ -55,6 +58,11 @@ Public Class ucrDataViewReoGrid
             workSheetColumnHeader.TextColor = variableTextColour
             workSheetColumnHeader.Style.BackColor = visiblePage.lstColumns(i).clsBackGroundColour
         Next
+    End Sub
+
+    Public Sub FocusGrid() Implements IDataViewGrid.Focus
+        grdData.Focus()
+        grdData.CurrentWorksheet.FocusPos = grdData.CurrentWorksheet.FocusPos
     End Sub
 
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
@@ -80,6 +88,9 @@ Public Class ucrDataViewReoGrid
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
                     strData = GetTransformedLTColumnContents(strData)
+                ElseIf strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(G)") Then
+                    strData = ShortenString(strData)
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=j).IsReadOnly = True
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -103,6 +114,15 @@ Public Class ucrDataViewReoGrid
         'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
+
+    Private Function ShortenString(strText As String) As String
+        Dim maxLength As Integer = 30
+        If strText.Length > maxLength Then
+            ' Trim the string to the specified length and add ellipsis
+            Return strText.Substring(0, maxLength) & "..."
+        End If
+        Return strText
+    End Function
 
     ''' <summary>
     ''' Transforms contents of LT column(s) that have structured R-like data into a more readable and user-friendly format that is consistent with R Viewer.
@@ -151,7 +171,7 @@ Public Class ucrDataViewReoGrid
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
         Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
-            MsgBox("Cannot wrap or unwrap this type of variable.")
+            MsgBoxTranslate("Cannot wrap or unwrap this type of variable.")
             Exit Sub
         End If
 
@@ -217,6 +237,11 @@ Public Class ucrDataViewReoGrid
         RaiseEvent WorksheetChanged()
     End Sub
 
+    Private Sub grdData_WorksheetInserted(sender As Object, e As EventArgs) Handles grdData.WorksheetInserted
+        RaiseEvent WorksheetInserted()
+    End Sub
+
+
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
         RaiseEvent WorksheetRemoved(New clsWorksheetAdapter(e.Worksheet))
     End Sub
@@ -250,7 +275,7 @@ Public Class ucrDataViewReoGrid
         If e.Range.EndCol >= GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns.Count Then
             'this happens when Ctrl + V is pressed and the data to be pasted has more columns
             'than columns between start and end column
-            MsgBox("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
+            MsgBoxTranslate("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
             Exit Sub
         End If
         'TODO check see if pasted range is same as selected
@@ -349,6 +374,15 @@ Public Class ucrDataViewReoGrid
                 End If
             End If
         Next
+    End Sub
+
+    Private Sub RemoveAllBackgroundColors() Implements IDataViewGrid.RemoveAllBackgroundColors
+        For rowNumber As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
+            For colIndex As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
+                grdData.CurrentWorksheet.Cells(rowNumber, colIndex).Style.BackColor = Color.Transparent
+            Next
+        Next
+        grdData.CurrentWorksheet.RequestInvalidate()
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,

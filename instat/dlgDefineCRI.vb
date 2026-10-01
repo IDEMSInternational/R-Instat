@@ -113,7 +113,7 @@ Public Class dlgCorruptionDefineCRI
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsDefineFunction)
         ucrBase.clsRsyntax.AddParameter("display", "FALSE")
 
-        clsDefineFunction.SetRCommand("instat_calculation$new")
+        clsDefineFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsDefineFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsDefineFunction.AddParameter("save", 2)
         clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.GetText() & Chr(34))
@@ -294,7 +294,7 @@ Public Class dlgCorruptionDefineCRI
                 strIndexValues = ExtractItemsFromRList(lviCondition.SubItems(1).Text)
                 ucrGridWeights.SetCellValues(strWeightColumn, strIndexValues, bRaisedControlValueChangedEvent:=True)
             Else
-                MsgBox("Cannot detect column or column data in the data. Editing of this component not possible", MsgBoxStyle.Exclamation, "Cannot edit component")
+                MsgBoxTranslate("Cannot detect column or column data in the data. Editing of this component not possible", MsgBoxStyle.Exclamation, "Cannot edit component")
             End If
         End If
     End Sub

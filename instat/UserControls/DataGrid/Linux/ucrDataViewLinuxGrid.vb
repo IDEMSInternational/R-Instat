@@ -35,6 +35,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
+    Public Event WorksheetInserted() Implements IDataViewGrid.WorksheetInserted
+
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
@@ -67,6 +69,10 @@ Public Class ucrDataViewLinuxGrid
                 dataGrid.Rows(i).Cells(j).Value = dataFrame.DisplayedData(i, j)
             Next
         Next
+    End Sub
+
+    Public Sub FocusGrid() Implements IDataViewGrid.Focus
+        Me.Focus()
     End Sub
 
     Public Function SelectedTab() As String
@@ -167,6 +173,10 @@ Public Class ucrDataViewLinuxGrid
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
+    End Sub
+
+    Private Sub RemoveAllBackgroundColors() Implements IDataViewGrid.RemoveAllBackgroundColors
+
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,

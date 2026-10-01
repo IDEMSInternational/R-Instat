@@ -4,7 +4,7 @@ R-Instat is free, menu driven statistics software powered by R. It is designed t
 
 ## Download
 
-The latest release is available from http://r-instat.org/Download.html where you will also find installation instructions and a getting started guide. R-Instat is currently a Windows only software. All prerequisites, including the R packages needed, are included in the installation file.
+The latest release is available from https://r-instat.org/ where you will also find installation instructions and a getting started guide. R-Instat is currently a Windows only software. All prerequisites, including the R packages needed, are included in the installation file.
 
 ## Background
 

@@ -72,6 +72,7 @@ Public Class dlgAnonymiseIDColumn
         ucrSelectorAnonymiseIDColumn.Reset()
         ucrSaveAnonymisedColumn.Reset()
 
+        clsHashFunction.SetPackageName("instatExtras")
         clsHashFunction.SetRCommand("hashed_id")
         clsHashFunction.AddParameter("algo", Chr(34) & "crc32" & Chr(34), iPosition:=2)
 

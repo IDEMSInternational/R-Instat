@@ -230,7 +230,7 @@ Public Class sdgSimpleRegOptions
         Dim clsTempParam As RParameter
         Dim lstPlots As New List(Of Integer)
 
-        For Each clsRCode As RCodeStructure In clsRSyntax.lstAfterCodes
+        For Each clsRCode As RCodeStructure In clsRSyntax.GetAfterCodes()
             clsTempFunc = TryCast(clsRCode, RFunction)
             If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = "plot" AndAlso clsTempFunc.ContainsParameter("which") Then
                 clsTempParam = clsTempFunc.GetParameter("which")

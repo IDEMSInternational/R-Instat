@@ -15,22 +15,28 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
+    Private bIsUpdatingSaveObject As Boolean = False
+    Private bDialogJustShown As Boolean = False
     Private bReset As Boolean = True
     Private strRainMin As String = "rain_min"
     Private strRainMax As String = "rain_max"
     Private strWBMin As String = "wb_min"
     Private strWBMax As String = "wb_max"
     Private strWB As String = "wb"
+    Private strCondCheck As String = "conditions_check"
     Private strEvapReplaceNA As String = "evap_NA_as_value"
     Private strCurrDataName As String = ""
     Private iCapacityDefault As Integer = 60
+    Private strYearType As String = "year_type"
 
 #Region "general_code_structures"
     ' General
-    Private clsRunCalculation As New RFunction
-    Private clsFirstOrLastFunction As New RFunction
+    Private clsVectorFunction, clsGetEndRainDefFunction, clsGetEndSeasonDefFunction, clsGetOffsetTermFunction, clsDeleteunusedrowFunction, clsStationtypeFunction, clsConvertColumnTypeStationFunction, clsConvertlinkedvariable1Function, clsConvertlinkedvariableFunction, clsConvertColumnType1Function, clsGetColumnDataTypeFunction, clsConvertColumnTypeFunction, clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
+    Private clsFirstOrLastFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
 
     ' Group by
     Private clsGroupByStationYearCalc As New RFunction
@@ -47,9 +53,9 @@ Public Class dlgEndOfRainsSeason
 
 #Region "end_of_rains_code_structures"
     ' Rolling sum rain
-    Private clsEndRainsRollingSumCalc As New RFunction
+    Private clsEndRainsRollingSumCalc, clsElseIfENdRainStatusFunction, clsWBEvaporationMinFunction, clsWBEvaporationMaxFunction As New RFunction
     Private clsRollSumRainFunction As New RFunction
-
+    Private clsWBOperator1, clsWBOperator2 As New ROperator
     ' Conditions filter
     Private clsEndRainsConditionsFilterCalc As New RFunction
     Private clsEndRainsConditionsFilterSubCalcsList As New RFunction
@@ -80,8 +86,7 @@ Public Class dlgEndOfRainsSeason
 
 #Region "end_of_season_code_structures"
 
-    Private clsEndSeasonIsNaRain As New RFunction
-
+    Private clsEndSeasonIsNaRain, clsLastFunction, clsnaIsRainFunction, clsElseIfRainFunction As New RFunction
     ' Rain min
     Private clsEndSeasonRainMinCalc As New RFunction
     Private clsIfElseRainMinFunction As New RFunction
@@ -97,16 +102,27 @@ Public Class dlgEndOfRainsSeason
     Private clsEndSeasonWBMinCalc As New RFunction
     Private clsEndSeasonWBMinCalcSubCalcsList As New RFunction
     Private clsReduceWBMinFunction As New RFunction
+    Private clsReduceWBMinFunction1 As New RFunction
+    Private clsReduceWBMinFunction2 As New RFunction
     Private clsPMinWBMinFunction As New RFunction
     Private clsWBMinTailFunction As New RFunction
+    Private clsWBMinTailFunction1 As New RFunction
+    Private clsWBMinTailFunction2 As New RFunction
     Private clsWBMinEvapOperator As New ROperator
+    Private clsMinusMinOperator As New ROperator
+    Private clsMinusMaxOperator As New ROperator
 
     ' Water Balance max
     Private clsEndSeasonWBMaxCalc As New RFunction
     Private clsEndSeasonWBMaxCalcSubCalcsList As New RFunction
     Private clsReduceWBMaxFunction As New RFunction
+    Private clsReduceWBMaxFunction1 As New RFunction
+    Private clsReduceWBMaxFunction2 As New RFunction
+    Private clsAsNumericFunction As New RFunction
     Private clsPMinWBMaxFunction As New RFunction
     Private clsWBMaxTailFunction As New RFunction
+    Private clsWBMaxTailFunction1 As New RFunction
+    Private clsWBMaxTailFunction2 As New RFunction
     Private clsWBMaxEvapOperator As New ROperator
 
     ' Water Balance
@@ -120,6 +136,11 @@ Public Class dlgEndOfRainsSeason
     Private clsIfElseVariableEvaporation As New RFunction
     Private clsIsNaEvaporation As New RFunction
 
+    'Check Condition 
+    Private clsConditionCheckFunction, clsConvertColumnlinkeddataFunction, clsRunCalculationStatus2Function, clsSetNamesEndSeasonStatusFunction, clsSetNamesEndSeasonFunction, clsVectorCalFormListFunction, clsLinkeddataFunction, clsRunCalculationStatusFunction, clsAllStatusFunction, clsListCondCheckFilterFunction, clsIsnaSecondConditionFilterFunction, clsListCondCheckFunction, clsConditionsFilterCondCheckFunction, clsElseifCondCheckFunction, clsIsnaConditionCheckFunction As New RFunction
+
+    Private clsConditionCheckOperator, clsCheckSecondConditionFilterOperator, clsCheckConditionFilterOperator, clsConditionChecksecondOperator As ROperator
+
     ' Conditions filter
     Private clsEndSeasonConditionsFilterCalc As New RFunction
     Private clsEndSeasonConditionsFilterSubCalcsList As New RFunction
@@ -128,9 +149,12 @@ Public Class dlgEndOfRainsSeason
 
     ' Doy summary
     Private clsEndSeasonFirstDoySummaryCalc As New RFunction
+    Private clsEndSeasonFirstDoySummaryCalcFilledFunction As New RFunction
     Private clsIfElseFirstDoyFunction As New RFunction
-    Private clsIsNaFirstWB As New RFunction
-    Private clsFirstDoyFunction As New RFunction
+    Public clsIfElseFirstDoyFilledFunction As New RFunction
+    Private clsIfElseFirstDoyFilled1Function, clsrunfilledFunction, clsFirstFilledFunction, clsFirstFilled1Function, clsIsNafilledFunction As New RFunction
+    Private clsAssignOperator As New ROperator
+    Private clsFirstDoyFunction, clsIsNaFirstWB As New RFunction
     Private clsFirstWBFunction As New RFunction
 
     ' Date summary
@@ -139,12 +163,12 @@ Public Class dlgEndOfRainsSeason
     Private clsFirstDateFunction As New RFunction
 
     ' Status summary
-    Private clsEndSeasonStatusSummaryCalc As New RFunction
+    Private clsEndSeasonStatusSummaryCalc, clsIfelseStatus2Function, clsIsnaStatus2Function, clsEndSeasonStatus2Function, clsIsNAStatusFunction, clsFirstStatusFunction, clsIfelseStatusFunction, clsIfelseStatus1Function As New RFunction
 
     ' Combination
-    Private clsEndSeasonCombinationCalc As New RFunction
-    Private clsEndSeasonCombinationManipulationList As New RFunction
-    Private clsEndSeasonCombinationSubCalcList As New RFunction
+    Private clsEndSeasonCombinationCalc, clsEndSeasonCombiStatus2ListFunction, clsEndSeasonCombiStatus2Function, clsEndSeasonCombinationCalcStatusFunction As New RFunction
+    Private clsEndSeasonCombinationManipulationList, clsEndSeasonCombinationManipulationListStatusFunction As New RFunction
+    Private clsEndSeasonCombinationSubCalcList, clsEndSeasonCombinationSubCalcListStatusFunction As New RFunction
 #End Region
 
     Private Sub dlgEndOfRainsSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -159,6 +183,8 @@ Public Class dlgEndOfRainsSeason
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
+        bDialogJustShown = True
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -232,8 +258,8 @@ Public Class dlgEndOfRainsSeason
         ucrInputEndRainDoy.SetValidationTypeAsRVariable()
         ucrInputEndRainDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
-        ucrChkEndofRainsDate.AddParameterPresentCondition(True, "sub2")
-        ucrChkEndofRainsDate.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkEndofRainsDate.AddParameterValuesCondition(True, "sub2", "True")
+        ucrChkEndofRainsDate.AddParameterValuesCondition(False, "sub2", "False")
         ucrChkEndofRainsDate.SetText("Date")
 
         ucrInputEndofRainsDate.SetParameter(New RParameter("result_name", 2))
@@ -241,8 +267,8 @@ Public Class dlgEndOfRainsSeason
         ucrInputEndofRainsDate.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
         ucrChkEndofRainsOccurence.SetText("Occurrence")
-        ucrChkEndofRainsOccurence.AddParameterPresentCondition(True, "sub3")
-        ucrChkEndofRainsOccurence.AddParameterPresentCondition(False, "sub3", False)
+        ucrChkEndofRainsOccurence.AddParameterValuesCondition(True, "sub3", "True")
+        ucrChkEndofRainsOccurence.AddParameterValuesCondition(False, "sub3", "False")
 
         ucrInputEndofRainsOccurence.SetParameter(New RParameter("result_name", 2))
         ucrInputEndofRainsOccurence.SetValidationTypeAsRVariable()
@@ -264,11 +290,6 @@ Public Class dlgEndOfRainsSeason
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
 
-        ucrInputReplaceNA.SetParameter(New RParameter("yes", 1))
-        ucrInputReplaceNA.SetValidationTypeAsNumeric()
-        ucrInputReplaceNA.AddQuotesIfUnrecognised = False
-
-
         ucrNudWBLessThan.SetParameter(New RParameter("1", 1, False))
         ucrNudWBLessThan.SetMinMax(0, Integer.MaxValue)
         ucrNudWBLessThan.Increment = 0.5
@@ -283,55 +304,71 @@ Public Class dlgEndOfRainsSeason
         ucrInputSeasonDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
         ucrChkEndofSeasonDate.SetText("Date")
-        ucrChkEndofSeasonDate.AddParameterPresentCondition(True, "sub2")
-        ucrChkEndofSeasonDate.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkEndofSeasonDate.AddParameterValuesCondition(True, "sub2", "True")
+        ucrChkEndofSeasonDate.AddParameterValuesCondition(False, "sub2", "False")
 
         ucrInputEndofSeasonDate.SetParameter(New RParameter("result_name", 3))
         ucrInputEndofSeasonDate.SetValidationTypeAsRVariable()
         ucrInputEndofSeasonDate.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
-        ucrChkEndofSeasonOccurence.AddParameterPresentCondition(True, "sub3")
-        ucrChkEndofSeasonOccurence.AddParameterPresentCondition(False, "sub3", False)
+        ucrChkEndofSeasonOccurence.AddParameterValuesCondition(True, "sub3", "True")
+        ucrChkEndofSeasonOccurence.AddParameterValuesCondition(False, "sub3", "False")
         ucrChkEndofSeasonOccurence.SetText("Occurrence")
 
         ucrInputEndofSeasonOccurence.SetParameter(New RParameter("result_name", 2))
         ucrInputEndofSeasonOccurence.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrInputEndofSeasonOccurence.SetValidationTypeAsRVariable()
 
-        ucrChkWB.SetParameter(New RParameter("WB_evap"))
-        ucrChkWB.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkWB.SetText("Reducing")
-        ucrChkWB.SetLinkedDisplayControl(ucrNudWB)
+        ucrChkFilled.AddParameterValuesCondition(True, "sub4", "True")
+        ucrChkFilled.AddParameterValuesCondition(False, "sub4", "False")
+        ucrChkFilled.SetText("Filled")
 
-        ucrNudWB.SetParameter(New RParameter("WB_evap_value"))
+        ucrInputFilled.SetParameter(New RParameter("result_name", 2))
+        ucrInputFilled.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
+        ucrInputFilled.SetValidationTypeAsRVariable()
+
+        ucrChkWB.AddParameterPresentCondition(True, "WB_evap", True)
+        ucrChkWB.AddParameterPresentCondition(False, "WB_evap", False)
+        ucrChkWB.SetText("Reducing")
+
+        ucrNudWB.SetParameter(New RParameter("WB_evap_value", 2, False))
         ucrNudWB.SetMinMax(0, 1)
-        ucrNudWB.DecimalPlaces = 0.01
         ucrNudWB.Increment = 0.01
+        ucrNudWB.DecimalPlaces = 2
+
 
         'linking controls
         ucrChkEndofRainsDoy.AddToLinkedControls(ucrInputEndRainDoy, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonOccurence.AddToLinkedControls(ucrInputEndofSeasonOccurence, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonDate.AddToLinkedControls(ucrInputEndofSeasonDate, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonDoy.AddToLinkedControls(ucrInputSeasonDoy, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkWB.AddToLinkedControls(ucrNudWB, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlEvaporation.AddToLinkedControls(ucrInputEvaporation, {rdoValueEvaporation}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFilled.AddToLinkedControls(ucrInputFilled, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkWB.AddToLinkedControls(ucrNudWB, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
+        ucrPnlEvaporation.AddToLinkedControls(ucrInputEvaporation, {rdoValueEvaporation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlEvaporation.AddToLinkedControls(ucrReceiverEvaporation, {rdoVariableEvaporation}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlEvaporation.AddToLinkedControls(ucrInputReplaceNA, {rdoVariableEvaporation}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofRainsOccurence.AddToLinkedControls(ucrInputEndofRainsOccurence, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofRainsDate.AddToLinkedControls(ucrInputEndofRainsDate, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrNudAmount, ucrNudTotalOverDays}, {rdoEndOfRains}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrNudCapacity, ucrNudWBLessThan, ucrChkEndofSeasonDoy}, {rdoEndOfSeasons}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrPnlEvaporation}, {rdoEndOfSeasons}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrChkWB}, {rdoEndOfSeasons}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrChkEndofSeasonDate, ucrChkEndofSeasonDoy, ucrChkEndofSeasonOccurence, ucrChkFilled}, {rdoEndOfSeasons}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrChkEndofRainsDate, ucrChkEndofRainsDoy, ucrChkEndofRainsOccurence}, {rdoEndOfRains}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkEndofRainsDoy.SetLinkedDisplayControl(grpEndofRains)
         ucrPnlEvaporation.SetLinkedDisplayControl(lblEvaporation)
-        ucrInputReplaceNA.SetLinkedDisplayControl(lblReplaceNA)
         ucrNudAmount.SetLinkedDisplayControl(lblAmount)
         ucrNudWBLessThan.SetLinkedDisplayControl(lblWaterBalanceLessThan)
         ucrNudCapacity.SetLinkedDisplayControl(lblCapacity)
         ucrChkEndofSeasonDoy.SetLinkedDisplayControl(grpEndofSeason)
         ucrNudTotalOverDays.SetLinkedDisplayControl(lblTotalOverDays)
+
+        ucrSaveObject.SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+        ucrSaveObject.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
+        ucrSaveObject.SetDataNameAsRVariable("linked_data_name")
+        ucrSaveObject.SetCheckBoxText("Store Definitions:")
+        ucrSaveObject.SetIsComboBox()
+        ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
 #End Region
     End Sub
@@ -343,21 +380,53 @@ Public Class dlgEndOfRainsSeason
         Dim strWaterBalanceMin As String = "water_balance_min"
         Dim strDifference As String = "difference"
         Dim strConditionsFilter As String = "conditions_filter"
+        Dim strConditionFilterCondCheck As String = "conditions_filter"
         Dim strRollSumRain As String = "roll_sum_rain"
         Dim strEndRains As String = "end_rains"
         Dim strEndRainsStatus As String = "end_rains_status"
         Dim strEndRainsDate As String = "end_rains_date"
         Dim strEndSeason As String = "end_season"
+        Dim strEndSeasonFilled As String = "end_season_filled"
         Dim strEndSeasonStatus As String = "end_season_status"
         Dim strEndSeasonDate As String = "end_season_date"
         Dim strDoyFilter As String = "doy_filter"
         Dim strEndofRains As String = "end_of_rains_combined"
         Dim strEndofSeason As String = "end_of_season_combined"
+        Dim strEndofSeasonStatus As String = "end_of_season_combined_status"
+        Dim strEndSeasonStatus2 As String = "end_season_status_2"
+        Dim strEndSeasonCombiStatus2 As String = "end_season_combined_status_2"
+        Dim strStationType As String = "station_type"
+        Dim strLinkeddata As String = "linked_data_name"
+        Dim strCalformlist As String = "calculated_from_list"
+
+        clsVectorFunction = New RFunction
+        clsConvertlinkedvariableFunction = New RFunction
+        clsConvertlinkedvariable1Function = New RFunction
+        clsIfElseFirstDoyFilled1Function = New RFunction
+        clsFirstFilledFunction = New RFunction
+        clsIsNafilledFunction = New RFunction
+        clsFirstFilled1Function = New RFunction
+        clsGetEndRainDefFunction = New RFunction
+        clsGetEndSeasonDefFunction = New RFunction
+        clsDeleteunusedrowFunction = New RFunction
+        clsGetOffsetTermFunction = New RFunction
+        clsDefineAsClimatic = New RFunction
+        clsVectorConcat2Function = New RFunction
+        clsConditionCheckOperator = New ROperator
+        clsConditionChecksecondOperator = New ROperator
+        clsCheckConditionFilterOperator = New ROperator
+        clsCheckSecondConditionFilterOperator = New ROperator
 
 #Region "clear_code_structures"
         ' General
         clsRunCalculation.Clear()
+        clsListCalFunction.Clear()
         clsFirstOrLastFunction.Clear()
+        clsConvertColumnTypeFunction.Clear()
+        clsGetColumnDataTypeFunction.Clear()
+        clsConvertColumnType1Function.Clear()
+        clsStationtypeFunction.Clear()
+        clsConvertColumnTypeStationFunction.Clear()
 
         '   Group by
         clsGroupByStationYearCalc.Clear()
@@ -375,6 +444,10 @@ Public Class dlgEndOfRainsSeason
         '   Rolling sum rain
         clsEndRainsRollingSumCalc.Clear()
         clsRollSumRainFunction.Clear()
+        clsElseIfENdRainStatusFunction.Clear()
+        clsElseIfRainFunction.Clear()
+        clsnaIsRainFunction.Clear()
+        clsLastFunction.Clear()
 
         '   Conditions filter
         clsEndRainsConditionsFilterCalc.Clear()
@@ -397,6 +470,10 @@ Public Class dlgEndOfRainsSeason
 
         '   Status summary
         clsEndRainsStatusSummaryCalc.Clear()
+        clsIfelseStatusFunction.Clear()
+        clsIfelseStatus1Function.Clear()
+        clsFirstStatusFunction.Clear()
+        clsIsNAStatusFunction.Clear()
 
         '   Combination
         clsEndRainsCombinationCalc.Clear()
@@ -421,16 +498,24 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonWBMinCalc.Clear()
         clsEndSeasonWBMinCalcSubCalcsList.Clear()
         clsReduceWBMinFunction.Clear()
+        clsReduceWBMinFunction1.Clear()
+        clsReduceWBMinFunction2.Clear()
         clsPMinWBMinFunction.Clear()
         clsWBMinTailFunction.Clear()
+        clsWBMinTailFunction1.Clear()
+        clsWBMinTailFunction2.Clear()
         clsWBMinEvapOperator.Clear()
 
         '   Water Balance max
         clsEndSeasonWBMaxCalc.Clear()
         clsEndSeasonWBMaxCalcSubCalcsList.Clear()
         clsReduceWBMaxFunction.Clear()
+        clsReduceWBMaxFunction1.Clear()
+        clsReduceWBMaxFunction2.Clear()
         clsPMinWBMaxFunction.Clear()
         clsWBMaxTailFunction.Clear()
+        clsWBMaxTailFunction1.Clear()
+        clsWBMaxTailFunction2.Clear()
         clsWBMaxEvapOperator.Clear()
 
         '   Water Balance
@@ -438,6 +523,10 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonWBCalcSubCalcsList.Clear()
         clsIfElseWBFunction.Clear()
         clsWBOperator.Clear()
+        clsWBOperator1.Clear()
+        clsWBOperator2.Clear()
+        clsWBEvaporationMinFunction.Clear()
+        clsPMinWBMaxFunction.Clear()
         clsWBMinMaxOperator.Clear()
 
         '   Evaporation
@@ -445,6 +534,18 @@ Public Class dlgEndOfRainsSeason
         clsIsNaEvaporation.Clear()
 
         '   Conditions filter
+        clsConditionCheckFunction.Clear()
+        clsElseifCondCheckFunction.Clear()
+        clsIsnaConditionCheckFunction.Clear()
+        clsListCondCheckFunction.Clear()
+        clsConditionsFilterCondCheckFunction.Clear()
+        clsIsnaSecondConditionFilterFunction.Clear()
+        clsListCondCheckFilterFunction.Clear()
+        clsEndSeasonStatus2Function.Clear()
+        clsIfelseStatus2Function.Clear()
+        clsIsnaStatus2Function.Clear()
+        clsEndSeasonCombiStatus2Function.Clear()
+        clsEndSeasonCombiStatus2ListFunction.Clear()
         clsEndSeasonConditionsFilterCalc.Clear()
         clsEndSeasonConditionsFilterSubCalcsList.Clear()
         clsEndSeasonConditionsOperator.Clear()
@@ -452,10 +553,14 @@ Public Class dlgEndOfRainsSeason
 
         '   Doy summary
         clsEndSeasonFirstDoySummaryCalc.Clear()
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.Clear()
         clsIfElseFirstDoyFunction.Clear()
+        clsIfElseFirstDoyFilledFunction.Clear()
+        clsAssignOperator.Clear()
         clsIsNaFirstWB.Clear()
         clsFirstDoyFunction.Clear()
         clsFirstWBFunction.Clear()
+        clsrunfilledFunction.Clear()
 
         '   Date summary
         clsEndSeasonFirstDateSummaryCalc.Clear()
@@ -467,9 +572,11 @@ Public Class dlgEndOfRainsSeason
 
         '   Combination
         clsEndSeasonCombinationCalc.Clear()
+        clsEndSeasonCombinationCalcStatusFunction.Clear()
         clsEndSeasonCombinationManipulationList.Clear()
+        clsEndSeasonCombinationManipulationListStatusFunction.Clear()
         clsEndSeasonCombinationSubCalcList.Clear()
-
+        clsEndSeasonCombinationSubCalcListStatusFunction.Clear()
 #End Region
 
         ucrSelectorForWaterBalance.Reset()
@@ -477,26 +584,41 @@ Public Class dlgEndOfRainsSeason
         'temporary fix
         rdoEndOfRains.Checked = True
 
+        ucrNudCapacity.SetText("100")
+        ucrNudWBLessThan.SetText("0.5")
+
+        clsDummyFunction = New RFunction
+        clsDummyFunction.AddParameter("sub2", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("sub3", "True", iPosition:=1)
+        clsDummyFunction.AddParameter("def", "false", iPosition:=2)
+
         ' Group by
+        clsGroupByStationYearCalc.SetPackageName("instatCalculations")
         clsGroupByStationYearCalc.SetRCommand("instat_calculation$new")
         clsGroupByStationYearCalc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStationYearCalc.SetAssignTo("grouping_by_station_year")
 
+        clsGroupByStationCalc.SetPackageName("instatCalculations")
         clsGroupByStationCalc.SetRCommand("instat_calculation$new")
         clsGroupByStationCalc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStationCalc.SetAssignTo("grouping_by_station")
 
         ' Doy Filter
+        clsDoyFilterCalcFromConvert.SetPackageName("databook")
         clsDoyFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDoyFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDoyFilterCalcFromList, iPosition:=0)
 
         clsDoyFilterCalcFromList.SetRCommand("list")
 
+        clsDoyFilterCalc.SetPackageName("instatCalculations")
         clsDoyFilterCalc.SetRCommand("instat_calculation$new")
         clsDoyFilterCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsDoyFilterCalc.AddParameter("function_exp", clsROperatorParameter:=clsDoyFilterOperator, iPosition:=1)
         clsDoyFilterCalc.AddParameter("calculated_from", clsRFunctionParameter:=clsDoyFilterCalcFromConvert, iPosition:=2)
         clsDoyFilterCalc.SetAssignTo(strDoyFilter)
+
+
+        clsDoyFilterCalcFromList.SetRCommand("list")
 
         clsDoyFilterOperator.SetOperation("&")
         clsDoyFilterOperator.AddParameter("from_operator", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
@@ -513,6 +635,7 @@ Public Class dlgEndOfRainsSeason
 #Region "end_of_rains"
 
         ' Rolling sum calculation
+        clsEndRainsRollingSumCalc.SetPackageName("instatCalculations")
         clsEndRainsRollingSumCalc.SetRCommand("instat_calculation$new")
         clsEndRainsRollingSumCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndRainsRollingSumCalc.AddParameter("function_exp", clsRFunctionParameter:=clsRollSumRainFunction, iPosition:=1)
@@ -527,6 +650,7 @@ Public Class dlgEndOfRainsSeason
         clsRollSumRainFunction.bToScriptAsRString = True
 
         ' Conditions filter
+        clsEndRainsConditionsFilterCalc.SetPackageName("instatCalculations")
         clsEndRainsConditionsFilterCalc.SetRCommand("instat_calculation$new")
         clsEndRainsConditionsFilterCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsEndRainsConditionsFilterCalc.AddParameter("function_exp", clsROperatorParameter:=clsEndRainsConditionsOperator, iPosition:=1)
@@ -549,6 +673,7 @@ Public Class dlgEndOfRainsSeason
         clsIsNaRollSumRain.AddParameter("x", strRollSumRain, iPosition:=0)
 
         ' Doy summary
+        clsEndRainsLastDoySummaryCalc.SetPackageName("instatCalculations")
         clsEndRainsLastDoySummaryCalc.SetRCommand("instat_calculation$new")
         clsEndRainsLastDoySummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsEndRainsLastDoySummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseLastDoyFunction, iPosition:=1)
@@ -573,6 +698,7 @@ Public Class dlgEndOfRainsSeason
         clsLastDoyFunction.SetRCommand("last")
 
         ' Date summary
+        clsEndRainsLastDateSummaryCalc.SetPackageName("instatCalculations")
         clsEndRainsLastDateSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndRainsLastDateSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsEndRainsLastDateSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseLastDateFunction, iPosition:=1)
@@ -591,14 +717,34 @@ Public Class dlgEndOfRainsSeason
         clsLastDateFunction.SetRCommand("last")
 
         ' Status summary
+        clsEndRainsStatusSummaryCalc.SetPackageName("instatCalculations")
         clsEndRainsStatusSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndRainsStatusSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsEndRainsStatusSummaryCalc.AddParameter("function_exp", Chr(34) & "n() > 0" & Chr(34), iPosition:=1)
+        clsEndRainsStatusSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsElseIfENdRainStatusFunction, iPosition:=1)
         clsEndRainsStatusSummaryCalc.AddParameter("result_name", Chr(34) & strEndRainsStatus & Chr(34), iPosition:=3)
         clsEndRainsStatusSummaryCalc.AddParameter("save", 2, iPosition:=4)
         clsEndRainsStatusSummaryCalc.SetAssignTo(strEndRainsStatus)
 
+        clsElseIfENdRainStatusFunction.SetRCommand("ifelse")
+        clsElseIfENdRainStatusFunction.bToScriptAsRString = True
+        clsElseIfENdRainStatusFunction.AddParameter("x", "n() > 0", iPosition:=0, bIncludeArgumentName:=False)
+        clsElseIfENdRainStatusFunction.AddParameter("yes", clsRFunctionParameter:=clsElseIfRainFunction, iPosition:=1)
+        clsElseIfENdRainStatusFunction.AddParameter("no", "FALSE", iPosition:=2)
+
+        clsElseIfRainFunction.SetRCommand("ifelse")
+        clsElseIfRainFunction.AddParameter("y", clsRFunctionParameter:=clsnaIsRainFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsElseIfRainFunction.AddParameter("yes", "NA", iPosition:=1)
+        clsElseIfRainFunction.AddParameter("no", "TRUE", iPosition:=2)
+
+        clsnaIsRainFunction.SetRCommand("is.na")
+        clsnaIsRainFunction.AddParameter("x", clsRFunctionParameter:=clsLastFunction, iPosition:=1)
+
+        clsLastFunction.SetPackageName("dplyr")
+        clsLastFunction.SetRCommand("last")
+        clsLastFunction.AddParameter("x", strRollSumRain, iPosition:=0)
+
         ' Combined
+        clsEndRainsCombinationCalc.SetPackageName("instatCalculations")
         clsEndRainsCombinationCalc.SetRCommand("instat_calculation$new")
         clsEndRainsCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsEndRainsCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsEndRainsCombinationManipulationList, iPosition:=1)
@@ -610,20 +756,37 @@ Public Class dlgEndOfRainsSeason
         clsEndRainsCombinationManipulationList.AddParameter("manip2", clsRFunctionParameter:=clsGroupByStationYearCalc, bIncludeArgumentName:=False, iPosition:=1)
         clsEndRainsCombinationManipulationList.AddParameter("manip3", clsRFunctionParameter:=clsDoyFilterCalc, bIncludeArgumentName:=False, iPosition:=2)
 
+        clsWBOperator1.SetOperation("-")
+        clsWBOperator1.AddParameter("left", "..1 + ..2", iPosition:=0)
+        clsWBOperator1.AddParameter("right", clsRFunctionParameter:=clsWBEvaporationMinFunction, iPosition:=1)
+        clsWBOperator1.bSpaceAroundOperation = True
+        clsWBOperator1.bBrackets = False
+
+        clsWBEvaporationMinFunction.SetPackageName("instatClimatic")
+        clsWBEvaporationMinFunction.SetRCommand("WB_evaporation")
+        clsWBEvaporationMinFunction.AddParameter("water_balance", "..1", iPosition:=0, bIncludeArgumentName:=False)
+        clsWBEvaporationMinFunction.AddParameter("y", "..2", iPosition:=4, bIncludeArgumentName:=False)
+
         clsEndRainsCombinationSubCalcList.SetRCommand("list")
         clsEndRainsCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainsLastDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
+        clsEndRainsCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsEndRainsLastDateSummaryCalc, bIncludeArgumentName:=False, iPosition:=1)
+        clsEndRainsCombinationSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsEndRainsStatusSummaryCalc, bIncludeArgumentName:=False, iPosition:=2)
+
+        clsListCalFunction.SetRCommand("list")
+        clsListCalFunction.AddParameter("drop", "FALSE", iPosition:=0)
 
         clsRunCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRunCalculation.AddParameter("display", "FALSE")
-        clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc)
+        clsRunCalculation.AddParameter("display", "FALSE", iPosition:=0)
+        clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc, iPosition:=1)
+        clsRunCalculation.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 #End Region
 
 #Region "end_of_season"
         clsEndSeasonIsNaRain.SetRCommand("is.na")
 
         'Rain min
+        clsEndSeasonRainMinCalc.SetPackageName("instatCalculations")
         clsEndSeasonRainMinCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonRainMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonRainMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseRainMinFunction, iPosition:=1)
@@ -636,6 +799,7 @@ Public Class dlgEndOfRainsSeason
         clsIfElseRainMinFunction.AddParameter("yes", "0", iPosition:=1)
 
         'Rain max
+        clsEndSeasonRainMaxCalc.SetPackageName("instatCalculations")
         clsEndSeasonRainMaxCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonRainMaxCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonRainMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseRainMaxFunction, iPosition:=1)
@@ -645,14 +809,15 @@ Public Class dlgEndOfRainsSeason
         clsIfElseRainMaxFunction.bToScriptAsRString = True
         clsIfElseRainMaxFunction.SetRCommand("ifelse")
         clsIfElseRainMaxFunction.AddParameter("test", clsRFunctionParameter:=clsEndSeasonIsNaRain, iPosition:=0)
-        clsIfElseRainMaxFunction.AddParameter("yes", 100, iPosition:=0)
+        clsIfElseRainMaxFunction.AddParameter("yes", 100, iPosition:=1)
 
         'Pmax
         clsPMaxFunction.SetRCommand("pmax")
-        clsPMaxFunction.AddParameter("0", "x + y", iPosition:=0, bIncludeArgumentName:=False)
+        clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxFunction.AddParameter("1", "0", bIncludeArgumentName:=False)
 
         ' Water Balance min
+        clsEndSeasonWBMinCalc.SetPackageName("instatCalculations")
         clsEndSeasonWBMinCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonWBMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction, iPosition:=1)
@@ -664,25 +829,54 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonWBMinCalcSubCalcsList.AddParameter("0", clsRFunctionParameter:=clsEndSeasonRainMinCalc, iPosition:=0, bIncludeArgumentName:=False)
 
         clsReduceWBMinFunction.bToScriptAsRString = True
-        clsReduceWBMinFunction.SetRCommand("Reduce")
-        clsReduceWBMinFunction.AddParameter("f", clsRFunctionParameter:=clsPMinWBMinFunction, iPosition:=0)
-        clsReduceWBMinFunction.AddParameter("x", clsRFunctionParameter:=clsWBMinTailFunction, iPosition:=1)
-        clsReduceWBMinFunction.AddParameter("init", "0", iPosition:=2)
-        clsReduceWBMinFunction.AddParameter("accumulate", "TRUE", iPosition:=3)
+        clsReduceWBMinFunction.SetPackageName("purrr")
+        clsReduceWBMinFunction.SetRCommand("accumulate")
+        clsReduceWBMinFunction.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMinFunction, iPosition:=0)
+        clsReduceWBMinFunction.AddParameter(".x", clsRFunctionParameter:=clsWBMinTailFunction, iPosition:=1)
+        clsReduceWBMinFunction.AddParameter(".init", "0", iPosition:=2)
 
-        clsPMinWBMinFunction.SetRCommand("function(x, y) pmin")
-        clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsPMinWBMinFunction.AddParameter("1", iCapacityDefault, iPosition:=1, bIncludeArgumentName:=False)
+        clsReduceWBMinFunction1.bToScriptAsRString = True
+        clsReduceWBMinFunction1.SetPackageName("purrr")
+        clsReduceWBMinFunction1.SetRCommand("accumulate2")
+        clsReduceWBMinFunction1.AddParameter(".x", clsRFunctionParameter:=clsWBMinTailFunction, iPosition:=0)
+        clsReduceWBMinFunction1.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMinFunction, iPosition:=1)
+        clsReduceWBMinFunction1.AddParameter(".init", "0", iPosition:=2)
+
+        clsReduceWBMinFunction2.bToScriptAsRString = True
+        clsReduceWBMinFunction2.SetPackageName("purrr")
+        clsReduceWBMinFunction2.SetRCommand("accumulate")
+        clsReduceWBMinFunction2.AddParameter(".x", clsRFunctionParameter:=clsWBMinTailFunction2, iPosition:=0)
+        clsReduceWBMinFunction2.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMinFunction, iPosition:=1)
+        clsReduceWBMinFunction2.AddParameter(".init", "0", iPosition:=2)
+
+        clsPMinWBMinFunction.SetRCommand(" ~ pmin")
 
         clsWBMinTailFunction.SetRCommand("tail")
         clsWBMinTailFunction.AddParameter("x", clsROperatorParameter:=clsWBMinEvapOperator, iPosition:=0)
         clsWBMinTailFunction.AddParameter("n", "-1", iPosition:=1)
 
+        clsWBMinTailFunction1.SetRCommand("tail")
+        clsWBMinTailFunction1.AddParameter("x", ucrReceiverEvaporation.GetVariableNames(False), iPosition:=0)
+        clsWBMinTailFunction1.AddParameter("n", "-1", iPosition:=1)
+
+        clsAsNumericFunction = New RFunction
+        clsAsNumericFunction.SetRCommand("as.numeric")
+        clsAsNumericFunction.AddParameter("x", ucrReceiverEvaporation.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+
+        clsMinusMinOperator = New ROperator
+        clsMinusMinOperator.SetOperation("-")
+        clsMinusMinOperator.AddParameter("left", strRainMin, iPosition:=0, bIncludeArgumentName:=False)
+        clsMinusMinOperator.AddParameter("right", clsRFunctionParameter:=clsAsNumericFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsWBMinTailFunction2.SetRCommand("tail")
+        clsWBMinTailFunction2.AddParameter("x", clsROperatorParameter:=clsMinusMinOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsWBMinTailFunction2.AddParameter("n", "-1", iPosition:=1)
+
         clsWBMinEvapOperator.SetOperation("-")
         clsWBMinEvapOperator.AddParameter("0", strRainMin, iPosition:=0)
-        clsWBMinEvapOperator.AddParameter("value", "5", iPosition:=1)
 
         ' Water Balance max
+        clsEndSeasonWBMaxCalc.SetPackageName("instatCalculations")
         clsEndSeasonWBMaxCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonWBMaxCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction, iPosition:=1)
@@ -694,25 +888,51 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonWBMaxCalcSubCalcsList.AddParameter("0", clsRFunctionParameter:=clsEndSeasonRainMaxCalc, iPosition:=0, bIncludeArgumentName:=False)
 
         clsReduceWBMaxFunction.bToScriptAsRString = True
-        clsReduceWBMaxFunction.SetRCommand("Reduce")
-        clsReduceWBMaxFunction.AddParameter("f", clsRFunctionParameter:=clsPMinWBMaxFunction, iPosition:=0)
-        clsReduceWBMaxFunction.AddParameter("x", clsRFunctionParameter:=clsWBMaxTailFunction, iPosition:=1)
-        clsReduceWBMaxFunction.AddParameter("init", "0", iPosition:=2)
-        clsReduceWBMaxFunction.AddParameter("accumulate", "TRUE", iPosition:=3)
+        clsReduceWBMaxFunction.SetPackageName("purrr")
+        clsReduceWBMaxFunction.SetRCommand("accumulate")
+        clsReduceWBMaxFunction.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMaxFunction, iPosition:=0)
+        clsReduceWBMaxFunction.AddParameter(".x", clsRFunctionParameter:=clsWBMaxTailFunction, iPosition:=1)
+        clsReduceWBMaxFunction.AddParameter(".init", "0", iPosition:=2)
 
-        clsPMinWBMaxFunction.SetRCommand("function(x, y) pmin")
-        clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsPMinWBMaxFunction.AddParameter("1", iCapacityDefault, iPosition:=1, bIncludeArgumentName:=False)
+        clsReduceWBMaxFunction1.bToScriptAsRString = True
+        clsReduceWBMaxFunction1.SetPackageName("purrr")
+        clsReduceWBMaxFunction1.SetRCommand("accumulate2")
+        clsReduceWBMaxFunction1.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMaxFunction, iPosition:=0)
+        clsReduceWBMaxFunction1.AddParameter(".x", clsRFunctionParameter:=clsWBMaxTailFunction, iPosition:=1)
+        clsReduceWBMaxFunction1.AddParameter(".init", "0", iPosition:=2)
+
+        clsReduceWBMaxFunction2.bToScriptAsRString = True
+        clsReduceWBMaxFunction2.SetPackageName("purrr")
+        clsReduceWBMaxFunction2.SetRCommand("accumulate")
+        clsReduceWBMaxFunction2.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMaxFunction, iPosition:=0)
+        clsReduceWBMaxFunction2.AddParameter(".x", clsRFunctionParameter:=clsWBMaxTailFunction2, iPosition:=1)
+        clsReduceWBMaxFunction2.AddParameter(".init", "0", iPosition:=2)
+
+        clsPMinWBMaxFunction.SetRCommand(" ~ pmin")
 
         clsWBMaxTailFunction.SetRCommand("tail")
         clsWBMaxTailFunction.AddParameter("x", clsROperatorParameter:=clsWBMaxEvapOperator, iPosition:=0)
         clsWBMaxTailFunction.AddParameter("n", "-1", iPosition:=1)
+
+        clsWBMaxTailFunction1.SetRCommand("tail")
+        clsWBMaxTailFunction1.AddParameter("x", ucrReceiverEvaporation.GetVariableNames(False), iPosition:=0)
+        clsWBMaxTailFunction1.AddParameter("n", "-1", iPosition:=1)
+
+        clsMinusMaxOperator = New ROperator
+        clsMinusMaxOperator.SetOperation("-")
+        clsMinusMaxOperator.AddParameter("left", strRainMax, iPosition:=0, bIncludeArgumentName:=False)
+        clsMinusMaxOperator.AddParameter("right", clsRFunctionParameter:=clsAsNumericFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsWBMaxTailFunction2.SetRCommand("tail")
+        clsWBMaxTailFunction2.AddParameter("x", clsROperatorParameter:=clsMinusMaxOperator, iPosition:=0)
+        clsWBMaxTailFunction2.AddParameter("n", "-1", iPosition:=1)
 
         clsWBMaxEvapOperator.SetOperation("-")
         clsWBMaxEvapOperator.AddParameter("0", strRainMax, iPosition:=0)
         clsWBMaxEvapOperator.AddParameter("value", "5", iPosition:=1)
 
         ' Water Balance
+        clsEndSeasonWBCalc.SetPackageName("instatCalculations")
         clsEndSeasonWBCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonWBCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonWBCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseWBFunction, iPosition:=1)
@@ -746,14 +966,15 @@ Public Class dlgEndOfRainsSeason
         clsIsNaEvaporation.SetRCommand("is.na")
 
         ' Conditions filter
+        clsEndSeasonConditionsFilterCalc.SetPackageName("instatCalculations")
         clsEndSeasonConditionsFilterCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonConditionsFilterCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsEndSeasonConditionsFilterCalc.AddParameter("function_exp", clsROperatorParameter:=clsEndSeasonConditionsOperator, iPosition:=1)
+        clsEndSeasonConditionsFilterCalc.AddParameter("function_exp", Chr(34) & "conditions_check == 1" & Chr(34), iPosition:=1)
         clsEndSeasonConditionsFilterCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonConditionsFilterSubCalcsList, iPosition:=4)
         clsEndSeasonConditionsFilterCalc.SetAssignTo(strConditionsFilter)
 
         clsEndSeasonConditionsFilterSubCalcsList.SetRCommand("list")
-        clsEndSeasonConditionsFilterSubCalcsList.AddParameter("sub1", clsRFunctionParameter:=clsEndSeasonWBCalc, iPosition:=0, bIncludeArgumentName:=False)
+        clsEndSeasonConditionsFilterSubCalcsList.AddParameter("sub1", clsRFunctionParameter:=clsConditionCheckFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsEndSeasonConditionsOperator.bToScriptAsRString = True
         clsEndSeasonConditionsOperator.SetOperation("|")
@@ -765,6 +986,7 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonWBConditionOperator.AddParameter("1", "0.5", iPosition:=1)
 
         ' Doy summary
+        clsEndSeasonFirstDoySummaryCalc.SetPackageName("instatCalculations")
         clsEndSeasonFirstDoySummaryCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonFirstDoySummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsEndSeasonFirstDoySummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseFirstDoyFunction, iPosition:=1)
@@ -772,11 +994,35 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonFirstDoySummaryCalc.AddParameter("save", "2", iPosition:=6)
         clsEndSeasonFirstDoySummaryCalc.SetAssignTo(strEndSeason)
 
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetPackageName("instatCalculations")
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetRCommand("instat_calculation$new")
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseFirstDoyFilledFunction, iPosition:=1)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("result_name", Chr(34) & strEndSeasonFilled & Chr(34), iPosition:=3)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("save", "2", iPosition:=4)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("calculated_from", strCalformlist, iPosition:=2)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetAssignTo(strEndSeasonFilled)
+
         clsIfElseFirstDoyFunction.bToScriptAsRString = True
         clsIfElseFirstDoyFunction.SetRCommand("ifelse")
         clsIfElseFirstDoyFunction.AddParameter("test", clsRFunctionParameter:=clsIsNaFirstWB, iPosition:=0)
         clsIfElseFirstDoyFunction.AddParameter("yes", "NA", iPosition:=1)
         clsIfElseFirstDoyFunction.AddParameter("no", clsRFunctionParameter:=clsFirstDoyFunction, iPosition:=2)
+
+        clsIfElseFirstDoyFilledFunction.bToScriptAsRString = True
+        clsIfElseFirstDoyFilledFunction.SetRCommand("ifelse")
+        clsIfElseFirstDoyFilledFunction.AddParameter("test", clsROperatorParameter:=clsAssignOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfElseFirstDoyFilledFunction.AddParameter("yes", "366", iPosition:=1)
+        clsIfElseFirstDoyFilledFunction.AddParameter("no", strEndSeason, iPosition:=2)
+
+        clsAssignOperator.SetOperation("==")
+        clsAssignOperator.AddParameter("left", strEndSeasonStatus, iPosition:=0, bIncludeArgumentName:=False)
+        clsAssignOperator.AddParameter("right", "FALSE", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsrunfilledFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsrunfilledFunction.AddParameter("display", "FALSE", iPosition:=0)
+        clsrunfilledFunction.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=1)
+        clsrunfilledFunction.AddParameter("calc", strEndSeasonFilled, iPosition:=2)
 
         clsIsNaFirstWB.SetRCommand("is.na")
         clsIsNaFirstWB.AddParameter("x", clsRFunctionParameter:=clsFirstWBFunction, iPosition:=0)
@@ -789,6 +1035,7 @@ Public Class dlgEndOfRainsSeason
         clsFirstDoyFunction.SetRCommand("first")
 
         ' Date summary
+        clsEndSeasonFirstDateSummaryCalc.SetPackageName("instatCalculations")
         clsEndSeasonFirstDateSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonFirstDateSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsEndSeasonFirstDateSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseFirstDateFunction, iPosition:=1)
@@ -807,14 +1054,35 @@ Public Class dlgEndOfRainsSeason
         clsFirstDateFunction.SetRCommand("first")
 
         ' Status summary
+        clsEndSeasonStatusSummaryCalc.SetPackageName("instatCalculations")
         clsEndSeasonStatusSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonStatusSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsEndSeasonStatusSummaryCalc.AddParameter("function_exp", Chr(34) & "n() > 0" & Chr(34), iPosition:=1)
+        clsEndSeasonStatusSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStatusFunction, iPosition:=1)
         clsEndSeasonStatusSummaryCalc.AddParameter("result_name", Chr(34) & strEndSeasonStatus & Chr(34), iPosition:=3)
-        clsEndSeasonStatusSummaryCalc.AddParameter("save", 2, iPosition:=4)
+        clsEndSeasonStatusSummaryCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListCondCheckFilterFunction, iPosition:=4)
+        clsEndSeasonStatusSummaryCalc.AddParameter("save", 2, iPosition:=5)
         clsEndSeasonStatusSummaryCalc.SetAssignTo(strEndSeasonStatus)
 
+        clsIfelseStatusFunction.SetRCommand("ifelse")
+        clsIfelseStatusFunction.bToScriptAsRString = True
+        clsIfelseStatusFunction.AddParameter("x", "n() == 0", iPosition:=0, bIncludeArgumentName:=False)
+        clsIfelseStatusFunction.AddParameter("y", "NA", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfelseStatusFunction.AddParameter("z", clsRFunctionParameter:=clsIfelseStatus1Function, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsIfelseStatus1Function.SetRCommand("ifelse")
+        clsIfelseStatus1Function.AddParameter("test", clsRFunctionParameter:=clsAllStatusFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfelseStatus1Function.AddParameter("yes", "FALSE", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfelseStatus1Function.AddParameter("no", "NA", iPosition:=2, bIncludeArgumentName:=False)
+
+        clsAllStatusFunction.SetRCommand("all")
+        clsAllStatusFunction.AddParameter("x", "conditions_check == 0", iPosition:=0, bIncludeArgumentName:=False)
+        clsAllStatusFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+        clsIsNAStatusFunction.SetRCommand("is.na")
+        clsIsNAStatusFunction.AddParameter("x", strWB, iPosition:=0, bIncludeArgumentName:=False)
+
         ' Combined
+        clsEndSeasonCombinationCalc.SetPackageName("instatCalculations")
         clsEndSeasonCombinationCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsEndSeasonCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsEndSeasonCombinationManipulationList, iPosition:=1)
@@ -828,29 +1096,206 @@ Public Class dlgEndOfRainsSeason
 
         clsEndSeasonCombinationSubCalcList.SetRCommand("list")
         clsEndSeasonCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
+        clsEndSeasonCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsEndSeasonFirstDateSummaryCalc, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsGetColumnDataTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
+        clsGetColumnDataTypeFunction.SetAssignTo(strYearType)
+
+        clsConvertColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
+        clsVectorFunction.SetRCommand("c")
+
+        clsVectorConcat2Function.SetRCommand("c")
+
+        clsConvertColumnType1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnType1Function.AddParameter("to_type", "year_type", iPosition:=2)
+
+        clsConvertlinkedvariableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
+
+        clsConvertlinkedvariable1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
+
+        clsConditionCheckFunction.SetPackageName("instatCalculations")
+        clsConditionCheckFunction.SetRCommand("instat_calculation$new")
+        clsConditionCheckFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsConditionCheckFunction.AddParameter("function_exp", clsRFunctionParameter:=clsElseifCondCheckFunction, iPosition:=1)
+        clsConditionCheckFunction.AddParameter("result_name", Chr(34) & strCondCheck & Chr(34), iPosition:=2)
+        clsConditionCheckFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsListCondCheckFunction, iPosition:=3)
+        clsConditionCheckFunction.SetAssignTo(strCondCheck)
+
+        clsListCondCheckFunction.SetRCommand("list")
+        clsListCondCheckFunction.AddParameter("x", clsRFunctionParameter:=clsEndSeasonWBCalc, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsElseifCondCheckFunction.bToScriptAsRString = True
+        clsElseifCondCheckFunction.SetRCommand("ifelse")
+        clsElseifCondCheckFunction.AddParameter("test", clsROperatorParameter:=clsConditionCheckOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsElseifCondCheckFunction.AddParameter("yes", "1", iPosition:=1, bIncludeArgumentName:=False)
+        clsElseifCondCheckFunction.AddParameter("no", "0", iPosition:=2, bIncludeArgumentName:=False)
+
+        clsConditionCheckOperator.SetOperation("|")
+        clsConditionCheckOperator.AddParameter("left", clsROperatorParameter:=clsConditionChecksecondOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsConditionCheckOperator.AddParameter("riht", clsRFunctionParameter:=clsIsnaConditionCheckFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsConditionChecksecondOperator.SetOperation("<=")
+        clsConditionChecksecondOperator.AddParameter("left", strWB, iPosition:=0, bIncludeArgumentName:=False)
+        clsConditionChecksecondOperator.AddParameter("right", "0.5", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsIsnaConditionCheckFunction.SetRCommand("is.na")
+
+        clsConditionsFilterCondCheckFunction.SetPackageName("instatCalculations")
+        clsConditionsFilterCondCheckFunction.SetRCommand("instat_calculation$new")
+        clsConditionsFilterCondCheckFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsConditionsFilterCondCheckFunction.AddParameter("function_exp", clsROperatorParameter:=clsCheckConditionFilterOperator, iPosition:=1)
+        clsConditionsFilterCondCheckFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsListCondCheckFilterFunction, iPosition:=2)
+        clsConditionsFilterCondCheckFunction.SetAssignTo(strConditionFilterCondCheck)
+
+        clsListCondCheckFilterFunction.SetRCommand("list")
+        clsListCondCheckFilterFunction.AddParameter("x", strCondCheck, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsCheckConditionFilterOperator.SetOperation("|")
+        clsCheckConditionFilterOperator.bToScriptAsRString = True
+        clsCheckConditionFilterOperator.AddParameter("left", "conditions_check == 1", iPosition:=0, bIncludeArgumentName:=False)
+        clsCheckConditionFilterOperator.AddParameter("right", clsROperatorParameter:=clsCheckSecondConditionFilterOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsCheckSecondConditionFilterOperator.SetOperation("|")
+        clsCheckSecondConditionFilterOperator.AddParameter("left", clsRFunctionParameter:=clsIsnaSecondConditionFilterFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsCheckSecondConditionFilterOperator.AddParameter("right", "conditions_check == 0", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsIsnaSecondConditionFilterFunction.SetRCommand("is.na")
+        clsIsnaSecondConditionFilterFunction.AddParameter("x", "conditions_check", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsEndSeasonCombinationCalcStatusFunction.SetPackageName("instatCalculations")
+        clsEndSeasonCombinationCalcStatusFunction.SetRCommand("instat_calculation$new")
+        clsEndSeasonCombinationCalcStatusFunction.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
+        clsEndSeasonCombinationCalcStatusFunction.AddParameter("manipulations", clsRFunctionParameter:=clsEndSeasonCombinationManipulationListStatusFunction, iPosition:=1)
+        clsEndSeasonCombinationCalcStatusFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonCombinationSubCalcListStatusFunction, iPosition:=2)
+        clsEndSeasonCombinationCalcStatusFunction.SetAssignTo(strEndofSeasonStatus)
+
+        clsEndSeasonCombinationManipulationListStatusFunction.SetRCommand("list")
+        clsEndSeasonCombinationManipulationListStatusFunction.AddParameter("manip1", strConditionsFilter, bIncludeArgumentName:=False, iPosition:=0)
+        clsEndSeasonCombinationManipulationListStatusFunction.AddParameter("manip2", "grouping_by_station_year", bIncludeArgumentName:=False, iPosition:=1)
+        clsEndSeasonCombinationManipulationListStatusFunction.AddParameter("manip3", strDoyFilter, bIncludeArgumentName:=False, iPosition:=2)
+
+        clsEndSeasonCombinationSubCalcListStatusFunction.SetRCommand("list")
+        clsEndSeasonCombinationSubCalcListStatusFunction.AddParameter("sub3", strEndSeasonStatus, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsRunCalculationStatusFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRunCalculationStatusFunction.AddParameter("display", "FALSE", iPosition:=0)
+        clsRunCalculationStatusFunction.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=1)
+        clsRunCalculationStatusFunction.AddParameter("calc", strEndofSeasonStatus, iPosition:=2)
+
+        clsLinkeddataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
+        clsLinkeddataFunction.SetAssignTo(strLinkeddata)
+
+
+        clsDefineAsClimatic.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
+        clsDefineAsClimatic.AddParameter("data_name", clsRFunctionParameter:=clsLinkeddataFunction, iPosition:=0)
+        clsDefineAsClimatic.AddParameter("key_col_names", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
+        clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
+        clsDefineAsClimatic.iCallType = 2
+
+        clsGetOffsetTermFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_offset_term")
+        clsGetOffsetTermFunction.SetAssignTo("definitions_offset")
+
+        clsGetEndRainDefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_end_rains_definition")
+        clsGetEndRainDefFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
+        clsGetEndRainDefFunction.AddParameter("summary_offset", clsRFunctionParameter:=clsGetOffsetTermFunction, iPosition:=5, bIncludeArgumentName:=False)
+
+        clsGetEndSeasonDefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_end_season_definition")
+        clsGetEndSeasonDefFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
+        clsGetEndSeasonDefFunction.AddParameter("summary_offset", clsRFunctionParameter:=clsGetOffsetTermFunction, iPosition:=5, bIncludeArgumentName:=False)
+
+        clsVectorCalFormListFunction.SetRCommand("c")
+        clsVectorCalFormListFunction.AddParameter("x", clsRFunctionParameter:=clsSetNamesEndSeasonStatusFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsVectorCalFormListFunction.AddParameter("y", clsRFunctionParameter:=clsSetNamesEndSeasonFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsVectorCalFormListFunction.SetAssignTo(strCalformlist)
+
+        clsSetNamesEndSeasonStatusFunction.SetRCommand("setNames")
+        clsSetNamesEndSeasonStatusFunction.AddParameter("x", Chr(34) & strEndSeasonStatus & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsSetNamesEndSeasonStatusFunction.AddParameter("y", strLinkeddata, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSetNamesEndSeasonFunction.SetRCommand("setNames")
+        clsSetNamesEndSeasonFunction.AddParameter("x", Chr(34) & strEndSeason & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsSetNamesEndSeasonFunction.AddParameter("y", strLinkeddata, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsEndSeasonStatus2Function.SetPackageName("instatCalculations")
+        clsEndSeasonStatus2Function.SetRCommand("instat_calculation$new")
+        clsEndSeasonStatus2Function.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonStatus2Function.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStatus2Function, iPosition:=1)
+        clsEndSeasonStatus2Function.AddParameter("calculated_from", strCalformlist, iPosition:=2)
+        clsEndSeasonStatus2Function.AddParameter("result_name", Chr(34) & strEndSeasonStatus & Chr(34), iPosition:=4)
+        clsEndSeasonStatus2Function.AddParameter("save", 2, iPosition:=5)
+        clsEndSeasonStatus2Function.SetAssignTo(strEndSeasonStatus2)
+
+        clsIfelseStatus2Function.SetRCommand("ifelse")
+        clsIfelseStatus2Function.bToScriptAsRString = True
+        clsIfelseStatus2Function.AddParameter("test", clsRFunctionParameter:=clsIsnaStatus2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfelseStatus2Function.AddParameter("yes", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfelseStatus2Function.AddParameter("no", strEndSeasonStatus, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsIsnaStatus2Function.SetRCommand("!is.na")
+        clsIsnaStatus2Function.AddParameter("x", strEndSeason, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsEndSeasonCombiStatus2Function.SetPackageName("instatCalculations")
+        clsEndSeasonCombiStatus2Function.SetRCommand("instat_calculation$new")
+        clsEndSeasonCombiStatus2Function.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
+        clsEndSeasonCombiStatus2Function.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonCombiStatus2ListFunction, iPosition:=2)
+        clsEndSeasonCombiStatus2Function.SetAssignTo(strEndSeasonCombiStatus2)
+
+        clsEndSeasonCombiStatus2ListFunction.SetRCommand("list")
+        clsEndSeasonCombiStatus2ListFunction.AddParameter("x", strEndSeasonStatus2, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsRunCalculationStatus2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRunCalculationStatus2Function.AddParameter("display", "FALSE", iPosition:=0)
+        clsRunCalculationStatus2Function.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=1)
+        clsRunCalculationStatus2Function.AddParameter("calc", strEndSeasonCombiStatus2, iPosition:=2)
+
+        clsConvertColumnlinkeddataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnlinkeddataFunction.AddParameter("data_name", strLinkeddata, iPosition:=0)
+        clsConvertColumnlinkeddataFunction.AddParameter("to_type", "year_type", iPosition:=2)
+
+        clsStationtypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
+        clsStationtypeFunction.SetAssignTo(strStationType)
+
+        clsConvertColumnTypeStationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnTypeStationFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
+        clsDeleteunusedrowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_unused_station_year_combinations")
+
 #End Region
+        ucrBase.clsRsyntax.ClearCodes()
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertlinkedvariableFunction, iPosition:=4)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsLinkeddataFunction, iPosition:=5)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDefineAsClimatic, iPosition:=10)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=13)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnlinkeddataFunction, iPosition:=14)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 
         clsFirstOrLastFunction = clsLastDoyFunction
+        RemoveUnusedRow()
+        StationType()
+        EnableFilledvariable()
+        SetDefaultPrefix()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsLastDoyFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFirstDoyFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
+        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFirstFilled1Function, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsEndSeasonIsNaRain, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIfElseRainMinFunction, New RParameter("no", 2), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIfElseRainMaxFunction, New RParameter("no", 2), iAdditionalPairNo:=3)
-        ucrReceiverEvaporation.AddAdditionalCodeParameterPair(clsIfElseVariableEvaporation, New RParameter("no", 2), iAdditionalPairNo:=1)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIsnaConditionCheckFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrReceiverEvaporation.AddAdditionalCodeParameterPair(clsWBMaxTailFunction1, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverEvaporation.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsFirstDateFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-
-        ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinWBMinFunction, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinWBMaxFunction, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-
-        ucrInputEvaporation.AddAdditionalCodeParameterPair(clsWBMaxEvapOperator, New RParameter("value", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrSaveObject.AddAdditionalRCode(clsGetEndSeasonDefFunction, iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-
-        ucrReceiverEvaporation.SetRCode(clsIsNaEvaporation, bReset)
 
         ucrInputEndRainDoy.SetRCode(clsEndRainsLastDoySummaryCalc, bReset)
         ucrInputEndofRainsDate.SetRCode(clsEndRainsLastDateSummaryCalc, bReset)
@@ -859,28 +1304,33 @@ Public Class dlgEndOfRainsSeason
         ucrInputSeasonDoy.SetRCode(clsEndSeasonFirstDoySummaryCalc, bReset)
         ucrInputEndofSeasonDate.SetRCode(clsEndSeasonFirstDateSummaryCalc, bReset)
         ucrInputEndofSeasonOccurence.SetRCode(clsEndSeasonStatusSummaryCalc, bReset)
+        ucrInputFilled.SetRCode(clsEndSeasonFirstDoySummaryCalcFilledFunction, bReset)
 
         ucrReceiverDate.SetRCode(clsLastDateFunction, bReset)
 
         ucrReceiverRainfall.SetRCode(clsRollSumRainFunction, bReset)
 
         ucrNudWBLessThan.SetRCode(clsEndSeasonWBConditionOperator, bReset)
+        ucrSaveObject.SetRCode(clsGetEndRainDefFunction, bReset)
 
-        ucrPnlEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
-        ucrInputEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
-        ucrNudCapacity.SetRCode(clsIfElseRainMaxFunction, bReset)
-        ucrInputReplaceNA.SetRCode(clsIfElseVariableEvaporation, bReset)
-
-        ucrChkEndofSeasonDoy.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
-        ucrChkEndofSeasonDate.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
-        ucrChkEndofSeasonOccurence.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
+        If bReset Then
+            ucrChkWB.SetRCode(clsWBEvaporationMinFunction, bReset)
+            ucrNudWB.SetRCode(clsWBEvaporationMinFunction, bReset)
+            ucrPnlEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
+            ucrReceiverEvaporation.SetRCode(clsWBMinTailFunction1, bReset)
+            ucrChkFilled.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
+            ucrChkEndofRainsDoy.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
+            ucrChkEndofRainsDate.SetRCode(clsDummyFunction, bReset)
+            ucrChkEndofRainsOccurence.SetRCode(clsDummyFunction, bReset)
+            ucrChkEndofSeasonDoy.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
+            ucrChkEndofSeasonDate.SetRCode(clsDummyFunction, bReset)
+            ucrChkEndofSeasonOccurence.SetRCode(clsDummyFunction, bReset)
+        End If
 
         ucrNudAmount.SetRCode(clsEndRainsRollSumRainConditionOperator, bReset)
         ucrNudTotalOverDays.SetRCode(clsRollSumRainFunction, bReset)
-        ucrChkEndofRainsDoy.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
-        ucrChkEndofRainsDate.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
-        ucrChkEndofRainsOccurence.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
         ucrPnlEndOfRainsAndSeasons.SetRCode(clsFirstOrLastFunction, bReset)
+        AddDefinitionName()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -910,20 +1360,28 @@ Public Class dlgEndOfRainsSeason
                 bOkEnabled = False
             ElseIf ucrChkEndofSeasonOccurence.Checked AndAlso ucrInputEndofSeasonOccurence.IsEmpty Then
                 bOkEnabled = False
+            ElseIf ucrChkFilled.Checked AndAlso ucrInputFilled.IsEmpty Then
+                bOkEnabled = False
             ElseIf rdoValueEvaporation.Checked AndAlso ucrInputEvaporation.IsEmpty Then
                 bOkEnabled = False
-            ElseIf rdoVariableEvaporation.Checked AndAlso (ucrReceiverEvaporation.IsEmpty OrElse ucrInputReplaceNA.IsEmpty) Then
+            ElseIf rdoVariableEvaporation.Checked AndAlso ucrReceiverEvaporation.IsEmpty Then
                 bOkEnabled = False
             End If
         Else
             bOkEnabled = False
         End If
+
+        If ucrSaveObject.ucrChkSave.Checked AndAlso Not ucrSaveObject.IsComplete Then
+            bOkEnabled = False
+        End If
+
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDoyFilterCalc, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDoyFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDoyFilterCalc, clsNewDayFromOperator:=clsDayFromOperator, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDoyFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False), bSetUseDateVisible:=False)
         sdgDoyRange.ShowDialog()
+        sdgDoyRange.SetUseDateVisibility(False)
         UpdateDayFilterPreview()
     End Sub
 
@@ -954,6 +1412,7 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub DayChange()
+        clsEndSeasonStatusSummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndRainsLastDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndSeasonFirstDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndRainsLastDateSummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames() & ")", iPosition:=3)
@@ -965,8 +1424,65 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonRainMaxCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
+    Private Sub RemoveUnusedRow()
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+            clsDeleteunusedrowFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=2)
+            clsDeleteunusedrowFunction.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=15)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDeleteunusedrowFunction)
+            clsDeleteunusedrowFunction.RemoveParameterByName("station")
+            clsDeleteunusedrowFunction.RemoveParameterByName("year")
+        End If
+    End Sub
+
+    Private Sub StationType()
+        If Not ucrReceiverStation.IsEmpty Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeStationFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsStationtypeFunction, iPosition:=2)
+            clsVectorFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+            clsStationtypeFunction.AddParameter("columns", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+            clsConvertColumnTypeStationFunction.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsConvertColumnTypeStationFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsStationtypeFunction)
+            clsVectorFunction.RemoveParameterByName("y")
+            clsConvertColumnTypeStationFunction.RemoveParameterByName("col_names")
+            clsStationtypeFunction.RemoveParameterByName("columns")
+        End If
+    End Sub
+
+    Private Sub YearStationVariable()
+        If Not ucrReceiverYear.IsEmpty Then
+            clsVectorFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+            clsConvertlinkedvariableFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
+            clsConvertlinkedvariable1Function.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
+            clsLinkeddataFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
+        Else
+            clsLinkeddataFunction.RemoveParameterByName("link_cols")
+            clsConvertlinkedvariableFunction.RemoveParameterByName("link_cols")
+            clsConvertlinkedvariable1Function.RemoveParameterByName("link_cols")
+            clsVectorFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
     Private Sub ucrReceiverStationYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         GroupingBy()
+        YearStationVariable()
+        RemoveUnusedRow()
+        StationType()
+        If Not ucrReceiverYear.IsEmpty Then
+            clsGetColumnDataTypeFunction.AddParameter("columns", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnTypeFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnType1Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnlinkeddataFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+        Else
+            clsConvertColumnlinkeddataFunction.RemoveParameterByName("col_names")
+            clsConvertColumnType1Function.RemoveParameterByName("col_names")
+            clsGetColumnDataTypeFunction.RemoveParameterByName("columns")
+            clsConvertColumnTypeFunction.RemoveParameterByName("col_names")
+        End If
+        AddTypes()
     End Sub
 
     Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
@@ -987,34 +1503,121 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub ucrSelectorForWaterBalance_DataFrameChanged() Handles ucrSelectorForWaterBalance.DataFrameChanged
         clsDoyFilterCalcFromList.ClearParameters()
+        clsGetColumnDataTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertlinkedvariableFunction.AddParameter("from_data_frame", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertlinkedvariable1Function.AddParameter("from_data_frame", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnTypeStationFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsStationtypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnTypeStationFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsLinkeddataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsDeleteunusedrowFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetOffsetTermFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
     End Sub
 
-    Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged, ucrReceiverEvaporation.ControlValueChanged, ucrInputReplaceNA.ControlValueChanged, ucrInputEvaporation.ControlValueChanged
+    Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged, ucrReceiverEvaporation.ControlValueChanged, ucrInputEvaporation.ControlValueChanged
         Evaporation()
+        If Me.Visible Then
+            CheckForMissingValues()
+        End If
     End Sub
 
     Private Sub Evaporation()
-        If rdoValueEvaporation.Checked Then
-            ucrReceiverRainfall.SetMeAsReceiver()
+        If rdoEndOfSeasons.Checked Then
+            clsPMaxFunction.RemoveParameterByName("0")
+            clsPMaxFunction.RemoveParameterByName("0")
             clsWBMinEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("variable")
-        ElseIf rdoVariableEvaporation.Checked Then
-            ucrReceiverEvaporation.SetMeAsReceiver()
-            clsWBMinEvapOperator.AddParameter("variable", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=1, bIncludeArgumentName:=False)
-            clsWBMinEvapOperator.RemoveParameterByName("value")
-            clsWBMaxEvapOperator.AddParameter("variable", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=1, bIncludeArgumentName:=False)
             clsWBMaxEvapOperator.RemoveParameterByName("value")
+            clsWBMinEvapOperator.RemoveParameterByName("value")
+            clsPMaxFunction.RemoveParameterByName("wb")
+            clsPMaxFunction.RemoveParameterByName("wb")
+            clsPMinWBMaxFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsPMinWBMinFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            If rdoValueEvaporation.Checked Then
+                clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction, iPosition:=1)
+                clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction, iPosition:=1)
+                If ucrChkWB.Checked Then
+                    clsWBEvaporationMinFunction.AddParameter("WB_evap_value", ucrNudWB.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+                    clsWBEvaporationMinFunction.AddParameter("yes", ucrNudCapacity.GetText(), iPosition:=2, bIncludeArgumentName:=False)
+                    clsWBEvaporationMinFunction.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=3, bIncludeArgumentName:=False)
+                    clsPMaxFunction.AddParameter("wb", clsROperatorParameter:=clsWBOperator1, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                Else
+                    clsWBMaxEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
+                    clsWBMinEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
+                    clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                End If
+            Else
+                ucrReceiverEvaporation.SetMeAsReceiver()
+                If ucrChkWB.Checked Then
+                    clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction1, iPosition:=1)
+                    clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction1, iPosition:=1)
+                    clsWBEvaporationMinFunction.AddParameter("WB_evap_value", ucrNudWB.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+                    clsWBEvaporationMinFunction.AddParameter("yes", ucrNudCapacity.GetText(), iPosition:=2, bIncludeArgumentName:=False)
+                    clsWBEvaporationMinFunction.AddParameter("value", "..3", bIncludeArgumentName:=False, iPosition:=3)
+                    clsReduceWBMinFunction1.AddParameter(".y", clsRFunctionParameter:=clsWBMinTailFunction1, iPosition:=1)
+                    clsReduceWBMaxFunction1.AddParameter(".y", clsRFunctionParameter:=clsWBMaxTailFunction1, iPosition:=1)
+                    clsPMaxFunction.AddParameter("wb", clsROperatorParameter:=clsWBOperator1, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                Else
+                    clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction2, iPosition:=1)
+                    clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction2, iPosition:=1)
+                    clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+                End If
+            End If
         End If
     End Sub
 
-    Private Sub ucrPnlEndOfRainsAndSeasons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlValueChanged
+    Private Sub ucrPnlEndOfRainsAndSeasons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged
         If rdoEndOfRains.Checked Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConditionsFilterCondCheckFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonStatusSummaryCalc)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonCombinationCalcStatusFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunCalculationStatusFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVectorCalFormListFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonStatus2Function)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonCombiStatus2Function)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunCalculationStatus2Function)
+
             clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc)
             clsFirstOrLastFunction = clsLastDoyFunction
         Else
+            If ucrChkEndofSeasonOccurence.Checked Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsConditionsFilterCondCheckFunction, iPosition:=0)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonStatusSummaryCalc, iPosition:=1)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonCombinationCalcStatusFunction, iPosition:=2)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRunCalculationStatusFunction, iPosition:=3)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsLinkeddataFunction, iPosition:=5)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsVectorCalFormListFunction, iPosition:=6)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonStatus2Function, iPosition:=7)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonCombiStatus2Function, iPosition:=8)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRunCalculationStatus2Function, iPosition:=9)
+            Else
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConditionsFilterCondCheckFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonStatusSummaryCalc)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunCalculationStatusFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkeddataFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonCombinationCalcStatusFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVectorCalFormListFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonStatus2Function)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonCombiStatus2Function)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunCalculationStatus2Function)
+            End If
             clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndSeasonCombinationCalc)
             clsFirstOrLastFunction = clsFirstDoyFunction
+            Evaporation()
         End If
+        AddDefinitionName()
+        SetDefaultPrefix()
+        AddTypes()
     End Sub
 
     Private Sub ucrChkEndofRainsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDoy.ControlValueChanged
@@ -1023,6 +1626,8 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndRainsCombinationSubCalcList.RemoveParameterByName("sub1")
         End If
+        AddSaveDefinitionOptions()
+        AddTypes()
     End Sub
 
     Private Sub ucrChkEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDate.ControlValueChanged
@@ -1031,14 +1636,8 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndRainsCombinationSubCalcList.RemoveParameterByName("sub2")
         End If
-    End Sub
-
-    Private Sub ucrChkEndofSeasonOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonOccurence.ControlValueChanged
-        If ucrChkEndofSeasonOccurence.Checked Then
-            clsEndSeasonCombinationSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsEndSeasonStatusSummaryCalc, bIncludeArgumentName:=False, iPosition:=2)
-        Else
-            clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub3")
-        End If
+        AddSaveDefinitionOptions()
+        AddTypes()
     End Sub
 
     Private Sub ucrChkEndofSeasonDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonDoy.ControlValueChanged
@@ -1047,6 +1646,7 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub1")
         End If
+        AddTypes()
     End Sub
 
     Private Sub ucrChkEndofSeasonDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonDate.ControlValueChanged
@@ -1055,6 +1655,7 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub2")
         End If
+        AddTypes()
     End Sub
 
     Private Sub ucrChkEndofRainsOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsOccurence.ControlValueChanged
@@ -1063,9 +1664,212 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndRainsCombinationSubCalcList.RemoveParameterByName("sub3")
         End If
+        AddSaveDefinitionOptions()
+        AddTypes()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrInputReplaceNA.ControlContentsChanged, ucrChkEndofSeasonOccurence.ControlContentsChanged, ucrInputEndofSeasonOccurence.ControlContentsChanged, ucrChkEndofSeasonDate.ControlContentsChanged, ucrInputEndofSeasonDate.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
+    Private Sub AddSaveDefinitionOptions()
+        ' Clear all existing parameters first
+        clsGetEndRainDefFunction.RemoveParameterByName("end_rains_date")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_rains")
+        clsGetEndRainDefFunction.RemoveParameterByName("end_rains_status")
+
+        clsGetEndSeasonDefFunction.RemoveParameterByName("end_season_date")
+        clsGetEndSeasonDefFunction.RemoveParameterByName("end_season")
+        clsGetEndSeasonDefFunction.RemoveParameterByName("end_season_status")
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndRainDefFunction)
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetEndSeasonDefFunction)
+
+        If ucrSaveObject.ucrChkSave.Checked Then
+
+            If rdoEndOfSeasons.Checked Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndSeasonDefFunction, iPosition:=16)
+
+                If ucrChkEndofSeasonDate.Checked Then
+                    clsGetEndSeasonDefFunction.AddParameter("end_season_date", Chr(34) & ucrInputEndofSeasonDate.GetText & Chr(34), iPosition:=2)
+                End If
+                If ucrChkEndofSeasonDoy.Checked Then
+                    clsGetEndSeasonDefFunction.AddParameter("end_season", Chr(34) & ucrInputSeasonDoy.GetText & Chr(34), iPosition:=3)
+                End If
+                If ucrChkEndofSeasonOccurence.Checked Then
+                    clsGetEndSeasonDefFunction.AddParameter("end_season_status", Chr(34) & ucrInputEndofSeasonOccurence.GetText & Chr(34), iPosition:=4)
+                End If
+
+            ElseIf rdoEndOfRains.Checked Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetEndRainDefFunction, iPosition:=16)
+
+                If ucrChkEndofRainsDate.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_rains_date", Chr(34) & ucrInputEndofRainsDate.GetText & Chr(34), iPosition:=2)
+                End If
+                If ucrChkEndofRainsDoy.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_rains", Chr(34) & ucrInputEndRainDoy.GetText & Chr(34), iPosition:=3)
+                End If
+                If ucrChkEndofRainsOccurence.Checked Then
+                    clsGetEndRainDefFunction.AddParameter("end_rains_status", Chr(34) & ucrInputEndofRainsOccurence.GetText & Chr(34), iPosition:=4)
+                End If
+            End If
+
+        End If
+    End Sub
+
+    Private Sub SetDefaultPrefix()
+        If rdoEndOfSeasons.Checked Then
+            ucrSaveObject.SetPrefix("end_season_definition")
+        ElseIf rdoEndOfRains.Checked Then
+            ucrSaveObject.SetPrefix("end_rain_definition")
+        End If
+
+        AddSaveDefinitionOptions()
+    End Sub
+
+
+    Private Sub ucrSaveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlValueChanged
+        If bIsUpdatingSaveObject Then
+            Exit Sub
+        End If
+
+        AddDefinitionName()
+        bIsUpdatingSaveObject = True
+        AddSaveDefinitionOptions()
+        bIsUpdatingSaveObject = False
+    End Sub
+
+    Private Sub AddDefinitionName()
+        Dim strDefinitionName = ucrSaveObject.GetText()
+
+        If strDefinitionName <> "" Then
+            If rdoEndOfRains.Checked Then
+                clsGetEndRainDefFunction.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=1)
+            ElseIf rdoEndOfSeasons.Checked Then
+                clsGetEndSeasonDefFunction.AddParameter("definition_name", Chr(34) & strDefinitionName & Chr(34), iPosition:=1)
+            End If
+        Else
+            clsGetEndRainDefFunction.RemoveParameterByName("definition_name")
+            clsGetEndSeasonDefFunction.RemoveParameterByName("definition_name")
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrChkEndofSeasonOccurence.ControlContentsChanged, ucrInputEndofSeasonOccurence.ControlContentsChanged, ucrChkEndofSeasonDate.ControlContentsChanged, ucrInputEndofSeasonDate.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrSaveObject.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged, ucrNudWB.ControlValueChanged, ucrNudCapacity.ControlValueChanged
+        Evaporation()
+    End Sub
+
+    Private Sub rdoValueEvaporation_CheckedChanged(sender As Object, e As EventArgs) Handles rdoValueEvaporation.CheckedChanged, rdoVariableEvaporation.CheckedChanged
+        Evaporation()
+    End Sub
+
+    Private Sub ucrNudWBLessThan_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBLessThan.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged, ucrInputEndofSeasonOccurence.ControlValueChanged, ucrChkEndofSeasonDate.ControlValueChanged, ucrInputEndofSeasonDate.ControlValueChanged, ucrChkEndofSeasonDoy.ControlValueChanged, ucrInputSeasonDoy.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
+        EnableFilledvariable()
+        AddSaveDefinitionOptions()
+
+        If Not ucrNudWBLessThan.IsEmpty Then
+            clsEndSeasonWBConditionOperator.AddParameter("1", ucrNudWBLessThan.GetText(), iPosition:=1)
+        Else
+            clsEndSeasonWBConditionOperator.RemoveParameterByName("1")
+        End If
+        AddTypes()
+    End Sub
+
+    Private Sub ucrChkFilled_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilled.ControlValueChanged
+        EnableFilledvariable()
+    End Sub
+
+    Private Sub EnableFilledvariable()
+        If ucrChkFilled.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsEndSeasonFirstDoySummaryCalcFilledFunction, iPosition:=11)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsrunfilledFunction, iPosition:=12)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsrunfilledFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndSeasonFirstDoySummaryCalcFilledFunction)
+        End If
+        ucrChkFilled.Enabled = ucrChkEndofSeasonOccurence.Checked
+    End Sub
+
+    Private Sub CheckForMissingValues()
+        If rdoEndOfSeasons.Checked AndAlso rdoVariableEvaporation.Checked Then
+            If Not ucrReceiverEvaporation.IsEmpty Then
+                Dim clsCalcFunction, clsIsNAFunction, clsAnyFunction As New RFunction
+                Dim strDataFrame As String = ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+                Dim strVariable As String = ucrReceiverEvaporation.GetVariableNames(False)
+
+                ' Build: any(is.na(data_book$get_columns_from_data(...)))
+                clsCalcFunction.SetRCommand("data_book$get_columns_from_data")
+                clsCalcFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+                clsCalcFunction.AddParameter("col_names", Chr(34) & strVariable & Chr(34), iPosition:=0)
+
+                clsIsNAFunction.SetRCommand("is.na")
+                clsIsNAFunction.AddParameter("na", clsRFunctionParameter:=clsCalcFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsAnyFunction.SetRCommand("any")
+                clsAnyFunction.AddParameter("any", clsRFunctionParameter:=clsIsNAFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                ' Run and check result
+                Try
+                    Dim symResult As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyFunction.ToScript)
+                    If symResult.AsLogical()(0) Then
+                        MsgBoxTranslate("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
+                    End If
+                Catch ex As Exception
+                    ' Do nothing on error — no message
+                End Try
+            End If
+        End If
+    End Sub
+
+    Private Sub dlgEndOfRainsSeason_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        If bDialogJustShown AndAlso Not ucrReceiverEvaporation.IsEmpty Then
+            CheckForMissingValues()
+            bDialogJustShown = False ' So it doesn't repeat if Shown is triggered again
+        End If
+    End Sub
+
+    Private Sub ucrInputEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEndofRainsDate.ControlValueChanged, ucrInputEndofRainsOccurence.ControlValueChanged, ucrInputEndRainDoy.ControlValueChanged
+        AddSaveDefinitionOptions()
+        AddTypes()
+    End Sub
+
+    Private Sub AddRemoveParam(ucrChk As ucrCheck, ucrInput As ucrInputTextBox, paramName As String, paramPos As Integer)
+        If ucrChk.Checked Then
+            If Not ucrInput.IsEmpty Then
+                clsVectorConcat2Function.AddParameter(paramName, Chr(34) & ucrInput.GetText() & Chr(34), iPosition:=paramPos)
+            Else
+                clsVectorConcat2Function.RemoveParameterByName(paramName)
+            End If
+        Else
+            clsVectorConcat2Function.RemoveParameterByName(paramName)
+        End If
+    End Sub
+
+    Private Sub AddTypes()
+        If Not ucrReceiverStation.IsEmpty Then
+            clsVectorConcat2Function.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=0)
+        Else
+            clsVectorConcat2Function.RemoveParameterByName("station")
+        End If
+        clsVectorConcat2Function.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+
+        If rdoEndOfRains.Checked Then
+            clsVectorConcat2Function.RemoveParameterByName("end_season")
+            clsVectorConcat2Function.RemoveParameterByName("end_season_date")
+            clsVectorConcat2Function.RemoveParameterByName("end_season_status")
+
+            AddRemoveParam(ucrChkEndofRainsDoy, ucrInputEndRainDoy, "end_rain", 2)
+            AddRemoveParam(ucrChkEndofRainsDate, ucrInputEndofRainsDate, "end_rain_date", 3)
+            AddRemoveParam(ucrChkEndofRainsOccurence, ucrInputEndofRainsOccurence, "end_rain_status", 4)
+        ElseIf rdoEndOfSeasons.Checked Then
+            clsVectorConcat2Function.RemoveParameterByName("end_rain")
+            clsVectorConcat2Function.RemoveParameterByName("end_rain_date")
+            clsVectorConcat2Function.RemoveParameterByName("end_rain_status")
+
+            AddRemoveParam(ucrChkEndofSeasonDoy, ucrInputSeasonDoy, "end_season", 2)
+            AddRemoveParam(ucrChkEndofSeasonDate, ucrInputEndofSeasonDate, "end_season_date", 3)
+            AddRemoveParam(ucrChkEndofSeasonOccurence, ucrInputEndofSeasonOccurence, "end_season_status", 4)
+        End If
+
+        clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
+    End Sub
+
 End Class

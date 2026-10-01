@@ -1,4 +1,6 @@
-﻿Public Class frmPackageIssues
+﻿Imports instat.Translations
+
+Public Class frmPackageIssues
     Private bFirstLoad As Boolean = True
     Private strMissingPackages() As String
     Private clsInstallPackages As New RFunction
@@ -40,10 +42,10 @@
         frmMain.clsRLink.RunInternalScript(clsInstallPackages.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         strCurrentMissingPackages = frmMain.clsRLink.GetRPackagesNotInstalled()
         If strCurrentMissingPackages IsNot Nothing AndAlso strCurrentMissingPackages.Length > 0 Then
-            MsgBox("Some packages could still not be installed. Try the alternative suggestions or contact the R-Instat help team." & vbNewLine & "You can continue to use R-Instat, however some functionality may be unavailable." & vbNewLine & "Click OK to see the packages still missing.", MsgBoxStyle.Information, Title:="Some packages still missing")
+            MsgBoxTranslate("Some packages could still not be installed. Try the alternative suggestions or contact the R-Instat help team." & vbNewLine & "You can continue to use R-Instat, however some functionality may be unavailable." & vbNewLine & "Click OK to see the packages still missing.", MsgBoxStyle.Information, Title:="Some packages still missing")
             SetMissingPackages(strCurrentMissingPackages)
         Else
-            MsgBox("Congratulations! All missing packages were successfully installed. You can now continue using R-Instat.", MsgBoxStyle.Information, Title:="Missing packages successfully installed")
+            MsgBoxTranslate("Congratulations! All missing packages were successfully installed. You can now continue using R-Instat.", MsgBoxStyle.Information, Title:="Missing packages successfully installed")
             frmMain.clsRLink.RunInternalScript(clsInstallPackages.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False, bSilent:=True)
             frmMain.clsRLink.LoadedRequiredPackages(bSilent:=True)
             Me.Close()
@@ -60,7 +62,7 @@
     Private Sub cmdCloseRInstat_Click(sender As Object, e As EventArgs) Handles cmdCloseRInstat.Click
         Dim bConfirm As DialogResult
 
-        bConfirm = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
+        bConfirm = MsgBoxTranslate("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
         If bConfirm = DialogResult.Yes Then
             bCloseRInstat = True
             Me.Close()

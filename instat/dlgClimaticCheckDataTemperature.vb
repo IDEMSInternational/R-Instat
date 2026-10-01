@@ -117,6 +117,13 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.bAutoFill = True
         ucrReceiverElement2.bWithQuotes = False
 
+        ' Setting tooltips
+        ttOutliers.SetToolTip(ucrChkRangeElement1.chkCheck, "Flag values outside the acceptable range for Element 1")
+        ttOutliers.SetToolTip(ucrChkRangeElement2.chkCheck, "Flag values outside the acceptable range for Element 2")
+        ttOutliers.SetToolTip(ucrChkSame.chkCheck, "Flag values that occur for the specified number of consecutive days")
+        ttOutliers.SetToolTip(ucrChkJump.chkCheck, "Flag values where there are consecutive rows with a difference of a specified value")
+        ttOutliers.SetToolTip(ucrChkDifference.chkCheck, "Flag cases where Element 1 is less than or equal to Element 2")
+
         'Checkboxes for options
         ucrChkRangeElement1.SetParameter(New RParameter("range1", clsRangeOrOp, 1), bNewChangeParameterValue:=False)
         ucrChkRangeElement1.SetText("Acceptable Range Element1:")
@@ -213,7 +220,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetMeAsReceiver()
 
         'GroupBy
-        clsGroupByFunc.SetRCommand("instat_calculation$new")
+        clsGroupByFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByFunc.SetAssignTo("grouping")
         clsGroupingListFunc.SetRCommand("list")
@@ -244,7 +251,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsDiffOp.SetOperation("|")
 
         'Group By Month for Outliers 
-        clsGroupByMonth.SetRCommand("instat_calculation$new")
+        clsGroupByMonth.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByMonth.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByMonth.SetAssignTo("grouping_month")
 
@@ -267,7 +274,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsDiffListSubCalc.SetOperation(",")
 
         'Main calculation filter
-        clsCalcFilterFunc.SetRCommand("instat_calculation$new")
+        clsCalcFilterFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsCalcFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
         clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterListFunc, iPosition:=2)

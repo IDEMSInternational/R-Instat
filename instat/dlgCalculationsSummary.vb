@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class dlgCalculationsSummary
     Public bFirstLoad As Boolean = True
     Public bResetSubdialog As Boolean = True
@@ -61,7 +62,7 @@ Public Class dlgCalculationsSummary
         clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsNewCalculationFunction)
 
-        clsNewCalculationFunction.SetRCommand("instat_calculation$new")
+        clsNewCalculationFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsNewCalculationFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         clsNewCalculationFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsNewCalculationFunction.AddParameter("save", "2")
@@ -96,7 +97,7 @@ Public Class dlgCalculationsSummary
         For Each lviTemp As ListViewItem In lstCalculations.SelectedItems
             iIndex = lstCalculations.Items.IndexOf(lviTemp)
             lstCalculations.Items.Remove(lviTemp)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = lviTemp.Text))
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(ucrBase.clsRsyntax.GetBeforeCodes().Find(Function(x) x.Tag = lviTemp.Text))
             dctCalculations.Remove(lviTemp.Text)
         Next
     End Sub
@@ -128,7 +129,7 @@ Public Class dlgCalculationsSummary
         If lstCalculations.SelectedItems.Count = 1 Then
             clsSelectedCalculationFunction = dctCalculations(lstCalculations.SelectedItems(0).Text)
             If clsSelectedCalculationFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedCalculationFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
-                MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
+                MsgBoxTranslate("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
             Else
                 sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
                 sdgCalculationsSummmary.ShowDialog()
@@ -139,7 +140,7 @@ Public Class dlgCalculationsSummary
                     strCalcName = lstCalculations.SelectedItems(0).Text
                 End If
                 lstCalculations.SelectedItems(0).Text = strCalcName
-                clsApplyCalculation = ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = strCalcName)
+                clsApplyCalculation = ucrBase.clsRsyntax.GetBeforeCodes().Find(Function(x) x.Tag = strCalcName)
                 If clsSelectedCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsSelectedCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
                     clsApplyCalculation.iCallType = 0
                     clsApplyCalculation.AddParameter("display", "FALSE")

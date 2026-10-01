@@ -181,6 +181,7 @@ Public Class clsDataFrame
             Else
                 bRefreshed = False
             End If
+            _clsVisibleDataFramePage.HasDataChangedForAutoSave = True
         End If
         _clsColumnMetaData.RefreshData()
         Return bRefreshed

@@ -52,6 +52,7 @@ Public Class GridROperations
         clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColumnsFromData.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
 
+        clsNNonNumeric.SetPackageName("instatExtras")
         clsNNonNumeric.SetRCommand("n_non_numeric")
 
         clsConvertToNumeric.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)

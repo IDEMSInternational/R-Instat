@@ -48,7 +48,7 @@ Public Class dlgCombineforGraphics
         ucrSave.SetPrefix("combined_graph")
         ucrSave.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         ucrSave.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
-        ucrSave.SetCheckBoxText("Save Graph")
+        ucrSave.SetCheckBoxText("Store Graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub

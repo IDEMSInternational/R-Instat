@@ -78,7 +78,7 @@ Partial Class ucrELementTextControl
         Me.grpAxisLabels.Controls.Add(Me.ucrInputTextFamily)
         Me.grpAxisLabels.Location = New System.Drawing.Point(3, 0)
         Me.grpAxisLabels.Name = "grpAxisLabels"
-        Me.grpAxisLabels.Size = New System.Drawing.Size(246, 223)
+        Me.grpAxisLabels.Size = New System.Drawing.Size(246, 231)
         Me.grpAxisLabels.TabIndex = 0
         Me.grpAxisLabels.TabStop = False
         Me.grpAxisLabels.Text = "Element Text "
@@ -89,7 +89,7 @@ Partial Class ucrELementTextControl
         Me.ucrTextColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrTextColors.GetSetSelectedIndex = -1
         Me.ucrTextColors.IsReadOnly = False
-        Me.ucrTextColors.Location = New System.Drawing.Point(141, 192)
+        Me.ucrTextColors.Location = New System.Drawing.Point(141, 203)
         Me.ucrTextColors.Name = "ucrTextColors"
         Me.ucrTextColors.Size = New System.Drawing.Size(101, 21)
         Me.ucrTextColors.TabIndex = 15
@@ -98,7 +98,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkTextColour.AutoSize = True
         Me.ucrChkTextColour.Checked = False
-        Me.ucrChkTextColour.Location = New System.Drawing.Point(8, 192)
+        Me.ucrChkTextColour.Location = New System.Drawing.Point(8, 203)
         Me.ucrChkTextColour.Name = "ucrChkTextColour"
         Me.ucrChkTextColour.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkTextColour.TabIndex = 14
@@ -107,7 +107,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkTextFace.AutoSize = True
         Me.ucrChkTextFace.Checked = False
-        Me.ucrChkTextFace.Location = New System.Drawing.Point(8, 167)
+        Me.ucrChkTextFace.Location = New System.Drawing.Point(8, 178)
         Me.ucrChkTextFace.Name = "ucrChkTextFace"
         Me.ucrChkTextFace.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkTextFace.TabIndex = 12
@@ -116,7 +116,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkTextFamily.AutoSize = True
         Me.ucrChkTextFamily.Checked = False
-        Me.ucrChkTextFamily.Location = New System.Drawing.Point(8, 142)
+        Me.ucrChkTextFamily.Location = New System.Drawing.Point(8, 153)
         Me.ucrChkTextFamily.Name = "ucrChkTextFamily"
         Me.ucrChkTextFamily.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkTextFamily.TabIndex = 10
@@ -125,7 +125,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkAngle.AutoSize = True
         Me.ucrChkAngle.Checked = False
-        Me.ucrChkAngle.Location = New System.Drawing.Point(8, 117)
+        Me.ucrChkAngle.Location = New System.Drawing.Point(8, 128)
         Me.ucrChkAngle.Name = "ucrChkAngle"
         Me.ucrChkAngle.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkAngle.TabIndex = 8
@@ -134,7 +134,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkHjust.AutoSize = True
         Me.ucrChkHjust.Checked = False
-        Me.ucrChkHjust.Location = New System.Drawing.Point(8, 44)
+        Me.ucrChkHjust.Location = New System.Drawing.Point(8, 55)
         Me.ucrChkHjust.Name = "ucrChkHjust"
         Me.ucrChkHjust.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkHjust.TabIndex = 2
@@ -143,7 +143,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkVjust.AutoSize = True
         Me.ucrChkVjust.Checked = False
-        Me.ucrChkVjust.Location = New System.Drawing.Point(8, 69)
+        Me.ucrChkVjust.Location = New System.Drawing.Point(8, 80)
         Me.ucrChkVjust.Name = "ucrChkVjust"
         Me.ucrChkVjust.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkVjust.TabIndex = 4
@@ -152,7 +152,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkLineHeight.AutoSize = True
         Me.ucrChkLineHeight.Checked = False
-        Me.ucrChkLineHeight.Location = New System.Drawing.Point(8, 94)
+        Me.ucrChkLineHeight.Location = New System.Drawing.Point(8, 105)
         Me.ucrChkLineHeight.Name = "ucrChkLineHeight"
         Me.ucrChkLineHeight.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkLineHeight.TabIndex = 6
@@ -161,7 +161,7 @@ Partial Class ucrELementTextControl
         '
         Me.ucrChkSize.AutoSize = True
         Me.ucrChkSize.Checked = False
-        Me.ucrChkSize.Location = New System.Drawing.Point(8, 19)
+        Me.ucrChkSize.Location = New System.Drawing.Point(8, 30)
         Me.ucrChkSize.Name = "ucrChkSize"
         Me.ucrChkSize.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkSize.TabIndex = 0
@@ -171,7 +171,7 @@ Partial Class ucrELementTextControl
         Me.ucrNudVjust.AutoSize = True
         Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjust.Location = New System.Drawing.Point(141, 69)
+        Me.ucrNudVjust.Location = New System.Drawing.Point(141, 80)
         Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVjust.Name = "ucrNudVjust"
@@ -184,7 +184,7 @@ Partial Class ucrELementTextControl
         Me.ucrNudLineHeight.AutoSize = True
         Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeight.Location = New System.Drawing.Point(141, 94)
+        Me.ucrNudLineHeight.Location = New System.Drawing.Point(141, 105)
         Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLineHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLineHeight.Name = "ucrNudLineHeight"
@@ -197,7 +197,7 @@ Partial Class ucrELementTextControl
         Me.ucrNudAngle.AutoSize = True
         Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngle.Location = New System.Drawing.Point(141, 117)
+        Me.ucrNudAngle.Location = New System.Drawing.Point(141, 128)
         Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Name = "ucrNudAngle"
@@ -210,7 +210,7 @@ Partial Class ucrELementTextControl
         Me.ucrNudHjust.AutoSize = True
         Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjust.Location = New System.Drawing.Point(141, 44)
+        Me.ucrNudHjust.Location = New System.Drawing.Point(141, 55)
         Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHjust.Name = "ucrNudHjust"
@@ -223,7 +223,7 @@ Partial Class ucrELementTextControl
         Me.ucrNudsize.AutoSize = True
         Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudsize.Location = New System.Drawing.Point(141, 19)
+        Me.ucrNudsize.Location = New System.Drawing.Point(141, 30)
         Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Name = "ucrNudsize"
@@ -237,7 +237,7 @@ Partial Class ucrELementTextControl
         Me.ucrInputTextFace.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTextFace.GetSetSelectedIndex = -1
         Me.ucrInputTextFace.IsReadOnly = False
-        Me.ucrInputTextFace.Location = New System.Drawing.Point(141, 166)
+        Me.ucrInputTextFace.Location = New System.Drawing.Point(141, 177)
         Me.ucrInputTextFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputTextFace.Name = "ucrInputTextFace"
         Me.ucrInputTextFace.Size = New System.Drawing.Size(101, 21)
@@ -249,7 +249,7 @@ Partial Class ucrELementTextControl
         Me.ucrInputTextFamily.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTextFamily.GetSetSelectedIndex = -1
         Me.ucrInputTextFamily.IsReadOnly = False
-        Me.ucrInputTextFamily.Location = New System.Drawing.Point(141, 141)
+        Me.ucrInputTextFamily.Location = New System.Drawing.Point(141, 152)
         Me.ucrInputTextFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputTextFamily.Name = "ucrInputTextFamily"
         Me.ucrInputTextFamily.Size = New System.Drawing.Size(101, 21)
@@ -262,7 +262,7 @@ Partial Class ucrELementTextControl
         Me.AutoSize = True
         Me.Controls.Add(Me.grpAxisLabels)
         Me.Name = "ucrELementTextControl"
-        Me.Size = New System.Drawing.Size(255, 227)
+        Me.Size = New System.Drawing.Size(255, 234)
         Me.grpAxisLabels.ResumeLayout(False)
         Me.grpAxisLabels.PerformLayout()
         Me.ResumeLayout(False)

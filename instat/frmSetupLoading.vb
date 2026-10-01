@@ -14,6 +14,9 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
+
 Public Class frmSetupLoading
     Private dctMessagesLinks As Dictionary(Of String, String)
     Private iSelectedMessage As Integer
@@ -51,7 +54,7 @@ Public Class frmSetupLoading
             Try
                 Process.Start(strHyperlink)
             Catch ex As Exception
-                MsgBox("Sorry, we couldn't open this link (" & strHyperlink & ")" & Environment.NewLine & ex.Message, "Cannot open link")
+                MsgBoxTranslate("Sorry, we couldn't open this link (" & strHyperlink & ")" & Environment.NewLine & ex.Message, "Cannot open link")
             End Try
         End If
     End Sub

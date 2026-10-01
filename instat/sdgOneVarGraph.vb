@@ -20,6 +20,7 @@ Public Class sdgOneVarGraph
     Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -27,7 +28,7 @@ Public Class sdgOneVarGraph
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
 
-        ucrButtonsOneVarGraph.iHelpTopicID = 170
+        ucrButtonsOneVarGraph.iHelpTopicID = 737
 
         ucrInputNumeric.SetParameter(New RParameter("numeric", 2))
         dctNumericPairs.Add("Boxplot", Chr(34) & "geom_boxplot" & Chr(34))
@@ -78,5 +79,16 @@ Public Class sdgOneVarGraph
         If bReset Then
             tbcOneVarGraph.SelectedIndex = 0
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case dlgOneVariableGraph.enumOnevariableMode
+            Case dlgOneVariableGraph.OnevariableMode.Prepare
+                ucrButtonsOneVarGraph.iHelpTopicID = 187
+            Case dlgOneVariableGraph.OnevariableMode.Describe
+                ucrButtonsOneVarGraph.iHelpTopicID = 170
+            Case dlgOneVariableGraph.OnevariableMode.Climatic
+                ucrButtonsOneVarGraph.iHelpTopicID = 623
+        End Select
     End Sub
 End Class

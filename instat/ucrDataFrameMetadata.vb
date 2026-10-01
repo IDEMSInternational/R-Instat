@@ -115,7 +115,7 @@ Public Class ucrDataFrameMetadata
 
         StrDataframeName = _grid.GetCellValue(iRow, _strNameLabel)
         If StrDataframeName = "" Then
-            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
+            MsgBoxTranslate("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
             Exit Sub
         End If
         If Decimal.TryParse(newValue, iTemp) Then
@@ -127,14 +127,14 @@ Public Class ucrDataFrameMetadata
         If strColumnName = _strNameLabel Then
             If frmMain.clsRLink.IsValidText(newValue) Then
                 If frmMain.clsRLink.GetDataFrameNames().Contains(newValue.ToString()) Then
-                    MsgBox(newValue.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
+                    MsgBoxTranslate(newValue.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
                     Exit Sub
                 Else
                     strScript = frmMain.clsRLink.strInstatDataObject & "$rename_dataframe(data_name =" & Chr(34) & strPreviousValue & Chr(34) & ", new_val = " & strNewValue & ")"
                     strComment = "Renamed data frame"
                 End If
             Else
-                MsgBox(newValue & " is not a valid data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
+                MsgBoxTranslate(newValue & " is not a valid data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
                 Exit Sub
             End If
         Else
@@ -167,7 +167,7 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "544")
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
     Private Function GetSelectedDataframeNameFromSelectedRow() As String
@@ -200,16 +200,6 @@ Public Class ucrDataFrameMetadata
         dlgCopyDataFrame.ShowDialog()
     End Sub
 
-    Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
-        Dim strScript As String = ""
-        Dim strTemp As String
-        clsGetDataFrame.AddParameter("data_name", Chr(34) & GetSelectedDataframeNameFromSelectedRow() & Chr(34), iPosition:=0)
-        clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0)
-        clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
-        strTemp = clsViewDataFrame.ToScript(strScript)
-        RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
-    End Sub
-
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
         dlgReorderDataFrame.ShowDialog()
     End Sub
@@ -221,5 +211,9 @@ Public Class ucrDataFrameMetadata
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
         dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
         dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "697")
     End Sub
 End Class

@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,10 +14,20 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat
 Imports instat.Translations
 
 Public Class ucrVariablesAsFactor
+
+    ''' <summary>
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' </summary>
+    Public Enum EnumTextType
+        isSingleVariable
+        variableNames
+    End Enum
+
     Public bSingleVariable As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
@@ -62,7 +72,7 @@ Public Class ucrVariablesAsFactor
         OnSelectionChanged()
     End Sub
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
         'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
         Dim strVariables As String = ""
@@ -75,7 +85,7 @@ Public Class ucrVariablesAsFactor
             Else
                 strVariables = "value"
                 If bWithQuotes Then
-                    strVariables = Chr(34) & strVariables & Chr(34)
+                    strVariables = strQuotes & strVariables & strQuotes
                 End If
             End If
         End If
@@ -283,7 +293,7 @@ Public Class ucrVariablesAsFactor
                             End If
                         End If
                     Else
-                        MsgBox("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
+                        MsgBoxTranslate("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
                     End If
                 End If
             End If
@@ -317,7 +327,7 @@ Public Class ucrVariablesAsFactor
             If ucrNewSelector IsNot Nothing Then
                 ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
                 If ucrVariableSelector Is Nothing Then
-                    MsgBox("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
+                    MsgBoxTranslate("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
                 End If
             End If
 
@@ -339,4 +349,37 @@ Public Class ucrVariablesAsFactor
         ucrSingleVariable.SetSelectorHeading(strNewHeading)
         ucrMultipleVariables.SetSelectorHeading(strNewHeading)
     End Sub
+
+    ''' <summary>
+    '''  Returns information about the control's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the variable names.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the control's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = ucrVariablesAsFactor.EnumTextType.variableNames
+        End If
+
+        Dim textType As EnumTextType
+        Try
+            textType = DirectCast(enumTextType, EnumTextType)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException(
+                        "Invalid text type requested from variables as factor control.")
+        End Try
+
+        Select Case textType
+            Case ucrVariablesAsFactor.EnumTextType.isSingleVariable
+                Return If(bSingleVariable, "TRUE", "FALSE")
+            Case ucrVariablesAsFactor.EnumTextType.variableNames
+                Return ucrMultipleVariables.GetVariableNames()
+        End Select
+
+        Throw New InvalidEnumArgumentException("Unhandled text type requested from single receiver.")
+    End Function
+
 End Class

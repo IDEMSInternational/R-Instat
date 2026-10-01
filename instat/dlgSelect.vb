@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgSelect
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -22,6 +23,7 @@ Public Class dlgSelect
     Private clsApplyAsSubset As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsCatFunction As New RFunction
+    Private clsSelectionView As New RFunction
 
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -86,6 +88,8 @@ Public Class dlgSelect
         clsApplyAsSubset = New RFunction
         clsDummyFunction = New RFunction
         clsCatFunction = New RFunction
+        clsSelectionView = New RFunction
+
         ucrSelectorForSelectColumns.Reset()
 
         grpOptions.Visible = False
@@ -101,6 +105,8 @@ Public Class dlgSelect
 
         clsApplyAsSubset.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
         clsApplyAsSubset.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.strCurrentDataFrame & Chr(34), iPosition:=0)
+
+        clsSelectionView.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$column_selection_string")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentColumnSelection)
     End Sub
@@ -137,6 +143,12 @@ Public Class dlgSelect
     End Sub
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        If frmMain.IsColumnSelectionApplied Then
+            Dim clsRemoveCurrentSelection As New RFunction
+            clsRemoveCurrentSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
+            clsRemoveCurrentSelection.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.strCurrentDataFrame & Chr(34))
+            frmMain.clsRLink.RunScript(clsRemoveCurrentSelection.ToScript, strComment:="Remove current selection")
+        End If
         dlgSelectColumns.SetDefaultDataFrame(ucrSelectorForSelectColumns.ucrAvailableDataFrames.strCurrDataFrame)
         dlgSelectColumns.ShowDialog()
         ucrSelectorForSelectColumns.LoadList()
@@ -154,6 +166,7 @@ Public Class dlgSelect
             ucrBase.clsRsyntax.SetBaseRFunction(clsCatFunction)
             grpOptions.Visible = False
         End If
+        SetSelectionPreview()
     End Sub
 
     Private Sub ucrSelectorForSelectColumns_DataFrameChanged() Handles ucrSelectorForSelectColumns.DataFrameChanged
@@ -185,4 +198,26 @@ Public Class dlgSelect
     Private Sub ucrChkDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlContentsChanged, ucrChkDialogue.ControlContentsChanged, ucrChkMetaData.ControlContentsChanged
         ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDialogue.Checked)
     End Sub
+
+    Private Sub SetSelectionPreview()
+        If ucrReceiverSelect.IsEmpty Then
+            ucrInputSelectPreview.SetName("( )")
+            clsSelectionView.RemoveParameterByName("name")
+            clsSelectionView.RemoveParameterByName("data_name")
+        Else
+            clsSelectionView.AddParameter("name", ucrReceiverSelect.GetVariableNames)
+            clsSelectionView.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.strCurrentDataFrame & Chr(34), iPosition:=0)
+            Try
+                ucrInputSelectPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsSelectionView.ToScript(), bSilent:=True).AsCharacter(0))
+            Catch ex As Exception
+                ucrInputSelectPreview.SetName("Preview not available")
+            End Try
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverSelect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelect.SelectionChanged
+        SetSelectionPreview()
+    End Sub
+
 End Class

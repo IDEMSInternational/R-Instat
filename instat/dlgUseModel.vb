@@ -41,7 +41,7 @@ Public Class dlgUseModel
         ucrSaveResult.SetPrefix("object")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
-        ucrSaveResult.SetCheckBoxText("Save Output")
+        ucrSaveResult.SetCheckBoxText("Store Output")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_object")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
 
@@ -147,27 +147,27 @@ Public Class dlgUseModel
     Private Sub cmdSummaryFevd_click(sender As Object, e As EventArgs) Handles cmdSummaryFevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::summary.fevd(object=, ...)", 6)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary(object=, ...)", 6)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::summary.fevd()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary()", 1)
         End If
     End Sub
 
     Private Sub cmdPlotFevd_click(sender As Object, e As EventArgs) Handles cmdPlotFevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::plot.fevd(x=, type = c(""primary"", ""probprob"", ""qq"", ""qq2"",""Zplot"", ""hist"", ""density"",""rl"", ""trace""), rperiods = c(2, 5, 10, 20, 50, 80, 100, 120, 200, 250, 300, 500, 800),a = 0, hist.args = NULL, density.args = NULL, d = NULL, ...)", 219)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot(x=, type = c(""primary"", ""probprob"", ""qq"", ""qq2"",""Zplot"", ""hist"", ""density"",""rl"", ""trace""), rperiods = c(2, 5, 10, 20, 50, 80, 100, 120, 200, 250, 300, 500, 800),a = 0, hist.args = NULL, density.args = NULL, d = NULL, ...)", 219)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::plot.fevd()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot()", 1)
         End If
     End Sub
 
     Private Sub cmdPrintFevd_click(sender As Object, e As EventArgs) Handles cmdPrintFevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::print.fevd(x=, ...)", 6)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("print(x=, ...)", 6)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::print.fevd()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("print()", 1)
         End If
     End Sub
 
@@ -256,7 +256,7 @@ Public Class dlgUseModel
         Dim strModel As String
         Dim item As ListViewItem
 
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        ucrBase.clsRsyntax.GetBeforeCodes.Clear()
         clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         ucrInputModels.SetName("[No models selected]")
         strExpression = ucrReceiverForTestColumn.GetVariableNames(False)
@@ -277,7 +277,7 @@ Public Class dlgUseModel
         End If
         'Checking if the commandString contains the commands from the segmented ,davie and pscore buttons.If so Again check if the list of before codes contains the clsAttach function before adiing
         If Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::segmented") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::davies.test") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::pscore.test") = 0) Then
-            If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttach) Then
+            If Not ucrBase.clsRsyntax.GetBeforeCodes().Contains(clsAttach) Then
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
             End If
 

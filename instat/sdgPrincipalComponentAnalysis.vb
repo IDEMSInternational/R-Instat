@@ -16,7 +16,6 @@
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Private bControlsInitialised As Boolean = False
-    Private clsREigenValues, clsDummyFunction, clsREigenVectors As New RFunction
     Public bFirstLoad As Boolean = True
 
     ' to do:
@@ -34,17 +33,6 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub InitialiseControls()
         Dim dctLabelOptionsChoice As New Dictionary(Of String, String)
         Dim dctOptionsForLabel As New Dictionary(Of String, String)
-
-        ucrChkEigenvalues.SetParameter(New RParameter("value1", 2))
-        ucrChkEigenvalues.SetText("Eigenvalues")
-        ucrChkEigenvalues.SetValueIfChecked(Chr(34) & "eig" & Chr(34))
-        ucrChkEigenvalues.AddParameterPresentCondition(True, "value1")
-        ucrChkEigenvalues.AddParameterPresentCondition(False, "value1", False)
-
-        ucrChkEigenvectors.SetParameter(New RParameter("value1", 2))
-        ucrChkEigenvectors.SetText("Eigenvectors")
-        ucrChkEigenvectors.SetValueIfChecked(Chr(34) & "ind" & Chr(34))
-        ucrChkEigenvectors.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNudDim1.SetParameter(New RParameter("first_dim", 0, bNewIncludeArgumentName:=False))
         ucrNudDim1.SetMinMax(1, 2)
@@ -135,7 +123,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrSaveGraph.SetPrefix("pca_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
@@ -147,14 +135,11 @@ Public Class sdgPrincipalComponentAnalysis
         rdoBarPlot.Enabled = False
     End Sub
 
-    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewDummyFunction As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, clsNewRFactor As RFunction, clsNewBaseOperator As ROperator, clsNewRThemeMinimal As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, clsNewRFactor As RFunction, clsNewBaseOperator As ROperator, clsNewRThemeMinimal As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsRsyntax = clsNewRsyntax
-        clsREigenValues = clsNewREigenValues
-        clsDummyFunction = clsNewDummyFunction
-        clsREigenVectors = clsNewREigenVectors
         clsRScreePlotFunction = clsNewScreePlotFunction
         clsRVariablesPlotFunction = clsNewVariablesPlotFunction
         clsRIndividualsPlotFunction = clsNewIndividualsPlotFunction
@@ -185,8 +170,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrInputLabel2.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
         ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkEigenvalues.SetRCode(clsREigenValues, bReset, bCloneIfNeeded:=True)
-        ucrChkEigenvectors.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         ucrPnlGraphics.SetRCode(clsBaseOperator, bReset)
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
@@ -196,26 +179,6 @@ Public Class sdgPrincipalComponentAnalysis
         Dimensions()
         If bReset Then
             tbRegOptions.SelectedIndex = 0
-        End If
-    End Sub
-
-    Private Sub ucrChkEigenvalues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvalues.ControlValueChanged
-        If ucrChkEigenvalues.Checked Then
-            clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
-        Else
-            clsRsyntax.RemoveFromAfterCodes(clsREigenValues)
-        End If
-    End Sub
-
-    Private Sub ucrChkEigenvectors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvectors.ControlValueChanged
-        If ucrChkEigenvectors.Checked Then
-            clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
-            clsDummyFunction.AddParameter("value1", "TRUE", iPosition:=1)
-
-        Else
-            clsDummyFunction.AddParameter("value1", "FALSE", iPosition:=1)
-            clsRsyntax.RemoveFromAfterCodes(clsREigenVectors)
-
         End If
     End Sub
 

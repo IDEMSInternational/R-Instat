@@ -60,7 +60,7 @@ Partial Class ucrGridUnit
         Me.grpUnits.Controls.Add(Me.ucrChkUnits)
         Me.grpUnits.Location = New System.Drawing.Point(3, 0)
         Me.grpUnits.Name = "grpUnits"
-        Me.grpUnits.Size = New System.Drawing.Size(254, 119)
+        Me.grpUnits.Size = New System.Drawing.Size(254, 127)
         Me.grpUnits.TabIndex = 0
         Me.grpUnits.TabStop = False
         Me.grpUnits.Text = "Units"
@@ -68,7 +68,7 @@ Partial Class ucrGridUnit
         'lblVector
         '
         Me.lblVector.AutoSize = True
-        Me.lblVector.Location = New System.Drawing.Point(6, 47)
+        Me.lblVector.Location = New System.Drawing.Point(6, 57)
         Me.lblVector.Name = "lblVector"
         Me.lblVector.Size = New System.Drawing.Size(74, 13)
         Me.lblVector.TabIndex = 1
@@ -77,7 +77,7 @@ Partial Class ucrGridUnit
         'lblUnits
         '
         Me.lblUnits.AutoSize = True
-        Me.lblUnits.Location = New System.Drawing.Point(6, 71)
+        Me.lblUnits.Location = New System.Drawing.Point(6, 81)
         Me.lblUnits.Name = "lblUnits"
         Me.lblUnits.Size = New System.Drawing.Size(34, 13)
         Me.lblUnits.TabIndex = 3
@@ -86,7 +86,7 @@ Partial Class ucrGridUnit
         'lblData
         '
         Me.lblData.AutoSize = True
-        Me.lblData.Location = New System.Drawing.Point(6, 96)
+        Me.lblData.Location = New System.Drawing.Point(6, 106)
         Me.lblData.Name = "lblData"
         Me.lblData.Size = New System.Drawing.Size(81, 13)
         Me.lblData.TabIndex = 5
@@ -98,7 +98,8 @@ Partial Class ucrGridUnit
         Me.ucrInputData.AutoSize = True
         Me.ucrInputData.IsMultiline = False
         Me.ucrInputData.IsReadOnly = False
-        Me.ucrInputData.Location = New System.Drawing.Point(126, 92)
+        Me.ucrInputData.Location = New System.Drawing.Point(126, 102)
+        Me.ucrInputData.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputData.Name = "ucrInputData"
         Me.ucrInputData.Size = New System.Drawing.Size(124, 23)
         Me.ucrInputData.TabIndex = 6
@@ -109,7 +110,8 @@ Partial Class ucrGridUnit
         Me.ucrInputVector.AutoSize = True
         Me.ucrInputVector.IsMultiline = False
         Me.ucrInputVector.IsReadOnly = False
-        Me.ucrInputVector.Location = New System.Drawing.Point(126, 43)
+        Me.ucrInputVector.Location = New System.Drawing.Point(126, 53)
+        Me.ucrInputVector.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputVector.Name = "ucrInputVector"
         Me.ucrInputVector.Size = New System.Drawing.Size(124, 23)
         Me.ucrInputVector.TabIndex = 2
@@ -120,7 +122,7 @@ Partial Class ucrGridUnit
         Me.ucrInputUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputUnits.GetSetSelectedIndex = -1
         Me.ucrInputUnits.IsReadOnly = False
-        Me.ucrInputUnits.Location = New System.Drawing.Point(126, 68)
+        Me.ucrInputUnits.Location = New System.Drawing.Point(126, 78)
         Me.ucrInputUnits.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputUnits.Name = "ucrInputUnits"
         Me.ucrInputUnits.Size = New System.Drawing.Size(124, 21)
@@ -130,7 +132,7 @@ Partial Class ucrGridUnit
         '
         Me.ucrChkUnits.AutoSize = True
         Me.ucrChkUnits.Checked = False
-        Me.ucrChkUnits.Location = New System.Drawing.Point(8, 19)
+        Me.ucrChkUnits.Location = New System.Drawing.Point(8, 29)
         Me.ucrChkUnits.Name = "ucrChkUnits"
         Me.ucrChkUnits.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkUnits.TabIndex = 0
@@ -142,7 +144,7 @@ Partial Class ucrGridUnit
         Me.AutoSize = True
         Me.Controls.Add(Me.grpUnits)
         Me.Name = "ucrGridUnit"
-        Me.Size = New System.Drawing.Size(260, 123)
+        Me.Size = New System.Drawing.Size(260, 131)
         Me.grpUnits.ResumeLayout(False)
         Me.grpUnits.PerformLayout()
         Me.ResumeLayout(False)

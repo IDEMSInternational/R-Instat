@@ -141,6 +141,7 @@ Public Class dlgNewDataFrame
         clsCorporaFunction.SetPackageName("rcorpora")
         clsCorporaFunction.SetRCommand("corpora")
 
+        clsListDfFunction.SetPackageName("instatExtras")
         clsListDfFunction.SetRCommand("read_corpora")
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
@@ -400,7 +401,7 @@ Public Class dlgNewDataFrame
                     Case "Integer"
                         clsColExpRFunction.SetRCommand("as.integer")
                     Case Else
-                        MsgBox("Developer error: Only expected one predefined item to set the column type.")
+                        MsgBoxTranslate("Developer error: Only expected one predefined item to set the column type.")
                 End Select
             End If
 

@@ -55,6 +55,7 @@ Public Class dlgEdit
     Private Sub InitialiseDialog()
         Dim dctLogical As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 699
         ucrSelectValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectValues.SetParameterIsString()
         ucrSelectValues.ucrAvailableDataFrames.Enabled = False
@@ -215,6 +216,12 @@ Public Class dlgEdit
         If Not ucrReceiverName.IsEmpty() Then
             Select Case ucrReceiverName.strCurrDataType.ToLower
                 Case "factor"
+                    ucrInputRows.Visible = True
+                    bInputRow = True
+                    bInputLogical = False
+                    bDate = False
+                    bNewName = False
+                Case "ordered,factor"
                     ucrInputRows.Visible = True
                     bInputRow = True
                     bInputLogical = False

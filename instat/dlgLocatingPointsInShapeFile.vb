@@ -44,6 +44,7 @@ Public Class dlgLocatingPointsInShapeFile
     End Sub
 
     Private Sub InitiliseDialog()
+        ucrBase.iHelpTopicID=622
         ucrSelectorStationFile.SetParameter(New RParameter("x", 0))
         ucrSelectorStationFile.SetParameterIsrfunction()
 

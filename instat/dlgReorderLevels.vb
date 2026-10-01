@@ -34,6 +34,12 @@ Public Class dlgReorderLevels
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
+    Private _strSelectedColumn As String
+    Public enumReorderLevelsMode As String = ReorderLevelsMode.Prepare
+    Public Enum ReorderLevelsMode
+        Prepare
+        Tricot
+    End Enum
 
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -44,13 +50,15 @@ Public Class dlgReorderLevels
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
+        SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
         Dim dctOptions As New Dictionary(Of String, String)
-        ucrBase.iHelpTopicID = 36
+        'ucrBase.iHelpTopicID = 36
 
         ucrPnlOptions.AddRadioButton(rdoHand)
         ucrPnlOptions.AddRadioButton(rdoProperty)
@@ -144,7 +152,7 @@ Public Class dlgReorderLevels
         ucrSaveResults.SetPrefix("new_column")
         ucrSaveResults.SetSaveTypeAsColumn()
         ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
-        ucrSaveResults.SetLabelText("Save As:")
+        ucrSaveResults.SetLabelText("Store As:")
         ucrSaveResults.SetIsComboBox()
     End Sub
 
@@ -206,7 +214,7 @@ Public Class dlgReorderLevels
 
         clsForcatsRelevelFunction.SetPackageName("forcats")
         clsForcatsRelevelFunction.SetRCommand("fct_relevel")
-        clsForcatsRelevelFunction.AddParameter("sort", "sort", iPosition:=1)
+        clsForcatsRelevelFunction.AddParameter("sort", "sort", iPosition:=1, bIncludeArgumentName:=False)
 
         clsForcatsReorderFunction.SetPackageName("forcats")
         clsForcatsReorderFunction.SetRCommand("fct_reorder")
@@ -272,6 +280,24 @@ Public Class dlgReorderLevels
         End If
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorFactorLevelsToReorder.lstAvailableVariable,
+                                                 ucrReceiverFactor,
+                                                 clsDummyFunction,
+                                                 ucrSelectorFactorLevelsToReorder.strCurrentDataFrame,
+                                                 _strSelectedColumn)
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -281,6 +307,7 @@ Public Class dlgReorderLevels
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkReverseVariable.ControlValueChanged, ucrInputOptions.ControlValueChanged, ucrReceiverFactorX.ControlValueChanged, ucrInputOrder.ControlValueChanged
         If rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
         ElseIf rdoProperty.Checked OrElse rdoVariable.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
@@ -321,6 +348,15 @@ Public Class dlgReorderLevels
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReorderFunction)
             End If
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumReorderLevelsMode
+            Case ReorderLevelsMode.Prepare
+                ucrBase.iHelpTopicID = 36
+            Case ReorderLevelsMode.Tricot
+                ucrBase.iHelpTopicID = 747
+        End Select
     End Sub
 
     Private Sub rdoAppearance_MouseHover(sender As Object, e As EventArgs) Handles rdoAppearance.MouseHover

@@ -41,7 +41,6 @@ Public Class dlgWordwrap
         Dim dctInputSeparator As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 343
-        ucrBase.clsRsyntax.bUseBaseFunction = True
 
         'ucrReceiver
         ucrReceiverWrapText.SetParameter(New RParameter("column_data", 2))

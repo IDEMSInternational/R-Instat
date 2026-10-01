@@ -102,7 +102,7 @@ Public Class sdgClimaticDataEntryOptions
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
-                MsgBox("Developer error: The ucrInputTransform combo box contains the value '" & ucrInputTransform.GetValue & "'. Cannot convert this to a double.")
+                MsgBoxTranslate("Developer error: The ucrInputTransform combo box contains the value '" & ucrInputTransform.GetValue & "'. Cannot convert this to a double.")
             End If
             Return dTemp
         End Get

@@ -114,20 +114,20 @@ Public Class dlgSPI
 
         ucrSaveIndex.SetSaveTypeAsColumn()
         ucrSaveIndex.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveIndex.SetLabelText("Save Index into:")
+        ucrSaveIndex.SetLabelText("Store Index into:")
         ucrSaveIndex.SetIsTextBox()
         ucrSaveIndex.SetPrefix("spi")
 
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveModel.SetCheckBoxText("Save Model")
+        ucrSaveModel.SetCheckBoxText("Store Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveGraph.SetPrefix("SPI_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
@@ -175,9 +175,11 @@ Public Class dlgSPI
         clsSpeiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
         clsSpeiFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
+        clsSpeiInputFunction.SetPackageName("instatClimatic")
         clsSpeiInputFunction.SetRCommand("spei_input")
         clsSpeiInputFunction.SetAssignTo("data_ts")
 
+        clsSpeiOutputFunction.SetPackageName("instatClimatic")
         clsSpeiOutputFunction.SetRCommand("spei_output")
         clsPlotFunction.SetRCommand("plot")
 

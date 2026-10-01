@@ -801,7 +801,7 @@ Public Class ucrDistributions
             ucrInputDistributions.SetName(GetTranslation(clsNewCurrentDist.strNameTag))
         Else
             If bErrorIfNotFound Then
-                MsgBox("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")
+                MsgBoxTranslate("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")
             End If
         End If
     End Sub

@@ -41,6 +41,8 @@ Public Class ucrReceiver
 
     Private strPrvNcFilePath As String = ""
 
+    Public strObjectName As String = ""
+
     'Should the receiver attempt to autofill items based on lstIncludedAutoFillProperties?
     Public bAutoFill As Boolean = False
     Public lstIncludedAutoFillProperties As Dictionary(Of String, String())
@@ -154,7 +156,7 @@ Public Class ucrReceiver
         Return New RFunction
     End Function
 
-    Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         Return ""
     End Function
 
@@ -417,6 +419,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "link_name"
             Case "calculation"
                 strItemsParameterNameInRFunction = "calculation_name"
+            Case "scalar"
+                strItemsParameterNameInRFunction = "scalar_name"
         End Select
         If IsCurrentReceiver() Then
             Selector.LoadList()
@@ -473,9 +477,9 @@ Public Class ucrReceiver
                 End If
                 Clear()
                 If lstCurrentVariables IsNot Nothing Then
-                    If Selector IsNot Nothing Then
-                        strTempDataName = Selector.strCurrentDataFrame
-                    End If
+
+                    strTempDataName = If(Selector?.strCurrentDataFrame?.Trim() <> "", Selector.strCurrentDataFrame, "data_names")
+
                     If TypeOf Me Is ucrReceiverMultiple Then
 
                         'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
@@ -564,6 +568,22 @@ Public Class ucrReceiver
             arrTypes(i) = Chr(34) & arrTypes(i) & Chr(34)
         Next
         dctTemp.Add("Climatic_Type", arrTypes)
+        SetIncludedAutoFillProperties(dctTemp)
+    End Sub
+
+    Public Sub SetTricotType(strTemp As String)
+        Dim dctTemp As New Dictionary(Of String, String())
+        SetTricotType({strTemp})
+    End Sub
+
+    Public Sub SetTricotType(enumTypes As IEnumerable(Of String))
+        Dim dctTemp As New Dictionary(Of String, String())
+        Dim arrTypes() As String = enumTypes.ToArray
+
+        For i As Integer = 0 To arrTypes.Count - 1
+            arrTypes(i) = Chr(34) & arrTypes(i) & Chr(34)
+        Next
+        dctTemp.Add("Tricot_Type", arrTypes)
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 

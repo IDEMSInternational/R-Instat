@@ -71,6 +71,9 @@ Partial Class dlgName
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrPnlSelectData = New instat.UcrPanel()
+        Me.rdoLabels = New System.Windows.Forms.RadioButton()
+        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -109,7 +112,7 @@ Partial Class dlgName
         Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(218, 10)
+        Me.rdoMultiple.Location = New System.Drawing.Point(178, 10)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(110, 28)
         Me.rdoMultiple.TabIndex = 2
@@ -128,7 +131,7 @@ Partial Class dlgName
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(108, 10)
+        Me.rdoSingle.Location = New System.Drawing.Point(70, 10)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(110, 28)
         Me.rdoSingle.TabIndex = 1
@@ -234,6 +237,7 @@ Partial Class dlgName
         Me.ucrInputBy.IsMultiline = False
         Me.ucrInputBy.IsReadOnly = False
         Me.ucrInputBy.Location = New System.Drawing.Point(96, 152)
+        Me.ucrInputBy.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputBy.Name = "ucrInputBy"
         Me.ucrInputBy.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBy.TabIndex = 27
@@ -256,6 +260,7 @@ Partial Class dlgName
         Me.ucrInputReplace.IsMultiline = False
         Me.ucrInputReplace.IsReadOnly = False
         Me.ucrInputReplace.Location = New System.Drawing.Point(96, 123)
+        Me.ucrInputReplace.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputReplace.Name = "ucrInputReplace"
         Me.ucrInputReplace.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputReplace.TabIndex = 26
@@ -312,7 +317,7 @@ Partial Class dlgName
         Me.rdoRenameWith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRenameWith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRenameWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRenameWith.Location = New System.Drawing.Point(328, 10)
+        Me.rdoRenameWith.Location = New System.Drawing.Point(286, 10)
         Me.rdoRenameWith.Name = "rdoRenameWith"
         Me.rdoRenameWith.Size = New System.Drawing.Size(110, 28)
         Me.rdoRenameWith.TabIndex = 13
@@ -342,7 +347,7 @@ Partial Class dlgName
         '
         'rdoSelectedColumn
         '
-        Me.rdoSelectedColumn.Location = New System.Drawing.Point(331, 62)
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(389, 62)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(189, 24)
         Me.rdoSelectedColumn.TabIndex = 21
@@ -353,7 +358,7 @@ Partial Class dlgName
         'rdoWholeDataFrame
         '
         Me.rdoWholeDataFrame.AutoSize = True
-        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(227, 66)
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(260, 66)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
         Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
         Me.rdoWholeDataFrame.TabIndex = 20
@@ -377,6 +382,7 @@ Partial Class dlgName
         Me.ucrInputVariableLabel.IsMultiline = False
         Me.ucrInputVariableLabel.IsReadOnly = False
         Me.ucrInputVariableLabel.Location = New System.Drawing.Point(251, 177)
+        Me.ucrInputVariableLabel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputVariableLabel.Name = "ucrInputVariableLabel"
         Me.ucrInputVariableLabel.Size = New System.Drawing.Size(194, 21)
         Me.ucrInputVariableLabel.TabIndex = 7
@@ -401,6 +407,7 @@ Partial Class dlgName
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(251, 130)
+        Me.ucrInputNewName.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(148, 21)
         Me.ucrInputNewName.TabIndex = 6
@@ -429,9 +436,9 @@ Partial Class dlgName
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(97, 2)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(62, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(448, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrReceiverColumns
@@ -455,12 +462,52 @@ Partial Class dlgName
         Me.ucrPnlSelectData.Size = New System.Drawing.Size(315, 51)
         Me.ucrPnlSelectData.TabIndex = 19
         '
+        'rdoLabels
+        '
+        Me.rdoLabels.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoLabels.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoLabels.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLabels.FlatAppearance.BorderSize = 2
+        Me.rdoLabels.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoLabels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLabels.Location = New System.Drawing.Point(394, 10)
+        Me.rdoLabels.Name = "rdoLabels"
+        Me.rdoLabels.Size = New System.Drawing.Size(110, 28)
+        Me.rdoLabels.TabIndex = 22
+        Me.rdoLabels.TabStop = True
+        Me.rdoLabels.Tag = ""
+        Me.rdoLabels.Text = "Labels With"
+        Me.rdoLabels.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoLabels.UseVisualStyleBackColor = False
+        '
+        'cmdAddkeyboard
+        '
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(315, 315)
+        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
+        Me.cmdAddkeyboard.Size = New System.Drawing.Size(100, 23)
+        Me.cmdAddkeyboard.TabIndex = 35
+        Me.cmdAddkeyboard.Text = "Add Keyboard"
+        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
+        '
+        'ucrChkIncludeRegularExpressions
+        '
+        Me.ucrChkIncludeRegularExpressions.AutoSize = True
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(71, 316)
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 23)
+        Me.ucrChkIncludeRegularExpressions.TabIndex = 34
+        '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 540)
+        Me.ClientSize = New System.Drawing.Size(561, 540)
+        Me.Controls.Add(Me.rdoSelectedColumn)
+        Me.Controls.Add(Me.rdoWholeDataFrame)
+        Me.Controls.Add(Me.rdoLabels)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
         Me.Controls.Add(Me.rdoRenameWith)
@@ -478,9 +525,9 @@ Partial Class dlgName
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverColumns)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.rdoSelectedColumn)
-        Me.Controls.Add(Me.rdoWholeDataFrame)
         Me.Controls.Add(Me.ucrPnlSelectData)
+        Me.Controls.Add(Me.cmdAddkeyboard)
+        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -527,4 +574,7 @@ Partial Class dlgName
     Friend WithEvents rdoSelectedColumn As RadioButton
     Friend WithEvents rdoWholeDataFrame As RadioButton
     Friend WithEvents ucrPnlSelectData As UcrPanel
+    Friend WithEvents rdoLabels As RadioButton
+    Friend WithEvents cmdAddkeyboard As Button
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
 End Class

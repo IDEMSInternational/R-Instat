@@ -39,7 +39,7 @@ Public Class dlgOtherRosePlots
 
     Private Sub InitiliseDialog()
         Dim dctMethod As New Dictionary(Of String, String)
-
+        ucrBase.iHelpTopicID = 309
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorOtherRosePlots.SetParameter(New RParameter("data", 0))
@@ -168,7 +168,7 @@ Public Class dlgOtherRosePlots
 
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorOtherRosePlots.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -182,6 +182,7 @@ Public Class dlgOtherRosePlots
 
         ucrInputStatistic.SetName("mean")
 
+        clsOtherRosePlots.SetPackageName("instatClimatic")
         clsOtherRosePlots.SetRCommand("other_rose_plots")
 
         clsOtherRosePlots.AddParameter("trans", "TRUE", iPosition:=9)

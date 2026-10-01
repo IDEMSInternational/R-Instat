@@ -36,6 +36,26 @@ Public Class dlgParallelCoordinatePlot
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsMatchFunction As New RFunction
+    Private clsNamesFunction As New RFunction
+
+    Private clsFacetFunction As New RFunction
+    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+
+    Private ReadOnly strNone As String = "None"
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
+    Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
+    Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
+
+    Private bNotSubdialogue As Boolean = False
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
 
     Private Sub dlgParallelCoordinatePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -53,6 +73,7 @@ Public Class dlgParallelCoordinatePlot
 
     Private Sub InitialiseDialog()
         Dim dctScale As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 593
         ucrBase.clsRsyntax.iCallType = 3
@@ -100,10 +121,36 @@ Public Class dlgParallelCoordinatePlot
         ucrInputScale.SetRDefault("std")
         ucrInputScale.SetDropDownStyleAsNonEditable()
 
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
+
+        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
+        ucr1stFactorReceiver.Selector = ucrSelectorParallelCoordinatePlot
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(0)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
+
         ucrSaveGraph.SetPrefix("par_coord_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -111,6 +158,16 @@ Public Class dlgParallelCoordinatePlot
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
         clsGGParCoordFunc = New RFunction
+        clsFacetFunction = New RFunction
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
+        clsPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
+        clsNamesFunction = New RFunction
+        clsMatchFunction = New RFunction
+
+        ucrInputStation.SetName(strFacetWrap)
+        ucrInputStation.bUpdateRCodeFromControl = True
 
         ucrReceiverXVariables.SetMeAsReceiver()
         ucrSelectorParallelCoordinatePlot.Reset()
@@ -118,14 +175,37 @@ Public Class dlgParallelCoordinatePlot
         ucrSaveGraph.Reset()
         bResetSubdialog = True
 
+        clsMatchFunction.SetRCommand("match")
+        clsMatchFunction.SetAssignTo("column_numbers")
+
         clsGGParCoordFunc.SetPackageName("GGally")
         clsGGParCoordFunc.SetRCommand("ggparcoord")
-
+        clsGGParCoordFunc.AddParameter("columns", clsRFunctionParameter:=clsMatchFunction, iPosition:=1)
         clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34), iPosition:=6)
-        clsGGParCoordFunc.AddParameter("order", Chr(34) & "skewness" & Chr(34), iPosition:=7)
+        'clsGGParCoordFunc.AddParameter("order", Chr(34) & "anyClass" & Chr(34), iPosition:=7)
+        clsGGParCoordFunc.AddParameter("centerObsID", "1", iPosition:=8)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsGGParCoordFunc, iPosition:=0)
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
+
+        clsPipeOperator.SetOperation("%>%")
+        SetPipeAssignTo()
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
+
+
+
+        clsNamesFunction.SetRCommand("names")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -150,13 +230,17 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverXVariables.AddAdditionalCodeParameterPair(clsMatchFunction, New RParameter("var", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+
         ucrSelectorParallelCoordinatePlot.SetRCode(clsGGParCoordFunc, bReset)
-        ucrReceiverXVariables.SetRCode(clsGGParCoordFunc, bReset)
         ucrReceiverFactor.SetRCode(clsGGParCoordFunc, bReset)
         ucrChkBoxplots.SetRCode(clsGGParCoordFunc, bReset)
         ucrChkPoints.SetRCode(clsGGParCoordFunc, bReset)
         ucrNudTransparency.SetRCode(clsGGParCoordFunc, bReset)
         ucrInputScale.SetRCode(clsGGParCoordFunc, bReset)
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
     End Sub
 
@@ -182,14 +266,234 @@ Public Class dlgParallelCoordinatePlot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
-                  clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction,
-                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorParallelCoordinatePlot, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+                  clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction,
+                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorParallelCoordinatePlot, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
                   clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        bResetSubdialog = False
+        bNotSubdialogue = False
+        If clsFacetFunction.strRCommand = "facet_grid" Then
+            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAndColAll)
+                Else
+                    ucrInputStation.SetName(strFacetRowAndCol)
+                End If
+            ElseIf clsFacetFunction.ContainsParameter("rows") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAll)
+                Else
+                    ucrInputStation.SetName(strFacetRow)
+                End If
+            ElseIf clsFacetFunction.ContainsParameter("cols") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetColAll)
+                Else
+                    ucrInputStation.SetName(strFacetCol)
+                End If
+            End If
+        Else
+            ucrInputStation.SetName(strFacetWrap)
+        End If
+        bNotSubdialogue = True
+            bResetSubdialog = False
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AutoFacetStation()
+        Dim currentReceiver As ucrReceiver = ucrSelectorParallelCoordinatePlot.CurrentReceiver
+
+        If currentReceiver IsNot Nothing Then
+            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+            currentReceiver.SetMeAsReceiver()
+            AddRemoveGroupBy()
+        End If
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll OrElse strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll _
+            OrElse ucrInputStation.GetText = strFacetRowAndCol OrElse ucrInputStation.GetText = strFacetRowAndColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+            OrElse ((strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+             AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
+
+        If bNotSubdialogue Then
+            clsFacetFunction.ClearParameters()
+        End If
+
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
+        Dim bRowsAndCols As Boolean = False
+        Dim bRowsAndColsAll As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucr1stFactorReceiver.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
+                Case strFacetRowAndCol
+                    bRowsAndCols = True
+                Case strFacetRowAndColAll
+                    bRowsAndColsAll = True
+            End Select
+        End If
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.RemoveParameterByName("cols")
+        Else
+            clsFacetFunction.RemoveParameterByName("facets")
+        End If
+
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
+            clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.RemoveParameterByName("facets")
+        End If
+
+        If bRowAll OrElse bColAll OrElse bRowsAndColsAll Then
+            clsFacetFunction.AddParameter("margins", "TRUE")
+        Else
+            clsFacetFunction.RemoveParameterByName("margins")
+        End If
+
+        If bRowsAndCols OrElse bRowsAndColsAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
+        ElseIf bRow OrElse bRowAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("cols")
+        ElseIf bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
+        End If
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                '' Feb 07 2026
+                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        'GetParameterValue(clsFacetVariablesOperator)
+                End Select
+            End If
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+        End If
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub SetPipeAssignTo()
+        If ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrSelectorParallelCoordinatePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorParallelCoordinatePlot.ControlValueChanged
+        AutoFacetStation()
+        SetPipeAssignTo()
+        clsNamesFunction.AddParameter("names", ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
+        clsMatchFunction.AddParameter("data", clsRFunctionParameter:=clsNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        If Not ucrReceiverFactor.IsEmpty Then
+            clsGGParCoordFunc.AddParameter("order", Chr(34) & "anyClass" & Chr(34), iPosition:=7)
+        Else
+            clsGGParCoordFunc.RemoveParameterByName("order")
+        End If
     End Sub
 End Class

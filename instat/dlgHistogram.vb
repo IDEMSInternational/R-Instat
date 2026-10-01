@@ -20,6 +20,7 @@ Public Class dlgHistogram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsBaseOperator As New ROperator
+    Private clsYlabScalesFunction As New RFunction
     Private clsRggplotFunction As New RFunction
     Private clsRgeomPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
@@ -46,6 +47,23 @@ Public Class dlgHistogram
     Private clsForecatsReverse As New RFunction
     Private clsForecatsInfreqValue As New RFunction
     Private clsForecatsReverseValue As New RFunction
+
+    Private clsFacetFunction As New RFunction
+    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+    Private ReadOnly strFacetColAll As String = "Facet Col + O"
+    Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
+    Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
+
+    Private bNotSubdialogue As Boolean = False
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -75,6 +93,7 @@ Public Class dlgHistogram
 
     Private Sub InitialiseDialog()
         Dim dctStats As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 435
@@ -114,10 +133,28 @@ Public Class dlgHistogram
         ucrChkDisplayAsDotPlot.SetText("Display as Dotplot")
         ucrChkDisplayAsDotPlot.AddFunctionNamesCondition(True, "geom_dotplot")
         ucrChkDisplayAsDotPlot.AddFunctionNamesCondition(False, "geom_dotplot", False)
+        ucrChkDisplayAsDotPlot.AddToLinkedControls({ucrChkOmitYAxis}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkOmitYAxis.SetText("Omit Y Axis")
+
+        ucrChkBinWidth.SetText("Binwidth")
+        ucrChkBinWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
+
+        ucrInputWidth.SetParameter(New RParameter("binwidth", 3))
+        ucrInputWidth.SetValidationTypeAsNumeric()
 
         ucrChkRidges.SetText("Density Ridges")
         ucrChkRidges.AddFunctionNamesCondition(True, "geom_density_ridges")
         ucrChkRidges.AddFunctionNamesCondition(False, "geom_density_ridges", False)
+        ucrChkRidges.AddToLinkedControls({ucrChkMinHeight}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkMinHeight.SetText("Min Height")
+        ucrChkMinHeight.AddToLinkedControls({ucrNudMinHeight}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudMinHeight.SetParameter(New RParameter("rel_min_height", 4))
+        ucrNudMinHeight.SetMinMax(0.000, 10.0)
+        ucrNudMinHeight.DecimalPlaces = 3
+        ucrNudMinHeight.Increment = 0.001
+        ucrNudMinHeight.SetRDefault(0.01)
 
         ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
@@ -131,14 +168,41 @@ Public Class dlgHistogram
         ucrInputAddReorder.SetDropDownStyleAsNonEditable()
         ucrInputAddReorder.SetLinkedDisplayControl(lblReorder)
 
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
+
+        ucr1stFactorReceiver.SetParameter(New RParameter("rows", bNewIncludeArgumentName:=False))
+        ucr1stFactorReceiver.Selector = ucrHistogramSelector
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(0)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
+
         ucrPnlOptions.AddToLinkedControls({ucrChkDisplayAsDotPlot}, {rdoHistogram}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkBinWidth}, {rdoHistogram, rdoFrequencyPolygon}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity_ridges}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveHist.SetPrefix("histogram")
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
         ucrSaveHist.SetIsComboBox()
-        ucrSaveHist.SetCheckBoxText("Save Graph")
+        ucrSaveHist.SetCheckBoxText("Store Graph")
         ucrSaveHist.SetSaveTypeAsGraph()
         ucrSaveHist.SetAssignToIfUncheckedValue("last_graph")
         DialogueSize()
@@ -151,9 +215,18 @@ Public Class dlgHistogram
         clsRaesFunction = New RFunction
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
+        clsYlabScalesFunction = New RFunction
         clsForecatsReverse = New RFunction
         clsForecatsInfreqValue = New RFunction
         clsForecatsReverseValue = New RFunction
+        clsFacetFunction = New RFunction
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
+        clsPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
+
+        ucrInputStation.SetName(strFacetWrap)
+        ucrInputStation.bUpdateRCodeFromControl = True
         ucrHistogramSelector.Reset()
         ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveHist.Reset()
@@ -163,6 +236,7 @@ Public Class dlgHistogram
 
         ucrInputAddReorder.SetText(strNone)
         ucrInputAddReorder.bUpdateRCodeFromControl = True
+
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -195,6 +269,27 @@ Public Class dlgHistogram
         clsForecatsInfreqValue.SetPackageName("forcats")
         clsForecatsInfreqValue.SetRCommand("fct_infreq")
 
+
+        clsYlabScalesFunction.SetRCommand("scale_y_continuous")
+        clsYlabScalesFunction.AddParameter("NULL", "NULL", bIncludeArgumentName:=False, iPosition:=0)
+        clsYlabScalesFunction.AddParameter("breaks", "NULL", iPosition:=1)
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
+
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
+
+        clsPipeOperator.SetOperation("%>%")
+        SetPipeAssignTo()
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
+
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -226,9 +321,18 @@ Public Class dlgHistogram
         ucrChkDisplayAsDotPlot.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
+
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrNudMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkOmitYAxis.SetRCode(clsBaseOperator, bReset)
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset)
         If bReset Then
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+            ucrChkMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
+            ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
         End If
     End Sub
 
@@ -247,6 +351,18 @@ Public Class dlgHistogram
         TestOkEnabled()
     End Sub
 
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
     Private Sub SetDialogOptions()
         clsHistAesFunction.RemoveParameterByName("x")
         clsHistAesFunction.RemoveParameterByName("y")
@@ -257,18 +373,39 @@ Public Class dlgHistogram
         If rdoHistogram.Checked Then
             If ucrChkDisplayAsDotPlot.Checked Then
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
+                clsRgeomPlotFunction.RemoveParameterByName("mapping")
+                clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
+                If Not ucrFactorReceiver.IsEmpty Then
+                    clsRgeomPlotFunction.AddParameter("binpositions", Chr(34) & "all" & Chr(34), iPosition:=0)
+                    clsRgeomPlotFunction.AddParameter("stackgroups", "TRUE", iPosition:=1)
+                Else
+                    clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+                    clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+                End If
             Else
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
+                clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
+                If Not ucrFactorReceiver.IsEmpty Then
+                    clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+                    clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+                End If
             End If
+            clsBaseOperator.RemoveParameterByName("scale")
+            clsHistAesFunction.RemoveParameterByName("fill")
             ucrFactorReceiver.ChangeParameterName("fill")
             If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
         End If
         If rdoDensity_ridges.Checked Then
+            clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+            clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+            clsRgeomPlotFunction.RemoveParameterByName("binwidth")
+            clsBaseOperator.RemoveParameterByName("scale")
             If ucrChkRidges.Checked Then
-                ucrFactorReceiver.ChangeParameterName("y")
+                ucrFactorReceiver.ChangeParameterName("fill")
                 clsHistAesFunction.RemoveParameterByName("y")
                 clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
                 clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
+                clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=3)
                 clsRgeomPlotFunction.SetPackageName("ggridges")
                 clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
                 clsRgeomPlotFunction.RemoveParameterByName("mapping")
@@ -277,6 +414,7 @@ Public Class dlgHistogram
                 End If
             Else
                 ucrFactorReceiver.ChangeParameterName("colour")
+                clsHistAesFunction.RemoveParameterByName("fill")
                 clsRgeomPlotFunction.SetRCommand("geom_density")
                 clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
                 If Not ucrSaveHist.bUserTyped Then
@@ -286,12 +424,17 @@ Public Class dlgHistogram
         ElseIf rdoFrequencyPolygon.Checked Then
             ucrFactorReceiver.ChangeParameterName("colour")
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
+            clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+            clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+            clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
+            clsBaseOperator.RemoveParameterByName("scale")
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
         End If
         autoTranslate(Me)
         UpdateParameter()
+
     End Sub
 
     Private Sub UpdateParameter()
@@ -348,7 +491,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkOmitYAxis.ControlValueChanged, ucrInputWidth.ControlValueChanged
         toolStripMenuItemHistogramOptions.Enabled = rdoHistogram.Checked AndAlso Not ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDotOptions.Enabled = rdoHistogram.Checked AndAlso ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDensityOptions.Enabled = rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked
@@ -398,11 +541,36 @@ Public Class dlgHistogram
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction,
                          clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                         clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector,
+                         clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector, clsNewRowVarsFunction:=clsRowVarsFunction, clsNewColVarsFunction:=clsColVarsFunction,
                          clsNewGlobalAesFunction:=clsRaesFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        bResetSubdialog = False
+        bNotSubdialogue = False
+        If clsFacetFunction.strRCommand = "facet_grid" Then
+            If clsFacetFunction.ContainsParameter("rows") AndAlso clsFacetFunction.ContainsParameter("cols") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAndColAll)
+                Else
+                    ucrInputStation.SetName(strFacetRowAndCol)
+                End If
+            ElseIf clsFacetFunction.ContainsParameter("rows") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetRowAll)
+                Else
+                    ucrInputStation.SetName(strFacetRow)
+                End If
+            ElseIf clsFacetFunction.ContainsParameter("cols") Then
+                If clsFacetFunction.ContainsParameter("margins") Then
+                    ucrInputStation.SetName(strFacetColAll)
+                Else
+                    ucrInputStation.SetName(strFacetCol)
+                End If
+            End If
+        Else
+            ucrInputStation.SetName(strFacetWrap)
+        End If
+        bNotSubdialogue = True
+            bResetSubdialog = False
     End Sub
 
     Private Sub toolStripMenuItemHistogramOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemHistogramOptions.Click
@@ -452,27 +620,254 @@ Public Class dlgHistogram
 
     Private Sub DialogueSize()
         If rdoHistogram.Checked Then
-            Me.Size = New Size(464, 409)
+            Me.Size = New Size(464, 468)
             Me.lblReorder.Location = New Point(283, 275)
             Me.ucrInputAddReorder.Location = New Point(283, 289)
-            Me.ucrSaveHist.Location = New Point(10, 314)
-            Me.ucrBase.Location = New Point(10, 342)
+            Me.ucrSaveHist.Location = New Point(10, 360)
+            Me.ucrChkLegend.Location = New Point(11, 329)
+            Me.ucrChkBinWidth.Location = New Point(10, 262)
+            Me.ucrChkOmitYAxis.Location = New Point(10, 287)
+            Me.ucrInputWidth.Location = New Point(139, 262)
+            Me.ucrInputStation.Location = New Point(318, 328)
+            Me.ucrInputLegendPosition.Location = New Point(87, 328)
+            Me.ucr1stFactorReceiver.Location = New Point(205, 329)
+            Me.lblFacetBy.Location = New Point(208, 315)
+            Me.ucrBase.Location = New Point(10, 390)
         ElseIf rdoDensity_ridges.Checked Then
-            Me.Size = New Size(464, 461)
+            Me.Size = New Size(464, 500)
             Me.lblReorder.Location = New Point(286, 298)
             Me.ucrInputAddReorder.Location = New Point(287, 314)
-            Me.ucrSaveHist.Location = New Point(10, 342)
-            Me.ucrBase.Location = New Point(10, 365)
+            Me.ucrChkMinHeight.Location = New Point(10, 311)
+            Me.ucrNudMinHeight.Location = New Point(138, 313)
+            Me.ucrSaveHist.Location = New Point(10, 380)
+            Me.ucrBase.Location = New Point(10, 408)
+            Me.ucrChkLegend.Location = New Point(11, 349)
+            Me.ucrInputStation.Location = New Point(318, 348)
+            Me.ucrInputLegendPosition.Location = New Point(87, 348)
+            Me.ucr1stFactorReceiver.Location = New Point(205, 349)
+            Me.lblFacetBy.Location = New Point(208, 334)
         Else
-            Me.Size = New Size(464, 401)
+            Me.Size = New Size(464, 440)
             Me.lblReorder.Location = New Point(283, 250)
             Me.ucrInputAddReorder.Location = New Point(283, 264)
-            Me.ucrSaveHist.Location = New Point(10, 288)
-            Me.ucrBase.Location = New Point(10, 314)
+            Me.ucrSaveHist.Location = New Point(10, 330)
+            Me.ucrChkBinWidth.Location = New Point(10, 262)
+            Me.ucrChkLegend.Location = New Point(11, 296)
+            Me.ucrInputWidth.Location = New Point(139, 262)
+            Me.ucrInputStation.Location = New Point(318, 294)
+            Me.ucrInputLegendPosition.Location = New Point(87, 294)
+            Me.ucr1stFactorReceiver.Location = New Point(205, 296)
+            Me.lblFacetBy.Location = New Point(208, 283)
+            Me.ucrBase.Location = New Point(10, 357)
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged
+    Private Sub AutoFacetStation()
+        Dim currentReceiver As ucrReceiver = ucrHistogramSelector.CurrentReceiver
+
+        If currentReceiver IsNot Nothing Then
+            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+            currentReceiver.SetMeAsReceiver()
+            AddRemoveGroupBy()
+        End If
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not (strChangedText = strFacetCol OrElse strChangedText = strFacetColAll _
+            OrElse strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll OrElse strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+            AndAlso Not ucrInputStation.Equals(ucrChangedControl) _
+            AndAlso ucrInputStation.GetText() = strChangedText Then
+
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso
+            (ucrInputStation.GetText = strFacetRow OrElse ucrInputStation.GetText = strFacetRowAll _
+            OrElse ucrInputStation.GetText = strFacetCol OrElse ucrInputStation.GetText = strFacetColAll _
+            OrElse ucrInputStation.GetText = strFacetRowAndCol OrElse ucrInputStation.GetText = strFacetRowAndColAll)) _
+        OrElse ((strChangedText = strFacetRow OrElse strChangedText = strFacetRowAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+        OrElse ((strChangedText = strFacetCol OrElse strChangedText = strFacetColAll) _
+            AndAlso ucrInputStation.GetText = strFacetWrap) _
+            OrElse ((strChangedText = strFacetRowAndCol OrElse strChangedText = strFacetRowAndColAll) _
+             AndAlso ucrInputStation.GetText = strFacetWrap) Then
+
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucr1stFactorReceiver.SetRCode(clsRowVarsFunction)
+
+        If Not clsRaesFunction.ContainsParameter("x") Then
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+
+        If bNotSubdialogue Then
+            clsFacetFunction.ClearParameters()
+        End If
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+        Dim bColAll As Boolean = False
+        Dim bRowAll As Boolean = False
+        Dim bRowsAndCols As Boolean = False
+        Dim bRowsAndColsAll As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucr1stFactorReceiver.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+                Case strFacetColAll
+                    bColAll = True
+                Case strFacetRowAll
+                    bRowAll = True
+                Case strFacetRowAndCol
+                    bRowsAndCols = True
+                Case strFacetRowAndColAll
+                    bRowsAndColsAll = True
+            End Select
+        End If
+        If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.RemoveParameterByName("cols")
+        Else
+            clsFacetFunction.RemoveParameterByName("facets")
+        End If
+
+        If bRow OrElse bCol OrElse bRowAll OrElse bColAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
+            clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.RemoveParameterByName("facets")
+        End If
+
+        If bRowAll OrElse bColAll OrElse bRowsAndColsAll Then
+            clsFacetFunction.AddParameter("margins", "TRUE")
+        Else
+            clsFacetFunction.RemoveParameterByName("margins")
+        End If
+
+        If bRowsAndCols OrElse bRowsAndColsAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
+        ElseIf bRow OrElse bRowAll Then
+            clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("cols")
+        ElseIf bCol OrElse bColAll Then
+            clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+            clsFacetFunction.RemoveParameterByName("rows")
+        End If
+
+    End Sub
+
+    Private Sub ucrChkOmitYAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitYAxis.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
+        If ucrChkDisplayAsDotPlot.Checked AndAlso ucrChkOmitYAxis.Checked Then
+            clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYlabScalesFunction, iPosition:=4, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale")
+        End If
+    End Sub
+
+    Private Sub ucrChkMinHeight_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinHeight.ControlValueChanged, ucrNudMinHeight.ControlValueChanged
+        If ucrChkRidges.Checked AndAlso ucrChkMinHeight.Checked Then
+            clsRgeomPlotFunction.AddParameter("rel_min_height", ucrNudMinHeight.GetText, iPosition:=4)
+        Else
+            clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
+        End If
+
+    End Sub
+
+    Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrInputWidth.ControlValueChanged
+        If ucrChkBinWidth.Checked Then
+            clsRgeomPlotFunction.AddParameter("binwidth", ucrInputWidth.GetText, iPosition:=4)
+        Else
+            clsRgeomPlotFunction.RemoveParameterByName("binwidth")
+        End If
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                '' Feb 07 2026
+                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        'GetParameterValue(clsFacetVariablesOperator)
+                End Select
+            End If
+
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+        End If
+
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub SetPipeAssignTo()
+        If ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrHistogramSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrHistogramSelector.ControlValueChanged
+        AutoFacetStation()
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrInputWidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class

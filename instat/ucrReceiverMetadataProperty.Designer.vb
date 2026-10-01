@@ -46,7 +46,8 @@ Partial Class ucrReceiverMetadataProperty
         '
         'ucrInputTextValue
         '
-        Me.ucrInputTextValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextValue.AddQuotesIfUnrecognised = False
+        Me.ucrInputTextValue.AutoSize = True
         Me.ucrInputTextValue.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrInputTextValue.IsMultiline = False
         Me.ucrInputTextValue.IsReadOnly = False
@@ -81,6 +82,7 @@ Partial Class ucrReceiverMetadataProperty
         '
         'ucrNudParamValue
         '
+        Me.ucrNudParamValue.AutoSize = True
         Me.ucrNudParamValue.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudParamValue.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrNudParamValue.Increment = New Decimal(New Integer() {1, 0, 0, 0})
@@ -103,6 +105,7 @@ Partial Class ucrReceiverMetadataProperty
         Me.Name = "ucrReceiverMetadataProperty"
         Me.Size = New System.Drawing.Size(140, 22)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrColor As ucrColors

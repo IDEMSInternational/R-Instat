@@ -39,6 +39,7 @@ Public Class dlgClimaticNCMPSummaryFile
     Private Sub InitialiseDialog()
         Dim dctResolution As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID=632
         ucrSelectorA2.SetParameter(New RParameter("a2", 0))
         ucrSelectorA2.SetParameterIsRFunction()
         ucrSelectorA2.lblDataFrame.Text = "Indices Data Frame:"

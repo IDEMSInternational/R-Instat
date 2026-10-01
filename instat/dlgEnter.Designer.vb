@@ -45,7 +45,10 @@ Partial Class dlgEnter
         Me.cmdExponential = New System.Windows.Forms.Button()
         Me.cmdConcantenateFunction = New System.Windows.Forms.Button()
         Me.cmdSequenceFunction = New System.Windows.Forms.Button()
-        Me.cmdRepelicationFunction = New System.Windows.Forms.Button()
+        Me.cmdRepTimes = New System.Windows.Forms.Button()
+        Me.cmdRepEach = New System.Windows.Forms.Button()
+        Me.cmdRnormal = New System.Windows.Forms.Button()
+        Me.cmdRfactor = New System.Windows.Forms.Button()
         Me.cmdLogical = New System.Windows.Forms.Button()
         Me.cmdPi = New System.Windows.Forms.Button()
         Me.cmdLetters2 = New System.Windows.Forms.Button()
@@ -76,14 +79,17 @@ Partial Class dlgEnter
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.ttEnter = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrSaveEnterResultInto = New instat.ucrSave()
-        Me.ucrTryModelling = New instat.ucrTry()
-        Me.ucrDataFrameEnter = New instat.ucrDataFrame()
-        Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.cmdRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripBase = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuBase = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblEnterLength = New System.Windows.Forms.Label()
+        Me.lblEnterLengthValue = New System.Windows.Forms.Label()
+        Me.ucrChkStoreScalar = New instat.ucrCheck()
+        Me.ucrSelectorEnter = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdRHelp = New instat.ucrSplitButton()
+        Me.ucrSaveEnterResultInto = New instat.ucrSave()
+        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.ContextMenuStripBase.SuspendLayout()
@@ -93,7 +99,7 @@ Partial Class dlgEnter
         '
         Me.chkShowEnterArguments.AutoSize = True
         Me.chkShowEnterArguments.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkShowEnterArguments.Location = New System.Drawing.Point(307, 18)
+        Me.chkShowEnterArguments.Location = New System.Drawing.Point(435, 19)
         Me.chkShowEnterArguments.Name = "chkShowEnterArguments"
         Me.chkShowEnterArguments.Size = New System.Drawing.Size(109, 17)
         Me.chkShowEnterArguments.TabIndex = 155
@@ -138,7 +144,7 @@ Partial Class dlgEnter
         'cmdConcantenateFunction
         '
         Me.cmdConcantenateFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdConcantenateFunction.Location = New System.Drawing.Point(4, 101)
+        Me.cmdConcantenateFunction.Location = New System.Drawing.Point(52, 72)
         Me.cmdConcantenateFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdConcantenateFunction.Name = "cmdConcantenateFunction"
         Me.cmdConcantenateFunction.Size = New System.Drawing.Size(49, 30)
@@ -159,17 +165,53 @@ Partial Class dlgEnter
         Me.cmdSequenceFunction.Text = "seq"
         Me.cmdSequenceFunction.UseVisualStyleBackColor = True
         '
-        'cmdRepelicationFunction
+        'cmdRepTimes
         '
-        Me.cmdRepelicationFunction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRepelicationFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRepelicationFunction.Location = New System.Drawing.Point(4, 43)
-        Me.cmdRepelicationFunction.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdRepelicationFunction.Name = "cmdRepelicationFunction"
-        Me.cmdRepelicationFunction.Size = New System.Drawing.Size(49, 30)
-        Me.cmdRepelicationFunction.TabIndex = 148
-        Me.cmdRepelicationFunction.Text = "rep"
-        Me.cmdRepelicationFunction.UseVisualStyleBackColor = True
+        Me.cmdRepTimes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRepTimes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRepTimes.Location = New System.Drawing.Point(4, 14)
+        Me.cmdRepTimes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRepTimes.Name = "cmdRepTimes"
+        Me.cmdRepTimes.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRepTimes.TabIndex = 148
+        Me.cmdRepTimes.Text = "rep_times"
+        Me.cmdRepTimes.UseVisualStyleBackColor = True
+        '
+        'cmdRepEach
+        '
+        Me.cmdRepEach.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRepEach.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRepEach.Location = New System.Drawing.Point(4, 43)
+        Me.cmdRepEach.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRepEach.Name = "cmdRepEach"
+        Me.cmdRepEach.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRepEach.TabIndex = 219
+        Me.cmdRepEach.Text = "rep_each"
+        Me.cmdRepEach.UseVisualStyleBackColor = True
+        '
+        'cmdRnormal
+        '
+        Me.cmdRnormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRnormal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRnormal.Location = New System.Drawing.Point(4, 130)
+        Me.cmdRnormal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRnormal.Name = "cmdRnormal"
+        Me.cmdRnormal.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRnormal.TabIndex = 220
+        Me.cmdRnormal.Text = "rnormal"
+        Me.cmdRnormal.UseVisualStyleBackColor = True
+        '
+        'cmdRfactor
+        '
+        Me.cmdRfactor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRfactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRfactor.Location = New System.Drawing.Point(52, 130)
+        Me.cmdRfactor.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRfactor.Name = "cmdRfactor"
+        Me.cmdRfactor.Size = New System.Drawing.Size(49, 30)
+        Me.cmdRfactor.TabIndex = 221
+        Me.cmdRfactor.Text = "rfactor"
+        Me.cmdRfactor.UseVisualStyleBackColor = True
         '
         'cmdLogical
         '
@@ -185,7 +227,7 @@ Partial Class dlgEnter
         'cmdPi
         '
         Me.cmdPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPi.Location = New System.Drawing.Point(52, 72)
+        Me.cmdPi.Location = New System.Drawing.Point(4, 101)
         Me.cmdPi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPi.Name = "cmdPi"
         Me.cmdPi.Size = New System.Drawing.Size(49, 30)
@@ -212,23 +254,27 @@ Partial Class dlgEnter
         Me.cmdMonths.Name = "cmdMonths"
         Me.cmdMonths.Size = New System.Drawing.Size(49, 30)
         Me.cmdMonths.TabIndex = 151
-        Me.cmdMonths.Text = "months "
+        Me.cmdMonths.Text = "months"
         Me.cmdMonths.UseVisualStyleBackColor = True
         '
         'cmdColon
         '
         Me.cmdColon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdColon.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdColon.Location = New System.Drawing.Point(4, 14)
+        Me.cmdColon.Location = New System.Drawing.Point(100, 130)
         Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
         Me.cmdColon.Size = New System.Drawing.Size(49, 30)
         Me.cmdColon.TabIndex = 151
-        Me.cmdColon.Text = "[:]"
+        Me.cmdColon.Text = "[ : ]"
         Me.cmdColon.UseVisualStyleBackColor = True
         '
         'grpEnterKeyboard2
         '
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRfactor)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRnormal)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepEach)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepTimes)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdText)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdFactor)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
@@ -236,16 +282,15 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLetters2)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdPi)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLogical)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepelicationFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequenceFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdConcantenateFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdExponential)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdQuotes)
-        Me.grpEnterKeyboard2.Location = New System.Drawing.Point(378, 50)
+        Me.grpEnterKeyboard2.Location = New System.Drawing.Point(477, 50)
         Me.grpEnterKeyboard2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpEnterKeyboard2.Size = New System.Drawing.Size(156, 134)
+        Me.grpEnterKeyboard2.Size = New System.Drawing.Size(156, 168)
         Me.grpEnterKeyboard2.TabIndex = 159
         Me.grpEnterKeyboard2.TabStop = False
         '
@@ -270,13 +315,13 @@ Partial Class dlgEnter
         Me.cmdFactor.Name = "cmdFactor"
         Me.cmdFactor.Size = New System.Drawing.Size(49, 30)
         Me.cmdFactor.TabIndex = 153
-        Me.cmdFactor.Text = "factor "
+        Me.cmdFactor.Text = "factor"
         Me.cmdFactor.UseVisualStyleBackColor = True
         '
         'btnExample
         '
         Me.btnExample.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnExample.Location = New System.Drawing.Point(436, 16)
+        Me.btnExample.Location = New System.Drawing.Point(562, 15)
         Me.btnExample.Margin = New System.Windows.Forms.Padding(2)
         Me.btnExample.Name = "btnExample"
         Me.btnExample.Size = New System.Drawing.Size(64, 22)
@@ -305,7 +350,7 @@ Partial Class dlgEnter
         Me.grpBasic.Controls.Add(Me.cmd2)
         Me.grpBasic.Controls.Add(Me.cmd0)
         Me.grpBasic.Controls.Add(Me.cmd1)
-        Me.grpBasic.Location = New System.Drawing.Point(170, 51)
+        Me.grpBasic.Location = New System.Drawing.Point(265, 51)
         Me.grpBasic.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpBasic.Name = "grpBasic"
         Me.grpBasic.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -529,71 +574,9 @@ Partial Class dlgEnter
         Me.cmd1.Text = "1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
-        'ucrSaveEnterResultInto
-        '
-        Me.ucrSaveEnterResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(11, 243)
-        Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
-        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(280, 22)
-        Me.ucrSaveEnterResultInto.TabIndex = 181
-        '
-        'ucrTryModelling
-        '
-        Me.ucrTryModelling.AutoSize = True
-        Me.ucrTryModelling.Location = New System.Drawing.Point(3, 202)
-        Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.RunCommandAsMultipleLines = False
-        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 33)
-        Me.ucrTryModelling.TabIndex = 160
-        '
-        'ucrDataFrameEnter
-        '
-        Me.ucrDataFrameEnter.AutoSize = True
-        Me.ucrDataFrameEnter.bDropUnusedFilterLevels = False
-        Me.ucrDataFrameEnter.bUseCurrentFilter = True
-        Me.ucrDataFrameEnter.Location = New System.Drawing.Point(11, 55)
-        Me.ucrDataFrameEnter.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
-        Me.ucrDataFrameEnter.Size = New System.Drawing.Size(151, 43)
-        Me.ucrDataFrameEnter.TabIndex = 156
-        '
-        'ucrReceiverForEnterCalculation
-        '
-        Me.ucrReceiverForEnterCalculation.AutoSize = True
-        Me.ucrReceiverForEnterCalculation.frmParent = Me
-        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(69, 16)
-        Me.ucrReceiverForEnterCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
-        Me.ucrReceiverForEnterCalculation.Selector = Nothing
-        Me.ucrReceiverForEnterCalculation.Size = New System.Drawing.Size(229, 28)
-        Me.ucrReceiverForEnterCalculation.strNcFilePath = ""
-        Me.ucrReceiverForEnterCalculation.TabIndex = 153
-        Me.ucrReceiverForEnterCalculation.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(11, 278)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'cmdRHelp
-        '
-        Me.cmdRHelp.AutoSize = True
-        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripBase
-        Me.cmdRHelp.Location = New System.Drawing.Point(459, 187)
-        Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(68, 23)
-        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripBase
-        Me.cmdRHelp.TabIndex = 213
-        Me.cmdRHelp.Text = "R Help"
-        Me.cmdRHelp.UseVisualStyleBackColor = True
-        '
         'ContextMenuStripBase
         '
+        Me.ContextMenuStripBase.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuStripBase.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuBase})
         Me.ContextMenuStripBase.Name = "ContextMenuStrip1"
         Me.ContextMenuStripBase.Size = New System.Drawing.Size(99, 26)
@@ -604,19 +587,123 @@ Partial Class dlgEnter
         Me.ToolStripMenuBase.Size = New System.Drawing.Size(98, 22)
         Me.ToolStripMenuBase.Text = "base"
         '
+        'lblEnterLength
+        '
+        Me.lblEnterLength.AutoSize = True
+        Me.lblEnterLength.Enabled = False
+        Me.lblEnterLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblEnterLength.Location = New System.Drawing.Point(426, 237)
+        Me.lblEnterLength.Name = "lblEnterLength"
+        Me.lblEnterLength.Size = New System.Drawing.Size(43, 13)
+        Me.lblEnterLength.TabIndex = 217
+        Me.lblEnterLength.Text = "Length:"
+        '
+        'lblEnterLengthValue
+        '
+        Me.lblEnterLengthValue.AutoSize = True
+        Me.lblEnterLengthValue.BackColor = System.Drawing.SystemColors.Control
+        Me.lblEnterLengthValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblEnterLengthValue.Enabled = False
+        Me.lblEnterLengthValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblEnterLengthValue.Location = New System.Drawing.Point(492, 237)
+        Me.lblEnterLengthValue.MinimumSize = New System.Drawing.Size(40, 18)
+        Me.lblEnterLengthValue.Name = "lblEnterLengthValue"
+        Me.lblEnterLengthValue.Size = New System.Drawing.Size(40, 18)
+        Me.lblEnterLengthValue.TabIndex = 218
+        Me.lblEnterLengthValue.Text = "-"
+        '
+        'ucrChkStoreScalar
+        '
+        Me.ucrChkStoreScalar.AutoSize = True
+        Me.ucrChkStoreScalar.Checked = False
+        Me.ucrChkStoreScalar.Location = New System.Drawing.Point(13, 306)
+        Me.ucrChkStoreScalar.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkStoreScalar.Name = "ucrChkStoreScalar"
+        Me.ucrChkStoreScalar.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkStoreScalar.TabIndex = 215
+        '
+        'ucrSelectorEnter
+        '
+        Me.ucrSelectorEnter.AutoSize = True
+        Me.ucrSelectorEnter.bDropUnusedFilterLevels = False
+        Me.ucrSelectorEnter.bShowHiddenColumns = False
+        Me.ucrSelectorEnter.bUseCurrentFilter = True
+        Me.ucrSelectorEnter.Location = New System.Drawing.Point(13, 41)
+        Me.ucrSelectorEnter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorEnter.Name = "ucrSelectorEnter"
+        Me.ucrSelectorEnter.Size = New System.Drawing.Size(249, 183)
+        Me.ucrSelectorEnter.TabIndex = 214
+        '
+        'cmdRHelp
+        '
+        Me.cmdRHelp.AutoSize = True
+        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripBase
+        Me.cmdRHelp.Location = New System.Drawing.Point(565, 215)
+        Me.cmdRHelp.Name = "cmdRHelp"
+        Me.cmdRHelp.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripBase
+        Me.cmdRHelp.TabIndex = 213
+        Me.cmdRHelp.Text = "R Help"
+        Me.cmdRHelp.UseVisualStyleBackColor = True
+        '
+        'ucrSaveEnterResultInto
+        '
+        Me.ucrSaveEnterResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(13, 284)
+        Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
+        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(341, 22)
+        Me.ucrSaveEnterResultInto.TabIndex = 181
+        '
+        'ucrTryModelling
+        '
+        Me.ucrTryModelling.AutoSize = True
+        Me.ucrTryModelling.Location = New System.Drawing.Point(13, 227)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
+        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 37)
+        Me.ucrTryModelling.TabIndex = 160
+        '
+        'ucrReceiverForEnterCalculation
+        '
+        Me.ucrReceiverForEnterCalculation.AutoSize = True
+        Me.ucrReceiverForEnterCalculation.frmParent = Me
+        Me.ucrReceiverForEnterCalculation.Location = New System.Drawing.Point(65, 16)
+        Me.ucrReceiverForEnterCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
+        Me.ucrReceiverForEnterCalculation.Selector = Nothing
+        Me.ucrReceiverForEnterCalculation.Size = New System.Drawing.Size(341, 28)
+        Me.ucrReceiverForEnterCalculation.strNcFilePath = ""
+        Me.ucrReceiverForEnterCalculation.TabIndex = 153
+        Me.ucrReceiverForEnterCalculation.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(13, 335)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgEnter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(538, 336)
+        Me.ClientSize = New System.Drawing.Size(639, 396)
+        Me.Controls.Add(Me.lblEnterLengthValue)
+        Me.Controls.Add(Me.lblEnterLength)
+        Me.Controls.Add(Me.ucrChkStoreScalar)
+        Me.Controls.Add(Me.ucrSelectorEnter)
         Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpEnterKeyboard2)
-        Me.Controls.Add(Me.ucrDataFrameEnter)
         Me.Controls.Add(Me.chkShowEnterArguments)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.ucrReceiverForEnterCalculation)
@@ -639,12 +726,14 @@ Partial Class dlgEnter
     Friend WithEvents chkShowEnterArguments As CheckBox
     Friend WithEvents lblData As Label
     Friend WithEvents ucrReceiverForEnterCalculation As ucrReceiverExpression
-    Friend WithEvents ucrDataFrameEnter As ucrDataFrame
     Friend WithEvents cmdQuotes As Button
     Friend WithEvents cmdExponential As Button
     Friend WithEvents cmdConcantenateFunction As Button
     Friend WithEvents cmdSequenceFunction As Button
-    Friend WithEvents cmdRepelicationFunction As Button
+    Friend WithEvents cmdRepTimes As Button
+    Friend WithEvents cmdRepEach As Button
+    Friend WithEvents cmdRnormal As Button
+    Friend WithEvents cmdRfactor As Button
     Friend WithEvents cmdLogical As Button
     Friend WithEvents cmdPi As Button
     Friend WithEvents cmdLetters2 As Button
@@ -680,4 +769,8 @@ Partial Class dlgEnter
     Friend WithEvents cmdRHelp As ucrSplitButton
     Friend WithEvents ContextMenuStripBase As ContextMenuStrip
     Friend WithEvents ToolStripMenuBase As ToolStripMenuItem
+    Friend WithEvents ucrSelectorEnter As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrChkStoreScalar As ucrCheck
+    Friend WithEvents lblEnterLength As Label
+    Friend WithEvents lblEnterLengthValue As Label
 End Class

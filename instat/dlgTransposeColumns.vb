@@ -105,7 +105,7 @@ Public Class dlgTransposeColumns
         NewDefaultName()
     End Sub
     Private Sub ucrReceiverColumnsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlValueChanged
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
         clsGetColumnNamesFunction = ucrReceiverColumnsToTranspose.GetVariables(True).Clone
         clsGetColumnNamesFunction.SetAssignTo("columns")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnNamesFunction)

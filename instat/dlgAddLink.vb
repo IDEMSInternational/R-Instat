@@ -37,7 +37,7 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 506
+        ucrBase.iHelpTopicID = 515
         ucrBase.clsRsyntax.iCallType = 2
         cmdSpecifyLink.Enabled = False ' temporarily disabled
 

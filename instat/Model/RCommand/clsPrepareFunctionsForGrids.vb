@@ -124,6 +124,7 @@ Public Class clsPrepareFunctionsForGrids
         clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
         clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
 
+        clsNNonNumeric.SetPackageName("instatExtras")
         clsNNonNumeric.SetRCommand("n_non_numeric")
         clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
         expTemp = _RLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
@@ -184,8 +185,40 @@ Public Class clsPrepareFunctionsForGrids
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsGetDataFrame.SetAssignTo(_strDataFrame)
         strTemp = clsViewDataFrame.ToScript(strScript)
-        _RLink.RunScript(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+        _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Data Frame", bSeparateThread:=False)
     End Sub
+
+    ''' <summary>
+    ''' View column metadata for the data in a within a pop up
+    ''' </summary>
+    Public Sub ViewColumnMetaData()
+        Dim clsGetDataFrameMetaData As New RFunction
+        Dim clsViewMetaData As New RFunction
+        Dim strScript As String = ""
+        Dim strTemp As String
+        clsGetDataFrameMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetDataFrameMetaData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsViewMetaData.SetRCommand("View")
+        clsViewMetaData.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameMetaData)
+        clsGetDataFrameMetaData.SetAssignTo(_strDataFrame)
+        strTemp = clsViewMetaData.ToScript(strScript)
+        _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Column Metadata", bSeparateThread:=False)
+    End Sub
+
+    Public Sub ViewDataframeMetaData()
+        Dim clsGetDataFrameMetaData As New RFunction
+        Dim clsViewMetaData As New RFunction
+        Dim strScript As String = ""
+        Dim strTemp As String
+        clsGetDataFrameMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame_metadata")
+        clsGetDataFrameMetaData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsViewMetaData.SetRCommand("View")
+        clsViewMetaData.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameMetaData)
+        clsGetDataFrameMetaData.SetAssignTo(_strDataFrame)
+        strTemp = clsViewMetaData.ToScript(strScript)
+        _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Data Frame Metadata", bSeparateThread:=False)
+    End Sub
+
     ''' <summary>
     ''' insert new rows
     ''' </summary>

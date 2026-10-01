@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R operation (e.g. 'x+y, 'x+y+z', '!x',
 '''             'data_book &lt;- DataBook$new()' etc.).
@@ -94,7 +95,6 @@ Public Class ROperator
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
         bBrackets = bBracketsTemp
-        'bIsAssigned = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -197,7 +197,7 @@ Public Class ROperator
                 'TODO SJL 03/04/20 if we only allow these 3 flags to be accessed through 'set/get' functions then we can guarantee that this error situation doesn't occur
                 'TODO Legacy comment:'should also check assignment of parameters'
                 If IsAssigned() Then
-                    MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+                    MsgBoxTranslate("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
                 End If
 
                 'replace double quotes with single quotes
@@ -264,22 +264,6 @@ Public Class ROperator
         Return Nothing
     End Function
 
-    ''' <summary>   Removes all additional parameters. </summary>
-    Public Sub RemoveAllAdditionalParameters()
-        'TODO SJL 03/04/20 this function is only used by 1 dialog. This hints that there may be an alternative way of doing the same thing.
-        '   It's also suspicious that the other RCodeStructure classes don't have such a function. Why is it only needed for an operator?
-        '   Can this function be removed?
-        SortParameters() 'This is used to bring the parameter with position 0 to the front if it exists, then clear all the others using range.
-        If clsParameters(0).Position = 0 Then
-            If clsParameters.Count > 1 Then
-                clsParameters.RemoveRange(1, clsParameters.Count - 1)
-            End If
-        Else
-            clsParameters.Clear()
-        End If
-        OnParametersChanged()
-    End Sub
-
     ''' <summary>   Clears this object to its blank/initial state. </summary>
     Public Overrides Sub Clear()
         SetOperation("")
@@ -310,7 +294,6 @@ Public Class ROperator
         clsTempROperator.iPosition = iPosition
         clsTempROperator.iCallType = iCallType
         clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
-        clsTempROperator.bClearFromGlobal = bClearFromGlobal
         clsTempROperator.bToScriptAsRString = bToScriptAsRString
         clsTempROperator.Tag = Tag
         For Each clsRParam In clsParameters

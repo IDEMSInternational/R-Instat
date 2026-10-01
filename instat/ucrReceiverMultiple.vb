@@ -21,12 +21,12 @@ Public Class ucrReceiverMultiple
     Public bSingleType As Boolean = False
     ' If bSingleType and bCategoricalNumeric then categorical and numeric are the only considered types
     Public bCategoricalNumeric As Boolean = False
+    Public iMaxItems As Integer
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             If lstSelectedVariables.Columns.Count = 0 Then
                 lstSelectedVariables.Columns.Add("Selected Data")
-                lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
             End If
             'by default multiple receivers will not be autoswitched on selection change
             bAutoSwitchFromReceiver = False
@@ -47,17 +47,29 @@ Public Class ucrReceiverMultiple
         'first eliminate all items that already exist
         'this improves perfomance significantly for wide data sets
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstItems
-            If lstSelectedVariables.FindItemWithText(kvpTempItem.Value) Is Nothing Then
+            Dim isMatchFound As Boolean = False
+            For Each item As ListViewItem In lstSelectedVariables.Items
+                If item.Text.Equals(kvpTempItem.Value, StringComparison.Ordinal) Then
+                    isMatchFound = True
+                    Exit For
+                End If
+            Next
+            If Not isMatchFound Then
                 lstActualItemsToAdd.Add(kvpTempItem)
             End If
         Next
+        lstSelectedVariables.Columns(0).Width = -2 ' Auto-resize to fit content
 
         If lstActualItemsToAdd.Count = 0 Then
             Exit Sub
         End If
 
-        'then add the new items
+        'Then add the new items with limit check
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstActualItemsToAdd
+            If iMaxItems <> 0 AndAlso lstSelectedVariables.Items.Count >= iMaxItems Then
+                MessageBox.Show($"Cannot add more than {iMaxItems} items.", "Item Limit Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit For ' Exit the loop if the maximum limit is reached
+            End If
             lstSelectedVariables.Items.Add(New ListViewItem With {
                     .Name = kvpTempItem.Value,
                     .Text = kvpTempItem.Value,
@@ -71,6 +83,13 @@ Public Class ucrReceiverMultiple
 
         OnSelectionChanged()
     End Sub
+
+    Private Sub lstSelectedVariables_Resize(sender As Object, e As EventArgs) Handles lstSelectedVariables.Resize
+        If lstSelectedVariables.Columns.Count > 0 Then
+            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
+        End If
+    End Sub
+
 
     'add new group if it exist and return it
     'support of multiple groups assumes that the receiver may have variables from more than one data frame
@@ -137,6 +156,11 @@ Public Class ucrReceiverMultiple
     ''' that is not in the list of variables of the selector
     ''' </summary>
     Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        ' SAFETY: Selector may not yet be initialised during autofill
+        If Selector Is Nothing OrElse Selector.lstAvailableVariable Is Nothing Then
+            Exit Sub
+        End If
+
         Dim lstItemsToRemove As New List(Of ListViewItem)
         For Each lvi As ListViewItem In lstSelectedVariables.Items
             If Selector.lstAvailableVariable.FindItemWithText(lvi.Text) Is Nothing Then
@@ -153,6 +177,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.Items.Remove(lvi)
         Next
 
+        SetGroupHeaderVariablesCount()
         OnSelectionChanged()
         MyBase.RemoveSelected()
     End Sub
@@ -168,11 +193,22 @@ Public Class ucrReceiverMultiple
         'it's not clear when the receiver will ever have more than one data frame
 
         'reset the header text with the name
-        lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Name
+        lstSelectedVariables.Groups(0).Header = ShortenString(lstSelectedVariables.Groups(0).Name)
         If lstSelectedVariables.Groups.Count = 1 AndAlso lstSelectedVariables.Items.Count > 0 Then
             lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Header & " (" & lstSelectedVariables.Items.Count & ")"
         End If
     End Sub
+
+    Private Function ShortenString(strText As String) As String
+        Dim maxLength As Integer = 6
+
+        If strText.Length > maxLength Then
+            ' Trim the string to the specified length and add ellipsis
+            Return strText.Substring(0, maxLength) & "..."
+        End If
+
+        Return strText
+    End Function
 
     Public Overrides Function IsEmpty() As Boolean
         Return lstSelectedVariables.Items.Count = 0
@@ -289,9 +325,9 @@ Public Class ucrReceiverMultiple
         Return lstColumnFunctions
     End Function
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = """") As String
         Dim strTempBuilder As New Text.StringBuilder
-        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
+        Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
 
         If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
             strTempBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
@@ -307,8 +343,26 @@ Public Class ucrReceiverMultiple
         Return strTempBuilder.ToString()
     End Function
 
+    Public Function GetVariableNamesAsAddition(Optional bWithQuotes As Boolean = True) As String
+        Dim strBuilder As New Text.StringBuilder
+        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
+
+        If lstSelectedVariables.Items.Count = 0 Then
+            Return ""
+        ElseIf lstSelectedVariables.Items.Count = 1 Then
+            strBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
+        Else
+            For Each lvi As ListViewItem In lstSelectedVariables.Items
+                strBuilder.Append(strQuoteHolder).Append(lvi.Text).Append(strQuoteHolder).Append("+")
+            Next
+            strBuilder.Length -= 1 ' remove last "+"
+        End If
+
+        Return strBuilder.ToString()
+    End Function
+
     Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim arrItems(lstSelectedVariables.Items.Count) As String
+        Dim arrItems(lstSelectedVariables.Items.Count - 1) As String
         Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
         For i = 0 To lstSelectedVariables.Items.Count - 1
             arrItems(i) = strQuoteHolder & lstSelectedVariables.Items(i).Text & strQuoteHolder
@@ -397,7 +451,7 @@ Public Class ucrReceiverMultiple
                 If bIsCategoricalNumeric Then
                     ' logical can be considered as both categorical or numeric so should be dealt with on individual dialogs
                     For i As Integer = 0 To strDataTypes.Count - 1
-                        If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") Then
+                        If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") OrElse strDataTypes(i).Contains("ordered") Then
                             strDataTypes(i) = "categorical"
                         ElseIf Not strDataTypes(i).Contains("logical") Then
                             strDataTypes(i) = "numeric"
@@ -514,6 +568,19 @@ Public Class ucrReceiverMultiple
             strHeaders.Add(grpTemp.Name)
         Next
         Return strHeaders
+    End Function
+
+    ''' <summary>
+    '''  Returns information about the receiver's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the receiver's text.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the receiver's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Return GetVariableNames(bWithQuotes:=True)
     End Function
 
 End Class

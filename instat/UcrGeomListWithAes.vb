@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 Public Class ucrGeomListWithParameters
     Public lstAesParameterLabels As New List(Of Label)
@@ -116,7 +117,7 @@ Public Class ucrGeomListWithParameters
         ucrChkApplyOnAllLayers.Checked = bApplyAesGlobally
         ucrChkIgnoreGlobalAes.SetRCode(clsGeomFunction, bReset)
         If ucrChkApplyOnAllLayers.Checked AndAlso ucrChkIgnoreGlobalAes.Checked Then
-            MsgBox("Error: Cannot check both 'Apply On All Layers' and 'Ignore Global Aesthetics' as this will remove all aesthetics from this layer. Setting both values to checked.", vbOKOnly)
+            MsgBoxTranslate("Error: Cannot check both 'Apply On All Layers' and 'Ignore Global Aesthetics' as this will remove all aesthetics from this layer. Setting both values to checked.", vbOKOnly)
             ucrChkApplyOnAllLayers.Checked = False
             ucrChkIgnoreGlobalAes.Checked = False
         End If
@@ -196,7 +197,7 @@ Public Class ucrGeomListWithParameters
                 Next
             ElseIf (clsCurrGeom.clsAesParameters.Count > iMaxIndex) Then
                 'If the number of parameters in the current geom is greater than the number of receivers, then there is an error.
-                MsgBox("Developer Error, the number of aesthetics parameters of the current geom exceeds the number of aesthetic receivers in ucrGeomListWithAes, on the sdgLayerOptions. The exceding parameters will be ignored.", MsgBoxStyle.OkOnly)
+                MsgBoxTranslate("Developer Error, the number of aesthetics parameters of the current geom exceeds the number of aesthetic receivers in ucrGeomListWithAes, on the sdgLayerOptions. The exceding parameters will be ignored.", MsgBoxStyle.OkOnly)
             End If
 
             'In any case, we show all the receivers that have index lower than the iMaxIndex, and we populate the labels with the appropriate names.
@@ -224,7 +225,7 @@ Public Class ucrGeomListWithParameters
                 End If
             Next
         Else 'If the current geom has not been populated, then an error has been made in the code
-            MsgBox("Developer Error: the current geom (clsCurrGeom) has not been populated before setting the aes parameters for the ucrGeomListWithAes on the sdgLayerOptions.", MsgBoxStyle.OkOnly)
+            MsgBoxTranslate("Developer Error: the current geom (clsCurrGeom) has not been populated before setting the aes parameters for the ucrGeomListWithAes on the sdgLayerOptions.", MsgBoxStyle.OkOnly)
         End If
     End Sub
 
@@ -300,6 +301,14 @@ Public Class ucrGeomListWithParameters
         SetReceiverColour()
     End Sub
 
+    Private Sub AddRFunctionParameter(parentFunction As RFunction, paramName As String, paramValue As String)
+        Dim clsProductFunction As New RFunction
+        clsProductFunction.SetPackageName("ggmosaic")
+        clsProductFunction.SetRCommand("product")
+        clsProductFunction.AddParameter(paramName, paramValue, bIncludeArgumentName:=False)
+        parentFunction.AddParameter(paramName, clsRFunctionParameter:=clsProductFunction)
+    End Sub
+
     Public Sub UpdateGlobalAndLocalAesFromInter()
         Dim clsRelevantAesFunction As New RFunction 'Will be used in the partially mandatory aes filling method below.
         Dim clsCurrentAesFunction As RFunction
@@ -342,9 +351,67 @@ Public Class ucrGeomListWithParameters
             clsCurrentAesFunction = clsLocalAesFunction
         End If
 
+        If clsGeomFunction.strRCommand = "geom_mosaic" Then
+            Dim xParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(xParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(condsParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+
+            Dim xParameterGlobalIndex As Integer = clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterGlobalIndex As Integer = clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterGlobalIndex >= 0 Then
+                Dim strArgNameValue = clsGlobalAesFunction.clsParameters(xParameterGlobalIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterGlobalIndex >= 0 Then
+                Dim strArgNameValue = clsGlobalAesFunction.clsParameters(condsParameterGlobalIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+        End If
+
+        If clsGeomFunction.strRCommand = "geom_mosaic_jitter" Then
+            Dim xParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(xParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(condsParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+        End If
+
+        If clsGeomFunction.strRCommand = "geom_mosaic_text" Then
+            Dim xParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(xParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(condsParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+        End If
+
         'This is a temporary solution to issue which should be solved with geoms
         'This adds "" aes for x or y when no variables are mapped to them for geoms which require it, either adding to the global or local aes.
-        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" Then
+        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" OrElse clsGeomFunction.strRCommand = "geom_violin" OrElse clsGeomFunction.strRCommand = "stat_summary" Then
             If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
@@ -358,6 +425,9 @@ Public Class ucrGeomListWithParameters
         End If
         'Adding stat = identity method 
         If {"geom_bar", "geom_density", "geom_freqpoly"}.Contains(clsGeomFunction.strRCommand) Then
+            If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+                clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            End If
             'If there is a y in the global aes, and the global aes are not ignored or if there is a y in the local aes then in case stat has not been set manually, stat is set to identity.
             If (((clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (Not ucrChkIgnoreGlobalAes.Checked))) OrElse (clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))

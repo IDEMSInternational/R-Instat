@@ -50,15 +50,18 @@ Partial Class sdgImportFromClimSoft
         Me.ucrComboBoxDatabaseName = New instat.ucrInputComboBox()
         Me.ucrBaseSdgClimSoft = New instat.ucrButtonsSubdialogue()
         Me.ucrTxtUserName = New instat.ucrInputTextBox()
+        Me.ucrInputDrv = New instat.ucrInputComboBox()
+        Me.lblDrv = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDatabaseName
         '
         Me.lblDatabaseName.AutoSize = True
         Me.lblDatabaseName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDatabaseName.Location = New System.Drawing.Point(12, 24)
+        Me.lblDatabaseName.Location = New System.Drawing.Point(18, 27)
+        Me.lblDatabaseName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDatabaseName.Name = "lblDatabaseName"
-        Me.lblDatabaseName.Size = New System.Drawing.Size(87, 13)
+        Me.lblDatabaseName.Size = New System.Drawing.Size(129, 20)
         Me.lblDatabaseName.TabIndex = 0
         Me.lblDatabaseName.Text = "Database Name:"
         '
@@ -66,9 +69,10 @@ Partial Class sdgImportFromClimSoft
         '
         Me.lblHost.AutoSize = True
         Me.lblHost.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHost.Location = New System.Drawing.Point(62, 53)
+        Me.lblHost.Location = New System.Drawing.Point(93, 106)
+        Me.lblHost.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHost.Name = "lblHost"
-        Me.lblHost.Size = New System.Drawing.Size(32, 13)
+        Me.lblHost.Size = New System.Drawing.Size(47, 20)
         Me.lblHost.TabIndex = 2
         Me.lblHost.Text = "Host:"
         '
@@ -76,9 +80,10 @@ Partial Class sdgImportFromClimSoft
         '
         Me.lblPort.AutoSize = True
         Me.lblPort.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPort.Location = New System.Drawing.Point(65, 80)
+        Me.lblPort.Location = New System.Drawing.Point(98, 146)
+        Me.lblPort.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPort.Name = "lblPort"
-        Me.lblPort.Size = New System.Drawing.Size(29, 13)
+        Me.lblPort.Size = New System.Drawing.Size(42, 20)
         Me.lblPort.TabIndex = 4
         Me.lblPort.Text = "Port:"
         '
@@ -86,9 +91,10 @@ Partial Class sdgImportFromClimSoft
         '
         Me.lblUserName.AutoSize = True
         Me.lblUserName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUserName.Location = New System.Drawing.Point(36, 106)
+        Me.lblUserName.Location = New System.Drawing.Point(54, 185)
+        Me.lblUserName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserName.Name = "lblUserName"
-        Me.lblUserName.Size = New System.Drawing.Size(58, 13)
+        Me.lblUserName.Size = New System.Drawing.Size(87, 20)
         Me.lblUserName.TabIndex = 6
         Me.lblUserName.Text = "Username:"
         '
@@ -97,9 +103,10 @@ Partial Class sdgImportFromClimSoft
         Me.lblConnection.AutoSize = True
         Me.lblConnection.ForeColor = System.Drawing.Color.Red
         Me.lblConnection.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConnection.Location = New System.Drawing.Point(185, 157)
+        Me.lblConnection.Location = New System.Drawing.Point(278, 262)
+        Me.lblConnection.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblConnection.Name = "lblConnection"
-        Me.lblConnection.Size = New System.Drawing.Size(78, 13)
+        Me.lblConnection.Size = New System.Drawing.Size(114, 20)
         Me.lblConnection.TabIndex = 8
         Me.lblConnection.Text = "No Connection"
         '
@@ -109,9 +116,10 @@ Partial Class sdgImportFromClimSoft
         Me.chkRememberCredentials.Checked = True
         Me.chkRememberCredentials.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkRememberCredentials.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkRememberCredentials.Location = New System.Drawing.Point(103, 129)
+        Me.chkRememberCredentials.Location = New System.Drawing.Point(154, 220)
+        Me.chkRememberCredentials.Margin = New System.Windows.Forms.Padding(4)
         Me.chkRememberCredentials.Name = "chkRememberCredentials"
-        Me.chkRememberCredentials.Size = New System.Drawing.Size(132, 17)
+        Me.chkRememberCredentials.Size = New System.Drawing.Size(198, 24)
         Me.chkRememberCredentials.TabIndex = 5
         Me.chkRememberCredentials.Text = "Remember Credentials"
         Me.chkRememberCredentials.UseVisualStyleBackColor = True
@@ -119,9 +127,10 @@ Partial Class sdgImportFromClimSoft
         'btnConnect
         '
         Me.btnConnect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnConnect.Location = New System.Drawing.Point(104, 152)
+        Me.btnConnect.Location = New System.Drawing.Point(156, 254)
+        Me.btnConnect.Margin = New System.Windows.Forms.Padding(4)
         Me.btnConnect.Name = "btnConnect"
-        Me.btnConnect.Size = New System.Drawing.Size(76, 22)
+        Me.btnConnect.Size = New System.Drawing.Size(114, 33)
         Me.btnConnect.TabIndex = 6
         Me.btnConnect.Text = "Connect"
         Me.btnConnect.UseVisualStyleBackColor = True
@@ -132,9 +141,10 @@ Partial Class sdgImportFromClimSoft
         Me.ucrComboBoxPort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrComboBoxPort.GetSetSelectedIndex = -1
         Me.ucrComboBoxPort.IsReadOnly = False
-        Me.ucrComboBoxPort.Location = New System.Drawing.Point(103, 77)
+        Me.ucrComboBoxPort.Location = New System.Drawing.Point(154, 142)
+        Me.ucrComboBoxPort.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrComboBoxPort.Name = "ucrComboBoxPort"
-        Me.ucrComboBoxPort.Size = New System.Drawing.Size(153, 21)
+        Me.ucrComboBoxPort.Size = New System.Drawing.Size(230, 32)
         Me.ucrComboBoxPort.TabIndex = 3
         '
         'ucrTxtHost
@@ -143,9 +153,10 @@ Partial Class sdgImportFromClimSoft
         Me.ucrTxtHost.AutoSize = True
         Me.ucrTxtHost.IsMultiline = False
         Me.ucrTxtHost.IsReadOnly = False
-        Me.ucrTxtHost.Location = New System.Drawing.Point(103, 49)
+        Me.ucrTxtHost.Location = New System.Drawing.Point(154, 100)
+        Me.ucrTxtHost.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtHost.Name = "ucrTxtHost"
-        Me.ucrTxtHost.Size = New System.Drawing.Size(153, 21)
+        Me.ucrTxtHost.Size = New System.Drawing.Size(230, 32)
         Me.ucrTxtHost.TabIndex = 2
         '
         'ucrComboBoxDatabaseName
@@ -154,17 +165,19 @@ Partial Class sdgImportFromClimSoft
         Me.ucrComboBoxDatabaseName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrComboBoxDatabaseName.GetSetSelectedIndex = -1
         Me.ucrComboBoxDatabaseName.IsReadOnly = False
-        Me.ucrComboBoxDatabaseName.Location = New System.Drawing.Point(103, 21)
+        Me.ucrComboBoxDatabaseName.Location = New System.Drawing.Point(154, 23)
+        Me.ucrComboBoxDatabaseName.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrComboBoxDatabaseName.Name = "ucrComboBoxDatabaseName"
-        Me.ucrComboBoxDatabaseName.Size = New System.Drawing.Size(153, 21)
+        Me.ucrComboBoxDatabaseName.Size = New System.Drawing.Size(230, 32)
         Me.ucrComboBoxDatabaseName.TabIndex = 1
         '
         'ucrBaseSdgClimSoft
         '
         Me.ucrBaseSdgClimSoft.AutoSize = True
-        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(22, 192)
+        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(33, 314)
+        Me.ucrBaseSdgClimSoft.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBaseSdgClimSoft.Name = "ucrBaseSdgClimSoft"
-        Me.ucrBaseSdgClimSoft.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSdgClimSoft.Size = New System.Drawing.Size(336, 45)
         Me.ucrBaseSdgClimSoft.TabIndex = 7
         '
         'ucrTxtUserName
@@ -173,17 +186,43 @@ Partial Class sdgImportFromClimSoft
         Me.ucrTxtUserName.AutoSize = True
         Me.ucrTxtUserName.IsMultiline = False
         Me.ucrTxtUserName.IsReadOnly = False
-        Me.ucrTxtUserName.Location = New System.Drawing.Point(103, 102)
+        Me.ucrTxtUserName.Location = New System.Drawing.Point(154, 179)
+        Me.ucrTxtUserName.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtUserName.Name = "ucrTxtUserName"
-        Me.ucrTxtUserName.Size = New System.Drawing.Size(153, 21)
+        Me.ucrTxtUserName.Size = New System.Drawing.Size(230, 32)
         Me.ucrTxtUserName.TabIndex = 4
+        '
+        'ucrInputDrv
+        '
+        Me.ucrInputDrv.AddQuotesIfUnrecognised = True
+        Me.ucrInputDrv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDrv.GetSetSelectedIndex = -1
+        Me.ucrInputDrv.IsReadOnly = False
+        Me.ucrInputDrv.Location = New System.Drawing.Point(154, 62)
+        Me.ucrInputDrv.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputDrv.Name = "ucrInputDrv"
+        Me.ucrInputDrv.Size = New System.Drawing.Size(230, 32)
+        Me.ucrInputDrv.TabIndex = 9
+        '
+        'lblDrv
+        '
+        Me.lblDrv.AutoSize = True
+        Me.lblDrv.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDrv.Location = New System.Drawing.Point(93, 65)
+        Me.lblDrv.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDrv.Name = "lblDrv"
+        Me.lblDrv.Size = New System.Drawing.Size(34, 20)
+        Me.lblDrv.TabIndex = 10
+        Me.lblDrv.Text = "drv:"
         '
         'sdgImportFromClimSoft
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(268, 225)
+        Me.ClientSize = New System.Drawing.Size(402, 365)
+        Me.Controls.Add(Me.lblDrv)
+        Me.Controls.Add(Me.ucrInputDrv)
         Me.Controls.Add(Me.ucrComboBoxPort)
         Me.Controls.Add(Me.ucrTxtHost)
         Me.Controls.Add(Me.ucrComboBoxDatabaseName)
@@ -197,6 +236,7 @@ Partial Class sdgImportFromClimSoft
         Me.Controls.Add(Me.lblHost)
         Me.Controls.Add(Me.lblDatabaseName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgImportFromClimSoft"
@@ -218,4 +258,6 @@ Partial Class sdgImportFromClimSoft
     Friend WithEvents ucrComboBoxDatabaseName As ucrInputComboBox
     Friend WithEvents ucrTxtHost As ucrInputTextBox
     Friend WithEvents ucrComboBoxPort As ucrInputComboBox
+    Friend WithEvents ucrInputDrv As ucrInputComboBox
+    Friend WithEvents lblDrv As Label
 End Class

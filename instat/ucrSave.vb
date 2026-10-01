@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.ComponentModel
 Imports instat
 Imports instat.Translations
 
@@ -34,7 +35,19 @@ Public Class ucrSave
     'TODO SJL 06/07/20 If you refactor this class then please see the suggestions from @Patowhiz in PR #5794
     ' 
 
+    ''' <summary>
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' </summary>
+    Public Enum SaveLocation
+        adjacentColumn
+        before
+        columnName
+        isChecked
+        saveName
+    End Enum
+
     ''' <summary>   True if the control has not yet loaded. </summary>
+
     Public bFirstLoad As Boolean = True
 
     ''' <summary>   True to show, false to hide the check box. <para>
@@ -50,6 +63,10 @@ Public Class ucrSave
     '''             For example, radio buttons may require the control to switch between different 
     '''             states.</para>
     '''             </summary>
+    '''             
+    Private strDataNameAsRVariable As String = ""
+    ''' <summary> If set, this R variable name is used for data_name instead of 
+    '''           the dataframe selector text. </summary>
     Private bShowCheckBox As Boolean = True
     ''' <summary>   True to show, false to hide the label. </summary>
     '''             (mutually exclusive with bShowCheckBox, see note above) 
@@ -252,6 +269,20 @@ Public Class ucrSave
             ucrInputTextSave.Visible = True
         End If
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Sets an R variable name to use for data_name instead of the dataframe 
+    '''           selector text.
+    '''           e.g. pass "linked_data_name" to produce data_name=linked_data_name (no quotes)
+    '''           Pass "" to revert to using the dataframe selector text (default behaviour)
+    ''' </summary>
+    ''' <param name="strRVariableName"> The R variable name to use for data_name </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetDataNameAsRVariable(strRVariableName As String)
+        strDataNameAsRVariable = strRVariableName
+        UpdateAssignTo()
+    End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the prefix for the text/combo box value to
     '''             <paramref name="strNewPrefix"/>. If <paramref name="strNewPrefix"/> is not an
@@ -420,7 +451,7 @@ Public Class ucrSave
                 ucrInputTextSave.SetDefaultTypeAsLink()
                 btnColumnPosition.Visible = False
             Case Else
-                MsgBox("Developer error: unrecognised save type: " & strRObjectType)
+                MsgBoxTranslate("Developer error: unrecognised save type: " & strRObjectType)
         End Select
     End Sub
     ''' <summary>   Sets save type as column. </summary>
@@ -634,7 +665,16 @@ Public Class ucrSave
                 If bRemove Then
                     clsTempCode.RemoveAssignTo()
                 Else
-                    strDataName = If(ucrDataFrameSelector IsNot Nothing, ucrDataFrameSelector.cboAvailableDataFrames.Text, strGlobalDataName)
+                    Dim bDataNameIsRVariable As Boolean = False
+                    If Not String.IsNullOrEmpty(strDataNameAsRVariable) Then
+                        strDataName = strDataNameAsRVariable
+                        bDataNameIsRVariable = True
+                    Else
+                        strDataName = If(ucrDataFrameSelector IsNot Nothing,
+                     ucrDataFrameSelector.cboAvailableDataFrames.Text,
+                     strGlobalDataName)
+                        bDataNameIsRVariable = False
+                    End If
                     strSaveName = If(bShowCheckBox AndAlso Not ucrChkSave.Checked, strAssignToIfUnchecked, GetText())
                     If strSaveName <> "" Then
                         Select Case _strRObjectLabel
@@ -666,10 +706,11 @@ Public Class ucrSave
                                                             bAssignToIsPrefix:=bAssignToIsPrefix)
                                 Else
                                     clsTempCode.SetAssignToOutputObject(strRObjectToAssignTo:=strSaveName,
-                                                                   strRObjectTypeLabelToAssignTo:=_strRObjectLabel,
-                                                                   strRObjectFormatToAssignTo:=_strRObjectFormat,
-                                                                   strRDataFrameNameToAddObjectTo:=strDataName,
-                                                                   strObjectName:=strSaveName)
+                                                                        strRObjectTypeLabelToAssignTo:=_strRObjectLabel,
+                                                                        strRObjectFormatToAssignTo:=_strRObjectFormat,
+                                                                        strRDataFrameNameToAddObjectTo:=strDataName,
+                                                                        strObjectName:=strSaveName,
+                                                                        bDataFrameNameIsRVariable:=bDataNameIsRVariable)
                                 End If
                         End Select
                     Else
@@ -763,19 +804,52 @@ Public Class ucrSave
         End If
     End Function
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the text from the text/combo box. </summary>
-    '''
-    ''' <returns>   The text from the text/combo box. </returns>
+    ''' <summary>
+    '''  Returns information about the save control's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the column name.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the save control's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
     '''--------------------------------------------------------------------------------------------
-    Public Function GetText() As String
-        If bIsComboBox Then
-            Return ucrInputComboSave.GetText()
-        Else
-            Return ucrInputTextSave.GetText()
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = SaveLocation.columnName
         End If
+
+        Dim enumSaveParameter As SaveLocation
+        Try
+            enumSaveParameter = DirectCast(enumTextType, SaveLocation)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException("Invalid value for SaveLocation")
+        End Try
+
+        Select Case enumSaveParameter
+            Case SaveLocation.adjacentColumn
+                Return strAdjacentColumn
+            Case SaveLocation.before
+                Return If(bInsertColumnBefore, "TRUE", "FALSE")
+            Case SaveLocation.columnName
+                If bIsComboBox Then
+                    Return ucrInputComboSave.GetText()
+                Else
+                    Return ucrInputTextSave.GetText()
+                End If
+            Case SaveLocation.isChecked
+                Return ucrChkSave.GetText()
+            Case SaveLocation.saveName
+                Return ucrInputComboSave.GetText()
+        End Select
+
+        Throw New InvalidEnumArgumentException("Invalid save parameter type")
     End Function
+
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the adjacent column name from the Save Column Position Sub Dialogue. </summary>
+    ''' <summary>   Gets the adjacent column name from the Save Column Position Sub Dialogue. 
+    ''' todo @lloyddewit 15/05/24 : should this function return `strAdjacentColumn`?
+    '''      This function is also unused. Remove this function?</summary>
     '''
     ''' <returns>   The adjacent column name from the Save Column Position Sub Dialogue. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -945,13 +1019,15 @@ Public Class ucrSave
         Dim strDataName As String = If(ucrDataFrameSelector IsNot Nothing, ucrDataFrameSelector.cboAvailableDataFrames.Text, strGlobalDataName)
 
         sdgSaveColumnPosition.SetUp(strDataName, bInsertColumnBefore, strAdjacentColumn, bKeepExistingPosition)
-        sdgSaveColumnPosition.ShowDialog()
+        ' Pass the parent form as owner so sdgSaveColumnPosition.Owner is set and the sub-dialog can find the parent controls:
+        sdgSaveColumnPosition.ShowDialog(Me.FindForm())
 
         bInsertColumnBefore = sdgSaveColumnPosition.InsertColumnBefore
         strAdjacentColumn = sdgSaveColumnPosition.AdjacentColumn
         bKeepExistingPosition = sdgSaveColumnPosition.KeepExistingPosition
 
         UpdateAssignTo()
+        OnControlValueChanged()
     End Sub
 
     '''--------------------------------------------------------------------------------------------

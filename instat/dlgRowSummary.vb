@@ -54,6 +54,8 @@ Public Class dlgRowSummary
         Dim dctRangeValues As New Dictionary(Of String, String)
         Dim dctTypeValues As New Dictionary(Of String, String)
 
+        ucrSelectorForRowSummaries.bUseCurrentFilter = False ' temporarily disabling filtering option - see #4141
+
         ucrReceiverForRowSummaries.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()

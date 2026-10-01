@@ -14,10 +14,23 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
+Imports System.IO
 Imports instat.Translations
+Imports Newtonsoft.Json
+Imports RInsightF461
 
 Public Class ucrButtons
-    Public clsRsyntax As RSyntax
+    ''' <summary>
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' </summary>
+    Public Enum EnumTextType
+        comment
+        isComment
+    End Enum
+
+    Public Shadows clsRsyntax As RSyntax
+
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
 
@@ -28,6 +41,11 @@ Public Class ucrButtons
     Public bAppendScriptsAtCurrentScriptWindowCursorPosition As Boolean = False
     Public bAddScriptToScriptWindowOnClickOk As Boolean = True
     Public bMakeVisibleScriptWindow As Boolean = True
+
+    Public strDialogName = ""
+    Public dctConfigurableValues As New Dictionary(Of String, String)
+    Public lstTransformToScript As New List(Of clsTransformationRModel)
+    Public lstTransformFromControl As New List(Of clsTransformationControl)
 
     Public Event BeforeClickOk(sender As Object, e As EventArgs)
     Public Event ClickOk(sender As Object, e As EventArgs)
@@ -46,6 +64,46 @@ Public Class ucrButtons
         bFirstLoad = True
     End Sub
 
+    ''' <summary>
+    '''  Returns information about the dialog comment as specified by <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the comment text.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>The comment information specified by <paramref name="enumTextType"/>: either the 
+    ''' comment text; or the state of the comment check box ("TRUE" or "FALSE").</returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = ucrButtons.EnumTextType.comment
+        End If
+
+        Dim textType As EnumTextType
+        Try
+            textType = DirectCast(enumTextType, EnumTextType)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException("Invalid text type requested from buttons.")
+        End Try
+
+        Select Case textType
+            Case ucrButtons.EnumTextType.comment
+                ' Split the comment into lines
+                Dim lines As String() = txtComment.Text.Split(New String() {vbCrLf, vbCr, vbLf},
+                                                              StringSplitOptions.RemoveEmptyEntries)
+
+                ' Prepend "# " to each line that is not just whitespace, ignore blank lines
+                Dim strComment As String = ""
+                For i As Integer = 0 To lines.Length - 1
+                    strComment &= "# " & lines(i) & vbCrLf
+                Next
+
+                Return strComment & vbCrLf
+
+            Case ucrButtons.EnumTextType.isComment
+                Return If(chkComment.Checked, "TRUE", "FALSE")
+        End Select
+
+        Throw New InvalidEnumArgumentException("Unhandled text type requested from buttons.")
+    End Function
+
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Close()
         RaiseEvent ClickClose(sender, e)
@@ -58,13 +116,35 @@ Public Class ucrButtons
 
     '"Ok", "Ok and Close" and "Ok and Keep" Click event 
     Private Sub Ok_Click(sender As Object, e As EventArgs) Handles cmdOk.Click, toolStripMenuItemOkClose.Click, toolStripMenuItemOkKeep.Click
-        OnScriptButtonsClick(sender, e, bAddScriptToScriptWindowOnClickOk, Not sender Is toolStripMenuItemOkKeep)
+        If frmMain.bRecordQuarto Then
+
+            'Add the new chunk to the Quarto document
+            OnScriptButtonsClick(sender, e, False, False)
+
+            'Run the same R code so output appears in the Output window
+            OnScriptButtonsClick(sender, e, True, False)
+
+            If Not sender Is toolStripMenuItemOkKeep Then
+                ParentForm.Close()
+            End If
+        Else
+            OnScriptButtonsClick(sender, e, bAddScriptToScriptWindowOnClickOk, Not sender Is toolStripMenuItemOkKeep)
+        End If
     End Sub
 
     '"To Script", "To Script and Close" and "To Script and Keep" Click event 
-    Private Sub ToScript_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click, toolStripMenuItemToScriptClose.Click, toolStripMenuItemToScriptKeep.Click
+    Private Sub ToScript_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click, toolStripMenuItemToScriptClose.Click, toolStripMenuItemToScriptKeep.Click, toolStripMenuItemToScriptOk.Click
+        'Determine whether to show the Script window
+        bMakeVisibleScriptWindow = frmMain.mnuViewLogScript.Checked OrElse
+    (Not frmMain.mnuViewDataView.Checked OrElse Not frmMain.mnuViewSwapDataAndScript.Checked)
+        ' Handle script button actions
         OnScriptButtonsClick(sender, e, False, Not sender Is toolStripMenuItemToScriptKeep)
-        frmMain.mnuViewLogScript.Checked = True
+        If sender Is toolStripMenuItemToScriptOk Then
+            ' Confirm and send to script
+            OnScriptButtonsClick(sender, e, True, True)
+        End If
+        ' Update menu state
+        frmMain.mnuViewLogScript.Checked = bMakeVisibleScriptWindow
     End Sub
 
     Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
@@ -98,20 +178,20 @@ Public Class ucrButtons
         'In the process, we want the RSyntax parameters to be set as at the end of GetScript. Hence the reset needs to come after.
         'Eventually, all this should be more neatly incorporated in the RSyntax machinery...
 
-        If bCloseForm Then
-            ParentForm.Close()
-        End If
-
         j = 0
         For Each ctrTempControl In ParentForm.Controls
             ctrTempControl.Enabled = lstCurrentEnabled(j)
             j = j + 1
         Next
         ParentForm.Cursor = Cursors.Default
+
+        If bCloseForm Then
+            ParentForm.Close()
+        End If
     End Sub
 
     Private Sub Scripts(bRun As Boolean)
-        If Not frmMain.ucrScriptWindow.IsScriptTabSelected() Then
+        If Not bRun AndAlso Not frmMain.ucrScriptWindow.IsScriptTabROrQuarto() Then
             Exit Sub
         End If
 
@@ -125,6 +205,7 @@ Public Class ucrButtons
         Dim clsRemoveListFun As New RFunction
         Dim lstAssignToCodes As New List(Of RCodeStructure) 'todo. remove after refactoring GetAllAssignTo
         Dim lstAssignToStrings As New List(Of String)
+        Dim strExpected As String = ""
 
         'rm is the R function to remove the created objects from the memory at the end of the script and c is the function that puts them together in a list
         clsRemoveFunc.SetRCommand("rm")
@@ -136,27 +217,64 @@ Public Class ucrButtons
         Else
             strComments = ""
         End If
-        If Not bRun AndAlso strComments <> "" Then
-            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+
+        Dim bIsQuarto As Boolean =
+                frmMain.ucrScriptWindow.enumScriptType = ucrScript.ScriptType.quarto
+
+        If Not bRun Then
+            If strComments <> "" Then
+                Dim strFormattedComment As String = If(bIsQuarto, strComments,
+                                                      frmMain.clsRLink.GetFormattedComment(strComments))
+                strExpected &= strFormattedComment & Environment.NewLine & vbLf
+                frmMain.AddToScriptWindow(strFormattedComment & Environment.NewLine,
+                      bMakeVisible:=bMakeVisibleScriptWindow,
+                      bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            End If
+
+            If bIsQuarto Then
+                Dim strOpenCodeBlock As String =
+        "```{r warning=" & frmMain.bQuartoWarning.ToString().ToUpper() &
+        ", message=" & frmMain.bQuartoMessage.ToString().ToUpper() &
+        ", echo=" & frmMain.bQuartoEcho.ToString().ToUpper() &
+        ", eval=" & frmMain.bQuartoEval.ToString().ToUpper() &
+        "}" & Environment.NewLine
+
+                frmMain.AddToScriptWindow(strOpenCodeBlock,
+        bMakeVisible:=bMakeVisibleScriptWindow,
+        bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            End If
         End If
 
         'Get this list before doing ToScript then no need for global variable name
         clsRsyntax.GetAllAssignTo(lstAssignToCodes, lstAssignToStrings)
 
         'Run additional before codes
-        lstBeforeScripts = clsRsyntax.GetBeforeCodesScripts()
         lstBeforeCodes = clsRsyntax.GetBeforeCodes()
-        For i As Integer = 0 To clsRsyntax.lstBeforeCodes.Count - 1
+        lstBeforeScripts = clsRsyntax.GetScriptsFromCodeList(lstBeforeCodes)
+        For i As Integer = 0 To lstBeforeCodes.Count - 1
             If bFirstCode Then
                 strComment = strComments
                 bFirstCode = False
             Else
                 strComment = ""
             End If
-            If bRun Then
+            If frmMain.bRecordQuarto Then
+
+                frmMain.clsRLink.RunScript(clsRsyntax.GetScript(),
+                                           clsRsyntax.iCallType,
+                                           strComment:=strComment,
+                                           bSeparateThread:=clsRsyntax.bSeparateThread)
+
+                AddToScriptWindow(clsRsyntax.GetScript(), True)
+
+                frmMain.SaveCurrentQuartoFile()
+
+
+            ElseIf bRun Then
                 frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
-                frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                strExpected &= lstBeforeScripts(i) & vbLf
+                AddToScriptWindow(lstBeforeScripts(i), bIsQuarto)
             End If
         Next
 
@@ -170,16 +288,13 @@ Public Class ucrButtons
             End If
             frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
-            frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            strExpected &= clsRsyntax.GetScript() & vbLf
+            AddToScriptWindow(clsRsyntax.GetScript(), bIsQuarto)
         End If
 
-        'This clears the script after it has been run, but leave the function and parameters in the base function
-        'so that it can be run exactly the same when reopened.
-        clsRsyntax.strScript = ""
-
         'Run additional after codes
-        lstAfterScripts = clsRsyntax.GetAfterCodesScripts()
         lstAfterCodes = clsRsyntax.GetAfterCodes()
+        lstAfterScripts = clsRsyntax.GetScriptsFromCodeList(lstAfterCodes)
         For i As Integer = 0 To lstAfterCodes.Count - 1
             If bRun Then
                 If bFirstCode Then
@@ -190,7 +305,8 @@ Public Class ucrButtons
                 End If
                 frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
-                frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                strExpected &= lstAfterScripts(i) & vbLf
+                AddToScriptWindow(lstAfterScripts(i), bIsQuarto)
             End If
         Next
 
@@ -215,14 +331,42 @@ Public Class ucrButtons
             If bRun Then
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
             Else
-                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+                strExpected &= clsRemoveFunc.ToScript()
+                AddToScriptWindow(clsRemoveFunc.ToScript(), bIsQuarto)
             End If
         End If
+
+        If Not bRun AndAlso bIsQuarto Then
+            Dim strCloseCodeBlock As String = "```" & Environment.NewLine
+            frmMain.AddToScriptWindow(strCloseCodeBlock,
+                  bMakeVisible:=bMakeVisibleScriptWindow,
+                  bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+        End If
+
+        If frmMain.bRecordQuarto Then
+            frmMain.SaveCurrentQuartoFile()
+        End If
+
+        CreateRScriptUsingXpBackEnd(strExpected)
+
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)
         cmdOk.Enabled = bEnabled
+
+        If TypeOf ParentForm Is dlgRecordQuarto OrElse frmMain.bRecordQuarto Then
+            cmdPaste.Enabled = False
+        Else
+            cmdPaste.Enabled = bEnabled
+        End If
+    End Sub
+
+    Public Sub SetToScriptEnabled(bEnabled As Boolean)
         cmdPaste.Enabled = bEnabled
+
+        toolStripMenuItemToScriptClose.Enabled = bEnabled
+        toolStripMenuItemToScriptKeep.Enabled = bEnabled
+        toolStripMenuItemToScriptOk.Enabled = bEnabled
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -255,6 +399,11 @@ Public Class ucrButtons
         bLoadInProgress = False
     End Sub
 
+    Private Sub AddToScriptWindow(strScript As String, bIsQuarto As Boolean)
+        Dim strCleaned As String = If(bIsQuarto, frmMain.ucrScriptWindow.GetScriptCleanedForQuarto(strScript), strScript)
+        frmMain.AddToScriptWindow(strCleaned, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+    End Sub
+
     Private Sub SetDefaults()
         If frmMain.clsInstatOptions IsNot Nothing Then
             chkComment.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
@@ -263,6 +412,58 @@ Public Class ucrButtons
         End If
         SetCommentEditable()
         ResetCommentToInstatOptionComment()
+    End Sub
+
+    ''' <summary>
+    ''' Creates the R script using the cross-platform backend. 
+    ''' Writes both <paramref name="strExpected"/> and the cross-platform backend R script to the 
+    ''' Desktop (in tmp/expected.R and tmp/actual.R respectively). These files are for testing 
+    ''' the cross-platform backend.
+    ''' </summary>
+    ''' <param name="strExpected"> The R script generated using the classic approach.</param>
+    Private Sub CreateRScriptUsingXpBackEnd(strExpected As String)
+        If String.IsNullOrEmpty(strDialogName) Then
+            Exit Sub
+        End If
+
+        'update the configurable values from the current state of the controls
+        For Each transform As clsTransformationControl In lstTransformFromControl
+            transform.UpdateConfigurableValue(dctConfigurableValues)
+        Next
+
+        'build the R model from the R script
+        Dim strDialogPathStem As String = Path.Combine(frmMain.strStaticPath & "\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName)
+        Dim strScriptReset = File.ReadAllText(strDialogPathStem + ".R")
+        Dim rScript As RScript = New RScript(strScriptReset)
+
+        'update the R model from the configurable values
+        Dim strTransformationsRJson As String = File.ReadAllText(strDialogPathStem + ".json")
+        lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
+        For Each transform As clsTransformationRModel In lstTransformToScript
+            transform.updateRModel(rScript, dctConfigurableValues)
+        Next
+
+        'write the expected script (script built from RSyntax classes)
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFilePath As String = Path.Combine(strDesktopPath, "tmp", "expected.R")
+        strExpected = vbLf & vbLf & vbLf & strExpected
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strExpected)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strExpected)
+        End If
+
+        'write the actual script (script built from the R model)
+        Dim strActual As String = rScript.GetAsExecutableScript()
+        strFilePath = Path.Combine(strDesktopPath, "tmp", "actual.R")
+        strActual = vbLf & vbLf & vbLf & strActual
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strActual)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strActual)
+        End If
     End Sub
 
     Private Sub ResetCommentToInstatOptionComment()

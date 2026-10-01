@@ -48,7 +48,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetPrefix("test")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
-        ucrSaveResult.SetCheckBoxText("Save test object")
+        ucrSaveResult.SetCheckBoxText("Store test object")
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 

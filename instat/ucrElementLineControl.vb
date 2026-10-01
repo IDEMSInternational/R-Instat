@@ -22,6 +22,8 @@ Public Class ucrElementLineControl
     Private clsThemeFunction As New RFunction
     Private clsElementLine As New RFunction
     Private clsBaseOperator As New ROperator
+    Private clsDummyFunction As New RFunction
+
     Public Sub InitialiseControl()
 
         ucrChkLineSize.SetText("Size")
@@ -39,8 +41,8 @@ Public Class ucrElementLineControl
 
         ucrChkLineColour.SetText("Colour")
         ucrLineColors.SetParameter(New RParameter("colour"))
-        ucrChkLineColour.AddParameterPresentCondition(True, "colour")
-        ucrChkLineColour.AddParameterPresentCondition(False, "colour", False)
+        ucrChkLineColour.AddParameterValuesCondition(True, "colour", "True")
+        ucrChkLineColour.AddParameterValuesCondition(False, "colour", "False")
         ucrLineColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrLineColors.SetDropDownStyleAsNonEditable()
 
@@ -71,13 +73,16 @@ Public Class ucrElementLineControl
         clsBaseOperator = clsNewBaseOperator
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
+        clsDummyFunction = New RFunction
+
+        clsDummyFunction.AddParameter("colour", "false", iPosition:=0)
 
         ucrNudLineSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkLineSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-
-        ucrLineColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkLineColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-
+        If bReset Then
+            ucrLineColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkLineColour.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        End If
         ucrInputLineLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkLineLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 

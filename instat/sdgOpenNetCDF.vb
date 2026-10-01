@@ -44,6 +44,7 @@ Public Class sdgOpenNetCDF
     Private bMultiImport As Boolean = False
 
     Private Sub sdgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -215,6 +216,7 @@ Public Class sdgOpenNetCDF
             lstDimAxes = Nothing
         End If
         If lstDimAxes IsNot Nothing Then
+            clsGetBoundsFunction.SetPackageName("instatExtras")
             clsGetBoundsFunction.SetRCommand("nc_get_dim_min_max")
             clsGetBoundsFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction)
             For i As Integer = 0 To lstDims.Count - 1
@@ -483,5 +485,14 @@ Public Class sdgOpenNetCDF
             End If
         End If
         bOKEnabled = Not bWarning
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case dlgOpenNetCDF.enumNetCDFMode
+            Case dlgOpenNetCDF.NetCDFMode.File
+                ucrBase.iHelpTopicID = 119
+            Case dlgOpenNetCDF.NetCDFMode.Climatic
+                ucrBase.iHelpTopicID = 117
+        End Select
     End Sub
 End Class

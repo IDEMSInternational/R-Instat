@@ -66,7 +66,7 @@ Public Class clsQCJumpRCode
         clsPmaxFunction.bToScriptAsRString = True
 
         strCalcName = strlargestJump
-        clsJumpCalcFunction.SetRCommand("instat_calculation$new")
+        clsJumpCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsJumpCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPmaxFunction, iPosition:=1)
         clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
@@ -75,7 +75,7 @@ Public Class clsQCJumpRCode
         strTestName = strJumpTest
         clsJumpListFunc.SetRCommand("list")
         clsJumpListFunc.AddParameter("sub1", clsRFunctionParameter:=clsJumpCalcFunction, bIncludeArgumentName:=False)
-        clsJumpTestFunction.SetRCommand("instat_calculation$new")
+        clsJumpTestFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsJumpTestFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsGreaterJumpOperator, iPosition:=1)
         clsJumpTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
@@ -131,7 +131,7 @@ Public Class clsQCSameRCode
         clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
 
         strCalcName = strlargestSame
-        clsSameCalcFunction.SetRCommand("instat_calculation$new")
+        clsSameCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsSameCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
         clsSameCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
@@ -142,7 +142,7 @@ Public Class clsQCSameRCode
         clsSameListFunc.SetRCommand("list")
         clsSameListFunc.AddParameter("sub1", clsRFunctionParameter:=clsSameCalcFunction, bIncludeArgumentName:=False)
 
-        clsSameTestFunction.SetRCommand("instat_calculation$new")
+        clsSameTestFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsSameTestFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsSameGreaterOperator, iPosition:=1)
         clsSameTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
@@ -179,7 +179,7 @@ Public Class clsQCDifferenceRCode
         clsDiffOperator.SetOperation("-")
         clsDiffOperator.bToScriptAsRString = True
 
-        clsDiffCalcFunction.SetRCommand("instat_calculation$new")
+        clsDiffCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsDiffCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsDiffCalcFunction.AddParameter("function_exp", clsROperatorParameter:=clsDiffOperator, iPosition:=1)
         clsDiffCalcFunction.AddParameter("result_name", Chr(34) & strDiffCalc & Chr(34), iPosition:=4)
@@ -188,7 +188,7 @@ Public Class clsQCDifferenceRCode
         strTestName = strDiffTest
         clsListFunc.SetRCommand("list")
         clsListFunc.AddParameter("sub1", bIncludeArgumentName:=False, clsRFunctionParameter:=clsDiffCalcFunction, iPosition:=0)
-        clsDiffTestFunction.SetRCommand("instat_calculation$new")
+        clsDiffTestFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsDiffTestFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsDiffTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
         clsDiffTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
@@ -223,7 +223,7 @@ Public Class clsQCAcceptableRange
         clsRangeOrOperator.AddParameter("left", clsROperatorParameter:=clsLessEqualToOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsRangeOrOperator.AddParameter("right", clsROperatorParameter:=clsGreaterEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsAcceptableRangeTestFunc.SetRCommand("instat_calculation$new")
+        clsAcceptableRangeTestFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsAcceptableRangeTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsAcceptableRangeTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsRangeOrOperator, iPosition:=1)
         clsAcceptableRangeTestFunc.AddParameter("result_name", Chr(34) & strRangeName & Chr(34), iPosition:=4)
@@ -265,7 +265,7 @@ Public Class clsQcOutliers
         strUpperTestName = strOutlierUpperTestCalcName
         strLowerTestName = strOutlierLowerTestCalcName
 
-        clsOutlierUpperLimitCalc.SetRCommand("instat_calculation$new")
+        clsOutlierUpperLimitCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsOutlierUpperLimitCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsOutlierUpperLimitCalc.AddParameter("function_exp", clsRFunctionParameter:=clsOutlierUpperLimitFunc, iPosition:=1)
         clsOutlierUpperLimitCalc.AddParameter("result_name", Chr(34) & strUpperCalcName & Chr(34), iPosition:=4)
@@ -275,7 +275,7 @@ Public Class clsQcOutliers
         clsOutlierUpperLimitFunc.AddParameter("bupperlimit", "TRUE")
         clsOutlierUpperLimitFunc.bToScriptAsRString = True
 
-        clsOutlierLowerLimitCalc.SetRCommand("instat_calculation$new")
+        clsOutlierLowerLimitCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsOutlierLowerLimitCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsOutlierLowerLimitCalc.AddParameter("function_exp", clsRFunctionParameter:=clsOutlierLowerLimitFunc, iPosition:=1)
         clsOutlierLowerLimitCalc.AddParameter("result_name", Chr(34) & strLowerCalcName & Chr(34), iPosition:=4)
@@ -285,7 +285,7 @@ Public Class clsQcOutliers
         clsOutlierLowerLimitFunc.AddParameter("bupperlimit", "FALSE")
         clsOutlierLowerLimitFunc.bToScriptAsRString = True
 
-        clsOutlierLowerLimitTestCalc.SetRCommand("instat_calculation$new")
+        clsOutlierLowerLimitTestCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsOutlierLowerLimitTestCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsOutlierLowerLimitTestCalc.AddParameter("function_exp", clsROperatorParameter:=clsOutlierLowerOperator, iPosition:=1)
         clsOutlierLowerLimitTestCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsOutlierLowerList, iPosition:=2)
@@ -299,7 +299,7 @@ Public Class clsQcOutliers
         clsOutlierLowerOperator.bToScriptAsRString = True
         clsOutlierLowerOperator.AddParameter("right", strLowerCalcName, iPosition:=1)
 
-        clsOutlierUpperLimitTestCalc.SetRCommand("instat_calculation$new")
+        clsOutlierUpperLimitTestCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsOutlierUpperLimitTestCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsOutlierUpperLimitTestCalc.AddParameter("function_exp", clsROperatorParameter:=clsOutlierUpperOperator, iPosition:=1)
         clsOutlierUpperLimitTestCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsOutlierUpperList, iPosition:=2)

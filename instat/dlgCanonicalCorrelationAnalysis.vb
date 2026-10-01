@@ -66,7 +66,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSaveResult.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveResult.SetDataFrameSelector(ucrSelectorCCA.ucrAvailableDataFrames)
         ucrSaveResult.SetIsComboBox()
-        ucrSaveResult.SetCheckBoxText("Save Model")
+        ucrSaveResult.SetCheckBoxText("Store Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
 
     End Sub
@@ -93,6 +93,7 @@ Public Class dlgCanonicalCorrelationAnalysis
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCCA.strCurrentDataFrame,
                                                   strObjectName:="last_model")
 
+        clsRFunctionCoef.SetPackageName("instatExtras")
         clsRFunctionCoef.SetRCommand("cancor_coef")
         clsRFunctionCoef.bExcludeAssignedFunctionOutput = False
         clsRFunctionCoef.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",

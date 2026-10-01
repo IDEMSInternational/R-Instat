@@ -41,7 +41,7 @@ Public Class dlgWindPollutionRose
         Dim dctStatistic As New Dictionary(Of String, String)
         Dim dctPosition As New Dictionary(Of String, String)
         Dim dctColor As New Dictionary(Of String, String)
-
+        ucrBase.iHelpTopicID = 184
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorWindPollutionRose.SetParameter(New RParameter("mydata", 0))
@@ -108,7 +108,7 @@ Public Class dlgWindPollutionRose
         ucrSaveGraph.SetPrefix("pollution_rose_plot")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorWindPollutionRose.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -118,7 +118,8 @@ Public Class dlgWindPollutionRose
         
         ucrSelectorWindPollutionRose.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        
+
+        clsPollutionRoseFunction.SetPackageName("instatClimatic")
         clsPollutionRoseFunction.SetRCommand("wind_pollution_rose")
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=8)

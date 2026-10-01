@@ -21,6 +21,12 @@ Imports RDotNet
 Imports System.ComponentModel
 
 Public Class dlgOpenNetCDF
+    Public enumNetCDFMode As String = NetCDFMode.File
+    Public Enum NetCDFMode
+        File
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsImportNetcdfFunction, clsNcOpenFunction, clsNcCloseFunction, clsRFileDetails As New RFunction
@@ -34,6 +40,7 @@ Public Class dlgOpenNetCDF
     Private strLong As String
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
+    Private strFilePathName As String = ""
     Private iExpandedWidth As Integer
     Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library" & "\" & "Climatic" & "\" & "_Satellite" & "\"
     Private bFromLibrary As Boolean = False
@@ -66,9 +73,11 @@ Public Class dlgOpenNetCDF
         Else
             OpenFile()
         End If
+        SetHelpOptions()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        SetInternalFilePathName()
     End Sub
 
     Private Sub OpenFile()
@@ -152,6 +161,30 @@ Public Class dlgOpenNetCDF
         End If
     End Sub
 
+    Public Sub SetFilePath(strFilePath As String)
+        strFilePathName = strFilePath
+    End Sub
+
+    Private Sub SetInternalFilePathName()
+        Dim strFileName As String
+
+        If strFilePathName <> "" AndAlso ucrInputPath IsNot Nothing Then
+            ucrInputPath.SetName(strFilePathName)
+            strFileName = Path.GetFileNameWithoutExtension(strFilePathName)
+            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+            clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFilePathName, "\", "/") & Chr(34))
+        End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumNetCDFMode
+            Case NetCDFMode.File
+                ucrBase.iHelpTopicID = 393
+            Case NetCDFMode.Climatic
+                ucrBase.iHelpTopicID = 381
+        End Select
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -213,7 +246,7 @@ Public Class dlgOpenNetCDF
                         clsBoundaryListFunction.ClearParameters()
                     End If
                 Else
-                    MsgBox("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
+                    MsgBoxTranslate("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
                     strShort = ""
                     strMedium = ""
                     strLong = ""

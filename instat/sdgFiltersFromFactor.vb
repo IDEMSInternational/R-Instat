@@ -19,6 +19,11 @@ Public Class sdgFiltersFromFactor
     Private bFirstLoad As Boolean
     Private bReset As Boolean = True
     Private clsAddFilterFromFactors As RFunction
+    Public enumFactorMode As String = FactorMode.Filter
+    Public Enum FactorMode
+        OutFilling
+        Filter
+    End Enum
 
     Public Sub New()
         'This call is required by the designer.
@@ -35,6 +40,7 @@ Public Class sdgFiltersFromFactor
             InitialiseControls()
             bFirstLoad = False
         End If
+        OpeningMode()
         autoTranslate(Me)
     End Sub
 
@@ -55,6 +61,8 @@ Public Class sdgFiltersFromFactor
                                                   dctParamAndColNames:=dctParamAndColNames,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=False)
+        ' Automatically select all rows by default
+        AddHandler ucrReceiverFactor.SelectionChanged, AddressOf SelectAllFactorLevels
 
     End Sub
 
@@ -62,11 +70,11 @@ Public Class sdgFiltersFromFactor
         If ucrNewBaseSelector IsNot Nothing AndAlso ucrNewBaseSelector.strCurrentDataFrame <> "" Then
             ucrSelectorFiltersFromFactors.SetDataframe(ucrNewBaseSelector.strCurrentDataFrame, False)
         End If
-        ucrReceiverFactor.SetRCode(clsAddFilterFromFactors, bReset)
-        ucrFactorLevels.SetRCode(clsAddFilterFromFactors, bReset)
 
         If bReset Then
             ucrSelectorFiltersFromFactors.Reset()
+            ucrFactorLevels.SetRCode(clsAddFilterFromFactors, bReset)
+            ucrReceiverFactor.SetRCode(clsAddFilterFromFactors, bReset)
         End If
     End Sub
 
@@ -78,5 +86,32 @@ Public Class sdgFiltersFromFactor
 
     Private Sub ucrSelectorFiltersFromFactors_DataFrameChanged() Handles ucrSelectorFiltersFromFactors.DataFrameChanged
         clsAddFilterFromFactors.AddParameter("data_name", Chr(34) & ucrSelectorFiltersFromFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
+
+    Public Function GetSelectedStations() As String
+        Dim strSelectedLevels As String = mdlCoreControl.GetRVector(
+        ucrFactorLevels.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True)
+    )
+
+        If strSelectedLevels <> "" Then
+            Return strSelectedLevels
+        Else
+            Return ""
+        End If
+    End Function
+
+    Private Sub SelectAllFactorLevels()
+        If ucrFactorLevels.RowCount > 0 Then
+            ucrFactorLevels.SelectAllGridRows(True) ' Pass True to select all rows
+        End If
+    End Sub
+
+    Private Sub OpeningMode()
+        Select Case enumFactorMode
+            Case FactorMode.Filter
+                Me.Text = "Filters From Factor"
+            Case FactorMode.OutFilling
+                Me.Text = "Stations to Include"
+        End Select
     End Sub
 End Class

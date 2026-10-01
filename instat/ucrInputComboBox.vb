@@ -14,9 +14,21 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports instat.Translations
 Imports System.ComponentModel
 
 Public Class ucrInputComboBox
+
+    ''' <summary>
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' In this case, either the combo box's key or value.
+    ''' </summary>
+    Public Enum EnumTextType
+        key
+        value
+    End Enum
+
     Private _strRObjectItemsTypeLabel As String = ""
 
     Public Sub New()
@@ -39,7 +51,7 @@ Public Class ucrInputComboBox
         If bAutoChangeOnLeave Then
             If Not IsValid(strCurrent) Then
                 'TODO This message should contain the same message from ValidateText()
-                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & Environment.NewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                'Select Case MsgBoxTranslate(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & Environment.NewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
                 '    Case MsgBoxResult.Yes
                 '        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
                 '    Case Else
@@ -149,8 +161,39 @@ Public Class ucrInputComboBox
         End If
     End Sub
 
-    Public Overrides Function GetText() As String
-        Return cboInput.Text
+    ''' <summary>
+    '''  Returns information about the combo box's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the combo box's key value.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the combo box's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = ucrInputComboBox.EnumTextType.key
+        End If
+
+        Dim textType As EnumTextType
+        Try
+            textType = DirectCast(enumTextType, EnumTextType)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException("Invalid text type requested from input combo box.")
+        End Try
+
+        Select Case textType
+            Case ucrInputComboBox.EnumTextType.key
+                Return cboInput.Text
+            Case ucrInputComboBox.EnumTextType.value
+                Dim value As String = String.Empty
+                If dctDisplayParameterValues.TryGetValue(cboInput.Text, value) Then
+                    Return value
+                End If
+                Throw New Exception("Value not found for input combo box key: " & cboInput.Text)
+        End Select
+
+        Throw New InvalidEnumArgumentException("Unhandled text type requested from input combo box.")
     End Function
 
     Public Overrides Function GetValue() As Object
@@ -207,7 +250,7 @@ Public Class ucrInputComboBox
         End If
         If bSetConditions Then
             If GetParameter() Is Nothing Then
-                MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+                MsgBoxTranslate("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
             End If
         End If
         For Each kvpTemp In dctItemParameterValuePairs

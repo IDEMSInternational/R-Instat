@@ -85,7 +85,7 @@ Partial Class dlgNewMarkovChains
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(12, 437)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrSelectorMarkovChains
@@ -389,7 +389,7 @@ Partial Class dlgNewMarkovChains
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(83, 17)
         Me.chkSaveModel.TabIndex = 20
-        Me.chkSaveModel.Text = "Save Model"
+        Me.chkSaveModel.Text = "Store Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
         'chkGraph

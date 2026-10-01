@@ -16,6 +16,7 @@
 
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 Public Class ucrColumnMetadataReoGrid
     Implements IColumnMetaDataGrid
@@ -25,6 +26,12 @@ Public Class ucrColumnMetadataReoGrid
 
     Public Event DeleteLabels(strColumnName As String) Implements IColumnMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
+
+    Public Shadows Event WorksheetChanged() Implements IColumnMetaDataGrid.WorksheetChanged
+
+    Private Sub BaseWorksheetChanged() Handles MyBase.WorksheetChanged
+        RaiseEvent WorksheetChanged()
+    End Sub
 
     Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
         grdData.CurrentWorksheet.Columns = columnMetaData.iColumnCount
@@ -115,7 +122,7 @@ Public Class ucrColumnMetadataReoGrid
     End Sub
 
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
-        MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
+        MsgBoxTranslate("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
         e.IsCancelled = True
     End Sub
 

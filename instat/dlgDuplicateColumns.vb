@@ -108,6 +108,12 @@ Public Class dlgDuplicateColumns
         ucrChkConvertKeepAttributes.SetText("Keep Attributes")
         ucrChkConvertKeepAttributes.SetRDefault("TRUE")
 
+        ucrPnlConvertTo.AddToLinkedControls(ucrChkIgnoreLabels, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIgnoreLabels.SetParameter(New RParameter("ignore_labels", 7))
+        ucrChkIgnoreLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIgnoreLabels.SetRDefault("FALSE")
+        ucrChkIgnoreLabels.SetText("Ignore Labels")
+
         ucrPnlConvertTo.AddToLinkedControls(ucrChkConvertCreateLabels, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkConvertCreateLabels.SetParameter(New RParameter("keep.labels", 7))
         ucrChkConvertCreateLabels.SetText("Create Labels")
@@ -125,7 +131,7 @@ Public Class dlgDuplicateColumns
     Private Sub SetDefaults()
         clsDuplicateFunction = New RFunction
         clsConvertFunction = New RFunction
-        ucrBase.clsRsyntax.lstAfterCodes.Clear()
+        ucrBase.clsRsyntax.GetAfterCodes.Clear()
 
         ucrSelectorForDuplicateColumn.Reset()
         ucrSaveColumn.Reset()
@@ -217,5 +223,13 @@ Public Class dlgDuplicateColumns
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudConvertDisplayDecimals.ControlContentsChanged, ucrChkConvertSpecifyDecimalsToDisplay.ControlContentsChanged, ucrChkChangeType.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkIgnoreLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreLabels.ControlValueChanged
+        If ucrChkIgnoreLabels.Checked Then
+            clsConvertFunction.AddParameter("ignore_labels", "TRUE")
+        Else
+            clsConvertFunction.RemoveParameterByName("ignore_labels")
+        End If
     End Sub
 End Class

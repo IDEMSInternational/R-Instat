@@ -248,6 +248,7 @@ Public Class dlgConversions
         clsDayLengthFunction.SetPackageName("geosphere")
         clsDayLengthFunction.SetRCommand("daylength")
 
+        clsConvertToDegreeFunction.SetPackageName("instatClimatic")
         clsConvertToDegreeFunction.SetRCommand("convert_to_dec_deg")
         clsConvertToDegreeFunction.AddParameter("dir", Chr(34) & "N" & Chr(34), iPosition:=3)
 
@@ -255,6 +256,7 @@ Public Class dlgConversions
         clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsConvertToDegreeFunction, iPosition:=0)
         clsRoundFunction.AddParameter("digits", 3, iPosition:=1)
 
+        clsYearConversionFunction.SetPackageName("instatClimatic")
         clsYearConversionFunction.SetRCommand("convert_yy_to_yyyy")
         clsYearConversionFunction.AddParameter("base", "2030", iPosition:=1)
 

@@ -17,14 +17,11 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgEnter
-    Dim dataset As DataFrame
-    Dim clsAttach As New RFunction
-    Dim clsDetach As New RFunction
-    Dim clsLength As New RFunction
-    Public bFirstLoad As Boolean = True
-    Public strOutput As String
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
+    Private clsAttachScalarsFunction, clsDetachScalarsFunction, clsScalarsDataFuntion, clsAddScalarFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Private strPackageName As String
-    Public clsCommands As New RFunction
 
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,55 +34,125 @@ Public Class dlgEnter
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
+
     Private Sub SetEntryHistory()
         ucrReceiverForEnterCalculation.AddtoCombobox(ucrReceiverForEnterCalculation.GetText)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 458
+
+        ucrSelectorEnter.SetItemType("column")
+        ucrReceiverForEnterCalculation.strSelectorHeading = "Variables"
+        ucrReceiverForEnterCalculation.Selector = ucrSelectorEnter
+
         ucrTryModelling.SetReceiver(ucrReceiverForEnterCalculation)
         ucrTryModelling.SetIsCommand()
         ucrTryModelling.StrvecOutputRequired()
+
+        ucrChkStoreScalar.SetText("Store Scalar")
+
+        clsAddScalarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_scalar")
+
+        clsScalarsDataFuntion.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_scalars")
+        clsScalarsDataFuntion.SetAssignTo("scalars")
+
+        clsAttachScalarsFunction.SetRCommand("attach")
+        clsDetachScalarsFunction.SetRCommand("detach")
+        clsAttachScalarsFunction.AddParameter("what", clsRFunctionParameter:=clsScalarsDataFuntion)
+        clsDetachScalarsFunction.AddParameter("name", "scalars")
+        clsDetachScalarsFunction.AddParameter("unload", "TRUE")
+
         clsAttach.SetRCommand("attach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorEnter.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.SetRCommand("detach")
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
+
         ucrBase.clsRsyntax.SetCommandString("")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 0)
+
         ucrSaveEnterResultInto.SetPrefix("enter")
-        ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
+        ucrSaveEnterResultInto.SetDataFrameSelector(ucrSelectorEnter.ucrAvailableDataFrames)
         ucrSaveEnterResultInto.SetIsComboBox()
         ucrSaveEnterResultInto.SetSaveTypeAsColumn()
-        ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
+        ucrSaveEnterResultInto.SetCheckBoxText("Enter Result")
+        ucrSaveEnterResultInto.SetAssignToIfUncheckedValue("last_enter")
+
+        ucrSaveEnterResultInto.SetPrefix("enter")
+        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
+        ucrSaveEnterResultInto.SetIsComboBox()
+        ucrSaveEnterResultInto.SetCheckBoxText("Enter Result")
+        ucrSaveEnterResultInto.SetAssignToIfUncheckedValue("last_enter")
+        ucrSaveEnterResultInto.SetDataFrameSelector(ucrSelectorEnter.ucrAvailableDataFrames)
 
         'Adding tooltips for the buttons
-        ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
+        ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d. Inserts letters[1:4] as an example; edit the vector name or range as needed.")
         ttEnter.SetToolTip(cmdLetters2, "The letters, e.g. letters[1:4] gives a, b, c, d. Type LETTERS[1:4] for A, B, C, D.")
         ttEnter.SetToolTip(cmdFactor, "e.g. forcats::as_factor(""B"", ""c"", ""A"") to make the contents into a factor variable with the levels in the order as entered, so here B is the lowest level.")
-        ttEnter.SetToolTip(cmdRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2, 3, 4), each=2) gives 2, 2, 3, 3, 4, 4.")
+        ttEnter.SetToolTip(cmdRepTimes, "rep(1:3, times = 2) gives (1,2,3,1,2,3); rep(1:3, times = c(3,2,1)) gives 1,1,1,2,2,3")
+        ttEnter.SetToolTip(cmdRepEach, "rep(1:3, each = 2) gives 1,1,2,2,3,3.")
         ttEnter.SetToolTip(cmdMonths, "month.abb[1:4] is ""Jan2"", ""Feb"", ""Mar"", ""Apr"". Type month.name for full month names.")
         ttEnter.SetToolTip(cmdText, "Define a character variable, e.g. as.character(c(3, 5, ""a"", ""b"")).")
-        ttEnter.SetToolTip(cmdSequenceFunction, "Sequences, given either as seq(1, 5, 2) to give 1, 3, 5 or as seq(1, 5, length = 3) to give the same.")
+        ttEnter.SetToolTip(cmdSequenceFunction, "Sequence: So seq(1, 10, 2) gives (1,3,5,7,9).")
         ttEnter.SetToolTip(cmdPi, "The number pi = 3.14...")
         ttEnter.SetToolTip(cmdLogical, " Define a logical variable, e.g. as.logical(0, 1, 0, 10, -5) gives FALSE, TRUE, FALSE, TRUE, TRUE.")
         ttEnter.SetToolTip(cmdConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8.")
         ttEnter.SetToolTip(cmdExponential, "For scientific notation, e.g. 1.5E-1 = 0.15.")
+        ttEnter.SetToolTip(cmdRnormal, "Random sample from a normal distribution.")
+        ttEnter.SetToolTip(cmdRfactor, "Generates a random factor variable. The calculator's Wakefield keyboard has more examples.")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+        AddHandler ucrSelectorEnter.checkBoxScalar.CheckedChanged, AddressOf checkBoxScalar_CheckedChanged
+
+        ResetEnterLengthDisplay()
     End Sub
-    Private Sub SetDefaults()
-        chkShowEnterArguments.Checked = False
-        ucrDataFrameEnter.Reset()
-        ucrReceiverForEnterCalculation.Clear()
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
-        ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
-    End Sub
-    Private Sub ReopenDialog()
+
+    Private Sub checkBoxScalar_CheckedChanged()
+        SetItemType()
         SaveResults()
     End Sub
+
+    Private Sub SetItemType()
+        If Not String.IsNullOrEmpty(ucrSelectorEnter.strCurrentDataFrame) Then
+            If ucrSelectorEnter.checkBoxScalar.Checked Then
+                ucrReceiverForEnterCalculation.strSelectorHeading = "Scalars"
+                ucrSelectorEnter.SetItemType("scalar")
+            Else
+                ucrReceiverForEnterCalculation.strSelectorHeading = "Variables"
+                ucrSelectorEnter.SetItemType("column")
+            End If
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
+        chkShowEnterArguments.Checked = False
+        ucrChkStoreScalar.Checked = False
+        ucrSelectorEnter.Reset()
+        ucrSelectorEnter.ResetCheckBoxScalar()
+        ucrSelectorEnter.ShowCheckBoxScalar(True)
+        ucrSaveEnterResultInto.ucrChkSave.Checked = True
+        ucrReceiverForEnterCalculation.Clear()
+        ucrReceiverForEnterCalculation.SetMeAsReceiver()
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
+        SaveResults()
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(),
+                                           strTempDataframe:=ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                           bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
+                                           bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
+                                           bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
+                                           bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
+        ResetEnterLengthDisplay()
+    End Sub
+
+    Private Sub ReopenDialog()
+        SaveResults()
+        ucrSelectorEnter.ShowCheckBoxScalar(True)
+    End Sub
+
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForEnterCalculation.IsEmpty AndAlso ucrSaveEnterResultInto.IsComplete Then
+        If Not ucrReceiverForEnterCalculation.IsEmpty AndAlso ucrSaveEnterResultInto.IsComplete AndAlso
+            (ucrChkStoreScalar.Checked OrElse ucrSaveEnterResultInto.ucrChkSave.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -93,8 +160,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub SaveResults()
-        If ucrSaveEnterResultInto.IsComplete Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrDataFrameEnter.cboAvailableDataFrames.Text, bRequireCorrectLength:=False)
+        If ucrSaveEnterResultInto.IsComplete AndAlso ucrSaveEnterResultInto.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -102,27 +168,18 @@ Public Class dlgEnter
             ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'Dim strScript As String = ""
-        'Dim strFunc As String
-        'clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
-        'strFunc = clsAttach.ToScript(strScript)
-        ' frmMain.clsRLink.RunScript(strScript & strFunc)
+        ManageScalarStorage()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'Dim strScript As String = ""
-        ' Dim strFunc As String
-        'clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
-        'strFunc = clsDetach.ToScript(strScript)
-        'frmMain.clsRLink.RunScript(strScript & strFunc)
         SetEntryHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
+        ucrChkStoreScalar.Checked = False
+        ResetEnterLengthDisplay()
+        SaveResults()
         TestOKEnabled()
     End Sub
 
@@ -132,7 +189,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[:]", 2)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("letters[1:4]", 4)
         TestOKEnabled()
     End Sub
 
@@ -178,10 +235,20 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdRepelicationFunction_Click_1(sender As Object, e As EventArgs) Handles cmdRepelicationFunction.Click
+    Private Sub cmdRepTimes_Click(sender As Object, e As EventArgs) Handles cmdRepTimes.Click
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x = , times = , length = , each = )", 32)
-        Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
+        Else
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( , times = )", 12)
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdRepEach_Click(sender As Object, e As EventArgs) Handles cmdRepEach.Click
+        If chkShowEnterArguments.Checked Then
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep(x = , times = , length = , each = )", 32)
+        Else
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rep( , each = )", 10)
         End If
         TestOKEnabled()
     End Sub
@@ -189,11 +256,38 @@ Public Class dlgEnter
     Private Sub cmdSequenceFunction_Click_1(sender As Object, e As EventArgs) Handles cmdSequenceFunction.Click
         If chkShowEnterArguments.Checked Then
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq(from = , to = , by = , length =  )", 27)
-        Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
+        Else
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq( , , 1)", 7)
         End If
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdRnormal_Click(sender As Object, e As EventArgs) Handles cmdRnormal.Click
+        Dim clsNormalFunction As New RFunction
+        Dim iNrows As Integer = ucrSelectorEnter.ucrAvailableDataFrames.iDataFrameLength
+
+        clsNormalFunction.SetRCommand("rnorm")
+        clsNormalFunction.AddParameter("n", iNrows.ToString(), iPosition:=0)
+        clsNormalFunction.AddParameter("mean", "0", iPosition:=1)
+        clsNormalFunction.AddParameter("sd", "1", iPosition:=2)
+
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(clsNormalFunction.ToScript, 0)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdRfactor_Click(sender As Object, e As EventArgs) Handles cmdRfactor.Click
+        Dim clsRfactorFunction As New RFunction
+        Dim iNrows As Integer = ucrSelectorEnter.ucrAvailableDataFrames.iDataFrameLength
+
+        clsRfactorFunction.SetPackageName("wakefield")
+        clsRfactorFunction.SetRCommand("r_sample_factor")
+        clsRfactorFunction.AddParameter("n", iNrows.ToString(), iPosition:=0)
+        clsRfactorFunction.AddParameter("x", "c(""a"", ""b"", ""c"")", iPosition:=1)
+        clsRfactorFunction.AddParameter("prob", "NULL", iPosition:=2)
+
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(clsRfactorFunction.ToScript, 0)
+        TestOKEnabled()
+    End Sub
 
     Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLogical.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))", 3)
@@ -207,14 +301,6 @@ Public Class dlgEnter
 
     Private Sub cmdMonthMinus_Click(sender As Object, e As EventArgs) Handles cmdMonths.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.abb")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSaveEnterResultInto_NameChanged()
-        SaveResults()
-    End Sub
-
-    Private Sub ucrSaveEnterResultInto_ContentsChanged()
         TestOKEnabled()
     End Sub
 
@@ -294,7 +380,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("/")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" / ")
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -314,7 +400,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("*")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" * ")
     End Sub
 
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
@@ -334,7 +420,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdMinus_Click_1(sender As Object, e As EventArgs) Handles cmdMinus.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("-")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" - ")
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -350,7 +436,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("+")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" + ")
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -369,10 +455,6 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("'month'")
     End Sub
 
-    Private Sub cmdRnorm_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("rnorm( )", 2)
-    End Sub
-
     Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("runif( )", 2)
     End Sub
@@ -383,4 +465,110 @@ Public Class dlgEnter
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub
+
+    Private Sub ucrSelectorEnter_DataFrameChanged() Handles ucrSelectorEnter.DataFrameChanged
+        If Not String.IsNullOrEmpty(ucrSelectorEnter.strCurrentDataFrame) Then
+            Dim strDataFrame As String = ucrSelectorEnter.strCurrentDataFrame
+            ucrTryModelling.ucrInputTryMessage.SetName("")
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+            clsDetach.AddParameter("name", strDataFrame)
+            SetItemType()
+            SaveResults()
+            ResetEnterLengthDisplay()
+        Else
+            ucrSelectorEnter.ResetCheckBoxScalar()
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachScalarsFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
+        End If
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveEnterResultInto.ControlValueChanged
+        Dim strDataFrame As String = ucrSelectorEnter.ucrAvailableDataFrames.strCurrDataFrame
+
+        clsDetach.AddParameter("name", strDataFrame)
+        clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsAddScalarFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        SaveResults()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ManageScalarStorage()
+        Dim dataFrameName As String = ucrSelectorEnter.strCurrentDataFrame
+
+        If ucrChkStoreScalar.Checked AndAlso Not ucrReceiverForEnterCalculation.IsEmpty _
+            AndAlso ucrSaveEnterResultInto.GetText <> "" _
+            AndAlso Not String.IsNullOrEmpty(dataFrameName) Then
+            Dim strResut As String = ucrSaveEnterResultInto.GetText
+            clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
+            clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 2)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 3)
+            ucrBase.clsRsyntax.SetAssignTo(strResut)
+
+            ucrSaveEnterResultInto.btnColumnPosition.Enabled = False
+            ucrSaveEnterResultInto.ucrChkSave.Enabled = False
+            ucrSaveEnterResultInto.ucrChkSave.Checked = False
+
+        ElseIf ucrSelectorEnter.checkBoxScalar.Checked AndAlso Not String.IsNullOrEmpty(dataFrameName) Then
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 2)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 3)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachScalarsFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
+            ucrSaveEnterResultInto.btnColumnPosition.Enabled = True
+            ucrSaveEnterResultInto.ucrChkSave.Enabled = True
+        End If
+        ucrSaveEnterResultInto.btnColumnPosition.Visible = True
+        ucrSaveEnterResultInto.ucrInputComboSave.Visible = True
+        ucrSaveEnterResultInto.ucrInputComboSave.Enabled = True
+        ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
+        ManageScalarStorage()
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveEnterResultInto.ControlContentsChanged
+        SaveResults()
+    End Sub
+    Private Sub ucrTryModelling_AfterTry(bValid As Boolean) Handles ucrTryModelling.AfterTry
+        UpdateEnterLengthDisplay(bValid)
+    End Sub
+
+    Private Sub ResetEnterLengthDisplay()
+        lblEnterLength.Enabled = False
+        lblEnterLengthValue.Enabled = False
+        lblEnterLengthValue.Text = "-"
+    End Sub
+
+    Private Sub UpdateEnterLengthDisplay(bValid As Boolean)
+        If Not bValid OrElse ucrReceiverForEnterCalculation.IsEmpty OrElse ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" Then
+            ResetEnterLengthDisplay()
+            Exit Sub
+        End If
+
+        lblEnterLength.Enabled = True
+        lblEnterLengthValue.Enabled = True
+
+        Dim strDataFrame As String = ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        Dim strExpression As String = ucrReceiverForEnterCalculation.GetText()
+        Dim strScript As String = "with(" & strDataFrame & ", length(" & strExpression & "))"
+        Dim expLength As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(strScript, bSilent:=True)
+
+        If expLength IsNot Nothing AndAlso Not expLength.Type = Internals.SymbolicExpressionType.Null Then
+            lblEnterLengthValue.Text = expLength.AsInteger(0).ToString()
+        Else
+            lblEnterLengthValue.Text = "-"
+        End If
+    End Sub
+
 End Class

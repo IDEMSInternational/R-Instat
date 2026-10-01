@@ -27,6 +27,8 @@ Public Class sdgMergeColumnstoInclude
     End Sub
 
     Public Sub InitiatiseControls()
+        ucrSubBase.iHelpTopicID = 154
+
         ucrChkMergeWithSubsetFirst.SetText("Choose Subset of Columns to Merge")
         ucrChkMergeWithSubsetFirst.AddToLinkedControls(ucrReceiverFirstSelected, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMergeWithSubsetFirst.AddParameterValueFunctionNamesCondition(True, "x", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")

@@ -39,6 +39,7 @@ Public Class dlgClimaticNCMPIndices
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID=627
         ucrSelectorIndices.SetParameter(New RParameter("df", 0))
         ucrSelectorIndices.SetParameterIsrfunction()
 

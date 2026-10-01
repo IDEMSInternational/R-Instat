@@ -32,6 +32,7 @@ Public Class dlgCircular
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 175
         ucrReceiverCircular.Selector = ucrSelectorCircular
         ucrReceiverCircular.SetMeAsReceiver()
 

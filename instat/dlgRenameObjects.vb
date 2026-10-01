@@ -51,6 +51,7 @@ Public Class dlgRenameObjects
         dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
         dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
         dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        dctTypes.Add("Scalars", Chr(34) & "scalar" & Chr(34))
         ucrInputType.SetItems(dctTypes)
         ucrInputType.SetDropDownStyleAsNonEditable()
 
@@ -89,7 +90,6 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-
     Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -108,13 +108,9 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
-
-
 End Class

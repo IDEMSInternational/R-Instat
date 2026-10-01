@@ -21,18 +21,22 @@ Public Class sdgDoyRange
     Private clsDoyFilterCalc As RFunction
     Private clsCalcFromList As RFunction
     Private clsCalcFromMainDataFrame As RFunction
+    Public clsIfElseFirstDoyFilledFunction As RFunction
     Private clsDayFromOperator As ROperator
     Private clsDayToOperator As ROperator
     Private bControlsInitialised As Boolean = False
     Private strMainDataFrame As String
     Private strDoyColumn As String
     Private bUpdate As Boolean = True
+    Private bReset As Boolean = True
+    Private bUseDateVisibility As Boolean = False ' Default to False or set as needed
+
 
     Private Sub sdgDoyRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String, strNewDoyColumn As String)
+    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String, strNewDoyColumn As String, Optional clsNewIfElseFirstDoyFilledFunction As RFunction = Nothing, Optional bReset As Boolean = False, Optional bSetUseDateVisible As Boolean = False)
         Dim iFrom As Integer
         Dim iTo As Integer
         Dim iDiff As Integer
@@ -49,17 +53,26 @@ Public Class sdgDoyRange
         Dim iNewStartDay As Integer
 
         If Not bControlsInitialised Then
+            bUseDateVisibility = bSetUseDateVisible
             bUpdate = False
             InitialiseControls()
             bUpdate = True
         End If
+        ucrChkUseDate.Visible = bUseDateVisibility
+        If bReset Then
+            ucrChkUseDate.Checked = False
+        End If
+
         clsDoyFilterCalc = clsNewDoyFilterCalc
         clsCalcFromList = clsNewCalcFromList
+        clsIfElseFirstDoyFilledFunction = clsNewIfElseFirstDoyFilledFunction
         strMainDataFrame = strNewMainDataFrame
         strDoyColumn = strNewDoyColumn
 
+
         ucrSelectorDoy.SetPrimaryDataFrameOptions(strMainDataFrame, True, True)
 
+        clsFindDfFunc.SetPackageName("databook")
         clsFindDfFunc.SetRCommand("find_df_from_calc_from")
         clsFindDfFunc.AddParameter("x", clsRFunctionParameter:=clsCalcFromList, iPosition:=0)
 
@@ -164,8 +177,8 @@ Public Class sdgDoyRange
         ucrPnlTo.AddToLinkedControls(ucrNudToDiff, {rdoLength}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverFrom.Selector = ucrSelectorDoy
-        'Strict because we only want numeric/integer, not Dates etc.
-        ucrReceiverFrom.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        'Strict because we only want numeric/integer, Dates etc.
+        ucrReceiverFrom.SetIncludedDataTypes({"numeric", "Date"}, bStrict:=True)
         ucrReceiverFrom.strSelectorHeading = "Numerics"
 
         ucrReceiverTo.Selector = ucrSelectorDoy
@@ -174,6 +187,9 @@ Public Class sdgDoyRange
 
         ucrDoyFrom.SetParameterIsNumber()
         ucrDoyTo.SetParameterIsNumber()
+
+        ucrChkUseDate.SetText("Use Date")
+        ucrChkUseDate.Visible = bUseDateVisibility
 
         bControlsInitialised = True
         ucrSelectorDoy.Reset()
@@ -217,8 +233,10 @@ Public Class sdgDoyRange
         If bUpdate Then
             If rdoToFixed.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
+                clsIfElseFirstDoyFilledFunction.AddParameter("yes", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
             ElseIf rdoToVariable.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
+                clsIfElseFirstDoyFilledFunction.AddParameter("yes", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
             ElseIf rdoLength.Checked Then
                 clsFixedDiffOp.SetOperation("+")
                 If clsDayFromOperator.ContainsParameter("from") Then
@@ -226,6 +244,7 @@ Public Class sdgDoyRange
                     clsFixedDiffOp.AddParameter("diff", strParameterValue:=ucrNudToDiff.Value, iPosition:=1)
                     clsFixedDiffOp.bBrackets = True
                     clsDayToOperator.AddParameter("to", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
+                    clsIfElseFirstDoyFilledFunction.AddParameter("yes", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
                 End If
             End If
             UpdateCalculatedFrom()
@@ -258,5 +277,36 @@ Public Class sdgDoyRange
     Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
         UpdateFromValues()
         UpdateToValues()
+    End Sub
+
+    Private Sub ucrChkUseDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseDate.ControlValueChanged
+        dlgClimaticSummary.AddDateDoy()
+        dlgExtremesClimatic.AddDateDoy()
+    End Sub
+
+    Public ReadOnly Property UseDateChecked As Boolean
+        Get
+            Return ucrChkUseDate.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property IsSeasonal As Boolean
+        Get
+            Return rdoFromVariable.Checked OrElse rdoToVariable.Checked OrElse rdoLength.Checked
+        End Get
+    End Property
+
+    Public Sub SetUseDateVisibility(bVisible As Boolean)
+        bUseDateVisibility = bVisible
+        If bControlsInitialised Then
+            ucrChkUseDate.Visible = bVisible
+            If Not bVisible Then
+                ucrChkUseDate.Checked = False ' Always uncheck when hidden
+            End If
+        End If
+    End Sub
+
+    Public Sub ResetUseDate()
+        ucrChkUseDate.Checked = False
     End Sub
 End Class
