@@ -39,9 +39,8 @@ Public Class clsCompareTwoOptionsLines
 
     ' Facet functions
     Public clsRFacetFunction As New RFunction
-    Public clsFacetOp As New ROperator
-    Public clsFacetRowOp As New ROperator
-    Public clsFacetColOp As New ROperator
+    Public clsRowVarsFunction As New RFunction
+    Public clsColVarsFunction As New RFunction
 
     ' Data unstacking, diff calculation and merge codes
     Public clsFilterMissingOperator As New ROperator
@@ -72,9 +71,8 @@ Public Class clsCompareTwoOptionsLines
         clsHlineGeom = New RFunction
 
         clsRFacetFunction = New RFunction
-        clsFacetOp = New ROperator
-        clsFacetRowOp = New ROperator
-        clsFacetColOp = New ROperator
+        clsRowVarsFunction = New RFunction
+        clsColVarsFunction = New RFunction
 
         clsFilterMissingOperator = New ROperator
         clsFilterMissingFunction = New RFunction
@@ -174,16 +172,14 @@ Public Class clsCompareTwoOptionsLines
 
         clsRFacetFunction.SetPackageName("ggplot2")
         clsRFacetFunction.SetRCommand("facet_grid")
-        clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp, iPosition:=0)
+        clsRFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+        clsRFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsColVarsFunction, iPosition:=1)
 
-        clsFacetOp.SetOperation("~")
-        clsFacetOp.bForceIncludeOperation = True
-        clsFacetOp.bBrackets = False
+        clsRowVarsFunction.SetPackageName("ggplot2")
+        clsRowVarsFunction.SetRCommand("vars")
 
-        clsFacetRowOp.SetOperation("+")
-        clsFacetRowOp.bBrackets = False
-        clsFacetColOp.SetOperation("+")
-        clsFacetColOp.bBrackets = False
+        clsColVarsFunction.SetPackageName("ggplot2")
+        clsColVarsFunction.SetRCommand("vars")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
     End Sub
