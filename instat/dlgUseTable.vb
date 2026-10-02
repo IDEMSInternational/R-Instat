@@ -31,8 +31,8 @@ Public Class dlgUseTable
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -62,8 +62,7 @@ Public Class dlgUseTable
 
         ucrChkExport.SetText("Export Table")
         ucrChkExport.Checked = True ' Forces the controls to be hidden
-        'cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
-        cboFileType.Items.AddRange({"HTML (*.html)", "LaTeX (*.tex)", "RTF (*.rtf)"})
+        cboFileType.Items.AddRange({"HTML (*.html)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)", "PDF (*.pdf)", "PNG (*.png)"})
     End Sub
 
     Private Sub SetDefaults()
@@ -113,17 +112,11 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(False)
-
-        If Not ucrTablesReceiver.IsEmpty Then
-            If ucrSaveTable.IsComplete Then
-                ucrBase.OKEnabled(True)
-            End If
-
-            If ucrChkExport.Checked AndAlso Not ucrFilePath.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            End If
+        Dim bEnableOk As Boolean = Not ucrTablesReceiver.IsEmpty AndAlso ucrSaveTable.IsComplete
+        If bEnableOk AndAlso ucrChkExport.Checked Then
+            bEnableOk = Not ucrFilePath.IsEmpty
         End If
+        ucrBase.OKEnabled(bEnableOk)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -178,6 +171,7 @@ Public Class dlgUseTable
     Private Sub cboFileType_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedValueChanged
         ucrFilePath.Clear()
         ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
