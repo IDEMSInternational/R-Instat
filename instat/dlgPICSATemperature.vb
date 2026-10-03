@@ -701,7 +701,7 @@ Public Class dlgPICSATemperature
         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=4)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSATemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
+        UpdatePointsColour()
         TestOkEnabled()
     End Sub
 
@@ -892,6 +892,17 @@ Public Class dlgPICSATemperature
         Else
             clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         End If
+        UpdatePointsColour()
+    End Sub
+
+    Private Sub UpdatePointsColour()
+        If Not ucrReceiverColourBy.IsEmpty Then
+            'Colour is mapped (e.g. multiple variables stacked -> colour=variable),
+            'so let the points inherit it from the global aes()
+            clsPointsFunc.RemoveParameterByName("colour")
+        Else
+            clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        End If
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
@@ -938,6 +949,7 @@ Public Class dlgPICSATemperature
 
     Private Sub ucrReceiverPICSA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPICSA.ControlValueChanged
         YAxisDataTypeCheckPISCATemp()
+        UpdatePointsColour()
     End Sub
 
     Private Sub ucrSelectorPICSATemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSATemperature.ControlValueChanged
