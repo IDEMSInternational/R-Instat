@@ -105,7 +105,6 @@ Public Class dlgUseTable
 
         clsGtSaveFunction.SetPackageName("gt")
         clsGtSaveFunction.SetRCommand("gtsave")
-        clsGtSaveFunction.AddParameter("data", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
 
         clsWebshotFunction.SetPackageName("webshot")
         clsWebshotFunction.SetRCommand("webshot")
@@ -237,6 +236,9 @@ Public Class dlgUseTable
 
         Dim strDataName As String = ucrTablesSelector.strCurrentDataFrame
         Dim strOutputName As String = GetExportObjectName()
+
+        clsGtSaveFunction.RemoveParameterByName("data")
+        clsGtSaveFunction.AddParameter("data", strOutputName, iPosition:=0, bIncludeArgumentName:=True)
 
         clsGetTableFileUrlFunction.RemoveParameterByName("data_name")
         clsGetTableFileUrlFunction.RemoveParameterByName("object_name")
