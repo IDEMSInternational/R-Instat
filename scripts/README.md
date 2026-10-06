@@ -5,7 +5,8 @@
 `setup_git_remotes.py` safely migrates a personal-fork checkout to use the
 shared repository as `origin`, without recloning. See the
 [developer Git setup](../docs/developer-git-setup.md) for the guarded migration,
-branch publishing, and bandwidth-efficient clone workflows.
+including instructions for fetching this migration branch directly from the
+shared repository, branch publishing, and bandwidth-efficient clone workflows.
 
 ## Translation tools
 
