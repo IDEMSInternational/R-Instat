@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetGtTableFunction, clsSaveGtRFunction As New RFunction
+    Private clsGetGtTableFunction, clsGtSaveFunction, clsWebshotFunction As New RFunction
+    Private clsGetTableFileUrlFunction, clsPasteFileUriFunction As New RFunction
     Private clsGtTableROperator, clsBaseOperator As New ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,8 +32,8 @@ Public Class dlgUseTable
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -62,15 +63,17 @@ Public Class dlgUseTable
 
         ucrChkExport.SetText("Export Table")
         ucrChkExport.Checked = True ' Forces the controls to be hidden
-        'cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
-        cboFileType.Items.AddRange({"HTML (*.html)", "LaTeX (*.tex)", "RTF (*.rtf)"})
+        cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "Word (*.docx)", "RTF (*.rtf)"})
     End Sub
 
     Private Sub SetDefaults()
         clsGtTableROperator = New ROperator
         clsBaseOperator = New ROperator
         clsGetGtTableFunction = New RFunction
-        clsSaveGtRFunction = New RFunction
+        clsGtSaveFunction = New RFunction
+        clsWebshotFunction = New RFunction
+        clsGetTableFileUrlFunction = New RFunction
+        clsPasteFileUriFunction = New RFunction
 
         ucrTablesSelector.Reset()
         ucrTablesReceiver.SetMeAsReceiver()
@@ -80,6 +83,7 @@ Public Class dlgUseTable
         cboFileType.SelectedIndex = 0
         ucrFilePath.ResetPathControl()
 
+        ucrBase.clsRsyntax.GetAfterCodes().Clear()
         clsGetGtTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
         clsGtTableROperator.SetOperation("%>%")
@@ -99,10 +103,21 @@ Public Class dlgUseTable
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
-        ' For export operations which is an after code
-        clsSaveGtRFunction.SetPackageName("gt")
-        clsSaveGtRFunction.SetRCommand("gtsave")
-        clsSaveGtRFunction.AddParameter(strParameterName:="data", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
+        clsGtSaveFunction.SetPackageName("gt")
+        clsGtSaveFunction.SetRCommand("gtsave")
+        clsGtSaveFunction.AddParameter("data", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
+
+        clsWebshotFunction.SetPackageName("webshot")
+        clsWebshotFunction.SetRCommand("webshot")
+
+        clsGetTableFileUrlFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetTableFileUrlFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+
+        clsPasteFileUriFunction.SetRCommand("paste0")
+        clsPasteFileUriFunction.AddParameter("prefix", Chr(34) & "file:///" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsPasteFileUriFunction.AddParameter("filepath", clsRFunctionParameter:=clsGetTableFileUrlFunction, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsWebshotFunction.AddParameter("url", clsRFunctionParameter:=clsPasteFileUriFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -113,17 +128,11 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(False)
-
-        If Not ucrTablesReceiver.IsEmpty Then
-            If ucrSaveTable.IsComplete Then
-                ucrBase.OKEnabled(True)
-            End If
-
-            If ucrChkExport.Checked AndAlso Not ucrFilePath.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            End If
+        Dim bEnableOk As Boolean = Not ucrTablesReceiver.IsEmpty AndAlso ucrSaveTable.IsComplete
+        If bEnableOk AndAlso ucrChkExport.Checked Then
+            bEnableOk = Not ucrFilePath.IsEmpty
         End If
+        ucrBase.OKEnabled(bEnableOk)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -165,7 +174,7 @@ Public Class dlgUseTable
             lblFileType.Visible = True
             cboFileType.Visible = True
             ucrFilePath.Visible = True
-            ucrBase.clsRsyntax.AddToAfterCodes(clsSaveGtRFunction)
+            UpdateExportAfterCodes()
         Else
             lblFileType.Visible = False
             cboFileType.Visible = False
@@ -177,18 +186,63 @@ Public Class dlgUseTable
 
     Private Sub cboFileType_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedValueChanged
         ucrFilePath.Clear()
-        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
+        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem?.ToString())
+        UpdateExportAfterCodes()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
-        If Not ucrFilePath.IsEmpty Then
-            Dim strFileName As String = Path.GetFileName(ucrFilePath.FilePath)
-            Dim strFilePath As String = Path.GetDirectoryName(ucrFilePath.FilePath).Replace("\", "/")
-
-            clsSaveGtRFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34), iPosition:=1)
-            clsSaveGtRFunction.AddParameter("path", Chr(34) & strFilePath & Chr(34), iPosition:=2)
-        End If
+        UpdateExportAfterCodes()
         TestOKEnabled()
+    End Sub
+
+    Private Sub UpdateExportAfterCodes()
+        ucrBase.clsRsyntax.GetAfterCodes().Clear()
+
+        If ucrChkExport.Checked AndAlso Not ucrFilePath.IsEmpty AndAlso cboFileType.SelectedItem IsNot Nothing Then
+
+            Dim strFileType As String = cboFileType.SelectedItem.ToString()
+            Dim strFilePath As String = ucrFilePath.FilePath.Replace("\", "/")
+
+            If strFileType.Contains(".png") OrElse strFileType.Contains(".pdf") Then
+                clsWebshotFunction.RemoveParameterByName("file")
+                clsWebshotFunction.AddParameter("file", Chr(34) & strFilePath & Chr(34), iPosition:=1)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsWebshotFunction)
+            Else
+                Dim strFileName As String = Path.GetFileName(strFilePath)
+                Dim strDir As String = Path.GetDirectoryName(strFilePath)
+                If strDir IsNot Nothing Then strDir = strDir.Replace("\", "/")
+
+                clsGtSaveFunction.RemoveParameterByName("filename")
+                clsGtSaveFunction.RemoveParameterByName("path")
+                clsGtSaveFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34), iPosition:=1)
+                If strDir IsNot Nothing Then
+                    clsGtSaveFunction.AddParameter("path", Chr(34) & strDir & Chr(34), iPosition:=2)
+                End If
+
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGtSaveFunction)
+            End If
+        End If
+    End Sub
+
+    Private Function GetExportObjectName() As String
+        If ucrSaveTable.ucrChkSave IsNot Nothing AndAlso ucrSaveTable.ucrChkSave.Checked Then
+            Return ucrSaveTable.GetText()
+        End If
+        Return "last_table"
+    End Function
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        ucrHeader.SetValuesToOperator(clsOperator:=clsGtTableROperator)
+
+        Dim strDataName As String = ucrTablesSelector.strCurrentDataFrame
+        Dim strOutputName As String = GetExportObjectName()
+
+        clsGetTableFileUrlFunction.RemoveParameterByName("data_name")
+        clsGetTableFileUrlFunction.RemoveParameterByName("object_name")
+
+        clsGetTableFileUrlFunction.AddParameter("data_name", Chr(34) & strDataName & Chr(34), iPosition:=0)
+        clsGetTableFileUrlFunction.AddParameter("object_name", Chr(34) & strOutputName & Chr(34), iPosition:=1)
     End Sub
 
     ''' <summary>
@@ -251,9 +305,5 @@ Public Class dlgUseTable
         clsThemeRFunction.SetPackageName("gtExtras")
         clsThemeRFunction.SetRCommand(strCommand)
         clsGtTableROperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        ucrHeader.SetValuesToOperator(clsOperator:=clsGtTableROperator)
     End Sub
 End Class
