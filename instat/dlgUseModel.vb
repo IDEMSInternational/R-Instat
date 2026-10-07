@@ -205,6 +205,7 @@ Public Class dlgUseModel
         grpExtrRemes.Visible = False
         grpSegmented.Visible = False
         grpEmmeans.Visible = False
+        UcrSelectorVariables.Visible = False
         Select Case ucrInputComboRPackage.GetText
             Case "General"
                 grpGeneral.Visible = True
@@ -241,7 +242,23 @@ Public Class dlgUseModel
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
+                UcrSelectorVariables.Visible = True
                 UpdateEmmeansVariables()
+        End Select
+    End Sub
+
+    Private Sub DialogSize()
+        Select Case ucrInputComboRPackage.GetText
+            Case "emmeans"
+                Me.Size = New Size(598, 585)
+                Me.ucrBase.Location = New Point(9, 486)
+                Me.ucrSaveResult.Location = New Point(10, 452)
+                Me.ucrTryModelling.Location = New Point(2, 414)
+            Case Else
+                Me.Size = New Size(454, 604)
+                Me.ucrBase.Location = New Point(9, 486)
+                Me.ucrSaveResult.Location = New Point(10, 452)
+                Me.ucrTryModelling.Location = New Point(2, 414)
         End Select
     End Sub
 
