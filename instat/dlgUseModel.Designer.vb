@@ -106,6 +106,7 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
+        Me.UcrSelectorVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -122,7 +123,7 @@ Partial Class dlgUseModel
         '
         Me.lblModel.AutoSize = True
         Me.lblModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModel.Location = New System.Drawing.Point(19, 18)
+        Me.lblModel.Location = New System.Drawing.Point(19, 12)
         Me.lblModel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblModel.Name = "lblModel"
         Me.lblModel.Size = New System.Drawing.Size(58, 13)
@@ -299,7 +300,7 @@ Partial Class dlgUseModel
         'lblModels
         '
         Me.lblModels.AutoSize = True
-        Me.lblModels.Location = New System.Drawing.Point(84, 49)
+        Me.lblModels.Location = New System.Drawing.Point(84, 35)
         Me.lblModels.Name = "lblModels"
         Me.lblModels.Size = New System.Drawing.Size(44, 13)
         Me.lblModels.TabIndex = 28
@@ -658,12 +659,12 @@ Partial Class dlgUseModel
         '
         Me.ContextMenuStripExtRemes.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuExtRemes})
         Me.ContextMenuStripExtRemes.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripExtRemes.Size = New System.Drawing.Size(126, 26)
+        Me.ContextMenuStripExtRemes.Size = New System.Drawing.Size(125, 26)
         '
         'ToolStripMenuExtRemes
         '
         Me.ToolStripMenuExtRemes.Name = "ToolStripMenuExtRemes"
-        Me.ToolStripMenuExtRemes.Size = New System.Drawing.Size(125, 22)
+        Me.ToolStripMenuExtRemes.Size = New System.Drawing.Size(124, 22)
         Me.ToolStripMenuExtRemes.Text = "extRemes"
         '
         'ContextMenuStripSegmented
@@ -944,7 +945,7 @@ Partial Class dlgUseModel
         'ucrTryModelling
         '
         Me.ucrTryModelling.AutoSize = True
-        Me.ucrTryModelling.Location = New System.Drawing.Point(2, 285)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(2, 414)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
@@ -954,7 +955,7 @@ Partial Class dlgUseModel
         'ucrSaveResult
         '
         Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 329)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 452)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
@@ -964,7 +965,7 @@ Partial Class dlgUseModel
         '
         Me.ucrChkIncludeArguments.AutoSize = True
         Me.ucrChkIncludeArguments.Checked = False
-        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 6)
         Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
         Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 23)
@@ -976,7 +977,7 @@ Partial Class dlgUseModel
         Me.ucrInputModels.AutoSize = True
         Me.ucrInputModels.IsMultiline = False
         Me.ucrInputModels.IsReadOnly = False
-        Me.ucrInputModels.Location = New System.Drawing.Point(133, 45)
+        Me.ucrInputModels.Location = New System.Drawing.Point(133, 31)
         Me.ucrInputModels.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputModels.Name = "ucrInputModels"
         Me.ucrInputModels.Size = New System.Drawing.Size(214, 21)
@@ -988,7 +989,7 @@ Partial Class dlgUseModel
         Me.ucrSelectorUseModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseModel.bShowHiddenColumns = False
         Me.ucrSelectorUseModel.bUseCurrentFilter = True
-        Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 68)
+        Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 53)
         Me.ucrSelectorUseModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorUseModel.Name = "ucrSelectorUseModel"
         Me.ucrSelectorUseModel.Size = New System.Drawing.Size(213, 183)
@@ -998,7 +999,7 @@ Partial Class dlgUseModel
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 362)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 486)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -1008,7 +1009,7 @@ Partial Class dlgUseModel
         '
         Me.ucrReceiverForTestColumn.AutoSize = True
         Me.ucrReceiverForTestColumn.frmParent = Me
-        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 11)
+        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 5)
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
@@ -1029,12 +1030,25 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
+        'UcrSelectorVariables
+        '
+        Me.UcrSelectorVariables.AutoSize = True
+        Me.UcrSelectorVariables.bDropUnusedFilterLevels = False
+        Me.UcrSelectorVariables.bShowHiddenColumns = False
+        Me.UcrSelectorVariables.bUseCurrentFilter = True
+        Me.UcrSelectorVariables.Location = New System.Drawing.Point(0, 235)
+        Me.UcrSelectorVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrSelectorVariables.Name = "UcrSelectorVariables"
+        Me.UcrSelectorVariables.Size = New System.Drawing.Size(213, 183)
+        Me.UcrSelectorVariables.TabIndex = 224
+        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(582, 423)
+        Me.ClientSize = New System.Drawing.Size(582, 546)
+        Me.Controls.Add(Me.UcrSelectorVariables)
         Me.Controls.Add(Me.cmdRHelpEmmeans)
         Me.Controls.Add(Me.cmdRHelpSegmented)
         Me.Controls.Add(Me.cmdRHelpExtRemes)
@@ -1162,4 +1176,5 @@ Partial Class dlgUseModel
     Friend WithEvents ToolStripMenuEmmeans As ToolStripMenuItem
     Friend WithEvents cmdcurlySign As Button
     Friend WithEvents cmdQuotes As Button
+    Friend WithEvents UcrSelectorVariables As ucrSelectorByDataFrameAddRemove
 End Class

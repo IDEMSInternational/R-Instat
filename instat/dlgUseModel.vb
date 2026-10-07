@@ -19,6 +19,7 @@ Imports instat.Translations
 Imports RDotNet
 Public Class dlgUseModel
     Private strPackageName As String
+    Private strLastVariablesModel As String = ""
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
     Public bUpdating As Boolean = False
@@ -62,6 +63,9 @@ Public Class dlgUseModel
 
         ucrInputModels.IsReadOnly = True
 
+        UcrSelectorVariables.lstAvailableVariable.MultiSelect = True
+        AddHandler UcrSelectorVariables.lstAvailableVariable.DoubleClick, AddressOf InsertSelectedVariables
+
         bUpdating = False
 
     End Sub
@@ -73,6 +77,7 @@ Public Class dlgUseModel
         clsAttach.SetRCommand("attach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorUseModel.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
+        strLastVariablesModel = ""
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -236,6 +241,7 @@ Public Class dlgUseModel
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
+                UpdateEmmeansVariables()
         End Select
     End Sub
 
@@ -246,6 +252,75 @@ Public Class dlgUseModel
     Private Sub ucrReceiverForTestColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForTestColumn.ControlValueChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
         GetModels()
+        If ucrInputComboRPackage.GetText = "emmeans" Then
+            UpdateEmmeansVariables()
+        End If
+    End Sub
+
+    Private Function GetSelectedModelName() As String
+        Dim strExpression As String = ucrReceiverForTestColumn.GetVariableNames(False)
+        If String.IsNullOrEmpty(strExpression) Then Return ""
+        Dim strBest As String = ""
+        For Each item As ListViewItem In ucrSelectorUseModel.lstAvailableVariable.Items
+            Dim strPattern As String = "(?<![\w.])" & System.Text.RegularExpressions.Regex.Escape(item.Text) & "(?![\w.])"
+            If System.Text.RegularExpressions.Regex.IsMatch(strExpression, strPattern) AndAlso item.Text.Length > strBest.Length Then
+                strBest = item.Text
+            End If
+        Next
+        Return strBest
+    End Function
+
+    Private Sub UpdateEmmeansVariables()
+        Dim strModel As String = GetSelectedModelName()
+        If strModel = strLastVariablesModel AndAlso UcrSelectorVariables.lstAvailableVariable.Items.Count > 0 Then Return
+        strLastVariablesModel = strModel
+
+        UcrSelectorVariables.lstAvailableVariable.Items.Clear()
+
+        If UcrSelectorVariables.lstAvailableVariable.Columns.Count = 0 Then
+            UcrSelectorVariables.lstAvailableVariable.Columns.Add("Variables")
+        End If
+        UcrSelectorVariables.lstAvailableVariable.View = View.Details
+
+        If String.IsNullOrEmpty(strModel) Then Return
+
+        ' Fetch the model from the data book, then get its variables
+        Dim clsGetModel As New RFunction
+        clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetModel.AddParameter("data_name", Chr(34) & ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetModel.AddParameter("object_name", Chr(34) & strModel & Chr(34), iPosition:=1)
+        clsGetModel.AddParameter("as_file", "FALSE", iPosition:=2)
+
+        Dim clsTerms As New RFunction
+        clsTerms.SetRCommand("terms")
+        clsTerms.AddParameter("x", clsRFunctionParameter:=clsGetModel, iPosition:=0)
+
+        Dim clsDeleteResponse As New RFunction
+        clsDeleteResponse.SetRCommand("delete.response")
+        clsDeleteResponse.AddParameter("termobj", clsRFunctionParameter:=clsTerms, iPosition:=0)
+
+        Dim clsGetVars As New RFunction
+        clsGetVars.SetRCommand("all.vars")
+        clsGetVars.AddParameter("expr", clsRFunctionParameter:=clsDeleteResponse, iPosition:=0)
+
+        Dim clsVariables As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVars.ToScript(), bSilent:=True)
+        If clsVariables Is Nothing Then Return
+
+        For Each strVariable As String In clsVariables.AsCharacter().ToArray()
+            If Not String.IsNullOrEmpty(strVariable) Then
+                UcrSelectorVariables.lstAvailableVariable.Items.Add(strVariable)
+            End If
+        Next
+    End Sub
+
+    Private Sub InsertSelectedVariables(sender As Object, e As EventArgs)
+        Dim lstItems As New List(Of String)
+        For Each item As ListViewItem In UcrSelectorVariables.lstAvailableVariable.SelectedItems
+            lstItems.Add(item.Text)
+        Next
+        If lstItems.Count > 0 Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(String.Join(" + ", lstItems))
+        End If
     End Sub
 
     Private Sub GetModels()
