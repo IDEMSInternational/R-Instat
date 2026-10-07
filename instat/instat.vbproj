@@ -233,6 +233,12 @@
     <Compile Include="clsTransformationControl.vb" />
     <Compile Include="clsTransformationRModel.vb" />
     <Compile Include="clsColumnSelectionUtility.vb" />
+    <Compile Include="dlgAnovaModel.Designer.vb">
+      <DependentUpon>dlgAnovaModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAnovaModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -3481,6 +3487,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Climsoft\sdgClimsoftFilter.resx">
       <DependentUpon>sdgClimsoftFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnovaModel.resx">
+      <DependentUpon>dlgAnovaModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgApsimx.resx">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
