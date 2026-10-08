@@ -36,6 +36,7 @@ Public Class dlgUseModel
         SetRcodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        DialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -197,6 +198,7 @@ Public Class dlgUseModel
 
     Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged
         KeyboardsVisibility()
+        DialogSize()
     End Sub
 
     Private Sub KeyboardsVisibility()
@@ -255,10 +257,10 @@ Public Class dlgUseModel
                 Me.ucrSaveResult.Location = New Point(10, 452)
                 Me.ucrTryModelling.Location = New Point(2, 414)
             Case Else
-                Me.Size = New Size(454, 604)
-                Me.ucrBase.Location = New Point(9, 486)
-                Me.ucrSaveResult.Location = New Point(10, 452)
-                Me.ucrTryModelling.Location = New Point(2, 414)
+                Me.Size = New Size(598, 462)
+                Me.ucrBase.Location = New Point(9, 362)
+                Me.ucrSaveResult.Location = New Point(10, 329)
+                Me.ucrTryModelling.Location = New Point(2, 280)
         End Select
     End Sub
 
