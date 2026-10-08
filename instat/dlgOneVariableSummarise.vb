@@ -28,11 +28,15 @@ Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bRCodeSet As Boolean = True
+    Private bUpdatingSkimRCode As Boolean = False
     Private clsSummaryFunction, clsSummariesList, clsGtFunction,
         clsConcFunction, clsSummaryTableFunction, clsDummyFunction,
-        clsSkimrFunction, clsPivotWiderFunction, clsSelectedColumnsFunction As New RFunction
+        clsSkimrFunction, clsPivotWiderFunction, clsSelectedColumnsFunction,
+        clsSelectFunction, clsWhereFunction, clsMapDfrFunction,
+        clsSkimDataNamesFunction, clsSkimDataNamesNmFunction,
+        clsSetNamesFunction As New RFunction
 
-    Private clsPipeOperator, clsJoiningPipeOperator As New ROperator
+    Private clsPipeOperator, clsJoiningPipeOperator, clsSkimPipeOperator As New ROperator
     Private clsSummaryOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
@@ -72,6 +76,11 @@ Public Class dlgOneVariableSummarise
         ucrReceiverOneVarSummarise.Selector = ucrSelectorOneVarSummarise
         ucrReceiverOneVarSummarise.SetMeAsReceiver()
 
+        ucrReceiverMultipleDataFrames.Selector = ucrSelectorMultipleDataFrames
+        ucrReceiverMultipleDataFrames.SetItemType("dataframe")
+        ucrReceiverMultipleDataFrames.strSelectorHeading = "Data Frames"
+        ucrReceiverMultipleDataFrames.SetMeAsReceiver()
+
         ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
         ucrNudMaxSum.SetMinMax(1, 100)
         ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
@@ -85,6 +94,21 @@ Public Class dlgOneVariableSummarise
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrPnlColumnFactor, ucrReorderSummary, ucrChkDisplayMissing},
                                             {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaries.AddToLinkedControls({ucrPnlSkimMode, ucrPnlDataType}, {rdoSkim}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSkimMode.SetLinkedDisplayControl(New List(Of Control) From {rdoSkimSingle, rdoSkimMultiple})
+        ucrPnlDataType.SetLinkedDisplayControl(grpDataType)
+
+        ucrPnlSkimMode.AddRadioButton(rdoSkimSingle)
+        ucrPnlSkimMode.AddRadioButton(rdoSkimMultiple)
+        ucrPnlSkimMode.AddParameterValuesCondition(rdoSkimSingle, "skim_mode", "single")
+        ucrPnlSkimMode.AddParameterValuesCondition(rdoSkimMultiple, "skim_mode", "multiple")
+
+        ucrPnlDataType.AddRadioButton(rdoCharacter)
+        ucrPnlDataType.AddRadioButton(rdoFactor)
+        ucrPnlDataType.AddRadioButton(rdoNumeric)
+        ucrPnlDataType.AddParameterValuesCondition(rdoCharacter, "data_type", "character")
+        ucrPnlDataType.AddParameterValuesCondition(rdoFactor, "data_type", "factor")
+        ucrPnlDataType.AddParameterValuesCondition(rdoNumeric, "data_type", "numeric")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -133,30 +157,59 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         clsSelectedColumnsFunction = New RFunction
+        clsSelectFunction = New RFunction
+        clsWhereFunction = New RFunction
+        clsMapDfrFunction = New RFunction
+        clsSkimDataNamesFunction = New RFunction
+        clsSkimDataNamesNmFunction = New RFunction
+        clsSetNamesFunction = New RFunction
 
         clsPipeOperator = New ROperator
-
+        clsSkimPipeOperator = New ROperator
         clsSummaryOperator = New ROperator
 
         ucrSelectorOneVarSummarise.Reset()
+        ucrSelectorMultipleDataFrames.Reset()
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
 
+        clsWhereFunction.SetPackageName("tidyselect")
+        clsWhereFunction.SetRCommand("where")
+        clsWhereFunction.AddParameter("fn", "is.character", bIncludeArgumentName:=False, iPosition:=0)
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("cols", clsRFunctionParameter:=clsWhereFunction, bIncludeArgumentName:=False, iPosition:=0)
+
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
-        clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsSkimrFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
-                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
-                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
-                                            strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
-                                            strObjectName:="last_summary")
+
+        clsSkimPipeOperator.SetOperation("%>%")
+        clsSkimPipeOperator.bBrackets = False
+        clsSkimPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsSkimPipeOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsSkimPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsSkimDataNamesFunction.SetRCommand("c")
+        clsSkimDataNamesNmFunction.SetRCommand("c")
+        clsSetNamesFunction.SetRCommand("setNames")
+        clsSetNamesFunction.AddParameter("object", clsRFunctionParameter:=clsSkimDataNamesFunction, iPosition:=0)
+        clsSetNamesFunction.AddParameter("nm", clsRFunctionParameter:=clsSkimDataNamesNmFunction, iPosition:=1)
+
+        clsMapDfrFunction.SetPackageName("purrr")
+        clsMapDfrFunction.SetRCommand("map_dfr")
+        clsMapDfrFunction.AddParameter(".x", clsRFunctionParameter:=clsSetNamesFunction, iPosition:=0)
+        clsMapDfrFunction.AddParameter(".f", GetSkimMapFormula(), iPosition:=1)
+        clsMapDfrFunction.AddParameter(".id", Chr(34) & "data_frame" & Chr(34), iPosition:=2)
 
         'Dummy function used to set conditions
         clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
         clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=2)
         clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
+        clsDummyFunction.AddParameter("skim_mode", "single", iPosition:=12)
+        clsDummyFunction.AddParameter("data_type", "character", iPosition:=13)
 
         clsConcFunction.SetRCommand("c")
 
@@ -211,25 +264,37 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=2)
+        ucrSaveSummary.AddAdditionalRCode(clsSkimPipeOperator, iAdditionalPairNo:=3)
+        ucrSaveSummary.AddAdditionalRCode(clsMapDfrFunction, iAdditionalPairNo:=4)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
         ucrInputDisplayMissing.SetRCode(clsSummaryTableFunction, bReset)
-        ucrSaveSummary.SetRCode(clsSkimrFunction, bReset)
+        ucrSaveSummary.SetRCode(clsSkimPipeOperator, bReset)
 
         If bReset Then
             ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
             ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
             ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
+            ucrPnlSkimMode.SetRCode(clsDummyFunction, bReset)
+            ucrPnlDataType.SetRCode(clsDummyFunction, bReset)
         End If
         bRCodeSet = True
         FillListView()
+        ConfigureSkimControls()
     End Sub
 
     Public Sub TestOKEnabled()
-        'We cannot test the values on the sub dialog because the sub dialog may not be in sync with the main dialog code. This only happens once the sub dialog has been opened.
-        If ucrReceiverOneVarSummarise.IsEmpty() OrElse (rdoCustomised.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" OrElse Not ucrSaveSummary.IsComplete Then
+        If rdoSkim.Checked Then
+            Dim bSkimReady As Boolean
+            If rdoSkimMultiple.Checked Then
+                bSkimReady = Not ucrReceiverMultipleDataFrames.IsEmpty()
+            Else
+                bSkimReady = ucrSelectorOneVarSummarise.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> ""
+            End If
+            ucrBase.OKEnabled(bSkimReady AndAlso ucrSaveSummary.IsComplete)
+        ElseIf ucrReceiverOneVarSummarise.IsEmpty() OrElse (rdoCustomised.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" OrElse Not ucrSaveSummary.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -261,13 +326,10 @@ Public Class dlgOneVariableSummarise
     Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlValueChanged
         If Not ucrReceiverOneVarSummarise.IsEmpty Then
             clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames(), iPosition:=4)
-            clsSkimrFunction.AddParameter("col_names", ucrReceiverOneVarSummarise.GetVariableNames(),
-                                          bIncludeArgumentName:=False, iPosition:=1)
             clsSelectedColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorOneVarSummarise.strCurrentDataFrame & Chr(34), iPosition:=0)
             clsSelectedColumnsFunction.AddParameter("col_names", ucrReceiverOneVarSummarise.GetVariableNames(), iPosition:=1)
         Else
             clsSummaryTableFunction.RemoveParameterByName("columns_to_summarise")
-            clsSkimrFunction.RemoveParameterByName("col_names")
             clsSelectedColumnsFunction.RemoveParameterByName("col_names")
         End If
     End Sub
@@ -299,14 +361,16 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub ucrSelectorOneVarSummarise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarSummarise.ControlValueChanged
-        clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsSkimPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSummaryFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
         clsJoiningPipeOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
-        clsSkimrFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
         clsSelectedColumnsFunction.SetAssignTo(ucrSelectorOneVarSummarise.strCurrentDataFrame)
         If Not ucrReceiverOneVarSummarise.IsEmpty Then
             clsSelectedColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorOneVarSummarise.strCurrentDataFrame & Chr(34), iPosition:=0)
+        End If
+        If rdoSkim.Checked Then
+            UpdateSkimRCode()
         End If
     End Sub
 
@@ -326,22 +390,113 @@ Public Class dlgOneVariableSummarise
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_table")
             ucrSaveSummary.SetCheckBoxText("Store Table")
+            ucrSaveSummary.SetPrefix("summary_table")
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoDefault.Checked Then
             clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
             ucrSaveSummary.SetCheckBoxText("Store Summary")
+            ucrSaveSummary.SetPrefix("summary")
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked_radio", "skim", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
-            ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
-            ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveSummary.SetCheckBoxText("Store Summary")
+            ucrSaveSummary.SetSaveTypeAsDataFrame()
+            ucrSaveSummary.SetAssignToIfUncheckedValue("")
+            ucrSaveSummary.SetCheckBoxText("Store Data Frame")
+            ucrSaveSummary.SetPrefix("skim")
+            If rdoSkimMultiple.Checked Then
+                ucrSaveSummary.SetRCode(clsMapDfrFunction, False)
+            Else
+                ucrSaveSummary.SetRCode(clsSkimPipeOperator, False)
+            End If
         End If
         cmdSummaries.Visible = rdoCustomised.Checked
         cmdTableOptions.Visible = rdoCustomised.Checked
         ConfigureColumnFactorsAndNames()
+        ConfigureSkimControls()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ConfigureSkimControls()
+        Dim bSkim As Boolean = rdoSkim.Checked
+        Dim bMultiple As Boolean = bSkim AndAlso rdoSkimMultiple.Checked
+
+        If bSkim Then
+            ucrSelectorOneVarSummarise.Visible = Not bMultiple
+            ucrReceiverOneVarSummarise.Visible = False
+            lblSelectedVariable.Visible = False
+            ucrSelectorMultipleDataFrames.Visible = bMultiple
+            ucrReceiverMultipleDataFrames.Visible = bMultiple
+            lblSelectedDataFrames.Visible = bMultiple
+            If Not bMultiple Then
+                ucrSelectorOneVarSummarise.SetVariablesVisible(False)
+            End If
+            If bMultiple Then
+                ucrReceiverMultipleDataFrames.SetMeAsReceiver()
+            End If
+            UpdateSkimRCode()
+        Else
+            ucrSelectorOneVarSummarise.Visible = True
+            ucrSelectorOneVarSummarise.SetVariablesVisible(True)
+            ucrReceiverOneVarSummarise.Visible = True
+            lblSelectedVariable.Visible = True
+            ucrSelectorMultipleDataFrames.Visible = False
+            ucrReceiverMultipleDataFrames.Visible = False
+            lblSelectedDataFrames.Visible = False
+            ucrReceiverOneVarSummarise.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Function GetSkimTypePredicate() As String
+        If rdoFactor.Checked Then
+            Return "is.factor"
+        ElseIf rdoNumeric.Checked Then
+            Return "is.numeric"
+        Else
+            Return "is.character"
+        End If
+    End Function
+
+    Private Function GetSkimMapFormula() As String
+        Return "~skimr::skim_without_charts(dplyr::select(" &
+            frmMain.clsRLink.strInstatDataObject & "$get_data_frame(data_name=.x), tidyselect::where(" &
+            GetSkimTypePredicate() & ")))"
+    End Function
+
+    Private Sub UpdateSkimRCode()
+        If Not bRCodeSet OrElse Not rdoSkim.Checked OrElse bUpdatingSkimRCode Then
+            Return
+        End If
+
+        bUpdatingSkimRCode = True
+        Try
+            Dim strType As String = GetSkimTypePredicate()
+            clsWhereFunction.AddParameter("fn", strType, bIncludeArgumentName:=False, iPosition:=0)
+
+            If rdoSkimMultiple.Checked Then
+                clsSkimDataNamesFunction.ClearParameters()
+                clsSkimDataNamesNmFunction.ClearParameters()
+                For Each strDf As String In ucrReceiverMultipleDataFrames.GetVariableNamesAsList()
+                    clsSkimDataNamesFunction.AddParameter(strDf, Chr(34) & strDf & Chr(34), bIncludeArgumentName:=False)
+                    clsSkimDataNamesNmFunction.AddParameter(strDf, Chr(34) & strDf & Chr(34), bIncludeArgumentName:=False)
+                Next
+                clsMapDfrFunction.AddParameter(".f", GetSkimMapFormula(), iPosition:=1)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsMapDfrFunction)
+            Else
+                clsSkimPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseROperator(clsSkimPipeOperator)
+            End If
+
+            If ucrSaveSummary.ucrChkSave.Checked Then
+                ucrBase.clsRsyntax.iCallType = 0
+            Else
+                ucrBase.clsRsyntax.iCallType = 2
+            End If
+        Finally
+            bUpdatingSkimRCode = False
+        End Try
     End Sub
 
     Private Sub FillListView()
@@ -407,7 +562,50 @@ Public Class dlgOneVariableSummarise
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
+    Private Sub SkimOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSkimMode.ControlValueChanged, ucrPnlDataType.ControlValueChanged
+        If Not bRCodeSet Then
+            Return
+        End If
+
+        If rdoSkimMultiple.Checked Then
+            clsDummyFunction.AddParameter("skim_mode", "multiple", iPosition:=12)
+            ucrSaveSummary.SetRCode(clsMapDfrFunction, False)
+        Else
+            clsDummyFunction.AddParameter("skim_mode", "single", iPosition:=12)
+            ucrSaveSummary.SetRCode(clsSkimPipeOperator, False)
+        End If
+
+        If rdoFactor.Checked Then
+            clsDummyFunction.AddParameter("data_type", "factor", iPosition:=13)
+        ElseIf rdoNumeric.Checked Then
+            clsDummyFunction.AddParameter("data_type", "numeric", iPosition:=13)
+        Else
+            clsDummyFunction.AddParameter("data_type", "character", iPosition:=13)
+        End If
+
+        ConfigureSkimControls()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverMultipleDataFrames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleDataFrames.ControlValueChanged
+        If rdoSkim.Checked AndAlso rdoSkimMultiple.Checked Then
+            UpdateSkimRCode()
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSaveSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveSummary.ControlValueChanged
+        If rdoSkim.Checked AndAlso Not bUpdatingSkimRCode Then
+            If ucrSaveSummary.ucrChkSave.Checked Then
+                ucrBase.clsRsyntax.iCallType = 0
+            Else
+                ucrBase.clsRsyntax.iCallType = 2
+            End If
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged, ucrReceiverMultipleDataFrames.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
