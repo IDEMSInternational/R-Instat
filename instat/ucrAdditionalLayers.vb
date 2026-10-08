@@ -166,8 +166,8 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click, toolStripMenuItemGeomBar.Click, toolStripMenuItemGeomBoxPlot.Click, toolStripMenuItemGeomCol.Click, toolStripMenuItemGeomCount.Click, toolStripMenuItemGeomcategoricalmodel.Click,
-            toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomLabel.Click, toolStripMenuItemGeomparallelslopes.Click, toolStripMenuItemGeomtile.Click, toolStripMenuItemGeomcontour.Click, toolStripMenuItemGeomhistogram.Click,
-            toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomsmooth.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRug.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click, toolStripMenuItemGeomDensityRidges.Click
+        toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomLabel.Click, toolStripMenuItemGeomparallelslopes.Click, toolStripMenuItemGeomtile.Click, toolStripMenuItemGeomcontour.Click, toolStripMenuItemGeomhistogram.Click,
+        toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomsmooth.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRug.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click, toolStripMenuItemGeomDensityRidges.Click
 
         'setup the geom function to use
         Dim clsNewGeomFunction As New RFunction
@@ -230,16 +230,15 @@ Public Class ucrAdditionalLayers
         'if no specific geom command selected then show the layer subdialog for geom command selection
         If bShowLayerSubdialog Then
             sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction,
-                                   clsNewGeomFunc:=clsNewGeomFunction,
-                                   clsNewGlobalAesFunc:=clsGlobalAesFunction,
-                                   clsNewLocalAes:=GgplotDefaults.clsAesFunction,
-                                   bFixGeom:=False,
-                                   ucrNewBaseSelector:=Nothing,
-                                   bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0),
-                                   iTabToDisplay:=0,
-                                   strDataFrame:=strGlobalDataFrame)
-            ParentForm.SendToBack()
-            sdgLayerOptions.ShowDialog()
+                               clsNewGeomFunc:=clsNewGeomFunction,
+                               clsNewGlobalAesFunc:=clsGlobalAesFunction,
+                               clsNewLocalAes:=GgplotDefaults.clsAesFunction,
+                               bFixGeom:=False,
+                               ucrNewBaseSelector:=Nothing,
+                               bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0),
+                               iTabToDisplay:=0,
+                               strDataFrame:=strGlobalDataFrame)
+            sdgLayerOptions.ShowDialog(ParentForm)
             'get the new options from the subdialog
             'todo. Should what should happen if a user clicks on Cancel in the sub dialog?
             strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
@@ -251,7 +250,7 @@ Public Class ucrAdditionalLayers
 
         'add the geom function as a new parameter of the dialog base operator
         Dim clsNewGeomParameter As New RParameter(clsNewGeomFunction.strRCommand & iMaxParameterPosition,
-                                                  clsNewGeomFunction, iNewPosition:=iMaxParameterPosition)
+                                              clsNewGeomFunction, iNewPosition:=iMaxParameterPosition)
         clsBaseOperator.AddParameter(clsNewGeomParameter)
 
         'add the parameter to the list of layers
@@ -317,8 +316,7 @@ Public Class ucrAdditionalLayers
             'Warning: sdgLayerOptions should not be setup using dlgGeneralForGraphics' fields !! These fields should be given through to the ucrAdditionalLayers (which should have all these) 
             sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataFrame:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=True, iTabToDisplay:=0)
             'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
-            ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
-            sdgLayerOptions.ShowDialog()
+            sdgLayerOptions.ShowDialog(ParentForm) 'Owner ensures it stacks correctly above the main form without reordering
 
             clsSelectedGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
             clsSelectedGeomParameter.SetArgument(clsSelectedGeomFunction)

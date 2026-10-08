@@ -741,7 +741,7 @@ Public Class dlgHeatMapPlot
                     clsReorderValueFunction.AddParameter("X", "-" & ucrReceiverX.GetVariableNames(False), iPosition:=1)
                     clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderValueFunction, iPosition:=0)
                 Case strReverse
-                    clsForecatsReverseValueFunction.AddParameter("f", ucrReceiverY.GetVariableNames(False), iPosition:=0)
+                    clsForecatsReverseValueFunction.AddParameter("f", "as.factor(" & ucrReceiverY.GetVariableNames(False) & ")", iPosition:=0)
                     clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverseValueFunction, iPosition:=0)
                 Case strNone
                     clsHeatmapAesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False), iPosition:=0)
@@ -754,7 +754,7 @@ Public Class dlgHeatMapPlot
                     clsReorderFunction.AddParameter("X", "-" & ucrReceiverY.GetVariableNames(False), iPosition:=1)
                     clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                 Case strReverse
-                    clsForecatsReverseFunction.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+                    clsForecatsReverseFunction.AddParameter("f", "as.factor(" & ucrReceiverX.GetVariableNames(False) & ")", iPosition:=0)
                     clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverseFunction, iPosition:=0)
                 Case strNone
                     clsHeatmapAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
