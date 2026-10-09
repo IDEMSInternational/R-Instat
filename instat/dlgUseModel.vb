@@ -65,8 +65,9 @@ Public Class dlgUseModel
         ucrInputModels.IsReadOnly = True
 
         UcrSelectorVariables.lstAvailableVariable.MultiSelect = True
-        AddHandler UcrSelectorVariables.lstAvailableVariable.DoubleClick, AddressOf InsertSelectedVariables
-
+        AddHandler UcrSelectorVariables.AddWithoutReceiver, Sub() InsertSelectedVariables(Nothing, Nothing)
+        AddHandler UcrSelectorVariables.lstAvailableVariable.SizeChanged, Sub(s, e) FitVariablesColumn()
+        AddHandler UcrSelectorVariables.VisibleChanged, Sub(s, e) FitVariablesColumn()
         bUpdating = False
 
     End Sub
@@ -245,6 +246,7 @@ Public Class dlgUseModel
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
                 UcrSelectorVariables.Visible = True
+                FitVariablesColumn()
                 UpdateEmmeansVariables()
         End Select
     End Sub
@@ -276,6 +278,18 @@ Public Class dlgUseModel
         End If
     End Sub
 
+    Private Sub FitVariablesColumn()
+        With UcrSelectorVariables.lstAvailableVariable
+            Do While .Columns.Count > 1
+                .Columns.RemoveAt(1)
+            Loop
+            If .Columns.Count = 0 Then .Columns.Add("Variables")
+            .Columns(0).Text = "Variables"
+            .View = View.Details
+            .Columns(0).Width = .ClientSize.Width
+        End With
+    End Sub
+
     Private Function GetSelectedModelName() As String
         Dim strExpression As String = ucrReceiverForTestColumn.GetVariableNames(False)
         If String.IsNullOrEmpty(strExpression) Then Return ""
@@ -296,10 +310,7 @@ Public Class dlgUseModel
 
         UcrSelectorVariables.lstAvailableVariable.Items.Clear()
 
-        If UcrSelectorVariables.lstAvailableVariable.Columns.Count = 0 Then
-            UcrSelectorVariables.lstAvailableVariable.Columns.Add("Variables")
-        End If
-        UcrSelectorVariables.lstAvailableVariable.View = View.Details
+        FitVariablesColumn()
 
         If String.IsNullOrEmpty(strModel) Then Return
 

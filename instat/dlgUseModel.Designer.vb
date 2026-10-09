@@ -1036,7 +1036,7 @@ Partial Class dlgUseModel
         Me.UcrSelectorVariables.bDropUnusedFilterLevels = False
         Me.UcrSelectorVariables.bShowHiddenColumns = False
         Me.UcrSelectorVariables.bUseCurrentFilter = True
-        Me.UcrSelectorVariables.Location = New System.Drawing.Point(0, 235)
+        Me.UcrSelectorVariables.Location = New System.Drawing.Point(11, 235)
         Me.UcrSelectorVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrSelectorVariables.Name = "UcrSelectorVariables"
         Me.UcrSelectorVariables.Size = New System.Drawing.Size(213, 183)
