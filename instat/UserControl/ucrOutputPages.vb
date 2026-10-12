@@ -130,18 +130,20 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub DeletePage()
-        Dim tab As TabPage = tabControl.SelectedTab
-        Dim tabName As String = SelectedTab()
-        tabControl.TabPages.Remove(tab)
-        tab.Dispose()
-        For Each outputPage In _allOutputPages
-            If outputPage.Tag = tabName Then
-                _allOutputPages.Remove(outputPage)
-                Exit For
-            End If
-        Next
-        _outputLogger.FilteredOutputs.Remove(_outputLogger.GetFilteredList(tabName))
-        UpdateTabsInDropDown()
+        If Not IsMainTabSelected() Then
+            Dim tab As TabPage = tabControl.SelectedTab
+            Dim tabName As String = SelectedTab()
+            tabControl.TabPages.Remove(tab)
+            tab.Dispose()
+            For Each outputPage In _allOutputPages
+                If outputPage.Tag = tabName Then
+                    _allOutputPages.Remove(outputPage)
+                    Exit For
+                End If
+            Next
+            _outputLogger.FilteredOutputs.Remove(_outputLogger.GetFilteredList(tabName))
+            UpdateTabsInDropDown()
+        End If
     End Sub
 
     Private Sub EnableDisableTopButtons()
@@ -197,6 +199,10 @@ Public Class ucrOutputPages
         Return tabControl.SelectedTab.Text
     End Function
 
+    Private Function IsMainTabSelected() As Boolean
+        Return tabControl.SelectedTab Is tpMain
+    End Function
+
     Private Sub tabControl_DoubleClick(sender As Object, e As EventArgs) Handles tabControl.DoubleClick
         If _selectedOutputPage.BCanRename Then
             tbRename_Click(sender, e)
@@ -230,7 +236,7 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tbDelete_Click(sender As Object, e As EventArgs) Handles tbDelete.Click
-        If SelectedTab() = "Main" Then
+        If IsMainTabSelected() Then
             For Each element In _selectedOutputPage.SelectedElements
                 _outputLogger.DeleteOutputFromMainList(element)
             Next
@@ -343,7 +349,7 @@ Public Class ucrOutputPages
         Dim iCountOutputElements As Integer = 0
 
         ' Determine the count of output elements based on the selected tab
-        If SelectedTab() = "Main" Then
+        If IsMainTabSelected() Then
             iCountOutputElements = _outputLogger.OutputElements.Count
         Else
             iCountOutputElements = _outputLogger.GetFilteredList(SelectedTab).Output.Count

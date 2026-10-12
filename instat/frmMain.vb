@@ -3301,4 +3301,8 @@ Public Class frmMain
     Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
         dlgCheckSummary.ShowDialog()
     End Sub
+
+    Private Sub mnuAnovaModel_Click(sender As Object, e As EventArgs) Handles mnuAnovaModel.Click
+        dlgAnovaModel.ShowDialog()
+    End Sub
 End Class
