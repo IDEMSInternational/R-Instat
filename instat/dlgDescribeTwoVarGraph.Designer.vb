@@ -107,13 +107,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFirstVars = New instat.ucrVariablesAsFactor()
-        Me.ucrInputLabelSize = New instat.ucrInputComboBox()
-        Me.lblLabelColour = New System.Windows.Forms.Label()
-        Me.lblLabelSize = New System.Windows.Forms.Label()
-        Me.ucrInputLabelPosition = New instat.ucrInputComboBox()
-        Me.ucrChkAddLabelsText = New instat.ucrCheck()
-        Me.lblLabelPosition = New System.Windows.Forms.Label()
-        Me.ucrInputLabelColour = New instat.ucrInputComboBox()
         Me.cmdPairOptions = New System.Windows.Forms.Button()
         Me.ucrInputXSidePlotOptions = New instat.ucrInputComboBox()
         Me.ucrChkXSidePlot = New instat.ucrCheck()
@@ -125,6 +118,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.lblCollapse = New System.Windows.Forms.Label()
+        Me.ucrInputCollapse = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -987,85 +982,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         Me.ucrReceiverFirstVars.ucrVariableSelector = Nothing
         '
-        'ucrInputLabelSize
-        '
-        Me.ucrInputLabelSize.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabelSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLabelSize.GetSetSelectedIndex = -1
-        Me.ucrInputLabelSize.IsReadOnly = False
-        Me.ucrInputLabelSize.Location = New System.Drawing.Point(639, 642)
-        Me.ucrInputLabelSize.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
-        Me.ucrInputLabelSize.Size = New System.Drawing.Size(86, 32)
-        Me.ucrInputLabelSize.TabIndex = 65
-        '
-        'lblLabelColour
-        '
-        Me.lblLabelColour.AutoSize = True
-        Me.lblLabelColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelColour.Location = New System.Drawing.Point(409, 646)
-        Me.lblLabelColour.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLabelColour.Name = "lblLabelColour"
-        Me.lblLabelColour.Size = New System.Drawing.Size(59, 20)
-        Me.lblLabelColour.TabIndex = 61
-        Me.lblLabelColour.Text = "Colour:"
-        '
-        'lblLabelSize
-        '
-        Me.lblLabelSize.AutoSize = True
-        Me.lblLabelSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelSize.Location = New System.Drawing.Point(590, 646)
-        Me.lblLabelSize.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLabelSize.Name = "lblLabelSize"
-        Me.lblLabelSize.Size = New System.Drawing.Size(44, 20)
-        Me.lblLabelSize.TabIndex = 64
-        Me.lblLabelSize.Text = "Size:"
-        '
-        'ucrInputLabelPosition
-        '
-        Me.ucrInputLabelPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabelPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLabelPosition.GetSetSelectedIndex = -1
-        Me.ucrInputLabelPosition.IsReadOnly = False
-        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(284, 642)
-        Me.ucrInputLabelPosition.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputLabelPosition.Name = "ucrInputLabelPosition"
-        Me.ucrInputLabelPosition.Size = New System.Drawing.Size(86, 32)
-        Me.ucrInputLabelPosition.TabIndex = 60
-        '
-        'ucrChkAddLabelsText
-        '
-        Me.ucrChkAddLabelsText.AutoSize = True
-        Me.ucrChkAddLabelsText.Checked = False
-        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(36, 642)
-        Me.ucrChkAddLabelsText.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkAddLabelsText.Name = "ucrChkAddLabelsText"
-        Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(132, 34)
-        Me.ucrChkAddLabelsText.TabIndex = 62
-        '
-        'lblLabelPosition
-        '
-        Me.lblLabelPosition.AutoSize = True
-        Me.lblLabelPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelPosition.Location = New System.Drawing.Point(210, 646)
-        Me.lblLabelPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLabelPosition.Name = "lblLabelPosition"
-        Me.lblLabelPosition.Size = New System.Drawing.Size(69, 20)
-        Me.lblLabelPosition.TabIndex = 59
-        Me.lblLabelPosition.Text = "Position:"
-        '
-        'ucrInputLabelColour
-        '
-        Me.ucrInputLabelColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabelColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLabelColour.GetSetSelectedIndex = -1
-        Me.ucrInputLabelColour.IsReadOnly = False
-        Me.ucrInputLabelColour.Location = New System.Drawing.Point(472, 642)
-        Me.ucrInputLabelColour.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
-        Me.ucrInputLabelColour.Size = New System.Drawing.Size(86, 32)
-        Me.ucrInputLabelColour.TabIndex = 63
-        '
         'cmdPairOptions
         '
         Me.cmdPairOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1213,12 +1129,38 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By:"
         '
+        'lblCollapse
+        '
+        Me.lblCollapse.AutoSize = True
+        Me.lblCollapse.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCollapse.Location = New System.Drawing.Point(33, 648)
+        Me.lblCollapse.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCollapse.Name = "lblCollapse"
+        Me.lblCollapse.Size = New System.Drawing.Size(74, 20)
+        Me.lblCollapse.TabIndex = 80
+        Me.lblCollapse.Tag = ""
+        Me.lblCollapse.Text = "Collapse:"
+        '
+        'ucrInputCollapse
+        '
+        Me.ucrInputCollapse.AddQuotesIfUnrecognised = True
+        Me.ucrInputCollapse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCollapse.GetSetSelectedIndex = -1
+        Me.ucrInputCollapse.IsReadOnly = False
+        Me.ucrInputCollapse.Location = New System.Drawing.Point(116, 648)
+        Me.ucrInputCollapse.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputCollapse.Name = "ucrInputCollapse"
+        Me.ucrInputCollapse.Size = New System.Drawing.Size(147, 32)
+        Me.ucrInputCollapse.TabIndex = 81
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(783, 802)
+        Me.Controls.Add(Me.ucrInputCollapse)
+        Me.Controls.Add(Me.lblCollapse)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -1232,12 +1174,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblFillThirdVariable)
         Me.Controls.Add(Me.ucrReceiverFill)
-        Me.Controls.Add(Me.ucrInputLabelSize)
-        Me.Controls.Add(Me.lblLabelColour)
-        Me.Controls.Add(Me.lblLabelSize)
-        Me.Controls.Add(Me.ucrInputLabelPosition)
-        Me.Controls.Add(Me.lblLabelPosition)
-        Me.Controls.Add(Me.ucrInputLabelColour)
         Me.Controls.Add(Me.rdoPairs)
         Me.Controls.Add(Me.rdoSummarize)
         Me.Controls.Add(Me.ucrPnlByPairs)
@@ -1252,7 +1188,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.lblColour)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
-        Me.Controls.Add(Me.ucrChkAddLabelsText)
         Me.Controls.Add(Me.grpTypeOfDispaly)
         Me.Controls.Add(Me.ucrReceiverColour)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -1261,7 +1196,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Plus Variable Graph"
+        Me.Text = "Two/Three Variable Graph"
         Me.grpSummaries.ResumeLayout(False)
         Me.grpSummaries.PerformLayout()
         Me.grpOptions.ResumeLayout(False)
@@ -1331,13 +1266,6 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrInputUpperDiscrete As ucrInputComboBox
     Friend WithEvents ucrInputUpperCombo As ucrInputComboBox
     Friend WithEvents ucrInputUpperContinous As ucrInputComboBox
-    Friend WithEvents ucrInputLabelSize As ucrInputComboBox
-    Friend WithEvents lblLabelColour As Label
-    Friend WithEvents lblLabelSize As Label
-    Friend WithEvents ucrInputLabelPosition As ucrInputComboBox
-    Friend WithEvents ucrChkAddLabelsText As ucrCheck
-    Friend WithEvents lblLabelPosition As Label
-    Friend WithEvents ucrInputLabelColour As ucrInputComboBox
     Friend WithEvents cmdPairOptions As Button
     Friend WithEvents lblFillThirdVariable As Label
     Friend WithEvents ucrReceiverFill As ucrReceiverSingle
@@ -1360,4 +1288,6 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputCollapse As ucrInputComboBox
+    Friend WithEvents lblCollapse As Label
 End Class

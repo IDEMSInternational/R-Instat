@@ -37,6 +37,9 @@ Public Class dlgDescribeTwoVarGraph
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
+            clsGeomDensityRidgesFunction, clsStatSummaryMeansFunction, clsStatSummaryMeansPlusSEFunction,
+            clsGeomSmoothFunction, clsGeomSmoothWithSEFunction, clsGeomSmoothThreeVarFunction, clsGeomSmoothWithSEThreeVarFunction, clsGGSideFunction,
+            clsGeomParallelSlopesFunction, clsGeomParallelSlopesWithSEFunction,
             clsGeomFreqPoly, clsGeomHistogram, clsGeomDensity, clsAnnotateFunction, clsGGpairsFunction,
             clsDummyFunction, clsGGpairAesFunction, clsUpperListFunction, clsLowerListFunction,
             clsDiagonalListFunction As New RFunction
@@ -75,10 +78,12 @@ Public Class dlgDescribeTwoVarGraph
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
     Private ReadOnly strFacetRowAll As String = "Facet Row + O"
+
     Private ReadOnly strFacetColAll As String = "Facet Col + O"
     Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
     Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
     Private ReadOnly strNone As String = "None"
+    'Private strAllFacetOptions() As String = {strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone}
 
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
@@ -109,6 +114,7 @@ Public Class dlgDescribeTwoVarGraph
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
         Dim strNumericCategoricalPlots() As String
+        Dim strNumericCategoricalPlotsThreeVariables() As String
         Dim dctPositionPairs As New Dictionary(Of String, String)
         Dim dctLabelColours As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
@@ -132,7 +138,7 @@ Public Class dlgDescribeTwoVarGraph
 
         ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates, ucr1stFactorReceiver, ucrInputStation}, {rdoTwoVars, rdoThreeVars, rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrReceiverFill}, {rdoThreeVars}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlByPairs.AddToLinkedControls({ucrChkXSidePlot, ucrChkYSidePlot}, {rdoSide}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrChkXSidePlot, ucrChkYSidePlot, ucrInputCollapse}, {rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
@@ -166,11 +172,11 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverSecondVar.bWithQuotes = False
         ucrReceiverSecondVar.SetLinkedDisplayControl(lblSecondVariable)
 
-        ucrInputNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Line plot + points"})
+        ucrInputNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Line plot + points", "Fitted Line", "Fitted Line + SE", "Points + Fitted Line", "Points + Fitted Line + SE"})
         ucrInputNumericByNumeric.SetName("Scatter plot")
         ucrInputNumericByNumeric.SetDropDownStyleAsNonEditable()
 
-        strNumericCategoricalPlots = {"Boxplot", "Point plot", "Jitter plot", "Violin plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot", "Density plot"}
+        strNumericCategoricalPlots = {"Boxplot", "Point plot", "Jitter plot", "Violin plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot", "Density plot", "Density Ridges", "Point Plot + Means", "Point Plot + Means + SE", "Jitter Plot + Means", "Jitter Plot + Means + SE"}
 
         ucrInputNumericByCategorical.SetItems(strNumericCategoricalPlots)
         ucrInputNumericByCategorical.SetName("Boxplot")
@@ -187,25 +193,19 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCategoricalByCategoricalByCategorical.SetName("Bar Chart")
         ucrInputCategoricalByCategoricalByCategorical.SetDropDownStyleAsNonEditable()
 
-        ucrInputCategoricalByNumericByCategorical.SetItems(strNumericCategoricalPlots)
+        strNumericCategoricalPlotsThreeVariables = {"Boxplot", "Point plot", "Jitter plot", "Violin plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot", "Density plot"}
+
+        ucrInputCategoricalByNumericByCategorical.SetItems(strNumericCategoricalPlotsThreeVariables)
         ucrInputCategoricalByNumericByCategorical.SetName("Boxplot")
         ucrInputCategoricalByNumericByCategorical.SetDropDownStyleAsNonEditable()
 
-        ucrInputNumericByCategoricalByCategorical.SetItems(strNumericCategoricalPlots)
+        ucrInputNumericByCategoricalByCategorical.SetItems(strNumericCategoricalPlotsThreeVariables)
         ucrInputNumericByCategoricalByCategorical.SetName("Boxplot")
         ucrInputNumericByCategoricalByCategorical.SetDropDownStyleAsNonEditable()
 
-        ucrInputNumericByNumericByCategorical.SetItems({"Scatter plot", "Line plot", "Line plot + points"})
+        ucrInputNumericByNumericByCategorical.SetItems({"Scatter plot", "Line plot", "Line plot + points", "Fitted Lines", "Fitted Lines + SE", "Points + Fitted Lines", "Points + Fitted Lines + SE", "Points + Parallel Lines", "Points + Parallel Lines + SE"})
         ucrInputNumericByNumericByCategorical.SetName("Scatter plot")
         ucrInputNumericByNumericByCategorical.SetDropDownStyleAsNonEditable()
-
-        ucrChkAddLabelsText.Visible = False
-        lblLabelColour.Visible = False
-        lblLabelPosition.Visible = False
-        lblLabelSize.Visible = False
-        ucrInputLabelPosition.Visible = False
-        ucrInputLabelColour.Visible = False
-        ucrInputLabelSize.Visible = False
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
@@ -339,6 +339,16 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
+        'Dim dctCollapse As New Dictionary(Of String, String)
+        'dctCollapse.Add("all", Chr(34) & "all" & Chr(34))
+        'dctCollapse.Add("x", Chr(34) & "x" & Chr(34))
+        'dctCollapse.Add("y", Chr(34) & "y" & Chr(34))
+        'ucrInputCollapse.SetParameter(New RParameter("collapse", 0))
+        ucrInputCollapse.SetItems({"all", "x", "y"})
+        ucrInputCollapse.SetName("all")
+        ucrInputCollapse.SetDropDownStyleAsNonEditable()
+        ucrInputCollapse.SetLinkedDisplayControl(lblCollapse)
+
         ucrSaveGraph.SetPrefix("two_var_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
@@ -349,6 +359,8 @@ Public Class dlgDescribeTwoVarGraph
         HideShowFillReceiver()
         HideShowGroupSummariesControl()
         HideShowGroupOptionsControl()
+        AddRemoveSidePlotRelatedFunctionsAndControls()
+        'HideSidePlotControlsAndCode()
     End Sub
 
     Private Sub SetDefaults()
@@ -396,6 +408,16 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomMosaic = New RFunction
         clsGgmosaicProduct = New RFunction
         clsStatSummaryHline = New RFunction
+        clsGeomDensityRidgesFunction = New RFunction
+        clsStatSummaryMeansFunction = New RFunction
+        clsStatSummaryMeansPlusSEFunction = New RFunction
+        clsGeomSmoothFunction = New RFunction
+        clsGeomSmoothWithSEFunction = New RFunction
+        clsGeomSmoothThreeVarFunction = New RFunction
+        clsGeomSmoothWithSEThreeVarFunction = New RFunction
+        clsGeomParallelSlopesFunction = New RFunction
+        clsGeomParallelSlopesWithSEFunction = New RFunction
+        clsGGSideFunction = New RFunction
 
         clsAesXLabelFunction = New RFunction
         clsAesLabelFunction = New RFunction
@@ -556,6 +578,65 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomBoxplot.SetPackageName("ggplot2")
         clsGeomBoxplot.SetRCommand("geom_boxplot")
 
+        clsGeomDensityRidgesFunction.SetPackageName("ggridges")
+        clsGeomDensityRidgesFunction.SetRCommand("geom_density_ridges")
+        clsGeomDensityRidgesFunction.AddParameter("alpha", "0.7", iPosition:=0)
+        clsGeomDensityRidgesFunction.AddParameter("fill", Chr(34) & "skyblue" & Chr(34), iPosition:=1)
+
+        clsStatSummaryMeansFunction.SetPackageName("ggplot2")
+        clsStatSummaryMeansFunction.SetRCommand("stat_summary")
+        clsStatSummaryMeansFunction.AddParameter("fun", Chr(34) & "mean" & Chr(34), iPosition:=0)
+        clsStatSummaryMeansFunction.AddParameter("geom", Chr(34) & "point" & Chr(34), iPosition:=1)
+        clsStatSummaryMeansFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
+        clsStatSummaryMeansFunction.AddParameter("size", "4", iPosition:=3)
+
+        clsStatSummaryMeansPlusSEFunction.SetPackageName("ggplot2")
+        clsStatSummaryMeansPlusSEFunction.SetRCommand("stat_summary")
+        clsStatSummaryMeansPlusSEFunction.AddParameter("fun.data", Chr(34) & "mean_se" & Chr(34), iPosition:=0)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("geom", Chr(34) & "pointrange" & Chr(34), iPosition:=1)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("size", "1", iPosition:=3)
+
+        'geom_smooth(method = "lm", se = FALSE, color = "blue")
+        clsGeomSmoothFunction.SetPackageName("ggplot2")
+        clsGeomSmoothFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
+        clsGeomSmoothFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
+
+        'geom_smooth(method = "lm", se = TRUE, fill = "blue", alpha = 0.2)
+        clsGeomSmoothWithSEFunction.SetPackageName("ggplot2")
+        clsGeomSmoothWithSEFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothWithSEFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothWithSEFunction.AddParameter("se", "TRUE", iPosition:=1)
+        clsGeomSmoothWithSEFunction.AddParameter("fill", Chr(34) & "blue" & Chr(34), iPosition:=2)
+        clsGeomSmoothWithSEFunction.AddParameter("alpha", "0.2", iPosition:=3)
+
+        clsGeomParallelSlopesFunction.SetPackageName("moderndive")
+        clsGeomParallelSlopesFunction.SetRCommand("geom_parallel_slopes")
+        clsGeomParallelSlopesFunction.AddParameter("se", "FALSE", iPosition:=0)
+
+        clsGeomParallelSlopesWithSEFunction.SetPackageName("moderndive")
+        clsGeomParallelSlopesWithSEFunction.SetRCommand("geom_parallel_slopes")
+        clsGeomParallelSlopesWithSEFunction.AddParameter("se", "TRUE", iPosition:=0)
+        clsGeomParallelSlopesWithSEFunction.AddParameter("alpha", "0.15", iPosition:=1)
+
+        clsGGSideFunction.SetPackageName("ggside")
+        clsGGSideFunction.SetRCommand("ggside")
+        clsGGSideFunction.AddParameter("collapse", Chr(34) & ucrInputCollapse.GetText() & Chr(34), iPosition:=0)
+
+        clsGeomSmoothThreeVarFunction.SetPackageName("ggplot2")
+        clsGeomSmoothThreeVarFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothThreeVarFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothThreeVarFunction.AddParameter("se", "FALSE", iPosition:=1)
+
+        clsGeomSmoothWithSEThreeVarFunction.SetPackageName("ggplot2")
+        clsGeomSmoothWithSEThreeVarFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothWithSEThreeVarFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothWithSEThreeVarFunction.AddParameter("se", "TRUE", iPosition:=1)
+        'clsGeomSmoothWithSEThreeVarFunction.AddParameter("fill", Chr(34) & "blue" & Chr(34), iPosition:=2)
+        clsGeomSmoothWithSEThreeVarFunction.AddParameter("alpha", "0.2", iPosition:=3)
+
         clsGeomMosaic.SetPackageName("ggmosaic")
         clsGeomMosaic.SetRCommand("geom_mosaic")
 
@@ -608,7 +689,8 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGeomPoint.SetPackageName("ggplot2")
         clsGeomPoint.SetRCommand("geom_point")
-        clsGeomPoint.AddParameter("size", "3", iPosition:=3)
+        clsGeomPoint.AddParameter("size", "2", iPosition:=3)
+        clsGeomPoint.AddParameter("alpha", "0.8", iPosition:=4)
 
         clsGeomLine.SetPackageName("ggplot2")
         clsGeomLine.SetRCommand("geom_line")
@@ -690,6 +772,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=6)
         ucrSaveGraph.AddAdditionalRCode(clsPairOperator, bReset)
 
+        'ucrInputCollapse.SetRCode(clsGGSideFunction, bReset)
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrReceiverSecondVar.SetRCode(clsAesCategoricalByCategoricalBarChart, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
@@ -720,10 +803,13 @@ Public Class dlgDescribeTwoVarGraph
             ucrChkXSidePlot.SetRCode(clsDummyFunction, bReset)
             ucrChkYSidePlot.SetRCode(clsDummyFunction, bReset)
         End If
-
         bRCodeSet = True
         Results()
         SetFreeYAxis()
+        If rdoSide.Checked Then
+            AddedXSidePlots()
+            AddedYSidePlots()
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -792,6 +878,8 @@ Public Class dlgDescribeTwoVarGraph
                     lblThirdType.Text = "________"
                     lblThirdType.ForeColor = SystemColors.ControlText
                 End If
+            Else
+                strThirdVariableType = ""
             End If
 
 
@@ -810,9 +898,22 @@ Public Class dlgDescribeTwoVarGraph
             ucrInputNumericByNumericByCategorical.Visible = False
             RemoveAllGeomsStats()
 
+            If rdoPairs.Checked Then
+                clsAesNumericByCategoricalXNumeric.RemoveParameterByName("y")
+                clsAesCategoricalByNumericXNumeric.RemoveParameterByName("y")
+                clsAesNumericByCategoricalXNumeric.AddParameter("colour", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
+                clsAesCategoricalByNumericXNumeric.AddParameter("colour", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
+            Else
+                clsAesNumericByCategoricalXNumeric.RemoveParameterByName("colour")
+                clsAesCategoricalByNumericXNumeric.RemoveParameterByName("colour")
+                clsAesNumericByCategoricalXNumeric.AddParameter("y", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
+                clsAesCategoricalByNumericXNumeric.AddParameter("y", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
+            End If
+
             If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "categorical" Then
                 ucrInputNumericByNumericByCategorical.Visible = True
                 AddRemoveFreeScaleX(False)
+                clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
                 AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="fill", iPosition:=6)
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByNumeric, iPosition:=0)
                 clsGlobalAes = clsAesNumericByNumeric
@@ -824,15 +925,36 @@ Public Class dlgDescribeTwoVarGraph
                     Case "Line plot + points"
                         clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLine, iPosition:=1)
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+                    Case "Fitted Lines"
+                        AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="color", iPosition:=7)
+                        clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothThreeVarFunction, iPosition:=1)
+                    Case "Fitted Lines + SE"
+                        AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="color", iPosition:=7)
+                        clsBaseOperator.AddParameter("geom_smooth_with_se", clsRFunctionParameter:=clsGeomSmoothWithSEThreeVarFunction, iPosition:=1)
+                    Case "Points + Fitted Lines"
+                        AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="color", iPosition:=7)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothThreeVarFunction, iPosition:=2)
+                    Case "Points + Fitted Lines + SE"
+                        AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="color", iPosition:=7)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_smooth_with_se", clsRFunctionParameter:=clsGeomSmoothWithSEThreeVarFunction, iPosition:=2)
+                    Case "Points + Parallel Lines"
+                        AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="color", iPosition:=7)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_smooth_with_se", clsRFunctionParameter:=clsGeomParallelSlopesFunction, iPosition:=2)
+                    Case "Points + Parallel Lines + SE"
+                        AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByNumeric, strParamName:="color", iPosition:=7)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_smooth_with_se", clsRFunctionParameter:=clsGeomParallelSlopesWithSEFunction, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "categorical" Then
-                Debug.Print("Motherfucking R-Instat Codebase")
                 ucrInputCategoricalByNumericByCategorical.Visible = True
                 ucrChkFreeScaleYAxis.Checked = False
                 ucrChkFreeScaleYAxis.Visible = False
                 AddRemoveFreeScaleX(True)
+                clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
                 AddRemoveAesFillParam(clsTempAesFunction:=clsAesCategoricalByNumericYNumeric, strParamName:="fill", iPosition:=6)
-                Debug.Print($"Fucker 3 AES FUNC: {clsAesCategoricalByNumericYNumeric.ToScript()}")
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
                 clsGlobalAes = clsAesCategoricalByNumericYNumeric
                 Select Case ucrInputCategoricalByNumericByCategorical.GetText
@@ -868,6 +990,7 @@ Public Class dlgDescribeTwoVarGraph
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
                 ucrInputNumericByCategoricalByCategorical.Visible = True
                 AddRemoveFreeScaleX(True)
+                clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
                 AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByCategoricalYNumeric, strParamName:="fill", iPosition:=6)
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                 clsGlobalAes = clsAesNumericByCategoricalYNumeric
@@ -914,6 +1037,11 @@ Public Class dlgDescribeTwoVarGraph
                     End Select
                 End If
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" Then
+                If rdoTwoVars.Checked Then
+                    clsGeomPoint.RemoveParameterByName("aes")
+                    clsAesNumericByNumeric.RemoveParameterByName("fill")
+                    clsAesNumericByNumeric.RemoveParameterByName("color")
+                End If
                 ucrChkXSidePlot.Visible = True
                 ucrChkYSidePlot.Visible = True
                 ucrInputXSidePlotOptions.Visible = ucrChkXSidePlot.Checked
@@ -934,9 +1062,23 @@ Public Class dlgDescribeTwoVarGraph
                     Case "Line plot + points"
                         clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLine, iPosition:=1)
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+                    Case "Fitted Line"
+                        clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=1)
+                    Case "Fitted Line + SE"
+                        clsBaseOperator.AddParameter("geom_smooth_with_se", clsRFunctionParameter:=clsGeomSmoothWithSEFunction, iPosition:=1)
+                    Case "Points + Fitted Line"
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=2)
+                    Case "Points + Fitted Line + SE"
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_smooth_with_se", clsRFunctionParameter:=clsGeomSmoothWithSEFunction, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" Then
-                Debug.Print("Yoooo.... Chill...")
+                If rdoTwoVars.Checked Then
+                    clsAesCategoricalByNumericYNumeric.RemoveParameterByName("fill")
+                    clsAesCategoricalByNumericXNumeric.RemoveParameterByName("fill")
+                    clsGeomPoint.RemoveParameterByName("aes")
+                End If
                 ucrChkXSidePlot.Visible = True
                 ucrChkYSidePlot.Visible = True
                 ucrInputXSidePlotOptions.Visible = ucrChkXSidePlot.Checked
@@ -946,7 +1088,6 @@ Public Class dlgDescribeTwoVarGraph
                 ucrChkFreeScaleYAxis.Visible = False
                 AddRemoveFreeScaleX(True)
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
-                Debug.Print($"Fucker 2 AES FUNC: {clsAesCategoricalByNumericYNumeric.ToScript()}")
                 clsGlobalAes = clsAesCategoricalByNumericYNumeric
                 Select Case ucrInputCategoricalByNumeric.GetText
                     Case "Boxplot"
@@ -1003,11 +1144,62 @@ Public Class dlgDescribeTwoVarGraph
                     Case "Density plot"
                         ucrChkXSidePlot.Visible = False
                         ucrChkYSidePlot.Visible = False
+                        ucrInputXSidePlotOptions.Visible = False
+                        ucrInputYSidePlotOptions.Visible = False
+                        clsAesCategoricalByNumericXNumeric.RemoveParameterByName("y")
+                        clsAesCategoricalByNumericXNumeric.AddParameter("colour", "value", iPosition:=2)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericXNumeric
                         clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
+                    Case "Density Ridges"
+                        ucrChkXSidePlot.Visible = False
+                        ucrChkYSidePlot.Visible = False
+                        ucrInputXSidePlotOptions.Visible = False
+                        ucrInputYSidePlotOptions.Visible = False
+                        clsAesCategoricalByNumericXNumeric.RemoveParameterByName("colour")
+                        clsAesCategoricalByNumericXNumeric.AddParameter("y", "value", iPosition:=2)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                        clsBaseOperator.AddParameter("geom_density_ridges", clsRFunctionParameter:=clsGeomDensityRidgesFunction, iPosition:=1)
+                    Case "Point Plot + Means"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                    Case "Point Plot + Means + SE"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
+                    Case "Jitter Plot + Means"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                    Case "Jitter Plot + Means + SE"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+                If rdoTwoVars.Checked Then
+                    clsAesNumericByCategoricalYNumeric.RemoveParameterByName("fill")
+                    clsAesNumericByCategoricalXNumeric.RemoveParameterByName("fill")
+                    clsGeomPoint.RemoveParameterByName("aes")
+                End If
                 ucrChkXSidePlot.Visible = True
                 ucrChkYSidePlot.Visible = True
                 ucrInputXSidePlotOptions.Visible = ucrChkXSidePlot.Checked
@@ -1083,11 +1275,66 @@ Public Class dlgDescribeTwoVarGraph
                     Case "Density plot"
                         ucrChkXSidePlot.Visible = False
                         ucrChkYSidePlot.Visible = False
+                        ucrInputXSidePlotOptions.Visible = False
+                        ucrInputYSidePlotOptions.Visible = False
+                        clsAesNumericByCategoricalXNumeric.RemoveParameterByName("y")
+                        clsAesNumericByCategoricalXNumeric.AddParameter("colour", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalXNumeric
                         clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
+                    Case "Density Ridges"
+                        ucrChkXSidePlot.Visible = False
+                        ucrChkYSidePlot.Visible = False
+                        ucrInputXSidePlotOptions.Visible = False
+                        ucrInputYSidePlotOptions.Visible = False
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                        clsBaseOperator.AddParameter("geom_density_ridges", clsRFunctionParameter:=clsGeomDensityRidgesFunction, iPosition:=1)
+                    Case "Point Plot + Means"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                    Case "Point Plot + Means + SE"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
+                    Case "Jitter Plot + Means"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                    Case "Jitter Plot + Means + SE"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
+                If rdoTwoVars.Checked Then
+                    clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("fill")
+                End If
                 ucrChkYSidePlot.Visible = False
                 ucrChkXSidePlot.Visible = False
                 ucrInputXSidePlotOptions.Visible = False
@@ -1214,6 +1461,9 @@ Public Class dlgDescribeTwoVarGraph
             ucr1stFactorReceiver.Location = New Point(290, 425)
             ucrInputStation.Location = New Point(390, 425)
             lblFacetBy.Location = New Point(291, 410)
+        ElseIf rdoSide.Checked Then
+            lblCollapse.Location = New Point(20, 425)
+            ucrInputCollapse.Location = New Point(75, 423)
         End If
     End Sub
 
@@ -1312,6 +1562,10 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrChkFreeScaleYAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScaleYAxis.ControlValueChanged
         SetFreeYAxis()
+    End Sub
+
+    Private Sub ucrInputCollapse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCollapse.ControlValueChanged
+        clsGGSideFunction.AddParameter("collapse", Chr(34) & ucrInputCollapse.GetText() & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -1459,6 +1713,8 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrPnlByPairs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlByPairs.ControlValueChanged
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
+        'ucrInputStation.SetName(strFacetWrap)
+        'ucrInputStation.SetItems(strAllFacetOptions)
         If rdoTwoVars.Checked Then
             lblThirdType.Visible = False
             lblSecondBy.Visible = False
@@ -1470,11 +1726,15 @@ Public Class dlgDescribeTwoVarGraph
             ucrReceiverFill.Visible = True
             ucrSaveGraph.SetPrefix("three_var_graph")
         ElseIf rdoSide.Checked Then
+            'ucrInputStation.SetName(strFacetWrap)
+            'ucrInputStation.SetItems({strFacetWrap})
             lblThirdType.Visible = False
             lblSecondBy.Visible = False
-            ucr1stFactorReceiver.Visible = False
-            ucrInputStation.Visible = False
-            lblFacetBy.Visible = False
+            'ucr1stFactorReceiver.Visible = True
+            'ucrInputStation.Visible = True
+            'lblFacetBy.Visible = True
+            ucrChkXSidePlot.Visible = True
+            ucrChkYSidePlot.Visible = True
             ucrSaveGraph.SetPrefix("graph_with_side_plots")
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
@@ -1485,14 +1745,12 @@ Public Class dlgDescribeTwoVarGraph
         End If
         If bRCodeSet Then
             If rdoTwoVars.Checked Then
-                ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
                 clsDummyFunction.AddParameter("checked", "two_vars", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
             ElseIf rdoThreeVars.Checked Then
                 clsDummyFunction.AddParameter("checked", "three_vars", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
             ElseIf rdoSide.Checked Then
-                If clsBaseOperator.ContainsParameter("facets") Then
-                    clsBaseOperator.RemoveParameterByName("facets")
-                End If
                 ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
                 clsDummyFunction.AddParameter("checked", "side", iPosition:=0)
             Else
@@ -1500,6 +1758,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
             End If
         End If
+        AddRemoveFacets()
         HideShowGroupSummariesControl()
         HideShowGroupOptionsControl()
         AddRemoveColourParameter()
@@ -1510,6 +1769,7 @@ Public Class dlgDescribeTwoVarGraph
         Results()
         HideShowFillReceiver()
         ChangeLocations()
+        AddRemoveSidePlotRelatedFunctionsAndControls()
     End Sub
 
     Private Sub HideShowGroupSummariesControl()
@@ -1594,7 +1854,6 @@ Public Class dlgDescribeTwoVarGraph
         HideShowFillReceiver()
         AddedXSidePlots()
         clsAesLabelFunction.AddParameter("colour", ucrReceiverFill.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-        clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
     Private Sub ucrReceiverFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged
@@ -1640,7 +1899,8 @@ Public Class dlgDescribeTwoVarGraph
         clsXsideHistogramFunction.RemoveParameterByName("mapping")
         clsXsideHistogramFunction.RemoveParameterByName("stat")
         clsAesXLabelFunction.RemoveParameterByName("fill")
-        If Not ucrChkXSidePlot.Checked Then
+        If Not (rdoSide.Checked AndAlso ucrChkXSidePlot.Checked) Then
+            AddRemoveSidePlotRelatedFunctionsAndControls()
             Exit Sub
         End If
         Select Case ucrInputXSidePlotOptions.GetText()
@@ -1679,7 +1939,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsXsideHistogramFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesXLabelFunction, bIncludeArgumentName:=False, iPosition:=3)
                 clsBaseOperator.AddParameter("ggside_x", clsRFunctionParameter:=clsXsideHistogramFunction, iPosition:=1)
         End Select
-        AddRemoveSidePlotThemeFunction()
+        AddRemoveSidePlotRelatedFunctionsAndControls()
     End Sub
 
     Private Sub AddedYSidePlots()
@@ -1696,7 +1956,8 @@ Public Class dlgDescribeTwoVarGraph
         clsAesYLabelFunction.RemoveParameterByName("fill")
         clsAesYLabelFunction.RemoveParameterByName("x")
         clsBaseOperator.RemoveParameterByName("ggside_y")
-        If Not ucrChkYSidePlot.Checked Then
+        If Not (rdoSide.Checked AndAlso ucrChkYSidePlot.Checked) Then
+            AddRemoveSidePlotRelatedFunctionsAndControls()
             Exit Sub
         End If
         Select Case ucrInputYSidePlotOptions.GetText()
@@ -1729,7 +1990,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsYsideHistogramFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesYLabelFunction, iPosition:=3)
                 clsBaseOperator.AddParameter("ggside_y", clsRFunctionParameter:=clsYsideHistogramFunction, bIncludeArgumentName:=False, iPosition:=1)
         End Select
-        AddRemoveSidePlotThemeFunction()
+        AddRemoveSidePlotRelatedFunctionsAndControls()
     End Sub
 
     Private Sub AddRemoveFillColorParams(ucrReceiverTemp As ucrReceiverSingle, clsTempRFunction As RFunction, paramName As String, iPosition As Integer)
@@ -1830,11 +2091,29 @@ Public Class dlgDescribeTwoVarGraph
         MsgBoxTranslate("Pick a categorical variable different from those selected in the " & strMessage & " to avoid Errors", vbOKOnly, "Matching Factor Variables")
     End Sub
 
-    Private Sub AddRemoveSidePlotThemeFunction()
-        If ucrChkXSidePlot.Checked OrElse ucrChkYSidePlot.Checked Then
-            clsBaseOperator.AddParameter("side_plot_theme", clsRFunctionParameter:=clsSidePlotThemeFunction, bIncludeArgumentName:=False, iPosition:=12)
+    Private Sub AddRemoveSidePlotRelatedFunctionsAndControls()
+        If rdoSide.Checked Then
+            ucrChkXSidePlot.Visible = True
+            ucrChkYSidePlot.Visible = True
+            If (ucrChkXSidePlot.Checked OrElse ucrChkYSidePlot.Checked) Then
+                clsBaseOperator.AddParameter("side_plot_theme", clsRFunctionParameter:=clsSidePlotThemeFunction, bIncludeArgumentName:=False, iPosition:=12)
+                clsBaseOperator.AddParameter("ggside_collapse", clsRFunctionParameter:=clsGGSideFunction, iPosition:=13)
+            Else
+                clsBaseOperator.RemoveParameterByName("side_plot_theme")
+                clsBaseOperator.RemoveParameterByName("ggside_y")
+                clsBaseOperator.RemoveParameterByName("ggside_x")
+                clsBaseOperator.RemoveParameterByName("ggside_collapse")
+            End If
         Else
             clsBaseOperator.RemoveParameterByName("side_plot_theme")
+            clsBaseOperator.RemoveParameterByName("ggside_y")
+            clsBaseOperator.RemoveParameterByName("ggside_x")
+            clsBaseOperator.RemoveParameterByName("ggside_collapse")
+
+            ucrChkXSidePlot.Visible = False
+            ucrChkYSidePlot.Visible = False
+            ucrInputXSidePlotOptions.Visible = False
+            ucrInputYSidePlotOptions.Visible = False
         End If
     End Sub
 
