@@ -154,6 +154,7 @@ Public Class dlgConditionalQuantilePlot
 
         clsConditionalQuantileFunction.SetPackageName("openair")
         clsConditionalQuantileFunction.SetRCommand("conditionalQuantile")
+        clsConditionalQuantileFunction.AddParameter("plot", "FALSE", iPosition:=11)
 
         clsConditionalQuantileOperator.SetOperation("$")
         clsConditionalQuantileOperator.AddParameter("left", clsRFunctionParameter:=clsConditionalQuantileFunction)
