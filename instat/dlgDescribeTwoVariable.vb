@@ -50,7 +50,7 @@ Public Class dlgDescribeTwoVariable
                                                           "signif_fig", "include_margins"})
 
     'Format Operators
-    Private clsPipeOperator, clsFactorOperator, clsSummariesOperator, clsTabFootnoteOperator, clsMapPipeOperator,
+    Private clsPipeOperator, clsFactorOperator, clsSummariesOperator, clsTabFootnoteOperator, clsMapPipeOperator, clsMapPipeOperator2,
             clsJoiningPipeOperator, clsMutableOperator, clsAnovaSwapTable2Opeator, clsAnovaTable2Operator, clsYlist2Operator, clsYlistOperator As New ROperator
     Private iUcrBaseXLocation, iDialogueXsize As Integer
 
@@ -222,6 +222,7 @@ Public Class dlgDescribeTwoVariable
         clsPipeOperator = New ROperator
         clsTabFootnoteOperator = New ROperator
         clsMapPipeOperator = New ROperator
+        clsMapPipeOperator2 = New ROperator
         clsgtFunction = New RFunction
         clsMapSetNamesFunction = New RFunction
 
@@ -457,6 +458,11 @@ Public Class dlgDescribeTwoVariable
         clsMapPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMapSetNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsMapPipeOperator.bSpaceAroundOperation = True
 
+        clsMapPipeOperator2.SetOperation("%>%")
+        clsMapPipeOperator2.AddParameter("left", clsRFunctionParameter:=clsMapping2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsMapPipeOperator2.AddParameter("right", clsRFunctionParameter:=clsMapSetNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsMapPipeOperator2.bSpaceAroundOperation = True
+
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
         clsJoiningPipeOperator.bBrackets = False
@@ -488,6 +494,7 @@ Public Class dlgDescribeTwoVariable
         ucrSaveTable.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=1)
         ucrSaveTable.AddAdditionalRCode(clsGroupByPipeOperator4, iAdditionalPairNo:=2)
         ucrSaveTable.AddAdditionalRCode(clsMapPipeOperator, iAdditionalPairNo:=3)
+        ucrSaveTable.AddAdditionalRCode(clsMapPipeOperator2, iAdditionalPairNo:=4)
 
         ucrChkOmitMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrReceiverSecondTwoVariableFactor.SetRCode(clsDummyFunction, bReset)
@@ -701,10 +708,10 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
                 If ucrChkSwapXYVar.Checked Then
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator2)
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)
                 Else
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                     clsDummyFunction.AddParameter("var", "False", iPosition:=5)
                 End If
                 If ucrChkCorrelations.Checked Then
@@ -715,7 +722,14 @@ Public Class dlgDescribeTwoVariable
                     clsDummyFunction.AddParameter("corr", "False", iPosition:=4)
                     ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRCorrelationFunction)
                 End If
-                ucrSaveTable.Visible = False
+
+                ' --- was: ucrSaveTable.Visible = False, I have changed it to ucrSaveTable.Visible = True so that it is visible ---
+                ucrSaveTable.Visible = True
+                ucrSaveTable.SetPrefix("two_var_model")
+                ucrSaveTable.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+                ucrSaveTable.SetAssignToIfUncheckedValue("last_model")
+                ucrSaveTable.SetCheckBoxText("Store Model")
+
                 cmdFormatTable.Visible = False
                 ucrChkInteraction.Visible = False
                 ucrChkMeans.Visible = True
@@ -1048,6 +1062,11 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.Location = New Point(iUcrBaseXLocation, 395)
                 Me.Size = New Point(iDialogueXsize, 485)
                 cmdFormatTable.Location = New Point(330, 370)
+            ElseIf IsNumericByNumeric() Then
+                ucrSaveTable.Location = New Point(iUcrBaseXLocation, 339)
+                ucrSaveTable.Size = New Point(350, 20)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 369)
+                Me.Size = New Point(iDialogueXsize, 465)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New Point(iDialogueXsize, 425)
