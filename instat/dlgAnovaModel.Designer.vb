@@ -26,16 +26,18 @@ Partial Class dlgAnovaModel
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExpressionAnovaModel = New instat.ucrReceiverExpression()
         Me.lblExplanatoryModel = New System.Windows.Forms.Label()
+        Me.ucrReceiverErrorAnovaModel = New instat.ucrReceiverExpression()
+        Me.lblErrorModel = New System.Windows.Forms.Label()
         Me.ucrReceiverAnovaResponseVar = New instat.ucrReceiverSingle()
         Me.lblResponseVariable = New System.Windows.Forms.Label()
         Me.lblRVType = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrInputModelPreview = New instat.ucrInputTextBox()
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrModelName = New instat.ucrSave()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSecondCalc = New System.Windows.Forms.GroupBox()
         Me.cmdCos = New System.Windows.Forms.Button()
@@ -76,7 +78,7 @@ Partial Class dlgAnovaModel
         '
         Me.ucrChkConvertToVariate.AutoSize = True
         Me.ucrChkConvertToVariate.Checked = False
-        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(594, 59)
+        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(594, 38)
         Me.ucrChkConvertToVariate.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
         Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(180, 34)
@@ -86,7 +88,7 @@ Partial Class dlgAnovaModel
         '
         Me.ucrReceiverExpressionAnovaModel.AutoSize = True
         Me.ucrReceiverExpressionAnovaModel.frmParent = Me
-        Me.ucrReceiverExpressionAnovaModel.Location = New System.Drawing.Point(391, 132)
+        Me.ucrReceiverExpressionAnovaModel.Location = New System.Drawing.Point(391, 104)
         Me.ucrReceiverExpressionAnovaModel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrReceiverExpressionAnovaModel.Name = "ucrReceiverExpressionAnovaModel"
         Me.ucrReceiverExpressionAnovaModel.Selector = Nothing
@@ -99,18 +101,42 @@ Partial Class dlgAnovaModel
         '
         Me.lblExplanatoryModel.AutoSize = True
         Me.lblExplanatoryModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExplanatoryModel.Location = New System.Drawing.Point(395, 110)
+        Me.lblExplanatoryModel.Location = New System.Drawing.Point(395, 82)
         Me.lblExplanatoryModel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExplanatoryModel.Name = "lblExplanatoryModel"
         Me.lblExplanatoryModel.Size = New System.Drawing.Size(143, 20)
         Me.lblExplanatoryModel.TabIndex = 9
         Me.lblExplanatoryModel.Text = "Explanatory Model:"
         '
+        'ucrReceiverErrorAnovaModel
+        '
+        Me.ucrReceiverErrorAnovaModel.AutoSize = True
+        Me.ucrReceiverErrorAnovaModel.frmParent = Me
+        Me.ucrReceiverErrorAnovaModel.Location = New System.Drawing.Point(391, 178)
+        Me.ucrReceiverErrorAnovaModel.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrReceiverErrorAnovaModel.Name = "ucrReceiverErrorAnovaModel"
+        Me.ucrReceiverErrorAnovaModel.Selector = Nothing
+        Me.ucrReceiverErrorAnovaModel.Size = New System.Drawing.Size(384, 45)
+        Me.ucrReceiverErrorAnovaModel.strNcFilePath = ""
+        Me.ucrReceiverErrorAnovaModel.TabIndex = 12
+        Me.ucrReceiverErrorAnovaModel.ucrSelector = Nothing
+        '
+        'lblErrorModel
+        '
+        Me.lblErrorModel.AutoSize = True
+        Me.lblErrorModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblErrorModel.Location = New System.Drawing.Point(395, 156)
+        Me.lblErrorModel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblErrorModel.Name = "lblErrorModel"
+        Me.lblErrorModel.Size = New System.Drawing.Size(66, 20)
+        Me.lblErrorModel.TabIndex = 11
+        Me.lblErrorModel.Text = "Error???:"
+        '
         'ucrReceiverAnovaResponseVar
         '
         Me.ucrReceiverAnovaResponseVar.AutoSize = True
         Me.ucrReceiverAnovaResponseVar.frmParent = Me
-        Me.ucrReceiverAnovaResponseVar.Location = New System.Drawing.Point(391, 59)
+        Me.ucrReceiverAnovaResponseVar.Location = New System.Drawing.Point(391, 38)
         Me.ucrReceiverAnovaResponseVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAnovaResponseVar.Name = "ucrReceiverAnovaResponseVar"
         Me.ucrReceiverAnovaResponseVar.Selector = Nothing
@@ -123,7 +149,7 @@ Partial Class dlgAnovaModel
         '
         Me.lblResponseVariable.AutoSize = True
         Me.lblResponseVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblResponseVariable.Location = New System.Drawing.Point(393, 36)
+        Me.lblResponseVariable.Location = New System.Drawing.Point(393, 16)
         Me.lblResponseVariable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblResponseVariable.Name = "lblResponseVariable"
         Me.lblResponseVariable.Size = New System.Drawing.Size(148, 20)
@@ -141,10 +167,21 @@ Partial Class dlgAnovaModel
         Me.lblRVType.TabIndex = 14
         Me.lblRVType.Text = "Response Variable Type:"
         '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblType.Location = New System.Drawing.Point(221, 296)
+        Me.lblType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(77, 20)
+        Me.lblType.TabIndex = 13
+        Me.lblType.Text = "________"
+        '
         'ucrTryModelling
         '
         Me.ucrTryModelling.AutoSize = True
-        Me.ucrTryModelling.Location = New System.Drawing.Point(19, 376)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(19, 404)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
@@ -157,7 +194,7 @@ Partial Class dlgAnovaModel
         Me.ucrInputModelPreview.AutoSize = True
         Me.ucrInputModelPreview.IsMultiline = False
         Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(178, 428)
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(178, 456)
         Me.ucrInputModelPreview.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
         Me.ucrInputModelPreview.Size = New System.Drawing.Size(392, 32)
@@ -167,7 +204,7 @@ Partial Class dlgAnovaModel
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(29, 434)
+        Me.lblModelPreview.Location = New System.Drawing.Point(29, 462)
         Me.lblModelPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(114, 20)
@@ -186,7 +223,7 @@ Partial Class dlgAnovaModel
         'ucrModelName
         '
         Me.ucrModelName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrModelName.Location = New System.Drawing.Point(32, 468)
+        Me.ucrModelName.Location = New System.Drawing.Point(32, 496)
         Me.ucrModelName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrModelName.Name = "ucrModelName"
         Me.ucrModelName.Size = New System.Drawing.Size(453, 36)
@@ -195,7 +232,7 @@ Partial Class dlgAnovaModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(623, 462)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(623, 490)
         Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(186, 34)
@@ -203,22 +240,11 @@ Partial Class dlgAnovaModel
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
-        'cmdModelOptions
-        '
-        Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(623, 420)
-        Me.cmdModelOptions.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmdModelOptions.Name = "cmdModelOptions"
-        Me.cmdModelOptions.Size = New System.Drawing.Size(186, 34)
-        Me.cmdModelOptions.TabIndex = 19
-        Me.cmdModelOptions.Text = "Model Options"
-        Me.cmdModelOptions.UseVisualStyleBackColor = True
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(32, 516)
+        Me.ucrBase.Location = New System.Drawing.Point(32, 544)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -232,7 +258,7 @@ Partial Class dlgAnovaModel
         Me.grpSecondCalc.Controls.Add(Me.cmdLog)
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
-        Me.grpSecondCalc.Location = New System.Drawing.Point(588, 178)
+        Me.grpSecondCalc.Location = New System.Drawing.Point(588, 232)
         Me.grpSecondCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.grpSecondCalc.Name = "grpSecondCalc"
         Me.grpSecondCalc.Padding = New System.Windows.Forms.Padding(4)
@@ -319,7 +345,7 @@ Partial Class dlgAnovaModel
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
-        Me.grpFirstCalc.Location = New System.Drawing.Point(393, 178)
+        Me.grpFirstCalc.Location = New System.Drawing.Point(393, 232)
         Me.grpFirstCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.grpFirstCalc.Name = "grpFirstCalc"
         Me.grpFirstCalc.Padding = New System.Windows.Forms.Padding(4)
@@ -462,19 +488,21 @@ Partial Class dlgAnovaModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(847, 613)
+        Me.ClientSize = New System.Drawing.Size(847, 641)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.cmdDisplayOptions)
-        Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblRVType)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.ucrInputModelPreview)
         Me.Controls.Add(Me.lblModelPreview)
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
+        Me.Controls.Add(Me.ucrReceiverErrorAnovaModel)
+        Me.Controls.Add(Me.lblErrorModel)
         Me.Controls.Add(Me.ucrReceiverExpressionAnovaModel)
         Me.Controls.Add(Me.lblExplanatoryModel)
         Me.Controls.Add(Me.ucrReceiverAnovaResponseVar)
@@ -495,16 +523,18 @@ Partial Class dlgAnovaModel
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents ucrReceiverExpressionAnovaModel As ucrReceiverExpression
     Friend WithEvents lblExplanatoryModel As Label
+    Friend WithEvents ucrReceiverErrorAnovaModel As ucrReceiverExpression
+    Friend WithEvents lblErrorModel As Label
     Friend WithEvents ucrReceiverAnovaResponseVar As ucrReceiverSingle
     Friend WithEvents lblResponseVariable As Label
     Friend WithEvents lblRVType As Label
+    Friend WithEvents lblType As Label
     Friend WithEvents ucrTryModelling As ucrTry
     Friend WithEvents ucrInputModelPreview As ucrInputTextBox
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents ucrModelName As ucrSave
     Friend WithEvents cmdDisplayOptions As Button
-    Friend WithEvents cmdModelOptions As Button
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSecondCalc As GroupBox
     Friend WithEvents cmdCos As Button
