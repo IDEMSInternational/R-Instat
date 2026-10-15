@@ -66,7 +66,6 @@ Public Class dlgDescribeTwoVarGraph
     Private clsFacetFunction As New RFunction
     Private clsRowVarsFunction, clsColVarsFunction As New RFunction
 
-    'Private clsGeomTextFunction As New RFunction
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
     Private strFirstVariablesType, strSecondVariableType, strThirdVariableType As String
@@ -83,7 +82,6 @@ Public Class dlgDescribeTwoVarGraph
     Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
     Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
     Private ReadOnly strNone As String = "None"
-    'Private strAllFacetOptions() As String = {strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone}
 
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
@@ -339,11 +337,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strFacetRowAll, strFacetColAll, strFacetRowAndCol, strFacetRowAndColAll, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        'Dim dctCollapse As New Dictionary(Of String, String)
-        'dctCollapse.Add("all", Chr(34) & "all" & Chr(34))
-        'dctCollapse.Add("x", Chr(34) & "x" & Chr(34))
-        'dctCollapse.Add("y", Chr(34) & "y" & Chr(34))
-        'ucrInputCollapse.SetParameter(New RParameter("collapse", 0))
         ucrInputCollapse.SetItems({"all", "x", "y"})
         ucrInputCollapse.SetName("all")
         ucrInputCollapse.SetDropDownStyleAsNonEditable()
@@ -360,7 +353,6 @@ Public Class dlgDescribeTwoVarGraph
         HideShowGroupSummariesControl()
         HideShowGroupOptionsControl()
         AddRemoveSidePlotRelatedFunctionsAndControls()
-        'HideSidePlotControlsAndCode()
     End Sub
 
     Private Sub SetDefaults()
@@ -597,14 +589,12 @@ Public Class dlgDescribeTwoVarGraph
         clsStatSummaryMeansPlusSEFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
         clsStatSummaryMeansPlusSEFunction.AddParameter("size", "1", iPosition:=3)
 
-        'geom_smooth(method = "lm", se = FALSE, color = "blue")
         clsGeomSmoothFunction.SetPackageName("ggplot2")
         clsGeomSmoothFunction.SetRCommand("geom_smooth")
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
         clsGeomSmoothFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
 
-        'geom_smooth(method = "lm", se = TRUE, fill = "blue", alpha = 0.2)
         clsGeomSmoothWithSEFunction.SetPackageName("ggplot2")
         clsGeomSmoothWithSEFunction.SetRCommand("geom_smooth")
         clsGeomSmoothWithSEFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
@@ -634,7 +624,6 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomSmoothWithSEThreeVarFunction.SetRCommand("geom_smooth")
         clsGeomSmoothWithSEThreeVarFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothWithSEThreeVarFunction.AddParameter("se", "TRUE", iPosition:=1)
-        'clsGeomSmoothWithSEThreeVarFunction.AddParameter("fill", Chr(34) & "blue" & Chr(34), iPosition:=2)
         clsGeomSmoothWithSEThreeVarFunction.AddParameter("alpha", "0.2", iPosition:=3)
 
         clsGeomMosaic.SetPackageName("ggmosaic")
@@ -772,7 +761,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=6)
         ucrSaveGraph.AddAdditionalRCode(clsPairOperator, bReset)
 
-        'ucrInputCollapse.SetRCode(clsGGSideFunction, bReset)
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrReceiverSecondVar.SetRCode(clsAesCategoricalByCategoricalBarChart, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
@@ -881,7 +869,6 @@ Public Class dlgDescribeTwoVarGraph
             Else
                 strThirdVariableType = ""
             End If
-
 
             ucrChkFreeScaleYAxis.Visible = True
             ucrInputPosition.Visible = False
@@ -1713,8 +1700,6 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrPnlByPairs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlByPairs.ControlValueChanged
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
-        'ucrInputStation.SetName(strFacetWrap)
-        'ucrInputStation.SetItems(strAllFacetOptions)
         If rdoTwoVars.Checked Then
             lblThirdType.Visible = False
             lblSecondBy.Visible = False
@@ -1726,13 +1711,8 @@ Public Class dlgDescribeTwoVarGraph
             ucrReceiverFill.Visible = True
             ucrSaveGraph.SetPrefix("three_var_graph")
         ElseIf rdoSide.Checked Then
-            'ucrInputStation.SetName(strFacetWrap)
-            'ucrInputStation.SetItems({strFacetWrap})
             lblThirdType.Visible = False
             lblSecondBy.Visible = False
-            'ucr1stFactorReceiver.Visible = True
-            'ucrInputStation.Visible = True
-            'lblFacetBy.Visible = True
             ucrChkXSidePlot.Visible = True
             ucrChkYSidePlot.Visible = True
             ucrSaveGraph.SetPrefix("graph_with_side_plots")
