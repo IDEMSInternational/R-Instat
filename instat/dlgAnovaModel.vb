@@ -168,10 +168,6 @@ Public Class dlgAnovaModel
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrModelName.ControlValueChanged
         Dim strModel As String = clsAOVFunction.GetRObjectToAssignTo()
 
-        '---------------------------------------------------------------------
-        'model summaries outputs
-
-        'stats output formula for the model
         clsFormulaFunction.AddParameter("x", strParameterValue:=strModel, iPosition:=0)
         clsFormulaFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -179,7 +175,6 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
-        'anova output summary for the model
         clsAnovaFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsAnovaFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -187,7 +182,6 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
-        'summary output for the model (the ANOVA table for aov)
         clsSummaryFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -195,7 +189,6 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
-        'confidence output limits for the model
         clsConfint.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsConfint.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -203,20 +196,11 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
-        '---------------------------------------------------------------------
-        'column outputs
-        'note set assign has not been set here because it's done at the sub dialog level
-        'through individual save controls linked to this dialog data frame selector
-
         clsResidualFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsFittedValuesFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsRstandardFunction.AddParameter("model", strParameterValue:=strModel, iPosition:=0)
         clsHatvaluesFunction.AddParameter("model", strParameterValue:=strModel, iPosition:=0)
 
-        '---------------------------------------------------------------------
-        'graphical outputs
-
-        'model plot output
         clsVisReg.AddParameter("fit", strParameterValue:=strModel, iPosition:=0)
         clsVisReg.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
@@ -224,7 +208,6 @@ Public Class dlgAnovaModel
                                   strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                   strObjectName:="last_graph")
 
-        'residual plots outputs
         For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
             kvp.Value.AddParameter("x", strParameterValue:=strModel, iPosition:=0)
             kvp.Value.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
@@ -265,9 +248,6 @@ Public Class dlgAnovaModel
             ucrReceiverErrorAnovaModel.AddtoCombobox(ucrReceiverErrorAnovaModel.GetText)
         End If
     End Sub
-
-    '---------------------------------------------------------------------
-    'Keyboard buttons. They write to whichever of the two expression receivers was used last.
 
     Private Sub ucrExpressionReceivers_Enter(sender As Object, e As EventArgs) Handles ucrReceiverExpressionAnovaModel.Enter, ucrReceiverErrorAnovaModel.Enter
         ucrActiveExpression = DirectCast(sender, ucrReceiverExpression)
@@ -355,13 +335,7 @@ Public Class dlgAnovaModel
         bResetOptionsSubDialog = False
     End Sub
 
-    '---------------------------------------------------------------------
-    'Formula and preview
 
-    ''' <summary>
-    ''' Builds the right hand side of the formula: the Explanatory Model, followed by
-    ''' " + Error(...)" when the Error receiver is not empty (issue #10554, point c).
-    ''' </summary>
     Private Sub UpdateFormulaRhs()
         Dim strRhs As String = ucrReceiverExpressionAnovaModel.GetText().Trim()
         If strRhs = "" Then
@@ -388,9 +362,6 @@ Public Class dlgAnovaModel
         UpdatePreview()
         TestOKEnabled()
     End Sub
-
-    '---------------------------------------------------------------------
-    'Response variable
 
     Public Sub ResponseConvert()
         If Not bRCodeSet Then
@@ -428,11 +399,6 @@ Public Class dlgAnovaModel
         TestOKEnabled()
     End Sub
 
-    ''' <summary>
-    ''' The pull-down only offers aov (issue #10554, point b). It stays as a pull-down
-    ''' so that other models can be added later. ucrFamily rebuilds its list every time the
-    ''' response data type changes, so this is applied after each of those updates.
-    ''' </summary>
     Private Sub RestrictFamilyToAov()
         Dim lstDistributions = ucrFamily.lstCurrentDistributions
         Dim cboDistributions = ucrFamily.ucrInputDistributions.cboInput
