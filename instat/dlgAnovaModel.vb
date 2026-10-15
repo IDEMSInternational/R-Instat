@@ -19,20 +19,33 @@ Imports RDotNet
 
 Public Class dlgAnovaModel
     Public strVariableType As String
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public bRCodeSet As Boolean = False
     Public clsFormulaOperator As New ROperator
+
+    'The model: only the aov object is kept (issue #10554, point e)
     Public clsAOVFunction, clsRConvert As New RFunction
+
+    'Displayed (not saved to the data frame) outputs, passed on to the Display Options sub dialog
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsVisReg As New RFunction
+
+    'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     Public bResetOptionsSubDialog As Boolean = False
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
+
+    'The expression receiver (Explanatory Model or Error) that the keyboard buttons write to
     Private ucrActiveExpression As ucrReceiverExpression
 
     Private Const strAovNameTag As String = "Normal_aov"
+
+    'True while the Error receiver has content. The model is then an aovlist, which anova() cannot handle
+    Private bErrorTermActive As Boolean = False
 
     Private Sub dlgAnovaModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -49,7 +62,7 @@ Public Class dlgAnovaModel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 371
+        ucrBase.iHelpTopicID = 371 'todo. this is the Fit Model help topic, replace with the Anova one
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -63,6 +76,9 @@ Public Class dlgAnovaModel
         ucrChkConvertToVariate.AddParameterIsRFunctionCondition(True, "x", True)
         ucrChkConvertToVariate.AddParameterIsRFunctionCondition(False, "x", False)
 
+        'The right hand side of the formula is built in UpdateFormulaRhs, because it is the
+        'combination of the Explanatory Model and the optional Error term, so neither
+        'receiver is linked directly to a parameter.
         ucrReceiverExpressionAnovaModel.bWithQuotes = False
         ucrReceiverErrorAnovaModel.bWithQuotes = False
         ucrTryModelling.SetReceiver(ucrReceiverExpressionAnovaModel)
@@ -160,7 +176,18 @@ Public Class dlgAnovaModel
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsAOVFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 1)
+        bErrorTermActive = False
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+
+        'attach/detach the data frame, as in Fit Model. Without it the Try button
+        'cannot find the data frame ("object 'vaneeuwijk.drymatter' not found")
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveAnovaModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveAnovaModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
 
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
@@ -168,6 +195,10 @@ Public Class dlgAnovaModel
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrModelName.ControlValueChanged
         Dim strModel As String = clsAOVFunction.GetRObjectToAssignTo()
 
+        '---------------------------------------------------------------------
+        'model summaries outputs
+
+        'stats output formula for the model
         clsFormulaFunction.AddParameter("x", strParameterValue:=strModel, iPosition:=0)
         clsFormulaFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -175,6 +206,7 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
+        'anova output summary for the model
         clsAnovaFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsAnovaFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -182,6 +214,7 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
+        'summary output for the model (the ANOVA table for aov)
         clsSummaryFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -189,6 +222,7 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
+        'confidence output limits for the model
         clsConfint.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsConfint.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -196,11 +230,20 @@ Public Class dlgAnovaModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                            strObjectName:="last_summary")
 
+        '---------------------------------------------------------------------
+        'column outputs
+        'note set assign has not been set here because it's done at the sub dialog level
+        'through individual save controls linked to this dialog data frame selector
+
         clsResidualFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsFittedValuesFunction.AddParameter("object", strParameterValue:=strModel, iPosition:=0)
         clsRstandardFunction.AddParameter("model", strParameterValue:=strModel, iPosition:=0)
         clsHatvaluesFunction.AddParameter("model", strParameterValue:=strModel, iPosition:=0)
 
+        '---------------------------------------------------------------------
+        'graphical outputs
+
+        'model plot output
         clsVisReg.AddParameter("fit", strParameterValue:=strModel, iPosition:=0)
         clsVisReg.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
@@ -208,6 +251,7 @@ Public Class dlgAnovaModel
                                   strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveAnovaModel.strCurrentDataFrame,
                                   strObjectName:="last_graph")
 
+        'residual plots outputs
         For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
             kvp.Value.AddParameter("x", strParameterValue:=strModel, iPosition:=0)
             kvp.Value.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
@@ -248,6 +292,9 @@ Public Class dlgAnovaModel
             ucrReceiverErrorAnovaModel.AddtoCombobox(ucrReceiverErrorAnovaModel.GetText)
         End If
     End Sub
+
+    '---------------------------------------------------------------------
+    'Keyboard buttons. They write to whichever of the two expression receivers was used last.
 
     Private Sub ucrExpressionReceivers_Enter(sender As Object, e As EventArgs) Handles ucrReceiverExpressionAnovaModel.Enter, ucrReceiverErrorAnovaModel.Enter
         ucrActiveExpression = DirectCast(sender, ucrReceiverExpression)
@@ -335,7 +382,13 @@ Public Class dlgAnovaModel
         bResetOptionsSubDialog = False
     End Sub
 
+    '---------------------------------------------------------------------
+    'Formula and preview
 
+    ''' <summary>
+    ''' Builds the right hand side of the formula: the Explanatory Model, followed by
+    ''' " + Error(...)" when the Error receiver is not empty (issue #10554, point c).
+    ''' </summary>
     Private Sub UpdateFormulaRhs()
         Dim strRhs As String = ucrReceiverExpressionAnovaModel.GetText().Trim()
         If strRhs = "" Then
@@ -359,9 +412,33 @@ Public Class dlgAnovaModel
 
     Private Sub ExpressionReceivers_Changed(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionAnovaModel.ControlValueChanged, ucrReceiverExpressionAnovaModel.ControlContentsChanged, ucrReceiverErrorAnovaModel.ControlValueChanged, ucrReceiverErrorAnovaModel.ControlContentsChanged
         UpdateFormulaRhs()
+        ChooseOutputFunction()
         UpdatePreview()
         TestOKEnabled()
     End Sub
+
+    ''' <summary>
+    ''' Output is anova(model), as in the issue's example. With an Error term aov returns an
+    ''' aovlist, for which anova() does not work, so summary(model) is used instead.
+    ''' Only acts when the Error term is added or removed, so choices made in Display Options are kept.
+    ''' </summary>
+    Private Sub ChooseOutputFunction()
+        Dim bErrorNow As Boolean = Not ucrReceiverErrorAnovaModel.IsEmpty() AndAlso Not ucrReceiverExpressionAnovaModel.IsEmpty()
+        If bErrorNow = bErrorTermActive Then
+            Exit Sub
+        End If
+        bErrorTermActive = bErrorNow
+        If bErrorNow Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        End If
+    End Sub
+
+    '---------------------------------------------------------------------
+    'Response variable
 
     Public Sub ResponseConvert()
         If Not bRCodeSet Then
@@ -398,6 +475,7 @@ Public Class dlgAnovaModel
         UpdatePreview()
         TestOKEnabled()
     End Sub
+
 
     Private Sub RestrictFamilyToAov()
         Dim lstDistributions = ucrFamily.lstCurrentDistributions
