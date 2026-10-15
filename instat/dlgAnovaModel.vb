@@ -23,21 +23,13 @@ Public Class dlgAnovaModel
     Private bReset As Boolean = True
     Public bRCodeSet As Boolean = False
     Public clsFormulaOperator As New ROperator
-
-    'The model: only the aov object is kept (issue #10554, point e)
     Public clsAOVFunction, clsRConvert As New RFunction
-
-    'Displayed (not saved to the data frame) outputs, passed on to the Display Options sub dialog
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsVisReg As New RFunction
-
-    'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     Public bResetOptionsSubDialog As Boolean = False
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
-
-    'The expression receiver (Explanatory Model or Error) that the keyboard buttons write to
     Private ucrActiveExpression As ucrReceiverExpression
 
     Private Const strAovNameTag As String = "Normal_aov"
@@ -57,7 +49,7 @@ Public Class dlgAnovaModel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 371 'todo. this is the Fit Model help topic, replace with the Anova one
+        ucrBase.iHelpTopicID = 371
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -71,9 +63,6 @@ Public Class dlgAnovaModel
         ucrChkConvertToVariate.AddParameterIsRFunctionCondition(True, "x", True)
         ucrChkConvertToVariate.AddParameterIsRFunctionCondition(False, "x", False)
 
-        'The right hand side of the formula is built in UpdateFormulaRhs, because it is the
-        'combination of the Explanatory Model and the optional Error term, so neither
-        'receiver is linked directly to a parameter.
         ucrReceiverExpressionAnovaModel.bWithQuotes = False
         ucrReceiverErrorAnovaModel.bWithQuotes = False
         ucrTryModelling.SetReceiver(ucrReceiverExpressionAnovaModel)
