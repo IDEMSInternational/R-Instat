@@ -369,6 +369,21 @@ Public Class ucrButtons
         toolStripMenuItemToScriptOk.Enabled = bEnabled
     End Sub
 
+    Private Sub TranslateDropdownItems()
+        Dim lstItems As ToolStripItem() = {
+        toolStripMenuItemOkClose, toolStripMenuItemOkKeep,
+        toolStripMenuItemToScriptClose, toolStripMenuItemToScriptKeep,
+        toolStripMenuItemToScriptOk
+    }
+        For Each item As ToolStripItem In lstItems
+            ' Remember the original English text, so toggling languages never translates an already-translated string
+            If item.Tag Is Nothing Then
+                item.Tag = item.Text
+            End If
+            item.Text = Translations.GetTranslation(CStr(item.Tag))
+        Next
+    End Sub
+
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bLoadInProgress = True
         If frmMain.clsRecentItems IsNot Nothing Then
@@ -397,6 +412,7 @@ Public Class ucrButtons
             strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
         End If
         bLoadInProgress = False
+        TranslateDropdownItems()
     End Sub
 
     Private Sub AddToScriptWindow(strScript As String, bIsQuarto As Boolean)
@@ -507,6 +523,7 @@ Public Class ucrButtons
         Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
         frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
         autoTranslate(Me.ParentForm)
+        TranslateDropdownItems()
         ' If the comment was not set specifically for this dialog, then translate to toggled language
         If Not bCommentChangedInThisDialog Then
             ResetCommentToInstatOptionComment()
