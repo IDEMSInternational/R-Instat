@@ -100,6 +100,8 @@ Public Class dlgNewDataFrame
         ucrChkRCommand.SetText("Show Command")
 
         ucrInputListInCategory.SetDropDownStyleAsNonEditable()
+
+        TranslateGridHeaders()
     End Sub
 
     Private Sub SetDefaults()
@@ -618,7 +620,7 @@ Public Class dlgNewDataFrame
             Dim iColumnLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
             Dim iRowLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
             Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
-            If selectedCombobox.SelectedItem = "Factor" Then
+            If CStr(selectedCombobox.SelectedValue) = "Factor" Then
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = False
                 Dim iColDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").ColumnIndex
                 Dim iRowDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").RowIndex
@@ -770,16 +772,16 @@ Public Class dlgNewDataFrame
 
     Private Sub dataTypeGridView_KeyUp(sender As Object, e As KeyEventArgs) Handles dataTypeGridView.KeyUp
         Dim i As Integer = 0
-        Dim strColName As String = dataTypeGridView.Columns(dataTypeGridView.CurrentCell.ColumnIndex).HeaderText
-        If e.Control AndAlso e.KeyCode = Keys.V AndAlso (strColName = "Name" OrElse strColName = "Label") Then
+        Dim strColName As String = dataTypeGridView.Columns(dataTypeGridView.CurrentCell.ColumnIndex).Name
+        If e.Control AndAlso e.KeyCode = Keys.V AndAlso (strColName = "colNames" OrElse strColName = "colLabel") Then
             Try
                 For Each element As String In Clipboard.GetText.Split(vbNewLine)
                     If Not element.Trim.ToString = "" Then
                         Dim strLabel() As String = element.Split(vbTab(0))
                         Dim strValue As String = strLabel(0).Replace(vbLf, "")
-                        If strColName = "Name" Then
+                        If strColName = "colNames" Then
                             dataTypeGridView.Rows.Item(i).Cells(1).Value = strValue
-                        ElseIf strColName = "Label" Then
+                        ElseIf strColName = "colLabel" Then
                             dataTypeGridView.Rows.Item(i).Cells(5).Value = strValue
                         End If
                         i += 1
@@ -833,12 +835,41 @@ Public Class dlgNewDataFrame
         ucrInputLists.SetText(clsListDfFunction.ToScript)
     End Sub
 
+    Private Sub TranslateTypeColumn()
+        Dim dtTypes As New DataTable
+        dtTypes.Columns.Add("Value", GetType(String))
+        dtTypes.Columns.Add("Display", GetType(String))
+        For Each strType As String In {"Integer", "Character", "Numeric", "Factor"}
+            dtTypes.Rows.Add(strType, Translations.GetTranslation(strType))
+        Next
+
+        Dim cbType As DataGridViewComboBoxColumn = CType(dataTypeGridView.Columns("cbType"), DataGridViewComboBoxColumn)
+        cbType.DataSource = dtTypes
+        cbType.ValueMember = "Value"
+        cbType.DisplayMember = "Display"
+    End Sub
+
     Private Sub ChangeSavePrefix()
         If rdoLists.Checked AndAlso Not ucrInputListInCategory.IsEmpty Then
             ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
         Else
             ucrNewDFName.SetPrefix("data")
         End If
+    End Sub
+
+    Private Sub TranslateGridHeaders()
+        TranslateHeaders(dataTypeGridView)
+        TranslateHeaders(dataGridView)
+        TranslateTypeColumn()
+    End Sub
+
+    Private Sub TranslateHeaders(dgv As DataGridView)
+        For Each col As DataGridViewColumn In dgv.Columns
+            If col.Tag Is Nothing Then
+                col.Tag = col.HeaderText
+            End If
+            col.HeaderText = Translations.GetTranslation(CStr(col.Tag))
+        Next
     End Sub
 
     Private Sub ucrInputLists_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputLists.ControlContentsChanged
