@@ -6984,5 +6984,10 @@
   "Shapiro": "Shapiro",
   "One Page": "One Page",
   "Store Plot:": "Store Plot:",
-  "Whole Numbers": "Whole Numbers"
+  "Whole Numbers": "Whole Numbers",
+  "JSON Column(s):": "JSON Column(s):",
+  "JSON": "JSON",
+  "Carry Column(s):": "Carry Column(s):",
+  "Key Column(s):": "Key Column(s):",
+  "Remove Prefix": "Remove Prefix"
 }
