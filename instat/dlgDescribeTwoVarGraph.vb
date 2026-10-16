@@ -39,7 +39,7 @@ Public Class dlgDescribeTwoVarGraph
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
             clsGeomDensityRidgesFunction, clsStatSummaryMeansFunction, clsStatSummaryMeansPlusSEFunction,
             clsGeomSmoothFunction, clsGeomSmoothWithSEFunction, clsGeomSmoothThreeVarFunction, clsGeomSmoothWithSEThreeVarFunction, clsGGSideFunction,
-            clsGeomParallelSlopesFunction, clsGeomParallelSlopesWithSEFunction,
+            clsGeomParallelSlopesFunction, clsGeomParallelSlopesWithSEFunction, clsModernDiveMeansFunction, clsModernDiveMeansWithSEFunction,
             clsGeomFreqPoly, clsGeomHistogram, clsGeomDensity, clsAnnotateFunction, clsGGpairsFunction,
             clsDummyFunction, clsGGpairAesFunction, clsUpperListFunction, clsLowerListFunction,
             clsDiagonalListFunction As New RFunction
@@ -174,7 +174,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputNumericByNumeric.SetName("Scatter plot")
         ucrInputNumericByNumeric.SetDropDownStyleAsNonEditable()
 
-        strNumericCategoricalPlots = {"Boxplot", "Point plot", "Jitter plot", "Violin plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot", "Density plot", "Density Ridges", "Point Plot + Means", "Point Plot + Means + SE", "Jitter Plot + Means", "Jitter Plot + Means + SE"}
+        strNumericCategoricalPlots = {"Boxplot", "Point plot", "Jitter plot", "Violin plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot", "Density plot", "Density Ridges", "Point Plot + Means (Moderndive)", "Point Plot + Means + SE (Moderndive)", "Jitter Plot + Means (Moderndive)", "Jitter Plot + Means + SE (Moderndive)", "Point Plot + Means", "Point Plot + Means + SE", "Jitter Plot + Means", "Jitter Plot + Means + SE"}
 
         ucrInputNumericByCategorical.SetItems(strNumericCategoricalPlots)
         ucrInputNumericByCategorical.SetName("Boxplot")
@@ -410,6 +410,8 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomParallelSlopesFunction = New RFunction
         clsGeomParallelSlopesWithSEFunction = New RFunction
         clsGGSideFunction = New RFunction
+        clsModernDiveMeansFunction = New RFunction
+        clsModernDiveMeansWithSEFunction = New RFunction
 
         clsAesXLabelFunction = New RFunction
         clsAesLabelFunction = New RFunction
@@ -565,7 +567,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomJitter.SetRCommand("geom_jitter")
         clsGeomJitter.AddParameter("width", "0.2", iPosition:=4)
         clsGeomJitter.AddParameter("height", "0", iPosition:=5)
-        clsGeomJitter.AddParameter("alpha", "0.4", iPosition:=6)
+        clsGeomJitter.AddParameter("alpha", "0.8", iPosition:=6)
 
         clsGeomBoxplot.SetPackageName("ggplot2")
         clsGeomBoxplot.SetRCommand("geom_boxplot")
@@ -575,19 +577,29 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomDensityRidgesFunction.AddParameter("alpha", "0.7", iPosition:=0)
         clsGeomDensityRidgesFunction.AddParameter("fill", Chr(34) & "skyblue" & Chr(34), iPosition:=1)
 
+
+        ' ggplot2::stat_summary(fun = "mean", fun.min = "mean", fun.max = "mean", geom = "crossbar", color = "red", width = 0.8, linetype = "dashed", size = 0.3, alpha = 0.5)
         clsStatSummaryMeansFunction.SetPackageName("ggplot2")
         clsStatSummaryMeansFunction.SetRCommand("stat_summary")
         clsStatSummaryMeansFunction.AddParameter("fun", Chr(34) & "mean" & Chr(34), iPosition:=0)
-        clsStatSummaryMeansFunction.AddParameter("geom", Chr(34) & "point" & Chr(34), iPosition:=1)
-        clsStatSummaryMeansFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
-        clsStatSummaryMeansFunction.AddParameter("size", "4", iPosition:=3)
+        clsStatSummaryMeansFunction.AddParameter("fun.min", Chr(34) & "mean" & Chr(34), iPosition:=1)
+        clsStatSummaryMeansFunction.AddParameter("fun.max", Chr(34) & "mean" & Chr(34), iPosition:=2)
+        clsStatSummaryMeansFunction.AddParameter("geom", Chr(34) & "crossbar" & Chr(34), iPosition:=3)
+        clsStatSummaryMeansFunction.AddParameter("color", Chr(34) & "red" & Chr(34), iPosition:=4)
+        clsStatSummaryMeansFunction.AddParameter("size", "0.3", iPosition:=5)
+        clsStatSummaryMeansFunction.AddParameter("width", "0.8", iPosition:=6)
+        clsStatSummaryMeansFunction.AddParameter("linetype", Chr(34) & "dashed" & Chr(34), iPosition:=7)
+        clsStatSummaryMeansFunction.AddParameter("alpha", "0.5", iPosition:=8)
 
+        'ggplot2::stat_summary(fun.data="mean_se", geom="crossbar", color="blue", size=0.4, fill = "red", alpha = 0.2)
         clsStatSummaryMeansPlusSEFunction.SetPackageName("ggplot2")
         clsStatSummaryMeansPlusSEFunction.SetRCommand("stat_summary")
         clsStatSummaryMeansPlusSEFunction.AddParameter("fun.data", Chr(34) & "mean_se" & Chr(34), iPosition:=0)
-        clsStatSummaryMeansPlusSEFunction.AddParameter("geom", Chr(34) & "pointrange" & Chr(34), iPosition:=1)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("geom", Chr(34) & "crossbar" & Chr(34), iPosition:=1)
         clsStatSummaryMeansPlusSEFunction.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
-        clsStatSummaryMeansPlusSEFunction.AddParameter("size", "1", iPosition:=3)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("size", "0.4", iPosition:=3)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("fill", Chr(34) & "red" & Chr(34), iPosition:=3)
+        clsStatSummaryMeansPlusSEFunction.AddParameter("alpha", "0.25", iPosition:=3)
 
         clsGeomSmoothFunction.SetPackageName("ggplot2")
         clsGeomSmoothFunction.SetRCommand("geom_smooth")
@@ -625,6 +637,14 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomSmoothWithSEThreeVarFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothWithSEThreeVarFunction.AddParameter("se", "TRUE", iPosition:=1)
         clsGeomSmoothWithSEThreeVarFunction.AddParameter("alpha", "0.2", iPosition:=3)
+
+        clsModernDiveMeansFunction.SetPackageName("moderndive")
+        clsModernDiveMeansFunction.SetRCommand("geom_categorical_model")
+        clsModernDiveMeansFunction.AddParameter("se", "FALSE", iPosition:=0)
+
+        clsModernDiveMeansWithSEFunction.SetPackageName("moderndive")
+        clsModernDiveMeansWithSEFunction.SetRCommand("geom_categorical_model")
+        clsModernDiveMeansWithSEFunction.AddParameter("se", "TRUE", iPosition:=0)
 
         clsGeomMosaic.SetPackageName("ggmosaic")
         clsGeomMosaic.SetRCommand("geom_mosaic")
@@ -1148,20 +1168,52 @@ Public Class dlgDescribeTwoVarGraph
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
                         clsGlobalAes = clsAesCategoricalByNumericXNumeric
                         clsBaseOperator.AddParameter("geom_density_ridges", clsRFunctionParameter:=clsGeomDensityRidgesFunction, iPosition:=1)
+                    Case "Point Plot + Means (Moderndive)"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansFunction, iPosition:=2)
+                    Case "Point Plot + Means + SE (Moderndive)"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansWithSEFunction, iPosition:=2)
+                    Case "Jitter Plot + Means (Moderndive)"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansFunction, iPosition:=2)
+                    Case "Jitter Plot + Means + SE (Moderndive)"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansWithSEFunction, iPosition:=2)
                     Case "Point Plot + Means"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
                     Case "Point Plot + Means + SE"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
                     Case "Jitter Plot + Means"
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
@@ -1170,7 +1222,7 @@ Public Class dlgDescribeTwoVarGraph
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
                     Case "Jitter Plot + Means + SE"
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
@@ -1179,7 +1231,7 @@ Public Class dlgDescribeTwoVarGraph
                         ucrInputXSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
                 If rdoTwoVars.Checked Then
@@ -1277,6 +1329,46 @@ Public Class dlgDescribeTwoVarGraph
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalXNumeric
                         clsBaseOperator.AddParameter("geom_density_ridges", clsRFunctionParameter:=clsGeomDensityRidgesFunction, iPosition:=1)
+                    Case "Point Plot + Means (Moderndive)"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansFunction, iPosition:=2)
+                    Case "Point Plot + Means + SE (Moderndive)"
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansWithSEFunction, iPosition:=2)
+                    Case "Jitter Plot + Means (Moderndive)"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansFunction, iPosition:=2)
+                    Case "Jitter Plot + Means + SE (Moderndive)"
+                        ucrNudJitter.Visible = True
+                        ucrNudTransparency.Visible = True
+                        ucrInputYSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
+                        ucrInputXSidePlotOptions.SetItems({"Boxplot"})
+                        ucrInputXSidePlotOptions.SetName(strXSidePlotInputDefault)
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                        clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                        clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsModernDiveMeansWithSEFunction, iPosition:=2)
                     Case "Point Plot + Means"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
@@ -1285,7 +1377,7 @@ Public Class dlgDescribeTwoVarGraph
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
                     Case "Point Plot + Means + SE"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
                         ucrInputYSidePlotOptions.SetName(strYSidePlotInputDefault)
@@ -1294,7 +1386,7 @@ Public Class dlgDescribeTwoVarGraph
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
                     Case "Jitter Plot + Means"
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
@@ -1305,7 +1397,7 @@ Public Class dlgDescribeTwoVarGraph
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansFunction, iPosition:=2)
                     Case "Jitter Plot + Means + SE"
                         ucrNudJitter.Visible = True
                         ucrNudTransparency.Visible = True
@@ -1316,7 +1408,7 @@ Public Class dlgDescribeTwoVarGraph
                         clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
                         clsGlobalAes = clsAesNumericByCategoricalYNumeric
                         clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
-                        clsBaseOperator.AddParameter("stat_summary_means_se", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
+                        clsBaseOperator.AddParameter("geom_mean_se_summaries", clsRFunctionParameter:=clsStatSummaryMeansPlusSEFunction, iPosition:=2)
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
                 If rdoTwoVars.Checked Then
