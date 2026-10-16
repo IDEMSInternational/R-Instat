@@ -36,6 +36,8 @@ Partial Class dlgAnovaModel
         Me.ucrInputModelPreview = New instat.ucrInputTextBox()
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.ucrFamily = New instat.ucrDistributions()
+        Me.lblModelType = New System.Windows.Forms.Label()
+        Me.ucrInputModelType = New instat.ucrInputComboBox()
         Me.ucrModelName = New instat.ucrSave()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
@@ -128,9 +130,9 @@ Partial Class dlgAnovaModel
         Me.lblErrorModel.Location = New System.Drawing.Point(395, 156)
         Me.lblErrorModel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblErrorModel.Name = "lblErrorModel"
-        Me.lblErrorModel.Size = New System.Drawing.Size(66, 20)
+        Me.lblErrorModel.Size = New System.Drawing.Size(126, 20)
         Me.lblErrorModel.TabIndex = 11
-        Me.lblErrorModel.Text = "Error???:"
+        Me.lblErrorModel.Text = "Error/Residuals:"
         '
         'ucrReceiverAnovaResponseVar
         '
@@ -178,10 +180,42 @@ Partial Class dlgAnovaModel
         Me.lblType.TabIndex = 13
         Me.lblType.Text = "________"
         '
+        'ucrFamily
+        '
+        Me.ucrFamily.AutoSize = True
+        Me.ucrFamily.Location = New System.Drawing.Point(22, 325)
+        Me.ucrFamily.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(320, 50)
+        Me.ucrFamily.TabIndex = 15
+        '
+        'lblModelType
+        '
+        Me.lblModelType.AutoSize = True
+        Me.lblModelType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblModelType.Location = New System.Drawing.Point(29, 390)
+        Me.lblModelType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblModelType.Name = "lblModelType"
+        Me.lblModelType.Size = New System.Drawing.Size(93, 20)
+        Me.lblModelType.TabIndex = 25
+        Me.lblModelType.Text = "Model Type:"
+        '
+        'ucrInputModelType
+        '
+        Me.ucrInputModelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelType.AutoSize = True
+        Me.ucrInputModelType.GetSetSelectedIndex = -1
+        Me.ucrInputModelType.IsReadOnly = False
+        Me.ucrInputModelType.Location = New System.Drawing.Point(178, 384)
+        Me.ucrInputModelType.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputModelType.Name = "ucrInputModelType"
+        Me.ucrInputModelType.Size = New System.Drawing.Size(160, 32)
+        Me.ucrInputModelType.TabIndex = 26
+        '
         'ucrTryModelling
         '
         Me.ucrTryModelling.AutoSize = True
-        Me.ucrTryModelling.Location = New System.Drawing.Point(19, 404)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(19, 449)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
@@ -194,36 +228,27 @@ Partial Class dlgAnovaModel
         Me.ucrInputModelPreview.AutoSize = True
         Me.ucrInputModelPreview.IsMultiline = False
         Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(178, 456)
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(178, 501)
         Me.ucrInputModelPreview.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(392, 32)
+        Me.ucrInputModelPreview.Size = New System.Drawing.Size(597, 32)
         Me.ucrInputModelPreview.TabIndex = 18
         '
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(29, 462)
+        Me.lblModelPreview.Location = New System.Drawing.Point(29, 507)
         Me.lblModelPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(114, 20)
         Me.lblModelPreview.TabIndex = 17
         Me.lblModelPreview.Text = "Model Preview:"
         '
-        'ucrFamily
-        '
-        Me.ucrFamily.AutoSize = True
-        Me.ucrFamily.Location = New System.Drawing.Point(22, 325)
-        Me.ucrFamily.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(320, 50)
-        Me.ucrFamily.TabIndex = 15
-        '
         'ucrModelName
         '
         Me.ucrModelName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrModelName.Location = New System.Drawing.Point(32, 496)
+        Me.ucrModelName.Location = New System.Drawing.Point(32, 541)
         Me.ucrModelName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrModelName.Name = "ucrModelName"
         Me.ucrModelName.Size = New System.Drawing.Size(453, 36)
@@ -232,7 +257,7 @@ Partial Class dlgAnovaModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(623, 490)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(623, 535)
         Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(186, 34)
@@ -244,7 +269,7 @@ Partial Class dlgAnovaModel
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(32, 544)
+        Me.ucrBase.Location = New System.Drawing.Point(32, 589)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -488,7 +513,9 @@ Partial Class dlgAnovaModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(847, 641)
+        Me.ClientSize = New System.Drawing.Size(847, 686)
+        Me.Controls.Add(Me.ucrInputModelType)
+        Me.Controls.Add(Me.lblModelType)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrModelName)
@@ -509,8 +536,11 @@ Partial Class dlgAnovaModel
         Me.Controls.Add(Me.lblResponseVariable)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemoveAnovaModel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgAnovaModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Anova_Model"
         Me.Text = "Anova"
         Me.grpSecondCalc.ResumeLayout(False)
         Me.grpFirstCalc.ResumeLayout(False)
@@ -533,6 +563,8 @@ Partial Class dlgAnovaModel
     Friend WithEvents ucrInputModelPreview As ucrInputTextBox
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents lblModelType As Label
+    Friend WithEvents ucrInputModelType As ucrInputComboBox
     Friend WithEvents ucrModelName As ucrSave
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents ucrBase As ucrButtons
