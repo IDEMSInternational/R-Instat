@@ -577,8 +577,6 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomDensityRidgesFunction.AddParameter("alpha", "0.7", iPosition:=0)
         clsGeomDensityRidgesFunction.AddParameter("fill", Chr(34) & "skyblue" & Chr(34), iPosition:=1)
 
-
-        ' ggplot2::stat_summary(fun = "mean", fun.min = "mean", fun.max = "mean", geom = "crossbar", color = "red", width = 0.8, linetype = "dashed", size = 0.3, alpha = 0.5)
         clsStatSummaryMeansFunction.SetPackageName("ggplot2")
         clsStatSummaryMeansFunction.SetRCommand("stat_summary")
         clsStatSummaryMeansFunction.AddParameter("fun", Chr(34) & "mean" & Chr(34), iPosition:=0)
@@ -591,7 +589,6 @@ Public Class dlgDescribeTwoVarGraph
         clsStatSummaryMeansFunction.AddParameter("linetype", Chr(34) & "dashed" & Chr(34), iPosition:=7)
         clsStatSummaryMeansFunction.AddParameter("alpha", "0.5", iPosition:=8)
 
-        'ggplot2::stat_summary(fun.data="mean_se", geom="crossbar", color="blue", size=0.4, fill = "red", alpha = 0.2)
         clsStatSummaryMeansPlusSEFunction.SetPackageName("ggplot2")
         clsStatSummaryMeansPlusSEFunction.SetRCommand("stat_summary")
         clsStatSummaryMeansPlusSEFunction.AddParameter("fun.data", Chr(34) & "mean_se" & Chr(34), iPosition:=0)
