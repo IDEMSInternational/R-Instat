@@ -6984,5 +6984,9 @@
   "Shapiro": "Shapiro",
   "One Page": "One Page",
   "Store Plot:": "Store Plot:",
-  "Whole Numbers": "Whole Numbers"
+  "Whole Numbers": "Whole Numbers",
+  "Error???:": "Error???:",
+  "Error/Residuals:": "Error/Residuals:",
+  "Model Type:": "Model Type:",
+  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):"
 }
