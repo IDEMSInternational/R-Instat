@@ -54,7 +54,7 @@ Public Class dlgPrepareDataReshapeUnnest
 
         rdoOther.Enabled = False
 
-        ucrPnlJSONOther.AddToLinkedControls({ucrSelectorUnnest, ucrReceiverJSONCols, UcrReceiverKeyCols, UcrReceiverCarryCols, ucrChkCarryCols, ucrChkRemovePrefix, ucrInputCheckInput}, {rdoJSON}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlJSONOther.AddToLinkedControls({ucrSelectorUnnest, ucrReceiverJSONCols, ucrReceiverKeyCols, ucrReceiverCarryCols, ucrChkCarryCols, ucrChkRemovePrefix, ucrInputCheckInput}, {rdoJSON}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorUnnest.SetParameter(New RParameter("data_name", 0))
         ucrSelectorUnnest.SetParameterIsString()
@@ -62,23 +62,24 @@ Public Class dlgPrepareDataReshapeUnnest
         ucrReceiverJSONCols.SetParameter(New RParameter("json_cols", iNewPosition:=1))
         ucrReceiverJSONCols.SetParameterIsString()
         ucrReceiverJSONCols.Selector = ucrSelectorUnnest
+        ucrReceiverJSONCols.SetDataType("character", bStrict:=True)
         ucrReceiverJSONCols.SetLinkedDisplayControl(lblJSONCols)
         ucrReceiverJSONCols.SetMeAsReceiver()
 
-        UcrReceiverKeyCols.SetParameter(New RParameter("key_columns", iNewPosition:=2))
-        UcrReceiverKeyCols.SetParameterIsString()
-        UcrReceiverKeyCols.Selector = ucrSelectorUnnest
-        UcrReceiverKeyCols.SetLinkedDisplayControl(lblKeyCols)
+        ucrReceiverKeyCols.SetParameter(New RParameter("key_columns", iNewPosition:=2))
+        ucrReceiverKeyCols.SetParameterIsString()
+        ucrReceiverKeyCols.Selector = ucrSelectorUnnest
+        ucrReceiverKeyCols.SetLinkedDisplayControl(lblKeyCols)
 
-        UcrReceiverCarryCols.SetParameter(New RParameter("carry_columns", iNewPosition:=3))
-        UcrReceiverCarryCols.SetParameterIsString()
-        UcrReceiverCarryCols.Selector = ucrSelectorUnnest
-        UcrReceiverCarryCols.SetLinkedDisplayControl(lblCarryCols)
+        ucrReceiverCarryCols.SetParameter(New RParameter("carry_columns", iNewPosition:=3))
+        ucrReceiverCarryCols.SetParameterIsString()
+        ucrReceiverCarryCols.Selector = ucrSelectorUnnest
+        ucrReceiverCarryCols.SetLinkedDisplayControl(lblCarryCols)
 
         ucrChkCarryCols.SetText("Carry Columns")
         ucrChkCarryCols.AddParameterValuesCondition(True, "carry_cols", "True")
         ucrChkCarryCols.AddParameterValuesCondition(False, "carry_cols", "False")
-        ucrChkCarryCols.AddToLinkedControls({UcrReceiverCarryCols}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCarryCols.AddToLinkedControls({ucrReceiverCarryCols}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRemovePrefix.SetText("Remove Prefix")
         ucrChkRemovePrefix.SetParameter(New RParameter("remove_prefix", 4))
@@ -115,8 +116,8 @@ Public Class dlgPrepareDataReshapeUnnest
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorUnnest.SetRCode(clsExtractJSONColsFunction, bReset)
-        UcrReceiverKeyCols.SetRCode(clsExtractJSONColsFunction, bReset)
-        UcrReceiverCarryCols.SetRCode(clsExtractJSONColsFunction, bReset)
+        ucrReceiverKeyCols.SetRCode(clsExtractJSONColsFunction, bReset)
+        ucrReceiverCarryCols.SetRCode(clsExtractJSONColsFunction, bReset)
         ucrPnlJSONOther.SetRCode(clsDummyFunction, bReset)
 
         If bReset Then
@@ -128,9 +129,9 @@ Public Class dlgPrepareDataReshapeUnnest
         Dim bOkEnabled = True
 
         If rdoJSON.Checked Then
-            If ucrReceiverJSONCols.IsEmpty() OrElse UcrReceiverKeyCols.IsEmpty() Then
+            If ucrReceiverJSONCols.IsEmpty() OrElse ucrReceiverKeyCols.IsEmpty() Then
                 bOkEnabled = False
-            ElseIf ucrChkCarryCols.Checked AndAlso UcrReceiverCarryCols.IsEmpty() Then
+            ElseIf ucrChkCarryCols.Checked AndAlso ucrReceiverCarryCols.IsEmpty() Then
                 bOkEnabled = False
             ElseIf Not bUniqueChecked Then
                 bOkEnabled = False
@@ -146,7 +147,7 @@ Public Class dlgPrepareDataReshapeUnnest
 
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
 
-        clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=UcrReceiverKeyCols.GetVariables())
+        clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverKeyCols.GetVariables())
         Try
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript())
             iAnyDuplicated = expTemp.AsInteger(0)
@@ -185,9 +186,15 @@ Public Class dlgPrepareDataReshapeUnnest
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorUnnest.ControlContentsChanged, ucrReceiverJSONCols.ControlContentsChanged,
-        UcrReceiverKeyCols.ControlContentsChanged, ucrPnlJSONOther.ControlContentsChanged, UcrReceiverCarryCols.ControlContentsChanged,
+        ucrReceiverKeyCols.ControlContentsChanged, ucrPnlJSONOther.ControlContentsChanged, ucrReceiverCarryCols.ControlContentsChanged,
         ucrInputCheckInput.ControlContentsChanged, ucrChkCarryCols.ControlContentsChanged, ucrChkRemovePrefix.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverKeyCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverKeyCols.ControlValueChanged
+        bUniqueChecked = False
+        ucrInputCheckInput.SetName("")
+        ucrInputCheckInput.txtInput.BackColor = Color.White
     End Sub
 
     Private Sub HideShowCheckUniqueBtn()

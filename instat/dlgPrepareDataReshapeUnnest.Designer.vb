@@ -29,9 +29,9 @@ Partial Class dlgPrepareDataReshapeUnnest
         Me.rdoJSON = New System.Windows.Forms.RadioButton()
         Me.ucrPnlJSONOther = New instat.UcrPanel()
         Me.rdoOther = New System.Windows.Forms.RadioButton()
-        Me.UcrReceiverCarryCols = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverCarryCols = New instat.ucrReceiverMultiple()
         Me.lblCarryCols = New System.Windows.Forms.Label()
-        Me.UcrReceiverKeyCols = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverKeyCols = New instat.ucrReceiverMultiple()
         Me.lblKeyCols = New System.Windows.Forms.Label()
         Me.ucrChkCarryCols = New instat.ucrCheck()
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
@@ -131,18 +131,18 @@ Partial Class dlgPrepareDataReshapeUnnest
         Me.rdoOther.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoOther.UseVisualStyleBackColor = True
         '
-        'UcrReceiverCarryCols
+        'ucrReceiverCarryCols
         '
-        Me.UcrReceiverCarryCols.AutoSize = True
-        Me.UcrReceiverCarryCols.frmParent = Me
-        Me.UcrReceiverCarryCols.Location = New System.Drawing.Point(424, 415)
-        Me.UcrReceiverCarryCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverCarryCols.Name = "UcrReceiverCarryCols"
-        Me.UcrReceiverCarryCols.Selector = Nothing
-        Me.UcrReceiverCarryCols.Size = New System.Drawing.Size(201, 120)
-        Me.UcrReceiverCarryCols.strNcFilePath = ""
-        Me.UcrReceiverCarryCols.TabIndex = 32
-        Me.UcrReceiverCarryCols.ucrSelector = Nothing
+        Me.ucrReceiverCarryCols.AutoSize = True
+        Me.ucrReceiverCarryCols.frmParent = Me
+        Me.ucrReceiverCarryCols.Location = New System.Drawing.Point(424, 415)
+        Me.ucrReceiverCarryCols.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverCarryCols.Name = "ucrReceiverCarryCols"
+        Me.ucrReceiverCarryCols.Selector = Nothing
+        Me.ucrReceiverCarryCols.Size = New System.Drawing.Size(201, 120)
+        Me.ucrReceiverCarryCols.strNcFilePath = ""
+        Me.ucrReceiverCarryCols.TabIndex = 32
+        Me.ucrReceiverCarryCols.ucrSelector = Nothing
         '
         'lblCarryCols
         '
@@ -156,18 +156,18 @@ Partial Class dlgPrepareDataReshapeUnnest
         Me.lblCarryCols.Tag = ""
         Me.lblCarryCols.Text = "Carry Column(s):"
         '
-        'UcrReceiverKeyCols
+        'ucrReceiverKeyCols
         '
-        Me.UcrReceiverKeyCols.AutoSize = True
-        Me.UcrReceiverKeyCols.frmParent = Me
-        Me.UcrReceiverKeyCols.Location = New System.Drawing.Point(424, 258)
-        Me.UcrReceiverKeyCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverKeyCols.Name = "UcrReceiverKeyCols"
-        Me.UcrReceiverKeyCols.Selector = Nothing
-        Me.UcrReceiverKeyCols.Size = New System.Drawing.Size(201, 120)
-        Me.UcrReceiverKeyCols.strNcFilePath = ""
-        Me.UcrReceiverKeyCols.TabIndex = 34
-        Me.UcrReceiverKeyCols.ucrSelector = Nothing
+        Me.ucrReceiverKeyCols.AutoSize = True
+        Me.ucrReceiverKeyCols.frmParent = Me
+        Me.ucrReceiverKeyCols.Location = New System.Drawing.Point(424, 258)
+        Me.ucrReceiverKeyCols.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverKeyCols.Name = "ucrReceiverKeyCols"
+        Me.ucrReceiverKeyCols.Selector = Nothing
+        Me.ucrReceiverKeyCols.Size = New System.Drawing.Size(201, 120)
+        Me.ucrReceiverKeyCols.strNcFilePath = ""
+        Me.ucrReceiverKeyCols.TabIndex = 34
+        Me.ucrReceiverKeyCols.ucrSelector = Nothing
         '
         'lblKeyCols
         '
@@ -233,9 +233,9 @@ Partial Class dlgPrepareDataReshapeUnnest
         Me.Controls.Add(Me.ucrInputCheckInput)
         Me.Controls.Add(Me.cmdCheckUniqueKeys)
         Me.Controls.Add(Me.ucrChkCarryCols)
-        Me.Controls.Add(Me.UcrReceiverKeyCols)
+        Me.Controls.Add(Me.ucrReceiverKeyCols)
         Me.Controls.Add(Me.lblKeyCols)
-        Me.Controls.Add(Me.UcrReceiverCarryCols)
+        Me.Controls.Add(Me.ucrReceiverCarryCols)
         Me.Controls.Add(Me.lblCarryCols)
         Me.Controls.Add(Me.rdoOther)
         Me.Controls.Add(Me.rdoJSON)
@@ -263,9 +263,9 @@ Partial Class dlgPrepareDataReshapeUnnest
     Friend WithEvents rdoOther As RadioButton
     Friend WithEvents rdoJSON As RadioButton
     Friend WithEvents ucrPnlJSONOther As UcrPanel
-    Friend WithEvents UcrReceiverKeyCols As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverKeyCols As ucrReceiverMultiple
     Friend WithEvents lblKeyCols As Label
-    Friend WithEvents UcrReceiverCarryCols As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverCarryCols As ucrReceiverMultiple
     Friend WithEvents lblCarryCols As Label
     Friend WithEvents ucrChkCarryCols As ucrCheck
     Friend WithEvents ucrInputCheckInput As ucrInputTextBox
