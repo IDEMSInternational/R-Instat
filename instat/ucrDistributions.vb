@@ -143,6 +143,13 @@ Public Class ucrDistributions
 
     Public Sub SetDistributions()
         Dim bUse As Boolean
+
+        ' This captures the currently selected distribution before clearing the whole list
+        Dim strPreviousDistTag As String = ""
+        If clsCurrDistribution IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsCurrDistribution.strNameTag) Then
+            strPreviousDistTag = clsCurrDistribution.strNameTag
+        End If
+
         lstCurrentDistributions.Clear()
         ucrInputDistributions.SetItems()
 
@@ -166,8 +173,12 @@ Public Class ucrDistributions
                                 If Dist.bTwoLevelFactor Then
                                     bUse = True
                                 End If
-                            Case "numeric", "integer"
+                            Case "numeric"
                                 If Dist.bNumeric Then
+                                    bUse = True
+                                End If
+                            Case "integer"
+                                If Dist.bNumeric Or Dist.bPositiveInt Then
                                     bUse = True
                                 End If
                             Case "positive integer"
@@ -236,7 +247,16 @@ Public Class ucrDistributions
             End If
         Next
         If ucrInputDistributions.cboInput.Items.Count > 0 Then
-            ucrInputDistributions.cboInput.SelectedIndex = 0
+            Dim iMatch As Integer = -1
+            If strPreviousDistTag <> "" Then
+                iMatch = lstCurrentDistributions.FindIndex(Function(x) x.strNameTag = strPreviousDistTag)
+            End If
+
+            If iMatch <> -1 Then
+                ucrInputDistributions.cboInput.SelectedIndex = iMatch
+            Else
+                ucrInputDistributions.cboInput.SelectedIndex = 0
+            End If
         End If
     End Sub
 
@@ -277,7 +297,6 @@ Public Class ucrDistributions
         Dim clsGlmNegativeBinomialDist As New Distribution
         Dim clsPolarDist As New Distribution
         Dim clsMultinomDist As New Distribution
-        Dim clsNormalAovDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -295,15 +314,6 @@ Public Class ucrDistributions
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
-
-        ' AOV distribution
-        clsNormalAovDist.strNameTag = "Normal_aov"
-        clsNormalAovDist.strRName = "aov"
-        clsNormalAovDist.strGLMFunctionName = "aov"
-        clsNormalAovDist.strAOVFunctionName = "aov"
-        clsNormalAovDist.bNumeric = True
-        clsNormalAovDist.bIsContinuous = True
-        lstAllDistributions.Add(clsNormalAovDist)
 
         ' Exponential Distribution
         clsExponentialDist.strNameTag = "Exponential"
@@ -768,6 +778,11 @@ Public Class ucrDistributions
         ElseIf bFunctionIsDistFunction Then
             SetRCode(clsCurrRFunction)
         End If
+    End Sub
+
+    Public Sub Reset()
+        clsCurrDistribution = New Distribution()
+        SetDistributions()
     End Sub
 
     Protected Overrides Sub SetControlValue()
