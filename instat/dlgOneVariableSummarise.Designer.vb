@@ -43,6 +43,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoCustomised = New System.Windows.Forms.RadioButton()
         Me.rdoDefault = New System.Windows.Forms.RadioButton()
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
+        Me.rdoSkimMultiple = New System.Windows.Forms.RadioButton()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
@@ -60,9 +61,6 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkDisplayMissing = New instat.ucrCheck()
         Me.ucrInputDisplayMissing = New instat.ucrInputComboBox()
         Me.cmdTableOptions = New System.Windows.Forms.Button()
-        Me.rdoSkimSingle = New System.Windows.Forms.RadioButton()
-        Me.rdoSkimMultiple = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSkimMode = New instat.UcrPanel()
         Me.grpDataType = New System.Windows.Forms.GroupBox()
         Me.rdoCharacter = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
@@ -78,7 +76,7 @@ Partial Class dlgOneVariableSummarise
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(299, 78)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(299, 64)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(142, 14)
         Me.lblSelectedVariable.TabIndex = 1
@@ -114,7 +112,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoCustomised.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCustomised.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCustomised.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCustomised.Location = New System.Drawing.Point(268, 13)
+        Me.rdoCustomised.Location = New System.Drawing.Point(314, 13)
         Me.rdoCustomised.Name = "rdoCustomised"
         Me.rdoCustomised.Size = New System.Drawing.Size(90, 27)
         Me.rdoCustomised.TabIndex = 22
@@ -131,9 +129,9 @@ Partial Class dlgOneVariableSummarise
         Me.rdoDefault.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDefault.Location = New System.Drawing.Point(103, 13)
+        Me.rdoDefault.Location = New System.Drawing.Point(55, 13)
         Me.rdoDefault.Name = "rdoDefault"
-        Me.rdoDefault.Size = New System.Drawing.Size(83, 27)
+        Me.rdoDefault.Size = New System.Drawing.Size(75, 27)
         Me.rdoDefault.TabIndex = 21
         Me.rdoDefault.TabStop = True
         Me.rdoDefault.Text = "Defaults"
@@ -148,14 +146,31 @@ Partial Class dlgOneVariableSummarise
         Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(183, 13)
+        Me.rdoSkim.Location = New System.Drawing.Point(128, 13)
         Me.rdoSkim.Name = "rdoSkim"
-        Me.rdoSkim.Size = New System.Drawing.Size(87, 27)
+        Me.rdoSkim.Size = New System.Drawing.Size(70, 27)
         Me.rdoSkim.TabIndex = 26
         Me.rdoSkim.TabStop = True
         Me.rdoSkim.Text = "Skim"
         Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSkim.UseVisualStyleBackColor = True
+        '
+        'rdoSkimMultiple
+        '
+        Me.rdoSkimMultiple.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSkimMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkimMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoSkimMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkimMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSkimMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSkimMultiple.Location = New System.Drawing.Point(196, 13)
+        Me.rdoSkimMultiple.Name = "rdoSkimMultiple"
+        Me.rdoSkimMultiple.Size = New System.Drawing.Size(120, 27)
+        Me.rdoSkimMultiple.TabIndex = 39
+        Me.rdoSkimMultiple.TabStop = True
+        Me.rdoSkimMultiple.Text = "Skim - Multiple"
+        Me.rdoSkimMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSkimMultiple.UseVisualStyleBackColor = True
         '
         'cmdMissingOptions
         '
@@ -245,9 +260,9 @@ Partial Class dlgOneVariableSummarise
         'ucrPnlSummaries
         '
         Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaries.Location = New System.Drawing.Point(82, 11)
+        Me.ucrPnlSummaries.Location = New System.Drawing.Point(48, 11)
         Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
-        Me.ucrPnlSummaries.Size = New System.Drawing.Size(286, 29)
+        Me.ucrPnlSummaries.Size = New System.Drawing.Size(368, 29)
         Me.ucrPnlSummaries.TabIndex = 20
         '
         'ucrNudMaxSum
@@ -278,7 +293,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrSelectorOneVarSummarise.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneVarSummarise.bShowHiddenColumns = False
         Me.ucrSelectorOneVarSummarise.bUseCurrentFilter = True
-        Me.ucrSelectorOneVarSummarise.Location = New System.Drawing.Point(10, 75)
+        Me.ucrSelectorOneVarSummarise.Location = New System.Drawing.Point(10, 55)
         Me.ucrSelectorOneVarSummarise.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarSummarise.Name = "ucrSelectorOneVarSummarise"
         Me.ucrSelectorOneVarSummarise.Size = New System.Drawing.Size(213, 183)
@@ -288,7 +303,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrReceiverOneVarSummarise.AutoSize = True
         Me.ucrReceiverOneVarSummarise.frmParent = Me
-        Me.ucrReceiverOneVarSummarise.Location = New System.Drawing.Point(301, 92)
+        Me.ucrReceiverOneVarSummarise.Location = New System.Drawing.Point(301, 78)
         Me.ucrReceiverOneVarSummarise.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOneVarSummarise.Name = "ucrReceiverOneVarSummarise"
         Me.ucrReceiverOneVarSummarise.Selector = Nothing
@@ -339,58 +354,13 @@ Partial Class dlgOneVariableSummarise
         Me.cmdTableOptions.Text = "Table Options..."
         Me.cmdTableOptions.UseVisualStyleBackColor = True
         '
-        'rdoSkimSingle
-        '
-        Me.rdoSkimSingle.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSkimSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSkimSingle.FlatAppearance.BorderSize = 2
-        Me.rdoSkimSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSkimSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSkimSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkimSingle.Location = New System.Drawing.Point(103, 44)
-        Me.rdoSkimSingle.Name = "rdoSkimSingle"
-        Me.rdoSkimSingle.Size = New System.Drawing.Size(83, 24)
-        Me.rdoSkimSingle.TabIndex = 39
-        Me.rdoSkimSingle.TabStop = True
-        Me.rdoSkimSingle.Text = "Single"
-        Me.rdoSkimSingle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSkimSingle.UseVisualStyleBackColor = True
-        Me.rdoSkimSingle.Visible = False
-        '
-        'rdoSkimMultiple
-        '
-        Me.rdoSkimMultiple.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSkimMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSkimMultiple.FlatAppearance.BorderSize = 2
-        Me.rdoSkimMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSkimMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSkimMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkimMultiple.Location = New System.Drawing.Point(183, 44)
-        Me.rdoSkimMultiple.Name = "rdoSkimMultiple"
-        Me.rdoSkimMultiple.Size = New System.Drawing.Size(87, 24)
-        Me.rdoSkimMultiple.TabIndex = 40
-        Me.rdoSkimMultiple.TabStop = True
-        Me.rdoSkimMultiple.Text = "Multiple"
-        Me.rdoSkimMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSkimMultiple.UseVisualStyleBackColor = True
-        Me.rdoSkimMultiple.Visible = False
-        '
-        'ucrPnlSkimMode
-        '
-        Me.ucrPnlSkimMode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSkimMode.Location = New System.Drawing.Point(82, 42)
-        Me.ucrPnlSkimMode.Name = "ucrPnlSkimMode"
-        Me.ucrPnlSkimMode.Size = New System.Drawing.Size(200, 28)
-        Me.ucrPnlSkimMode.TabIndex = 41
-        Me.ucrPnlSkimMode.Visible = False
-        '
         'grpDataType
         '
         Me.grpDataType.Controls.Add(Me.rdoCharacter)
         Me.grpDataType.Controls.Add(Me.rdoFactor)
         Me.grpDataType.Controls.Add(Me.rdoNumeric)
         Me.grpDataType.Controls.Add(Me.ucrPnlDataType)
-        Me.grpDataType.Location = New System.Drawing.Point(10, 265)
+        Me.grpDataType.Location = New System.Drawing.Point(10, 248)
         Me.grpDataType.Name = "grpDataType"
         Me.grpDataType.Size = New System.Drawing.Size(200, 90)
         Me.grpDataType.TabIndex = 42
@@ -443,7 +413,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrSelectorMultipleDataFrames.AutoSize = True
         Me.ucrSelectorMultipleDataFrames.bShowHiddenColumns = False
-        Me.ucrSelectorMultipleDataFrames.Location = New System.Drawing.Point(10, 75)
+        Me.ucrSelectorMultipleDataFrames.Location = New System.Drawing.Point(10, 55)
         Me.ucrSelectorMultipleDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorMultipleDataFrames.Name = "ucrSelectorMultipleDataFrames"
         Me.ucrSelectorMultipleDataFrames.Size = New System.Drawing.Size(216, 150)
@@ -454,7 +424,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrReceiverMultipleDataFrames.AutoSize = True
         Me.ucrReceiverMultipleDataFrames.frmParent = Me
-        Me.ucrReceiverMultipleDataFrames.Location = New System.Drawing.Point(301, 92)
+        Me.ucrReceiverMultipleDataFrames.Location = New System.Drawing.Point(301, 78)
         Me.ucrReceiverMultipleDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleDataFrames.Name = "ucrReceiverMultipleDataFrames"
         Me.ucrReceiverMultipleDataFrames.Selector = Nothing
@@ -467,7 +437,7 @@ Partial Class dlgOneVariableSummarise
         'lblSelectedDataFrames
         '
         Me.lblSelectedDataFrames.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedDataFrames.Location = New System.Drawing.Point(299, 78)
+        Me.lblSelectedDataFrames.Location = New System.Drawing.Point(299, 64)
         Me.lblSelectedDataFrames.Name = "lblSelectedDataFrames"
         Me.lblSelectedDataFrames.Size = New System.Drawing.Size(142, 14)
         Me.lblSelectedDataFrames.TabIndex = 45
@@ -484,13 +454,11 @@ Partial Class dlgOneVariableSummarise
         Me.Controls.Add(Me.ucrReceiverMultipleDataFrames)
         Me.Controls.Add(Me.ucrSelectorMultipleDataFrames)
         Me.Controls.Add(Me.grpDataType)
-        Me.Controls.Add(Me.rdoSkimMultiple)
-        Me.Controls.Add(Me.rdoSkimSingle)
-        Me.Controls.Add(Me.ucrPnlSkimMode)
         Me.Controls.Add(Me.cmdTableOptions)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.ucrSaveSummary)
         Me.Controls.Add(Me.cmdMissingOptions)
+        Me.Controls.Add(Me.rdoSkimMultiple)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.rdoCustomised)
         Me.Controls.Add(Me.rdoDefault)
@@ -534,6 +502,7 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents rdoCustomised As RadioButton
     Friend WithEvents rdoDefault As RadioButton
     Friend WithEvents rdoSkim As RadioButton
+    Friend WithEvents rdoSkimMultiple As RadioButton
     Friend WithEvents cmdMissingOptions As Button
     Friend WithEvents ucrSaveSummary As ucrSave
     Friend WithEvents rdoNoColumnFactor As RadioButton
@@ -545,9 +514,6 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents grpColumns As GroupBox
     Friend WithEvents ucrReorderSummary As ucrReorder
     Friend WithEvents cmdTableOptions As Button
-    Friend WithEvents rdoSkimSingle As RadioButton
-    Friend WithEvents rdoSkimMultiple As RadioButton
-    Friend WithEvents ucrPnlSkimMode As UcrPanel
     Friend WithEvents grpDataType As GroupBox
     Friend WithEvents rdoCharacter As RadioButton
     Friend WithEvents rdoFactor As RadioButton
