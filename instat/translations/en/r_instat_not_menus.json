@@ -6989,5 +6989,9 @@
   "JSON": "JSON",
   "Carry Column(s):": "Carry Column(s):",
   "Key Column(s):": "Key Column(s):",
-  "Remove Prefix": "Remove Prefix"
+  "Remove Prefix": "Remove Prefix",
+  "Error???:": "Error???:",
+  "Error/Residuals:": "Error/Residuals:",
+  "Model Type:": "Model Type:",
+  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):"
 }

@@ -21,6 +21,7 @@ Public Class ucrSelector
     Public Event ResetAll()
     Public Event ResetReceivers()
     Public Event DataFrameChanged()
+    Public Event AddWithoutReceiver()   'raised when Add is called but there is no receiver
 
     Public bFirstLoad As Boolean
     Public strCurrentDataFrame As String = ""
@@ -338,6 +339,9 @@ Public Class ucrSelector
             If CurrentReceiver.bAutoSwitchFromReceiver Then
                 AutoSwitchCurrentReceiver(CurrentReceiver)
             End If
+        ElseIf CurrentReceiver Is Nothing AndAlso lstAvailableVariable.SelectedItems.Count > 0 Then
+            'only selectors with no receiver (e.g. the emmeans variables list in dlgUseModel) reach here
+            RaiseEvent AddWithoutReceiver()
         End If
     End Sub
 
