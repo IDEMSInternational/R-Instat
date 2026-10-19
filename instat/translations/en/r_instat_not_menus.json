@@ -6992,5 +6992,10 @@
   "Whole Numbers": "Whole Numbers",
   "Collapse:": "Collapse:",
   "Two/Three Variable Graph": "Two/Three Variable Graph",
-  "Two/Three Variable Graph Sub-Dialog": "Two/Three Variable Graph Sub-Dialog"
+  "Two/Three Variable Graph Sub-Dialog": "Two/Three Variable Graph Sub-Dialog",
+  "Whole Numbers": "Whole Numbers",
+  "Error???:": "Error???:",
+  "Error/Residuals:": "Error/Residuals:",
+  "Model Type:": "Model Type:",
+  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):"
 }
