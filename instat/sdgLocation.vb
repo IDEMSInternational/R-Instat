@@ -107,8 +107,28 @@ Public Class sdgLocation
         End If
     End Sub
 
+    Public ReadOnly Property IsComplete As Boolean
+        Get
+            If Not bControlsInitialised Then
+                Return False
+            End If
+            Dim bFixedValues As Boolean = IsFixedValueMode()
+            Return IsValueSupplied(ucrReceiverLatitude.IsEmpty, ucrInputLatitude.IsEmpty, bFixedValues) AndAlso
+                   IsValueSupplied(ucrReceiverLongitude.IsEmpty, ucrInputLongitude.IsEmpty, bFixedValues) AndAlso
+                   IsValueSupplied(ucrReceiverAltitude.IsEmpty, ucrInputElevation.IsEmpty, bFixedValues)
+        End Get
+    End Property
+
+    Private Function IsFixedValueMode() As Boolean
+        Return ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty
+    End Function
+
+    Private Function IsValueSupplied(bReceiverEmpty As Boolean, bInputEmpty As Boolean, bFixedValues As Boolean) As Boolean
+        Return Not bReceiverEmpty OrElse (bFixedValues AndAlso Not bInputEmpty)
+    End Function
+
     Private Sub EnableDesableSelector()
-        Dim bEnableControl As Boolean = ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty
+        Dim bEnableControl As Boolean = IsFixedValueMode()
         ucrInputLatitude.Enabled = bEnableControl
         ucrInputElevation.Enabled = bEnableControl
         ucrInputLongitude.Enabled = bEnableControl
