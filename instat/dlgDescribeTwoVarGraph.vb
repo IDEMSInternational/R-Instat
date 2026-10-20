@@ -24,7 +24,7 @@ Public Class dlgDescribeTwoVarGraph
         Tricot
     End Enum
 
-    Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator As New ROperator
+    Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator, clsTildeOperator As New ROperator
     Private clsRGGplotFunction, clsXsideDensityFunction, clsXsideBarFunction, clsXsideBoxplotFunction,
             clsXsideFreqpolyFunction, clsXsideHistogramFunction, clsYsideDensityFunction,
             clsYsideBarFunction, clsYsideBoxplotFunction, clsYsideFreqployFunction,
@@ -64,7 +64,7 @@ Public Class dlgDescribeTwoVarGraph
     Private clsLabelAesFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
-    Private clsRowVarsFunction, clsColVarsFunction As New RFunction
+    Private clsRowVarsFunction, clsColVarsFunction, clsFreeVarsFunction As New RFunction
 
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
@@ -438,7 +438,10 @@ Public Class dlgDescribeTwoVarGraph
         clsBaseOperator = New ROperator
         clsFacetFunction = New RFunction
         clsRowVarsFunction = New RFunction
+        clsFreeVarsFunction = New RFunction
         clsColVarsFunction = New RFunction
+
+        clsTildeOperator = New ROperator
 
         bResetSubdialog = True
 
@@ -761,6 +764,16 @@ Public Class dlgDescribeTwoVarGraph
 
         clsPairOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsTildeOperator.SetOperation("~")
+        clsTildeOperator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
+        clsTildeOperator.AddParameter("right", "variable", iPosition:=1, bIncludeArgumentName:=False)
+        clsTildeOperator.bAllBrackets = False
+        clsTildeOperator.bSpaceAroundOperation = False
+
+        clsFreeVarsFunction.SetPackageName("ggplot2")
+        clsFreeVarsFunction.SetRCommand("vars")
+        clsFreeVarsFunction.AddParameter("variable", "variable", iPosition:=0, bIncludeArgumentName:=False)
+
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
         AddDataFrame()
@@ -956,7 +969,7 @@ Public Class dlgDescribeTwoVarGraph
                 ucrInputCategoricalByNumericByCategorical.Visible = True
                 ucrChkFreeScaleYAxis.Checked = False
                 ucrChkFreeScaleYAxis.Visible = False
-                AddRemoveFreeScaleX(True)
+                AddRemoveFreeScaleX(False)
                 clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
                 AddRemoveAesFillParam(clsTempAesFunction:=clsAesCategoricalByNumericYNumeric, strParamName:="fill", iPosition:=6)
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
@@ -993,7 +1006,7 @@ Public Class dlgDescribeTwoVarGraph
                 End Select
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
                 ucrInputNumericByCategoricalByCategorical.Visible = True
-                AddRemoveFreeScaleX(True)
+                AddRemoveFreeScaleX(False)
                 clsGeomPoint.AddParameter("aes", clsRFunctionParameter:=clsAesLabelFunction, bIncludeArgumentName:=False, iPosition:=0)
                 AddRemoveAesFillParam(clsTempAesFunction:=clsAesNumericByCategoricalYNumeric, strParamName:="fill", iPosition:=6)
                 clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
@@ -1030,7 +1043,7 @@ Public Class dlgDescribeTwoVarGraph
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
                 ucrInputCategoricalByCategoricalByCategorical.Visible = True
-                AddRemoveFreeScaleX(True)
+                AddRemoveFreeScaleX(False)
                 If ucrInputCategoricalByCategoricalByCategorical IsNot Nothing Then
                     Select Case ucrInputCategoricalByCategoricalByCategorical.GetText
                         Case "Bar Chart"
@@ -1241,7 +1254,7 @@ Public Class dlgDescribeTwoVarGraph
                 ucrInputXSidePlotOptions.Visible = ucrChkXSidePlot.Checked
                 ucrInputYSidePlotOptions.Visible = ucrChkYSidePlot.Checked
                 ucrInputNumericByCategorical.Visible = True
-                AddRemoveFreeScaleX(True)
+                AddRemoveFreeScaleX(False)
                 Select Case ucrInputNumericByCategorical.GetText
                     Case "Boxplot"
                         ucrInputYSidePlotOptions.SetItems({"Boxplot"})
@@ -1416,7 +1429,7 @@ Public Class dlgDescribeTwoVarGraph
                 ucrInputXSidePlotOptions.Visible = False
                 ucrInputYSidePlotOptions.Visible = False
                 ucrInputCategoricalByCategorical.Visible = True
-                AddRemoveFreeScaleX(True)
+                AddRemoveFreeScaleX(False)
                 If ucrInputCategoricalByCategorical IsNot Nothing Then
                     Select Case ucrInputCategoricalByCategorical.GetText
                         Case "Bar Chart"
@@ -1468,6 +1481,8 @@ Public Class dlgDescribeTwoVarGraph
             Exit Sub
         End If
         clsBaseOperator.RemoveParameterByName("facets")
+        clsFacetFunction.RemoveParameterByName("facets")
+
         If Not ucr1stFactorReceiver.IsEmpty Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
@@ -1486,6 +1501,7 @@ Public Class dlgDescribeTwoVarGraph
                     bRowsAndColsAll = True
             End Select
         End If
+
         If bWrap OrElse bRow OrElse bCol OrElse bColAll OrElse bRowAll OrElse bRowsAndCols OrElse bRowsAndColsAll Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
@@ -1519,6 +1535,23 @@ Public Class dlgDescribeTwoVarGraph
         ElseIf bCol OrElse bColAll Then
             clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
             clsFacetFunction.RemoveParameterByName("rows")
+        End If
+
+        If ucrReceiverFirstVars.ucrMultipleVariables.Count > 1 Then
+            ucrChkFreeScaleYAxis.Checked = True
+            If bWrap Then
+                clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTildeOperator, iPosition:=0)
+            ElseIf bRowsAndCols OrElse bRowsAndColsAll Then
+                clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
+                clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsFreeVarsFunction, iPosition:=0)
+            ElseIf bRow OrElse bRowAll Then
+                clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsFreeVarsFunction, iPosition:=0)
+            ElseIf bCol OrElse bColAll Then
+                clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsFreeVarsFunction, iPosition:=0)
+            End If
+        Else
+            ucrChkFreeScaleYAxis.Checked = False
+            SetFreeYAxis()
         End If
     End Sub
 
@@ -1599,6 +1632,7 @@ Public Class dlgDescribeTwoVarGraph
             clsAesCategoricalByCategoricalMosaicPlot.AddParameter("fill", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)(0), iPosition:=1)
         End If
         MatchSameCategoricalVariablesInReceivers(ucrReceiverFirstVars)
+        AddRemoveFacets()
     End Sub
 
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
@@ -1702,24 +1736,11 @@ Public Class dlgDescribeTwoVarGraph
         End If
         If bRCodeSet Then
             If ucrChkFreeScaleYAxis.Checked Then
-                If clsFacetFunction.ContainsParameter("scales") Then
-                    clsScaleParam = clsFacetFunction.GetParameter("scales")
-                    If clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) Then
-                        clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34)
-                    Else
-                        clsScaleParam.strArgumentValue = Chr(34) & "free_" & strYName & Chr(34)
-                    End If
-                Else
-                    clsFacetFunction.AddParameter("scales", Chr(34) & "free_" & strYName & Chr(34), iPosition:=3)
-                End If
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free_" & strYName & Chr(34), iPosition:=3)
             Else
                 If clsFacetFunction.ContainsParameter("scales") Then
                     clsScaleParam = clsFacetFunction.GetParameter("scales")
-                    If clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34) Then
-                        clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34)
-                    Else
-                        clsFacetFunction.RemoveParameter(clsScaleParam)
-                    End If
+                    clsFacetFunction.RemoveParameter(clsScaleParam)
                 End If
             End If
         End If
