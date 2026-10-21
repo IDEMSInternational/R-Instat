@@ -772,7 +772,7 @@ Public Class dlgDescribeTwoVarGraph
 
         clsFreeVarsFunction.SetPackageName("ggplot2")
         clsFreeVarsFunction.SetRCommand("vars")
-        clsFreeVarsFunction.AddParameter("variable", "variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsFreeVarsFunction.AddParameter("first_var", "variable", iPosition:=0, bIncludeArgumentName:=False)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
@@ -1481,9 +1481,8 @@ Public Class dlgDescribeTwoVarGraph
             Exit Sub
         End If
         clsBaseOperator.RemoveParameterByName("facets")
-        clsFacetFunction.RemoveParameterByName("facets")
 
-        If Not ucr1stFactorReceiver.IsEmpty Then
+        If Not ucr1stFactorReceiver.IsEmpty OrElse ucrReceiverFirstVars.ucrMultipleVariables.Count > 1 Then
             Select Case ucrInputStation.GetText()
                 Case strFacetWrap
                     bWrap = True
@@ -1537,11 +1536,25 @@ Public Class dlgDescribeTwoVarGraph
             clsFacetFunction.RemoveParameterByName("rows")
         End If
 
+        AddRemoveMultipleFacetVars(bWrap:=bWrap, bRowsAndCols:=bRowsAndCols, bRowsAndColsAll:=bRowsAndColsAll, bRow:=bRow, bRowAll:=bRowAll, bCol:=bCol, bColAll:=bColAll)
+    End Sub
+
+    Private Sub AddRemoveMultipleFacetVars(bWrap As Boolean, bRowsAndCols As Boolean, bRowsAndColsAll As Boolean, bRow As Boolean, bRowAll As Boolean, bCol As Boolean, bColAll As Boolean)
         If ucrReceiverFirstVars.ucrMultipleVariables.Count > 1 Then
             ucrChkFreeScaleYAxis.Checked = True
+            If Not ucr1stFactorReceiver.IsEmpty Then
+                clsFreeVarsFunction.AddParameter("second_var", ucr1stFactorReceiver.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsFreeVarsFunction.RemoveParameterByName("second_var")
+            End If
             If bWrap Then
-                clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTildeOperator, iPosition:=0)
+                If Not ucr1stFactorReceiver.IsEmpty Then
+                    clsFacetFunction.AddParameter("facets", clsRFunctionParameter:=clsFreeVarsFunction, iPosition:=0)
+                Else
+                    clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTildeOperator, iPosition:=0)
+                End If
             ElseIf bRowsAndCols OrElse bRowsAndColsAll Then
+                clsFreeVarsFunction.RemoveParameterByName("second_var")
                 clsFacetFunction.AddParameter("rows", clsRFunctionParameter:=clsRowVarsFunction, iPosition:=0)
                 clsFacetFunction.AddParameter("cols", clsRFunctionParameter:=clsFreeVarsFunction, iPosition:=0)
             ElseIf bRow OrElse bRowAll Then
@@ -1551,9 +1564,10 @@ Public Class dlgDescribeTwoVarGraph
             End If
         Else
             ucrChkFreeScaleYAxis.Checked = False
-            SetFreeYAxis()
         End If
+        SetFreeYAxis()
     End Sub
+
 
     Private Sub ChangeLocations()
         Me.ucrReceiverFirstVars.Size = New Size(145, 110)
