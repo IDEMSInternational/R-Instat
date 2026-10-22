@@ -47,6 +47,9 @@ Partial Class dlgUseGraph
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.grpLegend = New System.Windows.Forms.GroupBox()
+        Me.lblSliderFrame = New System.Windows.Forms.Label()
+        Me.ucrChkAddSlider = New instat.ucrCheck()
+        Me.ucrReceiverFrame = New instat.ucrReceiverSingle()
         Me.grpLegend.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,7 +74,7 @@ Partial Class dlgUseGraph
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 227)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 262)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(315, 24)
@@ -106,7 +109,7 @@ Partial Class dlgUseGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 254)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 5
@@ -135,19 +138,53 @@ Partial Class dlgUseGraph
         '
         Me.grpLegend.Controls.Add(Me.ucrChkLegendPosition)
         Me.grpLegend.Controls.Add(Me.ucrInputLegendPosition)
-        Me.grpLegend.Location = New System.Drawing.Point(250, 74)
+        Me.grpLegend.Location = New System.Drawing.Point(250, 91)
         Me.grpLegend.Name = "grpLegend"
         Me.grpLegend.Size = New System.Drawing.Size(159, 85)
         Me.grpLegend.TabIndex = 9
         Me.grpLegend.TabStop = False
         Me.grpLegend.Text = "Legend"
         '
+        'lblSliderFrame
+        '
+        Me.lblSliderFrame.AutoSize = True
+        Me.lblSliderFrame.Location = New System.Drawing.Point(253, 214)
+        Me.lblSliderFrame.Name = "lblSliderFrame"
+        Me.lblSliderFrame.Size = New System.Drawing.Size(68, 13)
+        Me.lblSliderFrame.TabIndex = 10
+        Me.lblSliderFrame.Text = "Slider Frame:"
+        '
+        'ucrChkAddSlider
+        '
+        Me.ucrChkAddSlider.AutoSize = True
+        Me.ucrChkAddSlider.Checked = False
+        Me.ucrChkAddSlider.Location = New System.Drawing.Point(10, 231)
+        Me.ucrChkAddSlider.Name = "ucrChkAddSlider"
+        Me.ucrChkAddSlider.Size = New System.Drawing.Size(222, 23)
+        Me.ucrChkAddSlider.TabIndex = 11
+        '
+        'ucrReceiverFrame
+        '
+        Me.ucrReceiverFrame.AutoSize = True
+        Me.ucrReceiverFrame.frmParent = Me
+        Me.ucrReceiverFrame.Location = New System.Drawing.Point(250, 231)
+        Me.ucrReceiverFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFrame.Name = "ucrReceiverFrame"
+        Me.ucrReceiverFrame.Selector = Nothing
+        Me.ucrReceiverFrame.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFrame.strNcFilePath = ""
+        Me.ucrReceiverFrame.TabIndex = 12
+        Me.ucrReceiverFrame.ucrSelector = Nothing
+        '
         'dlgUseGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(414, 311)
+        Me.ClientSize = New System.Drawing.Size(419, 346)
+        Me.Controls.Add(Me.ucrReceiverFrame)
+        Me.Controls.Add(Me.ucrChkAddSlider)
+        Me.Controls.Add(Me.lblSliderFrame)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.lblGraphtoUse)
@@ -178,4 +215,7 @@ Partial Class dlgUseGraph
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegendPosition As ucrCheck
     Friend WithEvents grpLegend As GroupBox
+    Friend WithEvents lblSliderFrame As Label
+    Friend WithEvents ucrReceiverFrame As ucrReceiverSingle
+    Friend WithEvents ucrChkAddSlider As ucrCheck
 End Class
