@@ -33,6 +33,8 @@ Imports instat.Translations
 ''' </summary>
 Public Class ucrFactor
 
+    Private _bEndingEdit As Boolean = False
+
     'this reogrid worksheet will eventually be replaced with the custom grid sheet 
     Private WithEvents _grdSheet As unvell.ReoGrid.Worksheet
 
@@ -141,6 +143,14 @@ Public Class ucrFactor
     Private WithEvents mnuCopyPaste As ContextMenuStrip
     Private WithEvents mnuCopy As ToolStripMenuItem
     Private WithEvents mnuPaste As ToolStripMenuItem
+
+    ''' <summary>
+    ''' last text typed in the cell editor. Re-applied by FlushPendingEdit if the grid
+    ''' ended the edit without keeping that text
+    ''' </summary>
+    Private _iPendingRow As Integer = -1
+    Private _iPendingCol As Integer = -1
+    Private _strPendingText As String = ""
 
     Private Property SelectionControlsVisible As Boolean
         Get
@@ -253,7 +263,7 @@ Public Class ucrFactor
                     End If
                 Next
             Next
-
+            ClearPendingEdit()
             ' Trigger validation and parameter update
             OnControlValueChanged()
 
@@ -296,7 +306,9 @@ Public Class ucrFactor
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub _grdSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles _grdSheet.CellEditTextChanging
-
+        If _bEndingEdit OrElse _grdSheet Is Nothing OrElse e.Cell Is Nothing Then
+            Exit Sub
+        End If
         Dim bValid As Boolean = True
         'do levels entry validation
         If _grdSheet.ColumnHeaders(e.Cell.Column).Text = DefaultColumnNames.Level Then
@@ -314,6 +326,9 @@ Public Class ucrFactor
             'set the new data before calling OnControlValueChanged
             'very important especially when writing to the parameter value
             _grdSheet(e.Cell.Row, e.Cell.Column) = e.Text
+            _iPendingRow = e.Cell.Row
+            _iPendingCol = e.Cell.Column
+            _strPendingText = e.Text
             'this will raise ControlContentsChanged event
             'and also update parameter and R code with the values
             OnControlValueChanged()
@@ -356,6 +371,27 @@ Public Class ucrFactor
         _editableColNames = New HashSet(Of String)(If(editableColNames, {}))
         _bIncludeNALevel = bIncludeNALevel
         FillGridWithNewDataSheet()
+    End Sub
+
+    ''' <summary>
+    ''' Closes the cell editor if one is open, keeping whatever text the sheet already holds
+    ''' (every keystroke is mirrored into the sheet by CellEditTextChanging).
+    ''' </summary>
+    Public Sub EndActiveEdit()
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+        _bEndingEdit = True
+        Try
+            If _grdSheet.IsEditing Then
+                Dim pos As CellPosition = _grdSheet.FocusPos
+                _grdSheet.EndEdit(Convert.ToString(_grdSheet(pos.Row, pos.Col)))
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("EndActiveEdit failed: " & ex.Message)
+        Finally
+            _bEndingEdit = False
+        End Try
     End Sub
 
     Public Sub SetAsNormalGridColumn(ucrLinkedReceiver As ucrReceiverSingle,
@@ -451,6 +487,8 @@ Public Class ucrFactor
         End If
         'set the new factor varible as the current cached variable
         strCurrFactorVariableName = strNewFactorVariableName
+        EndActiveEdit()
+        ClearPendingEdit()
         If CreateAndFillNewDataSheet(grdFactorData,
                                       Chr(34) & _ucrLinkedReceiver.GetDataName() & Chr(34),
                                       strNewFactorVariableName,
@@ -470,6 +508,8 @@ Public Class ucrFactor
     ''' also hides the grid
     ''' </summary>
     Private Sub ClearWorkSheetAndVariableName()
+        EndActiveEdit()
+        ClearPendingEdit()
         'clear any worksheets from the grid
         _grdSheet = Nothing
         grdFactorData.Worksheets.Clear()
@@ -894,6 +934,35 @@ Public Class ucrFactor
         End If
     End Sub
 
+    Private Sub ClearPendingEdit()
+        _iPendingRow = -1
+        _iPendingCol = -1
+        _strPendingText = ""
+    End Sub
+
+    ''' <summary>
+    ''' Makes sure the last text typed in the cell editor is what the sheet holds to.
+    ''' Call before reading the grid values, e.g. when OK is clicked.
+    ''' Raises ControlValueChanged only if the sheet had lost the typed text.
+    ''' </summary>
+    Public Sub FlushPendingEdit()
+        If _grdSheet Is Nothing OrElse _iPendingRow < 0 OrElse _iPendingCol < 0 _
+            OrElse _iPendingRow >= _grdSheet.Rows OrElse _iPendingCol >= _grdSheet.Columns Then
+            ClearPendingEdit()
+            Exit Sub
+        End If
+
+        Dim iRow As Integer = _iPendingRow
+        Dim iCol As Integer = _iPendingCol
+        Dim strText As String = _strPendingText
+        ClearPendingEdit()
+
+        If Convert.ToString(_grdSheet(iRow, iCol)) <> strText Then
+            _grdSheet(iRow, iCol) = strText
+            OnControlValueChanged()   ' updates new_labels / new_levels through the dialog handler
+        End If
+    End Sub
+
 
     'used internally when reading data from parameter
     Private Sub SetSelectedRows(grdSheet As unvell.ReoGrid.Worksheet,
@@ -958,6 +1027,7 @@ Public Class ucrFactor
 
     'used internally
     Private Sub SetCellValues(grdSheet As unvell.ReoGrid.Worksheet, iValueColIndex As Integer, cellValues As IEnumerable(Of String), bRaisedControlValueChangedEvent As Boolean)
+        ClearPendingEdit()
         For iRowIndex As Integer = 0 To grdSheet.RowCount - 1
             grdSheet(iRowIndex, iValueColIndex) = cellValues(iRowIndex)
         Next
