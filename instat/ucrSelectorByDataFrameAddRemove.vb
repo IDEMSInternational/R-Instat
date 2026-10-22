@@ -83,6 +83,7 @@ Public Class ucrSelectorByDataFrameAddRemove
     End Sub
 
     Private Sub contextMenuStripAdd_Opening(sender As Object, e As CancelEventArgs) Handles contextMenuStripAdd.Opening
+        TranslateAddMenu()
         'todo. this code block should be set under CurrentReceiver change event
         'once the event is added it can be removed from here.
         If CurrentReceiver Is Nothing Then
@@ -92,5 +93,16 @@ Public Class ucrSelectorByDataFrameAddRemove
             toolStripAddSelected.Enabled = lstAvailableVariable.SelectedItems.Count > 0
             toolStripAddAll.Enabled = TypeOf CurrentReceiver Is ucrReceiverMultiple
         End If
+    End Sub
+
+    Private Sub TranslateAddMenu()
+        For Each clsItem As ToolStripItem In contextMenuStripAdd.Items
+            'keep the original English text so repeated openings (or a language change) 
+            'always translate from English, not from already-translated text
+            If clsItem.Tag Is Nothing Then
+                clsItem.Tag = clsItem.Text
+            End If
+            clsItem.Text = Translations.GetTranslation(clsItem.Tag.ToString())
+        Next
     End Sub
 End Class
