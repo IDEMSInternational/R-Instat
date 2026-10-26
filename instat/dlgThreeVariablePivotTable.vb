@@ -20,7 +20,7 @@ Public Class dlgThreeVariablePivotTable
     Private bReset As Boolean = True
     Private clsConcatenateFunction,
           clsDummyFunction,
-        clsRelevelPasteFunction, clsGetDataFrameFunction, clsRPivotTableFunction,
+        clsRPivotTableFunction,
         clsSelectFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Public enumPivotMode As PivotMode = PivotMode.Prepare
@@ -160,10 +160,8 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub SetDefaults()
         clsConcatenateFunction = New RFunction
-        clsRelevelPasteFunction = New RFunction
         clsRPivotTableFunction = New RFunction
         clsSelectFunction = New RFunction
-        clsGetDataFrameFunction = New RFunction
         clsPipeOperator = New ROperator
 
         ucrReceiverInitialRowFactors.SetMeAsReceiver()
@@ -179,9 +177,6 @@ Public Class dlgThreeVariablePivotTable
         clsDummyFunction.AddParameter("renderer", "False", iPosition:=3)
         clsDummyFunction.AddParameter("check", "cols", iPosition:=4)
 
-        clsRelevelPasteFunction.SetRCommand("return_variable_levels")
-        clsRelevelPasteFunction.SetAssignTo("relevel_variables")
-
         clsConcatenateFunction.SetRCommand("c")
 
         clsSelectFunction.SetPackageName("dplyr")
@@ -195,9 +190,6 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.SetRCommand("rpivotTable")
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsRPivotTableFunction.SetAssignTo("last_table")
-
-        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataFrameFunction.AddParameter("stack_data", "TRUE", iPosition:=1)
 
         clsRPivotTableFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                    strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -277,7 +269,6 @@ Public Class dlgThreeVariablePivotTable
         AutofillMode()
         SetFactorSortingOrder()
         clsRPivotTableFunction._strDataFrameNameToAddAssignToObject = ucrSelectorPivot.strCurrentDataFrame
-        clsGetDataFrameFunction.SetAssignTo(ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsPipeOperator.SetAssignTo(ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
 
@@ -400,19 +391,11 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub SetFactorSortingOrder()
 
-        Dim DataFrame As String = ucrSelectorPivot.strCurrentDataFrame
-
-        ' Ensure clsRelevelPasteFunction is reset before checking conditions
-        clsRPivotTableFunction.RemoveParameterByName("sorters")
-        clsRelevelPasteFunction.RemoveParameterByName("data")
-        clsRelevelPasteFunction.RemoveParameterByName("data_stack")
         clsRPivotTableFunction.RemoveParameterByName("val")
 
         If ucrChkFactorsOrder.Checked Then
             clsDummyFunction.AddParameter("order", "True", iPosition:=0)
             If rdoSingle.Checked Then
-                clsRelevelPasteFunction.AddParameter("data", DataFrame, iPosition:=0, bIncludeArgumentName:=False)
-                clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
                 clsDummyFunction.AddParameter("checked", "single", iPosition:=1)
                 If ucrChkNumericVariable.Checked Then
                     clsRPivotTableFunction.AddParameter("val", ucrReceiverAdditionalRowFactor.GetVariableNames, iPosition:=3)
@@ -421,14 +404,8 @@ Public Class dlgThreeVariablePivotTable
                 End If
             ElseIf rdoMultiple.Checked Then
                 clsDummyFunction.AddParameter("checked", "multiple", iPosition:=1)
-                clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & DataFrame & Chr(34), iPosition:=0)
-                clsGetDataFrameFunction.AddParameter("measure.vars", ucrReceiverMultipleAddRows.GetVariableNames(), iPosition:=2)
-                clsRelevelPasteFunction.AddParameter("data_stack", clsRFunctionParameter:=clsGetDataFrameFunction, bIncludeArgumentName:=False)
-                clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
                 clsRPivotTableFunction.AddParameter("val", Chr(34) & "value" & Chr(34), iPosition:=3)
             ElseIf rdoDataFrame.Checked Then
-                clsRelevelPasteFunction.AddParameter("data", DataFrame, iPosition:=0, bIncludeArgumentName:=False)
-                clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
                 clsDummyFunction.AddParameter("checked", "dataframe", iPosition:=1)
             End If
         Else
