@@ -19,8 +19,6 @@ Public Class dlgTaylorDiagram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsTaylorDiagramFunction As New RFunction
-    Private clsTaylorDiagramPlotOperator As New ROperator
-
     Private Sub dlgTaylorDiagram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -37,9 +35,8 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 643
+        ucrBase.iHelpTopicID= 643
         ucrBase.clsRsyntax.iCallType = 3
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
         ucrSelectorTaylorDiagram.SetParameterIsrfunction()
@@ -83,35 +80,20 @@ Public Class dlgTaylorDiagram
 
     Private Sub SetDefaults()
         clsTaylorDiagramFunction = New RFunction
-        clsTaylorDiagramPlotOperator = New ROperator
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
         ucrReceiverObserved.SetMeAsReceiver()
 
-        ' plot = FALSE stops openair drawing on an external device.
-        ' openair v3 returns a wrapper object, so only its $plot element is a graph.
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
-        clsTaylorDiagramFunction.AddParameter("plot", "FALSE", iPosition:=6)
+        clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        clsTaylorDiagramPlotOperator.SetOperation("$", bBracketsTemp:=False)
-        clsTaylorDiagramPlotOperator.bSpaceAroundOperation = False
-        clsTaylorDiagramPlotOperator.AddParameter("left", clsRFunctionParameter:=clsTaylorDiagramFunction, iPosition:=0)
-        clsTaylorDiagramPlotOperator.AddParameter("right", "plot", iPosition:=1)
-
-        ' The assignment (last_graph or a stored graph) is done only by ucrSavePlot.
-        ucrBase.clsRsyntax.SetBaseROperator(clsTaylorDiagramPlotOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorTaylorDiagram.SetRCode(clsTaylorDiagramFunction, bReset)
-        ucrReceiverObserved.SetRCode(clsTaylorDiagramFunction, bReset)
-        ucrReceiverEstimated.SetRCode(clsTaylorDiagramFunction, bReset)
-        ucrReceiverGroup.SetRCode(clsTaylorDiagramFunction, bReset)
-        ucrReceiverType.SetRCode(clsTaylorDiagramFunction, bReset)
-        ucrChkNormalise.SetRCode(clsTaylorDiagramFunction, bReset)
-        ucrSavePlot.SetRCode(clsTaylorDiagramPlotOperator, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -120,39 +102,27 @@ Public Class dlgTaylorDiagram
         TestOkEnabled()
     End Sub
 
-    Private Function GroupAndTypeClash() As Boolean
-        If ucrReceiverGroup.IsEmpty() OrElse ucrReceiverType.IsEmpty() Then
-            Return False
-        End If
-        Dim strType As String = ucrReceiverType.GetVariableNames(False)
-        For Each strGroup As String In ucrReceiverGroup.GetVariableNamesAsList()
-            If strGroup = strType Then
-                Return True
-            End If
-        Next
-        Return False
-    End Function
-
     Private Sub TestOkEnabled()
-        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.Count > 2 _
-                OrElse GroupAndTypeClash() OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.Count > 2 OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverGroup.ControlContentsChanged, ucrReceiverType.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverEstimated_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimated.ControlContentsChanged
         If ucrReceiverEstimated.Count > 2 Then
             MsgBoxTranslate("Note: estimated variables can only be two i.e. two lots of model predictions. Extra variables will be removed.", MsgBoxStyle.Exclamation)
-            For i As Integer = ucrReceiverEstimated.Count - 1 To 2 Step -1
-                ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
+            For i As Integer = ucrReceiverEstimated.Count - 1 To 0 Step -1
+                If i > 1 Then
+                    ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
+                End If
             Next
+            TestOkEnabled()
         End If
-        TestOkEnabled()
     End Sub
 End Class
