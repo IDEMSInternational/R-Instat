@@ -89,6 +89,9 @@ Public Class dlgAnovaModel
         'Model type pull-down
         ucrInputModelType.SetItems({strModelAov, strModelLmer, strModelLme, strModelGlmer})
         ucrInputModelType.SetDropDownStyleAsNonEditable()
+        ucrInputModelType.Visible = False
+        lblModelType.Visible = False
+        lblErrorModel.Text = "Random/Residual/Error:"
 
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveAnovaModel.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("anova_model")
@@ -293,11 +296,10 @@ Public Class dlgAnovaModel
     End Sub
 
     Private Function GetModelType() As String
-        Dim strType As String = ucrInputModelType.GetText()
-        If String.IsNullOrEmpty(strType) Then
-            Return strModelAov
+        If ucrFamily.ucrInputDistributions.GetText() = strModelLmer Then
+            Return strModelLmer
         End If
-        Return strType
+        Return strModelAov
     End Function
 
     Private Sub TestOKEnabled()
@@ -448,10 +450,14 @@ Public Class dlgAnovaModel
                     strRhs &= " + Error(" & strRandom & ")"
                 Case strModelLmer, strModelGlmer
                     'y ~ x + (1 | block)
-                    If strRandom.StartsWith("(") AndAlso strRandom.EndsWith(")") Then
-                        strRhs &= " + " & strRandom
+                    If strRandom.Contains("|") Then
+                        If strRandom.StartsWith("(") AndAlso strRandom.EndsWith(")") Then
+                            strRhs &= " + " & strRandom
+                        Else
+                            strRhs &= " + (" & strRandom & ")"
+                        End If
                     Else
-                        strRhs &= " + (" & strRandom & ")"
+                        strRhs &= " + (1 | " & strRandom & ")"
                     End If
                 Case strModelLme
                     'fixed = y ~ x, random = ~ 1 | block
@@ -484,11 +490,7 @@ Public Class dlgAnovaModel
     End Sub
 
     Private Sub ucrInputModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelType.ControlValueChanged
-        If GetModelType() = strModelAov Then
-            lblErrorModel.Text = "Error/Residuals:"
-        Else
-            lblErrorModel.Text = "Random Effects (e.g. 1|block):"
-        End If
+        lblErrorModel.Text = "Random/Residual/Error:"
         ResponseConvert()
         ResponseVariableType()
         ChooseRFunction()
@@ -519,12 +521,31 @@ Public Class dlgAnovaModel
         End If
     End Sub
 
+    ''' <summary>
+    ''' Adds "lmer" under "aov" in the Distribution pull-down. lmer is also a normal
+    ''' model, so it reuses the same distribution object; GetModelType() reads the label.
+    ''' </summary>
+    Private Sub AddLmerToDistributions(strSelectModel As String)
+        Dim lstDistributions = ucrFamily.lstCurrentDistributions
+        Dim cboDistributions = ucrFamily.ucrInputDistributions.cboInput
+        If lstDistributions.Count = 0 OrElse cboDistributions.Items.Count = 0 Then
+            Exit Sub
+        End If
+        lstDistributions.Add(lstDistributions(0))
+        cboDistributions.Items.Add(strModelLmer)
+        If strSelectModel = strModelLmer Then
+            cboDistributions.SelectedIndex = cboDistributions.Items.Count - 1
+        End If
+    End Sub
+
     Public Sub ResponseConvert()
         If Not bRCodeSet Then
             Exit Sub
         End If
 
-        Dim bGlmer As Boolean = GetModelType() = strModelGlmer
+        'Remember aov / lmer, because the Distribution list is rebuilt below
+        Dim strPreviousModel As String = GetModelType()
+        Dim bGlmer As Boolean = False
 
         If Not ucrReceiverAnovaResponseVar.IsEmpty Then
             ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveAnovaModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverAnovaResponseVar.GetVariableNames(bWithQuotes:=False))
@@ -549,6 +570,7 @@ Public Class dlgAnovaModel
             Else
                 'aov / lmer / lme: Normal response only
                 FilterFamilyDistributions(Function(strTag) strTag = strAovNameTag)
+                AddLmerToDistributions(strPreviousModel)
             End If
         Else
             ucrChkConvertToVariate.Visible = False
@@ -560,6 +582,9 @@ Public Class dlgAnovaModel
         Else
             ucrFamily.Enabled = True
         End If
+        ChooseRFunction()
+        UpdateFormulaRhs()
+        ChooseOutputFunction()
         UpdatePreview()
         TestOKEnabled()
     End Sub
@@ -620,6 +645,13 @@ Public Class dlgAnovaModel
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ResponseVariableType()
         clsFamilyFunction.RemoveParameterByName("link")
+        If bRCodeSet Then
+            ChooseRFunction()
+            UpdateFormulaRhs()
+            ChooseOutputFunction()
+            UpdatePreview()
+            TestOKEnabled()
+        End If
     End Sub
 
     Private Sub ucrReceiverAnovaResponseVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnovaResponseVar.ControlValueChanged
