@@ -6993,7 +6993,6 @@
   "Collapse:": "Collapse:",
   "Two/Three Variable Graph": "Two/Three Variable Graph",
   "Two/Three Variable Graph Sub-Dialog": "Two/Three Variable Graph Sub-Dialog",
-  "Whole Numbers": "Whole Numbers",
   "JSON Column(s):": "JSON Column(s):",
   "JSON": "JSON",
   "Carry Column(s):": "Carry Column(s):",
@@ -7002,5 +7001,6 @@
   "Error???:": "Error???:",
   "Error/Residuals:": "Error/Residuals:",
   "Model Type:": "Model Type:",
-  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):"
+  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):",
+  "Random/Residual/Error:": "Random/Residual/Error:"
 }
