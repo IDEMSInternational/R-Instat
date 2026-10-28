@@ -192,9 +192,9 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThirdType.Location = New System.Drawing.Point(67, 50)
         Me.lblThirdType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblThirdType.Name = "lblThirdType"
-        Me.lblThirdType.Size = New System.Drawing.Size(69, 20)
+        Me.lblThirdType.Size = New System.Drawing.Size(74, 20)
         Me.lblThirdType.TabIndex = 19
-        Me.lblThirdType.Text = "third ype"
+        Me.lblThirdType.Text = "third type"
         '
         'lblSecondBy
         '
@@ -1159,7 +1159,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(783, 802)
-        Me.Controls.Add(Me.grpTypeOfDisplay)
         Me.Controls.Add(Me.ucrInputCollapse)
         Me.Controls.Add(Me.lblCollapse)
         Me.Controls.Add(Me.ucrInputStation)
@@ -1190,6 +1189,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
         Me.Controls.Add(Me.ucrReceiverColour)
+        Me.Controls.Add(Me.grpTypeOfDisplay)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
