@@ -69,7 +69,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.rdoPairs = New System.Windows.Forms.RadioButton()
         Me.rdoSummarize = New System.Windows.Forms.RadioButton()
         Me.lblColour = New System.Windows.Forms.Label()
-        Me.grpTypeOfDispaly = New System.Windows.Forms.GroupBox()
+        Me.grpTypeOfDisplay = New System.Windows.Forms.GroupBox()
         Me.lblDiagonalNA = New System.Windows.Forms.Label()
         Me.ucrInputDiagonalNA = New instat.ucrInputComboBox()
         Me.lblDiagonalDiscrete = New System.Windows.Forms.Label()
@@ -122,7 +122,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputCollapse = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
-        Me.grpTypeOfDispaly.SuspendLayout()
+        Me.grpTypeOfDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -516,44 +516,44 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblColour.TabIndex = 20
         Me.lblColour.Text = "Colour (Optional):"
         '
-        'grpTypeOfDispaly
+        'grpTypeOfDisplay
         '
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalNA)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputDiagonalNA)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalDiscrete)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputDiagonalDiscrete)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalContinuous)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputDiagonalContinous)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblUpperNA)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblUpperDiscrete)
-        Me.grpTypeOfDispaly.Controls.Add(Me.UcrReceiverSingle2)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblUpperCombo)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblUpperContinous)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputUpperNA)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputUpperDiscrete)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputUpperCombo)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputUpperContinous)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblLowerNA)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblLowerDiscrete)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblLowerCombo)
-        Me.grpTypeOfDispaly.Controls.Add(Me.lblLowerContinous)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputLowerNA)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputLowerDiscrete)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputLowerCombo)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputLowerContinous)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkDiagonal)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkLower)
-        Me.grpTypeOfDispaly.Controls.Add(Me.UcrVariablesAsFactor1)
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkUpper)
-        Me.grpTypeOfDispaly.Controls.Add(Me.UcrReceiverSingle1)
-        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(37, 408)
-        Me.grpTypeOfDispaly.Margin = New System.Windows.Forms.Padding(4)
-        Me.grpTypeOfDispaly.Name = "grpTypeOfDispaly"
-        Me.grpTypeOfDispaly.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpTypeOfDispaly.Size = New System.Drawing.Size(695, 226)
-        Me.grpTypeOfDispaly.TabIndex = 22
-        Me.grpTypeOfDispaly.TabStop = False
-        Me.grpTypeOfDispaly.Text = "Type Of Display"
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblDiagonalNA)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputDiagonalNA)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblDiagonalDiscrete)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputDiagonalDiscrete)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblDiagonalContinuous)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputDiagonalContinous)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblUpperNA)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblUpperDiscrete)
+        Me.grpTypeOfDisplay.Controls.Add(Me.UcrReceiverSingle2)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblUpperCombo)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblUpperContinous)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputUpperNA)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputUpperDiscrete)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputUpperCombo)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputUpperContinous)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblLowerNA)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblLowerDiscrete)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblLowerCombo)
+        Me.grpTypeOfDisplay.Controls.Add(Me.lblLowerContinous)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputLowerNA)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputLowerDiscrete)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputLowerCombo)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrInputLowerContinous)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrChkDiagonal)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrChkLower)
+        Me.grpTypeOfDisplay.Controls.Add(Me.UcrVariablesAsFactor1)
+        Me.grpTypeOfDisplay.Controls.Add(Me.ucrChkUpper)
+        Me.grpTypeOfDisplay.Controls.Add(Me.UcrReceiverSingle1)
+        Me.grpTypeOfDisplay.Location = New System.Drawing.Point(37, 408)
+        Me.grpTypeOfDisplay.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpTypeOfDisplay.Name = "grpTypeOfDisplay"
+        Me.grpTypeOfDisplay.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpTypeOfDisplay.Size = New System.Drawing.Size(695, 226)
+        Me.grpTypeOfDisplay.TabIndex = 22
+        Me.grpTypeOfDisplay.TabStop = False
+        Me.grpTypeOfDisplay.Text = "Type Of Display"
         '
         'lblDiagonalNA
         '
@@ -1159,6 +1159,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(783, 802)
+        Me.Controls.Add(Me.grpTypeOfDisplay)
         Me.Controls.Add(Me.ucrInputCollapse)
         Me.Controls.Add(Me.lblCollapse)
         Me.Controls.Add(Me.ucrInputStation)
@@ -1188,7 +1189,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.lblColour)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
-        Me.Controls.Add(Me.grpTypeOfDispaly)
         Me.Controls.Add(Me.ucrReceiverColour)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -1201,8 +1201,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpSummaries.PerformLayout()
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
-        Me.grpTypeOfDispaly.ResumeLayout(False)
-        Me.grpTypeOfDispaly.PerformLayout()
+        Me.grpTypeOfDisplay.ResumeLayout(False)
+        Me.grpTypeOfDisplay.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1240,7 +1240,7 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents rdoSummarize As RadioButton
     Friend WithEvents lblColour As Label
     Friend WithEvents ucrReceiverColour As ucrReceiverSingle
-    Friend WithEvents grpTypeOfDispaly As GroupBox
+    Friend WithEvents grpTypeOfDisplay As GroupBox
     Friend WithEvents ucrChkDiagonal As ucrCheck
     Friend WithEvents ucrChkLower As ucrCheck
     Friend WithEvents ucrChkUpper As ucrCheck
