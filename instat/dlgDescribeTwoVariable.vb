@@ -96,14 +96,14 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSkimrGroupByFactor.SetParameterIsString()
         ucrReceiverSkimrGroupByFactor.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSkimrGroupByFactor.SetLinkedDisplayControl(lblFirstGroupByFactor)
-        ucrReceiverSkimrGroupByFactor.SetDataType("factor")
+        ucrReceiverSkimrGroupByFactor.SetDataType("factor,character")
 
         ucrReceiverSecondSkimrGroupByFactor.SetParameter(New RParameter("second_factor", 3, bNewIncludeArgumentName:=False))
         ucrReceiverSecondSkimrGroupByFactor.bWithQuotes = False
         ucrReceiverSecondSkimrGroupByFactor.SetParameterIsString()
         ucrReceiverSecondSkimrGroupByFactor.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondSkimrGroupByFactor.SetLinkedDisplayControl(lblSecondGroupByFactor)
-        ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor")
+        ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor,character")
 
         ucrReceiverThreeVariableThirdVariable.SetParameter(New RParameter("second_factors", 3, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableThirdVariable.SetParameterIsString()
@@ -410,7 +410,7 @@ Public Class dlgDescribeTwoVariable
         clsSummaryTableCombineFactorsFunction.SetRCommand("c")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
+        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=3)
 
         clsTildOperator.SetOperation("~")
         clsTildOperator.AddParameter("right", clsRFunctionParameter:=clsSummaryTableFunction)
