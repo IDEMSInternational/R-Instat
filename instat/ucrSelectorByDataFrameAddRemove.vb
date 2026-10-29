@@ -17,6 +17,11 @@
 Imports System.ComponentModel
 
 Public Class ucrSelectorByDataFrameAddRemove
+    Public Overrides Sub TranslateMenus()
+        MyBase.TranslateMenus()
+        TranslateMenuItems(contextMenuStripAdd.Items)
+    End Sub
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, toolStripAddSelected.Click
         Add()
     End Sub

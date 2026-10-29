@@ -73,7 +73,17 @@ Public Class ucrSelector
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         strType = "column"
 
-        SetSortRightClickMenuText()
+        mnuSortToolStrip.Text = "Sort Alphabetically"   'plain default; translated later in TranslateMenus()
+    End Sub
+
+    Private Sub TranslateListHeading()
+        If CurrentReceiver Is Nothing OrElse lstAvailableVariable.Columns.Count = 0 Then
+            Exit Sub
+        End If
+        Dim strHeading As String = CurrentReceiver.strSelectorHeading
+        If Not String.IsNullOrEmpty(strHeading) Then
+            lstAvailableVariable.Columns(0).Text = GetTranslation(strHeading)
+        End If
     End Sub
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -92,11 +102,6 @@ Public Class ucrSelector
                 SetCurrentReceiver(lstVisibleReceivers(0)) 'set the focus to the first Receiver in the dialogue.
             End If
         End If
-    End Sub
-
-    Private Sub SetSortRightClickMenuText()
-        ' TODO. Add translations
-        mnuSortToolStrip.Text = If(enumCurrentListViewSortStatus = SelectorSortType.Appearance, "Sort Alphabetically", "Sort by Appearance")
     End Sub
 
     Protected Sub OnResetAll()
@@ -186,6 +191,8 @@ Public Class ucrSelector
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
                                       strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath,
                                       strObjectName:=CurrentReceiver.strObjectName)
+
+        TranslateListHeading()
 
         ' Sort sekector alphabetically if the sort order is set to alphabetical
         If enumCurrentListViewSortStatus = SelectorSortType.Alphabetically Then
@@ -617,6 +624,32 @@ Public Class ucrSelector
     Public Overridable Function RemoveReceiver(ucrReceiver As ucrReceiver) As Boolean
         Return lstOrderedReceivers.Remove(ucrReceiver)
     End Function
+
+    'Remembers the original (English) text so re-translating is always safe
+    Private dctOriginalMenuText As New Dictionary(Of ToolStripItem, String)
+
+    Public Overridable Sub TranslateMenus()
+        TranslateMenuItems(SelectionMenuStrip.Items)
+        SetSortRightClickMenuText() 'dynamic text, set separately
+        TranslateListHeading()
+    End Sub
+
+    Protected Sub TranslateMenuItems(items As ToolStripItemCollection)
+        For Each item As ToolStripItem In items
+            If TypeOf item Is ToolStripSeparator OrElse item Is mnuSortToolStrip Then
+                Continue For
+            End If
+            If Not dctOriginalMenuText.ContainsKey(item) Then
+                dctOriginalMenuText(item) = item.Text
+            End If
+            item.Text = GetTranslation(dctOriginalMenuText(item))
+        Next
+    End Sub
+
+    Private Sub SetSortRightClickMenuText()
+        mnuSortToolStrip.Text = GetTranslation(If(enumCurrentListViewSortStatus = SelectorSortType.Appearance,
+                                              "Sort Alphabetically", "Sort by Appearance"))
+    End Sub
 
     ''' <summary>
     ''' This subroutine is used to automatically switch focus to the next receiver whenever this 
