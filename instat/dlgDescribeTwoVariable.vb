@@ -96,14 +96,14 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSkimrGroupByFactor.SetParameterIsString()
         ucrReceiverSkimrGroupByFactor.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSkimrGroupByFactor.SetLinkedDisplayControl(lblFirstGroupByFactor)
-        ucrReceiverSkimrGroupByFactor.SetDataType("factor")
+        ucrReceiverSkimrGroupByFactor.SetDataType("factor,character")
 
         ucrReceiverSecondSkimrGroupByFactor.SetParameter(New RParameter("second_factor", 3, bNewIncludeArgumentName:=False))
         ucrReceiverSecondSkimrGroupByFactor.bWithQuotes = False
         ucrReceiverSecondSkimrGroupByFactor.SetParameterIsString()
         ucrReceiverSecondSkimrGroupByFactor.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondSkimrGroupByFactor.SetLinkedDisplayControl(lblSecondGroupByFactor)
-        ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor")
+        ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor,character")
 
         ucrReceiverThreeVariableThirdVariable.SetParameter(New RParameter("second_factors", 3, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableThirdVariable.SetParameterIsString()
@@ -410,7 +410,7 @@ Public Class dlgDescribeTwoVariable
         clsSummaryTableCombineFactorsFunction.SetRCommand("c")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
+        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=3)
 
         clsTildOperator.SetOperation("~")
         clsTildOperator.AddParameter("right", clsRFunctionParameter:=clsSummaryTableFunction)
@@ -1137,6 +1137,7 @@ Public Class dlgDescribeTwoVariable
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(bWithQuotes:=False), iPosition:=1)
+                clsgtFunction.AddParameter("rowname_col", ".x", iPosition:=1)
             ElseIf IsFactorByNumeric() Then
                 clsSummaryTableFunction.AddParameter("factors", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
@@ -1146,6 +1147,7 @@ Public Class dlgDescribeTwoVariable
                 clsSummaryTableFunction.AddParameter("factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames)
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=1)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
+                clsgtFunction.RemoveParameterByName("rowname_col")
             End If
         End If
         If rdoThreeVariable.Checked Then

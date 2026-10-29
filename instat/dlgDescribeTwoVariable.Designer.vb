@@ -357,7 +357,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoOCol.Size = New System.Drawing.Size(61, 17)
         Me.rdoOCol.TabIndex = 40
         Me.rdoOCol.TabStop = True
-        Me.rdoOCol.Text = "Row(%)"
+        Me.rdoOCol.Text = "Col(%)"
         Me.rdoOCol.UseVisualStyleBackColor = True
         '
         'rdoOCell
@@ -381,7 +381,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoORow.Size = New System.Drawing.Size(54, 17)
         Me.rdoORow.TabIndex = 42
         Me.rdoORow.TabStop = True
-        Me.rdoORow.Text = "Col(%)"
+        Me.rdoORow.Text = "Row(%)"
         Me.rdoORow.UseVisualStyleBackColor = True
         '
         'ucrReceiverThreeVariableThirdVariable
