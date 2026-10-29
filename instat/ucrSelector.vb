@@ -72,8 +72,6 @@ Public Class ucrSelector
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         strType = "column"
-
-        mnuSortToolStrip.Text = "Sort Alphabetically"   'plain default; translated later in TranslateMenus()
     End Sub
 
     Private Sub TranslateListHeading()
