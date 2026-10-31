@@ -388,7 +388,6 @@ Public Class ucrFactor
                 _grdSheet.EndEdit(Convert.ToString(_grdSheet(pos.Row, pos.Col)))
             End If
         Catch ex As Exception
-            Debug.WriteLine("EndActiveEdit failed: " & ex.Message)
         Finally
             _bEndingEdit = False
         End Try
