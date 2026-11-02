@@ -7003,5 +7003,6 @@
   "Error???:": "Error???:",
   "Error/Residuals:": "Error/Residuals:",
   "Model Type:": "Model Type:",
-  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):"
+  "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):",
+  "Random/Residual/Error:": "Random/Residual/Error:"
 }
