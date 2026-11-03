@@ -23,133 +23,210 @@ Partial Class dlgImportFromEPicsa
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrPnlImportFromEPicsa = New instat.UcrPanel()
-        Me.rdoDefinitions = New System.Windows.Forms.RadioButton()
-        Me.rdoData = New System.Windows.Forms.RadioButton()
-        Me.rdoStation = New System.Windows.Forms.RadioButton()
-        Me.ucrInputTokenPath = New instat.ucrInputTextBox()
-        Me.lblToken = New System.Windows.Forms.Label()
-        Me.cmdChooseFile = New System.Windows.Forms.Button()
-        Me.ucrInputComboCountry = New instat.ucrInputComboBox()
-        Me.lblCountry = New System.Windows.Forms.Label()
-        Me.ucrInputDefinitionsID = New instat.ucrInputTextBox()
-        Me.lblDefinitionsID = New System.Windows.Forms.Label()
-        Me.cmdFindFiles = New System.Windows.Forms.Button()
-        Me.ucrInputComboFindFiles = New instat.ucrInputComboBox()
+        Me.rdoStationMetadata = New System.Windows.Forms.RadioButton()
+        Me.rdoSummaryMetadata = New System.Windows.Forms.RadioButton()
+        Me.rdoSummaryData = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveDefinitions = New instat.ucrSave()
-        Me.ucrDataframeSelector = New instat.ucrDataFrame()
+        Me.lblConnection = New System.Windows.Forms.Label()
+        Me.btnConnection = New System.Windows.Forms.Button()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrChkSummaryData = New instat.ucrCheck()
+        Me.ucrSelectorImportFromEPICSA = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrStationFactorLevels = New instat.ucrFactor()
+        Me.ucrChkCropData = New instat.ucrCheck()
+        Me.ucrChkDefinitionsData = New instat.ucrCheck()
+        Me.ucrChkSpecifyStations = New instat.ucrCheck()
+        Me.ucrChkLatestData = New instat.ucrCheck()
+        Me.ucrInputDefinitionsID = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrPnlImportFromEPicsa
         '
         Me.ucrPnlImportFromEPicsa.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlImportFromEPicsa.Location = New System.Drawing.Point(17, 18)
-        Me.ucrPnlImportFromEPicsa.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlImportFromEPicsa.Location = New System.Drawing.Point(26, 8)
+        Me.ucrPnlImportFromEPicsa.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrPnlImportFromEPicsa.Name = "ucrPnlImportFromEPicsa"
-        Me.ucrPnlImportFromEPicsa.Size = New System.Drawing.Size(429, 46)
+        Me.ucrPnlImportFromEPicsa.Size = New System.Drawing.Size(695, 53)
         Me.ucrPnlImportFromEPicsa.TabIndex = 1
         '
-        'rdoDefinitions
+        'rdoStationMetadata
         '
-        Me.rdoDefinitions.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoDefinitions.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDefinitions.FlatAppearance.BorderSize = 2
-        Me.rdoDefinitions.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDefinitions.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDefinitions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDefinitions.Location = New System.Drawing.Point(63, 28)
-        Me.rdoDefinitions.Name = "rdoDefinitions"
-        Me.rdoDefinitions.Size = New System.Drawing.Size(116, 27)
-        Me.rdoDefinitions.TabIndex = 2
-        Me.rdoDefinitions.Text = "Definitions"
-        Me.rdoDefinitions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoDefinitions.UseVisualStyleBackColor = True
+        Me.rdoStationMetadata.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoStationMetadata.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStationMetadata.FlatAppearance.BorderSize = 2
+        Me.rdoStationMetadata.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStationMetadata.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoStationMetadata.Location = New System.Drawing.Point(108, 13)
+        Me.rdoStationMetadata.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoStationMetadata.Name = "rdoStationMetadata"
+        Me.rdoStationMetadata.Size = New System.Drawing.Size(174, 40)
+        Me.rdoStationMetadata.TabIndex = 2
+        Me.rdoStationMetadata.Text = "Station Metadata"
+        Me.rdoStationMetadata.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStationMetadata.UseVisualStyleBackColor = True
         '
-        'rdoData
+        'rdoSummaryMetadata
         '
-        Me.rdoData.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoData.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoData.FlatAppearance.BorderSize = 2
-        Me.rdoData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoData.Location = New System.Drawing.Point(290, 28)
-        Me.rdoData.Name = "rdoData"
-        Me.rdoData.Size = New System.Drawing.Size(116, 27)
-        Me.rdoData.TabIndex = 3
-        Me.rdoData.Text = "Data"
-        Me.rdoData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoData.UseVisualStyleBackColor = True
+        Me.rdoSummaryMetadata.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSummaryMetadata.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSummaryMetadata.FlatAppearance.BorderSize = 2
+        Me.rdoSummaryMetadata.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSummaryMetadata.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSummaryMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSummaryMetadata.Location = New System.Drawing.Point(449, 13)
+        Me.rdoSummaryMetadata.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSummaryMetadata.Name = "rdoSummaryMetadata"
+        Me.rdoSummaryMetadata.Size = New System.Drawing.Size(174, 40)
+        Me.rdoSummaryMetadata.TabIndex = 3
+        Me.rdoSummaryMetadata.Text = "Summary Metadata"
+        Me.rdoSummaryMetadata.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSummaryMetadata.UseVisualStyleBackColor = True
         '
-        'rdoStation
+        'rdoSummaryData
         '
-        Me.rdoStation.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStation.FlatAppearance.BorderSize = 2
-        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStation.Location = New System.Drawing.Point(176, 28)
-        Me.rdoStation.Name = "rdoStation"
-        Me.rdoStation.Size = New System.Drawing.Size(116, 27)
-        Me.rdoStation.TabIndex = 4
-        Me.rdoStation.Text = "Stations"
-        Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoStation.UseVisualStyleBackColor = True
+        Me.rdoSummaryData.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSummaryData.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSummaryData.FlatAppearance.BorderSize = 2
+        Me.rdoSummaryData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSummaryData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSummaryData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSummaryData.Location = New System.Drawing.Point(278, 13)
+        Me.rdoSummaryData.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSummaryData.Name = "rdoSummaryData"
+        Me.rdoSummaryData.Size = New System.Drawing.Size(174, 40)
+        Me.rdoSummaryData.TabIndex = 4
+        Me.rdoSummaryData.Text = "Summary Data"
+        Me.rdoSummaryData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSummaryData.UseVisualStyleBackColor = True
         '
-        'ucrInputTokenPath
+        'ucrBase
         '
-        Me.ucrInputTokenPath.AddQuotesIfUnrecognised = True
-        Me.ucrInputTokenPath.AutoSize = True
-        Me.ucrInputTokenPath.IsMultiline = False
-        Me.ucrInputTokenPath.IsReadOnly = False
-        Me.ucrInputTokenPath.Location = New System.Drawing.Point(117, 81)
-        Me.ucrInputTokenPath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrInputTokenPath.Name = "ucrInputTokenPath"
-        Me.ucrInputTokenPath.Size = New System.Drawing.Size(191, 21)
-        Me.ucrInputTokenPath.TabIndex = 5
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(26, 678)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 31
         '
-        'lblToken
+        'lblConnection
         '
-        Me.lblToken.AutoSize = True
-        Me.lblToken.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblToken.Location = New System.Drawing.Point(73, 84)
-        Me.lblToken.Name = "lblToken"
-        Me.lblToken.Size = New System.Drawing.Size(41, 13)
-        Me.lblToken.TabIndex = 6
-        Me.lblToken.Text = "Token:"
+        Me.lblConnection.AutoSize = True
+        Me.lblConnection.ForeColor = System.Drawing.Color.Red
+        Me.lblConnection.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblConnection.Location = New System.Drawing.Point(262, 87)
+        Me.lblConnection.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblConnection.Name = "lblConnection"
+        Me.lblConnection.Size = New System.Drawing.Size(114, 20)
+        Me.lblConnection.TabIndex = 35
+        Me.lblConnection.Text = "No Connection"
         '
-        'cmdChooseFile
+        'btnConnection
         '
-        Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(317, 80)
-        Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.Size = New System.Drawing.Size(80, 23)
-        Me.cmdChooseFile.TabIndex = 7
-        Me.cmdChooseFile.Text = "Browse"
-        Me.cmdChooseFile.UseVisualStyleBackColor = True
+        Me.btnConnection.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnConnection.Location = New System.Drawing.Point(26, 79)
+        Me.btnConnection.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnConnection.Name = "btnConnection"
+        Me.btnConnection.Size = New System.Drawing.Size(220, 34)
+        Me.btnConnection.TabIndex = 34
+        Me.btnConnection.Text = "Connect to Database"
+        Me.btnConnection.UseVisualStyleBackColor = True
         '
-        'ucrInputComboCountry
+        'lblStation
         '
-        Me.ucrInputComboCountry.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboCountry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboCountry.GetSetSelectedIndex = -1
-        Me.ucrInputComboCountry.IsReadOnly = False
-        Me.ucrInputComboCountry.Location = New System.Drawing.Point(79, 166)
-        Me.ucrInputComboCountry.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrInputComboCountry.Name = "ucrInputComboCountry"
-        Me.ucrInputComboCountry.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputComboCountry.TabIndex = 23
+        Me.lblStation.Location = New System.Drawing.Point(405, 339)
+        Me.lblStation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(124, 22)
+        Me.lblStation.TabIndex = 36
+        Me.lblStation.Text = "Station:"
         '
-        'lblCountry
+        'ucrReceiverStation
         '
-        Me.lblCountry.AutoSize = True
-        Me.lblCountry.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCountry.Location = New System.Drawing.Point(14, 166)
-        Me.lblCountry.Name = "lblCountry"
-        Me.lblCountry.Size = New System.Drawing.Size(46, 13)
-        Me.lblCountry.TabIndex = 24
-        Me.lblCountry.Text = "Country:"
+        Me.ucrReceiverStation.AutoSize = True
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(405, 363)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 37
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrChkSummaryData
+        '
+        Me.ucrChkSummaryData.AutoSize = True
+        Me.ucrChkSummaryData.Checked = False
+        Me.ucrChkSummaryData.Location = New System.Drawing.Point(26, 126)
+        Me.ucrChkSummaryData.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSummaryData.Name = "ucrChkSummaryData"
+        Me.ucrChkSummaryData.Size = New System.Drawing.Size(284, 34)
+        Me.ucrChkSummaryData.TabIndex = 38
+        '
+        'ucrSelectorImportFromEPICSA
+        '
+        Me.ucrSelectorImportFromEPICSA.AutoSize = True
+        Me.ucrSelectorImportFromEPICSA.bDropUnusedFilterLevels = False
+        Me.ucrSelectorImportFromEPICSA.bShowHiddenColumns = False
+        Me.ucrSelectorImportFromEPICSA.bUseCurrentFilter = True
+        Me.ucrSelectorImportFromEPICSA.Location = New System.Drawing.Point(26, 336)
+        Me.ucrSelectorImportFromEPICSA.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorImportFromEPICSA.Name = "ucrSelectorImportFromEPICSA"
+        Me.ucrSelectorImportFromEPICSA.Size = New System.Drawing.Size(320, 274)
+        Me.ucrSelectorImportFromEPICSA.TabIndex = 39
+        '
+        'ucrStationFactorLevels
+        '
+        Me.ucrStationFactorLevels.AutoSize = True
+        Me.ucrStationFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrStationFactorLevels.Location = New System.Drawing.Point(405, 415)
+        Me.ucrStationFactorLevels.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrStationFactorLevels.Name = "ucrStationFactorLevels"
+        Me.ucrStationFactorLevels.Size = New System.Drawing.Size(316, 195)
+        Me.ucrStationFactorLevels.TabIndex = 40
+        '
+        'ucrChkCropData
+        '
+        Me.ucrChkCropData.AutoSize = True
+        Me.ucrChkCropData.Checked = False
+        Me.ucrChkCropData.Location = New System.Drawing.Point(26, 178)
+        Me.ucrChkCropData.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkCropData.Name = "ucrChkCropData"
+        Me.ucrChkCropData.Size = New System.Drawing.Size(284, 34)
+        Me.ucrChkCropData.TabIndex = 41
+        '
+        'ucrChkDefinitionsData
+        '
+        Me.ucrChkDefinitionsData.AutoSize = True
+        Me.ucrChkDefinitionsData.Checked = False
+        Me.ucrChkDefinitionsData.Location = New System.Drawing.Point(26, 230)
+        Me.ucrChkDefinitionsData.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkDefinitionsData.Name = "ucrChkDefinitionsData"
+        Me.ucrChkDefinitionsData.Size = New System.Drawing.Size(284, 34)
+        Me.ucrChkDefinitionsData.TabIndex = 42
+        '
+        'ucrChkSpecifyStations
+        '
+        Me.ucrChkSpecifyStations.AutoSize = True
+        Me.ucrChkSpecifyStations.Checked = False
+        Me.ucrChkSpecifyStations.Location = New System.Drawing.Point(26, 282)
+        Me.ucrChkSpecifyStations.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSpecifyStations.Name = "ucrChkSpecifyStations"
+        Me.ucrChkSpecifyStations.Size = New System.Drawing.Size(284, 34)
+        Me.ucrChkSpecifyStations.TabIndex = 43
+        '
+        'ucrChkLatestData
+        '
+        Me.ucrChkLatestData.AutoSize = True
+        Me.ucrChkLatestData.Checked = False
+        Me.ucrChkLatestData.Location = New System.Drawing.Point(26, 629)
+        Me.ucrChkLatestData.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkLatestData.Name = "ucrChkLatestData"
+        Me.ucrChkLatestData.Size = New System.Drawing.Size(231, 34)
+        Me.ucrChkLatestData.TabIndex = 44
         '
         'ucrInputDefinitionsID
         '
@@ -157,97 +234,35 @@ Partial Class dlgImportFromEPicsa
         Me.ucrInputDefinitionsID.AutoSize = True
         Me.ucrInputDefinitionsID.IsMultiline = False
         Me.ucrInputDefinitionsID.IsReadOnly = False
-        Me.ucrInputDefinitionsID.Location = New System.Drawing.Point(102, 202)
-        Me.ucrInputDefinitionsID.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputDefinitionsID.Location = New System.Drawing.Point(280, 633)
+        Me.ucrInputDefinitionsID.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputDefinitionsID.Name = "ucrInputDefinitionsID"
-        Me.ucrInputDefinitionsID.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputDefinitionsID.TabIndex = 25
-        '
-        'lblDefinitionsID
-        '
-        Me.lblDefinitionsID.AutoSize = True
-        Me.lblDefinitionsID.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDefinitionsID.Location = New System.Drawing.Point(14, 202)
-        Me.lblDefinitionsID.Name = "lblDefinitionsID"
-        Me.lblDefinitionsID.Size = New System.Drawing.Size(73, 13)
-        Me.lblDefinitionsID.TabIndex = 26
-        Me.lblDefinitionsID.Text = "Definitions ID:"
-        '
-        'cmdFindFiles
-        '
-        Me.cmdFindFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFindFiles.Location = New System.Drawing.Point(17, 238)
-        Me.cmdFindFiles.Name = "cmdFindFiles"
-        Me.cmdFindFiles.Size = New System.Drawing.Size(80, 23)
-        Me.cmdFindFiles.TabIndex = 27
-        Me.cmdFindFiles.Text = "Find Files"
-        Me.cmdFindFiles.UseVisualStyleBackColor = True
-        '
-        'ucrInputComboFindFiles
-        '
-        Me.ucrInputComboFindFiles.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboFindFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboFindFiles.GetSetSelectedIndex = -1
-        Me.ucrInputComboFindFiles.IsReadOnly = False
-        Me.ucrInputComboFindFiles.Location = New System.Drawing.Point(124, 239)
-        Me.ucrInputComboFindFiles.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrInputComboFindFiles.Name = "ucrInputComboFindFiles"
-        Me.ucrInputComboFindFiles.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputComboFindFiles.TabIndex = 28
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(17, 325)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 31
-        '
-        'ucrSaveDefinitions
-        '
-        Me.ucrSaveDefinitions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDefinitions.Location = New System.Drawing.Point(17, 284)
-        Me.ucrSaveDefinitions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveDefinitions.Name = "ucrSaveDefinitions"
-        Me.ucrSaveDefinitions.Size = New System.Drawing.Size(375, 22)
-        Me.ucrSaveDefinitions.TabIndex = 32
-        '
-        'ucrDataframeSelector
-        '
-        Me.ucrDataframeSelector.AutoSize = True
-        Me.ucrDataframeSelector.bDropUnusedFilterLevels = False
-        Me.ucrDataframeSelector.bUseCurrentFilter = True
-        Me.ucrDataframeSelector.Location = New System.Drawing.Point(17, 110)
-        Me.ucrDataframeSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataframeSelector.Name = "ucrDataframeSelector"
-        Me.ucrDataframeSelector.Size = New System.Drawing.Size(151, 43)
-        Me.ucrDataframeSelector.TabIndex = 33
+        Me.ucrInputDefinitionsID.Size = New System.Drawing.Size(441, 32)
+        Me.ucrInputDefinitionsID.TabIndex = 45
         '
         'dlgImportFromEPicsa
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(464, 388)
-        Me.Controls.Add(Me.ucrDataframeSelector)
-        Me.Controls.Add(Me.ucrSaveDefinitions)
-        Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrInputComboFindFiles)
-        Me.Controls.Add(Me.cmdFindFiles)
-        Me.Controls.Add(Me.lblDefinitionsID)
+        Me.ClientSize = New System.Drawing.Size(738, 762)
         Me.Controls.Add(Me.ucrInputDefinitionsID)
-        Me.Controls.Add(Me.lblCountry)
-        Me.Controls.Add(Me.ucrInputComboCountry)
-        Me.Controls.Add(Me.cmdChooseFile)
-        Me.Controls.Add(Me.lblToken)
-        Me.Controls.Add(Me.ucrInputTokenPath)
-        Me.Controls.Add(Me.rdoStation)
-        Me.Controls.Add(Me.rdoData)
-        Me.Controls.Add(Me.rdoDefinitions)
+        Me.Controls.Add(Me.ucrChkLatestData)
+        Me.Controls.Add(Me.ucrChkSpecifyStations)
+        Me.Controls.Add(Me.ucrChkDefinitionsData)
+        Me.Controls.Add(Me.ucrChkCropData)
+        Me.Controls.Add(Me.ucrStationFactorLevels)
+        Me.Controls.Add(Me.ucrSelectorImportFromEPICSA)
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrChkSummaryData)
+        Me.Controls.Add(Me.lblConnection)
+        Me.Controls.Add(Me.btnConnection)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.rdoSummaryData)
+        Me.Controls.Add(Me.rdoSummaryMetadata)
+        Me.Controls.Add(Me.rdoStationMetadata)
         Me.Controls.Add(Me.ucrPnlImportFromEPicsa)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromEPicsa"
@@ -259,19 +274,20 @@ Partial Class dlgImportFromEPicsa
     End Sub
 
     Friend WithEvents ucrPnlImportFromEPicsa As UcrPanel
-    Friend WithEvents rdoDefinitions As RadioButton
-    Friend WithEvents rdoData As RadioButton
-    Friend WithEvents rdoStation As RadioButton
-    Friend WithEvents ucrInputTokenPath As ucrInputTextBox
-    Friend WithEvents lblToken As Label
-    Friend WithEvents cmdChooseFile As Button
-    Friend WithEvents ucrInputComboCountry As ucrInputComboBox
-    Friend WithEvents lblCountry As Label
-    Friend WithEvents ucrInputDefinitionsID As ucrInputTextBox
-    Friend WithEvents lblDefinitionsID As Label
-    Friend WithEvents cmdFindFiles As Button
-    Friend WithEvents ucrInputComboFindFiles As ucrInputComboBox
+    Friend WithEvents rdoStationMetadata As RadioButton
+    Friend WithEvents rdoSummaryMetadata As RadioButton
+    Friend WithEvents rdoSummaryData As RadioButton
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSaveDefinitions As ucrSave
-    Friend WithEvents ucrDataframeSelector As ucrDataFrame
+    Friend WithEvents lblConnection As Label
+    Friend WithEvents btnConnection As Button
+    Friend WithEvents lblStation As Label
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrChkSummaryData As ucrCheck
+    Friend WithEvents ucrSelectorImportFromEPICSA As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrChkSpecifyStations As ucrCheck
+    Friend WithEvents ucrChkDefinitionsData As ucrCheck
+    Friend WithEvents ucrChkCropData As ucrCheck
+    Friend WithEvents ucrStationFactorLevels As ucrFactor
+    Friend WithEvents ucrChkLatestData As ucrCheck
+    Friend WithEvents ucrInputDefinitionsID As ucrInputTextBox
 End Class
