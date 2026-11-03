@@ -19,6 +19,7 @@ Public Class dlgEvapotranspiration
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
+    Private bResetLocation As Boolean = True
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
@@ -189,6 +190,7 @@ Public Class dlgEvapotranspiration
         ucrNewColName.Reset()
 
         bResetSubdialog = True
+        bResetLocation = True
 
         clsDataFunctionPMFunction.SetRCommand("data.frame")
         clsDataFunctionPMFunction.AddParameter("Year", clsRFunctionParameter:=clsYearFuncFunction)
@@ -341,7 +343,7 @@ Public Class dlgEvapotranspiration
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoHargreavesSamani.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverExtraRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -355,7 +357,16 @@ Public Class dlgEvapotranspiration
                 ucrBase.OKEnabled(False)
             End If
         End If
+        If Not IsLocationComplete() Then
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
+
+    Private Function IsLocationComplete() As Boolean
+        'Location is only bound to this dialog's R code once sdgLocation.SetRFunction has run
+        'since the last reset, so stale sdgLocation values must not count before that.
+        Return Not bResetLocation AndAlso sdgLocation.IsComplete
+    End Function
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -397,8 +408,9 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdLocation_Click(sender As Object, e As EventArgs) Handles cmdLocation.Click
-        sdgLocation.SetRFunction(clsNewVarnamesVectorHSFunction:=clsVarnamesVectorHSFunction, clsNewVarnamesVectorPMFunction:=clsVarnamesVectorPMFunction, clsNewVarnamesVectorPTFunction:=clsVarnamesVectorPTFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        sdgLocation.SetRFunction(clsNewVarnamesVectorHSFunction:=clsVarnamesVectorHSFunction, clsNewVarnamesVectorPMFunction:=clsVarnamesVectorPMFunction, clsNewVarnamesVectorPTFunction:=clsVarnamesVectorPTFunction, clsNewListFunction:=clsListFunction, bReset:=bResetLocation)
         sdgLocation.ShowDialog()
+        bResetLocation = False
         bResetSubdialog = False
         TestOKEnabled()
     End Sub
@@ -610,7 +622,7 @@ Public Class dlgEvapotranspiration
         Solar()
     End Sub
 
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverExtraRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
