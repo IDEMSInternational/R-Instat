@@ -93,7 +93,8 @@ Public Class dlgTaylorDiagram
         ' openair v3 returns a wrapper object, so only its $plot element is a graph.
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
-        clsTaylorDiagramFunction.AddParameter("plot", "FALSE", iPosition:=6)
+        clsTaylorDiagramFunction.AddParameter("auto.text", "FALSE", iPosition:=6)
+        clsTaylorDiagramFunction.AddParameter("plot", "FALSE", iPosition:=7)
 
         clsTaylorDiagramPlotOperator.SetOperation("$", bBracketsTemp:=False)
         clsTaylorDiagramPlotOperator.bSpaceAroundOperation = False
