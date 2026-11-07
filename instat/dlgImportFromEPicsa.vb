@@ -225,7 +225,7 @@ Public Class dlgImportFromEPicsa
             Else
                 clsImportFromDatabaseFunction.AddParameter("latest", "FALSE", iPosition:=7)
                 If Not ucrInputDefinitionsID.IsEmpty Then
-                    clsImportFromDatabaseFunction.AddParameter("definition_id", ucrInputDefinitionsID.GetText(), iPosition:=8)
+                    clsImportFromDatabaseFunction.AddParameter("definition_id", Chr(34) & ucrInputDefinitionsID.GetText() & Chr(34), iPosition:=8)
                 End If
             End If
         End If
