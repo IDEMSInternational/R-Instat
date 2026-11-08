@@ -27,6 +27,11 @@ Public Class dlgImportFromEPicsa
     Private clsDummyFunction, clsGetDBConnectionFunction, clsDBWriteFunction, clsImportFromDatabaseFunction, clsImportDataFunction, clsLApplyFunction As New RFunction
     Private _sdgImportFromClimSoft As sdgImportFromClimSoft
 
+    Private Const DEFAULT_DATABASE_NAME As String = "epicsa"
+    Private Const DEFAULT_DRIVER As String = "RPostgres::Postgres()"
+    Private Const DEFAULT_HOST As String = "db.epicsa.idems.international"
+    Private Const DEFAULT_PORT As String = "5432"
+
     Private Sub dlgImportFromEPicsa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -272,10 +277,10 @@ Public Class dlgImportFromEPicsa
 
     Private Sub SetEPicsaSubDialogDefaults(sender As Object, e As EventArgs)
         Dim dlg As sdgImportFromClimSoft = DirectCast(sender, sdgImportFromClimSoft)
-        dlg.ucrComboBoxDatabaseName.SetText("epicsa")
-        dlg.ucrInputDrv.SetText("RPostgres::Postgres()")
-        dlg.ucrTxtHost.SetText("db.epicsa.idems.international")
-        dlg.ucrComboBoxPort.SetText("5432")
+        dlg.ucrComboBoxDatabaseName.SetText(DEFAULT_DATABASE_NAME)
+        dlg.ucrInputDrv.SetText(DEFAULT_DRIVER)
+        dlg.ucrTxtHost.SetText(DEFAULT_HOST)
+        dlg.ucrComboBoxPort.SetText(DEFAULT_PORT)
 
         dlg.ucrTxtHost.OnControlValueChanged()
         dlg.ucrComboBoxDatabaseName.OnControlValueChanged()
