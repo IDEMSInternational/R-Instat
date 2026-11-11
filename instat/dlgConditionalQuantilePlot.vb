@@ -190,10 +190,9 @@ Public Class dlgConditionalQuantilePlot
     End Sub
 
     Private Function ActiveOperator() As ROperator
-        If rdoEvaluation.Checked Then
-            Return clsConditionalEvalPlotOperator
-        End If
-        Return clsConditionalQuantilePlotOperator
+        Return If(rdoEvaluation.Checked,
+              clsConditionalEvalPlotOperator,
+              clsConditionalQuantilePlotOperator)
     End Function
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

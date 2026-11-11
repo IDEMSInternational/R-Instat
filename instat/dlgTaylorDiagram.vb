@@ -135,12 +135,11 @@ Public Class dlgTaylorDiagram
     End Function
 
     Private Sub TestOkEnabled()
-        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.Count > 2 _
-                OrElse GroupAndTypeClash() OrElse Not ucrSavePlot.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverObserved.IsEmpty() _
+                          AndAlso Not ucrReceiverEstimated.IsEmpty() _
+                          AndAlso ucrReceiverEstimated.Count <= 2 _
+                          AndAlso Not GroupAndTypeClash() _
+                          AndAlso ucrSavePlot.IsComplete)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverGroup.ControlContentsChanged, ucrReceiverType.ControlContentsChanged
