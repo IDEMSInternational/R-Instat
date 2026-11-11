@@ -140,12 +140,13 @@ Public Class dlgImportFromEPicsa
     Private Sub SetRCodeForControls(bReset As Boolean)
         If bReset Then
             ucrPnlImportFromEPicsa.SetRCode(clsDummyFunction, bReset)
-            ucrChkDefinitionsData.SetRCode(clsImportFromDatabaseFunction, bReset)
             ucrChkSummaryData.SetRCode(clsImportFromDatabaseFunction, bReset)
-            ucrChkCropData.SetRCode(clsImportFromDatabaseFunction, bReset)
             ucrChkSpecifyStations.SetRCode(clsDummyFunction, bReset)
             ucrChkLatestData.SetRCode(clsDummyFunction, bReset)
         End If
+
+        AddRemoveSummaryDataBooleanParams(ucrChkTemp:=ucrChkDefinitionsData, clsRFunctionTemp:=clsImportFromDatabaseFunction, strParamName:="definition_data", iPosition:=2)
+        AddRemoveSummaryDataBooleanParams(ucrChkTemp:=ucrChkCropData, clsRFunctionTemp:=clsImportFromDatabaseFunction, strParamName:="crop_data", iPosition:=5)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -200,6 +201,24 @@ Public Class dlgImportFromEPicsa
         AddRemoveDefinitionID()
         HideShowStationEntities()
         ChangeSizeAndLocation()
+    End Sub
+
+    Private Sub AddRemoveSummaryDataBooleanParams(ucrChkTemp As ucrCheck, clsRFunctionTemp As RFunction, strParamName As String, iPosition As Integer)
+        If rdoSummaryData.Checked Then
+            If ucrChkTemp.Checked Then
+                clsRFunctionTemp.AddParameter(strParamName, "TRUE", iPosition:=iPosition)
+            Else
+                clsRFunctionTemp.RemoveParameterByName(strParamName)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkDefinitionsData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefinitionsData.ControlValueChanged
+        AddRemoveSummaryDataBooleanParams(ucrChkTemp:=ucrChkDefinitionsData, clsRFunctionTemp:=clsImportFromDatabaseFunction, strParamName:="definition_data", iPosition:=2)
+    End Sub
+
+    Private Sub ucrChkCropData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCropData.ControlValueChanged
+        AddRemoveSummaryDataBooleanParams(ucrChkTemp:=ucrChkCropData, clsRFunctionTemp:=clsImportFromDatabaseFunction, strParamName:="crop_data", iPosition:=5)
     End Sub
 
     Private Sub AddRemoveStationIDs()
