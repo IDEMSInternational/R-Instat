@@ -117,6 +117,7 @@ Public Class dlgDescribeTwoVarGraph
         Dim dctLabelColours As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
         Dim dctLabelSizes As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 416
         ucrBase.clsRsyntax.iCallType = 3
@@ -134,7 +135,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrPnlByPairs.AddParameterValuesCondition(rdoPairs, "checked", "pair")
         rdoSummarize.Enabled = False
 
-        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates, ucr1stFactorReceiver, ucrInputStation}, {rdoTwoVars, rdoThreeVars, rdoSide}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates, ucr1stFactorReceiver, ucrInputStation, ucrChkLegend}, {rdoTwoVars, rdoThreeVars, rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrReceiverFill}, {rdoThreeVars}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkXSidePlot, ucrChkYSidePlot, ucrInputCollapse}, {rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
@@ -341,6 +342,19 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCollapse.SetName("all")
         ucrInputCollapse.SetDropDownStyleAsNonEditable()
         ucrInputCollapse.SetLinkedDisplayControl(lblCollapse)
+
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("none", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrSaveGraph.SetPrefix("two_var_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -1069,7 +1083,7 @@ Public Class dlgDescribeTwoVarGraph
                 If ucrInputCategoricalByCategoricalByCategorical IsNot Nothing Then
                     Select Case ucrInputCategoricalByCategoricalByCategorical.GetText
                         Case "Bar Chart"
-                            AddRemoveAesFillParam(clsTempAesFunction:=clsAesCategoricalByCategoricalBarChart, strParamName:="fill", iPosition:=6)
+                            'AddRemoveAesFillParam(clsTempAesFunction:=clsAesCategoricalByCategoricalBarChart, strParamName:="fill", iPosition:=6)
                             clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
                             clsGlobalAes = clsAesCategoricalByCategoricalBarChart
                             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
@@ -1444,7 +1458,7 @@ Public Class dlgDescribeTwoVarGraph
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
                 If rdoTwoVars.Checked Then
-                    clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("fill")
+                    clsAesCategoricalByCategoricalBarChart.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
                 End If
                 ucrChkYSidePlot.Visible = False
                 ucrChkXSidePlot.Visible = False
@@ -1602,13 +1616,19 @@ Public Class dlgDescribeTwoVarGraph
             ucr1stFactorReceiver.Location = New Point(290, 425)
             ucrInputStation.Location = New Point(390, 425)
             lblFacetBy.Location = New Point(291, 410)
+            ucrChkLegend.Location = New Point(25, 425)
+            ucrInputLegendPosition.Location = New Point(90, 425)
         ElseIf rdoThreeVars.Checked Then
             ucr1stFactorReceiver.Location = New Point(290, 425)
             ucrInputStation.Location = New Point(390, 425)
             lblFacetBy.Location = New Point(291, 410)
+            ucrChkLegend.Location = New Point(25, 425)
+            ucrInputLegendPosition.Location = New Point(90, 425)
         ElseIf rdoSide.Checked Then
             lblCollapse.Location = New Point(20, 425)
             ucrInputCollapse.Location = New Point(75, 423)
+            ucrChkLegend.Location = New Point(25, 395)
+            ucrInputLegendPosition.Location = New Point(90, 395)
         End If
     End Sub
 
@@ -1716,6 +1736,31 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrInputCollapse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCollapse.ControlValueChanged
         clsGGSideFunction.AddParameter("collapse", Chr(34) & ucrInputCollapse.GetText() & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub AddRemoveLegendParam()
+        If ucrChkLegend.Checked AndAlso Not ucrInputLegendPosition.IsEmpty Then
+            clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText() & Chr(34), iPosition:=0)
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.position")
+        End If
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged
+        AddRemoveLegendParam()
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveLegendParam()
+        AddRemoveTheme()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
