@@ -305,6 +305,7 @@ Public Class dlgDescribeTwoVariable
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
         clsPivotWiderFunction.AddParameter("names_expand", "TRUE", iPosition:=3)
+        clsPivotWiderFunction.AddParameter("id_expand", "TRUE", iPosition:=4)
 
         clsgtExtrasThemesFuction.SetPackageName("gtExtras")
 
@@ -410,7 +411,7 @@ Public Class dlgDescribeTwoVariable
         clsSummaryTableCombineFactorsFunction.SetRCommand("c")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=3)
+        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
 
         clsTildOperator.SetOperation("~")
         clsTildOperator.AddParameter("right", clsRFunctionParameter:=clsSummaryTableFunction)
@@ -1132,6 +1133,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub FactorColumns()
+        clsSummaryOperator.RemoveParameterByName("col_factor")
         If rdoTwoVariable.Checked Then
             If IsFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
@@ -1612,7 +1614,7 @@ Public Class dlgDescribeTwoVariable
             If Not ucrCurrentReceiver.IsEmpty Then
                 strSecondVariableType = If({"factor", "ordered,factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
                                   "categorical", "numeric")
-                lblSecondType.Text = strSecondVariableType
+                lblSecondType.Text = GetTypeLabelText(ucrCurrentReceiver.strCurrDataType, strSecondVariableType)
                 lblSecondType.ForeColor = SystemColors.Highlight
 
             Else
@@ -1644,7 +1646,12 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ChangeFirstTypeLabel()
         Dim lstFirstItemTypes As List(Of String)
+        Dim strFirstRawType As String = ""
         If Not ucrReceiverFirstVars.IsEmpty() Then
+            Dim lstRawTypes As List(Of String) = ucrReceiverFirstVars.GetCurrentItemTypes(True)
+            If lstRawTypes.Count = 1 Then
+                strFirstRawType = lstRawTypes(0)
+            End If
             lstFirstItemTypes = ucrReceiverFirstVars.GetCurrentItemTypes(True, bIsCategoricalNumeric:=True)
             If lstFirstItemTypes.Count = 1 AndAlso lstFirstItemTypes.Contains("logical") Then
                 lstFirstItemTypes(0) = "categorical"
@@ -1661,7 +1668,7 @@ Public Class dlgDescribeTwoVariable
         End If
 
         If strFirstVariablesType <> "" Then
-            lblFirstType.Text = strFirstVariablesType
+            lblFirstType.Text = GetTypeLabelText(strFirstRawType, strFirstVariablesType)
             lblFirstType.ForeColor = SystemColors.Highlight
         Else
             lblFirstType.Text = "________"
@@ -1669,13 +1676,24 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
+    Private Function GetTypeLabelText(strRawType As String, strGroupedType As String) As String
+        Select Case strRawType
+            Case "character"
+                Return "character"
+            Case "factor", "ordered,factor"
+                Return "factor"
+            Case Else
+                Return strGroupedType
+        End Select
+    End Function
+
     Private Sub AssignThirdVariableType()
         If rdoThreeVariable.Checked Then
             Dim ucrCurrentReceiver As ucrReceiverSingle = ucrReceiverThreeVariableThirdVariable
             If Not ucrCurrentReceiver.IsEmpty Then
                 strThirdVariableType = If({"factor", "ordered,factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
                                   "categorical", "numeric")
-                lblThreeVariableCategorical.Text = strThirdVariableType
+                lblThreeVariableCategorical.Text = GetTypeLabelText(ucrCurrentReceiver.strCurrDataType, strThirdVariableType)
                 lblThreeVariableCategorical.ForeColor = SystemColors.Highlight
 
             Else
