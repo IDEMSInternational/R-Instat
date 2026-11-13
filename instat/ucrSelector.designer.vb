@@ -45,9 +45,9 @@ Partial Class ucrSelector
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSortToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSortToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectionMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -72,51 +72,51 @@ Partial Class ucrSelector
         '
         Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem, Me.mnuSortToolStrip, Me.ToolStripSeparator1, Me.mnuHelp})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(181, 164)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 142)
         '
         'AddSelectedToolStripMenuItem
         '
         Me.AddSelectedToolStripMenuItem.Name = "AddSelectedToolStripMenuItem"
-        Me.AddSelectedToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AddSelectedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AddSelectedToolStripMenuItem.Tag = "Add_selected"
         Me.AddSelectedToolStripMenuItem.Text = "Add Selected"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SelectAllToolStripMenuItem.Tag = "Select_All"
         Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'ClearSelectionToolStripMenuItem
         '
         Me.ClearSelectionToolStripMenuItem.Name = "ClearSelectionToolStripMenuItem"
-        Me.ClearSelectionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClearSelectionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ClearSelectionToolStripMenuItem.Tag = "Clear_Selection"
         Me.ClearSelectionToolStripMenuItem.Text = "Clear Selection"
         '
         'AddAllToolStripMenuItem
         '
         Me.AddAllToolStripMenuItem.Name = "AddAllToolStripMenuItem"
-        Me.AddAllToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AddAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AddAllToolStripMenuItem.Text = "Add All"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
-        '
-        'mnuHelp
-        '
-        Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuHelp.Text = "Help"
         '
         'mnuSortToolStrip
         '
         Me.mnuSortToolStrip.Name = "mnuSortToolStrip"
-        Me.mnuSortToolStrip.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSortToolStrip.Size = New System.Drawing.Size(152, 22)
         Me.mnuSortToolStrip.Text = "Sort"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
+        '
+        'mnuHelp
+        '
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelp.Text = "Help"
         '
         'ucrSelector
         '
