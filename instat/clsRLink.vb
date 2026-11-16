@@ -1528,7 +1528,22 @@ Public Class RLink
                             Else
                                 strCurrColumnLables = New String(chrCurrColumns.Count - 1) {}
                             End If
+                            ' Positions in the full data frame, ignoring column selection and any include/exclude filters
+                            Dim clsGetAllNames As New RFunction
+                            Dim lstAllNames As New List(Of String)
+                            clsGetAllNames.SetRCommand(strInstatDataObject & "$get_column_names")
+                            clsGetAllNames.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
+                            clsGetAllNames.AddParameter("use_current_column_selection", "FALSE")
+                            expItems = RunInternalScriptGetValue(clsGetAllNames.ToScript(), bSilent:=True)
+                            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                                lstAllNames = expItems.AsCharacter.ToList()
+                            End If
                             For j = 0 To chrCurrColumns.Count - 1
+                                ' NEW: add the column number to the first line
+                                Dim iPosition As Integer = lstAllNames.IndexOf(chrCurrColumns(j)) + 1
+                                If iPosition > 0 Then
+                                    lstView.Items(j).ToolTipText = chrCurrColumns(j) & " (column " & iPosition & ")"
+                                End If
                                 strTemp = strCurrColumnLables(j)
                                 If strCurrColumnLables(j) <> "" Then
                                     lstView.Items(j).ToolTipText = lstView.Items(j).ToolTipText & vbNewLine & strTemp
