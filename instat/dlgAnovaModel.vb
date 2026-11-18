@@ -32,9 +32,7 @@ Public Class dlgAnovaModel
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
     Private ucrActiveExpression As ucrReceiverExpression
 
-    'Mixed model functions
     Public clsLmerFunction, clsLmeFunction, clsGlmerFunction, clsFamilyFunction As New RFunction
-    'The model function currently used as the base function (equivalent of clsLMOrGLM in dlgFitModel)
     Public clsCurrentModelFunction As RFunction
 
     Private Const strAovNameTag As String = "Normal_aov"
@@ -43,10 +41,8 @@ Public Class dlgAnovaModel
     Private Const strModelLme As String = "lme"
     Private Const strModelGlmer As String = "glmer"
 
-    'Distributions that are not glm-style families, so cannot be passed to glmer(family = ...)
     Private ReadOnly lstNonGlmerFamilies As New List(Of String) From {strAovNameTag, "Negative_Binomial_GLM", "Ordered_Logistic", "Multinomial"}
 
-    'True when summary() is in the after codes instead of anova() (aov with an Error() term)
     Private bUseSummaryOutput As Boolean = False
 
     Private Sub dlgAnovaModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -89,6 +85,9 @@ Public Class dlgAnovaModel
         'Model type pull-down
         ucrInputModelType.SetItems({strModelAov, strModelLmer, strModelLme, strModelGlmer})
         ucrInputModelType.SetDropDownStyleAsNonEditable()
+        ucrInputModelType.Visible = False
+        lblModelType.Visible = False
+        lblErrorModel.Text = "Random/Residual/Error:"
 
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveAnovaModel.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("anova_model")
@@ -137,27 +136,23 @@ Public Class dlgAnovaModel
         ucrInputModelPreview.SetName("")
         ucrInputModelPreview.IsReadOnly = True
 
-        'aov
         clsAOVFunction = clsRegressionDefaults.clsDefaultAovFunction.Clone()
         clsAOVFunction.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
         clsAOVFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
         SetModelOutput(clsAOVFunction)
 
-        'lme4::lmer(formula = y ~ x + (1 | g), data = ...)
         clsLmerFunction.SetPackageName("lme4")
         clsLmerFunction.SetRCommand("lmer")
         clsLmerFunction.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
         clsLmerFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
         SetModelOutput(clsLmerFunction)
 
-        'nlme::lme(fixed = y ~ x, random = ~ 1 | g, data = ...)
         clsLmeFunction.SetPackageName("nlme")
         clsLmeFunction.SetRCommand("lme")
         clsLmeFunction.AddParameter("fixed", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
         clsLmeFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
         SetModelOutput(clsLmeFunction)
 
-        'lme4::glmer(formula = y ~ x + (1 | g), family = ..., data = ...)
         clsFamilyFunction = ucrFamily.clsCurrRFunction
         clsGlmerFunction.SetPackageName("lme4")
         clsGlmerFunction.SetRCommand("glmer")
@@ -207,7 +202,6 @@ Public Class dlgAnovaModel
 
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
-        'Set last, so the ControlValueChanged handler finds every function already built
         ucrInputModelType.SetName(strModelAov)
     End Sub
 
@@ -275,7 +269,6 @@ Public Class dlgAnovaModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        'Keep data and model name in sync across all the model functions (as in dlgFitModel)
         ucrSelectorByDataFrameAddRemoveAnovaModel.AddAdditionalCodeParameterPair(clsLmerFunction, ucrSelectorByDataFrameAddRemoveAnovaModel.GetParameter(), 1)
         ucrSelectorByDataFrameAddRemoveAnovaModel.AddAdditionalCodeParameterPair(clsLmeFunction, ucrSelectorByDataFrameAddRemoveAnovaModel.GetParameter(), 2)
         ucrSelectorByDataFrameAddRemoveAnovaModel.AddAdditionalCodeParameterPair(clsGlmerFunction, ucrSelectorByDataFrameAddRemoveAnovaModel.GetParameter(), 3)
@@ -293,15 +286,13 @@ Public Class dlgAnovaModel
     End Sub
 
     Private Function GetModelType() As String
-        Dim strType As String = ucrInputModelType.GetText()
-        If String.IsNullOrEmpty(strType) Then
-            Return strModelAov
+        If ucrFamily.ucrInputDistributions.GetText() = strModelLmer Then
+            Return strModelLmer
         End If
-        Return strType
+        Return strModelAov
     End Function
 
     Private Sub TestOKEnabled()
-        'lmer, lme and glmer all need at least one random effect term
         Dim bRandomOk As Boolean = GetModelType() = strModelAov OrElse Not ucrReceiverErrorAnovaModel.IsEmpty()
         If (Not ucrReceiverAnovaResponseVar.IsEmpty()) AndAlso (Not ucrReceiverExpressionAnovaModel.IsEmpty()) AndAlso Not ucrFamily.ucrInputDistributions.IsEmpty AndAlso bRandomOk Then
             ucrBase.OKEnabled(True)
@@ -409,9 +400,7 @@ Public Class dlgAnovaModel
         bResetOptionsSubDialog = False
     End Sub
 
-    ''' <summary>
-    ''' Equivalent of dlgFitModel.ChooseRFunction: picks the base R function from the model type pull-down.
-    ''' </summary>
+
     Public Sub ChooseRFunction()
         Select Case GetModelType()
             Case strModelLmer
@@ -427,10 +416,7 @@ Public Class dlgAnovaModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrentModelFunction)
     End Sub
 
-    ''' <summary>
-    ''' Builds the right-hand side of the formula. The second receiver holds the
-    ''' Error() term for aov, or the random effects for lmer / lme / glmer.
-    ''' </summary>
+
     Private Sub UpdateFormulaRhs()
         Dim strRhs As String = ucrReceiverExpressionAnovaModel.GetText().Trim()
         Dim strRandom As String = ucrReceiverErrorAnovaModel.GetText().Trim()
@@ -444,17 +430,18 @@ Public Class dlgAnovaModel
         If strRandom <> "" Then
             Select Case GetModelType()
                 Case strModelAov
-                    'y ~ x + Error(block)
                     strRhs &= " + Error(" & strRandom & ")"
                 Case strModelLmer, strModelGlmer
-                    'y ~ x + (1 | block)
-                    If strRandom.StartsWith("(") AndAlso strRandom.EndsWith(")") Then
-                        strRhs &= " + " & strRandom
+                    If strRandom.Contains("|") Then
+                        If strRandom.StartsWith("(") AndAlso strRandom.EndsWith(")") Then
+                            strRhs &= " + " & strRandom
+                        Else
+                            strRhs &= " + (" & strRandom & ")"
+                        End If
                     Else
-                        strRhs &= " + (" & strRandom & ")"
+                        strRhs &= " + (1 | " & strRandom & ")"
                     End If
                 Case strModelLme
-                    'fixed = y ~ x, random = ~ 1 | block
                     If Not strRandom.StartsWith("~") Then
                         strRandom = "~ " & strRandom
                     End If
@@ -481,14 +468,11 @@ Public Class dlgAnovaModel
         ChooseOutputFunction()
         UpdatePreview()
         TestOKEnabled()
+        ucrTryModelling.ClearTryText()
     End Sub
 
     Private Sub ucrInputModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelType.ControlValueChanged
-        If GetModelType() = strModelAov Then
-            lblErrorModel.Text = "Error/Residuals:"
-        Else
-            lblErrorModel.Text = "Random Effects (e.g. 1|block):"
-        End If
+        lblErrorModel.Text = "Random/Residual/Error:"
         ResponseConvert()
         ResponseVariableType()
         ChooseRFunction()
@@ -498,10 +482,6 @@ Public Class dlgAnovaModel
         TestOKEnabled()
     End Sub
 
-    ''' <summary>
-    ''' anova() works for aov, lmer, lme and glmer. Only aov with an Error() term
-    ''' needs summary() instead.
-    ''' </summary>
     Private Sub ChooseOutputFunction()
         Dim bUseSummaryNow As Boolean = GetModelType() = strModelAov AndAlso
                                         Not ucrReceiverErrorAnovaModel.IsEmpty() AndAlso
@@ -519,12 +499,26 @@ Public Class dlgAnovaModel
         End If
     End Sub
 
+
+    Private Sub AddLmerToDistributions(strSelectModel As String)
+        Dim lstDistributions = ucrFamily.lstCurrentDistributions
+        Dim cboDistributions = ucrFamily.ucrInputDistributions.cboInput
+        If lstDistributions.Count = 0 OrElse cboDistributions.Items.Count = 0 Then
+            Exit Sub
+        End If
+        lstDistributions.Add(lstDistributions(0))
+        cboDistributions.Items.Add(strModelLmer)
+        If strSelectModel = strModelLmer Then
+            cboDistributions.SelectedIndex = cboDistributions.Items.Count - 1
+        End If
+    End Sub
+
     Public Sub ResponseConvert()
         If Not bRCodeSet Then
             Exit Sub
         End If
-
-        Dim bGlmer As Boolean = GetModelType() = strModelGlmer
+        Dim strPreviousModel As String = GetModelType()
+        Dim bGlmer As Boolean = False
 
         If Not ucrReceiverAnovaResponseVar.IsEmpty Then
             ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveAnovaModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverAnovaResponseVar.GetVariableNames(bWithQuotes:=False))
@@ -544,11 +538,10 @@ Public Class dlgAnovaModel
             End If
 
             If bGlmer Then
-                'glmer: offer the glm families that suit the response type
                 FilterFamilyDistributions(Function(strTag) Not lstNonGlmerFamilies.Contains(strTag))
             Else
-                'aov / lmer / lme: Normal response only
                 FilterFamilyDistributions(Function(strTag) strTag = strAovNameTag)
+                AddLmerToDistributions(strPreviousModel)
             End If
         Else
             ucrChkConvertToVariate.Visible = False
@@ -560,6 +553,9 @@ Public Class dlgAnovaModel
         Else
             ucrFamily.Enabled = True
         End If
+        ChooseRFunction()
+        UpdateFormulaRhs()
+        ChooseOutputFunction()
         UpdatePreview()
         TestOKEnabled()
     End Sub
@@ -575,7 +571,6 @@ Public Class dlgAnovaModel
                 End If
             End If
         Next
-        'Show "aov" in the pull-down instead of the internal name "Normal_aov"
         Dim iSelected As Integer = cboDistributions.SelectedIndex
         For i As Integer = 0 To Math.Min(lstDistributions.Count, cboDistributions.Items.Count) - 1
             If lstDistributions(i).strNameTag = strAovNameTag Then
@@ -620,16 +615,26 @@ Public Class dlgAnovaModel
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ResponseVariableType()
         clsFamilyFunction.RemoveParameterByName("link")
+        If bRCodeSet Then
+            ChooseRFunction()
+            UpdateFormulaRhs()
+            ChooseOutputFunction()
+            UpdatePreview()
+            TestOKEnabled()
+            ucrTryModelling.ClearTryText()
+        End If
     End Sub
 
     Private Sub ucrReceiverAnovaResponseVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnovaResponseVar.ControlValueChanged
         ResponseConvert()
         ResponseVariableType()
+        ucrTryModelling.ClearTryText()
     End Sub
 
     Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
         ResponseConvert()
         ResponseVariableType()
+        ucrTryModelling.ClearTryText()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlContentsChanged

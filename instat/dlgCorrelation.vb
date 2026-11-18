@@ -31,6 +31,7 @@ Public Class dlgCorrelation
          clsShaveFunction, clsRearrangeFunction,
     clsMutateFunction, clsAcrossFunction, clsDataFrameFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
+    Private clsKendallColpairFunction, clsNaOmitFunction, clsKendallTestFunction As New RFunction
     Private clsDummyShave As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsNotOperator As New ROperator
@@ -250,6 +251,9 @@ Public Class dlgCorrelation
         clsMutateFunction = New RFunction
         clsAcrossFunction = New RFunction
         clsDataFrameFunction = New RFunction
+        clsKendallColpairFunction = New RFunction
+        clsNaOmitFunction = New RFunction
+        clsKendallTestFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
@@ -336,6 +340,16 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
         clsRGGcorrGraphicsFunction.AddParameter("geom", Chr(34) & "tile" & Chr(34), iPosition:=3)
 
+        clsNaOmitFunction.SetRCommand("na.omit")
+        clsKendallColpairFunction.SetPackageName("corrr")
+        clsKendallColpairFunction.SetRCommand("colpair_map")
+        clsKendallColpairFunction.AddParameter(".data", clsRFunctionParameter:=clsNaOmitFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsKendallColpairFunction.AddParameter(".f", "kendallknight::kendall_cor", bIncludeArgumentName:=False, iPosition:=1)
+
+        clsKendallTestFunction.SetPackageName("kendallknight")
+        clsKendallTestFunction.SetRCommand("kendall_cor_test")
+        clsKendallTestFunction.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34), iPosition:=2)
+
         clsDataFrameFunction.SetRCommand("data.frame")
         clsDataFrameFunction.AddParameter("data", clsRFunctionParameter:=clsFashionFunction, bIncludeArgumentName:=False, iPosition:=0)
 
@@ -369,6 +383,9 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
         ucrSaveCorrelation.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=1)
+        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsNaOmitFunction, New RParameter("object", 0), iAdditionalPairNo:=1)
+        ucrReceiverFirstColumn.AddAdditionalCodeParameterPair(clsKendallTestFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverSecondColumn.AddAdditionalCodeParameterPair(clsKendallTestFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
 
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
@@ -488,10 +505,10 @@ Public Class dlgCorrelation
                         ucrBase.clsRsyntax.iCallType = 0
                     End If
                 Else
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+                    ucrBase.clsRsyntax.SetBaseRFunction(GetCorrelationMatrixFunction())
                 End If
             Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(GetTwoVariableFunction())
             End If
         End If
     End Sub
@@ -546,27 +563,28 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub DisplayOptions()
-        If ucrChkDisplayOptions.Checked Then
-            If ucrChkShave.Checked Then
-                clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
-            ElseIf ucrChkRearrange.Checked Then
-                clsRearrangeFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
-                clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
-            Else
-                clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
-            End If
-            If ucrChkShave.Checked AndAlso ucrChkRearrange.Checked Then
-                clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
-                clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
-            Else
-                clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
-            End If
+        If Not ucrChkDisplayOptions.Checked Then
+            Exit Sub
+        End If
+        Dim clsMatrixFunction As RFunction = GetCorrelationMatrixFunction()
+        clsRearrangeFunction.AddParameter("x", clsRFunctionParameter:=clsMatrixFunction, iPosition:=0)
+        If ucrChkShave.Checked AndAlso ucrChkRearrange.Checked Then
+            clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
+            clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
+        ElseIf ucrChkShave.Checked Then
+            clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsMatrixFunction, iPosition:=0)
+            clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
+        ElseIf ucrChkRearrange.Checked Then
+            clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
+        Else
+            clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsMatrixFunction, iPosition:=0)
         End If
     End Sub
 
     Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged,
-        ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged,
-        ucrInputRearrange.ControlValueChanged, ucrPnlOutput.ControlValueChanged
+    ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged,
+    ucrInputRearrange.ControlValueChanged, ucrPnlOutput.ControlValueChanged, ucrPnlMethod.ControlValueChanged
+
         DisplayOptions()
         ChangeOutputObject()
         ChangeBaseFunction()
@@ -593,6 +611,7 @@ Public Class dlgCorrelation
             If ucrChkDisplayOptions.Checked Then
                 clsPipeOperator.RemoveAssignTo()
                 clsCorrelationFunction.RemoveAssignTo()
+                clsKendallColpairFunction.RemoveAssignTo()
                 If rdoAsText.Checked Then
                     clsDummyFunction.AddParameter("output", "as.table", iPosition:=2)
                     ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
@@ -600,10 +619,10 @@ Public Class dlgCorrelation
                     ucrSaveCorrelation.SetPrefix("summary_table")
                     ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
                     clsPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
-                                            strRDataFrameNameToAddObjectTo:=ucrSelectorCorrelation.strCurrentDataFrame,
-                                            strObjectName:="last_table")
+                                        strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                        strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                        strRDataFrameNameToAddObjectTo:=ucrSelectorCorrelation.strCurrentDataFrame,
+                                        strObjectName:="last_table")
                 Else
                     clsDummyFunction.AddParameter("output", "as.dataframe", iPosition:=2)
                     clsPipeOperator.RemoveAssignTo()
@@ -613,28 +632,62 @@ Public Class dlgCorrelation
                     ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
                 End If
             Else
-
                 ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
                 ucrSaveCorrelation.SetCheckBoxText("Store Table")
                 ucrSaveCorrelation.SetPrefix("summary_table")
                 ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
-                clsCorrelationFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
-                                           strRDataFrameNameToAddObjectTo:=ucrSelectorCorrelation.strCurrentDataFrame,
-                                           strObjectName:="last_table")
+
+                If rdoKendall.Checked Then
+                    clsCorrelationFunction.RemoveAssignTo()
+                    AssignTableOutput(clsKendallColpairFunction)
+                Else
+                    clsKendallColpairFunction.RemoveAssignTo()
+                    AssignTableOutput(clsCorrelationFunction)
+                End If
             End If
         Else
-
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveCorrelation.SetCheckBoxText("Store Model")
             ucrSaveCorrelation.SetPrefix("summary_model")
             ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_model")
-            clsCorrelationTestFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
-                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
-                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
-                                           strRDataFrameNameToAddObjectTo:=ucrSelectorCorrelation.strCurrentDataFrame,
-                                           strObjectName:="last_model")
+
+            If rdoKendall.Checked Then
+                clsCorrelationTestFunction.RemoveAssignTo()
+                AssignModelOutput(clsKendallTestFunction)
+            Else
+                clsKendallTestFunction.RemoveAssignTo()
+                AssignModelOutput(clsCorrelationTestFunction)
+            End If
         End If
+    End Sub
+
+    Private Function GetTwoVariableFunction() As RFunction
+        If rdoKendall.Checked Then
+            Return clsKendallTestFunction
+        End If
+        Return clsCorrelationTestFunction
+    End Function
+
+    Private Sub AssignModelOutput(clsTestFunction As RFunction)
+        clsTestFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                   strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCorrelation.strCurrentDataFrame,
+                                   strObjectName:="last_model")
+    End Sub
+
+    Private Function GetCorrelationMatrixFunction() As RFunction
+        If rdoKendall.Checked Then
+            Return clsKendallColpairFunction
+        End If
+        Return clsCorrelationFunction
+    End Function
+
+    Private Sub AssignTableOutput(clsMatrixFunction As RFunction)
+        clsMatrixFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                   strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCorrelation.strCurrentDataFrame,
+                                   strObjectName:="last_table")
     End Sub
 End Class

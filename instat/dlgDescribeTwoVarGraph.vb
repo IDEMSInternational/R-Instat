@@ -139,7 +139,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrPnlByPairs.AddToLinkedControls({ucrChkXSidePlot, ucrChkYSidePlot, ucrInputCollapse}, {rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
+        ucrChkLower.SetLinkedDisplayControl(grpTypeOfDisplay)
 
         ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoVarGraph.SetParameterIsrfunction()
@@ -831,13 +831,35 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub TestOkEnabled()
+        Dim bOkEnabled As Boolean = True
         If rdoTwoVars.Checked Then
-            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso ucrSaveGraph.IsComplete)
+            If ucrReceiverFirstVars.IsEmpty OrElse ucrReceiverSecondVar.IsEmpty OrElse Not ucrSaveGraph.IsComplete Then
+                bOkEnabled = False
+            End If
         ElseIf rdoThreeVars.Checked Then
-            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso Not ucrReceiverFill.IsEmpty AndAlso ucrSaveGraph.IsComplete)
+            If ucrReceiverFirstVars.IsEmpty OrElse ucrReceiverSecondVar.IsEmpty OrElse ucrReceiverFill.IsEmpty OrElse Not ucrSaveGraph.IsComplete Then
+                bOkEnabled = False
+            End If
+        ElseIf rdoPairs.Checked Then
+            If Not ucrReceiverFirstVars.IsEmpty Then
+                If ucrChkLower.Checked AndAlso (ucrInputLowerContinous.IsEmpty OrElse ucrInputLowerDiscrete.IsEmpty OrElse ucrInputLowerCombo.IsEmpty OrElse ucrInputLowerNA.IsEmpty) Then
+                    bOkEnabled = False
+                End If
+                If ucrChkDiagonal.Checked AndAlso (ucrInputDiagonalContinous.IsEmpty OrElse ucrInputDiagonalDiscrete.IsEmpty OrElse ucrInputDiagonalNA.IsEmpty) Then
+                    bOkEnabled = False
+                End If
+                If ucrChkUpper.Checked AndAlso (ucrInputUpperContinous.IsEmpty OrElse ucrInputUpperDiscrete.IsEmpty OrElse ucrInputUpperCombo.IsEmpty OrElse ucrInputUpperNA.IsEmpty) Then
+                    bOkEnabled = False
+                End If
+            Else
+                bOkEnabled = False
+            End If
         Else
-            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty)
+            If ucrReceiverFirstVars.IsEmpty Then
+                bOkEnabled = False
+            End If
         End If
+        ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -1661,7 +1683,11 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged,
         ucrPnlByPairs.ControlContentsChanged, ucrReceiverColour.ControlContentsChanged, ucrPnlByPairs.ControlContentsChanged,
         ucrReceiverColour.ControlContentsChanged,
-        ucrReceiverFill.ControlContentsChanged, UcrVariablesAsFactor1.ControlContentsChanged, UcrReceiverSingle2.ControlContentsChanged, UcrReceiverSingle1.ControlContentsChanged
+        ucrReceiverFill.ControlContentsChanged, UcrVariablesAsFactor1.ControlContentsChanged, UcrReceiverSingle2.ControlContentsChanged, UcrReceiverSingle1.ControlContentsChanged,
+        ucrInputLowerContinous.ControlContentsChanged, ucrInputLowerDiscrete.ControlContentsChanged, ucrInputLowerCombo.ControlContentsChanged, ucrInputLowerNA.ControlContentsChanged,
+        ucrInputDiagonalContinous.ControlContentsChanged, ucrInputDiagonalDiscrete.ControlContentsChanged, ucrInputDiagonalNA.ControlContentsChanged,
+        ucrInputUpperContinous.ControlContentsChanged, ucrInputUpperDiscrete.ControlContentsChanged, ucrInputUpperCombo.ControlContentsChanged, ucrInputUpperNA.ControlContentsChanged,
+        ucrChkLower.ControlContentsChanged, ucrChkDiagonal.ControlContentsChanged, ucrChkUpper.ControlContentsChanged
         AddedXSidePlots()
         AddedYSidePlots()
         TestOkEnabled()
