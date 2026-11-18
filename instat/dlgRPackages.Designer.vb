@@ -31,7 +31,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputTextBoxRPackage = New instat.ucrInputTextBox()
         Me.ucrPnlRPackages = New instat.UcrPanel()
         Me.ucrInputMessage = New instat.ucrInputTextBox()
-        Me.ucrInputRepositoryName = New instat.ucrInputTextBox()
+        Me.ucrInputRepositoryName = New instat.ucrInputComboBox()
         Me.ucrInputPackage = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
@@ -154,13 +154,13 @@ Partial Class dlgInstallRPackage
         'ucrInputRepositoryName
         '
         Me.ucrInputRepositoryName.AddQuotesIfUnrecognised = True
-        Me.ucrInputRepositoryName.AutoSize = True
-        Me.ucrInputRepositoryName.IsMultiline = False
+        Me.ucrInputRepositoryName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRepositoryName.GetSetSelectedIndex = -1
         Me.ucrInputRepositoryName.IsReadOnly = False
         Me.ucrInputRepositoryName.Location = New System.Drawing.Point(151, 105)
-        Me.ucrInputRepositoryName.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputRepositoryName.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputRepositoryName.Name = "ucrInputRepositoryName"
-        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(471, 33)
+        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(323, 32)
         Me.ucrInputRepositoryName.TabIndex = 6
         '
         'ucrInputPackage
@@ -212,6 +212,6 @@ Partial Class dlgInstallRPackage
     Friend WithEvents rdoCRAN As RadioButton
     Friend WithEvents rdoRPackage As RadioButton
     Friend WithEvents lblRepository As Label
-    Friend WithEvents ucrInputRepositoryName As ucrInputTextBox
+    Friend WithEvents ucrInputRepositoryName As ucrInputComboBox
     Friend WithEvents ucrInputPackage As ucrInputComboBox
 End Class
