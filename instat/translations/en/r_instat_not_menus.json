@@ -6992,7 +6992,6 @@
   "second type": "second type",
   "Summarize": "Summarize",
   "Type Of Display": "Type Of Display",
-  "Whole Numbers": "Whole Numbers",
   "Collapse:": "Collapse:",
   "Two/Three Variable Graph": "Two/Three Variable Graph",
   "Two/Three Variable Graph Sub-Dialog": "Two/Three Variable Graph Sub-Dialog",
@@ -7005,5 +7004,10 @@
   "Error/Residuals:": "Error/Residuals:",
   "Model Type:": "Model Type:",
   "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):",
-  "Random/Residual/Error:": "Random/Residual/Error:"
+  "Random/Residual/Error:": "Random/Residual/Error:",
+  "Summary Metadata": "Summary Metadata",
+  "Definition Data": "Definition Data",
+  "Crop Data": "Crop Data",
+  "Specify Station(s)": "Specify Station(s)",
+  "Latest Data": "Latest Data"
 }
