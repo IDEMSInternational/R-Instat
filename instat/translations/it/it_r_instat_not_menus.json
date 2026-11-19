@@ -7004,5 +7004,10 @@
   "Error/Residuals:": "Error/Residuals:",
   "Model Type:": "Model Type:",
   "Random Effects (e.g. 1|block):": "Random Effects (e.g. 1|block):",
-  "Random/Residual/Error:": "Random/Residual/Error:"
+  "Random/Residual/Error:": "Random/Residual/Error:",
+  "Summary Metadata": "Summary Metadata",
+  "Definition Data": "Definition Data",
+  "Crop Data": "Crop Data",
+  "Specify Station(s)": "Specify Station(s)",
+  "Latest Data": "Latest Data"
 }
