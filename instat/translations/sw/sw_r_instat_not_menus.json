@@ -7004,5 +7004,10 @@
   "Error/Residuals:": "Makosa/Mabaki:",
   "Model Type:": "Aina ya Modeli:",
   "Random Effects (e.g. 1|block):": "Athari Nasibu (mf. 1|bloku):",
-  "Random/Residual/Error:": "Nasibu/Mabaki/Makosa:"
+  "Random/Residual/Error:": "Nasibu/Mabaki/Makosa:",
+  "Summary Metadata": "Summary Metadata",
+  "Definition Data": "Definition Data",
+  "Crop Data": "Crop Data",
+  "Specify Station(s)": "Specify Station(s)",
+  "Latest Data": "Latest Data"
 }
