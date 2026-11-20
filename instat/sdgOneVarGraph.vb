@@ -27,6 +27,7 @@ Public Class sdgOneVarGraph
     Public Sub InitialiseControls()
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
+        Dim dctLabelPairs As New Dictionary(Of String, String)
 
         ucrButtonsOneVarGraph.iHelpTopicID = 737
 
@@ -51,6 +52,20 @@ Public Class sdgOneVarGraph
         dctCategoricalPairs.Add("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34))
         ucrInputCategorical.SetItems(dctCategoricalPairs)
         ucrInputCategorical.SetDropDownStyleAsNonEditable()
+
+        ucrChkColour.SetParameter(New RParameter("colour", 8))
+        ucrChkColour.SetText("Colour")
+        ucrChkColour.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkColour.SetRDefault("FALSE")
+
+        ucrInputLabel.SetParameter(New RParameter("label", 9))
+        dctLabelPairs.Add("None", "NA")
+        dctLabelPairs.Add("Count", Chr(34) & "Count" & Chr(34))
+        dctLabelPairs.Add("Percent", Chr(34) & "Percent" & Chr(34))
+        ucrInputLabel.SetItems(dctLabelPairs)
+        ucrInputLabel.SetDropDownStyleAsNonEditable()
+        ucrInputLabel.SetLinkedDisplayControl(lblLabel)
+        ucrInputLabel.SetRDefault("NA")
 
         ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis", 5))
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
