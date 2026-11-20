@@ -65,6 +65,7 @@ Public Class dlgEvapotranspiration
         ucrReceiverHumidityMin.Selector = ucrSelectorEvapotranspiration
         ucrReceiverRadiation.Selector = ucrSelectorEvapotranspiration
         ucrReceiverWindSpeed.Selector = ucrSelectorEvapotranspiration
+        ucrReceiverStation.Selector = ucrSelectorEvapotranspiration
 
         ucrReceiverDate.SetParameter(New RParameter("x", 0))
         ucrReceiverDate.SetParameterIsRFunction()
@@ -102,6 +103,11 @@ Public Class dlgEvapotranspiration
         ucrReceiverWindSpeed.SetParameterIsRFunction()
         ucrReceiverWindSpeed.SetClimaticType("wind_speed")
         ucrReceiverWindSpeed.bAutoFill = True
+
+        ucrReceiverStation.SetParameter(New RParameter("Station_Name", 7))
+        ucrReceiverStation.SetParameterIsRFunction()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
         ucrInputTimeStep.SetParameter(New RParameter("ts", 2))
         dctInputTimeStep.Add("daily", Chr(34) & "daily" & Chr(34))
@@ -152,6 +158,7 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrReceiverExtraRadiation, {rdoHargreavesSamani}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrNudAlpha, {rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.23")
+        ucrPnlMethod.AddToLinkedControls(ucrReceiverStation, {rdoHargreavesSamani}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverExtraRadiation.SetLinkedDisplayControl(lblRA)
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
@@ -160,6 +167,7 @@ Public Class dlgEvapotranspiration
         ucrInputTimeStep.SetLinkedDisplayControl(lblTimeStep)
         ucrInputSolar.SetLinkedDisplayControl(lblSolar)
         ucrInputCrop.SetLinkedDisplayControl(lblCrop)
+        ucrReceiverStation.SetLinkedDisplayControl(lblStationReceiver)
 
         'ucrSave Column
         ucrNewColName.SetLabelText("New Column Name:")
@@ -310,12 +318,14 @@ Public Class dlgEvapotranspiration
         ucrInputSolar.AddAdditionalCodeParameterPair(clsETPriestleyTaylorFunction, New RParameter("solar", 3), iAdditionalPairNo:=1)
         ucrReceiverHumidityMax.AddAdditionalCodeParameterPair(clsDataFunctionPTFunction, New RParameter("RHmax", 4), iAdditionalPairNo:=1)
         ucrReceiverHumidityMin.AddAdditionalCodeParameterPair(clsDataFunctionPTFunction, New RParameter("RHmin", 5), iAdditionalPairNo:=1)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsDataFunctionHSFunction, New RParameter("Station_Name", 7), iAdditionalPairNo:=1)
 
         ucrReceiverDate.SetRCode(clsDayFuncFunction, bReset)
         ucrReceiverTmax.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverTmin.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverHumidityMax.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverHumidityMin.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrReceiverStation.SetRCode(clsDataFunctionHSFunction, bReset)
         ucrInputTimeStep.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrInputCrop.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteithFunction, bReset)
@@ -341,7 +351,7 @@ Public Class dlgEvapotranspiration
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoHargreavesSamani.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverStation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
