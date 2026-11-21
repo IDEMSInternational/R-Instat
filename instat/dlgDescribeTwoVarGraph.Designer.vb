@@ -120,6 +120,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.lblCollapse = New System.Windows.Forms.Label()
         Me.ucrInputCollapse = New instat.ucrInputComboBox()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDisplay.SuspendLayout()
@@ -214,7 +216,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblFirstType.Location = New System.Drawing.Point(9, 17)
         Me.lblFirstType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFirstType.Name = "lblFirstType"
-        Me.lblFirstType.Size = New System.Drawing.Size(82, 20)
+        Me.lblFirstType.Size = New System.Drawing.Size(95, 20)
         Me.lblFirstType.TabIndex = 10
         Me.lblFirstType.Text = "first type"
         Me.lblFirstType.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -244,7 +246,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblBy.AutoSize = True
         Me.lblBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBy.Location = New System.Drawing.Point(117, 17)
+        Me.lblBy.Location = New System.Drawing.Point(127, 17)
         Me.lblBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(25, 20)
@@ -255,7 +257,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblSecondType.AutoSize = True
         Me.lblSecondType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondType.Location = New System.Drawing.Point(152, 17)
+        Me.lblSecondType.Location = New System.Drawing.Point(162, 17)
         Me.lblSecondType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSecondType.Name = "lblSecondType"
         Me.lblSecondType.Size = New System.Drawing.Size(95, 20)
@@ -1153,12 +1155,36 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputCollapse.Size = New System.Drawing.Size(147, 32)
         Me.ucrInputCollapse.TabIndex = 81
         '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(170, 648)
+        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(168, 32)
+        Me.ucrInputLegendPosition.TabIndex = 83
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(39, 649)
+        Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(147, 36)
+        Me.ucrChkLegend.TabIndex = 82
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(783, 802)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.ucrInputCollapse)
         Me.Controls.Add(Me.lblCollapse)
         Me.Controls.Add(Me.ucrInputStation)
@@ -1290,4 +1316,6 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputCollapse As ucrInputComboBox
     Friend WithEvents lblCollapse As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class
