@@ -934,6 +934,24 @@ Public Class frmMain
             bDataSaved = True
         End If
     End Sub
+    ''' <summary>
+    ''' If a column selection is active but matches no columns, remove it
+    ''' (same idea as removing a filter that no longer applies).
+    ''' </summary>
+    Public Sub RemoveColumnSelectionIfEmpty()
+        If Not IsColumnSelectionApplied() Then
+            Return
+        End If
+
+        Dim clsFocus = ucrDataViewer.GetCurrentDataFrameFocus()
+        If clsFocus Is Nothing OrElse clsFocus.clsVisibleDataFramePage.lstColumns.Count > 0 Then
+            Return
+        End If
+
+        clsFocus.clsPrepareFunctions.RemoveCurrentColumnSelection()
+        UseColumnSelectionInDataView(False)
+        UseColumnSelectionInMetaData(False)
+    End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "135")

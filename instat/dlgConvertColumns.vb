@@ -166,6 +166,11 @@ Public Class dlgConvertColumns
         End If
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        'a select based on column type may now match no columns, e.g. after converting character columns to factors
+        frmMain.RemoveColumnSelectionIfEmpty()
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToConvert.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudDisplayDecimals.ControlContentsChanged, ucrChkSpecifyDecimalsToDisplay.ControlContentsChanged
         TestOKEnabled()
     End Sub
