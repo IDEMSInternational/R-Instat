@@ -122,6 +122,9 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputCollapse = New instat.ucrInputComboBox()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
+        Me.ucrChkXLabelsAngle = New instat.ucrCheck()
+        Me.ucrNudXLabelAngle = New instat.ucrNud()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDisplay.SuspendLayout()
@@ -362,6 +365,8 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrNudXLabelAngle)
+        Me.grpOptions.Controls.Add(Me.ucrChkXLabelsAngle)
         Me.grpOptions.Controls.Add(Me.lblPosition)
         Me.grpOptions.Controls.Add(Me.ucrNudTransparency)
         Me.grpOptions.Controls.Add(Me.ucrNudJitter)
@@ -370,11 +375,11 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpOptions.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.grpOptions.Controls.Add(Me.ucrChkFreeScaleYAxis)
         Me.grpOptions.Controls.Add(Me.ucrInputPosition)
-        Me.grpOptions.Location = New System.Drawing.Point(476, 438)
+        Me.grpOptions.Location = New System.Drawing.Point(456, 438)
         Me.grpOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpOptions.Size = New System.Drawing.Size(256, 166)
+        Me.grpOptions.Size = New System.Drawing.Size(273, 185)
         Me.grpOptions.TabIndex = 16
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -929,7 +934,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(36, 678)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(36, 723)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(508, 36)
@@ -964,7 +969,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(36, 718)
+        Me.ucrBase.Location = New System.Drawing.Point(36, 763)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -1100,7 +1105,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(585, 669)
+        Me.ucrInputStation.Location = New System.Drawing.Point(585, 714)
         Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(147, 32)
@@ -1110,7 +1115,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucr1stFactorReceiver.AutoSize = True
         Me.ucr1stFactorReceiver.frmParent = Me
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(434, 670)
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(434, 715)
         Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
@@ -1123,7 +1128,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(434, 648)
+        Me.lblFacetBy.Location = New System.Drawing.Point(434, 693)
         Me.lblFacetBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(76, 20)
@@ -1161,7 +1166,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(170, 648)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(170, 693)
         Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(168, 32)
@@ -1171,18 +1176,53 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(39, 649)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(39, 694)
         Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(147, 36)
         Me.ucrChkLegend.TabIndex = 82
+        '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.AutoSize = True
+        Me.ucrChkAddLabels.Checked = False
+        Me.ucrChkAddLabels.Location = New System.Drawing.Point(36, 648)
+        Me.ucrChkAddLabels.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        Me.ucrChkAddLabels.Size = New System.Drawing.Size(147, 36)
+        Me.ucrChkAddLabels.TabIndex = 84
+        '
+        'ucrChkXLabelsAngle
+        '
+        Me.ucrChkXLabelsAngle.AutoSize = True
+        Me.ucrChkXLabelsAngle.Checked = False
+        Me.ucrChkXLabelsAngle.Location = New System.Drawing.Point(9, 142)
+        Me.ucrChkXLabelsAngle.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkXLabelsAngle.Name = "ucrChkXLabelsAngle"
+        Me.ucrChkXLabelsAngle.Size = New System.Drawing.Size(162, 34)
+        Me.ucrChkXLabelsAngle.TabIndex = 14
+        '
+        'ucrNudXLabelAngle
+        '
+        Me.ucrNudXLabelAngle.AutoSize = True
+        Me.ucrNudXLabelAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXLabelAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudXLabelAngle.Location = New System.Drawing.Point(186, 142)
+        Me.ucrNudXLabelAngle.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrNudXLabelAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXLabelAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXLabelAngle.Name = "ucrNudXLabelAngle"
+        Me.ucrNudXLabelAngle.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudXLabelAngle.TabIndex = 85
+        Me.ucrNudXLabelAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(783, 802)
+        Me.ClientSize = New System.Drawing.Size(783, 843)
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.ucrInputCollapse)
@@ -1318,4 +1358,7 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents lblCollapse As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents ucrNudXLabelAngle As ucrNud
+    Friend WithEvents ucrChkXLabelsAngle As ucrCheck
 End Class

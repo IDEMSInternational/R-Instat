@@ -33,7 +33,10 @@ Public Class dlgDescribeTwoVarGraph
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
             clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
             clsScaleColourViridisFunction, clsAesLabelFunction, clsAesXLabelFunction, clsAesYLabelFunction, clsPairThemesFunction, clsSidePlotThemeFunction,
-            clsTextXTopElementFunction, clsTicksXTopElementFunction, clsTitleXTopElementFunction As New RFunction
+            clsTextXTopElementFunction, clsTicksXTopElementFunction, clsTitleXTopElementFunction, clsAfterStatPropFunction, clsScaleXDiscreteFunction,
+            clsLabelWrapFunction, clsScaleYContinuousFunction, clsLimitsCombineFunction, clsBreakSequenceFunction, clsExpansionFunction, clsMultCombineFunction,
+            clsLabelsFunction, clsGeomTextFunction, clsScalesPercentFunction, clsGeomTextAesFunction, clsPostionDodgeFunction, clsAfterStatCountFunction,
+            clsPositionStackFunction, clsPositionFillFunction, clsPositionJitterFunction, clsXLabelAngleElementTextFunction As New RFunction
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
@@ -82,6 +85,8 @@ Public Class dlgDescribeTwoVarGraph
     Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
     Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
     Private ReadOnly strNone As String = "None"
+
+    Private ReadOnly strBarchatJitterPositionSeed As String = "123"
 
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
@@ -135,7 +140,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrPnlByPairs.AddParameterValuesCondition(rdoPairs, "checked", "pair")
         rdoSummarize.Enabled = False
 
-        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates, ucr1stFactorReceiver, ucrInputStation, ucrChkLegend}, {rdoTwoVars, rdoThreeVars, rdoSide}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates, ucr1stFactorReceiver, ucrInputStation, ucrChkLegend, ucrChkAddLabels}, {rdoTwoVars, rdoThreeVars, rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrReceiverFill}, {rdoThreeVars}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkXSidePlot, ucrChkYSidePlot, ucrInputCollapse}, {rdoSide}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
@@ -184,7 +189,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCategoricalByNumeric.SetItems(strNumericCategoricalPlots)
         ucrInputCategoricalByNumeric.SetName("Boxplot")
         ucrInputCategoricalByNumeric.SetDropDownStyleAsNonEditable()
-        ucrInputCategoricalByCategorical.SetItems({"Bar Chart"})
+
+        ucrInputCategoricalByCategorical.SetItems({"Bar Chart", "Bar + 2nd %", "Bar + 1st %", "Bar + %"})
         ucrInputCategoricalByCategorical.SetName("Bar Chart")
         ucrInputCategoricalByCategorical.SetDropDownStyleAsNonEditable()
 
@@ -217,6 +223,21 @@ Public Class dlgDescribeTwoVarGraph
         ucrChkFreeScaleYAxis.SetParameter(New RParameter("scales", iNewPosition:=3), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=False)
         ucrChkFreeScaleYAxis.AddParameterPresentCondition(True, "scales")
         ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
+
+        ucrChkAddLabels.SetText("Add Labels")
+        ucrChkAddLabels.AddParameterValuesCondition(True, "add_labels", "True")
+        ucrChkAddLabels.AddParameterValuesCondition(False, "add_labels", "False")
+
+        ucrChkXLabelsAngle.SetText("X Label Angle")
+        ucrChkXLabelsAngle.AddParameterValuesCondition(True, "x_label_angle", "True")
+        ucrChkXLabelsAngle.AddParameterValuesCondition(False, "x_label_angle", "False")
+        ucrChkXLabelsAngle.AddToLinkedControls({ucrNudXLabelAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudXLabelAngle.SetParameter(New RParameter("angle", 0))
+        ucrNudXLabelAngle.Minimum = 0
+        ucrNudXLabelAngle.DecimalPlaces = 0
+        ucrNudXLabelAngle.Increment = 1
+        ucrNudXLabelAngle.SetRDefault(10)
 
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
@@ -347,11 +368,11 @@ Public Class dlgDescribeTwoVarGraph
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
-        dctLegendPosition.Add("none", Chr(34) & "none" & Chr(34))
-        dctLegendPosition.Add("left", Chr(34) & "left" & Chr(34))
-        dctLegendPosition.Add("right", Chr(34) & "right" & Chr(34))
-        dctLegendPosition.Add("top", Chr(34) & "top" & Chr(34))
-        dctLegendPosition.Add("bottom", Chr(34) & "bottom" & Chr(34))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
@@ -367,6 +388,7 @@ Public Class dlgDescribeTwoVarGraph
         HideShowGroupSummariesControl()
         HideShowGroupOptionsControl()
         AddRemoveSidePlotRelatedFunctionsAndControls()
+        HideShowXlabelAngleNudControl()
     End Sub
 
     Private Sub SetDefaults()
@@ -454,6 +476,24 @@ Public Class dlgDescribeTwoVarGraph
         clsRowVarsFunction = New RFunction
         clsFreeVarsFunction = New RFunction
         clsColVarsFunction = New RFunction
+        clsAfterStatPropFunction = New RFunction
+        clsAfterStatCountFunction = New RFunction
+        clsScaleXDiscreteFunction = New RFunction
+        clsLabelWrapFunction = New RFunction
+        clsScaleYContinuousFunction = New RFunction
+        clsLimitsCombineFunction = New RFunction
+        clsBreakSequenceFunction = New RFunction
+        clsExpansionFunction = New RFunction
+        clsMultCombineFunction = New RFunction
+        clsLabelsFunction = New RFunction
+        clsGeomTextFunction = New RFunction
+        clsScalesPercentFunction = New RFunction
+        clsGeomTextAesFunction = New RFunction
+        clsPostionDodgeFunction = New RFunction
+        clsPositionStackFunction = New RFunction
+        clsPositionFillFunction = New RFunction
+        clsPositionJitterFunction = New RFunction
+        clsXLabelAngleElementTextFunction = New RFunction
 
         clsTildeOperator = New ROperator
 
@@ -476,6 +516,8 @@ Public Class dlgDescribeTwoVarGraph
         clsDummyFunction.AddParameter("checked", "two_vars", iPosition:=0)
         clsDummyFunction.AddParameter("x_side_plot", "False", iPosition:=1)
         clsDummyFunction.AddParameter("y_side_plot", "False", iPosition:=2)
+        clsDummyFunction.AddParameter("add_labels", "False", iPosition:=3)
+        clsDummyFunction.AddParameter("x_label_angle", "False", iPosition:=4)
 
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
@@ -722,6 +764,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomBar.SetRCommand("geom_bar")
         clsGeomBar.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
         clsGeomBar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
+        clsGeomBar.AddParameter("seed", strBarchatJitterPositionSeed, iPosition:=5)
 
         clsGeomFreqPoly.SetPackageName("ggplot2")
         clsGeomFreqPoly.SetRCommand("geom_freqpoly")
@@ -788,6 +831,77 @@ Public Class dlgDescribeTwoVarGraph
         clsFreeVarsFunction.SetRCommand("vars")
         clsFreeVarsFunction.AddParameter("first_var", "variable", iPosition:=0, bIncludeArgumentName:=False)
 
+        clsAfterStatPropFunction.SetPackageName("ggplot2")
+        clsAfterStatPropFunction.SetRCommand("after_stat")
+        clsAfterStatPropFunction.AddParameter("prop", "prop", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsAfterStatCountFunction.SetPackageName("ggplot2")
+        clsAfterStatCountFunction.SetRCommand("after_stat")
+        clsAfterStatCountFunction.AddParameter("count", "count", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsLabelWrapFunction.SetPackageName("scales")
+        clsLabelWrapFunction.SetRCommand("label_wrap")
+        clsLabelWrapFunction.AddParameter("x", "15", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsScaleXDiscreteFunction.SetRCommand("scale_x_discrete")
+        clsScaleXDiscreteFunction.AddParameter("labels", clsRFunctionParameter:=clsLabelWrapFunction, iPosition:=0)
+
+        clsLimitsCombineFunction.SetRCommand("c")
+        clsLimitsCombineFunction.AddParameter("min", "0", iPosition:=0, bIncludeArgumentName:=False)
+        clsLimitsCombineFunction.AddParameter("max", "1", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsMultCombineFunction.SetRCommand("c")
+        clsMultCombineFunction.AddParameter("min", "0", iPosition:=0, bIncludeArgumentName:=False)
+        clsMultCombineFunction.AddParameter("max", "0.05", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsBreakSequenceFunction.SetRCommand("seq")
+        clsBreakSequenceFunction.AddParameter("min", "0", iPosition:=0, bIncludeArgumentName:=False)
+        clsBreakSequenceFunction.AddParameter("max", "1", iPosition:=1, bIncludeArgumentName:=False)
+        clsBreakSequenceFunction.AddParameter("by", "0.2", iPosition:=2, bIncludeArgumentName:=False)
+
+        clsExpansionFunction.SetRCommand("expansion")
+        clsExpansionFunction.AddParameter("mult", clsRFunctionParameter:=clsMultCombineFunction, iPosition:=0)
+
+        clsScaleYContinuousFunction.SetRCommand("scale_y_continuous")
+        clsScaleYContinuousFunction.AddParameter("labels", "scales::percent", iPosition:=0)
+        clsScaleYContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsCombineFunction, iPosition:=1)
+        clsScaleYContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsBreakSequenceFunction, iPosition:=2)
+        clsScaleYContinuousFunction.AddParameter("expand", clsRFunctionParameter:=clsExpansionFunction, iPosition:=3)
+
+        clsLabelsFunction.SetRCommand("labs")
+        clsLabelsFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+        clsLabelsFunction.AddParameter("y", Chr(34) & "Percentages" & Chr(34), iPosition:=1)
+
+        clsGeomTextAesFunction.SetRCommand("aes")
+        clsGeomTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsScalesPercentFunction, iPosition:=0)
+
+        clsScalesPercentFunction.SetPackageName("scales")
+        clsScalesPercentFunction.SetRCommand("percent")
+        clsScalesPercentFunction.AddParameter("stat", clsRFunctionParameter:=clsAfterStatPropFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsScalesPercentFunction.AddParameter("accuracy", "1", iPosition:=1)
+
+        clsPostionDodgeFunction.SetRCommand("position_dodge")
+        clsPostionDodgeFunction.AddParameter("width", "0.9", iPosition:=0)
+
+        clsPositionStackFunction.SetRCommand("position_stack")
+        clsPositionStackFunction.AddParameter("vjust", "0.5", iPosition:=0)
+
+        clsPositionFillFunction.SetRCommand("position_fill")
+        clsPositionFillFunction.AddParameter("vjust", "0.5", iPosition:=0)
+
+        clsPositionJitterFunction.SetRCommand("position_jitter")
+        clsPositionJitterFunction.AddParameter("seed", strBarchatJitterPositionSeed, iPosition:=0)
+
+        clsGeomTextFunction.SetRCommand("geom_text")
+        clsGeomTextFunction.AddParameter("stat", "ggstats::StatProp", iPosition:=0)
+        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextAesFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPostionDodgeFunction, iPosition:=2)
+        clsGeomTextFunction.AddParameter("vjust", "-0.5", iPosition:=3)
+
+        clsXLabelAngleElementTextFunction.SetPackageName("ggplot2")
+        clsXLabelAngleElementTextFunction.SetRCommand("element_text")
+        clsXLabelAngleElementTextFunction.AddParameter("angle", ucrNudXLabelAngle.GetText(), iPosition:=0)
+
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
         AddDataFrame()
@@ -807,12 +921,15 @@ Public Class dlgDescribeTwoVarGraph
 
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrReceiverSecondVar.SetRCode(clsAesCategoricalByCategoricalBarChart, bReset)
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkFreeScaleYAxis.SetRCode(clsFacetFunction, bReset)
         ucrInputPosition.SetRCode(clsGeomBar, bReset)
         ucrNudJitter.SetRCode(clsGeomJitter, bReset)
         ucrNudTransparency.SetRCode(clsGeomJitter, bReset)
+        ucrNudXLabelAngle.SetRCode(clsXLabelAngleElementTextFunction, bReset)
         ucrPnlByPairs.SetRCode(clsDummyFunction, bReset)
         ucrReceiverColour.SetRCode(clsGGpairAesFunction, bReset)
         ucrInputLowerContinous.SetRCode(clsLowerListFunction, bReset)
@@ -834,6 +951,8 @@ Public Class dlgDescribeTwoVarGraph
         If bReset Then
             ucrChkXSidePlot.SetRCode(clsDummyFunction, bReset)
             ucrChkYSidePlot.SetRCode(clsDummyFunction, bReset)
+            ucrChkAddLabels.SetRCode(clsDummyFunction, bReset)
+            ucrNudXLabelAngle.SetRCode(clsDummyFunction, bReset)
         End If
         bRCodeSet = True
         Results()
@@ -938,6 +1057,7 @@ Public Class dlgDescribeTwoVarGraph
 
             ucrChkFreeScaleYAxis.Visible = True
             ucrInputPosition.Visible = False
+            ucrChkAddLabels.Visible = False
             ucrNudJitter.Visible = False
             ucrNudTransparency.Visible = False
             lblGraphName.Visible = False
@@ -950,6 +1070,7 @@ Public Class dlgDescribeTwoVarGraph
             ucrInputNumericByCategoricalByCategorical.Visible = False
             ucrInputNumericByNumericByCategorical.Visible = False
             RemoveAllGeomsStats()
+            ShowHideAddLabelsControl()
 
             If rdoPairs.Checked Then
                 clsAesNumericByCategoricalXNumeric.RemoveParameterByName("y")
@@ -1078,12 +1199,14 @@ Public Class dlgDescribeTwoVarGraph
                         clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
                 End Select
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
+                clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("y")
+                clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("by")
                 ucrInputCategoricalByCategoricalByCategorical.Visible = True
+                ucrChkAddLabels.Visible = True
                 AddRemoveFreeScaleX(False)
                 If ucrInputCategoricalByCategoricalByCategorical IsNot Nothing Then
                     Select Case ucrInputCategoricalByCategoricalByCategorical.GetText
                         Case "Bar Chart"
-                            'AddRemoveAesFillParam(clsTempAesFunction:=clsAesCategoricalByCategoricalBarChart, strParamName:="fill", iPosition:=6)
                             clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
                             clsGlobalAes = clsAesCategoricalByCategoricalBarChart
                             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
@@ -1460,19 +1583,75 @@ Public Class dlgDescribeTwoVarGraph
                 If rdoTwoVars.Checked Then
                     clsAesCategoricalByCategoricalBarChart.AddParameter("fill", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=2)
                 End If
+                If ucrChkAddLabels.Checked Then
+                    clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=11, bIncludeArgumentName:=False)
+                    Debug.Print("============================= You MotherFucker ======================================")
+                End If
+                clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("y")
+                clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("by")
                 ucrChkYSidePlot.Visible = False
                 ucrChkXSidePlot.Visible = False
+                ucrChkAddLabels.Visible = True
                 ucrInputXSidePlotOptions.Visible = False
                 ucrInputYSidePlotOptions.Visible = False
                 ucrInputCategoricalByCategorical.Visible = True
                 AddRemoveFreeScaleX(False)
+                ChangeGeomTextPositionParam()
                 If ucrInputCategoricalByCategorical IsNot Nothing Then
                     Select Case ucrInputCategoricalByCategorical.GetText
                         Case "Bar Chart"
                             ucrInputPosition.Visible = True
                             clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
                             clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                            clsGeomBar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
                             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            clsGeomTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsAfterStatCountFunction, iPosition:=0)
+                            clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+                            clsLabelsFunction.AddParameter("y", Chr(34) & "Counts" & Chr(34), iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_labels", clsRFunctionParameter:=clsLabelsFunction, iPosition:=9)
+                        Case "Bar + 2nd %"
+                            ucrInputPosition.Visible = True
+                            clsAesCategoricalByCategoricalBarChart.AddParameter("y", clsRFunctionParameter:=clsAfterStatPropFunction, iPosition:=5)
+                            clsAesCategoricalByCategoricalBarChart.AddParameter("by", "value", iPosition:=6)
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
+                            clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                            clsGeomBar.AddParameter("stat", "ggstats::StatProp", iPosition:=1)
+                            clsLabelsFunction.AddParameter("y", Chr(34) & "Percentages" & Chr(34), iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_scale_x", clsRFunctionParameter:=clsScaleXDiscreteFunction, iPosition:=7)
+                            clsBaseOperator.AddParameter("geom_scale_y", clsRFunctionParameter:=clsScaleYContinuousFunction, iPosition:=8)
+                            clsBaseOperator.AddParameter("geom_labels", clsRFunctionParameter:=clsLabelsFunction, iPosition:=9)
+                            clsGeomTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsScalesPercentFunction, iPosition:=0)
+                            clsGeomTextFunction.AddParameter("stat", "ggstats::StatProp", iPosition:=0)
+                        Case "Bar + 1st %"
+                            ucrInputPosition.Visible = True
+                            clsAesCategoricalByCategoricalBarChart.AddParameter("y", clsRFunctionParameter:=clsAfterStatPropFunction, iPosition:=5)
+                            clsAesCategoricalByCategoricalBarChart.AddParameter("by", ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False), iPosition:=6)
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
+                            clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                            clsGeomBar.AddParameter("stat", "ggstats::StatProp", iPosition:=1)
+                            clsLabelsFunction.AddParameter("y", Chr(34) & "Percentages" & Chr(34), iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_scale_x", clsRFunctionParameter:=clsScaleXDiscreteFunction, iPosition:=7)
+                            clsBaseOperator.AddParameter("geom_scale_y", clsRFunctionParameter:=clsScaleYContinuousFunction, iPosition:=8)
+                            clsBaseOperator.AddParameter("geom_labels", clsRFunctionParameter:=clsLabelsFunction, iPosition:=9)
+                            clsGeomTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsScalesPercentFunction, iPosition:=0)
+                            clsGeomTextFunction.AddParameter("stat", "ggstats::StatProp", iPosition:=0)
+                        Case "Bar + %"
+                            ucrInputPosition.Visible = True
+                            clsAesCategoricalByCategoricalBarChart.AddParameter("y", clsRFunctionParameter:=clsAfterStatPropFunction, iPosition:=5)
+                            clsAesCategoricalByCategoricalBarChart.AddParameter("by", "1", iPosition:=6)
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
+                            clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                            clsGeomBar.AddParameter("stat", "ggstats::StatProp", iPosition:=1)
+                            'dyfyuweyfiyw
+                            clsLabelsFunction.AddParameter("y", Chr(34) & "Percentages" & Chr(34), iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_scale_x", clsRFunctionParameter:=clsScaleXDiscreteFunction, iPosition:=7)
+                            clsBaseOperator.AddParameter("geom_scale_y", clsRFunctionParameter:=clsScaleYContinuousFunction, iPosition:=8)
+                            clsBaseOperator.AddParameter("geom_labels", clsRFunctionParameter:=clsLabelsFunction, iPosition:=9)
+                            clsGeomTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsScalesPercentFunction, iPosition:=0)
+                            clsGeomTextFunction.AddParameter("stat", "ggstats::StatProp", iPosition:=0)
                     End Select
                 End If
             Else
@@ -1483,6 +1662,42 @@ Public Class dlgDescribeTwoVarGraph
             End If
         End If
         autoTranslate(Me)
+    End Sub
+
+    Private Sub ChangeGeomTextPositionParam()
+        If ucrInputPosition IsNot Nothing Then
+            Select Case ucrInputPosition.GetText
+                Case "Stack"
+                    clsPositionStackFunction.RemoveParameterByName("reverse")
+                    clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionStackFunction, iPosition:=2)
+                    clsGeomTextFunction.RemoveParameterByName("vjust")
+                Case "Dodge"
+                    clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPostionDodgeFunction, iPosition:=2)
+                    clsGeomTextFunction.AddParameter("vjust", "-0.5", iPosition:=3)
+                Case "Identity"
+                    clsGeomTextFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+                    clsGeomTextFunction.AddParameter("vjust", "-0.5", iPosition:=3)
+                Case "Jitter"
+                    clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionJitterFunction, iPosition:=2)
+                    clsGeomTextFunction.AddParameter("vjust", "-0.5", iPosition:=3)
+                Case "Fill"
+                    clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionFillFunction, iPosition:=2)
+                    clsGeomTextFunction.RemoveParameterByName("vjust")
+                Case "Stack in reverse"
+                    clsPositionStackFunction.AddParameter("reverse", "TRUE", iPosition:=1)
+                    clsGeomTextFunction.AddParameter("position", clsRFunctionParameter:=clsPositionStackFunction, iPosition:=2)
+                    clsGeomTextFunction.RemoveParameterByName("vjust")
+            End Select
+        End If
+    End Sub
+
+    Private Sub ucrInputPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPosition.ControlValueChanged
+        ChangeGeomTextPositionParam()
+    End Sub
+
+    Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
+        Results()
+        ShowHideAddLabelsControl()
     End Sub
 
     Private Sub AddRemoveAesFillParam(clsTempAesFunction As RFunction, strParamName As String, iPosition As Integer)
@@ -1610,25 +1825,29 @@ Public Class dlgDescribeTwoVarGraph
         Me.ucrReceiverFirstVars.ucrMultipleVariables.Size = New Size(140, 90)
         Me.ucrReceiverFirstVars.ucrSingleVariable.Size = New Size(140, 30)
         Me.ucrReceiverFirstVars.cmdVariables.Size = New Size(140, 30)
+        Me.Size = New Size(510, 600)
 
         If rdoTwoVars.Checked Then
             grpOptions.Location = New Point(325, 240)
-            ucr1stFactorReceiver.Location = New Point(290, 425)
-            ucrInputStation.Location = New Point(390, 425)
-            lblFacetBy.Location = New Point(291, 410)
-            ucrChkLegend.Location = New Point(25, 425)
-            ucrInputLegendPosition.Location = New Point(90, 425)
+            ucr1stFactorReceiver.Location = New Point(290, 455)
+            ucrInputStation.Location = New Point(390, 455)
+            lblFacetBy.Location = New Point(291, 440)
+            ucrChkLegend.Location = New Point(25, 455)
+            ucrInputLegendPosition.Location = New Point(90, 455)
+            ucrChkAddLabels.Location = New Point(25, 430)
         ElseIf rdoThreeVars.Checked Then
-            ucr1stFactorReceiver.Location = New Point(290, 425)
-            ucrInputStation.Location = New Point(390, 425)
-            lblFacetBy.Location = New Point(291, 410)
-            ucrChkLegend.Location = New Point(25, 425)
-            ucrInputLegendPosition.Location = New Point(90, 425)
+            ucr1stFactorReceiver.Location = New Point(290, 455)
+            ucrInputStation.Location = New Point(390, 455)
+            lblFacetBy.Location = New Point(291, 440)
+            ucrChkLegend.Location = New Point(25, 455)
+            ucrInputLegendPosition.Location = New Point(90, 455)
+            ucrChkAddLabels.Location = New Point(25, 430)
         ElseIf rdoSide.Checked Then
-            lblCollapse.Location = New Point(20, 425)
-            ucrInputCollapse.Location = New Point(75, 423)
-            ucrChkLegend.Location = New Point(25, 395)
-            ucrInputLegendPosition.Location = New Point(90, 395)
+            lblCollapse.Location = New Point(20, 455)
+            ucrInputCollapse.Location = New Point(75, 453)
+            ucrChkLegend.Location = New Point(25, 420)
+            ucrInputLegendPosition.Location = New Point(90, 420)
+            ucrChkAddLabels.Location = New Point(25, 395)
         End If
     End Sub
 
@@ -1738,12 +1957,33 @@ Public Class dlgDescribeTwoVarGraph
         clsGGSideFunction.AddParameter("collapse", Chr(34) & ucrInputCollapse.GetText() & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub AddRemoveLegendParam()
-        If ucrChkLegend.Checked AndAlso Not ucrInputLegendPosition.IsEmpty Then
-            clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText() & Chr(34), iPosition:=0)
+    Private Sub AddRemoveXLabelAngleParam()
+        If ucrChkXLabelsAngle.Checked Then
+            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXLabelAngleElementTextFunction, iPosition:=1)
         Else
-            clsThemeFunction.RemoveParameterByName("legend.position")
+            clsThemeFunction.RemoveParameterByName("axis.text.x")
         End If
+    End Sub
+
+    Private Sub HideShowXlabelAngleNudControl()
+        If ucrChkXLabelsAngle.Checked Then
+            ucrNudXLabelAngle.Visible = True
+        Else
+            ucrNudXLabelAngle.Visible = False
+        End If
+    End Sub
+
+
+    Private Sub ucrNudXLabelAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudXLabelAngle.ControlValueChanged
+        If ucrChkXLabelsAngle.Checked Then
+            clsXLabelAngleElementTextFunction.AddParameter("angle", ucrNudXLabelAngle.GetText(), iPosition:=0)
+        End If
+        HideShowXlabelAngleNudControl()
+    End Sub
+
+    Private Sub ucrChkXLabelsAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXLabelsAngle.ControlValueChanged
+        AddRemoveXLabelAngleParam()
+        AddRemoveTheme()
     End Sub
 
     Private Sub AddRemoveTheme()
@@ -1754,12 +1994,7 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
-    Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged
-        AddRemoveLegendParam()
-    End Sub
-
-    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
-        AddRemoveLegendParam()
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         AddRemoveTheme()
     End Sub
 
@@ -2264,6 +2499,19 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub DisplayWarning(strMessage As String)
         MsgBoxTranslate("Pick a categorical variable different from those selected in the " & strMessage & " to avoid Errors", vbOKOnly, "Matching Factor Variables")
+    End Sub
+
+
+    Public Sub ShowHideAddLabelsControl()
+        If rdoSide.Checked OrElse rdoThreeVars.Checked OrElse rdoTwoVars.Checked Then
+            If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
+                ucrChkAddLabels.Visible = True
+            Else
+                ucrChkAddLabels.Visible = False
+            End If
+        Else
+            ucrChkAddLabels.Visible = False
+        End If
     End Sub
 
     Private Sub AddRemoveSidePlotRelatedFunctionsAndControls()
