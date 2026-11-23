@@ -33,6 +33,25 @@ Public Class Translations
         End If
 
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(clsControl, GetDbPath(), GetLanguageCode()))
+
+        'Translates the menus inside the shared user controls (which arenot reachable by TranslateForm)
+        TranslateSharedControlMenus(clsControl)
+    End Sub
+
+    ''' <summary>
+    ''' It recursively finds every ucrSelector in <paramref name="ctrParent"/> and
+    ''' asks it to translate its own context menus.
+    ''' </summary>
+    Private Shared Sub TranslateSharedControlMenus(ctrParent As Control)
+        For Each ctr As Control In ctrParent.Controls
+            Dim ucrSel As ucrSelector = TryCast(ctr, ucrSelector)
+            If ucrSel IsNot Nothing Then
+                ucrSel.TranslateMenus()
+            End If
+            If ctr.HasChildren Then
+                TranslateSharedControlMenus(ctr)
+            End If
+        Next
     End Sub
 
     '''--------------------------------------------------------------------------------------------

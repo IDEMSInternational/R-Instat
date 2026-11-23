@@ -9,6 +9,7 @@ Public Class dlgInstallRPackage
     Private clsBeforeOptionsFunc As New RFunction
     Private clsAfterOptionsFunc As New RFunction
     Private clsDummyFunction As New RFunction
+    Private dctRepositoryPackages As New Dictionary(Of String, Dictionary(Of String, String))
 
     Private Sub dlgRPackages_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -49,6 +50,15 @@ Public Class dlgInstallRPackage
         dctPackages.Add("instatCalculations", Chr(34) & "instatCalculations" & Chr(34))
         dctPackages.Add("databook", Chr(34) & "databook" & Chr(34))
         ucrInputPackage.SetItems(dctPackages)
+
+        Dim dctPreTeXtBooksPackages As New Dictionary(Of String, String)
+        dctPreTeXtBooksPackages.Add(" ", Chr(34) & " " & Chr(34))
+        dctPreTeXtBooksPackages.Add("statsdata", Chr(34) & "statsdata" & Chr(34))
+        dctPreTeXtBooksPackages.Add("lsrdata", Chr(34) & "lsrdata" & Chr(34))
+
+        dctRepositoryPackages.Add("IDEMSInternational", dctPackages)
+        dctRepositoryPackages.Add("PreTeXtBooks", dctPreTeXtBooksPackages)
+        ucrInputRepositoryName.SetItems(dctRepositoryPackages.Keys.ToArray)
 
         ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
         ucrPnlRPackages.AddParameterValuesCondition(rdoRPackage, "checked", "rpackage")
@@ -263,6 +273,10 @@ Public Class dlgInstallRPackage
     End Sub
 
     Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlValueChanged
+        If dctRepositoryPackages.ContainsKey(ucrInputRepositoryName.GetText) Then
+            ucrInputPackage.SetItems(dctRepositoryPackages(ucrInputRepositoryName.GetText))
+            ucrInputPackage.SetText(" ")
+        End If
         TestOkEnabled()
         Call GithubOption()
         bUniqueChecked = False

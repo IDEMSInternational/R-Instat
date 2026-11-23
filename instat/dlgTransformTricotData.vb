@@ -1,11 +1,27 @@
-﻿Imports RDotNet
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgTransformTricotData
     Private clsOutputDataLevel, clsConcFunction, clsSetNameFunction, clsGetDataFrameFunction,
         clsListFunction, clsAddLinkFunction, clsGetVariablesPlotFunction, clsGetColumnSelectionFunction,
-        clsGetVariablesVarietyFunction, clsOutputDataLevelForCheck, clsDefineTricotDataFunction, clsAddFunction, clsAddGroupedFunction,
-        clsCheckDataLevel, clsRankingFunction, clsRankingGroupedFunction, clsUnameFunction,
-        clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
+                clsGetVariablesVarietyFunction, clsOutputDataLevelForCheck, clsDefineTricotDataFunction, clsAddFunction, clsAddGroupedFunction, clsRankingFunction, clsRankingGroupedFunction, clsUnameFunction,
+                clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
     Private clsOutputLevelsOperator, clsIdVarietyOperator, clsIdOperator, clsTraitsOperator, clsPlotPullOperator, clsVarietyPullOperator, clsPlotOperator, clsVarietyOperator, OverallSymbolOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -21,8 +37,10 @@ Public Class dlgTransformTricotData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bReset = False
+        ClearCheckOnSdgClose()
+        autoTranslate(Me)
         TestOKEnabled()
-        bUniqueChecked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -65,12 +83,10 @@ Public Class dlgTransformTricotData
         clsIdOperator = New ROperator
         clsIdVarietyOperator = New ROperator
 
-        bUniqueChecked = False
+        ClearCheckOnSdgClose()
         bResetSubdialog = True
         ucrBase.clsRsyntax.iCallType = 2
         ucrSelectorTricotData.Reset()
-        ucrInputTricotData.SetText("")
-        ucrInputTricotData.txtInput.BackColor = Color.White
 
         ucrReceiverTricotData.SetMeAsReceiver()
 
@@ -82,6 +98,10 @@ Public Class dlgTransformTricotData
         clsCreateTricotData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_tricot_datasets")
         clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0, bIncludeArgumentName:=True)
         clsCreateTricotData.SetAssignTo("output_data_levels")
+
+        clsIDColsFunction.SetRCommand("c")
+        clsVarietyColsFunction.SetRCommand("c")
+        clsTraitColsFunction.SetRCommand("c")
 
         OverallSymbolOperator.SetOperation("[")
         OverallSymbolOperator.AddParameter("left", clsRFunctionParameter:=clsOutputDataLevelForCheck, iPosition:=0)
@@ -226,29 +246,27 @@ Public Class dlgTransformTricotData
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-
-        ' Only add parameters if it is clicked, otherwise we take the defaults
-        clsOutputDataLevel.AddParameter("id_cols", clsRFunctionParameter:=clsIDColsFunction)
-        clsOutputDataLevel.AddParameter("variety_cols", clsRFunctionParameter:=clsVarietyColsFunction)
-        clsOutputDataLevel.AddParameter("trait_cols", clsRFunctionParameter:=clsTraitColsFunction)
-        clsIDColsFunction.SetRCommand("c")
-        clsIDColsFunction.AddParameter("id_1", Chr(34) & "ID" & Chr(34), bIncludeArgumentName:=False)
-        clsIDColsFunction.AddParameter("id_2", Chr(34) & "id" & Chr(34), bIncludeArgumentName:=False)
-        clsIDColsFunction.AddParameter("id_3", Chr(34) & "participant_name" & Chr(34), bIncludeArgumentName:=False)
-        clsIDColsFunction.AddParameter("id_4", Chr(34) & "participant_id" & Chr(34), bIncludeArgumentName:=False)
-        clsVarietyColsFunction.SetRCommand("c")
-        clsVarietyColsFunction.AddParameter("var_1", Chr(34) & "variety" & Chr(34), bIncludeArgumentName:=False)
-        clsVarietyColsFunction.AddParameter("var_2", Chr(34) & "varieties" & Chr(34), bIncludeArgumentName:=False)
-        clsVarietyColsFunction.AddParameter("var_3", Chr(34) & "item" & Chr(34), bIncludeArgumentName:=False)
-        clsVarietyColsFunction.AddParameter("var_4", Chr(34) & "items" & Chr(34), bIncludeArgumentName:=False)
-        clsVarietyColsFunction.AddParameter("var_5", Chr(34) & "Genotype" & Chr(34), bIncludeArgumentName:=False)
-        clsVarietyColsFunction.AddParameter("var_6", Chr(34) & "genotype" & Chr(34), bIncludeArgumentName:=False)
-        clsTraitColsFunction.SetRCommand("c")
-        clsTraitColsFunction.AddParameter("trait_1", Chr(34) & "trait" & Chr(34), bIncludeArgumentName:=False)
-        clsTraitColsFunction.AddParameter("trait_2", Chr(34) & "traits" & Chr(34), bIncludeArgumentName:=False)
-
         sdgTransformations.SetRFunction(clsNewRFunction:=clsOutputDataLevel, clsNewDefaultFunction:=clsCreateTricotData, clsNewIDColsFunction:=clsIDColsFunction, clsNewVarietyColsFunction:=clsVarietyColsFunction, clsNewTraitColsFunction:=clsTraitColsFunction, clsNewDefineTricotDataFunction:=clsDefineTricotDataFunction, ucrNewBaseSelector:=ucrSelectorTricotData, bReset:=bResetSubdialog)
         sdgTransformations.ShowDialog()
+
+        Dim dctColumnOptions As New Dictionary(Of String, RFunction) From {
+            {"id_cols", clsIDColsFunction},
+            {"variety_cols", clsVarietyColsFunction},
+            {"trait_cols", clsTraitColsFunction}}
+        For Each kvpOption As KeyValuePair(Of String, RFunction) In dctColumnOptions
+            For Each clsTarget As RFunction In {clsOutputDataLevel, clsOutputDataLevelForCheck}
+                If kvpOption.Value.clsParameters.Count > 0 Then
+                    clsTarget.AddParameter(kvpOption.Key, clsRFunctionParameter:=kvpOption.Value)
+                Else
+                    clsTarget.RemoveParameterByName(kvpOption.Key)
+                End If
+            Next
+        Next
+
+        If clsCreateTricotData.ContainsParameter("na_candidates") AndAlso clsCreateTricotData.GetParameter("na_candidates").strArgumentValue = Chr(34) & "Not observed" & Chr(34) Then
+            clsCreateTricotData.RemoveParameterByName("na_candidates")
+        End If
+
         ClearCheckOnSdgClose()
         TestOKEnabled()
         bResetSubdialog = False
@@ -323,7 +341,7 @@ Public Class dlgTransformTricotData
                 Cursor = Cursors.Default
                 If expTemp IsNot Nothing Then
                     strFormNames = expTemp.AsCharacter().ToArray()
-                    ucrInputTricotData.SetName(String.Join(", ", strFormNames))
+                    ucrInputTricotData.SetName(String.Join(", ", strFormNames).Replace(vbLf, "; "))
                 End If
                 ucrInputTricotData.txtInput.BackColor = Color.LightGreen
         End Select
@@ -409,6 +427,8 @@ Public Class dlgTransformTricotData
 
     Private Sub ucrReceiverTricotData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTricotData.ControlValueChanged
         clsOutputDataLevelForCheck.AddParameter("data_list", ucrReceiverTricotData.GetVariableNames())
+        ClearCheckOnSdgClose()
+        bResetSubdialog = True
     End Sub
 
     Private Sub ucrReceiverTricotData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTricotData.ControlContentsChanged

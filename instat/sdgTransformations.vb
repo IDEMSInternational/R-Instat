@@ -229,6 +229,13 @@ Public Class sdgTransformations
 
         SetVisibility()
 
+        If TypeOf ucrBaseSelector Is ucrSelectorByDataFrameAddRemove Then
+            Dim currentData = DirectCast(ucrBaseSelector, ucrSelectorByDataFrameAddRemove).ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
+            For Each sel In {ucrSelectorTricotIDLevel, ucrSelectorTricotVarietyLevel, ucrSelectorIDVarietyLevel, ucrSelectorIDVarTraitLevel}
+                sel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = currentData
+            Next
+        End If
+
         If bReset Then
             ucrReceiverVarietyVariables.Clear()
             ucrReceiverTraitVariables.Clear()
