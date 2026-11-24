@@ -89,6 +89,7 @@ Public Class dlgBarAndPieChart
     Private clsVennInOperator As New ROperator
     Private clsVennLevelsVectorFunction As New RFunction
     Private clsVennLevelsFunc As New RFunction
+    Private clsVennFillColorFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
     'Private clsFacetVariablesOperator As New ROperator
@@ -118,6 +119,7 @@ Public Class dlgBarAndPieChart
     Private ReadOnly strColNamesParam As String = "col_names"
     Private ReadOnly strDataNameParam As String = "data_name"
     Private ReadOnly arrVennTrueLevels As String() = {"Yes", "TRUE", "1"}
+    Private ReadOnly arrVennFillColors As String() = {"#E66101", "#2C7FB8", "#5E3C99"}
 
     Private bNotSubdialogue As Boolean = False
     Private bUpdateComboOptions As Boolean = True
@@ -269,7 +271,6 @@ Public Class dlgBarAndPieChart
         ucrChkVennPercentages.SetText("Percentages")
         ucrChkVennPercentages.SetParameter(New RParameter("show_percentage", 2))
         ucrChkVennPercentages.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkVennPercentages.SetRDefault("TRUE")
 
         ucrChkVennShowOutside.SetText("Show Outside")
         ucrChkVennShowOutside.SetParameter(New RParameter(strShowOutsideChecked, 1))
@@ -285,14 +286,13 @@ Public Class dlgBarAndPieChart
         ucrChkVennDecimals.SetText("Decimals")
         ucrChkVennDecimals.SetParameter(New RParameter(strDigitsChecked, 2))
         ucrChkVennDecimals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkVennDecimals.AddToLinkedControls({ucrNudVennDecimals}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+        ucrChkVennDecimals.AddToLinkedControls({ucrNudVennDecimals}, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
 
         ucrNudVennDecimals.SetParameter(New RParameter("digits", 3))
         ucrNudVennDecimals.DecimalPlaces = 0
         ucrNudVennDecimals.Increment = 1
         ucrNudVennDecimals.Minimum = 0
         ucrNudVennDecimals.Maximum = 2
-        ucrNudVennDecimals.SetRDefault(0)
 
         ucrChkVennFactorLevel.SetText("Factor Level")
         ucrChkVennFactorLevel.SetParameter(New RParameter(strFactorLevelChecked, 3))
@@ -532,6 +532,7 @@ Public Class dlgBarAndPieChart
         clsVennInOperator = New ROperator
         clsVennLevelsVectorFunction = New RFunction
         clsVennLevelsFunc = New RFunction
+        clsVennFillColorFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrInputStation.SetName(strFacetWrap)
@@ -737,6 +738,11 @@ Public Class dlgBarAndPieChart
         clsVennAsDataFrameFunction.SetRCommand("as.data.frame")
         clsVennAsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsVennLapplyFunction, bIncludeArgumentName:=False, iPosition:=0)
 
+        clsVennFillColorFunction.SetRCommand("c")
+        For i As Integer = 0 To arrVennFillColors.Length - 1
+            clsVennFillColorFunction.AddParameter(i.ToString(), Chr(34) & arrVennFillColors(i) & Chr(34), bIncludeArgumentName:=False, iPosition:=i)
+        Next
+
         clsGgvennFunction.SetPackageName(strGgvenn)
         clsGgvennFunction.SetRCommand(strGgvenn)
         clsGgvennFunction.AddParameter("data", clsRFunctionParameter:=clsVennAsDataFrameFunction, iPosition:=0)
@@ -744,6 +750,7 @@ Public Class dlgBarAndPieChart
         clsGgvennFunction.AddParameter("show_percentage", "TRUE", iPosition:=2)
         clsGgvennFunction.AddParameter("digits", "0", iPosition:=3)
         clsGgvennFunction.AddParameter("show_set_totals", Chr(34) & "c" & Chr(34), iPosition:=4)
+        clsGgvennFunction.AddParameter("fill_color", clsRFunctionParameter:=clsVennFillColorFunction, iPosition:=6)
         clsGgvennFunction.AddParameter("stroke_size", "0.8", iPosition:=7)
         clsGgvennFunction.AddParameter("set_name_size", "5", iPosition:=8)
         clsGgvennFunction.AddParameter("text_size", "4", iPosition:=9)
