@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgBarAndPieChart
     Private bResetLineLayerSubdialog As Boolean = True
@@ -79,6 +80,15 @@ Public Class dlgBarAndPieChart
     Private clsThemeFunction As New RFunction
     Private clsPointsFunction As New RFunction
     Private clsGeomLollipopAesFunction As New RFunction
+    Private clsGgvennFunction As New RFunction
+    Private clsVennAsDataFrameFunction As New RFunction
+    Private clsVennLapplyFunction As New RFunction
+    Private clsVennGetColumnsFunction As New RFunction
+    Private clsVennAnonymousFunction As New RFunction
+    Private clsVennAsCharacterFunction As New RFunction
+    Private clsVennInOperator As New ROperator
+    Private clsVennLevelsVectorFunction As New RFunction
+    Private clsVennLevelsFunc As New RFunction
 
     Private clsFacetFunction As New RFunction
     'Private clsFacetVariablesOperator As New ROperator
@@ -98,6 +108,16 @@ Public Class dlgBarAndPieChart
     Private ReadOnly strFacetColAll As String = "Facet Col + O"
     Private ReadOnly strFacetRowAndCol As String = "Facet Row & Col"
     Private ReadOnly strFacetRowAndColAll As String = "Facet Row & Col + O"
+
+    Private ReadOnly strGgvenn As String = "ggvenn"
+    Private ReadOnly strShowOutsideChecked As String = "show_outside_checked"
+    Private ReadOnly strDigitsChecked As String = "digits_checked"
+    Private ReadOnly strFactorLevelChecked As String = "factor_level_checked"
+    Private ReadOnly strVennPlot As String = "venn_plot"
+    Private ReadOnly strBarPlot As String = "bar_plot"
+    Private ReadOnly strColNamesParam As String = "col_names"
+    Private ReadOnly strDataNameParam As String = "data_name"
+    Private ReadOnly arrVennTrueLevels As String() = {"Yes", "TRUE", "1"}
 
     Private bNotSubdialogue As Boolean = False
     Private bUpdateComboOptions As Boolean = True
@@ -137,26 +157,33 @@ Public Class dlgBarAndPieChart
         Dim dctStart As New Dictionary(Of String, String)
         Dim dctPlace As New Dictionary(Of String, String)
         Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctVennShowOutside As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 438
 
         ucrPnlOptions.AddRadioButton(rdoFrequency)
+        ucrPnlOptions.AddRadioButton(rdoPercent)
         ucrPnlOptions.AddRadioButton(rdoValue)
         ucrPnlOptions.AddRadioButton(rdoTreeMap)
         ucrPnlOptions.AddRadioButton(rdoWordCloud)
+        ucrPnlOptions.AddRadioButton(rdoVennDiagram)
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, {"coordpolar", "geom_bar", "geom_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoValue, {"coordpolar", "geom_bar", "geom_text", "geom_lollipop"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoVennDiagram, {strGgvenn})
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrChkReorderValue, ucrInputAddReorder, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkReorderFrequency, ucrChkBinWidth, ucrInputAddReorder}, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize, ucrChkIncreaseSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverVenn, ucrChkVennCounts, ucrChkVennPercentages, ucrChkVennShowOutside, ucrChkVennDecimals, ucrChkVennFactorLevel}, {rdoVennDiagram}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucr1stFactorReceiver, ucrInputStation, ucrChkLegend}, {rdoFrequency, rdoValue, rdoTreeMap, rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrReceiverX.SetLinkedDisplayControl(lblXvariable)
         ucrInputBarChartPositions.SetLinkedDisplayControl(lblPosition)
@@ -166,6 +193,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudSize.SetLinkedDisplayControl(lblWordcloudSize)
         ucrReceiverWordcloudColor.SetLinkedDisplayControl(lblWordcloudColor)
         ucrReceiverWordcloudAngle.SetLinkedDisplayControl(lblWordcloudAngle)
+        ucrReceiverVenn.SetLinkedDisplayControl(lblVennColumns)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrBarChartSelector.SetParameterIsrfunction()
@@ -227,11 +255,58 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudAngle.bWithQuotes = False
         ucrReceiverWordcloudAngle.Selector = ucrBarChartSelector
 
+        ucrReceiverVenn.SetParameter(New RParameter(strColNamesParam, 1))
+        ucrReceiverVenn.Selector = ucrBarChartSelector
+        ucrReceiverVenn.SetIncludedDataTypes({"factor", "logical"})
+        ucrReceiverVenn.strSelectorHeading = "Factors and Logicals"
+        ucrReceiverVenn.SetParameterIsString()
+
+        ucrChkVennCounts.SetText("Counts")
+        ucrChkVennCounts.SetParameter(New RParameter("show_counts", 1))
+        ucrChkVennCounts.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVennCounts.SetRDefault("TRUE")
+
+        ucrChkVennPercentages.SetText("Percentages")
+        ucrChkVennPercentages.SetParameter(New RParameter("show_percentage", 2))
+        ucrChkVennPercentages.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVennPercentages.SetRDefault("TRUE")
+
+        ucrChkVennShowOutside.SetText("Show Outside")
+        ucrChkVennShowOutside.SetParameter(New RParameter(strShowOutsideChecked, 1))
+        ucrChkVennShowOutside.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVennShowOutside.AddToLinkedControls({ucrInputVennShowOutside}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+
+        ucrInputVennShowOutside.SetParameter(New RParameter("show_outside", 5))
+        dctVennShowOutside.Add("None", Chr(34) & "none" & Chr(34))
+        dctVennShowOutside.Add("Always", Chr(34) & "always" & Chr(34))
+        ucrInputVennShowOutside.SetItems(dctVennShowOutside)
+        ucrInputVennShowOutside.SetDropDownStyleAsNonEditable()
+
+        ucrChkVennDecimals.SetText("Decimals")
+        ucrChkVennDecimals.SetParameter(New RParameter(strDigitsChecked, 2))
+        ucrChkVennDecimals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVennDecimals.AddToLinkedControls({ucrNudVennDecimals}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+
+        ucrNudVennDecimals.SetParameter(New RParameter("digits", 3))
+        ucrNudVennDecimals.DecimalPlaces = 0
+        ucrNudVennDecimals.Increment = 1
+        ucrNudVennDecimals.Minimum = 0
+        ucrNudVennDecimals.Maximum = 2
+        ucrNudVennDecimals.SetRDefault(0)
+
+        ucrChkVennFactorLevel.SetText("Factor Level")
+        ucrChkVennFactorLevel.SetParameter(New RParameter(strFactorLevelChecked, 3))
+        ucrChkVennFactorLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVennFactorLevel.AddToLinkedControls({ucrInputVennFactorLevel}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputVennFactorLevel.bAllowNonConditionValues = True
+        ucrInputVennFactorLevel.SetDropDownStyleAsNonEditable()
+
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Store Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrSaveBar.SetSaveTypeAsGraph()
-        ucrSaveBar.SetPrefix("bar_plot")
+        ucrSaveBar.SetPrefix(strBarPlot)
         ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
@@ -448,7 +523,17 @@ Public Class dlgBarAndPieChart
         clsColVarsFunction = New RFunction
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+        clsGgvennFunction = New RFunction
+        clsVennAsDataFrameFunction = New RFunction
+        clsVennLapplyFunction = New RFunction
+        clsVennGetColumnsFunction = New RFunction
+        clsVennAnonymousFunction = New RFunction
+        clsVennAsCharacterFunction = New RFunction
+        clsVennInOperator = New ROperator
+        clsVennLevelsVectorFunction = New RFunction
+        clsVennLevelsFunc = New RFunction
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
 
@@ -471,6 +556,9 @@ Public Class dlgBarAndPieChart
         rdoFrequency.Checked = True
 
         clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
+        clsDummyFunction.AddParameter(strShowOutsideChecked, "FALSE", iPosition:=1)
+        clsDummyFunction.AddParameter(strDigitsChecked, "FALSE", iPosition:=2)
+        clsDummyFunction.AddParameter(strFactorLevelChecked, "FALSE", iPosition:=3)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -623,6 +711,43 @@ Public Class dlgBarAndPieChart
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
 
+        clsVennGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsVennGetColumnsFunction.AddParameter("force_as_data_frame", "TRUE", iPosition:=2)
+
+        clsVennAsCharacterFunction.SetRCommand("as.character")
+        clsVennAsCharacterFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
+
+        clsVennLevelsVectorFunction.SetRCommand("c")
+        SetVennLevels()
+
+        clsVennLevelsFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
+
+        clsVennInOperator.SetOperation("%in%")
+        clsVennInOperator.AddParameter("left", clsRFunctionParameter:=clsVennAsCharacterFunction, iPosition:=0)
+        clsVennInOperator.AddParameter("right", clsRFunctionParameter:=clsVennLevelsVectorFunction, iPosition:=1)
+        clsVennInOperator.bBrackets = False
+
+        clsVennAnonymousFunction.SetRCommand("function(x)")
+        clsVennAnonymousFunction.AddParameter("body", clsROperatorParameter:=clsVennInOperator, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsVennLapplyFunction.SetRCommand("lapply")
+        clsVennLapplyFunction.AddParameter("FUN", clsRFunctionParameter:=clsVennAnonymousFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsVennLapplyFunction.AddParameter("X", clsRFunctionParameter:=clsVennGetColumnsFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsVennAsDataFrameFunction.SetRCommand("as.data.frame")
+        clsVennAsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsVennLapplyFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsGgvennFunction.SetPackageName(strGgvenn)
+        clsGgvennFunction.SetRCommand(strGgvenn)
+        clsGgvennFunction.AddParameter("data", clsRFunctionParameter:=clsVennAsDataFrameFunction, iPosition:=0)
+        clsGgvennFunction.AddParameter("show_counts", "TRUE", iPosition:=1)
+        clsGgvennFunction.AddParameter("show_percentage", "TRUE", iPosition:=2)
+        clsGgvennFunction.AddParameter("digits", "0", iPosition:=3)
+        clsGgvennFunction.AddParameter("show_set_totals", Chr(34) & "c" & Chr(34), iPosition:=4)
+        clsGgvennFunction.AddParameter("stroke_size", "0.8", iPosition:=7)
+        clsGgvennFunction.AddParameter("set_name_size", "5", iPosition:=8)
+        clsGgvennFunction.AddParameter("text_size", "4", iPosition:=9)
+
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -689,42 +814,39 @@ Public Class dlgBarAndPieChart
         ucrInputWidth.SetRCode(clsRgeomBarFunction, bReset)
         ucr1stFactorReceiver.SetRCode(clsRowVarsFunction, bReset)
 
+        ucrReceiverVenn.SetRCode(clsVennGetColumnsFunction, bReset)
+        ucrChkVennCounts.SetRCode(clsGgvennFunction, bReset)
+        ucrChkVennPercentages.SetRCode(clsGgvennFunction, bReset)
+        ucrInputVennShowOutside.SetRCode(clsGgvennFunction, bReset)
+        ucrNudVennDecimals.SetRCode(clsGgvennFunction, bReset)
+
         If bReset Then
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
             ucrChkBinWidth.SetRCode(clsRgeomBarFunction, bReset)
+            ucrChkVennShowOutside.SetRCode(clsDummyFunction, bReset)
+            ucrChkVennDecimals.SetRCode(clsDummyFunction, bReset)
+            ucrChkVennFactorLevel.SetRCode(clsDummyFunction, bReset)
         End If
         HideShowWidth()
         AddRemoveCountLabel()
     End Sub
 
     Private Sub TestOkEnabled()
+        Dim bEnableOk As Boolean = False
         If rdoFrequency.Checked Then
-            If ucrSaveBar.IsComplete AndAlso (Not ucrVariablesAsFactorForBarChart.IsEmpty OrElse Not ucrReceiverByFactor.IsEmpty) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            bEnableOk = Not ucrVariablesAsFactorForBarChart.IsEmpty OrElse Not ucrReceiverByFactor.IsEmpty
         ElseIf rdoValue.Checked Then
-            If ucrSaveBar.IsComplete AndAlso (Not ucrVariablesAsFactorForBarChart.IsEmpty OrElse Not ucrReceiverX.IsEmpty OrElse Not ucrReceiverByFactor.IsEmpty) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            bEnableOk = Not ucrVariablesAsFactorForBarChart.IsEmpty OrElse Not ucrReceiverX.IsEmpty OrElse Not ucrReceiverByFactor.IsEmpty
         ElseIf rdoTreeMap.Checked Then
-            If ucrSaveBar.IsComplete AndAlso (Not ucrReceiverArea.IsEmpty AndAlso Not ucrReceiverFill.IsEmpty) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            bEnableOk = Not ucrReceiverArea.IsEmpty AndAlso Not ucrReceiverFill.IsEmpty
         ElseIf rdoWordCloud.Checked Then
-            If ucrSaveBar.IsComplete AndAlso (Not ucrReceiverWordcloudLabel.IsEmpty AndAlso Not ucrReceiverWordcloudSize.IsEmpty) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            bEnableOk = Not ucrReceiverWordcloudLabel.IsEmpty AndAlso Not ucrReceiverWordcloudSize.IsEmpty
+        ElseIf rdoVennDiagram.Checked Then
+            bEnableOk = ucrReceiverVenn.Count() >= 2
         End If
+        ucrBase.OKEnabled(ucrSaveBar.IsComplete AndAlso bEnableOk)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -763,16 +885,7 @@ Public Class dlgBarAndPieChart
                     Else
                         'ucrReceiverX.Add(clsParam.strArgumentValue)
                     End If
-                    'In the y case, the value stored in the clsReasFunction in the multiple variables 
-                    '  case is "value", however that one shouldn't be written in the multiple 
-                    '  variables receiver (otherwise it would stack all variables and the stack 
-                    '  ("value") itself!).
-                    'Warning: what if someone used the name value for one of it's variables 
-                    '  independently from the multiple variables method? Here if the receiver is 
-                    '  actually in single mode, the variable "value" will still be given back, which 
-                    '  throws the problem back to the creation of "value" in the multiple receiver case.
                 ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBarChart.bSingleVariable) Then
-                    'Still might be in the case of bSingleVariable with mapping y="".
                     If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                         ucrVariablesAsFactorForBarChart.Clear()
                     Else
@@ -783,7 +896,7 @@ Public Class dlgBarAndPieChart
                 End If
             Next
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBoxTranslate(ex.Message)
         End Try
         SetGeomTextOptions()
         TestOkEnabled()
@@ -863,26 +976,40 @@ Public Class dlgBarAndPieChart
         toolStripMenuItemBarchartOptions.Enabled = rdoFrequency.Checked OrElse rdoValue.Checked
         toolStripMenuItemTextOptions.Enabled = ucrChkAddLabelsText.Checked AndAlso (rdoValue.Checked OrElse rdoFrequency.Checked)
         toolStripMenuItemTreemapTextOptionsOptions.Enabled = ucrChkAddLabelsTreemap.Checked AndAlso rdoTreeMap.Checked
-        toolStripMenuItemWordcloudOptions.Enabled = rdoWordCloud.Checked AndAlso rdoWordCloud.Checked
+        toolStripMenuItemWordcloudOptions.Enabled = rdoWordCloud.Checked
         toolStripMenuItemTreemapOptions.Enabled = rdoTreeMap.Checked
         toolStripMenuItemLollipopOptions.Enabled = ucrChkLollipop.Checked AndAlso rdoValue.Checked
     End Sub
 
     Private Sub SetDialogOptions()
+        If Not rdoVennDiagram.Checked Then
+            clsBaseOperator.RemoveParameterByName(strGgvenn)
+            If Not clsBaseOperator.ContainsParameter(GgplotDefaults.clsDefaultThemeParameter.strArgumentName) Then
+                clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+            End If
+        End If
         If rdoValue.Checked Or rdoFrequency.Checked Then
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
-                ucrSaveBar.SetPrefix("bar_plot")
+                ucrSaveBar.SetPrefix(strBarPlot)
             End If
             ucrVariablesAsFactorForBarChart.RemoveIncludedMetadataProperty("class")
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
             ucrInputBarChartPositions.Visible = Not ucrReceiverByFactor.IsEmpty()
         ElseIf rdoTreeMap.Checked Then
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
-        Else
+        ElseIf rdoWordCloud.Checked Then
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextWordcloudAesFunction, iPosition:=1)
+        ElseIf rdoVennDiagram.Checked Then
+            clsBaseOperator.RemoveParameterByName(GgplotDefaults.clsDefaultThemeParameter.strArgumentName)
+            If Not ucrSaveBar.bUserTyped Then
+                ucrSaveBar.SetPrefix(strVennPlot)
+            End If
         End If
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
     End Sub
@@ -894,6 +1021,71 @@ Public Class dlgBarAndPieChart
             ucrChkReorderValue.Visible = ucrVariablesAsFactorForBarChart.bSingleVariable
             ucrInputAddReorder.Visible = ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso Not ucrReceiverByFactor.IsEmpty()
         End If
+    End Sub
+
+    Private Sub SetVennLevels(Optional strLevel As String = "")
+        Dim arrLevels As String() = If(String.IsNullOrEmpty(strLevel), arrVennTrueLevels, {strLevel})
+        clsVennLevelsVectorFunction.ClearParameters()
+        For i As Integer = 0 To arrLevels.Length - 1
+            clsVennLevelsVectorFunction.AddParameter(i.ToString(), Chr(34) & arrLevels(i) & Chr(34), bIncludeArgumentName:=False, iPosition:=i)
+        Next
+    End Sub
+
+    Private Sub UpdateVennDataName()
+        Dim strDataName As String = ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        If Not String.IsNullOrEmpty(strDataName) Then
+            clsVennGetColumnsFunction.AddParameter(strDataNameParam, Chr(34) & strDataName & Chr(34), iPosition:=0)
+            clsVennGetColumnsFunction.SetAssignTo(strDataName)
+        Else
+            clsVennGetColumnsFunction.RemoveParameterByName(strDataNameParam)
+            clsVennGetColumnsFunction.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub UpdateVennParameters()
+        UpdateVennDataName()
+        If ucrChkVennFactorLevel.Checked AndAlso Not String.IsNullOrEmpty(ucrInputVennFactorLevel.GetText()) Then
+            SetVennLevels(ucrInputVennFactorLevel.GetText())
+        Else
+            SetVennLevels()
+        End If
+    End Sub
+
+    Private Function GetVennFactorLevels(strDataName As String, strColumn As String) As String()
+        If frmMain.clsRLink.GetDataType(strDataName, strColumn) = "logical" Then
+            Return {"FALSE", "TRUE"}
+        End If
+        clsVennLevelsFunc.ClearParameters()
+        clsVennLevelsFunc.AddParameter(strDataNameParam, Chr(34) & strDataName & Chr(34), iPosition:=0)
+        clsVennLevelsFunc.AddParameter("col_name", Chr(34) & strColumn & Chr(34), iPosition:=1)
+        Dim expLevels As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsVennLevelsFunc.ToScript(), bSilent:=True)
+        If expLevels Is Nothing OrElse expLevels.Type = Internals.SymbolicExpressionType.Null Then
+            Return New String() {}
+        End If
+        Return expLevels.AsCharacter().ToArray()
+    End Function
+
+    Private Sub PopulateVennFactorLevels()
+        Dim strDataName As String = ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        ucrInputVennFactorLevel.cboInput.Items.Clear()
+        If ucrReceiverVenn.Count() > 0 AndAlso Not String.IsNullOrEmpty(strDataName) Then
+            Dim strFirstVar As String = ucrReceiverVenn.GetVariableNamesAsList()(0)
+            Dim arrLevels As String() = GetVennFactorLevels(strDataName, strFirstVar)
+            If arrLevels.Length > 0 Then
+                ucrInputVennFactorLevel.SetItems(arrLevels)
+                ucrInputVennFactorLevel.SetName(arrLevels(arrLevels.Length - 1))
+            End If
+        End If
+    End Sub
+
+    Private Sub RemoveNonVennLayers()
+        For Each strLayer As String In {"ggplot", "geom_bar", "geom_lollipop", "geom_text", "geom_treemap", "geom_treemap_text", "geom_text_wordcloud", "scale_size_area", "facets", "theme"}
+            clsBaseOperator.RemoveParameterByName(strLayer)
+        Next
+    End Sub
+
+    Private Sub ucrReceiverVenn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVenn.ControlValueChanged
+        PopulateVennFactorLevels()
     End Sub
 
     Private Sub UpdateParameter()
@@ -984,7 +1176,6 @@ Public Class dlgBarAndPieChart
 
             clsReorderFunction.AddParameter("x", strXVariable, iPosition:=0)
             clsReorderFunctionValue.AddParameter("x", strXVariable, iPosition:=0)
-            ' Reorder needs an X variable; skip when X is empty (e.g. Value + multiple with no X)
             If bCanReorderX Then
                 Select Case strChangeTextReorder
                     Case strAscending
@@ -1066,6 +1257,8 @@ Public Class dlgBarAndPieChart
                         clsGeomLollipopAesFunction.AddParameter("colour", strByFactor, iPosition:=1)
                 End Select
             End If
+        ElseIf rdoVennDiagram.Checked Then
+            UpdateVennParameters()
         End If
     End Sub
 
@@ -1106,6 +1299,7 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
+            clsBaseOperator.RemoveParameterByName(strGgvenn)
             If ucrReceiverX.IsEmpty Then
                 clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
@@ -1153,16 +1347,22 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
+            clsBaseOperator.RemoveParameterByName(strGgvenn)
+            If Not clsBaseOperator.ContainsParameter(GgplotDefaults.clsDefaultThemeParameter.strArgumentName) Then
+                clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+            End If
         ElseIf rdoTreeMap.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.RemoveParameterByName("geom_text")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
+            clsBaseOperator.RemoveParameterByName(strGgvenn)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
             clsBaseOperator.AddParameter("geom_treemap", clsRFunctionParameter:=clsGeomTreemapFunction, iPosition:=2)
         ElseIf rdoWordCloud.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
             clsBaseOperator.RemoveParameterByName("geom_bar")
+            clsBaseOperator.RemoveParameterByName(strGgvenn)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextWordcloudAesFunction, iPosition:=1)
             clsBaseOperator.AddParameter("geom_text_wordcloud", clsRFunctionParameter:=clsGeomTextWordcloudFunction, iPosition:=2)
             If ucrChkIncreaseSize.Checked Then
@@ -1170,6 +1370,9 @@ Public Class dlgBarAndPieChart
             Else
                 clsBaseOperator.RemoveParameterByName("scale_size_area")
             End If
+        ElseIf rdoVennDiagram.Checked Then
+            RemoveNonVennLayers()
+            clsBaseOperator.AddParameter(strGgvenn, clsRFunctionParameter:=clsGgvennFunction, iPosition:=0)
         End If
         UpdateParameter()
     End Sub
@@ -1334,8 +1537,6 @@ Public Class dlgBarAndPieChart
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
-                '' Feb 07 2026
-                ''This should be figured out, when we have mutate in the clsPipeOperator for the all Cases
                 Select Case ucrInputStation.GetText()
                     Case strFacetWrap
                         'GetParameterValue(clsFacetVariablesOperator)
@@ -1364,13 +1565,18 @@ Public Class dlgBarAndPieChart
     Private Sub ucrBarChartSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrBarChartSelector.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
+        If rdoVennDiagram.Checked Then
+            PopulateVennFactorLevels()
+            UpdateVennParameters()
+        End If
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged,
         ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged,
         ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
-        ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
+        ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrChkVennFactorLevel.ControlValueChanged,
+        ucrInputVennFactorLevel.ControlValueChanged, ucrReceiverVenn.ControlValueChanged
         ShowHideControl()
         SetDialogOptions()
         EnableDisablesOptions()
@@ -1382,6 +1588,8 @@ Public Class dlgBarAndPieChart
             ucrReceiverArea.SetMeAsReceiver()
         ElseIf rdoWordCloud.Checked Then
             ucrReceiverWordcloudLabel.SetMeAsReceiver()
+        ElseIf rdoVennDiagram.Checked Then
+            ucrReceiverVenn.SetMeAsReceiver()
         End If
     End Sub
 
@@ -1390,7 +1598,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrReceiverX_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-        If Not ucrReceiverX.Visible Then
+        If Not ucrReceiverX.Visible AndAlso (rdoFrequency.Checked OrElse rdoValue.Checked) Then
             ucrVariablesAsFactorForBarChart.SetMeAsReceiver()
         End If
     End Sub
@@ -1485,11 +1693,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub AddRemoveCountLabel()
-        ' Remove existing parameters before adding new ones
         clsGeomTextFunction.RemoveParameterByName("stat")
         clsTextAesFunction.RemoveParameterByName("label")
 
-        ' Add label and stat parameters if checkbox is checked and label isn't already set
         If ucrChkAddLabelsText.Checked AndAlso Not clsTextAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "label") >= 0 Then
             If rdoFrequency.Checked Then
                 clsTextAesFunction.AddParameter("label", "..count..", iPosition:=0)
@@ -1510,7 +1716,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged,
         ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged,
         ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged,
-        ucrChkIncreaseSize.ControlContentsChanged
+        ucrChkIncreaseSize.ControlContentsChanged, ucrReceiverVenn.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
