@@ -41,7 +41,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ttFactorLevels = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverMultiple()
-        Me.ucrChkFactorsOrder = New instat.ucrCheck()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
@@ -235,16 +234,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverInitialColumnFactor.TabIndex = 68
         Me.ucrReceiverInitialColumnFactor.ucrSelector = Nothing
         '
-        'ucrChkFactorsOrder
-        '
-        Me.ucrChkFactorsOrder.AutoSize = True
-        Me.ucrChkFactorsOrder.Checked = False
-        Me.ucrChkFactorsOrder.Location = New System.Drawing.Point(12, 338)
-        Me.ucrChkFactorsOrder.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkFactorsOrder.Name = "ucrChkFactorsOrder"
-        Me.ucrChkFactorsOrder.Size = New System.Drawing.Size(135, 23)
-        Me.ucrChkFactorsOrder.TabIndex = 69
-        '
         'rdoDataFrame
         '
         Me.rdoDataFrame.Appearance = System.Windows.Forms.Appearance.Button
@@ -409,7 +398,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.ucrChkFactorsOrder)
         Me.Controls.Add(Me.ucrReceiverInitialColumnFactor)
         Me.Controls.Add(Me.ucrInputSummary)
         Me.Controls.Add(Me.lblSummary)
@@ -458,7 +446,6 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents ucrChkNumericVariable As ucrCheck
     Friend WithEvents ttFactorLevels As ToolTip
     Friend WithEvents ucrReceiverInitialColumnFactor As ucrReceiverMultiple
-    Friend WithEvents ucrChkFactorsOrder As ucrCheck
     Friend WithEvents rdoDataFrame As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton

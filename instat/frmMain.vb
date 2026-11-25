@@ -927,6 +927,16 @@ Public Class frmMain
         If strSaveFilePath = "" Then
             dlgSaveAs.ShowDialog()
         Else
+            If IsColumnSelectionApplied() Then
+                'always remove any active column selection (on any data frame) before saving
+                clsRLink.RunScript("for (i in " & clsRLink.strInstatDataObject & "$get_data_names()) try(" &
+                           clsRLink.strInstatDataObject & "$remove_current_column_selection(data_name = i), silent = TRUE)",
+                           strComment:="File > Save: Remove current column selection before saving",
+                           iCallType:=2)
+                UseColumnSelectionInDataView(False)
+                UseColumnSelectionInMetaData(False)
+                UpdateAllGrids()
+            End If
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & Replace(strSaveFilePath, "\", "/") & Chr(34))
@@ -3300,5 +3310,9 @@ Public Class frmMain
 
     Private Sub CheckSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSummaryToolStripMenuItem.Click
         dlgCheckSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuAnovaModel_Click(sender As Object, e As EventArgs) Handles mnuAnovaModel.Click
+        dlgAnovaModel.ShowDialog()
     End Sub
 End Class

@@ -27,7 +27,7 @@ Public Class dlgSpells
     Private clsCurrCalc, clsLinkedDataFunction, clsVectorConcatFunction, clsDefineAsClimatic, clsVectorConcat2Function As New RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
-    Private clsGetLinkedDataNameFunction, clsGetLongestSpellDefFunction, clsLinkedColsVectorFunction As New RFunction
+    Private clsGetLinkedDataNameFunction, clsGetLongestSpellDefFunction, clsLinkedColsVectorFunction, clsParamListFunction As New RFunction
 
     Private strCurrDataName As String = ""
     Private strSpellDay As String = "spell_day"
@@ -202,6 +202,7 @@ Public Class dlgSpells
         clsLessThanOperator.Clear()
         clsGetLinkedDataNameFunction.Clear()
         clsLinkedColsVectorFunction.Clear()
+        clsParamListFunction.Clear()
         UpdateDefinitionsOutput()
 
         ucrSelectorForSpells.Reset()
@@ -364,10 +365,13 @@ Public Class dlgSpells
         clsDefineAsClimatic.AddParameter("types", clsRFunctionParameter:=clsVectorConcat2Function, iPosition:=2)
         clsDefineAsClimatic.AddParameter("overwrite", "FALSE", iPosition:=3)
 
+        clsParamListFunction.SetRCommand("list")
+        clsParamListFunction.AddParameter("drop", "TRUE", iPosition:=0)
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
+        clsApplyInstatFunction.AddParameter("param_list", clsRFunctionParameter:=clsParamListFunction, iPosition:=2)
 
         ' Save Definitions
         clsGetLongestSpellDefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_longest_spell_definition")

@@ -161,7 +161,7 @@ Partial Class sdgDescribeTwoVarGraph
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeTwoVarGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Two Variable Graph"
+        Me.Text = "Two/Three Variable Graph Sub-Dialog"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -127,6 +127,18 @@ Public Class dlgLabelsLevels
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        ucrFactorLabels.EndActiveEdit()
+        ucrFactorLabels.FlushPendingEdit()
+        AddNewLabels()
+    End Sub
+
+    Private Sub dlgLabelsLevels_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Not Me.Visible Then
+            ucrFactorLabels.EndActiveEdit()
+        End If
+    End Sub
+
     Private Sub cmdAddLevel_Click(sender As Object, e As EventArgs) Handles cmdAddLevel.Click
         ucrFactorLabels.AddNewRowInGrid()
     End Sub
