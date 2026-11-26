@@ -74,6 +74,8 @@ Partial Class dlgBarAndPieChart
         Me.toolStripMenuItemTreemapTextOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemWordcloudOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.lblVennColumns = New System.Windows.Forms.Label()
+        Me.lblVennFactorLevel = New System.Windows.Forms.Label()
         Me.ucrReceiverVenn = New instat.ucrReceiverMultiple()
         Me.ucrChkVennCounts = New instat.ucrCheck()
         Me.ucrChkVennPercentages = New instat.ucrCheck()
@@ -81,7 +83,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputVennShowOutside = New instat.ucrInputComboBox()
         Me.ucrChkVennDecimals = New instat.ucrCheck()
         Me.ucrNudVennDecimals = New instat.ucrNud()
-        Me.ucrChkVennFactorLevel = New instat.ucrCheck()
         Me.ucrInputVennFactorLevel = New instat.ucrInputComboBox()
         Me.ucrInputWidth = New instat.ucrInputTextBox()
         Me.ucrChkBinWidth = New instat.ucrCheck()
@@ -128,7 +129,10 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkAddLabelsTreemap = New instat.ucrCheck()
         Me.ucrChkBacktoback = New instat.ucrCheck()
         Me.ucrChkIncreaseSize = New instat.ucrCheck()
-        Me.lblVennColumns = New System.Windows.Forms.Label()
+        Me.lblVennPalette = New System.Windows.Forms.Label()
+        Me.lblVennAlpha = New System.Windows.Forms.Label()
+        Me.ucrInputVennPalette = New instat.ucrInputComboBox()
+        Me.ucrNudAlpha = New instat.ucrNud()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -490,6 +494,28 @@ Partial Class dlgBarAndPieChart
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By:"
         '
+        'lblVennColumns
+        '
+        Me.lblVennColumns.AutoSize = True
+        Me.lblVennColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVennColumns.Location = New System.Drawing.Point(256, 72)
+        Me.lblVennColumns.Name = "lblVennColumns"
+        Me.lblVennColumns.Size = New System.Drawing.Size(50, 13)
+        Me.lblVennColumns.TabIndex = 104
+        Me.lblVennColumns.Tag = "Columns:"
+        Me.lblVennColumns.Text = "Columns:"
+        '
+        'lblVennFactorLevel
+        '
+        Me.lblVennFactorLevel.AutoSize = True
+        Me.lblVennFactorLevel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVennFactorLevel.Location = New System.Drawing.Point(260, 236)
+        Me.lblVennFactorLevel.Name = "lblVennFactorLevel"
+        Me.lblVennFactorLevel.Size = New System.Drawing.Size(69, 13)
+        Me.lblVennFactorLevel.TabIndex = 105
+        Me.lblVennFactorLevel.Tag = "Factor Level:"
+        Me.lblVennFactorLevel.Text = "Factor Level:"
+        '
         'ucrReceiverVenn
         '
         Me.ucrReceiverVenn.AutoSize = True
@@ -507,7 +533,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkVennCounts.AutoSize = True
         Me.ucrChkVennCounts.Checked = False
-        Me.ucrChkVennCounts.Location = New System.Drawing.Point(10, 270)
+        Me.ucrChkVennCounts.Location = New System.Drawing.Point(9, 270)
         Me.ucrChkVennCounts.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkVennCounts.Name = "ucrChkVennCounts"
         Me.ucrChkVennCounts.Size = New System.Drawing.Size(100, 23)
@@ -517,7 +543,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkVennPercentages.AutoSize = True
         Me.ucrChkVennPercentages.Checked = False
-        Me.ucrChkVennPercentages.Location = New System.Drawing.Point(10, 293)
+        Me.ucrChkVennPercentages.Location = New System.Drawing.Point(9, 293)
         Me.ucrChkVennPercentages.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkVennPercentages.Name = "ucrChkVennPercentages"
         Me.ucrChkVennPercentages.Size = New System.Drawing.Size(110, 23)
@@ -527,7 +553,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkVennShowOutside.AutoSize = True
         Me.ucrChkVennShowOutside.Checked = False
-        Me.ucrChkVennShowOutside.Location = New System.Drawing.Point(10, 316)
+        Me.ucrChkVennShowOutside.Location = New System.Drawing.Point(9, 316)
         Me.ucrChkVennShowOutside.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkVennShowOutside.Name = "ucrChkVennShowOutside"
         Me.ucrChkVennShowOutside.Size = New System.Drawing.Size(110, 23)
@@ -549,10 +575,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkVennDecimals.AutoSize = True
         Me.ucrChkVennDecimals.Checked = False
-        Me.ucrChkVennDecimals.Location = New System.Drawing.Point(10, 341)
+        Me.ucrChkVennDecimals.Location = New System.Drawing.Point(9, 342)
         Me.ucrChkVennDecimals.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkVennDecimals.Name = "ucrChkVennDecimals"
-        Me.ucrChkVennDecimals.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkVennDecimals.Size = New System.Drawing.Size(110, 23)
         Me.ucrChkVennDecimals.TabIndex = 95
         '
         'ucrNudVennDecimals
@@ -560,7 +586,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudVennDecimals.AutoSize = True
         Me.ucrNudVennDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVennDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVennDecimals.Location = New System.Drawing.Point(125, 342)
+        Me.ucrNudVennDecimals.Location = New System.Drawing.Point(125, 341)
         Me.ucrNudVennDecimals.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudVennDecimals.Maximum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudVennDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -568,16 +594,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudVennDecimals.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudVennDecimals.TabIndex = 100
         Me.ucrNudVennDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkVennFactorLevel
-        '
-        Me.ucrChkVennFactorLevel.AutoSize = True
-        Me.ucrChkVennFactorLevel.Checked = False
-        Me.ucrChkVennFactorLevel.Location = New System.Drawing.Point(258, 226)
-        Me.ucrChkVennFactorLevel.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrChkVennFactorLevel.Name = "ucrChkVennFactorLevel"
-        Me.ucrChkVennFactorLevel.Size = New System.Drawing.Size(119, 23)
-        Me.ucrChkVennFactorLevel.TabIndex = 101
         '
         'ucrInputVennFactorLevel
         '
@@ -1111,16 +1127,52 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(129, 23)
         Me.ucrChkIncreaseSize.TabIndex = 63
         '
-        'lblVennColumns
+        'lblVennPalette
         '
-        Me.lblVennColumns.AutoSize = True
-        Me.lblVennColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVennColumns.Location = New System.Drawing.Point(256, 72)
-        Me.lblVennColumns.Name = "lblVennColumns"
-        Me.lblVennColumns.Size = New System.Drawing.Size(50, 13)
-        Me.lblVennColumns.TabIndex = 104
-        Me.lblVennColumns.Tag = "Columns:"
-        Me.lblVennColumns.Text = "Columns:"
+        Me.lblVennPalette.AutoSize = True
+        Me.lblVennPalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVennPalette.Location = New System.Drawing.Point(9, 397)
+        Me.lblVennPalette.Name = "lblVennPalette"
+        Me.lblVennPalette.Size = New System.Drawing.Size(71, 13)
+        Me.lblVennPalette.TabIndex = 106
+        Me.lblVennPalette.Tag = "Venn Palette:"
+        Me.lblVennPalette.Text = "Venn Palette:"
+        '
+        'lblVennAlpha
+        '
+        Me.lblVennAlpha.AutoSize = True
+        Me.lblVennAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVennAlpha.Location = New System.Drawing.Point(9, 368)
+        Me.lblVennAlpha.Name = "lblVennAlpha"
+        Me.lblVennAlpha.Size = New System.Drawing.Size(37, 13)
+        Me.lblVennAlpha.TabIndex = 107
+        Me.lblVennAlpha.Tag = "Alpha:"
+        Me.lblVennAlpha.Text = "Alpha:"
+        '
+        'ucrInputVennPalette
+        '
+        Me.ucrInputVennPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputVennPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputVennPalette.GetSetSelectedIndex = -1
+        Me.ucrInputVennPalette.IsReadOnly = False
+        Me.ucrInputVennPalette.Location = New System.Drawing.Point(84, 393)
+        Me.ucrInputVennPalette.Name = "ucrInputVennPalette"
+        Me.ucrInputVennPalette.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputVennPalette.TabIndex = 108
+        '
+        'ucrNudAlpha
+        '
+        Me.ucrNudAlpha.AutoSize = True
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(87, 364)
+        Me.ucrNudAlpha.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlpha.TabIndex = 110
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgBarAndPieChart
         '
@@ -1128,6 +1180,11 @@ Partial Class dlgBarAndPieChart
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(467, 596)
+        Me.Controls.Add(Me.ucrNudAlpha)
+        Me.Controls.Add(Me.ucrInputVennPalette)
+        Me.Controls.Add(Me.lblVennAlpha)
+        Me.Controls.Add(Me.lblVennPalette)
+        Me.Controls.Add(Me.lblVennFactorLevel)
         Me.Controls.Add(Me.lblVennColumns)
         Me.Controls.Add(Me.rdoPercent)
         Me.Controls.Add(Me.rdoVennDiagram)
@@ -1138,7 +1195,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrInputVennShowOutside)
         Me.Controls.Add(Me.ucrChkVennDecimals)
         Me.Controls.Add(Me.ucrNudVennDecimals)
-        Me.Controls.Add(Me.ucrChkVennFactorLevel)
         Me.Controls.Add(Me.ucrInputVennFactorLevel)
         Me.Controls.Add(Me.ucrInputWidth)
         Me.Controls.Add(Me.ucrChkBinWidth)
@@ -1308,7 +1364,11 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrInputVennShowOutside As ucrInputComboBox
     Friend WithEvents ucrChkVennDecimals As ucrCheck
     Friend WithEvents ucrNudVennDecimals As ucrNud
-    Friend WithEvents ucrChkVennFactorLevel As ucrCheck
     Friend WithEvents ucrInputVennFactorLevel As ucrInputComboBox
     Friend WithEvents lblVennColumns As Label
+    Friend WithEvents lblVennFactorLevel As Label
+    Friend WithEvents lblVennAlpha As Label
+    Friend WithEvents lblVennPalette As Label
+    Friend WithEvents ucrInputVennPalette As ucrInputComboBox
+    Friend WithEvents ucrNudAlpha As ucrNud
 End Class

@@ -113,17 +113,17 @@ Public Class dlgBarAndPieChart
     Private ReadOnly strGgvenn As String = "ggvenn"
     Private ReadOnly strShowOutsideChecked As String = "show_outside_checked"
     Private ReadOnly strDigitsChecked As String = "digits_checked"
-    Private ReadOnly strFactorLevelChecked As String = "factor_level_checked"
     Private ReadOnly strVennPlot As String = "venn_plot"
     Private ReadOnly strBarPlot As String = "bar_plot"
     Private ReadOnly strColNamesParam As String = "col_names"
     Private ReadOnly strDataNameParam As String = "data_name"
     Private ReadOnly arrVennTrueLevels As String() = {"Yes", "TRUE", "1"}
-    Private ReadOnly arrVennFillColors As String() = {"#E66101", "#2C7FB8", "#5E3C99"}
 
     Private bNotSubdialogue As Boolean = False
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
+    Private bPopulatingVennLevels As Boolean = False
+    Private strVennFactorLevel As String = ""
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -183,7 +183,8 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddToLinkedControls({ucrChkReorderFrequency, ucrChkBinWidth, ucrInputAddReorder}, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize, ucrChkIncreaseSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverVenn, ucrChkVennCounts, ucrChkVennPercentages, ucrChkVennShowOutside, ucrChkVennDecimals, ucrChkVennFactorLevel}, {rdoVennDiagram}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverVenn, ucrChkVennCounts, ucrChkVennPercentages, ucrChkVennShowOutside, ucrChkVennDecimals}, {rdoVennDiagram}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputVennFactorLevel}, {rdoVennDiagram}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucr1stFactorReceiver, ucrInputStation, ucrChkLegend}, {rdoFrequency, rdoValue, rdoTreeMap, rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
@@ -294,13 +295,9 @@ Public Class dlgBarAndPieChart
         ucrNudVennDecimals.Minimum = 0
         ucrNudVennDecimals.Maximum = 2
 
-        ucrChkVennFactorLevel.SetText("Factor Level")
-        ucrChkVennFactorLevel.SetParameter(New RParameter(strFactorLevelChecked, 3))
-        ucrChkVennFactorLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkVennFactorLevel.AddToLinkedControls({ucrInputVennFactorLevel}, {True}, bNewLinkedHideIfParameterMissing:=True)
-
         ucrInputVennFactorLevel.bAllowNonConditionValues = True
         ucrInputVennFactorLevel.SetDropDownStyleAsNonEditable()
+        ucrInputVennFactorLevel.SetLinkedDisplayControl(lblVennFactorLevel)
 
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Store Graph")
@@ -474,10 +471,29 @@ Public Class dlgBarAndPieChart
         ucrChkIncreaseSize.AddToLinkedControls(ucrNudMaxSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
         ucrChkIncreaseSize.AddParameterPresentCondition(True, "max_size")
         ucrChkIncreaseSize.AddParameterPresentCondition(False, "max_size", False)
+
+        Dim dctVennPalettes As New Dictionary(Of String, String)
+        ucrInputVennPalette.SetParameter(New RParameter("name", 1, bNewIncludeArgumentName:=False))
+        For Each strPalette As String In {"Set1", "Set2", "Set3", "Dark2", "Paired", "Accent", "Pastel1", "Pastel2"}
+            dctVennPalettes.Add(strPalette, Chr(34) & strPalette & Chr(34))
+        Next
+        ucrInputVennPalette.SetItems(dctVennPalettes)
+        ucrInputVennPalette.SetDropDownStyleAsNonEditable()
+        ucrInputVennPalette.SetLinkedDisplayControl(lblVennPalette)
+
+        ucrNudAlpha.SetParameter(New RParameter("fill_alpha", 7))
+        ucrNudAlpha.SetMinMax(0, 1)
+        ucrNudAlpha.DecimalPlaces = 2
+        ucrNudAlpha.Increment = 0.05
+        ucrNudAlpha.SetLinkedDisplayControl(lblVennAlpha)
+
+        ucrPnlOptions.AddToLinkedControls({ucrInputVennPalette, ucrNudAlpha}, {rdoVennDiagram}, bNewLinkedHideIfParameterMissing:=True)
+
     End Sub
 
     Private Sub SetDefaults()
         bResetLineLayerSubdialog = True
+        strVennFactorLevel = ""
         clsBaseOperator = New ROperator
         clsIsEqualToOperator1 = New ROperator
         clsIsEqualToOperator2 = New ROperator
@@ -559,7 +575,6 @@ Public Class dlgBarAndPieChart
         clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter(strShowOutsideChecked, "FALSE", iPosition:=1)
         clsDummyFunction.AddParameter(strDigitsChecked, "FALSE", iPosition:=2)
-        clsDummyFunction.AddParameter(strFactorLevelChecked, "FALSE", iPosition:=3)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -738,10 +753,10 @@ Public Class dlgBarAndPieChart
         clsVennAsDataFrameFunction.SetRCommand("as.data.frame")
         clsVennAsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsVennLapplyFunction, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsVennFillColorFunction.SetRCommand("c")
-        For i As Integer = 0 To arrVennFillColors.Length - 1
-            clsVennFillColorFunction.AddParameter(i.ToString(), Chr(34) & arrVennFillColors(i) & Chr(34), bIncludeArgumentName:=False, iPosition:=i)
-        Next
+        clsVennFillColorFunction.SetPackageName("RColorBrewer")
+        clsVennFillColorFunction.SetRCommand("brewer.pal")
+        clsVennFillColorFunction.AddParameter("n", "5", bIncludeArgumentName:=False, iPosition:=0)
+        clsVennFillColorFunction.AddParameter("name", Chr(34) & "Set1" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
 
         clsGgvennFunction.SetPackageName(strGgvenn)
         clsGgvennFunction.SetRCommand(strGgvenn)
@@ -751,9 +766,10 @@ Public Class dlgBarAndPieChart
         clsGgvennFunction.AddParameter("digits", "0", iPosition:=3)
         clsGgvennFunction.AddParameter("show_set_totals", Chr(34) & "c" & Chr(34), iPosition:=4)
         clsGgvennFunction.AddParameter("fill_color", clsRFunctionParameter:=clsVennFillColorFunction, iPosition:=6)
-        clsGgvennFunction.AddParameter("stroke_size", "0.8", iPosition:=7)
-        clsGgvennFunction.AddParameter("set_name_size", "5", iPosition:=8)
-        clsGgvennFunction.AddParameter("text_size", "4", iPosition:=9)
+        clsGgvennFunction.AddParameter("fill_alpha", "0.5", iPosition:=7)
+        clsGgvennFunction.AddParameter("stroke_size", "0.8", iPosition:=8)
+        clsGgvennFunction.AddParameter("set_name_size", "5", iPosition:=9)
+        clsGgvennFunction.AddParameter("text_size", "4", iPosition:=10)
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -826,6 +842,8 @@ Public Class dlgBarAndPieChart
         ucrChkVennPercentages.SetRCode(clsGgvennFunction, bReset)
         ucrInputVennShowOutside.SetRCode(clsGgvennFunction, bReset)
         ucrNudVennDecimals.SetRCode(clsGgvennFunction, bReset)
+        ucrInputVennPalette.SetRCode(clsVennFillColorFunction, bReset)
+        ucrNudAlpha.SetRCode(clsGgvennFunction, bReset)
 
         If bReset Then
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
@@ -834,7 +852,6 @@ Public Class dlgBarAndPieChart
             ucrChkBinWidth.SetRCode(clsRgeomBarFunction, bReset)
             ucrChkVennShowOutside.SetRCode(clsDummyFunction, bReset)
             ucrChkVennDecimals.SetRCode(clsDummyFunction, bReset)
-            ucrChkVennFactorLevel.SetRCode(clsDummyFunction, bReset)
         End If
         HideShowWidth()
         AddRemoveCountLabel()
@@ -1051,11 +1068,7 @@ Public Class dlgBarAndPieChart
 
     Private Sub UpdateVennParameters()
         UpdateVennDataName()
-        If ucrChkVennFactorLevel.Checked AndAlso Not String.IsNullOrEmpty(ucrInputVennFactorLevel.GetText()) Then
-            SetVennLevels(ucrInputVennFactorLevel.GetText())
-        Else
-            SetVennLevels()
-        End If
+        SetVennLevels(ucrInputVennFactorLevel.GetText())
     End Sub
 
     Private Function GetVennFactorLevels(strDataName As String, strColumn As String) As String()
@@ -1074,16 +1087,27 @@ Public Class dlgBarAndPieChart
 
     Private Sub PopulateVennFactorLevels()
         Dim strDataName As String = ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        bPopulatingVennLevels = True
         ucrInputVennFactorLevel.cboInput.Items.Clear()
         If ucrReceiverVenn.Count() > 0 AndAlso Not String.IsNullOrEmpty(strDataName) Then
             Dim strFirstVar As String = ucrReceiverVenn.GetVariableNamesAsList()(0)
             Dim arrLevels As String() = GetVennFactorLevels(strDataName, strFirstVar)
             If arrLevels.Length > 0 Then
                 ucrInputVennFactorLevel.SetItems(arrLevels)
-                ucrInputVennFactorLevel.SetName(arrLevels(arrLevels.Length - 1))
+                ucrInputVennFactorLevel.SetName(GetVennLevelToSelect(arrLevels))
             End If
         End If
+        bPopulatingVennLevels = False
     End Sub
+
+    'Keeps the user's chosen level 
+    Private Function GetVennLevelToSelect(arrLevels As String()) As String
+        If arrLevels.Contains(strVennFactorLevel) Then
+            Return strVennFactorLevel
+        End If
+        Dim strTrueLevel As String = arrLevels.FirstOrDefault(Function(strLevel) arrVennTrueLevels.Contains(strLevel, StringComparer.OrdinalIgnoreCase))
+        Return If(strTrueLevel, arrLevels(arrLevels.Length - 1))
+    End Function
 
     Private Sub RemoveNonVennLayers()
         For Each strLayer As String In {"ggplot", "geom_bar", "geom_lollipop", "geom_text", "geom_treemap", "geom_treemap_text", "geom_text_wordcloud", "scale_size_area", "facets", "theme"}
@@ -1093,6 +1117,22 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrReceiverVenn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVenn.ControlValueChanged
         PopulateVennFactorLevels()
+        If rdoVennDiagram.Checked Then
+            UpdateVennParameters()
+        End If
+    End Sub
+
+    Private Sub ucrInputVennFactorLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputVennFactorLevel.ControlValueChanged
+        If Not bPopulatingVennLevels AndAlso Not String.IsNullOrEmpty(ucrInputVennFactorLevel.GetText()) Then
+            strVennFactorLevel = ucrInputVennFactorLevel.GetText()
+        End If
+    End Sub
+
+    Private Sub ucrChkVennDecimals_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkVennDecimals.ControlValueChanged
+        If Not ucrChkVennDecimals.Checked Then
+            ucrNudVennDecimals.Value = 0
+            clsGgvennFunction.AddParameter("digits", "0", iPosition:=3)
+        End If
     End Sub
 
     Private Sub UpdateParameter()
@@ -1582,7 +1622,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged,
         ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
-        ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrChkVennFactorLevel.ControlValueChanged,
+        ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged,
         ucrInputVennFactorLevel.ControlValueChanged, ucrReceiverVenn.ControlValueChanged
         ShowHideControl()
         SetDialogOptions()
