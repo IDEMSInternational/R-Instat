@@ -575,8 +575,6 @@ Public Class dlgDescribeTwoVariableMoreLikertGraphs
             lblLevelsWarning.Visible = False
             iNumLevels = 0
             lstFirstVarLevels.Clear()
-            UpdateExcludeItems(lstFirstVarLevels)
-            UpdateSideValueItems(lstFirstVarLevels)
             UpdateCutoffBounds()
         Else
             lstFirstVarLevels = GetColumnLevels(strDataFrame, varNames(0))
