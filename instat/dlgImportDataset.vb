@@ -951,19 +951,9 @@ Public Class dlgImportDataset
         clsAsCharacterFunc.SetPackageName("instatExtras")
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
 
-        'If ucrChkDropEmptyCols is checked, add the script in the pipeOperator as the input to the data argument in the "convert_to_character_matrix" function
-        'The pipeOperator feeds the imported data to the "remove_empty" function in the janitor package to remove all the empty rows and columns
-        If ucrChkDropEmptyCols.Checked Then
-
-            Dim clsPipeClone As ROperator = clsPipeOperator.Clone()
-            clsPipeClone.RemoveAssignTo()
-
-            clsPipeClone.AddParameter("y", clsRFunctionParameter:=clsTempImport, iPosition:=0)
-
-            clsAsCharacterFunc.AddParameter("data", clsPipeClone.ToScript())
-        Else
-            clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
-        End If
+        'Drop Empty Rows and Columns is deliberately not applied to the preview (it is slow on wide data).
+        'It is still applied on import through RemoveMissingValues / clsPipeOperator.
+        clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
 
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
         Try
@@ -1111,7 +1101,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
-    ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
+    ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
     ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged,
     ucrChkColumnsExcel.ControlValueChanged, ucrNudColFromExcel.ControlValueChanged, ucrNudColToExcel.ControlValueChanged
         TryGridPreview()
@@ -1142,7 +1132,7 @@ Public Class dlgImportDataset
                 clsImportMultipleTextFiles.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
         End If
-        TryGridPreview()
+        'TryGridPreview()
         TestOkEnabled()
     End Sub
 
@@ -1453,6 +1443,5 @@ Public Class dlgImportDataset
 
     Private Sub ucrChkDropEmptyCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropEmptyCols.ControlValueChanged
         RemoveMissingValues()
-        TryGridPreview()
     End Sub
 End Class
