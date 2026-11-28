@@ -224,7 +224,7 @@ Public Class clsDataFramePage
         Dim clsUndoRFunction As New RFunction
         clsUndoRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$undo_last_action")
         clsUndoRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-        _clsRLink.RunScript(clsUndoRFunction.ToScript)
+        _clsRLink.RunScript(clsUndoRFunction.ToScript, strComment:="Edit menu. Undo Last Action")
 
     End Sub
 

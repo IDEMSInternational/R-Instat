@@ -243,6 +243,10 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Private Sub mnuRowContextUndo_Click(sender As Object, e As EventArgs) Handles mnuRowContextUndo.Click
+        Undo()
+    End Sub
+
     Public Sub CopyRange()
         Try
             _grid.CopyRange()
@@ -256,9 +260,10 @@ Public Class ucrDataView
     End Sub
 
     Private Sub EnableDisableUndoMenu()
-        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
-            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory
-        End If
+        Dim clsCurrentDataFrame As clsDataFrame = GetCurrentDataFrameFocus()
+        Dim bUndoEnabled As Boolean = clsCurrentDataFrame IsNot Nothing AndAlso clsCurrentDataFrame.clsVisibleDataFramePage.HasUndoHistory
+        frmMain.mnuUndo.Enabled = bUndoEnabled
+        mnuRowContextUndo.Enabled = bUndoEnabled
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
@@ -864,6 +869,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
+        EnableDisableUndoMenu()
         mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
         mnuRowContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub

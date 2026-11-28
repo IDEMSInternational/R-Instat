@@ -98,6 +98,8 @@ Partial Class ucrDataView
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuRowContextUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRowContextColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRowContextRemoveCurrentColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
@@ -474,7 +476,7 @@ Partial Class ucrDataView
         'rowContextMenuStrip
         '
         Me.rowContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuAddComment, Me.ToolStripSeparator4, Me.mnuFilter, Me.mnuRowContextColumnSelection, Me.mnuRowContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilter, Me.ToolStripSeparator10, Me.mnuHelp2})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRowContextUndo, Me.ToolStripSeparator15, Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuAddComment, Me.ToolStripSeparator4, Me.mnuFilter, Me.mnuRowContextColumnSelection, Me.mnuRowContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilter, Me.ToolStripSeparator10, Me.mnuHelp2})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
         Me.rowContextMenuStrip.Size = New System.Drawing.Size(253, 238)
         '
@@ -511,6 +513,17 @@ Partial Class ucrDataView
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(249, 6)
+        '
+        'mnuRowContextUndo
+        '
+        Me.mnuRowContextUndo.Name = "mnuRowContextUndo"
+        Me.mnuRowContextUndo.Size = New System.Drawing.Size(252, 24)
+        Me.mnuRowContextUndo.Text = "Undo Last Action"
+        '
+        'ToolStripSeparator15
+        '
+        Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(249, 6)
         '
         'mnuFilter
         '
@@ -1146,6 +1159,8 @@ Partial Class ucrDataView
     Friend WithEvents mnuInsertRowsBefore As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents mnuFilter As ToolStripMenuItem
+    Friend WithEvents mnuRowContextUndo As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
     Friend WithEvents mnuRemoveCurrentFilter As ToolStripMenuItem
     Friend WithEvents mnuSort As ToolStripMenuItem
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
