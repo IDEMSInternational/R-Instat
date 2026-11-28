@@ -27,6 +27,8 @@ Public Class clsColumnMetaData
 
     Private _useColumnSelectionInMetaData As Boolean
 
+    Private _lstOriginalPositions As List(Of Integer)
+
     ''' <summary>
     ''' holds the metadata change audit id
     ''' </summary> 
@@ -51,6 +53,9 @@ Public Class clsColumnMetaData
     ''' <returns></returns>
     Public ReadOnly Property strRowName(row As Integer) As String
         Get
+            If _lstOriginalPositions IsNot Nothing AndAlso row < _lstOriginalPositions.Count AndAlso _lstOriginalPositions(row) > 0 Then
+                Return _lstOriginalPositions(row).ToString()
+            End If
             Return _clsColsMetadataDataFrame.RowNames(row)
         End Get
     End Property
@@ -141,6 +146,7 @@ Public Class clsColumnMetaData
         'Need to check to see if dataframe exists due to the column meta data not changing when sheets are un-hidden 
         If _clsColsMetadataDataFrame Is Nothing OrElse HasDataChanged() Then
             _clsColsMetadataDataFrame = GetColsMetadataFromRCommand()
+            _lstOriginalPositions = GetOriginalPositions()
             SetColsMetadataToNotChangedInR()
 
             'this change number should eventually come from R
@@ -151,6 +157,29 @@ Public Class clsColumnMetaData
             MetadataChangeAuditId += 1
         End If
     End Sub
+
+    ''' <summary>
+    ''' Position of each metadata row's column in the full data frame (ignoring any column selection)
+    ''' </summary>
+    Private Function GetOriginalPositions() As List(Of Integer)
+        If _clsColsMetadataDataFrame Is Nothing OrElse Not _useColumnSelectionInMetaData Then
+            Return Nothing
+        End If
+        Dim clsGetNames As New RFunction
+        clsGetNames.SetRCommand(_RLink.strInstatDataObject & "$get_column_names")
+        clsGetNames.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        clsGetNames.AddParameter("use_current_column_selection", "FALSE")
+        Dim expTemp As SymbolicExpression = _RLink.RunInternalScriptGetValue(clsGetNames.ToScript(), bSilent:=True)
+        If expTemp Is Nothing OrElse expTemp.Type = Internals.SymbolicExpressionType.Null Then
+            Return Nothing
+        End If
+        Dim lstAllNames As List(Of String) = expTemp.AsCharacter().ToList()
+        Dim lstPositions As New List(Of Integer)
+        For i As Integer = 0 To _clsColsMetadataDataFrame.RowCount - 1
+            lstPositions.Add(lstAllNames.IndexOf(Convert.ToString(Data(i, 0))) + 1)
+        Next
+        Return lstPositions
+    End Function
 
     Private Function GetColsMetadataFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
