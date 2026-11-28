@@ -1244,9 +1244,9 @@
   "Data Column and Factor Column": "Safu wima ya data na safu wima ya Nambari Kamilifu",
   "Data Column:": "Safuwima ya Data:",
   "Data Columns": "Safu wima za Data",
-  "Data Frame": "Mfumo wa Data",
-  "Data frame": "Muafaka wa data",
-  "Data Frame Label:": "Lebo ya Data Frame:",
+  "Data Frame": "Data Fremu",
+  "Data frame": "Data Fremu",
+  "Data Frame Label:": "Lebo ya Data Fremu:",
   "Data Frame Metadata": "Metadata ya Fremu ya Data",
   "Data frame Metadata": "Data frame Metadata",
   "Data frame metadata": "Metadata ya fremu ya data",
@@ -7009,5 +7009,11 @@
   "Definition Data": "Definition Data",
   "Crop Data": "Crop Data",
   "Specify Station(s)": "Specify Station(s)",
-  "Latest Data": "Latest Data"
+  "Latest Data": "Latest Data",
+  "Save Quarto File:": "Save Quarto File:",
+  "Venn Diagram": "Venn Diagram",
+  "Show Outside": "Show Outside",
+  "Decimals": "Decimals",
+  "Factor Level:": "Factor Level:",
+  "Venn Palette:": "Venn Palette:"
 }
