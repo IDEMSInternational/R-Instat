@@ -479,7 +479,6 @@ Public Class dlgDescribeTwoVarGraph
         clsScaleXDiscreteFunction = New RFunction
         clsLabelWrapFunction = New RFunction
         clsScaleYContinuousFunction = New RFunction
-        'clsLimitsCombineFunction = New RFunction
         clsBreakSequenceFunction = New RFunction
         clsExpansionFunction = New RFunction
         clsMultCombineFunction = New RFunction
@@ -497,7 +496,7 @@ Public Class dlgDescribeTwoVarGraph
 
         bResetSubdialog = True
 
-        'Reset
+        'Reset 
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
         ucrInputXSidePlotOptions.SetItems({"Density", "Bar", "Boxplot", "Frequency Polygon", "Histogram"})
@@ -943,7 +942,7 @@ Public Class dlgDescribeTwoVarGraph
             ucrChkXSidePlot.SetRCode(clsDummyFunction, bReset)
             ucrChkYSidePlot.SetRCode(clsDummyFunction, bReset)
             ucrChkAddLabels.SetRCode(clsDummyFunction, bReset)
-            ucrNudXLabelAngle.SetRCode(clsDummyFunction, bReset)
+            ucrChkXLabelsAngle.SetRCode(clsDummyFunction, bReset)
         End If
         bRCodeSet = True
         Results()
@@ -1576,7 +1575,6 @@ Public Class dlgDescribeTwoVarGraph
                 End If
                 If ucrChkAddLabels.Checked Then
                     clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=11, bIncludeArgumentName:=False)
-                    Debug.Print("============================= You MotherFucker ======================================")
                 End If
                 clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("y")
                 clsAesCategoricalByCategoricalBarChart.RemoveParameterByName("by")
